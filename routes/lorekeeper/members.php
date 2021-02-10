@@ -190,3 +190,6 @@ Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function() {
     Route::post('/{comment}', 'CommentController@reply')->name('comments.reply');
     Route::post('/{id}/feature', 'CommentController@feature')->name('comments.feature');
 });
+
+// RAFFLE SELF ENTRY - NEWT
+Route::post('/raffles/enter/{id}', 'RaffleController@selfEnter');

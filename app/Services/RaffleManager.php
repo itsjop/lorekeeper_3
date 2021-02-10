@@ -68,6 +68,30 @@ class RaffleManager extends Service
         return 0;
     }
 
+    // enters self into raffle
+    public function selfEnter($raffle, $user)
+    {
+        DB::beginTransaction();
+
+        try {
+            
+            if(!$user || !$raffle) throw new \Exception('An error occured.');
+            if(RaffleTicket::where('user_id', $user->id)->where('raffle_id', $raffle->id)->exists()) throw new \Exception('You may only enter once!');
+            if($raffle->rolled_at != null) throw new \Exception('This raffle has been rolled.');
+            
+            RaffleTicket::create([
+                'user_id' => $user->id,
+                'raffle_id' => $raffle->id,
+                'created_at' => Carbon::now()
+            ]);
+
+            return $this->commitReturn(true);
+        } catch(\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+        return $this->rollbackReturn(false);
+    }
+
     /**
      * Removes a single ticket.
      *

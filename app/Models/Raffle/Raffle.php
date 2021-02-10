@@ -11,7 +11,7 @@ class Raffle extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'is_active', 'winner_count', 'group_id', 'order'
+        'name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry'
     ];
 
     /**

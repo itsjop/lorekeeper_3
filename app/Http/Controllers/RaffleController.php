@@ -5,6 +5,7 @@ use Request;
 use App\Models\Raffle\RaffleGroup;
 use App\Models\Raffle\Raffle;
 use App\Models\Raffle\RaffleTicket;
+use App\Services\RaffleManager;
 
 class RaffleController extends Controller
 {
@@ -55,5 +56,23 @@ class RaffleController extends Controller
             'userCount' => $userCount, 
             "page" => Request::get('page') ? Request::get('page') - 1 : 0
         ]);
+    }
+
+    // allows self entry
+    public function selfEnter($id, RaffleManager $service)
+    {
+        $raffle = Raffle::find($id);
+        if(!$raffle || !$raffle->is_active) abort(404);
+        $user = Auth::user();
+        if(!$user) abort(404);
+
+        if($service->selfEnter($raffle, $user)) {        
+        flash('Entered successfully!')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
+        
     }
 }

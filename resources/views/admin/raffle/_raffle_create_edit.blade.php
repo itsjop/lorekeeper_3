@@ -26,6 +26,12 @@
             {!! Form::label('is_displayed', 'Active (visible to users)', ['class' => 'form-check-label ml-3']) !!}
         </label>
     </div>
+    <div class="form-group">
+        <label class="control-label">
+            {!! Form::checkbox('allow_entry', 1, $raffle->allow_entry, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
+            {!! Form::label('allow_entry', 'Allow users to enter?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Allows users to enter themselves into the raffle.') !!}
+        </label>
+    </div>
     <div class="text-right">
         {!! Form::submit('Confirm', ['class' => 'btn btn-primary']) !!}
     </div>
