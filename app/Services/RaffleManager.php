@@ -74,8 +74,9 @@ class RaffleManager extends Service
         DB::beginTransaction();
 
         try {
-            
+
             if(!$user || !$raffle) throw new \Exception('An error occured.');
+            if(!$raffle->allow_entry) throw new \Exception('You cannot enter yourself into this raffle!');
             if(RaffleTicket::where('user_id', $user->id)->where('raffle_id', $raffle->id)->exists()) throw new \Exception('You may only enter once!');
             if($raffle->rolled_at != null) throw new \Exception('This raffle has been rolled.');
             

@@ -9,14 +9,19 @@
     <div class="alert alert-success">This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})</div>
     @if($raffle->allow_entry)
       @if(Auth::check())
-      <div class="alert alert-success">This raffle allows you to enter yourself!</div>
-        {!! Form::open(['url' => 'raffles/enter/'.$raffle->id]) !!}
-          <div class="text-right">
-              {!! Form::submit('Enter', ['class' => 'btn btn-primary']) !!}
-          </div>
-        {!! Form::close() !!}
+        @if($userCount > 0)
+        <div class="alert alert-info">You have already self-entered into this raffle!</div>
+        @else
+          <div class="alert alert-success">This raffle allows you to enter yourself!</div>
+          {!! Form::open(['url' => 'raffles/enter/'.$raffle->id]) !!}
+            <div class="text-right">
+                {!! Form::submit('Enter', ['class' => 'btn btn-primary']) !!}
+            </div>
+          {!! Form::close() !!}
+        @endif
+      @else
+        <div class="alert alert-warning">This raffle allows you to enter yourself! Login to enter.</div>
       @endif
-      <div class="alert alert-warning">This raffle allows you to enter yourself! Login to enter.</div>
     @endif
 @elseif($raffle->is_active == 2)
     <div class="alert alert-danger">This raffle is closed. Rolled: {!! format_date($raffle->rolled_at) !!}</div>
