@@ -23,12 +23,13 @@
         <div class="card-header h3">Winner(s)</div>
         <div class="table-responsive">
             <table class="table table-sm mb-0">
-                <thead><th class="col-xs-1 text-center" style="width:100px;">#</th><th>User</th></thead>
+                <thead><th class="col-xs-1 text-center" style="width:100px;">#</th><th>User</th><th></th></thead>
                 <tbody>
                     @foreach($raffle->tickets()->winners()->get() as $winner)
                         <tr>
                             <td class="text-center">{{ $winner->position }}</td>
-                            <td class="text-left">{!! $winner->displayHolderName !!}</td>
+                            <td class="text-left">{!! $winner->displayHolderName !!} @if($winner->reroll)<span class="text-danger">(Reroll)</span>@endif</td>
+                            <td class="text-right"><div class="btn btn-primary btn-sm reroll" value="{{ $winner->id }}">Reroll?</div></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -79,10 +80,19 @@
         </div>
     </div>
 </div>
+
+@include('raffles._logs', ['raffle' => $raffle])
+
 @endsection
 @section('scripts')
 @parent
 <script>
+    $('.reroll').on('click', function(e) {
+        e.preventDefault();
+        // get value
+        var id = $(this).attr('value');
+        loadModal("{{ url('/admin/raffles/edit/reroll') }}/" + id, 'Reroll Ticket');
+    });
     $('.edit-tickets').on('click', function(e) {
         e.preventDefault();
         $('#raffle-modal').modal('show');

@@ -30,7 +30,8 @@ class RaffleService  extends Service
         DB::beginTransaction();
         if(!isset($data['is_active'])) $data['is_active'] = 0;
         if(!isset($data['allow_entry'])) $data['allow_entry'] = 0;
-        $raffle = Raffle::create(Arr::only($data, ['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry']));
+        if(!isset($data['unordered'])) $data['unordered'] = 0;
+        $raffle = Raffle::create(Arr::only($data, ['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'unordered']));
         DB::commit();
         return $raffle;
     }
@@ -47,7 +48,8 @@ class RaffleService  extends Service
         DB::beginTransaction();
         if(!isset($data['is_active'])) $data['is_active'] = 0;
         if(!isset($data['allow_entry'])) $data['allow_entry'] = 0;
-        $raffle->update(Arr::only($data, ['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry']));
+        if(!isset($data['unordered'])) $data['unordered'] = 0;
+        $raffle->update(Arr::only($data, ['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'unordered']));
         DB::commit();
         return $raffle;
     }    

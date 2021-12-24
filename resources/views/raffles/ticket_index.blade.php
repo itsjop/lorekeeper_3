@@ -34,7 +34,7 @@
                     @foreach($raffle->tickets()->winners()->get() as $winner)
                         <tr>
                             <td class="text-center">{{ $winner->position }}</td>
-                            <td class="text-left">{!! $winner->displayHolderName !!}</td>
+                            <td class="text-left">{!! $winner->displayHolderName !!} @if($winner->reroll)<span class="text-danger">(Reroll)</span>@endif</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -71,6 +71,9 @@
   </div>
 
 <div class="text-right">{!! $tickets->render() !!}</div>
+
+@include('raffles._logs', ['raffle' => $raffle])
+
 @endsection
 @section('scripts')
 @parent

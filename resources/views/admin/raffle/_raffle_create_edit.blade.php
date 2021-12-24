@@ -32,6 +32,12 @@
             {!! Form::label('allow_entry', 'Allow users to enter?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Allows users to enter themselves into the raffle.') !!}
         </label>
     </div>
+    <div class="form-group">
+        <label class="control-label">
+            {!! Form::checkbox('unordered', 1, $raffle->unordered, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
+            {!! Form::label('unordered', 'Unordered Results?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If there are less entrants than winners, the numbers will be random instead of 1 - X.') !!}
+        </label>
+    </div>
     <div class="text-right">
         {!! Form::submit('Confirm', ['class' => 'btn btn-primary']) !!}
     </div>

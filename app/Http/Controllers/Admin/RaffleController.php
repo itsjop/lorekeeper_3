@@ -67,7 +67,7 @@ class RaffleController extends Controller
      */
     public function postCreateEditRaffle(Request $request, RaffleService $service, $id = null)
     {
-        $data = $request->only(['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry']);
+        $data = $request->only(['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'unordered']);
         $raffle = null;
         if (!$id) $raffle = $service->createRaffle($data);
         else if ($id) $raffle = $service->updateRaffle($data, Raffle::find($id));
@@ -252,5 +252,34 @@ class RaffleController extends Controller
             flash('Error in rolling winners.')->error();
             return redirect()->back()->withInput();  
         }
+    }
+
+    /**
+     * Reroll a winner for a raffle.
+     */
+    public function getRerollTicket(RaffleManager $service, $id) 
+    {
+        $ticket = RaffleTicket::find($id);
+        if(!$ticket) abort(404);
+        return view('admin.raffle._ticket_reroll', [
+            'ticket' => $ticket,
+        ]);
+    }
+
+    /**
+     * Reroll a winner for a raffle.
+     */
+    public function rerollTicket(Request $request, RaffleManager $service, $id) 
+    {
+        $ticket = RaffleTicket::find($id);
+        if(!$ticket) abort(404);
+        $reason = $request->input('reason');
+        if($service->rerollWinner($ticket, $reason, Auth::user())) {
+            flash('Winner rerolled!')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
     }
 }

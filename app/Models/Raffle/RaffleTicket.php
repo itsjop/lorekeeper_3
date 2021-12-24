@@ -85,4 +85,13 @@ class RaffleTicket extends Model
         if ($this->user_id) return $this->user->displayName;
         return '<a href="http://'.$this->alias.'.deviantart.com">'.$this->alias.'@dA</a>';
     }
+
+    /**
+     * Returns the identifier of the ticket.
+     */
+    public function getIdentifierAttribute()
+    {
+        if ($this->user_id) return $this->user->id;
+        return $this->alias;
+    }
 }

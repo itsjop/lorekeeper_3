@@ -6,6 +6,7 @@ use App\Services\Service;
 use App\Models\Raffle\RaffleGroup;
 use App\Models\Raffle\Raffle;
 use App\Models\Raffle\RaffleTicket;
+use App\Models\Raffle\RaffleLog;
 use App\Models\User\User;
 
 class RaffleManager extends Service 
@@ -181,6 +182,7 @@ class RaffleManager extends Service
         $ticketPool = $raffle->tickets;
         $ticketCount = $ticketPool->count();
         $winners = ['ids' => [], 'aliases' => []];
+        $used = [];
         for ($i = 0; $i < $raffle->winner_count; $i++)
         {
             if($ticketCount == 0) break;
@@ -188,8 +190,20 @@ class RaffleManager extends Service
             $num = mt_rand(0, $ticketCount - 1);
             $winner = $ticketPool[$num];
 
-            // save ticket position as ($i + 1)
-            $winner->update(['position' => $i + 1]);
+            if($raffle->unordered && $raffle->tickets->count() < $raffle->winner_count) {
+                // save ticket position as random number between 1 and winner_count
+                $n = mt_rand(1, $raffle->winner_count);
+                while(in_array($n, $used))
+                {
+                    $n = mt_rand(1, $raffle->winner_count);
+                }
+                $winner->update(['position' => $n]);
+                $used[] = $n;
+            }
+            else {
+                // save ticket position as ($i + 1)
+                $winner->update(['position' => $i + 1]);
+            }
 
             // save the winning ticket's user id
             if(isset($winner->user_id)) $winners['ids'][] = $winner->user_id;
@@ -237,5 +251,69 @@ class RaffleManager extends Service
         return true;
     }
 
+    /**
+     * Rerolls a raffle winner
+     */
+    public function rerollWinner($ticket, $reason, $user)
+    {
+        DB::beginTransaction();
 
+        try {
+            if(!$reason) throw new \Exception('Please provide a reason for rerolling.');
+            if($ticket->user) {
+                $tickets = RaffleTicket::where('raffle_id', $ticket->raffle_id)->where('user_id', $ticket->user->id)->get();
+                $rerollTickets = RaffleTicket::where('raffle_id', $ticket->raffle_id)->where(function($query) use ($ticket) {
+                    $query->where('user_id', '!=', $ticket->user->id)->orWhereNotNull('alias');
+                })->get();
+            }
+            else {
+                $tickets = RaffleTicket::where('raffle_id', $ticket->raffle_id)->where('alias', $ticket->alias)->get();
+                $rerollTickets = RaffleTicket::where('raffle_id', $ticket->raffle_id)->where(function($query) use ($ticket) {
+                    $query->where('alias', '!=', $ticket->alias)->orWhereNotNull('user_id');
+                })->get();
+            }
+            if($rerollTickets->count() < 1) {
+                throw new \Exception('No tickets to reroll.');
+            }
+            $n = $ticket->position;
+
+            foreach($tickets as $t) {
+                $t->position = null;
+                $t->reroll = 0;
+                $t->save();
+            }
+
+            $num = mt_rand(0, count($rerollTickets) - 1);
+            $winner = $rerollTickets[$num];
+
+            $winner->position = $n;
+            $winner->reroll = 1;
+            $winner->save();
+
+            if(!$this->logReroll($ticket, $reason, $user)) throw new \Exception('Failed to log reroll.');
+
+            return $this->commitReturn(true);
+        } catch(\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+        return $this->rollbackReturn(false);
+    }
+
+    private function logReroll($ticket, $reason, $user)
+    {
+        DB::beginTransaction();
+
+        try {
+            $log = RaffleLog::create([
+                'raffle_id' => $ticket->raffle_id,
+                'user_id' => $user->id,
+                'reason' => 'Reroll: ' . $reason,
+                'ticket_id' => $ticket->id,
+            ]);
+            return $this->commitReturn(true);
+        } catch(\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+        return $this->rollbackReturn(false);
+    }
 }
