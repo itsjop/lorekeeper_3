@@ -34,11 +34,28 @@
     </div>
     <div class="form-group">
         <label class="control-label">
+            {!! Form::checkbox('is_fto', 1, $raffle->is_fto, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
+            {!! Form::label('is_fto', 'FTO / Non-Owner Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Only users that are Non-Owners or are FTO can self enter if turned on. PLEASE NOTE that tickets added manually can override this requirement.') !!}
+        </label>
+    </div>
+    <div class="form-group">
+        <label class="control-label">
             {!! Form::checkbox('unordered', 1, $raffle->unordered, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
             {!! Form::label('unordered', 'Unordered Results?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If there are less entrants than winners, the numbers will be random instead of 1 - X.') !!}
         </label>
+    </div>
+    <div class="container">
+        <h5>Raffle Entry Rewards</h5>
+        <p>If you want users to receive a reward for entering, add it here. This only applies to users with an account, who are entered by an admin or who self entered.
+            <br>Users entered as an alias are not eligible to receive rewards at this time.
+        </p>
+        @include('widgets._loot_select', ['loots' => $raffle->rewards, 'showLootTables' => false, 'showRaffles' => false])
     </div>
     <div class="text-right">
         {!! Form::submit('Confirm', ['class' => 'btn btn-primary']) !!}
     </div>
 {!! Form::close() !!}
+
+@include('widgets._loot_select_row', ['items' => $items, 'currencies' => $currencies, 'showLootTables' => false, 'showRaffles' => false])
+
+@include('js._modal_loot_js', ['showLootTables' => false, 'showRaffles' => false])

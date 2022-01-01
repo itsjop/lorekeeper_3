@@ -5,7 +5,7 @@
 @section('admin-content')
 {!! breadcrumbs(['Admin Panel' => 'admin', 'Raffle Index' => 'admin/raffles', 'Raffle Tickets for ' . $raffle->name => 'admin/raffles/view/'.$raffle->id]) !!}
 
-<h1>Raffle Tickets: {{ $raffle->name }}</h1>
+<h1>Raffle Tickets: {{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</h1>
 
 @if($raffle->is_active == 0)
     <p>This raffle is currently hidden. (Number of winners to be drawn: {{ $raffle->winner_count }})</p>

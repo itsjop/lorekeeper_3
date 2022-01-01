@@ -11,7 +11,7 @@ class Raffle extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'unordered'
+        'name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered'
     ];
 
     /**
@@ -70,6 +70,14 @@ class Raffle extends Model
     public function logs()
     {
         return $this->hasMany('App\Models\Raffle\RaffleLog');
+    }
+
+    /**
+     * Get the rewards attached to this raffle.
+     */
+    public function rewards()
+    {
+        return $this->hasMany('App\Models\Raffle\RaffleEntryReward', 'raffle_id');
     }
 
     /**********************************************************************************************

@@ -9,6 +9,8 @@ use App\Models\Raffle\RaffleTicket;
 use App\Models\Raffle\RaffleLog;
 use App\Models\User\User;
 
+use App\Models\Item\Item;
+use App\Models\Currency\Currency;
 class RaffleManager extends Service 
 {
     /*
@@ -62,6 +64,7 @@ class RaffleManager extends Service
         else {
             DB::beginTransaction();
             $data = ["raffle_id" => $raffle->id, 'created_at' => Carbon::now()] + (is_string($user) ? ['alias' => $user] : ['user_id' => $user->id]);
+            if(is_object($user)) $this->grantRewards($raffle, $user);
             for ($i = 0; $i < $count; $i++) RaffleTicket::create($data);
             DB::commit();
             return 1;
@@ -79,6 +82,9 @@ class RaffleManager extends Service
             if(!$user || !$raffle) throw new \Exception('An error occured.');
             if(!$raffle->allow_entry) throw new \Exception('You cannot enter yourself into this raffle!');
             if(RaffleTicket::where('user_id', $user->id)->where('raffle_id', $raffle->id)->exists()) throw new \Exception('You may only enter once!');
+            if($raffle->is_fto) {
+                if(!$user->settings->is_fto && $user->characters->count() > 0) throw new \Exception('You must be a FTO or Non-Owner to enter this raffle!');
+            }
             if($raffle->rolled_at != null) throw new \Exception('This raffle has been rolled.');
             
             RaffleTicket::create([
@@ -87,11 +93,75 @@ class RaffleManager extends Service
                 'created_at' => Carbon::now()
             ]);
 
+            $this->grantRewards($raffle, $user);
+
             return $this->commitReturn(true);
         } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
         return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Grants rewards to a user for a raffle.
+     */
+    private function grantRewards($raffle, $user)
+    {
+        if($raffle->rewards->count() > 0) {
+            // check user hasn't already received rewards
+            if($raffle->logs()->where('user_id', $user->id)->where('type', 'Reward')->exists()) return;
+            // Get the updated set of rewards
+            $rewards = $this->processRewards($raffle->rewards, false, true);
+
+            // Logging data
+            $logType = 'Raffle Entry Rewards';
+            $data = [
+                'data' => 'Received rewards for entering the raffle '.$raffle->name.' (<a href="'.$raffle->url.'">#'.$raffle->id.'</a>)'
+            ];
+
+            // Distribute user rewards
+            if(!$rewards = fillUserAssets($rewards, null, $user, $logType, $data)) throw new \Exception("Failed to distribute rewards to user.");
+
+            // Log the rewards
+            RaffleLog::create([
+                'user_id' => $user->id,
+                'raffle_id' => $raffle->id,
+                'type' => 'Reward',
+                'reason' => 'Enterred Raffle',
+                'created_at' => Carbon::now()
+            ]);
+        }
+    }
+
+    /**
+     * Processes reward data into a format that can be used for distribution.
+     *
+     * @param  array $data
+     * @param  bool  $isCharacter
+     * @param  bool  $isStaff
+     * @return array
+     */
+    private function processRewards($rewards)
+    {
+        $assets = createAssetsArray(false);
+        // Process the additional rewards
+        foreach($rewards as $reward)
+        {
+            $asset = null;
+            switch($reward->rewardable_type)
+            {
+                case 'Item':
+                    $asset = Item::find($reward->rewardable_id);
+                    break;
+                case 'Currency':
+                    $asset = Currency::find($reward->rewardable_id);
+                    if(!$asset->is_user_owned) throw new \Exception("Invalid currency selected.");
+                    break;
+            }
+            if(!$asset) continue;
+            addAsset($assets, $asset, $reward->quantity);
+        }
+        return $assets;
     }
 
     /**

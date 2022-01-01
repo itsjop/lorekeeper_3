@@ -53,7 +53,7 @@
 
     <li class="list-group-item">
         <i class="fas {{ $raffle->is_active ? 'fa-eye' : 'fa-eye-slash' }} mr-2"></i>
-        <a href="{{ url('admin/raffles/view/'.$raffle->id) }}">{{ $raffle->name }}</a>
+        <a href="{{ url('admin/raffles/view/'.$raffle->id) }}">{{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</a>
         @if($raffle->is_active < 2)
             <div class="float-right">
                 @if(!$raffle->group_id)

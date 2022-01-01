@@ -27,7 +27,7 @@
         @endif
 
         <li class="list-group-item">
-            <a href="{{ url('raffles/view/'.$raffle->id) }}">{{ $raffle->name }}</a>
+            <a href="{{ url('raffles/view/'.$raffle->id) }}">{{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</a>
         </li>
         <?php $prevGroup = $raffle->group_id; ?>
     @endforeach

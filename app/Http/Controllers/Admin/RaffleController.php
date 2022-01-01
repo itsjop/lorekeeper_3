@@ -14,6 +14,9 @@ use App\Models\User\User;
 use App\Services\RaffleService;
 use App\Services\RaffleManager;
 
+use App\Models\Item\Item;
+use App\Models\Currency\Currency;
+
 use App\Http\Controllers\Controller;
 
 class RaffleController extends Controller
@@ -54,6 +57,8 @@ class RaffleController extends Controller
         return view('admin.raffle._raffle_create_edit', [
             'raffle' => $raffle,
             'groups' => [0 => 'No group'] + RaffleGroup::where('is_active', '<', 2)->pluck('name', 'id')->toArray(),
+            'items' => Item::orderBy('name')->pluck('name', 'id'),
+            'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
     }
 
@@ -67,7 +72,7 @@ class RaffleController extends Controller
      */
     public function postCreateEditRaffle(Request $request, RaffleService $service, $id = null)
     {
-        $data = $request->only(['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'unordered']);
+        $data = $request->only(['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered', 'rewardable_type', 'rewardable_id', 'quantity']);
         $raffle = null;
         if (!$id) $raffle = $service->createRaffle($data);
         else if ($id) $raffle = $service->updateRaffle($data, Raffle::find($id));

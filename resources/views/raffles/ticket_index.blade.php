@@ -4,9 +4,22 @@
 
 @section('content')
 {!! breadcrumbs(['Raffles' => 'raffles', 'Raffle: ' . $raffle->name => 'raffles/view/'.$raffle->id]) !!}
-<h1>Raffle: {{ $raffle->name }}</h1>
+<h1>Raffle: {{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</h1>
 @if($raffle->is_active == 1)
-    <div class="alert alert-success">This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})</div>
+    <div class="alert alert-success mb-2">This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})</div>
+    @if($raffle->rewards)
+    <div class="alert alert-info mb-2">
+      This raffle gives you rewards for entering!<br>
+      <a class="card-title collapse-title" data-toggle="collapse" href="#rewards">View Rewards</a>
+      <div id="rewards" class="collapse">
+          <ul>
+            @foreach($raffle->rewards as $reward)
+              <li>{!! $reward->reward->displayName !!} x {{ $reward->quantity }}</li>
+            @endforeach
+          </ul>
+      </div>
+    </div>
+  @endif
     @if($raffle->allow_entry)
       @if(Auth::check())
         @if($userCount > 0)
