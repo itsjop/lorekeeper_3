@@ -23,26 +23,25 @@ class RaffleManager extends Service
     */
 
     /**
-     * Adds tickets to a raffle. 
-     * One ticket is added per name in $names, which is a
-     * string containing comma-separated names.
+     * Adds tickets to a raffle.
      *
      * @param  \App\Models\Raffle\Raffle $raffle
-     * @param  string                    $names
+     * @param  array                     $data
      * @return int
      */
-    public function addTickets($raffle, $names)
+    public function addTickets($raffle, $data)
     {
-        $names = explode(',', $names);
         $count = 0;
-        foreach($names as $name)
+        foreach($data['user_id'] as $key=>$id)
         {
-            $name = trim($name);
-            if(strlen($name) == 0) continue;
-            if ($user = User::where('name', $name)->first())
-                $count += $this->addTicket($user, $raffle);
-            else
-                $count += $this->addTicket($name, $raffle);
+            if ($user = User::where('id', $id)->first()) {
+                if($this->addTicket($user, $raffle, $data['ticket_count'][$key]))
+                    $count += $data['ticket_count'][$key];
+            }
+            else {
+                if($this->addTicket($data['alias'][$key], $raffle, $data['ticket_count'][$key]))
+                    $count += $data['ticket_count'][$key];
+            }
         }
         return $count;
     }
@@ -61,6 +60,8 @@ class RaffleManager extends Service
         else if (!$raffle) return 0;
         else if ($count == 0) return 0;
         else if ($raffle->rolled_at != null) return 0;
+        else if ($raffle->ticket_cap > 0 && ((is_string($user) ? $raffle->tickets()->where('alias', $user)->count() : $raffle->tickets()->where('user_id', $user->id)->count()) > $raffle->ticket_cap || (is_string($user) ? $raffle->tickets()->where('alias', $user)->count() : $raffle->tickets()->where('user_id', $user->id)->count()) + $count > $raffle->ticket_cap)) return 0;
+
         else {
             DB::beginTransaction();
             $data = ["raffle_id" => $raffle->id, 'created_at' => Carbon::now()] + (is_string($user) ? ['alias' => $user] : ['user_id' => $user->id]);
@@ -109,7 +110,10 @@ class RaffleManager extends Service
     {
         if($raffle->rewards->count() > 0) {
             // check user hasn't already received rewards
-            if($raffle->logs()->where('user_id', $user->id)->where('type', 'Reward')->exists()) return;
+            if($raffle->logs()->where('user_id', $user->id)->where('type', 'Reward')->exists()) {
+                flash('This user ('.$user->name.') has already received rewards for entering.')->info();
+                return;
+            }
             // Get the updated set of rewards
             $rewards = $this->processRewards($raffle->rewards, false, true);
 
@@ -127,7 +131,7 @@ class RaffleManager extends Service
                 'user_id' => $user->id,
                 'raffle_id' => $raffle->id,
                 'type' => 'Reward',
-                'reason' => 'Enterred Raffle',
+                'reason' => 'Entered Raffle',
                 'created_at' => Carbon::now()
             ]);
         }
@@ -195,7 +199,7 @@ class RaffleManager extends Service
         DB::beginTransaction();
         foreach($raffleGroup->raffles()->orderBy('order')->get() as $raffle)
         {
-            if (!$this->rollRaffle($raffle, $updateGroup)) 
+            if (!$this->rollRaffle($raffle, $updateGroup))
             {
                 DB::rollback();
                 return false;
@@ -216,7 +220,7 @@ class RaffleManager extends Service
      * @param  bool                      $updateGroup
      * @return bool
      */
-    public function rollRaffle($raffle, $updateGroup = false) 
+    public function rollRaffle($raffle, $updateGroup = false)
     {
         if(!$raffle) return null;
         DB::beginTransaction();
@@ -288,7 +292,7 @@ class RaffleManager extends Service
             // remove tickets for the same user...I'm unsure how this is going to hold up with 3000 tickets,
             foreach($ticketPool as $key=>$ticket)
             {
-                if(($ticket->user_id != null && $ticket->user_id == $winner->user_id) || ($ticket->user_id == null && $ticket->alias == $winner->alias)) 
+                if(($ticket->user_id != null && $ticket->user_id == $winner->user_id) || ($ticket->user_id == null && $ticket->alias == $winner->alias))
                 {
                     $ticketPool->forget($key);
                 }
@@ -314,8 +318,8 @@ class RaffleManager extends Service
         $raffles = $raffleGroup->raffles()->where('is_active', '!=', 2)->where('id', '!=', $raffle->id)->get();
         foreach($raffles as $r)
         {
-            $r->tickets()->where(function($query) use ($winners) { 
-                $query->whereIn('user_id', $winners['ids'])->orWhereIn('alias', $winners['aliases']); 
+            $r->tickets()->where(function($query) use ($winners) {
+                $query->whereIn('user_id', $winners['ids'])->orWhereIn('alias', $winners['aliases']);
             })->delete();
         }
         return true;

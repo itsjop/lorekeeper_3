@@ -72,7 +72,7 @@ class RaffleController extends Controller
      */
     public function postCreateEditRaffle(Request $request, RaffleService $service, $id = null)
     {
-        $data = $request->only(['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered', 'rewardable_type', 'rewardable_id', 'quantity']);
+        $data = $request->only(['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered', 'rewardable_type', 'rewardable_id', 'quantity', 'ticket_cap']);
         $raffle = null;
         if (!$id) $raffle = $service->createRaffle($data);
         else if ($id) $raffle = $service->updateRaffle($data, Raffle::find($id));
@@ -82,10 +82,10 @@ class RaffleController extends Controller
         }
         else {
             flash('Couldn\'t create raffle.')->error();
-            return redirect()->back()->withInput();  
+            return redirect()->back()->withInput();
         }
     }
-    
+
     /**
      * Shows the create/edit raffle group modal.
      *
@@ -125,7 +125,7 @@ class RaffleController extends Controller
         }
         else {
             flash('Couldn\'t create raffle group.')->error();
-            return redirect()->back()->withInput();  
+            return redirect()->back()->withInput();
         }
     }
 
@@ -144,6 +144,7 @@ class RaffleController extends Controller
         return view('admin.raffle.ticket_index', [
             'raffle' => $raffle,
             'tickets' => $raffle->tickets()->orderBy('id')->paginate(200),
+            'users' => User::visible()->orderBy('name')->pluck('name', 'id')->toArray(),
             "page" => $request->get('page') ? $request->get('page') - 1 : 0
         ]);
     }
@@ -158,14 +159,15 @@ class RaffleController extends Controller
      */
     public function postCreateRaffleTickets(Request $request, RaffleManager $service, $id)
     {
-        $data = $request->get('names');
+        $request->validate(RaffleTicket::$createRules);
+        $data = $request->only('user_id', 'alias', 'ticket_count');
         if ($count = $service->addTickets(Raffle::find($id), $data)) {
             flash($count . ' tickets added!')->success();
             return redirect()->back();
         }
         else {
             flash('Couldn\'t add tickets.')->error();
-            return redirect()->back()->withInput();  
+            return redirect()->back()->withInput();
         }
     }
 
@@ -185,7 +187,7 @@ class RaffleController extends Controller
         }
         else {
             flash('Couldn\'t remove ticket.')->error();
-            return redirect()->back()->withInput();  
+            return redirect()->back()->withInput();
         }
     }
 
@@ -220,7 +222,7 @@ class RaffleController extends Controller
         }
         else {
             flash('Error in rolling winners.')->error();
-            return redirect()->back()->withInput();  
+            return redirect()->back()->withInput();
         }
     }
 
@@ -255,7 +257,7 @@ class RaffleController extends Controller
         }
         else {
             flash('Error in rolling winners.')->error();
-            return redirect()->back()->withInput();  
+            return redirect()->back()->withInput();
         }
     }
 
