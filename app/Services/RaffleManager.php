@@ -63,6 +63,9 @@ class RaffleManager extends Service
         else if ($raffle->rolled_at != null) return 0;
         else {
             DB::beginTransaction();
+            if($raffle->is_fto) {
+                if(!$user->settings->is_fto && $user->characters->count() > 0) throw new \Exception('One or more users is not a FTO or Non-Owner and cannot enter this raffle!');
+            }
             $data = ["raffle_id" => $raffle->id, 'created_at' => Carbon::now()] + (is_string($user) ? ['alias' => $user] : ['user_id' => $user->id]);
             if(is_object($user)) $this->grantRewards($raffle, $user);
             for ($i = 0; $i < $count; $i++) RaffleTicket::create($data);
