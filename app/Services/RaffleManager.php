@@ -112,7 +112,10 @@ class RaffleManager extends Service
     {
         if($raffle->rewards->count() > 0) {
             // check user hasn't already received rewards
-            if($raffle->logs()->where('user_id', $user->id)->where('type', 'Reward')->exists()) return;
+            if($raffle->logs()->where('user_id', $user->id)->where('type', 'Reward')->exists()) {
+                flash('This user ('.$user->name.') has already received rewards for entering.')->info();
+                return;
+            }
             // Get the updated set of rewards
             $rewards = $this->processRewards($raffle->rewards, false, true);
 
@@ -130,7 +133,7 @@ class RaffleManager extends Service
                 'user_id' => $user->id,
                 'raffle_id' => $raffle->id,
                 'type' => 'Reward',
-                'reason' => 'Enterred Raffle',
+                'reason' => 'Entered Raffle',
                 'created_at' => Carbon::now()
             ]);
         }
