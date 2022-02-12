@@ -50,7 +50,10 @@ return [
     'manage_reports' => [
         'name' => 'Manage Reports',
         'description' => 'Allow rank to view the reports queue.'
+    ],
+    'send_mod_mail' => [
+        'name' => 'Send Mod Mail',
+        'description' => 'Allow rank to send mod mail to other site members.'
     ]
-
 
 ];

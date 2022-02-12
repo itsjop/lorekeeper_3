@@ -32,6 +32,15 @@ return [
             ]
         ]
     ],
+    'Mod Mail' => [
+        'power' => 'send_mod_mail',
+        'links' => [
+            [
+                'name' => 'Mod Mail',
+                'url' => 'admin/mail'
+            ]
+        ]
+    ],
     'Site' => [
         'power' => 'edit_pages',
         'links' => [
