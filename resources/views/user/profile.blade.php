@@ -52,7 +52,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        @include('widgets._selected_character', ['character' => $user->settings->selectedCharacter, 'user' => $user])
+        @include('widgets._selected_character', ['character' => $user->settings->selectedCharacter, 'user' => $user, 'fullImage' => true])
     </div>
     <div class="col-md-6 mb-4 profile-assets" style="clear:both;">
         <div class="card profile-currencies profile-assets-card mb-4">
