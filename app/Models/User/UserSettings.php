@@ -13,7 +13,7 @@ class UserSettings extends Model
      * @var array
      */
     protected $fillable = [
-        'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting'
+        'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting', 'selected_character_id',
     ];
 
     /**
@@ -38,16 +38,24 @@ class UserSettings extends Model
     protected $dates = ['banned_at'];
 
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
-    
+
     /**
      * Get the user this set of settings belongs to.
      */
-    public function user() 
+    public function user()
     {
         return $this->belongsTo('App\Models\User\User');
+    }
+
+    /**
+     * Get the character the user has selected if appropriate.
+     */
+    public function selectedCharacter()
+    {
+        return $this->belongsTo('App\Models\Character\Character', 'selected_character_id');
     }
 }
