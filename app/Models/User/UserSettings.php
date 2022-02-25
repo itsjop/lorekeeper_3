@@ -56,6 +56,6 @@ class UserSettings extends Model
      */
     public function selectedCharacter()
     {
-        return $this->belongsTo('App\Models\Character\Character', 'selected_character_id');
+        return $this->belongsTo('App\Models\Character\Character', 'selected_character_id')->visible();
     }
 }
