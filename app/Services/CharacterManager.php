@@ -1715,7 +1715,7 @@ class CharacterManager extends Service
         }
 
         // Unset the owner's selected character if it's this character
-        if($character->user->settings->selected_character_id == $character->id) {
+        if($character->user && $character->user->settings->selected_character_id == $character->id) {
             $character->user->settings->update([
                 'selected_character_id' => null,
             ]);
