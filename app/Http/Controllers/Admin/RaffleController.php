@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Item\Item;
-use App\Models\Currency\Currency;
-
 use App\Http\Controllers\Controller;
+use App\Models\Currency\Currency;
+use App\Models\Item\Item;
 use App\Models\Raffle\Raffle;
 use App\Models\Raffle\RaffleGroup;
 use App\Models\Raffle\RaffleTicket;
@@ -54,9 +53,9 @@ class RaffleController extends Controller {
         }
 
         return view('admin.raffle._raffle_create_edit', [
-            'raffle' => $raffle,
-            'groups' => [0 => 'No group'] + RaffleGroup::where('is_active', '<', 2)->pluck('name', 'id')->toArray(),
-            'items' => Item::orderBy('name')->pluck('name', 'id'),
+            'raffle'     => $raffle,
+            'groups'     => [0 => 'No group'] + RaffleGroup::where('is_active', '<', 2)->pluck('name', 'id')->toArray(),
+            'items'      => Item::orderBy('name')->pluck('name', 'id'),
             'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
     }
@@ -69,8 +68,7 @@ class RaffleController extends Controller {
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreateEditRaffle(Request $request, RaffleService $service, $id = null)
-    {
+    public function postCreateEditRaffle(Request $request, RaffleService $service, $id = null) {
         $data = $request->only(['name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered', 'rewardable_type', 'rewardable_id', 'quantity', 'ticket_cap',
             'end_at', 'roll_on_end',
         ]);
@@ -282,11 +280,15 @@ class RaffleController extends Controller {
 
     /**
      * Reroll a winner for a raffle.
+     *
+     * @param mixed $id
      */
-    public function getRerollTicket(RaffleManager $service, $id) 
-    {
+    public function getRerollTicket(RaffleManager $service, $id) {
         $ticket = RaffleTicket::find($id);
-        if(!$ticket) abort(404);
+        if (!$ticket) {
+            abort(404);
+        }
+
         return view('admin.raffle._ticket_reroll', [
             'ticket' => $ticket,
         ]);
@@ -294,18 +296,23 @@ class RaffleController extends Controller {
 
     /**
      * Reroll a winner for a raffle.
+     *
+     * @param mixed $id
      */
-    public function rerollTicket(Request $request, RaffleManager $service, $id) 
-    {
+    public function rerollTicket(Request $request, RaffleManager $service, $id) {
         $ticket = RaffleTicket::find($id);
-        if(!$ticket) abort(404);
+        if (!$ticket) {
+            abort(404);
+        }
         $reason = $request->input('reason');
-        if($service->rerollWinner($ticket, $reason, Auth::user())) {
+        if ($service->rerollWinner($ticket, $reason, Auth::user())) {
             flash('Winner rerolled!')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
         }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
+
         return redirect()->back();
     }
 }

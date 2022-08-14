@@ -4,15 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddEnterToRaffles extends Migration
-{
+class AddEnterToRaffles extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::table('raffles', function (Blueprint $table) {
             //
             $table->boolean('allow_entry')->default(0);
@@ -21,11 +17,8 @@ class AddEnterToRaffles extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('raffles', function (Blueprint $table) {
             $table->dropColumn('allow_entry');
         });

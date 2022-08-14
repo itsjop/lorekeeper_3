@@ -64,16 +64,14 @@ class Raffle extends Model {
     /**
      * Gets the logs associated with this raffle.
      */
-    public function logs()
-    {
+    public function logs() {
         return $this->hasMany('App\Models\Raffle\RaffleLog');
     }
 
     /**
      * Get the rewards attached to this raffle.
      */
-    public function rewards()
-    {
+    public function rewards() {
         return $this->hasMany('App\Models\Raffle\RaffleEntryReward', 'raffle_id');
     }
 

@@ -1,17 +1,17 @@
-<?php namespace App\Models\Raffle;
+<?php
+
+namespace App\Models\Raffle;
 
 use App\Models\Model;
-use DB;
 
-class RaffleLog extends Model
-{
+class RaffleLog extends Model {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'raffle_id', 'reason', 'ticket_id'
+        'user_id', 'raffle_id', 'reason', 'ticket_id',
     ];
 
     /**
@@ -28,9 +28,8 @@ class RaffleLog extends Model
      */
     public $timestamps = true;
 
-
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
@@ -38,24 +37,21 @@ class RaffleLog extends Model
     /**
      * Get the raffle this log is for.
      */
-    public function raffle()
-    {
+    public function raffle() {
         return $this->belongsTo('App\Models\Raffle\Raffle');
     }
 
     /**
      * Get the user who made the raffle log.
      */
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo('App\Models\User\User');
     }
 
     /**
      * Get the ticket this log is for.
      */
-    public function ticket()
-    {
+    public function ticket() {
         return $this->belongsTo('App\Models\Raffle\RaffleTicket');
     }
 }

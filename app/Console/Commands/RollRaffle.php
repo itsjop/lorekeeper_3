@@ -2,14 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Raffle\Raffle;
+use App\Services\RaffleManager;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-use App\Services\RaffleManager;
-use App\Models\Raffle\Raffle;
-use Carbon\Carbon;
-
-class RollRaffle extends Command
-{
+class RollRaffle extends Command {
     /**
      * The name and signature of the console command.
      *
@@ -26,11 +24,8 @@ class RollRaffle extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
@@ -39,8 +34,7 @@ class RollRaffle extends Command
      *
      * @return mixed
      */
-    public function handle()
-    {
+    public function handle() {
         $raffles = Raffle::where('is_active', 1)->where('end_at', '<', Carbon::now())->where('roll_on_end', 1)->get();
         $service = new RaffleManager;
         foreach ($raffles as $raffle) {

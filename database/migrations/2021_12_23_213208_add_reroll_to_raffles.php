@@ -4,15 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRerollToRaffles extends Migration
-{
+class AddRerollToRaffles extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::table('raffles', function (Blueprint $table) {
             $table->boolean('unordered')->default(false);
         });
@@ -34,15 +30,12 @@ class AddRerollToRaffles extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('raffles', function (Blueprint $table) {
             $table->dropColumn('unordered');
         });
-        
+
         Schema::table('raffle_tickets', function (Blueprint $table) {
             //
             $table->dropColumn('reroll');

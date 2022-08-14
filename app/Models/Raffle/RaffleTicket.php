@@ -98,9 +98,11 @@ class RaffleTicket extends Model {
     /**
      * Returns the identifier of the ticket.
      */
-    public function getIdentifierAttribute()
-    {
-        if ($this->user_id) return $this->user->id;
+    public function getIdentifierAttribute() {
+        if ($this->user_id) {
+            return $this->user->id;
+        }
+
         return $this->alias;
     }
 }
