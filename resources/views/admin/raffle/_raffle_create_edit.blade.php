@@ -1,4 +1,4 @@
-@if(!$raffle->id)
+@if (!$raffle->id)
     <p>
         Enter basic information about this raffle. Tickets can be added after the raffle is created.
     </p>

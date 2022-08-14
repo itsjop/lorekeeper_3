@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title') Raffle - {{ $raffle->name }} @endsection
+@section('title')
+    Raffle - {{ $raffle->name }}
+@endsection
 
 @section('content')
 {!! breadcrumbs(['Raffles' => 'raffles', 'Raffle: ' . $raffle->name => 'raffles/view/'.$raffle->id]) !!}
@@ -106,7 +108,6 @@
         </div>
         @endforeach
     </div>
-</div>
 
 <div class="text-right">{!! $tickets->render() !!}</div>
 

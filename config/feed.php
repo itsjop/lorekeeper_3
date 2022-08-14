@@ -18,9 +18,14 @@ return [
              */
             'url' => '/news',
 
-            'title' => env('APP_NAME', 'Laravel').' ・ News',
+            'title'       => env('APP_NAME', 'Laravel').' ・ News',
             'description' => 'Site news.',
-            'language' => 'en-US',
+            'language'    => 'en-US',
+
+            /*
+             * The format of the feed.  Acceptable values are 'rss', 'atom', or 'json'.
+             */
+            'format' => 'atom',
 
             /*
              * The view that will render the feed.
@@ -30,7 +35,13 @@ return [
             /*
              * The type to be used in the <link> tag
              */
-            'type' => 'application/atom+xml',
+            'type' => '',
+
+            /*
+             * The content type for the feed response.  Set to an empty string to automatically
+             * determine the correct value.
+             */
+            'contentType' => '',
         ],
 
         'sales' => [
@@ -49,9 +60,14 @@ return [
              */
             'url' => '/sales',
 
-            'title' => env('APP_NAME', 'Laravel').' ・ Sales',
+            'title'       => env('APP_NAME', 'Laravel').' ・ Sales',
             'description' => 'Site news.',
-            'language' => 'en-US',
+            'language'    => 'en-US',
+
+            /*
+             * The format of the feed.  Acceptable values are 'rss', 'atom', or 'json'.
+             */
+            'format' => 'atom',
 
             /*
              * The view that will render the feed.
@@ -61,7 +77,13 @@ return [
             /*
              * The type to be used in the <link> tag
              */
-            'type' => 'application/atom+xml',
+            'type' => '',
+
+            /*
+             * The content type for the feed response.  Set to an empty string to automatically
+             * determine the correct value.
+             */
+            'contentType' => '',
         ],
     ],
 ];
