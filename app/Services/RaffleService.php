@@ -86,7 +86,7 @@ class RaffleService  extends Service
     }
 
     /**
-     * Deletes a raffle. 
+     * Deletes a raffle.
      *
      * @param  \App\Models\Raffle\Raffle $raffle
      * @return bool

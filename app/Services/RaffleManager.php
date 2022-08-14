@@ -11,7 +11,7 @@ use App\Models\User\User;
 
 use App\Models\Item\Item;
 use App\Models\Currency\Currency;
-class RaffleManager extends Service 
+class RaffleManager extends Service
 {
     /*
     |--------------------------------------------------------------------------
