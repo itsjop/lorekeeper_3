@@ -11,7 +11,7 @@ class Raffle extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered'
+        'name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered', 'end_at', 'roll_on_end',
     ];
 
     /**
@@ -26,7 +26,7 @@ class Raffle extends Model
      *
      * @var array
      */
-    public $dates = ['rolled_at'];
+    public $dates = ['rolled_at', 'end_at'];
 
     /**
      * Accessors to append to the model.

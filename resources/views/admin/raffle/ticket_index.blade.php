@@ -9,11 +9,25 @@
 
 @if($raffle->is_active == 0)
     <p>This raffle is currently hidden. (Number of winners to be drawn: {{ $raffle->winner_count }})</p>
+    @if($raffle->end_at)
+        @if($raffle->end_at < Carbon\Carbon::now())
+            <div class="alert alert-danger mb-2">This raffle has closed.</div>
+        @else
+            <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
+        @endif
+    @endif
     <div class="text-right form-group">
         <a class="btn btn-success edit-tickets" href="#" data-id="">Add Tickets</a>
     </div>
 @elseif($raffle->is_active == 1)
     <p>This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})</p>
+    @if($raffle->end_at)
+        @if($raffle->end_at < Carbon\Carbon::now())
+            <div class="alert alert-warning mb-2">This raffle has closed.</div>
+        @else
+            <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
+        @endif
+    @endif
     <div class="text-right form-group">
         <a class="btn btn-success edit-tickets" href="#" data-id="">Add Tickets</a>
     </div>

@@ -90,6 +90,7 @@ class RaffleManager extends Service
                 if(!$user->settings->is_fto && $user->characters->count() > 0) throw new \Exception('You must be a FTO or Non-Owner to enter this raffle!');
             }
             if($raffle->rolled_at != null) throw new \Exception('This raffle has been rolled.');
+            if($raffle->end_at && $raffle->end_at->isPast()) throw new \Exception('This raffle has ended.');
             
             RaffleTicket::create([
                 'user_id' => $user->id,
