@@ -27,10 +27,10 @@
             <ul class="list-group list-group-flush">
     @endif
 
-        <li class="list-group-item">
-            <a href="{{ url('raffles/view/'.$raffle->id) }}">{{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</a>
-        </li>
-        <?php $prevGroup = $raffle->group_id; ?>
+    <li class="list-group-item">
+        <a href="{{ url('raffles/view/' . $raffle->id) }}">{{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</a>
+    </li>
+    <?php $prevGroup = $raffle->group_id; ?>
     @endforeach
 @else
     <p>No raffles found.</p>

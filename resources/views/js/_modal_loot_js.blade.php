@@ -1,13 +1,12 @@
-
 <script>
-    var $lootTable  = $('#lootTableBody');
+    var $lootTable = $('#lootTableBody');
     var $lootRow = $('#lootRow').find('.loot-row');
     var $itemSelect = $('#lootRowData').find('.item-select');
     var $currencySelect = $('#lootRowData').find('.currency-select');
-    @if($showLootTables)
+    @if ($showLootTables)
         var $tableSelect = $('#lootRowData').find('.table-select');
     @endif
-    @if($showRaffles)
+    @if ($showRaffles)
         var $raffleSelect = $('#lootRowData').find('.raffle-select');
     @endif
 
@@ -27,12 +26,12 @@
         var $cell = $(this).parent().find('.loot-row-select');
 
         var $clone = null;
-        if(val == 'Item') $clone = $itemSelect.clone();
+        if (val == 'Item') $clone = $itemSelect.clone();
         else if (val == 'Currency') $clone = $currencySelect.clone();
-        @if($showLootTables)
+        @if ($showLootTables)
             else if (val == 'LootTable') $clone = $tableSelect.clone();
         @endif
-        @if($showRaffles)
+        @if ($showRaffles)
             else if (val == 'Raffle') $clone = $raffleSelect.clone();
         @endif
 
@@ -46,12 +45,12 @@
             var $cell = $(this).parent().parent().find('.loot-row-select');
 
             var $clone = null;
-            if(val == 'Item') $clone = $itemSelect.clone();
+            if (val == 'Item') $clone = $itemSelect.clone();
             else if (val == 'Currency') $clone = $currencySelect.clone();
-            @if($showLootTables)
+            @if ($showLootTables)
                 else if (val == 'LootTable') $clone = $tableSelect.clone();
             @endif
-            @if($showRaffles)
+            @if ($showRaffles)
                 else if (val == 'Raffle') $clone = $raffleSelect.clone();
             @endif
 
