@@ -35,7 +35,7 @@
     <div class="form-group">
         <label class="control-label">
             {!! Form::checkbox('is_fto', 1, $raffle->is_fto, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
-            {!! Form::label('is_fto', 'FTO / Non-Owner Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Only users that are Non-Owners or are FTO can self enter if turned on. PLEASE NOTE that tickets added manually can override this requirement.') !!}
+            {!! Form::label('is_fto', 'FTO / Non-Owner Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Only users that are Non-Owners or are FTO can enter if turned on.') !!}
         </label>
     </div>
     <div class="form-group">
