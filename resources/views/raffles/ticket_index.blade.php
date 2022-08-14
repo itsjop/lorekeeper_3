@@ -6,12 +6,17 @@
 {!! breadcrumbs(['Raffles' => 'raffles', 'Raffle: ' . $raffle->name => 'raffles/view/'.$raffle->id]) !!}
 <h1>Raffle: {{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</h1>
 @if($raffle->is_active == 1)
-<<<<<<< HEAD
-    <div class="alert alert-success mb-2">This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})</div>
     @if($raffle->end_at)
         @if($raffle->end_at < Carbon\Carbon::now())
             <div class="alert alert-danger mb-2">This raffle has closed.</div>
         @else
+            <div class="alert alert-success text-center">
+                This raffle is currently open.
+                ・ Number of winners to be drawn: {{ $raffle->winner_count }}
+                @if($raffle->ticket_cap)
+                    ・ This raffle has a cap of {{ $raffle->ticket_cap }} tickets per individual.
+                @endif
+            </div>
             <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
         @endif
     @endif
@@ -46,15 +51,6 @@
         	<div class="alert alert-warning">This raffle allows you to enter yourself! Login to enter.</div>
         @endif
     @endif
-=======
-    <div class="alert alert-success text-center">
-        This raffle is currently open.
-        ・ Number of winners to be drawn: {{ $raffle->winner_count }}
-        @if($raffle->ticket_cap)
-            ・ This raffle has a cap of {{ $raffle->ticket_cap }} tickets per individual.
-        @endif
-    </div>
->>>>>>> before-linter
 @elseif($raffle->is_active == 2)
     <div class="alert alert-danger">This raffle is closed. Rolled: {!! format_date($raffle->rolled_at) !!}</div>
     <div class="card mb-3">

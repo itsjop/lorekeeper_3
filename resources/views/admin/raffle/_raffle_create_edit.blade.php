@@ -73,7 +73,6 @@
         {!! Form::submit('Confirm', ['class' => 'btn btn-primary']) !!}
     </div>
 {!! Form::close() !!}
-<<<<<<< HEAD
 
 @include('widgets._loot_select_row', ['items' => $items, 'currencies' => $currencies, 'showLootTables' => false, 'showRaffles' => false])
 
@@ -85,5 +84,3 @@
         timeFormat: 'HH:mm:ss',
     });
 </script>
-=======
->>>>>>> before-linter

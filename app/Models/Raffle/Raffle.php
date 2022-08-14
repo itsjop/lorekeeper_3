@@ -11,11 +11,7 @@ class Raffle extends Model
      * @var array
      */
     protected $fillable = [
-<<<<<<< HEAD
         'name', 'is_active', 'winner_count', 'group_id', 'order', 'allow_entry', 'is_fto', 'unordered', 'end_at', 'roll_on_end',
-=======
-        'name', 'is_active', 'winner_count', 'group_id', 'order', 'ticket_cap'
->>>>>>> before-linter
     ];
 
     /**

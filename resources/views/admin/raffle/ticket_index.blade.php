@@ -8,44 +8,36 @@
 <h1>Raffle Tickets: {{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</h1>
 
 @if($raffle->is_active == 0)
-<<<<<<< HEAD
-    <p>This raffle is currently hidden. (Number of winners to be drawn: {{ $raffle->winner_count }})</p>
-    @if($raffle->end_at)
-        @if($raffle->end_at < Carbon\Carbon::now())
-            <div class="alert alert-danger mb-2">This raffle has closed.</div>
-        @else
-            <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
-        @endif
-    @endif
-=======
     <p>
-        This raffle is currently hidden. (Number of winners to be drawn: {{ $raffle->winner_count }})<br/>
+        @if($raffle->end_at)
+            @if($raffle->end_at < Carbon\Carbon::now())
+                <div class="alert alert-danger mb-2">This raffle has closed.</div>
+            @else
+                This raffle is currently hidden. (Number of winners to be drawn: {{ $raffle->winner_count }})</p>
+                <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
+            @endif
+        @endif
         @if($raffle->ticket_cap)
             This raffle has a cap of {{ $raffle->ticket_cap }} tickets per individual.
         @endif
     </p>
->>>>>>> before-linter
     <div class="text-right form-group">
         <a class="btn btn-success edit-tickets" href="#" data-id="">Add Tickets</a>
     </div>
 @elseif($raffle->is_active == 1)
-<<<<<<< HEAD
-    <p>This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})</p>
-    @if($raffle->end_at)
-        @if($raffle->end_at < Carbon\Carbon::now())
-            <div class="alert alert-warning mb-2">This raffle has closed.</div>
-        @else
-            <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
-        @endif
-    @endif
-=======
     <p>
-        This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})<br/>
+        @if($raffle->end_at)
+            @if($raffle->end_at < Carbon\Carbon::now())
+                <div class="alert alert-warning mb-2">This raffle has closed.</div>
+            @else
+                This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})
+                <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
+            @endif
+        @endif
         @if($raffle->ticket_cap)
             This raffle has a cap of {{ $raffle->ticket_cap }} tickets per individual.
         @endif
     </p>
->>>>>>> before-linter
     <div class="text-right form-group">
         <a class="btn btn-success edit-tickets" href="#" data-id="">Add Tickets</a>
     </div>
