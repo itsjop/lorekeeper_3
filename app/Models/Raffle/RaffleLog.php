@@ -11,7 +11,7 @@ class RaffleLog extends Model {
      * @var array
      */
     protected $fillable = [
-        'user_id', 'raffle_id', 'reason', 'ticket_id',
+        'user_id', 'raffle_id', 'reason', 'ticket_id', 'type',
     ];
 
     /**
