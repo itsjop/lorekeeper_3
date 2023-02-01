@@ -9,6 +9,7 @@ use Auth;
 use Config;
 use Carbon\Carbon;
 
+use App\Models\ModMail;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImageCreator;
 use App\Models\Rank\RankPower;
@@ -379,6 +380,15 @@ class User extends Authenticatable implements MustVerifyEmail
         $bday = $this->birthday; 
         if(!$bday || $bday->diffInYears(carbon::now()) < 13) return false;
         else return true;
+    }
+
+    /** 
+     * Check if user has any unseen mod mail
+     */
+    public function gethasUnseenMailAttribute()
+    {
+        if(ModMail::where('user_id', $this->id)->where('seen', 0)->exists()) return true;
+        else return false;
     }
     /**********************************************************************************************
 

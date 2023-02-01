@@ -170,4 +170,10 @@ Route::group(['prefix' => 'reports', 'namespace' => 'Users'], function() {
     Route::get('/bug-reports', 'ReportController@getBugIndex');
 });
 
-
+/**************************************************************************************************
+    Mail - this has to be in browse so banned users can view mail
+**************************************************************************************************/
+Route::group(['prefix' => 'mail', 'namespace' => 'Users'], function() {
+    Route::get('/', 'ModMailController@getIndex');
+    Route::get('view/{id}', 'ModMailController@getMail');
+});
