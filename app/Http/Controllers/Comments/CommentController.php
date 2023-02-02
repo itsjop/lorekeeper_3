@@ -20,6 +20,7 @@ use App\Models\News;
 use App\Models\Gallery\GallerySubmission;
 use App\Models\Report\Report;
 use App\Models\SitePage;
+use App\Models\Mail\UserMail;
 
 use Notifications;
 
@@ -127,6 +128,12 @@ class CommentController extends Controller implements CommentControllerInterface
                 else $recipient = $submission->user;
                 $post = (($type != 'User-User') ? 'your gallery submission\'s staff comments' : 'your gallery submission');
                 $link = (($type != 'User-User') ? $submission->queueUrl . '/#comment-' . $comment->getKey() : $submission->url . '/#comment-' . $comment->getKey());
+                break;
+            case 'App\Models\Mail\UserMail':
+                $userMail = UserMail::find($comment->commentable_id);
+                $recipient = $userMail->sender; // User that has been commented on (or owner of sale post)
+                $post = 'your direct message';
+                $link = $userMail->viewUrl . '/#comment-' . $comment->getKey();
                 break;
             }
 

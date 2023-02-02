@@ -407,4 +407,11 @@ return [
         'message' => '<a href="{sender_url}">{sender}</a> has added you as a participant on a gallery submission. (<a href="{url}">View Submission</a>)',
         'url' => 'gallery/view/{submission_id}'
     ],
+
+    // DIRECT_MESSAGE_RECEIVED
+    1098 => [
+        'name' => 'Direct Message Received',
+        'message' => '<a href="{sender_url}">{sender_name}</a> has sent you a direct message with the subject line: "{subject}". <a href="{url}">See Context</a>.',
+        'url' => 'inbox/view/{mail_id}'
+    ],
 ];
