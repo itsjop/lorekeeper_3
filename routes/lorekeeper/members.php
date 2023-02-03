@@ -205,6 +205,7 @@ Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function() {
 Route::group(['prefix' => 'inbox', 'namespace' => 'Users'], function() {
     Route::get('/', 'ModMailController@getIndex');
     Route::get('view/{id}', 'ModMailController@getUserMail');
+    Route::post('/view/{id}', 'ModMailController@postCreateUserMail');
 
     Route::get('/new', 'ModMailController@getCreateUserMail');
     Route::post('/new', 'ModMailController@postCreateUserMail');

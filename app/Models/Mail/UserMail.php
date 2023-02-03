@@ -17,7 +17,7 @@ class UserMail extends Model
      * @var array
      */
     protected $fillable = [
-        'sender_id', 'recipient_id', 'subject', 'message', 'seen'
+        'sender_id', 'recipient_id', 'subject', 'message', 'seen', 'parent_id'
     ];
 
     /**
@@ -42,6 +42,7 @@ class UserMail extends Model
     public static $createRules = [
         'subject' => 'required|between:3,100',
         'message' => 'required',
+        'parent_id' => 'nullable',
     ];
 
     /**********************************************************************************************
@@ -66,6 +67,22 @@ class UserMail extends Model
         return $this->belongsTo('App\Models\User\User');
     }
 
+    /**
+     * Get the parent message
+     */
+    public function parent()
+    {
+        return $this->belongsTo($this, 'parent_id');
+    }
+
+    /**
+     * Get the child messages
+     */
+    public function children()
+    {
+        return $this->hasMany($this, 'parent_id');
+    }
+
     /**********************************************************************************************
     
         ACCESSORS
@@ -79,7 +96,11 @@ class UserMail extends Model
      */
     public function getDisplayNameAttribute()
     {
-        return '<a href="'.$this->url.'">'.$this->subject.'</a>';
+        $prefix = '';
+        if($this->parent){
+            $prefix = 'Re:';
+        }
+        return '<a href="'.$this->url.'">'.$prefix.$this->subject.'</a>';
     }
 
     /**

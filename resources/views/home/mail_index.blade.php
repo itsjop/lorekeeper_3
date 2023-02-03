@@ -39,7 +39,7 @@
 
                 @foreach($inbox as $mail)
                     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-                        <div class="col-12 col-md-2">{{ $mail->subject }}</div>
+                        <div class="col-12 col-md-2">{!! $mail->displayName !!}</div>
                         <div class="col-6 col-md-3">
                             <span class="ubt-texthide">{{ Illuminate\Support\Str::limit($mail->message, 50, $end='...') }}</span>
                         </div>
@@ -69,7 +69,7 @@
 
                 @foreach($outbox as $mail)
                     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-                        <div class="col-12 col-md-2">{{ $mail->subject }}</div>
+                        <div class="col-12 col-md-2">{!! $mail->displayName !!}</div>
                         <div class="col-6 col-md-3">
                             <span class="ubt-texthide">{{ Illuminate\Support\Str::limit($mail->message, 50, $end='...') }}</span>
                         </div>

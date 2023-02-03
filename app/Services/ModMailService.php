@@ -82,6 +82,7 @@ class ModMailService extends Service
                 'subject' => $data['subject'],
                 'message' => $data['message'],
                 'seen' => false,
+                'parent_id' => $data['parent_id']
             ]);
 
             // send a notification

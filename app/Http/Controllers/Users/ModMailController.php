@@ -61,6 +61,8 @@ class ModMailController extends Controller
         if(!Auth::check()) abort(404);
         $mail = UserMail::findOrFail($id);
 
+        if(Auth::user()->id != $mail->sender_id && Auth::user()->id != $mail->recipient_id) abort(403);
+        
         if(!$mail->seen) $mail->update(['seen' => 1]);
 
         return view('home.mail.user_mail', [
@@ -88,13 +90,19 @@ class ModMailController extends Controller
     public function postCreateUserMail(Request $request, ModMailService $service)
     {
         $request->validate(UserMail::$createRules);
-        $data = $request->only(['recipient_id', 'subject', 'message']);
+        $data = $request->only(['recipient_id', 'subject', 'message', 'parent_id']);
         if($service->createUserMail($data, Auth::user())) {
             flash('Message sent successfully.')->success();
         }
         else {
             foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
         }
-        return redirect()->back();
+
+        if(!isset($data['parent_id'])) {
+            return redirect()->back();
+        } else {
+            $child = UserMail::where('parent_id', $data['parent_id'])->latest('id')->first();
+            return redirect('inbox/view/'.$child->id);
+        }
     }
 }
