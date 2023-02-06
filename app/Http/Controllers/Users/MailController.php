@@ -80,7 +80,7 @@ class MailController extends Controller
     {
         return view('home.mail.create_user_mail', [
             'mail' => new UserMail,
-            'users' => ['Select User'] + User::orderBy('id')->pluck('name', 'id')->toArray()
+            'users' => ['Select User'] + User::orderBy('id')->where('id', '!=', Auth::user()->id)->pluck('name', 'id')->toArray()
         ]);
     }
 

@@ -75,6 +75,7 @@ class MailService extends Service
 
             $recipient = User::find($data['recipient_id']);
             if(!$recipient) throw new \Exception('Recipient not found');
+            if($recipient->id == $sender->id) throw new \Exception('You cannot send mail to yourself.');
 
             $mail = UserMail::create([
                 'sender_id' => $sender->id,
