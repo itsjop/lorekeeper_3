@@ -24,6 +24,8 @@
     {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
 </div>
 
+{{ Form::hidden('parent_id', null) }}
+
 <div class="text-right">
     {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
 </div>
