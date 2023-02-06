@@ -8,13 +8,13 @@ use App\Models\User\User;
 use App\Models\Mail\ModMail;
 use App\Models\Mail\UserMail;
 
-use App\Services\ModMailService;
+use App\Services\MailService;
 
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
-class ModMailController extends Controller
+class MailController extends Controller
 {
     /**
      * Shows the mail index
@@ -87,7 +87,7 @@ class ModMailController extends Controller
     /**
      * Sends mail from one user to another.
      */
-    public function postCreateUserMail(Request $request, ModMailService $service)
+    public function postCreateUserMail(Request $request, MailService $service)
     {
         $request->validate(UserMail::$createRules);
         $data = $request->only(['recipient_id', 'subject', 'message', 'parent_id']);

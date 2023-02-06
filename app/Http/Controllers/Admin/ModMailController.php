@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Mail\ModMail;
 use App\Models\User\User;
-use App\Services\ModMailService;
+use App\Services\MailService;
 
 use App\Http\Controllers\Controller;
 
@@ -57,7 +57,7 @@ class ModMailController extends Controller
     /**
      * Sends mod mail to a user.
      */
-    public function postCreateMail(Request $request, ModMailService $service)
+    public function postCreateMail(Request $request, MailService $service)
     {
         $request->validate(ModMail::$createRules);
         $data = $request->only(['user_id', 'subject', 'message', 'issue_strike', 'strike_count']);

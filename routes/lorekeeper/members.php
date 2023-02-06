@@ -203,10 +203,10 @@ Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function() {
     User Mail - mod mail is in browse, so banned users can view mail
 **************************************************************************************************/
 Route::group(['prefix' => 'inbox', 'namespace' => 'Users'], function() {
-    Route::get('/', 'ModMailController@getIndex');
-    Route::get('view/{id}', 'ModMailController@getUserMail');
-    Route::post('/view/{id}', 'ModMailController@postCreateUserMail');
+    Route::get('/', 'MailController@getIndex');
+    Route::get('view/{id}', 'MailController@getUserMail');
+    Route::post('/view/{id}', 'MailController@postCreateUserMail');
 
-    Route::get('/new', 'ModMailController@getCreateUserMail');
-    Route::post('/new', 'ModMailController@postCreateUserMail');
+    Route::get('/new', 'MailController@getCreateUserMail');
+    Route::post('/new', 'MailController@postCreateUserMail');
 });

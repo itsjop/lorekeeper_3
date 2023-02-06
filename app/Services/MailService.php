@@ -12,7 +12,7 @@ use App\Models\Mail\UserMail;
 use App\Models\User\User;
 use App\Services\UserService;
 
-class ModMailService extends Service
+class MailService extends Service
 {
     /**
      * Creates mod mail
