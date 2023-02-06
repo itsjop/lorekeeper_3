@@ -7,7 +7,7 @@ use Config;
 use Settings;
 use Notifications;
 
-use App\Models\ModMail;
+use App\Models\Mail\ModMail;
 use App\Models\Mail\UserMail;
 use App\Models\User\User;
 use App\Services\UserService;

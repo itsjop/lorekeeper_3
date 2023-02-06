@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Users;
 use Auth;
 
 use App\Models\User\User;
-use App\Models\ModMail;
+use App\Models\Mail\ModMail;
 use App\Models\Mail\UserMail;
 
 use App\Services\ModMailService;
@@ -25,7 +25,7 @@ class ModMailController extends Controller
     {
         if(!Auth::check()) abort(404);
 
-        return view('home.mail_index', [
+        return view('home.mail.mail_index', [
             'mails' => ModMail::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
             'inbox' => UserMail::where('recipient_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
             'outbox' => UserMail::where('sender_id', Auth::user()->id)->orderBy('created_at', 'desc')->get()
@@ -45,7 +45,7 @@ class ModMailController extends Controller
 
         if(!$mail->seen) $mail->update(['seen' => 1]);
 
-        return view('home.mail', [
+        return view('home.mail.mail', [
             'mail' => $mail
         ]);
     }

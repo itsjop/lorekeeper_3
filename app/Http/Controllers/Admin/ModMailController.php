@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use Auth;
-use App\Models\ModMail;
+use App\Models\Mail\ModMail;
 use App\Models\User\User;
 use App\Services\ModMailService;
 
