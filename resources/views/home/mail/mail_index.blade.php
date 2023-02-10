@@ -116,7 +116,6 @@
         @else
             <p>No mod mail found.</p>
         @endif
-
-        @endsection
   </div>
 </div>
+@endsection
