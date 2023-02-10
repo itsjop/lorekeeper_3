@@ -15,6 +15,10 @@
         <div class="sidebar-item"><a href="{{ url('trades/open') }}" class="{{ set_active('trades/open*') }}">Trades</a></div>
     </li>
     <li class="sidebar-section">
+        <div class="sidebar-section-header">Inbox</div>
+        <div class="sidebar-item"><a href="{{ url('inbox') }}" class="{{ set_active('inbox*') }}">All Mail</a></div>
+    </li>
+    <li class="sidebar-section">
         <div class="sidebar-section-header">Reports</div>
         <div class="sidebar-item"><a href="{{ url('reports') }}" class="{{ set_active('reports*') }}">Reports</a></div>
     </li>
