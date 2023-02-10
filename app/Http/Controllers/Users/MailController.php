@@ -43,7 +43,7 @@ class MailController extends Controller
         if(!Auth::check()) abort(404);
         $mail = ModMail::findOrFail($id);
 
-        if(!$mail->seen) $mail->update(['seen' => 1]);
+        if(!$mail->seen && $mail->user_id == Auth::user()->id) $mail->update(['seen' => 1]);
 
         return view('home.mail.mail', [
             'mail' => $mail
@@ -63,7 +63,7 @@ class MailController extends Controller
 
         if(Auth::user()->id != $mail->sender_id && Auth::user()->id != $mail->recipient_id) abort(403);
         
-        if(!$mail->seen) $mail->update(['seen' => 1]);
+        if(!$mail->seen && $mail->recipient_id == Auth::user()->id) $mail->update(['seen' => 1]);
 
         return view('home.mail.user_mail', [
             'mail' => $mail
