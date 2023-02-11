@@ -6,7 +6,7 @@
 
 {!! breadcrumbs(['Inbox' => 'inbox', $mail->displayName . ' from ' . $mail->sender->displayName => $mail->viewUrl]) !!}
 
-<div class="card">
+<div class="card mb-3">
     <div class="card-header">
         <div class="row">
             <div class="col-6">
@@ -23,6 +23,24 @@
         </div>
     </div>
 </div>
+@if($mail->parent && $mail->children)
+    <div class="card mb-3">
+        <div class="btn card-header text-right" data-toggle="collapse" href="#collapseExample" role="button" >
+            <h5>Mail #{{ $mail->id }} History</h5>
+        </div>
+        <div class="collapse card-body pb-0" id="collapseExample">
+            @if($mail->parent)
+                <p><strong>Previous Message:</strong> {!! $mail->parent->displayName !!} ({{ Illuminate\Support\Str::limit($mail->parent->message, 25, $end='...') }})</p>
+            @endif
+            @if($mail->parent && $mail->children)<hr>@endif
+            @if($mail->children)
+                @foreach($mail->children as $child)
+                    <p><strong>Replies:</strong> {!! $child->displayName !!} ({{ Illuminate\Support\Str::limit($child->message, 50, $end='...') }})</p>
+                @endforeach
+            @endif
+        </div>
+    </div>
+@endif
 
 <br>
 
@@ -30,7 +48,11 @@
 {!! Form::open(['url' => 'inbox/new']) !!}
 
 <div class="form-group">
-    {!! Form::label('message', 'Reply') !!}
+    @if($mail->children)
+        {!! Form::label('message', 'Send New Reply') !!}
+    @else
+        {!! Form::label('message', 'Send Reply') !!}
+    @endif
     {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
 </div>
 
