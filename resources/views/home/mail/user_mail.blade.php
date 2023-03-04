@@ -19,7 +19,7 @@
     </div>
     <div class="card-body">
         <div class="card-text">
-            {{ $mail->message }}
+            {!! $mail->message !!}
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@
     @else
         {!! Form::label('message', 'Send Reply') !!}
     @endif
-    {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('message', null, ['class' => 'form-control wysiwyg']) !!}
 </div>
 
 {{ Form::hidden('parent_id', $mail->id) }}
