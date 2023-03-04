@@ -5,6 +5,11 @@
 @section('meta-img') {{ asset('/images/avatars/'.$user->avatar) }} @endsection
 
 @section('profile-content')
+
+@if(Auth::check() && Auth::user()->id != $user->id)
+    <a class="btn btn-primary btn-sm float-right" href="{{ url('inbox/new?recipient_id=' . $user->id) }}"><i class="fas fa-envelope"></i> Message User</a>
+@endif
+
 {!! breadcrumbs(['Users' => 'users', $user->name => $user->url]) !!}
 
 @if($user->is_banned)
