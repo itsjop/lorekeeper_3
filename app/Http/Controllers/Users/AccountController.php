@@ -61,6 +61,7 @@ class AccountController extends Controller
     public function postProfile(Request $request)
     {
         Auth::user()->profile->update([
+            'pronouns' => $request->get('pronouns'),
             'text' => $request->get('text'),
             'parsed_text' => parse($request->get('text'))
         ]);
