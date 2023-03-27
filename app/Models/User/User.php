@@ -302,6 +302,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return ($this->is_banned ? '<strike>' : '') . '<a href="'.$this->url.'" class="display-user" '.($this->rank->color ? 'style="color: #'.$this->rank->color.';"' : '').'>'.$this->name.'</a>' . ($this->is_banned ? '</strike>' : '');
     }
 
+    /**
+     * Displays the user's name, linked to their profile page.
+     *
+     * @return string
+     */
+    public function getDisplayNamePronounsAttribute()
+    {
+        if($this->profile->pronouns) return ($this->displayName.' ('.$this->profile->pronouns.')');
+        else return ($this->displayName);
+    }
+
         /**
      * Displays the user's name, linked to their profile page.
      *
