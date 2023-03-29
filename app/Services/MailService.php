@@ -5,12 +5,14 @@ use App\Services\Service;
 use DB;
 use Config;
 use Settings;
+use Notifications;
 
-use App\Models\ModMail;
+use App\Models\Mail\ModMail;
+use App\Models\Mail\UserMail;
 use App\Models\User\User;
 use App\Services\UserService;
 
-class ModMailService extends Service
+class MailService extends Service
 {
     /**
      * Creates mod mail
@@ -51,6 +53,46 @@ class ModMailService extends Service
                 $service = new UserService;
                 $service->ban(['ban_reason' => 'Banned for exceeding the maximum strike count.'], $user, $staff);
             }
+
+        return $this->commitReturn(true);
+    } catch(\Exception $e) {
+        $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Creates user mail
+     *
+     * @param array $data
+     * @return UserMail
+     */
+    public function createUserMail($data, $sender)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $recipient = User::find($data['recipient_id']);
+            if(!$recipient) throw new \Exception('Recipient not found');
+            if($recipient->id == $sender->id) throw new \Exception('You cannot send mail to yourself.');
+
+            $mail = UserMail::create([
+                'sender_id' => $sender->id,
+                'recipient_id' => $recipient->id,
+                'subject' => $data['subject'],
+                'message' => $data['message'],
+                'seen' => false,
+                'parent_id' => $data['parent_id']
+            ]);
+
+            // send a notification
+            Notifications::create('DIRECT_MESSAGE_RECEIVED', $recipient, [
+                'sender_url' => $sender->url,
+                'sender_name' => $sender->name,
+                'subject' => $mail->subject,
+                'mail_id' => $mail->id
+            ]);
 
         return $this->commitReturn(true);
     } catch(\Exception $e) {

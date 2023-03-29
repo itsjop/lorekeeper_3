@@ -9,7 +9,7 @@ use Auth;
 use Config;
 use Carbon\Carbon;
 
-use App\Models\ModMail;
+use App\Models\Mail\ModMail;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImageCreator;
 use App\Models\Rank\RankPower;

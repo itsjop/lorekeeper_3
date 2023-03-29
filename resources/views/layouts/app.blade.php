@@ -31,6 +31,10 @@
     <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
     <meta property="twitter:description" content="@if(View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
+    <!-- No AI scraping directives -->
+    <meta name="robots" content="noai">
+    <meta name="robots" content="noimageai">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/site.js') }}"></script>
@@ -91,7 +95,7 @@
                     <div>
                         @if(Auth::check() && Auth::user()->hasUnseenMail)
                             <div class="alert alert-danger">
-                                <h5 class="mb-0"><i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages from staff. <a href="{{ url('mail') }}">View here.</a></h5>
+                                <h5 class="mb-0"><i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages from staff. <a href="{{ url('mail#modMail') }}">View here.</a></h5>
                             </div>
                         @endif
                         @if(Auth::check() && !Config::get('lorekeeper.extensions.navbar_news_notif'))

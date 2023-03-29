@@ -19,7 +19,7 @@
     </div>
     <div class="card-body">
         <div class="card-text">
-            {{ $mail->message }}
+            {!! $mail->message !!}
         </div>
         @if($mail->issue_strike)
             <hr>

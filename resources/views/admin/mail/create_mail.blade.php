@@ -23,7 +23,7 @@
 
 <div class="form-group">
     {!! Form::label('message', 'Message') !!}
-    {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('message', null, ['class' => 'form-control wysiwyg']) !!}
 </div>
 
 <h3>Additional Data</h3>

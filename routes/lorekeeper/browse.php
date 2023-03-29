@@ -174,6 +174,6 @@ Route::group(['prefix' => 'reports', 'namespace' => 'Users'], function() {
     Mail - this has to be in browse so banned users can view mail
 **************************************************************************************************/
 Route::group(['prefix' => 'mail', 'namespace' => 'Users'], function() {
-    Route::get('/', 'ModMailController@getIndex');
-    Route::get('view/{id}', 'ModMailController@getMail');
+    Route::get('/', 'MailController@getIndex');
+    Route::get('view/{id}', 'MailController@getMail');
 });
