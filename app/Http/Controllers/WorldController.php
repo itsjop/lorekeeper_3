@@ -19,6 +19,7 @@ use App\Models\Prompt\Prompt;
 use App\Models\Shop\Shop;
 use App\Models\Shop\ShopStock;
 use App\Models\User\User;
+use App\Models\Map\Map;
 
 class WorldController extends Controller
 {
@@ -388,6 +389,28 @@ class WorldController extends Controller
         return view('world.prompts', [
             'prompts' => $query->paginate(20)->appends($request->query()),
             'categories' => ['none' => 'Any Category'] + PromptCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray()
+        ]);
+    }
+
+    /**
+     * shows all maps
+     */
+    public function getMaps()
+    {
+        return view('world.maps', [
+            'maps' => Map::active()->orderBy('name', 'DESC')->get(),
+        ]);
+    }
+
+    /**
+     * Gets a map by its name
+     */
+    public function getMap($name)
+    {
+        $map = Map::active()->where('name', $name)->first();
+        if(!$map) abort(404);
+        return view('world.map', [
+            'map' => $map,
         ]);
     }
 }

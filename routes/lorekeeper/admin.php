@@ -437,3 +437,21 @@ Route::group(['prefix' => 'designs', 'middleware' => 'power:manage_characters'],
     Route::post('vote/{id}/{action}', 'DesignController@postVote')->where('action', 'approve|reject');
 });
 Route::get('{type}/{status}', 'DesignController@getDesignIndex')->where('type', 'myo-approvals|design-approvals')->where('status', 'pending|approved|rejected');
+
+# MAPS
+Route::group(['prefix' => 'maps', 'middleware' => 'power:manage_maps'], function() {
+    Route::get('/', 'MapController@getMapIndex');
+    Route::get('create', 'MapController@getCreateMap');
+    Route::post('create', 'MapController@postCreateEditMap');
+    Route::get('edit/{id}', 'MapController@getEditMap');
+    Route::post('edit/{id}', 'MapController@postCreateEditMap');
+    Route::get('delete/{id}', 'MapController@getDeleteMap');
+    Route::post('delete/{id}', 'MapController@postDeleteMap');
+    # LOCATIONS
+    Route::get('locations/create/{map_id}', 'MapController@getCreateLocation');
+    Route::post('locations/create/{map_id}', 'MapController@postCreateEditLocation');
+    Route::get('locations/edit/{id}', 'MapController@getEditLocation');
+    Route::post('locations/edit/{id}/{map_id}', 'MapController@postCreateEditLocation');
+    Route::get('locations/delete/{id}', 'MapController@getDeleteLocation');
+    Route::post('locations/delete/{id}', 'MapController@postDeleteLocation');
+});

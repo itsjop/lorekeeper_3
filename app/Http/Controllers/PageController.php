@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\SitePage;
+use App\Models\Map\Map;
 
 class PageController extends Controller
 {
@@ -31,7 +32,16 @@ class PageController extends Controller
     {
         $page = SitePage::where('key', $key)->where('is_visible', 1)->first();
         if(!$page) abort(404);
-        return view('pages.page', ['page' => $page]);
+
+        // replace @map(int) with the map's HTML
+        $text = $page->text;
+        $text = preg_replace_callback('/@map\((\d+)\)/', function($matches) {
+            $map = Map::find($matches[1]);
+            if($map) return view('widgets._map', ['map' => $map])->render();
+            else return '';
+        }, $text);
+        
+        return view('pages.page', ['page' => $page, 'text' => $text]);
     }
     
 

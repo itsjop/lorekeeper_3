@@ -47,6 +47,7 @@
     <script src="{{ asset('js/selectize.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>
     <script src="{{ asset('js/croppie.min.js') }}"></script>
+    <script src="{{ asset('js/image-map-resize.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -167,6 +168,29 @@
                         $(this).next().toggle();
                     });
                 });
+
+                $(document).ready(function() {
+                    var $imageMaps = $('img[usemap]');
+                    // loop through each element
+                    $imageMaps.each(function() {
+                        // get the map name
+                        var mapName = $(this).attr('usemap').replace('#', '');
+                        // get the map object
+                        var $map = $('map[name="' + mapName + '"]');
+                        // resize image map
+                        $map.imageMapResize();
+                    });
+                });
+                
+                $('.tooltip-bot, .tooltip-bot a, .nav-social-links a').tooltip({
+                    placement: "top"
+                });
+                
+                $(document).mousemove( function(e) {	
+                    var mouseX = e.pageX - $('#Image-Maps-Com-process-map').offset().left ;
+                    var mouseY = e.pageY - $('#Image-Maps-Com-process-map').offset().top - 5;
+                    $('.tooltip').css({'top':mouseY,'left':mouseX}).fadeIn('slow');
+                }); 
         </script>
     </div>
 </body>

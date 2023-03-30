@@ -11,7 +11,7 @@
 </div>  
 
 <div class="site-page-content parsed-text">
-    {!! $page->parsed_text !!}
+    {!! $text !!}
 </div>
 
 @if($page->can_comment)
