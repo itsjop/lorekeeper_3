@@ -28,7 +28,7 @@
         <div class="col-md">
             <div class="form-group">
                 {!! Form::label('shape', 'Shape') !!}
-                {!! Form::select('shape', ['rect' => 'Rect', 'poly' => 'Poly', 'circle' => 'Circle'], $location->link_type, ['class' => 'form-control']) !!}
+                {!! Form::select('shape', ['rect' => 'Rect', 'poly' => 'Poly', 'circle' => 'Circle'], $location->shape, ['class' => 'form-control']) !!}
             </div>
         </div>
     </div>
