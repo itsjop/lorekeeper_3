@@ -149,7 +149,9 @@ class Map extends Model
         foreach($this->locations as $location)
         {
            $locations[] =
-            '<area target="" alt="'.$location->name.'" title="" data-toggle="tooltip" class="tooltip-bot" href="'.$location->url.'" coords="'.$location->cords.'" shape="'.$location->shape.'" data-original-title="'.$location->name.'">';
+            '<area target="" alt="'.$location->name.'" title="'.$location->name.'"'
+            . ($location->link_type == 'GET' ? ' href="'.$location->link.'"' : '') .
+            ' data-toggle="tooltip" class="tooltip-bot" href="'.$location->url.'" coords="'.$location->cords.'" shape="'.$location->shape.'" data-original-title="'.$location->name.'">';
         }
         return
             ('<img src="'.$this->imageUrl.'" id="Image-Maps-Com-process-map" class="img-fluid border" usemap="#'.$this->name.'">')
