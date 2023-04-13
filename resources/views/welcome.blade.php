@@ -2,6 +2,12 @@
 
 @section('title') Home @endsection
 
+@section('sidebar')
+    @if(Auth::check())
+       @include('frontpage._sidebar')
+    @endif
+@endsection
+
 @section('content')
     @if(Auth::check())
         @include('pages._dashboard')

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\SitePage;
+use App\Models\Species\Species;
+use App\Models\Character\Character;
+use App\Models\Character\CharacterImage;
 use App\Services\LinkService;
 use App\Services\UserService;
 use Auth;
@@ -30,9 +33,46 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
+        $featured = [];
+        $specieses = Species::visible(0)->orderBy('specieses.sort', 'DESC')->pluck('id')->toArray();
+        
+        foreach($specieses as $species) {
+            $randomSpecies = HomeController::randomCharacter($species);
+            if($randomSpecies) {
+                array_push($featured, $randomSpecies);
+            }
+        }
+
         return view('welcome', [
             'about' => SitePage::where('key', 'about')->first(),
+            'featuredChars' => $featured,
         ]);
+    }
+
+    /**
+     * Gets random character from specified species.
+     *
+     * @param  int (species_id)          $species
+     */
+    public function randomCharacter(int $species)
+    {
+        $query = Character::with('user.rank')->with('image.features')->with('rarity')->with('image.species')->myo(0)->where(function ($query) {
+               $query->where('is_gift_art_allowed', '>=', 1)
+                     ->orWhere('is_gift_writing_allowed', '>=', 1);
+           });
+        $imageQuery = CharacterImage::images(Auth::check() ? Auth::user() : null)->with('features')->with('rarity')->with('species')->with('features')->where('species_id', $species);
+
+        $query->whereIn('id', $imageQuery->pluck('character_id')->toArray());
+
+        if(!Auth::check() || !Auth::user()->hasPower('manage_characters')) $query->visible();
+
+        $allCharacters = $query->get();
+        
+        if (!count($allCharacters)) {
+            return false;
+        }
+
+        return $allCharacters->random();
     }
 
     /**
