@@ -2,8 +2,12 @@
     <li class="sidebar-header" style="display: block; padding: 0.3em 1em; color: white;">Spotlight of the Moment</li>
     <li class="sidebar-section text-center accordion" id="featAccordion">
     @foreach($featuredChars as $character)
-        <div class="sidebar-section-header" id="heading{{ $character->image->species->name }}"><a class="btn btn-link @if($character->image->species->id != 1) collapsed @endif collapse-toggle" data-toggle="collapse" data-target="#collapse{{ $character->image->species->name }}" aria-expanded="true" aria-controls="collapse{{ $character->image->species->name }}" style="margin-right:10px;"><h4>{!! $character->image->species_id ? $character->image->species->name : 'No Species' !!}</h4></a></div>
-        <div id="collapse{{ $character->image->species->name }}" class="collapse @if($character->image->species->id == 1) show @endif" aria-labelledby="heading{{ $character->image->species->name }}" data-parent="#featAccordion">
+        <div class="sidebar-section-header" id="headingSpecies_{{ $character->image->species->id }}">
+                <a class="btn btn-link @if($character->image->species->id != 1) collapsed @endif collapse-toggle" data-toggle="collapse" data-target="#collapseSpecies_{{ $character->image->species->id }}" aria-expanded="true" aria-controls="collapseSpecies_{{ $character->image->species->id }}" style="margin-right:10px;">
+                    <h4>{{ $character->image->species->name }}</h4>
+                </a>
+        </div>
+        <div id="collapseSpecies_{{ $character->image->species->id }}" class="collapse @if($character->image->species->id == 1) show @endif" aria-labelledby="headingSpecies_{{ $character->image->species->id }}" data-parent="#featAccordion">
             <div>
                 <a href="{{ $character->url }}"><img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->fullName }}"/></a>
             </div>
