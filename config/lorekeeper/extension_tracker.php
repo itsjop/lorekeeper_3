@@ -19,6 +19,6 @@ return [
          'creators' => json_encode([
             'Speedy' => 'https://github.com/SpeedyD/',
          ]),
-         'version' => '1.0.2',
+         'version' => '1.0.3',
      ],
 ];
