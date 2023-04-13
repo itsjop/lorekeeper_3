@@ -14,13 +14,6 @@
                 <div class="col-6">{!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!}</div>
                 <div class="col-6">{!! $character->displayOwner !!}</div>
             </div>
-            <div class="small mb-1">
-                @if(Settings::get('character_title_display') && $character->image->hasTitle)
-                    {!! $character->image->title_id ? $character->image->title->displayNameShort : (isset($character->image->title_data['short']) ? nl2br(htmlentities($character->image->title_data['short'])) : nl2br(htmlentities($character->image->title_data['full']))) !!}
-                @else
-                    &nbsp;
-                @endif
-            </div>
             <div class="mb-1">
                 <button class="btn btn-sm {{ $character->is_gift_art_allowed == 1 ? 'badge-success' : ($character->is_gift_art_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }}" data-toggle="tooltip" title="{{ $character->is_gift_art_allowed == 1 ? 'OPEN for gift art.' : ($character->is_gift_art_allowed == 2 ? 'PLEASE ASK before gift art.' : 'CLOSED for gift art.') }}"><i class="fas fa-pencil-ruler"></i></button>
                 <button class="btn btn-sm {{ $character->is_gift_writing_allowed == 1 ? 'badge-success' : ($character->is_gift_writing_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }}" data-toggle="tooltip" title="{{ $character->is_gift_writing_allowed == 1 ? 'OPEN for gift writing.' : ($character->is_gift_writing_allowed == 2 ? 'PLEASE ASK before gift writing.' : 'CLOSED for gift writing.') }}"><i class="fas fa-file-alt"></i></button>
