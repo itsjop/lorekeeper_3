@@ -60,7 +60,7 @@ class HomeController extends Controller
                $query->where('is_gift_art_allowed', '>=', 1)
                      ->orWhere('is_gift_writing_allowed', '>=', 1);
            });
-        $imageQuery = CharacterImage::images(Auth::check() ? Auth::user() : null)->with('features')->with('rarity')->with('species')->with('features')->where('species_id', $species);
+        $imageQuery = CharacterImage::images(Auth::check() ? Auth::user() : null)->with('features')->with('rarity')->with('species')->where('species_id', $species)->whereIn('id', $query->pluck('character_image_id')->toArray());
 
         $query->whereIn('id', $imageQuery->pluck('character_id')->toArray());
 
