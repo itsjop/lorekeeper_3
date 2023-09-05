@@ -28,6 +28,10 @@ return [
         'title' => 'Credits',
         'text' => 'This page will contain credits for code, art, ect that has been used on your site!'
     ],
+    'professions' => [
+        'title' => 'Professions',
+        'text' => 'This page will contain the main info on your profession page!'
+    ],
 
 
 ];

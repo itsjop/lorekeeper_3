@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\User\User;
 use App\Models\Profession\Profession;
+use App\Models\Profession\ProfessionSubcategory;
 
 class ProfessionCategory extends Model
 {
@@ -61,15 +62,16 @@ class ProfessionCategory extends Model
     **********************************************************************************************/
 
     /**
-     * Get the location attached to this type.
+     * Get the professions attached to this type.
      */
     public function professions()
     {
         return $this->hasMany('App\Models\Profession\Profession', 'category_id')->visible();
     }
 
+
     /**
-     * Get the species of the character image.
+     * Get the species of the category.
      */
     public function species()
     {
@@ -81,6 +83,15 @@ class ProfessionCategory extends Model
 
         ACCESSORS
     **********************************************************************************************/
+
+    /**
+     * Get the subcategories attached to this category that have a profession attached.
+     */
+    public function getSubcategoriesWithProfessionsAttribute()
+    {
+        $professionIds = Profession::where('category_id', $this->id)->where('subcategory_id', '!=', null)->pluck('subcategory_id');
+        return ProfessionSubcategory::whereIn('id', $professionIds)->orderBy('sort', 'DESC')->get();
+    }
 
     /**
      * Displays linked name.

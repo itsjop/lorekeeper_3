@@ -57,7 +57,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            {!! Form::label('Profession Category (Optional)') !!}
+            {!! Form::label('Profession Category') !!}
             {!! Form::select('category_id', $categories, $profession->category_id, ['class' => 'form-control']) !!}
         </div>
     </div>

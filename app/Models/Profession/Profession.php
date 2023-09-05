@@ -99,7 +99,7 @@ class Profession extends Model
      */
     public function scopeVisible($query)
     {
-        if(!Auth::check() || !(Auth::check() && Auth::user()->isStaff)) return $query->where('is_active', 1);
+        if(!Auth::check() || !(Auth::check() && Auth::user()->isStaff)) return $query->where('is_active', 1)->orderBy('sort', 'DESC');
         else return $query;
     }
 

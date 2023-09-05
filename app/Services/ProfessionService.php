@@ -468,6 +468,9 @@ class ProfessionService extends Service
      */
     private function populateData($data, $profession = null)
     {
+
+        if(!isset($data['category_id'])) throw new \Exception("A profession must have a category.");
+
         if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
         if(isset($data['species_id']) && $data['species_id'] == 'none') $data['species_id'] = null;
         if(isset($data['category_id']) && $data['category_id'] == 'none') $data['category_id'] = null;
