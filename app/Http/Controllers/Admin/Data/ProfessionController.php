@@ -356,7 +356,7 @@ class ProfessionController extends Controller
     {
         $id ? $request->validate(Profession::$updateRules) : $request->validate(Profession::$createRules);
         $data = $request->only([
-            'name', 'category_id','subcategory_id', 'description', 'image', 'image_icon', 'remove_image', 'remove_image_icon', 'is_active'
+            'name', 'category_id','subcategory_id', 'description', 'image', 'image_icon', 'remove_image', 'remove_image_icon', 'is_active', 'is_choosable'
         ]);
         if($id && $service->updateProfession(Profession::find($id), $data, Auth::user())) {
             flash('Profession updated successfully.')->success();

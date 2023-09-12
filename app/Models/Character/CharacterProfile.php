@@ -16,7 +16,7 @@ class CharacterProfile extends Model
      * @var array
      */
     protected $fillable = [
-        'character_id', 'text', 'parsed_text', 'link'
+        'character_id', 'text', 'parsed_text', 'link', 'profession','profession_id'
     ];
 
     /**
@@ -54,5 +54,13 @@ class CharacterProfile extends Model
     public function character()
     {
         return $this->belongsTo('App\Models\Character\Character', 'character_id');
+    }
+
+    /**
+     * Get the profession of the character.
+     */
+    public function profession()
+    {
+        return $this->belongsTo('App\Models\Profession\Profession', 'profession_id');
     }
 }

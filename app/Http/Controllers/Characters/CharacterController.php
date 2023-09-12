@@ -26,6 +26,7 @@ use App\Models\Item\ItemCategory;
 use App\Models\User\UserItem;
 use App\Models\Character\CharacterItem;
 use App\Models\Item\ItemLog;
+use App\Models\Profession\Profession;
 
 use App\Models\Character\CharacterTransfer;
 
@@ -105,8 +106,13 @@ class CharacterController extends Controller
         $isOwner = ($this->character->user_id == Auth::user()->id);
         if(!$isMod && !$isOwner) abort(404);
 
+        $professions = Profession::where("is_choosable", 1)->with('category')->get()->filter(function ($item) {
+            return $item->category->species_id == null || $item->category->species_id == $this->character->image->species_id;
+        })->pluck('name', 'id')->toArray();
+
         return view('character.edit_profile', [
             'character' => $this->character,
+            'professions' => $professions
         ]);
     }
 
@@ -128,7 +134,10 @@ class CharacterController extends Controller
 
         $request->validate(CharacterProfile::$rules);
 
-        if($service->updateCharacterProfile($request->only(['name', 'link', 'text', 'is_gift_art_allowed', 'is_gift_writing_allowed', 'is_trading', 'alert_user']), $this->character, Auth::user(), !$isOwner)) {
+        if($service->updateCharacterProfile($request->only([
+            'name', 'link', 'text', 'is_gift_art_allowed', 'is_gift_writing_allowed', 'is_trading', 'alert_user',
+            'profession', 'profession_id'
+        ]), $this->character, Auth::user(), !$isOwner)) {
             flash('Profile edited successfully.')->success();
         }
         else {

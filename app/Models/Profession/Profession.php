@@ -24,7 +24,7 @@ class Profession extends Model
      */
     protected $fillable = [
         'name','description', 'parsed_description', 'image_extension', 'icon_extension',
-        'category_id', 'subcategory_id', 'is_active', 'sort'
+        'category_id', 'subcategory_id', 'is_active', 'sort', 'is_choosable'
     ];
 
 

@@ -69,6 +69,10 @@ class ProfessionCategory extends Model
         return $this->hasMany('App\Models\Profession\Profession', 'category_id')->visible();
     }
 
+    public function subcategories()
+    {
+        return $this->hasMany('App\Models\Profession\ProfessionSubCategory', 'category_id');
+    }
 
     /**
      * Get the species of the category.
@@ -83,14 +87,24 @@ class ProfessionCategory extends Model
 
         ACCESSORS
     **********************************************************************************************/
-
+    
     /**
-     * Get the subcategories attached to this category that have a profession attached.
+     * Get professions by subcategory and put those without one into the general category.
      */
-    public function getSubcategoriesWithProfessionsAttribute()
+    public function getProfessionsBySubcategoryAttribute()
     {
-        $professionIds = Profession::where('category_id', $this->id)->where('subcategory_id', '!=', null)->pluck('subcategory_id');
-        return ProfessionSubcategory::whereIn('id', $professionIds)->orderBy('sort', 'DESC')->get();
+        //get professions sort by subcategory sort
+        $professions = Profession::where('professions.category_id', $this->id)->where('is_active', 1)->with('subcategory')
+        ->join('profession_subcategories', 'profession_subcategories.id', '=', 'professions.subcategory_id')
+        ->select('professions.*') 
+        ->orderBy('profession_subcategories.sort', 'DESC')
+        ->get()->groupBy('subcategory_id');
+
+        //add all empty ones under general/empty id
+        $noCatprofessions = Profession::where('category_id', $this->id)->where('is_active', 1)->where('subcategory_id', null)->get();
+        $professions->put('', $noCatprofessions);
+        //
+        return $professions;
     }
 
     /**

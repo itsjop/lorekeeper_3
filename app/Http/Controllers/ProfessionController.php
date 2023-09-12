@@ -43,6 +43,7 @@ class ProfessionController extends Controller
         return view('professions.index', [
             'page' => $professionPage,
             'categories' => $categories,
+
         ]);
     }
 
@@ -54,13 +55,15 @@ class ProfessionController extends Controller
     public function getCategory($id)
     {
         $category = ProfessionCategory::where('id', $id)->first();
+        if(!$category) abort(404);
+
         $categories = ProfessionCategory::orderBy('sort', 'DESC')->get();
-        $professionsBySubCategories = Profession::where('category_id', $id)->get()->groupBy('subcategory_id');
+        $professions= Profession::where('category_id', $id)->get();
 
         return view('professions.category', [
             'category' => $category,
             'categories' => $categories,
-            'professionsBySubCategories' => $professionsBySubCategories
+            'professions' => $professions
         ]);
     }
 

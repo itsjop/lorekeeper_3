@@ -476,6 +476,7 @@ class ProfessionService extends Service
         if(isset($data['category_id']) && $data['category_id'] == 'none') $data['category_id'] = null;
         if(isset($data['subcategory_id']) && $data['subcategory_id'] == 'none') $data['subcategory_id'] = null;
         $data['is_active'] = isset($data['is_active']);
+        $data['is_choosable'] = isset($data['is_choosable']);
 
         if(isset($data['remove_image']))
         {
