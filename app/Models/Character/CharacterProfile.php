@@ -59,7 +59,7 @@ class CharacterProfile extends Model
     /**
      * Get the profession of the character.
      */
-    public function profession()
+    public function professionObj()
     {
         return $this->belongsTo('App\Models\Profession\Profession', 'profession_id');
     }
