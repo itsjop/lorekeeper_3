@@ -178,7 +178,7 @@ class ProfessionController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function ProfessionSubcategory()
+    public function getCreateProfessionSubcategory()
     {
         return view('admin.professions.create_edit_profession_subcategory', [
             'subcategory' => new ProfessionSubcategory,
@@ -193,7 +193,7 @@ class ProfessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function ProfessionSubcategory($id)
+    public function getEditProfessionSubcategory($id)
     {
         $category = ProfessionSubcategory::find($id);
         if(!$category) abort(404);
