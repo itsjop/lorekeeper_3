@@ -19,7 +19,7 @@
 @if($category->subcategories()->get()->count() > 0)
 <ul class="nav nav-tabs mt-3" id="professionTabs" role="tablist">
     @foreach($category->professionsBySubcategory as $subcategoryId => $professions)
-    @php $subcategory = \App\Models\Profession\ProfessionSubCategory::where('id', $subcategoryId)->first(); @endphp
+    @php $subcategory = \App\Models\Profession\ProfessionSubcategory::where('id', $subcategoryId)->first(); @endphp
     @if($professions->count() > 0)
     <li class="nav-item h4">
         <a class="nav-link h-100 {{ ($loop->index == 0) ? 'active' : '' }}" id="tab-{{$subcategory->id ?? 'general' }}" data-toggle="tab"
@@ -33,7 +33,7 @@
 <!---- TAB CONTENT / PROFESSIONS WITH SUBCATEGORY -->
 <div class="tab-content" id="professionContent">
     @foreach($category->professionsBySubcategory as $subcategoryId => $professions)
-    @php $subcategory = \App\Models\Profession\ProfessionSubCategory::where('id', $subcategoryId)->first(); @endphp
+    @php $subcategory = \App\Models\Profession\ProfessionSubcategory::where('id', $subcategoryId)->first(); @endphp
     <div class="tab-pane fade show {{($loop->index == 0) ? ' active' : ''}}" id="subcat-{{$subcategory->id ?? 'general' }}" role="tabpanel" aria-labelledby="tab-{{$subcategory->id ?? 'general' }}">
         @if(isset($subcategory->parsed_description))
         <div class="site-page-content parsed-text">

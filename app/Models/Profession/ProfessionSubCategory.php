@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User\User;
 use App\Models\Profession\Profession;
 
-class ProfessionSubCategory extends Model
+class ProfessionSubcategory extends Model
 {
 
     /**

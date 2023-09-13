@@ -71,7 +71,7 @@ class ProfessionCategory extends Model
 
     public function subcategories()
     {
-        return $this->hasMany('App\Models\Profession\ProfessionSubCategory', 'category_id');
+        return $this->hasMany('App\Models\Profession\ProfessionSubcategory', 'category_id');
     }
 
     /**

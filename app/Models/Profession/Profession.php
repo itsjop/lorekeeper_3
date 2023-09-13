@@ -81,7 +81,7 @@ class Profession extends Model
      */
     public function subcategory()
     {
-        return $this->belongsTo('App\Models\Profession\ProfessionSubCategory', 'subcategory_id');
+        return $this->belongsTo('App\Models\Profession\ProfessionSubcategory', 'subcategory_id');
     }
 
 
