@@ -12,5 +12,13 @@ return [
     //     'version' => '1.0.0',
     // ],
     
+    'character_professions' => [
+        'key' => 'character_professions',
+        'wiki_key' => 'Character Professions',
+        'creators' => json_encode([
+            'Cylunny' => 'https://toyhou.se/cylunny',
+        ]),
+        'version' => '1.0.0',
+    ],
 
 ];
