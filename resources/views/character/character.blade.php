@@ -15,7 +15,7 @@
 
 @if(isset($character->profile->professionObj) || isset($character->profile->profession))
 <div class="card-header mb-2 p-0 text-right">
-    <div class="col-2 ml-auto">
+    <div class="col-lg-2 ml-auto">
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
             @if(isset($character->profile->professionObj))
             <h5 class="p-0 m-0"><img class="fr-fic fr-dii mr-2" src="{{$character->profile->professionObj->iconUrl ?? '/images/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}</h5>
