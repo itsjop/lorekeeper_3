@@ -16,21 +16,7 @@ class CharacterLineage extends Model
      * @var array
      */
     protected $fillable = [
-        'character_id',
-        'sire_id',              'sire_name',
-        'sire_sire_id',         'sire_sire_name',
-        'sire_sire_sire_id',    'sire_sire_sire_name',
-        'sire_sire_dam_id',     'sire_sire_dam_name',
-        'sire_dam_id',          'sire_dam_name',
-        'sire_dam_sire_id',     'sire_dam_sire_name',
-        'sire_dam_dam_id',      'sire_dam_dam_name',
-        'dam_id',               'dam_name',
-        'dam_sire_id',          'dam_sire_name',
-        'dam_sire_sire_id',     'dam_sire_sire_name',
-        'dam_sire_dam_id',      'dam_sire_dam_name',
-        'dam_dam_id',           'dam_dam_name',
-        'dam_dam_sire_id',      'dam_dam_sire_name',
-        'dam_dam_dam_id',       'dam_dam_dam_name',
+        'character_id', 'father_id', 'father_name', 'mother_id', 'mother_name',
     ];
 
     /**
@@ -40,81 +26,28 @@ class CharacterLineage extends Model
      */
     protected $table = 'character_lineages';
 
-    // test
-    private $unknown = "Unknown";
-
-    /*
-     * ASSOCIATING THE FAMILY CHARACTER MODELS
+    /**
+     * gets the character
      */
-
-    public function sire()
+    public function character()
     {
         return $this->belongsTo('App\Models\Character\Character');
     }
 
-    public function sire_sire()
+    /**
+     * Gets father of this character
+     */
+    public function father()
     {
-        return $this->belongsTo('App\Models\Character\Character');
+        return $this->belongsTo('App\Models\Character\Character', 'father_id');
     }
 
-    public function sire_sire_sire()
+    /**
+     * Gets mother of this character
+     */
+    public function mother()
     {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function sire_sire_dam()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function sire_dam()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function sire_dam_sire()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function sire_dam_dam()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function dam()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function dam_sire()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function dam_sire_sire()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function dam_sire_dam()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function dam_dam()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function dam_dam_sire()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
-    }
-
-    public function dam_dam_dam()
-    {
-        return $this->belongsTo('App\Models\Character\Character');
+        return $this->belongsTo('App\Models\Character\Character', 'mother_id');
     }
 
     /**

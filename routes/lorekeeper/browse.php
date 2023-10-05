@@ -86,10 +86,8 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
 
     # lineage
     Route::get('{slug}/lineage', 'CharacterLineageController@getCharacterLineage');
-    Route::get('{slug}/children', 'CharacterLineageController@getCharacterChildren');
-    Route::get('{slug}/grandchildren', 'CharacterLineageController@getCharacterGrandChildren');
-    Route::get('{slug}/great-grandchildren', 'CharacterLineageController@getCharacterGreatGrandChildren');
 });
+
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
     Route::get('{id}', 'MyoController@getCharacter');
     Route::get('{id}/profile', 'MyoController@getCharacterProfile');

@@ -195,6 +195,14 @@ class Character extends Model {
         return $this->hasOne('App\Models\Character\CharacterLineage', 'character_id');
     }
 
+    /**
+     * Get the character's children from the lineages.
+     */
+    public function children()
+    {
+        return $this->hasMany('App\Models\Character\CharacterLineage', 'father_id')->orWhere('mother_id', $this->id);
+    }
+
     /**********************************************************************************************
 
         SCOPES
@@ -560,7 +568,7 @@ class Character extends Model {
     /**
      * Finds the lineage blacklist level of this character.
      * 0 is no restriction at all
-     * 1 is no ancestors but no children
+     * 1 is ancestors but no children
      * 2 is no lineage at all
      *
      * @return int

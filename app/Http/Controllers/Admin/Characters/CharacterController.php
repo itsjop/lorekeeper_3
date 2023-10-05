@@ -105,28 +105,11 @@ class CharacterController extends Controller {
             'description', 'is_visible', 'is_giftable', 'is_tradeable', 'is_sellable',
             'sale_value', 'transferrable_at', 'use_cropper',
             'x0', 'x1', 'y0', 'y1',
-
-            // hello darkness my old friend //
-            'sire_id',           'sire_name',
-            'sire_sire_id',      'sire_sire_name',
-            'sire_sire_sire_id', 'sire_sire_sire_name',
-            'sire_sire_dam_id',  'sire_sire_dam_name',
-            'sire_dam_id',       'sire_dam_name',
-            'sire_dam_sire_id',  'sire_dam_sire_name',
-            'sire_dam_dam_id',   'sire_dam_dam_name',
-            'dam_id',            'dam_name',
-            'dam_sire_id',       'dam_sire_name',
-            'dam_sire_sire_id',  'dam_sire_sire_name',
-            'dam_sire_dam_id',   'dam_sire_dam_name',
-            'dam_dam_id',        'dam_dam_name',
-            'dam_dam_sire_id',   'dam_dam_sire_name',
-            'dam_dam_dam_id',    'dam_dam_dam_name',
-            'generate_ancestors',
-
             'designer_id', 'designer_url',
             'artist_id', 'artist_url',
             'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
             'image', 'thumbnail', 'image_description',
+            'father_id', 'mother_id',
         ]);
         if ($character = $service->createCharacter($data, Auth::user())) {
             flash('Character created successfully.')->success();
@@ -155,28 +138,11 @@ class CharacterController extends Controller {
             'description', 'is_visible', 'is_giftable', 'is_tradeable', 'is_sellable',
             'sale_value', 'transferrable_at', 'use_cropper',
             'x0', 'x1', 'y0', 'y1',
-
-            // i've come to speak with you again //
-            'sire_id',           'sire_name',
-            'sire_sire_id',      'sire_sire_name',
-            'sire_sire_sire_id', 'sire_sire_sire_name',
-            'sire_sire_dam_id',  'sire_sire_dam_name',
-            'sire_dam_id',       'sire_dam_name',
-            'sire_dam_sire_id',  'sire_dam_sire_name',
-            'sire_dam_dam_id',   'sire_dam_dam_name',
-            'dam_id',            'dam_name',
-            'dam_sire_id',       'dam_sire_name',
-            'dam_sire_sire_id',  'dam_sire_sire_name',
-            'dam_sire_dam_id',   'dam_sire_dam_name',
-            'dam_dam_id',        'dam_dam_name',
-            'dam_dam_sire_id',   'dam_dam_sire_name',
-            'dam_dam_dam_id',    'dam_dam_dam_name',
-            'generate_ancestors',
-
             'designer_id', 'designer_url',
             'artist_id', 'artist_url',
             'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
             'image', 'thumbnail',
+            'father_id', 'mother_id',
         ]);
         if ($character = $service->createCharacter($data, Auth::user(), true)) {
             flash('MYO slot created successfully.')->success();

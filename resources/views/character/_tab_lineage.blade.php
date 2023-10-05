@@ -1,41 +1,25 @@
-@if($character->lineage !== null)
-    <?php $line = $character->lineage; ?>
-    @include('character._tab_lineage_tree', [
-        'line' => [
-            'sire' =>           $line->getDisplayName('sire'),
-            'sire_sire' =>      $line->getDisplayName('sire_sire'),
-            'sire_sire_sire' => $line->getDisplayName('sire_sire_sire'),
-            'sire_sire_dam' =>  $line->getDisplayName('sire_sire_dam'),
-            'sire_dam' =>       $line->getDisplayName('sire_dam'),
-            'sire_dam_sire' =>  $line->getDisplayName('sire_dam_sire'),
-            'sire_dam_dam' =>   $line->getDisplayName('sire_dam_dam'),
-            'dam' =>            $line->getDisplayName('dam'),
-            'dam_sire' =>       $line->getDisplayName('dam_sire'),
-            'dam_sire_sire' =>  $line->getDisplayName('dam_sire_sire'),
-            'dam_sire_dam' =>   $line->getDisplayName('dam_sire_dam'),
-            'dam_dam' =>        $line->getDisplayName('dam_dam'),
-            'dam_dam_sire' =>   $line->getDisplayName('dam_dam_sire'),
-            'dam_dam_dam' =>    $line->getDisplayName('dam_dam_dam'),
-        ]])
-@else
-    @include('character._tab_lineage_tree', [
-        'line' => [
-            'sire' => "Unknown",
-            'sire_sire' => "Unknown",
-            'sire_sire_sire' => "Unknown",
-            'sire_sire_dam' => "Unknown",
-            'sire_dam' => "Unknown",
-            'sire_dam_sire' => "Unknown",
-            'sire_dam_dam' => "Unknown",
-            'dam' => "Unknown",
-            'dam_sire' => "Unknown",
-            'dam_sire_sire' => "Unknown",
-            'dam_sire_dam' => "Unknown",
-            'dam_dam' => "Unknown",
-            'dam_dam_sire' => "Unknown",
-            'dam_dam_dam' => "Unknown",
-        ]])
-@endif
+<div class="container text-center">
+    @if ($character->children->count() && config('lorekeeper.lineage.show_children_on_tab'))
+        @include('character._lineage_children', [
+            'character' => $character,
+            'max_depth' => 0,
+            'title'     => 'Children',
+        ])
+    @endif
+    <div class="row">
+        @include('character._tab_lineage_col', [
+            'character' => $character->lineage ? $character->lineage->father : null,
+            'max_depth' => config('lorekeeper.lineage.lineage_depth') - 1,
+            'parent' => 'Father',
+        ])
+        @include('character._tab_lineage_col', [
+            'character' => $character->lineage ? $character->lineage->mother : null,
+            'max_depth' => config('lorekeeper.lineage.lineage_depth') - 1,
+            'parent' => 'Mother',
+        ])
+    </div>
+</div>
+
 @if(Auth::check() && Auth::user()->hasPower('manage_characters'))
     <div class="mt-3">
         <a href="#" class="btn btn-outline-info btn-sm edit-lineage" data-{{ $character->is_myo_slot ? 'id' : 'slug' }}="{{ $character->is_myo_slot ? $character->id : $character->slug }}"><i class="fas fa-cog"></i> Edit</a>
