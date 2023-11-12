@@ -14,7 +14,7 @@ class AddSiteForms extends Migration
     public function up()
     {
         //
-        Schema::create('forms', function (Blueprint $table) {
+        Schema::create('site_forms', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('title');
@@ -27,29 +27,29 @@ class AddSiteForms extends Migration
             $table->boolean('is_anonymous')->default(true);
         });
 
-        Schema::create('form_question', function (Blueprint $table) {
+        Schema::create('site_form_questions', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('form_id')->unsigned()->index();
-            $table->text('description');
+            $table->text('question');
             $table->boolean('has_options')->default(true); // if no options we render a text field as response, otherwise we know to look up the options
         });
 
-        Schema::create('form_option', function (Blueprint $table) {
+        Schema::create('site_form_options', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('question_id')->unsigned()->index();
             $table->text('option');
         });
 
-        Schema::create('form_answer', function (Blueprint $table) {
+        Schema::create('site_form_answers', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('form_id')->unsigned()->index();
             $table->integer('question_id')->unsigned()->index();
             $table->integer('option_id')->unsigned()->nullable()->default(null)->index();
             $table->integer('user_id')->unsigned()->nullable()->default(null);
-            $table->text('text_answer')->nullable()->default(null);
+            $table->text('answer')->nullable()->default(null);
         });
     }
 
