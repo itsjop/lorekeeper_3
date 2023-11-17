@@ -64,14 +64,14 @@ class SiteFormController extends Controller
     {
         $id ? $request->validate(SiteForm::$updateRules) : $request->validate(SiteForm::$createRules);
         $data = $request->only([
-            'title', 'text', 'post_at', 'is_visible', 'bump'
+            'title', 'description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous', 'questions', 'options',
         ]);
         if($id && $service->updateSiteForm(SiteForm::find($id), $data, Auth::user())) {
             flash('SiteForm updated successfully.')->success();
         }
         else if (!$id && $site_form = $service->createSiteForm($data, Auth::user())) {
             flash('SiteForm created successfully.')->success();
-            return redirect()->to('admin/site_form/edit/'.$site_form->id);
+            return redirect()->to('admin/forms/edit/'.$site_form->id);
         }
         else {
             foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
@@ -109,7 +109,7 @@ class SiteFormController extends Controller
         else {
             foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
         }
-        return redirect()->to('admin/site_form');
+        return redirect()->to('admin/forms');
     }
 
 }

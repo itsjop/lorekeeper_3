@@ -3,7 +3,7 @@
 @section('admin-title') Forms & Polls @endsection
 
 @section('admin-content')
-{!! breadcrumbs(['Admin Panel' => 'admin', 'News' => 'admin/forms']) !!}
+{!! breadcrumbs(['Admin Panel' => 'admin', 'Forms & Polls' => 'admin/forms']) !!}
 
 <h1>Forms & Polls</h1>
 
@@ -23,12 +23,8 @@
         @foreach($forms as $form)
         <div class="d-flex row flex-wrap col-12 mt-1 pt-2 px-0 ubt-top">
           <div class="col-12 col-md-5">
-              @if(!$form->is_visible)
-                  @if($form->post_at)
-                      <i class="fas fa-clock mr-1" data-toggle="tooltip" title="This post is scheduled to be posted in the future."></i>
-                  @else
-                      <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This post is hidden."></i>
-                  @endif
+              @if(!$form->is_active)
+                    <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This form is hidden."></i>
               @endif
               <a href="{{ $form->url }}">{{ $form->title }}</a>
           </div>

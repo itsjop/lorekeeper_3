@@ -4,6 +4,7 @@ namespace App\Models\Forms;
 
 use App\Models\Model;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class SiteForm extends Model
 {
@@ -14,7 +15,7 @@ class SiteForm extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous'
+        'user_id', 'title', 'description', 'parsed_description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous'
     ];
 
     /**
@@ -56,6 +57,14 @@ class SiteForm extends Model
     **********************************************************************************************/
     
     /**
+     * Get the user who created the news post.
+     */
+    public function user() 
+    {
+        return $this->belongsTo('App\Models\User\User');
+    }
+
+    /**
      * Get the questions related to this form.
      */
     public function questions() 
@@ -77,7 +86,7 @@ class SiteForm extends Model
      */
     public function scopeVisible($query)
     {
-        return $query->where('is_active', 1);
+        return $query->where('is_active', 1)->where('is_timed', '<=', 0)->orWhere('is_timed', '>=', 1)->where('start_at', '<=', Carbon::now())->where('is_active', 1);
     }
 
     /**********************************************************************************************
@@ -87,7 +96,7 @@ class SiteForm extends Model
     **********************************************************************************************/
 
     /**
-     * Get the news slug.
+     * Get the form slug.
      *
      * @return bool
      */
@@ -97,7 +106,7 @@ class SiteForm extends Model
     }
 
     /**
-     * Displays the news post title, linked to the news post itself.
+     * Displays the form post title, linked to the form post itself.
      *
      * @return string
      */
@@ -107,7 +116,7 @@ class SiteForm extends Model
     }
 
     /**
-     * Gets the news post URL.
+     * Gets the form post URL.
      *
      * @return string
      */

@@ -3,7 +3,7 @@
 @section('admin-title') Forms & Polls @endsection
 
 @section('admin-content')
-{!! breadcrumbs(['Admin Panel' => 'admin', 'News' => 'admin/forms', ($form->id ? 'Edit' : 'Create').' Post' => $form->id ? 'admin/forms/edit/'.$form->id : 'admin/forms/create']) !!}
+{!! breadcrumbs(['Admin Panel' => 'admin', 'Forms & Polls' => 'admin/forms', ($form->id ? 'Edit' : 'Create').' Post' => $form->id ? 'admin/forms/edit/'.$form->id : 'admin/forms/create']) !!}
 
 <h1>{{ $form->id ? 'Edit' : 'Create' }} Form
     @if($form->id)
@@ -23,7 +23,7 @@
 
 <div class="form-group">
     {!! Form::label('Description') !!}
-    {!! Form::textarea('text', $form->text, ['class' => 'form-control wysiwyg']) !!}
+    {!! Form::textarea('description', $form->description, ['class' => 'form-control wysiwyg']) !!}
 </div>
 
 
@@ -46,10 +46,11 @@
 
 <div class="pl-4">
     <div class="form-group">
-        {!! Form::checkbox('is_timed', 1, $form->is_timed ?? 0, ['class' => 'form-check-input form-timed form-toggle form-field', 'id' => 'is_timed']) !!}
+        {!! Form::checkbox('is_timed', 0, $form->is_timed ?? 0, ['class' => 'form-check-input form-timed form-toggle form-field', 'id' => 'is_timed']) !!}
         {!! Form::label('is_timed', 'Set Timed Form', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Sets the form as timed between the chosen dates.') !!}
     </div>
     <div class="form-timed-quantity {{ $form->is_timed ? '' : 'hide' }}">
+        <p>Set the start time for when the form should become visible, and the end time at which it closes. Closed forms are still visible on site! Even if set active, a form will only show once the start time is reached. </p>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -71,21 +72,59 @@
 <h3>Questions</h3>
 <p>Add your question/s here. At least one question is required for the creation of a form.</p>
 <div id="questionContainer" class="mb-5">
-    <div class="card hide mb-2">
-    <div class="card-body">
-        @php $id = uniqid() @endphp
-        <h5 class="card-title">Question {!! Form::text('question[default]', null, ['class' => 'form-control']) !!} </h5>
-        <h5 class="card-text">Options (Optional) {!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}</h5>
-        <div class="options">
-            <div class="hide mb-2">
-                {!! Form::text('options[default][]', null, ['class' => 'form-control']) !!}
+    @foreach($form->questions as $question)
+    <div class="card mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Question <a href="#" class="btn btn-danger float-right remove-question-button">X</a>
+                {!! Form::text('questions['.$question->id.']', $question->question, ['class' => 'form-control']) !!} </h5>
+            <h5 class="card-text">Options (Optional) {!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}</h5>
+            <div class="options" id="option-{{ $question->id }}">
+                @foreach($question->options as $option)
+                <div class="mb-2">
+                    <div class="row">
+                        <div class="col-10">
+                            {!! Form::text('options['.$question->id.']['.$option->id.']', $option->option, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="col"><a href="#" class="btn btn-secondary float-right remove-option-button">X</a></div>
+                    </div>
+                </div>
+                @endforeach
+                <div class="hide mb-2">
+                    <div class="row">
+                        <div class="col-10">
+                            {!! Form::text('options[default][]', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="col"><a href="#" class="btn btn-secondary float-right remove-option-button">X</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right mt-2">
+                <a href="#" class="btn btn-outline-info addOption" id="button-{{ $question->id }}">Add Option</a>
             </div>
         </div>
-
-        <div class="text-right mt-2">
-            <a href="#" class="btn btn-outline-info addOption">Add Option</a>
-        </div>
     </div>
+    @endforeach
+    <div class="card hide mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Question <a href="#" class="btn btn-danger float-right remove-question-button">X</a>
+                {!! Form::text('questions[default]', null, ['class' => 'form-control']) !!} </h5>
+            <h5 class="card-text">Options (Optional) {!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}</h5>
+            <div class="options">
+                <div class="hide mb-2">
+                    <div class="row">
+                        <div class="col-10">
+                            {!! Form::text('options[default][]', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="col"><a href="#" class="btn btn-secondary float-right remove-option-button">X</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right mt-2">
+                <a href="#" class="btn btn-outline-info addOption">Add Option</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -130,12 +169,15 @@
             timeFormat: 'HH:mm:ss',
         });
 
+        attachRemoveListener($('#questionContainer .remove-question-button'));
+        attachRemoveListener($('#questionContainer .remove-option-button'));
+
         var questions = $('#questionContainer');
         var questionRow = $('#questionContainer').find('.card.hide');
 
         $('#addQuestion').on('click', function(e) {
             e.preventDefault();
-            var questionId =  Math.random().toString(16).slice(2)
+            var questionId = Math.random().toString(16).slice(2)
 
             //setup clone and add its unique id
             var clone = questionRow.clone();
@@ -143,7 +185,7 @@
             questions.append(clone);
             attachRemoveListener(clone.find('.remove-question-button'));
             var questionInput = clone.find('.card-title input');
-            questionInput.attr("name", "question[" + questionId +"]")
+            questionInput.attr("name", "questions[" + questionId + "]")
 
             //setup options for the clone with its unique id
             var options = clone.find('.card-body .options');
@@ -151,22 +193,21 @@
             var optionInput = options.find('input');
             options.attr("id", "option-" + questionId);
             optionButton.attr("id", "button-" + questionId);
-            optionInput.attr("name", "option[" + questionId +"][]")
+            optionInput.attr("name", "options[" + questionId + "][]")
         });
 
-        $(questions).on('click', '.addOption', function(e){
+        $(questions).on('click', '.addOption', function(e) {
             e.preventDefault();
             var clickedBtnId = $(this).attr('id');
-            var options = $('#option-' + clickedBtnId.replace('button-',''));
+            var options = $('#option-' + clickedBtnId.replace('button-', ''));
             var optionRow = options.find('.hide');
-            console.log(optionRow.hasClass('hide'))
             var clone = optionRow.clone();
             clone.removeClass('hide');
             options.append(clone);
-            attachRemoveListener(clone.find('.remove-option-button'));        
+            attachRemoveListener(clone.find('.remove-option-button'));
         });
 
- 
+
         function attachRemoveListener(node) {
             node.on('click', function(e) {
                 e.preventDefault();

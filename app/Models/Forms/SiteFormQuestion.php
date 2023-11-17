@@ -65,9 +65,18 @@ class SiteFormQuestion extends Model
     /**
      * Get the options related to this question.
      */
-    public function questions() 
+    public function options() 
     {
         return $this->hasMany('App\Models\Forms\SiteFormOption', 'question_id');
     }
+
+    /**
+     * Get the answers related to this question.
+     */
+    public function answers() 
+    {
+        return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'question_id');
+    }
+
 
 }

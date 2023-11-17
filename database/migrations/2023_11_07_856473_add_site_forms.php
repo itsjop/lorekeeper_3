@@ -17,8 +17,10 @@ class AddSiteForms extends Migration
         Schema::create('site_forms', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('title');
             $table->text('description')->nullable()->default(null);
+            $table->text('parsed_description')->nullable()->default(null);
             $table->timestamps();
             $table->timestamp('start_at')->nullable()->default(null);
             $table->timestamp('end_at')->nullable()->default(null);
