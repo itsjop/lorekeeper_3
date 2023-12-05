@@ -112,4 +112,19 @@ class SiteFormController extends Controller
         return redirect()->to('admin/forms');
     }
 
+        
+    /**
+     * Shows the results of a site form.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getSiteFormResults($id)
+    {
+        $form = SiteForm::find($id);
+        if(!$form) abort(404);
+        return view('admin.forms.site_form_results', [
+            'form' => $form
+        ]);
+    }
 }

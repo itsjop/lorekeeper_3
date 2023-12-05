@@ -265,6 +265,8 @@ Route::group(['prefix' => 'forms', 'middleware' => 'power:edit_pages'], function
     Route::post('create', 'SiteFormController@postCreateEditSiteForm');
     Route::post('edit/{id?}', 'SiteFormController@postCreateEditSiteForm');
     Route::post('delete/{id}', 'SiteFormController@postDeleteSiteForm');
+    Route::get('results/{id}', 'SiteFormController@getSiteFormResults');
+
 });
 
 

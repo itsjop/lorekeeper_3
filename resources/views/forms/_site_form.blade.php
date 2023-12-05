@@ -1,8 +1,10 @@
 <div class="card mb-3">
     <div class="card-header">
         <h2 class="card-title mb-0">
+            @if(!$form->is_active || ($form->is_active && $form->is_timed && $form->start_at > Carbon\Carbon::now())) 
+                    <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This form is hidden."></i>
+              @endif
             {!! $form->displayName !!}
-
         </h2>
         <div class="h5">
             <span class="badge bg-warning border">
@@ -19,29 +21,25 @@
     </div>
     <div class="card-body">
         <div class="parsed-text">
-            {!! $form->parsed_description !!}
+            {!! $form->parsed_description ?? '<i>This form has no description.</i>' !!}
         </div>
-        {!! Form::open(['url' => 'forms/send']) !!}
-
-        <div class="border rounded p-4">
-
-            @foreach($form->questions as $question)
-            <h5>{{ $question->question }}</h5>
-            @if($question->options->count() > 0)
-            @foreach($question->options as $option)
-            <div class="form-group mb-0">
-                <label>{{ Form::radio($question->id, $option->id , true, ['class' => 'mr-1']) }} {{ $option->option }}</label>
-            </div>
-            @endforeach
+        @if($page)
+            @if((!$user || $form->answers->where('user_id', $user->id)->count() > 0) && !$edit)
+                @include('forms._site_form_results')
             @else
-            {!! Form::text($question->id, null, ['class' => 'form-control']) !!}
+                @include('forms._site_form_edit')
             @endif
-            @endforeach
-
-        </div>
-        <div class="text-right mt-2">
-            {!! Form::submit('Send', ['class' => 'btn btn-primary']) !!}
-        </div>
-        {!! Form::close() !!}
+        @endif
     </div>
+    <?php $commentCount = App\Models\Comment::where('commentable_type', 'App\Models\Forms\SiteForm')->where('commentable_id', $form->id)->count(); ?>
+    @if(!$page)
+         <hr>
+        <div class="text-right mb-2 mr-2">
+            <a class="btn" href="{{ $form->url }}"><i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : ''}}</a>
+        </div>
+    @else
+        <div class="text-right mb-2 mr-2">
+            <span class="btn"><i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : ''}}</span>
+        </div>
+    @endif
 </div>

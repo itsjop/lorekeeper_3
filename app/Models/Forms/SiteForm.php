@@ -5,9 +5,11 @@ namespace App\Models\Forms;
 use App\Models\Model;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Traits\Commentable;
 
 class SiteForm extends Model
 {
+    use Commentable;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +17,8 @@ class SiteForm extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'title', 'description', 'parsed_description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous'
+        'user_id', 'title', 'description', 'parsed_description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous',
+        'timeframe', 'is_public', 'is_editable'
     ];
 
     /**
@@ -70,6 +73,15 @@ class SiteForm extends Model
     public function questions() 
     {
         return $this->hasMany('App\Models\Forms\SiteFormQuestion', 'form_id');
+    }
+
+    
+    /**
+     * Get the questions related to this form.
+     */
+    public function answers() 
+    {
+        return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'form_id');
     }
 
     /**********************************************************************************************

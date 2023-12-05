@@ -52,6 +52,7 @@ class AddSiteForms extends Migration
             $table->integer('option_id')->unsigned()->nullable()->default(null)->index();
             $table->integer('user_id')->unsigned()->nullable()->default(null);
             $table->text('answer')->nullable()->default(null);
+            $table->timestamps();
         });
     }
 

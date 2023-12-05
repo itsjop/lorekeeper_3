@@ -29,7 +29,7 @@ class SiteFormAnswer extends Model
      *
      * @var string
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Validation rules for creation.
@@ -57,6 +57,15 @@ class SiteFormAnswer extends Model
 
     **********************************************************************************************/
     
+    /**
+     * Get the user who sent in this answer.
+     */
+    public function user() 
+    {
+        return $this->belongsTo('App\Models\User\User');
+    }
+
+
     /**
      * Get the form this answer belongs to.
      */

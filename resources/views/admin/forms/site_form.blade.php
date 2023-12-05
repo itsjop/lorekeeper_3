@@ -17,20 +17,22 @@
       <div class="row ml-md-2">
         <div class="d-flex row flex-wrap col-12 pb-1 px-0 ubt-bottom">
           <div class="col-12 col-md-5 font-weight-bold">Title</div>
-          <div class="col-6 col-md-3 font-weight-bold">Created At</div>
-          <div class="col-6 col-md-3 font-weight-bold">Last Edited</div>
+          <div class="col-6 col-md-2 font-weight-bold">Created At</div>
+          <div class="col-6 col-md-2 font-weight-bold">Last Edited</div>
         </div>
         @foreach($forms as $form)
         <div class="d-flex row flex-wrap col-12 mt-1 pt-2 px-0 ubt-top">
           <div class="col-12 col-md-5">
-              @if(!$form->is_active)
+              @if(!$form->is_active || ($form->is_active && $form->is_timed && $form->start_at > Carbon\Carbon::now())) 
                     <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This form is hidden."></i>
               @endif
               <a href="{{ $form->url }}">{{ $form->title }}</a>
           </div>
-          <div class="col-6 col-md-3">{!! pretty_date($form->created_at) !!}</div>
-          <div class="col-6 col-md-3">{!! pretty_date($form->updated_at) !!}</div>
-          <div class="col-12 col-md-1 text-right"><a href="{{ url('admin/forms/edit/'.$form->id) }}" class="btn btn-primary py-0 px-2 w-100">Edit</a></div>
+          <div class="col-6 col-md-2">{!! pretty_date($form->created_at) !!}</div>
+          <div class="col-6 col-md-2">{!! pretty_date($form->updated_at) !!}</div>
+          <div class="col-6 col-md-1"><a href="{{ url('admin/forms/edit/'.$form->id) }}" class="btn btn-primary py-0 px-2 w-100">Edit</a></div>
+          <div class="col-6 col-md-2 text-right"><a href="{{ url('admin/forms/results/'.$form->id) }}" class="btn btn-secondary py-0 px-2 w-100">View Results</a></div>
+
         </div>
         @endforeach
       </div>
