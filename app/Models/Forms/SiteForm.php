@@ -18,7 +18,7 @@ class SiteForm extends Model
      */
     protected $fillable = [
         'user_id', 'title', 'description', 'parsed_description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous',
-        'timeframe', 'is_public', 'is_editable'
+        'timeframe', 'is_public', 'is_editable',  'allow_likes'
     ];
 
     /**
@@ -136,4 +136,61 @@ class SiteForm extends Model
     {
         return url('forms/'.$this->slug);
     }
+
+    public function getStartDateAttribute(){
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->start_at);
+    }
+
+    public function getEndDateAttribute(){
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->end_at);
+    }
+    
+    /**********************************************************************************************
+    
+        OTHER
+
+    **********************************************************************************************/
+
+    /*
+     * Gets the current date associated to the forms's timeframe
+     */
+    public function getTimeframeDateAttribute() {
+        switch($this->timeframe) {
+            case "yearly":
+                $date = date("Y-m-d H:i:s", strtotime('January 1st')); 
+                break;
+            case "monthly":
+                $date = date("Y-m-d H:i:s", strtotime('midnight first day of this month')); 
+                break;
+            case "weekly":
+                $date = date("Y-m-d H:i:s", strtotime('last sunday')); 
+                break;
+            case "daily":
+                $date = date("Y-m-d H:i:s", strtotime('midnight'));
+                break;
+            default:
+                $date = null;
+        }
+        return $date;
+    }
+
+    public function canSubmit()
+    {
+        //if form is closed by time, we dont allow submissions
+        if($this->is_timed && $this->end_at < Carbon::now()) return false;
+
+        //if form is open check timeframe
+        $lastSubmission = $this->answers()->orderBy('created_at', 'DESC')->first();
+        if ($lastSubmission) {
+            // if a timer exists we cannot submit again if the time is right
+            if ($lastSubmission->created_at >= $this->timeframeDate) return false;
+        }
+        return true;
+    }
+
+    public function latestSubmissionNumber(){
+        $answers = $this->answers()->get()->groupBy('submission_number');
+        return max( array_keys( $answers->toArray() ) );
+    }
+
 }

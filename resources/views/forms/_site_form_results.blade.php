@@ -30,21 +30,23 @@
                 @endif
             </div>
             <div id="question-{{$question->id}}" class="collapse" aria-labelledby="headingTwo" data-parent="#questionAccordion">
-                <div class="card-body">
+                <div class="card-body p-lg-3 p-0">
                     @if($question->has_options)
-                    @foreach($question->options as $option)
-                    <b>{{ $option->option }} :</b>
-                    <div>
-                        @foreach($option->answers as $answer) <span class="mr-2">{!! $answer->user->displayName !!}</span> @endforeach
-                    </div>
-                    @endforeach
+                        @foreach($question->options as $option)
+                        <b>{{ $option->option }} :</b>
+                        <div>
+                            @foreach($option->answers as $answer) <span class="mr-2">{!! $answer->user->displayName !!}</span> @endforeach
+                        </div>
+                        @endforeach
                     @else
-                    @foreach($question->answers as $answer)
-                    <div>
-                    @if(!$form->is_anonymous && $user && $user->isStaff)<b>{!! $answer->user->displayName !!}:</b>@endif
-                        <div class="p-3 border">{{ $answer->answer }}</div>
-                    </div>
-                    @endforeach
+                        @foreach($question->answers as $answer)
+                            @if($answer->answer)
+                            <div>
+                            @if(!$form->is_anonymous && $user && $user->isStaff)<b>{!! $answer->user->displayName !!}:</b>@endif
+                                <div class="p-2 border">{{ $answer->answer }}</div>
+                            </div>
+                            @endif
+                        @endforeach
                     @endif
                 </div>
             </div>
@@ -52,6 +54,4 @@
         @endforeach
 
     </div>
-    @if($user)
-    <a class="btn btn-primary float-right" href="?edit=True">Edit Answers</a>
-    @endif
+

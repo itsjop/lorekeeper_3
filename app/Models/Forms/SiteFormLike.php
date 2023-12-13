@@ -14,7 +14,7 @@ class SiteFormAnswer extends Model
      * @var array
      */
     protected $fillable = [
-        'form_id', 'question_id', 'option_id', 'user_id', 'answer', 'submission_number'
+        'answer_id', 'user_id'
     ];
 
     /**
@@ -22,14 +22,14 @@ class SiteFormAnswer extends Model
      *
      * @var string
      */
-    protected $table = 'site_form_answers';
+    protected $table = 'site_form_likes';
 
     /**
      * Whether the model contains timestamps to be saved and updated.
      *
      * @var string
      */
-    public $timestamps = true;
+    public $timestamps = false;
 
     /**
      * Validation rules for creation.
@@ -37,8 +37,7 @@ class SiteFormAnswer extends Model
      * @var array
      */
     public static $createRules = [
-        'form_id' => 'required',
-        'question_id' => 'required'
+        'answer_id' => 'required',
     ];
     
     /**
@@ -47,8 +46,7 @@ class SiteFormAnswer extends Model
      * @var array
      */
     public static $updateRules = [
-        'form_id' => 'required',
-        'question_id' => 'required'    
+        'answer_id' => 'required',  
     ];
 
     /**********************************************************************************************
@@ -69,25 +67,9 @@ class SiteFormAnswer extends Model
     /**
      * Get the form this answer belongs to.
      */
-    public function form() 
+    public function answer() 
     {
-        return $this->belongsTo('App\Models\Forms\SiteForm', 'form_id');
-    }
-
-    /**
-     * Get the question this answer belongs to.
-     */
-    public function question() 
-    {
-        return $this->belongsTo('App\Models\Forms\SiteQuestion', 'question_id');
-    }
-
-    /**
-     * Get the option this answer picked (if not free text answer)
-     */
-    public function option() 
-    {
-        return $this->belongsTo('App\Models\Forms\SiteFormOption', 'option_id');
+        return $this->belongsTo('App\Models\Forms\SiteFormAnswer', 'answer_id');
     }
 
 }

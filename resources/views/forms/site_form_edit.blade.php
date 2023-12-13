@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title') {{ $form->title }} @endsection
+
+@section('content')
 <div class="card mb-3">
     <div class="card-header">
         <h2 class="card-title mb-0">
@@ -48,28 +53,11 @@
             {!! $form->parsed_description ?? '<i>This form has no description.</i>' !!}
         </div>
         <hr>
-        @if($page)
-        <!---Not logged in or is not trying to edit or submit it--->
-            @if($form->is_public)
-                @include('forms._site_form_results')
-            @else
-                <div><i>Answers are hidden - you have already submitted this form.</i></div>
-            @endif
-            @if($user)
-                @if($form->is_editable == 1 && $form->answers->where('user_id', $user->id)->count() > 0)<a class="btn btn-secondary float-right" href="/forms/send/{{$form->id}}?action=edit">Edit Answers</a>@endif
-                @if($form->canSubmit())<a class="btn btn-primary float-right" href="/forms/send/{{$form->id}}?action=submit">Submit Form</a>@endif
-            @endif
-         @endif
+        @if($form->is_editable || $action = 'submit' && $form->canSubmit())
+            @include('forms._site_form_edit')
+        @else
+            <div><i>Submissions to this form cannot be edited, or the form is not up for submission again.</i></div>
+        @endif
     </div>
-    <?php $commentCount = App\Models\Comment::where('commentable_type', 'App\Models\Forms\SiteForm')->where('commentable_id', $form->id)->count(); ?>
-    @if(!$page)
-    <hr>
-    <div class="text-right mb-2 mr-2">
-        <a class="btn" href="{{ $form->url }}"><i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : ''}}</a>
-    </div>
-    @else
-    <div class="text-right mb-2 mr-2">
-        <span class="btn"><i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : ''}}</span>
-    </div>
-    @endif
 </div>
+@endsection

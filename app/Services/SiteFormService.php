@@ -113,6 +113,9 @@ class SiteFormService extends Service
         $data['is_active'] = isset($data['is_active']);
         $data['is_timed'] = isset($data['is_timed']);
         $data['is_anonymous'] = isset($data['is_anonymous']);
+        $data['is_public'] = isset($data['is_public']);
+        $data['is_editable'] = isset($data['is_editable']);
+        $data['allow_likes'] = isset($data['allow_likes']);
         return $data;
     }
 
@@ -207,59 +210,4 @@ class SiteFormService extends Service
 
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | User side: post and edit forms
-    |--------------------------------------------------------------------------
-
-    */
-
-    public function postSiteForm($form, $data, $user)
-    {
-        DB::beginTransaction();
-        try {
-            foreach ($form->questions as $question) {
-                if($question->answers->where('user_id', $user->id)->count() > 0){
-                    //update existing answer
-                    $existingAnswer = SiteFormAnswer::where('user_id', $user->id)->where('question_id', $question->id)->first();
-                    $answer = $data[$question->id];
-                    if (isset($data[$question->id])) {
-                        if ($question->has_options) {
-                            $existingAnswer->update([
-                                'option_id' => $answer,
-                            ]);
-                        } else {
-                            $existingAnswer->update([
-                                'answer' => $answer,
-                            ]);
-                        }
-                    }
-                } else {
-                    //save new answer
-                    if (isset($data[$question->id])) {
-                        $answer = $data[$question->id];
-                        if ($question->has_options) {
-                            SiteFormAnswer::create([
-                                'form_id' => $form->id,
-                                'question_id' => $question->id,
-                                'option_id' => $answer,
-                                'user_id' => $user->id
-                            ]);
-                        } else {
-                            SiteFormAnswer::create([
-                                'form_id' => $form->id,
-                                'question_id' => $question->id,
-                                'answer' => $answer,
-                                'user_id' => $user->id
-                            ]);
-                        }
-                    }
-                }
-            }
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-        return $this->rollbackReturn(false);
-    }
 }

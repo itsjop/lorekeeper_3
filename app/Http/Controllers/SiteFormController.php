@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Forms\SiteForm;
-use App\Services\SiteFormService;
+use App\Services\SiteFormManager;
 
 class SiteFormController extends Controller
 {
@@ -39,17 +39,35 @@ class SiteFormController extends Controller
      * Shows a form post.
      *
      * @param  int          $id
-     * @param  string|null  $slug
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getSiteForm(Request $request, $id, $slug = null)
+    public function getSiteForm(Request $request, $id)
     {
         $form = SiteForm::where('id', $id)->visible()->first();
         if(!$form) abort(404);
         return view('forms.site_form', [
             'form' => $form, 
             'user' => Auth::user(),
-            'edit' => isset($request['edit']) ? $request['edit'] : null
+            'action' => isset($request['action']) ? $request['action'] : null,
+            'number' => isset($request['number']) ? $request['number'] : null,
+        ]);
+    }
+
+    /**
+     * Edit a form post.
+     *
+     * @param  int          $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function editSiteForm(Request $request, $id)
+    {
+        $form = SiteForm::where('id', $id)->visible()->first();
+        if(!$form) abort(404);
+        return view('forms.site_form_edit', [
+            'form' => $form, 
+            'user' => Auth::user(),
+            'action' => isset($request['action']) ? $request['action'] : null,
+            'number' => isset($request['number']) ? $request['number'] : null,
         ]);
     }
 
@@ -60,7 +78,7 @@ class SiteFormController extends Controller
      * @param  int          $id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function postSiteForm(Request $request, SiteFormService $service, $id)
+    public function postSiteForm(Request $request, SiteFormManager $service, $id)
     {
         $form = SiteForm::where('id', $id)->first();
         if(!$form) abort(404);
@@ -68,11 +86,12 @@ class SiteFormController extends Controller
 
         if($service->postSiteForm( $form , $request->all(), Auth::user())) {
             flash('Form posted successfully.')->success();
+            return redirect()->to('/forms/send/'.$form->id.'?action=edit&number='. $request['submission_number']);
         }
         else {
             foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
         }
-        $back = strtok(redirect()->back()->getTargetUrl(), '?');
-        return redirect($back);
+        return redirect()->back();
+
     }
 }

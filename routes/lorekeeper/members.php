@@ -204,4 +204,5 @@ Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function() {
 **************************************************************************************************/
 Route::group(['prefix' => 'forms'], function() {
     Route::post('/send/{id}', 'SiteFormController@postSiteForm');
+    Route::get('/send/{id}', 'SiteFormController@editSiteForm');
 });
