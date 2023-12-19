@@ -3,6 +3,8 @@
 @section('title') {{ $form->title }} @endsection
 
 @section('content')
+{!! breadcrumbs(['Site Forms & Polls' => 'forms', $form->title => $form->url]) !!}
+
 <div class="card mb-3">
     <div class="card-header">
         <h2 class="card-title mb-0">
@@ -56,7 +58,7 @@
         @if($form->is_editable || $action = 'submit' && $form->canSubmit())
             @include('forms._site_form_edit')
         @else
-            <div><i>Submissions to this form cannot be edited, or the form is not up for submission again.</i></div>
+            @include('forms._site_form_view')
         @endif
     </div>
 </div>

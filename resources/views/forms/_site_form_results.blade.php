@@ -15,7 +15,7 @@
                     </a>
                     @endif
                 </div>
-                @php $totalAnswers = $question->answers->count(); @endphp
+                @php $totalAnswers = $question->totalAnswers(); @endphp
                 <h6><b>Total answers: {{ $totalAnswers }}</b></h6>
                 @if($question->options->count() > 0)
                 @foreach($question->options as $option)

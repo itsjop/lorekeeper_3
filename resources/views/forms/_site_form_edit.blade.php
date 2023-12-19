@@ -13,7 +13,7 @@
         </div>
         @endforeach
         @else
-        {!! Form::text($question->id, ($number) ? $question->answers->where('user_id', $user->id)->where('submission_number', $number)->first()?->answer : null , ['class' => 'form-control']) !!}
+        {!! Form::textarea($question->id, ($number) ? $question->answers->where('user_id', $user->id)->where('submission_number', $number)->first()?->answer : null , ['class' => 'form-control']) !!}
         @endif
         @endforeach
         {!! Form::hidden('action', 'edit') !!}
@@ -21,7 +21,7 @@
 
     </div>
     <div class="text-right mt-2">
-        @if($user){!! Form::submit( 'Edit' , ['class' => 'btn btn-primary']) !!}
+        @if($user){!! Form::submit( 'Edit' , ['class' => 'btn btn-success']) !!}
         @else
         You must be logged in to send the form.
         @endif
@@ -51,14 +51,14 @@
         </div>
         @endforeach
         @else
-        {!! Form::text($question->id, null , ['class' => 'form-control']) !!}
+        {!! Form::textarea($question->id, null , ['class' => 'form-control']) !!}
         @endif
         @endforeach
         {!! Form::hidden('action', 'submit') !!}
 
     </div>
     <div class="text-right mt-2">
-        @if($user){!! Form::submit('Submit' , ['class' => 'btn btn-primary']) !!}
+        @if($user){!! Form::submit('Submit' , ['class' => 'btn btn-success']) !!}
         @else
         You must be logged in to send the form.
         @endif

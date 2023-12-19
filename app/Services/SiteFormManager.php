@@ -27,18 +27,20 @@ class SiteFormManager extends Service
     {
         DB::beginTransaction();
         try {
+            $isEdit = isset($data['action']) && $data['action'] == 'edit';
+            $submissionNumber = $data['submission_number'];
             // check editable when edit is set
-            if(isset($data['action']) && $data['action'] == 'edit' && !$form->is_editable) throw new \Exception ("This form cannot be edited.");
+            if( $isEdit && !$form->is_editable) throw new \Exception ("This form cannot be edited.");
             // check if submission is valid
             if(isset($data['action']) && $data['action'] == 'submit' && !$form->canSubmit()) throw new \Exception ("This form cannot be submitted at the time.");
 
             $nextNumber = $form->latestSubmissionNumber() + 1;
             foreach ($form->questions as $question) {
-                if(isset($data['action']) && $data['action'] == 'edit'){
+                $existingAnswer = SiteFormAnswer::where('user_id', $user->id)->where('question_id', $question->id)->where('submission_number', $submissionNumber)->first();
+                if($isEdit && $existingAnswer){
                     //update existing answer
-                    $existingAnswer = SiteFormAnswer::where('user_id', $user->id)->where('question_id', $question->id)->where('submission_number', $data['submission_number'])->first();
                     $answer = $data[$question->id];
-                    if (isset($data[$question->id])) {
+                    if (array_key_exists($question->id, $data)) {
                         if ($question->has_options) {
                             $existingAnswer->update([
                                 'option_id' => $answer,
@@ -50,7 +52,6 @@ class SiteFormManager extends Service
                         }
                     }
                 } else {
-                    //dd($data);
                     //save new answer
                     if (isset($data[$question->id])) {
                         $answer = $data[$question->id];
@@ -60,7 +61,7 @@ class SiteFormManager extends Service
                                 'question_id' => $question->id,
                                 'option_id' => $answer,
                                 'user_id' => $user->id,
-                                'submission_number' => $nextNumber 
+                                'submission_number' => $isEdit ? $submissionNumber : $nextNumber 
                             ]);
                         } else {
                             SiteFormAnswer::create([
@@ -68,15 +69,16 @@ class SiteFormManager extends Service
                                 'question_id' => $question->id,
                                 'answer' => $answer,
                                 'user_id' => $user->id,
-                                'submission_number' => $nextNumber 
+                                'submission_number' => $isEdit ? $submissionNumber : $nextNumber 
                             ]);
                         }
                     } else {
+                        //allow empty answers
                         SiteFormAnswer::create([
                             'form_id' => $form->id,
                             'question_id' => $question->id,
                             'user_id' => $user->id,
-                            'submission_number' => $nextNumber 
+                            'submission_number' => $isEdit ? $submissionNumber : $nextNumber 
                         ]);
                     }
                 }

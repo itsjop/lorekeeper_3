@@ -190,7 +190,8 @@ class SiteForm extends Model
 
     public function latestSubmissionNumber(){
         $answers = $this->answers()->get()->groupBy('submission_number');
-        return max( array_keys( $answers->toArray() ) );
+        if($answers->count() > 0) return max( array_keys( $answers->toArray() ) );
+        else return 0;
     }
 
 }

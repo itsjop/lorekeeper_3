@@ -179,10 +179,10 @@ class SiteFormService extends Service
                     'has_options' => count($optionsData) > 0
                 ]);
 
-
                 //remove question from array so we dont re-create it later
                 unset($questions[$question->id]);
 
+                // update or delete existing option if needed
                 foreach ($question->options as $option) {
 
                     if (isset($optionsData[$option->id])) {
@@ -191,13 +191,26 @@ class SiteFormService extends Service
                             'option' => $optionsData[$option->id],
                         ]);
                     } else {
-                        //if option wasnt passed it was removed so we delete it.
+                        //if option wasnt passed it was removed so we delete it and all associated answers.
+                        if ($question->answers->where('option_id', $option->id)->count() > 0) $question->answers->where('option_id', $option->id)->each->delete();
+
                         $option->delete();
                     }
-
                     //remove option from array so we dont re-create it later
                     unset($options[$question->id][$option->id]);
                 }
+
+                // add new options
+                foreach($optionsData as $optionId=>$option){
+                    if($question->options->where('id', $optionId)->count() <= 0) {
+                        SiteFormOption::create([
+                            'question_id' => $question->id,
+                            'option' => $option,
+                        ]);
+                    }
+                    unset($options[$question->id][$optionId]);
+                }
+                
             } else {
                 // if question wasnt passed it was removed so we delete it and the related options/answers.
                 if ($question->options()->count() > 0) $question->options->each->delete();

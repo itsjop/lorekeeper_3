@@ -78,5 +78,20 @@ class SiteFormQuestion extends Model
         return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'question_id');
     }
 
+    /**********************************************************************************************
+    
+        Other Functions
+
+    **********************************************************************************************/
+    
+    /**
+     * Get the total non null answers to a question.
+     */
+    public function totalAnswers() 
+    {
+        return $this->answers->filter(function ($value) {
+            return $value->option_id != null || $value->answer != null;
+        })->count();
+    }
 
 }

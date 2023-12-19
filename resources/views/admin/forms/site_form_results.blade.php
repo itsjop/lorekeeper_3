@@ -20,7 +20,7 @@
         <div class="h5">
             <span class="badge bg-warning border">
                 @if($form->is_anonymous)
-                This form is anonymous {!! add_help('Staff will be unable to see your answers, however, the site owners may still access this information through the database.') !!}
+                This form is anonymous {!! add_help('Staff will be unable to see your answers, however, the site owners may still access this information through the database. Note that this option can be changed at any time.') !!}
                 @else
                 This form is not anonymous. {!! add_help('Staff will be able to easily see your answers.') !!}
                 @endif

@@ -56,8 +56,8 @@
                 <div><i>Answers are hidden - you have already submitted this form.</i></div>
             @endif
             @if($user)
-                @if($form->is_editable == 1 && $form->answers->where('user_id', $user->id)->count() > 0)<a class="btn btn-secondary float-right" href="/forms/send/{{$form->id}}?action=edit">Edit Answers</a>@endif
-                @if($form->canSubmit())<a class="btn btn-primary float-right" href="/forms/send/{{$form->id}}?action=submit">Submit Form</a>@endif
+                @if($form->answers->where('user_id', $user->id)->count() > 0)<a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=edit">Your Answers</a>@endif
+                @if($form->canSubmit())<a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=submit">Submit Form</a>@endif
             @endif
          @endif
     </div>

@@ -112,7 +112,7 @@
                 <div class="hide mb-2">
                     <div class="row">
                         <div class="col-10">
-                            {!! Form::text('options[default][]', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('options['.$question->id.'][]', null, ['class' => 'form-control']) !!}
                         </div>
                         <div class="col"><a href="#" class="btn btn-secondary float-right remove-option-button">X</a></div>
                     </div>
