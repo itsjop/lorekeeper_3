@@ -13,7 +13,7 @@ class SiteFormQuestion extends Model
      * @var array
      */
     protected $fillable = [
-        'form_id', 'question', 'has_options'
+        'form_id', 'question', 'has_options', 'is_mandatory'
     ];
 
     /**
@@ -75,7 +75,7 @@ class SiteFormQuestion extends Model
      */
     public function answers() 
     {
-        return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'question_id');
+        return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'question_id')->withCount('likes')->orderBy('likes_count', 'desc');
     }
 
     /**********************************************************************************************

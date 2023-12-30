@@ -5,13 +5,13 @@ namespace App\Services;
 use App\Services\Service;
 
 use DB;
-use Config;
 
-use App\Models\User\User;
-use App\Models\Forms\SiteForm;
-use App\Models\Forms\SiteFormOption;
-use App\Models\Forms\SiteFormQuestion;
 use App\Models\Forms\SiteFormAnswer;
+use App\Models\Forms\SiteFormLike;
+use App\Models\Currency\Currency;
+use App\Models\Item\Item;
+use App\Models\Loot\LootTable;
+use App\Models\Raffle\Raffle;
 
 class SiteFormManager extends Service
 {
@@ -23,23 +23,25 @@ class SiteFormManager extends Service
     | Handles the editing of forms, as well as posting answers from user side.
     |
     */
+
     public function postSiteForm($form, $data, $user)
     {
         DB::beginTransaction();
         try {
             $isEdit = isset($data['action']) && $data['action'] == 'edit';
-            $submissionNumber = $data['submission_number'];
+            $submissionNumber = $data['submission_number'] ?? 0;
             // check editable when edit is set
-            if( $isEdit && !$form->is_editable) throw new \Exception ("This form cannot be edited.");
+            if ($isEdit && !$form->is_editable) throw new \Exception("This form cannot be edited.");
             // check if submission is valid
-            if(isset($data['action']) && $data['action'] == 'submit' && !$form->canSubmit()) throw new \Exception ("This form cannot be submitted at the time.");
+            if (isset($data['action']) && $data['action'] == 'submit' && !$form->canSubmit()) throw new \Exception("This form cannot be submitted at the time.");
 
             $nextNumber = $form->latestSubmissionNumber() + 1;
-            foreach ($form->questions as $question) {
+            foreach ($form->questions as $key => $question) {
                 $existingAnswer = SiteFormAnswer::where('user_id', $user->id)->where('question_id', $question->id)->where('submission_number', $submissionNumber)->first();
-                if($isEdit && $existingAnswer){
+                if ($isEdit && $existingAnswer) {
                     //update existing answer
                     $answer = $data[$question->id];
+                    if ($question->is_mandatory && empty($answer)) throw new \Exception("Question " . $key + 1 . " cannot be empty, as it is mandatory!");
                     if (array_key_exists($question->id, $data)) {
                         if ($question->has_options) {
                             $existingAnswer->update([
@@ -61,7 +63,7 @@ class SiteFormManager extends Service
                                 'question_id' => $question->id,
                                 'option_id' => $answer,
                                 'user_id' => $user->id,
-                                'submission_number' => $isEdit ? $submissionNumber : $nextNumber 
+                                'submission_number' => $isEdit ? $submissionNumber : $nextNumber
                             ]);
                         } else {
                             SiteFormAnswer::create([
@@ -69,24 +71,122 @@ class SiteFormManager extends Service
                                 'question_id' => $question->id,
                                 'answer' => $answer,
                                 'user_id' => $user->id,
-                                'submission_number' => $isEdit ? $submissionNumber : $nextNumber 
+                                'submission_number' => $isEdit ? $submissionNumber : $nextNumber
                             ]);
                         }
                     } else {
+                        if ($question->is_mandatory) throw new \Exception("Question " . $key + 1 . " cannot be empty, as it is mandatory!");
                         //allow empty answers
                         SiteFormAnswer::create([
                             'form_id' => $form->id,
                             'question_id' => $question->id,
                             'user_id' => $user->id,
-                            'submission_number' => $isEdit ? $submissionNumber : $nextNumber 
+                            'submission_number' => $isEdit ? $submissionNumber : $nextNumber
                         ]);
                     }
                 }
             }
+            $rewards = [];
+            // distribute rewards if applicable
+            if ($form->rewards->count() > 0) {
+                // Get the updated set of rewards
+                $rewardData = [];
+                $rewardData['rewardable_type'] = [];
+                $rewardData['rewardable_id'] = [];
+                $rewardData['quantity'] = [];
+
+                foreach ($form->rewards as $reward) {
+                    $rewardData['rewardable_type'][] = $reward->rewardable_type;
+                    $rewardData['rewardable_id'][] = $reward->rewardable_id;
+                    $rewardData['quantity'][] = $reward->quantity;
+                }
+                $rewards = $this->processRewards($rewardData);
+                // Distribute user rewards
+                $assets = fillUserAssets($rewards, null, $user, 'Form Rewards', [
+                    'data' => 'Received rewards from form (<a href="' . $form->url . '">' . $form->title . '</a>)'
+                ]);
+                if (!$assets) throw new \Exception("Failed to distribute rewards to user.");
+            }
+            $this->commitReturn(true);
+            return count($rewards) > 0 ? getRewardsString($reward) : '';
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Likes an answer.
+     */
+    public function postLikeAnswer($answer, $user)
+    {
+        DB::beginTransaction();
+        try {
+            $like = SiteformLike::where('user_id', $user->id)->where('answer_id', $answer->id)->first();
+            if ($like) throw new \Exception("You have already liked this answer!");
+
+            SiteFormLike::create([
+                'user_id' => $user->id,
+                'answer_id' => $answer->id,
+            ]);
+
             return $this->commitReturn(true);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
         return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Un-Likes an answer.
+     */
+    public function postUnlikeAnswer($answer, $user)
+    {
+        DB::beginTransaction();
+        try {
+            $like = SiteformLike::where('user_id', $user->id)->where('answer_id', $answer->id)->first();
+            if (!$like) throw new \Exception("You cannot remove a like that does not exist!");
+            $like->delete();
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Processes reward data into a format that can be used for distribution.
+     *
+     * @param  array $data
+     * @return array
+     */
+    private function processRewards($data)
+    {
+
+        $assets = createAssetsArray(false);
+        // Process the additional rewards
+        if (isset($data['rewardable_type']) && $data['rewardable_type']) {
+            foreach ($data['rewardable_type'] as $key => $type) {
+                $reward = null;
+                switch ($type) {
+                    case 'Item':
+                        $reward = Item::find($data['rewardable_id'][$key]);
+                        break;
+                    case 'Currency':
+                        $reward = Currency::find($data['rewardable_id'][$key]);
+                        if (!$reward->is_user_owned) throw new \Exception("Invalid currency selected.");
+                        break;
+                    case 'LootTable':
+                        $reward = LootTable::find($data['rewardable_id'][$key]);
+                        break;
+                    case 'Raffle':
+                        $reward = Raffle::find($data['rewardable_id'][$key]);
+                        break;
+                }
+                if (!$reward) continue;
+                addAsset($assets, $reward, $data['quantity'][$key]);
+            }
+        }
+        return $assets;
     }
 }

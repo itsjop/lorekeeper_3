@@ -42,8 +42,28 @@
                         @foreach($question->answers as $answer)
                             @if($answer->answer)
                             <div>
-                            @if(!$form->is_anonymous && $user && $user->isStaff)<b>{!! $answer->user->displayName !!}:</b>@endif
-                                <div class="p-2 border">{{ $answer->answer }}</div>
+                                <div class="p-3 mt-3 border">
+                                @if(!$form->is_anonymous && $user && $user->isStaff)<b>{!! $answer->user->displayName !!}:</b>@endif
+                                    {{ $answer->answer }}
+                                    @if($form->allow_likes)
+                                        @if($user)
+                                        <div class="text-right">
+                                            @if($answer->hasLiked($user))
+                                                {!! Form::open(['url' => 'forms/unlike/'. $answer->id ]) !!}
+                                                {{ $answer->likes()->count()}} {!! Form::button('<i class="fas fa-heart h4"></i>', ['type' => 'submit', 'class' => 'border-0 bg-transparent btn']) !!}
+                                                {!! Form::close() !!}
+                                            @else 
+                                                {!! Form::open(['url' => 'forms/like/'. $answer->id ]) !!}
+                                                {{ $answer->likes()->count()}} {!! Form::button('<i class="far fa-heart h4"></i>', ['type' => 'submit', 'class' => 'border-0 bg-transparent btn']) !!}
+                                                {!! Form::close() !!}
+                                            @endif
+                                        </div> 
+                                        @else
+                                        <div class="text-right">{{ $answer->likes()->count()}} <i class="far fa-heart h4"></i></div> 
+                                        @endif
+                                    @endif
+                                </div>
+                                
                             </div>
                             @endif
                         @endforeach

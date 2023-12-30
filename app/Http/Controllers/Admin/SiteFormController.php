@@ -8,7 +8,10 @@ use Auth;
 
 use App\Models\Forms\SiteForm;
 use App\Services\SiteFormService;
-
+use App\Models\Item\Item;
+use App\Models\Currency\Currency;
+use App\Models\Loot\LootTable;
+use App\Models\Raffle\Raffle;
 use App\Http\Controllers\Controller;
 
 class SiteFormController extends Controller
@@ -33,7 +36,11 @@ class SiteFormController extends Controller
     public function getCreateSiteForm()
     {
         return view('admin.forms.create_edit_site_form', [
-            'form' => new SiteForm
+            'form' => new SiteForm,
+            'items' => Item::orderBy('name')->pluck('name', 'id'),
+            'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+            'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+            'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
     }
     
@@ -48,7 +55,11 @@ class SiteFormController extends Controller
         $form = SiteForm::find($id);
         if(!$form) abort(404);
         return view('admin.forms.create_edit_site_form', [
-            'form' => $form
+            'form' => $form,
+            'items' => Item::orderBy('name')->pluck('name', 'id'),
+            'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+            'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+            'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
     }
 
@@ -64,8 +75,8 @@ class SiteFormController extends Controller
     {
         $id ? $request->validate(SiteForm::$updateRules) : $request->validate(SiteForm::$createRules);
         $data = $request->only([
-            'title', 'description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous', 'questions', 'options',
-            'timeframe', 'is_public', 'is_editable', 'submit', 'edit', 'allow_likes'
+            'title', 'description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous', 'questions', 'options', 'is_mandatory',
+            'timeframe', 'is_public', 'is_editable', 'submit', 'edit', 'allow_likes', 'rewardable_type', 'rewardable_id', 'quantity'
         ]);
         if($id && $service->updateSiteForm(SiteForm::find($id), $data, Auth::user())) {
             flash('SiteForm updated successfully.')->success();

@@ -95,8 +95,17 @@
     @foreach($form->questions as $question)
     <div class="card mb-2">
         <div class="card-body">
-            <h5 class="card-title">Question <a href="#" class="btn btn-danger float-right remove-question-button">X</a>
-                {!! Form::text('questions['.$question->id.']', $question->question, ['class' => 'form-control']) !!} </h5>
+
+            <div class="card-title row">
+                <h5 class="col-lg col-12">Question</h5>
+                <div class="col-lg col-11">
+                    {!! Form::checkbox('is_mandatory['.$question->id.']', 1, $question->is_mandatory ?? 0, ['class' => 'form-check-input form-timed form-toggle form-field']) !!}
+                    Mandatory {!! add_help('If turned off, this question can be left empty.') !!}
+                </div>
+                <a href="#" class="btn btn-danger col-1 remove-question-button">X</a>
+            </div>
+            <div class="question">{!! Form::text('questions['.$question->id.']', $question->question, ['class' => 'form-control mt-2 mb-2']) !!}</div>
+
             <h5 class="card-text">Options (Optional) {!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}</h5>
             <div class="options" id="option-{{ $question->id }}">
                 @foreach($question->options as $option)
@@ -127,8 +136,15 @@
     @endforeach
     <div class="card hide mb-2">
         <div class="card-body">
-            <h5 class="card-title">Question <a href="#" class="btn btn-danger float-right remove-question-button">X</a>
-                {!! Form::text('questions[default]', null, ['class' => 'form-control']) !!} </h5>
+            <div class="card-title row">
+                <h5 class="col-lg col-12">Question</h5>
+                <div class="col-lg col-11">
+                    {!! Form::checkbox('is_mandatory[default]', 1, 0, ['class' => 'form-check-input form-timed form-toggle form-field']) !!}
+                    Mandatory {!! add_help('If turned off, this question can be left empty.') !!}
+                </div>
+                <a href="#" class="btn btn-danger col-1 remove-question-button">X</a>
+            </div>
+            <div class="question">{!! Form::text('questions[default]', null, ['class' => 'form-control mt-2 mb-2']) !!}</div>
             <h5 class="card-text">Options (Optional) {!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}</h5>
             <div class="options">
                 <div class="hide mb-2">
@@ -152,18 +168,24 @@
     <a href="#" class="btn btn-outline-info" id="addQuestion">Add Question</a>
 </div>
 
+<h3>Rewards</h3>
+<p>Rewards are credited on a per-user basis. They are given out each time the user submits the form, so make sure to set the form timeframe accordingly. Edits to existing answers will not reward the user again.</p>
+
+@include('widgets._loot_select', ['loots' => $form->rewards, 'showLootTables' => true, 'showRaffles' => true])
+
 <div class="text-right">
     {!! Form::submit($form->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>
 
 {!! Form::close() !!}
 
-
+@include('widgets._loot_select_row', ['items' => $items, 'currencies' => $currencies, 'tables' => $tables, 'raffles' => $raffles, 'showLootTables' => true, 'showRaffles' => true])
 
 @endsection
 
 @section('scripts')
 @parent
+@include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true])
 <script>
     $(document).ready(function() {
         $('.delete-form-button').on('click', function(e) {
@@ -204,8 +226,10 @@
             clone.removeClass('hide');
             questions.append(clone);
             attachRemoveListener(clone.find('.remove-question-button'));
-            var questionInput = clone.find('.card-title input');
-            questionInput.attr("name", "questions[" + questionId + "]")
+            var questionInput = clone.find('.question input');
+            questionInput.attr("name", "questions[" + questionId + "]");
+            var mandatoryInput = clone.find('.card-title input');
+            mandatoryInput.attr("name", "ismandatory[" + questionId + "]");
 
             //setup options for the clone with its unique id
             var options = clone.find('.card-body .options');
@@ -213,7 +237,7 @@
             var optionInput = options.find('input');
             options.attr("id", "option-" + questionId);
             optionButton.attr("id", "button-" + questionId);
-            optionInput.attr("name", "options[" + questionId + "][]")
+            optionInput.attr("name", "options[" + questionId + "][]");
         });
 
         $(questions).on('click', '.addOption', function(e) {

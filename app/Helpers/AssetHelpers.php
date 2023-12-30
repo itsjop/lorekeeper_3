@@ -321,3 +321,21 @@ function fillCharacterAssets($assets, $sender, $recipient, $logType, $data, $sub
     }
     return $assets;
 }
+
+function createRewardsString($array) {
+    $string = [];
+    foreach ($array as $key => $contents) {
+        foreach ($contents as $asset) {
+            $string[] = $asset['asset']->displayName.' x'.$asset['quantity'];
+        }
+    }
+    if (!count($string)) {
+        return 'Nothing. :('; // :(
+    }
+
+    if (count($string) == 1) {
+        return implode(', ', $string);
+    }
+
+    return implode(', ', array_slice($string, 0, count($string) - 1)).(count($string) > 2 ? ', and ' : ' and ').end($string);
+}

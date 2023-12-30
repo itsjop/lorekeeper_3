@@ -90,4 +90,28 @@ class SiteFormAnswer extends Model
         return $this->belongsTo('App\Models\Forms\SiteFormOption', 'option_id');
     }
 
+    /**
+     * Get the likes to this answer 
+     */
+    public function likes() 
+    {
+        return $this->hasMany('App\Models\Forms\SiteFormLike', 'answer_id');
+    }
+
+    /**********************************************************************************************
+    
+        MISC
+
+    **********************************************************************************************/
+    
+    /**
+     * Get whether user has liked this answer already or not
+     */
+    public function hasLiked($user) 
+    {
+        $likes = $this->likes()->where('user_id', $user->id);
+        return $likes->count() > 0;
+    }
+
+
 }

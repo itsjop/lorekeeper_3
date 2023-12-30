@@ -10,26 +10,7 @@
 </h1>
 
 <div class="card mb-3">
-    <div class="card-header">
-        <h2 class="card-title mb-0">
-            @if(!$form->is_active || ($form->is_active && $form->is_timed && $form->start_at > Carbon\Carbon::now()))
-            <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This form is hidden."></i>
-            @endif
-            {!! $form->displayName !!}
-        </h2>
-        <div class="h5">
-            <span class="badge bg-warning border">
-                @if($form->is_anonymous)
-                This form is anonymous {!! add_help('Staff will be unable to see your answers, however, the site owners may still access this information through the database. Note that this option can be changed at any time.') !!}
-                @else
-                This form is not anonymous. {!! add_help('Staff will be able to easily see your answers.') !!}
-                @endif
-            </span>
-        </div>
-        <small>
-            Posted {!! $form->post_at ? pretty_date($form->post_at) : pretty_date($form->created_at) !!} :: Last edited {!! pretty_date($form->updated_at) !!} by {!! $form->user->displayName !!}
-        </small>
-    </div>
+    @include('forms._site_form_header')
 
     <div class="accordion" id="questionAccordion">
         @foreach($form->questions as $question)

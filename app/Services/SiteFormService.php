@@ -5,13 +5,12 @@ namespace App\Services;
 use App\Services\Service;
 
 use DB;
-use Config;
+use Illuminate\Support\Arr;
 
-use App\Models\User\User;
 use App\Models\Forms\SiteForm;
 use App\Models\Forms\SiteFormOption;
 use App\Models\Forms\SiteFormQuestion;
-use App\Models\Forms\SiteFormAnswer;
+use App\Models\Forms\SiteFormReward;
 
 class SiteFormService extends Service
 {
@@ -39,7 +38,8 @@ class SiteFormService extends Service
             $data['user_id'] = $user->id;
             $form = SiteForm::create($data);
 
-            $this->createFormQuestions($data['questions'], $data['options'], $form);
+            $this->createFormQuestions($data['questions'], $data['options'], $data['is_mandatory'] ?? [], $form);
+            $this->populateRewards(Arr::only($data, ['rewardable_type', 'rewardable_id', 'quantity']), $form);
 
             return $this->commitReturn($form);
         } catch (\Exception $e) {
@@ -64,8 +64,8 @@ class SiteFormService extends Service
             $data = $this->populateFormData($data);
             $data['user_id'] = $user->id;
             $form->update($data);
-            $this->updateFormQuestions($data['questions'], $data['options'], $form);
-
+            $this->updateFormQuestions($data['questions'], $data['options'], $data['is_mandatory'] ?? [], $form);
+            $this->populateRewards(Arr::only($data, ['rewardable_type', 'rewardable_id', 'quantity']), $form);
             return $this->commitReturn($form);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
@@ -87,10 +87,16 @@ class SiteFormService extends Service
             if ($form->questions->count() > 0) {
                 foreach ($form->questions as $question) {
                     if ($question->options()->count() > 0) $question->options()->delete();
-                    if ($question->answers()->count() > 0) $question->answers()->delete();
+                    if ($question->answers()->count() > 0) {
+                        foreach ($question->answers as $answer) {
+                            if ($answer->likes()->count() > 0) $answer->likes->each->delete();
+                            $answer->delete();
+                        }
+                    }
                     $question->delete();
                 }
             }
+            if ($form->rewards()->count() > 0) $form->rewards()->delete();
             $form->delete();
 
             return $this->commitReturn(true);
@@ -127,10 +133,10 @@ class SiteFormService extends Service
      * @param  App\Models\Forms\SiteForm  $form
      * @return array
      */
-    private function createFormQuestions($questions, $options, $form)
+    private function createFormQuestions($questions, $options, $isMandatory, $form)
     {
         $questions = array_filter($questions);
-        if(count($questions) <= 0 ) throw new \Exception ("A form must have at least one question.");
+        if (count($questions) <= 0) throw new \Exception("A form must have at least one question.");
 
         foreach ($questions as $id => $question) {
             if ($id != 'default') { // ignore empty default
@@ -139,7 +145,8 @@ class SiteFormService extends Service
                 $questionEntry = SiteFormQuestion::create([
                     'form_id' => $form->id,
                     'question' => $question,
-                    'has_options' => count($op) > 0
+                    'has_options' => count($op) > 0,
+                    'is_mandatory' => isset($isMandatory[$id]) ? 1 : 0
                 ]);
 
                 //save options
@@ -161,11 +168,11 @@ class SiteFormService extends Service
      * @param  App\Models\Forms\SiteForm  $form
      * @return array
      */
-    private function updateFormQuestions($questions, $options, $form)
+    private function updateFormQuestions($questions, $options, $isMandatory, $form)
     {
         $questions = array_filter($questions);
 
-        if(count($questions) <= 0 ) throw new \Exception ("A form must have at least one question.");
+        if (count($questions) <= 0) throw new \Exception("A form must have at least one question.");
 
         //update exisiting questions...
         foreach ($form->questions as $question) {
@@ -176,7 +183,8 @@ class SiteFormService extends Service
                 // update question
                 $question->update([
                     'question' => $questionData,
-                    'has_options' => count($optionsData) > 0
+                    'has_options' => count($optionsData) > 0,
+                    'is_mandatory' => isset($isMandatory[$question->id]) ? 1 : 0
                 ]);
 
                 //remove question from array so we dont re-create it later
@@ -201,8 +209,8 @@ class SiteFormService extends Service
                 }
 
                 // add new options
-                foreach($optionsData as $optionId=>$option){
-                    if($question->options->where('id', $optionId)->count() <= 0) {
+                foreach ($optionsData as $optionId => $option) {
+                    if ($question->options->where('id', $optionId)->count() <= 0) {
                         SiteFormOption::create([
                             'question_id' => $question->id,
                             'option' => $option,
@@ -210,17 +218,42 @@ class SiteFormService extends Service
                     }
                     unset($options[$question->id][$optionId]);
                 }
-                
             } else {
                 // if question wasnt passed it was removed so we delete it and the related options/answers.
                 if ($question->options()->count() > 0) $question->options->each->delete();
-                if ($question->answers()->count() > 0) $question->answers->each->delete();
+                if ($question->answers()->count() > 0) {
+                    foreach ($question->answers as $answer) {
+                        if ($answer->likes()->count() > 0) $answer->likes->each->delete();
+                        $answer->delete();
+                    }
+                }
                 $question->delete();
             }
         }
         //then just create the rest anew if needed
-        if(count($questions) > 0 ) $this->createFormQuestions($questions, $options, $form);
-
+        if (count($questions) > 0) $this->createFormQuestions($questions, $options, $isMandatory, $form);
     }
 
+    /**
+     * Processes user input for creating/updating form rewards.
+     *
+     * @param  array                      $data
+     * @param  \App\Models\Forms\SiteForm  $form
+     */
+    private function populateRewards($data, $form)
+    {
+        // Clear the old rewards...
+        $form->rewards()->delete();
+
+        if (isset($data['rewardable_type'])) {
+            foreach ($data['rewardable_type'] as $key => $type) {
+                SiteFormReward::create([
+                    'form_id'       => $form->id,
+                    'rewardable_type' => $type,
+                    'rewardable_id'   => $data['rewardable_id'][$key],
+                    'quantity'        => $data['quantity'][$key],
+                ]);
+            }
+        }
+    }
 }

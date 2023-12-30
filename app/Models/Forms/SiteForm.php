@@ -84,6 +84,14 @@ class SiteForm extends Model
         return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'form_id');
     }
 
+    /**
+     * Get the rewards attached to this form.
+     */
+    public function rewards()
+    {
+        return $this->hasMany('App\Models\Forms\SiteFormReward', 'form_id');
+    }
+
     /**********************************************************************************************
     
         SCOPES

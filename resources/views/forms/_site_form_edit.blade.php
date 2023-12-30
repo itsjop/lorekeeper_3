@@ -2,10 +2,11 @@
     @if($number && $number <= $form->latestSubmissionNumber())
     {!! Form::open(['url' => 'forms/send/'. $form->id ]) !!}
     <h2> Edit Form Submission {{ $number }}</h2>
+    Questions marked with * are mandatory.
     <div class="border rounded p-4">
 
-        @foreach($form->questions as $question)
-        <h5>{{ $question->question }}</h5>
+        @foreach($form->questions as $key=>$question)
+        <h5>{{ $question->question }} {{ $question->is_mandatory ? '*' : ''}}</h5>
         @if($question->options->count() > 0)
         @foreach($question->options as $option)
         <div class="form-group mb-0">
@@ -40,10 +41,12 @@
 @else
     {!! Form::open(['url' => 'forms/send/'. $form->id ]) !!}
     <h2> Submit Form </h2>
+    Questions marked with * are mandatory.
+
     <div class="border rounded p-4">
 
-        @foreach($form->questions as $question)
-        <h5>{{ $question->question }}</h5>
+        @foreach($form->questions as $key=>$question)
+        <h5>{{ $question->question }} {{ $question->is_mandatory ? '*' : ''}}</h5>
         @if($question->options->count() > 0)
         @foreach($question->options as $option)
         <div class="form-group mb-0">

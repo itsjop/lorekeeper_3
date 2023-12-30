@@ -4,7 +4,7 @@ namespace App\Models\Forms;
 
 use App\Models\Model;
 
-class SiteFormAnswer extends Model
+class SiteFormLike extends Model
 {
 
 
