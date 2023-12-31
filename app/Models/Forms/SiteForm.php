@@ -77,11 +77,19 @@ class SiteForm extends Model
 
     
     /**
-     * Get the questions related to this form.
+     * Get the answers related to this form.
      */
     public function answers() 
     {
         return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'form_id');
+    }
+
+    /**
+     * Get the answers related to this form for a given user.
+     */
+    public function userAnswers($user) 
+    {
+        return $this->hasMany('App\Models\Forms\SiteFormAnswer', 'form_id')->where('user_id', $user->id)->get()->groupBy('submission_number');
     }
 
     /**
@@ -182,13 +190,13 @@ class SiteForm extends Model
         return $date;
     }
 
-    public function canSubmit()
+    public function canSubmit($user)
     {
         //if form is closed by time, we dont allow submissions
         if($this->is_timed && $this->end_at < Carbon::now()) return false;
 
         //if form is open check timeframe
-        $lastSubmission = $this->answers()->orderBy('created_at', 'DESC')->first();
+        $lastSubmission = $this->answers()->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
         if ($lastSubmission) {
             // if a timer exists we cannot submit again if the time is right
             if ($lastSubmission->created_at >= $this->timeframeDate) return false;

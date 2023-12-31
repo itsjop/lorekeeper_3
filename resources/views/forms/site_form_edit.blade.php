@@ -12,7 +12,7 @@
             {!! $form->parsed_description ?? '<i>This form has no description.</i>' !!}
         </div>
         <hr>
-        @if($form->is_editable || $action == 'submit' && $form->canSubmit())
+        @if($form->is_editable || $action == 'submit' && $form->canSubmit($user))
             @include('forms._site_form_edit')
         @else
             @include('forms._site_form_view')

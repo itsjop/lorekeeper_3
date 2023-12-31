@@ -14,7 +14,7 @@
             @endif
             @if($user)
                 @if($form->answers->where('user_id', $user->id)->count() > 0)<a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=edit">Your Answers</a>@endif
-                @if($form->canSubmit())<a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=submit">Submit Form</a>@endif
+                @if($form->canSubmit($user))<a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=submit">Submit Form</a>@endif
             @endif
          @endif
     </div>

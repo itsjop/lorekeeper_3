@@ -30,7 +30,7 @@
     {!! Form::close() !!}
     @else
     <h2>Edit Form Submissions </h2>
-    @foreach($form->answers()->get()->groupBy('submission_number') as $submission => $answers)
+    @foreach($form->userAnswers($user) as $submission => $answers)
     <div class="row">
         <div class="col-8"> Submission {{ $submission }} </div>
         <div class="col-4"> <a class="btn btn-primary btn-sm float-right" href="?action=edit&number={{ $submission }}">Edit</a> </div>
