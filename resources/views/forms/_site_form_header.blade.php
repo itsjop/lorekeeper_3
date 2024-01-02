@@ -1,12 +1,15 @@
 <div class="card-header">
     <h2 class="card-title mb-0">
-        @if(!$form->is_active || ($form->is_active && $form->is_timed && $form->start_at > Carbon\Carbon::now()))
+        @if(!$form->is_active || ($form->is_active && $form->is_timed && isset($form->start_at) && $form->start_at > Carbon\Carbon::now()))
         <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This form is hidden."></i>
         @endif
         {!! $form->displayName !!}
     </h2>
     <div class="h6">
-        <b>@if($form->is_timed && $form->end_at < Carbon\Carbon::now())[CLOSED] @else [OPEN] @endif</b> @if($form->is_timed) Open from {!! format_date($form->startDate) !!} to {!! format_date($form->endDate) !!} @endif
+        <b>@if($form->is_timed && isset($form->end_at) && $form->end_at < Carbon\Carbon::now())[CLOSED] @else [OPEN] @endif</b> 
+        @if($form->is_timed) 
+            Open @if($form->startDate) from {!! format_date($form->startDate) !!} @endif @if($form->endDate) until {!! format_date($form->endDate) !!} @endif
+        @endif
     </div>
     <div class="h5">
         <span class="badge bg-warning border">

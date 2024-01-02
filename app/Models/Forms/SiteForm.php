@@ -154,11 +154,11 @@ class SiteForm extends Model
     }
 
     public function getStartDateAttribute(){
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->start_at);
+        return isset($this->start_at) ? Carbon::createFromFormat('Y-m-d H:i:s', $this->start_at) : null;
     }
 
     public function getEndDateAttribute(){
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->end_at);
+        return isset($this->end_at) ? Carbon::createFromFormat('Y-m-d H:i:s', $this->end_at) : null;
     }
     
     /**********************************************************************************************
