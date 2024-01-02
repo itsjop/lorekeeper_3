@@ -114,9 +114,12 @@ class SiteForm extends Model
      */
     public function scopeVisible($query)
     {
-        return $query->where('is_active', 1)->where('is_timed', '<=', 0)->orWhere('is_timed', '>=', 1)->where('start_at', '<=', Carbon::now())->where('is_active', 1);
+        return $query->where('is_active', 1)->where(function ($query){
+            $query->where('start_at', '<=', Carbon::now())
+                  ->orWhereNull('start_at');
+        });
+        
     }
-
     /**********************************************************************************************
     
         ACCESSORS
