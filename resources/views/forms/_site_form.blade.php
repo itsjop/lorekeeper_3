@@ -10,11 +10,16 @@
             @if($form->is_public)
                 @include('forms._site_form_results')
             @else
-                <div><i>Answers are hidden - you have already submitted this form.</i></div>
+                <i>Answers are hidden - you have already submitted this form.</i>
             @endif
             @if($user)
-                @if($form->answers->where('user_id', $user->id)->count() > 0)<a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=edit">Your Answers</a>@endif
-                @if($form->canSubmit($user))<a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=submit">Submit Form</a>@endif
+                <i>@if($form->canSubmit($user)) You can submit this form below. @else You have already submitted this form. @endif</i>
+                @if($form->answers->where('user_id', $user->id)->count() > 0)
+                <a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=edit">Your Answers</a>
+                @endif
+                @if($form->canSubmit($user))
+                <a class="btn btn-primary float-right mt-5" href="/forms/send/{{$form->id}}?action=submit">Submit Form</a>
+                @endif
             @endif
          @endif
     </div>
