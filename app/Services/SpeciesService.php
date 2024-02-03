@@ -6,7 +6,7 @@ use App\Models\Character\CharacterImage;
 use App\Models\Species\Species;
 use App\Models\Species\Subtype;
 use App\Models\Character\CharacterLineageBlacklist;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class SpeciesService extends Service {
     /*
@@ -35,6 +35,7 @@ class SpeciesService extends Service {
             $image = null;
             if (isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
+                $data['hash'] = randomString(10);
                 $image = $data['image'];
                 unset($data['image']);
             } else {
@@ -79,6 +80,7 @@ class SpeciesService extends Service {
             $image = null;
             if (isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
+                $data['hash'] = randomString(10);
                 $image = $data['image'];
                 unset($data['image']);
             }
@@ -172,6 +174,7 @@ class SpeciesService extends Service {
             $image = null;
             if (isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
+                $data['hash'] = randomString(10);
                 $image = $data['image'];
                 unset($data['image']);
             } else {
@@ -212,6 +215,7 @@ class SpeciesService extends Service {
             $image = null;
             if (isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
+                $data['hash'] = randomString(10);
                 $image = $data['image'];
                 unset($data['image']);
             }

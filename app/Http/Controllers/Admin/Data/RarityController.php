@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Rarity;
 use App\Models\Character\CharacterLineageBlacklist;
 use App\Services\RarityService;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RarityController extends Controller {
     /*
