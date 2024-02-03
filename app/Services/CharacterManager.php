@@ -2074,7 +2074,22 @@ class CharacterManager extends Service {
 
         try {
             if(!$user->hasPower('manage_characters')) throw new \Exception('You do not have the required permissions to do this.');
-            dd("TODO");
+
+            if (!$character->lineage) {
+                return $this->handleCharacterLineage($data, $character, $character->is_myo_slot);
+            } else {
+                $character->lineage->update([
+                    'father_id'   => $data['father_id'] ?? null,
+                    'father_name' => $data['father_id'] ? null : ($data['father_name'] ?? null),
+                    'mother_id'   => $data['mother_id'] ?? null,
+                    'mother_name' => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+                    'depth'       => $data['depth'] ?? 0,
+                ]);
+            }
+            // CUSTOM ANCESTRY
+
+
+
             return $this->commitReturn(true);
         } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
@@ -2113,8 +2128,8 @@ class CharacterManager extends Service {
                 'father_id'    => $data['father_id'] ?? null,
                 'father_name'  => $data['father_id'] ? null : ($data['father_name'] ?? null),
                 'mother_id'    => $data['mother_id'] ?? null,
-                'mother_name'  => $data['mother_name'] ? null : ($data['mother_name'] ?? null),
-                'depth'        => $data['depth']
+                'mother_name'  => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+                'depth'        => $data['depth'] ?? 0,
             ]);
 
             return $this->commitReturn($lineage);

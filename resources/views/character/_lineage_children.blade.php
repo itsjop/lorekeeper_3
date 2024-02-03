@@ -1,4 +1,4 @@
-<div class="container text-center">
+<div class="container text-center {{ isset($tab) && $tab ? 'mb-3' : '' }}">
     {{-- recursive based on config --}}
     @if ($character->children && $character->children->count())
         <h5 class="text-center">{{ $title }}</h5>
@@ -8,7 +8,7 @@
                     <div class="col text-center">
                         <div>
                             <a href="{{ $child->character->url }}">
-                                <img src="{{ $child->character->image->thumbnailUrl }}" class="img-thumbnail" style="max-width: 40% !important;" alt="Thumbnail for {{ $child->character->fullName }}" />
+                                <img src="{{ $child->character->image->thumbnailUrl }}" class="img-thumbnail" style="width: 10% !important;" alt="Thumbnail for {{ $child->character->fullName }}" />
                             </a>
                         </div>
                         <div class="mt-1">
@@ -32,6 +32,7 @@
                 @endforeach
             </div>
         @endforeach
+        {!! isset($tab) && $tab ? '<hr />' : '' !!}
     @else
         <div class="alert alert-info text-center">No Descendants</div>
     @endif

@@ -4,17 +4,19 @@
             'character' => $character,
             'max_depth' => 0,
             'title' => 'Children',
+            'tab' => true,
         ])
     @endif
+    <h5>{{ $character->fullName }}'s Lineage</h5>
     <div class="row">
         @include('character._tab_lineage_col', [
-            'character' => $character->lineage ? $character->lineage->father : null,
-            'max_depth' => config('lorekeeper.lineage.lineage_depth') - 1,
+            'character' => $character?->lineage?->father,
+            'max_depth' => config('lorekeeper.lineage.tab_lineage_depth') - 1,
             'parent' => 'Father',
         ])
         @include('character._tab_lineage_col', [
-            'character' => $character->lineage ? $character->lineage->mother : null,
-            'max_depth' => config('lorekeeper.lineage.lineage_depth') - 1,
+            'character' => $character?->lineage?->mother,
+            'max_depth' => config('lorekeeper.lineage.tab_lineage_depth') - 1,
             'parent' => 'Mother',
         ])
     </div>

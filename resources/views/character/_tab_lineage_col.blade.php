@@ -5,7 +5,8 @@
         </span>
         <br>
         <a href="{{ $character ? $character->url : '#' }}" data-toggle="tooltip" data-placement="top"
-            title="{{ $character ? '<img src="' . $character->image->thumbnailUrl . '" class=\'img-thumbnail\' alt=\'Thumbnail for ' . $character->fullName . '\' />' : '' }}">
+            title="{{ $character ? '<img src="' . $character->image->thumbnailUrl . '" class=\'img-thumbnail\' alt=\'Thumbnail for ' . $character->fullName . '\' />' 
+            : '<i class=\'fas fa-question-circle\'></i>' }}">
             {!! $character ? $character->fullName : 'Unkown' !!}
         </a>
     </div>
@@ -13,14 +14,14 @@
     @if ($max_depth > 0)
         <div class="row">
             @include('character._tab_lineage_col', [
-                'character' => $character ? ($character->lineage ? $character->lineage->father : null) : null,
+                'character' => $character?->lineage?->father,
                 'max_depth' => $max_depth - 1,
-                'parent' => 'Father',
+                'parent' => $parent . "'s Father",
             ])
             @include('character._tab_lineage_col', [
-                'character' => $character ? ($character->lineage ? $character->lineage->mother : null) : null,
+                'character' => $character?->lineage?->mother,
                 'max_depth' => $max_depth - 1,
-                'parent' => 'Mother',
+                'parent' => $parent . "'s Mother",
             ])
         </div>
     @endif

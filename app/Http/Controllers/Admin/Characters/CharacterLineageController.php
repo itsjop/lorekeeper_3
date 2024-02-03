@@ -32,28 +32,6 @@ class CharacterLineageController extends Controller
     */
 
     /**
-     * Shows the character lineage page.
-     *
-     * @param  string  $slug
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getCharacterLineagePage($slug)
-    {
-        return $this->getLineagePage($slug, false);
-    }
-
-    /**
-     * Shows the MYO slot lineage page.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getMyoLineagePage($id)
-    {
-        return $this->getLineagePage($id, true);
-    }
-
-    /**
      * Shows the character's lineage page.
      *
      * @param  string  $slug
@@ -105,13 +83,13 @@ class CharacterLineageController extends Controller
     public function getEditLineage($id, $isMyo)
     {
         $this->character = $isMyo ? Character::where('is_myo_slot', 1)->where('id', $id)->first() : Character::where('slug', $id)->first();
-        if(!$this->character) abort(404);
+        if(!$this->character) {
+            abort(404);
+        }
 
-        $hasLineage = $this->character->lineage !== null;
-        $line = $this->character->lineage;
         return view('character.admin._edit_lineage_modal', [
             'character' => $this->character,
-            'characterOptions' => CharacterLineageBlacklist::getAncestorOptions(),
+            'characterOptions' => CharacterLineageBlacklist::getAncestorOptions($this->character),
             'isMyo' => $isMyo,
         ]);
     }
@@ -156,38 +134,7 @@ class CharacterLineageController extends Controller
         $this->character = $isMyo ? Character::where('is_myo_slot', 1)->where('id', $id)->first() : Character::where('slug', $id)->first();
         if(!$this->character) abort(404);
 
-        $data = $request->only([
-            'sire_id',
-            'sire_name',
-            'sire_sire_id',
-            'sire_sire_name',
-            'sire_sire_sire_id',
-            'sire_sire_sire_name',
-            'sire_sire_dam_id',
-            'sire_sire_dam_name',
-            'sire_dam_id',
-            'sire_dam_name',
-            'sire_dam_sire_id',
-            'sire_dam_sire_name',
-            'sire_dam_dam_id',
-            'sire_dam_dam_name',
-            'dam_id',
-            'dam_name',
-            'dam_sire_id',
-            'dam_sire_name',
-            'dam_sire_sire_id',
-            'dam_sire_sire_name',
-            'dam_sire_dam_id',
-            'dam_sire_dam_name',
-            'dam_dam_id',
-            'dam_dam_name',
-            'dam_dam_sire_id',
-            'dam_dam_sire_name',
-            'dam_dam_dam_id',
-            'dam_dam_dam_name',
-            'generate_ancestors',
-            'update_descendants',
-        ]);
+        $data = $request->only(['father_id', 'father_name', 'mother_id', 'mother_name']);
         if ($service->updateCharacterLineage($data, $this->character, Auth::user())) {
             flash('Character lineage updated successfully.')->success();
             return redirect()->to($this->character->url);

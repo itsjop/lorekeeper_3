@@ -21,14 +21,14 @@
     @if ($max_depth > 0)
         <div class="row">
             @include('character._lineage_tree', [
-                'character' => $character ? ($character->lineage ? $character->lineage->father : null) : null,
+                'character' => $character?->lineage?->father,
                 'max_depth' => $max_depth - 1,
-                'parent' => 'Father',
+                'parent' => $parent . "'s Father",
             ])
             @include('character._lineage_tree', [
-                'character' => $character ? ($character->lineage ? $character->lineage->mother : null) : null,
+                'character' => $character?->lineage?->mother,
                 'max_depth' => $max_depth - 1,
-                'parent' => 'Mother',
+                'parent' => $parent . "'s Mother",
             ])
         </div>
     @endif

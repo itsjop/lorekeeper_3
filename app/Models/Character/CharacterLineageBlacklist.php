@@ -94,7 +94,7 @@ class CharacterLineageBlacklist extends Model
      */
     public static function canHaveChildren($character)
     {
-        return CharacterLineageBlacklist::getBlacklistLevel($character, 1) < 1;
+        return $this->getBlacklistLevel($character, 1) < 1;
     }
 
     /**
@@ -105,7 +105,7 @@ class CharacterLineageBlacklist extends Model
      */
     public static function canHaveLineage($character)
     {
-        return CharacterLineageBlacklist::getBlacklistLevel($character, 2) < 2;
+        return $this->getBlacklistLevel($character, 2) < 2;
     }
 
     /**
@@ -119,7 +119,7 @@ class CharacterLineageBlacklist extends Model
      * @param  int                            $level
      * @return int
      */
-    public static function getBlacklistLevel($character, $maxLevel = 2)
+    public function getBlacklistLevel($character, $maxLevel = 2)
     {
         if(!$character) return 0;
         $level = [
@@ -154,22 +154,22 @@ class CharacterLineageBlacklist extends Model
      *
      * @return array
      */
-    public static function getAncestorOptions()
+    public function getAncestorOptions($character = null)
     {
-        // JOIN
-        $query = Character::query()
-            ->where('is_myo_slot', false)
+        $query = Character::myo(0)
             ->whereNotIn('character_category_id', CharacterLineageBlacklist::getBlacklistCategories())
-            ->whereNotIn('rarity_id',  CharacterLineageBlacklist::getBlacklistRarities())
+            ->whereNotIn('rarity_id', CharacterLineageBlacklist::getBlacklistRarities())
             ->join('character_images', 'characters.character_image_id', '=', 'character_images.id')
             ->whereNotIn('species_id', CharacterLineageBlacklist::getBlacklistSpecies())
             ->whereNotIn('suptype_id', CharacterLineageBlacklist::getBlacklistSubtypes())
-            ->orderBy('slug')
-            ->selectRaw('characters.id, IF(name IS NOT NULL, concat(slug, \': \', name), slug) as \'lineage_select_name\'')
-            ->pluck('lineage_select_name', 'characters.id')
-            ->toArray();
-
-        return $query;
+            ->orderBy('characters.slug'); // Ensure orderBy is correct
+        
+        if ($character) {
+            $query->where('characters.id', '!=', $character->id);
+        }
+        
+        // Now pluck using the alias
+        return $query->get()->pluck('fullName', 'character_id')->toArray();
     }
 
     /**
@@ -181,7 +181,7 @@ class CharacterLineageBlacklist extends Model
      *
      * @return App\Models\Character\CharacterLineageBlacklist|null
      */
-    public static function searchAndSet($level, $type, $typeID)
+    public function searchAndSet($level, $type, $typeID)
     {
         $blacklistEntry = CharacterLineageBlacklist::where('type', $type)->where('type_id', $typeID)->get()->first();
         $blacklist = false;
