@@ -51,7 +51,7 @@
 
     @include('admin.lineage._edit_lineage_blacklist', [
         'lineageBlacklist' => $lineageBlacklist,
-        'type' => 'subtype'
+        'type' => 'subtype',
     ])
 
     <div class="text-right">

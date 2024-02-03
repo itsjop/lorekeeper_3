@@ -33,7 +33,7 @@
         @endif
     </div>
 
-    @if(Auth::check() && Auth::user()->hasPower('manage_characters'))
+    @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
         <div class="my-3">
             <a href="#" class="btn btn-outline-info btn-sm edit-lineage" data-{{ $character->is_myo_slot ? 'id' : 'slug' }}="{{ $character->is_myo_slot ? $character->id : $character->slug }}"><i class="fas fa-cog"></i> Edit</a>
         </div>
@@ -53,7 +53,7 @@
                         @include('character._lineage_children', [
                             'character' => $character,
                             'max_depth' => config('lorekeeper.lineage.descendant_depth') - 1,
-                            'title'     => 'Children',
+                            'title' => 'Children',
                         ])
                     </div>
                 </div>
@@ -86,13 +86,12 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('scripts')
     <script>
         $('.edit-lineage').on('click', function(e) {
             e.preventDefault();
-            loadModal("{{ url($character->is_myo_slot ? 'admin/myo/' : 'admin/character/') }}/"+$(this).data('{{ $character->is_myo_slot ? 'id' : 'slug' }}')+"/lineage", 'Edit Character Lineage');
+            loadModal("{{ url($character->is_myo_slot ? 'admin/myo/' : 'admin/character/') }}/" + $(this).data('{{ $character->is_myo_slot ? 'id' : 'slug' }}') + "/lineage", 'Edit Character Lineage');
         });
     </script>
 @endsection

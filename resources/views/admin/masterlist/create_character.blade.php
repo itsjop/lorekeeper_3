@@ -261,7 +261,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group text-center pb-1 border-bottom">
-                    {!! Form::label('father_id', "Father (Optional)", ['class' => 'font-weight-bold']) !!}
+                    {!! Form::label('father_id', 'Father (Optional)', ['class' => 'font-weight-bold']) !!}
                     <div class="row">
                         <div class="col-sm-6 pr-sm-1">
                             {!! Form::select('father_id', $characterOptions, null, ['class' => 'form-control text-left character-select mb-1', 'placeholder' => 'None']) !!}
@@ -274,7 +274,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group text-center pb-1 border-bottom">
-                    {!! Form::label('mpther_id', "Mother (Optional)", ['class' => 'font-weight-bold']) !!}
+                    {!! Form::label('mpther_id', 'Mother (Optional)', ['class' => 'font-weight-bold']) !!}
                     <div class="row">
                         <div class="col-sm-6 pr-sm-1">
                             {!! Form::select('mother_id', $characterOptions, null, ['class' => 'form-control text-left character-select mb-1', 'placeholder' => 'None']) !!}
@@ -320,8 +320,7 @@
 
         $(document).ready(function() {
             $('.character-select').selectize();
-            $('#advanced_lineage').on('click', function(e)
-            {
+            $('#advanced_lineage').on('click', function(e) {
                 e.preventDefault();
             });
         });

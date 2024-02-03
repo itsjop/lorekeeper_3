@@ -50,7 +50,7 @@
 
     @include('admin.lineage._edit_lineage_blacklist', [
         'lineageBlacklist' => $lineageBlacklist,
-        'type' => 'category'
+        'type' => 'category',
     ])
 
     <div class="form-group">
