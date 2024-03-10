@@ -30,7 +30,16 @@ class Event extends Model
      */
     protected $table = 'events';
 
-    protected $dates = ['occur_start', 'occur_end'];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'occur_start'        => 'datetime',
+        'occur_end'          => 'datetime',
+    ];
+
 
     public $timestamps = true;
 
