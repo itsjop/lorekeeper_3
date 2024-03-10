@@ -9,11 +9,6 @@ use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Models\User\User;
-use App\Models\WorldExpansion\FigureCategory;
-use App\Models\WorldExpansion\FactionRankMember;
-use App\Models\Item\Item;
-
 class Figure extends Model
 {
     use SoftDeletes;
@@ -26,7 +21,6 @@ class Figure extends Model
     protected $fillable = [
         'name','description', 'summary', 'parsed_description', 'sort', 'image_extension', 'thumb_extension',
         'category_id', 'is_active', 'birth_date', 'death_date', 'faction_id'
-
     ];
 
 
@@ -46,12 +40,12 @@ class Figure extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:figures|between:3,50',
+        'name'        => 'required|unique:figures|between:3,50',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
-        'data' => 'nullable'
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
+        'data'        => 'nullable'
     ];
 
     /**
@@ -60,12 +54,12 @@ class Figure extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,50',
+        'name'        => 'required|between:3,50',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
-        'data' => 'nullable'
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
+        'data'        => 'nullable'
     ];
 
 
@@ -80,7 +74,7 @@ class Figure extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\FigureCategory', 'category_id');
+        return $this->belongsTo(FigureCategory::class, 'category_id');
     }
 
     /**
@@ -88,7 +82,7 @@ class Figure extends Model
      */
     public function attachments()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attacher_id')->where('attacher_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attacher_id')->where('attacher_type',class_basename($this));
     }
 
 
@@ -97,7 +91,7 @@ class Figure extends Model
      */
     public function attachers()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attachment_id')->where('attachment_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attachment_id')->where('attachment_type',class_basename($this));
     }
 
 
@@ -106,7 +100,7 @@ class Figure extends Model
      */
     public function faction()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\Faction', 'faction_id')->visible();
+        return $this->belongsTo(Faction::class, 'faction_id')->visible();
     }
 
 
@@ -188,8 +182,6 @@ class Figure extends Model
         return public_path($this->imageDirectory);
     }
 
-
-
     /**
      * Gets the file name of the model's image.
      *
@@ -199,7 +191,6 @@ class Figure extends Model
     {
         return $this->id . '-image.' . $this->image_extension;
     }
-
 
     /**
      * Gets the file name of the model's thumbnail image.
@@ -260,6 +251,7 @@ class Figure extends Model
         $ids = FigureCategory::orderBy('sort', 'DESC')->pluck('id')->toArray();
         return count($ids) ? $query->orderByRaw(DB::raw('FIELD(category_id, '.implode(',', $ids).')')) : $query;
     }
+
     /**
      * Scope a query to sort items in alphabetical order.
      *
@@ -308,7 +300,6 @@ class Figure extends Model
         if(!isset($this->faction_id) || !$this->faction->ranks()->count()) return null;
         if(FactionRankMember::where('member_type', 'figure')->where('member_id', $this->id)->first()) return FactionRankMember::where('member_type', 'figure')->where('member_id', $this->id)->first()->rank;
     }
-
 
     public static function getFiguresByCategory()
     {

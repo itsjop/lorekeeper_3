@@ -7,11 +7,6 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Models\User\User;
-use App\Models\WorldExpansion\Flora;
-use App\Models\WorldExpansion\FloraCategory;
-use App\Models\WorldExpansion\Location;
-
 class FloraCategory extends Model
 {
 
@@ -40,11 +35,11 @@ class FloraCategory extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:flora_categories|between:3,25',
-        'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'name'          => 'required|unique:flora_categories|between:3,25',
+        'description'   => 'nullable',
+        'summary'       => 'nullable|max:300',
+        'image'         => 'mimes:png,gif,jpg,jpeg',
+        'image_th'      => 'mimes:png,gif,jpg,jpeg',
     ];
 
     /**
@@ -53,11 +48,11 @@ class FloraCategory extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,25',
-        'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'name'          => 'required|between:3,25',
+        'description'   => 'nullable',
+        'summary'       => 'nullable|max:300',
+        'image'         => 'mimes:png,gif,jpg,jpeg',
+        'image_th'      => 'mimes:png,gif,jpg,jpeg',
     ];
 
 
@@ -71,7 +66,7 @@ class FloraCategory extends Model
      */
     public function floras()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Flora', 'category_id')->visible();
+        return $this->hasMany(Flora::class, 'category_id')->visible();
     }
 
 

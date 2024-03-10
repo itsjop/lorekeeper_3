@@ -9,11 +9,6 @@ use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Models\User\User;
-use App\Models\WorldExpansion\FloraCategory;
-use App\Models\WorldExpansion\Location;
-use App\Models\Item\Item;
-
 class Flora extends Model
 {
     use SoftDeletes;
@@ -26,7 +21,6 @@ class Flora extends Model
     protected $fillable = [
         'name','description', 'summary', 'parsed_description', 'sort', 'image_extension', 'thumb_extension',
         'category_id', 'is_active', 'scientific_name'
-
     ];
 
 
@@ -45,11 +39,11 @@ class Flora extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:floras|between:3,25',
-        'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'name'          => 'required|unique:floras|between:3,25',
+        'description'   => 'nullable',
+        'summary'       => 'nullable|max:300',
+        'image'         => 'mimes:png,gif,jpg,jpeg',
+        'image_th'      => 'mimes:png,gif,jpg,jpeg',
     ];
 
     /**
@@ -58,11 +52,11 @@ class Flora extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,25',
-        'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'name'          => 'required|between:3,25',
+        'description'   => 'nullable',
+        'summary'       => 'nullable|max:300',
+        'image'         => 'mimes:png,gif,jpg,jpeg',
+        'image_th'      => 'mimes:png,gif,jpg,jpeg',
     ];
 
 
@@ -77,7 +71,7 @@ class Flora extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\FloraCategory', 'category_id');
+        return $this->belongsTo(FloraCategory::class, 'category_id');
     }
 
     /**
@@ -85,16 +79,15 @@ class Flora extends Model
      */
     public function attachments()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attacher_id')->where('attacher_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attacher_id')->where('attacher_type',class_basename($this));
     }
-
 
     /**
      * Get the attacher attached to the model.
      */
     public function attachers()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attachment_id')->where('attachment_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attachment_id')->where('attachment_type',class_basename($this));
     }
 
     /**********************************************************************************************

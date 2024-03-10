@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\User\User;
 use App\Models\Character\Character;
-use App\Models\WorldExpansion\FactionType;
 
 class Faction extends Model
 {
@@ -46,11 +45,11 @@ class Faction extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:factions|between:3,25',
+        'name'        => 'required|unique:factions|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
     /**
@@ -59,11 +58,11 @@ class Faction extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,25',
+        'name'        => 'required|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
 
@@ -78,7 +77,7 @@ class Faction extends Model
      */
     public function type()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\FactionType', 'type_id');
+        return $this->belongsTo(FactionType::class, 'type_id');
     }
 
     /**
@@ -86,7 +85,7 @@ class Faction extends Model
      */
     public function parent()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\Faction', 'parent_id')->visible();
+        return $this->belongsTo(Faction::class, 'parent_id')->visible();
     }
 
     /**
@@ -94,7 +93,7 @@ class Faction extends Model
      */
     public function children()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Faction', 'parent_id')->visible();
+        return $this->hasMany(Faction::class, 'parent_id')->visible();
     }
 
     /**
@@ -102,7 +101,7 @@ class Faction extends Model
      */
     public function members()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Figure', 'faction_id')->visible();
+        return $this->hasMany(Figure::class, 'faction_id')->visible();
     }
 
     /**
@@ -110,7 +109,7 @@ class Faction extends Model
      */
     public function ranks()
     {
-        return $this->hasMany('App\Models\WorldExpansion\FactionRank', 'faction_id');
+        return $this->hasMany(FactionRank::class, 'faction_id');
     }
 
     /**
@@ -118,7 +117,7 @@ class Faction extends Model
      */
     public function attachments()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attacher_id')->where('attacher_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attacher_id')->where('attacher_type',class_basename($this));
     }
 
 
@@ -127,7 +126,7 @@ class Faction extends Model
      */
     public function attachers()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attachment_id')->where('attachment_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attachment_id')->where('attachment_type',class_basename($this));
     }
 
     /**********************************************************************************************

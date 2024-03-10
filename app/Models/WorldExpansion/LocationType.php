@@ -4,8 +4,6 @@ namespace App\Models\WorldExpansion;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\User\User;
-
 class LocationType extends Model
 {
 
@@ -34,12 +32,12 @@ class LocationType extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:location_types|between:3,25',
-        'names' => 'required|unique:location_types|between:3,25',
-        'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'name'          => 'required|unique:location_types|between:3,25',
+        'names'         => 'required|unique:location_types|between:3,25',
+        'description'   => 'nullable',
+        'summary'       => 'nullable|max:300',
+        'image'         => 'mimes:png,gif,jpg,jpeg',
+        'image_th'      => 'mimes:png,gif,jpg,jpeg',
     ];
 
     /**
@@ -48,12 +46,12 @@ class LocationType extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,25',
-        'names' => 'required|between:3,25',
-        'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'name'          => 'required|between:3,25',
+        'names'         => 'required|between:3,25',
+        'description'   => 'nullable',
+        'summary'       => 'nullable|max:300',
+        'image'         => 'mimes:png,gif,jpg,jpeg',
+        'image_th'      => 'mimes:png,gif,jpg,jpeg',
     ];
 
 
@@ -67,10 +65,8 @@ class LocationType extends Model
      */
     public function locations()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Location', 'type_id')->visible();
+        return $this->hasMany(Location::class, 'type_id')->visible();
     }
-
-
 
 
     /**********************************************************************************************

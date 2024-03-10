@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\User\User;
-use App\Models\WorldExpansion\LocationType;
+use App\Models\Character\Character;
+use App\Models\Gallery\GallerySubmission;
 
 class Location extends Model
 {
@@ -76,7 +77,7 @@ class Location extends Model
      */
     public function type()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\LocationType', 'type_id');
+        return $this->belongsTo(LocationType::class, 'type_id');
     }
 
     /**
@@ -84,7 +85,7 @@ class Location extends Model
      */
     public function parent()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\Location', 'parent_id')->visible();
+        return $this->belongsTo(Location::class, 'parent_id')->visible();
     }
 
     /**
@@ -92,7 +93,7 @@ class Location extends Model
      */
     public function children()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Location', 'parent_id')->visible();
+        return $this->hasMany(Location::class, 'parent_id')->visible();
     }
 
     /**
@@ -100,7 +101,7 @@ class Location extends Model
      */
     public function gallerysubmissions()
     {
-        return $this->hasMany('App\Models\Gallery\GallerySubmission', 'location_id')->visible();
+        return $this->hasMany(GallerySubmission::class, 'location_id')->visible();
     }
 
     /**
@@ -108,7 +109,7 @@ class Location extends Model
      */
     public function attachments()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attacher_id')->where('attacher_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attacher_id')->where('attacher_type',class_basename($this));
     }
 
     /**
@@ -116,7 +117,23 @@ class Location extends Model
      */
     public function attachers()
     {
-        return $this->hasMany('App\Models\WorldExpansion\WorldAttachment', 'attachment_id')->where('attachment_type',class_basename($this));
+        return $this->hasMany(WorldAttachment::class, 'attachment_id')->where('attachment_type',class_basename($this));
+    }
+
+    /**
+     * Get the users who are in this location.
+     */
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'home_id')->visible();
+    }
+
+    /**
+     * Get the characters who are in this location.
+     */
+    public function characters()
+    {
+        return $this->belongsTo(Character::class, 'home_id')->visible();
     }
 
     /**********************************************************************************************
@@ -264,10 +281,10 @@ class Location extends Model
         return
             array(
                 0 => $this->name,
-                1 => 'the '.$this->type->name.' of '.$this->name,
-                2 => $this->type->name.' of '.$this->name,
-                3 => $this->name.' '.$this->type->name,
-                4 => $this->type->name.' '.$this->name,
+                1 => 'the '.$this->type?->name.' of '.$this->name,
+                2 => $this->type?->name.' of '.$this->name,
+                3 => $this->name.' '.$this->type?->name,
+                4 => $this->type?->name.' '.$this->name,
             );
     }
 
@@ -288,7 +305,7 @@ class Location extends Model
      */
     public function getStyleParentAttribute()
     {
-        if($this->parent_id) return $this->style . ' (' . $this->parent->style . ')';
+        if($this->parent_id) return $this->style . ' (' . $this->parent?->style . ')';
         else return $this->style;
     }
 

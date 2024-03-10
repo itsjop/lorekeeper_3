@@ -7,11 +7,6 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Models\User\User;
-use App\Models\WorldExpansion\Figure;
-use App\Models\WorldExpansion\FigureCategory;
-use App\Models\WorldExpansion\Location;
-
 class FigureCategory extends Model
 {
 
@@ -40,11 +35,11 @@ class FigureCategory extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:figure_categories|between:3,25',
+        'name'        => 'required|unique:figure_categories|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
     /**
@@ -53,11 +48,11 @@ class FigureCategory extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,25',
+        'name'        => 'required|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
 
@@ -71,10 +66,8 @@ class FigureCategory extends Model
      */
     public function figures()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Figure', 'category_id')->visible();
+        return $this->hasMany(Figure::class, 'category_id')->visible();
     }
-
-
 
 
     /**********************************************************************************************

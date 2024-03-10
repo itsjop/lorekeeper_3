@@ -7,11 +7,6 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Models\User\User;
-use App\Models\WorldExpansion\Event;
-use App\Models\WorldExpansion\EventCategory;
-use App\Models\WorldExpansion\Location;
-
 class EventCategory extends Model
 {
 
@@ -40,11 +35,11 @@ class EventCategory extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:event_categories|between:3,25',
+        'name'        => 'required|unique:event_categories|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
     /**
@@ -53,11 +48,11 @@ class EventCategory extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,25',
+        'name'        => 'required|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
 
@@ -72,7 +67,7 @@ class EventCategory extends Model
      */
     public function events()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Event', 'category_id')->visible();
+        return $this->hasMany(Event::class, 'category_id')->visible();
     }
 
 

@@ -5,6 +5,8 @@ namespace App\Models\WorldExpansion;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User\User;
+use App\Models\Character\Character;
+use App\Models\Gallery\GallerySubmission;
 
 class FactionRankMember extends Model
 {
@@ -39,7 +41,7 @@ class FactionRankMember extends Model
      */
     public function faction()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\Faction', 'faction_id');
+        return $this->belongsTo(Faction::class, 'faction_id');
     }
 
     /**
@@ -47,7 +49,7 @@ class FactionRankMember extends Model
      */
     public function rank()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\FactionRank', 'rank_id');
+        return $this->belongsTo(FactionRank::class, 'rank_id');
     }
 
     /**
@@ -55,7 +57,7 @@ class FactionRankMember extends Model
      */
     public function figure()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\Figure', 'member_id');
+        return $this->belongsTo(Figure::class, 'member_id');
     }
 
     /**
@@ -63,7 +65,7 @@ class FactionRankMember extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User\User', 'member_id');
+        return $this->belongsTo(User::class, 'member_id');
     }
 
     /**
@@ -71,7 +73,7 @@ class FactionRankMember extends Model
      */
     public function character()
     {
-        return $this->belongsTo('App\Models\Character\Character', 'member_id');
+        return $this->belongsTo(Character::class, 'member_id');
     }
 
     /**********************************************************************************************

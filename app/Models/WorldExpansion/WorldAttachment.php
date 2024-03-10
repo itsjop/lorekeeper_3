@@ -4,13 +4,10 @@ namespace App\Models\WorldExpansion;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\WorldExpansion\Figure;
-use App\Models\WorldExpansion\Fauna;
-use App\Models\WorldExpansion\Flora;
-use App\Models\WorldExpansion\Faction;
-use App\Models\WorldExpansion\Location;
-use App\Models\WorldExpansion\Concept;
 use App\Models\Item\Item;
+use App\Models\Prompt\Prompt;
+use App\Models\Loot\Loot;
+use App\Models\News;
 
 class WorldAttachment extends Model
 {
@@ -47,28 +44,28 @@ class WorldAttachment extends Model
         switch ($this->attachment_type)
         {
             case 'Figure':
-                return $this->belongsTo('App\Models\WorldExpansion\Figure', 'attachment_id');
+                return $this->belongsTo(Figure::class, 'attachment_id');
             case 'Fauna':
-                return $this->belongsTo('App\Models\WorldExpansion\Fauna', 'attachment_id');
+                return $this->belongsTo(Fauna::class, 'attachment_id');
             case 'Flora':
-                return $this->belongsTo('App\Models\WorldExpansion\Flora', 'attachment_id');
+                return $this->belongsTo(Flora::class, 'attachment_id');
             case 'Faction':
-                return $this->belongsTo('App\Models\WorldExpansion\Faction', 'attachment_id');
+                return $this->belongsTo(Faction::class, 'attachment_id');
             case 'Concept':
-                return $this->belongsTo('App\Models\WorldExpansion\Concept', 'attachment_id');
+                return $this->belongsTo(Concept::class, 'attachment_id');
             case 'Location':
-                return $this->belongsTo('App\Models\WorldExpansion\Location', 'attachment_id');
+                return $this->belongsTo(Location::class, 'attachment_id');
             case 'Event':
-                return $this->belongsTo('App\Models\WorldExpansion\Event', 'attachment_id');
+                return $this->belongsTo(Event::class, 'attachment_id');
             case 'Item':
-                return $this->belongsTo('App\Models\Item\Item', 'attachment_id');
+                return $this->belongsTo(Item::class, 'attachment_id');
             case 'Prompt':
-                return $this->belongsTo('App\Models\Prompt\Prompt', 'attachment_id');
+                return $this->belongsTo(Prompt::class, 'attachment_id');
             case 'News':
-                return $this->belongsTo('App\Models\News', 'attachment_id');
+                return $this->belongsTo(News::class, 'attachment_id');
             case 'None':
                 // Laravel requires a relationship instance to be returned (cannot return null), so returning one that doesn't exist here.
-                return $this->belongsTo('App\Models\Loot\Loot', 'attachment_id', 'loot_table_id')->whereNull('loot_table_id');
+                return $this->belongsTo(Loot::class, 'attachment_id', 'loot_table_id')->whereNull('loot_table_id');
         }
         return null;
     }
@@ -80,28 +77,28 @@ class WorldAttachment extends Model
         switch ($this->attacher_type)
         {
             case 'Figure':
-                return $this->belongsTo('App\Models\WorldExpansion\Figure', 'attacher_id');
+                return $this->belongsTo(Figure::class, 'attacher_id');
             case 'Fauna':
-                return $this->belongsTo('App\Models\WorldExpansion\Fauna', 'attacher_id');
+                return $this->belongsTo(Fauna::class, 'attacher_id');
             case 'Flora':
-                return $this->belongsTo('App\Models\WorldExpansion\Flora', 'attacher_id');
+                return $this->belongsTo(Flora::class, 'attacher_id');
             case 'Faction':
-                return $this->belongsTo('App\Models\WorldExpansion\Faction', 'attacher_id');
+                return $this->belongsTo(Faction::class, 'attacher_id');
             case 'Concept':
-                return $this->belongsTo('App\Models\WorldExpansion\Concept', 'attacher_id');
+                return $this->belongsTo(Concept::class, 'attacher_id');
             case 'Location':
-                return $this->belongsTo('App\Models\WorldExpansion\Location', 'attacher_id');
+                return $this->belongsTo(Location::class, 'attacher_id');
             case 'Event':
-                return $this->belongsTo('App\Models\WorldExpansion\Event', 'attacher_id');
+                return $this->belongsTo(Event::class, 'attacher_id');
             case 'Item':
-                return $this->belongsTo('App\Models\Item\Item', 'attacher_id');
+                return $this->belongsTo(Item::class, 'attacher_id');
             case 'Prompt':
-                return $this->belongsTo('App\Models\Prompt\Prompt', 'attacher_id');
+                return $this->belongsTo(Prompt::class, 'attacher_id');
             case 'News':
-                return $this->belongsTo('App\Models\News', 'attacher_id');
+                return $this->belongsTo(News::class, 'attacher_id');
             case 'None':
                 // Laravel requires a relationship instance to be returned (cannot return null), so returning one that doesn't exist here.
-                return $this->belongsTo('App\Models\Loot\Loot', 'attacher_id', 'loot_table_id')->whereNull('loot_table_id');
+                return $this->belongsTo(Loot::class, 'attacher_id', 'loot_table_id')->whereNull('loot_table_id');
         }
         return null;
     }

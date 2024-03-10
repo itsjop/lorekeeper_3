@@ -4,8 +4,6 @@ namespace App\Models\WorldExpansion;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\User\User;
-
 class FactionRank extends Model
 {
 
@@ -39,7 +37,7 @@ class FactionRank extends Model
      */
     public function faction()
     {
-        return $this->belongsTo('App\Models\WorldExpansion\Faction', 'faction_id');
+        return $this->belongsTo(Faction::class, 'faction_id');
     }
 
     /**
@@ -47,7 +45,7 @@ class FactionRank extends Model
      */
     public function members()
     {
-        return $this->hasMany('App\Models\WorldExpansion\FactionRankMember', 'rank_id');
+        return $this->hasMany(FactionRankMember::class, 'rank_id');
     }
 
     /**********************************************************************************************

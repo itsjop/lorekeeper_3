@@ -15,7 +15,6 @@ class Glossary extends Model
      */
     protected $fillable = [
         'name','description', 'parsed_description', 'is_active', 'link_id', 'link_type'
-
     ];
 
 
@@ -34,7 +33,7 @@ class Glossary extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:glossary|between:3,191',
+        'name'        => 'required|unique:glossary|between:3,191',
         'description' => 'nullable',
     ];
 
@@ -44,7 +43,7 @@ class Glossary extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,191',
+        'name'        => 'required|between:3,191',
         'description' => 'nullable',
     ];
 
@@ -65,7 +64,7 @@ class Glossary extends Model
         if(!Auth::check() || !(Auth::check() && Auth::user()->isStaff)) return $query->where('is_active', 1);
         else return $query;
     }
-    
+
     /**
      * Scope a query to sort items in alphabetical order.
      *
@@ -96,7 +95,7 @@ class Glossary extends Model
         $displayName = !$this->is_active ? '<s>' : '';
         $displayName .= $this->url ? '<a href="'.$this->url.'" class="glossary">'.$this->name.'</a>' : $this->name;
         $displayName .= !$this->is_active ? '</s>' : '';
-        
+
         return $displayName;
     }
 
@@ -107,7 +106,7 @@ class Glossary extends Model
      */
     public function getUrlAttribute()
     {
-        return isset($this->link) ? $this->link->url : null;
+        return isset($this->link) ? $this->link?->url : null;
     }
 
     /**

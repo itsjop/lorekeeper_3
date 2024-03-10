@@ -4,8 +4,6 @@ namespace App\Models\WorldExpansion;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\User\User;
-
 class FactionType extends Model
 {
 
@@ -34,12 +32,12 @@ class FactionType extends Model
      * @var array
      */
     public static $createRules = [
-        'name' => 'required|unique:faction_types|between:3,25',
-        'names' => 'required|unique:faction_types|between:3,25',
+        'name'        => 'required|unique:faction_types|between:3,25',
+        'names'       => 'required|unique:faction_types|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
     /**
@@ -48,12 +46,12 @@ class FactionType extends Model
      * @var array
      */
     public static $updateRules = [
-        'name' => 'required|between:3,25',
-        'names' => 'required|between:3,25',
+        'name'        => 'required|between:3,25',
+        'names'       => 'required|between:3,25',
         'description' => 'nullable',
-        'summary' => 'nullable|max:300',
-        'image' => 'mimes:png,gif,jpg,jpeg',
-        'image_th' => 'mimes:png,gif,jpg,jpeg',
+        'summary'     => 'nullable|max:300',
+        'image'       => 'mimes:png,gif,jpg,jpeg',
+        'image_th'    => 'mimes:png,gif,jpg,jpeg',
     ];
 
 
@@ -67,7 +65,7 @@ class FactionType extends Model
      */
     public function factions()
     {
-        return $this->hasMany('App\Models\WorldExpansion\Faction', 'type_id')->visible();
+        return $this->hasMany(Faction::class, 'type_id')->visible();
     }
 
     /**********************************************************************************************
