@@ -250,7 +250,7 @@ class Event extends Model
     public function scopeSortCategory($query)
     {
         $ids = EventCategory::orderBy('sort', 'DESC')->pluck('id')->toArray();
-        return count($ids) ? $query->orderByRaw(DB::raw('FIELD(category_id, '.implode(',', $ids).')')) : $query;
+        return count($ids) ? $query->orderBy(DB::raw('FIELD(category_id, '.implode(',', $ids).')')) : $query;
     }
     /**
      * Scope a query to sort items in alphabetical order.

@@ -156,7 +156,7 @@ class Faction extends Model
     public function scopeSortFactionType($query)
     {
         $ids = LocationType::orderBy('sort', 'DESC')->pluck('id')->toArray();
-        return count($ids) ? $query->orderByRaw(DB::raw('FIELD(type_id, '.implode(',', $ids).')')) : $query;
+        return count($ids) ? $query->orderBy(DB::raw('FIELD(type_id, '.implode(',', $ids).')')) : $query;
     }
     /**
      * Scope a query to sort items in alphabetical order.
