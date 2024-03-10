@@ -15,7 +15,7 @@
 {!! Form::open(['url' => $term->id ? 'admin/world/glossary/edit/'.$term->id : 'admin/world/glossary/create']) !!}
 
 <div class="card mb-3">
-    <div class="card-header h3">Basic Information</div>
+    <h2 class="card-header h3">Basic Information</h2>
     <div class="card-body">
         <div class="form-group">
             {!! Form::label('Name') !!}

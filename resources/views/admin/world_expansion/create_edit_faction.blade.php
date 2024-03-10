@@ -15,7 +15,7 @@
 {!! Form::open(['url' => $faction->id ? 'admin/world/factions/edit/'.$faction->id : 'admin/world/factions/create', 'files' => true]) !!}
 
 <div class="card mb-3">
-    <div class="card-header h3">Basic Information</div>
+    <h2 class="card-header h3">Basic Information</h2>
     <div class="card-body">
         <div class="row mx-0 px-0">
             <div class="form-group col-md px-0 pr-md-1">
@@ -62,7 +62,7 @@
 </div>
 
 <div class="card mb-3">
-    <div class="card-header h3">Images</div>
+    <h2  class="card-header h3">Images</h2>
     <div class="card-body row">
         <div class="form-group col-md-6">
             @if($faction->thumb_extension)
@@ -240,16 +240,16 @@
 
 @if($faction->id)
     <div class="card mb-3">
-        <div class="card-header h3">
+        <h2 class="card-header h3">
             <div class="float-right"><a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a></div>
             Attachments
-        </div>
+        </h2>
         <div class="card-body">
             @include('widgets._attachment_select', ['attachments' => $faction->attachments])
         </div>
         @if($faction->attachers->count())
             <div class="card-footer">
-                <h5>Attached to the following</h5>
+                <div class="h5">Attached to the following</div>
                 <div class="row">
                     @foreach($faction->attachers->groupBy('attacher_type') as $type => $attachers)
                         <div class="col-6 col-md-3"><div class="card"><div class="card-body p-2 text-center">

@@ -14,11 +14,9 @@
 
 {!! Form::open(['url' => $location->id ? 'admin/world/locations/edit/'.$location->id : 'admin/world/locations/create', 'files' => true]) !!}
 
-
 <div class="card mb-3">
-    <div class="card-header h3">Basic Information</div>
+    <h2 class="card-header h3">Basic Information</h2>
     <div class="card-body">
-
         <div class="row mx-0 px-0">
             <div class="form-group col-md px-0 pr-md-1">
                 {!! Form::label('Name*') !!}
@@ -31,8 +29,6 @@
                 </div>
             @endif
         </div>
-
-
         <div class="row mx-0 px-0">
             <div class="form-group col-12 col-md-6 px-0 pr-md-1">
                 {!! Form::label('Type*') !!} {!! add_help('What type of location is this?') !!}
@@ -44,7 +40,6 @@
                 {!! Form::select('parent_id', [0=>'Choose a Parent'] + $locations, isset($location->parent_id) ? $location->parent_id : null, ['class' => 'form-control selectize']) !!}
             </div>
         </div>
-
         @if($user_enabled || $ch_enabled)
             <div class=" mx-0 px-0 text-center">
             @if($user_enabled)
@@ -55,7 +50,6 @@
             @endif
             </div>
         @endif
-
         <div class="form-group">
             {!! Form::label('Summary (Optional)') !!}
             {!! Form::text('summary', $location->summary, ['class' => 'form-control']) !!}
@@ -64,7 +58,7 @@
 </div>
 
 <div class="card mb-3">
-    <div class="card-header h3">Images</div>
+    <h2 class="card-header h3">Images</h2>
     <div class="card-body row">
         <div class="form-group col-md-6">
             @if($location->thumb_extension)
@@ -79,7 +73,6 @@
                 </div>
             @endif
         </div>
-
         <div class="form-group col-md-6">
             @if($location->image_extension)
                 <a href="{{$location->imageUrl}}"  data-lightbox="entry" data-title="{{ $location->name }}"><img src="{{$location->imageUrl}}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
@@ -109,16 +102,16 @@
 
 @if($location->id)
     <div class="card mb-3">
-        <div class="card-header h3">
+        <h2 class="card-header h3">
             <div class="float-right"><a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a></div>
             Attachments
-        </div>
+        </h2>
         <div class="card-body">
             @include('widgets._attachment_select', ['attachments' => $location->attachments])
         </div>
         @if($location->attachers->count())
             <div class="card-footer">
-                <h5>Attached to the following</h5>
+                <div class="h5">Attached to the following</div>
                 <div class="row">
                     @foreach($location->attachers->groupBy('attacher_type') as $type => $attachers)
                         <div class="col-6 col-md-3"><div class="card"><div class="card-body p-2 text-center">

@@ -14,7 +14,6 @@
     $events              = \App\Models\WorldExpansion\Event::getEventsByCategory();
 @endphp
 
-
 <div class="row no-gutters" id="attachments">
     <div class="row col-12  logs-table-header align-items-center ">
         <div class="col-4 py-1 h-100 col-md-4 font-weight-bold"><div class="logs-table-cell">Attachment Type</div></div>

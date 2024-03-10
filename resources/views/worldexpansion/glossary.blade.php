@@ -29,12 +29,12 @@
 {!! $terms->render() !!}
 @foreach($terms as $term)
     <div class="term">
-        <h6>
+        <h2 class="h6">
             {!! $term->displayName !!}
             @if(Auth::check() && Auth::user()->hasPower('manage_world'))
                 <a data-toggle="tooltip" title="[ADMIN] Edit Term" href="{{ url('admin/world/glossary/edit/').'/'.$term->id }}" class="float-right"><i class="fas fa-crown"></i></a>
             @endif
-        </h6>
+        </h2>
         <div class="parsed-text mt-2 pl-3 py-2" style="border-left: 4px solid lightgrey">{!! $term->parsed_description !!}</div>
     </div>
     <hr class="my-4 w-75"/>
@@ -49,14 +49,14 @@
 @section('scripts')
 <style>
      .parsed-text p:last-child, .parsed-text ol:last-child, .parsed-text ul:last-child {
-       margin-bottom: 0; 
+       margin-bottom: 0;
     }
-    
+
     .parsed-text ul, .parsed-text ol {
         padding-left: 0;
         list-style-position: inside;
     }
-    
+
     .parsed-text li {
         padding-bottom: 10px;
     }

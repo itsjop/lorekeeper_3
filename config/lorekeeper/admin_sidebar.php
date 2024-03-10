@@ -186,7 +186,7 @@ return [
             ],
         ],
     ],
-    'Woldbuilder' => [
+    'WorldExpansion' => [
         'power' => 'manage_world',
         'links' => [
             [
