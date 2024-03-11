@@ -15,14 +15,11 @@
                         </a>
                     @endif
                 </div>
-                @php $totalAnswers = $question->totalAnswers(); @endphp
+                @php $totalAnswers = $question->is_multichoice ? $question->answers->groupBy('user_id')->count() : $question->totalAnswers(); @endphp
                 <h6><b>Total answers: {{ $totalAnswers }}</b></h6>
                 @if ($question->options->count() > 0)
                     @foreach ($question->options as $option)
-                        @php
-                            $optionAnswers = $option->answers->count();
-                            $totalAnswers = $question->is_multichoice ? $question->answers->groupBy('user_id')->count() : $totalAnswers;
-                        @endphp
+                        @php $optionAnswers = $option->answers->count(); @endphp
                         {{ $option->option }}
                         <div class="progress" style="height: 30px;">
                             <div class="progress-bar @if ($totalAnswers > 0 && ($optionAnswers / $totalAnswers) * 100 == 0) ml-2 text-dark @endif" role="progressbar" style="width:{{ $totalAnswers > 0 ? ($optionAnswers / $totalAnswers) * 100 : 0 }}%;" aria-valuenow="{{ $optionAnswers }}" aria-valuemin="0"

@@ -196,7 +196,7 @@ class SiteForm extends Model
     public function canSubmit($user)
     {
         //if form is closed by time, we dont allow submissions
-        if($this->is_timed && $this->end_at < Carbon::now()) return false;
+        if ($this->is_timed && $this->end_at < Carbon::now()) return 'closed';
 
         //if form is open check timeframe
         $lastSubmission = $this->answers()->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();

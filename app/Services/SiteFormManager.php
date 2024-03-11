@@ -31,7 +31,7 @@ class SiteFormManager extends Service {
             // check editable when edit is set
             if ($isEdit && !$form->is_editable) throw new \Exception("This form cannot be edited.");
             // check if submission is valid
-            if (isset($data['action']) && $data['action'] == 'submit' && !$form->canSubmit($user)) throw new \Exception("This form cannot be submitted at the time.");
+            if (isset($data['action']) && $data['action'] == 'submit' && $form->canSubmit($user) !== true) throw new \Exception("This form cannot be submitted at the time.");
 
             $nextNumber = $form->latestSubmissionNumber() + 1;
             foreach ($form->questions as $key => $question) {
