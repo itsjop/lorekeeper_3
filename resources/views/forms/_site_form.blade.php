@@ -10,7 +10,7 @@
             @if($form->is_public)
                 @include('forms._site_form_results')
             @else
-                <i>Answers are hidden - you have already submitted this form.</i>
+                <i>Answers are hidden.</i>
             @endif
             @if($user)
                 <i>@if($form->canSubmit($user)) You can submit this form below. @else You have already submitted this form. @endif</i>
