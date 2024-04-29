@@ -87,11 +87,15 @@
                         <a class="dropdown-item" href="{{ url('myos') }}">
                             MYO Slot Masterlist
                         </a>
+                        <a class="dropdown-item" href="{{ url('forms') }}">
+                            Site Forms & Polls
+                        </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('raffles') }}">
                             Raffles
                         </a>
                         <div class="dropdown-divider"></div>
+
                         <a class="dropdown-item" href="{{ url('reports/bug-reports') }}">
                             Bug Reports
                         </a>

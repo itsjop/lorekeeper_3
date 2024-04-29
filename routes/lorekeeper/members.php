@@ -198,3 +198,13 @@ Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function() {
     Route::post('/{comment}', 'CommentController@reply')->name('comments.reply');
     Route::post('/{id}/feature', 'CommentController@feature')->name('comments.feature');
 });
+
+/**************************************************************************************************
+    Forms & Polls
+**************************************************************************************************/
+Route::group(['prefix' => 'forms'], function() {
+    Route::post('/send/{id}', 'SiteFormController@postSiteForm');
+    Route::get('/send/{id}', 'SiteFormController@editSiteForm');
+    Route::post('/like/{id}', 'SiteFormController@postLikeAnswer');
+    Route::post('/unlike/{id}', 'SiteFormController@postUnlikeAnswer');
+});

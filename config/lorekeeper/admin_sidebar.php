@@ -46,6 +46,10 @@ return [
             [
                 'name' => 'Pages',
                 'url' => 'admin/pages'
+            ],
+            [
+                'name' => 'Forms & Polls',
+                'url' => 'admin/forms'
             ]
         ]
     ],
