@@ -41,6 +41,8 @@ class SiteFormService extends Service
             $this->createFormQuestions($data['questions'], $data['options'], $data['is_mandatory'] ?? [], $form);
             $this->populateRewards(Arr::only($data, ['rewardable_type', 'rewardable_id', 'quantity']), $form);
 
+            if($form->is_visible) $this->alertUsers();
+
             return $this->commitReturn($form);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
@@ -66,6 +68,9 @@ class SiteFormService extends Service
             $form->update($data);
             $this->updateFormQuestions($data['questions'], $data['options'], $data['is_mandatory'] ?? [], $form);
             $this->populateRewards(Arr::only($data, ['rewardable_type', 'rewardable_id', 'quantity']), $form);
+
+            if(isset($data['bump']) && $data['is_visible'] == 1 && $data['bump'] == 1) $this->alertUsers();
+            
             return $this->commitReturn($form);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
@@ -255,5 +260,17 @@ class SiteFormService extends Service
                 ]);
             }
         }
+    }
+
+    /**
+     * Updates the unread news flag for all users so that
+     * the new news notification is displayed.
+     *
+     * @return bool
+     */
+    private function alertUsers()
+    {
+        User::query()->update(['is_polls_unread' => 1]);
+        return true;
     }
 }
