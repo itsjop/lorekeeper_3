@@ -37,6 +37,14 @@
             {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the form will not be visible to regular users.') !!}
         </div>
     </div>
+    @if($form->id && $form->is_active)
+        <div class="col-md">
+            <div class="form-group">
+                {!! Form::checkbox('bump', 1, null, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+                {!! Form::label('bump', 'Bump form', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If toggled on, this will alert users that there is a new form. Best in conjunction with a clear notification of changes!') !!}
+            </div>
+        </div>
+    @endif
     <div class="col-md-2">
         <div class="form-group">
             {!! Form::checkbox('is_anonymous', 1, $form->id ? $form->is_anonymous : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}

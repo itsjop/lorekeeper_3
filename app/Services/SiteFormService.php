@@ -11,6 +11,7 @@ use App\Models\Forms\SiteForm;
 use App\Models\Forms\SiteFormOption;
 use App\Models\Forms\SiteFormQuestion;
 use App\Models\Forms\SiteFormReward;
+use App\Models\User\User;
 
 class SiteFormService extends Service
 {
@@ -41,7 +42,7 @@ class SiteFormService extends Service
             $this->createFormQuestions($data['questions'], $data['options'], $data['is_mandatory'] ?? [], $form);
             $this->populateRewards(Arr::only($data, ['rewardable_type', 'rewardable_id', 'quantity']), $form);
 
-            if($form->is_visible) $this->alertUsers();
+            if($form->is_active) $this->alertUsers();
 
             return $this->commitReturn($form);
         } catch (\Exception $e) {
@@ -69,7 +70,7 @@ class SiteFormService extends Service
             $this->updateFormQuestions($data['questions'], $data['options'], $data['is_mandatory'] ?? [], $form);
             $this->populateRewards(Arr::only($data, ['rewardable_type', 'rewardable_id', 'quantity']), $form);
 
-            if(isset($data['bump']) && $data['is_visible'] == 1 && $data['bump'] == 1) $this->alertUsers();
+            if(isset($data['bump']) && $data['is_active'] == 1 && $data['bump'] == 1) $this->alertUsers();
             
             return $this->commitReturn($form);
         } catch (\Exception $e) {

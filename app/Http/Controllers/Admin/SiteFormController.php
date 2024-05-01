@@ -76,7 +76,7 @@ class SiteFormController extends Controller
         $id ? $request->validate(SiteForm::$updateRules) : $request->validate(SiteForm::$createRules);
         $data = $request->only([
             'title', 'description', 'start_at', 'end_at', 'is_active', 'is_timed', 'is_anonymous', 'questions', 'options', 'is_mandatory',
-            'timeframe', 'is_public', 'is_editable', 'submit', 'edit', 'allow_likes', 'rewardable_type', 'rewardable_id', 'quantity'
+            'timeframe', 'is_public', 'is_editable', 'submit', 'edit', 'allow_likes', 'rewardable_type', 'rewardable_id', 'quantity', 'bump'
         ]);
         if($id && $service->updateSiteForm(SiteForm::find($id), $data, Auth::user())) {
             flash('SiteForm updated successfully.')->success();
