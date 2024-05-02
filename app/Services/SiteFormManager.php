@@ -53,6 +53,8 @@ class SiteFormManager extends Service
                             ]);
                         }
                     }
+                    // no rewards for edits...
+                    $rewardsString = '';
                 } else {
                     //save new answer
                     if (isset($data[$question->id])) {
@@ -84,31 +86,11 @@ class SiteFormManager extends Service
                             'submission_number' => $isEdit ? $submissionNumber : $nextNumber
                         ]);
                     }
+                    // only reward initial post
+                    $rewardsString = $this->rewardUser($form, $user);
                 }
             }
-            $assets = [];
-            // distribute rewards if applicable
-            if ($form->rewards->count() > 0) {
-                // Get the updated set of rewards
-                $rewardData = [];
-                $rewardData['rewardable_type'] = [];
-                $rewardData['rewardable_id'] = [];
-                $rewardData['quantity'] = [];
 
-                foreach ($form->rewards as $reward) {
-                    $rewardData['rewardable_type'][] = $reward->rewardable_type;
-                    $rewardData['rewardable_id'][] = $reward->rewardable_id;
-                    $rewardData['quantity'][] = $reward->quantity;
-                }
-                $rewards = $this->processRewards($rewardData);
-                // Distribute user rewards
-                $assets = fillUserAssets($rewards, null, $user, 'Form Rewards', [
-                    'data' => 'Received rewards from form (<a href="' . $form->url . '">' . $form->title . '</a>)'
-                ]);
-                if (!$assets) throw new \Exception("Failed to distribute rewards to user.");
-            }
-            $rewardsString = count($assets) > 0 ? 'As a reward, you have received: ' . createRewardsString($assets) : '';
-            if(!isset($rewardsString)) throw new \Exception("Reward string could not be built.");
             $this->commitReturn(true);
             return $rewardsString;
         } catch (\Exception $e) {
@@ -190,5 +172,33 @@ class SiteFormManager extends Service
             }
         }
         return $assets;
+    }
+
+    private function rewardUser($form, $user)
+    {
+        $assets = [];
+        // distribute rewards if applicable
+        if ($form->rewards->count() > 0) {
+            // Get the updated set of rewards
+            $rewardData = [];
+            $rewardData['rewardable_type'] = [];
+            $rewardData['rewardable_id'] = [];
+            $rewardData['quantity'] = [];
+
+            foreach ($form->rewards as $reward) {
+                $rewardData['rewardable_type'][] = $reward->rewardable_type;
+                $rewardData['rewardable_id'][] = $reward->rewardable_id;
+                $rewardData['quantity'][] = $reward->quantity;
+            }
+            $rewards = $this->processRewards($rewardData);
+            // Distribute user rewards
+            $assets = fillUserAssets($rewards, null, $user, 'Form Rewards', [
+                'data' => 'Received rewards from form (<a href="' . $form->url . '">' . $form->title . '</a>)'
+            ]);
+            if (!$assets) throw new \Exception("Failed to distribute rewards to user.");
+        }
+        $rewardsString = count($assets) > 0 ? 'As a reward, you have received: ' . createRewardsString($assets) : '';
+        if (!isset($rewardsString)) throw new \Exception("Reward string could not be built.");
+        return $rewardsString;
     }
 }
