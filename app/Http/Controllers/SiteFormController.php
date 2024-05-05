@@ -29,6 +29,9 @@ class SiteFormController extends Controller
      */
     public function getIndex()
     {
+        //check notif
+        if(Auth::check() && Auth::user()->is_polls_unread) Auth::user()->update(['is_polls_unread' => 0]);
+
         if (Auth::user() && Auth::user()->isStaff) {
             return view('forms.index', ['forms' => SiteForm::orderBy('updated_at', 'DESC')->paginate(10)]);
         } else {
