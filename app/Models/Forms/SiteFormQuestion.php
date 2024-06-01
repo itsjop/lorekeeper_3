@@ -13,7 +13,7 @@ class SiteFormQuestion extends Model
      * @var array
      */
     protected $fillable = [
-        'form_id', 'question', 'has_options', 'is_mandatory'
+        'form_id', 'question', 'has_options', 'is_mandatory', 'is_multichoice'
     ];
 
     /**

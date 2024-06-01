@@ -88,7 +88,7 @@ class SiteFormController extends Controller
         if (!$form) abort(404);
         if (!Auth::user()) abort(403);
         $rewardsString = $service->postSiteForm($form, $request->all(), Auth::user());
-        if (isset($rewardsString)) {
+        if (isset($rewardsString) && $rewardsString !== false) {
             flash('Form posted successfully! ' . $rewardsString)->success();
             return redirect()->to('/forms/send/' . $form->id . '?action=edit&number=' . $request['submission_number']);
         } else {

@@ -13,8 +13,7 @@ use App\Models\Item\Item;
 use App\Models\Loot\LootTable;
 use App\Models\Raffle\Raffle;
 
-class SiteFormManager extends Service
-{
+class SiteFormManager extends Service {
     /*
     |--------------------------------------------------------------------------
     | SiteForm Manager
@@ -24,8 +23,7 @@ class SiteFormManager extends Service
     |
     */
 
-    public function postSiteForm($form, $data, $user)
-    {
+    public function postSiteForm($form, $data, $user) {
         DB::beginTransaction();
         try {
             $isEdit = isset($data['action']) && $data['action'] == 'edit';
@@ -33,12 +31,13 @@ class SiteFormManager extends Service
             // check editable when edit is set
             if ($isEdit && !$form->is_editable) throw new \Exception("This form cannot be edited.");
             // check if submission is valid
-            if (isset($data['action']) && $data['action'] == 'submit' && !$form->canSubmit($user)) throw new \Exception("This form cannot be submitted at the time.");
+            if (isset($data['action']) && $data['action'] == 'submit' && $form->canSubmit($user) !== true) throw new \Exception("This form cannot be submitted at the time.");
 
             $nextNumber = $form->latestSubmissionNumber() + 1;
             foreach ($form->questions as $key => $question) {
                 $existingAnswer = SiteFormAnswer::where('user_id', $user->id)->where('question_id', $question->id)->where('submission_number', $submissionNumber)->first();
-                if ($isEdit && $existingAnswer) {
+                // Is edit and not a valid multichoice question
+                if ($isEdit && $existingAnswer && !($question->is_multichoice && $question->has_options)) {
                     //update existing answer
                     $answer = $data[$question->id];
                     if ($question->is_mandatory && empty($answer)) throw new \Exception("Question " . $key + 1 . " cannot be empty, as it is mandatory!");
@@ -53,8 +52,23 @@ class SiteFormManager extends Service
                             ]);
                         }
                     }
-                    // no rewards for edits...
-                    $rewardsString = '';
+                    // Cause if it didn't have options multichoice doesn't mean anything
+                } else if ($question->is_multichoice && $question->has_options) {
+                    // Always clear out existing answers for multi-choice easier than trying to figure out which to remove / update / etc.
+                    $answers = SiteFormAnswer::where('user_id', $user->id)->where('question_id', $question->id)->where('submission_number', $submissionNumber);
+                    $answers->delete();
+                    if (isset($data[$question->id])) {
+                        $answers = $data[$question->id];
+                        foreach ($answers as $key => $answer) {
+                            SiteFormAnswer::create([
+                                'form_id' => $form->id,
+                                'question_id' => $question->id,
+                                'option_id' => $answer,
+                                'user_id' => $user->id,
+                                'submission_number' => $isEdit ? $submissionNumber : $nextNumber
+                            ]);
+                        }
+                    }
                 } else {
                     //save new answer
                     if (isset($data[$question->id])) {
@@ -86,9 +100,15 @@ class SiteFormManager extends Service
                             'submission_number' => $isEdit ? $submissionNumber : $nextNumber
                         ]);
                     }
-                    // only reward initial post
-                    $rewardsString = $this->rewardUser($form, $user);
                 }
+            }
+
+            if ($isEdit) {
+                // no rewards for edits...
+                $rewardsString = '';
+            } else {
+                // only reward initial post
+                $rewardsString = $this->rewardUser($form, $user);
             }
 
             $this->commitReturn(true);
@@ -102,8 +122,7 @@ class SiteFormManager extends Service
     /**
      * Likes an answer.
      */
-    public function postLikeAnswer($answer, $user)
-    {
+    public function postLikeAnswer($answer, $user) {
         DB::beginTransaction();
         try {
             $like = SiteformLike::where('user_id', $user->id)->where('answer_id', $answer->id)->first();
@@ -124,8 +143,7 @@ class SiteFormManager extends Service
     /**
      * Un-Likes an answer.
      */
-    public function postUnlikeAnswer($answer, $user)
-    {
+    public function postUnlikeAnswer($answer, $user) {
         DB::beginTransaction();
         try {
             $like = SiteformLike::where('user_id', $user->id)->where('answer_id', $answer->id)->first();
@@ -144,8 +162,7 @@ class SiteFormManager extends Service
      * @param  array $data
      * @return array
      */
-    private function processRewards($data)
-    {
+    private function processRewards($data) {
 
         $assets = createAssetsArray(false);
         // Process the additional rewards
@@ -174,8 +191,7 @@ class SiteFormManager extends Service
         return $assets;
     }
 
-    private function rewardUser($form, $user)
-    {
+    private function rewardUser($form, $user) {
         $assets = [];
         // distribute rewards if applicable
         if ($form->rewards->count() > 0) {
