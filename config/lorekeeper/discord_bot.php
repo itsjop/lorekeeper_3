@@ -72,6 +72,10 @@ return [
                 ],
             ],
         ],
+        [
+            'name'       => 'roles',
+            'description' => 'Applies roles to your Discord account based on your site roles.',
+        ],
     ],
 
     // Channels to ignore for EXP rewards
@@ -108,6 +112,13 @@ return [
         // Should be relative to the site's public directory (e.g. 'images/meta-image.png')
         // Set to null to disable
         'logo_insert' => 'images/meta-image.png',
+    ],
+
+    // these are roles for labels like FTO, Non-Owner, Owner, etc.
+    'roles' => [
+        'owner'     => null,
+        'non_owner' => null,
+        'fto'       => null,
     ],
 
     /*

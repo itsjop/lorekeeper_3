@@ -3,17 +3,20 @@
 namespace App\Console\Commands;
 
 use App\Facades\Settings;
+use App\Models\User\UserAlias;
 use App\Models\User\UserDiscordLevel;
 use App\Services\DiscordManager;
 use Carbon\Carbon;
 use Discord\Builders\MessageBuilder;
 use Discord\Discord;
+use Discord\Parts\User\Member;
 use Discord\Parts\Channel\Message;
 use Discord\Parts\Embed\Embed;
 use Discord\Parts\Interactions\Command\Command as DiscordCommand;
 use Discord\Parts\Interactions\Interaction;
 use Discord\WebSockets\Event;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class DiscordBot extends Command
 {
@@ -189,6 +192,42 @@ class DiscordBot extends Command
                 }
                 // response can still be error response
                 $interaction->respondWithMessage(MessageBuilder::new()->setContent($response));
+            });
+
+            $discord->listenCommand('roles', function (Interaction $interaction) use ($service) {
+                if (UserAlias::where('site', 'discord')->where('user_snowflake', $interaction->user->id)->exists()) {
+                    $user = UserAlias::where('site', 'discord')->where('user_snowflake', $interaction->user->id)->first()->user;
+
+                    $role = $user->characters->count() ? 'owner' : ($user->settings->is_fto ? 'fto' : 'non_owner');
+                    $interaction->guild->members->fetch($interaction->user->id)->done(function (Member $member) use ($user, $interaction, $role) {
+                        $roles = [
+                            'owner'     => config('lorekeeper.discord_bot.roles.owner'),
+                            'fto'       => config('lorekeeper.discord_bot.roles.fto'),
+                            'non_owner' => config('lorekeeper.discord_bot.roles.non_owner'),
+                        ];
+
+                        $promises = [];
+                        foreach ($roles as $key => $value) {
+                            if ($role == $key) {
+                                $promises[] = $member->addRole($value);
+                            } else {
+                                // check if user has role
+                                if ($member->roles->has($value)) {
+                                    $promises[] = $member->removeRole($value);
+                                }
+                            }
+                        }
+
+                        // Wait for all role changes to complete
+                        \React\Promise\all($promises)->then(function () use ($interaction, $role) {
+                            $interaction->respondWithMessage(MessageBuilder::new()->setContent('Roles applied! Applied role: ' . ucfirst(str_replace('_', ' ', $role))));
+                        }, function ($error) use ($interaction) {
+                            $interaction->respondWithMessage(MessageBuilder::new()->setContent('Error applying roles: ' . $error->getMessage()));
+                        });
+                    });
+                } else {
+                    $interaction->respondWithMessage(MessageBuilder::new()->setContent('Could not verify invoking user on site.'));
+                }
             });
 
             $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord) use ($service) {
