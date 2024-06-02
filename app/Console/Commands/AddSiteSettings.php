@@ -78,7 +78,7 @@ class AddSiteSettings extends Command {
         $this->addSiteSetting('discord_exp_multiplier', 1, '1 = default, anything past this will multiply accordingly.');
 
         $this->addSiteSetting('discord_level_notif', 1, '0: No level up notification, 1: DM notification, 2: Give user a notification of level up in channel.');
-        
+
         $this->addSiteSetting('deactivated_privacy', 0, 'Who can view the deactivated list? 0: Admin only, 1: Staff only, 2: Members only, 3: Public.');
 
         $this->addSiteSetting('deactivated_link', 0, '0: No link to the deactivated list is displayed anywhere, 1: Link to the deactivated list is shown on the user list.');

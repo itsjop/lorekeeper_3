@@ -9,15 +9,12 @@ use App\Models\User\UserUpdateLog;
 use Config;
 use Intervention\Image\Facades\Image;
 use Settings;
-use Str;
 
-class DiscordManager extends Service
-{
+class DiscordManager extends Service {
     /**
      * Generates a message with all commands and their descriptions.
      */
-    public function showHelpMessage()
-    {
+    public function showHelpMessage() {
         $data = [];
         $data['title'] = 'Loaded Command List';
         $data['type'] = 'rich';
@@ -43,9 +40,9 @@ class DiscordManager extends Service
      * @param mixed|null $author
      * @param mixed|null $url
      * @param mixed|null $fields
+     * @param mixed      $is_staff
      */
-    public function handleWebhook($content, $title, $author = null, $url = null, $fields = null, $is_staff = false)
-    {
+    public function handleWebhook($content, $title, $author = null, $url = null, $fields = null, $is_staff = false) {
         $webhook = $is_staff ? config('lorekeeper.discord_bot.env.webhooks.staff') : config('lorekeeper.discord_bot.env.webhooks.announcement');
         if ($webhook) {
             // format data
@@ -97,10 +94,9 @@ class DiscordManager extends Service
      * @param \Discord\Parts\Channel\Message|\Discord\Parts\Interactions\Interaction|\Discord\Parts\User\User|int $context
      * @param \Carbon\Carbon|null                                                                                 $timestamp
      *
-     * @return \App\Models\User\UserDiscordLevel
+     * @return UserDiscordLevel
      */
-    public function getUserLevel($context, $timestamp = null)
-    {
+    public function getUserLevel($context, $timestamp = null) {
         try {
             if (is_object($context)) {
                 switch (get_class($context)) {
@@ -154,12 +150,11 @@ class DiscordManager extends Service
     /**
      * Generate a rank card for a user on request.
      *
-     * @param \App\Models\User\UserDiscordLevel $level
+     * @param UserDiscordLevel $level
      *
      * @return string
      */
-    public function showUserInfo($level)
-    {
+    public function showUserInfo($level) {
         $user = $level->user;
 
         // Fetch config values for convenience
@@ -244,8 +239,7 @@ class DiscordManager extends Service
      *
      * @param mixed $id
      */
-    public function checkRewards($id)
-    {
+    public function checkRewards($id) {
         try {
             if (UserAlias::where('site', 'discord')->where('user_snowflake', $id)->exists()) {
                 $user = UserAlias::where('site', 'discord')->where('user_snowflake', $id)->first()->user;
@@ -311,8 +305,7 @@ class DiscordManager extends Service
      * @param Carbon $timestamp
      * @param mixed  $id
      */
-    public function giveExp($id, $timestamp)
-    {
+    public function giveExp($id, $timestamp) {
         try {
             if (UserAlias::where('site', 'discord')->where('user_snowflake', $id)->exists()) {
                 $user = UserAlias::where('site', 'discord')->where('user_snowflake', $id)->first()->user;
@@ -336,12 +329,12 @@ class DiscordManager extends Service
                 // since they've never had a message before, we can just add exp straight away
                 $level->exp += mt_rand($exp / 2, $exp) * $multiplier;
                 $level->save();
-            // formula: 5 * (lvl ^ 2) + (50 * lvl) + 100 - xp
-            // lvl is current level
-            // xp is how much XP already have towards the next level.
+                // formula: 5 * (lvl ^ 2) + (50 * lvl) + 100 - xp
+                // lvl is current level
+                // xp is how much XP already have towards the next level.
             } else {
                 // check if it's been a minute since the last message
-                if (!$level->last_message_at || 1 <= $timestamp->diffInMinutes($level->last_message_at)) {
+                if (!$level->last_message_at || $timestamp->diffInMinutes($level->last_message_at) >= 1) {
                     $level->exp += mt_rand($exp / 2, $exp) * $multiplier;
                     $level->last_message_at = $timestamp;
                     $level->save();
@@ -361,6 +354,7 @@ class DiscordManager extends Service
                     'user'   => $user,
                 ];
             }
+
             // if nothing happened just continue as normal
             return true;
         } catch (\Exception $e) {
@@ -375,8 +369,7 @@ class DiscordManager extends Service
      *
      * @return string
      */
-    public function grant($interaction)
-    {
+    public function grant($interaction) {
         // check if the user has the permission to grant levels (on-site must have manage_discord power)
         if (UserAlias::where('site', 'discord')->where('user_snowflake', $interaction->user->id)->exists()) {
             $user = UserAlias::where('site', 'discord')->where('user_snowflake', $interaction->user->id)->first()->user;
@@ -395,7 +388,7 @@ class DiscordManager extends Service
         $recipientInfo = $this->getUserLevel($options['user']['value']);
         if (!$recipientInfo) {
             return 'Recipient does not have any discord level data. Check that they are correctly linked.';
-        } else if (is_string($recipientInfo)) {
+        } elseif (is_string($recipientInfo)) {
             return $recipientInfo;
         }
 

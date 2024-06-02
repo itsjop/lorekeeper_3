@@ -9,8 +9,7 @@ use App\Models\Loot\LootTable;
 use DB;
 use Illuminate\Support\Arr;
 
-class DiscordService extends Service
-{
+class DiscordService extends Service {
     /*
     |--------------------------------------------------------------------------
     | Discord Reward Service
@@ -32,8 +31,7 @@ class DiscordService extends Service
      * @param mixed $data
      * @param mixed $user
      */
-    public function createReward($data, $user)
-    {
+    public function createReward($data, $user) {
         DB::beginTransaction();
 
         try {
@@ -56,8 +54,7 @@ class DiscordService extends Service
      * @param mixed $data
      * @param mixed $user
      */
-    public function updateReward($reward, $data, $user)
-    {
+    public function updateReward($reward, $data, $user) {
         DB::beginTransaction();
 
         try {
@@ -82,9 +79,9 @@ class DiscordService extends Service
      * Deletes a discord reward.
      *
      * @param mixed $reward
+     * @param mixed $user
      */
-    public function deleteReward($reward, $user)
-    {
+    public function deleteReward($reward, $user) {
         DB::beginTransaction();
 
         try {
@@ -106,8 +103,7 @@ class DiscordService extends Service
      * @param mixed $data
      * @param mixed $reward
      */
-    private function populateRewards($data, $reward)
-    {
+    private function populateRewards($data, $reward) {
         $assets = createAssetsArray(false);
         // Process the additional rewards
         if (isset($data['rewardable_type']) && $data['rewardable_type']) {

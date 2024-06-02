@@ -2,15 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Database\Migrations\Migration;
+use App\Models\User\UserAlias;
+use Illuminate\Console\Command;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Models\User\UserAlias;
-use Illuminate\Console\Command;
-
 class UpdateDiscord extends Command {
-
     /**
      * The name and signature of the console command.
      *
@@ -38,16 +35,14 @@ class UpdateDiscord extends Command {
      * @return int
      */
     public function handle() {
-
         if (Schema::hasColumn('user_aliases', 'extra_data')) {
-
             $aliases = UserAlias::whereNotNull('extra_data')->where('site', 'discord')->get();
 
             // progress bar
             $bar = $this->output->createProgressBar(count($aliases));
             $bar->start();
             foreach ($aliases as $alias) {
-                $this->line('Updating user_snowflake for ' . $alias->alias . '...');
+                $this->line('Updating user_snowflake for '.$alias->alias.'...');
                 $alias->user_snowflake = $alias->extra_data;
                 $alias->save();
 

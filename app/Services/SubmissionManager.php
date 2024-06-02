@@ -31,10 +31,10 @@ class SubmissionManager extends Service {
     /**
      * Creates a new submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param bool                  $isClaim
-     * @param mixed                 $isDraft
+     * @param array $data
+     * @param User  $user
+     * @param bool  $isClaim
+     * @param mixed $isDraft
      *
      * @return mixed
      */
@@ -94,8 +94,8 @@ class SubmissionManager extends Service {
 
             // send webhook alert to staff
             $response = (new DiscordManager)->handleWebhook(
-                'A new ' . ($isClaim ? 'claim' : 'submission for ' . $prompt->name) . ' has been created by [' . $user->name . ']('. $user->url .'). (#'.$submission->id.')',
-                ($isClaim ? 'Claim' : 'Submission') . ($isClaim ? '' : ' for ' . $prompt->name),
+                'A new '.($isClaim ? 'claim' : 'submission for '.$prompt->name).' has been created by ['.$user->name.']('.$user->url.'). (#'.$submission->id.')',
+                ($isClaim ? 'Claim' : 'Submission').($isClaim ? '' : ' for '.$prompt->name),
                 $user,
                 $submission->adminUrl,
                 null,
@@ -118,11 +118,11 @@ class SubmissionManager extends Service {
     /**
      * Edits an existing submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param bool                  $isClaim
-     * @param mixed                 $submission
-     * @param mixed                 $isSubmit
+     * @param array $data
+     * @param User  $user
+     * @param bool  $isClaim
+     * @param mixed $submission
+     * @param mixed $isSubmit
      *
      * @return mixed
      */
@@ -264,8 +264,8 @@ class SubmissionManager extends Service {
     /**
      * Rejects a submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
+     * @param array $data
+     * @param User  $user
      *
      * @return mixed
      */
@@ -327,8 +327,8 @@ class SubmissionManager extends Service {
     /**
      * Approves a submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
+     * @param array $data
+     * @param User  $user
      *
      * @return mixed
      */

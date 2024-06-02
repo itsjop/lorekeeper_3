@@ -4,8 +4,7 @@ namespace App\Models\Discord;
 
 use App\Models\Model;
 
-class DiscordReward extends Model
-{
+class DiscordReward extends Model {
     /**
      * The attributes that are mass assignable.
      *
@@ -49,8 +48,7 @@ class DiscordReward extends Model
     /**
      * Get the rewards.
      */
-    public function getRewardsAttribute()
-    {
+    public function getRewardsAttribute() {
         if ($this->loot) {
             $assets = parseDiscordAssetData(json_decode($this->loot));
             $rewards = [];

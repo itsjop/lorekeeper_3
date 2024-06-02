@@ -8,8 +8,7 @@ use App\Services\DiscordService;
 use Auth;
 use Illuminate\Http\Request;
 
-class DiscordController extends Controller
-{
+class DiscordController extends Controller {
     /*****************************************************************************
      * REWARDS SECTION
      *****************************************************************************/
@@ -19,8 +18,7 @@ class DiscordController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getDiscordRewardIndex(Request $request)
-    {
+    public function getDiscordRewardIndex(Request $request) {
         return view('admin.discord.reward_index', [
             'rewards' => DiscordReward::all(),
         ]);
@@ -29,8 +27,7 @@ class DiscordController extends Controller
     /**
      * Gets create reward page.
      */
-    public function getCreateReward()
-    {
+    public function getCreateReward() {
         return view('admin.discord.create_edit_reward', [
             'reward' => new DiscordReward(),
         ]);
@@ -41,8 +38,7 @@ class DiscordController extends Controller
      *
      * @param mixed $id
      */
-    public function getEditReward($id)
-    {
+    public function getEditReward($id) {
         return view('admin.discord.create_edit_reward', [
             'reward' => DiscordReward::findOrFail($id),
         ]);
@@ -53,8 +49,7 @@ class DiscordController extends Controller
      *
      * @param mixed|null $id
      */
-    public function postCreateEditReward(Request $request, DiscordService $service, $id = null)
-    {
+    public function postCreateEditReward(Request $request, DiscordService $service, $id = null) {
         $id ? $request->validate(DiscordReward::$updateRules) : $request->validate(DiscordReward::$createRules);
         $data = $request->only([
             'level', 'rewardable_type', 'rewardable_id', 'quantity', 'role_reward_id',
@@ -75,10 +70,11 @@ class DiscordController extends Controller
     }
 
     /**
-     * Get delete reward modal
+     * Get delete reward modal.
+     *
+     * @param mixed $id
      */
-    public function getDeleteReward($id)
-    {
+    public function getDeleteReward($id) {
         return view('admin.discord._delete_reward', [
             'reward' => DiscordReward::findOrFail($id),
         ]);
@@ -86,9 +82,10 @@ class DiscordController extends Controller
 
     /**
      * Deletes a reward.
+     *
+     * @param mixed $id
      */
-    public function postDeleteReward(Request $request, DiscordService $service, $id)
-    {
+    public function postDeleteReward(Request $request, DiscordService $service, $id) {
         $reward = DiscordReward::findOrFail($id);
         if ($service->deleteReward($reward, Auth::user())) {
             flash('Reward deleted successfully.')->success();
@@ -108,8 +105,7 @@ class DiscordController extends Controller
     /**
      * gets level index page.
      */
-    public function getDiscordLevelIndex()
-    {
+    public function getDiscordLevelIndex() {
         return 'coming soon';
     }
 }

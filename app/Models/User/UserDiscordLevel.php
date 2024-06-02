@@ -4,8 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Model;
 
-class UserDiscordLevel extends Model
-{
+class UserDiscordLevel extends Model {
     /**
      * The attributes that are mass assignable.
      *
@@ -31,8 +30,7 @@ class UserDiscordLevel extends Model
     /**
      * Get the user this set of settings belongs to.
      */
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo('App\Models\User\User');
     }
 
@@ -49,8 +47,7 @@ class UserDiscordLevel extends Model
      *
      * @return int
      */
-    public function relativeRank($user)
-    {
+    public function relativeRank($user) {
         $orderedLevels = $this->query()->orderBy('level', 'DESC')->orderBy('exp', 'DESC')->get();
         $rankIndex = $orderedLevels->search(function ($level) use ($user) {
             return $user->id == $level->user_id;
@@ -64,8 +61,7 @@ class UserDiscordLevel extends Model
      *
      * @return int
      */
-    public function topTen()
-    {
+    public function topTen() {
         $orderedLevels = $this->query()->orderBy('level', 'DESC')->orderBy('exp', 'DESC')->take(10)->get();
 
         return $orderedLevels;
