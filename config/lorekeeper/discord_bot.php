@@ -11,6 +11,15 @@ return [
     |
     */
 
+    'rules_channel' => null,
+    'questions_channel' => null,
+
+    'welcome_channel_id' => 873306133463449620,
+
+    // BANNED WORDS
+    // refer to http://www.rsdb.org/full for examples
+    // upload banned words to the filemanager in a file called banned_words.txt, one word per line
+
     // list of registered commands and their descriptions
     'commands' => [
         [
@@ -119,6 +128,7 @@ return [
         'owner'     => null,
         'non_owner' => null,
         'fto'       => null,
+        'adult'     => 1007252972130025503,
     ],
 
     /*
@@ -132,9 +142,16 @@ return [
     */
 
     'env' => [
+        // bot token is the token for the bot user
         'token'                => env('DISCORD_BOT_TOKEN'),
-        'announcement_channel' => env('DISCORD_ANNOUNCEMENT_CHANNEL'),
+
+        // error channel is specifically for errors that occur in the bot
         'error_channel'        => env('DISCORD_ERROR_CHANNEL'),
+
+        // log channel is used for logs such as edits, deletions, etc.
+        'log_channel'      => env('DISCORD_LOG_CHANNEL'),
+
+        // guild ID is the id of the Discord server the bot should be active in
         'guild_id'             => env('DISCORD_GUILD_ID'),
 
         // WEBHOOKS

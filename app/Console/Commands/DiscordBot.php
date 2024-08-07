@@ -10,12 +10,15 @@ use Carbon\Carbon;
 use Discord\Builders\MessageBuilder;
 use Discord\Discord;
 use Discord\Parts\Channel\Message;
+use Discord\Parts\Channel\Channel;
 use Discord\Parts\Embed\Embed;
 use Discord\Parts\Interactions\Command\Command as DiscordCommand;
 use Discord\Parts\Interactions\Interaction;
 use Discord\Parts\User\Member;
 use Discord\WebSockets\Event;
+use Discord\WebSockets\Intents;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class DiscordBot extends Command {
     /**
@@ -38,11 +41,9 @@ class DiscordBot extends Command {
     public function __construct() {
         parent::__construct();
         $this->token = config('lorekeeper.discord_bot.env.token');
-        $this->prefix = '/';
         $this->error_channel_id = config('lorekeeper.discord_bot.env.error_channel');
-        // webhook related settings - if we should delete webhook messages and post them ourselves etc.
-        $this->announcement_channel_id = config('lorekeeper.discord_bot.env.announcement_channel');
-        //
+        $this->log_channel_id = config('lorekeeper.discord_bot.env.log_channel');
+        $this->banned_words = file_exists(public_path('files/banned_words.txt')) ? file_get_contents(public_path('files/banned_words.txt')) : '';
     }
 
     /**
@@ -74,6 +75,8 @@ class DiscordBot extends Command {
         }
         $discord = new Discord([
             'token' => $this->token,
+            'intents' => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS | Intents::GUILDS | Intents::MESSAGE_CONTENT,
+            'storeMessages' => true,
         ]);
 
         $service = new DiscordManager();
@@ -85,10 +88,7 @@ class DiscordBot extends Command {
             $guild = config('lorekeeper.discord_bot.env.guild_id') ? $discord->guilds->get('id', config('lorekeeper.discord_bot.env.guild_id')) : $discord->guilds->first();
             $channel = $guild->channels->get('id', $this->error_channel_id);
 
-            $channel->sendMessage('Bot is ready! Use '.$this->prefix.'ping to check delay.');
-            if (!$this->announcement_channel_id) {
-                $channel->sendMessage('No announcement channel is set! This means I will be unable to announce any new posts etc. Webhooks will function as normal.');
-            }
+            $channel->sendMessage('Bot is ready! Use `/ping` to check delay.');
             ////////////////////////////////////
 
             // Register commands
@@ -193,9 +193,8 @@ class DiscordBot extends Command {
             $discord->listenCommand('roles', function (Interaction $interaction) {
                 if (UserAlias::where('site', 'discord')->where('user_snowflake', $interaction->user->id)->exists()) {
                     $user = UserAlias::where('site', 'discord')->where('user_snowflake', $interaction->user->id)->first()->user;
-
                     $role = $user->characters->count() ? 'owner' : ($user->settings->is_fto ? 'fto' : 'non_owner');
-                    $interaction->guild->members->fetch($interaction->user->id)->done(function (Member $member) use ($interaction, $role) {
+                    $interaction->guild->members->fetch($interaction->user->id)->done(function (Member $member) use ($interaction, $role, $user) {
                         $roles = [
                             'owner'     => config('lorekeeper.discord_bot.roles.owner'),
                             'fto'       => config('lorekeeper.discord_bot.roles.fto'),
@@ -204,6 +203,9 @@ class DiscordBot extends Command {
 
                         $promises = [];
                         foreach ($roles as $key => $value) {
+                            if (!isset($value) || !$value) {
+                                continue;
+                            }
                             if ($role == $key) {
                                 $promises[] = $member->addRole($value);
                             } else {
@@ -214,15 +216,28 @@ class DiscordBot extends Command {
                             }
                         }
 
+                        // add the adult role if the user is over 18
+                        if ($user->birthday && $user->birthday->diffInYears() >= 18 && config('lorekeeper.discord_bot.roles.adult')) {
+                            // check if user has role
+                            if (!$member->roles->has(config('lorekeeper.discord_bot.roles.adult'))) {
+                                $promises[] = $member->addRole(config('lorekeeper.discord_bot.roles.adult'));
+                            }
+                        }
+
+                        if (empty($promises)) {
+                            $interaction->respondWithMessage(MessageBuilder::new()->setContent('No roles to apply.'));
+                            return;
+                        }
+
                         // Wait for all role changes to complete
                         \React\Promise\all($promises)->then(function () use ($interaction, $role) {
-                            $interaction->respondWithMessage(MessageBuilder::new()->setContent('Roles applied! Applied role: '.ucfirst(str_replace('_', ' ', $role))));
+                            $interaction->respondWithMessage(MessageBuilder::new()->setContent('Roles applied!'));
                         }, function ($error) use ($interaction) {
                             $interaction->respondWithMessage(MessageBuilder::new()->setContent('Error applying roles: '.$error->getMessage()));
                         });
                     });
                 } else {
-                    $interaction->respondWithMessage(MessageBuilder::new()->setContent('Could not verify invoking user on site.'));
+                    $interaction->respondWithMessage(MessageBuilder::new()->setContent('Could not verify invoking user on site. Have you linked your Discord account?'));
                 }
             });
 
@@ -230,6 +245,16 @@ class DiscordBot extends Command {
                 // don't reply to ourselves
                 if ($message->author->bot) {
                     return;
+                }
+
+                // check that the message doesn't contain any banned words
+                $words = explode("\n", $this->banned_words);
+                foreach ($words as $word) {
+                    if (stripos($message->content, $word) !== false) {
+                        $message->delete();
+                        $message->reply('Your message has been deleted due to containing abusive language.');
+                        return;
+                    }
                 }
 
                 // finally check if we can give exp to this user
@@ -285,6 +310,97 @@ class DiscordBot extends Command {
 
                     $channel->sendMessage('Error: '.$e->getMessage());
                 }
+            });
+
+            $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member) use ($discord) {
+                // Check if we have a specific channel set
+                if (config('lorekeeper.discord_bot.welcome_channel_id')) {
+                    $channelId = config('lorekeeper.discord_bot.welcome_channel_id');
+                    $channel = $discord->getChannel($channelId);
+
+                    // Create an embed message
+                    $embed = new Embed($discord);
+                    $embed->setTitle('Welcome to the Server!')
+                          ->setDescription("Welcome to the " . config('app.name') . " Discord server!")
+                          ->setColor(0x7289DA); // Green color
+
+                    $rulesChannel = config('lorekeeper.discord_bot.rules_channel') ? "<#".config('lorekeeper.discord_bot.rules_channel').">" : "the rules channel";
+                    $questionsChannel = config('lorekeeper.discord_bot.questions_channel') ? "<#".config('lorekeeper.discord_bot.questions_channel').">" : "the questions channel";
+
+                    // Add fields to the embed
+                    $embed->addField([
+                        'name' => 'Rules',
+                        'value' => "Please make sure to read the rules in {$rulesChannel}.",
+                        'inline' => false
+                    ]);
+                    $embed->addField([
+                        'name' => 'Questions',
+                        'value' => "If you have any questions, feel free to ask in {$questionsChannel}.",
+                        'inline' => false
+                    ]);
+
+                    // Mention user and send the embed message
+                    $channel->sendMessage("<@{$member->id}>", false, $embed);
+                }
+            });
+
+            $discord->on(Event::MESSAGE_CREATE, function (Message $message) {
+                Cache::put('message_' . $message->id, $message->content, 86400);
+            });
+
+            $discord->on(Event::MESSAGE_UPDATE, function (Message $newMessage, Discord $discord, ?Message $oldMessage) use ($guild) {
+                try {
+                    $channel = $guild->channels->get('id', $this->log_channel_id);
+
+                    if ($oldMessage) {
+                        $oldContent = $oldMessage->content;
+                    } else {
+                        $oldContent = Cache::get('message_' . $newMessage->id, 'Unknown Content (Cache Expired)');
+                    }
+                    Cache::put('message_' . $newMessage->id, $newMessage->content, 86400);
+
+                    // Create an embed message
+                    $embed = new Embed($discord);
+                    $embed->setTitle('Message Edited')
+                        ->setColor(0x4682B4)
+                        ->addField([
+                            'name'   => 'Old Content',
+                            'value'  => $oldContent,
+                            'inline' => false,
+                        ])
+                        ->addField([
+                            'name'   => 'New Content',
+                            'value'  => $newMessage->content,
+                            'inline' => false,
+                        ])
+                        ->setAuthor($newMessage->author->username, null, $newMessage->author->avatar)
+                        ->setFooter('Message ID: ' . $newMessage->id)
+                        ->setTimestamp();
+
+                        $channel->sendMessage('', false, $embed);
+                } catch (\Exception $e) {
+                    $channel->sendMessage('Error: '.$e->getMessage());
+                }
+            });
+
+            $discord->on(Event::MESSAGE_DELETE, function ($message) use ($discord) {
+                if ($message instanceof Message) {
+                    $oldContent = $message->content;
+                } else {
+                    $oldContent = Cache::get('message_' . $message->id, 'Unknown Content (Cache Expired)');
+                }
+                $channel = $discord->getChannel($message->channel_id);
+                $embed = new Embed($discord);
+                $embed->setTitle('Message Deleted')
+                    ->setColor(0xff0000)
+                    ->addField([
+                        'name'   => 'Content',
+                        'value'  => $oldContent,
+                        'inline' => false,
+                    ])
+                    ->setFooter('Message ID: ' . $message->id)
+                    ->setTimestamp();
+                $channel->sendMessage('', false, $embed);
             });
         });
         // init loop
