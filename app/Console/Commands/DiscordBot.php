@@ -43,7 +43,7 @@ class DiscordBot extends Command {
         $this->token = config('lorekeeper.discord_bot.env.token');
         $this->error_channel_id = config('lorekeeper.discord_bot.env.error_channel');
         $this->log_channel_id = config('lorekeeper.discord_bot.env.log_channel');
-        $this->banned_words = file_exists(public_path('files/banned_words.txt')) ? file_get_contents(public_path('files/banned_words.txt')) : '';
+        $this->banned_words = file_exists(public_path('files/banned_words.txt')) ? file_get_contents(public_path('files/banned_words.txt')) : null;
     }
 
     /**
@@ -248,12 +248,14 @@ class DiscordBot extends Command {
                 }
 
                 // check that the message doesn't contain any banned words
-                $words = explode("\n", $this->banned_words);
-                foreach ($words as $word) {
-                    if (stripos($message->content, $word) !== false) {
-                        $message->delete();
-                        $message->reply('Your message has been deleted due to containing abusive language.');
-                        return;
+                if ($this->banned_words) {
+                    $words = explode("\n", $this->banned_words);
+                    foreach ($words as $word) {
+                        if (stripos($message->content, $word) !== false) {
+                            $message->delete();
+                            $message->reply('Your message has been deleted due to containing abusive language.');
+                            return;
+                        }
                     }
                 }
 
