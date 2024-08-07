@@ -387,13 +387,13 @@ class DiscordBot extends Command {
                 }
             });
 
-            $discord->on(Event::MESSAGE_DELETE, function ($message) use ($discord) {
+            $discord->on(Event::MESSAGE_DELETE, function ($message) use ($discord, $guild) {
                 if ($message instanceof Message) {
                     $oldContent = $message->content;
                 } else {
                     $oldContent = Cache::get('message_'.$message->id, 'Unknown Content (Cache Expired)');
                 }
-                $channel = $discord->getChannel(config('lorekeeper.discord_bot.log_channel_id'));
+                $channel = $guild->channels->get('id', $this->log_channel_id);
                 $embed = new Embed($discord);
                 $embed->setTitle('Message Deleted')
                     ->setColor(0xFF0000)
