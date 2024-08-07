@@ -393,7 +393,7 @@ class DiscordBot extends Command {
                 } else {
                     $oldContent = Cache::get('message_'.$message->id, 'Unknown Content (Cache Expired)');
                 }
-                $channel = $discord->getChannel($message->channel_id);
+                $channel = $discord->getChannel(config('lorekeeper.discord_bot.log_channel_id'));
                 $embed = new Embed($discord);
                 $embed->setTitle('Message Deleted')
                     ->setColor(0xFF0000)
