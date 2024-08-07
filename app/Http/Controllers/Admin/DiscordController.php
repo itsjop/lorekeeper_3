@@ -29,7 +29,7 @@ class DiscordController extends Controller {
      */
     public function getCreateReward() {
         return view('admin.discord.create_edit_reward', [
-            'reward' => new DiscordReward(),
+            'reward' => new DiscordReward,
         ]);
     }
 

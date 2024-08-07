@@ -9,8 +9,8 @@ use App\Services\DiscordManager;
 use Carbon\Carbon;
 use Discord\Builders\MessageBuilder;
 use Discord\Discord;
-use Discord\Parts\Channel\Message;
 use Discord\Parts\Channel\Channel;
+use Discord\Parts\Channel\Message;
 use Discord\Parts\Embed\Embed;
 use Discord\Parts\Interactions\Command\Command as DiscordCommand;
 use Discord\Parts\Interactions\Interaction;
@@ -74,12 +74,12 @@ class DiscordBot extends Command {
             exit;
         }
         $discord = new Discord([
-            'token' => $this->token,
-            'intents' => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS | Intents::GUILDS | Intents::MESSAGE_CONTENT,
+            'token'         => $this->token,
+            'intents'       => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS | Intents::GUILDS | Intents::MESSAGE_CONTENT,
             'storeMessages' => true,
         ]);
 
-        $service = new DiscordManager();
+        $service = new DiscordManager;
 
         $discord->on('ready', function (Discord $discord) use ($service) {
             // startup message //////////////////
@@ -226,11 +226,12 @@ class DiscordBot extends Command {
 
                         if (empty($promises)) {
                             $interaction->respondWithMessage(MessageBuilder::new()->setContent('No roles to apply.'));
+
                             return;
                         }
 
                         // Wait for all role changes to complete
-                        \React\Promise\all($promises)->then(function () use ($interaction, $role) {
+                        \React\Promise\all($promises)->then(function () use ($interaction) {
                             $interaction->respondWithMessage(MessageBuilder::new()->setContent('Roles applied!'));
                         }, function ($error) use ($interaction) {
                             $interaction->respondWithMessage(MessageBuilder::new()->setContent('Error applying roles: '.$error->getMessage()));
@@ -253,6 +254,7 @@ class DiscordBot extends Command {
                     if (stripos($message->content, $word) !== false) {
                         $message->delete();
                         $message->reply('Your message has been deleted due to containing abusive language.');
+
                         return;
                     }
                 }
@@ -321,22 +323,22 @@ class DiscordBot extends Command {
                     // Create an embed message
                     $embed = new Embed($discord);
                     $embed->setTitle('Welcome to the Server!')
-                          ->setDescription("Welcome to the " . config('app.name') . " Discord server!")
-                          ->setColor(0x7289DA); // Green color
+                        ->setDescription('Welcome to the '.config('app.name').' Discord server!')
+                        ->setColor(0x7289DA); // Green color
 
-                    $rulesChannel = config('lorekeeper.discord_bot.rules_channel') ? "<#".config('lorekeeper.discord_bot.rules_channel').">" : "the rules channel";
-                    $questionsChannel = config('lorekeeper.discord_bot.questions_channel') ? "<#".config('lorekeeper.discord_bot.questions_channel').">" : "the questions channel";
+                    $rulesChannel = config('lorekeeper.discord_bot.rules_channel') ? '<#'.config('lorekeeper.discord_bot.rules_channel').'>' : 'the rules channel';
+                    $questionsChannel = config('lorekeeper.discord_bot.questions_channel') ? '<#'.config('lorekeeper.discord_bot.questions_channel').'>' : 'the questions channel';
 
                     // Add fields to the embed
                     $embed->addField([
-                        'name' => 'Rules',
-                        'value' => "Please make sure to read the rules in {$rulesChannel}.",
-                        'inline' => false
+                        'name'   => 'Rules',
+                        'value'  => "Please make sure to read the rules in {$rulesChannel}.",
+                        'inline' => false,
                     ]);
                     $embed->addField([
-                        'name' => 'Questions',
-                        'value' => "If you have any questions, feel free to ask in {$questionsChannel}.",
-                        'inline' => false
+                        'name'   => 'Questions',
+                        'value'  => "If you have any questions, feel free to ask in {$questionsChannel}.",
+                        'inline' => false,
                     ]);
 
                     // Mention user and send the embed message
@@ -345,7 +347,7 @@ class DiscordBot extends Command {
             });
 
             $discord->on(Event::MESSAGE_CREATE, function (Message $message) {
-                Cache::put('message_' . $message->id, $message->content, 86400);
+                Cache::put('message_'.$message->id, $message->content, 86400);
             });
 
             $discord->on(Event::MESSAGE_UPDATE, function (Message $newMessage, Discord $discord, ?Message $oldMessage) use ($guild) {
@@ -355,9 +357,9 @@ class DiscordBot extends Command {
                     if ($oldMessage) {
                         $oldContent = $oldMessage->content;
                     } else {
-                        $oldContent = Cache::get('message_' . $newMessage->id, 'Unknown Content (Cache Expired)');
+                        $oldContent = Cache::get('message_'.$newMessage->id, 'Unknown Content (Cache Expired)');
                     }
-                    Cache::put('message_' . $newMessage->id, $newMessage->content, 86400);
+                    Cache::put('message_'.$newMessage->id, $newMessage->content, 86400);
 
                     // Create an embed message
                     $embed = new Embed($discord);
@@ -374,10 +376,10 @@ class DiscordBot extends Command {
                             'inline' => false,
                         ])
                         ->setAuthor($newMessage->author->username, null, $newMessage->author->avatar)
-                        ->setFooter('Message ID: ' . $newMessage->id)
+                        ->setFooter('Message ID: '.$newMessage->id)
                         ->setTimestamp();
 
-                        $channel->sendMessage('', false, $embed);
+                    $channel->sendMessage('', false, $embed);
                 } catch (\Exception $e) {
                     $channel->sendMessage('Error: '.$e->getMessage());
                 }
@@ -387,18 +389,18 @@ class DiscordBot extends Command {
                 if ($message instanceof Message) {
                     $oldContent = $message->content;
                 } else {
-                    $oldContent = Cache::get('message_' . $message->id, 'Unknown Content (Cache Expired)');
+                    $oldContent = Cache::get('message_'.$message->id, 'Unknown Content (Cache Expired)');
                 }
                 $channel = $discord->getChannel($message->channel_id);
                 $embed = new Embed($discord);
                 $embed->setTitle('Message Deleted')
-                    ->setColor(0xff0000)
+                    ->setColor(0xFF0000)
                     ->addField([
                         'name'   => 'Content',
                         'value'  => $oldContent,
                         'inline' => false,
                     ])
-                    ->setFooter('Message ID: ' . $message->id)
+                    ->setFooter('Message ID: '.$message->id)
                     ->setTimestamp();
                 $channel->sendMessage('', false, $embed);
             });
