@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'rules_channel' => null,
+    'rules_channel'     => null,
     'questions_channel' => null,
 
     'welcome_channel_id' => 873306133463449620,
