@@ -9,8 +9,8 @@ use App\Models\Currency\Currency;
 use App\Models\Item\Item;
 use App\Models\Loot\LootTable;
 use App\Models\Prompt\Prompt;
-use App\Models\Recipe\Recipe;
 use App\Models\Raffle\Raffle;
+use App\Models\Recipe\Recipe;
 use App\Models\Submission\Submission;
 use App\Models\Submission\SubmissionCharacter;
 use App\Models\User\User;
@@ -636,7 +636,7 @@ class SubmissionManager extends Service {
                             }
                             $reward = Recipe::find($data['rewardable_id'][$key]);
                             if (!$reward->needs_unlocking) {
-                                throw new \Exception("Invalid recipe selected.");
+                                throw new \Exception('Invalid recipe selected.');
                             }
                             break;
                     }
