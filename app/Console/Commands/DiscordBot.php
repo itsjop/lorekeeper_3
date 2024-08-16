@@ -199,7 +199,7 @@ class DiscordBot extends Command {
                         $promises = [];
 
                         // check if there are any level roles they need applied
-                        $userLevel = $user->discordLevel?->level;
+                        $userLevel = $user->discord?->level;
                         if ($userLevel) {
                             $levelRoles = DiscordReward::where('level', '<=', $userLevel)->whereNotNull('role_reward_id')->get();
                             foreach ($levelRoles as $levelRole) {
