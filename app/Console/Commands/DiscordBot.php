@@ -18,10 +18,10 @@ use Discord\Parts\Interactions\Interaction;
 use Discord\Parts\User\Member;
 use Discord\WebSockets\Event;
 use Discord\WebSockets\Intents;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class DiscordBot extends Command {
     /**
