@@ -7,14 +7,13 @@ use App\Models\Discord\DiscordReward;
 use App\Models\User\UserAlias;
 use App\Models\User\UserDiscordLevel;
 use App\Models\User\UserUpdateLog;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Log;
+use Intervention\Image\Facades\Image;
 
 class DiscordManager extends Service {
-
     /**
      * Generates a message with all commands and their descriptions.
-     * 
+     *
      * @return array
      */
     public function showHelpMessage() {
@@ -428,9 +427,9 @@ class DiscordManager extends Service {
 
     /**
      * Rolls a dice command.
-     * 
+     *
      * @param Interaction $interaction
-     * 
+     *
      * @return string
      */
     public function roll($interaction) {
@@ -455,9 +454,9 @@ class DiscordManager extends Service {
         }
 
         return [
-            'result' => array_sum($rolls),
-            'rolls'  => $rolls,
-            'sides'  => $sides,
+            'result'   => array_sum($rolls),
+            'rolls'    => $rolls,
+            'sides'    => $sides,
             'quantity' => $quantity,
         ];
     }

@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Facades\Settings;
+use App\Models\Discord\DiscordReward;
 use App\Models\User\UserAlias;
 use App\Models\User\UserDiscordLevel;
-use App\Models\Discord\DiscordReward;
 use App\Services\DiscordManager;
 use Carbon\Carbon;
 use Discord\Builders\MessageBuilder;
@@ -98,6 +98,7 @@ class DiscordBot extends Command {
                 $response = $service->showHelpMessage();
                 if (!$response) {
                     $interaction->respondWithMessage(MessageBuilder::new()->setContent('Couldn\'t generate help message! Please try again later.'));
+
                     return;
                 }
                 $interaction->respondWithMessage(MessageBuilder::new()->addEmbed($response));
@@ -119,6 +120,7 @@ class DiscordBot extends Command {
                 if (!$level) {
                     // Error if no corresponding on-site user
                     $interaction->updateOriginalResponse(MessageBuilder::new()->setContent('You don\'t seem to have a level! Have you linked your Discord account on site?'), true);
+
                     return;
                 }
 
@@ -246,15 +248,16 @@ class DiscordBot extends Command {
                 }
             });
 
-            $discord->listenCommand('roll', function (Interaction $interaction) use ($discord, $service) {
+            $discord->listenCommand('roll', function (Interaction $interaction) use ($service) {
                 $data = $service->roll($interaction);
 
-                $interaction->respondWithMessage(MessageBuilder::new()->setContent(
-                        "```md\n" .
-                        "# " . $data['result'] .
-                        "\n" .
-                        "Details: [".$data['quantity']."d".$data['sides']." (" . implode(", ", $data['rolls']) . ")]" .
-                        "```"
+                $interaction->respondWithMessage(
+                    MessageBuilder::new()->setContent(
+                        "```md\n".
+                        '# '.$data['result'].
+                        "\n".
+                        'Details: ['.$data['quantity'].'d'.$data['sides'].' ('.implode(', ', $data['rolls']).')]'.
+                        '```'
                     )
                 );
             });
