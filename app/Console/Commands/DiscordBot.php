@@ -90,7 +90,14 @@ class DiscordBot extends Command {
             // Register commands
             foreach (config('lorekeeper.discord_bot.commands') as $command) {
                 $newCommand = new DiscordCommand($discord, $command);
-                $discord->application->commands->save($newCommand);
+                $discord->application->commands->save($newCommand)->done(
+                    function () use ($command) {
+                        echo "Command '{$command['name']}' registered successfully.\n";
+                    },
+                    function ($e) use ($command) {
+                        echo "Failed to register command '{$command['name']}': {$e->getMessage()}\n";
+                    }
+                );
             }
 
             // Listen for commands
