@@ -14,7 +14,7 @@ return [
     'rules_channel'     => null,
     'questions_channel' => null,
 
-    'welcome_channel_id' => 873306133463449620,
+    'welcome_channel_id' => null,
 
     // BANNED WORDS
     // refer to http://www.rsdb.org/full for examples
@@ -145,7 +145,7 @@ return [
         'owner'     => null,
         'non_owner' => null,
         'fto'       => null,
-        'adult'     => 1007252972130025503,
+        'adult'     => null,
     ],
 
     /*
