@@ -49,7 +49,7 @@ return [
         [
             'name'        => 'grant',
             'description' => 'Grants exp or levels to a user. The invoker must be on-site staff.'.
-                            'This command is recommended to be run in a staff channel, as it will send errors as a response if the user is not found.',
+                             "\nThis command is recommended to be run in a staff channel, as it will send errors as a response if the user is not found.",
             'options'     => [
                 [
                     'name'        => 'user',
