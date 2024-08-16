@@ -206,6 +206,10 @@ class DiscordBot extends Command {
                                 if ($member->roles->has($levelRole->role_reward_id)) {
                                     continue;
                                 }
+                                // check role exists
+                                if (!$interaction->guild->roles->has($levelRole->role_reward_id)) {
+                                    continue;
+                                }
                                 $promises[] = $member->addRole($levelRole->role_reward_id);
                             }
                         }
@@ -217,6 +221,9 @@ class DiscordBot extends Command {
                         ];
                         foreach ($roles as $key => $value) {
                             if (!isset($value) || !$value) {
+                                continue;
+                            }
+                            if (!$interaction->guild->roles->has($levelRole->role_reward_id)) {
                                 continue;
                             }
                             if ($role == $key) {
@@ -233,7 +240,9 @@ class DiscordBot extends Command {
                         if ($user->birthday && $user->birthday->diffInYears() >= 18 && config('lorekeeper.discord_bot.roles.adult')) {
                             // check if user has role
                             if (!$member->roles->has(config('lorekeeper.discord_bot.roles.adult'))) {
-                                $promises[] = $member->addRole(config('lorekeeper.discord_bot.roles.adult'));
+                                if ($interaction->guild->roles->has(config('lorekeeper.discord_bot.roles.adult'))) {
+                                    $promises[] = $member->addRole(config('lorekeeper.discord_bot.roles.adult'));
+                                }
                             }
                         }
 
