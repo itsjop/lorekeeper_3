@@ -83,7 +83,25 @@ return [
         ],
         [
             'name'        => 'roles',
-            'description' => 'Applies roles to your Discord account based on your site roles.',
+            'description' => 'Applies roles to your Discord account based on your site information and Discord level.',
+        ],
+        [
+            'name'        => 'roll',
+            'description' => 'Rolls a dice.',
+            'options'     => [
+                [
+                    'name'        => 'sides',
+                    'description' => 'The dice to roll.',
+                    'type'        => 3,
+                    'required'    => true,
+                ],
+                [
+                    'name'        => 'quantity',
+                    'description' => 'The quantity of dice to roll.',
+                    'type'        => 4,
+                    'required'    => false,
+                ],
+            ],
         ],
     ],
 

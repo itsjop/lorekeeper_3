@@ -2,17 +2,20 @@
 
 namespace App\Services;
 
+use App\Facades\Settings;
 use App\Models\Discord\DiscordReward;
 use App\Models\User\UserAlias;
 use App\Models\User\UserDiscordLevel;
 use App\Models\User\UserUpdateLog;
-use Config;
 use Intervention\Image\Facades\Image;
-use Settings;
+use Illuminate\Support\Facades\Log;
 
 class DiscordManager extends Service {
+
     /**
      * Generates a message with all commands and their descriptions.
+     * 
+     * @return array
      */
     public function showHelpMessage() {
         $data = [];
@@ -55,7 +58,7 @@ class DiscordManager extends Service {
             }
             $description = $url ? 'View [Here]('.$url.')' : '_ _';
             $data = [];
-            $data['username'] = Config::get('lorekeeper.settings.site_name', 'Lorekeeper');
+            $data['username'] = config('lorekeeper.settings.site_name', 'Lorekeeper');
             $data['avatar_url'] = url('images/favicon.ico');
             $data['content'] = $content;
             $data['embeds'] = [[
@@ -421,5 +424,41 @@ class DiscordManager extends Service {
         $recipientInfo->save();
 
         return 'Successfully granted '.$options['amount']['value'].' '.$options['type']['value'].' to '.$recipientInfo->user->name.'.';
+    }
+
+    /**
+     * Rolls a dice command.
+     * 
+     * @param Interaction $interaction
+     * 
+     * @return string
+     */
+    public function roll($interaction) {
+        if (!$interaction instanceof \Discord\Parts\Interactions\Interaction) {
+            return 'Invalid interaction type.';
+        }
+
+        $options = $interaction->data->options->toArray();
+        $sides = $options['sides']['value'];
+        if (!is_numeric($sides) || $sides < 2) {
+            return 'Invalid dice sides. Must be a number greater than 1.';
+        }
+
+        $quantity = $options['quantity']['value'] ?? 1;
+        if (!is_numeric($quantity) || $quantity < 1) {
+            return 'Invalid dice quantity. Must be a number greater than 0.';
+        }
+
+        $rolls = [];
+        for ($i = 0; $i < $quantity; $i++) {
+            $rolls[] = mt_rand(1, $sides);
+        }
+
+        return [
+            'result' => array_sum($rolls),
+            'rolls'  => $rolls,
+            'sides'  => $sides,
+            'quantity' => $quantity,
+        ];
     }
 }

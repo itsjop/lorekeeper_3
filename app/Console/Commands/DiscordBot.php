@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Facades\Settings;
 use App\Models\User\UserAlias;
 use App\Models\User\UserDiscordLevel;
+use App\Models\Discord\DiscordReward;
 use App\Services\DiscordManager;
 use Carbon\Carbon;
 use Discord\Builders\MessageBuilder;
@@ -54,16 +55,9 @@ class DiscordBot extends Command {
      * @return mixed
      */
     public function handle() {
-        // Hi, if you're reading this you're likely either trying to understand the following mess,
-        // or you're trying to add features etc.
-        // if you think your feature idea is a good one, please let me know!
-        // Otherwise, good luck! You may or may not need it
-        // I've commented somewhat extensively, but there is an expectation you know what you're doing.
-
         // to start the bot run the following:
-        // npm pm2 start 'php artisan discord-bot'
+        // pm2 start 'php artisan discord-bot'
 
-        // this is pre-emptive 'shutdown' stuff so it doesnt break
         if (php_sapi_name() !== 'cli') {
             exit;
         }
@@ -88,14 +82,10 @@ class DiscordBot extends Command {
         $service = new DiscordManager;
 
         $discord->on('ready', function (Discord $discord) use ($service) {
-            // startup message //////////////////
             echo 'Bot is ready!', PHP_EOL;
-            // send message to specified channel
             $guild = config('lorekeeper.discord_bot.env.guild_id') ? $discord->guilds->get('id', config('lorekeeper.discord_bot.env.guild_id')) : $discord->guilds->first();
             $channel = $guild->channels->get('id', $this->error_channel_id);
-
             $channel->sendMessage('Bot is ready! Use `/ping` to check delay.');
-            ////////////////////////////////////
 
             // Register commands
             foreach (config('lorekeeper.discord_bot.commands') as $command) {
@@ -107,9 +97,7 @@ class DiscordBot extends Command {
             $discord->listenCommand('help', function (Interaction $interaction) use ($service) {
                 $response = $service->showHelpMessage();
                 if (!$response) {
-                    // Error
                     $interaction->respondWithMessage(MessageBuilder::new()->setContent('Couldn\'t generate help message! Please try again later.'));
-
                     return;
                 }
                 $interaction->respondWithMessage(MessageBuilder::new()->addEmbed($response));
@@ -131,7 +119,6 @@ class DiscordBot extends Command {
                 if (!$level) {
                     // Error if no corresponding on-site user
                     $interaction->updateOriginalResponse(MessageBuilder::new()->setContent('You don\'t seem to have a level! Have you linked your Discord account on site?'), true);
-
                     return;
                 }
 
@@ -179,7 +166,6 @@ class DiscordBot extends Command {
                 ]);
 
                 $builder = MessageBuilder::new()->addEmbed($embed);
-
                 $interaction->respondWithMessage($builder);
             });
 
@@ -201,13 +187,25 @@ class DiscordBot extends Command {
                     $user = UserAlias::where('site', 'discord')->where('user_snowflake', $interaction->user->id)->first()->user;
                     $role = $user->characters->count() ? 'owner' : ($user->settings->is_fto ? 'fto' : 'non_owner');
                     $interaction->guild->members->fetch($interaction->user->id)->done(function (Member $member) use ($interaction, $role, $user) {
+                        $promises = [];
+
+                        // check if there are any level roles they need applied
+                        $userLevel = $user->discordLevel?->level;
+                        if ($userLevel) {
+                            $levelRoles = DiscordReward::where('level', '<=', $userLevel)->whereNotNull('role_reward_id')->get();
+                            foreach ($levelRoles as $levelRole) {
+                                if ($member->roles->has($levelRole->role_reward_id)) {
+                                    continue;
+                                }
+                                $promises[] = $member->addRole($levelRole->role_reward_id);
+                            }
+                        }
+
                         $roles = [
                             'owner'     => config('lorekeeper.discord_bot.roles.owner'),
                             'fto'       => config('lorekeeper.discord_bot.roles.fto'),
                             'non_owner' => config('lorekeeper.discord_bot.roles.non_owner'),
                         ];
-
-                        $promises = [];
                         foreach ($roles as $key => $value) {
                             if (!isset($value) || !$value) {
                                 continue;
@@ -246,6 +244,19 @@ class DiscordBot extends Command {
                 } else {
                     $interaction->respondWithMessage(MessageBuilder::new()->setContent('Could not verify invoking user on site. Have you linked your Discord account?'));
                 }
+            });
+
+            $discord->listenCommand('roll', function (Interaction $interaction) use ($discord, $service) {
+                $data = $service->roll($interaction);
+
+                $interaction->respondWithMessage(MessageBuilder::new()->setContent(
+                        "```md\n" .
+                        "# " . $data['result'] .
+                        "\n" .
+                        "Details: [".$data['quantity']."d".$data['sides']." (" . implode(", ", $data['rolls']) . ")]" .
+                        "```"
+                    )
+                );
             });
 
             $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord) use ($service) {
