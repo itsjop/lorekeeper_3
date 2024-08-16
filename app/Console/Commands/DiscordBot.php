@@ -17,6 +17,8 @@ use Discord\Parts\Interactions\Interaction;
 use Discord\Parts\User\Member;
 use Discord\WebSockets\Event;
 use Discord\WebSockets\Intents;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
@@ -73,10 +75,14 @@ class DiscordBot extends Command {
             echo 'Please set the DISCORD_ERROR_CHANNEL environment variable.', PHP_EOL;
             exit;
         }
+
+        $logger = new Logger('discord-logger');
+        $logger->pushHandler(new StreamHandler('php://stdout', Logger::ERROR));
         $discord = new Discord([
             'token'         => $this->token,
             'intents'       => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS | Intents::GUILDS | Intents::MESSAGE_CONTENT,
             'storeMessages' => true,
+            'logger'        => $logger,
         ]);
 
         $service = new DiscordManager;
