@@ -2,15 +2,7 @@
 
 namespace App\Models\Character;
 
-use Settings;
 use App\Facades\Notifications;
-
-use App\Models\Character\Character;
-use App\Models\Character\CharacterCategory;
-use App\Models\Character\CharacterTransfer;
-use App\Models\Character\CharacterBookmark;
-
-use App\Models\Character\CharacterCurrency;
 use App\Models\Currency\Currency;
 use App\Models\Currency\CurrencyLog;
 use App\Models\Gallery\GalleryCharacter;
@@ -23,11 +15,10 @@ use App\Models\Submission\SubmissionCharacter;
 use App\Models\Trade;
 use App\Models\User\User;
 use App\Models\User\UserCharacterLog;
+use App\Models\WorldExpansion\FactionRankMember;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-use App\Models\WorldExpansion\FactionRank;
-use App\Models\WorldExpansion\FactionRankMember;
+use Settings;
 
 class Character extends Model {
     use SoftDeletes;
@@ -61,8 +52,8 @@ class Character extends Model {
      */
     protected $casts = [
         'transferrable_at' => 'datetime',
-        'home_changed' => 'datetime',
-        'faction_changed' => 'datetime',
+        'home_changed'     => 'datetime',
+        'faction_changed'  => 'datetime',
     ];
 
     /**
@@ -189,16 +180,14 @@ class Character extends Model {
     /**
      * Get the trade this character is attached to.
      */
-    public function home()
-    {
+    public function home() {
         return $this->belongsTo('App\Models\WorldExpansion\Location', 'home_id');
     }
 
     /**
      * Get the faction this character is attached to.
      */
-    public function faction()
-    {
+    public function faction() {
         return $this->belongsTo('App\Models\WorldExpansion\Faction', 'faction_id');
     }
 
@@ -390,57 +379,72 @@ class Character extends Model {
         return 'Character';
     }
 
-    public function getHomeSettingAttribute()
-    {
+    public function getHomeSettingAttribute() {
         return intval(Settings::get('WE_character_locations'));
     }
 
-    public function getLocationAttribute()
-    {
+    public function getLocationAttribute() {
         $setting = $this->homeSetting;
 
-
-        switch($setting) {
+        switch ($setting) {
             case 1:
-                if(!$this->user) return null;
-                elseif(!$this->user->home) return null;
-                else return $this->user->home->fullDisplayName;
+                if (!$this->user) {
+                    return null;
+                } elseif (!$this->user->home) {
+                    return null;
+                } else {
+                    return $this->user->home->fullDisplayName;
+                }
 
             case 2:
-                if(!$this->home) return null;
-                else return $this->home->fullDisplayName;
+                if (!$this->home) {
+                    return null;
+                } else {
+                    return $this->home->fullDisplayName;
+                }
 
             case 3:
-                if(!$this->home) return null;
-                else return $this->home->fullDisplayName;
+                if (!$this->home) {
+                    return null;
+                } else {
+                    return $this->home->fullDisplayName;
+                }
 
             default:
                 return null;
         }
     }
 
-    public function getFactionSettingAttribute()
-    {
+    public function getFactionSettingAttribute() {
         return intval(Settings::get('WE_character_factions'));
     }
 
-    public function getCurrentFactionAttribute()
-    {
+    public function getCurrentFactionAttribute() {
         $setting = $this->factionSetting;
 
-        switch($setting) {
+        switch ($setting) {
             case 1:
-                if(!$this->user) return null;
-                elseif(!$this->user->faction) return null;
-                else return $this->user->faction->fullDisplayName;
+                if (!$this->user) {
+                    return null;
+                } elseif (!$this->user->faction) {
+                    return null;
+                } else {
+                    return $this->user->faction->fullDisplayName;
+                }
 
             case 2:
-                if(!$this->faction) return null;
-                else return $this->faction->fullDisplayName;
+                if (!$this->faction) {
+                    return null;
+                } else {
+                    return $this->faction->fullDisplayName;
+                }
 
             case 3:
-                if(!$this->faction) return null;
-                else return $this->faction->fullDisplayName;
+                if (!$this->faction) {
+                    return null;
+                } else {
+                    return $this->faction->fullDisplayName;
+                }
 
             default:
                 return null;
@@ -450,13 +454,19 @@ class Character extends Model {
     /**
      * Get character's faction rank.
      */
-    public function getFactionRankAttribute()
-    {
-        if(!isset($this->faction_id) || !$this->faction->ranks()->count()) return null;
-        if(FactionRankMember::where('member_type', 'character')->where('member_id', $this->id)->first()) return FactionRankMember::where('member_type', 'character')->where('member_id', $this->id)->first()->rank;
-        if($this->faction->ranks()->where('is_open', 1)->count()) {
+    public function getFactionRankAttribute() {
+        if (!isset($this->faction_id) || !$this->faction->ranks()->count()) {
+            return null;
+        }
+        if (FactionRankMember::where('member_type', 'character')->where('member_id', $this->id)->first()) {
+            return FactionRankMember::where('member_type', 'character')->where('member_id', $this->id)->first()->rank;
+        }
+        if ($this->faction->ranks()->where('is_open', 1)->count()) {
             $standing = $this->getCurrencies(true)->where('id', Settings::get('WE_faction_currency'))->first();
-            if(!$standing) return $this->faction->ranks()->where('is_open', 1)->where('breakpoint', 0)->first();
+            if (!$standing) {
+                return $this->faction->ranks()->where('is_open', 1)->where('breakpoint', 0)->first();
+            }
+
             return $this->faction->ranks()->where('is_open', 1)->where('breakpoint', '<=', $standing->quantity)->orderBy('breakpoint', 'DESC')->first();
         }
     }

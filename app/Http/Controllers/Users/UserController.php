@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Facades\Settings;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImage;
@@ -18,7 +19,6 @@ use App\Models\User\UserUpdateLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use App\Facades\Settings;
 use Route;
 
 class UserController extends Controller {

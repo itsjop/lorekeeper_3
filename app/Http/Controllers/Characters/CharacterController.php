@@ -5,11 +5,6 @@ namespace App\Http\Controllers\Characters;
 use App\Facades\Settings;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
-use App\Models\Species\Species;
-use App\Models\Rarity;
-use App\Models\WorldExpansion\Location;
-use App\Models\WorldExpansion\Faction;
-use App\Models\Feature\Feature;
 use App\Models\Character\CharacterCurrency;
 use App\Models\Character\CharacterItem;
 use App\Models\Character\CharacterProfile;
@@ -21,6 +16,8 @@ use App\Models\Item\ItemCategory;
 use App\Models\User\User;
 use App\Models\User\UserCurrency;
 use App\Models\User\UserItem;
+use App\Models\WorldExpansion\Faction;
+use App\Models\WorldExpansion\Location;
 use App\Services\CharacterManager;
 use App\Services\CurrencyManager;
 use App\Services\DesignUpdateManager;
@@ -160,13 +157,13 @@ class CharacterController extends Controller {
         }
 
         return view('character.edit_profile', [
-            'character' => $this->character,
-            'locations' => Location::all()->where('is_character_home')->pluck('style','id')->toArray(),
-            'factions' => Faction::all()->where('is_character_faction')->pluck('style','id')->toArray(),
-            'user_enabled' => Settings::get('WE_user_locations'),
+            'character'            => $this->character,
+            'locations'            => Location::all()->where('is_character_home')->pluck('style', 'id')->toArray(),
+            'factions'             => Faction::all()->where('is_character_faction')->pluck('style', 'id')->toArray(),
+            'user_enabled'         => Settings::get('WE_user_locations'),
             'user_faction_enabled' => Settings::get('WE_user_factions'),
-            'char_enabled' => Settings::get('WE_character_locations'),
-            'char_faction_enabled' => Settings::get('WE_character_factions')
+            'char_enabled'         => Settings::get('WE_character_locations'),
+            'char_faction_enabled' => Settings::get('WE_character_factions'),
         ]);
     }
 

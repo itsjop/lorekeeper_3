@@ -446,10 +446,8 @@ Route::group(['prefix' => 'designs', 'middleware' => 'power:manage_characters'],
 
 Route::get('{type}/{status}', 'DesignController@getDesignIndex')->where('type', 'myo-approvals|design-approvals')->where('status', 'pending|approved|rejected');
 
-
 // WORLD EXPANSION
-Route::group(['prefix' => 'world',  'namespace' => 'World', 'middleware' => 'power:manage_world'], function() {
-
+Route::group(['prefix' => 'world',  'namespace' => 'World', 'middleware' => 'power:manage_world'], function () {
     // LOCATIONS
     Route::get('location-types', 'LocationController@getIndex');
     Route::get('location-types/create', 'LocationController@getCreateLocationType');
@@ -592,5 +590,4 @@ Route::group(['prefix' => 'world',  'namespace' => 'World', 'middleware' => 'pow
     Route::post('glossary/edit/{id}', 'GlossaryController@postCreateEditTerm');
     Route::get('glossary/delete/{id}', 'GlossaryController@getDeleteTerm');
     Route::post('glossary/delete/{id}', 'GlossaryController@postDeleteTerm');
-
 });

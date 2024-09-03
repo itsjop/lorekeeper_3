@@ -201,37 +201,37 @@ return [
         'links' => [
             [
                 'name' => 'Concepts',
-                'url' => 'admin/world/concepts'
+                'url'  => 'admin/world/concepts',
             ],
             [
                 'name' => 'Fauna',
-                'url' => 'admin/world/faunas'
+                'url'  => 'admin/world/faunas',
             ],
             [
                 'name' => 'Flora',
-                'url' => 'admin/world/floras'
+                'url'  => 'admin/world/floras',
             ],
             [
                 'name' => ' Events',
-                'url' => 'admin/world/events'
+                'url'  => 'admin/world/events',
             ],
             [
                 'name' => ' Figures',
-                'url' => 'admin/world/figures'
+                'url'  => 'admin/world/figures',
             ],
             [
                 'name' => 'Factions',
-                'url' => 'admin/world/factions'
+                'url'  => 'admin/world/factions',
             ],
             [
                 'name' => 'Glossary',
-                'url' => 'admin/world/glossary'
+                'url'  => 'admin/world/glossary',
             ],
             [
                 'name' => 'Locations',
-                'url' => 'admin/world/locations'
+                'url'  => 'admin/world/locations',
             ],
-        ]
+        ],
     ],
     'Raffles'    => [
         'power' => 'manage_raffles',

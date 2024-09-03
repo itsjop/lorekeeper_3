@@ -6,9 +6,9 @@ use App\Facades\Settings;
 use App\Models\Currency\Currency;
 use App\Models\Model;
 use App\Models\Prompt\Prompt;
-use App\Models\WorldExpansion\Location;
 use App\Models\Submission\Submission;
 use App\Models\User\User;
+use App\Models\WorldExpansion\Location;
 use App\Traits\Commentable;
 
 class GallerySubmission extends Model {
@@ -131,8 +131,7 @@ class GallerySubmission extends Model {
     /**
      * Get the location this submission is for if relevant.
      */
-    public function location()
-    {
+    public function location() {
         return $this->belongsTo(Location::class, 'location_id');
     }
 
@@ -509,8 +508,7 @@ class GallerySubmission extends Model {
      *
      * @return array
      */
-    public function getLocationSubmissionsAttribute()
-    {
+    public function getLocationSubmissionsAttribute() {
         // Only returns submissions which are viewable to everyone,
         // but given that this is for the sake of public display, that's fine
         return Submission::viewable()->whereNotNull('location_id')->where('url', $this->url)->get();
@@ -521,8 +519,7 @@ class GallerySubmission extends Model {
      *
      * @return array
      */
-    public function getLocationsAttribute()
-    {
+    public function getLocationsAttribute() {
         // Only returns submissions which are viewable to everyone,
         // but given that this is for the sake of public display, that's fine
         return Prompt::whereIn('id', $this->promptSubmissions->pluck('location_id'))->get();

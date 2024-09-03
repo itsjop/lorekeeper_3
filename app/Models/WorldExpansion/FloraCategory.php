@@ -1,24 +1,18 @@
 <?php
+
 namespace App\Models\WorldExpansion;
 
-use Config;
-use DB;
-
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FloraCategory extends Model
-{
-
+class FloraCategory extends Model {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',  'description', 'summary', 'parsed_description', 'sort', 'image_extension', 'thumb_extension'
+        'name',  'description', 'summary', 'parsed_description', 'sort', 'image_extension', 'thumb_extension',
     ];
-
 
     /**
      * The table associated with the model.
@@ -55,7 +49,6 @@ class FloraCategory extends Model
         'image_th'      => 'mimes:png,gif,jpg,jpeg',
     ];
 
-
     /**********************************************************************************************
 
         RELATIONS
@@ -64,13 +57,9 @@ class FloraCategory extends Model
     /**
      * Get the location attached to this type.
      */
-    public function floras()
-    {
+    public function floras() {
         return $this->hasMany(Flora::class, 'category_id')->visible();
     }
-
-
-
 
     /**********************************************************************************************
 
@@ -82,8 +71,7 @@ class FloraCategory extends Model
      *
      * @return string
      */
-    public function getDisplayNameAttribute()
-    {
+    public function getDisplayNameAttribute() {
         return '<a href="'.$this->url.'" class="display-type">'.$this->name.'</a>';
     }
 
@@ -92,8 +80,7 @@ class FloraCategory extends Model
      *
      * @return string
      */
-    public function getImageDirectoryAttribute()
-    {
+    public function getImageDirectoryAttribute() {
         return 'images/data/flora_categories';
     }
 
@@ -102,8 +89,7 @@ class FloraCategory extends Model
      *
      * @return string
      */
-    public function getImagePathAttribute()
-    {
+    public function getImagePathAttribute() {
         return public_path($this->imageDirectory);
     }
 
@@ -112,20 +98,17 @@ class FloraCategory extends Model
      *
      * @return string
      */
-    public function getImageFileNameAttribute()
-    {
-        return $this->id . '-image.' . $this->image_extension;
+    public function getImageFileNameAttribute() {
+        return $this->id.'-image.'.$this->image_extension;
     }
-
 
     /**
      * Gets the file name of the model's thumbnail image.
      *
      * @return string
      */
-    public function getThumbFileNameAttribute()
-    {
-        return $this->id . '-th.'. $this->thumb_extension;
+    public function getThumbFileNameAttribute() {
+        return $this->id.'-th.'.$this->thumb_extension;
     }
 
     /**
@@ -133,10 +116,12 @@ class FloraCategory extends Model
      *
      * @return string
      */
-    public function getImageUrlAttribute()
-    {
-        if (!$this->image_extension) return null;
-        return asset($this->imageDirectory . '/' . $this->imageFileName);
+    public function getImageUrlAttribute() {
+        if (!$this->image_extension) {
+            return null;
+        }
+
+        return asset($this->imageDirectory.'/'.$this->imageFileName);
     }
 
     /**
@@ -144,20 +129,20 @@ class FloraCategory extends Model
      *
      * @return string
      */
-    public function getThumbUrlAttribute()
-    {
-        if (!$this->thumb_extension) return null;
-        return asset($this->imageDirectory . '/' . $this->thumbFileName);
-    }
+    public function getThumbUrlAttribute() {
+        if (!$this->thumb_extension) {
+            return null;
+        }
 
+        return asset($this->imageDirectory.'/'.$this->thumbFileName);
+    }
 
     /**
      * Gets the URL of the model's encyclopedia page.
      *
      * @return string
      */
-    public function getUrlAttribute()
-    {
+    public function getUrlAttribute() {
         return url('world/flora-categories/'.$this->id);
     }
 
@@ -166,10 +151,7 @@ class FloraCategory extends Model
      *
      * @return string
      */
-    public function getSearchUrlAttribute()
-    {
+    public function getSearchUrlAttribute() {
         return url('world/floras?category_id='.$this->id.'&sort=category');
     }
-
-
 }

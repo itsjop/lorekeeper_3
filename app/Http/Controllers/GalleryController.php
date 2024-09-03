@@ -73,7 +73,7 @@ class GalleryController extends Controller {
             $query->where('prompt_id', $request->get('prompt_id'));
         }
 
-        if($request->get('location_id')) {
+        if ($request->get('location_id')) {
             $query->where('location_id', $request->get('location_id'));
         }
 

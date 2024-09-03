@@ -177,8 +177,7 @@ Route::group(['prefix' => 'reports', 'namespace' => 'Users'], function () {
     World Expansion
 **************************************************************************************************/
 
-Route::group(['prefix' => 'world', 'namespace' => 'WorldExpansion'], function() {
-
+Route::group(['prefix' => 'world', 'namespace' => 'WorldExpansion'], function () {
     Route::get('info', 'WorldExpansionController@getIndex');
     Route::get('glossary', 'WorldExpansionController@getGlossary');
 
@@ -219,4 +218,3 @@ Route::group(['prefix' => 'world', 'namespace' => 'WorldExpansion'], function() 
     Route::get('concept-categories', 'ConceptController@getConceptCategories');
     Route::get('concept-categories/{id}', 'ConceptController@getConceptCategory');
 });
-
