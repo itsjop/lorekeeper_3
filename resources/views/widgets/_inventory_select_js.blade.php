@@ -23,7 +23,7 @@
         $('.inventory-select-all').on('click', function(e) {
             e.preventDefault();
             selectVisible();
-            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum,element) {
+            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum, element) {
                 return sum + Number(element.value);
             }, 0);
             $('#selected').html(selected);
@@ -31,7 +31,7 @@
         $('.inventory-clear-selection').on('click', function(e) {
             e.preventDefault();
             deselectVisible();
-            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum,element) {
+            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum, element) {
                 return sum + Number(element.value);
             }, 0);
             $('#selected').html(selected);
@@ -46,8 +46,8 @@
                 $(rowId).removeClass('category-selected');
                 $(rowId).find('.quantity-select').prop('name', '')
             }
-            
-            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum,element) {
+
+            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum, element) {
                 return sum + Number(element.value);
             }, 0);
             $('#selected').html(selected);
@@ -55,9 +55,9 @@
         $('#toggle-checks').on('click', function() {
             ($(this).is(":checked")) ? selectVisible(): deselectVisible();
         });
-        
+
         $('.quantity-select').on('change', () => {
-            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum,element) {
+            const selected = $('.quantity-select[name*=stack]').toArray().reduce(function(sum, element) {
                 return sum + Number(element.value);
             }, 0);
             $('#selected').html(selected);

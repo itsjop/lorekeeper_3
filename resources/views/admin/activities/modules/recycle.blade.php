@@ -12,21 +12,21 @@
         </tr>
     </thead>
     <tbody id="recyclable">
-    @if($settings && $settings->recyclables)
-        @foreach($settings->recyclables as $recyclable)
-             <tr class="recyclable-row">
-                <td>{!! Form::select('recyclable_type[]', ['Item' => 'Item', 'ItemCategory' => 'Item Category'], $recyclable->rewardable_type, ['class' => 'form-control recyclable-type', 'placeholder' => 'Select Recyclable Type']) !!}</td>
-                <td class="recyclable-row-select">
-                    @if($recyclable->rewardable_type == 'Item')
-                        {!! Form::select('recyclable_id[]', $items, $recyclable->rewardable_id, ['class' => 'form-control item-select selectize', 'placeholder' => 'Select Item']) !!}
-                    @elseif($recyclable->rewardable_type == 'ItemCategory')
-                        {!! Form::select('recyclable_id[]', $categories, $recyclable->rewardable_id, ['class' => 'form-control item-select selectize', 'placeholder' => 'Select Item Category']) !!}
-                    @endif
-                </td>
-                <td class="text-right"><a href="#" class="btn btn-danger remove-recyclable-button">Remove</a></td>
-            </tr>
-        @endforeach
-    @endif
+        @if ($settings && $settings->recyclables)
+            @foreach ($settings->recyclables as $recyclable)
+                <tr class="recyclable-row">
+                    <td>{!! Form::select('recyclable_type[]', ['Item' => 'Item', 'ItemCategory' => 'Item Category'], $recyclable->rewardable_type, ['class' => 'form-control recyclable-type', 'placeholder' => 'Select Recyclable Type']) !!}</td>
+                    <td class="recyclable-row-select">
+                        @if ($recyclable->rewardable_type == 'Item')
+                            {!! Form::select('recyclable_id[]', $items, $recyclable->rewardable_id, ['class' => 'form-control item-select selectize', 'placeholder' => 'Select Item']) !!}
+                        @elseif($recyclable->rewardable_type == 'ItemCategory')
+                            {!! Form::select('recyclable_id[]', $categories, $recyclable->rewardable_id, ['class' => 'form-control item-select selectize', 'placeholder' => 'Select Item Category']) !!}
+                        @endif
+                    </td>
+                    <td class="text-right"><a href="#" class="btn btn-danger remove-recyclable-button">Remove</a></td>
+                </tr>
+            @endforeach
+        @endif
     </tbody>
 </table>
 

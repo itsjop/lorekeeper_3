@@ -1,5 +1,5 @@
 <div class="row">
-    @foreach($activities as $activity)
+    @foreach ($activities as $activity)
         <div class="col-md-3 col-6 mb-3 text-center">
             <div class="shop-image">
                 <a href="{{ $activity->url }}"><img class="img-fluid" src="{{ $activity->imageUrl }}" alt="{{ $activity->name }}" /></a>
