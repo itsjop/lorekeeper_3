@@ -19,7 +19,6 @@
     @if (View::exists('activities.modules._' . $activity->module))
         @include('activities.modules._' . $activity->module, ['settings' => $activity->data])
     @endif
-
 @endsection
 
 @section('scripts')
