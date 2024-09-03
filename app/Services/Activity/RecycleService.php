@@ -173,7 +173,7 @@ class RecycleService extends Service {
         if (!isset($allRewards)) $allRewards = $rewards;
         else $allRewards = mergeAssetsArrays($allRewards, $rewards);
       }
-      flash(getRewardsString($allRewards));
+      flash(createRewardsString($allRewards));
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {

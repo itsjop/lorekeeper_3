@@ -64,7 +64,7 @@ class PromptService extends Service {
   }
 
   /**
-   * Code executed by the act post url being hit 
+   * Code executed by the act post url being hit
    * (expected from the user-side blade file at resources/views/activities/modules/name.blade.php)
    *
    * @param  \App\Models\User\UserItem  $stacks
@@ -92,7 +92,7 @@ class PromptService extends Service {
       $data['prompt_id'] = $activity->data->prompt_id;
 
       $manager = new SubmissionManager;
-      if (!$manager->createSubmission($data, $user, false, true)) throw new \Exception($manager->errors()->getMessages()['error'][0]);
+      if (!$manager->createSubmission($data, $user, false, false, true)) throw new \Exception($manager->errors()->getMessages()['error'][0]);
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {

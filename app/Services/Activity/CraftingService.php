@@ -109,7 +109,7 @@ class CraftingService extends Service {
 
       if (!$rewards = fillUserAssets($recipe->rewardItems, null, $user, $logType, $craftingData)) throw new \Exception("Failed to distribute rewards to user.");
 
-      flash(getRewardsString($rewards));
+      flash(createRewardsString($rewards));
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {

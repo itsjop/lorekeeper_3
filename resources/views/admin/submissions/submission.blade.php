@@ -1,22 +1,23 @@
-@extends('home.layout')
+@extends('admin.layout')
 
-@section('home-title')
+@section('admin-title')
     {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
 @endsection
 
-@section('home-content')
+@section('admin-content')
     @if ($submission->prompt_id)
         {!! breadcrumbs(['Admin Panel' => 'admin', 'Prompt Queue' => 'admin/submissions/pending', 'Submission (#' . $submission->id . ')' => $submission->viewUrl]) !!}
     @else
         {!! breadcrumbs(['Admin Panel' => 'admin', 'Claim Queue' => 'admin/claims/pending', 'Claim (#' . $submission->id . ')' => $submission->viewUrl]) !!}
     @endif
 
-
     @if ($submission->status == 'Pending')
 
         <h1>
             {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
-            <span class="float-right badge badge-{{ $submission->status == 'Pending' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}">{{ $submission->status }}</span>
+            <span class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}">
+                {{ $submission->status }}
+            </span>
         </h1>
 
         <div class="mb-1">
@@ -55,7 +56,7 @@
         </div>
         <h2>Comments</h2>
         <div class="card mb-3">
-            <div class="card-body">{!! $submission->comments !!}</div>
+            <div class="card-body">{!! nl2br(htmlentities($submission->comments)) !!}</div>
         </div>
         @if (Auth::check() && $submission->staff_comments && ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions')))
             <h2>Staff Comments ({!! $submission->staff->displayName !!})</h2>
@@ -82,7 +83,13 @@
 
         <h2>Characters</h2>
         <div id="characters" class="mb-3">
-            @foreach ($submission->characters as $character)
+            @if (count(
+                    $submission->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($submission->characters()->get()))
+                <div class="alert alert-warning">
+                    Some characters have been deleted since this submission was created.
+                </div>
+            @endif
+            @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
                 @include('widgets._character_select_entry', ['characterCurrencies' => $characterCurrencies, 'items' => $items, 'tables' => $tables, 'character' => $character, 'expanded_rewards' => $expanded_rewards])
             @endforeach
         </div>
@@ -145,6 +152,7 @@
 
         <div class="text-right">
             <a href="#" class="btn btn-danger mr-2" id="rejectionButton">Reject</a>
+            <a href="#" class="btn btn-secondary mr-2" id="cancelButton">Cancel</a>
             <a href="#" class="btn btn-success" id="approvalButton">Approve</a>
         </div>
 
@@ -162,10 +170,9 @@
                             </div>
                         </div>
                         <div class="col-md-10">
-                            <a href="#" class="float-right fas fa-close"></a>
                             <div class="form-group">
-                                {!! Form::label('slug[]', 'Character Code') !!}
-                                {!! Form::text('slug[]', null, ['class' => 'form-control character-code']) !!}
+                                {!! Form::label('slug', 'Character Code') !!}
+                                {!! Form::select('slug[]', $characters, null, ['class' => 'form-control character-code', 'placeholder' => 'Select Character']) !!}
                             </div>
                             <div class="character-rewards hide">
                                 <h4>Character Rewards</h4>
@@ -218,7 +225,7 @@
                 </tr>
             </table>
         </div>
-        @include('widgets._loot_select_row', ['items' => $items, 'currencies' => $currencies, 'showLootTables' => true, 'showRaffles' => true])
+        @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true])
 
         <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -231,6 +238,18 @@
                         <p>This will approve the {{ $submission->prompt_id ? 'submission' : 'claim' }} and distribute the above rewards to the user.</p>
                         <div class="text-right">
                             <a href="#" id="approvalSubmit" class="btn btn-success">Approve</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-content hide" id="cancelContent">
+                    <div class="modal-header">
+                        <span class="modal-title h5 mb-0">Confirm Cancellation</span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} and send it back to drafts. Make sure to include a staff comment if you do this!</p>
+                        <div class="text-right">
+                            <a href="#" id="cancelSubmit" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </div>
@@ -274,16 +293,30 @@
                 var $rejectionContent = $('#rejectionContent');
                 var $rejectionSubmit = $('#rejectionSubmit');
 
+                var $cancelButton = $('#cancelButton');
+                var $cancelContent = $('#cancelContent');
+                var $cancelSubmit = $('#cancelSubmit');
+
                 $approvalButton.on('click', function(e) {
                     e.preventDefault();
                     $approvalContent.removeClass('hide');
                     $rejectionContent.addClass('hide');
+                    $cancelContent.addClass('hide');
                     $confirmationModal.modal('show');
                 });
 
                 $rejectionButton.on('click', function(e) {
                     e.preventDefault();
                     $rejectionContent.removeClass('hide');
+                    $approvalContent.addClass('hide');
+                    $cancelContent.addClass('hide');
+                    $confirmationModal.modal('show');
+                });
+
+                $cancelButton.on('click', function(e) {
+                    e.preventDefault();
+                    $cancelContent.removeClass('hide');
+                    $rejectionContent.addClass('hide');
                     $approvalContent.addClass('hide');
                     $confirmationModal.modal('show');
                 });
@@ -297,6 +330,12 @@
                 $rejectionSubmit.on('click', function(e) {
                     e.preventDefault();
                     $submissionForm.attr('action', '{{ url()->current() }}/reject');
+                    $submissionForm.submit();
+                });
+
+                $cancelSubmit.on('click', function(e) {
+                    e.preventDefault();
+                    $submissionForm.attr('action', '{{ url()->current() }}/cancel');
                     $submissionForm.submit();
                 });
             });

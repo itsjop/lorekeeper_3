@@ -28,7 +28,7 @@ class CollectionService extends Service {
    * @return array
    */
   public function getActData($activity) {
-    
+
     return [
       'collection' => Collection::find($activity->data)
     ];
@@ -86,7 +86,7 @@ class CollectionService extends Service {
       ];
       if (!(new CollectionManager)->creditCollection(null, $user, null, 'Collection Completed', $collectionData, $collection)) throw new \Exception('Failed to create collection log.');
 
-      flash(getRewardsString($rewards));
+      flash(createRewardsString($rewards));
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {
