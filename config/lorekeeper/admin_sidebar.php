@@ -180,7 +180,7 @@ return [
             ],
             [
                 'name' => 'Activities',
-                'url' => 'admin/data/activities'
+                'url'  => 'admin/data/activities',
             ],
             [
                 'name' => 'Currencies',

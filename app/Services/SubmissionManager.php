@@ -35,6 +35,7 @@ class SubmissionManager extends Service {
      * @param \App\Models\User\User $user
      * @param bool                  $isClaim
      * @param mixed                 $isDraft
+     * @param mixed                 $isActivity
      *
      * @return mixed
      */
@@ -56,10 +57,10 @@ class SubmissionManager extends Service {
                     throw new \Exception('Please select a prompt.');
                 }
                 $prompt = Prompt::query()
-                ->when(!$isActivity, fn($query) => $query->active())
-                ->where('id', $data['prompt_id'])
-                ->with('rewards')
-                ->first();
+                    ->when(!$isActivity, fn ($query) => $query->active())
+                    ->where('id', $data['prompt_id'])
+                    ->with('rewards')
+                    ->first();
 
                 if (!$prompt) {
                     throw new \Exception('Invalid prompt selected.');
