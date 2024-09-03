@@ -5,6 +5,7 @@
 @endsection
 
 @section('activities-content')
+    <x-admin-edit title="Activity" :object="$activity" />
     {!! breadcrumbs(['Activities' => 'activities', $activity->name => $activity->url]) !!}
 
     <h1>
@@ -15,9 +16,10 @@
         <p>{!! $activity->parsed_description !!}</p>
     </div>
 
-    @if (View::exists('activities.modules.' . $activity->module))
-        @include('activities.modules.' . $activity->module, ['settings' => $activity->data])
+    @if (View::exists('activities.modules._' . $activity->module))
+        @include('activities.modules._' . $activity->module, ['settings' => $activity->data])
     @endif
+
 @endsection
 
 @section('scripts')

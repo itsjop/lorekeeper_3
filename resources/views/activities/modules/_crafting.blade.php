@@ -5,7 +5,7 @@
             'col-lg-6' => count($recipes) > 1,
         ])>
             <div class="d-flex mt-4">
-                <h2>{{ $recipe->name }}</h2>
+                <h2 class="h3">{{ $recipe->name }}</h2>
                 @if ($activity->service->checkRecipe(Auth::user(), $recipe))
                     {!! Form::open(['url' => 'activities/' . $activity->id . '/act']) !!}
                     {!! Form::hidden('recipe_id', $recipe->id) !!}

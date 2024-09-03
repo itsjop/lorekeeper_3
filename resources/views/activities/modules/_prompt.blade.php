@@ -2,7 +2,7 @@
 
 {{-- Default rewards are only default if we're not choosing --}}
 @if (!$activity->data->choose_reward)
-    <h3>Submission Approval will Reward:</h3>
+    <h2 class="h3">Submission Approval will Reward:</h2>
     <table class="table table-sm mb-0">
         <thead>
             <tr>
@@ -21,7 +21,7 @@
     </table>
 @endif
 
-<h3 class="mt-4">Submission Entry</h3>
+<h2 class="h3 mt-3">Submission Entry</h2>
 <div class="form-group">
     {!! Form::label('comments', 'Submission') !!}
     {!! Form::textarea('comments', $activity->data->template ?? null, ['class' => 'form-control wysiwyg']) !!}
@@ -40,11 +40,10 @@
 @endif
 
 @if ($activity->data->show_rewards)
-    <h2>Rewards</h2>
-    <p>Select the rewards you would like to claim with this submission</p>
+    <h2 class="h3 mt-3">Rewards</h2>
+    <p>Add the rewards you would like to claim with this submission.</p>
     @include('widgets._loot_select', ['loots' => null, 'showLootTables' => false, 'showRaffles' => false])
 @endif
-
 
 <div class="text-right">
     {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}

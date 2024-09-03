@@ -1,7 +1,7 @@
 @extends('activities.layout')
 
 @section('activities-title')
-    Shop Index
+    Activities Index
 @endsection
 
 @section('activities-content')

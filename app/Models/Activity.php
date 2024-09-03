@@ -106,6 +106,24 @@ class Activity extends Model {
     }
 
     /**
+     * Gets the admin edit URL.
+     *
+     * @return string
+     */
+    public function getAdminUrlAttribute() {
+        return url('admin/data/activities/edit/'.$this->id);
+    }
+
+    /**
+     * Gets the power required to edit this model.
+     *
+     * @return string
+     */
+    public function getAdminPowerAttribute() {
+        return 'edit_data';
+    }
+
+    /**
      * Get the data attribute as an associative array.
      *
      * @param mixed $data
