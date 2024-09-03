@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Data;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Services\ActivityService;
-use Config;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller {
@@ -37,7 +36,7 @@ class ActivityController extends Controller {
     public function getCreateActivity() {
         return view('admin.activities.create_edit_activity', [
             'activity' => new Activity,
-            'modules'  => Config::get('lorekeeper.activity_modules'),
+            'modules'  => config('lorekeeper.activity_modules'),
         ]);
     }
 
@@ -56,7 +55,7 @@ class ActivityController extends Controller {
 
         return view('admin.activities.create_edit_activity', [
             'activity' => $activity,
-            'modules'  => Config::get('lorekeeper.activity_modules'),
+            'modules'  => config('lorekeeper.activity_modules'),
         ] + $activity->service->getEditData());
     }
 
