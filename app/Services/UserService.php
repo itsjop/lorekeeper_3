@@ -22,6 +22,7 @@ use App\Services\SubmissionManager;
 use App\Services\GalleryManager;
 use App\Services\CharacterManager;
 use App\Models\Trade;
+use App\Models\User\UserImageBlock;
 
 class UserService extends Service
 {
@@ -82,7 +83,7 @@ class UserService extends Service
     }
 
     /**
-     * Updates the user's password. 
+     * Updates the user's password.
      *
      * @param  array                  $data
      * @param  \App\Models\User\User  $user
@@ -101,14 +102,14 @@ class UserService extends Service
             $user->save();
 
             return $this->commitReturn(true);
-        } catch(\Exception $e) { 
+        } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
         return $this->rollbackReturn(false);
     }
 
     /**
-     * Updates the user's email and resends a verification email. 
+     * Updates the user's email and resends a verification email.
      *
      * @param  array                  $data
      * @param  \App\Models\User\User  $user
@@ -148,7 +149,7 @@ class UserService extends Service
     }
 
     /**
-     * Updates the user's avatar. 
+     * Updates the user's avatar.
      *
      * @param  array                  $data
      * @param  \App\Models\User\User  $user
@@ -161,7 +162,7 @@ class UserService extends Service
         try {
             if(!$avatar) throw new \Exception ("Please upload a file.");
             $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
-            
+
             if ($user->avatar !== 'default.jpg') {
                 $file = 'images/avatars/' . $user->avatar;
                 //$destinationPath = 'uploads/' . $id . '/';
@@ -173,15 +174,15 @@ class UserService extends Service
 
             // Checks if uploaded file is a GIF
             if ($avatar->getClientOriginalExtension() == 'gif') {
-            
+
                 if(!copy($avatar, $file)) throw new \Exception("Failed to copy file.");
-                if(!$file->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file."); 
-                if(!$avatar->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file."); 
-                
+                if(!$file->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
+                if(!$avatar->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
+
             }
 
             else {
-                if(!Image::make($avatar)->resize(150, 150)->save( public_path('images/avatars/' . $filename))) 
+                if(!Image::make($avatar)->resize(150, 150)->save( public_path('images/avatars/' . $filename)))
                 throw new \Exception("Failed to process avatar.");
             }
 
@@ -189,14 +190,14 @@ class UserService extends Service
             $user->save();
 
             return $this->commitReturn($avatar);
-        } catch(\Exception $e) { 
+        } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
         return $this->rollbackReturn(false);
     }
 
     /**
-     * Bans a user. 
+     * Bans a user.
      *
      * @param  array                  $data
      * @param  \App\Models\User\User  $user
@@ -269,14 +270,14 @@ class UserService extends Service
             $user->settings->save();
 
             return $this->commitReturn(true);
-        } catch(\Exception $e) { 
+        } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
         return $this->rollbackReturn(false);
     }
 
     /**
-     * Unbans a user. 
+     * Unbans a user.
      *
      * @param  \App\Models\User\User  $user
      * @param  \App\Models\User\User  $staff
@@ -290,7 +291,7 @@ class UserService extends Service
             if($user->is_banned) {
                 $user->is_banned = 0;
                 $user->save();
-                
+
                 $user->settings->ban_reason = null;
                 $user->settings->banned_at = null;
                 $user->settings->save();
@@ -298,9 +299,78 @@ class UserService extends Service
             }
 
             return $this->commitReturn(true);
-        } catch(\Exception $e) { 
+        } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Block or unblock an image
+     *
+     * @param User $user
+     * @param User $staff
+     *
+     * @return bool
+     */
+    public function blockUnblockImage($model, $id, $user)
+    {
+        DB::beginTransaction();
+
+        try {
+            $decodedmodel = urldecode(base64_decode($model));
+            //check model + id combo exists
+            $object = $decodedmodel::find($id);
+            if(!$object){
+                throw new \Exception('Invalid object blocked.');
+            }
+
+            //check it's not already blocked, if not, make the block
+
+            $block = $user->blockedImages()->where([
+                ['object_id', $object->id],
+                ['object_type', get_class($object)],
+            ])->first();
+
+            if (!$block) {
+                $block = UserImageBlock::create([
+                    'object_id' => $id,
+                    'object_type' => $decodedmodel,
+                    'user_id' => $user->id,
+                ]);
+                flash('Image blocked successfully.')->success();
+            } else {
+                $block->delete();
+                flash('Image unblocked successfully.')->success();
+            }
+
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Updates a user's image  block setting
+     *
+     * @param mixed $data
+     * @param mixed $user
+     */
+    public function updateImageBlockSetting($data, $user) {
+        DB::beginTransaction();
+
+        try {
+            $user->settings->update([
+                'show_image_blocks' => isset($data['show_image_blocks']) ? $data['show_image_blocks'] : 0,
+            ]);
+
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
         return $this->rollbackReturn(false);
     }
 }

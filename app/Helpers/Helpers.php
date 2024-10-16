@@ -292,3 +292,26 @@ function prettyProfileName($url)
     if(isset($name) && isset($site)) return $name.'@'.(Config::get('lorekeeper.sites.'.$site.'.display_name') != null ? Config::get('lorekeeper.sites.'.$site.'.display_name') : $site);
     else return $url;
 }
+
+/**
+ * Check if user blocked an object's image
+ *
+ */
+function checkImageBlock($object, $user)
+{
+    //just in case?
+    if(!$user) {
+        return false;
+    }
+
+    $block = $user->blockedImages()->where([
+        ['object_id', $object->id],
+        ['object_type', get_class($object)],
+    ])->first();
+
+    if ($block) {
+        return true;
+    }
+    return false;
+
+}

@@ -42,6 +42,10 @@ Route::group(['prefix' => 'account', 'namespace' => 'Users'], function() {
     Route::post('bookmarks/edit/{id}', 'BookmarkController@postCreateEditBookmark');
     Route::get('bookmarks/delete/{id}', 'BookmarkController@getDeleteBookmark');
     Route::post('bookmarks/delete/{id}', 'BookmarkController@postDeleteBookmark');
+
+    Route::get('blocked-images', 'AccountController@getImageBlocks');
+    Route::post('blocked-image-setting', 'AccountController@postImageBlockSettings');
+    Route::post('blocked-images/block/{model}/{id}', 'AccountController@postBlockUnblockImage');
 });
 
 Route::group(['prefix' => 'inventory', 'namespace' => 'Users'], function() {

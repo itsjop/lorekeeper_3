@@ -6,5 +6,6 @@
         <div class="sidebar-item"><a href="{{ url('account/settings') }}" class="{{ set_active('account/settings') }}">Settings</a></div>
         <div class="sidebar-item"><a href="{{ url('account/aliases') }}" class="{{ set_active('account/aliases') }}">Aliases</a></div>
         <div class="sidebar-item"><a href="{{ url('account/bookmarks') }}" class="{{ set_active('account/bookmarks') }}">Bookmarks</a></div>
+        <div class="sidebar-item"><a href="{{ url('account/blocked-images') }}" class="{{ set_active('account/blocked-images') }}">Blocked Images</a></div>
     </li>
 </ul>
