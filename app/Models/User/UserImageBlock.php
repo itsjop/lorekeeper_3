@@ -35,7 +35,7 @@ class UserImageBlock extends Model
      */
     public function object()
     {
-        return $this->belongsTo($this->object_type);
+        return $this->morphTo();
     }
 
     /**

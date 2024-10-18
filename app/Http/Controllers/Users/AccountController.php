@@ -298,7 +298,10 @@ class AccountController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getImageBlocks(Request $request) {
-        $query = Auth::user()->blockedImages();
+        $query = Auth::user()->blockedImages()->with('object');
+
+        $name = $request->get('name');
+        if($name) $query->whereRelation('object', 'name',  'LIKE', '%'.$name.'%');
 
         switch ($request->get('sort')) {
             case 'desc':

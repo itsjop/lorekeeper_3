@@ -13,6 +13,11 @@
 
     {!! Form::open(['method' => 'GET']) !!}
     <div class="form-inline justify-content-end mb-3">
+        <div class="form-inline justify-content-end">
+            <div class="form-group ml-3 mb-3">
+                {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+            </div>
+        </div>
         <div class="form-group mr-3">
             {!! Form::label('sort', 'Sort: ', ['class' => 'mr-2']) !!}
             {!! Form::select(
