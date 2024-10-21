@@ -438,12 +438,12 @@ class DiscordManager extends Service {
         }
 
         $options = $interaction->data->options->toArray();
-        $sides = $options['sides']['value'];
+        $sides = isset($options['sides']['value']) ? $options['sides']['value'] : 6;
         if (!is_numeric($sides) || $sides < 2) {
             return 'Invalid dice sides. Must be a number greater than 1.';
         }
 
-        $quantity = $options['quantity']['value'] ?? 1;
+        $quantity = isset($options['quantity']['value']) ? $options['quantity']['value'] : 1;
         if (!is_numeric($quantity) || $quantity < 1) {
             return 'Invalid dice quantity. Must be a number greater than 0.';
         }

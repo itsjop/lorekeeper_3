@@ -19,7 +19,6 @@ use Discord\Parts\User\Member;
 use Discord\WebSockets\Event;
 use Discord\WebSockets\Intents;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
@@ -384,10 +383,6 @@ class DiscordBot extends Command {
                 }
             });
 
-            $discord->on(Event::MESSAGE_CREATE, function (Message $message) {
-                Cache::put('message_'.$message->id, $message->content, 86400);
-            });
-
             $discord->on(Event::MESSAGE_UPDATE, function (Message $newMessage, Discord $discord, ?Message $oldMessage) use ($guild) {
                 try {
                     $channel = $guild->channels->get('id', $this->log_channel_id);
@@ -395,9 +390,8 @@ class DiscordBot extends Command {
                     if ($oldMessage) {
                         $oldContent = $oldMessage->content;
                     } else {
-                        $oldContent = Cache::get('message_'.$newMessage->id, 'Unknown Content (Cache Expired)');
+                        $oldContent = 'Unknown Content (Cache Expired)';
                     }
-                    Cache::put('message_'.$newMessage->id, $newMessage->content, 86400);
 
                     // Create an embed message
                     $embed = new Embed($discord);
@@ -427,7 +421,7 @@ class DiscordBot extends Command {
                 if ($message instanceof Message) {
                     $oldContent = $message->content;
                 } else {
-                    $oldContent = Cache::get('message_'.$message->id, 'Unknown Content (Cache Expired)');
+                    $oldContent = 'Unknown Content (Cache Expired)';
                 }
                 $channel = $guild->channels->get('id', $this->log_channel_id);
                 $embed = new Embed($discord);
