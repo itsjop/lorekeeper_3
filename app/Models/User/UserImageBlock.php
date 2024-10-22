@@ -55,6 +55,8 @@ class UserImageBlock extends Model
             return $this->object->currencyImageUrl;
         } elseif ($this->object->avatarUrl) {
             return $this->object->avatarUrl;
+        } elseif ($this->object->thumbnailUrl) {
+            return $this->object->thumbnailUrl;
         }
         return $this->object->imageUrl;
     }
