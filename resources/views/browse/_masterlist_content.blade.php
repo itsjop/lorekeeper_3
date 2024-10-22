@@ -144,6 +144,7 @@
             <div class="col-md-3 col-6 text-center">
                 <div>
                     <a href="{{ $character->url }}"><img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->fullName }}"/></a>
+                    <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div>
                 </div>
                 <div class="mt-1">
                     <a href="{{ $character->url }}" class="h5 mb-0">@if(!$character->is_visible) <i class="fas fa-eye-slash"></i> @endif {{ $character->fullName }}</a>
