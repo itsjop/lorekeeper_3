@@ -17,7 +17,7 @@
 <div class="row mb-3">
     <div class="col-md-7">
         <div class="text-center">
-            @if(checkImageBlock($character, Auth::user()))
+            @if(Auth::check() && checkImageBlock($character, Auth::user()))
                 <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" data-lightbox="entry" data-title="{{ $character->fullName }}">
                     <img src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" class="image-blur" alt="{{ $character->fullName }}" />
                 </a>
