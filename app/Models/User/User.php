@@ -24,6 +24,7 @@ use App\Models\Gallery\GallerySubmission;
 use App\Models\Gallery\GalleryCollaborator;
 use App\Models\Gallery\GalleryFavorite;
 use App\Traits\Commenter;
+use App\Models\User\UserImageBlock;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -180,13 +181,21 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Gallery\GalleryFavorite')->where('user_id', $this->id);
     }
-    
+
     /**
      * Get all of the user's character bookmarks.
      */
-    public function bookmarks() 
+    public function bookmarks()
     {
         return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
+    }
+
+    /**
+     * Get all of the user's blocked images
+     */
+    public function blockedImages()
+    {
+        return $this->hasMany(UserImageBlock::class, 'user_id');
     }
 
     /**********************************************************************************************
@@ -376,7 +385,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getcheckBirthdayAttribute()
     {
-        $bday = $this->birthday; 
+        $bday = $this->birthday;
         if(!$bday || $bday->diffInYears(carbon::now()) < 13) return false;
         else return true;
     }
@@ -564,5 +573,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasBookmarked($character)
     {
         return CharacterBookmark::where('user_id', $this->id)->where('character_id', $character->id)->first();
+    }
+
+     /**
+     * Gets the display URL for a user's avatar, or the default avatar if they don't have one.
+     *
+     * @return url
+     */
+    public function getAvatarUrlAttribute() {
+
+        return url('images/avatars/'.$this->avatar.'?v='.filemtime(public_path('images/avatars/'.$this->avatar)));
     }
 }

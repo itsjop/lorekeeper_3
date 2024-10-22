@@ -38,7 +38,7 @@ class AccountController extends Controller
     {
         if(Auth::user()->is_banned)
             return view('account.banned');
-        else 
+        else
             return redirect()->to('/');
     }
 
@@ -51,7 +51,7 @@ class AccountController extends Controller
     {
         return view('account.settings');
     }
-    
+
     /**
      * Edits the user's profile.
      *
@@ -84,7 +84,7 @@ class AccountController extends Controller
         }
         return redirect()->back();
     }
-    
+
     /**
      * Changes the user's password.
      *
@@ -106,7 +106,7 @@ class AccountController extends Controller
         }
         return redirect()->back();
     }
-    
+
     /**
      * Changes the user's email address and sends a verification email.
      *
@@ -162,7 +162,7 @@ class AccountController extends Controller
             'notifications' => $notifications
         ]);
     }
-    
+
     /**
      * Deletes a notification and returns a response.
      *
@@ -273,6 +273,70 @@ class AccountController extends Controller
         else {
             foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
         }
+        return redirect()->back();
+    }
+
+/**
+     * Create (or remove) image block
+     *
+     */
+    public function postBlockUnblockImage(Request $request, UserService $service, $model, $id)
+    {
+        if (!$service->blockUnblockImage($model, $id, Auth::user())) {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
+        }
+
+        return redirect()->back();
+
+    }
+
+    /**
+     * Get a page of all the user's blocked images.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getImageBlocks(Request $request) {
+        $query = Auth::user()->blockedImages()->with('object');
+
+        $name = $request->get('name');
+        if($name) $query->whereRelation('object', 'name',  'LIKE', '%'.$name.'%');
+
+        switch ($request->get('sort')) {
+            case 'desc':
+                $query->orderBy('id', 'DESC');
+                break;
+            case 'asc':
+                $query->orderBy('id', 'ASC');
+                break;
+            default:
+                $query->orderBy('id', 'DESC');
+                break;
+        }
+
+        return view('account.blocked_images', [
+            'images' => $query->paginate(20)->appends($request->query()),
+        ]);
+    }
+
+    /**
+     * Changes user's image  block setting
+     *
+     * @param App\Services\UserService $service
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postImageBlockSettings(Request $request, UserService $service) {
+        $data = $request->only(['show_image_blocks']);
+        if ($service->updateImageBlockSetting($data, Auth::user())) {
+            flash('Image block setting updated successfully.')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
+        }
+
         return redirect()->back();
     }
 }
