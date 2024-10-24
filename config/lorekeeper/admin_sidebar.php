@@ -54,9 +54,9 @@ return [
         'links' => [
             [
                 'name' => 'Mod Mail',
-                'url' => 'admin/mail'
-            ]
-        ]
+                'url'  => 'admin/mail',
+            ],
+        ],
     ],
     'Sales' => [
         'power' => 'manage_sales',

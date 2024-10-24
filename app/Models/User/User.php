@@ -448,20 +448,22 @@ class User extends Authenticatable implements MustVerifyEmail {
      */
     public function getcheckBirthdayAttribute() {
         $bday = $this->birthday;
-        if (!$bday || $bday->diffInYears(carbon::now()) < 13) {
+        if (!$bday || $bday->diffInYears(Carbon::now()) < 13) {
             return false;
         } else {
             return true;
         }
     }
 
-    /** 
-     * Check if user has any unseen mod mail
+    /**
+     * Check if user has any unseen mod mail.
      */
-    public function gethasUnseenMailAttribute()
-    {
-        if(ModMail::where('user_id', $this->id)->where('seen', 0)->exists()) return true;
-        else return false;
+    public function gethasUnseenMailAttribute() {
+        if (ModMail::where('user_id', $this->id)->where('seen', 0)->exists()) {
+            return true;
+        } else {
+            return false;
+        }
     }
     /**********************************************************************************************
 
@@ -678,7 +680,7 @@ class User extends Authenticatable implements MustVerifyEmail {
      *
      * @param mixed $character
      *
-     * @return \App\Models\Character\CharacterBookmark
+     * @return CharacterBookmark
      */
     public function hasBookmarked($character) {
         return CharacterBookmark::where('user_id', $this->id)->where('character_id', $character->id)->first();

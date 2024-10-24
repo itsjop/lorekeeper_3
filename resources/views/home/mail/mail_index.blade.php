@@ -87,7 +87,9 @@
         @endif
   </div>
   <div class="tab-pane fade" id="modMail" role="tabpanel">
-    <p class="alert alert-info">This mail is anonymously sent messages from moderators. It cannot be responded to.</p>
+        <p class="alert alert-info">
+            This mail is anonymously sent messages from moderators. It cannot be responded to.
+        </p>
         @if(count($mails))
             <div class="row ml-md-2">
                 <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">

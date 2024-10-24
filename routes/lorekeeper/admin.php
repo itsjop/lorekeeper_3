@@ -443,8 +443,8 @@ Route::group(['prefix' => 'designs', 'middleware' => 'power:manage_characters'],
 });
 Route::get('{type}/{status}', 'DesignController@getDesignIndex')->where('type', 'myo-approvals|design-approvals')->where('status', 'pending|approved|rejected');
 
-# MOD MAIL
-Route::group(['prefix' => 'mail', 'middleware' => 'power:send_mod_mail'], function() {
+// MOD MAIL
+Route::group(['prefix' => 'mail', 'middleware' => 'power:send_mod_mail'], function () {
     Route::get('/', 'ModMailController@getIndex');
     Route::get('/view/{id}', 'ModMailController@getMail');
     Route::get('/create', 'ModMailController@getCreateMail');

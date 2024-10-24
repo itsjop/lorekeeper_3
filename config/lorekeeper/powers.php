@@ -68,7 +68,7 @@ return [
         'description' => 'Allow rank to comment on sales in preview mode.',
     ],
     'send_mod_mail' => [
-        'name' => 'Send Mod Mail',
-        'description' => 'Allow rank to send mod mail to other site members.'
+        'name'        => 'Send Mod Mail',
+        'description' => 'Allow rank to send mod mail to other site members.',
     ],
 ];
