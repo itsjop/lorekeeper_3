@@ -2,7 +2,7 @@
 
 @section('title')
     Design Approvals ::
-        @yield('design-title')
+    @yield('design-title')
 @endsection
 
 @section('sidebar')

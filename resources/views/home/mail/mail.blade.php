@@ -14,7 +14,7 @@
                     <h3>Mail #{{ $mail->id }} - {{ $mail->subject }}</h3>
                 </div>
                 <div class="col-6 text-right">
-                   <h5>Sent {!! pretty_date($mail->created_at) !!}</h5>
+                    <h5>Sent {!! pretty_date($mail->created_at) !!}</h5>
                 </div>
             </div>
         </div>
