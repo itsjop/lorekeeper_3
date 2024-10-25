@@ -14,7 +14,7 @@
     <h1>Mod Mail</h1>
 
     <p>
-        Mod Mail can be sent to a user anonymously by staff in order to issue strikes, warnings, information etc. 
+        Mod Mail can be sent to a user anonymously by staff in order to issue strikes, warnings, information etc.
         <br> Mail can be used to automatically ban users after a set number of strikes
         (see the setting "max_strike_count" in <a href="{{ url('admin/settings') }}">Site Settings</a>).
     </p>
@@ -34,8 +34,7 @@
         <p>No mail found.</p>
     @else
         {!! $mails->render() !!}
-            @include('home.mail._mail', ['mails' => $mails])
+        @include('home.mail._mail', ['mails' => $mails])
         {!! $mails->render() !!}
     @endif
-
 @endsection

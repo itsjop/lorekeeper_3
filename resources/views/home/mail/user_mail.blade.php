@@ -23,7 +23,7 @@
                         $parent = $parent->parent;
                     }
                 @endphp
-        
+
                 @foreach ($parents as $index => $parent)
                     <div class="card">
                         <div class="card-header" data-toggle="collapse" data-target="#message-{{ $index }}" aria-expanded="false" aria-controls="message-{{ $index }}">
@@ -40,14 +40,14 @@
                     </div>
                 @endforeach
             @endif
-        
+
             <div class="card my-2">
                 <div class="card-body">
                     <h5>"{{ $mail->subject }}" Sent {!! pretty_date($mail->created_at) !!} - {!! $mail->sender->displayName !!}</h5>
                     {!! $mail->message !!}
                 </div>
             </div>
-        
+
             @if ($mail->children->count() > 0)
                 @php $child = $mail->children->first(); @endphp
                 <div class="card my-2">
@@ -66,11 +66,11 @@
                 </div>
             @endif
         </div>
-        
+
     </div>
 
     @if (Auth::user()->id != $mail->sender_id)
-        {!! Form::open(['url' => 'mail/new/'.$mail->id]) !!}
+        {!! Form::open(['url' => 'mail/new/' . $mail->id]) !!}
 
         <div class="card">
             <div class="card-header">

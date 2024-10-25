@@ -5,7 +5,6 @@
 @endsection
 
 @section('home-content')
-
     {!! breadcrumbs(['Mail' => 'mail']) !!}
 
     <h1>

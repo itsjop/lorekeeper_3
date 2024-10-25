@@ -24,7 +24,7 @@
                 <div class="row flex-wrap">
                     <div class="col-2 col-md-2">
                         <div class="logs-table-cell">{!! $mail->displayName !!}</div>
-                    </div>  
+                    </div>
                     <div class="col-3 col-md-3">
                         <div class="logs-table-cell">
                             <span class="ubt-texthide">{{ Illuminate\Support\Str::limit(strip_tags($mail->message), 50, $end = '...') }}</span>

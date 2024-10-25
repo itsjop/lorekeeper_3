@@ -36,7 +36,7 @@
     </div>
 
     <div class="row hide" id="strike-input">
-        <div class="col-md-6 form-group" >
+        <div class="col-md-6 form-group">
             {!! Form::label('strike_count', 'Strike Count') !!} {!! add_help('If multiple strikes need to be issues set the value here.') !!}
             {!! Form::number('strike_count', 1, ['class' => 'form-control', 'min' => '1']) !!}
         </div>
