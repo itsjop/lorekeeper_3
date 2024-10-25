@@ -9,7 +9,7 @@
 
     <h1>Mod Mail (#{{ $mail->id }})</h1>
 
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header">
             <div class="row">
                 <div class="col-6">
@@ -28,14 +28,22 @@
             <hr>
             <p>{!! $mail->message !!}</p>
             <hr>
-            <div class="card-text {!! $mail->issue_strike ? 'text-danger' : 'text-secondary' !!} float-right">
+            <div class="alert {!! $mail->issue_strike ? 'alert-danger' : 'alert-secondary' !!} w-100 text-right m-0">
                 @if (!$mail->issue_strike)
                     <h5>No Strike Issued</h5>
                 @else
                     <h5>Strike{{ $mail->strike_count > 1 ? 's' : '' }} Issued</h5>
                     <strong>Amount:</strong> {{ $mail->strike_count }}
+                    @if ($mail->strike_expiry)
+                        <br>
+                        <strong>Expires:</strong> {!! pretty_date($mail->strike_expiry) !!}
+                    @endif
                 @endif
             </div>
         </div>
     </div>
+
+    @if (config('lorekeeper.mod_mail.allow_replies_to_staff'))
+        @comments(['type' => 'Staff-User', 'model' => $mail, 'perPage' => 5])
+    @endif
 @endsection

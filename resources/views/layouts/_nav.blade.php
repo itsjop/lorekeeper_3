@@ -43,8 +43,8 @@
                             <a class="dropdown-item" href="{{ url('bank') }}">
                                 Bank
                             </a>
-                            <a class="dropdown-item" href="{{ url('inbox') }}">
-                                Inbox
+                            <a class="dropdown-item" href="{{ url('mail') }}">
+                                Direct Messages
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('comments/liked') }}">

@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Http\Request;
 
 class MailController extends Controller {
+
     /**
      * Shows the mail index.
      *
@@ -21,8 +22,8 @@ class MailController extends Controller {
             abort(404);
         }
 
-        return view('home.mail.mail_index', [
-            'mails'  => ModMail::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
+        return view('home.mail.index', [
+            'modMail'  => ModMail::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
             'inbox'  => UserMail::where('recipient_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
             'outbox' => UserMail::where('sender_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
         ]);
@@ -35,7 +36,7 @@ class MailController extends Controller {
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getMail($id) {
+    public function getModMail($id) {
         if (!Auth::check()) {
             abort(404);
         }
@@ -45,7 +46,7 @@ class MailController extends Controller {
             $mail->update(['seen' => 1]);
         }
 
-        return view('home.mail.mail', [
+        return view('home.mail.mod_mail', [
             'mail' => $mail,
         ]);
     }
@@ -58,7 +59,7 @@ class MailController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getUserMail($id) {
-        if (!Auth::check()) {
+        if (!Auth::check() || !config('lorekeeper.mod_mail.allow_user_mail')) {
             abort(404);
         }
         $mail = UserMail::findOrFail($id);
@@ -82,32 +83,47 @@ class MailController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getCreateUserMail() {
+        if (!config('lorekeeper.mod_mail.allow_user_mail')) {
+            abort(404);
+        }
         return view('home.mail.create_user_mail', [
             'mail'  => new UserMail,
-            'users' => ['Select User'] + User::orderBy('id')->where('id', '!=', Auth::user()->id)->pluck('name', 'id')->toArray(),
+            'users' => User::orderBy('id')->where('id', '!=', Auth::user()->id)->pluck('name', 'id')->toArray(),
         ]);
     }
 
     /**
      * Sends mail from one user to another.
+     * 
+     * @param Request $request
+     * @param MailService $service
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreateUserMail(Request $request, MailService $service) {
-        $request->validate(UserMail::$createRules);
-        $data = $request->only(['recipient_id', 'subject', 'message', 'parent_id']);
-        if ($service->createUserMail($data, Auth::user())) {
-            flash('Message sent successfully.')->success();
+    public function postCreateUserMail(Request $request, MailService $service, $mail_id = null) {
+        if (!config('lorekeeper.mod_mail.allow_user_mail')) {
+            abort(404);
+        }
+        $data = $request->only(['recipient_id', 'subject', 'message']);
+        $mail = $mail_id ? UserMail::findOrFail($mail_id) : null;
+        if ($mail) {
+            $data['recipient_id'] = $mail->sender_id;
+            $data['subject'] = 'Re: '.$mail->subject;
+            $data['parent_id'] = $mail->id;
         } else {
+            $request->validate(UserMail::$createRules);
+        }
+
+        if (!$mail = $service->createUserMail($data, Auth::user())) {
             foreach ($service->errors()->getMessages()['error'] as $error) {
                 flash($error)->error();
             }
-        }
 
-        if (!isset($data['parent_id'])) {
-            return redirect()->back();
+            return redirect()->to('mail');
         } else {
-            $child = UserMail::where('parent_id', $data['parent_id'])->latest('id')->first();
-
-            return redirect('inbox/view/'.$child->id);
+            flash('Message sent successfully.')->success();
         }
+
+        return redirect()->to('mail/view/'.$mail->id);
     }
 }

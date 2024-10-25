@@ -6,68 +6,90 @@
 
 @section('home-content')
 
-    {!! breadcrumbs(['Inbox' => 'inbox', $mail->displayName . ' from ' . $mail->sender->displayName => $mail->viewUrl]) !!}
+    {!! breadcrumbs(['Mail' => 'mail', ($mail->recipient_id == Auth::user()->id ? '(Inbox) ' : '(Outbox) ') . $mail->displayName . ' from ' . $mail->sender->displayName => $mail->viewUrl]) !!}
 
     <div class="card mb-3">
         <div class="card-header">
-            <div class="row">
-                <div class="col-6">
-                    <h3>Mail #{{ $mail->id }} - {!! $mail->displayName !!}</h3>
-                </div>
-                <div class="col-6 text-right">
-                    <h5>Sent {!! pretty_date($mail->created_at) !!}</h5>
-                </div>
-            </div>
+            <h3>{!! $mail->displayName !!}</h3>
         </div>
         <div class="card-body">
-            <div class="card-text">
-                {!! $mail->message !!}
+            @if ($mail->parent)
+                @php
+                    // Get all ancestors in reverse order (oldest first)
+                    $parents = [];
+                    $parent = $mail->parent;
+                    while ($parent) {
+                        array_unshift($parents, $parent);
+                        $parent = $parent->parent;
+                    }
+                @endphp
+        
+                @foreach ($parents as $index => $parent)
+                    <div class="card">
+                        <div class="card-header" data-toggle="collapse" data-target="#message-{{ $index }}" aria-expanded="false" aria-controls="message-{{ $index }}">
+                            <h5>"{{ $parent->subject }}" Message from {!! pretty_date($parent->created_at) !!} - {!! $parent->sender->displayName !!}</h5>
+                        </div>
+                        <div id="message-{{ $index }}" class="collapse">
+                            <div class="card-body">
+                                {!! $parent->message !!}
+                                <div class="text-right">
+                                    <a href="{{ $parent->viewUrl }}"><u>View Message</u></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        
+            <div class="card my-2">
+                <div class="card-body">
+                    <h5>"{{ $mail->subject }}" Sent {!! pretty_date($mail->created_at) !!} - {!! $mail->sender->displayName !!}</h5>
+                    {!! $mail->message !!}
+                </div>
             </div>
-        </div>
-    </div>
-    @if ($mail->parent && $mail->children)
-        <div class="card mb-3">
-            <div class="btn card-header text-right" data-toggle="collapse" href="#collapseExample" role="button">
-                <h5>Mail #{{ $mail->id }} History</h5>
-            </div>
-            <div class="collapse card-body pb-0" id="collapseExample">
-                @if ($mail->parent)
-                    <p>
-                        <strong>Previous Message:</strong> {!! $mail->parent->displayName !!} ({{ Illuminate\Support\Str::limit($mail->parent->message, 25, $end = '...') }})
-                    </p>
-                @endif
-                @if ($mail->parent && $mail->children)
-                    <hr />
-                @endif
-                @if ($mail->children)
-                    @foreach ($mail->children as $child)
-                        <p><strong>Replies:</strong> {!! $child->displayName !!} ({{ Illuminate\Support\Str::limit($child->message, 50, $end = '...') }})</p>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    @endif
+        
+            @if ($mail->children->count() > 0)
+                @php $child = $mail->children->first(); @endphp
+                <div class="card my-2">
+                    <div class="card-header" type="button" data-toggle="collapse" data-target="#child-message" aria-expanded="false" aria-controls="child-message">
+                        <h5>"{{ $child->subject }}" Reply from {!! pretty_date($child->created_at) !!} - {!! $child->sender->displayName !!}</h5>
+                    </div>
+                    <div id="child-message" class="collapse">
+                        <div class="card-body">
+                            {!! $child->message !!}
 
-    <br>
+                            <div class="text-right">
+                                <a href="{{ $child->viewUrl }}"><u>...View Reply</u></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+        
+    </div>
 
     @if (Auth::user()->id != $mail->sender_id)
-        {!! Form::open(['url' => 'inbox/new']) !!}
+        {!! Form::open(['url' => 'mail/new/'.$mail->id]) !!}
 
-        <div class="form-group">
-            @if ($mail->children)
-                {!! Form::label('message', 'Send New Reply') !!}
-            @else
-                {!! Form::label('message', 'Send Reply') !!}
-            @endif
-            {!! Form::textarea('message', null, ['class' => 'form-control wysiwyg']) !!}
-        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3>Reply</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    @if ($mail->children->count() > 0)
+                        {!! Form::label('message', 'Send New Reply') !!}
+                    @else
+                        {!! Form::label('message', 'Send Reply') !!}
+                    @endif
+                    {!! Form::textarea('message', null, ['class' => 'form-control wysiwyg']) !!}
+                </div>
 
-        {{ Form::hidden('parent_id', $mail->id) }}
-        {{ Form::hidden('subject', $mail->subject) }}
-        {{ Form::hidden('recipient_id', $mail->sender_id) }}
-
-        <div class="text-right">
-            {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+                <div class="text-right">
+                    {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+                </div>
+            </div>
         </div>
 
         {!! Form::close() !!}

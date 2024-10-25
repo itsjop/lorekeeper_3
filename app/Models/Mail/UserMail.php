@@ -3,10 +3,10 @@
 namespace App\Models\Mail;
 
 use App\Models\Model;
-use App\Traits\Commentable;
+use App\Models\User\User;
 
 class UserMail extends Model {
-    use Commentable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -51,28 +51,28 @@ class UserMail extends Model {
      * Get the staff that sent the message.
      */
     public function sender() {
-        return $this->belongsTo('App\Models\User\User', 'sender_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
     /**
      * Get the user who was sent the message.
      */
     public function recipient() {
-        return $this->belongsTo('App\Models\User\User');
+        return $this->belongsTo(User::class, 'recipient_id');
     }
 
     /**
      * Get the parent message.
      */
     public function parent() {
-        return $this->belongsTo($this, 'parent_id');
+        return $this->belongsTo(UserMail::class, 'parent_id');
     }
 
     /**
      * Get the child messages.
      */
     public function children() {
-        return $this->hasMany($this, 'parent_id');
+        return $this->hasMany(UserMail::class, 'parent_id', 'id');
     }
 
     /**********************************************************************************************
@@ -87,12 +87,7 @@ class UserMail extends Model {
      * @return string
      */
     public function getDisplayNameAttribute() {
-        $prefix = '';
-        if ($this->parent) {
-            $prefix = 'Re:';
-        }
-
-        return '<a href="'.$this->url.'">'.$prefix.$this->subject.'</a>';
+        return '<a href="'.$this->url.'">'.$this->subject.'</a>';
     }
 
     /**
@@ -101,6 +96,6 @@ class UserMail extends Model {
      * @return string
      */
     public function getViewUrlAttribute() {
-        return url('inbox/view/'.$this->id);
+        return url('mail/view/'.$this->id);
     }
 }

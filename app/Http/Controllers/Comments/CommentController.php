@@ -10,6 +10,8 @@ use App\Models\News;
 use App\Models\Report\Report;
 use App\Models\Sales\Sales;
 use App\Models\SitePage;
+use App\Models\Mail\ModMail;
+use App\Models\Mail\UserMail;
 use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -146,6 +148,12 @@ class CommentController extends Controller {
                 }
                 $post = (($type != 'User-User') ? 'your gallery submission\'s staff comments' : 'your gallery submission');
                 $link = (($type != 'User-User') ? $submission->queueUrl.'/#comment-'.$comment->getKey() : $submission->url.'/#comment-'.$comment->getKey());
+                break;
+            case 'App\Models\Mail\ModMail':
+                $mail = ModMail::find($comment->commentable_id);
+                $recipient = $mail->staff;
+                $post = 'your sent mod mails';
+                $link = 'mail/view/'.$comment->commentable_id.'/#comment-'.$comment->getKey();
                 break;
             default:
                 throw new \Exception('Comment type not supported.');

@@ -49,15 +49,6 @@ return [
             ],
         ],
     ],
-    'Mod Mail' => [
-        'power' => 'send_mod_mail',
-        'links' => [
-            [
-                'name' => 'Mod Mail',
-                'url'  => 'admin/mail',
-            ],
-        ],
-    ],
     'Sales' => [
         'power' => 'manage_sales',
         'links' => [
@@ -86,6 +77,10 @@ return [
             [
                 'name' => 'Invitation Keys',
                 'url'  => 'admin/invitations',
+            ],
+            [
+                'name' => 'Mod Mail',
+                'url'  => 'admin/mail',
             ],
         ],
     ],

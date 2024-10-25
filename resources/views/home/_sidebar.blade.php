@@ -16,8 +16,8 @@
         <div class="sidebar-item"><a href="{{ url('comments/liked') }}" class="{{ set_active('comments/liked*') }}">Liked Comments</a></div>
     </li>
     <li class="sidebar-section">
-        <div class="sidebar-section-header">Inbox</div>
-        <div class="sidebar-item"><a href="{{ url('inbox') }}" class="{{ set_active('inbox*') }}">All Mail</a></div>
+        <div class="sidebar-section-header">Mail</div>
+        <div class="sidebar-item"><a href="{{ url('mail') }}" class="{{ set_active('mail*') }}">All Mail</a></div>
     </li>
     <li class="sidebar-section">
         <div class="sidebar-section-header">Reports</div>

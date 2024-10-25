@@ -446,7 +446,7 @@ Route::get('{type}/{status}', 'DesignController@getDesignIndex')->where('type', 
 // MOD MAIL
 Route::group(['prefix' => 'mail', 'middleware' => 'power:send_mod_mail'], function () {
     Route::get('/', 'ModMailController@getIndex');
-    Route::get('/view/{id}', 'ModMailController@getMail');
-    Route::get('/create', 'ModMailController@getCreateMail');
-    Route::post('/create', 'ModMailController@postCreateMail');
+    Route::get('view/{id}', 'ModMailController@getMail');
+    Route::get('create', 'ModMailController@getCreateMail');
+    Route::post('create', 'ModMailController@postCreateMail');
 });

@@ -35,9 +35,15 @@
         {!! Form::label('issue_strike', 'Issue Strike?', ['class' => 'form-check-label ml-3']) !!}
     </div>
 
-    <div class="form-group hide" id="strike-input">
-        {!! Form::label('strike_count', 'Strike Count') !!} {!! add_help('If multiple strikes need to be issues set the value here.') !!}
-        {!! Form::number('strike_count', 1, ['class' => 'form-control', 'min' => '1']) !!}
+    <div class="row hide" id="strike-input">
+        <div class="col-md-6 form-group" >
+            {!! Form::label('strike_count', 'Strike Count') !!} {!! add_help('If multiple strikes need to be issues set the value here.') !!}
+            {!! Form::number('strike_count', 1, ['class' => 'form-control', 'min' => '1']) !!}
+        </div>
+        <div class="col-md-6 form-group">
+            {!! Form::label('strike_expiry', 'Expiry Date (Optional)') !!} {!! add_help('If the strike should expire set the date here.') !!}
+            {!! Form::text('strike_expiry', null, ['class' => 'form-control datepicker']) !!}
+        </div>
     </div>
 
     <div class="text-right">
@@ -47,6 +53,8 @@
     {!! Form::close() !!}
 @endsection
 @section('scripts')
+    @include('widgets._datetimepicker_js')
+    @parent
     <script>
         $(document).ready(function() {
             $('#usernameList').selectize();

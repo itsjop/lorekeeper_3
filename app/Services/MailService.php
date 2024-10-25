@@ -30,6 +30,7 @@ class MailService extends Service {
             if (!isset($data['issue_strike']) || !$data['issue_strike']) {
                 $data['issue_strike'] = false;
                 $data['strike_count'] = 0;
+                $data['strike_expiry'] = null;
             }
             $mail = ModMail::create([
                 'staff_id'              => $staff->id,
@@ -38,6 +39,7 @@ class MailService extends Service {
                 'message'               => $data['message'],
                 'issue_strike'          => $data['issue_strike'],
                 'strike_count'          => $data['strike_count'],
+                'strike_expiry'         => $data['strike_expiry'],
                 'previous_strike_count' => $user->settings->strike_count,
                 'seen'                  => false,
             ]);
@@ -52,7 +54,7 @@ class MailService extends Service {
                 $service->ban(['ban_reason' => 'Banned for exceeding the maximum strike count.'], $user, $staff);
             }
 
-            return $this->commitReturn(true);
+            return $this->commitReturn($mail);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
@@ -72,9 +74,14 @@ class MailService extends Service {
         DB::beginTransaction();
 
         try {
-            $recipient = User::find($data['recipient_id']);
+
+            if (!config('lorekeeper.mod_mail.allow_user_mail')) {
+                throw new \Exception('User mail is disabled.');
+            }
+
+            $recipient = $data['recipient_id'] ? User::find($data['recipient_id']) : null;
             if (!$recipient) {
-                throw new \Exception('Recipient not found');
+                throw new \Exception('Recipient not found.');
             }
             if ($recipient->id == $sender->id) {
                 throw new \Exception('You cannot send mail to yourself.');
@@ -97,7 +104,7 @@ class MailService extends Service {
                 'mail_id'     => $mail->id,
             ]);
 
-            return $this->commitReturn(true);
+            return $this->commitReturn($mail);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
         }

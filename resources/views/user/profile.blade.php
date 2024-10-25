@@ -11,8 +11,8 @@
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url]) !!}
 
-    @if (Auth::check() && Auth::user()->id != $user->id)
-        <a class="btn btn-primary btn-sm float-right" href="{{ url('inbox/new?recipient_id=' . $user->id) }}"><i class="fas fa-envelope"></i> Message User</a>
+    @if (Auth::check() && Auth::user()->id != $user->id && config('lorekeeper.mod_mail.allow_user_mail'))
+        <a class="btn btn-primary btn-sm float-right" href="{{ url('mail/new?recipient_id=' . $user->id) }}"><i class="fas fa-envelope"></i> Message User</a>
     @endif
 
     @if (mb_strtolower($user->name) != mb_strtolower($name))
@@ -21,6 +21,12 @@
 
     @if ($user->is_banned)
         <div class="alert alert-danger">This user has been banned.</div>
+    @endif
+
+    @if (Auth::user() ?? false && Auth::user()->isStaff && $user->settings->strike_count > 0)
+        <div class="alert alert-warning">
+            This user has received {{ $user->settings->strike_count }} strike{{ $user->settings->strike_count > 1 ? 's' : '' }}.
+        </div>
     @endif
 
     @if ($user->is_deactivated)

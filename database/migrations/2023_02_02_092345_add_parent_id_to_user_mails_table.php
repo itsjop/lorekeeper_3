@@ -9,9 +9,11 @@ class AddParentIdToUserMailsTable extends Migration {
      * Run the migrations.
      */
     public function up() {
-        Schema::table('user_mails', function (Blueprint $table) {
-            $table->integer('parent_id')->nullable();
-        });
+        if (!Schema::hasColumn('user_mails', 'parent_id')) {
+            Schema::table('user_mails', function (Blueprint $table) {
+                $table->integer('parent_id')->nullable();
+            });
+        }
     }
 
     /**

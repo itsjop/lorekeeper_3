@@ -13,7 +13,7 @@
 
     <div class="form-group">
         {!! Form::label('recipient_id', 'Recipient Username') !!}
-        {!! Form::select('recipient_id', $users, Request::get('recipient_id'), ['id' => 'usernameList', 'class' => 'form-control']) !!}
+        {!! Form::select('recipient_id', $users, Request::get('recipient_id'), ['id' => 'usernameList', 'class' => 'form-control', 'placeholder' => 'Select User']) !!}
     </div>
 
     <div class="form-group">
