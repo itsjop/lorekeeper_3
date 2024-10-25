@@ -23,9 +23,9 @@
         <div class="alert alert-danger">This user has been banned.</div>
     @endif
 
-    @if (Auth::user() ?? false && Auth::user()->isStaff && $user->settings->strike_count > 0)
+    @if (Auth::check() && Auth::user()->isStaff)
         <div class="alert alert-warning">
-            This user has received {{ $user->settings->strike_count }} strike{{ $user->settings->strike_count > 1 ? 's' : '' }}.
+            This user has received {{ $user->settings->strike_count }} strike{{ $user->settings->strike_count == 1 ? '' : 's' }}.
         </div>
     @endif
 
