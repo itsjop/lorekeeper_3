@@ -6,7 +6,6 @@ use App\Models\Model;
 use App\Models\User\User;
 
 class UserMail extends Model {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -65,14 +64,14 @@ class UserMail extends Model {
      * Get the parent message.
      */
     public function parent() {
-        return $this->belongsTo(UserMail::class, 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     /**
      * Get the child messages.
      */
     public function children() {
-        return $this->hasMany(UserMail::class, 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
     /**********************************************************************************************

@@ -11,7 +11,6 @@ use Auth;
 use Illuminate\Http\Request;
 
 class MailController extends Controller {
-
     /**
      * Shows the mail index.
      *
@@ -24,8 +23,8 @@ class MailController extends Controller {
 
         return view('home.mail.index', [
             'modMail'  => ModMail::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
-            'inbox'  => UserMail::where('recipient_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
-            'outbox' => UserMail::where('sender_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
+            'inbox'    => UserMail::where('recipient_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
+            'outbox'   => UserMail::where('sender_id', Auth::user()->id)->orderBy('created_at', 'desc')->get(),
         ]);
     }
 
@@ -86,6 +85,7 @@ class MailController extends Controller {
         if (!config('lorekeeper.mod_mail.allow_user_mail')) {
             abort(404);
         }
+
         return view('home.mail.create_user_mail', [
             'mail'  => new UserMail,
             'users' => User::orderBy('id')->where('id', '!=', Auth::user()->id)->pluck('name', 'id')->toArray(),
@@ -94,10 +94,9 @@ class MailController extends Controller {
 
     /**
      * Sends mail from one user to another.
-     * 
-     * @param Request $request
-     * @param MailService $service
-     * 
+     *
+     * @param mixed|null $mail_id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postCreateUserMail(Request $request, MailService $service, $mail_id = null) {

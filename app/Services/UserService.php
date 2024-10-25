@@ -487,7 +487,7 @@ class UserService extends Service {
         try {
             if (!$staff) {
                 $staff = $user;
-                if (!$this->logAdminAction($staff, 'Unbanned User', 'Unbanned '.$user->displayname . ' after strike expiry.')) {
+                if (!$this->logAdminAction($staff, 'Unbanned User', 'Unbanned '.$user->displayname.' after strike expiry.')) {
                     throw new \Exception('Failed to log admin action.');
                 }
             } else {

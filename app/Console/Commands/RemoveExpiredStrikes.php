@@ -2,13 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Facades\Settings;
 use App\Models\Mail\ModMail;
 use App\Services\UserService;
+use Illuminate\Console\Command;
 
-class RemoveExpiredStrikes extends Command
-{
+class RemoveExpiredStrikes extends Command {
     /**
      * The name and signature of the console command.
      *
@@ -26,8 +25,7 @@ class RemoveExpiredStrikes extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
-    {
+    public function handle() {
         //
         $mails = ModMail::where('has_expired', 0)->where('issue_strike', 1)->where('strike_expiry', '<', now())->get();
         foreach ($mails as $mail) {
@@ -39,7 +37,7 @@ class RemoveExpiredStrikes extends Command
                 $service = new UserService;
                 $service->unban($mail->user);
 
-                $this->info('Unbanned user ' . $mail->recipient->username . ' due to expired strike.');
+                $this->info('Unbanned user '.$mail->recipient->username.' due to expired strike.');
             }
         }
     }

@@ -74,7 +74,6 @@ class MailService extends Service {
         DB::beginTransaction();
 
         try {
-
             if (!config('lorekeeper.mod_mail.allow_user_mail')) {
                 throw new \Exception('User mail is disabled.');
             }

@@ -4,8 +4,8 @@ namespace App\Models\Mail;
 
 use App\Models\Model;
 use App\Models\User\User;
-use Illuminate\Support\Facades\Auth;
 use App\Traits\Commentable;
+use Illuminate\Support\Facades\Auth;
 
 class ModMail extends Model {
     use Commentable;
@@ -27,13 +27,6 @@ class ModMail extends Model {
     protected $table = 'mod_mails';
 
     /**
-     * Whether the model contains timestamps to be saved and updated.
-     *
-     * @var string
-     */
-    public $timestamps = true;
-
-    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -41,6 +34,13 @@ class ModMail extends Model {
     protected $casts = [
         'strike_expiry' => 'datetime',
     ];
+
+    /**
+     * Whether the model contains timestamps to be saved and updated.
+     *
+     * @var string
+     */
+    public $timestamps = true;
 
     /**
      * Validation rules for creation.

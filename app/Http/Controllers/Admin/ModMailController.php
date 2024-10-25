@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Mail\ModMail;
 use App\Models\User\User;
 use App\Services\MailService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ModMailController extends Controller {
     /**
@@ -50,7 +50,7 @@ class ModMailController extends Controller {
      */
     public function getCreateMail() {
         return view('admin.mail.create_mail', [
-            'mail' => new ModMail,
+            'mail'  => new ModMail,
             'users' => ['Select User'] + User::orderBy('id')->pluck('name', 'id')->toArray(),
         ]);
     }
