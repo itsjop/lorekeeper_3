@@ -34,6 +34,8 @@
 
     {!! Form::close() !!}
 
+@endsection
+@section('scripts')
     <script>
         $(document).ready(function() {
             $('#usernameList').selectize();

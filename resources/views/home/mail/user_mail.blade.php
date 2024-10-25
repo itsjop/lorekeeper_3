@@ -32,16 +32,18 @@
             </div>
             <div class="collapse card-body pb-0" id="collapseExample">
                 @if ($mail->parent)
-    <p><strong>Previous Message:</strong> {!! $mail->parent->displayName !!} ({{ Illuminate\Support\Str::limit($mail->parent->message, 25, $end = '...') }})</p>
-    @endif
+                    <p>
+                        <strong>Previous Message:</strong> {!! $mail->parent->displayName !!} ({{ Illuminate\Support\Str::limit($mail->parent->message, 25, $end = '...') }})
+                    </p>
+                @endif
                 @if ($mail->parent && $mail->children)
-    <hr/>
-    @endif
+                    <hr/>
+                    @endif
                 @if ($mail->children)
-    @foreach ($mail->children as $child)
-    <p><strong>Replies:</strong> {!! $child->displayName !!} ({{ Illuminate\Support\Str::limit($child->message, 50, $end = '...') }})</p>
-    @endforeach
-    @endif
+                    @foreach ($mail->children as $child)
+                        <p><strong>Replies:</strong> {!! $child->displayName !!} ({{ Illuminate\Support\Str::limit($child->message, 50, $end = '...') }})</p>
+                    @endforeach
+                @endif
             </div>
         </div>
     @endif
@@ -49,26 +51,26 @@
     <br>
 
     @if (Auth::user()->id != $mail->sender_id)
-    {!! Form::open(['url' => 'inbox/new']) !!}
+        {!! Form::open(['url' => 'inbox/new']) !!}
 
-    <div class="form-group">
-        @if ($mail->children)
-    {!! Form::label('message', 'Send New Reply') !!}
-@else
-    {!! Form::label('message', 'Send Reply') !!}
-    @endif
-        {!! Form::textarea('message', null, ['class' => 'form-control wysiwyg']) !!}
-    </div>
+            <div class="form-group">
+                @if ($mail->children)
+                    {!! Form::label('message', 'Send New Reply') !!}
+                @else
+                    {!! Form::label('message', 'Send Reply') !!}
+                @endif
+                {!! Form::textarea('message', null, ['class' => 'form-control wysiwyg']) !!}
+            </div>
 
-    {{ Form::hidden('parent_id', $mail->id) }}
-    {{ Form::hidden('subject', $mail->subject) }}
-    {{ Form::hidden('recipient_id', $mail->sender_id) }}
+            {{ Form::hidden('parent_id', $mail->id) }}
+            {{ Form::hidden('subject', $mail->subject) }}
+            {{ Form::hidden('recipient_id', $mail->sender_id) }}
 
-    <div class="text-right">
-        {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
-    </div>
+            <div class="text-right">
+                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+            </div>
 
-    {!! Form::close() !!}
+        {!! Form::close() !!}
     @endif
 
 @endsection

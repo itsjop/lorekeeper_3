@@ -28,9 +28,9 @@
         </li>
     </ul>
     <div class="tab-content" id="inboxTypeContent">
-      <div class="tab-pane fade show active" id="inbox" role="tabpanel">
+        <div class="tab-pane fade show active" id="inbox" role="tabpanel">
             @if (count($inbox))
-    <div class="row ml-md-2">
+                <div class="row ml-md-2">
                     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
                         <div class="col-12 col-md-2 font-weight-bold">Subject</div>
                         <div class="col-6 col-md-3 font-weight-bold">Message</div>
@@ -38,29 +38,28 @@
                         <div class="col-6 col-md-2 font-weight-bold">Seen</div>
                         <div class="col-12 col-md-1 font-weight-bold">Details</div>
                     </div>
-
-                    @foreach ($inbox as $mail)
-    <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-                            <div class="col-12 col-md-2">{!! $mail->displayName !!}</div>
-                            <div class="col-6 col-md-3">
-                                <span class="ubt-texthide">{{ Illuminate\Support\Str::limit($mail->message, 50, $end = '...') }}</span>
-                            </div>
-                            <div class="col-6 col-md-4">{!! $mail->sender->displayName !!} {!! pretty_date($mail->created_at) !!}</div>
-                            <div class="col-6 col-md-2">{!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
-                            <div class="col-12 col-md-1">
-                                <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
-                            </div>
+                </div>
+                @foreach ($inbox as $mail)
+                    <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
+                        <div class="col-12 col-md-2">{!! $mail->displayName !!}</div>
+                        <div class="col-6 col-md-3">
+                            <span class="ubt-texthide">{{ Illuminate\Support\Str::limit($mail->message, 50, $end = '...') }}</span>
                         </div>
-    @endforeach
-                  </div>
+                        <div class="col-6 col-md-4">{!! $mail->sender->displayName !!} {!! pretty_date($mail->created_at) !!}</div>
+                        <div class="col-6 col-md-2">{!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
+                        <div class="col-12 col-md-1">
+                            <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
+                        </div>
+                    </div>
+                @endforeach
                 <div class="text-center mt-4 small text-muted">{{ $inbox->count() }} result{{ $inbox->count() == 1 ? '' : 's' }} found.</div>
-@else
-    <p>Your inbox is empty.</p>
-    @endif
-      </div>
-      <div class="tab-pane fade" id="outbox" role="tabpanel">
+            @else
+                <p>Your inbox is empty.</p>
+            @endif
+        </div>
+        <div class="tab-pane fade" id="outbox" role="tabpanel">
             @if (count($outbox))
-    <div class="row ml-md-2">
+                <div class="row ml-md-2">
                     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
                         <div class="col-12 col-md-2 font-weight-bold">Subject</div>
                         <div class="col-6 col-md-3 font-weight-bold">Message</div>
@@ -68,32 +67,31 @@
                         <div class="col-6 col-md-2 font-weight-bold">Seen</div>
                         <div class="col-12 col-md-1 font-weight-bold">Details</div>
                     </div>
-
-                    @foreach ($outbox as $mail)
-    <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-                            <div class="col-12 col-md-2">{!! $mail->displayName !!}</div>
-                            <div class="col-6 col-md-3">
-                                <span class="ubt-texthide">{{ Illuminate\Support\Str::limit($mail->message, 50, $end = '...') }}</span>
-                            </div>
-                            <div class="col-6 col-md-4">{!! $mail->recipient->displayName !!} {!! pretty_date($mail->created_at) !!}</div>
-                            <div class="col-6 col-md-2">{!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
-                            <div class="col-12 col-md-1">
-                                <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
-                            </div>
+                </div>
+                @foreach ($outbox as $mail)
+                    <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
+                        <div class="col-12 col-md-2">{!! $mail->displayName !!}</div>
+                        <div class="col-6 col-md-3">
+                            <span class="ubt-texthide">{{ Illuminate\Support\Str::limit($mail->message, 50, $end = '...') }}</span>
                         </div>
-    @endforeach
-                  </div>
+                        <div class="col-6 col-md-4">{!! $mail->recipient->displayName !!} {!! pretty_date($mail->created_at) !!}</div>
+                        <div class="col-6 col-md-2">{!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
+                        <div class="col-12 col-md-1">
+                            <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
+                        </div>
+                    </div>
+                @endforeach
                 <div class="text-center mt-4 small text-muted">{{ $outbox->count() }} result{{ $outbox->count() == 1 ? '' : 's' }} found.</div>
-@else
-    <p>Your outbox is empty.</p>
-    @endif
-      </div>
-      <div class="tab-pane fade" id="modMail" role="tabpanel">
+            @else
+                <p>Your outbox is empty.</p>
+            @endif
+        </div>
+        <div class="tab-pane fade" id="modMail" role="tabpanel">
             <p class="alert alert-info">
                 This mail is anonymously sent messages from moderators. {{ config('lorekeeper.mod_mail.can_user_respond_to_staff_mail') ? 'You can respond to staff mail.' : 'It cannot be responded to.' }}
             </p>
             @if (count($mails))
-    <div class="row ml-md-2">
+                <div class="row ml-md-2">
                     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
                         <div class="col-12 col-md-2 font-weight-bold">Subject</div>
                         <div class="col-6 col-md-3 font-weight-bold">Message</div>
@@ -101,28 +99,28 @@
                         <div class="col-6 col-md-2 font-weight-bold">Seen</div>
                         <div class="col-12 col-md-1 font-weight-bold">Details</div>
                     </div>
-
-                    @foreach ($mails as $mail)
-    <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-                            <div class="col-12 col-md-2">{{ $mail->subject }}</div>
-                            <div class="col-6 col-md-3">
-                                <span class="ubt-texthide">{{ Illuminate\Support\Str::limit(strip_tags($mail->message), 50, $end = '...') }}</span>
-                            </div>
-                            <div class="col-6 col-md-4">{!! pretty_date($mail->created_at) !!}</div>
-                            <div class="col-6 col-md-2">{!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
-                            <div class="col-12 col-md-1">
-                                <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
-                            </div>
+                </div>
+                @foreach ($mails as $mail)
+                    <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
+                        <div class="col-12 col-md-2">{{ $mail->subject }}</div>
+                        <div class="col-6 col-md-3">
+                            <span class="ubt-texthide">{{ Illuminate\Support\Str::limit(strip_tags($mail->message), 50, $end = '...') }}</span>
                         </div>
-    @endforeach
-                  </div>
+                        <div class="col-6 col-md-4">{!! pretty_date($mail->created_at) !!}</div>
+                        <div class="col-6 col-md-2">{!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
+                        <div class="col-12 col-md-1">
+                            <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
+                        </div>
+                    </div>
+                @endforeach
                 <div class="text-center mt-4 small text-muted">{{ $mails->count() }} result{{ $mails->count() == 1 ? '' : 's' }} found.</div>
-@else
-    <p>No mod mail found.</p>
-    @endif
-      </div>
+            @else
+                <p>No mod mail found.</p>
+            @endif
+        </div>
     </div>
-
+@endsection
+@section('scripts')
     <script>
         $(function() {
             var hash = window.location.hash;
@@ -136,5 +134,4 @@
             });
         });
     </script>
-
 @endsection

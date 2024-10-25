@@ -22,19 +22,19 @@
         </div>
         <div class="card-body">
             @if (Auth::check() && Auth::user()->isStaff)
-    <p class="float-right ml-5">From: {!! $mail->staff->displayName !!} {!! add_help('Not viewable by users.') !!}</p>
-    @endif
+                <p class="float-right ml-5">From: {!! $mail->staff->displayName !!} {!! add_help('Not viewable by users.') !!}</p>
+            @endif
             <p>To: {!! $mail->user->displayName !!} {!! $mail->seen ? '<i class="fas fa-eye text-success"></i>' : '<i class="fas fa-eye-slash text-danger"></i>' !!}</p>
             <hr>
             <p>{!! $mail->message !!}</p>
             <hr>
             <div class="card-text {!! $mail->issue_strike ? 'text-danger' : 'text-secondary' !!} float-right">
                 @if (!$mail->issue_strike)
-    <h5>No Strike Issued</h5>
-@else
-    <h5>Strike{{ $mail->strike_count > 1 ? 's' : '' }} Issued</h5>
+                    <h5>No Strike Issued</h5>
+                @else
+                    <h5>Strike{{ $mail->strike_count > 1 ? 's' : '' }} Issued</h5>
                     <strong>Amount:</strong> {{ $mail->strike_count }}
-    @endif
+                @endif
             </div>
         </div>
     </div>

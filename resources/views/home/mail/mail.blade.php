@@ -23,12 +23,12 @@
                 {!! $mail->message !!}
             </div>
             @if ($mail->issue_strike)
-    <hr>
+                <hr>
                 <div class="card-text text-danger float-right">
                     <h5>Strike{{ $mail->strike_count > 1 ? 's' : '' }} issued</h5>
                     <strong>Amount:</strong> {{ $mail->strike_count }}
                 </div>
-    @endif
+            @endif
         </div>
     </div>
 @endsection
