@@ -513,7 +513,7 @@ class ProfessionService extends Service
 
         try {
             // Check first if the profession is currently in use
-            if(DB::table('character_professions')->where('profession_id', $profession->id)->exists()) throw new \Exception("A character with this trait exists. Please remove the trait first.");
+            if(DB::table('character_profiles')->where('profession_id', $profession->id)->exists()) throw new \Exception("A character with this profession exists. Please remove the profession from all characters first.");
             
             if($profession->has_image) $this->deleteImage($profession->imagePath, $profession->imageFileName); 
             $profession->delete();
