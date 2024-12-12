@@ -51,7 +51,7 @@
                 <tr class="sort-item" data-id="{{ $profession->id }}">
                     <td>
                         <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-                        {!! $profession->name !!}                         {!! $profession->sort !!}
+                        {!! $profession->name !!}                         
 
                     </td>
                     <td>
