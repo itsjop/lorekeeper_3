@@ -128,6 +128,8 @@ Route::group(['prefix' => 'shops'], function() {
 Route::group(['prefix' => 'professions'], function() {
     Route::get('/', 'ProfessionController@getIndex');
     Route::get('{id}', 'ProfessionController@getCategory');
+    Route::get('/characters/{id}', 'ProfessionController@getCharacters');
+
 });
 
 /**************************************************************************************************

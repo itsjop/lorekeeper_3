@@ -12,6 +12,7 @@ use App\Models\Item\Item;
 use App\Models\Currency\Currency;
 use App\Models\Item\ItemCategory;
 use App\Models\User\UserItem;
+use App\Models\Character\Character;
 use App\Models\Profession\ProfessionCategory;
 use App\Models\Profession\ProfessionSubcategory;
 use App\Models\Profession\Profession;
@@ -62,6 +63,30 @@ class ProfessionController extends Controller
         return view('professions.category', [
             'category' => $category,
             'categories' => $categories,
+        ]);
+    }
+
+    /**
+     * Shows all characters linked to professions within the category.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getCharacters($id)
+    {
+        $category = ProfessionCategory::where('id', $id)->first();
+        if(!$category) abort(404);
+
+        $categories = ProfessionCategory::orderBy('sort', 'DESC')->get();
+        $professionIds = $category->professions->pluck('id');
+
+        $charactersByProfession = Character::whereHas('profile', function ($query) use ($professionIds) {
+            $query->whereIn('profession_id', $professionIds);
+          })->get()->groupBy('profile.profession_id');
+
+        return view('professions.characters', [
+            'category' => $category,
+            'categories' => $categories,
+            'charactersByProfession' => $charactersByProfession
         ]);
     }
 

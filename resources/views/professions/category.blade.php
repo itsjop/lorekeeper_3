@@ -5,7 +5,15 @@
 @section('content')
 {!! breadcrumbs(['Professions' => 'professions', 'Category' => 'category']) !!}
 
-<h1>{{ $category->name }}</h1>
+<div class="row">
+    <div class="col-lg-7 col-12 text-lg-left text-center">
+        <h1>{{ $category->name }}</h1>
+    </div>
+    <div class="col-lg-5 col-12 text-lg-right text-center">
+        <a href="/professions/characters/{{ $category->id }}"><div class="btn btn-primary"><i class="fas fa-search"></i> View characters</div></a>
+    </div>
+</div>
+
 
 @if($category->parsed_description)
 <div class="card text-justify w-75 p-3 ml-auto mr-auto site-page-content parsed-text">
