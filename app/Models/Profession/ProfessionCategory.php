@@ -96,14 +96,16 @@ class ProfessionCategory extends Model
         //get professions sort by subcategory sort
         $professions = Profession::where('professions.category_id', $this->id)->where('is_active', 1)->with('subcategory')
         ->join('profession_subcategories', 'profession_subcategories.id', '=', 'professions.subcategory_id')
-        ->select('professions.*') 
+        ->select('professions.*')
         ->orderBy('profession_subcategories.sort', 'DESC')
+        ->orderBy('professions.sort', 'DESC') 
         ->get()->groupBy('subcategory_id');
 
         //add all empty ones under general/empty id
-        $noCatprofessions = Profession::where('category_id', $this->id)->where('is_active', 1)->where('subcategory_id', null)->get();
+        $noCatprofessions = Profession::where('category_id', $this->id)->where('is_active', 1)->where('subcategory_id', null)->orderBy('professions.sort', 'DESC')->get();
         $professions->put('', $noCatprofessions);
         //
+        
         return $professions;
     }
 

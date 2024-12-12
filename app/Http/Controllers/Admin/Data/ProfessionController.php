@@ -296,20 +296,17 @@ class ProfessionController extends Controller
     public function getProfessionIndex(Request $request)
     {
         $query = Profession::query();
-        $data = $request->only(['rarity_id', 'profession_category_id', 'name']);
-        if(isset($data['rarity_id']) && $data['rarity_id'] != 'none') 
-            $query->where('rarity_id', $data['rarity_id']);
-        if(isset($data['profession_category_id']) && $data['profession_category_id'] != 'none') 
-            $query->where('profession_category_id', $data['profession_category_id']);
-        if(isset($data['subtype_id']) && $data['subtype_id'] != 'none') 
-            $query->where('subtype_id', $data['subtype_id']);
+        $data = $request->only(['subcategory_id', 'category_id', 'name']);
+        if(isset($data['subcategory_id']) && $data['subcategory_id'] != 'none') 
+            $query->where('subcategory_id', $data['subcategory_id']);
+        if(isset($data['category_id']) && $data['category_id'] != 'none') 
+            $query->where('category_id', $data['category_id']);
         if(isset($data['name'])) 
             $query->where('name', 'LIKE', '%'.$data['name'].'%');
         return view('admin.professions.professions', [
-            'professions' => $query->paginate(20)->appends($request->query()),
-            'specieses' => ['none' => 'Any Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'professions' => $query->orderBy('category_id', 'ASC')->orderBy('sort', 'DESC')->get(),
             'categories' => ['none' => 'Any Category'] + ProfessionCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'subcategories' => ['none' => 'No subcategory'] + ProfessionSubcategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray()
+            'subcategories' => ['none' => 'Any subcategory'] + ProfessionSubcategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray()
         ]);
     }
     
@@ -403,5 +400,23 @@ class ProfessionController extends Controller
             foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
         }
         return redirect()->to('admin/data/professions');
+    }
+
+    /**
+     * Sorts profession.
+     *
+     * @param  \Illuminate\Http\Request     $request
+     * @param  App\Services\ProfessionService  $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postSortProfession(Request $request, ProfessionService $service)
+    {
+        if($service->sortProfession($request->get('sort'))) {
+            flash('Profession order updated successfully.')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
     }
 }

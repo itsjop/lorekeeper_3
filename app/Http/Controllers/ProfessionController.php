@@ -58,12 +58,10 @@ class ProfessionController extends Controller
         if(!$category) abort(404);
 
         $categories = ProfessionCategory::orderBy('sort', 'DESC')->get();
-        $professions= Profession::where('category_id', $id)->get();
 
         return view('professions.category', [
             'category' => $category,
             'categories' => $categories,
-            'professions' => $professions
         ]);
     }
 
