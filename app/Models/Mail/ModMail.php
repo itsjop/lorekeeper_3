@@ -84,7 +84,7 @@ class ModMail extends Model {
      * @return string
      */
     public function getDisplayNameAttribute() {
-        return '<a href="'.$this->url.'">'.$this->subject.'</a>';
+        return '<a href="'.$this->viewUrl.'">'.$this->subject.'</a>';
     }
 
     /**
