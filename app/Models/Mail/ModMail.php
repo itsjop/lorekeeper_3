@@ -94,7 +94,7 @@ class ModMail extends Model {
      */
     public function getViewUrlAttribute() {
         if (Auth::user()->id != $this->recipient_id || Auth::user()->id == $this->user_id) {
-            return url('admin/mail/view/'.$this->id);
+            return url('inbox/view/'.$this->id);
         }
 
         return url('inbox/view/'.$this->id);
