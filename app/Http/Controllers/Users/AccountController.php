@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mail\ModMail;
 use App\Models\Notification;
 use App\Models\User\User;
 use App\Models\User\UserAlias;
@@ -37,7 +38,9 @@ class AccountController extends Controller {
      */
     public function getBanned() {
         if (Auth::user()->is_banned) {
-            return view('account.banned');
+            return view('account.banned', [
+                'unreadModMail' => ModMail::select(['subject', 'message'])->where('user_id', Auth::id())->where('seen', 0)->get(),
+            ]);
         } else {
             return redirect()->to('/');
         }
