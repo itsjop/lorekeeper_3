@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment\Comment;
 use App\Models\Gallery\GallerySubmission;
+use App\Models\Mail\ModMail;
 use App\Models\Report\Report;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +52,14 @@ class PermalinkController extends Controller {
                         $report = Report::where('id', $comment->commentable_id)->first();
                         $isMod = Auth::user()->hasPower('manage_reports');
                         $isOwner = ($report->user_id == Auth::user()->id);
+                        if (!$isMod && !$isOwner) {
+                            abort(404);
+                        }
+                        break;
+                    case 'App\Models\Mail\ModMail':
+                        $mail = ModMail::where('id', $comment->commentable_id)->first();
+                        $isMod = Auth::user()->hasPower('send_mod_mail');
+                        $isOwner = ($mail->user_id == Auth::user()->id);
                         if (!$isMod && !$isOwner) {
                             abort(404);
                         }
