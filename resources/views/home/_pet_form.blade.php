@@ -86,8 +86,8 @@
         {!! Form::open(['url' => 'pets/variant/' . $pet->id, 'id' => 'userVariantForm', 'class' => 'collapse']) !!}
         <p>
             This will use a splice item!
-            @if ($pet->variant_id)
-                <br>Current Variant: {{ $pet->variant->variant_name }}
+            @if ($pet->pet->isVariant)
+                <br>Current Variant: {{ $pet->pet->name }}
             @endif
         </p>
         <div class="form-group">
@@ -95,12 +95,10 @@
         </div>
         <div class="form-group">
             @php
-                $variants =
-                    ['0' => 'Default'] +
-                    $pet->pet
-                        ->variants()
-                        ->pluck('variant_name', 'id')
-                        ->toArray();
+                $variants = ['0' => 'Default'] + ($pet->pet->isVariant ?
+                    $pet->pet->parent->variants()->pluck('name', 'id')->toArray() :
+                    $pet->pet->variants()->pluck('name', 'id')->toArray()
+                );
             @endphp
             {!! Form::select('variant_id', $variants, $pet->variant_id, ['class' => 'form-control']) !!}
         </div>
@@ -119,12 +117,10 @@
         {!! Form::hidden('is_staff', 1) !!}
         <div class="form-group">
             @php
-                $variants =
-                    ['0' => 'Default'] +
-                    $pet->pet
-                        ->variants()
-                        ->pluck('variant_name', 'id')
-                        ->toArray();
+                $variants = ['0' => 'Default'] + ($pet->pet->isVariant ?
+                    $pet->pet->parent->variants()->pluck('name', 'id')->toArray() :
+                    $pet->pet->variants()->pluck('name', 'id')->toArray()
+                );
             @endphp
             {!! Form::select('variant_id', $variants, $pet->variant_id, ['class' => 'form-control mt-2']) !!}
         </div>

@@ -444,6 +444,11 @@ class WorldController extends Controller {
      */
     public function getPets(Request $request) {
         $query = Pet::with('category');
+        // only show pets with no parent_id if config is set
+        if (!config('lorekeeper.pets.include_variants')) {
+            $query->whereNull('parent_id');
+        }
+
         $data = $request->only(['pet_category_id', 'name', 'sort']);
         if (isset($data['pet_category_id']) && $data['pet_category_id'] != 'none') {
             $query->where('pet_category_id', $data['pet_category_id']);

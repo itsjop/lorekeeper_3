@@ -277,6 +277,12 @@ class PetManager extends Service {
             if ($character->user_id != $user->id && !$user->hasPower('edit_inventories')) {
                 throw new \Exception('You do not own this character.');
             }
+            if ($character->user_id != $pet->user_id && !$user->hasPower('edit_inventories')) {
+                throw new \Exception('This character does not belong to the owner of the pet.');
+            }
+            if (config('lorekeeper.pets.max_pets') && $character->pets->count() >= config('lorekeeper.pets.max_pets')) {
+                throw new \Exception('This character has reached the limit of pets.');
+            }
 
             // Finally, compare character and limits based on pet and pet category.
             $allPets = $character->pets;
@@ -372,7 +378,7 @@ class PetManager extends Service {
             if ($user->id != $pet->user_id) {
                 throw new \Exception('You do not own this pet.');
             }
-            
+
             if (!$pet->canBond()) {
                 throw new \Exception('You cannot bond with this pet again yet.');
             }
@@ -465,18 +471,23 @@ class PetManager extends Service {
                 if ($tag->data['variant_ids'] && !in_array($id, $tag->data['variant_ids'])) {
                     throw new \Exception('Item is not a splice for this variant.');
                 }
-                if ($id == $pet->variant_id) {
+                if ($id == $pet->pet_id) {
                     throw new \Exception('Pet is already this variant.');
                 }
 
-                $invman = new InventoryManager;
-                if (!$invman->debitStack($pet->user, 'Used to change pet variant', ['data' => 'Used to change '.$pet->pet->name.' variant'], $item, 1)) {
+                $service = new InventoryManager;
+                if (!$service->debitStack($pet->user, 'Used to change pet variant', ['data' => 'Used to change '.$pet->pet->name.' variant'], $item, 1)) {
+                    foreach ($service->errors()->getMessages()['error'] as $error) {
+                        flash($error)->error();
+                    }
                     throw new \Exception('Could not debit item.');
                 }
             }
-            else $this->logAdminAction($pet->user, 'Pet Variant Changed', json_encode(['pet' => $pet->id, 'variant' => $id])); // for when develop is merged
+            else {
+                $this->logAdminAction($pet->user, 'Pet Variant Changed', json_encode(['pet' => $pet->id, 'variant' => $id]));
+            }
 
-            $pet['variant_id'] = $id == 'default' ? null : $id;
+            $pet->pet_id = $id == 'default' ? null : $id;
             $pet->save();
 
             return $this->commitReturn(true);
@@ -506,14 +517,18 @@ class PetManager extends Service {
 
                 // check if user has item
                 $item = UserItem::find($stack_id);
-                $invman = new InventoryManager;
-                if (!$invman->debitStack($pet->user, 'Used to change pet evolution', ['data' => 'Used to change '.$pet->pet->name.' evolution'], $item, 1)) {
+                $service = new InventoryManager;
+                if (!$service->debitStack($pet->user, 'Used to change pet evolution', ['data' => 'Used to change '.$pet->pet->name.' evolution'], $item, 1)) {
+                    foreach ($service->errors()->getMessages()['error'] as $error) {
+                        flash($error)->error();
+                    }
+
                     throw new \Exception('Could not debit item.');
                 }
             }
             else $this->logAdminAction($pet->user, 'Pet Evolution Changed', json_encode(['pet' => $pet->id, 'evolution' => $id])); // for when develop is merged
 
-            $pet['evolution_id'] = $id;
+            $pet->evolution_id = $id;
             $pet->save();
 
             return $this->commitReturn(true);
@@ -525,7 +540,7 @@ class PetManager extends Service {
     }
 
     /**
-     * Edits the custom variant image on a user pet stack.
+     * Edits the custom image on a user pet stack.
      *
      * @param mixed $pet
      * @param mixed $data
@@ -638,9 +653,8 @@ class PetManager extends Service {
 
                 $user_pet = UserPet::create([
                     'user_id'    => $recipient->id,
-                    'pet_id'     => $pet->id,
+                    'pet_id'     => $variant ? $variant->id : $pet->id,
                     'data'       => json_encode($data),
-                    'variant_id' => $variant?->id,
                     'evolution_id' => $evolution?->id,
                 ]);
             }

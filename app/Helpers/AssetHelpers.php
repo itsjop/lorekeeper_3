@@ -72,7 +72,7 @@ function calculateGroupCurrency($data) {
  */
 function getAssetKeys($isCharacter = false) {
     if (!$isCharacter) {
-        return ['items', 'currencies', 'pets', 'pet_variants', 'raffle_tickets', 'loot_tables', 'user_items', 'characters'];
+        return ['items', 'currencies', 'pets', 'raffle_tickets', 'loot_tables', 'user_items', 'characters'];
     } else {
         return ['currencies', 'items', 'character_items', 'loot_tables'];
     }
@@ -110,13 +110,6 @@ function getAssetModelString($type, $namespaced = true) {
                 return '\App\Models\Pet\Pet';
             } else {
                 return 'Pet';
-            }
-            break;
-        case 'pet_variants': case 'pet_variant':
-            if ($namespaced) {
-                return '\App\Models\Pet\PetVariant';
-            } else {
-                return 'PetVariant';
             }
             break;
         case 'raffle_tickets':
@@ -413,13 +406,6 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
             $service = new \App\Services\PetManager;
             foreach ($contents as $asset) {
                 if (!$service->creditPet($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
-                    return false;
-                }
-            }
-        } elseif ($key == 'pet_variants' && count($contents)) {
-            $service = new \App\Services\PetManager;
-            foreach ($contents as $asset) {
-                if (!$service->creditPet($sender, $recipient, $logType, $data, $asset['asset']->pet, $asset['quantity'], $asset['asset']->id)) {
                     return false;
                 }
             }

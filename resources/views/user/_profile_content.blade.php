@@ -124,7 +124,7 @@
                     @foreach ($pets as $pet)
                         <div class="col-md-2 profile-inventory-item">
                             <a href="{{ url($user->url . '/pets') }}" class="inventory-stack">
-                                <img class="img-fluid" src="{{ $pet->VariantImage($pet->pivot->id) }}" data-toggle="tooltip" title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
+                                <img class="img-fluid" src="{{ $pet->image($pet->pivot->id) }}" data-toggle="tooltip" title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
                                     alt="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}" />
                             </a>
                         </div>
