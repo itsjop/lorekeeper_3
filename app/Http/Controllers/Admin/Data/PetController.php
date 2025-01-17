@@ -574,7 +574,7 @@ class PetController extends Controller {
     /**
      * Loads the add pet to level modal.
      */
-    public function getAddPetToLevel($id) {
+    public function getAddPetToLevel($level_id) {
         $level = PetLevel::find($id);
         if (!$level) {
             abort(404);
@@ -589,7 +589,7 @@ class PetController extends Controller {
     /**
      * Shows the edit pet on level page.
      */
-    public function getEditPetLevel($id) {
+    public function getEditPetLevel($level_id, $id) {
         $petLevel = PetLevelPet::find($id);
         if (!$petLevel) {
             abort(404);
@@ -604,7 +604,7 @@ class PetController extends Controller {
     /**
      * Adds pet(s) to a level.
      */
-    public function postAddPetToLevel(Request $request, PetService $service, $id) {
+    public function postAddPetToLevel(Request $request, PetService $service, $level_id, $id) {
         if ($service->addPetsToLevel($request->input('pet_ids'), PetLevel::find($id))) {
             flash('Pet(s) added to level successfully.')->success();
         } else {
@@ -619,7 +619,7 @@ class PetController extends Controller {
     /**
      * Edits the rewards for a specific pet on a level.
      */
-    public function postEditPetLevel(Request $request, PetService $service, $id) {
+    public function postEditPetLevel(Request $request, PetService $service, $level_id, $id) {
         $data = $request->only([
             'rewardable_id', 'rewardable_type', 'quantity',
         ]);

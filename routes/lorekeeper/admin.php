@@ -197,17 +197,17 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     // levels
     Route::get('pets/levels', 'PetController@getLevelIndex');
     Route::get('pets/levels/create', 'PetController@getCreateLevel');
-    Route::get('pets/levels/edit/{id}', 'PetController@getEditLevel');
-    Route::get('pets/levels/delete/{id}', 'PetController@getDeleteLevel');
+    Route::get('pets/levels/edit/{id}', 'PetController@getEditLevel')->where('id', '[0-9]+');
+    Route::get('pets/levels/delete/{id}', 'PetController@getDeleteLevel')->where('id', '[0-9]+');
     Route::post('pets/levels/create', 'PetController@postCreateEditLevel');
-    Route::post('pets/levels/edit/{id}', 'PetController@postCreateEditLevel');
-    Route::post('pets/levels/delete/{id}', 'PetController@postDeleteLevel');
+    Route::post('pets/levels/edit/{id}', 'PetController@postCreateEditLevel')->where('id', '[0-9]+');
+    Route::post('pets/levels/delete/{id}', 'PetController@postDeleteLevel')->where('id', '[0-9]+');
 
     // level pets
-    Route::get('pets/levels/edit/{level_id}/pets/add', 'PetController@getAddPetToLevel');
-    Route::get('pets/levels/edit/{level_id}/pets/edit/{id}', 'PetController@getEditPetLevel');
-    Route::post('pets/levels/edit/{level_id}/pets/add', 'PetController@postAddPetToLevel');
-    Route::post('pets/levels/edit/{level_id}/pets/edit/{id}', 'PetController@postEditPetLevel');
+    Route::get('pets/levels/edit/{level_id}/pets/add', 'PetController@getAddPetToLevel')->where('level_id', '[0-9]+');
+    Route::get('pets/levels/edit/{level_id}/pets/edit/{id}', 'PetController@getEditPetLevel')->where('level_id', '[0-9]+')->where('id', '[0-9]+');
+    Route::post('pets/levels/edit/{level_id}/pets/add', 'PetController@postAddPetToLevel')->where('level_id', '[0-9]+');
+    Route::post('pets/levels/edit/{level_id}/pets/edit/{id}', 'PetController@postEditPetLevel')->where('level_id', '[0-9]+')->where('id', '[0-9]+');
 
     // SHOPS
     Route::get('shops', 'ShopController@getIndex');

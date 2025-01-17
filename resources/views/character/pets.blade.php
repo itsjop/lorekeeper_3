@@ -23,10 +23,12 @@
 
     <h1>Pets</h1>
 
-    @if(Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
+    @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
         <p>
             Currently {{ config('lorekeeper.pets.display_pet_count') }} pet{{ config('lorekeeper.pets.display_pet_count') != 1 ? 's' : '' }} are displayed on the character's page.
-            A maximum of {{ config('lorekeeper.pets.max_pets') }} pet{{ config('lorekeeper.pets.max_pets') != 1 ? 's' : '' }} can be attached.
+            @if (config('lorekeeper.pets.max_pets') && config('lorekeeper.pets.max_pets') > 0)
+                A maximum of {{ config('lorekeeper.pets.max_pets') }} pet{{ config('lorekeeper.pets.max_pets') != 1 ? 's' : '' }} can be attached.
+            @endif
             <br />You can determine which pets are displayed by dragging and dropping them in the order you want.
         </p>
 
@@ -62,6 +64,7 @@
                                     {{ $pet->level?->nextLevel?->bonding_required ? ($pet->level?->bonding .'/'. $pet->level?->nextLevel?->bonding_required) : $pet->level?->levelName }}
                                 </div>
                             </div>
+                            {{ $pet->level?->levelName }}
                             @if (Auth::check() && Auth::user()->id == $character->user_id && $pet->canBond())
                                 <div class="form-group mb-0" id="bondForm">
                                     {!! Form::open(['url' => 'pets/bond/' . $pet->id]) !!}
