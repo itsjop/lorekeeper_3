@@ -575,7 +575,7 @@ class PetController extends Controller {
      * Loads the add pet to level modal.
      */
     public function getAddPetToLevel($level_id) {
-        $level = PetLevel::find($id);
+        $level = PetLevel::find($level_id);
         if (!$level) {
             abort(404);
         }
@@ -604,8 +604,8 @@ class PetController extends Controller {
     /**
      * Adds pet(s) to a level.
      */
-    public function postAddPetToLevel(Request $request, PetService $service, $level_id, $id) {
-        if ($service->addPetsToLevel($request->input('pet_ids'), PetLevel::find($id))) {
+    public function postAddPetToLevel(Request $request, PetService $service, $level_id) {
+        if ($service->addPetsToLevel($request->input('pet_ids'), PetLevel::find($level_id))) {
             flash('Pet(s) added to level successfully.')->success();
         } else {
             foreach ($service->errors()->getMessages()['error'] as $error) {

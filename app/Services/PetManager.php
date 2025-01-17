@@ -399,20 +399,24 @@ class PetManager extends Service {
             if ($pet->level->nextLevel && $bonding >= $pet->level->nextLevel?->bonding_required) {
                 // check if this level has rewards, or if it has pet rewards for this pet
                 $nextLevel = $pet->level->nextLevel;
-                $nextLevelRewards = $pet->level->nextLevel?->rewards;
-                $petRewards = $nextLevel->pets()->where('pet_id', $pet->pet->id)->first()?->rewards;
+                $nextLevelRewards = $pet->level->nextLevel?->rewardData;
+                $petRewards = $nextLevel->pets()->where('pet_id', $pet->pet->id)->first()?->rewardData;
                 if ($nextLevelRewards || $petRewards) {
                     $assets = createAssetsArray();
 
                     if ($nextLevelRewards) {
                         foreach ($nextLevelRewards as $reward) {
-                            addAsset($assets, findReward($reward->rewardable_type, $reward->rewardable_id), $reward->quantity);
+                            $model = getAssetModelString(strtolower($reward->rewardable_type));
+                            $asset = $model::find($reward->rewardable_id);
+                            addAsset($assets, $asset, $reward->quantity);
                         }
                     }
 
                     if ($petRewards) {
                         foreach ($petRewards as $reward) {
-                            addAsset($assets, findReward($reward->rewardable_type, $reward->rewardable_id), $reward->quantity);
+                            $model = getAssetModelString(strtolower($reward->rewardable_type));
+                            $asset = $model::find($reward->rewardable_id);
+                            addAsset($assets, $asset, $reward->quantity);
                         }
                     }
 
@@ -427,7 +431,7 @@ class PetManager extends Service {
                 $pet->level->bonding = 0;
                 $pet->level->save();
 
-                flash('Your pet has leveled up! They are now level '.$pet->level->level->level.'.')->success();
+                flash('Your pet has leveled up! They are now level '.$pet->level->bonding_level.'.')->success();
             } else {
                 $pet->level->bonding = $bonding;
                 $pet->level->save();

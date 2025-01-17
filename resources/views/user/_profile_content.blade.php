@@ -124,8 +124,12 @@
                     @foreach ($pets as $pet)
                         <div class="col-md-2 profile-inventory-item">
                             <a href="{{ url($user->url . '/pets') }}" class="inventory-stack">
-                                <img class="img-fluid" src="{{ $pet->image($pet->pivot->id) }}" data-toggle="tooltip" title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
+                                @if ($pet->has_image)
+                                    <img class="img-fluid" src="{{ $pet->image($pet->pivot->id) }}" data-toggle="tooltip" title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
                                     alt="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}" />
+                                @else
+                                    <p>{{ $pet->name }}</p>
+                                @endif
                             </a>
                         </div>
                     @endforeach

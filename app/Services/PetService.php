@@ -505,6 +505,20 @@ class PetService extends Service {
 
             $level = PetLevel::create($data);
 
+            $rewards = createAssetsArray();
+            if (isset($data['rewardable_type']) && $data['rewardable_type']) {
+                foreach($data['rewardable_type'] as $key => $type) {
+                    $model = getAssetModelString(strtolower($type));
+                    $reward = $model::find($data['rewardable_id'][$key]);
+
+                    addAsset($rewards, $reward, $data['quantity'][$key]);
+                }
+            }
+
+            $level->update([
+                'rewards' => getDataReadyAssets($rewards),
+            ]);
+
             return $this->commitReturn($level);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
@@ -536,13 +550,11 @@ class PetService extends Service {
 
             $rewards = createAssetsArray();
             if (isset($data['rewardable_id']) && $data['rewardable_id']) {
-                foreach($data['rewardable_id'] as $key => $rewardable_id) {
-                    $reward = findReward($data['rewardable_type'][$key], $rewardable_id);
-                    $rewards[$reward->assetType] = [
-                        'rewardable_id'   => $rewardable_id,
-                        'rewardable_type' => $data['rewardable_type'][$key],
-                        'quantity'        => $data['quantity'][$key],
-                    ];
+                foreach($data['rewardable_type'] as $key => $type) {
+                    $model = getAssetModelString(strtolower($type));
+                    $reward = $model::find($data['rewardable_id'][$key]);
+
+                    addAsset($rewards, $reward, $data['quantity'][$key]);
                 }
             }
 
@@ -550,7 +562,7 @@ class PetService extends Service {
                 'name'             => $data['name'],
                 'level'            => $data['level'],
                 'bonding_required' => $data['bonding_required'],
-                'rewards'          => json_encode($rewards),
+                'rewards'          => getDataReadyAssets($rewards),
             ]);
 
             return $this->commitReturn($level);
@@ -589,16 +601,32 @@ class PetService extends Service {
 
     /**
      * Adds pets to a level.
+     * 
+     * @param array                 $pet_ids
+     * @param \App\Models\Pet\PetLevel $level
+     * 
+     * @return bool
      */
     public function addPetsToLevel($pet_ids, $level) {
         DB::beginTransaction();
 
         try {
-            $level->pets()->delete();
+            $existingPets = $level->pets()->pluck('pet_id')->toArray();
+
+            // get the ids that need to be deleted
+            $deletePets = array_diff($existingPets, $pet_ids);
+            $level->pets()->whereIn('pet_id', $deletePets)->delete();
 
             $pet_ids = array_unique($pet_ids);
-            foreach($pet_ids as $pet_id) {
+            foreach ($pet_ids as $pet_id) {
                 $pet = Pet::find($pet_id);
+                if (!$pet) {
+                    throw new \Exception('Invalid pet selected.');
+                }
+
+                if ($level->pets()->where('pet_id', $pet_id)->exists()) {
+                    continue;
+                }
                 $level->pets()->create([
                     'pet_id' => $pet_id,
                 ]);
@@ -621,19 +649,17 @@ class PetService extends Service {
         try {
 
             $rewards = createAssetsArray();
-            if (isset($data['rewardable_id']) && $data['rewardable_id']) {
-                foreach($data['rewardable_id'] as $key => $rewardable_id) {
-                    $reward = findReward($data['rewardable_type'][$key], $rewardable_id);
-                    $rewards[$reward->assetType] = [
-                        'rewardable_id'   => $rewardable_id,
-                        'rewardable_type' => $data['rewardable_type'][$key],
-                        'quantity'        => $data['quantity'][$key],
-                    ];
+            if (isset($data['rewardable_type']) && $data['rewardable_type']) {
+                foreach($data['rewardable_type'] as $key => $type) {
+                    $model = getAssetModelString(strtolower($type));
+                    $reward = $model::find($data['rewardable_id'][$key]);
+
+                    addAsset($rewards, $reward, $data['quantity'][$key]);
                 }
             }
 
             $petLevel->update([
-                'rewards' => json_encode($rewards),
+                'rewards' => getDataReadyAssets($rewards),
             ]);
 
             return $this->commitReturn($petLevel);

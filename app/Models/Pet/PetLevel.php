@@ -22,6 +22,15 @@ class PetLevel extends Model {
      */
     protected $table = 'pet_levels';
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'rewards' => 'array',
+    ];
+
     /**********************************************************************************************
 
         RELATIONS
@@ -42,18 +51,28 @@ class PetLevel extends Model {
     **********************************************************************************************/
 
     /**
-     * Returns rewards as objects.
+     * Get the rewards for the submission/claim.
+     *
+     * @return array
      */
-    public function getRewardsAttribute() {
-        if (empty($this->attributes['rewards'])) {
+    public function getRewardDataAttribute() {
+        if (!$this->rewards) {
             return [];
         }
+
+        $assets = parseAssetData($this->rewards);
         $rewards = [];
-        foreach(json_decode($this->attributes['rewards']) as $key=>$reward) {
-            if (count(json_decode($this->attributes['rewards'], true)[$key])) {
-                $rewards[] = $reward;
+        foreach ($assets as $type => $a) {
+            $class = getAssetModelString($type, false);
+            foreach ($a as $id => $asset) {
+                $rewards[] = (object) [
+                    'rewardable_type' => $class,
+                    'rewardable_id'   => $id,
+                    'quantity'        => $asset['quantity'],
+                ];
             }
         }
+
         return $rewards;
     }
 }

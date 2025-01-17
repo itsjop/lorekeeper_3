@@ -46,7 +46,7 @@
 
     <h2>General Rewards</h2>
     <p>These rewards are given to the owner of a pet when they reach this level, regardless of what pet it is.</p>
-    @include('widgets._loot_select', ['loots' => $level->rewards ?? [], 'showLootTables' => true, 'showRaffles' => true])
+    @include('widgets._loot_select', ['loots' => $level->rewardData ?? [], 'showLootTables' => true, 'showRaffles' => true])
 
     <div class="text-right">
         {!! Form::submit($level->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
@@ -71,7 +71,7 @@
                             <h3>{{ $pet->pet->name }}</h3>
                         </div>
                         <div class="card-body">
-                            @if(count($pet->rewards))
+                            @if (count($pet->rewardData))
                                 <h4>Rewards</h4>
                                 <table class="table table-sm">
                                     <thead>
@@ -81,9 +81,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pet->rewards as $reward)
+                                        @foreach ($pet->rewardData as $reward)
+                                            @php
+                                                $model = getAssetModelString(strtolower($reward->rewardable_type));
+                                                $asset = $model::find($reward->rewardable_id);
+                                            @endphp
                                             <tr>
-                                                @php $asset = findReward($reward->rewardable_type, $reward->rewardable_id); @endphp
                                                 <td>{!! $asset->displayName !!}</td>
                                                 <td>{{ $reward->quantity }}</td>
                                             </tr>

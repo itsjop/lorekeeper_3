@@ -254,7 +254,33 @@ function getDataReadyAssets($array, $isCharacter = false) {
     return $result;
 }
 
-// --------------------------------------------
+/**
+ * Retrieves the data associated with an asset array,
+ * basically reversing the above function.
+ * Use the data attribute after json_decode()ing it.
+ *
+ * @param array $array
+ *
+ * @return array
+ */
+function parseAssetData($array) {
+    $assets = createAssetsArray();
+    foreach ($array as $key => $contents) {
+        $model = getAssetModelString($key);
+        if ($model) {
+            foreach ($contents as $id => $quantity) {
+                $assets[$key][$id] = [
+                    'asset'    => $model::find($id),
+                    'quantity' => $quantity,
+                ];
+            }
+        }
+    }
+
+    return $assets;
+}
+
+// PET DROPS --------------------------------------------
 
 /**
  * Adds an asset to the given array.
@@ -339,32 +365,6 @@ function parseDropAssetData($array) {
 }
 
 // --------------------------------------------
-
-/**
- * Retrieves the data associated with an asset array,
- * basically reversing the above function.
- * Use the data attribute after json_decode()ing it.
- *
- * @param array $array
- *
- * @return array
- */
-function parseAssetData($array) {
-    $assets = createAssetsArray();
-    foreach ($array as $key => $contents) {
-        $model = getAssetModelString($key);
-        if ($model) {
-            foreach ($contents as $id => $quantity) {
-                $assets[$key][$id] = [
-                    'asset'    => $model::find($id),
-                    'quantity' => $quantity,
-                ];
-            }
-        }
-    }
-
-    return $assets;
-}
 
 /**
  * Distributes the assets in an assets array to the given recipient (user).
@@ -508,32 +508,4 @@ function createRewardsString($array) {
     }
 
     return implode(', ', array_slice($string, 0, count($string) - 1)).(count($string) > 2 ? ', and ' : ' and ').end($string);
-}
-
-/**
- * Returns an asset from provided data.
- */
-function findReward($type, $id, $isCharacter = false) {
-    $reward = null;
-    switch ($type) {
-        case 'Item':
-            $reward = \App\Models\Item\Item::find($id);
-            break;
-        case 'Currency':
-            $reward = \App\Models\Currency\Currency::find($id);
-            if (!$isCharacter && !$reward->is_user_owned) {
-                throw new \Exception('Invalid currency selected.');
-            }
-            break;
-        case 'Pet':
-            $reward = \App\Models\Pet\Pet::find($id);
-            break;
-        case 'LootTable':
-            $reward = \App\Models\Loot\LootTable::find($id);
-            break;
-        case 'Raffle':
-            $reward = \App\Models\Raffle\Raffle::find($id);
-            break;
-    }
-    return $reward;
 }
