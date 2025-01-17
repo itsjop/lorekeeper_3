@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 Use App\Models\Pet\Pet;
 Use App\Models\Pet\PetDropData;
 Use App\Models\Pet\PetEvolution;
+Use App\Models\User\UserPet;
 use App\Services\PetService;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -63,20 +64,6 @@ class UpdatePetVariants extends Command
                 rename($oldImage, $newImage);
             }
 
-            $variantDropData = DB::table('pet_variant_drop_data')->where('variant_id', $variant->id)->first();
-            $parentPetDropData = PetDropData::where('pet_id', $variant->pet_id)->first();
-            $dropData = PetDropData::create([
-                'pet_id' => $pet->id,
-                'parameters' => $parentPetDropData->parameters,
-                'is_active' => $parentPetDropData->is_active,
-                'name' => $parentPetDropData->name . ' - ' . $variant->variant_name,
-                'frequency' => $parentPetDropData->frequency,
-                'interval' => $parentPetDropData->interval,
-                'cap' => $parentPetDropData->cap,
-                //
-                'data' => json_decode($variantDropData->data),
-            ]);
-
             // evolutions
             $petEvolutions = PetEvolution::where('pet_id', $variant->pet_id)->get();
             foreach ($petEvolutions as $evolution) {
@@ -103,6 +90,23 @@ class UpdatePetVariants extends Command
                     'pet_id' => $pet->id,
                 ]);
             }
+
+            $variantDropData = DB::table('pet_variant_drop_data')->where('variant_id', $variant->id)->first();
+            $parentPetDropData = PetDropData::where('pet_id', $variant->pet_id)->first();
+            if (!$variantDropData || !$parentPetDropData) {
+                continue;
+            }
+            $dropData = PetDropData::create([
+                'pet_id' => $pet->id,
+                'parameters' => $parentPetDropData->parameters,
+                'is_active' => $parentPetDropData->is_active,
+                'name' => $parentPetDropData->name . ' - ' . $variant->variant_name,
+                'frequency' => $parentPetDropData->frequency,
+                'interval' => $parentPetDropData->interval,
+                'cap' => $parentPetDropData->cap,
+                //
+                'data' => json_decode($variantDropData->data),
+            ]);
         }
 
         Schema::dropIfExists('pet_variants');
