@@ -552,7 +552,13 @@ class PetService extends Service {
             if (isset($data['rewardable_id']) && $data['rewardable_id']) {
                 foreach($data['rewardable_type'] as $key => $type) {
                     $model = getAssetModelString(strtolower($type));
+                    if (!$model) {
+                        throw new \Exception('Invalid rewardable type selected: ' . $type);
+                    }
                     $reward = $model::find($data['rewardable_id'][$key]);
+                    if (!$reward) {
+                        throw new \Exception('Invalid rewardable selected.');
+                    }
 
                     addAsset($rewards, $reward, $data['quantity'][$key]);
                 }
@@ -652,7 +658,13 @@ class PetService extends Service {
             if (isset($data['rewardable_type']) && $data['rewardable_type']) {
                 foreach($data['rewardable_type'] as $key => $type) {
                     $model = getAssetModelString(strtolower($type));
+                    if (!$model) {
+                        throw new \Exception('Invalid rewardable type selected: ' . $type);
+                    }
                     $reward = $model::find($data['rewardable_id'][$key]);
+                    if (!$reward) {
+                        throw new \Exception('Invalid rewardable selected.');
+                    }
 
                     addAsset($rewards, $reward, $data['quantity'][$key]);
                 }
