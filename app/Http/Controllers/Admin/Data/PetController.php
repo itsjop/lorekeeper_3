@@ -189,6 +189,7 @@ class PetController extends Controller {
     public function getCreatePet() {
         return view('admin.pets.create_edit_pet', [
             'pet'        => new Pet,
+            'pets'       => Pet::orderBy('name', 'DESC')->whereNull('parent_id')->pluck('name', 'id')->toArray(),
             'categories' => ['none' => 'No category'] + PetCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
         ]);
     }
@@ -208,6 +209,7 @@ class PetController extends Controller {
 
         return view('admin.pets.create_edit_pet', [
             'pet'        => $pet,
+            'pets'       => Pet::orderBy('name', 'DESC')->whereNull('parent_id')->where('id', '!=', $id)->pluck('name', 'id')->toArray(),
             'categories' => ['none' => 'No category'] + PetCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
         ]);
     }
@@ -223,7 +225,7 @@ class PetController extends Controller {
     public function postCreateEditPet(Request $request, PetService $service, $id = null) {
         $id ? $request->validate(Pet::$updateRules) : $request->validate(Pet::$createRules);
         $data = $request->only([
-            'name', 'allow_transfer', 'pet_category_id', 'description', 'image', 'remove_image', 'limit',
+            'name', 'allow_transfer', 'pet_category_id', 'description', 'image', 'remove_image', 'limit', 'parent_id',
         ]);
         if ($id && $service->updatePet(Pet::find($id), $data, Auth::user())) {
             flash('Pet updated successfully.')->success();

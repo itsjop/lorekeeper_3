@@ -57,6 +57,15 @@
         {!! Form::number('limit', $pet->limit, ['class' => 'col-md-9 form-control px-2']) !!}
     </div>
 
+    @if (!$pet->variants->count())
+        <div class="form-group row no-gutters align-items-center">
+            <div class="col-md col-form-label">
+                {!! Form::label('parent_id', 'Variant of Pet (Optional)', ['class' => 'mb-0']) !!} {!! add_help('If this pet is a variant of another pet, select the parent pet here.') !!}
+            </div>
+            {!! Form::select('parent_id', $pets, $pet->parent_id, ['class' => 'col-md-9 form-control', 'placeholder' => 'Select Main Pet']) !!}
+        </div>
+    @endif
+
     <div class="form-group">
         {!! Form::label('Description (Optional)') !!}
         {!! Form::textarea('description', $pet->description, ['class' => 'form-control wysiwyg']) !!}
@@ -73,46 +82,48 @@
 
     @if ($pet->id)
         <hr />
-        <div class="card mb-3">
-            <div class="card-header h3">Variants</div>
-            <div class="card-body">
-                <p>
-                    Variants are different colourations, patterns, or other visual differences that a pet can have.
-                    <br />They are technically separate pets, but are treated as variants of the same pet.
-                    {{ !config('lorekeeper.pets.include_variants') ? 'They do not have a unique encyclopedia entry.' : '' }}
-                </p>
-                @if ($pet->variants->count())
-                    @foreach ($pet->variants->chunk(4) as $chunk)
-                        <div class="row {{ $loop->last ? '' : 'mb-3' }}">
-                            @foreach ($chunk as $variant)
-                                <div class="col">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            @if ($variant->has_image)
-                                                <a href="{{ $variant->imageUrl }}" data-lightbox="entry" data-title="{{ $variant->name }}">
-                                                    <img src="{{ $variant->imageUrl }}" class="img-fluid" alt="{{ $variant->name }}" data-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
-                                                </a>
-                                            @else
-                                                {{ $variant->name }}
-                                            @endif
-                                            <div class="h5 my-2">{{ $variant->name }}</div>
-                                            <div>
-                                                <a href="{{ $variant->adminUrl }}" class="btn btn-sm btn-primary edit-variant"><i class="fas fa-cog mr-1"></i>Edit</a>
-                                                @if ($variant->dropData)
-                                                    <a href="{{ url('/admin/data/pets/drops/edit') . '/' . $variant->id }}" class="btn btn-sm btn-primary"><i class="fas fa-gift mr-1"></i>Drops</a>
+        @if (!$pet->isVariant)
+            <div class="card mb-3">
+                <div class="card-header h3">Variants</div>
+                <div class="card-body">
+                    <p>
+                        Variants are different colourations, patterns, or other visual differences that a pet can have.
+                        <br />They are technically separate pets, but are treated as variants of the same pet.
+                        {{ !config('lorekeeper.pets.include_variants') ? 'They do not have a unique encyclopedia entry.' : '' }}
+                    </p>
+                    @if ($pet->variants->count())
+                        @foreach ($pet->variants->chunk(4) as $chunk)
+                            <div class="row {{ $loop->last ? '' : 'mb-3' }}">
+                                @foreach ($chunk as $variant)
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="card-body text-center">
+                                                @if ($variant->has_image)
+                                                    <a href="{{ $variant->imageUrl }}" data-lightbox="entry" data-title="{{ $variant->name }}">
+                                                        <img src="{{ $variant->imageUrl }}" class="img-fluid" alt="{{ $variant->name }}" data-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
+                                                    </a>
+                                                @else
+                                                    {{ $variant->name }}
                                                 @endif
+                                                <div class="h5 my-2">{{ $variant->name }}</div>
+                                                <div>
+                                                    <a href="{{ $variant->adminUrl }}" class="btn btn-sm btn-primary edit-variant"><i class="fas fa-cog mr-1"></i>Edit</a>
+                                                    @if ($variant->dropData)
+                                                        <a href="{{ url('/admin/data/pets/drops/edit') . '/' . $variant->id }}" class="btn btn-sm btn-primary"><i class="fas fa-gift mr-1"></i>Drops</a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endforeach
-                @else
-                    <div class="alert alert-info">No variants found.</div>
-                @endif
+                                @endforeach
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="alert alert-info">No variants found.</div>
+                    @endif
+                </div>
             </div>
-        </div>
+        @endif
 
         <div class="card mb-3">
             <div class="card-header h2">Evolutions</div>
