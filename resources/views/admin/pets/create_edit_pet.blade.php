@@ -135,8 +135,9 @@
 
         <div class="card mb-3">
             <div class="card-header h2">Evolutions</div>
-               <div class="card-body">
-                <p>If you would like your pet to "evolve" (similarly to Pokémon), you can set up evolutions here. Evolutions are not required, and you can have as many or as few as you like. If you do not set up any evolutions, the pet will not evolve.</p>
+            <div class="card-body">
+                <p>If you would like your pet to "evolve" (similarly to Pokémon), you can set up evolutions here. Evolutions are not required, and you can have as many or as few as you like. If you do not set up any evolutions, the pet will not evolve.
+                </p>
                 <p>Please note that variants will not be carried over to the evolved pet. If you would like to have a variant evolve into another variant, you will need to set up an evolution for each variant (after an evolution has been created).</p>
                 <div class="mb-2 text-right">
                     <a href="#" class="btn btn-primary" id="add-evolution">Add Evolution</a>

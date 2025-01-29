@@ -110,7 +110,7 @@
                                     <td>{{ $variant->name }}</td>
                                     <td>
                                         @if ($variant->dropData->rewards())
-                                            {!! $variant->dropData->rewardString()!!}
+                                            {!! $variant->dropData->rewardString() !!}
                                         @else
                                             <i>No rewards set.</i>
                                         @endif

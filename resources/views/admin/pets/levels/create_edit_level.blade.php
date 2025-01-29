@@ -64,7 +64,7 @@
             <a href="#" class="btn btn-primary add-pet">Add Pet</a>
         </div>
         <div class="row">
-            @foreach($level->pets as $pet)
+            @foreach ($level->pets as $pet)
                 <div class="col-md-6">
                     <div class="card mb-2">
                         <div class="card-header">
@@ -97,7 +97,7 @@
                                 <p>This pet has no specific rewards for this level.</p>
                             @endif
                             <div class="float-right">
-                                <a href="{{ url('admin/data/pets/levels/edit/'.$level->id.'/pets/edit/'.$pet->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('admin/data/pets/levels/edit/' . $level->id . '/pets/edit/' . $pet->id) }}" class="btn btn-primary">Edit</a>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
             });
             $('.add-pet').on('click', function(e) {
                 e.preventDefault();
-                loadModal("{{ url('admin/data/pets/levels/edit/'.$level->id.'/pets/add') }}", 'Add Pet to Level');
+                loadModal("{{ url('admin/data/pets/levels/edit/' . $level->id . '/pets/add') }}", 'Add Pet to Level');
             });
         });
     </script>

@@ -23,7 +23,7 @@
         <div class="col-lg-6 col-lg-10">
             <div class="card mb-3">
                 <div class="card-body">
-                    <div class="row world-entry {{ $pet->evolutions->count() || $pet->variants->count() ? 'mb-3' : ''}}">
+                    <div class="row world-entry {{ $pet->evolutions->count() || $pet->variants->count() ? 'mb-3' : '' }}">
                         @if ($pet->has_image)
                             <div class="col-md-3 world-entry-image">
                                 <a href="{{ $pet->imageUrl }}" data-lightbox="entry" data-title="{{ $pet->name }}">
@@ -99,17 +99,17 @@
                                 @foreach ($pet->variants->chunk(4) as $chunk)
                                     <div class="row">
                                         @foreach ($chunk as $variant)
-                                        <div class="col-md text-center">
-                                            <a href="{{ $variant->idUrl }}">
-                                                @if ($variant->has_image)
-                                                    <img src="{{ $variant->imageUrl }}" class="img-fluid" style="max-height: 10em;" alt="{{ $variant->name }}" data-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
-                                                @else
-                                                    {{ $variant->name }}
-                                                @endif
-                                                <p class="mb-0">{{ $variant->description }}</p>
-                                            </a>
-                                        </div>
-                                    @endforeach
+                                            <div class="col-md text-center">
+                                                <a href="{{ $variant->idUrl }}">
+                                                    @if ($variant->has_image)
+                                                        <img src="{{ $variant->imageUrl }}" class="img-fluid" style="max-height: 10em;" alt="{{ $variant->name }}" data-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
+                                                    @else
+                                                        {{ $variant->name }}
+                                                    @endif
+                                                    <p class="mb-0">{{ $variant->description }}</p>
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 @endforeach
                             </div>
