@@ -21,7 +21,7 @@ class PageService extends Service {
      * @param array                 $data
      * @param \App\Models\User\User $user
      *
-     * @return \App\Models\SitePage|bool
+     * @return bool|SitePage
      */
     public function createPage($data, $user) {
         DB::beginTransaction();
@@ -56,7 +56,7 @@ class PageService extends Service {
      * @param \App\Models\User\User $user
      * @param mixed                 $page
      *
-     * @return \App\Models\SitePage|bool
+     * @return bool|SitePage
      */
     public function updatePage($page, $data, $user) {
         DB::beginTransaction();
@@ -108,6 +108,29 @@ class PageService extends Service {
             $page->delete();
 
             return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Regenerates a site page.
+     *
+     * @param mixed $page
+     *
+     * @return bool
+     */
+    public function regenPage($page) {
+        DB::beginTransaction();
+
+        try {
+            $page->parsed_text = parse($page->text);
+
+            $page->save();
+
+            return $this->commitReturn($page);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
         }

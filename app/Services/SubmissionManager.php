@@ -32,10 +32,10 @@ class SubmissionManager extends Service {
     /**
      * Creates a new submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param bool                  $isClaim
-     * @param mixed                 $isDraft
+     * @param array $data
+     * @param User  $user
+     * @param bool  $isClaim
+     * @param mixed $isDraft
      *
      * @return mixed
      */
@@ -84,10 +84,10 @@ class SubmissionManager extends Service {
             $promptRewards = $assets['promptRewards'];
 
             $submission->update([
-                'data' => json_encode([
+                'data' => [
                     'user'    => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
                     'rewards' => getDataReadyAssets($promptRewards),
-                ]), // list of rewards and addons
+                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : []),
             ]);
 
             // Set characters that have been attached.
@@ -104,11 +104,11 @@ class SubmissionManager extends Service {
     /**
      * Edits an existing submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param bool                  $isClaim
-     * @param mixed                 $submission
-     * @param mixed                 $isSubmit
+     * @param array $data
+     * @param User  $user
+     * @param bool  $isClaim
+     * @param mixed $submission
+     * @param mixed $isSubmit
      *
      * @return mixed
      */
@@ -156,10 +156,10 @@ class SubmissionManager extends Service {
                 'url'           => $data['url'] ?? null,
                 'updated_at'    => Carbon::now(),
                 'comments'      => $data['comments'],
-                'data'          => json_encode([
+                'data'          => [
                     'user'          => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
                     'rewards'       => getDataReadyAssets($promptRewards),
-                ]), // list of rewards and addons
+                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : []),
             ] + ($isClaim ? [] : ['prompt_id' => $prompt->id]));
 
             return $this->commitReturn($submission);
@@ -216,10 +216,11 @@ class SubmissionManager extends Service {
                     'updated_at'            => Carbon::now(),
                     'staff_id'              => $user->id,
                     'status'                => 'Draft',
-                    'data'                  => json_encode([
-                        'user'      => $userAssets,
-                        'rewards'   => getDataReadyAssets($promptRewards),
-                    ]), // list of rewards and addons
+                    'data'                  => [
+                        'user'                  => $userAssets,
+                        'rewards'               => getDataReadyAssets($promptRewards),
+                        'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
+                    ], // list of rewards and addons
                 ]);
 
                 Notifications::create($submission->prompt_id ? 'SUBMISSION_CANCELLED' : 'CLAIM_CANCELLED', $submission->user, [
@@ -232,10 +233,11 @@ class SubmissionManager extends Service {
                 $submission->update([
                     'status'     => 'Draft',
                     'updated_at' => Carbon::now(),
-                    'data'       => json_encode([
-                        'user'      => $userAssets,
-                        'rewards'   => getDataReadyAssets($promptRewards),
-                    ]), // list of rewards and addons
+                    'data'       => [
+                        'user'                  => $userAssets,
+                        'rewards'               => getDataReadyAssets($promptRewards),
+                        'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
+                    ], // list of rewards and addons
                 ]);
             }
 
@@ -250,8 +252,8 @@ class SubmissionManager extends Service {
     /**
      * Rejects a submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
+     * @param array $data
+     * @param User  $user
      *
      * @return mixed
      */
@@ -313,8 +315,8 @@ class SubmissionManager extends Service {
     /**
      * Approves a submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
+     * @param array $data
+     * @param User  $user
      *
      * @return mixed
      */
@@ -455,7 +457,7 @@ class SubmissionManager extends Service {
                 SubmissionCharacter::create([
                     'character_id'  => $c->id,
                     'submission_id' => $submission->id,
-                    'data'          => json_encode(getDataReadyAssets($assets)),
+                    'data'          => getDataReadyAssets($assets),
                 ]);
             }
 
@@ -481,10 +483,11 @@ class SubmissionManager extends Service {
                 'parsed_staff_comments' => $data['parsed_staff_comments'],
                 'staff_id'              => $user->id,
                 'status'                => 'Approved',
-                'data'                  => json_encode([
-                    'user'    => $addonData,
-                    'rewards' => getDataReadyAssets($rewards),
-                ]), // list of rewards
+                'data'                  => [
+                    'user'                  => $addonData,
+                    'rewards'               => getDataReadyAssets($rewards),
+                    'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
+                ], // list of rewards
             ]);
 
             Notifications::create($submission->prompt_id ? 'SUBMISSION_APPROVED' : 'CLAIM_APPROVED', $submission->user, [
@@ -799,7 +802,7 @@ class SubmissionManager extends Service {
             SubmissionCharacter::create([
                 'character_id'  => $c->id,
                 'submission_id' => $submission->id,
-                'data'          => json_encode(getDataReadyAssets($assets)),
+                'data'          => getDataReadyAssets($assets),
             ]);
         }
 

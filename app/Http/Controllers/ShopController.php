@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Currency\Currency;
 use App\Models\Item\Item;
 use App\Models\Item\ItemCategory;
 use App\Models\Item\ItemTag;
@@ -12,6 +11,7 @@ use App\Models\Shop\Shop;
 use App\Models\Shop\ShopLog;
 use App\Models\Shop\ShopStock;
 use App\Models\User\UserItem;
+use App\Services\LimitManager;
 use App\Services\ShopManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +33,7 @@ class ShopController extends Controller {
      */
     public function getIndex() {
         return view('shops.index', [
-            'shops' => Shop::where('is_active', 1)->orderBy('sort', 'DESC')->get(),
+            'shops' => Shop::where('is_active', 1)->where('is_hidden', 0)->orderBy('sort', 'DESC')->get(),
         ]);
     }
 
@@ -45,8 +45,6 @@ class ShopController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getShop($id) {
-        $categories = ItemCategory::orderBy('sort', 'DESC')->get();
-        $petCategories = PetCategory::orderBy('sort', 'DESC')->get();
         $shop = Shop::where('id', $id)->where('is_active', 1)->first();
 
         if (!$shop) {
@@ -62,21 +60,18 @@ class ShopController extends Controller {
             }
         }
 
-        if ($shop->is_restricted) {
+        if (count(getLimits($shop))) {
             if (!Auth::check()) {
                 flash('You must be logged in to enter this shop.')->error();
 
-                return redirect()->to('/shops');
+                return redirect()->to('shops');
             }
-            foreach ($shop->limits as $limit) {
-                $item = $limit->item_id;
-                $check = UserItem::where('item_id', $item)->where('user_id', auth::user()->id)->where('count', '>', 0)->first();
 
-                if (!$check) {
-                    flash('You require a '.$limit->item->name.' to enter this store.')->error();
+            $limitService = new LimitManager;
+            if (!$limitService->checkLimits($shop)) {
+                flash($limitService->errors()->getMessages()['error'][0])->error();
 
-                    return redirect()->to('/shops');
-                }
+                return redirect()->to('shops');
             }
         }
 
@@ -125,7 +120,6 @@ class ShopController extends Controller {
             'shop'       => $shop,
             'stocks'     => $stocks,
             'shops'      => Shop::where('is_active', 1)->orderBy('sort', 'DESC')->get(),
-            'currencies' => Currency::whereIn('id', ShopStock::where('shop_id', $shop->id)->pluck('currency_id')->toArray())->get()->keyBy('id'),
         ]);
     }
 
@@ -143,6 +137,15 @@ class ShopController extends Controller {
         $stock = ShopStock::where('id', $stockId)->where('shop_id', $id)->first();
         if (!$shop) {
             abort(404);
+        }
+
+        if (count(getLimits($shop))) {
+            $limitService = new LimitManager;
+            if (!$limitService->checkLimits($shop)) {
+                flash($limitService->errors()->getMessages()['error'][0])->error();
+
+                return redirect()->to('shops');
+            }
         }
 
         $user = Auth::user();
@@ -165,7 +168,7 @@ class ShopController extends Controller {
                     return in_array($itemId, json_decode($shop->allowed_coupons, 1));
                 });
             }
-            $check = UserItem::with('item')->whereIn('item_id', $itemIds)->where('user_id', auth::user()->id)->where('count', '>', 0)->get()->pluck('item.name', 'id');
+            $check = UserItem::with('item')->whereIn('item_id', $itemIds)->where('user_id', Auth::user()->id)->where('count', '>', 0)->get()->pluck('item.name', 'id');
         } else {
             $check = null;
         }
@@ -190,7 +193,7 @@ class ShopController extends Controller {
      */
     public function postBuy(Request $request, ShopManager $service) {
         $request->validate(ShopLog::$createRules);
-        if ($service->buyStock($request->only(['stock_id', 'shop_id', 'slug', 'bank', 'quantity', 'use_coupon', 'coupon']), Auth::user())) {
+        if ($service->buyStock($request->only(['stock_id', 'shop_id', 'slug', 'bank', 'quantity', 'use_coupon', 'coupon', 'cost_group']), Auth::user())) {
             flash('Successfully purchased item.')->success();
         } else {
             foreach ($service->errors()->getMessages()['error'] as $error) {

@@ -22,10 +22,10 @@ class SalesService extends Service {
     /**
      * Creates a Sales post.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
+     * @param array $data
+     * @param User  $user
      *
-     * @return \App\Models\Sales\Sales|bool
+     * @return bool|Sales
      */
     public function createSales($data, $user) {
         DB::beginTransaction();
@@ -73,11 +73,11 @@ class SalesService extends Service {
     /**
      * Updates a Sales post.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param mixed                 $sales
+     * @param array $data
+     * @param User  $user
+     * @param mixed $sales
      *
-     * @return \App\Models\Sales\Sales|bool
+     * @return bool|Sales
      */
     public function updateSales($sales, $data, $user) {
         DB::beginTransaction();
@@ -241,7 +241,7 @@ class SalesService extends Service {
                 'image_id'     => $data['image_id'][$key] ?? $character->image->id,
                 'sales_id'     => $sales->id,
                 'type'         => $charData[$key]['type'],
-                'data'         => json_encode($charData[$key]),
+                'data'         => $charData[$key],
                 'description'  => $data['description'][$key] ?? null,
                 'link'         => $data['link'][$key] ?? null,
                 'is_open'      => $data['character_is_open'][$character->slug] ?? ($data['new_entry'][$key] ? 1 : 0),
