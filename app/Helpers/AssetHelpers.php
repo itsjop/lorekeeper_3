@@ -303,7 +303,6 @@ function addDropAsset(&$array, $asset, $min_quantity = 1, $max_quantity = 1) {
 /**
  * Get a clean version of the asset array to store in the database,
  * where each asset is listed in [id => quantity] format.
- * json_encode this and store in the data attribute.
  *
  * @param array $array
  *

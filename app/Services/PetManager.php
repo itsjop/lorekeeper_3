@@ -488,7 +488,7 @@ class PetManager extends Service {
                 }
             }
             else {
-                $this->logAdminAction($pet->user, 'Pet Variant Changed', json_encode(['pet' => $pet->id, 'variant' => $id]));
+                $this->logAdminAction($pet->user, 'Pet Variant Changed', ['pet' => $pet->id, 'variant' => $id]);
             }
 
             $pet->pet_id = $id == 'default' ? null : $id;
@@ -530,7 +530,9 @@ class PetManager extends Service {
                     throw new \Exception('Could not debit item.');
                 }
             }
-            else $this->logAdminAction($pet->user, 'Pet Evolution Changed', json_encode(['pet' => $pet->id, 'evolution' => $id])); // for when develop is merged
+            else {
+                $this->logAdminAction($pet->user, 'Pet Evolution Changed', ['pet' => $pet->id, 'evolution' => $id]);
+            }
 
             $pet->evolution_id = $id;
             $pet->save();
@@ -656,9 +658,9 @@ class PetManager extends Service {
                 }
 
                 $user_pet = UserPet::create([
-                    'user_id'    => $recipient->id,
-                    'pet_id'     => $variant ? $variant->id : $pet->id,
-                    'data'       => json_encode($data),
+                    'user_id'      => $recipient->id,
+                    'pet_id'       => $variant ? $variant->id : $pet->id,
+                    'data'         => $data,
                     'evolution_id' => $evolution?->id,
                 ]);
             }

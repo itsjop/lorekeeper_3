@@ -44,6 +44,8 @@ class UserPet extends Model {
      */
     protected $casts = [
         'bonded_at' => 'datetime',
+        'attached_at' => 'datetime',
+        'data' => 'array',
     ];
 
     /**********************************************************************************************

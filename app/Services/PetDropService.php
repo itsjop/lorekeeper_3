@@ -47,7 +47,7 @@ class PetDropService extends Service {
 
             $drop = PetDropData::create([
                 'pet_id'     => $data['pet_id'],
-                'parameters' => json_encode($paramData),
+                'parameters' => $paramData,
                 'frequency'  => $data['drop_frequency'],
                 'interval'   => $data['drop_interval'],
                 'is_active'  => $data['is_active'] ?? 0,
@@ -95,7 +95,7 @@ class PetDropService extends Service {
             $data['max_quantity'] ??= null;
 
             $drop->update([
-                'parameters' => json_encode($paramData),
+                'parameters' => $paramData,
                 'frequency'  => $data['drop_frequency'],
                 'interval'   => $data['drop_interval'],
                 'is_active'  => $data['is_active'] ?? 0,
