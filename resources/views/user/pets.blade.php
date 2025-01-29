@@ -32,6 +32,9 @@
                                 </div>
                                 <div>
                                     <a href="#" class="inventory-stack inventory-stack-name">
+                                        @if (!$pet->is_visible)
+                                            <i class="fas fa-eye-slash mr-1"></i>
+                                        @endif
                                         {{ $pet->pivot->evolution_id ? $pet->evolutions->where('id', $pet->pivot->evolution_id)->first()->evolution_name : $pet->name }}
                                         @if ($pet->pivot->has_image)
                                             <i class="fas fa-brush ml-1" data-toggle="tooltip" title="This pet has custom art."></i>

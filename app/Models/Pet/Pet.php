@@ -4,7 +4,7 @@ namespace App\Models\Pet;
 
 use App\Models\Model;
 use App\Models\User\UserPet;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class Pet extends Model {
     /**
@@ -14,7 +14,7 @@ class Pet extends Model {
      */
     protected $fillable = [
         'pet_category_id', 'name', 'has_image', 'description', 'parsed_description', 'allow_transfer', 'limit',
-        'parent_id',
+        'parent_id', 'is_visible',
     ];
 
     /**
@@ -94,6 +94,22 @@ class Pet extends Model {
         SCOPES
 
     **********************************************************************************************/
+
+    /**
+     * Scope a query to show only visible pets.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param mixed|null                            $user
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeVisible($query, $user = null) {
+        if ($user && $user->hasPower('edit_data')) {
+            return $query;
+        }
+
+        return $query->where('is_visible', 1);
+    }
 
     /**
      * Scope a query to sort pets in alphabetical order.

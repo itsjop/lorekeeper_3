@@ -279,7 +279,7 @@ class PetService extends Service {
             if (DB::table('prompt_rewards')->where('rewardable_type', 'Pet')->where('rewardable_id', $pet->id)->exists()) {
                 throw new \Exception('A prompt currently distributes this pet as a reward. Please remove the pet before deleting it.');
             }
-            if (DB::table('user_pets_logs')->where('pet_id', $pet->id)->exists()) {
+            if (DB::table('user_pets_log')->where('pet_id', $pet->id)->exists()) {
                 throw new \Exception('At least one log currently has this pet. Please remove the log(s) before deleting it.');
             }
             if (DB::table('shop_stock')->where('item_id', $pet->id)->where('stock_type', 'Pet')->exists()) {
@@ -287,7 +287,7 @@ class PetService extends Service {
             }
 
             // Delete character drops and drop data if they exist
-            if ($pet->dropData->exists()) {
+            if ($pet->dropData) {
                 $pet->dropData->petDrops()->delete();
                 $pet->dropData->delete();
             }
@@ -422,7 +422,9 @@ class PetService extends Service {
         if (isset($data['description']) && $data['description']) {
             $data['parsed_description'] = parse($data['description']);
         }
-
+        if (!isset($data['is_visible'])) {
+            $data['is_visible'] = 0;
+        }
         if (!isset($data['allow_attach'])) {
             $data['allow_attach'] = 0;
             $data['limit'] = null;
@@ -463,6 +465,10 @@ class PetService extends Service {
 
         if (!isset($data['allow_transfer'])) {
             $data['allow_transfer'] = 0;
+        }
+
+        if (!isset($data['is_visible'])) {
+            $data['is_visible'] = 0;
         }
 
         if (isset($data['remove_image'])) {
@@ -607,10 +613,10 @@ class PetService extends Service {
 
     /**
      * Adds pets to a level.
-     * 
+     *
      * @param array                 $pet_ids
      * @param \App\Models\Pet\PetLevel $level
-     * 
+     *
      * @return bool
      */
     public function addPetsToLevel($pet_ids, $level) {

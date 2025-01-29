@@ -1,12 +1,17 @@
 <div class="row world-entry">
     @if ($pet->imageUrl)
-        <div class="col-md-3 world-entry-image"><a href="{{ $pet->imageUrl }}" data-lightbox="entry" data-title="{{ $pet->name }}">
+        <div class="col-md-3 world-entry-image">
+            <a href="{{ $pet->imageUrl }}" data-lightbox="entry" data-title="{{ $pet->name }}">
                 <img src="{{ $pet->imageUrl }}" class="world-entry-image" alt="{{ $pet->name }}" />
-            </a></div>
+            </a>
+        </div>
     @endif
     <div class="{{ $pet->imageUrl ? 'col-md-9' : 'col-12' }}">
         <x-admin-edit title="Pet" :object="$pet" />
         <h2 class="h3">
+            @if (!$pet->is_visible)
+                <i class="fas fa-eye-slash mr-1"></i>
+            @endif
             {!! $pet->displayName !!}
             @if ($pet->category)
                 <i class="h4"> ({!! $pet->category->displayName !!})</i>

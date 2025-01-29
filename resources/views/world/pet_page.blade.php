@@ -33,6 +33,9 @@
                         @endif
                         <div class="{{ $pet->has_image ? 'col-md-9' : 'col-12' }}">
                             <h1>
+                                @if (!$pet->is_visible)
+                                    <i class="fas fa-eye-slash mr-1"></i>
+                                @endif
                                 {!! $pet->name !!}
                             </h1>
                             <div class="row">

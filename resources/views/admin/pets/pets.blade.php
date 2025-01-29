@@ -44,7 +44,12 @@
             </div>
             @foreach ($pets as $pet)
                 <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-                    <div class="col-5 col-md-6"> {{ $pet->name }} </div>
+                    <div class="col-5 col-md-6">
+                        @if (!$pet->is_visible)
+                            <i class="fas fa-eye-slash mr-1"></i>
+                        @endif
+                        {{ $pet->name }}
+                    </div>
                     <div class="col-5 col-md-5"> {{ $pet->category ? $pet->category->name : '' }} </div>
                     <div class="col-2 col-md-1 text-right"> <a href="{{ url('admin/data/pets/edit/' . $pet->id) }}" class="btn btn-primary py-0">Edit</a> </div>
                 </div>

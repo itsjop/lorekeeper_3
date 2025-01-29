@@ -13,8 +13,8 @@ use App\Models\Pet\PetLevelPet;
 use App\Models\User\UserPet;
 use App\Services\PetDropService;
 use App\Services\PetService;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PetController extends Controller {
     /*
@@ -83,7 +83,7 @@ class PetController extends Controller {
     public function postCreateEditPetCategory(Request $request, PetService $service, $id = null) {
         $id ? $request->validate(PetCategory::$updateRules) : $request->validate(PetCategory::$createRules);
         $data = $request->only([
-            'name', 'description', 'image', 'remove_image', 'allow_attach', 'limit',
+            'name', 'description', 'image', 'remove_image', 'allow_attach', 'limit', 'is_visible',
         ]);
         if ($id && $service->updatePetCategory(PetCategory::find($id), $data, Auth::user())) {
             flash('Category updated successfully.')->success();
@@ -225,7 +225,7 @@ class PetController extends Controller {
     public function postCreateEditPet(Request $request, PetService $service, $id = null) {
         $id ? $request->validate(Pet::$updateRules) : $request->validate(Pet::$createRules);
         $data = $request->only([
-            'name', 'allow_transfer', 'pet_category_id', 'description', 'image', 'remove_image', 'limit', 'parent_id',
+            'name', 'allow_transfer', 'pet_category_id', 'description', 'image', 'remove_image', 'limit', 'is_visible', 'parent_id',
         ]);
         if ($id && $service->updatePet(Pet::find($id), $data, Auth::user())) {
             flash('Pet updated successfully.')->success();
@@ -575,6 +575,8 @@ class PetController extends Controller {
 
     /**
      * Loads the add pet to level modal.
+     *
+     * @param mixed $id
      */
     public function getAddPetToLevel($level_id) {
         $level = PetLevel::find($level_id);
@@ -590,6 +592,9 @@ class PetController extends Controller {
 
     /**
      * Shows the edit pet on level page.
+     *
+     * @param mixed $id
+     * @param mixed $level_id
      */
     public function getEditPetLevel($level_id, $id) {
         $petLevel = PetLevelPet::find($id);
@@ -605,6 +610,8 @@ class PetController extends Controller {
 
     /**
      * Adds pet(s) to a level.
+     *
+     * @param mixed $id
      */
     public function postAddPetToLevel(Request $request, PetService $service, $level_id) {
         if ($service->addPetsToLevel($request->input('pet_ids'), PetLevel::find($level_id))) {
@@ -620,6 +627,9 @@ class PetController extends Controller {
 
     /**
      * Edits the rewards for a specific pet on a level.
+     *
+     * @param mixed $id
+     * @param mixed $level_id
      */
     public function postEditPetLevel(Request $request, PetService $service, $level_id, $id) {
         $data = $request->only([

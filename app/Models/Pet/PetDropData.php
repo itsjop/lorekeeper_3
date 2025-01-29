@@ -135,7 +135,7 @@ class PetDropData extends Model {
      * @return array
      */
     public function getCapAttribute() {
-        return $this->data['cap'] ?? null;
+        return $this->attributes['cap'] ?? null;
     }
 
     /**********************************************************************************************
