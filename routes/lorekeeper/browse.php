@@ -125,8 +125,6 @@ Route::group(['prefix' => 'world'], function () {
     Route::get('pet-categories', 'WorldController@getPetCategories');
     Route::get('pets', 'WorldController@getPets');
     Route::get('pets/{id}', 'WorldController@getPet');
-    Route::get('prompt-categories', 'WorldController@getPromptCategories');
-    Route::get('prompts', 'WorldController@getPrompts');
     Route::get('character-categories', 'WorldController@getCharacterCategories');
 });
 
