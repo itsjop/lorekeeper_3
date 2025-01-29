@@ -39,7 +39,7 @@
     @endif
 
     <div id="sortable" class="row sortable justify-content-center">
-        @foreach($character->pets()->orderBy('sort', 'DESC')->get() as $pet)
+        @foreach ($character->pets()->orderBy('sort', 'DESC')->get() as $pet)
             <div class="col-md-3 col-6 mb-3" data-id="{{ $pet->id }}">
                 <div class="card inventory-category h-100" data-id="{{ $pet->id }}">
                     <div class="card-body inventory-body text-center">
@@ -59,9 +59,9 @@
                         @if (config('lorekeeper.pets.pet_bonding_enabled'))
                             <div class="progress mb-2">
                                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                    style="width: {{ ($pet->level?->nextLevel?->bonding_required ? ($pet->level?->bonding / $pet->level?->nextLevel?->bonding_required) * 100 : 1 * 100) . '%' }}"
-                                    aria-valuenow="{{ $pet->level?->bonding }}" aria-valuemin="0" aria-valuemax="{{ $pet->level?->nextLevel?->bonding_required ?? 100 }}">
-                                    {{ $pet->level?->nextLevel?->bonding_required ? ($pet->level?->bonding .'/'. $pet->level?->nextLevel?->bonding_required) : $pet->level?->levelName }}
+                                    style="width: {{ ($pet->level?->nextLevel?->bonding_required ? ($pet->level?->bonding / $pet->level?->nextLevel?->bonding_required) * 100 : 1 * 100) . '%' }}" aria-valuenow="{{ $pet->level?->bonding }}"
+                                    aria-valuemin="0" aria-valuemax="{{ $pet->level?->nextLevel?->bonding_required ?? 100 }}">
+                                    {{ $pet->level?->nextLevel?->bonding_required ? $pet->level?->bonding . '/' . $pet->level?->nextLevel?->bonding_required : $pet->level?->levelName }}
                                 </div>
                             </div>
                             {{ $pet->level?->levelName }}
