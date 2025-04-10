@@ -179,6 +179,10 @@ return [
                 'url'  => 'admin/data/shops',
             ],
             [
+                'name' => 'Activities',
+                'url'  => 'admin/data/activities',
+            ],
+            [
                 'name' => 'Currencies',
                 'url'  => 'admin/data/currencies',
             ],

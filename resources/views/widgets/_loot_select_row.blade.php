@@ -9,10 +9,10 @@
     $currencies = \App\Models\Currency\Currency::where('is_user_owned', 1)
         ->orderBy('name')
         ->pluck('name', 'id');
-    if ($showLootTables) {
+    if (isset($showLootTables) && $showLootTables) {
         $tables = \App\Models\Loot\LootTable::orderBy('name')->pluck('name', 'id');
     }
-    if ($showRaffles) {
+    if (isset($showRaffles) && $showRaffles) {
         $raffles = \App\Models\Raffle\Raffle::where('rolled_at', null)
             ->where('is_active', 1)
             ->orderBy('name')

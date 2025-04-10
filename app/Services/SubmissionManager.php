@@ -31,14 +31,15 @@ class SubmissionManager extends Service {
     /**
      * Creates a new submission.
      *
-     * @param array $data
-     * @param User  $user
-     * @param bool  $isClaim
-     * @param mixed $isDraft
+     * @param array                 $data
+     * @param \App\Models\User\User $user
+     * @param bool                  $isClaim
+     * @param mixed                 $isDraft
+     * @param mixed                 $isActivity
      *
      * @return mixed
      */
-    public function createSubmission($data, $user, $isClaim = false, $isDraft = false) {
+    public function createSubmission($data, $user, $isClaim = false, $isDraft = false, $isActivity = false) {
         DB::beginTransaction();
 
         try {
@@ -50,11 +51,17 @@ class SubmissionManager extends Service {
             } elseif ($isClaim && !Settings::get('is_claims_open')) {
                 throw new \Exception('The claim queue is closed for submissions.');
             }
-            if (!$isClaim && !isset($data['prompt_id'])) {
-                throw new \Exception('Please select a prompt.');
-            }
+
             if (!$isClaim) {
-                $prompt = Prompt::active()->where('id', $data['prompt_id'])->with('rewards')->first();
+                if (!isset($data['prompt_id'])) {
+                    throw new \Exception('Please select a prompt.');
+                }
+                $prompt = Prompt::query()
+                    ->when(!$isActivity, fn ($query) => $query->active())
+                    ->where('id', $data['prompt_id'])
+                    ->with('rewards')
+                    ->first();
+
                 if (!$prompt) {
                     throw new \Exception('Invalid prompt selected.');
                 }
