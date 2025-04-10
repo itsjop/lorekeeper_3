@@ -4,15 +4,7 @@
   {{-- {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}
     </a> --}}
 
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="{{ __('Toggle navigation') }}"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
     <span class="navbar-toggler-icon">
     </span>
   </button>
@@ -44,16 +36,7 @@
       </li>
       @if (Auth::check())
         <li class="nav-item dropdown">
-          <a
-            id="inventoryDropdown"
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
+          <a id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             Home
           </a>
 
@@ -77,16 +60,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a
-            id="queueDropdown"
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
+          <a id="queueDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             Activity
           </a>
           <div class="dropdown-menu" aria-labelledby="queueDropdown">
@@ -114,16 +88,7 @@
         </li>
       @endif
       <li class="nav-item dropdown">
-        <a
-          id="browseDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Browse
         </a>
 
@@ -150,16 +115,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a
-          id="loreDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="loreDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           World
         </a>
 
@@ -214,16 +170,7 @@
         @endif
 
         <li class="nav-item dropdown">
-          <a
-            id="browseDropdown"
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
+          <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             Submit
           </a>
 
@@ -241,16 +188,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            id="navbarDropdown"
-            class="nav-link dropdown-toggle"
-            href="{{ Auth::user()->url }}"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ Auth::user()->url }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->name }} <span class="caret">
             </span>
           </a>
@@ -270,15 +208,10 @@
             </a>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+              {{ __('Logout') }}
             </a>
 
-            <form
-              id="logout-form"
-              action="{{ route('logout') }}"
-              method="POST"
-              style="display: none;"
-            >
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
             </form>
           </div>

@@ -4,6 +4,6 @@
 <p>Are you sure you want to do this?</p>
 
 <div class="text-right">
-    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+  {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 </div>
 {!! Form::close() !!}

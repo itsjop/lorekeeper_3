@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('title')
-    Admin ::
-    @yield('admin-title')
+  Admin ::
+  @yield('admin-title')
 @endsection
 
 @section('sidebar')
-    @include('admin._sidebar')
+  @include('admin._sidebar')
 @endsection
 
 @section('content')
-    @yield('admin-content')
+  @yield('admin-content')
 @endsection
 
 @section('scripts')
-    @parent
+  @parent
 @endsection

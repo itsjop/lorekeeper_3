@@ -3,6 +3,6 @@
 <p>A non-visible image cannot be set as a character's active image. A non-valid image can, but this is not recommended. A character's active image cannot be deleted.</p>
 
 <div class="text-right">
-    {!! Form::submit('Set Active', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit('Set Active', ['class' => 'btn btn-primary']) !!}
 </div>
 {!! Form::close() !!}
