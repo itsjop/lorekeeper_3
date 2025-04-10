@@ -14,6 +14,7 @@
     aria-label="{{ __('Toggle navigation') }}"
   >
     <span class="navbar-toggler-icon">
+      toggle this
     </span>
   </button>
 
@@ -163,34 +164,22 @@
           World
         </a>
 
-        <div class="dropdown-menu" aria-labelledby="loreDropdown">
-          <a class="dropdown-item" href="{{ url('world') }}">
-            Encyclopedia
-          </a>
-                        <a class="dropdown-item" href="{{ url('world/info') }}">
-                            World Expanded
+                    <div class="dropdown-menu" aria-labelledby="loreDropdown">
+                        <a class="dropdown-item" href="{{ url('world') }}">
+                            Encyclopedia
                         </a>
-          <a class="dropdown-item" href="{{ url('prompts/prompts') }}">
-            Prompts
-          </a>
-          <a class="dropdown-item" href="{{ url('shops') }}">
-            Shops
-          </a>
-          {{-- @if (Auth::check())
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ url('search') }}">
-              Site Search
-            </a>
-          @endif
-          <a class="dropdown-item" href="{{ url(__('dailies.dailies')) }}">
-            {{ __('dailies.dailies') }}
-          </a> --}}
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('gallery') }}">Gallery</a>
-      </li>
-    </ul>
+                        <a class="dropdown-item" href="{{ url('prompts/prompts') }}">
+                            Prompts
+                        </a>
+                        <a class="dropdown-item" href="{{ url('shops') }}">
+                            Shops
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('gallery') }}">Gallery</a>
+                </li>
+            </ul>
 
     <!-- Right Side Of Navbar -->
     <ul class="navbar-nav ml-auto">
