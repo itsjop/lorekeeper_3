@@ -19,6 +19,15 @@
   }
 }
 
+@keyframes cloud-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(200vw);
+  }
+}
+
 /* General Styling */
 #app {
   font-family: "Baloo 2", sans-serif;
@@ -30,6 +39,31 @@
   justify-items: center;
   min-height: 100vh;
   padding-top: 40px;
+  .scolling-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    .cloud {
+      position: fixed;
+      width: 70vw;
+      --cloud-width: 50vw;
+      height: var(--cloud-width);
+      animation: cloud-scroll 5s linear forwards infinite;
+      background-image: url("https://transparenttextures.com/patterns/nice-snow.png");
+      background-repeat: repeat;
+    }
+    .cloud-1,
+    .cloud-2,
+    .cloud-3 {
+      width: 100vw;
+    }
+    /* prettier-ignore */
+    .cloud-1 {left: calc(90vw - (var(--cloud-width) * 1));}
+    /* prettier-ignore */
+    .cloud-2 {left: calc(90vw - (var(--cloud-width) * 2));}
+    /* prettier-ignore */
+    .cloud-3 {left: calc(90vw - (var(--cloud-width) * 3));}
+  }
   #main-app {
     --sb-width: min(20vw, 200px);
     --app-width: 70vw;
@@ -127,7 +161,7 @@
       background-color: #635bbe;
       grid-area: nav;
       border-radius: 20px;
-      .nav-item>a {
+      .nav-item > a {
         color: white;
       }
       .navbar-brand .navbar-brand-image {
