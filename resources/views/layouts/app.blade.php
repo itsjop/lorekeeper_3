@@ -19,38 +19,22 @@
   <title>{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')</title>
 
   <!-- Primary Meta Tags -->
-  <meta name="title"
-    content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')"
-  >
-  <meta name="description"
-    content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  >
+  <meta name="title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
+  <meta name="description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="og:image"
-    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif"
-  >
-  <meta property="og:title"
-    content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')"
-  >
-  <meta property="og:description"
-    content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  >
+  <meta property="og:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
+  <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
+  <meta property="og:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="twitter:image"
-    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif"
-  >
-  <meta property="twitter:title"
-    content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')"
-  >
-  <meta property="twitter:description"
-    content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  >
+  <meta property="twitter:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
+  <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
+  <meta property="twitter:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- No AI scraping directives -->
   <meta name="robots" content="noai">
@@ -72,11 +56,7 @@
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito"
-    rel="stylesheet"
-    type="text/css"
-  >
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
   <!-- Styles -->
   <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
@@ -88,18 +68,13 @@
   <link href="{{ asset('css/vendor/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/croppie.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/lorekeeper.css'))) }}"
-    rel="stylesheet"
-  >
+  <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/lorekeeper.css'))) }}" rel="stylesheet">
 
   <!-- Custom Styles -->
   <link href="{{ asset('css/sitewide.css') }}" rel="stylesheet">
 
   @if (file_exists(public_path() . '/css/custom.css'))
-    <link
-      href="{{ asset('css/custom.css') . '?v=' . filemtime(public_path('css/lorekeeper.css')) }}"
-      rel="stylesheet"
-    >
+    <link href="{{ asset('css/custom.css') . '?v=' . filemtime(public_path('css/lorekeeper.css')) }}" rel="stylesheet">
   @endif
 
   @include('feed::links')
@@ -116,9 +91,7 @@
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">
         <picture>
-          <source srcset="{{ asset('images/somnivores/raw/logo_raw.webp') }}"
-            media="(min-width: 1200px)"
-          />
+          <source srcset="{{ asset('images/somnivores/raw/logo_raw.webp') }}" media="(min-width: 1200px)" />
           <source srcset="{{ asset('images/somnivores/logo.webp') }}" media="(min-width: 768px)" />
           <img src="{{ asset('images/somnivores/logo.webp') }}" alt="" />
         </picture>
@@ -174,21 +147,12 @@
 
     </main>
 
-    <div
-      class="modal fade"
-      id="modal"
-      tabindex="-1"
-      role="dialog"
-    >
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0"></span>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-            >&times;</button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
           </div>

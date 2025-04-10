@@ -5,22 +5,22 @@
 
 <h5>Recipes</h5>
 <div class="recipes">
-    <div class="form-group w-50">
-        {!! Form::select('recipe_id[]', $recipes, $activity->data[0] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
-    </div>
-    <div class="form-group w-50">
-        {!! Form::select('recipe_id[]', $recipes, $activity->data[1] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
-    </div>
-    <div class="form-group w-50">
-        {!! Form::select('recipe_id[]', $recipes, $activity->data[2] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
-    </div>
-    <div class="form-group w-50">
-        {!! Form::select('recipe_id[]', $recipes, $activity->data[3] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
-    </div>
-    <div class="form-group w-50">
-        {!! Form::select('recipe_id[]', $recipes, $activity->data[4] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
-    </div>
-    <div class="form-group w-50">
-        {!! Form::select('recipe_id[]', $recipes, $activity->data[5] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
-    </div>
+  <div class="form-group w-50">
+    {!! Form::select('recipe_id[]', $recipes, $activity->data[0] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
+  </div>
+  <div class="form-group w-50">
+    {!! Form::select('recipe_id[]', $recipes, $activity->data[1] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
+  </div>
+  <div class="form-group w-50">
+    {!! Form::select('recipe_id[]', $recipes, $activity->data[2] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
+  </div>
+  <div class="form-group w-50">
+    {!! Form::select('recipe_id[]', $recipes, $activity->data[3] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
+  </div>
+  <div class="form-group w-50">
+    {!! Form::select('recipe_id[]', $recipes, $activity->data[4] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
+  </div>
+  <div class="form-group w-50">
+    {!! Form::select('recipe_id[]', $recipes, $activity->data[5] ?? null, ['class' => 'form-control', 'placeholder' => 'Select a Recipe']) !!}
+  </div>
 </div>

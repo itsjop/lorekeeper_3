@@ -1,3 +1,3 @@
 <script>
-    $('.recipes .form-control').selectize();
+  $('.recipes .form-control').selectize();
 </script>

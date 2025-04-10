@@ -1,9 +1,9 @@
 @if ($submission)
-    <ul>
-        @foreach ($favorites as $favorite)
-            <li>{!! $favorite->user->displayName !!}</li>
-        @endforeach
-    </ul>
+  <ul>
+    @foreach ($favorites as $favorite)
+      <li>{!! $favorite->user->displayName !!}</li>
+    @endforeach
+  </ul>
 @else
-    Invalid submission selected.
+  Invalid submission selected.
 @endif
