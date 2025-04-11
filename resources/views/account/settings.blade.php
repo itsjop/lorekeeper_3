@@ -72,7 +72,7 @@
     {!! Form::close() !!}
   </div>
 
-  @if ($user_enabled == 1 || (Auth::user()divsStaff && $user_enabled == 2))
+  @if ($user_enabled == 1 || (Auth::user()->isStaff && $user_enabled == 2))
     <div class="card p-3 mb-2">
       <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
       @if (Auth::user()->isStaff && $user_enabled == 2)

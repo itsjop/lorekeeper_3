@@ -21,6 +21,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is the current version of Lorekeeper that your site is on.
+    | This is the current version of Lorekeeper that your site is on.
     | Do not change this value!
     |
     */
@@ -296,14 +297,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Shop Purchase Limit
+    | Shops
     |--------------------------------------------------------------------------
     |
-    | This is an arbitrary upper limit on how many items a user can buy in a
-    | single shop transaction.
-    |
+    | Purchase limit:
+    |       This is an arbitrary upper limit on how many items a user can buy in a single shop transaction.
     */
     'default_purchase_limit'                            => 99,
+    /*
+    | Donation Shop:
+    |       Item donations: Controls restrictions (or lack thereof) on user item donations. 0: No restrictions. Any item can be donated. 1: Only items of certain categories may be donated (configure when creating/editing item categories). 2: Only items with the 'donatable' tag may be donated. 3: Items in certain categories or that have the 'donateable' tag may be donated. Default: 0.
+    |       Cooldown: Time (in minutes) that users must wait between "purchases". Default: 5.
+    |       Expiry: Time (in months) before items are automatically deleted from the donation shop. Set to 0 to disable expiry. Default: 0.
+    |
+    */
+    'donation_shop' => [
+        'item_donations' => 0,
+        'cooldown' => 5,
+        'expiry' => 0,
+    ],
 
     /*
     |--------------------------------------------------------------------------
