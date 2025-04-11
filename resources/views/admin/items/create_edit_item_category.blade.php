@@ -70,12 +70,12 @@
     </div>
   </div>
 
-@if(Config::get('lorekeeper.settings.donation_shop.item_donations') == 1 || Config::get('lorekeeper.settings.donation_shop.item_donations') == 3)
+  @if (Config::get('lorekeeper.settings.donation_shop.item_donations') == 1 || Config::get('lorekeeper.settings.donation_shop.item_donations') == 3)
     <div class="form-group">
-        {!! Form::checkbox('can_donate', 1, $category->can_donate, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
-        {!! Form::label('is_character_owned', 'Can Be Donated', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to donate items in this category to the Donation Shop.') !!}
+      {!! Form::checkbox('can_donate', 1, $category->can_donate, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+      {!! Form::label('is_character_owned', 'Can Be Donated', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to donate items in this category to the Donation Shop.') !!}
     </div>
-@endif
+  @endif
 
   <div class="text-right">
     {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
@@ -94,14 +94,13 @@
 @endsection
 
 @section('scripts')
-@parent
-<script>
-$( document ).ready(function() {
-    $('.delete-category-button').on('click', function(e) {
+  @parent
+  <script>
+    $(document).ready(function() {
+      $('.delete-category-button').on('click', function(e) {
         e.preventDefault();
         loadModal("{{ url('admin/data/item-categories/delete') }}/{{ $category->id }}", 'Delete Category');
+      });
     });
-});
-
-</script>
+  </script>
 @endsection

@@ -66,20 +66,20 @@
     {!! $submissions->render() !!}
 
     <div class="d-flex align-content-around flex-wrap mb-2">
-    divforeach ($submissions as $submission)
-        @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
-      @endforeach
-    </div>
+      divforeach ($submissions as $submission)
+      @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
+  @endforeach
+  </div>
 
-    {!! $submissions->render() !!}
-  @elseif($childSubmissions->count())
-    <div class="d-flex align-content-around flex-wrap mb-2">
-      @foreach ($childSubmissions->orderBy('created_at', 'DESC')->get()->take(20) as $submission)
-        @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
-      @endforeach
-    </div>
-  @else
-    <p>No submissions found!</p>
+  {!! $submissions->render() !!}
+@elseif($childSubmissions->count())
+  <div class="d-flex align-content-around flex-wrap mb-2">
+    @foreach ($childSubmissions->orderBy('created_at', 'DESC')->get()->take(20) as $submission)
+      @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
+    @endforeach
+  </div>
+@else
+  <p>No submissions found!</p>
   @endif
 
 @endsection

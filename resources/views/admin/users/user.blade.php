@@ -57,7 +57,7 @@
   @if (Settings::get('WE_user_locations') > 0)
     <div class="card p-3 mb-2">
       <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
-div   @if ($char_enabled == 1)
+      div @if ($char_enabled == 1)
         <div class="alert alert-warning">This user's characters will have the same home as them.</div>
       @endif
       {!! Form::open(['url' => 'admin/users/' . $user->name . '/location']) !!}
