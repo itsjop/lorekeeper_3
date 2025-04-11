@@ -179,6 +179,10 @@ return [
                 'url'  => 'admin/data/shops',
             ],
             [
+                'name' => 'Activities',
+                'url'  => 'admin/data/activities',
+            ],
+            [
                 'name' => 'Currencies',
                 'url'  => 'admin/data/currencies',
             ],
@@ -193,6 +197,43 @@ return [
             [
                 'name' => 'Items',
                 'url'  => 'admin/data/items',
+            ],
+        ],
+    ],
+    'WorldExpansion' => [
+        'power' => 'manage_world',
+        'links' => [
+            [
+                'name' => 'Concepts',
+                'url'  => 'admin/world/concepts',
+            ],
+            [
+                'name' => 'Fauna',
+                'url'  => 'admin/world/faunas',
+            ],
+            [
+                'name' => 'Flora',
+                'url'  => 'admin/world/floras',
+            ],
+            [
+                'name' => ' Events',
+                'url'  => 'admin/world/events',
+            ],
+            [
+                'name' => ' Figures',
+                'url'  => 'admin/world/figures',
+            ],
+            [
+                'name' => 'Factions',
+                'url'  => 'admin/world/factions',
+            ],
+            [
+                'name' => 'Glossary',
+                'url'  => 'admin/world/glossary',
+            ],
+            [
+                'name' => 'Locations',
+                'url'  => 'admin/world/locations',
             ],
         ],
     ],

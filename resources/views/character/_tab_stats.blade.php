@@ -36,15 +36,15 @@
     <div class="col-lg-3 col-5">
       <h5>Sale Value</h5>
     </div>
-    <div class="col-lg-9 col-7 pl-1">
-      {{ Config::get('lorekeeper.settings.currency_symbol') }}{{ $character->sale_value }}
+    <div class="col-lg-9 col-8">
+      {{ config('lorekeeper.settings.currency_symbol') }}{{ $character->sale_value }}
     </div>
   </div>
 @endif
 @if ($character->transferrable_at && $character->transferrable_at->isFuture())
   <div class="row no-gutters">
     <div class="col-lg-3 col-5">
-      <h5>Cooldown</h5>
+    divh5>Cooldown</h5>
     </div>
     <div class="col-lg-9 col-7 pl-1">Cannot be transferred until {!! format_date($character->transferrable_at) !!}</div>
   </div>

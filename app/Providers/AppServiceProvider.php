@@ -10,61 +10,64 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
-    /**
-     * Register any application services.
+  /**
+   * Register any application services.
+   */
+  public function register() {
+    $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+    $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
+  }
+
+  /**
+   * Bootstrap any application services.
+   */
+  public function boot() {
+    //
+    Schema::defaultStringLength(191);
+    Paginator::defaultView('layouts._pagination');
+    Paginator::defaultSimpleView('layouts._simple-pagination');
+
+    /*
+     * Paginate a standard Laravel Collection.
+     *
+     * @param int $perPage
+     * @param int $total
+     * @param int $page
+     * @param string $pageName
+     * @return array
      */
-    public function register() {
-        //
-    }
+    Collection::macro('paginate', function (
+      $perPage,
+      $total = null,
+      $page = null,
+      $pageName = 'page'
+    ) {
+      $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot() {
-        //
-        Schema::defaultStringLength(191);
-        Paginator::defaultView('layouts._pagination');
-        Paginator::defaultSimpleView('layouts._simple-pagination');
+      return new LengthAwarePaginator(
+        $this->forPage($page, $perPage),
+        $total ?: $this->count(),
+        $perPage,
+        $page,
+        [
+          'path' => LengthAwarePaginator::resolveCurrentPath(),
+          'pageName' => $pageName
+        ]
+      );
+    });
 
-        /*
-         * Paginate a standard Laravel Collection.
-         *
-         * @param int $perPage
-         * @param int $total
-         * @param int $page
-         * @param string $pageName
-         * @return array
-         */
-        Collection::macro('paginate', function ($perPage, $total = null, $page = null, $pageName = 'page') {
-            $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
+    $this->bootToyhouseSocialite();
+  }
 
-            return new LengthAwarePaginator(
-                $this->forPage($page, $perPage),
-                $total ?: $this->count(),
-                $perPage,
-                $page,
-                [
-                    'path'     => LengthAwarePaginator::resolveCurrentPath(),
-                    'pageName' => $pageName,
-                ]
-            );
-        });
+  /**
+   * Boot Toyhouse Socialite provider.
+   */
+  private function bootToyhouseSocialite() {
+    $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
+    $socialite->extend('toyhouse', function ($app) use ($socialite) {
+      $config = $app['config']['services.toyhouse'];
 
-        $this->bootToyhouseSocialite();
-    }
-
-    /**
-     * Boot Toyhouse Socialite provider.
-     */
-    private function bootToyhouseSocialite() {
-        $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
-        $socialite->extend(
-            'toyhouse',
-            function ($app) use ($socialite) {
-                $config = $app['config']['services.toyhouse'];
-
-                return $socialite->buildProvider(ToyhouseProvider::class, $config);
-            }
-        );
-    }
+      return $socialite->buildProvider(ToyhouseProvider::class, $config);
+    });
+  }
 }

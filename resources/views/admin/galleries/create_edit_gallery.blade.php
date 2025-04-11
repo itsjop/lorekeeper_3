@@ -67,14 +67,16 @@
         ) !!}
       </div>
     </div>
+    <div class="col-md">
+      <div class="form-group">
+        {!! Form::checkbox('location_selection', 1, $gallery->location_selection, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::label('location_selection', 'Location Selection', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not users can select a location to associate a gallery submission with when creating it.') !!}
+      </div>
+    </div>
   </div>
   @if (Settings::get('gallery_submissions_require_approval'))
     <div class="form-group">
-      {!! Form::label('Votes Required') !!} {!! add_help('How many votes are required for submissions to this gallery to be accepted. Set to 0 to automatically accept submissions.') !!}
-      {!! Form::number('votes_required', $gallery->votes_required, ['class' => 'form-control']) !!}
-    </div>
-  @endif
-
+      {!! Form::label('Votes Required'div
   <div class="row">
     <div class="col-md">
       <div class="form-group">

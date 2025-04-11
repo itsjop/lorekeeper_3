@@ -6,6 +6,7 @@
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
     <span class="navbar-toggler-icon">
+      toggle this
     </span>
   </button>
 
@@ -129,15 +130,9 @@
           <a class="dropdown-item" href="{{ url('shops') }}">
             Shops
           </a>
-          {{-- @if (Auth::check())
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ url('search') }}">
-              Site Search
-            </a>
-          @endif
-          <a class="dropdown-item" href="{{ url(__('dailies.dailies')) }}">
-            {{ __('dailies.dailies') }}
-          </a> --}}
+          <a class="dropdown-item" href="{{ url('activities') }}">
+            Activities
+          </a>
         </div>
       </li>
       <li class="nav-item">

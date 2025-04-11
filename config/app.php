@@ -181,6 +181,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
