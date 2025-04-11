@@ -151,13 +151,6 @@ class CharacterDesignUpdate extends Model {
         return $this->belongsTo('App\Models\Character\CharacterTransformation', 'transformation_id');
     }
 
-        /**
-     * Get the transformation of the design update.
-     */
-    public function transformation() {
-        return $this->belongsTo('App\Models\Character\CharacterTransformation', 'transformation_id');
-    }
-
     /**********************************************************************************************
 
         SCOPES
