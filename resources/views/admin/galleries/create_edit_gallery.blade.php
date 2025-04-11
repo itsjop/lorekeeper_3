@@ -76,7 +76,10 @@
   </div>
   @if (Settings::get('gallery_submissions_require_approval'))
     <div class="form-group">
-      {!! Form::label('Votes Required'div
+      {!! Form::label('Votes Required') !!} {!! add_help('How many votes are required for submissions to this gallery to be accepted. Set to 0 to automatically accept submissions.') !!}
+      {!! Form::number('votes_required', $gallery->votes_required, ['class' => 'form-control']) !!}
+    </div>
+  @endif
   <div class="row">
     <div class="col-md">
       <div class="form-group">

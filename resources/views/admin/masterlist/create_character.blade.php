@@ -225,9 +225,7 @@
 
         <div class="form-group">
           {!! Form::label('Species') !!} @if  ($isMyo)
-
                 {!! add_help('This will lock the slot into a particular species. Leave it blank if you would like to give the user a choice.') !!}
-
             @endif
           {!! Form::select('species_id', $specieses, old('species_id'), ['class' => 'form-control', 'id' => 'species']) !!}
         </div>
@@ -240,7 +238,7 @@
 
 
                     'This will lock the slot into a particular subtype. Leave it blank if you would like to give the user a choice, or not select a subtype. The subtype must match the species selected above, and if no species is specified, the subtype will not be applied.',
-        ,
+
                         ) !!}
 
 
@@ -280,7 +278,7 @@
         {!! add_help(
 
             'These traits will be listed as required traits for the slot. The user will still be able to add on more traits, but not be able to remove these. This is allowed to conflict with the rarity above; you may add traits above the character\'s specified rarity.',
-                ,
+                
         ) !!}
 
       @endif
