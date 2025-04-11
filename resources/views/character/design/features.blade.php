@@ -5,13 +5,13 @@
 @endsection
 
 @section('design-content')
-      {!! breadcrumbs(['Design Approvals' => 'designs', 'Request (#' . $request->id . ')' => 'designs/' . $request->id, 'Traits' => 'designs/' . $request->id . '/traits']) !!}
+  {!! breadcrumbs(['Design Approvals' => 'designs', 'Request (#' . $request->id . ')' => 'designs/' . $request->id, 'Traits' => 'designs/' . $request->id . '/traits']) !!}
 
-      @include('character.design._header', ['request' => $request])
+  @include('character.design._header', ['request' => $request])
 
-      <h2>
+  <h2>
 
-        Traits</h2>
+    Traits</h2>
 
   @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id)
     <p>Select the traits for the {{ $request->character->is_myo_slot ? 'created' : 'updated' }} character. @if ($request->character->is_myo_slot)
@@ -28,42 +28,42 @@
 
     </div>
 
-        <div class="form-group">
-            {!! Form::label('subtype_id', 'Species Subtype') !!}
-            @if ($request->character->is_myo_slot && $request->character->image->subtype_id)
-                <div class="alert alert-secondary">{!! $request->character->image->subtype->displayName !!}</div>
-            @else
-                <div id="subtypes">
-                    {!! Form::select('subtype_id', $subtypes, $request->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
-                </div>
-            @endif
+    <div class="form-group">
+      {!! Form::label('subtype_id', 'Species Subtype') !!}
+      @if ($request->character->is_myo_slot && $request->character->image->subtype_id)
+        <div class="alert alert-secondary">{!! $request->character->image->subtype->displayName !!}</div>
+      @else
+        <div id="subtypes">
+          {!! Form::select('subtype_id', $subtypes, $request->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
         </div>
+      @endif
+    </div>
 
-        <hr>
-        <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
-        <div class="form-group">
-            {!! Form::label('transformation_id', 'Transformation') !!}
-            @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
-                <div class="alert alert-secondary">{!! $request->character->image->transformation->displayName !!}</div>
-            @else
-                <div id="transformations">
-                    {!! Form::select('transformation_id', $transformations, $request->transformation_id, ['class' => 'form-control', 'id' => 'transformation']) !!}
-                </div>
-            @endif
+    <hr>
+    <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
+    <div class="form-group">
+      {!! Form::label('transformation_id', 'Transformation') !!}
+      @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
+        <div class="alert alert-secondary">{!! $request->character->image->transformation->displayName !!}</div>
+      @else
+        <div id="transformations">
+          {!! Form::select('transformation_id', $transformations, $request->transformation_id, ['class' => 'form-control', 'id' => 'transformation']) !!}
         </div>
-        <div class="form-group">
-            {!! Form::label(ucfirst(__('transformations.transformation')) . ' Tab Info (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name in the tabs, so try to keep it short.') !!}
-            {!! Form::text('transformation_info', $request->transformation_info, ['class' => 'form-control mr-2', 'placeholder' => 'Tab Info (Optional)']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.') !!}
-            {!! Form::text('transformation_description', $request->transformation_description, ['class' => 'form-control mr-2', 'placeholder' => 'Origin Info (Optional)']) !!}
-        </div>
-        <hr>
+      @endif
+    </div>
+    <div class="form-group">
+      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Tab Info (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name in the tabs, so try to keep it short.') !!}
+      {!! Form::text('transformation_info', $request->transformation_info, ['class' => 'form-control mr-2', 'placeholder' => 'Tab Info (Optional)']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.') !!}
+      {!! Form::text('transformation_description', $request->transformation_description, ['class' => 'form-control mr-2', 'placeholder' => 'Origin Info (Optional)']) !!}
+    </div>
+    <hr>
 
     <div class="form-group">
       {!! Form::label('rarity_id', 'Character Rarity') !!}
-      @if  ($request->character->is_myo_slot && $request->character->image->rarity_id)
+      @if ($request->character->is_myo_slot && $request->character->image->rarity_id)
         <div class="alert alert-secondary">{!! $request->character->image->rarity->displayName !!}</div>
       @else
         {!! Form::select('rarity_id', $rarities, $request->rarity_id, ['class' => 'form-control', 'id' => 'rarity']) !!}
@@ -75,8 +75,8 @@
       <div><a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a></div>
       <div id="featureList">
         {{-- Add in the compulsory traits for MYO slots --}}
-        @if  ($request->character->is_myo_slot && $request->character->image->features)
-          @foreach  ($request->character->image->features as $feature)
+        @if ($request->character->is_myo_slot && $request->character->image->features)
+          @foreach ($request->character->image->features as $feature)
             <div class="mb-2 d-flex align-items-center">
               {!! Form::text('', $feature->name, ['class' => 'form-control mr-2', 'disabled']) !!}
               {!! Form::text('', $feature->data, ['class' => 'form-control mr-2', 'disabled']) !!}
@@ -130,39 +130,39 @@
       @endif
 
       @if ($request->transformation_id)
-      <div class="row">
+        <div class="row">
           <div class="col-md-2 col-4">
-              <h5>{{ ucfirst(__('transformations.transformation')) }}</h5>
+            <h5>{{ ucfirst(__('transformations.transformation')) }}</h5>
           </div>
           <div class="col-md-10 col-8">
-              @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
-                  {!! $request->character->image->transformation->displayName !!}
-              @else
-                  {!! $request->transformation_id ? $request->transformation->displayName : 'None Selected' !!}
-              @endif
+            @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
+              {!! $request->character->image->transformation->displayName !!}
+            @else
+              {!! $request->transformation_id ? $request->transformation->displayName : 'None Selected' !!}
+            @endif
           </div>
           <div class="col-md-2 col-4">
-              <strong>Tab Info</strong>
+            <strong>Tab Info</strong>
           </div>
           <div class="col-md-10 col-8">
-              @if ($request->character->is_myo_slot && $request->character->image->transformation_info)
-                  {{ $request->character->image->transformation_info }}
-              @else
-                  {!! $request->transformation_info ? $request->transformation_info : 'No tab info given.' !!}
-              @endif
+            @if ($request->character->is_myo_slot && $request->character->image->transformation_info)
+              {{ $request->character->image->transformation_info }}
+            @else
+              {!! $request->transformation_info ? $request->transformation_info : 'No tab info given.' !!}
+            @endif
           </div>
           <div class="col-md-2 col-4">
-              <strong>Description</strong>
+            <strong>Description</strong>
           </div>
           <div class="col-md-10 col-8">
-              @if ($request->character->is_myo_slot && $request->character->image->transformation_description)
-                  {{ $request->character->image->transformation_description }}
-              @else
-                  {!! $request->transformation_description ? $request->transformation_description : 'No description given.' !!}
-              @endif
+            @if ($request->character->is_myo_slot && $request->character->image->transformation_description)
+              {{ $request->character->image->transformation_description }}
+            @else
+              {!! $request->transformation_description ? $request->transformation_description : 'No description given.' !!}
+            @endif
           </div>
-      </div>
-  @endif
+        </div>
+      @endif
       <div class="row">
         <div class="col-md-2 col-4">
           <h5>Rarity</h5>
@@ -198,25 +198,31 @@
 @endsection
 
 @section('scripts')
-      @include('widgets._image_upload_js')
+  @include('widgets._image_upload_js')
 
-<script>
-  $( "#species" ).change(function() {
-    var species = $('#species').val();
-    var id = '<?php echo($request->id); ?>';
+  <script>
+    $("#species").change(function() {
+      var species = $('#species').val();
+      var id = '<?php echo $request->id; ?>';
 
-    $.ajax({
-                type: "GET",
-                url: "{{ url('designs/traits/subtype') }}?species=" + species + "&id=" + id,
-                dataType: "text"
-            }).done(function(res) {
-                $("#subtypes").html(res);
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-            });
-    $.ajax({
-      type: "GET", url: "{{ url('designs/traits/subtype') }}?species="+species+"&id="+id, dataType: "text"
-    }).done(function (res) { $("#subtypes").html(res); }).fail(function (jqXHR, textStatus, errorThrown) { alert("AJAX call failed: " + textStatus + ", " + errorThrown); });
+      $.ajax({
+        type: "GET",
+        url: "{{ url('designs/traits/subtype') }}?species=" + species + "&id=" + id,
+        dataType: "text"
+      }).done(function(res) {
+        $("#subtypes").html(res);
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+      });
+      $.ajax({
+        type: "GET",
+        url: "{{ url('designs/traits/subtype') }}?species=" + species + "&id=" + id,
+        dataType: "text"
+      }).done(function(res) {
+        $("#subtypes").html(res);
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+      });
 
     });
   </script>
