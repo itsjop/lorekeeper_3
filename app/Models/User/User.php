@@ -215,15 +215,9 @@ class User extends Authenticatable implements MustVerifyEmail {
     /**
      * Get all of the user's character bookmarks.
      */
-    public function bookmarks() {
-        return $this->hasMany(CharacterBookmark::class)->where('user_id', $this->id);
-    }
-
-    /**
-     * Gets all of a user's liked / disliked comments.
-     */
-    public function commentLikes() {
-        return $this->hasMany(CommentLike::class);
+    public function bookmarks()
+    {
+        return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
     }
 
     /**********************************************************************************************
@@ -549,108 +543,12 @@ class User extends Authenticatable implements MustVerifyEmail {
     /**
      * Check if user is of age.
      */
-    public function getcheckBirthdayAttribute() {
+    public function getcheckBirthdayAttribute()
+    {
         $bday = $this->birthday;
-        if (!$bday || $bday->diffInYears(Carbon::now()) < 13) {
-            return false;
-        } else {
-            return true;
-        }
+        if(!$bday || $bday->diffInYears(carbon::now()) < 13) return false;
+        else return true;
     }
-
-    /**
-     * Checks if the user can change faction.
-     *
-     * @return string
-     */
-    public function getCanChangeFactionAttribute() {
-        if (!isset($this->faction_changed)) {
-            return true;
-        }
-        $limit = Settings::get('WE_change_timelimit');
-        switch ($limit) {
-            case 0:
-                return true;
-            case 1:
-                // Yearly
-                if (now()->year == $this->faction_changed->year) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            case 2:
-                // Quarterly
-                if (now()->year != $this->faction_changed->year) {
-                    return true;
-                }
-                if (now()->quarter != $this->faction_changed->quarter) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            case 3:
-                // Monthly
-                if (now()->year != $this->faction_changed->year) {
-                    return true;
-                }
-                if (now()->month != $this->faction_changed->month) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            case 4:
-                // Weekly
-                if (now()->year != $this->faction_changed->year) {
-                    return true;
-                }
-                if (now()->week != $this->faction_changed->week) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            case 5:
-                // Daily
-                if (now()->year != $this->faction_changed->year) {
-                    return true;
-                }
-                if (now()->month != $this->faction_changed->month) {
-                    return true;
-                }
-                if (now()->day != $this->faction_changed->day) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            default:
-                return true;
-        }
-    }
-
-    /**
-     * Get user's faction rank.
-     */
-    public function getFactionRankAttribute() {
-        if (!isset($this->faction_id) || !$this->faction->ranks()->count()) {
-            return null;
-        }
-        if (FactionRankMember::where('member_type', 'user')->where('member_id', $this->id)->first()) {
-            return FactionRankMember::where('member_type', 'user')->where('member_id', $this->id)->first()->rank;
-        }
-        if ($this->faction->ranks()->where('is_open', 1)->count()) {
-            $standing = $this->getCurrencies(true)->where('id', Settings::get('WE_faction_currency'))->first();
-            if (!$standing) {
-                return $this->faction->ranks()->where('is_open', 1)->where('breakpoint', 0)->first();
-            }
-
-            return $this->faction->ranks()->where('is_open', 1)->where('breakpoint', '<=', $standing->quantity)->orderBy('breakpoint', 'DESC')->first();
-        }
-    }
-
     /**********************************************************************************************
 
         OTHER FUNCTIONS
