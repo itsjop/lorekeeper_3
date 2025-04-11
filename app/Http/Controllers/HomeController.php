@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
 use App\Models\SitePage;
+use Settings;
 
 use App\Services\LinkService;
 use App\Services\UserService;
@@ -15,15 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
-
-
-
-namespace App\Http\Controllers;
-
-
-
 class HomeController extends Controller {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Home Controller
     |--------------------------------------------------------------------------
@@ -32,180 +26,191 @@ class HomeController extends Controller {
     |
     */
 
-    /**
-     * Shows the homepage.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getIndex() {
-        if (config('lorekeeper.extensions.show_all_recent_submissions.enable')) {
-            $query = GallerySubmission::visible(Auth::check() ? Auth::user() : null)->accepted()->orderBy('created_at', 'DESC');
-            $gallerySubmissions = $query->get()->take(8);
-        } else {
-            $gallerySubmissions = [];
-        }
-
-        if(Settings::get('featured_character')) {
-            $character = Character::find(Settings::get('featured_character'));
-        }
-        else $character = null;
-        return view('welcome', [
-            'about'               => SitePage::where('key', 'about')->first(),
-            'featured' => $character,,
-            'gallerySubmissions'  => $gallerySubmissions,
-        ]);
+  /**
+   * Shows the homepage.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getIndex() {
+    if (config('lorekeeper.extensions.show_all_recent_submissions.enable')) {
+      $query = GallerySubmission::visible(Auth::check() ? Auth::user() : null)
+        ->accepted()
+        ->orderBy('created_at', 'DESC');
+      $gallerySubmissions = $query->get()->take(8);
+    } else {
+      $gallerySubmissions = [];
     }
 
-    /**
-     * Shows the account linking page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getLink(Request $request) {
-        // If the user already has a username associated with their account, redirect them
-        if (Auth::check() && Auth::user()->hasAlias) {
-            redirect()->to('home');
-        }
+    if (Settings::get('featured_character')) {
+      $character = Character::find(Settings::get('featured_character'));
+    } else {
+      $character = null;
+    }
+    return view('welcome', [
+      'about' => SitePage::where('key', 'about')->first(),
+      'featured' => $character,
+      'gallerySubmissions' => $gallerySubmissions
+    ]);
+  }
 
-        // Display the login link
-        return view('auth.link');
+  /**
+   * Shows the account linking page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getLink(Request $request) {
+    // If the user already has a username associated with their account, redirect them
+    if (Auth::check() && Auth::user()->hasAlias) {
+      redirect()->to('home');
     }
 
-    /**
-     * Redirects to the appropriate provider.
-     *
-     * @param string $provider
-     */
-    public function getAuthRedirect(LinkService $service, $provider) {
-        if (!$this->checkProvider($provider, Auth::user())) {
-            flash($this->error)->error();
+    // Display the login link
+    return view('auth.link');
+  }
 
-            return redirect()->to(Auth::user()->has_alias ? 'account/aliases' : 'link');
-        }
+  /**
+   * Redirects to the appropriate provider.
+   *
+   * @param string $provider
+   */
+  public function getAuthRedirect(LinkService $service, $provider) {
+    if (!$this->checkProvider($provider, Auth::user())) {
+      flash($this->error)->error();
 
-        // Redirect to the provider's authentication page
-        return $service->getAuthRedirect($provider); //Socialite::driver($provider)->redirect();
+      return redirect()->to(Auth::user()->has_alias ? 'account/aliases' : 'link');
     }
 
-    /**
-     * Redirects to the appropriate provider.
-     *
-     * @param string $provider
-     */
-    public function getAuthCallback(LinkService $service, $provider) {
-        if (!$this->checkProvider($provider, Auth::user())) {
-            flash($this->error)->error();
+    // Redirect to the provider's authentication page
+    return $service->getAuthRedirect($provider); //Socialite::driver($provider)->redirect();
+  }
 
-            return redirect()->to(Auth::user()->has_alias ? 'account/aliases' : 'link');
-        }
+  /**
+   * Redirects to the appropriate provider.
+   *
+   * @param string $provider
+   */
+  public function getAuthCallback(LinkService $service, $provider) {
+    if (!$this->checkProvider($provider, Auth::user())) {
+      flash($this->error)->error();
 
-        // Toyhouse runs on Laravel Passport for OAuth2 and this has some issues with state exceptions,
-        // admin suggested the easy fix (to use stateless)
-        $result = $provider == 'toyhouse' ? Socialite::driver($provider)->stateless()->user() : Socialite::driver($provider)->user();
-        if ($service->saveProvider($provider, $result, Auth::user())) {
-            flash('Account has been linked successfully.')->success();
-            Auth::user()->updateCharacters();
-            Auth::user()->updateArtDesignCredits();
-
-            return redirect()->to('account/aliases');
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-
-            return redirect()->to(Auth::user()->has_alias ? 'account/aliases' : 'link');
-        }
-
-        return redirect()->to('/');
+      return redirect()->to(Auth::user()->has_alias ? 'account/aliases' : 'link');
     }
 
-    /**
-     * Shows the birthdaying page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getBirthday(Request $request) {
-        // If the user already has a username associated with their account, redirect them
-        if (Auth::check() && Auth::user()->birthday) {
-            return redirect()->to('/');
-        }
+    // Toyhouse runs on Laravel Passport for OAuth2 and this has some issues with state exceptions,
+    // admin suggested the easy fix (to use stateless)
+    $result =
+      $provider == 'toyhouse'
+        ? Socialite::driver($provider)->stateless()->user()
+        : Socialite::driver($provider)->user();
+    if ($service->saveProvider($provider, $result, Auth::user())) {
+      flash('Account has been linked successfully.')->success();
+      Auth::user()->updateCharacters();
+      Auth::user()->updateArtDesignCredits();
 
-        // Step 1: display a login birthday
-        return view('auth.birthday');
+      return redirect()->to('account/aliases');
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+
+      return redirect()->to(Auth::user()->has_alias ? 'account/aliases' : 'link');
     }
 
-    /**
-     * Posts the birthdaying page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function postBirthday(Request $request) {
-        $service = new UserService;
-        // Make birthday into format we can store
-        $data = $request->input('dob');
+    return redirect()->to('/');
+  }
 
-        if ($service->updateBirthday($data, Auth::user())) {
-            flash('Birthday added successfully!');
-
-            return redirect()->to('/');
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-
-            return redirect()->back();
-        }
+  /**
+   * Shows the birthdaying page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getBirthday(Request $request) {
+    // If the user already has a username associated with their account, redirect them
+    if (Auth::check() && Auth::user()->birthday) {
+      return redirect()->to('/');
     }
 
-    /**
-     * Shows the birthdaying page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getBirthdayBlocked(Request $request) {
-        // If the user already has a username associated with their account, redirect them
-        if (Auth::check() && Auth::user()->checkBirthday) {
-            return redirect()->to('/');
-        }
+    // Step 1: display a login birthday
+    return view('auth.birthday');
+  }
 
-        if (Auth::check() && !Auth::user()->birthday) {
-            return redirect()->to('birthday');
-        }
+  /**
+   * Posts the birthdaying page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function postBirthday(Request $request) {
+    $service = new UserService();
+    // Make birthday into format we can store
+    $data = $request->input('dob');
 
-        // Step 1: display a login birthday
-        return view('auth.blocked');
+    if ($service->updateBirthday($data, Auth::user())) {
+      flash('Birthday added successfully!');
+
+      return redirect()->to('/');
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+
+      return redirect()->back();
+    }
+  }
+
+  /**
+   * Shows the birthdaying page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getBirthdayBlocked(Request $request) {
+    // If the user already has a username associated with their account, redirect them
+    if (Auth::check() && Auth::user()->checkBirthday) {
+      return redirect()->to('/');
     }
 
-    private function checkProvider($provider, $user) {
-        // Check if the site can be used for authentication
-        $isAllowed = false;
-        foreach (config('lorekeeper.sites') as $key => $site) {
-            if ($key == $provider && isset($site['auth'])) {
-                // require a primary alias if the user does not already have one
-                if (!Auth::user()->has_alias && (!isset($site['primary_alias']) || !$site['primary_alias'])) {
-                    $this->error = 'The site you selected cannot be used as your primary alias (means of identification). Please choose a different site to link.';
-
-                    return false;
-                }
-
-                $isAllowed = true;
-                break;
-            }
-        }
-        if (!$isAllowed) {
-            $this->error = 'The site you selected cannot be linked with your account. Please contact an administrator if this is in error!';
-
-            return false;
-        }
-
-        // I think there's no harm in linking multiple of the same site as people may want their activity separated into an ARPG account.
-        // Uncomment the following to restrict to one account per site, however.
-        // Check if the user already has a username associated with their account
-        //if(DB::table('user_aliases')->where('site', $provider)->where('user_id', $user->id)->exists()) {
-        //    $this->error = 'You already have a username associated with this website linked to your account.';
-        //    return false;
-        //}
-
-        return true;
+    if (Auth::check() && !Auth::user()->birthday) {
+      return redirect()->to('birthday');
     }
+
+    // Step 1: display a login birthday
+    return view('auth.blocked');
+  }
+
+  private function checkProvider($provider, $user) {
+    // Check if the site can be used for authentication
+    $isAllowed = false;
+    foreach (config('lorekeeper.sites') as $key => $site) {
+      if ($key == $provider && isset($site['auth'])) {
+        // require a primary alias if the user does not already have one
+        if (
+          !Auth::user()->has_alias &&
+          (!isset($site['primary_alias']) || !$site['primary_alias'])
+        ) {
+          $this->error =
+            'The site you selected cannot be used as your primary alias (means of identification). Please choose a different site to link.';
+
+          return false;
+        }
+
+        $isAllowed = true;
+        break;
+      }
+    }
+    if (!$isAllowed) {
+      $this->error =
+        'The site you selected cannot be linked with your account. Please contact an administrator if this is in error!';
+
+      return false;
+    }
+
+    // I think there's no harm in linking multiple of the same site as people may want their activity separated into an ARPG account.
+    // Uncomment the following to restrict to one account per site, however.
+    // Check if the user already has a username associated with their account
+    //if(DB::table('user_aliases')->where('site', $provider)->where('user_id', $user->id)->exists()) {
+    //    $this->error = 'You already have a username associated with this website linked to your account.';
+    //    return false;
+    //}
+
+    return true;
+  }
 }
