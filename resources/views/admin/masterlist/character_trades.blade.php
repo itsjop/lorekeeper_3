@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/masterlist/character-trades'])
 
 @section('admin-title')
     Character Trades

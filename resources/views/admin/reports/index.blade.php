@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/reports/index'])
 
 @section('admin-title')
     Report Queue

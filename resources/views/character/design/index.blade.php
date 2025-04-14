@@ -1,5 +1,4 @@
-@extends('character.design.layout')
-
+@extends('character.design.layout', ['componentName' => 'character/design/index'])
 @section('design-title')
     Index
 @endsection

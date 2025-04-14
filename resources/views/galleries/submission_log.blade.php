@@ -1,4 +1,4 @@
-@extends('galleries.layout')
+@extends('galleries.layout', ['componentName' => 'galleries/submission-log'])
 
 @section('gallery-title')
     {{ $submission->title }} Log

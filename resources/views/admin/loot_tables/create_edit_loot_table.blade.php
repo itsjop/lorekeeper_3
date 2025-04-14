@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/loot/create-edit-loot'])
 
 @section('admin-title')
     {{ $table->id ? 'Edit' : 'Create' }} Loot Table

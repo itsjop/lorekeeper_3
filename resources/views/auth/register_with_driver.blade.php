@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/auth/register-with-driver'])
+
 
 @section('title')
     Register

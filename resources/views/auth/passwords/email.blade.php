@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/auth/passwords/email'])
+
 
 @section('title')
     Reset Password

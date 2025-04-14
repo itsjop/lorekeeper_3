@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/galleries/create-edit-gallery'])
 
 @section('admin-title')
     {{ $gallery->id ? 'Edit' : 'Create' }} Gallery

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/grants/user-currency'])
 
 @section('admin-title')
     Grant User Currency

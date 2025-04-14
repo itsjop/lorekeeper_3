@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/submissions'])
 
 @section('home-title')
     {{ $isClaims ? 'Claims' : 'Prompt Submissions' }}

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/create-edit-sublist'])
 
 @section('admin-title')
     Sub Masterlists

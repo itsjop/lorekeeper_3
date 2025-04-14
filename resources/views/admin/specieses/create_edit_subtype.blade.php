@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/species/create-edit-species'])
 
 @section('admin-title')
     {{ $subtype->id ? 'Edit' : 'Create' }} Subtype

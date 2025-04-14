@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/edit-submission'])
 
 @section('home-title')
     @if ($isClaim)

@@ -1,4 +1,4 @@
-@extends('prompts.layout')
+@extends('prompts.layout', ['componentName' => 'prompts/index'])
 
 @section('prompts-title')
     Home

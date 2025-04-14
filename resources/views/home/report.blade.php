@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/report'])
 
 @section('home-title')
     Report (#{{ $report->id }})

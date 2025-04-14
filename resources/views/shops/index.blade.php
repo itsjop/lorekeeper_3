@@ -1,4 +1,4 @@
-@extends('shops.layout')
+@extends('shops.layout', ['componentName' => 'shops/index'])
 
 @section('shops-title')
     Shop Index

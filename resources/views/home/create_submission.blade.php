@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/create-submission'])
 
 @section('home-title')
     New Submission

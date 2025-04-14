@@ -1,4 +1,4 @@
-@extends('character.layout', ['isMyo' => $character->is_myo_slot])
+@extends('character.layout', ['componentName' => 'character/edit-profile', 'isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
     Editing {{ $character->fullName }}'s Profile

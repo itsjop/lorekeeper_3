@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['pageName' => 'user/inventory'])
 
 @section('profile-title')
     {{ $user->name }}'s Inventory

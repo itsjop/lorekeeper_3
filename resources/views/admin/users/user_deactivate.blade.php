@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/users/user-deactivate'])
 
 @section('admin-title')
     Deactivate User: {{ $user->name }}

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/masterlist/character-transfers'])
 
 @section('admin-title')
     Character Transfers

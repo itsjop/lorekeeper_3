@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/files/images'])
 
 @section('admin-title')
     Site Images

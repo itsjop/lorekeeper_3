@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['componentName' => 'user/ownership-logs'])
 
 @section('profile-title')
     {{ $user->name }}'s Character History

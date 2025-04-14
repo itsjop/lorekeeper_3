@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/galleries/galleries'])
 
 @section('admin-title')
     Galleries

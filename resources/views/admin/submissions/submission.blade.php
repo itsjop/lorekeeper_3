@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/submissions/submission'])
 
 @section('admin-title')
     {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})

@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['componentName' => 'user/sublist'])
 
 @section('profile-title')
     {{ $user->name }}'s {{ $sublist->name }}

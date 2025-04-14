@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/shops/create-edit-shops'])
 
 @section('admin-title')
     {{ $shop->id ? 'Edit' : 'Create' }} Shop

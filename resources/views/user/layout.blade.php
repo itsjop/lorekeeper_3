@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/user'])
 
 @section('title')
     User ::@yield('profile-title')

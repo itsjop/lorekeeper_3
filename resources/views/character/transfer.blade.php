@@ -1,4 +1,4 @@
-@extends('character.layout', ['isMyo' => $character->is_myo_slot])
+@extends('character.layout', ['componentName' => 'character/transfer', 'isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
     Transferring {{ $character->fullName }}

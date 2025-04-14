@@ -1,4 +1,4 @@
-@extends('user.layout', ['user' => isset($user) ? $user : null])
+@extends('user.layout', ['componentName' => 'user/profile', 'user' => isset($user) ? $user : null])
 
 @section('profile-title')
     {{ $user->name }}'s Profile
@@ -11,12 +11,28 @@
 @section('profile-content')
     {!! breadcrumbs(['Users' => 'users', $user->name => $user->url]) !!}
 
-    @if (mb_strtolower($user->name) != mb_strtolower($name))
-        <div class="alert alert-info">This user has changed their name to <strong>{{ $user->name }}</strong>.</div>
-    @endif
+  @if ($user->is_banned)
+    <div class="alert alert-danger">This user has been banned.</div>
+  @endif
+  <h1>
+    <div style=" float:left;">
+      {!! $user->userBorder() !!}
+    </div>
 
-    @if ($user->is_banned)
-        <div class="alert alert-danger">This user has been banned.</div>
+    {!! $user->displayName !!}
+    <a href="{{ url('reports/new?url=') . $user->url }}"><i
+        class="fas fa-exclamation-triangle fa-xs"
+        data-toggle="tooltip"
+        title="Click here to report this user."
+        style="opacity: 50%; font-size:0.5em;"
+      ></i></a>
+
+    @if ($user->settings->is_fto)
+      <span
+        class="badge badge-success float-right"
+        data-toggle="tooltip"
+        title="This user has not owned any characters from this world before."
+      >FTO</span>
     @endif
 
     @if ($user->is_deactivated)

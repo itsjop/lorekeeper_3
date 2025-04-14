@@ -1,4 +1,4 @@
-@extends('character.layout', ['isMyo' => true])
+@extends('character.layout', ['componentName' => 'myo/character', 'isMyo' => true])
 
 @section('profile-title')
     {{ $character->fullName }}

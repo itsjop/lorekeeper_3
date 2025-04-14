@@ -1,4 +1,4 @@
-@extends('news.layout')
+@extends('news.layout', ['componentName' => 'news/index'])
 
 @section('title')
     Site News

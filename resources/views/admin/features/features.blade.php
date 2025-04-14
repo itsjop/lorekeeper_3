@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/features/features'])
 
 @section('admin-title')
     Traits
