@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['componentName' => 'user/currency-logs'])
 
 @section('profile-title')
   {{ $user->name }}'s Currency Logs

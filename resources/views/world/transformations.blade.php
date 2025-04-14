@@ -1,4 +1,4 @@
-@extends('world.layout')
+@extends('world.layout', ['componentName' => 'world/transformations'])
 
 @section('title')
   {{ ucfirst(__('transformations.transformations')) }}

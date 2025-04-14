@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/users/ranks'])
 
 @section('admin-title')
   User Ranks

@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/myo-masterlist'])
+
 
 @section('title')
   MYO Slot Masterlist

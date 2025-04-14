@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'borders'])
 
 @section('admin-title')
   Borders

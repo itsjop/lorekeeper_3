@@ -1,4 +1,4 @@
-@extends('worldexpansion.layout')
+@extends('worldexpansion.layout', ['componentName' => 'worldexpansion/factions'])
 
 @section('title')
   Factions

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/grants/borders'])
 
 @section('admin-title')
   Grant Borders
@@ -83,5 +83,6 @@
         }
       }
     });
-  </script>
+</script>
+
 @endsection

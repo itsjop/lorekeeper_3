@@ -1,4 +1,4 @@
-@extends('worldexpansion.layout')
+@extends('worldexpansion.layout', ['componentName' => 'worldexpansion/concept-category-page'])
 
 @section('title')
   {{ $category->name }} Concept

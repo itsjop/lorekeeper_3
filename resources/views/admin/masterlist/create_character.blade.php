@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/masterlist/create-character'])
 
 @section('admin-title')
   Create {{ $isMyo ? 'MYO Slot' : 'Character' }}

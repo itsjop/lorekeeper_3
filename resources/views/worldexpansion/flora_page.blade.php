@@ -1,4 +1,4 @@
-@extends('worldexpansion.layout')
+@extends('worldexpansion.layout', ['componentName' => 'worldexpansion/flora-page'])
 
 @section('title')
   Flora :: {{ $flora->name }}

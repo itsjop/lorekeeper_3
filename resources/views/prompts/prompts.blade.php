@@ -1,4 +1,4 @@
-@extends('prompts.layout')
+@extends('prompts.layout', ['componentName' => 'prompts/prompts'])
 
 @section('prompts-title')
   All Prompts

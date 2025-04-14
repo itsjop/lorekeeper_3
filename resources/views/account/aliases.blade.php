@@ -1,4 +1,4 @@
-@extends('account.layout')
+@extends('account.layout', ['componentName' => 'account/aliases'])
 
 @section('account-title')
   Links

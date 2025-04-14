@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/borders/create-edit-border'])
 
 @section('admin-title')
   Border Categories

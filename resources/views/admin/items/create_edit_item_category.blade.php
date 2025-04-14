@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/items/create-edit-item-category'])
 
 @section('admin-title')
   {{ $category->id ? 'Edit' : 'Create' }} Item Category

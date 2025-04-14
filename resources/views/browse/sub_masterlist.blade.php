@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/sub-masterlist'])
+
 
 @section('title')
   {{ $sublist->name }} Masterlist

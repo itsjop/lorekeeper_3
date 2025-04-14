@@ -1,5 +1,4 @@
-@extends('character.design.layout')
-
+@extends('character.design.layout', ['componentName' => 'character/design/comments'])
 @section('design-title')
   Request (#{{ $request->id }}) :: Comments
 @endsection

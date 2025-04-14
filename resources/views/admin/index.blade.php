@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/index'])
 
 @section('admin-title')
   Dashboard

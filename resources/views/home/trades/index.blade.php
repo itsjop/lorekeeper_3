@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/trades/index'])
 
 @section('home-title')
   Trades

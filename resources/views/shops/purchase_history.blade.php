@@ -1,4 +1,4 @@
-@extends('shops.layout')
+@extends('shops.layout', ['componentName' => 'shops/purchase-history'])
 
 @section('shops-title')
   My Purchase History

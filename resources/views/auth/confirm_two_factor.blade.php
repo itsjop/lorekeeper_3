@@ -1,4 +1,4 @@
-@extends('account.layout')
+@extends('account.layout', ['componentName' => 'auth/confirm-2fa'])
 
 @section('account-title')
   Confirm Two Factor Auth

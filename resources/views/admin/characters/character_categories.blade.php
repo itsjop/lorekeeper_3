@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/characters/character-categories'])
 
 @section('admin-title')
   Character Categories

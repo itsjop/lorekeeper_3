@@ -1,4 +1,4 @@
-@extends('galleries.layout')
+@extends('galleries.layout', ['componentName' => 'galleries/create-edit-submission'])
 
 @section('gallery-title')
   {{ $submission->id ? 'Edit' : 'Create' }} Submission

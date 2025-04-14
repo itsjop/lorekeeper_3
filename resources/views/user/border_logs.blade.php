@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['componentName' => 'user/border-logs'])
 
 @section('profile-title')
   {{ $user->name }}'s Border Logs

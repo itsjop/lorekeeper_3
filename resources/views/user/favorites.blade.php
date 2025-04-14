@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['componentName' => 'user/favorites'])
 
 @section('profile-title')
   {{ $user->name }}'s Favorites

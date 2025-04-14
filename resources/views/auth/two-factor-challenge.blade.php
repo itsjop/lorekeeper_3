@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/auth/2fa-challenge'])
+
 
 @section('title')
   Login: Two-Factor Auth

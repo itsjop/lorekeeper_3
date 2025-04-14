@@ -81,13 +81,8 @@
 </head>
 
 <body>
-  <div id="app">
-    <main id="main-app" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
-      {{-- <div class="scolling-bg">
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-      </div> --}}
+  <div id="app" {{ isset($componentName) ? 'data-component-path='.$componentName : '' }} {{ isset($pageName) ? 'data-page='.$pageName : '' }}>
+    <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">
         <picture>

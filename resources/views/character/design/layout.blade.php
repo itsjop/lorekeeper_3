@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/character/design'])
+
 
 @section('title')
   Design Approvals ::

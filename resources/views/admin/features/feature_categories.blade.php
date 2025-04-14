@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/features/feature-categories'])
 
 @section('admin-title')
   Trait Categories

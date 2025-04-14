@@ -1,4 +1,4 @@
-@extends('world.layout')
+@extends('world.layout', ['componentName' => 'world/feature-categories'])
 
 @section('world-title')
   Trait Categories

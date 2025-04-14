@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/staff-rewards'])
 
 @section('admin-title')
   Staff Reward Settings

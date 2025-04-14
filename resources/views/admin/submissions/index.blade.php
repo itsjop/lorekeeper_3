@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/submissions/index'])
 
 @section('admin-title')
   {{ $isClaims ? 'Claim' : 'Prompt' }} Queue

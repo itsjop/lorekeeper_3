@@ -1,4 +1,4 @@
-@extends('galleries.layout')
+@extends('galleries.layout', ['componentName' => 'galleries/submissions'])
 
 @section('gallery-title')
   Gallery Submissions

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/transformations/transformations'])
 
 @section('admin-title')
   Species

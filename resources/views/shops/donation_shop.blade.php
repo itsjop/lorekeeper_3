@@ -1,4 +1,4 @@
-@extends('shops.layout')
+@extends('shops.layout', ['componentName' => 'shops/donation-shop'])
 
 @section('shops-title')
   Donation Shop

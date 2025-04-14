@@ -1,4 +1,4 @@
-@extends('shops.layout')
+@extends('shops.layout', ['componentName' => 'shops/shop'])
 
 @section('shops-title')
   {{ $shop->name }}

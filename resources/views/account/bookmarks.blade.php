@@ -1,4 +1,4 @@
-@extends('account.layout')
+@extends('account.layout', ['componentName' => 'account/bookmarks'])
 
 @section('account-title')
   Bookmarks
