@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/auth/login'])
 
-
 @section('title')
     Login
 @endsection

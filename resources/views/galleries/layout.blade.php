@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/galleries'])
 
-
 @section('title')
     Gallery :: @yield('gallery-title')
 @endsection

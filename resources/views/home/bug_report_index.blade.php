@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/bug-report'])
 
-
 @section('title')
     Bug Reports
 @endsection

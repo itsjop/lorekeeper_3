@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/admin'])
 
-
 @section('title')
     Admin ::
     @yield('admin-title')

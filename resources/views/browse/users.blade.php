@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/users'])
 
-
 @section('title')
     Users
 @endsection

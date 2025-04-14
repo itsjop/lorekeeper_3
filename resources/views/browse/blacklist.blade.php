@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/blacklist'])
 
-
 @section('title')
     Blacklist
 @endsection

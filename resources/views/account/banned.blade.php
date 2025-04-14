@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/banned'])
 
-
 @section('title')
     Banned
 @endsection

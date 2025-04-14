@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/news'])
 
-
 @section('title')
     Site News :: @yield('news-title')
 @endsection

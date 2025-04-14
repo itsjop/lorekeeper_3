@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/credits'])
 
-
 @section('title')
     Credits
 @endsection

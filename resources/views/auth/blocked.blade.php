@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/auth/blocked'])
 
-
 @section('title')
     Blocked
 @endsection

@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/home'])
 
-
 @section('title')
     Home ::
     @yield('home-title')

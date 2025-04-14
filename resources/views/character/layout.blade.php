@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/character'])
 
-
 @section('title')
     Character ::
     @yield('profile-title')

@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/world'])
 
-
 @section('title')
     World ::
     @yield('world-title')

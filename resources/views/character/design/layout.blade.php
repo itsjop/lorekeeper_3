@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/character/design'])
 
-
 @section('title')
     Design Approvals ::
     @yield('design-title')

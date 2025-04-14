@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/masterlist'])
 
-
 @section('title')
     Character Masterlist
 @endsection

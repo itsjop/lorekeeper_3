@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/auth/link'])
 
-
 @section('title')
     Link Account
 @endsection

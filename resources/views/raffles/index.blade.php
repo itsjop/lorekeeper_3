@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/raffles'])
 
-
 @section('title')
     Raffles
 @endsection

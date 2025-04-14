@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/deactivated'])
 
-
 @section('title')
     Deactivated Users
 @endsection

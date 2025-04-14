@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/auth/register'])
 
-
 @section('title')
     Register
 @endsection
