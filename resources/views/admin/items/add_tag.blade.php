@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/items/add-tag'])
 
 @section('admin-title')
     Add Item Tag

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/designs/index'])
 
 @section('admin-title')
     {{ $isMyo ? 'MYO Approval' : 'Design Update' }} Queue

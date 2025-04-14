@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/sales'])
+
 
 @section('title')
     Site Sales :: @yield('sales-title')

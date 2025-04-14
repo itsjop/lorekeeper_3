@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/grants/items'])
 
 @section('admin-title')
     Grant Items

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/currencies/sort'])
 
 @section('admin-title')
     Sort Currencies

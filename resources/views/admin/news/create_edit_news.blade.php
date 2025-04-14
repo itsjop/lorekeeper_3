@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/news/create-edit-news'])
 
 @section('admin-title')
     {{ $news->id ? 'Edit' : 'Create' }} News Post

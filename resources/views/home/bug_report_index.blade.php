@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/bug-report'])
+
 
 @section('title')
     Bug Reports

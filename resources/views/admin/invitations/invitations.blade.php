@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/invitations/invitations'])
 
 @section('admin-title')
     Invitation Keys

@@ -1,4 +1,4 @@
-@extends('character.layout')
+@extends('character.layout', ['componentName' => 'character/admin/upload-image'])
 
 @section('profile-title')
     {{ $character->fullName }} - Upload New Image

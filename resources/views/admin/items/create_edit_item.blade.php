@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/items/create-edit-item'])
 
 @section('admin-title')
     {{ $item->id ? 'Edit' : 'Create' }} Item

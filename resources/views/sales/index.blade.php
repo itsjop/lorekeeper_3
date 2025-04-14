@@ -1,4 +1,4 @@
-@extends('sales.layout')
+@extends('sales.layout', ['componentName' => 'sales/index'])
 
 @section('title')
     Site Sales

@@ -1,4 +1,4 @@
-@extends('world.layout')
+@extends('world.layout', ['componentName' => 'world/character_categories'])
 
 @section('world-title')
     Character Categories

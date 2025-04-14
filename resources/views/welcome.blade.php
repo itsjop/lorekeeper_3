@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/welcome'])
 
 @section('title')
     Home

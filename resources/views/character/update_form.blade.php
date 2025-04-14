@@ -1,4 +1,4 @@
-@extends('character.layout', ['isMyo' => $character->is_myo_slot])
+@extends('character.layout', ['componentName' => 'character/update-form', 'isMyo' => $character->is_myo_slot])
 
 @section('profile-title')
     {{ $character->is_myo_slot ? 'MYO Approval' : 'Design Update' }} for {{ $character->fullName }}

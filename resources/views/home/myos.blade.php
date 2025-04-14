@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/myos'])
 
 @section('home-title')
     My MYO Slots

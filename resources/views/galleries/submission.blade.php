@@ -1,4 +1,4 @@
-@extends('galleries.layout')
+@extends('galleries.layout', ['componentName' => 'galleries/submission'])
 
 @section('gallery-title')
     {{ $submission->displayTitle }}

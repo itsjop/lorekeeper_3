@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/auth/birthday'])
+
 
 @section('title')
     Add Your Birthday

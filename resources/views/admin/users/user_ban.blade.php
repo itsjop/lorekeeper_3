@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/users/user-ban'])
 
 @section('admin-title')
     Ban User: {{ $user->name }}

@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['componentName' => 'user/aliases'])
 
 @section('profile-title')
     {{ $user->name }}'s Aliases

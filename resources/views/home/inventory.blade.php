@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/inventory'])
 
 @section('home-title')
     Inventory

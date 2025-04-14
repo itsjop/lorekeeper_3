@@ -1,4 +1,4 @@
-@extends('world.layout')
+@extends('world.layout', ['componentName' => 'world/subtypes'])
 
 @section('world-title')
     Subtypes

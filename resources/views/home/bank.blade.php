@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/bank'])
 
 @section('home-title')
     Bank
