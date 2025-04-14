@@ -1,52 +1,75 @@
 @extends('user.layout', ['componentName' => 'user/profile', 'user' => isset($user) ? $user : null])
 
 @section('profile-title')
-    {{ $user->name }}'s Profile
+    {{ $character->fullName }}'s Profile
 @endsection
 
 @section('meta-img')
-    {{ $user->avatarUrl }}
+    {{ $character->image->thumbnailUrl }}
 @endsection
 
 @section('profile-content')
-    {!! breadcrumbs(['Users' => 'users', $user->name => $user->url]) !!}
-
-  @if ($user->is_banned)
-    <div class="alert alert-danger">This user has been banned.</div>
-  @endif
-  <h1>
-    <div style=" float:left;">
-      {!! $user->userBorder() !!}
-    </div>
-
-    {!! $user->displayName !!}
-    <a href="{{ url('reports/new?url=') . $user->url }}"><i
-        class="fas fa-exclamation-triangle fa-xs"
-        data-toggle="tooltip"
-        title="Click here to report this user."
-        style="opacity: 50%; font-size:0.5em;"
-      ></i></a>
-
-    @if ($user->settings->is_fto)
-      <span
-        class="badge badge-success float-right"
-        data-toggle="tooltip"
-        title="This user has not owned any characters from this world before."
-      >FTO</span>
+    @if ($character->is_myo_slot)
+        {!! breadcrumbs(['MYO Slot Masterlist' => 'myos', $character->fullName => $character->url, 'Profile' => $character->url . '/profile']) !!}
+    @else
+        {!! breadcrumbs([
+            $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+            $character->fullName => $character->url,
+            'Profile' => $character->url . '/profile',
+        ]) !!}
     @endif
 
-    @if ($user->is_deactivated)
-        <div class="alert alert-info text-center">
-            <h1>{!! $user->displayName !!}</h1>
-            <p>This account is currently deactivated, be it by staff or the user's own action. All information herein is hidden until the account is reactivated.</p>
-            @if (Auth::check() && Auth::user()->isStaff)
-                <p class="mb-0">As you are staff, you can see the profile contents below and the sidebar contents.</p>
-            @endif
+    @include('character._header', ['character' => $character])
+
+    <div class="mb-3">
+        <div class="text-center">
+            <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+                data-lightbox="entry" data-title="{{ $character->fullName }}">
+                <img src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+                    class="image img-fluid" alt="{{ $character->fullName }}" />
+            </a>
+        </div>
+        @if ($character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
+            <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked image</a>?</div>
+        @endif
+    </div>
+
+    {{-- Bio --}}
+    <a class="float-left" href="{{ url('reports/new?url=') . $character->url . '/profile' }}"><i class="fas fa-exclamation-triangle" data-toggle="tooltip" title="Click here to report this character's profile." style="opacity: 50%;"></i></a>
+    @if (Auth::check() && ($character->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
+        <div class="text-right mb-2">
+            <a href="{{ $character->url . '/profile/edit' }}" class="btn btn-outline-info btn-sm"><i class="fas fa-cog"></i> Edit Profile</a>
+        </div>
+    @endif
+    @if ($character->profile->parsed_text)
+        <div class="card mb-3">
+            <div class="card-body parsed-text">
+                {!! $character->profile->parsed_text !!}
+            </div>
         </div>
     @endif
 
-    @if (!$user->is_deactivated || (Auth::check() && Auth::user()->isStaff))
-        @include('user._profile_content', ['user' => $user, 'deactivated' => $user->is_deactivated])
+    @if ($character->is_trading || $character->is_gift_art_allowed || $character->is_gift_writing_allowed)
+        <div class="card mb-3">
+            <ul class="list-group list-group-flush">
+                @if ($character->is_gift_art_allowed >= 1 && !$character->is_myo_slot)
+                    <li class="list-group-item">
+                        <h5 class="mb-0"><i class="{{ $character->is_gift_art_allowed == 1 ? 'text-success' : 'text-secondary' }} far fa-circle fa-fw mr-2"></i>
+                            {{ $character->is_gift_art_allowed == 1 ? 'Gift art is allowed' : 'Please ask before gift art' }}</h5>
+                    </li>
+                @endif
+                @if ($character->is_gift_writing_allowed >= 1 && !$character->is_myo_slot)
+                    <li class="list-group-item">
+                        <h5 class="mb-0"><i class="{{ $character->is_gift_writing_allowed == 1 ? 'text-success' : 'text-secondary' }} far fa-circle fa-fw mr-2"></i>
+                            {{ $character->is_gift_writing_allowed == 1 ? 'Gift writing is allowed' : 'Please ask before gift writing' }}</h5>
+                    </li>
+                @endif
+                @if ($character->is_trading)
+                    <li class="list-group-item">
+                        <h5 class="mb-0"><i class="text-success far fa-circle fa-fw mr-2"></i> Open for trades</h5>
+                    </li>
+                @endif
+            </ul>
+        </div>
     @endif
-
 @endsection
