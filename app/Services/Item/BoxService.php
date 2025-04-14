@@ -6,6 +6,7 @@ use App\Models\Item\Item;
 use App\Services\InventoryManager;
 use App\Services\Service;
 use Illuminate\Support\Facades\DB;
+use App\Models\Border\Border;
 
 class BoxService extends Service {
     /*
@@ -22,8 +23,16 @@ class BoxService extends Service {
      *
      * @return array
      */
-    public function getEditData() {
-        return [];
+    public function getEditData()
+    {
+        return [
+            'characterCurrencies' => Currency::where('is_character_owned', 1)->orderBy('sort_character', 'DESC')->pluck('name', 'id'),
+            'items' => Item::orderBy('name')->pluck('name', 'id'),
+            'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+            'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+            'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
+            'borders' => Border::base()->orderBy('name')->where('is_default', 0)->where('admin_only', 0)->pluck('name', 'id'),
+        ];
     }
 
     /**
@@ -85,6 +94,9 @@ class BoxService extends Service {
                         break;
                     case 'Raffle':
                         $type = 'App\Models\Raffle\Raffle';
+                        break;
+                    case 'Border':
+                        $type = 'App\Models\Border\Border';
                         break;
                 }
                 $asset = $type::find($data['rewardable_id'][$key]);
