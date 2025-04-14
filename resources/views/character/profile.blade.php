@@ -20,7 +20,6 @@
     @endif
 
     @include('character._header', ['character' => $character])
-
     <div class="mb-3">
         <div class="text-center">
             <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
