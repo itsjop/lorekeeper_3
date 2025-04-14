@@ -10,8 +10,8 @@
     @if ($showRaffles)
       var $raffleSelect = $('#lootRowData').find('.raffle-select');
     @endif
-    @if(isset($showBorders) && $showBorders)
-        var $borderSelect = $('#lootRowData').find('.border-select');
+    @if (isset($showBorders) && $showBorders)
+      var $borderSelect = $('#lootRowData').find('.border-select');
     @endif
 
     $('#lootTableBody .selectize').selectize();
@@ -38,9 +38,9 @@
       @if ($showRaffles)
         else if (val == 'Raffle') $clone = $raffleSelect.clone();
       @endif
-        @if(isset($showBorders) && $showBorders)
-            else if (val == 'Border') $clone = $borderSelect.clone();
-        @endif
+      @if (isset($showBorders) && $showBorders)
+        else if (val == 'Border') $clone = $borderSelect.clone();
+      @endif
 
       $cell.html('');
       $cell.append($clone);
@@ -60,9 +60,9 @@
         @if ($showRaffles)
           else if (val == 'Raffle') $clone = $raffleSelect.clone();
         @endif
-            @if(isset($showBorders) && $showBorders)
-                else if (val == 'Border') $clone = $borderSelect.clone();
-            @endif
+        @if (isset($showBorders) && $showBorders)
+          else if (val == 'Border') $clone = $borderSelect.clone();
+        @endif
 
         $cell.html('');
         $cell.append($clone);

@@ -119,24 +119,24 @@
 
       <div id="main-content" class="main-content p-4">
 
-          @if (Settings::get('is_maintenance_mode'))
-            <div class="alert alert-secondary">
-              The site is currently in maintenance mode!
-              @if (!Auth::check() || !Auth::user()->hasPower('maintenance_access'))
-                You can browse public content, but cannot make any submissions.
-              @endif
-            </div>
-          @endif
-          @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
-            @if (Auth::user()->is_news_unread)
-              <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
+        @if (Settings::get('is_maintenance_mode'))
+          <div class="alert alert-secondary">
+            The site is currently in maintenance mode!
+            @if (!Auth::check() || !Auth::user()->hasPower('maintenance_access'))
+              You can browse public content, but cannot make any submissions.
             @endif
-            @if (Auth::user()->is_sales_unread)
-              <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
-            @endif
+          </div>
+        @endif
+        @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
+          @if (Auth::user()->is_news_unread)
+            <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
           @endif
-          @include('flash::message')
-          @yield('content')
+          @if (Auth::user()->is_sales_unread)
+            <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
+          @endif
+        @endif
+        @include('flash::message')
+        @yield('content')
 
 
         @include('layouts._footer')
