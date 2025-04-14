@@ -392,44 +392,11 @@ class UserController extends Controller {
 
         return view('user.border_logs', [
             'user' => $this->user,
+            'logs' => $this->user->getBorderLogs(0),
+            'sublists' => Sublist::orderBy('sort', 'DESC')->get(),
             'characters' => true,
             'favorites'  => $this->user->characters->count() ? GallerySubmission::whereIn('id', $userFavorites)->whereIn('id', GalleryCharacter::whereIn('character_id', $userCharacters)->pluck('gallery_submission_id')->toArray())->visible(Auth::check() ? Auth::user() : null)->orderBy('created_at', 'DESC')->paginate(20)->appends($request->query()) : null,
-        ]);
-    }
 
-    /**
-     * Shows a user's borders.
-     *
-     * @param  string  $name
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getUserBorders($name)
-    {
-        $default =  Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->get();
-        $admin = Border::base()->where('admin_only', 1)->get();
-
-        return view('user.borders', [
-            'user' => $this->user,
-            'default' => $default,
-            'admin' => $admin,
-            'logs' => $this->user->getBorderLogs(),
-        ]);
-    }
-
-    /**
-     * Shows a user's border logs.
-     *
-     * @param  string  $name
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getUserBorderLogs($name)
-    {
-        $user = $this->user;
-
-        return view('user.border_logs', [
-            'user' => $this->user,
-            'logs' => $this->user->getBorderLogs(0),
-            'sublists' => Sublist::orderBy('sort', 'DESC')->get()
         ]);
     }
 }

@@ -30,6 +30,7 @@ class UserSettings extends Model {
     protected $casts = [
         'banned_at'      => 'datetime',
         'deactivated_at' => 'datetime',
+        'border_settings' => 'array',
     ];
 
     /**
@@ -38,16 +39,7 @@ class UserSettings extends Model {
      * @var string
      */
     public $primaryKey = 'user_id';
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'border_settings' => 'array',
-    ];
-
+    
     /**********************************************************************************************
 
         RELATIONS

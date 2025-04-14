@@ -118,7 +118,7 @@
       </div>
 
       <div id="main-content" class="main-content p-4">
-        <div>
+
           @if (Settings::get('is_maintenance_mode'))
             <div class="alert alert-secondary">
               The site is currently in maintenance mode!
@@ -129,17 +129,15 @@
           @endif
           @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
             @if (Auth::user()->is_news_unread)
-              <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news
-                  post!</a></div>
+              <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
             @endif
             @if (Auth::user()->is_sales_unread)
-              <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales
-                  post!</a></div>
+              <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
             @endif
           @endif
           @include('flash::message')
           @yield('content')
-        </div>
+
 
         @include('layouts._footer')
 
@@ -187,7 +185,7 @@
           ],
           toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
           content_css: [
-            '{{ asset('css/app.css') }}',
+            '{{ asset('css/vendor/app.css') }}',
             '{{ asset('css/lorekeeper.css') }}'
           ],
           spoiler_caption: 'Toggle Spoiler',
