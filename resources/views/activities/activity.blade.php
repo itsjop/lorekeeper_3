@@ -1,4 +1,4 @@
-@extends('activities.layout')
+@extends('activities.layout', ['componentName' => 'activities/activity'])
 
 @section('activities-title')
   {{ $activity->name }}

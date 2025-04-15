@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/account-search'])
 
 @section('home-title')
   Account Search

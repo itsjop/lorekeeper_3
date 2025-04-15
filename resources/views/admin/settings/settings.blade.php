@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/settings/settings'])
 
 @section('admin-title')
   Site Settings

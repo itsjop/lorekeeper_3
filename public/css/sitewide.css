@@ -65,7 +65,7 @@
     /* prettier-ignore */
     .cloud-3 {left: calc(90vw - (var(--cloud-width) * 3));}
   }
-  #main-app {
+  #site-wrapper {
     --sb-width: min(20vw, 200px);
     --app-width: 70vw;
     display: grid;
@@ -227,7 +227,7 @@
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
     padding: 10px var(--m-app-padding);
-    #main-app {
+    #site-wrapper {
       width: var(--m-app-width);
       &.has-sidebar {
         --m-app-width: calc(100vw - (var(--m-app-padding) * 2));

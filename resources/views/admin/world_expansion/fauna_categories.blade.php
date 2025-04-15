@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/worldexpansion/fauna-categories'])
 
 @section('admin-title')
   Fauna Categories

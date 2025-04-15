@@ -1,4 +1,4 @@
-@extends('worldexpansion.layout')
+@extends('worldexpansion.layout', ['componentName' => 'worldexpansion/event-page'])
 
 @section('title')
   Event :: {{ $event->name }}

@@ -1,4 +1,4 @@
-@extends('world.layout')
+@extends('world.layout', ['componentName' => 'world/species-features'])
 
 @section('world-title')
   {{ $species->name }} Traits

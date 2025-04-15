@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/users/user-update'])
 
 @section('admin-title')
   User Account Updates: {{ $user->name }}

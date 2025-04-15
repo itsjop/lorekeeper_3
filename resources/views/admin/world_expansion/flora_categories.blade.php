@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/worldexpansion/flora-categories'])
 
 @section('admin-title')
   Flora Categories

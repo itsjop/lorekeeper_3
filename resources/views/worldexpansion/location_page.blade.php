@@ -1,4 +1,4 @@
-@extends('worldexpansion.layout')
+@extends('worldexpansion.layout', ['componentName' => 'worldexpansion/location'])
 
 @section('title')
   {{ $location->style }}

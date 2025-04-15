@@ -1,4 +1,4 @@
-@extends('world.layout')
+@extends('world.layout', ['componentName' => 'world/borders'])
 
 @section('title')
   Borders

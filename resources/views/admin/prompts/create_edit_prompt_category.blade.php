@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/prompts/create-edit-prompt-category'])
 
 @section('admin-title')
   {{ $category->id ? 'Edit' : 'Create' }} Prompt Category

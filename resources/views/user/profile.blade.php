@@ -1,4 +1,4 @@
-@extends('user.layout', ['user' => isset($user) ? $user : null])
+@extends('user.layout', ['componentName' => 'user/profile', 'user' => isset($user) ? $user : null])
 
 @section('profile-title')
   {{ $user->name }}'s Profile
@@ -70,7 +70,6 @@
         </div>
       @endif
     </div>
-
 
     @if (isset($user->profile->parsed_text))
       <div class="card mb-3" style="clear:both;">

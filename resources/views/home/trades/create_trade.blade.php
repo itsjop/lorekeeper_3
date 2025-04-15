@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/trades/create-trade'])
 
 @section('home-title')
   Trades

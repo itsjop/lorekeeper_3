@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/_perma-layout'])
+
 
 @section('title')
   Comments

@@ -1,4 +1,4 @@
-@extends('account.layout')
+@extends('account.layout', ['componentName' => 'account/settings'])
 
 @section('account-title')
   Settings

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/sales/create-edit-sales'])
 
 @section('admin-title')
   {{ $sales->id ? 'Edit' : 'Create' }} Sales Post

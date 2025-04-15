@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/features/create-edit-feature'])
 
 @section('admin-title')
   {{ $feature->id ? 'Edit' : 'Create' }} Trait

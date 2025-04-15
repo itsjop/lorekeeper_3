@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/pages/create-edit-pages'])
 
 @section('admin-title')
   {{ $page->id ? 'Edit' : 'Create' }} Page

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/sales/sales'])
 
 @section('admin-title')
   Sales

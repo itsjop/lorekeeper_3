@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/worldexpansion/concept-categories'])
 
 @section('admin-title')
   Concept Categories

@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.layout', ['componentName' => 'user/myo-slots'])
 
 @section('profile-title')
   {{ $user->name }}'s MYO Slots

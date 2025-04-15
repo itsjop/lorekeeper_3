@@ -1,4 +1,4 @@
-@extends('worldexpansion.layout')
+@extends('worldexpansion.layout', ['componentName' => 'worldexpansion/figure-categories'])
 
 @section('title')
   Figure Categories

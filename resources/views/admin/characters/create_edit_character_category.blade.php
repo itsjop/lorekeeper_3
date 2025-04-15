@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/currencies/create-edit-character-category'])
 
 @section('admin-title')
   {{ $category->id ? 'Edit' : 'Create' }} Character Category

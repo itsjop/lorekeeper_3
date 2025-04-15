@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/character-transfers'])
 
 @section('home-title')
   Character Transfers

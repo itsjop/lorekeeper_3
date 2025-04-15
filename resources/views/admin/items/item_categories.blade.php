@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/items/item-categories'])
 
 @section('admin-title')
   Item Categories

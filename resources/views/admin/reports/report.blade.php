@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/reports/report'])
 
 @section('admin-title')
   Report (#{{ $report->id }})

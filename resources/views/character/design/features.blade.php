@@ -1,5 +1,4 @@
-@extends('character.design.layout')
-
+@extends('character.design.layout', ['componentName' => 'character/design/features'])
 @section('design-title')
   Request (#{{ $request->id }}) :: Traits
 @endsection

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/galleries/submissions-currency'])
 
 @section('admin-title')
   Gallery Currency Queue

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/grants/item-search'])
 
 @section('admin-title')
   Item Search

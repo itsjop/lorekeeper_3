@@ -1,4 +1,4 @@
-@extends('news.layout')
+@extends('news.layout', ['componentName' => 'news/news']))
 
 @section('news-title')
   {{ $news->title }}

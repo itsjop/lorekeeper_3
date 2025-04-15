@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/prompts/create-edit-prompt'])
 
 @section('admin-title')
   {{ $prompt->id ? 'Edit' : 'Create' }} Prompts

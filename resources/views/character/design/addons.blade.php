@@ -1,5 +1,4 @@
-@extends('character.design.layout')
-
+@extends('character.design.layout', ['componentName' => 'character/design/addons'])
 @section('design-title')
   Request (#{{ $request->id }}) :: Add-ons
 @endsection

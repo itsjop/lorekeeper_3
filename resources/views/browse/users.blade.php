@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/users'])
+
 
 @section('title')
   Users

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/worldexpansion/event-categories'])
 
 @section('admin-title')
   Event Categories

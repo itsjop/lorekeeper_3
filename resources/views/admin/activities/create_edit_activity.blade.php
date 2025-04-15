@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/activities/create-edit-activity'])
 
 @section('admin-title')
   Activity

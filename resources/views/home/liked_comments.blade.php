@@ -1,4 +1,4 @@
-@extends('home.layout')
+@extends('home.layout', ['componentName' => 'home/liked-comments'])
 
 @section('home-title')
   My Liked Comments

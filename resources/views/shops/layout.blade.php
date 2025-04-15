@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageName' => '/shops'])
 
 @section('title')
   Shops ::

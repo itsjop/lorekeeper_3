@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.layout', ['componentName' => 'admin/currencies/create-edit-currency'])
 
 @section('admin-title')
   {{ $currency->id ? 'Edit' : 'Create' }} Currency
