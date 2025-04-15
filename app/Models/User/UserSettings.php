@@ -11,7 +11,7 @@ class UserSettings extends Model {
      * @var array
      */
     protected $fillable = [
-        'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting',
+        'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting','border_settings',
         'deactivate_reason', 'deactivated_at',
     ];
 
@@ -30,6 +30,7 @@ class UserSettings extends Model {
     protected $casts = [
         'banned_at'      => 'datetime',
         'deactivated_at' => 'datetime',
+        'border_settings' => 'array',
     ];
 
     /**
@@ -38,7 +39,7 @@ class UserSettings extends Model {
      * @var string
      */
     public $primaryKey = 'user_id';
-
+    
     /**********************************************************************************************
 
         RELATIONS
@@ -48,7 +49,8 @@ class UserSettings extends Model {
     /**
      * Get the user this set of settings belongs to.
      */
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User\User');
     }
 }

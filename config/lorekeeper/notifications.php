@@ -458,4 +458,12 @@ return [
         'message' => 'Your character (<a href="{character_url}">{character_name}</a>) has {count} submissions by other users. (<a href="{url}">View {character_name}’s Submissions</a>)',
         'url' => '{character_url}/submissions'
     ],
+
+    
+    // BORDER_GRANT
+    1106 => [
+        'name' => 'Border Grant',
+        'message' => 'You have received a staff grant of the user border {border_name} from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Borders</a>)',
+        'url' => 'user/{recipient_name}/borders'
+    ],
 ];

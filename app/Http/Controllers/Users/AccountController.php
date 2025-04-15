@@ -2,548 +2,735 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Http\Controllers\Controller;
-use App\Models\Notification;
+use Auth;
+use File;
+use Image;
+
 use App\Models\User\User;
 use App\Models\User\UserAlias;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Notification;
+use App\Services\UserService;
+use App\Services\LinkService;
+use App\Models\Border\Border;
 use App\Models\WorldExpansion\Faction;
 use App\Models\WorldExpansion\Location;
-use App\Services\LinkService;
-use App\Services\UserService;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Contracts\TwoFactorAuthenticationProvider;
 use Laravel\Fortify\RecoveryCode;
 use Settings;
 
 class AccountController extends Controller {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Account Controller
     |--------------------------------------------------------------------------
     |
     | Handles the user's account management.
     |
-    */
-
-    /**
-     * Shows the banned page, or redirects the user to the home page if they aren't banned.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Http\RedirectResponse
      */
-    public function getBanned() {
-        if (Auth::user()->is_banned) {
-            return view('account.banned');
-        } else {
-            return redirect()->to('/');
-        }
+
+  /**
+   * Shows the banned page, or redirects the user to the home page if they aren't banned.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Http\RedirectResponse
+   */
+  public function getBanned() {
+    if (Auth::user()->is_banned) {
+      return view('account.banned');
+    } else {
+      return view('account.deactivated');
+    }
+  }
+
+  /**
+   * Shows the user settings page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getSettings() {
+    $interval = [
+      0 => 'whenever',
+      1 => 'yearly',
+      2 => 'quarterly',
+      3 => 'monthly',
+      4 => 'weekly',
+      5 => 'daily'
+    ];
+    if (Auth::user()->isStaff) {
+      $borderOptions =
+        ['0' => 'Select Border'] +
+        Border::base()
+          ->active(Auth::user() ?? null)
+          ->where('is_default', 1)
+          ->get()
+          ->pluck('settingsName', 'id')
+          ->toArray() +
+        Border::base()->where('admin_only', 1)->get()->pluck('settingsName', 'id')->toArray();
+    } else {
+      $borderOptions =
+        ['0' => 'Select Border'] +
+        Border::base()
+          ->active(Auth::user() ?? null)
+          ->where('is_default', 1)
+          ->where('admin_only', 0)
+          ->get()
+          ->pluck('settingsName', 'id')
+          ->toArray();
     }
 
-    /**
-     * Shows the deactivation page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getDeactivated() {
-        if (!Auth::user()->is_deactivated) {
-            return redirect()->to('/');
-        } else {
-            return view('account.deactivated');
-        }
+    $default = Border::base()
+      ->active(Auth::user() ?? null)
+      ->where('is_default', 1)
+      ->get();
+    $admin = Border::base()->where('admin_only', 1)->get();
+
+    return view('account.settings', [
+      'locations' => Location::all()->where('is_user_home')->pluck('style', 'id')->toArray(),
+      'factions' => Faction::all()->where('is_user_faction')->pluck('style', 'id')->toArray(),
+      'user_enabled' => Settings::get('WE_user_locations'),
+      'user_faction_enabled' => Settings::get('WE_user_factions'),
+      'char_enabled' => Settings::get('WE_character_locations'),
+      'char_faction_enabled' => Settings::get('WE_character_factions'),
+      'location_interval' => $interval[Settings::get('WE_change_timelimit')],
+      'borders' =>
+        $borderOptions + Auth::user()->borders()->get()->pluck('settingsName', 'id')->toArray(),
+      'default' => $default,
+      'admin' => $admin,
+      'border_variants' => ['0' => 'Pick a Border First'],
+      'bottom_layers' => ['0' => 'Pick a Border First']
+    ]);
+  }
+
+  /**
+   * Edits the user's profile.
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postProfile(Request $request) {
+    Auth::user()->profile->update([
+      'text' => $request->get('text'),
+      'parsed_text' => parse($request->get('text')),
+      ,
+    ]);
+    flash('Profile updated successfully.')->success();
+
+    return redirect()->back();
+  }
+
+  /**
+   * Edits the user's avatar.
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postAvatar(Request $request, UserService $service) {
+    if ($service->updateAvatar($request->file('avatar'), Auth::user())) {
+      flash('Avatar updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Shows the user settings page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getSettings() {
-        $interval = [
-            0 => 'whenever',
-            1 => 'yearly',
-            2 => 'quarterly',
-            3 => 'monthly',
-            4 => 'weekly',
-            5 => 'daily',
-        ];
+    return redirect()->back();
+  }
 
-        return view('account.settings', [
-            'locations'            => Location::all()->where('is_user_home')->pluck('style', 'id')->toArray(),
-            'factions'             => Faction::all()->where('is_user_faction')->pluck('style', 'id')->toArray(),
-            'user_enabled'         => Settings::get('WE_user_locations'),
-            'user_faction_enabled' => Settings::get('WE_user_factions'),
-            'char_enabled'         => Settings::get('WE_character_locations'),
-            'char_faction_enabled' => Settings::get('WE_character_factions'),
-            'location_interval'    => $interval[Settings::get('WE_change_timelimit')],
-        ]);
+  /**
+   * Edits the user's profile image.
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postProfileImg(Request $request, UserService $service) {
+    if ($service->updateProfileImg($request->file('profile_img'), Auth::user())) {
+      flash('Profile Image updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Edits the user's profile.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postProfile(Request $request) {
-        Auth::user()->profile->update([
-            'text'        => $request->get('text'),
-            'parsed_text' => parse($request->get('text')),
-        ]);
-        flash('Profile updated successfully.')->success();
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Edits the user's username.
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postUsername(Request $request, UserService $service) {
+    if ($service->updateUsername($request->get('username'), Auth::user())) {
+      flash('Username updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Edits the user's avatar.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postAvatar(Request $request, UserService $service) {
-        if ($service->updateAvatar($request->file('avatar'), Auth::user())) {
-            flash('Avatar updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Edits the user's location from a list of locations that users can make their home.
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postLocation(Request $request, UserService $service) {
+    if ($service->updateLocation($request->input('location'), Auth::user())) {
+      flash('Location updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Edits the user's profile image.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postProfileImg(Request $request, UserService $service) {
-        if ($service->updateProfileImg($request->file('profile_img'), Auth::user())) {
-            flash('Profile Image updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Edits the user's faction from a list of factions that users can make their home.
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postFaction(Request $request, UserService $service) {
+    if ($service->updateFaction($request->input('faction'), Auth::user())) {
+      flash('Faction updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Edits the user's username.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postUsername(Request $request, UserService $service) {
-        if ($service->updateUsername($request->get('username'), Auth::user())) {
-            flash('Username updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Changes the user's password.
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postPassword(Request $request, UserService $service) {
+    $user = Auth::user();
+    if (!isset($user->password) && (!isset($user->email) || !isset($user->email_verified_at))) {
+      flash('Please set and verify an email before setting a password for email login.')->error();
+
+      return redirect()->back();
     }
 
-    /**
-     * Edits the user's location from a list of locations that users can make their home.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postLocation(Request $request, UserService $service) {
-        if ($service->updateLocation($request->input('location'), Auth::user())) {
-            flash('Location updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
+    $request->validate(
+      [
+        'old_password' => 'required|string',
+        'new_password' => 'required|string|min:8|confirmed'
+      ] + (isset($user->password) ? ['old_password' => 'required|string'] : [])
+    );
+    if (
+      $service->updatePassword(
+        $request->only(['old_password', 'new_password', 'new_password_confirmation']),
+        Auth::user()
+      )
+    ) {
+      flash('Password updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Edits the user's faction from a list of factions that users can make their home.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postFaction(Request $request, UserService $service) {
-        if ($service->updateFaction($request->input('faction'), Auth::user())) {
-            flash('Faction updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Changes the user's email address and sends a verification email.
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postEmail(Request $request, UserService $service) {
+    $request->validate([
+      'email' => 'required|string|email|max:255|unique:users'
+    ]);
+    if ($service->updateEmail($request->only(['email']), Auth::user())) {
+      flash(
+        'Email updated successfully. A verification email has been sent to your new email address.'
+      )->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Changes the user's password.
-     *
-     * @param App\Services\UserService $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postPassword(Request $request, UserService $service) {
-        $user = Auth::user();
-        if (!isset($user->password) && (!isset($user->email) || !isset($user->email_verified_at))) {
-            flash('Please set and verify an email before setting a password for email login.')->error();
+    return redirect()->back();
+  }
 
-            return redirect()->back();
-        }
-
-        $request->validate([
-            'new_password' => 'required|string|min:8|confirmed',
-        ] + (isset($user->password) ? ['old_password' => 'required|string'] : []));
-        if ($service->updatePassword($request->only(['old_password', 'new_password', 'new_password_confirmation']), Auth::user())) {
-            flash('Password updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
+  /**
+   * Changes user birthday setting.
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postBirthday(Request $request, UserService $service) {
+    if (
+      $service->updateBirthdayVisibilitySetting($request->input('birthday_setting'), Auth::user())
+    ) {
+      flash('Setting updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Changes the user's email address and sends a verification email.
-     *
-     * @param App\Services\UserService $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postEmail(Request $request, UserService $service) {
-        $request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
-        ]);
-        if ($service->updateEmail($request->only(['email']), Auth::user())) {
-            flash('Email updated successfully. A verification email has been sent to your new email address.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Enables the user's two factor auth.
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postEnableTwoFactor(Request $request, UserService $service) {
+    if (
+      !$request->session()->put([
+        'two_factor_secret' => encrypt(
+          app(TwoFactorAuthenticationProvider::class)->generateSecretKey()
+        ),
+        'two_factor_recovery_codes' => encrypt(
+          json_encode(
+            Collection::times(8, function () {
+              return RecoveryCode::generate();
+            })->all()
+          )
+        )
+      ])
+    ) {
+      flash('2FA info generated. Please confirm to enable 2FA.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Changes user birthday setting.
-     *
-     * @param App\Services\UserService $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postBirthday(Request $request, UserService $service) {
-        if ($service->updateBirthdayVisibilitySetting($request->input('birthday_setting'), Auth::user())) {
-            flash('Setting updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->to('account/two-factor/confirm');
+  }
 
-        return redirect()->back();
+  /**
+   * Shows the confirm two-factor auth page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getConfirmTwoFactor(Request $request) {
+    // Assemble URL and QR Code svg from session information
+    $qrUrl = app(TwoFactorAuthenticationProvider::class)->qrCodeUrl(
+      config('app.name'),
+      Auth::user()->email,
+      decrypt($request->session()->get('two_factor_secret'))
+    );
+    $qrCode = (new Writer(
+      new ImageRenderer(
+        new RendererStyle(
+          192,
+          0,
+          null,
+          null,
+          Fill::uniformColor(new Rgb(255, 255, 255), new Rgb(45, 55, 72))
+        ),
+        new SvgImageBackEnd()
+      )
+    ))->writeString($qrUrl);
+    $qrCode = trim(substr($qrCode, strpos($qrCode, "\n") + 1));
+
+    return view('auth.confirm_two_factor', [
+      'qrCode' => $qrCode,
+      'recoveryCodes' => json_decode(decrypt($request->session()->get('two_factor_recovery_codes')))
+    ]);
+  }
+
+  /**
+   * Confirms and fully enables the user's two factor auth.
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postConfirmTwoFactor(Request $request, UserService $service) {
+    $request->validate([
+      'code' => 'required'
+    ]);
+    if (
+      $service->confirmTwoFactor(
+        $request->only(['code']),
+        $request->session()->only(['two_factor_secret', 'two_factor_recovery_codes']),
+        Auth::user()
+      )
+    ) {
+      flash('2FA enabled succesfully.')->success();
+      $request->session()->forget(['two_factor_secret', 'two_factor_recovery_codes']);
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Enables the user's two factor auth.
-     *
-     * @param App\Services\UserService $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postEnableTwoFactor(Request $request, UserService $service) {
-        if (!$request->session()->put([
-            'two_factor_secret'         => encrypt(app(TwoFactorAuthenticationProvider::class)->generateSecretKey()),
-            'two_factor_recovery_codes' => encrypt(json_encode(Collection::times(8, function () {
-                return RecoveryCode::generate();
-            })->all())),
-        ])) {
-            flash('2FA info generated. Please confirm to enable 2FA.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->to('account/settings');
+  }
 
-        return redirect()->to('account/two-factor/confirm');
+  /**
+   * Confirms and disables the user's two factor auth.
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postDisableTwoFactor(Request $request, UserService $service) {
+    $request->validate([
+      'code' => 'required'
+    ]);
+    if ($service->disableTwoFactor($request->only(['code']), Auth::user())) {
+      flash('2FA disabled succesfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Shows the confirm two-factor auth page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getConfirmTwoFactor(Request $request) {
-        // Assemble URL and QR Code svg from session information
-        $qrUrl = app(TwoFactorAuthenticationProvider::class)->qrCodeUrl(config('app.name'), Auth::user()->email, decrypt($request->session()->get('two_factor_secret')));
-        $qrCode = (new Writer(
-            new ImageRenderer(
-                new RendererStyle(192, 0, null, null, Fill::uniformColor(new Rgb(255, 255, 255), new Rgb(45, 55, 72))),
-                new SvgImageBackEnd
-            )
-        ))->writeString($qrUrl);
-        $qrCode = trim(substr($qrCode, strpos($qrCode, "\n") + 1));
+    return redirect()->back();
+  }
 
-        return view('auth.confirm_two_factor', [
-            'qrCode'        => $qrCode,
-            'recoveryCodes' => json_decode(decrypt($request->session()->get('two_factor_recovery_codes'))),
-        ]);
+  /**
+   * Shows the notifications page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getNotifications() {
+    $notifications = Auth::user()->notifications()->orderBy('id', 'DESC')->paginate(30);
+    Auth::user()
+      ->notifications()
+      ->update(['is_unread' => 0]);
+    Auth::user()->notifications_unread = 0;
+    Auth::user()->save();
+
+    return view('account.notifications', [
+      'notifications' => $notifications,
+      ,
+    ]);
+  }
+
+  /**
+   * Deletes a notification and returns a response.
+   *
+   * @param mixed $id
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function getDeleteNotification($id) {
+    $notification = Notification::where('id', $id)
+      ->where('user_id', Auth::user()->id)
+      ->first();
+    if ($notification) {
+      $notification->delete();
     }
 
-    /**
-     * Confirms and fully enables the user's two factor auth.
-     *
-     * @param App\Services\UserService $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postConfirmTwoFactor(Request $request, UserService $service) {
-        $request->validate([
-            'code' => 'required',
-        ]);
-        if ($service->confirmTwoFactor($request->only(['code']), $request->session()->only(['two_factor_secret', 'two_factor_recovery_codes']), Auth::user())) {
-            flash('2FA enabled succesfully.')->success();
-            $request->session()->forget(['two_factor_secret', 'two_factor_recovery_codes']);
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return response(200);
+  }
 
-        return redirect()->to('account/settings');
+  /**
+   * Deletes all of the user's notifications.
+   *
+   * @param mixed|null $type
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postClearNotifications($type = null) {
+    if (isset($type)) {
+      Auth::user()->notifications()->where('notification_type_id', $type)->delete();
+    } else {
+      Auth::user()->notifications()->delete();
     }
 
-    /**
-     * Confirms and disables the user's two factor auth.
-     *
-     * @param App\Services\UserService $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postDisableTwoFactor(Request $request, UserService $service) {
-        $request->validate([
-            'code' => 'required',
-        ]);
-        if ($service->disableTwoFactor($request->only(['code']), Auth::user())) {
-            flash('2FA disabled succesfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    flash('Notifications cleared successfully.')->success();
 
-        return redirect()->back();
+    return redirect()->back();
+  }
+
+  /**
+   * Shows the account links page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getAliases() {
+    return view('account.aliases');
+  }
+
+  /**
+   * Shows the make primary alias modal.
+   *
+   * @param mixed $id
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getMakePrimary($id) {
+    return view('account._make_primary_modal', [
+      'alias' => UserAlias::where('id', $id)
+        ->where('user_id', Auth::user()->id)
+        ->first()
+    ]);
+  }
+
+  /**
+   * Makes an alias the user's primary alias.
+   *
+   * @param mixed $id
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postMakePrimary(LinkService $service, $id) {
+    if ($service->makePrimary($id, Auth::user())) {
+      flash('Your primary alias has been changed successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Shows the notifications page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getNotifications() {
-        $notifications = Auth::user()->notifications()->orderBy('id', 'DESC')->paginate(30);
-        Auth::user()->notifications()->update(['is_unread' => 0]);
-        Auth::user()->notifications_unread = 0;
-        Auth::user()->save();
+    return redirect()->back();
+  }
 
-        return view('account.notifications', [
-            'notifications' => $notifications,
-        ]);
+  /**
+   * Shows the hide alias modal.
+   *
+   * @param mixed $id
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getHideAlias($id) {
+    return view('account._hide_alias_modal', [
+      'alias' => UserAlias::where('id', $id)
+        ->where('user_id', Auth::user()->id)
+        ->first()
+    ]);
+  }
+
+  /**
+   * Hides or unhides the selected alias from public view.
+   *
+   * @param mixed $id
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postHideAlias(LinkService $service, $id) {
+    if ($service->hideAlias($id, Auth::user())) {
+      flash('Your alias\'s visibility setting has been changed successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Deletes a notification and returns a response.
-     *
-     * @param mixed $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getDeleteNotification($id) {
-        $notification = Notification::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if ($notification) {
-            $notification->delete();
-        }
+    return redirect()->back();
+  }
 
-        return response(200);
+  /**
+   * Shows the remove alias modal.
+   *
+   * @param mixed $id
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getRemoveAlias($id) {
+    return view('account._remove_alias_modal', [
+      'alias' => UserAlias::where('id', $id)
+        ->where('user_id', Auth::user()->id)
+        ->first()
+    ]);
+  }
+
+  /**
+   * Removes the selected alias from the user's account.
+   *
+   * @param mixed $id
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postRemoveAlias(LinkService $service, $id) {
+    if ($service->removeAlias($id, Auth::user())) {
+      flash('Your alias has been removed successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Deletes all of the user's notifications.
-     *
-     * @param mixed|null $type
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postClearNotifications($type = null) {
-        if (isset($type)) {
-            Auth::user()->notifications()->where('notification_type_id', $type)->delete();
-        } else {
-            Auth::user()->notifications()->delete();
-        }
-        flash('Notifications cleared successfully.')->success();
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Show a user's deactivate confirmation page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getDeactivate() {
+    return view('account.deactivate');
+  }
+
+  /**
+   * Show a user's deactivate confirmation page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getDeactivateConfirmation() {
+    return view('account._deactivate_confirmation');
+  }
+
+  public function postDeactivate(Request $request, UserService $service) {
+    $wasDeactivated = Auth::user()->is_deactivated;
+    if (
+      $service->deactivate(
+        ['deactivate_reason' => $request->get('deactivate_reason')],
+        Auth::user(),
+        null
+      )
+    ) {
+      flash(
+        $wasDeactivated
+          ? 'Deactivation reason edited successfully.'
+          : 'Your account has successfully been deactivated. We hope to see you again and wish you the best!'
+      )->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Shows the account links page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getAliases() {
-        return view('account.aliases');
+    return redirect()->back();
+  }
+
+  /**
+   * Show a user's reactivate confirmation page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getReactivateConfirmation() {
+    return view('account._reactivate_confirmation');
+  }
+
+  public function postReactivate(Request $request, UserService $service) {
+    if ($service->reactivate(Auth::user(), null)) {
+      flash('You have reactivated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Shows the make primary alias modal.
-     *
-     * @param mixed $id
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getMakePrimary($id) {
-        return view('account._make_primary_modal', ['alias' => UserAlias::where('id', $id)->where('user_id', Auth::user()->id)->first()]);
+    return redirect()->back();
+  }
+
+  /**
+   * Edits the user's border.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postBorder(Request $request, UserService $service) {
+    if (
+      $service->updateBorder(
+        $request->only(
+          'border',
+          'border_variant_id',
+          'bottom_border_id',
+          'top_border_id',
+          'border_flip'
+        ),
+        Auth::user()
+      )
+    ) {
+      flash('Border updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+    return redirect()->back();
+  }
+  /**
+   * Get applicable variants
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getBorderVariants(Request $request) {
+    $border = $request->input('border');
+
+    if (
+      Border::where('parent_id', '=', $border)
+        ->where('border_type', 'variant')
+        ->active(Auth::user() ?? null)
+        ->count()
+    ) {
+      $border_variants =
+        ['0' => 'Select Border Variant'] +
+        Border::where('parent_id', '=', $border)
+          ->where('border_type', 'variant')
+          ->active(Auth::user() ?? null)
+          ->get()
+          ->pluck('settingsName', 'id')
+          ->toArray();
+    } else {
+      $border_variants = ['0' => 'None Available'];
     }
 
-    /**
-     * Makes an alias the user's primary alias.
-     *
-     * @param mixed $id
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postMakePrimary(LinkService $service, $id) {
-        if ($service->makePrimary($id, Auth::user())) {
-            flash('Your primary alias has been changed successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return view('account.border_variants', [
+      'border_variants' => $border_variants
+    ]);
+  }
 
-        return redirect()->back();
+  /**
+   * Get applicable layers
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getBorderLayers(Request $request) {
+    $border = $request->input('border');
+
+    $layeredborder = Border::find($border);
+    if (
+      !$layeredborder ||
+      !$layeredborder->topLayers()->count() ||
+      !$layeredborder->bottomLayers()->count()
+    ) {
+      $bottom_layers = ['0' => 'None Available'];
+      $top_layers = ['0' => 'None Available'];
     }
 
-    /**
-     * Shows the hide alias modal.
-     *
-     * @param mixed $id
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getHideAlias($id) {
-        return view('account._hide_alias_modal', ['alias' => UserAlias::where('id', $id)->where('user_id', Auth::user()->id)->first()]);
-    }
-
-    /**
-     * Hides or unhides the selected alias from public view.
-     *
-     * @param mixed $id
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postHideAlias(LinkService $service, $id) {
-        if ($service->hideAlias($id, Auth::user())) {
-            flash('Your alias\'s visibility setting has been changed successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Shows the remove alias modal.
-     *
-     * @param mixed $id
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getRemoveAlias($id) {
-        return view('account._remove_alias_modal', ['alias' => UserAlias::where('id', $id)->where('user_id', Auth::user()->id)->first()]);
-    }
-
-    /**
-     * Removes the selected alias from the user's account.
-     *
-     * @param mixed $id
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postRemoveAlias(LinkService $service, $id) {
-        if ($service->removeAlias($id, Auth::user())) {
-            flash('Your alias has been removed successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Show a user's deactivate confirmation page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getDeactivate() {
-        return view('account.deactivate');
-    }
-
-    /**
-     * Show a user's deactivate confirmation page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getDeactivateConfirmation() {
-        return view('account._deactivate_confirmation');
-    }
-
-    public function postDeactivate(Request $request, UserService $service) {
-        $wasDeactivated = Auth::user()->is_deactivated;
-        if ($service->deactivate(['deactivate_reason' => $request->get('deactivate_reason')], Auth::user(), null)) {
-            flash($wasDeactivated ? 'Deactivation reason edited successfully.' : 'Your account has successfully been deactivated. We hope to see you again and wish you the best!')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Show a user's reactivate confirmation page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getReactivateConfirmation() {
-        return view('account._reactivate_confirmation');
-    }
-
-    public function postReactivate(Request $request, UserService $service) {
-        if ($service->reactivate(Auth::user(), null)) {
-            flash('You have reactivated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
+    return view('account.border_layers', [
+      'top_layers' =>
+        $top_layers ??
+        ['0' => 'Select Top Layer'] +
+          Border::where('parent_id', '=', $border)
+            ->where('border_type', 'top')
+            ->active(Auth::user() ?? null)
+            ->get()
+            ->pluck('settingsName', 'id')
+            ->toArray(),
+      'bottom_layers' =>
+        $bottom_layers ??
+        ['0' => 'Select Bottom Layer'] +
+          Border::where('parent_id', '=', $border)
+            ->where('border_type', 'bottom')
+            ->active(Auth::user() ?? null)
+            ->get()
+            ->pluck('settingsName', 'id')
+            ->toArray()
+    ]);
+  }
 }
