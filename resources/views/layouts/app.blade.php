@@ -85,10 +85,7 @@
 </head>
 
 <body>
-    <div id="app"
-        {{ config('app.debug') && isset($componentName) ? 'data-component-path=' . $componentName : '' }}
-        {{ config('app.debug') && isset($pageName) ? 'data-page=' . $pageName : '' }}
-    >
+    <div id="app" {{ config('app.debug') && isset($componentName) ? 'data-component-path=' . $componentName : '' }} {{ config('app.debug') && isset($pageName) ? 'data-page=' . $pageName : '' }}>
         <div class="site-header-image" id="header" style="background-image: url('{{ asset('images/header.png') }}');"></div>
         @include('layouts._nav')
         @if (View::hasSection('sidebar'))
