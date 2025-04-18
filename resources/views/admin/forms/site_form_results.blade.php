@@ -55,7 +55,7 @@
                     @else
                     @foreach($question->answers as $answer)
                     <div>
-                        <b>{!! $answer->user->displayName !!}:</b>
+                        <b>@if(!$form->is_anonymous){!! $answer->user->displayName !!} @else Anonymous @endif:</b>
                         <div class="p-3 border">{{ $answer->answer }}</div>
                     </div>
                     @endforeach
