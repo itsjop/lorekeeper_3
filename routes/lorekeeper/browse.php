@@ -144,6 +144,12 @@ Route::group(['prefix' => 'professions'], function() {
 
 });
 
+Route::group(['prefix' => __('cultivation.cultivation')], function() {
+    Route::get('/', 'CultivationController@getIndex');
+    Route::get('/guide', 'CultivationController@getGuide');
+
+});
+
 /**************************************************************************************************
     Site Pages
 **************************************************************************************************/

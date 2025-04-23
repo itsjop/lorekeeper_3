@@ -73,6 +73,11 @@ class AddSiteSettings extends Command {
 
         $this->addSiteSetting('group_currency', 1, 'ID of the group currency to award from gallery submissions (if enabled).');
 
+        //cultivation
+        $this->addSiteSetting('cultivation_plot_usability', 0, 'Do plots become unusable once an item was cultivated? 0=no / 1=yes');
+        $this->addSiteSetting('cultivation_care_cooldown', 0, 'How many plots can users care for each day? 0=unlimited.');
+        $this->addSiteSetting('cultivation_area_unlock', 0, 'How many areas can a user unlock at the same time? 0=unlimited.');
+
         $this->addSiteSetting('featured_character', 1, 'ID of the currently featured character.');
 
         $this->addSiteSetting('is_maintenance_mode', 0, '0: Site is normal, 1: Users without the Has Maintenance Access power will be redirected to the home page.');
