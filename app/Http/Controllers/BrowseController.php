@@ -325,8 +325,7 @@ class BrowseController extends Controller {
             'rarities'    => [0 => 'Any Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
             'features'    => Feature::getDropdownItems(),
             'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
-            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),,
-            'transformations' => [0 => 'Any '.ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
             'transformations' => [0 => 'Any '.ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
         ]);
     }
@@ -656,7 +655,7 @@ class BrowseController extends Controller {
             'features'    => Feature::getDropdownItems(),
             'sublist'     => $sublist,
             'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
-            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),,
+            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
             'transformations' => [0 => 'Any '.ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'transformations' => [0 => 'Any '.ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
         ]);

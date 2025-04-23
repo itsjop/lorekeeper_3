@@ -52,8 +52,12 @@
           </thead>
           <tbody>
             @foreach ($inventory as $itemRow)
+                        @if($page == 'quickstock')
+                            <tr id ="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable && $itemRow->item->canUserSell ? '' : 'accountbound' }} user-item select-item-row item-all category-all item-{{ $itemRow->item->id }} category-{{ $itemRow->item->item_category_id ? : 0 }} {{ (isset($selected) && in_array($itemRow->id, array_keys($selected))) || (isset($old_selection) && isset($old_selection[$itemRow->id])) ? 'category-selected' : '' }}">
+                        @else
               <tr id="itemRow{{ $itemRow->id }}"
                 class="d-flex {{ $itemRow->isTransferrable ? '' : 'accountbound' }} user-item select-item-row item-all category-all item-{{ $itemRow->item->id }} category-{{ $itemRow->item->item_category_id ?: 0 }} {{ (isset($selected) && in_array($itemRow->id, array_keys($selected))) || (isset($old_selection) && isset($old_selection[$itemRow->id])) ? 'category-selected' : '' }}">
+                        @endif
                 <td class="col-1">{!! Form::checkbox(isset($fieldName) && $fieldName ? $fieldName : 'stack_id[]', $itemRow->id, isset($selected) && in_array($itemRow->id, array_keys($selected)) ? true : false, ['class' => 'inventory-checkbox']) !!}</td>
                 <td class="col-2">
                   @if (isset($itemRow->item->image_url))

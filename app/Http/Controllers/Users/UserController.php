@@ -27,6 +27,8 @@ use App\Models\User\UserItem;
 use App\Models\Border\Border;
 use App\Models\User\UserUpdateLog;
 use Illuminate\Support\Facades\View;
+use App\Models\Shop\UserShop;
+
 
 class UserController extends Controller {
     /*
@@ -395,8 +397,26 @@ class UserController extends Controller {
             'logs' => $this->user->getBorderLogs(0),
             'sublists' => Sublist::orderBy('sort', 'DESC')->get(),
             'characters' => true,
-            'favorites'  => $this->user->characters->count() ? GallerySubmission::whereIn('id', $userFavorites)->whereIn('id', GalleryCharacter::whereIn('character_id', $userCharacters)->pluck('gallery_submission_id')->toArray())->visible(Auth::check() ? Auth::user() : null)->orderBy('created_at', 'DESC')->paginate(20)->appends($request->query()) : null,
 
+            'favorites' => $this->user->characters->count() ? GallerySubmission::whereIn('id', $userFavorites)->whereIn('id', GalleryCharacter::whereIn('character_id', $userCharacters)->pluck('gallery_submission_id')->toArray())->visible(Auth::check() ? Auth::user() : null)->accepted()->orderBy('created_at', 'DESC')->paginate(20) : null,
+            'sublists' => Sublist::orderBy('sort', 'DESC')->get()
+        ]);
+    }
+
+    /**
+     * Shows a user's characters.
+     *
+     * @param  string  $name
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getUserShops($name)
+    {
+        $shops = UserShop::visible()->where('user_id', $this->user->id);
+
+        return view('user.shops', [
+            'user' => $this->user,
+            'shops' => $shops->orderBy('sort', 'DESC')->get(),
+            'sublists' => Sublist::orderBy('sort', 'DESC')->get()
         ]);
     }
 }

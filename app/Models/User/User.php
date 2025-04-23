@@ -17,6 +17,7 @@ use App\Models\Currency\Currency;
 use App\Models\Currency\CurrencyLog;
 use App\Models\Item\ItemLog;
 use App\Models\Shop\ShopLog;
+use App\Models\Shop\UserShopLog;
 use App\Models\User\UserCharacterLog;
 use App\Models\Submission\Submission;
 use App\Models\Submission\SubmissionCharacter;
@@ -223,54 +224,62 @@ class User extends Authenticatable implements MustVerifyEmail {
       ->orderBy('created_at', 'DESC');
   }
 
-  /**
-   * Get all of the user's favorited gallery submissions.
-   */
-  public function galleryFavorites() {
-    return $this->hasMany(GalleryFavorite::class)->where('user_id', $this->id);
-  }
+    /**
+     * Get all of the user's favorited gallery submissions.
+     */
+    public function galleryFavorites()
+    {
+        return $this->hasMany('App\Models\Gallery\GalleryFavorite')->where('user_id', $this->id);
+    }
 
-  /**
-   * Get all of the user's character bookmarks.
-   */
-  public function bookmarks() {
-    return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
-  }
+    /**
+     * Get all of the user's character bookmarks.
+     */
+    public function bookmarks()
+    {
+        return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
+    }
+    /**
+     * Get the user's rank data.
+     */
+    public function shops()
+    {
+        return $this->hasMany('App\Models\Shop\UserShop', 'user_id');
+    }
+    /**
+     * Get user's unlocked borders.
+     */
+    public function borders() {
+      return $this->belongsToMany('App\Models\Border\Border', 'user_borders')->withPivot('id');
+    }
 
-  /**
-   * Get user's unlocked borders.
-   */
-  public function borders() {
-    return $this->belongsToMany('App\Models\Border\Border', 'user_borders')->withPivot('id');
-  }
+    /**
+     * Get the border associated with this user.
+     */
+    public function border() {
+      return $this->belongsTo('App\Models\Border\Border', 'border_id');
+    }
 
-  /**
-   * Get the border associated with this user.
-   */
-  public function border() {
-    return $this->belongsTo('App\Models\Border\Border', 'border_id');
-  }
+    /**
+     * Get the border associated with this user.
+     */
+    public function borderVariant() {
+      return $this->belongsTo('App\Models\Border\Border', 'border_variant_id');
+    }
 
-  /**
-   * Get the border associated with this user.
-   */
-  public function borderVariant() {
-    return $this->belongsTo('App\Models\Border\Border', 'border_variant_id');
-  }
+    /**
+     * Get the border associated with this user.
+     */
+    public function borderTopLayer() {
+      return $this->belongsTo('App\Models\Border\Border', 'top_border_id');
+    }
 
-  /**
-   * Get the border associated with this user.
-   */
-  public function borderTopLayer() {
-    return $this->belongsTo('App\Models\Border\Border', 'top_border_id');
-  }
-
-  /**
-   * Get the border associated with this user.
-   */
-  public function borderBottomLayer() {
-    return $this->belongsTo('App\Models\Border\Border', 'bottom_border_id');
-  }
+    /**
+     * Get the border associated with this user.
+     */
+    public function borderBottomLayer() {
+      return $this->belongsTo('App\Models\Border\Border', 'bottom_border_id');
+    }
 
   /**********************************************************************************************
 
@@ -773,22 +782,32 @@ class User extends Authenticatable implements MustVerifyEmail {
     }
   }
 
-  /**
-   * Get the user's shop purchase logs.
-   *
-   * @param int $limit
-   *
-   * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Support\Collection
-   */
-  public function getShopLogs($limit = 10) {
-    $user = $this;
-    $query = ShopLog::where('user_id', $this->id)->with('character')->with('shop')->with('item')->with('currency')->orderBy('id', 'DESC');
-    if ($limit) {
-      return $query->take($limit)->get();
-    } else {
-      return $query->paginate(30);
+    /**
+     * Get the user's shop purchase logs.
+     *
+     * @param  int  $limit
+     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getShopLogs($limit = 10)
+    {
+        $user = $this;
+        $query = ShopLog::where('user_id', $this->id)->with('character')->with('shop')->with('item')->with('currency')->orderBy('id', 'DESC');
+        if($limit) return $query->take($limit)->get();
+        else return $query->paginate(30);
     }
-  }
+    /**
+     * Get the user's shop purchase logs.
+     *
+     * @param  int  $limit
+     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getUserShopLogs($limit = 10)
+    {
+        $user = $this;
+        $query = UserShopLog::where('user_id', $this->id)->with('shop')->with('item')->with('currency')->orderBy('id', 'DESC');
+        if($limit) return $query->take($limit)->get();
+        else return $query->paginate(30);
+    }
 
   /**
    * Get the user's character ownership logs.

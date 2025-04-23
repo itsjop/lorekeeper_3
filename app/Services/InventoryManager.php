@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use App\Models\Shop\UserItemDonation;
+use App\Models\Shop\UserShopStock;
 
 class InventoryManager extends Service {
   /*
@@ -875,43 +876,37 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Creates an inventory log.
-   *
-   * @param  int     $senderId
-   * @param  string  $senderType
-   * @param  int     $recipientId
-   * @param  string  $recipientType
-   * @param  int     $stackId
-   * @param  string  $type
-   * @param  string  $data
-   * @param  int     $quantity
-   * @return  int
-   */
-  public function createLog(
-    $senderId,
-    $senderType,
-    $recipientId,
-    $recipientType,
-    $stackId,
-    $type,
-    $data,
-    $itemId,
-    $quantity
-  ) {
-    return DB::table('items_log')->insert([
-      'sender_id' => $senderId,
-      'sender_type' => $senderType,
-      'recipient_id' => $recipientId,
-      'recipient_type' => $recipientType,
-      'stack_id' => $stackId,
-      'log' => $type . ($data ? ' (' . $data . ')' : ''),
-      'log_type' => $type,
-      'data' => $data, // this should be just a string
-      'item_id' => $itemId,
-      'quantity' => $quantity,
-      'created_at' => Carbon::now(),
-      'updated_at' => Carbon::now()
-    ]);
-  }
+    /**
+     * Creates an inventory log.
+     *
+     * @param  int     $senderId
+     * @param  string  $senderType
+     * @param  int     $recipientId
+     * @param  string  $recipientType
+     * @param  int     $stackId
+     * @param  string  $type
+     * @param  string  $data
+     * @param  int     $quantity
+     * @return  int
+     */
+    public function createLog($senderId, $senderType, $recipientId, $recipientType, $stackId, $type, $data, $itemId, $quantity)
+    {
+
+        return DB::table('items_log')->insert(
+            [
+                'sender_id' => $senderId,
+                'sender_type' => $senderType,
+                'recipient_id' => $recipientId,
+                'recipient_type' => $recipientType,
+                'stack_id' => $stackId,
+                'log' => $type . ($data ? ' (' . $data . ')' : ''),
+                'log_type' => $type,
+                'data' => $data, // this should be just a string
+                'item_id' => $itemId,
+                'quantity' => $quantity,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
+    }
 }
