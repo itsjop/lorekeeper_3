@@ -252,6 +252,35 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::post('prompts/edit/{id?}', 'PromptController@postCreateEditPrompt');
     Route::post('prompts/delete/{id}', 'PromptController@postDeletePrompt');
 
+    # PROFESSIONS
+    Route::get('profession-categories', 'ProfessionController@getCategoryIndex');
+    Route::get('profession-categories/create', 'ProfessionController@getCreateProfessionCategory');
+    Route::get('profession-categories/edit/{id}', 'ProfessionController@getEditProfessionCategory');
+    Route::get('profession-categories/delete/{id}', 'ProfessionController@getDeleteProfessionCategory');
+    Route::post('profession-categories/create', 'ProfessionController@postCreateEditProfessionCategory');
+    Route::post('profession-categories/edit/{id?}', 'ProfessionController@postCreateEditProfessionCategory');
+    Route::post('profession-categories/delete/{id}', 'ProfessionController@postDeleteProfessionCategory');
+    Route::post('profession-categories/sort', 'ProfessionController@postSortProfessionCategory');
+
+    Route::get('profession-subcategories', 'ProfessionController@getSubcategoryIndex');
+    Route::get('profession-subcategories/create', 'ProfessionController@getCreateProfessionSubcategory');
+    Route::get('profession-subcategories/edit/{id}', 'ProfessionController@getEditProfessionSubcategory');
+    Route::get('profession-subcategories/delete/{id}', 'ProfessionController@getDeleteProfessionSubcategory');
+    Route::post('profession-subcategories/create', 'ProfessionController@postCreateEditProfessionSubcategory');
+    Route::post('profession-subcategories/edit/{id?}', 'ProfessionController@postCreateEditProfessionSubcategory');
+    Route::post('profession-subcategories/delete/{id}', 'ProfessionController@postDeleteProfessionSubcategory');
+    Route::post('profession-subcategories/sort', 'ProfessionController@postSortProfessionSubcategory');
+
+    Route::get('professions', 'ProfessionController@getProfessionIndex');
+    Route::get('professions/create', 'ProfessionController@getCreateProfession');
+    Route::get('professions/edit/{id}', 'ProfessionController@getEditProfession');
+    Route::get('professions/delete/{id}', 'ProfessionController@getDeleteProfession');
+    Route::post('professions/create', 'ProfessionController@postCreateEditProfession');
+    Route::post('professions/edit/{id?}', 'ProfessionController@postCreateEditProfession');
+    Route::post('professions/delete/{id}', 'ProfessionController@postDeleteProfession');
+    Route::post('professions/sort', 'ProfessionController@postSortProfession');
+
+
      # BORDERS
      Route::get('border-categories', 'BorderController@getIndex');
      Route::get('border-categories/create', 'BorderController@getCreateBorderCategory');

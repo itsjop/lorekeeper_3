@@ -136,6 +136,14 @@ Route::group(['prefix' => 'shops'], function () {
     Route::get('donation-shop/{id}', 'ShopController@getDonationShopStock')->where(['id' => '[0-9]+']);
 });
 
+
+Route::group(['prefix' => 'professions'], function() {
+    Route::get('/', 'ProfessionController@getIndex');
+    Route::get('{id}', 'ProfessionController@getCategory');
+    Route::get('/characters/{id}', 'ProfessionController@getCharacters');
+
+});
+
 /**************************************************************************************************
     Site Pages
 **************************************************************************************************/

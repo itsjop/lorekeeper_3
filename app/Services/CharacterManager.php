@@ -1511,9 +1511,12 @@ class CharacterManager extends Service {
                 $character->profile->link = $data['link'];
             }
 
-            $character->profile->save();
+            //$character->profile->save();
 
             $character->profile->text = $data['text'];
+            if(isset($data['profession'])) $character->profile->profession = $data['profession'];
+            if(isset($data['profession_id'])) $character->profile->profession_id = $data['profession_id'];
+
             $character->profile->parsed_text = parse($data['text']);
             $character->profile->save();
 

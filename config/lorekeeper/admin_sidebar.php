@@ -207,6 +207,10 @@ return [
                 'url'  => 'admin/data/items',
             ],
             [
+                'name' => 'Professions',
+                'url' => 'admin/data/professions'
+            ],
+            [
                 'name' => 'User Borders',
                 'url' => 'admin/data/borders'
             ],

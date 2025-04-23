@@ -1,15 +1,17 @@
 <?php
 return [
-  // FORMAT EXAMPLE.
-  //
-  // 'extension_tracker' => [
-  //     'key' => 'extension_tracker',
-  //     'wiki_key' => 'Extension_Tracker',
-  //     'creators' => json_encode([
-  //         'Uri' => 'https://github.com/preimpression/',
-  //     ]),
-  //     'version' => '1.0.0',
-  // ],
+
+    // FORMAT EXAMPLE.
+    //
+    // 'extension_tracker' => [
+    //     'key' => 'extension_tracker',
+    //     'wiki_key' => 'Extension_Tracker',
+    //     'creators' => json_encode([
+    //         'Uri' => 'https://github.com/preimpression/',
+    //     ]),
+    //     'version' => '1.0.0',
+    // ],
+
   'User_Shops' => [
     'key' => 'user_shops',
     'wiki_key' => 'User_Shops',
@@ -62,5 +64,15 @@ return [
       'Cylunny' => 'https://toyhou.se/cylunny'
     ]),
     'version' => '1.0.0'
-  ]
+  ],
+    'character_professions' => [
+      'key' => 'character_professions',
+      'wiki_key' => 'Character Professions',
+      'creators' => json_encode([
+          'Cylunny' => 'https://toyhou.se/cylunny',
+      ]),
+      'version' => '1.0.0',
+  ],
+
+
 ];

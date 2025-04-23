@@ -151,6 +151,9 @@
                         <a class="dropdown-item" href="{{ url('user-shops/shop-index') }}">
                             All User Shops
                         </a>
+                        <a class="dropdown-item" href="{{ url('professions') }}">
+                            Professions
+                        </a>
         </div>
       </li>
       <li class="nav-item">
