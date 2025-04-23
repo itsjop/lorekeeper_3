@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Honeypot\ProtectAgainstSpam;
+use App\Models\Forms\SiteForm;
 
 class CommentController extends Controller {
     public function __construct() {
@@ -149,6 +150,12 @@ class CommentController extends Controller {
                 break;
             default:
                 throw new \Exception('Comment type not supported.');
+                break;
+            case 'App\Models\Forms\SiteForm':
+                $form = SiteForm::find($comment->commentable_id);
+                $recipient = $form->user; // User that has been commented on (or owner of form post)
+                $post = 'your form';
+                $link = $form->url . '/#comment-' . $comment->getKey();
                 break;
         }
 

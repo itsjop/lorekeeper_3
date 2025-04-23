@@ -56,7 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     'has_alias',
     'avatar',
     'is_sales_unread',
-    'birthday',
+    'birthday','is_polls_unread',
     'border_id',
     'border_variant_id',
     'bottom_border_id',

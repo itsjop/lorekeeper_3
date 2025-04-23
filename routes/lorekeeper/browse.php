@@ -228,3 +228,11 @@ Route::group(['prefix' => 'world', 'namespace' => 'WorldExpansion'], function ()
     Route::get('concept-categories', 'ConceptController@getConceptCategories');
     Route::get('concept-categories/{id}', 'ConceptController@getConceptCategory');
 });
+/**************************************************************************************************
+    Forms & Polls
+**************************************************************************************************/
+Route::group(['prefix' => 'forms'], function() {
+    Route::get('/', 'SiteFormController@getIndex');
+    Route::get('{id}.{slug?}', 'SiteFormController@getSiteForm');
+    Route::get('{id}.', 'SiteFormController@getSiteForm');
+});
