@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use App\Models\Shop\UserItemDonation;
+use App\Models\Shop\UserShopStock;
 
 class InventoryManager extends Service {
   /*
@@ -875,43 +876,107 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Creates an inventory log.
-   *
-   * @param  int     $senderId
-   * @param  string  $senderType
-   * @param  int     $recipientId
-   * @param  string  $recipientType
-   * @param  int     $stackId
-   * @param  string  $type
-   * @param  string  $data
-   * @param  int     $quantity
-   * @return  int
-   */
-  public function createLog(
-    $senderId,
-    $senderType,
-    $recipientId,
-    $recipientType,
-    $stackId,
-    $type,
-    $data,
-    $itemId,
-    $quantity
-  ) {
-    return DB::table('items_log')->insert([
-      'sender_id' => $senderId,
-      'sender_type' => $senderType,
-      'recipient_id' => $recipientId,
-      'recipient_type' => $recipientType,
-      'stack_id' => $stackId,
-      'log' => $type . ($data ? ' (' . $data . ')' : ''),
-      'log_type' => $type,
-      'data' => $data, // this should be just a string
-      'item_id' => $itemId,
-      'quantity' => $quantity,
-      'created_at' => Carbon::now(),
-      'updated_at' => Carbon::now()
-    ]);
-  }
+    /**
+     * Creates an inventory log.
+     *
+     * @param  int     $senderId
+     * @param  string  $senderType
+     * @param  int     $recipientId
+     * @param  string  $recipientType
+     * @param  int     $stackId
+     * @param  string  $type
+     * @param  string  $data
+     * @param  int     $quantity
+     * @return  int
+     */
+    public function createLog($senderId, $senderType, $recipientId, $recipientType, $stackId, $type, $data, $itemId, $quantity)
+    {
+
+        return DB::table('items_log')->insert(
+            [
+                'sender_id' => $senderId,
+                'sender_type' => $senderType,
+                'recipient_id' => $recipientId,
+                'recipient_type' => $recipientType,
+                'stack_id' => $stackId,
+                'log' => $type . ($data ? ' (' . $data . ')' : ''),
+                'log_type' => $type,
+                'data' => $data, // this should be just a string
+                'item_id' => $itemId,
+                'quantity' => $quantity,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        );
+    }
+
+    /**
+     * Consolidates a user's item stacks.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function consolidateInventory($user) {
+        DB::beginTransaction();
+
+        try {
+            if (!$user->hasAlias) {
+                throw new \Exception('You need to have a linked social media account before you can perform this action.');
+            }
+
+            // Making a very large assumption here that there aren't going to be a huge number
+            // of items to process, due to the nature of ARPGs.
+
+            // Group owned items by ID.
+            // We'll exclude stacks that are partially contained in trades, updates and submissions.
+            $items = UserItem::where('user_id', $user->id)->whereNull('deleted_at')
+                ->where(function ($query) {
+                    $query->where('trade_count', 0)->orWhereNull('trade_count');
+                })->where(function ($query) {
+                    $query->where('update_count', 0)->orWhereNull('update_count');
+                })->where(function ($query) {
+                    $query->where('submission_count', 0)->orWhereNull('submission_count');
+                })->get()->groupBy('item_id');
+
+            foreach ($items as $itemId => $itemVariations) {
+                $variations = [];
+
+                // We'll loop over the user items to obtain the first of each variant of item, to update with the final count.
+                // Variations are distinguished by having the same data field.
+                foreach ($itemVariations as $typeVariation) {
+                    $isNew = true;
+                    foreach ($variations as $foundVariation) {
+                        // Found an existing match.
+                        // The count can be added to the existing variation, and this row can be deleted.
+                        // Just for the sake of reducing confusion when looking in the DB,
+                        // We'll also reduce its count to 0 before deletion.
+                        if ($foundVariation->data == $typeVariation->data) {
+                            $isNew = false;
+                            $foundVariation->count += $typeVariation->count;
+                            $typeVariation->count = 0;
+                            $typeVariation->save();
+                            $typeVariation->delete();
+                            break;
+                        }
+                    }
+                    // No match, add a new variation
+                    if ($isNew) {
+                        $variations[] = $typeVariation;
+                    }
+                }
+
+                // At the end, save the rows in the variations array
+                foreach ($variations as $variation) {
+                    $variation->save();
+                }
+            }
+
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
 }

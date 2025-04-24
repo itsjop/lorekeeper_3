@@ -37,18 +37,31 @@
     </div>
   @endif
 
+  @if (isset($character->profile->professionObj) || isset($character->profile->profession))
+    <div class="card-header mb-2 p-0 text-right">
+      <div class="col-lg-2 ml-auto">
+        <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
+          @if (isset($character->profile->professionObj))
+            <h5 class="p-0 m-0"><img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}</h5>
+          @else
+            <h5 class="p-0 m-0"><img class="fr-fic fr-dii mr-2" src="/images/profession.png" style="max-width:50px;">{{ $character->profile->profession }}</h5>
+          @endif
+        </a>
+      </div>
+    </div>
+  @endif
+
   {{-- Main Image --}}
   <div class="row mb-3" id="main-tab">
     <div class="col-md-7">
       <div class="text-center">
-        <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+        <a href="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
           data-lightbox="entry" data-title="{{ $character->fullName }}">
-          <img
-            src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+          <img src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
             class="image" alt="{{ $character->fullName }}" />
         </a>
       </div>
-      @if ($character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
+      @if ($character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
         <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked image</a>?</div>
       @endif
     </div>

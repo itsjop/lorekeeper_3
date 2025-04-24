@@ -159,4 +159,5 @@ class Notification extends Model {
   public const GIFT_CLAIM_RECEIVED = 1003;
   public const GIFT_SUBMISSION_ALERT = 1004;
   public const BORDER_GRANT = 1106;
+    const USER_SHOP_ITEM_SOLD    = 1104;
 }

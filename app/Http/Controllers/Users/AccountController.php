@@ -6,6 +6,7 @@ use Auth;
 use File;
 use Image;
 
+use App\Http\Controllers\Controller;
 use App\Models\User\User;
 use App\Models\User\UserAlias;
 use Illuminate\Http\Request;
@@ -118,7 +119,6 @@ class AccountController extends Controller {
     Auth::user()->profile->update([
       'text' => $request->get('text'),
       'parsed_text' => parse($request->get('text')),
-      ,
     ]);
     flash('Profile updated successfully.')->success();
 
@@ -422,7 +422,6 @@ class AccountController extends Controller {
 
     return view('account.notifications', [
       'notifications' => $notifications,
-      ,
     ]);
   }
 

@@ -11,7 +11,7 @@ class CharacterProfile extends Model {
      * @var array
      */
     protected $fillable = [
-        'character_id', 'text', 'parsed_text', 'link',
+        'character_id', 'text', 'parsed_text', 'link', 'profession','profession_id'
     ];
 
     /**
@@ -42,10 +42,15 @@ class CharacterProfile extends Model {
 
     **********************************************************************************************/
 
-    /**
-     * Get the character this profile belongs to.
-     */
     public function character() {
-        return $this->belongsTo(Character::class, 'character_id');
-    }
+      return $this->belongsTo(Character::class, 'character_id');
+  }
+
+  /**
+   * Get the profession of the character.
+   */
+  public function professionObj()
+  {
+      return $this->belongsTo('App\Models\Profession\Profession', 'profession_id');
+  }
 }

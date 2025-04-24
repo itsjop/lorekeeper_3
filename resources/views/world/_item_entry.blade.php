@@ -48,6 +48,27 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      @if ($item->seedRewards())
+        <div class="col-md">
+          <p><strong>Cultivates:</strong>
+            @foreach ($item->seedRewards() as $reward)
+              {{ $reward['quantity'] }}x {!! $reward['asset']->displayName !!}
+            @endforeach
+          </p>
+        </div>
+      @endif
+      @if ($item->toolPlot())
+        <div class="col-md">
+          <p><strong>Creates Plot:</strong> {{ $item->toolPlot()->name }}</p>
+        </div>
+      @endif
+      @if ($item->explorationArea())
+        <div class="col-md">
+          <p><strong>Unlocks Area:</strong> {{ $item->explorationArea()->name }}</p>
+        </div>
+      @endif
+    </div>
     <div class="world-entry-text">
       @if (isset($item->reference) && $item->reference && Config::get('lorekeeper.extensions.item_entry_expansion.extra_fields'))
         <p><strong>Reference Link:</strong> <a href="{{ $item->reference }}">{{ $item->reference }}</a></p>
@@ -115,6 +136,11 @@
               @endif
             </div>
           @endif
+        </div>
+      @endif
+      @if ($item->canUserSell)
+        <div class="text-right mb-4">
+          <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}"><i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
         </div>
       @endif
     </div>

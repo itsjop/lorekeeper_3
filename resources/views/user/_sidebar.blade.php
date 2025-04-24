@@ -3,8 +3,12 @@
   <li class="sidebar-section">
     <div class="sidebar-section-header">Gallery</div>
     <div class="sidebar-item"><a href="{{ $user->url . '/gallery' }}" class="{{ set_active('user/' . $user->name . '/gallery*') }}">Gallery</a></div>
+    <div class="sidebar-item"><a href="{{ $user->url . '/character-designs' }}" class="{{ set_active('user/' . $user->name . '/character-designs*') }}">Character Designs</a></div>
+    <div class="sidebar-item"><a href="{{ $user->url . '/character-art' }}" class="{{ set_active('user/' . $user->name . '/character-art*') }}">Character Art</a></div>
     <div class="sidebar-item"><a href="{{ $user->url . '/favorites' }}" class="{{ set_active('user/' . $user->name . '/favorites*') }}">Favorites</a></div>
     <div class="sidebar-item"><a href="{{ $user->url . '/favorites/own-characters' }}" class="{{ set_active('user/' . $user->name . '/favorites/own-characters*') }}">Own Character Favorites</a></div>
+    <div class="sidebar-item"><a href="{{ $user->url . '/borders' }}" class="{{ set_active('user/' . $user->name . '/borders*') }}">Borders</a></div>
+    <div class="sidebar-item"><a href="{{ $user->url . '/shops' }}" class="{{ set_active('user/' . $user->name . '/shops*') }}">User Shops</a></div>
   </li>
   <li class="sidebar-section">
     <div class="sidebar-section-header">User</div>
@@ -19,6 +23,7 @@
     <div class="sidebar-item"><a href="{{ $user->url . '/inventory' }}" class="{{ set_active('user/' . $user->name . '/inventory*') }}">Inventory</a></div>
     <div class="sidebar-item"><a href="{{ $user->url . '/bank' }}" class="{{ set_active('user/' . $user->name . '/bank*') }}">Bank</a></div>
     <div class="sidebar-item"><a href="{{ $user->url . '/borders' }}" class="{{ set_active('user/' . $user->name . '/borders*') }}">Borders</a></div>
+    <div class="sidebar-item"><a href="{{ $user->url . '/shops' }}" class="{{ set_active('user/' . $user->name . '/shops*') }}">User Shops</a></div>
   </li>
   <li class="sidebar-section">
     <div class="sidebar-section-header">History</div>
@@ -26,7 +31,6 @@
     <div class="sidebar-item"><a href="{{ $user->url . '/item-logs' }}" class="{{ set_active('user/' . $user->name . '/item-logs*') }}">Item Logs</a></div>
     <div class="sidebar-item"><a href="{{ $user->url . '/currency-logs' }}" class="{{ set_active('user/' . $user->name . '/currency-logs*') }}">Currency Logs</a></div>
     <div class="sidebar-item"><a href="{{ $user->url . '/submissions' }}" class="{{ set_active('user/' . $user->name . '/submissions*') }}">Submissions</a></div>
-    <div class="sidebar-item"><a href="{{ $user->url . '/border-logs' }}" class="{{ set_active('user/' . $user->name . '/border-logs*') }}">Border Logs</a></div>
   </li>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_user_info'))

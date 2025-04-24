@@ -69,6 +69,9 @@ Route::group(['prefix' => 'inventory', 'namespace' => 'Users'], function () {
     Route::post('consolidate', 'InventoryController@postConsolidateInventory');
 
     Route::get('selector', 'InventoryController@getSelector');
+
+    Route::get('quickstock', 'InventoryController@getQuickstock');
+    Route::post('quickstock-items', 'InventoryController@postQuickstock');
 });
 
 Route::group(['prefix' => 'characters', 'namespace' => 'Users'], function () {
@@ -84,6 +87,9 @@ Route::group(['prefix' => 'characters', 'namespace' => 'Users'], function () {
 Route::group(['prefix' => 'bank', 'namespace' => 'Users'], function () {
     Route::get('/', 'BankController@getIndex');
     Route::post('transfer', 'BankController@postTransfer');
+    Route::get('convert/{id}', 'BankController@getConvertCurrency');
+    Route::get('convert/{currency_id}/rate/{conversion_id}', 'BankController@getConvertCurrencyRate');
+    Route::post('convert', 'BankController@postConvertCurrency');
 });
 
 Route::group(['prefix' => 'trades', 'namespace' => 'Users'], function () {
@@ -100,6 +106,34 @@ Route::group(['prefix' => 'trades', 'namespace' => 'Users'], function () {
     Route::post('{id}/confirm-trade', 'TradeController@postConfirmTrade');
     Route::get('{id}/cancel-trade', 'TradeController@getCancelTrade');
     Route::post('{id}/cancel-trade', 'TradeController@postCancelTrade');
+});
+
+Route::group(['prefix' => 'user-shops', 'namespace' => 'Users'], function() {
+    Route::get('/', 'UserShopController@getUserIndex'); 
+    Route::get('create', 'UserShopController@getCreateShop');
+    Route::get('edit/{id}', 'UserShopController@getEditShop');
+    Route::get('delete/{id}', 'UserShopController@getDeleteShop');
+    Route::post('create', 'UserShopController@postCreateEditShop');
+    Route::post('edit/{id?}', 'UserShopController@postCreateEditShop');
+    Route::post('stock/{id}', 'UserShopController@postEditShopStock');
+    Route::post('delete/{id}', 'UserShopController@postDeleteShop');
+    Route::post('sort', 'UserShopController@postSortShop');
+
+    // misc
+    Route::get('/stock-type', 'UserShopController@getShopStockType');
+    Route::get('/history', 'UserShopController@getPurchaseHistory');
+    Route::get('item-search', 'UserShopController@getItemSearch');
+
+    Route::get('sales/{id}', 'UserShopController@getShopHistory');
+
+    Route::post('quickstock/{id}', 'UserShopController@postQuickstockStock');
+});
+
+Route::group(['prefix' => 'user-shops',], function() {
+    Route::get('/shop-index', 'UserShopController@getIndex'); 
+    Route::get('/shop/{id}', 'UserShopController@getShop'); 
+    Route::post('/shop/buy', 'UserShopController@postBuy');
+    Route::get('{id}/{stockId}', 'UserShopController@getShopStock')->where(['id' => '[0-9]+', 'stockId' => '[0-9]+']);
 });
 
 /**************************************************************************************************
@@ -213,6 +247,9 @@ Route::group(['prefix' => 'designs', 'namespace' => 'Characters'], function () {
 
     Route::get('{id}/delete', 'DesignController@getDelete');
     Route::post('{id}/delete', 'DesignController@postDelete');
+
+    Route::get('{id}/cancel', 'DesignController@getCancel');
+    Route::post('{id}/cancel', 'DesignController@postCancel');
 });
 
 /**************************************************************************************************
@@ -240,10 +277,39 @@ Route::group(['prefix' => 'activities'], function () {
 **************************************************************************************************/
 Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function () {
     Route::post('make/{model}/{id}', 'CommentController@store');
-    Route::delete('/{comment}', 'CommentController@destroy')->name('comments.destroy');
+    Route::delete('{comment}', 'CommentController@destroy')->name('comments.destroy')->where('comment', '[0-9]+');
     Route::post('edit/{comment}', 'CommentController@update')->name('comments.update');
-    Route::post('/{comment}', 'CommentController@reply')->name('comments.reply');
-    Route::post('/{id}/feature', 'CommentController@feature')->name('comments.feature');
-    Route::post('/{id}/like/{action}', 'CommentController@like')->name('comments.like');
-    Route::get('/liked', 'CommentController@getLikedComments');
+    Route::post('{comment}', 'CommentController@reply')->name('comments.reply');
+    Route::post('{id}/feature', 'CommentController@feature')->name('comments.feature');
+    Route::post('{id}/like/{action}', 'CommentController@like')->name('comments.like');
+    Route::get('liked', 'CommentController@getLikedComments');
+});
+
+/**************************************************************************************************
+    Forms & Polls
+**************************************************************************************************/
+Route::group(['prefix' => 'forms'], function() {
+    Route::post('/send/{id}', 'SiteFormController@postSiteForm');
+    Route::get('/send/{id}', 'SiteFormController@editSiteForm');
+    Route::post('/like/{id}', 'SiteFormController@postLikeAnswer');
+    Route::post('/unlike/{id}', 'SiteFormController@postUnlikeAnswer');
+});
+
+
+/**************************************************************************************************
+    Cultivation
+**************************************************************************************************/
+
+Route::group(['prefix' => __('cultivation.cultivation')], function() {
+    Route::get('{id}', 'CultivationController@getArea');
+    
+    Route::get('area/delete/{id}', 'CultivationController@getDeleteAreaModal');
+    Route::post('area/delete/{id}', 'CultivationController@postDeleteArea');
+
+    Route::get('{id}/{plotNumber}', 'CultivationController@getPlotModal');
+    Route::post('plots/prepare/{plotNumber}', 'CultivationController@postPreparePlot');
+    Route::post('plots/cultivate/{plotNumber}', 'CultivationController@postCultivatePlot');
+    Route::post('plots/tend/{plotId}', 'CultivationController@postTendPlot');
+    Route::post('plots/harvest/{plotId}', 'CultivationController@postHarvestPlot');
+
 });

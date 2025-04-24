@@ -2,9 +2,15 @@
 
 namespace App\Models\Item;
 
+use DB;
+use Auth;
+use App\Models\Cultivation\CultivationPlot;
+use App\Models\Cultivation\CultivationArea;
+// use App\Model;
 use App\Models\Model;
-use App\Models\Prompt\Prompt;
+use App\Models\Item\ItemCategory;
 use App\Models\Shop\Shop;
+use App\Models\Prompt\Prompt;
 use App\Models\Shop\ShopStock;
 use App\Models\User\User;
 
@@ -16,7 +22,7 @@ class Item extends Model {
      */
     protected $fillable = [
         'item_category_id', 'name', 'has_image', 'description', 'parsed_description', 'allow_transfer',
-        'data', 'reference_url', 'artist_alias', 'artist_url', 'artist_id', 'is_released', 'hash',
+        'data', 'reference_url', 'artist_alias', 'artist_url', 'artist_id', 'is_released', 'hash', 'is_deletable',
     ];
 
     protected $appends = ['image_url'];
@@ -389,9 +395,14 @@ class Item extends Model {
         if (count($itemPrompts)) {
             return Prompt::whereIn('id', $itemPrompts)->get();
         } else {
-            return null;
+           return null;
         }
-    }
+    if (count($itemPrompts)) {
+      return Prompt::whereIn('id', $itemPrompts)->get();
+  } else {
+      return null;
+  }
+}
 
     /**
      * Gets the admin edit URL.
@@ -441,6 +452,24 @@ class Item extends Model {
         return 0;
     }
 
+        /**
+     * Check if an item can be donated.
+     *
+     * @return bool
+     */
+    public function getCanUserSellAttribute()
+    {
+        //borrowed idea from donation shop
+        //it makes it a lot cleaner to check if a thing can be sold in a user shop
+        //ty merc :)
+
+        if(Auth::check() && Auth::user()->hasPower('edit_inventories')) return 1;
+        if(!$this->allow_transfer) return 0;
+        if(!$this->category) return 1;
+        if($this->category && $this->category->can_user_sell) return 1;
+        else return 0;
+    }
+
     /**********************************************************************************************
 
         OTHER FUNCTIONS
@@ -467,5 +496,63 @@ class Item extends Model {
      */
     public function tag($tag) {
         return $this->tags()->where('tag', $tag)->where('is_active', 1)->first();
+    }
+
+
+    /**
+     * Gets the rewards of the linked seed item tag if it exists.
+     *
+     */
+    public function seedRewards()
+    {
+        if($this->tag('seed')){
+            $assets = [];
+            $rewards = $this->tag('seed')->getData()['rewards'];
+            foreach($rewards as $reward) {
+                switch ($reward->rewardable_type)
+                {
+                    case 'Item':
+                        $type = 'App\Models\Item\Item';
+                        break;
+                    case 'Currency':
+                        $type = 'App\Models\Currency\Currency';
+                        break;
+                    case 'LootTable':
+                        $type = 'App\Models\Loot\LootTable';
+                        break;
+                    case 'Raffle':
+                        $type = 'App\Models\Raffle\Raffle';
+                        break;
+                }
+                $asset = $type::find($reward->rewardable_id);
+                $assets[] = ['asset' => $asset, 'quantity' => $reward->quantity ];
+            }
+            return $assets;
+        }
+        return null;
+    }
+
+    /**
+     * Gets the plot a tool item unlocks.
+     *
+     */
+    public function toolPlot()
+    {
+        if($this->tag('tool')){
+            return CultivationPlot::where('id', $this->tag('tool')->getData()['plot_id'])->first();
+        }
+        return null;
+    }
+
+    /**
+     * Gets the area a exploration item unlocks.
+     *
+     */
+    public function explorationArea()
+    {
+        if($this->tag('exploration')){
+            return CultivationArea::where('id', $this->tag('exploration')->getData()['area_id'])->first();
+        }
+        return null;
     }
 }

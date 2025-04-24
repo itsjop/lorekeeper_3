@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Characters;
 
+use Route;
 use App\Facades\Settings;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
@@ -18,15 +19,14 @@ use App\Models\User\UserCurrency;
 use App\Models\User\UserItem;
 use App\Models\WorldExpansion\Faction;
 use App\Models\WorldExpansion\Location;
+use App\Models\Item\ItemLog;
+use App\Models\Profession\Profession;
+use App\Models\Character\CharacterImage;
 use App\Services\CharacterManager;
-use App\Services\CurrencyManager;
 use App\Services\DesignUpdateManager;
-use App\Services\InventoryManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use Route;
-use App\Models\Character\CharacterImage;
 
 class CharacterController extends Controller {
     /*
@@ -157,6 +157,10 @@ class CharacterController extends Controller {
             abort(404);
         }
 
+        $professions = Profession::where("is_choosable", 1)->with('category')->get()->filter(function ($item) {
+            return $item->category->species_id == null || $item->category->species_id == $this->character->image->species_id;
+        })->pluck('name', 'id')->toArray();
+
         return view('character.edit_profile', [
             'character'            => $this->character,
             'locations'            => Location::all()->where('is_character_home')->pluck('style', 'id')->toArray(),
@@ -165,6 +169,7 @@ class CharacterController extends Controller {
             'user_faction_enabled' => Settings::get('WE_user_factions'),
             'char_enabled'         => Settings::get('WE_character_locations'),
             'char_faction_enabled' => Settings::get('WE_character_factions'),
+            'professions' => $professions
         ]);
     }
 
@@ -189,7 +194,10 @@ class CharacterController extends Controller {
 
         $request->validate(CharacterProfile::$rules);
 
-        if ($service->updateCharacterProfile($request->only(['name', 'link', 'text', 'is_gift_art_allowed', 'is_gift_writing_allowed', 'is_trading', 'alert_user', 'location', 'faction']), $this->character, Auth::user(), !$isOwner)) {
+        if ($service->updateCharacterProfile($request->only([
+            'name', 'link', 'text', 'is_gift_art_allowed', 'is_gift_writing_allowed', 'is_trading', 'alert_user', 'location', 'faction',
+            'profession', 'profession_id'
+        ]), $this->character, Auth::user(), !$isOwner)) {
             flash('Profile edited successfully.')->success();
         } else {
             foreach ($service->errors()->getMessages()['error'] as $error) {
@@ -224,7 +232,7 @@ class CharacterController extends Controller {
      */
     public function getCharacterImages($slug) {
         return view('character.images', [
-            'user'                  => Auth::check() ? Auth::user() : null,
+            'user'                  => Auth::user() ?? null,
             'character'             => $this->character,
             'extPrevAndNextBtnsUrl' => '/images',
         ]);
@@ -238,7 +246,7 @@ class CharacterController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getCharacterInventory($slug) {
-        $categories = ItemCategory::visible(Auth::check() ? Auth::user() : null)->where('is_character_owned', '1')->orderBy('sort', 'DESC')->get();
+        $categories = ItemCategory::visible(Auth::user() ?? null)->where('is_character_owned', '1')->orderBy('sort', 'DESC')->get();
         $itemOptions = Item::whereIn('item_category_id', $categories->pluck('id'));
 
         $items = count($categories) ?
