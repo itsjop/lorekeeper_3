@@ -71,6 +71,7 @@
   <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/lorekeeper.css'))) }}" rel="stylesheet">
 
   <!-- Custom Styles -->
+  <link href="{{ asset('css/mixins.css') }}" rel="stylesheet">
   <link href="{{ asset('css/sitewide.css') }}" rel="stylesheet">
 
   @if (file_exists(public_path() . '/css/custom.css'))
