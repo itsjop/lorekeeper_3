@@ -137,20 +137,20 @@
           <a class="dropdown-item" href="{{ url('activities') }}">
             Activities
           </a>
-                        @if(Auth::check())
-                            @if(Auth::user()->shops()->count() && Settings::get('user_shop_limit') == 1)
-                                <a class="dropdown-item" href="{{ url(Auth::user()->shops()->first()->editUrl) }}">
-                                    My Shop
-                                </a>
-                            @else
-                                <a class="dropdown-item" href="{{ url('user-shops') }}">
-                                    My Shops
-                                </a>
-                            @endif
-                        @endif
-                        <a class="dropdown-item" href="{{ url('user-shops/shop-index') }}">
-                            All User Shops
-                        </a>
+          @if (Auth::check())
+            @if (Auth::user()->shops()->count() && Settings::get('user_shop_limit') == 1)
+              <a class="dropdown-item" href="{{ url(Auth::user()->shops()->first()->editUrl) }}">
+                My Shop
+              </a>
+            @else
+              <a class="dropdown-item" href="{{ url('user-shops') }}">
+                My Shops
+              </a>
+            @endif
+          @endif
+          <a class="dropdown-item" href="{{ url('user-shops/shop-index') }}">
+            All User Shops
+          </a>
                         <a class="dropdown-item" href="{{ url('professions') }}">
                             Professions
                         </a>

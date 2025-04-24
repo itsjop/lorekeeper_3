@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
 
   @if (Config::get('lorekeeper.settings.donation_shop.item_donations') == 1 || Config::get('lorekeeper.settings.donation_shop.item_donations') == 3)
     <div class="form-group">
@@ -76,10 +76,10 @@
       {!! Form::label('is_character_owned', 'Can Be Donated', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to donate items in this category to the Donation Shop.') !!}
       {!! Form::checkbox('can_user_sell', 1, $category->can_user_sell, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
       {!! Form::label('can_user_sell', 'Can Be Sold In User Shops', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow or disallow users to sell items in their user shops..') !!}
- </div>
+    </div>
   @endif
 
-<div class="text-right">
+  <div class="text-right">
     {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
