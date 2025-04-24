@@ -451,6 +451,16 @@ class User extends Authenticatable implements MustVerifyEmail {
 
     return $log->data['old_name'];
   }
+  /**
+     * Displays the user's name, linked to their profile page.
+     *
+     * @return string
+     */
+    public function getDisplayNamePronounsAttribute()
+    {
+        if($this->profile->pronouns) return ($this->displayName.' ('.$this->profile->pronouns.')');
+        else return ($this->displayName);
+    }
 
   /**
    * Displays the user's name, linked to their profile page.

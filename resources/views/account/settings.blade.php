@@ -54,6 +54,10 @@
   <div class="card p-3 mb-2">
     <h3>Profile</h3>
     {!! Form::open(['url' => 'account/profile']) !!}
+        <div class="form-group">
+            {!! Form::label('pronouns', 'Preferred Pronouns') !!} {!! add_help('Your preferred pronouns will be displayed in various places across the site. This field can be changed or removed at anytime.') !!}
+            {!! Form::text('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
+        </div>
     <div class="form-group">
       {!! Form::label('text', 'Profile Text') !!}
       {!! Form::textarea('text', Auth::user()->profile->text, ['class' => 'form-control wysiwyg']) !!}

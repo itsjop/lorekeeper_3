@@ -21,9 +21,9 @@
     </h1>
 
     <div class="mb-1">
-      <div class="row">
-        <div class="col-md-2 col-4">
-          <h5>User</h5>
+        <div class="row">
+            <div class="col-md-2 col-4"><h5>User</h5></div>
+            <div class="col-md-10 col-8">{!! $submission->user->displayNamePronouns !!}</div>
         </div>
         <div class="col-md-10 col-8">{!! $submission->user->displayName !!}</div>
       </div>

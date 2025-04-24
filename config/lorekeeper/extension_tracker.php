@@ -1,6 +1,7 @@
 <?php
 return [
 
+<<<<<<< HEAD
   'User_Shops' => [
     'key' => 'user_shops',
     'wiki_key' => 'User_Shops',
@@ -78,3 +79,14 @@ return [
   ],
   
 ];
+=======
+    'user_pronouns' => [
+        'key' => 'user_pronouns',
+        'wiki_key' => 'User_Pronouns',
+        'creators' => json_encode([
+            'AnimatedCritter' => 'https://github.com/animatedcritter/',
+        ]),
+        'version' => '1.0.0',
+    ],
+];
+>>>>>>> e96928be2d5f63bf4fcc5456990b97a656495072
