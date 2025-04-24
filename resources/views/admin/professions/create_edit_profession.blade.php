@@ -49,7 +49,7 @@
           <a href="{{ $profession->imageUrl }}" data-lightbox="entry" data-title="{{ $profession->name }}"><img src="{{ $profession->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Main Image (Optional)') !!} {!! add_help('This image is used as the main profession
-                    image.') !!}
+                            image.') !!}
         <div>{!! Form::file('image') !!}</div>
         <div class="text-muted">Recommended size: None (Choose a standard size for all profession images.)</div>
         @if (isset($profession->image_extension))
