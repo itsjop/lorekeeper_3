@@ -18,17 +18,13 @@
   <h3>Basic Information</h3>
 
   <div class="row">
-    <div class="col-md">
-      <div class="form-group">
-        {!! Form::label('Name') !!}
-        {!! Form::text('name', $gallery->name, ['class' => 'form-control']) !!}
-      </div>
+    <div class="col-md form-group">
+      {!! Form::label('Name') !!}
+      {!! Form::text('name', $gallery->name, ['class' => 'form-control']) !!}
     </div>
-    <div class="col-md-2">
-      <div class="form-group">
-        {!! Form::label('Sort (Optional)') !!} {!! add_help('Galleries are ordered first by sort number, then by name-- so galleries without a sort number are sorted only by name.') !!}
-        {!! Form::number('sort', $gallery->sort, ['class' => 'form-control']) !!}
-      </div>
+    <div class="col-md-2 form-group">
+      {!! Form::label('Sort (Optional)') !!} {!! add_help('Galleries are ordered first by sort number, then by name-- so galleries without a sort number are sorted only by name.') !!}
+      {!! Form::number('sort', $gallery->sort, ['class' => 'form-control']) !!}
     </div>
   </div>
 
@@ -67,11 +63,12 @@
         ) !!}
       </div>
     </div>
-    <div class="col-md">
-      <div class="form-group">
-        {!! Form::checkbox('location_selection', 1, $gallery->location_selection, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-        {!! Form::label('location_selection', 'Location Selection', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not users can select a location to associate a gallery submission with when creating it.') !!}
-      </div>
+  </div>
+
+  <div class="col-md">
+    <div class="form-group">
+      {!! Form::checkbox('location_selection', 1, $gallery->location_selection, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::label('location_selection', 'Location Selection', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not users can select a location to associate a gallery submission with when creating it.') !!}
     </div>
   </div>
   @if (Settings::get('gallery_submissions_require_approval'))
@@ -80,6 +77,7 @@
       {!! Form::number('votes_required', $gallery->votes_required, ['class' => 'form-control']) !!}
     </div>
   @endif
+
   <div class="row">
     <div class="col-md">
       <div class="form-group">

@@ -1,4 +1,4 @@
-@extends('home.layout', ['componentName' => 'home/liked-comments'])
+@extends('home.layout')
 
 @section('home-title')
   My Liked Comments
@@ -16,9 +16,10 @@
     {{-- Order user CommentLikes by when the comment was created inside the foreach --}}
     @php
       $comments = $user->commentLikes;
-      $comments = $comments->sortByDesc(function ($comment) {
+      $comments = $comments?->sortByDesc(function ($comment) {
           return $comment->comment->created_at;
       });
+      $comments = $comments ?? [];
     @endphp
 
     @foreach ($comments as $comment)

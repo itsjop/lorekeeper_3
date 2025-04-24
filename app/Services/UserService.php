@@ -794,113 +794,122 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Updates the user's border.
-   *
-   * @param  array                  $data
-   * @param  \App\Models\User\User  $user
-   * @return bool
-   */
-  public function updateBorder($data, $user) {
-    DB::beginTransaction();
+    /**
+     * Deactivates a user.
+     *
+     * @param array $data
+     * @param User  $user
+     * @param User  $staff
+     *
+     * @return bool
+     */
+    public function deactivate($data, $user, $staff = null) {
+      DB::beginTransaction();
 
-    try {
-      $border = Border::find($data['border']);
-
-      //do some validation...
-      if (!Auth::user()->isStaff && $border) {
-        if ($border->parent_id) {
-          abort(404);
-        }
-        if (!$border->is_default) {
-          if (!Auth::user()->hasBorder($border->id)) {
-            throw new \Exception('You do not own this border.');
+      try {
+          if (!$staff) {
+              $staff = $user;
           }
-        }
-        if (!$border->is_active) {
-          throw new \Exception('This border is not active.');
-        }
-        if ($border->admin_only) {
-          throw new \Exception('You cannot select a staff border.');
-        }
+          if (!$user->is_deactivated) {
+              // New deactivation (not just editing the reason), clear all their engagements
+
+              // 1. Character transfers
+              $characterManager = new CharacterManager;
+              $transfers = CharacterTransfer::where(function ($query) use ($user) {
+                  $query->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
+              })->where('status', 'Pending')->get();
+              foreach ($transfers as $transfer) {
+                  $characterManager->processTransferQueue(['transfer' => $transfer, 'action' => 'Reject', 'reason' => ($transfer->sender_id == $user->id ? 'Sender' : 'Recipient').'\'s account was deactivated.'], ($staff ? $staff : $user));
+              }
+
+              // 2. Submissions and claims
+              $submissionManager = new SubmissionManager;
+              $submissions = Submission::where('user_id', $user->id)->where('status', 'Pending')->get();
+              foreach ($submissions as $submission) {
+                  $submissionManager->rejectSubmission(['submission' => $submission, 'staff_comments' => 'User\'s account was deactivated.'], $staff);
+              }
+
+              // 3. Gallery Submissions
+              $galleryManager = new GalleryManager;
+              $gallerySubmissions = GallerySubmission::where('user_id', $user->id)->where('status', 'Pending')->get();
+              foreach ($gallerySubmissions as $submission) {
+                  $galleryManager->rejectSubmission($submission, $staff);
+                  $galleryManager->postStaffComments($submission->id, ['staff_comments' => 'User\'s account was deactivated.'], $staff);
+              }
+              $gallerySubmissions = GallerySubmission::where('user_id', $user->id)->where('status', 'Accepted')->get();
+              foreach ($gallerySubmissions as $submission) {
+                  $submission->update(['is_visible' => 0]);
+              }
+
+              // 4. Design approvals
+              $requests = CharacterDesignUpdate::where('user_id', $user->id)->where(function ($query) {
+                  $query->where('status', 'Pending')->orWhere('status', 'Draft');
+              })->get();
+              foreach ($requests as $request) {
+                  (new DesignUpdateManager)->rejectRequest(['staff_comments' => 'User\'s account was deactivated.'], $request, $staff, true);
+              }
+
+              // 5. Trades
+              $tradeManager = new TradeManager;
+              $trades = Trade::where(function ($query) {
+                  $query->where('status', 'Open')->orWhere('status', 'Pending');
+              })->where(function ($query) use ($user) {
+                  $query->where('sender_id', $user->id)->where('recipient_id', $user->id);
+              })->get();
+              foreach ($trades as $trade) {
+                  $tradeManager->rejectTrade(['trade' => $trade, 'reason' => 'User\'s account was deactivated.'], $staff);
+              }
+
+              UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['is_deactivated' => 'Yes', 'deactivate_reason' => $data['deactivate_reason'] ?? null]), 'type' => 'Deactivation']);
+
+              $user->settings->deactivated_at = Carbon::now();
+
+              $user->is_deactivated = 1;
+              $user->deactivater_id = $staff->id;
+              $user->rank_id = Rank::orderBy('sort')->first()->id;
+              $user->save();
+
+              Notifications::create('USER_DEACTIVATED', User::find(Settings::get('admin_user')), [
+                  'user_url'   => $user->url,
+                  'user_name'  => $user->name,
+                  'staff_url'  => $staff->url,
+                  'staff_name' => $staff->name,
+              ]);
+          } else {
+              UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['deactivate_reason' => $data['deactivate_reason'] ?? null]), 'type' => 'Deactivation Update']);
+          }
+
+          $user->settings->deactivate_reason = isset($data['deactivate_reason']) && $data['deactivate_reason'] ? $data['deactivate_reason'] : null;
+          $user->settings->save();
+
+          return $this->commitReturn(true);
+      } catch (\Exception $e) {
+          $this->setError('error', $e->getMessage());
       }
 
-      if ($data['border_variant_id'] > 0) {
-        $variant = Border::where('id', $data['border_variant_id'])
-          ->whereNotNull('parent_id')
-          ->first();
-        if (!$variant) {
-          abort(404);
-        }
-        //do some validation...
-        if (!Auth::user()->isStaff) {
-          if (!$variant->parent->is_default) {
-            if (!Auth::user()->hasBorder($variant->parent->id)) {
-              throw new \Exception('You do not own this border.');
-            }
-          }
-          if (!$variant->is_active) {
-            throw new \Exception('This border variant is not active.');
-          }
-          if ($variant->parent->admin_only) {
-            throw new \Exception('You cannot select a staff border.');
-          }
-        }
-      }
-      if (
-        (!$data['bottom_border_id'] && $data['top_border_id']) ||
-        ($data['bottom_border_id'] && !$data['top_border_id'])
-      ) {
-        throw new \Exception('You must select both a top border and a bottom border.');
-      }
-      if ($data['bottom_border_id'] > 0) {
-        $layer = Border::where('id', $data['bottom_border_id'])
-          ->whereNotNull('parent_id')
-          ->where('border_type', 'bottom')
-          ->first();
-        if (!$layer) {
-          throw new \Exception('That bottom border does not exist.');
-        }
-        $toplayer = Border::where('id', $data['top_border_id'])
-          ->whereNotNull('parent_id')
-          ->where('border_type', 'top')
-          ->first();
-        if (!$toplayer) {
-          throw new \Exception('That top border does not exist.');
-        }
-        //do some validation...
-        if (!Auth::user()->isStaff) {
-          if (!$layer->parent->is_default || !$toplayer->parent->is_default) {
-            if (
-              !Auth::user()->hasBorder($layer->parent->id) ||
-              !Auth::user()->hasBorder($toplayer->parent->id)
-            ) {
-              throw new \Exception('You do not own this border.');
-            }
-          }
-          if (!$layer->is_active) {
-            throw new \Exception('This bottom border is not active.');
-          }
-          if (!$toplayer->is_active) {
-            throw new \Exception('This top border is not active.');
-          }
-          if ($layer->parent->admin_only || $toplayer->parent->admin_only) {
-            throw new \Exception('You cannot select a staff border.');
-          }
-        }
-      }
+      return $this->rollbackReturn(false);
+  }
 
-      $user->border_id = $data['border'];
-      $user->border_variant_id = $data['border_variant_id'];
-      $user->bottom_border_id = $data['bottom_border_id'];
-      $user->top_border_id = $data['top_border_id'];
+    /**
+     * Reactivates a user account.
+     *
+     * @param \App\Models\User\User $user
+     * @param \App\Models\User\User $staff
+     *
+     * @return bool
+     */
+    public function reactivate($user, $staff = null) {
+        DB::beginTransaction();
+        try {
+            if (!$staff) {                $staff = $user;            }
+            if ($user->is_deactivated) {
+                $user->is_deactivated = 0;
+                $user->deactivater_id = null;
+                $user->save();
 
-      $user->save();
-
-      $user->settings->border_settings = [
-        'border_flip' => $data['border_flip'] ?? 0
-      ];
+      $user->settings->border_settings = [        'border_flip' => $data['border_flip'] ?? 0      ];
       $user->settings->save();
+            }
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {
@@ -908,4 +917,4 @@ class UserService extends Service {
     }
     return $this->rollbackReturn(false);
   }
-}
+  }

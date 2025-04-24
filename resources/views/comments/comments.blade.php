@@ -15,9 +15,48 @@
 @endphp
 
 @if (!isset($type) || $type == 'User-User')
-  <h2>Comments</h2>
+  <div class="row">
+    <div class="{{ !isset($type) || $type == 'User-User' ? 'h2' : 'hide' }}">
+      Comments
+    </div>
+
+    <div class="ml-auto">
+      <div class="form-inline justify-content-end">
+        <div class="form-group ml-3 mb-3">
+          {!! Form::select(
+              'sort',
+              [
+                  'newest' => 'Newest First',
+                  'oldest' => 'Oldest First',
+              ],
+              Request::get('sort') ?: 'newest',
+              ['class' => 'form-control', 'id' => 'sort'],
+          ) !!}
+        </div>
+        <div class="form-group ml-3 mb-3">
+          {!! Form::select(
+              'perPage',
+              [
+                  5 => '5 Per Page',
+                  10 => '10 Per Page',
+                  25 => '25 Per Page',
+                  50 => '50 Per Page',
+                  100 => '100 Per Page',
+              ],
+              Request::get('perPage') ?: 5,
+              ['class' => 'form-control', 'id' => 'perPage'],
+          ) !!}
+        </div>
+      </div>
+    </div>
+  </div>
 @endif
 <div class="d-flex mw-100 row mx-0" style="overflow:hidden;">
+  <div id="comments">
+    <div class="justify-content-center text-center mb-2">
+      <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
+  </div>
   @php
     $comments = $comments->sortByDesc('created_at');
 
@@ -97,12 +136,49 @@
         ],
         toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
         content_css: [
-          '{{ asset('css/vendor/app.css') }}',
+          '{{ asset('css/app.css') }}',
           '{{ asset('css/lorekeeper.css') }}'
         ],
         spoiler_caption: 'Toggle Spoiler',
         target_list: false
       });
+
+      function sortComments() {
+        $('#comments').fadeOut();
+        $.ajax({
+          url: "{{ url('sort-comments/' . base64_encode(urlencode(get_class($model))) . '/' . $model->getKey()) }}",
+          type: 'GET',
+          data: {
+            url: '{{ url()->current() }}',
+            allow_dislikes: '{{ isset($allow_dislikes) ? $allow_dislikes : false }}',
+            approved: '{{ isset($approved) ? $approved : false }}',
+            type: '{{ isset($type) ? $type : null }}',
+            sort: $('#sort').val(),
+            perPage: $('#perPage').val(),
+            page: '{{ request()->query('page') }}',
+          },
+          success: function(data) {
+            $('#comments').html(data);
+            // update current url to reflect sort change
+            var url = new URL(window.location.href);
+            url.searchParams.set('sort', $('#sort').val());
+            url.searchParams.set('perPage', $('#perPage').val());
+
+            window.history.pushState({}, '', url);
+            $('#comments').fadeIn();
+          }
+        });
+      }
+
+      $('#sort').change(function() {
+        sortComments();
+      });
+
+      $('#perPage').change(function() {
+        sortComments();
+      });
+
+      sortComments(); // initial sort
     });
   </script>
 @endsection

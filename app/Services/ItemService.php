@@ -126,6 +126,7 @@ class ItemService extends Service {
         isset($data['character_limit']) && $data['character_limit'] ? $data['character_limit'] : $data['character_limit'] = 0;
         isset($data['can_donate']) && $data['can_donate'] ? $data['can_donate'] : $data['can_donate'] = 0;
         isset($data['can_name']) && $data['can_name'] ? $data['can_name'] : $data['can_name'] = 0;
+        isset($data['can_user_sell']) && $data['can_user_sell'] ? $data['can_user_sell'] : $data['can_user_sell'] = 0;
 
         if(isset($data['remove_image']))
         {
@@ -574,6 +575,9 @@ class ItemService extends Service {
             $data['is_released'] = 0;
         } else {
             $data['is_released'] = 1;
+        }
+        if (!isset($data['is_deletable'])) {
+            $data['is_deletable'] = 0;
         }
 
         if (isset($data['remove_image'])) {

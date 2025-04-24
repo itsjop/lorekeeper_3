@@ -78,6 +78,13 @@ Route::group(['prefix' => 'files', 'middleware' => 'power:edit_site_settings'], 
     Route::post('folder/rename', 'FileController@postRenameFolder');
 });
 
+// LOG VIEWER
+Route::group(['prefix' => 'logs', 'middleware' => 'power:edit_site_settings'], function() {
+    Route::get('/', 'LogController@getIndex');
+    Route::get('/{name}', 'LogController@getLog');
+    Route::post('/delete', 'LogController@postDeleteLog');
+});
+
 // SITE IMAGES
 Route::group(['prefix' => 'images', 'middleware' => 'power:edit_site_settings'], function () {
     Route::get('/', 'FileController@getSiteImages');
@@ -252,6 +259,35 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::post('prompts/edit/{id?}', 'PromptController@postCreateEditPrompt');
     Route::post('prompts/delete/{id}', 'PromptController@postDeletePrompt');
 
+    # PROFESSIONS
+    Route::get('profession-categories', 'ProfessionController@getCategoryIndex');
+    Route::get('profession-categories/create', 'ProfessionController@getCreateProfessionCategory');
+    Route::get('profession-categories/edit/{id}', 'ProfessionController@getEditProfessionCategory');
+    Route::get('profession-categories/delete/{id}', 'ProfessionController@getDeleteProfessionCategory');
+    Route::post('profession-categories/create', 'ProfessionController@postCreateEditProfessionCategory');
+    Route::post('profession-categories/edit/{id?}', 'ProfessionController@postCreateEditProfessionCategory');
+    Route::post('profession-categories/delete/{id}', 'ProfessionController@postDeleteProfessionCategory');
+    Route::post('profession-categories/sort', 'ProfessionController@postSortProfessionCategory');
+
+    Route::get('profession-subcategories', 'ProfessionController@getSubcategoryIndex');
+    Route::get('profession-subcategories/create', 'ProfessionController@getCreateProfessionSubcategory');
+    Route::get('profession-subcategories/edit/{id}', 'ProfessionController@getEditProfessionSubcategory');
+    Route::get('profession-subcategories/delete/{id}', 'ProfessionController@getDeleteProfessionSubcategory');
+    Route::post('profession-subcategories/create', 'ProfessionController@postCreateEditProfessionSubcategory');
+    Route::post('profession-subcategories/edit/{id?}', 'ProfessionController@postCreateEditProfessionSubcategory');
+    Route::post('profession-subcategories/delete/{id}', 'ProfessionController@postDeleteProfessionSubcategory');
+    Route::post('profession-subcategories/sort', 'ProfessionController@postSortProfessionSubcategory');
+
+    Route::get('professions', 'ProfessionController@getProfessionIndex');
+    Route::get('professions/create', 'ProfessionController@getCreateProfession');
+    Route::get('professions/edit/{id}', 'ProfessionController@getEditProfession');
+    Route::get('professions/delete/{id}', 'ProfessionController@getDeleteProfession');
+    Route::post('professions/create', 'ProfessionController@postCreateEditProfession');
+    Route::post('professions/edit/{id?}', 'ProfessionController@postCreateEditProfession');
+    Route::post('professions/delete/{id}', 'ProfessionController@postDeleteProfession');
+    Route::post('professions/sort', 'ProfessionController@postSortProfession');
+
+
      # BORDERS
      Route::get('border-categories', 'BorderController@getIndex');
      Route::get('border-categories/create', 'BorderController@getCreateBorderCategory');
@@ -308,6 +344,33 @@ Route::group(['prefix' => 'news', 'middleware' => 'power:manage_news'], function
     Route::post('create', 'NewsController@postCreateEditNews');
     Route::post('edit/{id?}', 'NewsController@postCreateEditNews');
     Route::post('delete/{id}', 'NewsController@postDeleteNews');
+});
+
+
+# FORMS
+Route::group(['prefix' => 'forms', 'middleware' => 'power:manage_sales'], function() {
+
+    Route::get('/', 'SiteFormController@getIndex');
+    Route::get('create', 'SiteFormController@getCreateSiteForm');
+    Route::get('edit/{id}', 'SiteFormController@getEditSiteForm');
+    Route::get('delete/{id}', 'SiteFormController@getDeleteSiteForm');
+    Route::post('create', 'SiteFormController@postCreateEditSiteForm');
+    Route::post('edit/{id?}', 'SiteFormController@postCreateEditSiteForm');
+    Route::post('delete/{id}', 'SiteFormController@postDeleteSiteForm');
+    Route::get('results/{id}', 'SiteFormController@getSiteFormResults');
+
+});
+
+# FORMS
+Route::group(['prefix' => 'forms', 'middleware' => 'power:edit_pages'], function() {
+    Route::get('/', 'SiteFormController@getIndex');
+    Route::get('create', 'SiteFormController@getCreateSiteForm');
+    Route::get('edit/{id}', 'SiteFormController@getEditSiteForm');
+    Route::get('delete/{id}', 'SiteFormController@getDeleteSiteForm');
+    Route::post('create', 'SiteFormController@postCreateEditSiteForm');
+    Route::post('edit/{id?}', 'SiteFormController@postCreateEditSiteForm');
+    Route::post('delete/{id}', 'SiteFormController@postDeleteSiteForm');
+    Route::get('results/{id}', 'SiteFormController@getSiteFormResults');
 });
 
 // SALES
@@ -456,8 +519,27 @@ Route::group(['prefix' => 'raffles', 'middleware' => 'power:manage_raffles'], fu
     Route::post('roll/group/{id}', 'RaffleController@postRollRaffleGroup');
 });
 
-// SUBMISSIONS
-Route::group(['prefix' => 'submissions', 'middleware' => 'power:manage_submissions'], function () {
+# CULTIVATION
+Route::group(['prefix' => 'cultivation', 'middleware' => 'power:edit_data'], function() {
+    Route::get('areas', 'CultivationController@getAreaIndex');
+    Route::get('plots', 'CultivationController@getPlotIndex');
+
+    Route::get('areas/edit/{id?}', 'CultivationController@getCreateEditArea');
+    Route::post('areas/edit/{id?}', 'CultivationController@postCreateEditArea');
+    Route::get('plots/edit/{id?}', 'CultivationController@getCreateEditPlot');
+    Route::post('plots/edit/{id?}', 'CultivationController@postCreateEditPlot');
+    Route::post('areas/sort', 'CultivationController@postSortAreas');
+    Route::post('plots/sort', 'CultivationController@postSortPlot');
+    Route::get('areas/delete/{id}', 'CultivationController@getDeleteArea');
+    Route::get('plots/delete/{id}', 'CultivationController@getDeletePlot');
+    Route::post('areas/delete/{id}', 'CultivationController@postDeleteArea');
+    Route::post('plots/delete/{id}', 'CultivationController@postDeletePlot');
+
+});
+
+
+# SUBMISSIONS
+Route::group(['prefix' => 'submissions', 'middleware' => 'power:manage_submissions'], function() {
     Route::get('/', 'SubmissionController@getSubmissionIndex');
     Route::get('/{status}', 'SubmissionController@getSubmissionIndex')->where('status', 'pending|approved|rejected');
     Route::get('edit/{id}', 'SubmissionController@getSubmission');

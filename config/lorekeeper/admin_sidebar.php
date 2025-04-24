@@ -65,6 +65,10 @@ return [
                 'name' => 'Pages',
                 'url'  => 'admin/pages',
             ],
+            [
+                'name' => 'Forms & Polls',
+                'url' => 'admin/forms'
+            ],
         ],
     ],
     'Users'      => [
@@ -203,6 +207,10 @@ return [
                 'url'  => 'admin/data/items',
             ],
             [
+                'name' => 'Professions',
+                'url' => 'admin/data/professions'
+            ],
+            [
                 'name' => 'User Borders',
                 'url' => 'admin/data/borders'
             ],
@@ -258,6 +266,20 @@ return [
             ],
         ],
     ],
+    'Cultivation' => [
+        'power' => 'edit_data',
+        'links' => [
+            [
+                'name' => 'Areas',
+                'url' => 'admin/cultivation/areas'
+            ],
+            [
+                'name' => 'Plots',
+                'url' => 'admin/cultivation/plots'
+            ],
+        ]
+    ],
+
     'Settings'   => [
         'power' => 'edit_site_settings',
         'links' => [
@@ -272,6 +294,10 @@ return [
             [
                 'name' => 'File Manager',
                 'url'  => 'admin/files',
+            ],
+            [
+                'name' => 'Log Viewer',
+                'url' => 'admin/logs'
             ],
         ],
     ],
