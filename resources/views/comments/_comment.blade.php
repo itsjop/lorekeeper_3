@@ -12,26 +12,31 @@
           <img class="mr-3 mt-2" src="{{ $comment->commenter->avatarUrl }}" style="width:70px; height:70px; border-radius:50%;" alt="{{ $comment->commenter->name }} Avatar">
           {!! $comment->commenter->userBorder() !!}
         </div>
-        @endif
-        <div class="d-block" style="flex:1">
-            <div class="row mx-0 px-0 align-items-md-end">
-                <h5 class="mt-0 mb-1 col mx-0 px-0">
-                    {!! $comment->commenter->commentDisplayName !!} @if($comment->commenter->isStaff == true)<small class="text-success">Staff Member</small>@endif
-                </h5>
-                @if($comment->is_featured)<div class="ml-1 text-muted text-right col-6 mx-0 pr-1"><small class="text-success">Featured by Owner</small></div> @endif
-            </div>
-            <div class="border p-3 rounded {{ $comment->is_featured ? 'border-success bg-light' : '' }} "><p>{!! nl2br($markdown->line($comment->comment)) !!} </p>
-            <p class="border-top pt-1 text-right mb-0">
-                <small class="text-muted">{!! $comment->created_at !!}
-                @if($comment->created_at != $comment->updated_at)
-                    <span class="text-muted border-left mx-1 px-1">(Edited {!! ($comment->updated_at) !!})</span>
-                @endif
-                </small>
-                @if($comment->type == "User-User")
-                    <a href="{{ url('comment/').'/'.$comment->id }}"><i class="fas fa-link ml-1" style="opacity: 50%;"></i></a>
-                @endif
-                <a href="{{ url('reports/new?url=') . $comment->url }}"><i class="fas fa-exclamation-triangle" data-toggle="tooltip" title="Click here to report this comment." style="opacity: 50%;"></i></a>
-            </p>
+      @endif
+      <div class="d-block" style="flex:1">
+        <div class="row mx-0 px-0 align-items-md-end">
+          <h5 class="mt-0 mb-1 col mx-0 px-0">
+            {!! $comment->commenter->commentDisplayName !!} @if ($comment->commenter->isStaff == true)
+              <small class="text-success">Staff Member</small>
+            @endif
+          </h5>
+          @if ($comment->is_featured)
+            <div class="ml-1 text-muted text-right col-6 mx-0 pr-1"><small class="text-success">Featured by Owner</small></div>
+          @endif
+        </div>
+        <div class="border p-3 rounded {{ $comment->is_featured ? 'border-success bg-light' : '' }} ">
+          <p>{!! nl2br($markdown->line($comment->comment)) !!} </p>
+          <p class="border-top pt-1 text-right mb-0">
+            <small class="text-muted">{!! $comment->created_at !!}
+              @if ($comment->created_at != $comment->updated_at)
+                <span class="text-muted border-left mx-1 px-1">(Edited {!! $comment->updated_at !!})</span>
+              @endif
+            </small>
+            @if ($comment->type == 'User-User')
+              <a href="{{ url('comment/') . '/' . $comment->id }}"><i class="fas fa-link ml-1" style="opacity: 50%;"></i></a>
+            @endif
+            <a href="{{ url('reports/new?url=') . $comment->url }}"><i class="fas fa-exclamation-triangle" data-toggle="tooltip" title="Click here to report this comment." style="opacity: 50%;"></i></a>
+          </p>
         </div>
 
         @include('comments._actions', ['comment' => $comment, 'compact' => isset($compact) ? $compact : false])
