@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use DB;
 use Auth;
+use App\Facades\Settings;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterDesignUpdate;
@@ -15,20 +16,12 @@ use App\Models\Submission\Submission;
 use App\Models\User\User;
 use App\Models\User\UserItem;
 use App\Models\Shop\UserShop;
-use App\Models\Shop\UserShopStock;
+
 use App\Models\Item\UserItemLog;
+use Illuminate\Http\Request;
+use App\Models\Shop\UserShopStock;
 use App\Services\InventoryManager;
 
-use App\Models\Trade;
-use App\Models\Character\CharacterDesignUpdate;
-use App\Models\Submission\Submission;
-use App\Models\Trade;
-use App\Models\User\User;
-use App\Models\User\UserItem;
-use App\Services\InventoryManager;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Shop\UserShopStock;
 
 class InventoryController extends Controller {
     /*
@@ -46,7 +39,7 @@ class InventoryController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getIndex() {
-        $categories = ItemCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->get();
+        $categories = ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get();
         $items = count($categories) ?
             Auth::user()->items()
                 ->where('count', '>', 0)
@@ -90,8 +83,9 @@ class InventoryController extends Controller {
             'user'             => Auth::user(),
             'userOptions'      => ['' => 'Select User'] + User::visible()->where('id', '!=', $first_instance ? $first_instance->user_id : 0)->orderBy('name')->get()->pluck('verified_name', 'id')->toArray(),
             'readOnly'         => $readOnly,
+            'canTransfer'      => Settings::get('can_transfer_items_directly'),
+            'shopOptions' => $shops,
             'characterOptions' => Character::visible()->myo(0)->where('user_id', optional(Auth::user())->id)->orderBy('sort', 'DESC')->get()->pluck('fullName', 'id')->toArray(),
-            'shopOptions' => $shops
         ]);
     }
 
@@ -245,94 +239,6 @@ class InventoryController extends Controller {
     }
 
     /**
-     * Show the full inventory page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getFullInventory() {
-        $user = Auth::user();
-
-        // Gather the user's characters
-        $characters = $user->allCharacters;
-
-        if (!Auth::check() || !$user->hasPower('manage_characters')) {
-            $characters = $characters->where('is_visible', 1);
-        }
-
-        // Set up Categories
-        $categories = ItemCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->get();
-
-        if (count($categories)) {
-            $items =
-                Auth::user()->items()
-                    ->where('count', '>', 0)
-                    ->orderByRaw('FIELD(item_category_id,'.implode(',', $categories->pluck('id')->toArray()).')')
-                    ->orderBy('name')
-                    ->orderBy('updated_at')
-                    ->get();
-            foreach ($characters as $character) {
-                $itemCollect = $character->items()
-                    ->where('count', '>', 0)
-                    ->orderByRaw('FIELD(item_category_id,'.implode(',', $categories->pluck('id')->toArray()).')')
-                    ->orderBy('name')
-                    ->orderBy('updated_at')
-                    ->get();
-                isset($items) ? $items = $items->mergeRecursive($itemCollect) : $items = $itemCollect;
-            }
-        } else {
-            $items =
-                Auth::user()->items()
-                    ->where('count', '>', 0)
-                    ->orderBy('name')
-                    ->orderBy('updated_at')
-                    ->get();
-            foreach ($characters as $character) {
-                $itemCollect = $character->items()
-                    ->where('count', '>', 0)
-                    ->orderBy('name')
-                    ->orderBy('updated_at')
-                    ->get();
-                isset($items) ? $items = $items->mergeRecursive($itemCollect) : $items = $itemCollect;
-            }
-        }
-
-        return view('home.inventory_full', [
-            'categories' => $categories->keyBy('id'),
-            'items'      => $items->sortBy('name')->sortBy('updated_at')->groupBy(['item_category_id', 'id']),
-            'user'       => $user,
-            'characters' => $characters,
-        ]);
-    }
-
-    /**
-     * Shows the confirmation modal for inventory consolidation.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getConsolidateInventory(Request $request) {
-        return view('home._inventory_consolidate');
-    }
-
-    /**
-     * Consolidates the user's inventory.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postConsolidateInventory(Request $request, InventoryManager $service) {
-        if ($service->consolidateInventory(Auth::user())) {
-            flash('Inventory consolidated.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
      * Transfers inventory items to another user.
      *
      * @param App\Services\InventoryManager $service
@@ -431,6 +337,25 @@ class InventoryController extends Controller {
     }
 
     /**
+     * transfers item to shop
+     *
+     * @param  \Illuminate\Http\Request       $request
+     * @param  App\Services\InventoryManager  $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postQuickstock(Request $request, InventoryManager $service)
+    {
+        if($service->quickstockItems($request->only(['stack_id', 'stack_quantity']), Auth::user(), UserShop::where('id', $request->get('shop_id'))->first())) {
+            flash('Item transferred successfully.')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
+    }
+
+
+    /**
      * Show the full inventory page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -509,104 +434,6 @@ class InventoryController extends Controller {
     public function postConsolidateInventory(Request $request, InventoryManager $service) {
         if ($service->consolidateInventory(Auth::user())) {
             flash('Inventory consolidated.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Transfers inventory items to another user.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postTransfer(Request $request, InventoryManager $service) {
-        if ($service->transferStack(Auth::user(), User::visible()->where('id', $request->get('user_id'))->first(), UserItem::find($request->get('ids')), $request->get('quantities'))) {
-            flash('Item transferred successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Transfers inventory items to a character.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postTransferToCharacter(Request $request, InventoryManager $service) {
-        if ($service->transferCharacterStack(Auth::user(), Character::visible()->where('id', $request->get('character_id'))->first(), UserItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
-            flash('Item transferred successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Deletes an inventory stack.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postDelete(Request $request, InventoryManager $service) {
-        if ($service->deleteStack(Auth::user(), UserItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
-            flash('Item deleted successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Sells an inventory stack.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postResell(Request $request, InventoryManager $service) {
-        if ($service->resellStack(Auth::user(), UserItem::find($request->get('ids')), $request->get('quantities'))) {
-            flash('Item sold successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Acts on an item based on the item's tag.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postAct(Request $request) {
-        $stacks = UserItem::with('item')->find($request->get('ids'));
-        $tag = $request->get('tag');
-        $service = $stacks->first()->item->hasTag($tag) ? $stacks->first()->item->tag($tag)->service : null;
-        if ($service && $service->act($stacks, Auth::user(), $request->all())) {
-            flash('Item used successfully.')->success();
-        } elseif (!$stacks->first()->item->hasTag($tag)) {
-            flash('Invalid action selected.')->error();
         } else {
             foreach ($service->errors()->getMessages()['error'] as $error) {
                 flash($error)->error();
@@ -634,22 +461,4 @@ class InventoryController extends Controller {
             'shopOptions' => UserShop::where('user_id', '=', Auth::user()->id)->pluck('name', 'id'),
         ]);
     }
-    /**
-     * transfers item to shop
-     *
-     * @param  \Illuminate\Http\Request       $request
-     * @param  App\Services\InventoryManager  $service
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postQuickstock(Request $request, InventoryManager $service)
-    {
-        if($service->quickstockItems($request->only(['stack_id', 'stack_quantity']), Auth::user(), UserShop::where('id', $request->get('shop_id'))->first())) {
-            flash('Item transferred successfully.')->success();
-        }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
-        return redirect()->back();
-    }
-
 }

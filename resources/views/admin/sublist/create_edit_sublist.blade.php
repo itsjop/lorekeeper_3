@@ -17,20 +17,16 @@
 
   <h3>Basic Information</h3>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        {!! Form::label('Name') !!}
-        {!! Form::text('name', $sublist->name, ['class' => 'form-control']) !!}
-      </div>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            {!! Form::label('Name') !!}
+            {!! Form::text('name', $sublist->name, ['class' => 'form-control']) !!}
+        </div>
+        <div class="col-md-6 form-group">
+            {!! Form::label('Key') !!}
+            {!! Form::text('key', $sublist->key, ['class' => 'form-control']) !!}
+        </div>
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        {!! Form::label('Key') !!}
-        {!! Form::text('key', $sublist->key, ['class' => 'form-control']) !!}
-      </div>
-    </div>
-  </div>
 
   <h3>Contents</h3>
   <p>Each category and species can only have ONE sublist. If you assign a sublist here, it will be removed from any other sublists. If you want a species shared across multiple lists, it is suggested you only use character categories. Likewise, if you

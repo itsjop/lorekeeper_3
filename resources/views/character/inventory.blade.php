@@ -31,49 +31,49 @@
     </div>
   </div>
 
-  <div id="defView" class="hide">
-    @foreach ($items as $categoryId => $categoryItems)
-      <div class="card mb-3 inventory-category">
-        <h5 class="card-header inventory-header">
-          {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
-            Show
-          </a>
-        </h5>
-        <div class="card-body inventory-body collapse show" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
-          @foreach ($categoryItems->chunk(4) as $chunk)
-            <div class="row mb-3">
-              @foreach ($chunk as $itemId => $stack)
-                <?php
-                $canName = $stack->first()->category->can_name;
-                $stackName = $stack->first()->pivot->pluck('stack_name', 'id')->toArray()[$stack->first()->pivot->id];
-                $stackNameClean = htmlentities($stackName);
-                ?>
-                <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $stack->first()->pivot->id }}"
-                  data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}">
-                  <div class="mb-1">
-                    <a href="#" class="inventory-stack">
-                      <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
+    <div id="defView" class="hide">
+        @foreach ($items as $categoryId => $categoryItems)
+            <div class="card mb-3 inventory-category">
+                <h5 class="card-header inventory-header">
+                    {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
+                    <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
+                        Show
                     </a>
-                  </div>
-                  <div class="{{ $canName ? 'text-muted' : '' }}">
-                    <a href="#" class="inventory-stack inventory-stack-name">
-                      {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }}
-                    </a>
-                  </div>
-                  @if ($canName && $stackName)
-                    <div>
-                      <span class="inventory-stack inventory-stack-name badge badge-info" style="font-size:95%; margin:5px;">"{{ $stackName }}"</span>
-                    </div>
-                  @endif
+                </h5>
+                <div class="card-body inventory-body collapse show" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
+                    @foreach ($categoryItems->chunk(4) as $chunk)
+                        <div class="row mb-3">
+                            @foreach ($chunk as $itemId => $stack)
+                                <?php
+                                $canName = $stack->first()->category->can_name;
+                                $stackName = $stack->first()->pivot->pluck('stack_name', 'id')->toArray()[$stack->first()->pivot->id];
+                                $stackNameClean = htmlentities($stackName);
+                                ?>
+                                <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $stack->first()->pivot->id }}"
+                                    data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}">
+                                    <div class="mb-1">
+                                        <a href="#" class="inventory-stack">
+                                            <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
+                                        </a>
+                                    </div>
+                                    <div class="{{ $canName ? 'text-muted' : '' }}">
+                                        <a href="#" class="inventory-stack inventory-stack-name">
+                                            {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }}
+                                        </a>
+                                    </div>
+                                    @if ($canName && $stackName)
+                                        <div>
+                                            <span class="inventory-stack inventory-stack-name badge badge-info" style="font-size:95%; margin:5px;">"{{ $stackName }}"</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 </div>
-              @endforeach
             </div>
-          @endforeach
-        </div>
-      </div>
-    @endforeach
-  </div>
+        @endforeach
+    </div>
 
   <div id="sumView" class="hide">
     @foreach ($items as $categoryId => $categoryItems)
