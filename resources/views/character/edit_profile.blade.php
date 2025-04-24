@@ -40,17 +40,17 @@
         {!! Form::text('link', $character->profile->link, ['class' => 'form-control']) !!}
       </div>
     @endif
-      {!! Form::label('profession', 'Profession') !!} {!! add_help('Select a profession from the available ones below! If nothing fits, you may write your own profession into the text field instead. Note that this will use a default icon.') !!}
+    {!! Form::label('profession', 'Profession') !!} {!! add_help('Select a profession from the available ones below! If nothing fits, you may write your own profession into the text field instead. Note that this will use a default icon.') !!}
     <div class="row">
-        <div class="col-md form-group">
-            {!! Form::select('profession_id', [0=>'Choose a Profession'] + $professions, $character->profile->profession_id ?? 0, ['class' => 'form-control selectize']) !!}
-        </div>
-        <div class="col-md form-group">
+      <div class="col-md form-group">
+        {!! Form::select('profession_id', [0 => 'Choose a Profession'] + $professions, $character->profile->profession_id ?? 0, ['class' => 'form-control selectize']) !!}
+      </div>
+      <div class="col-md form-group">
         {!! Form::text('profession', $character->profile->profession, ['class' => 'form-control']) !!}
-        </div>
+      </div>
     </div>
-</div>
-@endif
+    </div>
+  @endif
 
   @if (!$character->is_myo_slot && ($char_enabled == 2 || (Auth::user()->isStaff && $char_enabled == 3)))
     @if (Auth::user()->isStaff && $char_enabled == 3)

@@ -103,9 +103,9 @@
           <a class="dropdown-item" href="{{ url('myos') }}">
             MYO Slot Masterlist
           </a>
-                        <a class="dropdown-item" href="{{ url('forms') }}">
-                            Site Forms & Polls
-                        </a>
+          <a class="dropdown-item" href="{{ url('forms') }}">
+            Site Forms & Polls
+          </a>
           <div class="dropdown-divider">
           </div>
           <a class="dropdown-item" href="{{ url('raffles') }}">
@@ -151,12 +151,12 @@
           <a class="dropdown-item" href="{{ url('user-shops/shop-index') }}">
             All User Shops
           </a>
-                        <a class="dropdown-item" href="{{ url('professions') }}">
-                            Professions
-                        </a>
-                        <a class="dropdown-item" href="{{ url(__('cultivation.cultivation')) }}">
-                            {{__('cultivation.cultivation')}}
-                        </a>
+          <a class="dropdown-item" href="{{ url('professions') }}">
+            Professions
+          </a>
+          <a class="dropdown-item" href="{{ url(__('cultivation.cultivation')) }}">
+            {{ __('cultivation.cultivation') }}
+          </a>
         </div>
       </li>
       <li class="nav-item">

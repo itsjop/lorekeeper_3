@@ -36,14 +36,14 @@
       This request is in the approval queue.
       @if (!Auth::user()->hasPower('manage_characters'))
         Please wait for it to be processed{{ $canCancel ? ' or cancel it below.' : '.' }}
-                @if ($canCancel)
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <a href="#" class="btn btn-outline-secondary cancel-button btn-sm float-right" data-action="cancel">Cancel</a>
-                            <strong class="text-secondary">Cancelling</strong> the request returns it to its draft status, allowing you to make further edits.
-                        </div>
-                    </div>
-                @endif
+        @if ($canCancel)
+          <div class="card mb-3">
+            <div class="card-body">
+              <a href="#" class="btn btn-outline-secondary cancel-button btn-sm float-right" data-action="cancel">Cancel</a>
+              <strong class="text-secondary">Cancelling</strong> the request returns it to its draft status, allowing you to make further edits.
+            </div>
+          </div>
+        @endif
       @else
         As a staff member with the ability to edit the masterlist, you can view the details of the request, but can only edit certain parts of it.
       @endif
@@ -88,12 +88,12 @@
         });
       @endif
 
-            @if ($request->user_id == Auth::user()->id && $request->status == 'Pending' && $canCancel)
-                $('.cancel-button').on('click', function(e) {
-                    e.preventDefault();
-                    loadModal("{{ url('designs/' . $request->id . '/cancel/') }}", 'Cancel Submission');
-                });
-            @endif
+      @if ($request->user_id == Auth::user()->id && $request->status == 'Pending' && $canCancel)
+        $('.cancel-button').on('click', function(e) {
+          e.preventDefault();
+          loadModal("{{ url('designs/' . $request->id . '/cancel/') }}", 'Cancel Submission');
+        });
+      @endif
 
       @if (Auth::user()->hasPower('manage_characters'))
         $('.process-button').on('click', function(e) {

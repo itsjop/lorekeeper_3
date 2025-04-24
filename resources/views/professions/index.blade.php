@@ -1,13 +1,15 @@
 @extends('professions.layout')
 
-@section('title') Professions @endsection
+@section('title')
+  Professions
+@endsection
 
 @section('content')
-{!! breadcrumbs(['Professions' => 'professions']) !!}
+  {!! breadcrumbs(['Professions' => 'professions']) !!}
 
-<h1>{{ $page->title }}</h1>
+  <h1>{{ $page->title }}</h1>
 
-<div class="site-page-content parsed-text">
+  <div class="site-page-content parsed-text">
     {!! $page->parsed_text !!}
-</div>
+  </div>
 @endsection

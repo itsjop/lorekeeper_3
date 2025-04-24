@@ -18,16 +18,16 @@
     {!! Form::select('names[]', $users, null, ['id' => 'usernameList', 'class' => 'form-control', 'multiple']) !!}
   </div>
 
-    <div class="row">
-        <div class="col-md-6 form-group">
-            {!! Form::label('currency_id', 'Currency') !!}
-            {!! Form::select('currency_id', $userCurrencies, null, ['class' => 'form-control']) !!}
-        </div>
-        <div class="col-md-6 form-group">
-            {!! Form::label('quantity', 'Quantity') !!} {!! add_help('If the value given is less than 0, this will be deducted from the user(s).') !!}
-            {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
-        </div>
+  <div class="row">
+    <div class="col-md-6 form-group">
+      {!! Form::label('currency_id', 'Currency') !!}
+      {!! Form::select('currency_id', $userCurrencies, null, ['class' => 'form-control']) !!}
     </div>
+    <div class="col-md-6 form-group">
+      {!! Form::label('quantity', 'Quantity') !!} {!! add_help('If the value given is less than 0, this will be deducted from the user(s).') !!}
+      {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
+    </div>
+  </div>
 
   <div class="form-group">
     {!! Form::label('data', 'Reason (Optional)') !!} {!! add_help('A reason for the grant. This will be noted in the logs.') !!}

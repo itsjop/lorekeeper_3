@@ -33,24 +33,24 @@
     </div>
   </div>
 
-    @if ($editable != 2)
-        {{-- Powers --}}
-        <div class="form-group">
-            <div class="row">
-                @foreach ($powers as $key => $power)
-                    <div class="col-md-6 form-check">
-                        {!! Form::checkbox('powers[' . $key . ']', $key, $rankPowers ? isset($rankPowers[$key]) : false, ['class' => 'form-check-input', 'id' => 'powers[' . $key . ']']) !!}
-                        {!! Form::label('powers[' . $key . ']', $power['name'], ['class' => 'form-check-label']) !!}
-                        {!! add_help($power['description']) !!}
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @else
-        <div class="card bg-light mb-3">
-            <div class="card-body">Powers for the admin rank cannot be edited. {!! add_help('The admin rank has the ability to edit any editable information on the site, and is always highest-ranked (cannot be edited by any other user).') !!}</div>
-        </div>
-    @endif
+  @if ($editable != 2)
+    {{-- Powers --}}
+    <div class="form-group">
+      <div class="row">
+        @foreach ($powers as $key => $power)
+          <div class="col-md-6 form-check">
+            {!! Form::checkbox('powers[' . $key . ']', $key, $rankPowers ? isset($rankPowers[$key]) : false, ['class' => 'form-check-input', 'id' => 'powers[' . $key . ']']) !!}
+            {!! Form::label('powers[' . $key . ']', $power['name'], ['class' => 'form-check-label']) !!}
+            {!! add_help($power['description']) !!}
+          </div>
+        @endforeach
+      </div>
+    </div>
+  @else
+    <div class="card bg-light mb-3">
+      <div class="card-body">Powers for the admin rank cannot be edited. {!! add_help('The admin rank has the ability to edit any editable information on the site, and is always highest-ranked (cannot be edited by any other user).') !!}</div>
+    </div>
+  @endif
 
   <div class="text-right">
     {!! Form::submit($rank->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}

@@ -5,9 +5,9 @@
 @endsection
 
 @if ($shop->has_image)
-    @section('meta-img')
-        {{ $shop->shopImageUrl }}
-    @endsection
+  @section('meta-img')
+    {{ $shop->shopImageUrl }}
+  @endsection
 @endif
 
 @section('shops-content')

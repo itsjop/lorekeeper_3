@@ -30,14 +30,14 @@
       </div>
       <div class="col-md-10"><a href="{{ $submission->url }}">{{ $submission->url }}</a></div>
     </div>
-        @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && $submission->data['gallery_submission_id'])
-            <div class="row mb-2 no-gutters">
-                <div class="col-md-2">
-                    <h5 class="mb-0">Gallery Submission</h5>
-                </div>
-                <div class="col-md-10"><a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a></div>
-            </div>
-        @endif
+    @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && $submission->data['gallery_submission_id'])
+      <div class="row mb-2 no-gutters">
+        <div class="col-md-2">
+          <h5 class="mb-0">Gallery Submission</h5>
+        </div>
+        <div class="col-md-10"><a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a></div>
+      </div>
+    @endif
     <div class="row mb-2 no-gutters">
       <div class="col-md-2">
         <h5 class="mb-0">Submitted</h5>
@@ -104,40 +104,40 @@
 @endif
 
 <div class="card mb-3">
-    <div class="card-header h2">Characters</div>
-    <div class="card-body">
-        @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($submission->characters()->get()))
-            <div class="alert alert-warning">
-                Some characters have been deleted since this submission was created.
-            </div>
-        @endif
-        @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
-            <div class="submission-character-row mb-2">
-                <div class="submission-character-thumbnail">
-                    <a href="{{ $character->character->url }}"><img src="{{ $character->character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->character->fullName }}" /></a>
-                </div>
-                <div class="submission-character-info card ml-2">
-                    <div class="card-body">
-                        <div class="submission-character-info-content">
-                            <h3 class="mb-2 submission-character-info-header"><a href="{{ $character->character->url }}">{{ $character->character->fullName }}</a></h3>
-                            <div class="submission-character-info-body">
-                                @if (array_filter(parseAssetData($character->data)))
-                                    <table class="table table-sm mb-0">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th width="70%">Reward</th>
-                                                <th width="30%">Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (parseAssetData($character->data) as $key => $type)
-                                                @foreach ($type as $asset)
-                                                    <tr>
-                                                        <td>{!! $asset['asset']->displayName !!} ({!! ucfirst($key) !!})</td>
-                                                        <td>{{ $asset['quantity'] }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endforeach
+  <div class="card-header h2">Characters</div>
+  <div class="card-body">
+    @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($submission->characters()->get()))
+      <div class="alert alert-warning">
+        Some characters have been deleted since this submission was created.
+      </div>
+    @endif
+    @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
+      <div class="submission-character-row mb-2">
+        <div class="submission-character-thumbnail">
+          <a href="{{ $character->character->url }}"><img src="{{ $character->character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->character->fullName }}" /></a>
+        </div>
+        <div class="submission-character-info card ml-2">
+          <div class="card-body">
+            <div class="submission-character-info-content">
+              <h3 class="mb-2 submission-character-info-header"><a href="{{ $character->character->url }}">{{ $character->character->fullName }}</a></h3>
+              <div class="submission-character-info-body">
+                @if (array_filter(parseAssetData($character->data)))
+                  <table class="table table-sm mb-0">
+                    <thead class="thead-light">
+                      <tr>
+                        <th width="70%">Reward</th>
+                        <th width="30%">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach (parseAssetData($character->data) as $key => $type)
+                        @foreach ($type as $asset)
+                          <tr>
+                            <td>{!! $asset['asset']->displayName !!} ({!! ucfirst($key) !!})</td>
+                            <td>{{ $asset['quantity'] }}</td>
+                          </tr>
+                        @endforeach
+                      @endforeach
 
                       {{--
 

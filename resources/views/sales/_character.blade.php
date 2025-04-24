@@ -14,58 +14,58 @@
             </small>
           </h5>
 
-                    @if ($loop->count == 1)
-                        <div class="mb-2">
-                            @if (config('lorekeeper.extensions.traits_by_category'))
-                                <div>
-                                    @php
-                                        $traitgroup = $character->image->features()->get()->groupBy('feature_category_id');
-                                    @endphp
-                                    @if ($character->image->features()->count())
-                                        @foreach ($traitgroup as $key => $group)
-                                            <div>
-                                                @if ($group->count() > 1)
-                                                    <div>
-                                                        <strong>{!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
-                                                        @foreach ($group as $feature)
-                                                            {!! $feature->feature->displayName !!}@if ($feature->data)
-                                                                ({{ $feature->data }})
-                                                            @endif{{ !$loop->last ? ', ' : '' }}
-                                                        @endforeach
-                                                    </div>
-                                                @else
-                                                    <strong>{!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
-                                                    {!! $group->first()->feature->displayName !!}
-                                                    @if ($group->first()->data)
-                                                        ({{ $group->first()->data }})
-                                                    @endif
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div>No traits listed.</div>
-                                    @endif
-                                </div>
-                            @else
-                                <div>
-                                    <?php $features = $character->image->features()->with('feature.category')->get(); ?>
-                                    @if ($features->count())
-                                        @foreach ($features as $feature)
-                                            <div>
-                                                @if ($feature->feature->feature_category_id)
-                                                    <strong>{!! $feature->feature->category->displayName !!}:</strong>
-                                                    @endif {!! $feature->feature->displayName !!} @if ($feature->data)
-                                                        ({{ $feature->data }})
-                                                    @endif
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div>No traits listed.</div>
-                                    @endif
-                                </div>
-                            @endif
-                        </div>
-                    @endif
+          @if ($loop->count == 1)
+            <div class="mb-2">
+              @if (config('lorekeeper.extensions.traits_by_category'))
+                <div>
+                  @php
+                    $traitgroup = $character->image->features()->get()->groupBy('feature_category_id');
+                  @endphp
+                  @if ($character->image->features()->count())
+                    @foreach ($traitgroup as $key => $group)
+                      <div>
+                        @if ($group->count() > 1)
+                          <div>
+                            <strong>{!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
+                            @foreach ($group as $feature)
+                              {!! $feature->feature->displayName !!}@if ($feature->data)
+                                ({{ $feature->data }})
+                              @endif{{ !$loop->last ? ', ' : '' }}
+                            @endforeach
+                          </div>
+                        @else
+                          <strong>{!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
+                          {!! $group->first()->feature->displayName !!}
+                          @if ($group->first()->data)
+                            ({{ $group->first()->data }})
+                          @endif
+                        @endif
+                      </div>
+                    @endforeach
+                  @else
+                    <div>No traits listed.</div>
+                  @endif
+                </div>
+              @else
+                <div>
+                  <?php $features = $character->image->features()->with('feature.category')->get(); ?>
+                  @if ($features->count())
+                    @foreach ($features as $feature)
+                      <div>
+                        @if ($feature->feature->feature_category_id)
+                          <strong>{!! $feature->feature->category->displayName !!}:</strong>
+                          @endif {!! $feature->feature->displayName !!} @if ($feature->data)
+                            ({{ $feature->data }})
+                          @endif
+                      </div>
+                    @endforeach
+                  @else
+                    <div>No traits listed.</div>
+                  @endif
+                </div>
+              @endif
+            </div>
+          @endif
 
           <h6>
             <div class="mb-2">
