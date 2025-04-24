@@ -26,9 +26,9 @@ use App\Models\Currency\CurrencyLog;
 use App\Models\User\UserItem;
 use App\Models\Border\Border;
 use App\Models\User\UserUpdateLog;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Models\Shop\UserShop;
-
 
 class UserController extends Controller {
     /*
@@ -199,40 +199,6 @@ class UserController extends Controller {
         return view('user.myo_slots', [
             'user' => $this->user,
             'myos' => $myo->get(),
-        ]);
-    }
-
-    /**
-     * Shows a user's inventory.
-     *
-     * @param string $name
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getUserInventory($name) {
-        $categories = ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get();
-        $items = count($categories) ?
-            $this->user->items()
-                ->where('count', '>', 0)
-                ->orderByRaw('FIELD(item_category_id,'.implode(',', $categories->pluck('id')->toArray()).')')
-                ->orderBy('name')
-                ->orderBy('updated_at')
-                ->get()
-                ->groupBy(['item_category_id', 'id']) :
-            $this->user->items()
-                ->where('count', '>', 0)
-                ->orderBy('name')
-                ->orderBy('updated_at')
-                ->get()
-                ->groupBy(['item_category_id', 'id']);
-
-        return view('user.inventory', [
-            'user'        => $this->user,
-            'categories'  => $categories->keyBy('id'),
-            'items'       => $items,
-            'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
-            'user'        => $this->user,
-            'logs'        => $this->user->getItemLogs(),
         ]);
     }
 
@@ -479,5 +445,40 @@ class UserController extends Controller {
                   'shops' => $shops->orderBy('sort', 'DESC')->get(),
                   'sublists' => Sublist::orderBy('sort', 'DESC')->get()
               ]);
+    }
+
+
+
+    /**
+     * Shows a user's inventory.
+     *
+     * @param string $name
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getUserInventory($name) {
+        $categories = ItemCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->get();
+        $items = count($categories) ?
+            $this->user->items()
+                ->where('count', '>', 0)
+                ->orderByRaw('FIELD(item_category_id,'.implode(',', $categories->pluck('id')->toArray()).')')
+                ->orderBy('name')
+                ->orderBy('updated_at')
+                ->get()
+                ->groupBy(['item_category_id', 'id']) :
+            $this->user->items()
+                ->where('count', '>', 0)
+                ->orderBy('name')
+                ->orderBy('updated_at')
+                ->get()
+                ->groupBy(['item_category_id', 'id']);
+
+        return view('user.inventory', [
+            'user'        => $this->user,
+            'categories'  => $categories->keyBy('id'),
+            'items'       => $items,
+            'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
+            'logs'        => $this->user->getItemLogs(),
+        ]);
     }
 }
