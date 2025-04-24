@@ -10,8 +10,8 @@
   <h1>Deactivate Account</h1>
 
   <p>
-    If you wish to deactivate your account for whatever reason, you may do so here. This does not delete your account in totality, but it hides your information
-    from the public. Due to the way our website is set up, this is the closest we can get to account deletion. You will be able to reactivate your account at any time.
+    If you wish to deactivate your account for any reason, you may do so here. This does not delete your account in totality, but it hides your information
+    from the public. <strong> Due to the way our server is set up, this is the closest we can get to automatic account deletion. </strong> You will be able to reactivate your account at any time.
   </p>
   <p>
     This will automatically cancel all pending design updates, submissions, and trades associated with your account.

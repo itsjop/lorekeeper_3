@@ -51,6 +51,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Users'], function () {
     Route::get('{name}/character-art', 'UserController@getUserCharacterArt');
     Route::get('{name}/favorites', 'UserController@getUserFavorites');
     Route::get('{name}/favorites/own-characters', 'UserController@getUserOwnCharacterFavorites');
+    Route::get('{name}/borders', 'UserController@getUserBorders');
 
     Route::get('{name}', 'UserController@getUser');
     Route::get('{name}/aliases', 'UserController@getUserAliases');
