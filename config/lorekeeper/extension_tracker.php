@@ -27,7 +27,6 @@ return [
     ]),
     'version' => '1.2.4'
   ],
-
   'gift_art_notifications' => [
     'key' => 'gift_art_notifications',
     'wiki_key' => 'Gift_Art_Notifications',
@@ -36,7 +35,6 @@ return [
     ]),
     'version' => '1.0.0'
   ],
-
   'Character_Transformations' => [
     'key' => 'character_transformations',
     'wiki_key' => 'Character_Transformations',
@@ -46,7 +44,6 @@ return [
     ]),
     'version' => '1.0.0'
   ],
-
   'polls_and_forms' => [
     'key' => 'polls_and_forms',
     'wiki_key' => 'Polls_and_Forms',
@@ -55,7 +52,6 @@ return [
     ]),
     'version' => '1.0.0'
   ],
-
   'character_professions' => [
     'key' => 'character_professions',
     'wiki_key' => 'Character Professions',
@@ -64,7 +60,6 @@ return [
     ]),
     'version' => '1.0.0'
   ],
-
   'dailies' => [
     'key' => 'dailies',
     'wiki_key' => 'Dailies',
@@ -81,7 +76,6 @@ return [
     ]),
     'version' => '1.0.0'
   ],
-
   'automatic_backups' => [
     'key' => 'automatic_backups',
     'wiki_key' => 'Automatic_Backups',
@@ -89,5 +83,13 @@ return [
       'Mercury' => 'https://github.com/itinerare/'
     ]),
     'version' => '1.0.0'
+  ],
+  'scavenger_hunts' => [
+    'key' => 'scavenger_hunts',
+    'wiki_key' => 'Scavenger_Hunts',
+    'creators' => json_encode([
+      'Mercury' => 'https://github.com/itinerare/'
+    ]),
+    'version' => '1.0.2'
   ]
 ];
