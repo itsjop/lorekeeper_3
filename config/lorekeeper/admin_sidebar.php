@@ -226,6 +226,10 @@ return [
                 'name' => 'Scavenger Hunts',
                 'url' => 'admin/data/hunts'
             ],
+            [
+                'name' => 'Advent Calendars',
+                'url' => 'admin/data/advent-calendars'
+            ],
         ],
     ],
     'WorldExpansion' => [

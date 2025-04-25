@@ -91,5 +91,13 @@ return [
       'Mercury' => 'https://github.com/itinerare/'
     ]),
     'version' => '1.0.2'
+  ],
+  'advent_calendars' => [
+    'key' => 'advent_calendars',
+    'wiki_key' => 'Advent_Calendars',
+    'creators' => json_encode([
+      'Mercury' => 'https://github.com/itinerare/'
+    ]),
+    'version' => '1.0.1'
   ]
 ];
