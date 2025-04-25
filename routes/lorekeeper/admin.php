@@ -259,6 +259,30 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::post('prompts/edit/{id?}', 'PromptController@postCreateEditPrompt');
     Route::post('prompts/delete/{id}', 'PromptController@postDeletePrompt');
 
+    Route::get('advent-calendars', 'AdventController@getAdventIndex');
+    Route::get('advent-calendars/create', 'AdventController@getCreateAdvent');
+    Route::get('advent-calendars/edit/{id}', 'AdventController@getEditAdvent');
+    Route::get('advent-calendars/delete/{id}', 'AdventController@getDeleteAdvent');
+    Route::post('advent-calendars/create', 'AdventController@postCreateEditAdvent');
+    Route::post('advent-calendars/edit/{id?}', 'AdventController@postCreateEditAdvent');
+    Route::post('advent-calendars/delete/{id}', 'AdventController@postDeleteAdvent');
+
+    # SCAVENGER HUNTS
+    Route::get('hunts', 'HuntController@getHuntIndex');
+    Route::get('hunts/create', 'HuntController@getCreateHunt');
+    Route::get('hunts/edit/{id}', 'HuntController@getEditHunt');
+    Route::get('hunts/delete/{id}', 'HuntController@getDeleteHunt');
+    Route::post('hunts/create', 'HuntController@postCreateEditHunt');
+    Route::post('hunts/edit/{id?}', 'HuntController@postCreateEditHunt');
+    Route::post('hunts/delete/{id}', 'HuntController@postDeleteHunt');
+
+    Route::get('hunts/targets/create/{id}', 'HuntController@getCreateHuntTarget');
+    Route::post('hunts/targets/create', 'HuntController@postCreateEditHuntTarget');
+    Route::get('hunts/targets/edit/{id}', 'HuntController@getEditHuntTarget');
+    Route::post('hunts/targets/edit/{id}', 'HuntController@postCreateEditHuntTarget');
+    Route::get('hunts/targets/delete/{id}', 'HuntController@getDeleteHuntTarget');
+    Route::post('hunts/targets/delete/{id}', 'HuntController@postDeleteHuntTarget');
+
     # DAILIES
     Route::get('dailies', 'DailyController@getIndex');
     Route::get('dailies/create', 'DailyController@getCreateDaily');

@@ -109,7 +109,7 @@ Route::group(['prefix' => 'trades', 'namespace' => 'Users'], function () {
 });
 
 Route::group(['prefix' => 'user-shops', 'namespace' => 'Users'], function() {
-    Route::get('/', 'UserShopController@getUserIndex'); 
+    Route::get('/', 'UserShopController@getUserIndex');
     Route::get('create', 'UserShopController@getCreateShop');
     Route::get('edit/{id}', 'UserShopController@getEditShop');
     Route::get('delete/{id}', 'UserShopController@getDeleteShop');
@@ -130,8 +130,8 @@ Route::group(['prefix' => 'user-shops', 'namespace' => 'Users'], function() {
 });
 
 Route::group(['prefix' => 'user-shops',], function() {
-    Route::get('/shop-index', 'UserShopController@getIndex'); 
-    Route::get('/shop/{id}', 'UserShopController@getShop'); 
+    Route::get('/shop-index', 'UserShopController@getIndex');
+    Route::get('/shop/{id}', 'UserShopController@getShop');
     Route::post('/shop/buy', 'UserShopController@postBuy');
     Route::get('{id}/{stockId}', 'UserShopController@getShopStock')->where(['id' => '[0-9]+', 'stockId' => '[0-9]+']);
 });
@@ -286,6 +286,16 @@ Route::group(['prefix' => 'activities'], function () {
 });
 
 /**************************************************************************************************
+    Scavenger Hunts
+**************************************************************************************************/
+
+Route::group(['prefix' => 'hunts'], function() {
+    Route::get('{id}', 'HuntController@getHunt');
+    Route::get('targets/{pageId}', 'HuntController@getTarget');
+    Route::post('targets/claim', 'HuntController@postClaimTarget');
+});
+
+/**************************************************************************************************
     Comments
 **************************************************************************************************/
 Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function () {
@@ -315,7 +325,7 @@ Route::group(['prefix' => 'forms'], function() {
 
 Route::group(['prefix' => __('cultivation.cultivation')], function() {
     Route::get('{id}', 'CultivationController@getArea');
-    
+
     Route::get('area/delete/{id}', 'CultivationController@getDeleteAreaModal');
     Route::post('area/delete/{id}', 'CultivationController@postDeleteArea');
 
@@ -325,4 +335,12 @@ Route::group(['prefix' => __('cultivation.cultivation')], function() {
     Route::post('plots/tend/{plotId}', 'CultivationController@postTendPlot');
     Route::post('plots/harvest/{plotId}', 'CultivationController@postHarvestPlot');
 
+});
+/**************************************************************************************************
+    Advent Calendars
+**************************************************************************************************/
+
+Route::group(['prefix' => 'advent-calendars'], function() {
+    Route::get('{id}', 'AdventController@getAdvent');
+    Route::post('{id}', 'AdventController@postClaimPrize');
 });

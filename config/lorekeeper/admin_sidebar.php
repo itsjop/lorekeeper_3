@@ -222,6 +222,14 @@ return [
                 'name' => 'Transformations',
                 'url'  => 'admin/data/transformations',
             ],
+            [
+                'name' => 'Scavenger Hunts',
+                'url' => 'admin/data/hunts'
+            ],
+            [
+                'name' => 'Advent Calendars',
+                'url' => 'admin/data/advent-calendars'
+            ],
         ],
     ],
     'WorldExpansion' => [
@@ -260,6 +268,10 @@ return [
                 'url'  => 'admin/world/locations',
             ],
         ],
+            [
+                'name' => 'Scavenger Hunts',
+                'url' => 'admin/data/hunts'
+            ],
     ],
     'Raffles'    => [
         'power' => 'manage_raffles',
