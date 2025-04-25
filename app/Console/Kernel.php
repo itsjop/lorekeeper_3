@@ -19,15 +19,17 @@ class Kernel extends ConsoleKernel {
    * Define the application's command schedule.
    */
   protected function schedule(Schedule $schedule) {
+    $schedule->command('backup:clean')->daily()->at('01:30');
+    $schedule->command('backup:run')->daily()->at('01:00');
+    $schedule->command('backup:monitor')->daily()->at('01:40');
     $schedule->command('check-news')->everyMinute();
     $schedule->command('check-sales')->everyMinute();
-    $schedule->exec('rm public/images/avatars/*.tmp')->daily();
     $schedule->command('update-extension-tracker')->daily();
     $schedule->command('update-staff-reward-actions')->daily();
-    $schedule->command('change-feature')->monthly();
+    $schedule->command('change-feature')->weekly();
     $schedule->command('clean-donations')->everyMinute();
-        $schedule->command('update-timed-daily')
-                ->everyMinute();
+    $schedule->command('update-timed-daily')->everyMinute();
+    $schedule->exec('rm public/images/avatars/*.tmp')->daily();
   }
 
   /**

@@ -1,7 +1,5 @@
 <?php
 return [
-
-<<<<<<< HEAD
   'User_Shops' => [
     'key' => 'user_shops',
     'wiki_key' => 'User_Shops',
@@ -12,7 +10,6 @@ return [
     ]),
     'version' => '2.0.0'
   ],
-
   'user_borders' => [
     'key' => 'user_borders',
     'wiki_key' => 'User Borders',
@@ -22,7 +19,6 @@ return [
     ]),
     'version' => '2.0.0'
   ],
-
   'donation_shop' => [
     'key' => 'donation_shop',
     'wiki_key' => 'Donation_Shop',
@@ -77,16 +73,21 @@ return [
     ]),
     'version' => '2.0.1'
   ],
-  
+  'user_pronouns' => [
+    'key' => 'user_pronouns',
+    'wiki_key' => 'User_Pronouns',
+    'creators' => json_encode([
+      'AnimatedCritter' => 'https://github.com/animatedcritter/'
+    ]),
+    'version' => '1.0.0'
+  ],
+
+  'automatic_backups' => [
+    'key' => 'automatic_backups',
+    'wiki_key' => 'Automatic_Backups',
+    'creators' => json_encode([
+      'Mercury' => 'https://github.com/itinerare/'
+    ]),
+    'version' => '1.0.0'
+  ]
 ];
-=======
-    'user_pronouns' => [
-        'key' => 'user_pronouns',
-        'wiki_key' => 'User_Pronouns',
-        'creators' => json_encode([
-            'AnimatedCritter' => 'https://github.com/animatedcritter/',
-        ]),
-        'version' => '1.0.0',
-    ],
-];
->>>>>>> e96928be2d5f63bf4fcc5456990b97a656495072
