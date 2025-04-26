@@ -37,7 +37,7 @@ return [
     | site wherever the name needs to be displayed.
     |
     */
-    'site_name'                                         => 'Lorekeeper',
+    'site_name'                                         => 'Somnivores!',
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ return [
     | It is not, however, displayed on the site itself. This should be kept short and snappy!
     |
     */
-    'site_desc'                                         => 'A Lorekeeper ARPG',
+    'site_desc'                                         => 'Welcome to the world of Reverie!',
 
     /*
     |--------------------------------------------------------------------------
@@ -340,7 +340,7 @@ return [
     |
     */
 
-    'allow_username_changes'                            => 0,
+    'allow_username_changes'                            => 1,
     'username_change_cooldown'                          => 30,
 
     /*

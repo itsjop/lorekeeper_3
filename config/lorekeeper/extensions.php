@@ -20,7 +20,7 @@ return [
     */
 
     // Navbar News Notif - Juni
-    'navbar_news_notif'                    => 0,
+    'navbar_news_notif'                    => 1,
 
     /*  Visual Trait Indexes
      *
@@ -30,17 +30,17 @@ return [
      *  Trait Modals addition - Moif
      */
     'visual_trait_index' => [
-        'enable_species_index'   => 0, // Enables the Species Trait Index
+        'enable_species_index'   => 1, // Enables the Species Trait Index
         'enable_subtype_index'   => 0, // Enables the Subtype Trait Index
         'enable_universal_index' => 0, // Enables the Universal Trait Index
-        'trait_modals'           => 0, // Enables modals when you click on a trait for more info instead of linking to the traits page
+        'trait_modals'           => 1, // Enables modals when you click on a trait for more info instead of linking to the traits page
     ],
 
     // Character Status Badges - Juni
-    'character_status_badges' => 0,
+    'character_status_badges' => 1,
 
     // Character TH Profile Link - Juni
-    'character_TH_profile_link' => 0,
+    'character_TH_profile_link' => 1,
 
     // Design Update Voting - Mercury
     'design_update_voting' => 0,
@@ -60,7 +60,7 @@ return [
     'traits_by_category' => 0,
 
     // Scroll To Top - Uri
-    'scroll_to_top' => 0, // 1 - On, 0 - off
+    'scroll_to_top' => 1, // 1 - On, 0 - off
 
     // Character Reward Expansion - Uri
     'character_reward_expansion' => [
@@ -88,18 +88,18 @@ return [
     // Previous & Next buttons on Character pages - Speedy
     // Adds buttons linking to the previous character as well as the next character on all character pages.
     'previous_and_next_characters' => [
-        'display' => 0,
+        'display' => 1,
         'reverse' => 0, // By default, 0 has the lower number on the 'Next' side and the higher number on the 'Previous' side, reflecting the default masterlist order. Setting this to 1 reverses this.
     ],
 
     // Aliases on Userpage - Speedy
-    'aliases_on_userpage' => 0, // By default, does not display the aliases on userpage. Enable to add a small arrow to display these underneath the primary alias.
+    'aliases_on_userpage' => 1, // By default, does not display the aliases on userpage. Enable to add a small arrow to display these underneath the primary alias.
 
     // Show All Recent Submissions - Speedy
     'show_all_recent_submissions' => [
         'enable' => 0,
         'links'  => [
-            'sidebar'      => 1,      // By default, ON, and will display in the sidebar.
+            'sidebar'      => 1, // By default, ON, and will display in the sidebar.
             'indexbutton'  => 1, // By default, ON, and will display a button on the index.
         ],
         'section_on_front' => 0, // By default, does not display on the front page. Enable to add a block above the footer.
@@ -113,7 +113,7 @@ return [
 
     // Use ReCaptcha to check new user registrations - Mercury
     // Requires site key and secret be set in your .env file!
-    'use_recaptcha' => 0,
+    'use_recaptcha' => 1,
 
     // Show Small Badges on the User's Characters/MYO Slots Page
     // Indicating Trading Status (and Gift Art & Gift Writing Status)
