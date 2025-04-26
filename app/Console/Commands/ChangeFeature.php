@@ -43,10 +43,7 @@ class ChangeFeature extends Command
     {
         $id = Character::myo()->random()->id;
         $setting = Settings::get('featured_character');
-        while($id == $setting) {
-            $id = Character::myo()->random()->id;
-        }
-
+        while($id == $setting) { $id = Character::myo()?->random()->id; }
         DB::table('site_settings')->where('key', 'featured_character')->update(['value' => $id]);
     }
 }
