@@ -11,9 +11,9 @@
 
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- ReCaptcha v3 -->
-    {!! RecaptchaV3::initJs() !!}
-  
+  <!-- ReCaptcha v3 -->
+  {!! RecaptchaV3::initJs() !!}
+
 
   <title>{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')</title>
 
