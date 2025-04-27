@@ -118,7 +118,7 @@ class UserService extends Service {
           }
         ]
       ] +
-        (config('app.env') == 'production' && config('lorekeeper.extensions.use_recaptcha')
+        (config('app.env') == 'production')
           ? [
             'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
           ]

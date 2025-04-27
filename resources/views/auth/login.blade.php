@@ -76,6 +76,8 @@
       </div>
     </form>
 
+    {!! RecaptchaV3::field('login') !!}
+
     @if ($altLogins)
       <h3 class="text-center mt-5 pt-2">Alternate Logins</h3>
       @foreach ($altLogins as $provider => $site)

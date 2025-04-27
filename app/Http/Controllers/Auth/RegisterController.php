@@ -92,7 +92,7 @@ class RegisterController extends Controller {
             return redirect()->back();
         }
     }
-
+    
     /**
      * Create a new user instance after a valid registration.
      *
