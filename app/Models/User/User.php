@@ -131,6 +131,13 @@ class User extends Authenticatable implements MustVerifyEmail {
   }
 
   /**
+   * Get user local settings.
+   */
+  public function localSettings() {
+    return $this->hasOne(UserLocalSettings::class);
+  }
+
+  /**
    * Get user-editable profile data.
    */
   public function profile() {
@@ -655,10 +662,8 @@ class User extends Authenticatable implements MustVerifyEmail {
         return null;
         break;
       case 1:
-        if (Auth::check()) {
+        if (Auth::check())
           return $bday->format('d M') . $icon;
-        }
-
         break;
       case 2:
         return $bday->format('d M') . $icon;
@@ -986,13 +991,7 @@ class User extends Authenticatable implements MustVerifyEmail {
       //especially with the checks
 
       //get some fun variables for later
-      $avatar =
-        '<!-- avatar -->
-                  <img class="avatar" src="' .
-        $this->avatarUrl .
-        '" alt="Avatar of ' .
-        $this->name .
-        '">';
+      $avatar = '<!-- avatar --> <img class="avatar" src="' . $this->avatarUrl . '" alt="Avatar of ' . $this->name . '">';
 
       // Check if variant border or regular border is under or over
       if (isset($this->borderVariant) && $this->borderVariant->border_style == 0) {
@@ -1052,5 +1051,12 @@ class User extends Authenticatable implements MustVerifyEmail {
       }
       //if no border return standard avatar style
       return $styling . $avatar . '</div>';
+    }
+    public function updateLocalSetting($setting, $property) {
+      if($setting === 'high_contrast') $this->localSettings->high_contrast = $property;
+      if($setting === 'reduced_motion') $this->localSettings->reduced_motion = $property;
+      if($setting === 'light_dark') $this->localSettings->light_dark = $property;
+      if($setting === 'site_font') $this->localSettings->site_font = $property;
+      if($setting === 'theme') $this->localSettings->theme = $property;
     }
 }

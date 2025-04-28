@@ -59,7 +59,7 @@ class AddWorldExpansion extends Command {
             DB::table('site_settings')->insert([
                 [
                     'key'         => 'WE_user_locations',
-                    'value'       => 0,
+                    'value'       => 1,
                     'description' => '0: Users do not have locations. 1: Users can freely change locations. 2: Only admins can freely change user locations.',
                 ],
 
