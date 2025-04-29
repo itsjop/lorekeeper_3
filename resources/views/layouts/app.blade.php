@@ -58,18 +58,10 @@
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito"
-    rel="stylesheet"
-    type="text/css"
-  >
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet">
 
   <!-- Styles -->
@@ -99,23 +91,14 @@
 
   <link href="{{ asset('css/pages/dashboard.css') }}" rel="stylesheet">
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
 
   @include('feed::links')
 </head>
 
 <body>
-  <div
-    id="app"
-    {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
-    {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
-  >
+  <div id="app" {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }} {{ isset($pageName) ? 'data-page=' . $pageName : '' }}>
     <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">
@@ -176,21 +159,12 @@
 
       </main>
 
-      <div
-        class="modal fade"
-        id="modal"
-        tabindex="-1"
-        role="dialog"
-      >
+      <div class="modal fade" id="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <span class="modal-title h5 mb-0"></span>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-              >&times;</button>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
             </div>
