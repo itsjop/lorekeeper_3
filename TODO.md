@@ -5,6 +5,8 @@
 
 - [ ] Combine News and Sales to a Newsfeed
 
+- [ ] Get recursive Image Optimization CLI script
+
 
 ------------ IDEAS --------------
 mailbox with a cute little flag!!

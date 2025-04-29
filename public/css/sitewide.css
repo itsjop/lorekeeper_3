@@ -4,7 +4,9 @@
 * {  box-sizing: border-box; }
 
 /* prettier-ignore */
-h1, h2, h3, h4, h5, h6 { font-family: "Chewy", system-ui; }
+h1, h2, h3 { font-family: "Sour Gummy", system-ui; font-weight: 400; text-transform: lowercase;}
+/* prettier-ignore */
+h4, h5, h6 { font-family: "Stylish", system-ui; font-weight: 400;}
 /* prettier-ignore */
 ul { padding: 0; }
 
