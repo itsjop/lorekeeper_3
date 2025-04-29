@@ -28,6 +28,7 @@
             'name' => $category->displayName,
             'description' => $category->parsed_description,
             'searchUrl' => $category->searchUrl,
+            'visible' => $category?->is_visible ?? false,
         ])
       </div>
     </div>

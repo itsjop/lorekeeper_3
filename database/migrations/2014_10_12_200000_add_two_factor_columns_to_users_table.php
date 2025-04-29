@@ -4,6 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+function doesColumnExist($tableName, $columnName) {
+  return Schema::hasColumn($tableName, $columnName);
+}
+function dropColumnIfExists($tableName, $columnName) {
+  if (doesColumnExist($tableName, $columnName))
+    Schema::table($tableName, fn(Blueprint $table) => $table->dropColumn($columnName));
+}
+
 class AddTwoFactorColumnsToUsersTable extends Migration {
     /**
      * Run the migrations.

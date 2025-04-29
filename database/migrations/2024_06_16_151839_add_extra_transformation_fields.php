@@ -35,18 +35,11 @@ class AddExtraTransformationFields extends Migration
      */
     public function down()
     {
-        Schema::table('character_images', function (Blueprint $table) {
-            $table->dropColumn('transformation_info');
-            $table->dropColumn('transformation_description');
-        });
+      dropColumnIfExists('character_images', 'transformation_info');
+      dropColumnIfExists('character_images', 'transformation_description');
 
-        Schema::table('character_transformations', function (Blueprint $table) {
-            $table->dropColumn('species_id');
-        });
-
-        Schema::table('character_transformations', function (Blueprint $table) {
-            $table->dropColumn('transformation_info');
-            $table->dropColumn('transformation_description');
-        });
+      dropColumnIfExists('character_transformations', 'species_id');
+      dropColumnIfExists('character_transformations', 'transformation_info');
+      dropColumnIfExists('character_transformations', 'transformation_description');
     }
 }
