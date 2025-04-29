@@ -1,0 +1,62 @@
+#app {
+  #site-wrapper {
+    #site-logo-header {
+      grid-area: logo;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      picture {
+        display: grid;
+        grid-template: "logo";
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        img,
+        source,
+        &::after {
+          max-width: 50vw;
+          grid-area: logo;
+          width: 100%;
+        }
+        img,
+        source {
+          object-fit: contain;
+          object-position: center;
+          /* filter: drop-shadow(5px 10px 2px rgba(29, 1, 36, 0.3)); */
+          position: relative;
+        }
+        &::after {
+          content: "";
+          max-width: unset;
+          background-image: url("http://127.0.0.1:8000/images/somnivores/logo.webp");
+          background-size: contain;
+          background-position: center;
+          z-index: 5;
+        }
+      }
+    }
+  }
+}
+
+/* Tablet Down */
+@media (width <= 992px) {
+  #app {
+    #site-wrapper {
+      #site-logo-header {
+        position: relative;
+        justify-self: center;
+        picture {
+          width: 80vw;
+          max-width: unset;
+          justify-content: center;
+          img,
+          source {
+            max-width: unset;
+            max-height: 10vh;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
+}

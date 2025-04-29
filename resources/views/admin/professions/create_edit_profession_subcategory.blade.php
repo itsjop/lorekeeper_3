@@ -8,7 +8,7 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Profession Subcategories' => 'admin/data/profession-subcategories',
-      ($subcategory->id ? 'Edit' : 'Create') . ' Subcategory' => $subcategory->id ? 'admin/data/profession-subcategories/edit/' . $subcategory->id : 'admin/data/profession-subcategories/create',
+      ($subcategory->id ? 'Edit' : 'Create') . ' Subcategory' => $subcategory->id ? 'admin/data/profession-subcategories/edit/' . $subcategory->id : 'admin/data/profession-subcategories/create'
   ]) !!}
 
   <h1>{{ $subcategory->id ? 'Edit' : 'Create' }} Subcategory
@@ -57,7 +57,12 @@
     <h3>Preview</h3>
     <div class="card mb-3">
       <div class="card-body">
-        @include('world._entry', ['imageUrl' => $subcategory->imageUrl, 'name' => $subcategory->displayName, 'description' => $subcategory->parsed_description])
+        @include('world._entry', [
+            'imageUrl' => $subcategory->imageUrl,
+            'name' => $subcategory->displayName,
+            'description' => $subcategory->parsed_description,
+            'visible' => $subcategory->is_visible
+        ])
       </div>
     </div>
   @endif

@@ -26,12 +26,23 @@ class ScavengerHunt extends Model
     protected $table = 'scavenger_hunts';
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+      'start_at' => 'datetime',
+      'end_at'   => 'datetime',
+  ];
+
+
+    /**
      * Dates on the model to convert to Carbon instances.
      *
      * @var array
      */
-    public $dates = ['start_at', 'end_at'];
-    
+
+
     /**
      * Validation rules for hunt creation.
      *
@@ -43,7 +54,7 @@ class ScavengerHunt extends Model
         'summary' => 'nullable',
         'locations' => 'nullable',
     ];
-    
+
     /**
      * Validation rules for hunt updating.
      *
@@ -57,15 +68,15 @@ class ScavengerHunt extends Model
     ];
 
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
-    
+
     /**
      * Get the targets attached to this scavenger hunt.
      */
-    public function targets() 
+    public function targets()
     {
         return $this->hasMany('App\Models\ScavengerHunt\HuntTarget', 'hunt_id');
     }
@@ -73,13 +84,13 @@ class ScavengerHunt extends Model
     /**
      * Get the targets attached to this scavenger hunt.
      */
-    public function participants() 
+    public function participants()
     {
         return $this->hasMany('App\Models\ScavengerHunt\HuntParticipant', 'hunt_id');
     }
 
     /**********************************************************************************************
-    
+
         SCOPES
 
     **********************************************************************************************/
@@ -90,20 +101,47 @@ class ScavengerHunt extends Model
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeActive($query)
-    {
-        return $query->where(function($query) {
-            $query->whereNull('start_at')->orWhere('start_at', '<', Carbon::now())->orWhere(function($query) {
-                $query->where('start_at', '>=', Carbon::now());
-            });
-        })->where(function($query) {
-                $query->whereNull('end_at')->orWhere('end_at', '>', Carbon::now())->orWhere(function($query) {
-                    $query->where('end_at', '<=', Carbon::now());
-                });
-        });
-        
-    }
+    public function scopeActive($query) {
+      return $query->where('is_active', 1)
+          ->where(function ($query) {
+              $query->whereNull('start_at')->orWhere('start_at', '<', Carbon::now())->orWhere(function ($query) {
+                  $query->where('start_at', '>=', Carbon::now())->where('hide_before_start', 0);
+              });
+          })->where(function ($query) {
+              $query->whereNull('end_at')->orWhere('end_at', '>', Carbon::now())->orWhere(function ($query) {
+                  $query->where('end_at', '<=', Carbon::now())->where('hide_after_end', 0);
+              });
+          });
+  }
 
+
+    /**
+     * Scope a query to open or closed prompts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param bool                                  $isOpen
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOpen($query, $isOpen) {
+      if ($isOpen) {
+          $query->where(function ($query) {
+              $query->whereNull('end_at')->where('start_at', '<', Carbon::now());
+          })->orWhere(function ($query) {
+              $query->whereNull('start_at')->where('end_at', '>', Carbon::now());
+          })->orWhere(function ($query) {
+              $query->where('start_at', '<', Carbon::now())->where('end_at', '>', Carbon::now());
+          })->orWhere(function ($query) {
+              $query->whereNull('end_at')->whereNull('start_at');
+          });
+      } else {
+          $query->where(function ($query) {
+              $query->whereNull('end_at')->where('start_at', '>', Carbon::now());
+          })->orWhere(function ($query) {
+              $query->whereNull('start_at')->where('end_at', '<', Carbon::now());
+          })->orWhere('start_at', '>', Carbon::now())->orWhere('end_at', '<', Carbon::now());
+      }
+  }
     /**
      * Scope a query to sort hunts in alphabetical order.
      *
@@ -174,11 +212,11 @@ class ScavengerHunt extends Model
     }
 
     /**********************************************************************************************
-    
+
         ACCESSORS
 
     **********************************************************************************************/
-    
+
     /**
      * Displays the model's name, linked to its page.
      *
@@ -188,7 +226,7 @@ class ScavengerHunt extends Model
     {
         return $this->attributes['display_name'];
     }
-    
+
     /**
      * Displays the model's name, linked to its page.
      *
@@ -220,15 +258,15 @@ class ScavengerHunt extends Model
             return TRUE;
         else
             return FALSE;
-        
+
     }
 
     /**
      * Get the list of targets attached to this scavenger hunt, keyed to their number within the hunt.
-     * 
+     *
      * @return array
      */
-    public function getNumberedTargetsAttribute() 
+    public function getNumberedTargetsAttribute()
     {
         $targets = (array_flip($this->targets->pluck('id')->toArray()));
         return $targets;

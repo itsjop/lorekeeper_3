@@ -6,6 +6,7 @@
 
 @section('news-content')
   {!! breadcrumbs(['Site News' => 'news']) !!}
+  {{-- TODO: combine news and sales? --}}
   <h1>Site News</h1>
   @if (count($newses))
     {!! $newses->render() !!}

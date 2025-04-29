@@ -21,10 +21,19 @@
     </div>
 
     {!! $user->displayName !!}
-    <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
+    <a href="{{ url('reports/new?url=') . $user->url }}"><i
+        class="fas fa-exclamation-triangle fa-xs"
+        data-toggle="tooltip"
+        title="Click here to report this user."
+        style="opacity: 50%; font-size:0.5em;"
+      ></i></a>
 
     @if ($user->settings->is_fto)
-      <span class="badge badge-success float-right" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
+      <span
+        class="badge badge-success float-right"
+        data-toggle="tooltip"
+        title="This user has not owned any characters from this world before."
+      >FTO</span>
     @endif
   </h1>
   <div class="mb-4">
@@ -53,6 +62,14 @@
             <h5>Birthday</h5>
           </div>
           <div class="col-md-10 col-8">{!! $user->birthdayDisplay !!}</div>
+        </div>
+      @endif
+      @if ($user_enabled && isset($user->home_id))
+        <div class="row col-md-6">
+          <div class="col-md-4 col-4">
+            <h5>Home</h5>
+          </div>
+          <div class="col-md-8 col-8">{!! $user->home ? $user->home->fullDisplayName : '-Deleted Location-' !!}</div>
         </div>
       @endif
       @if (isset($user->border) || isset($user->borderVariant))
@@ -105,7 +122,12 @@
                 @foreach ($items as $item)
                   <div class="col-md-3 col-6 profile-inventory-item">
                     @if ($item->imageUrl)
-                      <img src="{{ $item->imageUrl }}" data-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
+                      <img
+                        src="{{ $item->imageUrl }}"
+                        data-toggle="tooltip"
+                        title="{{ $item->name }}"
+                        alt="{{ $item->name }}"
+                      />
                     @else
                       <p>{{ $item->name }}</p>
                     @endif
@@ -135,7 +157,11 @@
         @foreach ($chunk as $character)
           <div class="col-md-3 col-6 text-center">
             <div>
-              <a href="{{ $character->url }}"><img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="{{ $character->fullName }}" /></a>
+              <a href="{{ $character->url }}"><img
+                  src="{{ $character->image->thumbnailUrl }}"
+                  class="img-thumbnail"
+                  alt="{{ $character->fullName }}"
+                /></a>
             </div>
             <div class="mt-1">
               <a href="{{ $character->url }}" class="h5 mb-0">

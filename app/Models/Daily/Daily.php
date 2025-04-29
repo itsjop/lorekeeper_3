@@ -14,7 +14,7 @@ class Daily extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'sort', 'has_image', 'has_button_image', 'description', 'parsed_description', 'is_active', 'is_progressable', 'is_timed_daily', 'start_at', 'end_at', 'daily_timeframe', 
+        'name', 'sort', 'has_image', 'has_button_image', 'description', 'parsed_description', 'is_active', 'is_progressable', 'is_timed_daily', 'start_at', 'end_at', 'daily_timeframe',
         'progress_display', 'is_loop', 'is_streak', 'type', 'fee', 'currency_id'
     ];
 
@@ -54,7 +54,7 @@ class Daily extends Model
 
     **********************************************************************************************/
 
-    
+
     /**
      * Get the rewards attached to this daily.
      */
@@ -167,7 +167,7 @@ class Daily extends Model
      */
     public function getUrlAttribute()
     {
-        return url(__('dailies.dailies').'/'.$this->id);
+        return url('admin/data/'.__('dailies.dailies').'/edit/'.$this->id);
     }
 
     /**
@@ -203,13 +203,13 @@ class Daily extends Model
     public function getDailyTimeframeDateAttribute() {
         switch($this->daily_timeframe) {
             case "yearly":
-                $date = date("Y-m-d H:i:s", strtotime('January 1st')); 
+                $date = date("Y-m-d H:i:s", strtotime('January 1st'));
                 break;
             case "monthly":
-                $date = date("Y-m-d H:i:s", strtotime('midnight first day of this month')); 
+                $date = date("Y-m-d H:i:s", strtotime('midnight first day of this month'));
                 break;
             case "weekly":
-                $date = date("Y-m-d H:i:s", strtotime('last sunday')); 
+                $date = date("Y-m-d H:i:s", strtotime('last sunday'));
                 break;
             case "daily":
                 $date = date("Y-m-d H:i:s", strtotime('midnight'));
@@ -226,10 +226,10 @@ class Daily extends Model
     public function getNextDateAttribute() {
         switch($this->daily_timeframe) {
             case "yearly":
-                $date = date("Y-m-d H:i:s", strtotime("+1 Year", strtotime('January 1st'))); 
+                $date = date("Y-m-d H:i:s", strtotime("+1 Year", strtotime('January 1st')));
                 break;
             case "monthly":
-                $date = date("Y-m-d H:i:s", strtotime("+1 Month", strtotime('midnight first day of this month'))); 
+                $date = date("Y-m-d H:i:s", strtotime("+1 Month", strtotime('midnight first day of this month')));
                 break;
             case "weekly":
                 $date = date("Y-m-d H:i:s", strtotime("+1 Week +1 Day",strtotime('last sunday')));

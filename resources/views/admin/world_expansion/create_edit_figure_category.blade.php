@@ -77,11 +77,6 @@
     </div>
   </div>
 
-  <div class="form-group" style="clear:both">
-    {!! Form::label('Description (Optional)') !!}
-    {!! Form::textarea('description', $category->description, ['class' => 'form-control wysiwyg']) !!}
-  </div>
-
   <div class="text-right">
     {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>

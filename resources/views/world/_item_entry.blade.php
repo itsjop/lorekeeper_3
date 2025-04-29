@@ -1,6 +1,14 @@
 <div class="row world-entry">
   @if ($imageUrl)
-    <div class="col-md-3 world-entry-image"><a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}"><img src="{{ $imageUrl }}" class="world-entry-image" alt="{{ $name }}" /></a></div>
+    <div class="col-md-3 world-entry-image"><a
+        href="{{ $imageUrl }}"
+        data-lightbox="entry"
+        data-title="{{ $name }}"
+      ><img
+          src="{{ $imageUrl }}"
+          class="world-entry-image"
+          alt="{{ $name }}"
+        /></a></div>
   @endif
   <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
     <x-admin-edit title="Item" :object="$item" />
@@ -16,6 +24,7 @@
           <p><strong>Category:</strong>
             @if (!$item->category->is_visible)
               <i class="fas fa-eye-slash mx-1 text-danger"></i>
+            @endif
           </p>
         </div>
       @endif
@@ -77,7 +86,11 @@
 
       @if ($item->hasTag('border'))
         <div class="mb-2">
-          <a data-toggle="collapse" href="#border{{ $item->id }}" class="h5">Unlocks Borders <i class="fas fa-caret-down"></i></a>
+          <a
+            data-toggle="collapse"
+            href="#border{{ $item->id }}"
+            class="h5"
+          >Unlocks Borders <i class="fas fa-caret-down"></i></a>
           <div class="card collapse mt-1" id="border{{ $item->id }}">
             <div class="card-body">
               @if (isset($item->tag('border')->data['all_borders']))
@@ -100,7 +113,11 @@
         </div>
       @endif
       @if (((isset($item->uses) && $item->uses) || (isset($item->source) && $item->source) || $shops->count() || (isset($item->data['prompts']) && $item->data['prompts'])) && Config::get('lorekeeper.extensions.item_entry_expansion.extra_fields'))
-        <div class="text-right"><a data-toggle="collapse" href="#item-{{ $item->id }}" class="text-primary"><strong>Show details...</strong></a></div>
+        <div class="text-right"><a
+            data-toggle="collapse"
+            href="#item-{{ $item->id }}"
+            class="text-primary"
+          ><strong>Show details...</strong></a></div>
         <div class="collapse" id="item-{{ $item->id }}">
           @if (isset($item->uses) && $item->uses)
             <p><strong>Uses:</strong> {{ $item->uses }}</p>

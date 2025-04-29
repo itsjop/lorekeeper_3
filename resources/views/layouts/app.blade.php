@@ -14,7 +14,6 @@
   <!-- ReCaptcha v3 -->
   {!! RecaptchaV3::initJs() !!}
 
-
   <title>{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')</title>
 
   <!-- Primary Meta Tags -->
@@ -59,7 +58,19 @@
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito"
+    rel="stylesheet"
+    type="text/css"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
@@ -71,21 +82,40 @@
   <link href="{{ asset('css/vendor/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/croppie.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/lorekeeper.css'))) }}" rel="stylesheet">
+  <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
 
   <!-- Custom Styles -->
   <link href="{{ asset('css/mixins.css') }}" rel="stylesheet">
   <link href="{{ asset('css/sitewide.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/global-vars.css') }}" rel="stylesheet">
 
-  @if (file_exists(public_path() . '/css/custom.css'))
-    <link href="{{ asset('css/custom.css') . '?v=' . filemtime(public_path('css/lorekeeper.css')) }}" rel="stylesheet">
-  @endif
+  <link href="{{ asset('css/components/site-header.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/components/background.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/components/sidebar.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/components/navbar.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/components/footer.css') }}" rel="stylesheet">
+
+  <link href="{{ asset('css/helpers/animation.css') }}" rel="stylesheet">
+
+  <link href="{{ asset('css/pages/dashboard.css') }}" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
   @include('feed::links')
 </head>
 
 <body>
-  <div id="app" {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }} {{ isset($pageName) ? 'data-page=' . $pageName : '' }}>
+  <div
+    id="app"
+    {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
+    {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
+  >
     <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">
@@ -111,9 +141,9 @@
           </div>
         @endif
         {{-- Actual Sidebar --}}
-        <ul id="sidebar" class="sidebar">
+        <div id="sidebar" class="sidebar">
           @yield('sidebar')
-        </ul>
+        </div>
       </div>
 
       <div id="main-content" class="main-content p-4">
@@ -140,19 +170,27 @@
         @include('flash::message')
         @yield('content')
 
-
         @include('layouts._footer')
 
       </div>
 
       </main>
 
-      <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+      <div
+        class="modal fade"
+        id="modal"
+        tabindex="-1"
+        role="dialog"
+      >
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <span class="modal-title h5 mb-0"></span>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+              >&times;</button>
             </div>
             <div class="modal-body">
             </div>
@@ -188,7 +226,7 @@
             toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
             content_css: [
               '{{ asset('css/vendor/app.css') }}',
-              '{{ asset('css/lorekeeper.css') }}'
+              '{{ asset('css/vendor/lorekeeper.css') }}'
             ],
             spoiler_caption: 'Toggle Spoiler',
             target_list: false

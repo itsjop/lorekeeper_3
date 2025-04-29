@@ -51,31 +51,60 @@ class AccountController extends Controller {
     }
   }
 
-    /**
-     * Shows the user settings page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getSettings()
-    {
-        return view('account.settings');
+
+  /**
+   * Shows the user settings page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getSettings() {
+    $interval = array(
+      0 => 'whenever',
+      1 => 'yearly',
+      2 => 'quarterly',
+      3 => 'monthly',
+      4 => 'weekly',
+      5 => 'daily'
+    );
+
+    if (Auth::user()->isStaff) {
+      $borderOptions = ['0' => 'Select Border'] + Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->get()->pluck('settingsName', 'id')->toArray() + Border::base()->where('admin_only', 1)->get()->pluck('settingsName', 'id')->toArray();
+    } else {
+      $borderOptions = ['0' => 'Select Border'] + Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->where('admin_only', 0)->get()->pluck('settingsName', 'id')->toArray();
     }
 
-    /**
-     * Edits the user's profile.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postProfile(Request $request)
-    {
-        Auth::user()->profile->update([
-            'text' => $request->get('text'),
-            'parsed_text' => parse($request->get('text'))
-        ]);
-        flash('Profile updated successfully.')->success();
-        return redirect()->back();
-    }
+    $default = Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->get();
+    $admin = Border::base()->where('admin_only', 1)->get();
+
+    return view('account.settings', [
+      'admin' => $admin,
+      'default' => $default,
+      'border_variants' => ['0' => 'Pick a Border First'],
+      'borders' => $borderOptions + Auth::user()->borders()->get()->pluck('settingsName', 'id')->toArray(),
+      'locations' => Location::all()->where('is_user_home')->pluck('style', 'id')->toArray(),
+      'factions' => Faction::all()->where('is_user_faction')->pluck('style', 'id')->toArray(),
+      'bottom_layers' => ['0' => 'Pick a Border First'],
+      'user_enabled' => Settings::get('WE_user_locations'),
+      'user_faction_enabled' => Settings::get('WE_user_factions'),
+      'char_enabled' => Settings::get('WE_character_locations'),
+      'char_faction_enabled' => Settings::get('WE_character_factions'),
+      'location_interval' => $interval[Settings::get('WE_change_timelimit')]
+    ]);
+  }
+  /**
+   * Edits the user's profile.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postProfile(Request $request) {
+    Auth::user()->profile->update([
+      'text' => $request->get('text'),
+      'parsed_text' => parse($request->get('text'))
+    ]);
+    flash('Profile updated successfully.')->success();
+    return redirect()->back();
+  }
 
   /**
    * Edits the user's avatar.
@@ -624,18 +653,18 @@ class AccountController extends Controller {
 
     if (
       Border::where('parent_id', '=', $border)
-        ->where('border_type', 'variant')
-        ->active(Auth::user() ?? null)
-        ->count()
+      ->where('border_type', 'variant')
+      ->active(Auth::user() ?? null)
+      ->count()
     ) {
       $border_variants =
         ['0' => 'Select Border Variant'] +
         Border::where('parent_id', '=', $border)
-          ->where('border_type', 'variant')
-          ->active(Auth::user() ?? null)
-          ->get()
-          ->pluck('settingsName', 'id')
-          ->toArray();
+        ->where('border_type', 'variant')
+        ->active(Auth::user() ?? null)
+        ->get()
+        ->pluck('settingsName', 'id')
+        ->toArray();
     } else {
       $border_variants = ['0' => 'None Available'];
     }
@@ -665,23 +694,23 @@ class AccountController extends Controller {
 
     return view('account.border_layers', [
       'top_layers' =>
-        $top_layers ??
+      $top_layers ??
         ['0' => 'Select Top Layer'] +
-          Border::where('parent_id', '=', $border)
-            ->where('border_type', 'top')
-            ->active(Auth::user() ?? null)
-            ->get()
-            ->pluck('settingsName', 'id')
-            ->toArray(),
+        Border::where('parent_id', '=', $border)
+        ->where('border_type', 'top')
+        ->active(Auth::user() ?? null)
+        ->get()
+        ->pluck('settingsName', 'id')
+        ->toArray(),
       'bottom_layers' =>
-        $bottom_layers ??
+      $bottom_layers ??
         ['0' => 'Select Bottom Layer'] +
-          Border::where('parent_id', '=', $border)
-            ->where('border_type', 'bottom')
-            ->active(Auth::user() ?? null)
-            ->get()
-            ->pluck('settingsName', 'id')
-            ->toArray()
+        Border::where('parent_id', '=', $border)
+        ->where('border_type', 'bottom')
+        ->active(Auth::user() ?? null)
+        ->get()
+        ->pluck('settingsName', 'id')
+        ->toArray()
     ]);
   }
 }

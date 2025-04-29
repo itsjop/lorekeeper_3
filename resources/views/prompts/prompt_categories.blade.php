@@ -28,6 +28,7 @@
             'imageUrl' => $category->categoryImageUrl,
             'name' => $category->displayName,
             'description' => $category->parsed_description,
+            'visible' => $category->is_visible,
             'searchUrl' => $category->searchUrl,
         ])
       </div>

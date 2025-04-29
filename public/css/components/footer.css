@@ -1,0 +1,36 @@
+#app {
+  #site-wrapper {
+    #footer {
+      display: grid;
+      justify-content: center;
+      text-align: center;
+      gap: 10px;
+      &::before {
+        content: "";
+        width: 80%;
+        justify-self: center;
+        height: 3px;
+        background-color: #393f46;
+        border-radius: 5px;
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+/* Mobile Only */
+@media (width < 768px) {
+  #footer {
+    .navbar-nav {
+      flex-direction: row;
+      gap: 5px 10px;
+      a {
+        padding: 0;
+      }
+    }
+  }
+}
