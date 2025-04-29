@@ -8,7 +8,7 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Profession Categories' => 'admin/data/profession-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/profession-categories/edit/' . $category->id : 'admin/data/profession-categories/create'
+      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/profession-categories/edit/' . $category->id : 'admin/data/profession-categories/create',
   ]) !!}
 
   <h1>{{ $category->id ? 'Edit' : 'Create' }} Category
@@ -61,7 +61,7 @@
             'imageUrl' => $category->imageUrl,
             'name' => $category->displayName,
             'description' => $category->parsed_description,
-            'visible' => $category->is_visible
+            'visible' => $category->is_visible,
         ])
       </div>
     </div>
