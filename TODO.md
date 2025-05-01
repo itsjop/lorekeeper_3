@@ -7,6 +7,8 @@
 
 - [ ] Get recursive Image Optimization CLI script
 
+- [ ] store current vanilla version of lorekeeper for the "accessible " version
 
+- [ ] all common quick links in the corner
 ------------ IDEAS --------------
 mailbox with a cute little flag!!
