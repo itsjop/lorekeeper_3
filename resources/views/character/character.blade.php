@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ $character->image->thumbnailUrl }}
+  {{ $character?->image?->thumbnailUrl }}
 @endsection
 
 @section('profile-content')
