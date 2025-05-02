@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Characters;
 
+use App\Services\CurrencyManager;
+use App\Services\InventoryManager;
 use Route;
 use App\Facades\Settings;
 use App\Http\Controllers\Controller;
@@ -673,109 +675,6 @@ class CharacterController extends Controller {
             }
         }
 
-        return redirect()->back();
-    }
-
-    /**
-     * Transfers inventory items back to a user.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postItemTransfer(Request $request, InventoryManager $service) {
-        if ($service->transferCharacterStack($this->character, $this->character->user, CharacterItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
-            flash('Item transferred successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Names an inventory stack.
-     *
-     * @param App\Services\CharacterManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postName(Request $request, InventoryManager $service) {
-        $request->validate([
-            'stack_name' => 'nullable|max:100',
-        ]);
-
-        if ($service->nameStack($this->character, CharacterItem::find($request->get('ids')), $request->get('stack_name'), Auth::user())) {
-            flash('Item named successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Deletes an inventory stack.
-     *
-     * @param App\Services\CharacterManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postDelete(Request $request, InventoryManager $service) {
-        if ($service->deleteStack($this->character, CharacterItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
-            flash('Item deleted successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Shows a character's images.
-     *
-     * @param string $slug
-     * @param mixed  $id
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getCharacterImage($slug, $id) {
-        $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
-
-        return view('character.image', [
-            'user'      => Auth::check() ? Auth::user() : null,
-            'character' => $this->character,
-            'image'     => $image,
-            'ajax'      => true,
-        ]);
-    }
-
-    /**
-     * Opens a new design update approval request for a character. but with a specific image lmao
-     *
-     * @param  App\Services\CharacterManager  $service
-     * @param  string                         $slug
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postCharacterApprovalSpecificImage($slug, CharacterManager $service, $id)
-    {
-        if(!Auth::check() || $this->character->user_id != Auth::user()->id) abort(404);
-        $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
-
-
-        if($request = $service->createDesignUpdateRequest($this->character, Auth::user(), $image, true)) {
-            flash('Successfully created new design update request draft.')->success();
-            return redirect()->to($request->url);
-        }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
         return redirect()->back();
     }
 }
