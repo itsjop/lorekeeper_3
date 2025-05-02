@@ -13,6 +13,7 @@ use App\Models\Character\CharacterFeature;
 use App\Models\Character\CharacterImage;
 use App\Models\Character\CharacterTransfer;
 use App\Models\Sales\SalesCharacter;
+use App\Models\Species\Species;
 use App\Models\Species\Subtype;
 use App\Models\User\User;
 use App\Models\WorldExpansion\FactionRankMember;
@@ -21,7 +22,14 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
+use App\Models\User\UserItem;
+use App\Models\Currency\Currency;
+use App\Services\CurrencyService;
+use App\Models\Feature\Feature;
+use App\Models\Feature\FeatureCategory;
 use App\Models\Character\CharacterTransformation as Transformation;
+use App\Models\Rarity;
+
 
 class CharacterManager extends Service {
     /*
@@ -333,12 +341,11 @@ class CharacterManager extends Service {
           // Save image
           $this->handleImage($data['image'], $image->imageDirectory, $image->imageFileName, null, isset($data['default_image']));
 
-          // Save thumbnail
-          if(!$isAdmin || ($isAdmin && isset($data['modify_thumbnail']))) {
-              if(isset($data['use_cropper']))
-                  $this->cropThumbnail(Arr::only($data, ['x0','x1','y0','y1']), $request);
-              else if(isset($data['thumbnail']))
-                  $this->handleImage($data['thumbnail'], $request->imageDirectory, $request->thumbnailFileName);
+          // Save thumbnail first before processing full image
+          if (isset($data['use_cropper'])) {
+              $this->cropThumbnail(Arr::only($data, ['x0', 'x1', 'y0', 'y1']), $image, $isMyo);
+          } else {
+              $this->handleImage($data['thumbnail'], $image->imageDirectory, $image->thumbnailFileName, null, isset($data['default_image']));
           }
 
           return $this->commitReturn(true);
@@ -2250,32 +2257,7 @@ class CharacterManager extends Service {
         }
         return $this->rollbackReturn(false);
     }
-
-    /**
-     * Saves the comment section of a character design update request.
-     *
-     * @param  array                                        $data
-     * @param  \App\Models\Character\CharacterDesignUpdate  $request
-     * @return  bool
-     */
-    public function saveRequestComment($data, $request)
-    {
-        DB::beginTransaction();
-
-        try {
-            // Update the comments section
-            $request->comments = (isset($data['comments']) && $data['comments']) ? $data['comments'] : null;
-            $request->has_comments = 1;
-            $request->save();
-
-            return $character;
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return false;
-    }
-
+    
     /**
      * Submit a character design update request to the approval queue.
      *
@@ -2304,7 +2286,7 @@ class CharacterManager extends Service {
         }
         return $this->rollbackReturn(false);
     }
-    
+
     /**
      * Generates a list of features for displaying.
      *

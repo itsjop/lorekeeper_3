@@ -2,7 +2,7 @@
 
 namespace App\Services\Activity;
 
-use App\Models\Collection\Collection;
+use Illuminate\Support\Collection;
 use App\Services\CollectionService as CollectionManager;
 use App\Services\Service;
 use DB;
