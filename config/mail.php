@@ -2,7 +2,7 @@
 
 return [
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Mail Driver
     |--------------------------------------------------------------------------
@@ -16,13 +16,13 @@ return [
     |
     */
 
-    'driver'      => env('MAIL_DRIVER', 'smtp'),
+  'driver'      => env('MAIL_DRIVER', 'smtp'),
 
 
-    'mailers' => ['mailersend' => [
+  'mailers' => ['mailersend' => [
     'transport' => 'mailersend',
-],]
-    /*
+  ],],
+  /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
     |--------------------------------------------------------------------------
@@ -33,9 +33,9 @@ return [
     |
     */
 
-    'host'        => env('MAIL_HOST', 'smtp.mailgun.org'),
+  'host'        => env('MAIL_HOST', 'smtp.mailgun.org'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | SMTP Host Port
     |--------------------------------------------------------------------------
@@ -46,9 +46,9 @@ return [
     |
     */
 
-    'port'        => env('MAIL_PORT', 587),
+  'port'        => env('MAIL_PORT', 587),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Global "From" Address
     |--------------------------------------------------------------------------
@@ -59,12 +59,12 @@ return [
     |
     */
 
-    'from'        => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name'    => env('MAIL_FROM_NAME', 'Example'),
-    ],
+  'from'        => [
+    'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+    'name'    => env('MAIL_FROM_NAME', 'Example'),
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
     |--------------------------------------------------------------------------
@@ -75,9 +75,9 @@ return [
     |
     */
 
-    'encryption'  => env('MAIL_ENCRYPTION', 'tls'),
+  'encryption'  => env('MAIL_ENCRYPTION', 'tls'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | SMTP Server Username
     |--------------------------------------------------------------------------
@@ -88,11 +88,11 @@ return [
     |
     */
 
-    'username'    => env('MAIL_USERNAME'),
+  'username'    => env('MAIL_USERNAME'),
 
-    'password'    => env('MAIL_PASSWORD'),
+  'password'    => env('MAIL_PASSWORD'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Sendmail System Path
     |--------------------------------------------------------------------------
@@ -103,9 +103,9 @@ return [
     |
     */
 
-    'sendmail'    => '/usr/sbin/sendmail -bs',
+  'sendmail'    => '/usr/sbin/sendmail -bs',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
     |--------------------------------------------------------------------------
@@ -116,15 +116,15 @@ return [
     |
     */
 
-    'markdown'    => [
-        'theme' => 'default',
+  'markdown'    => [
+    'theme' => 'default',
 
-        'paths' => [
-            resource_path('views/vendor/mail'),
-        ],
+    'paths' => [
+      resource_path('views/vendor/mail'),
     ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Log Channel
     |--------------------------------------------------------------------------
@@ -135,6 +135,6 @@ return [
     |
     */
 
-    'log_channel' => env('MAIL_LOG_CHANNEL'),
+  'log_channel' => env('MAIL_LOG_CHANNEL'),
 
 ];
