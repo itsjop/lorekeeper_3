@@ -1,14 +1,17 @@
-- [ ] Critical CSS Render Path to avoid flickering
-  - [ ] look into caching to avoid redraws?
-
+# CRITICAL
 - [ ] Mailersend Error Fix
 
-- [ ] Combine News and Sales to a Newsfeed
+# HIGH PRIORITY
+- [ ] Critical CSS Render Path to avoid flickering
+    - [ ] look into caching to avoid redraws?
 
+# BONUSES
+- [ ] Combine News and Sales to a Newsfeed
 - [ ] Get recursive Image Optimization CLI script
 
+# CSS
 - [ ] store current vanilla version of lorekeeper for the "accessible " version
 
+# funsies!
 - [ ] all common quick links in the corner
------------- IDEAS --------------
-mailbox with a cute little flag!!
+- [ ] SOUND EFFECT TOGGLE
