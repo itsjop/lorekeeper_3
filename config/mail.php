@@ -18,6 +18,10 @@ return [
 
     'driver'      => env('MAIL_DRIVER', 'smtp'),
 
+
+    'mailers' => ['mailersend' => [
+    'transport' => 'mailersend',
+],]
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
