@@ -661,20 +661,17 @@ class CharacterController extends Controller {
      */
 
      public function postCharacterApprovalSpecificImage($slug, CharacterManager $service, $id)
-    {
-        if(!Auth::check() || $this->character->user_id != Auth::user()->id) abort(404);
-        $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
+     {
+         if(!Auth::check() || $this->character->user_id != Auth::user()->id) abort(404);
+         $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
 
-        if($request = $service->createDesignUpdateRequest($this->character, Auth::user(), $image, true)) {
-            flash('Successfully created new design update request draft.')->success();
-
-            return redirect()->to($request->url);
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
+         if($request = $service->createDesignUpdateRequest($this->character, Auth::user(), $image, true)) {
+             flash('Successfully created new design update request draft.')->success();
+             return redirect()->to($request->url);
+         }
+         else {
+             foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+         }
+         return redirect()->back();
+     }
 }

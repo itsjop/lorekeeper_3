@@ -22,8 +22,9 @@
   {{-- {{ dd($character->images()->where('is_valid',1)->whereNotNull('transformation_id')->exists()) }}
   {{ dd($character->images()->where('is_valid', 1)) }} --}}
 
-  {{-- @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists()) --}}
-  @if (true) {{-- TODO: implement this if-check again --}}
+  @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
+  {{-- @if (true) --}}
+  {{-- TODO: implement this if-check again --}}
     <div class="card-header mb-2">
       <ul class="nav nav-tabs card-header-tabs">
         @foreach ($character->images()->where('is_valid', 1)->get() as $image)
@@ -34,6 +35,7 @@
               role="tab"
               data-id="{{ $image->id }}"
             >
+            {{-- {{ dd($image) }} --}}
               {{ $image->transformation_id ? $image->transformation->name : 'Main' }} {{ $image->transformation_info ? ' (' . $image->transformation_info . ')' : '' }}
             </a>
           </li>

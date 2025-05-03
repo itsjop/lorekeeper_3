@@ -843,7 +843,7 @@ class CharacterManager extends Service {
       $old['species'] = $image->species_id ? $image->species->displayName : null;
       $old['subtype'] = $image->subtype_id ? $image->subtype->displayName : null;
       $old['rarity'] = $image->rarity_id ? $image->rarity->displayName : null;
-      $old['transformation'] = $image->transformation_id ? $image->transformation->displayName : null;
+      $old['transformation_id'] = $image->transformation_id ? $image->transformation->displayName : null;
 
       // Clear old features
       $image->features()->delete();
@@ -869,7 +869,7 @@ class CharacterManager extends Service {
       $new['species'] = $image->species_id ? $image->species->displayName : null;
       $new['subtype'] = $image->subtype_id ? $image->subtype->displayName : null;
       $new['rarity'] = $image->rarity_id ? $image->rarity->displayName : null;
-      $new['transformation'] = $image->transformation_id ? $image->transformation->displayName : null;
+      $new['transformation_id'] = $image->transformation_id ? $image->transformation->displayName : null;
       $new['transformation_info'] = $image->transformation_info ? $image->transformation_info : null;
       $new['transformation_description'] = $image->transformation_description ? $image->transformation_description : null;
 
