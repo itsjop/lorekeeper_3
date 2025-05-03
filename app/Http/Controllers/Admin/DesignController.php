@@ -55,9 +55,8 @@ class DesignController extends Controller {
      */
     public function getDesignConfirmation($id, $action) {
         $r = CharacterDesignUpdate::where('id', $id)->where('status', 'Pending')->first();
-        if (!$r) {
-            abort(404);
-        }
+        if (!$r)    abort(404);
+
 
         return view('admin.designs._'.$action.'_request_modal', [
             'request' => $r,

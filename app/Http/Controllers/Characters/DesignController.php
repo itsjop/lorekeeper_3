@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Characters;
 
+use DB;
+use Settings;
+
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterDesignUpdate;
@@ -15,6 +18,7 @@ use App\Models\User\User;
 use App\Models\User\UserItem;
 use App\Services\DesignUpdateManager;
 use Illuminate\Http\Request;
+use App\Services\CharacterManager;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Character\CharacterTransformation as Transformation;
 

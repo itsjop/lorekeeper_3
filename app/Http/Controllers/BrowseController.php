@@ -656,8 +656,7 @@ class BrowseController extends Controller {
             'sublist'     => $sublist,
             'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
             'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
-            'transformations' => [0 => 'Any '.ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'transformations' => [0 => 'Any '.ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'transformations' => [0 => 'Any '.ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray()
         ]);
     }
 }

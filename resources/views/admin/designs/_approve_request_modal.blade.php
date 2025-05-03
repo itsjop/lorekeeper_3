@@ -4,10 +4,19 @@
 <h3>Basic Information</h3>
 <div class="form-group">
   {!! Form::label('Character Category') !!}
-  <select name="character_category_id" id="category" class="form-control" placeholder="Select Category">
+  <select
+    name="character_category_id"
+    id="category"
+    class="form-control"
+    placeholder="Select Category"
+  >
     <option value="" data-code="">Select Category</option>
     @foreach ($categories as $category)
-      <option value="{{ $category->id }}" data-code="{{ $category->code }}" {{ $request->character->character_category_id == $category->id ? 'selected' : '' }}>{{ $category->name }} ({{ $category->code }})</option>
+      <option
+        value="{{ $category->id }}"
+        data-code="{{ $category->code }}"
+        {{ $request->character->character_category_id == $category->id ? 'selected' : '' }}
+      >{{ $category->name }} ({{ $category->code }})</option>
     @endforeach
   </select>
 </div>
@@ -15,8 +24,13 @@
   {!! Form::label('Number') !!} {!! add_help('This number helps to identify the character and should preferably be unique either within the category, or among all characters.') !!}
   <div class="d-flex">
     {!! Form::text('number', $request->character->number, ['class' => 'form-control mr-2', 'id' => 'number']) !!}
-    <a href="#" id="pull-number" class="btn btn-primary" data-toggle="tooltip"
-      title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code.">Pull Next Number</a>
+    <a
+      href="#"
+      id="pull-number"
+      class="btn btn-primary"
+      data-toggle="tooltip"
+      title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code."
+    >Pull Next Number</a>
   </div>
 </div>
 
@@ -30,7 +44,22 @@
   {!! Form::textarea('description', $request->character->description, ['class' => 'form-control wysiwyg']) !!}
 </div>
 
-
+<h3>Image Settings</h3>
+<div class="form-group">
+  {!! Form::checkbox('set_active', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::label('set_active', 'Set Active Image', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will set the new approved image as the character\'s masterlist image.') !!}
+</div>
+<div class="form-group">
+  {!! Form::checkbox('invalidate_old', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::label('invalidate_old', 'Invalidate Old Image', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will mark the last image attached to the character as an invalid reference.') !!}
+</div>
+@if (config('lorekeeper.extensions.remove_myo_image') && $request->character->is_myo_slot)
+  <div class="form-group">
+    {!! Form::label('Remove MYO Image') !!} {!! add_help('This will either hide or delete the MYO slot placeholder image if set.') !!}
+    {!! Form::select('remove_myo_image', [0 => 'Leave MYO Image', 1 => 'Hide MYO Image', 2 => 'Delete MYO Image'], null, ['class' => 'form-control']) !!}
+  </div>
+@endif
+<br>
 <h3>Transfer Information</h3>
 
 <div class="alert alert-info">
@@ -62,23 +91,6 @@
   {!! Form::label('On Transfer Cooldown Until (Optional)') !!}
   {!! Form::text('transferrable_at', $request->character->transferrable_at, ['class' => 'form-control datepicker']) !!}
 </div>
-
-<h3>Image Settings</h3>
-
-<div class="form-group">
-  {!! Form::checkbox('set_active', 1, true, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-  {!! Form::label('set_active', 'Set Active Image', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will set the new approved image as the character\'s masterlist image.') !!}
-</div>
-<div class="form-group">
-  {!! Form::checkbox('invalidate_old', 1, true, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-  {!! Form::label('invalidate_old', 'Invalidate Old Image', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will mark the last image attached to the character as an invalid reference.') !!}
-</div>
-@if (config('lorekeeper.extensions.remove_myo_image') && $request->character->is_myo_slot)
-  <div class="form-group">
-    {!! Form::label('Remove MYO Image') !!} {!! add_help('This will either hide or delete the MYO slot placeholder image if set.') !!}
-    {!! Form::select('remove_myo_image', [0 => 'Leave MYO Image', 1 => 'Hide MYO Image', 2 => 'Delete MYO Image'], null, ['class' => 'form-control']) !!}
-  </div>
-@endif
 
 <div class="text-right">
   {!! Form::submit('Approve Request', ['class' => 'btn btn-success']) !!}
