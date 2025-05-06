@@ -45,6 +45,9 @@ ul { padding: 0; }
       border-radius: 10px;
       overflow: hidden;
     }
+    .modal-dialog .modal-body .inventory-main-img img {
+      width: 100%
+    }
   }
 }
 

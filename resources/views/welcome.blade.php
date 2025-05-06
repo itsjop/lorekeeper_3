@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+  <sub-component propname="something"></sub-component>
   @if (Auth::check())
     @include('pages._dashboard')
   @else

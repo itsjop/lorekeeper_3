@@ -6,7 +6,11 @@
 
 @section('profile-content')
   @if ($character->is_myo_slot)
-    {!! breadcrumbs(['MYO Slot Masterlist' => 'myos', $character->fullName => $character->url, 'Inventory' => $character->url . '/inventory']) !!}
+    {!! breadcrumbs([
+        'MYO Slot Masterlist' => 'myos',
+        $character->fullName => $character->url,
+        'Inventory' => $character->url . '/inventory',
+    ]) !!}
   @else
     {!! breadcrumbs([
         $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
@@ -51,7 +55,7 @@
                 ?>
                 <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $stack->first()->pivot->id }}"
                   data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}">
-                  <div class="mb-1">
+                  <div class="mb-1 inventory-main-img">
                     <a href="#" class="inventory-stack">
                       <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
                     </a>
@@ -155,7 +159,7 @@
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
     <div class="modal fade" id="grantModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog Inventory" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">[ADMIN] Grant Items</span>
@@ -169,7 +173,10 @@
               {!! Form::label('Item(s)') !!} {!! add_help('Must have at least 1 item and Quantity must be at least 1.') !!}
               <div id="itemList">
                 <div class="d-flex mb-2">
-                  {!! Form::select('item_ids[]', $itemOptions, null, ['class' => 'form-control mr-2 default item-select', 'placeholder' => 'Select Item']) !!}
+                  {!! Form::select('item_ids[]', $itemOptions, null, [
+                      'class' => 'form-control mr-2 default item-select',
+                      'placeholder' => 'Select Item',
+                  ]) !!}
                   {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
                   <a href="#" class="remove-item btn btn-danger mb-2 disabled">×</a>
                 </div>

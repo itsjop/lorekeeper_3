@@ -4,7 +4,7 @@
 @else
   <div class="text-center">
     @if ($item->has_image)
-      <div class="mb-1"><a href="{{ $item->url }}"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a></div>
+      <div class="mb-1 "><a href="{{ $item->url }}"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a></div>
     @endif
     <div @if (count($item->tags)) class="mb-1" @endif><a href="{{ $item->idUrl }}">{{ $item->name }}</a></div>
     @if (count($item->tags))
@@ -51,12 +51,21 @@
             <td class="col-3">{!! array_key_exists('notes', $itemRow->data) ? ($itemRow->data['notes'] ? $itemRow->data['notes'] : 'N/A') : 'N/A' !!}</td>
             @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
               @if ($itemRow->availableQuantity)
-                <td class="col-3">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;']) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
+                <td class="col-3">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, [
+                    'class' => 'quantity-select',
+                    'type' => 'number',
+                    'style' => 'min-width:40px;',
+                ]) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
                     {{ $itemRow->getOthers() }}
                   @endif
                 </td>
               @else
-                <td class="col-3">{!! Form::selectRange('', 0, 0, 0, ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;', 'disabled']) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
+                <td class="col-3">{!! Form::selectRange('', 0, 0, 0, [
+                    'class' => 'quantity-select',
+                    'type' => 'number',
+                    'style' => 'min-width:40px;',
+                    'disabled',
+                ]) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
                     {{ $itemRow->getOthers() }}
                   @endif
                 </td>
@@ -66,7 +75,7 @@
             @endif
             <td class="col-1">
               @if (!$itemRow->isTransferrable)
-                <i class="fas fa-lock" data-toggle="tooltip" title="Account-bound items cannot be transferred{!! $item->is_deletable ? ', but can be deleted.' : '.' !!}"></i>
+                <i class="fas fa-lock" data-toggle="tooltip" title="Account-bound items cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -96,25 +105,18 @@
             <div id="characterTransferForm" class="collapse">
               <p>This will transfer this stack or stacks to this character's inventory.</p>
               <div class="form-group">
-                {!! Form::select('character_id', $characterOptions, null, ['class' => 'form-control mr-2 default character-select', 'placeholder' => 'Select Character']) !!}
+                {!! Form::select('character_id', $characterOptions, null, [
+                    'class' => 'form-control mr-2 default character-select',
+                    'placeholder' => 'Select Character',
+                ]) !!}
               </div>
               <div class="text-right">
-                {!! Form::button('Transfer', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'characterTransfer', 'type' => 'submit']) !!}
-              </div>
-            </div>
-          </li>
-        @endif
-        @if ($item->canDonate)
-          <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#donateForm">
-              @if ($stack->first()->user_id != $user->id)
-                [ADMIN]
-              @endif Donate Item
-            </a>
-            <div id="donateForm" class="collapse">
-              <p>This will donate this item to the <a href="{{ url('shops/donation-shop') }}">Donation Shop</a>, where it will be available for other users to take. This action is not reversible. Are you sure you want to donate this item?</p>
-              <div class="text-right">
-                {!! Form::button('Donate', ['class' => 'btn btn-warning', 'name' => 'action', 'value' => 'donate', 'type' => 'submit']) !!}
+                {!! Form::button('Transfer', [
+                    'class' => 'btn btn-primary',
+                    'name' => 'action',
+                    'value' => 'characterTransfer',
+                    'type' => 'submit',
+                ]) !!}
               </div>
             </div>
           </li>
@@ -127,46 +129,48 @@
               @endif Sell Item
             </a>
             <div id="resellForm" class="collapse">
-              <p>This item can be sold for <strong>{!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</strong>. This action is not reversible. Are you sure you want to sell this item?</p>
+              <p>This item can be sold for <strong>{!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</strong>. This action is not reversible. Are you sure
+                you want to sell this item?</p>
               <div class="text-right">
                 {!! Form::button('Sell', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'resell', 'type' => 'submit']) !!}
               </div>
             </div>
           </li>
         @endif
-        @if ($canTransfer || $user->hasPower('edit_inventories'))
-          <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
-              @if ($stack->first()->user_id != $user->id || !$canTransfer)
-                [ADMIN]
-              @endif Transfer Item
-            </a>
-            <div id="transferForm" class="collapse">
-              <div class="form-group">
-                {!! Form::label('user_id', 'Recipient') !!} {!! add_help('You can only transfer items to verified users.') !!}
-                {!! Form::select('user_id', $userOptions, null, ['class' => 'form-control']) !!}
-              </div>
-              <div class="text-right">
-                {!! Form::button('Transfer', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'transfer', 'type' => 'submit']) !!}
-              </div>
+        <li class="list-group-item">
+          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
+            @if ($stack->first()->user_id != $user->id)
+              [ADMIN]
+            @endif Transfer Item
+          </a>
+          <div id="transferForm" class="collapse">
+            <div class="form-group">
+              {!! Form::label('user_id', 'Recipient') !!} {!! add_help('You can only transfer items to verified users.') !!}
+              {!! Form::select('user_id', $userOptions, null, ['class' => 'form-control']) !!}
             </div>
-          </li>
-        @endif
-        @if ($item->is_deletable || $user->hasPower('edit_inventories'))
-          <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
-              @if ($stack->first()->user_id != $user->id || !$item->is_deletable)
-                [ADMIN]
-              @endif Delete Item
-            </a>
-            <div id="deleteForm" class="collapse">
-              <p>This action is not reversible. Are you sure you want to delete this item?</p>
-              <div class="text-right">
-                {!! Form::button('Delete', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete', 'type' => 'submit']) !!}
-              </div>
+            <div class="text-right">
+              {!! Form::button('Transfer', [
+                  'class' => 'btn btn-primary',
+                  'name' => 'action',
+                  'value' => 'transfer',
+                  'type' => 'submit',
+              ]) !!}
             </div>
-          </li>
-        @endif
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
+            @if ($stack->first()->user_id != $user->id)
+              [ADMIN]
+            @endif Delete Item
+          </a>
+          <div id="deleteForm" class="collapse">
+            <p>This action is not reversible. Are you sure you want to delete this item?</p>
+            <div class="text-right">
+              {!! Form::button('Delete', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete', 'type' => 'submit']) !!}
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   @endif

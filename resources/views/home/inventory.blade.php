@@ -16,7 +16,6 @@
       <a class="btn btn-primary" href="{{ url('inventory/quickstock') }}"><i class="fas fa-truck"></i> Quickstock</a>
     </div>
   </h1>
-
   <p>This is your inventory. Click on an item to view more details and actions you can perform on it.</p>
 
   <div class="text-right mb-3">
@@ -36,10 +35,10 @@
         <div class="card-body inventory-body collapse show" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
           @foreach ($categoryItems->chunk(4) as $chunk)
             <div class="row mb-3">
-              @foreach ($chunk as $stack)
+              @foreach ($chunk as $itemId => $stack)
                 <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $stack->first()->pivot->id }}" data-name="{{ $user->name }}'s {{ $stack->first()->name }}">
                   @if ($stack->first()->has_image)
-                    <div class="mb-1">
+                    <div class="mb-1 inv-main-img">
                       <a href="#" class="inventory-stack">
                         <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
                       </a>
@@ -89,6 +88,8 @@
     <a href="{{ url(Auth::user()->url . '/item-logs') }}">View logs...</a>
   </div>
 @endsection
+
+
 @section('scripts')
   @include('widgets._inventory_view_js')
   <script>
@@ -96,11 +97,8 @@
       $('.inventory-stack').on('click', function(e) {
         e.preventDefault();
         var $parent = $(this).parent().parent();
-        loadModal("{{ url('items') }}/" + $parent.data('id'), $parent.data('name'));
-      });
-      $('.consolidate-inventory').on('click', function(e) {
-        e.preventDefault();
-        loadModal("{{ url('inventory/consolidate-inventory') }}", 'Consolidate Inventory');
+        console.log('parent', $parent.data('id'), $parent.data('name'))
+        loadModal("{{ url('items') }}/" + $parent.data('id') + '/', $parent.data('name'));
       });
     });
   </script>
