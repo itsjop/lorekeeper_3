@@ -54,7 +54,7 @@
           {!! Form::select('currency_id', $convertOptions, null, [
               'class' => 'form-control',
               'placeholder' => 'Select Currency',
-              'id' => 'convert-currency'
+              'id' => 'convert-currency',
           ]) !!}
         </div>
       </div>

@@ -1,9 +1,4 @@
-<a
-  id="backToTop"
-  data-toggle="tooltip"
-  data-title="Scroll to Top"
-  title="Scroll to Top"
-><i class="fas fa-angle-double-up"></i></a>
+<a id="backToTop" data-toggle="tooltip" data-title="Scroll to Top" title="Scroll to Top"><i class="fas fa-angle-double-up"></i></a>
 
 <script>
   $(document).ready(function() {
