@@ -5,8 +5,10 @@
 @endsection
 
 @section('content')
-  <sub-component propname="something"></sub-component>
-  @if (Auth::check())
+@if (Auth::check())
+  {{-- vue component babey!!! --}}
+  <sub-component generic-prop-name="BRAND NEW"></sub-component>
+
     @include('pages._dashboard')
   @else
     @include('pages._logged_out')

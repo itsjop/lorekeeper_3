@@ -1,11 +1,11 @@
 <template>
-  <span></span>
+  <span>the {{ genericPropName }} vue component</span>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 const props = defineProps({
-  propname: { type: String, default: '' },
+  genericPropName: { type: String, default: '' },
 });
 
 onMounted(() => {
