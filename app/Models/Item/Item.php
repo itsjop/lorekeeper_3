@@ -4,6 +4,7 @@ namespace App\Models\Item;
 
 use DB;
 use Auth;
+use Config;
 use App\Models\Cultivation\CultivationPlot;
 use App\Models\Cultivation\CultivationArea;
 // use App\Model;
@@ -13,6 +14,7 @@ use App\Models\Shop\Shop;
 use App\Models\Prompt\Prompt;
 use App\Models\Shop\ShopStock;
 use App\Models\User\User;
+
 
 class Item extends Model {
     /**
@@ -434,20 +436,16 @@ class Item extends Model {
         switch($setting) {
             case 0:
                 return 1;
-                break;
             case 1:
                 if($this->category->can_donate) return 1;
                 else return 0;
-                break;
             case 2:
                 if($this->hasTag('donateable')) return 1;
                 else return 0;
-                break;
             case 3:
                 if($this->category->can_donate) return 1;
                 elseif($this->hasTag('donateable')) return 1;
                 else return 0;
-                break;
         };
         return 0;
     }

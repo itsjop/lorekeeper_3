@@ -6,12 +6,18 @@
 
 @section('profile-content')
   @if ($character->is_myo_slot)
-    {!! breadcrumbs(['MYO Slot Masterlist' => 'myos', $character->fullName => $character->url, 'Inventory' => $character->url . '/inventory']) !!}
+    {!! breadcrumbs([
+        'MYO Slot Masterlist' => 'myos',
+        $character->fullName => $character->url,
+        'Inventory' => $character->url . '/inventory'
+    ]) !!}
   @else
     {!! breadcrumbs([
-        $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+        $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character masterlist' => $character->category->masterlist_sub_id
+            ? 'sublist/' . $character->category->sublist->key
+            : 'masterlist',
         $character->fullName => $character->url,
-        'Inventory' => $character->url . '/inventory',
+        'Inventory' => $character->url . '/inventory'
     ]) !!}
   @endif
 
@@ -19,15 +25,33 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+      <a
+        href="#"
+        class="float-right btn btn-outline-info btn-sm"
+        id="grantButton"
+        data-toggle="modal"
+        data-target="#grantModal"
+      ><i class="fas fa-cog"></i> Admin</a>
     @endif
     Items
   </h3>
 
   <div class="text-right mb-3">
     <div class="btn-group">
-      <button type="button" class="btn btn-secondary active def-view-button" data-toggle="tooltip" title="Default View" alt="Default View"><i class="fas fa-th"></i></button>
-      <button type="button" class="btn btn-secondary sum-view-button" data-toggle="tooltip" title="Summarized View" alt="Summarized View"><i class="fas fa-bars"></i></button>
+      <button
+        type="button"
+        class="btn btn-secondary active def-view-button"
+        data-toggle="tooltip"
+        title="Default View"
+        alt="Default View"
+      ><i class="fas fa-th"></i></button>
+      <button
+        type="button"
+        class="btn btn-secondary sum-view-button"
+        data-toggle="tooltip"
+        title="Summarized View"
+        alt="Summarized View"
+      ><i class="fas fa-bars"></i></button>
     </div>
   </div>
 
@@ -35,8 +59,14 @@
     @foreach ($items as $categoryId => $categoryItems)
       <div class="card mb-3 inventory-category">
         <h5 class="card-header inventory-header">
-          {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
+          {!! isset($categories[$categoryId])
+              ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
+              : 'Miscellaneous' !!}
+          <a
+            class="small inventory-collapse-toggle collapse-toggle"
+            href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}"
+            data-toggle="collapse"
+          >
             Show
           </a>
         </h5>
@@ -49,9 +79,12 @@
                 $stackName = $stack->first()->pivot->pluck('stack_name', 'id')->toArray()[$stack->first()->pivot->id];
                 $stackNameClean = htmlentities($stackName);
                 ?>
-                <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $stack->first()->pivot->id }}"
-                  data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}">
-                  <div class="mb-1">
+                <div
+                  class="col-sm-3 col-6 text-center inventory-item"
+                  data-id="{{ $stack->first()->pivot->id }}"
+                  data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}"
+                >
+                  <div class="mb-1 inventory-main-img">
                     <a href="#" class="inventory-stack">
                       <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
                     </a>
@@ -63,7 +96,8 @@
                   </div>
                   @if ($canName && $stackName)
                     <div>
-                      <span class="inventory-stack inventory-stack-name badge badge-info" style="font-size:95%; margin:5px;">"{{ $stackName }}"</span>
+                      <span class="inventory-stack inventory-stack-name badge badge-info"
+                        style="font-size:95%; margin:5px;">"{{ $stackName }}"</span>
                     </div>
                   @endif
                 </div>
@@ -79,8 +113,14 @@
     @foreach ($items as $categoryId => $categoryItems)
       <div class="card mb-2">
         <h5 class="card-header">
-          {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
+          {!! isset($categories[$categoryId])
+              ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
+              : 'Miscellaneous' !!}
+          <a
+            class="small inventory-collapse-toggle collapse-toggle"
+            href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}"
+            data-toggle="collapse"
+          >
             Show
           </a>
         </h5>
@@ -88,7 +128,11 @@
           @foreach ($categoryItems as $itemtype)
             <div class="col-lg-3 col-sm-4 col-12">
               @if ($itemtype->first()->has_image)
-                <img src="{{ $itemtype->first()->imageUrl }}" style="height: 25px;" alt="{{ $itemtype->first()->name }}" />
+                <img
+                  src="{{ $itemtype->first()->imageUrl }}"
+                  style="height: 25px;"
+                  alt="{{ $itemtype->first()->name }}"
+                />
               @endif
               <a href="{{ $itemtype->first()->idUrl }}">{{ $itemtype->first()->name }}</a>
               <ul class="mb-0">
@@ -99,12 +143,20 @@
                   $stackName = $itemNames[$item->pivot->id];
                   $stackNameClean = htmlentities($stackName);
                   ?>
-                  <div data-id="{{ $item->pivot->id }}" data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $item->name }}{!! $canName && $stackName ? ']' : null !!}">
+                  <div data-id="{{ $item->pivot->id }}"
+                    data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $item->name }}{!! $canName && $stackName ? ']' : null !!}"
+                  >
                     <li>
                       <a class="inventory-stack" href="#">
                         Stack of x{{ $item->pivot->count }}.
                         @if ($canName && $stackName)
-                          <span class="text-info m-0" style="font-size:95%; margin:5px;" data-toggle="tooltip" data-placement="top" title='Named stack:<br />"{{ $stackName }}"'>
+                          <span
+                            class="text-info m-0"
+                            style="font-size:95%; margin:5px;"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title='Named stack:<br />"{{ $stackName }}"'
+                          >
                             &nbsp;<i class="fas fa-tag"></i>
                           </span>
                         @endif
@@ -154,12 +206,21 @@
   </div>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-    <div class="modal fade" id="grantModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
+    <div
+      class="modal fade"
+      id="grantModal"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog Inventory" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">[ADMIN] Grant Items</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
             <p>Note that granting items does not check against any category hold limits for characters.</p>
@@ -169,12 +230,19 @@
               {!! Form::label('Item(s)') !!} {!! add_help('Must have at least 1 item and Quantity must be at least 1.') !!}
               <div id="itemList">
                 <div class="d-flex mb-2">
-                  {!! Form::select('item_ids[]', $itemOptions, null, ['class' => 'form-control mr-2 default item-select', 'placeholder' => 'Select Item']) !!}
+                  {!! Form::select('item_ids[]', $itemOptions, null, [
+                      'class' => 'form-control mr-2 default item-select',
+                      'placeholder' => 'Select Item'
+                  ]) !!}
                   {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
                   <a href="#" class="remove-item btn btn-danger mb-2 disabled">×</a>
                 </div>
               </div>
-              <div><a href="#" class="btn btn-primary" id="add-item">Add Item</a></div>
+              <div><a
+                  href="#"
+                  class="btn btn-primary"
+                  id="add-item"
+                >Add Item</a></div>
               <div class="item-row hide mb-2">
                 {!! Form::select('item_ids[]', $itemOptions, null, ['class' => 'form-control mr-2 item-select', 'placeholder' => 'Select Item']) !!}
                 {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
@@ -195,7 +263,9 @@
 
               <div class="form-group">
                 {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-                {!! Form::label('disallow_transfer', 'Character-bound', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is on, the character\'s owner will not be able to transfer this item to their inventory. Items that disallow transfers by default will still not be transferrable.') !!}
+                {!! Form::label('disallow_transfer', 'Character-bound', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+                    'If this is on, the character\'s owner will not be able to transfer this item to their inventory. Items that disallow transfers by default will still not be transferrable.'
+                ) !!}
               </div>
 
               <div class="text-right">
