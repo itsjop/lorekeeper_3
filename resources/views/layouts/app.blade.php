@@ -97,7 +97,7 @@
 
   @include('feed::links')
 
-    @include('js._external_link_alert_js')
+  @include('js._external_link_alert_js')
 </head>
 
 <body>
