@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-@if (Auth::check())
-  {{-- vue component babey!!! --}}
-  <sub-component generic-prop-name="BRAND NEW"></sub-component>
+  @if (Auth::check())
+    {{-- vue component babey!!! --}}
+    <sub-component generic-prop-name="BRAND NEW"></sub-component>
 
     @include('pages._dashboard')
   @else
