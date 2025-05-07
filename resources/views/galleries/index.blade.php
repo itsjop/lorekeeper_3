@@ -63,6 +63,7 @@
               <div class="text-right"><a href="{{ url('gallery/' . $gallery->id) }}">See More...</a></div>
             @endif
           @elseif($gallery->children_count && $gallery->through('children')->has('submissions')->where('is_visible', 1)->where('status', 'Accepted')->count())
+            {{-- @elseif($gallery->children->count() && App\Models\Gallery\GallerySubmission::whereIn('gallery_id', $gallery->children->pluck('id')->toArray())->where('is_visible', 1)->where('status', 'Accepted')->count()) --}}
             <div class="row">
               @foreach ($gallery->through('children')->has('submissions')->where('is_visible', 1)->where('status', 'Accepted')->orderBy('created_at', 'DESC')->get()->take(4) as $submission)
                 <div class="col-md-3 text-center align-self-center">

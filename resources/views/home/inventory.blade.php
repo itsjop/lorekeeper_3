@@ -38,7 +38,7 @@
               @foreach ($chunk as $itemId => $stack)
                 <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $stack->first()->pivot->id }}" data-name="{{ $user->name }}'s {{ $stack->first()->name }}">
                   @if ($stack->first()->has_image)
-                    <div class="mb-1 inv-main-img">
+                    <div class="mb-1">
                       <a href="#" class="inventory-stack">
                         <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
                       </a>

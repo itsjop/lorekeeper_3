@@ -31,11 +31,10 @@ class SubmissionManager extends Service {
     /**
      * Creates a new submission.
      *
-     * @param array $data
-     * @param User  $user
-     * @param bool  $isClaim
-     * @param mixed $isDraft
-     * @param mixed                 $isActivity
+     * @param array                 $data
+     * @param \App\Models\User\User $user
+     * @param bool                  $isClaim
+     * @param mixed                 $isDraft
      *
      * @return mixed
      */
@@ -98,6 +97,21 @@ class SubmissionManager extends Service {
 
             // Set characters that have been attached.
             $this->createCharacterAttachments($submission, $data);
+
+            // send webhook alert to staff
+            $response = (new DiscordManager)->handleWebhook(
+                'A new '.($isClaim ? 'claim' : 'submission for '.$prompt->name).' has been created by ['.$user->name.']('.$user->url.'). (#'.$submission->id.')',
+                ($isClaim ? 'Claim' : 'Submission').($isClaim ? '' : ' for '.$prompt->name),
+                $user,
+                $submission->adminUrl,
+                null,
+                true
+            );
+
+            if (is_array($response)) {
+                flash($response['error'])->error();
+                throw new \Exception('Failed to create webhook.');
+            }
 
             return $this->commitReturn($submission);
         } catch (\Exception $e) {

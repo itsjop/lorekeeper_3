@@ -125,6 +125,9 @@ Route::group(['prefix' => 'world'], function () {
     Route::get('borders', 'WorldController@getBorders');
     Route::get('borders/{id}', 'WorldController@getBorder');
     Route::get('check-border', 'WorldController@getBorderPreview');
+
+    Route::get('maps', 'WorldController@getMaps');
+    Route::get('maps/{name}', 'WorldController@getMap');
 });
 
 Route::group(['prefix' => 'prompts'], function () {
