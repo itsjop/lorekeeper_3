@@ -23,16 +23,16 @@ class InventoryManager extends Service {
     |
     */
 
-  /**
-   * Grants an item to multiple users.
-   *
-   * @param array $data
-   * @param User  $staff
-   *
-   * @return bool
-   */
-  public function grantItems($data, $staff) {
-    DB::beginTransaction();
+    /**
+     * Grants an item to multiple users.
+     *
+     * @param array                 $data
+     * @param \App\Models\User\User $staff
+     *
+     * @return bool
+     */
+    public function grantItems($data, $staff) {
+        DB::beginTransaction();
 
     try {
       foreach ($data['quantities'] as $q) {
@@ -106,17 +106,17 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Grants an item to a character.
-   *
-   * @param array                           $data
-   * @param \App\Models\Character\Character $character
-   * @param User                            $staff
-   *
-   * @return bool
-   */
-  public function grantCharacterItems($data, $character, $staff) {
-    DB::beginTransaction();
+    /**
+     * Grants an item to a character.
+     *
+     * @param array                           $data
+     * @param \App\Models\Character\Character $character
+     * @param \App\Models\User\User           $staff
+     *
+     * @return bool
+     */
+    public function grantCharacterItems($data, $character, $staff) {
+        DB::beginTransaction();
 
     try {
       if (!$character) {
@@ -176,19 +176,19 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Transfers items between a user and character.
-   *
-   * @param \App\Models\Character\Character|User $sender
-   * @param \App\Models\Character\Character|User $recipient
-   * @param CharacterItem|UserItem               $stacks
-   * @param int                                  $quantities
-   * @param mixed                                $user
-   *
-   * @return bool
-   */
-  public function transferCharacterStack($sender, $recipient, $stacks, $quantities, $user) {
-    DB::beginTransaction();
+    /**
+     * Transfers items between a user and character.
+     *
+     * @param \App\Models\Character\Character|\App\Models\User\User         $sender
+     * @param \App\Models\Character\Character|\App\Models\User\User         $recipient
+     * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
+     * @param int                                                           $quantities
+     * @param mixed                                                         $user
+     *
+     * @return bool
+     */
+    public function transferCharacterStack($sender, $recipient, $stacks, $quantities, $user) {
+        DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {
@@ -294,18 +294,18 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Transfers items between user stacks.
-   *
-   * @param User     $sender
-   * @param User     $recipient
-   * @param UserItem $stacks
-   * @param int      $quantities
-   *
-   * @return bool
-   */
-  public function transferStack($sender, $recipient, $stacks, $quantities) {
-    DB::beginTransaction();
+    /**
+     * Transfers items between user stacks.
+     *
+     * @param \App\Models\User\User     $sender
+     * @param \App\Models\User\User     $recipient
+     * @param \App\Models\User\UserItem $stacks
+     * @param int                       $quantities
+     *
+     * @return bool
+     */
+    public function transferStack($sender, $recipient, $stacks, $quantities) {
+        DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {
@@ -383,18 +383,18 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Deletes items from stack.
-   *
-   * @param \App\Models\Character\Character|User $owner
-   * @param CharacterItem|UserItem               $stacks
-   * @param int                                  $quantities
-   * @param mixed                                $user
-   *
-   * @return bool
-   */
-  public function deleteStack($owner, $stacks, $quantities, $user) {
-    DB::beginTransaction();
+    /**
+     * Deletes items from stack.
+     *
+     * @param \App\Models\Character\Character|\App\Models\User\User         $owner
+     * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
+     * @param int                                                           $quantities
+     * @param mixed                                                         $user
+     *
+     * @return bool
+     */
+    public function deleteStack($owner, $stacks, $quantities, $user) {
+        DB::beginTransaction();
 
     try {
       if ($owner->logType == 'User') {
@@ -492,17 +492,17 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Sells items from stack.
-   *
-   * @param User     $user
-   * @param UserItem $stacks
-   * @param int      $quantities
-   *
-   * @return bool
-   */
-  public function resellStack($user, $stacks, $quantities) {
-    DB::beginTransaction();
+    /**
+     * Sells items from stack.
+     *
+     * @param \App\Models\User\User     $user
+     * @param \App\Models\User\UserItem $stacks
+     * @param int                       $quantities
+     *
+     * @return bool
+     */
+    public function resellStack($user, $stacks, $quantities) {
+        DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {
@@ -654,19 +654,20 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Credits an item to a user or character.
-   *
-   * @param  \App\Models\User\User|\App\Models\Character\Character  $sender
-   * @param  \App\Models\User\User|\App\Models\Character\Character  $recipient
-   * @param  string                                                 $type
-   * @param  array                                                  $data
-   * @param  \App\Models\Item\Item                                  $item
-   * @param  int                                                    $quantity
-   * @return bool
-   */
-  public function creditItem($sender, $recipient, $type, $data, $item, $quantity) {
-    DB::beginTransaction();
+    /**
+     * Credits an item to a user or character.
+     *
+     * @param \App\Models\Character\Character|\App\Models\User\User $sender
+     * @param \App\Models\Character\Character|\App\Models\User\User $recipient
+     * @param string                                                $type
+     * @param array                                                 $data
+     * @param \App\Models\Item\Item                                 $item
+     * @param int                                                   $quantity
+     *
+     * @return bool
+     */
+    public function creditItem($sender, $recipient, $type, $data, $item, $quantity) {
+        DB::beginTransaction();
 
     try {
       $encoded_data = \json_encode($data);
@@ -738,18 +739,20 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Moves items from one user or character stack to another.
-   *
-   * @param  \App\Models\User\User|\App\Models\Character\Character          $sender
-   * @param  \App\Models\User\User|\App\Models\Character\Character          $recipient
-   * @param  string                                                         $type
-   * @param  array                                                          $data
-   * @param  \App\Models\User\UserItem|\App\Models\Character\CharacterItem  $item
-   * @return bool
-   */
-  public function moveStack($sender, $recipient, $type, $data, $stack, $quantity) {
-    DB::beginTransaction();
+    /**
+     * Moves items from one user or character stack to another.
+     *
+     * @param \App\Models\Character\Character|\App\Models\User\User $sender
+     * @param \App\Models\Character\Character|\App\Models\User\User $recipient
+     * @param string                                                $type
+     * @param array                                                 $data
+     * @param mixed                                                 $stack
+     * @param mixed                                                 $quantity
+     *
+     * @return bool
+     */
+    public function moveStack($sender, $recipient, $type, $data, $stack, $quantity) {
+        DB::beginTransaction();
 
     try {
       $recipient_stack = UserItem::where([
@@ -796,17 +799,19 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Debits an item from a user or character.
-   *
-   * @param  \App\Models\User\User|\App\Models\Character\Character  $owner
-   * @param  string                                                 $type
-   * @param  array                                                  $data
-   * @param  \App\Models\Item\UserItem                              $stack
-   * @return bool
-   */
-  public function debitStack($owner, $type, $data, $stack, $quantity) {
-    DB::beginTransaction();
+    /**
+     * Debits an item from a user or character.
+     *
+     * @param \App\Models\Character\Character|\App\Models\User\User $owner
+     * @param string                                                $type
+     * @param array                                                 $data
+     * @param \App\Models\Item\UserItem                             $stack
+     * @param mixed                                                 $quantity
+     *
+     * @return bool
+     */
+    public function debitStack($owner, $type, $data, $stack, $quantity) {
+        DB::beginTransaction();
 
     try {
       $stack->count -= $quantity;
@@ -837,18 +842,18 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Names an item stack.
-   *
-   * @param \App\Models\Character\Character|User $owner
-   * @param CharacterItem|UserItem               $stacks
-   * @param mixed                                $name
-   * @param mixed                                $user
-   *
-   * @return bool
-   */
-  public function nameStack($owner, $stacks, $name, $user) {
-    DB::beginTransaction();
+    /**
+     * Names an item stack.
+     *
+     * @param \App\Models\Character\Character|\App\Models\User\User         $owner
+     * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
+     * @param mixed                                                         $name
+     * @param mixed                                                         $user
+     *
+     * @return bool
+     */
+    public function nameStack($owner, $stacks, $name, $user) {
+        DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {

@@ -294,8 +294,8 @@ class CharacterManager extends Service {
       $imageData['is_valid'] = isset($data['is_valid']);
       $imageData['is_visible'] = isset($data['is_visible']);
       $imageData['extension'] = (Config::get('lorekeeper.settings.masterlist_image_format') ? Config::get('lorekeeper.settings.masterlist_image_format') : (isset($data['extension']) ? $data['extension'] : $data['image']->getClientOriginalExtension()));
-      $imageData['character_id'] = $character->id;
       $imageData['fullsize_extension'] = (config('lorekeeper.settings.masterlist_fullsizes_format') ?? ($data['fullsize_extension'] ?? $data['image']->getClientOriginalExtension()));
+      $imageData['character_id'] = $character->id;
 
       $image = CharacterImage::create($imageData);
 

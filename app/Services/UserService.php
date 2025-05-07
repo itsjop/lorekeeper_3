@@ -41,18 +41,18 @@ class UserService extends Service {
     |
      */
 
-  /**
-   * Create a user.
-   *
-   * @param array $data
-   *
-   * @return User
-   */
-  public function createUser($data) {
-    // If the rank is not given, create a user with the lowest existing rank.
-    if (!isset($data['rank_id'])) {
-      $data['rank_id'] = Rank::orderBy('sort')->first()->id;
-    }
+    /**
+     * Create a user.
+     *
+     * @param array $data
+     *
+     * @return \App\Models\User\User
+     */
+    public function createUser($data) {
+        // If the rank is not given, create a user with the lowest existing rank.
+        if (!isset($data['rank_id'])) {
+            $data['rank_id'] = Rank::orderBy('sort')->first()->id;
+        }
 
     // Make birthday into format we can store
     $formatDate = Carbon::parse($data['dob']);
@@ -130,22 +130,21 @@ class UserService extends Service {
     );
   }
 
-  /**
-   * Updates a user. Used in modifying the admin user on the command line.
-   *
-   * @param array $data
-   *
-   * @return User
-   */
-  public function updateUser($data) {
-    $user = User::find($data['id']);
-    if (isset($data['password'])) {
-      $data['password'] = Hash::make($data['password']);
-    }
-
-    if ($user) {
-      $user->update($data);
-    }
+    /**
+     * Updates a user. Used in modifying the admin user on the command line.
+     *
+     * @param array $data
+     *
+     * @return \App\Models\User\User
+     */
+    public function updateUser($data) {
+        $user = User::find($data['id']);
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+        if ($user) {
+            $user->update($data);
+        }
 
     return $user;
   }
@@ -261,16 +260,16 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Updates the user's password.
-   *
-   * @param array $data
-   * @param User  $user
-   *
-   * @return bool
-   */
-  public function updatePassword($data, $user) {
-    DB::beginTransaction();
+    /**
+     * Updates the user's password.
+     *
+     * @param array                 $data
+     * @param \App\Models\User\User $user
+     *
+     * @return bool
+     */
+    public function updatePassword($data, $user) {
+        DB::beginTransaction();
 
     try {
       if (isset($user->password) && !Hash::check($data['old_password'], $user->password)) {
@@ -292,18 +291,18 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Updates the user's email and resends a verification email.
-   *
-   * @param array $data
-   * @param User  $user
-   *
-   * @return bool
-   */
-  public function updateEmail($data, $user) {
-    $user->email = $data['email'];
-    $user->email_verified_at = null;
-    $user->save();
+    /**
+     * Updates the user's email and resends a verification email.
+     *
+     * @param array                 $data
+     * @param \App\Models\User\User $user
+     *
+     * @return bool
+     */
+    public function updateEmail($data, $user) {
+        $user->email = $data['email'];
+        $user->email_verified_at = null;
+        $user->save();
 
     $user->sendEmailVerificationNotification();
 
@@ -425,16 +424,16 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Updates the user's avatar.
-   *
-   * @param User  $user
-   * @param mixed $avatar
-   *
-   * @return bool
-   */
-  public function updateAvatar($avatar, $user) {
-    DB::beginTransaction();
+    /**
+     * Updates the user's avatar.
+     *
+     * @param \App\Models\User\User $user
+     * @param mixed                 $avatar
+     *
+     * @return bool
+     */
+    public function updateAvatar($avatar, $user) {
+        DB::beginTransaction();
 
     try {
       if (!$avatar) {
@@ -549,16 +548,16 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Updates a user's username.
-   *
-   * @param string $username
-   * @param User   $user
-   *
-   * @return bool
-   */
-  public function updateUsername($username, $user) {
-    DB::beginTransaction();
+    /**
+     * Updates a user's username.
+     *
+     * @param string                $username
+     * @param \App\Models\User\User $user
+     *
+     * @return bool
+     */
+    public function updateUsername($username, $user) {
+        DB::beginTransaction();
 
     try {
       if (!config('lorekeeper.settings.allow_username_changes')) {
@@ -621,17 +620,17 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Bans a user.
-   *
-   * @param array $data
-   * @param User  $user
-   * @param User  $staff
-   *
-   * @return bool
-   */
-  public function ban($data, $user, $staff) {
-    DB::beginTransaction();
+    /**
+     * Bans a user.
+     *
+     * @param array                 $data
+     * @param \App\Models\User\User $user
+     * @param \App\Models\User\User $staff
+     *
+     * @return bool
+     */
+    public function ban($data, $user, $staff) {
+        DB::beginTransaction();
 
     try {
       if (!$user->is_banned) {
@@ -759,16 +758,16 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Unbans a user.
-   *
-   * @param User $user
-   * @param User $staff
-   *
-   * @return bool
-   */
-  public function unban($user, $staff) {
-    DB::beginTransaction();
+    /**
+     * Unbans a user.
+     *
+     * @param \App\Models\User\User $user
+     * @param \App\Models\User\User $staff
+     *
+     * @return bool
+     */
+    public function unban($user, $staff) {
+        DB::beginTransaction();
 
     try {
       if (!$this->logAdminAction($staff, 'Unbanned User', 'Unbanned ' . $user->displayname)) {
@@ -797,17 +796,17 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Deactivates a user.
-   *
-   * @param array $data
-   * @param User  $user
-   * @param User  $staff
-   *
-   * @return bool
-   */
-  public function deactivate($data, $user, $staff = null) {
-    DB::beginTransaction();
+    /**
+     * Deactivates a user.
+     *
+     * @param array                 $data
+     * @param \App\Models\User\User $user
+     * @param \App\Models\User\User $staff
+     *
+     * @return bool
+     */
+    public function deactivate($data, $user, $staff = null) {
+        DB::beginTransaction();
 
     try {
       if (!$staff) {
@@ -893,24 +892,25 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Reactivates a user account.
-   *
-   * @param \App\Models\User\User $user
-   * @param \App\Models\User\User $staff
-   *
-   * @return bool
-   */
-  public function reactivate($user, $staff = null) {
-    DB::beginTransaction();
-    try {
-      if (!$staff) {
-        $staff = $user;
-      }
-      if ($user->is_deactivated) {
-        $user->is_deactivated = 0;
-        $user->deactivater_id = null;
-        $user->save();
+    /**
+     * Reactivates a user account.
+     *
+     * @param \App\Models\User\User $user
+     * @param \App\Models\User\User $staff
+     *
+     * @return bool
+     */
+    public function reactivate($user, $staff = null) {
+        DB::beginTransaction();
+
+        try {
+            if (!$staff) {
+                $staff = $user;
+            }
+            if ($user->is_deactivated) {
+                $user->is_deactivated = 0;
+                $user->deactivater_id = null;
+                $user->save();
 
         $user->settings->border_settings = ['border_flip' => $data['border_flip'] ?? 0];
         $user->settings->save();

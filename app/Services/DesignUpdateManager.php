@@ -124,17 +124,17 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Saves the image upload section of a character design update request.
-   *
-   * @param array                 $data
-   * @param CharacterDesignUpdate $request
-   * @param bool                  $isAdmin
-   *
-   * @return bool
-   */
-  public function saveRequestImage($data, $request, $isAdmin = false) {
-    DB::beginTransaction();
+    /**
+     * Saves the image upload section of a character design update request.
+     *
+     * @param array                                       $data
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     * @param bool                                        $isAdmin
+     *
+     * @return bool
+     */
+    public function saveRequestImage($data, $request, $isAdmin = false) {
+        DB::beginTransaction();
 
     try {
       // Require an image to be uploaded the first time, but if an image already exists, allow user to update the other details
@@ -248,16 +248,16 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Saves the addons section of a character design update request.
-   *
-   * @param array                 $data
-   * @param CharacterDesignUpdate $request
-   *
-   * @return bool
-   */
-  public function saveRequestAddons($data, $request) {
-    DB::beginTransaction();
+    /**
+     * Saves the addons section of a character design update request.
+     *
+     * @param array                                       $data
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     *
+     * @return bool
+     */
+    public function saveRequestAddons($data, $request) {
+        DB::beginTransaction();
 
     try {
       $requestData = $request->data;
@@ -360,16 +360,16 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Saves the character features (traits) section of a character design update request.
-   *
-   * @param array                 $data
-   * @param CharacterDesignUpdate $request
-   *
-   * @return bool
-   */
-  public function saveRequestFeatures($data, $request) {
-    DB::beginTransaction();
+    /**
+     * Saves the character features (traits) section of a character design update request.
+     *
+     * @param array                                       $data
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     *
+     * @return bool
+     */
+    public function saveRequestFeatures($data, $request) {
+        DB::beginTransaction();
 
     try {
       if (!($request->character->is_myo_slot && $request->character->image->species_id) && !isset($data['species_id'])) {
@@ -453,15 +453,15 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Submit a character design update request to the approval queue.
-   *
-   * @param CharacterDesignUpdate $request
-   *
-   * @return bool
-   */
-  public function submitRequest($request) {
-    DB::beginTransaction();
+    /**
+     * Submit a character design update request to the approval queue.
+     *
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     *
+     * @return bool
+     */
+    public function submitRequest($request) {
+        DB::beginTransaction();
 
     try {
       if ($request->status != 'Draft') {
@@ -490,17 +490,17 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Approves a character design update request and processes it.
-   *
-   * @param array                 $data
-   * @param CharacterDesignUpdate $request
-   * @param User                  $user
-   *
-   * @return bool
-   */
-  public function approveRequest($data, $request, $user) {
-    DB::beginTransaction();
+    /**
+     * Approves a character design update request and processes it.
+     *
+     * @param array                                       $data
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     * @param \App\Models\User\User                       $user
+     *
+     * @return bool
+     */
+    public function approveRequest($data, $request, $user) {
+        DB::beginTransaction();
 
     try {
       if ($request->status != 'Pending') {
@@ -738,21 +738,21 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Rejects a character design update request and processes it.
-   * Rejection can be a soft rejection (reopens the request so the user can edit it and resubmit)
-   * or a hard rejection (takes the request out of the queue completely).
-   *
-   * @param array                 $data
-   * @param CharacterDesignUpdate $request
-   * @param User                  $user
-   * @param bool                  $forceReject
-   * @param mixed                 $notification
-   *
-   * @return bool
-   */
-  public function rejectRequest($data, $request, $user, $forceReject = false, $notification = true) {
-    DB::beginTransaction();
+    /**
+     * Rejects a character design update request and processes it.
+     * Rejection can be a soft rejection (reopens the request so the user can edit it and resubmit)
+     * or a hard rejection (takes the request out of the queue completely).
+     *
+     * @param array                                       $data
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     * @param \App\Models\User\User                       $user
+     * @param bool                                        $forceReject
+     * @param mixed                                       $notification
+     *
+     * @return bool
+     */
+    public function rejectRequest($data, $request, $user, $forceReject = false, $notification = true) {
+        DB::beginTransaction();
 
     try {
       if (!$forceReject && $request->status != 'Pending') {
@@ -830,17 +830,17 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Cancels a character design update request.
-   *
-   * @param array                 $data
-   * @param CharacterDesignUpdate $request
-   * @param User                  $user
-   *
-   * @return bool
-   */
+    /**
+     * Cancels a character design update request.
+     *
+     * @param array                                       $data
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     * @param \App\Models\User\User                       $user
+     *
+     * @return bool
+     */
   public function cancelRequest($data, $request, $user, $self = 0) {
-    DB::beginTransaction();
+        DB::beginTransaction();
 
     try {
       if ($request->status != 'Pending') {
@@ -889,15 +889,15 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Deletes a character design update request.
-   *
-   * @param CharacterDesignUpdate $request
-   *
-   * @return bool
-   */
-  public function deleteRequest($request) {
-    DB::beginTransaction();
+    /**
+     * Deletes a character design update request.
+     *
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     *
+     * @return bool
+     */
+    public function deleteRequest($request) {
+        DB::beginTransaction();
 
     try {
       if ($request->status != 'Draft') {
@@ -960,17 +960,17 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-  /**
-   * Votes on a character design update request.
-   *
-   * @param string                $action
-   * @param CharacterDesignUpdate $request
-   * @param User                  $user
-   *
-   * @return bool
-   */
-  public function voteRequest($action, $request, $user) {
-    DB::beginTransaction();
+    /**
+     * Votes on a character design update request.
+     *
+     * @param string                                      $action
+     * @param \App\Models\Character\CharacterDesignUpdate $request
+     * @param \App\Models\User\User                       $user
+     *
+     * @return bool
+     */
+    public function voteRequest($action, $request, $user) {
+        DB::beginTransaction();
 
     try {
       if ($request->status != 'Pending') {
