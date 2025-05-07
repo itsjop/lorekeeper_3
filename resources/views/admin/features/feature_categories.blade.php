@@ -12,7 +12,9 @@
   <p>This is a list of trait categories that will be used to sort traits in the inventory. Creating trait categories is entirely optional, but recommended if you have a lot of traits in the game.</p>
   <p>The sorting order reflects the order in which the trait categories will be displayed in the inventory, as well as on the world pages.</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/trait-categories/create') }}"><i class="fas fa-plus"></i> Create New Trait Category</a></div>
+  <div class="text-right mb-3">
+<a class="btn btn-primary" href="{{ url('admin/data/trait-categories/create') }}">
+<i class="fas fa-plus"></i> Create New Trait Category</a></div>
   @if (!count($categories))
     <p>No trait categories found.</p>
   @else

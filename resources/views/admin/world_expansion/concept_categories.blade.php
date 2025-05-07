@@ -8,8 +8,10 @@
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Concept Categories' => 'admin/world/concept-categories']) !!}
 
   <div class="float-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/concept-categories/create') }}"><i class="fas fa-plus mr-2"></i> Create New Concept Category</a>
-    <a class="btn btn-secondary" href="{{ url('admin/world/concepts') }}"><i class="fas fa-undo-alt mr-2"></i> Back to Concepts</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/concept-categories/create') }}">
+<i class="fas fa-plus mr-2"></i> Create New Concept Category</a>
+    <a class="btn btn-secondary" href="{{ url('admin/world/concepts') }}">
+<i class="fas fa-undo-alt mr-2"></i> Back to Concepts</a>
   </div>
   <h1>Concept Categories</h1>
 
@@ -24,7 +26,8 @@
           <tr class="sort-item" data-id="{{ $category->id }}">
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              <a href={!! $category->url !!} @if ($category->thumb_extension) data-toggle="tooltip" title="<img src='{{ $category->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($category->name) }} " @endif />{!! $category->name !!}</a>
+              <a href={!! $category->url !!} @if ($category->thumb_extension) data-toggle="tooltip" title="<img src='{{ $category->thumbUrl }}' style='max-width:100px;'/>
+<br> {{ ucfirst($category->name) }} " @endif />{!! $category->name !!}</a>
               {{ $category->summary ? '(' . $category->summary . ')' : '' }}
             </td>
             <td class="text-right">

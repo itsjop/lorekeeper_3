@@ -106,22 +106,26 @@ class AccountController extends Controller {
     return redirect()->back();
   }
 
-  /**
-   * Edits the user's avatar.
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postAvatar(Request $request, UserService $service) {
-    if ($service->updateAvatar($request->file('avatar'), Auth::user())) {
-      flash('Avatar updated successfully.')->success();
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
+    /**
+     * Edits the user's avatar.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postAvatar(Request $request, UserService $service) {
+      $data = $request->only([
+        'avatar', 'x0', 'x1', 'y0', 'y1',
+    ]);
+        if ($service->updateAvatar($request->file('avatar'), Auth::user())) {
+            flash('Avatar updated successfully.')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
+        }
 
     return redirect()->back();
   }
+
 
   /**
    * Edits the user's profile image.
@@ -385,9 +389,46 @@ class AccountController extends Controller {
       }
     }
 
-    return redirect()->back();
+        return redirect()->back();
+    }
+
+    /**
+     * Changes user character warning visibility setting.
+     *
+     * @param App\Services\UserService $service
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postWarningVisibility(Request $request, UserService $service) {
+      if ($service->updateContentWarningVisibility($request->input('content_warning_visibility'), Auth::user())) {
+          flash('Setting updated successfully.')->success();
+      } else {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+              flash($error)->error();
+          }
+      }
+
+      return redirect()->back();
   }
 
+  /**
+   * Changes user profile comment visibility setting.
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postProfileComments(Request $request, UserService $service) {
+      if ($service->updateProfileCommentSetting($request->input('allow_profile_comments'), Auth::user())) {
+          flash('Setting updated successfully.')->success();
+      } else {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+              flash($error)->error();
+          }
+      }
+
+      return redirect()->back();
+  }
   /**
    * Shows the notifications page.
    *

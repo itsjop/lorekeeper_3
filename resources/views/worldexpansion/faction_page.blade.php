@@ -6,10 +6,12 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Faction" href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
+    <a data-toggle="tooltip" title="[ADMIN] Edit Faction" href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}" class="mb-2 float-right">
+<i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Factions' => 'world/factions', $faction->style => 'world/factions/' . $faction->id]) !!}
-  <h1 style="clear:both;"><img src="{{ $faction->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $faction->style !!}</h1>
+  <h1 style="clear:both;">
+<img src="{{ $faction->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $faction->style !!}</h1>
   <h5 class="mb-0">{!! ucfirst($faction->type->displayName) !!} {!! $faction->parent ? 'inside ' . $faction->parent->displayName : '' !!}</h5>
 
   @if (($user_enabled && $faction->is_user_faction) || ($ch_enabled && $faction->is_character_faction))
@@ -23,7 +25,8 @@
 
 
   @if ($faction->image_extension)
-    <div class="text-center"><img src="{{ $faction->imageUrl }}" class="mw-100" /></div>
+    <div class="text-center">
+<img src="{{ $faction->imageUrl }}" class="mw-100" /></div>
   @endif
 
   @isset($faction->summary)
@@ -46,7 +49,8 @@
                                                                                       <p class="mb-0">
                                                                                           @foreach ($faction->children as $key => $child)
   @if ($child->thumb_extension)
-  <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/><img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+  <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/>
+<img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $child->displayName !!}
   @endif
@@ -80,7 +84,8 @@
                                                                                       <p class="mb-0">
                                                                                           @foreach ($faction->members as $key => $member)
   @if ($member->thumb_extension)
-  <a href="{{ $member->url }}" data-toggle="tooltip" title="{{ $member->name }}"/><img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+  <a href="{{ $member->url }}" data-toggle="tooltip" title="{{ $member->name }}"/>
+<img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $member->displayName !!}
   @endif

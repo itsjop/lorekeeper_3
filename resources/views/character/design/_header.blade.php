@@ -36,13 +36,15 @@
               <div class="col-sm-6 text-center text-danger">
                 {{ $rejectSum }}/{{ Settings::get('design_votes_needed') }}
                 {!! Form::open(['url' => 'admin/designs/vote/' . $request->id . '/reject', 'id' => 'voteRejectForm']) !!}
-                <button class="btn {{ $request->voteData->get(Auth::user()->id) == 1 ? 'btn-danger' : 'btn-outline-danger' }}" style="min-width:40px;" data-action="reject"><i class="fas fa-times"></i></button>
+                <button class="btn {{ $request->voteData->get(Auth::user()->id) == 1 ? 'btn-danger' : 'btn-outline-danger' }}" style="min-width:40px;" data-action="reject">
+<i class="fas fa-times"></i></button>
                 {!! Form::close() !!}
               </div>
               <div class="col-sm-6 text-center text-success">
                 {{ $approveSum }}/{{ Settings::get('design_votes_needed') }}
                 {!! Form::open(['url' => 'admin/designs/vote/' . $request->id . '/approve', 'id' => 'voteApproveForm']) !!}
-                <button class="btn {{ $request->voteData->get(Auth::user()->id) == 2 ? 'btn-success' : 'btn-outline-success' }}" style="min-width:40px;" data-action="approve"><i class="fas fa-check"></i></button>
+                <button class="btn {{ $request->voteData->get(Auth::user()->id) == 2 ? 'btn-success' : 'btn-outline-success' }}" style="min-width:40px;" data-action="approve">
+<i class="fas fa-check"></i></button>
                 {!! Form::close() !!}
               </div>
             </div>
@@ -98,19 +100,23 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/comments') }}" href="{{ url('designs/' . $request->id . '/comments') }}"><i
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/comments') }}" href="{{ url('designs/' . $request->id . '/comments') }}">
+<i
         class="text-{{ $request->has_comments ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i> Comments</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/image') }}" href="{{ url('designs/' . $request->id . '/image') }}"><i class="text-{{ $request->has_image ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/image') }}" href="{{ url('designs/' . $request->id . '/image') }}">
+<i class="text-{{ $request->has_image ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
       Masterlist Image</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/addons') }}" href="{{ url('designs/' . $request->id . '/addons') }}"><i class="text-{{ $request->has_addons ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/addons') }}" href="{{ url('designs/' . $request->id . '/addons') }}">
+<i class="text-{{ $request->has_addons ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
       Add-ons</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/traits') }}" href="{{ url('designs/' . $request->id . '/traits') }}"><i class="text-{{ $request->has_features ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/traits') }}" href="{{ url('designs/' . $request->id . '/traits') }}">
+<i class="text-{{ $request->has_features ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
       Traits</a>
   </li>
 </ul>

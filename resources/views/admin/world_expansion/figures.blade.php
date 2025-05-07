@@ -9,8 +9,10 @@
 
 
   <div class="float-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/figure-categories') }}"><i class="fas fa-folder mr-2"></i> Figure Categories</a>
-    <a class="btn btn-primary" href="{{ url('admin/world/figures/create') }}"><i class="fas fa-plus mr-2"></i> Create New Figure</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/figure-categories') }}">
+<i class="fas fa-folder mr-2"></i> Figure Categories</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/figures/create') }}">
+<i class="fas fa-plus mr-2"></i> Create New Figure</a>
   </div>
   <h1>Figures</h1>
 
@@ -40,7 +42,8 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $figure->url !!}
-                @if ($figure->thumb_extension) data-toggle="tooltip" title="<img src='{{ $figure->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($figure->name) }} " @endif />{!! $figure->name !!}</a>
+                @if ($figure->thumb_extension) data-toggle="tooltip" title="<img src='{{ $figure->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+<br> {{ ucfirst($figure->name) }} " @endif />{!! $figure->name !!}</a>
             </td>
             <td>
               {!! $figure->category ? $figure->category->displayName : '' !!}

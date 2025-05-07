@@ -13,7 +13,8 @@
     </div>
     <div class="col-lg-5 col-12 text-lg-right text-center">
       <a href="/professions/characters/{{ $category->id }}">
-        <div class="btn btn-primary"><i class="fas fa-search"></i> View characters</div>
+        <div class="btn btn-primary">
+<i class="fas fa-search"></i> View characters</div>
       </a>
     </div>
   </div>
@@ -79,10 +80,12 @@
             <div class="tab-pane fade show {{ $loop->index == 0 ? 'active' : '' }}" id="prof-{{ $profession->id }}" role="tabpanel" aria-labelledby="prof-{{ $profession->id }}">
               <div class="row justify-content-center border" style="background-image:url('{{ $profession->subcategory->imageUrl ?? $profession->category->imageUrl }}')">
                 @if ($profession->imageUrl)
-                  <div class="col-lg-7 text-center"><img src="{{ $profession->imageUrl }}" class="fr-fic fr-dii" style="max-height:800px;width:auto;max-width:100%;"></div>
+                  <div class="col-lg-7 text-center">
+<img src="{{ $profession->imageUrl }}" class="fr-fic fr-dii" style="max-height:800px;width:auto;max-width:100%;"></div>
                 @endif
                 <div class="card col-lg m-5">
-                  <h1 class="mt-3"><img class="fr-fic fr-dii" src="{{ $profession->iconUrl }}" style="max-width:50px;">{{ $profession->name }}</h1>
+                  <h1 class="mt-3">
+<img class="fr-fic fr-dii" src="{{ $profession->iconUrl }}" style="max-width:50px;">{{ $profession->name }}</h1>
                   <div class="row text-justify p-4 mt-2 site-page-content parsed-text">
                     <div class="site-page-content parsed-text">
                       {!! $profession->parsed_description !!}

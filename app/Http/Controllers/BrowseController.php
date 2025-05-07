@@ -163,6 +163,121 @@ class BrowseController extends Controller {
         $query->whereNotIn('character_category_id', $subCategories);
         $imageQuery->whereNotIn('species_id', $subSpecies);
 
+        $query = $this->handleMasterlistSearch($request, $query, $imageQuery);
+
+        $contentWarnings = CharacterImage::whereNotNull('content_warnings')->pluck('content_warnings')->flatten()->map(function ($warnings) {
+            return collect($warnings)->mapWithKeys(function ($warning) {
+                $lower = strtolower(trim($warning));
+
+                return [$lower => ucwords($lower)];
+            });
+        })->collapse()->unique()->sort()->toArray();
+
+        return view('browse.masterlist', [
+            'isMyo'           => false,
+            'characters'      => $query->paginate(24)->appends($request->query()),
+            'categories'      => [0 => 'Any Category'] + CharacterCategory::whereNotIn('id', $subCategories)->visible(Auth::user() ?? null)->orderBy('character_categories.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'specieses'       => [0 => 'Any Species'] + Species::whereNotIn('id', $subSpecies)->visible(Auth::user() ?? null)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'subtypes'        => ['none' => 'No Subtypes', 'any' => 'Any Subtype', 'hybrid' => 'Multiple / Hybrid Subtypes'] + Subtype::visible(Auth::user() ?? null)->orderBy('subtypes.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'rarities'        => [0 => 'Any Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'features'        => Feature::getDropdownItems(),
+            'sublists'        => Sublist::orderBy('sort', 'DESC')->get(),
+            'userOptions'     => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+            'contentWarnings' => $contentWarnings,
+        ]);
+    }
+
+    /**
+     * Shows the MYO slot masterlist.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getMyos(Request $request) {
+        $query = Character::with('user.rank', 'image.features', 'rarity', 'image.species', 'image.rarity')->myo(1);
+        $imageQuery = CharacterImage::images(Auth::user() ?? null)->with('features', 'rarity', 'species');
+
+        $query = $this->handleMasterlistSearch($request, $query, $imageQuery, true);
+
+        return view('browse.myo_masterlist', [
+            'isMyo'       => true,
+            'slots'       => $query->paginate(30)->appends($request->query()),
+            'specieses'   => [0 => 'Any Species'] + Species::visible(Auth::user() ?? null)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'rarities'    => [0 => 'Any Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'features'    => Feature::getDropdownItems(),
+            'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
+            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+        ]);
+    }
+
+    /**
+     * Shows the Sub masterlists.
+     *
+     * @param mixed $key
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getSublist(Request $request, $key) {
+        $query = Character::with('user.rank', 'image.features', 'rarity', 'image.species', 'image.rarity')->myo(0);
+        $imageQuery = CharacterImage::with('features', 'rarity', 'species');
+
+        $sublist = Sublist::where('key', $key)->first();
+        if (!$sublist) {
+            abort(404);
+        }
+        $subCategories = $sublist->categories->pluck('id')->toArray();
+        $subSpecies = $sublist->species->pluck('id')->toArray();
+
+        if ($subCategories) {
+            $query->whereIn('character_category_id', $subCategories);
+        }
+        if ($subSpecies) {
+            $imageQuery->whereIn('species_id', $subSpecies);
+        }
+
+        $query = $this->handleMasterlistSearch($request, $query, $imageQuery);
+
+        $subCategory = CharacterCategory::where('masterlist_sub_id', $sublist->id)->orderBy('character_categories.sort', 'DESC')->pluck('name', 'id')->toArray();
+        if (!$subCategory) {
+            $subCategory = CharacterCategory::visible(Auth::user() ?? null)->orderBy('character_categories.sort', 'DESC')->pluck('name', 'id')->toArray();
+        }
+        $subSpecies = Species::where('masterlist_sub_id', $sublist->id)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray();
+        if (!$subSpecies) {
+            $subSpecies = Species::visible(Auth::user() ?? null)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray();
+        }
+
+        $contentWarnings = CharacterImage::whereNotNull('content_warnings')->pluck('content_warnings')->flatten()->map(function ($warnings) {
+            return collect($warnings)->mapWithKeys(function ($warning) {
+                $lower = strtolower(trim($warning));
+
+                return [$lower => ucwords($lower)];
+            });
+        })->collapse()->unique()->sort()->toArray();
+
+        return view('browse.sub_masterlist', [
+            'isMyo'           => false,
+            'characters'      => $query->paginate(24)->appends($request->query()),
+            'categories'      => [0 => 'Any Category'] + $subCategory,
+            'specieses'       => [0 => 'Any Species'] + $subSpecies,
+            'subtypes'        => ['none' => 'No Subtypes', 'any' => 'Any Subtype', 'hybrid' => 'Multiple / Hybrid Subtypes'] + Subtype::visible(Auth::user() ?? null)->orderBy('subtypes.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'rarities'        => [0 => 'Any Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'features'        => Feature::getDropdownItems(),
+            'sublist'         => $sublist,
+            'sublists'        => Sublist::orderBy('sort', 'DESC')->get(),
+            'userOptions'     => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+            'contentWarnings' => $contentWarnings,
+        ]);
+    }
+
+    /**
+     * Handles character search/filtering.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Eloquent\Builder $imageQuery
+     * @param bool                                  $isMyo
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    private function handleMasterlistSearch(Request $request, $query, $imageQuery, $isMyo = false) {
         if ($request->get('name')) {
             $query->where(function ($query) use ($request) {
                 $query->where('characters.name', 'LIKE', '%'.$request->get('name').'%')->orWhere('characters.slug', 'LIKE', '%'.$request->get('name').'%');
@@ -171,7 +286,7 @@ class BrowseController extends Controller {
         if ($request->get('rarity_id')) {
             $query->where('rarity_id', $request->get('rarity_id'));
         }
-        if ($request->get('character_category_id')) {
+        if (!$isMyo && $request->get('character_category_id')) {
             $query->where('character_category_id', $request->get('character_category_id'));
         }
 
@@ -217,8 +332,37 @@ class BrowseController extends Controller {
         if ($request->get('species_id')) {
             $imageQuery->where('species_id', $request->get('species_id'));
         }
-        if ($request->get('subtype_id')) {
-            $imageQuery->where('subtype_id', $request->get('subtype_id'));
+        if (!$isMyo && $request->get('subtype_ids')) {
+            if (in_array('none', $request->get('subtype_ids'))) {
+                $imageQuery->doesntHave('subtypes');
+            } elseif (in_array('hybrid', $request->get('subtype_ids')) && !in_array('any', $request->get('subtype_ids')) && count($request->get('subtype_ids')) > 1) {
+                // If hybrid + any number of subtype IDs, return characters with the subtype(s) and any additional subtypes
+                // This is functionally somewhat redundant, but allows some specialized searches (e.g. hybrids including a specific subtype)
+                $imageQuery->has('subtypes', '>', 1)->whereHas('subtypes', function ($query) use ($request) {
+                    $query->whereIn('character_image_subtypes.subtype_id', $request->get('subtype_ids'));
+                });
+            } elseif (in_array('any', $request->get('subtype_ids')) || in_array('hybrid', $request->get('subtype_ids'))) {
+                // If subtype ids contains "any" search for all subtypes
+                $imageQuery->has('subtypes', '>', in_array('hybrid', $request->get('subtype_ids')) ? 1 : 0);
+            } else {
+                if (config('lorekeeper.extensions.exclusionary_search')) {
+                    $imageQuery->whereHas('subtypes', function ($query) use ($request) {
+                        $subtypeIds = $request->get('subtype_ids');
+
+                        // Filter to ensure the character has all the specified subtypes
+                        $query->whereIn('character_image_subtypes.subtype_id', $subtypeIds)
+                            ->groupBy('character_image_subtypes.character_image_id')
+                            ->havingRaw('COUNT(character_image_subtypes.subtype_id) = ?', [count($subtypeIds)]);
+                    })->whereDoesntHave('subtypes', function ($query) use ($request) {
+                        // Ensure that no additional subtypes are present
+                        $query->whereNotIn('character_image_subtypes.subtype_id', $request->get('subtype_ids'));
+                    });
+                } else {
+                    $imageQuery->whereHas('subtypes', function ($query) use ($request) {
+                        $query->whereIn('character_image_subtypes.subtype_id', $request->get('subtype_ids'));
+                    });
+                }
+            }
         }
         if ($request->get('feature_ids')) {
             $featureIds = $request->get('feature_ids');
@@ -258,9 +402,62 @@ class BrowseController extends Controller {
                 $query->where('url', 'LIKE', '%'.$designerUrl.'%');
             });
         }
+        if ($request->get('excluded_tags') || $request->get('included_tags')) {
+            $filteredImageIds = collect();
+            $excludedTags = $request->get('excluded_tags', []);
+            $includedTags = $request->get('included_tags', []);
 
-        $query->whereIn('id', $imageQuery->pluck('character_id')->toArray());
+            $imageQuery->chunk(100, function ($images) use (&$filteredImageIds, $excludedTags, $includedTags) {
+                // excluded tags
+                if (!empty($excludedTags)) {
+                    $images = $images->reject(function ($image) use ($excludedTags) {
+                        if (!$image->content_warnings) {
+                            return false;
+                        }
+                        if (in_array('all', $excludedTags)) {
+                            return true;
+                        }
+                        foreach ($excludedTags as $tag) {
+                            foreach ($image->content_warnings as $warning) {
+                                if (strtolower($warning) == strtolower($tag)) {
+                                    return true;
+                                }
+                            }
+                        }
 
+                        return false;
+                    });
+                }
+
+                // included tags
+                if (!empty($includedTags)) {
+                    $images = $images->filter(function ($image) use ($includedTags) {
+                        if (!$image->content_warnings) {
+                            return false;
+                        }
+                        if (in_array('all', $includedTags)) {
+                            return true;
+                        }
+                        foreach ($includedTags as $tag) {
+                            foreach ($image->content_warnings as $warning) {
+                                if (strtolower($warning) == strtolower($tag)) {
+                                    return true;
+                                }
+                            }
+                        }
+
+                        return false;
+                    });
+                }
+
+                $filteredImageIds = $filteredImageIds->merge($images->pluck('character_id'));
+            });
+        } else {
+            $filteredImageIds = $imageQuery->pluck('character_id');
+        }
+
+        $query->whereIn('id', $filteredImageIds->toArray());
+        if (!$isMyo) {
         if ($request->get('is_gift_art_allowed')) {
             switch ($request->get('is_gift_art_allowed')) {
                 case 1:
@@ -287,6 +484,8 @@ class BrowseController extends Controller {
                     break;
             }
         }
+        }
+        if (!$isMyo) {
 
         switch ($request->get('sort')) {
             default:
@@ -310,6 +509,7 @@ class BrowseController extends Controller {
             case 'sale_value_asc':
                 $query->orderBy('characters.sale_value', 'ASC');
                 break;
+        }
         }
 
         if (!Auth::check() || !Auth::user()->hasPower('manage_characters')) {
@@ -442,7 +642,9 @@ class BrowseController extends Controller {
             case 'sale_value_asc':
                 $query->orderBy('characters.sale_value', 'ASC');
                 break;
-        }
+        } $query->visible(Auth::user() ?? null);
+
+        return $query;
 
         if (!Auth::check() || !Auth::user()->hasPower('manage_characters')) {
             $query->visible();

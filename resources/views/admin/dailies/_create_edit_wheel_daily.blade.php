@@ -69,7 +69,8 @@
 <div class="card-body row">
   <div class="form-group col-md-6">
     @if ($daily->has_image)
-      <a href="{{ $daily->imageUrl }}"><img src="{{ $daily->dailyImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+      <a href="{{ $daily->imageUrl }}">
+<img src="{{ $daily->dailyImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
     @endif
     {!! Form::label(__('dailies.daily') . ' Image (Optional)') !!} {!! add_help('This image is used on the ' . __('dailies.daily') . ' index.') !!}
     <div>{!! Form::file('image') !!}</div>
@@ -82,7 +83,8 @@
   </div>
   <div class="form-group col-md-6">
     @if ($wheel?->wheel_extension)
-      <a href="{{ $wheel->wheelUrl }}"><img src="{{ $wheel->wheelUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+      <a href="{{ $wheel->wheelUrl }}">
+<img src="{{ $wheel->wheelUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
     @endif
     {!! Form::label('Wheel Image (Optional)') !!}
     <div>{!! Form::file('wheel_image') !!}</div>
@@ -97,7 +99,8 @@
 
   <div class="form-group col-md-6">
     @if ($wheel?->stopper_extension)
-      <a href="{{ $wheel->stopperUrl }}"><img src="{{ $wheel->stopperUrl }}" class="w-100 float-left mr-3" style="max-height:125px;max-width:125px;"></a>
+      <a href="{{ $wheel->stopperUrl }}">
+<img src="{{ $wheel->stopperUrl }}" class="w-100 float-left mr-3" style="max-height:125px;max-width:125px;"></a>
     @endif
     {!! Form::label('Stopper Image (Optional)') !!}
     <div>{!! Form::file('stopper_image') !!}</div>
@@ -111,7 +114,8 @@
 
   <div class="form-group col-md-6">
     @if ($wheel?->background_extension)
-      <a href="{{ $wheel->backgroundUrl }}"><img src="{{ $wheel->backgroundUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+      <a href="{{ $wheel->backgroundUrl }}">
+<img src="{{ $wheel->backgroundUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
     @endif
     {!! Form::label('Background Image (Optional)') !!} {!! add_help('This image is used as a wheel background and will take the place of the daily image.') !!}
     <div>{!! Form::file('background_image') !!}</div>

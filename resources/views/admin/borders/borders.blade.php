@@ -15,9 +15,11 @@
   </p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/border-categories') }}"><i class="fas fa-folder"></i> Border
+    <a class="btn btn-primary" href="{{ url('admin/data/border-categories') }}">
+<i class="fas fa-folder"></i> Border
       Categories</a>
-    <a class="btn btn-primary" href="{{ url('admin/data/borders/create') }}"><i class="fas fa-plus"></i> Create New
+    <a class="btn btn-primary" href="{{ url('admin/data/borders/create') }}">
+<i class="fas fa-plus"></i> Create New
       Border</a>
   </div>
 

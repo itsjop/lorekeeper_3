@@ -31,9 +31,11 @@
                       $userOwned = intval(\App\Models\User\UserItem::where('user_id', $user->id)->where('item_id', $ingredient->ingredient->id)->where('count', '>', 0)->sum('count'));
                     @endphp
                     @if ($userOwned > $ingredient->quantity)
-                      <div class="img-thumbnail" style="border: 1px solid grey;"><img src="{{ $ingredient->ingredient->image_url }}" /></div>
+                      <div class="img-thumbnail" style="border: 1px solid grey;">
+<img src="{{ $ingredient->ingredient->image_url }}" /></div>
                     @else
-                      <div class="img-thumbnail"><img class="greyscale" src="{{ $ingredient->ingredient->image_url }}" /></div>
+                      <div class="img-thumbnail">
+<img class="greyscale" src="{{ $ingredient->ingredient->image_url }}" /></div>
                     @endif
                   @break
 
@@ -43,9 +45,11 @@
                       $userOwned = \App\Models\User\UserCurrency::where('user_id', $user->id)->where('currency_id', $ingredient->ingredient->id)->where('quantity', '>', 0)->sum('quantity');
                     @endphp
                     @if ($userOwned > $ingredient->quantity)
-                      <div class="img-thumbnail" style="border: 1px solid grey;"><img src="{{ $ingredient->ingredient->currencyIconUrl }}" /></div>
+                      <div class="img-thumbnail" style="border: 1px solid grey;">
+<img src="{{ $ingredient->ingredient->currencyIconUrl }}" /></div>
                     @else
-                      <div class="img-thumbnail"><img class="greyscale" src="{{ $ingredient->ingredient->currencyIconUrl }}" /></div>
+                      <div class="img-thumbnail">
+<img class="greyscale" src="{{ $ingredient->ingredient->currencyIconUrl }}" /></div>
                     @endif
                   @break
                 @endswitch
@@ -54,14 +58,16 @@
             @endforeach
           </div>
         </div>
-        <div class="d-flex align-items-center justify-content-center"><i style="font-size: 2rem;" class="fas fa-random"></i></div>
+        <div class="d-flex align-items-center justify-content-center">
+<i style="font-size: 2rem;" class="fas fa-random"></i></div>
         <div style="flex: 1">
           <div class="square-grid @if (count($recipes) === 1) lg @else xl @endif justify-content-start">
             @foreach ($recipe->reward_items as $type)
               @foreach ($type as $reward)
                 <div class="square-column text-center">
                   @if (isset($reward['asset']->image_url))
-                    <div class="img-thumbnail greyscale"><img src="{{ $reward['asset']->image_url }}" /></div>
+                    <div class="img-thumbnail greyscale">
+<img src="{{ $reward['asset']->image_url }}" /></div>
                   @endif
                   <div class="text-center">{!! $reward['asset']->displayName !!} x{{ $reward['quantity'] }}</div>
                 </div>

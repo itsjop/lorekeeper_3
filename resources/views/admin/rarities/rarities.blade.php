@@ -13,7 +13,9 @@
   <p>The sorting order reflects the order in which rarities will be displayed on the world pages (e.g. rarity-sorted traits will appear in this order), as well as in select dropdown fields. <strong>Please note that the highest rarity should be at the
       <u>top</u> of the list.</strong></p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/rarities/create') }}"><i class="fas fa-plus"></i> Create New Rarity</a></div>
+  <div class="text-right mb-3">
+<a class="btn btn-primary" href="{{ url('admin/data/rarities/create') }}">
+<i class="fas fa-plus"></i> Create New Rarity</a></div>
   @if (!count($rarities))
     <p>No rarities found.</p>
   @else
@@ -33,6 +35,11 @@
       </tbody>
 
     </table>
+        @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields') && config('lorekeeper.extensions.item_entry_expansion.loot_tables.enable'))
+            <div class="alert alert-info mb-2">
+                Note that changing the order of rarities may have unintended consequences on criteria loot tables.
+            </div>
+        @endif
     <div class="mb-4">
       {!! Form::open(['url' => 'admin/data/rarities/sort']) !!}
       {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}

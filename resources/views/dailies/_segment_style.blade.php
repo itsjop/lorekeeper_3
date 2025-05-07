@@ -29,7 +29,8 @@ You can ignore this section if you use an image for the wheel, although text wil
                     <div class="input-group cp">
                       {!! Form::text('segment_style[color][]', $segments[$i]['fillStyle'] ?? null, ['class' => 'form-control']) !!}
                       <span class="input-group-append">
-                        <span class="input-group-text colorpicker-input-addon"><i></i></span>
+                        <span class="input-group-text colorpicker-input-addon">
+<i></i></span>
                       </span>
                     </div>
                   </td>

@@ -61,7 +61,8 @@
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($figure->thumb_extension)
-          <a href="{{ $figure->thumbUrl }}" data-lightbox="entry" data-title="{{ $figure->name }}"><img src="{{ $figure->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $figure->thumbUrl }}" data-lightbox="entry" data-title="{{ $figure->name }}">
+<img src="{{ $figure->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the figure index.') !!}
         <div>{!! Form::file('image_th') !!}</div>
@@ -75,7 +76,8 @@
 
       <div class="form-group col-md-6">
         @if ($figure->image_extension)
-          <a href="{{ $figure->imageUrl }}" data-lightbox="entry" data-title="{{ $figure->name }}"><img src="{{ $figure->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $figure->imageUrl }}" data-lightbox="entry" data-title="{{ $figure->name }}">
+<img src="{{ $figure->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Figure Image (Optional)') !!} {!! add_help('This image is used on the figure page as a header.') !!}
         <div>{!! Form::file('image') !!}</div>
@@ -103,7 +105,8 @@
   @if ($figure->id)
     <div class="card mb-3">
       <h2 class="card-header h3">
-        <div class="float-right"><a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a></div>
+        <div class="float-right">
+<a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a></div>
         Attachments
       </h2>
       <div class="card-body">

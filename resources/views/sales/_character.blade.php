@@ -2,13 +2,15 @@
   <div class="m-1">
     <div class="row">
       <div class="col-md-6 text-center align-self-center">
-        <a href="{{ $character->character->url }}"><img src="{{ $loop->count == 1 ? $character->image->imageUrl : $character->image->thumbnailUrl }}" class="mw-100 img-thumbnail" alt="{{ $character->fullName }}" /></a>
+        <a href="{{ $character->character->url }}">
+<img src="{{ $loop->count == 1 ? $character->image->imageUrl : $character->image->thumbnailUrl }}" class="mw-100 img-thumbnail" alt="{{ $character->fullName }}" /></a>
       </div>
       <div class="col-md text-center">
         <div class="mt-2">
           <h5>
             {{ $character->displayType }}: <a href="{{ $character->character->url }}">{!! $character->character->slug !!}</a> ・ <span
-              class="{{ $character->is_open && $character->sales->is_open ? 'text-success' : '' }}">[{{ $character->is_open && $character->sales->is_open ? 'Open' : 'Closed' }}]</span><br />
+              class="{{ $character->is_open && $character->sales->is_open ? 'text-success' : '' }}">[{{ $character->is_open && $character->sales->is_open ? 'Open' : 'Closed' }}]</span>
+<br />
             <small>
               {!! $character->image->species->displayName !!} ・ {!! $character->image->rarity->displayName !!}<br />
             </small>

@@ -109,7 +109,8 @@
   </div>
 
   <h3>
-    {{-- <div class="float-right"><a href="#" class="btn btn-info btn-sm" data-toggle="tooltip" title="This will fill the below fields with the same data as the character's current image. Note that this will overwrite any changes made below.">Fill Data</a></div> --}}
+    {{-- <div class="float-right">
+<a href="#" class="btn btn-info btn-sm" data-toggle="tooltip" title="This will fill the below fields with the same data as the character's current image. Note that this will overwrite any changes made below.">Fill Data</a></div> --}}
     Traits
   </h3>
 
@@ -119,8 +120,8 @@
   </div>
 
   <div class="form-group" id="subtypes">
-    {!! Form::label('Subtype (Optional)') !!}
-    {!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $character->image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
+    {!! Form::label('Subtypes (Optional)') !!}
+    {!! Form::select('subtype_ids[]', $subtypes, old('subtype_ids') ?: $character->image->subtypes()?->pluck('subtype_id')->toArray(), ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
   </div>
 
   <hr>
@@ -146,7 +147,8 @@
 
   <div class="form-group">
     {!! Form::label('Traits') !!}
-    <div><a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a></div>
+    <div>
+<a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a></div>
     <div id="featureList">
       @if (config('lorekeeper.extensions.autopopulate_image_features'))
         @foreach ($character->image->features as $feature)
@@ -289,7 +291,8 @@
       }
 
       function featureSelectedRender(item, escape) {
-        return '<div><span>' + escape(item["text"].trim()) + ' (' + escape(item["optgroup"].trim()) + ')' + '</span></div>';
+        return '<div>
+<span>' + escape(item["text"].trim()) + ' (' + escape(item["optgroup"].trim()) + ')' + '</span></div>';
       }
 
       // Croppie ////////////////////////////////////////////////////////////////////////////////////
@@ -348,20 +351,18 @@
 
     });
 
-
-
-    $("#species").change(function() {
-      var species = $('#species').val();
-      var id = '<?php echo $character->image->id; ?>';
-      $.ajax({
-        type: "GET",
-        url: "{{ url('admin/character/image/subtype') }}?species=" + species + "&id=" + id,
-        dataType: "text"
-      }).done(function(res) {
-        $("#subtypes").html(res);
-      }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-      });
+        $("#species").change(function() {
+            var species = $('#species').val();
+            var id = '<?php echo $character->image->id; ?>';
+            $.ajax({
+                type: "GET",
+                url: "{{ url('admin/character/image/subtype') }}?species=" + species + "&id=" + id,
+                dataType: "text"
+            }).done(function(res) {
+                $("#subtypes").html(res);
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+            });
       $.ajax({
         type: "GET",
         url: "{{ url('admin/character/image/transformation') }}?species=" + species + "&id=" + id,
@@ -372,6 +373,8 @@
         alert("AJAX call failed: " + textStatus + ", " + errorThrown);
       });
 
+        $('#subtype').selectize({
+            maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
     });
   </script>
 @endsection

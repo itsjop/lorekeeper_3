@@ -17,14 +17,16 @@
           <div class="col-md-6">
             <h3 class="text-center">Main Image</h3>
             <div class="text-center">
-              <a href="{{ $request->imageUrl }}?v={{ $request->updated_at->timestamp }}" data-lightbox="entry" data-title="Request #{{ $request->id }}"><img src="{{ $request->imageUrl }}?v={{ $request->updated_at->timestamp }}" class="mw-100"
+              <a href="{{ $request->imageUrl }}?v={{ $request->updated_at->timestamp }}" data-lightbox="entry" data-title="Request #{{ $request->id }}">
+<img src="{{ $request->imageUrl }}?v={{ $request->updated_at->timestamp }}" class="mw-100"
                   alt="Request {{ $request->id }}" /></a>
             </div>
           </div>
           <div class="col-md-6">
             <h3 class="text-center">Thumbnail Image</h3>
             <div class="text-center">
-              <a href="{{ $request->thumbnailUrl }}?v={{ $request->updated_at->timestamp }}" data-lightbox="entry" data-title="Request #{{ $request->id }} thumbnail"><img src="{{ $request->thumbnailUrl }}?v={{ $request->updated_at->timestamp }}"
+              <a href="{{ $request->thumbnailUrl }}?v={{ $request->updated_at->timestamp }}" data-lightbox="entry" data-title="Request #{{ $request->id }} thumbnail">
+<img src="{{ $request->thumbnailUrl }}?v={{ $request->updated_at->timestamp }}"
                   class="mw-100" alt="Thumbnail for request {{ $request->id }}" /></a>
             </div>
           </div>
@@ -115,7 +117,9 @@
         </div>
       </div>
     @endif
-    @if (config('lorekeeper.settings.masterlist_image_automation') === 0 || config('lorekeeper.settings.masterlist_image_automation_hide_manual_thumbnail') === 0 || Auth::user()->hasPower('manage_characters'))
+    @if (
+            ((config('lorekeeper.settings.masterlist_image_automation') === 0 || config('lorekeeper.settings.masterlist_image_automation_hide_manual_thumbnail') === 0) && config('lorekeeper.settings.hide_manual_thumbnail_image_upload') === 0) ||
+                Auth::user()->hasPower('manage_characters'))
       <div class="card mb-3" id="thumbnailUpload">
         <div class="card-body">
           {!! Form::label('Thumbnail Image') !!} {!! add_help('This image is shown on the masterlist page.') !!}

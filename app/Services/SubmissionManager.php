@@ -8,6 +8,7 @@ use App\Models\Character\Character;
 use App\Models\Currency\Currency;
 use App\Models\Item\Item;
 use App\Models\Loot\LootTable;
+use App\Models\Pet\Pet;
 use App\Models\Prompt\Prompt;
 use App\Models\Raffle\Raffle;
 use App\Models\Submission\Submission;
@@ -89,10 +90,10 @@ class SubmissionManager extends Service {
             $promptRewards = $assets['promptRewards'];
 
             $submission->update([
-                'data' => json_encode([
+                'data' => [
                     'user'    => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
                     'rewards' => getDataReadyAssets($promptRewards),
-                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : [])),
+                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : []),
             ]);
 
             // Set characters that have been attached.
@@ -176,10 +177,10 @@ class SubmissionManager extends Service {
                 'url'           => $data['url'] ?? null,
                 'updated_at'    => Carbon::now(),
                 'comments'      => $data['comments'],
-                'data'          => json_encode([
+                'data'          => [
                     'user'          => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
                     'rewards'       => getDataReadyAssets($promptRewards),
-                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : [])),
+                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : []),
             ] + ($isClaim ? [] : ['prompt_id' => $prompt->id]));
 
             return $this->commitReturn($submission);
@@ -236,11 +237,11 @@ class SubmissionManager extends Service {
                     'updated_at'            => Carbon::now(),
                     'staff_id'              => $user->id,
                     'status'                => 'Draft',
-                    'data'                  => json_encode([
+                    'data'                  => [
                         'user'                  => $userAssets,
                         'rewards'               => getDataReadyAssets($promptRewards),
                         'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
-                    ]), // list of rewards and addons
+                    ], // list of rewards and addons
                 ]);
 
                 Notifications::create($submission->prompt_id ? 'SUBMISSION_CANCELLED' : 'CLAIM_CANCELLED', $submission->user, [
@@ -253,11 +254,11 @@ class SubmissionManager extends Service {
                 $submission->update([
                     'status'     => 'Draft',
                     'updated_at' => Carbon::now(),
-                    'data'       => json_encode([
+                    'data'       => [
                         'user'                  => $userAssets,
                         'rewards'               => getDataReadyAssets($promptRewards),
                         'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
-                    ]), // list of rewards and addons
+                    ], // list of rewards and addons
                 ]);
             }
 
@@ -477,7 +478,7 @@ class SubmissionManager extends Service {
                 SubmissionCharacter::create([
                     'character_id'  => $c->id,
                     'submission_id' => $submission->id,
-                    'data'          => json_encode(getDataReadyAssets($assets)),
+                    'data'          => getDataReadyAssets($assets),
                     'notify_owner' => isset($data['character_notify_owner']) && $data['character_notify_owner'][$c->id] ? $data['character_notify_owner'][$c->id] : 0,
                 ]);
             }
@@ -504,11 +505,11 @@ class SubmissionManager extends Service {
                 'parsed_staff_comments' => $data['parsed_staff_comments'],
                 'staff_id'              => $user->id,
                 'status'                => 'Approved',
-                'data'                  => json_encode([
+                'data'                  => [
                     'user'                  => $addonData,
                     'rewards'               => getDataReadyAssets($rewards),
                     'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
-                ]), // list of rewards
+                ], // list of rewards
             ]);
 
             Notifications::create($submission->prompt_id ? 'SUBMISSION_APPROVED' : 'CLAIM_APPROVED', $submission->user, [
@@ -657,6 +658,9 @@ class SubmissionManager extends Service {
                             if (!$reward->is_user_owned) {
                                 throw new \Exception('Invalid currency selected.');
                             }
+                            break;
+                        case 'Pet':
+                            $reward = Pet::find($data['rewardable_id'][$key]);
                             break;
                         case 'LootTable':
                             if (!$isStaff) {
@@ -839,7 +843,7 @@ class SubmissionManager extends Service {
             SubmissionCharacter::create([
                 'character_id'  => $c->id,
                 'submission_id' => $submission->id,
-                'data'          => json_encode(getDataReadyAssets($assets)),
+                'data'          => getDataReadyAssets($assets),
             ]);
         }
 

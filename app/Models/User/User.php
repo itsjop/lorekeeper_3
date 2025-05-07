@@ -14,6 +14,7 @@ use App\Models\Character\CharacterBookmark;
 use App\Models\Character\CharacterImageCreator;
 use App\Models\Rank\RankPower;
 use App\Models\Currency\Currency;
+use App\Models\Currency\CurrencyCategory;
 use App\Models\Currency\CurrencyLog;
 use App\Models\Item\ItemLog;
 use App\Models\Shop\ShopLog;
@@ -30,6 +31,9 @@ use App\Models\User\UserBorder;
 use App\Models\User\UserBorderLog;
 use App\Models\Comment\CommentLike;
 use App\Models\Item\Item;
+use App\Models\Pet\Pet;
+use App\Models\Pet\PetLog;
+use App\Models\Limit\UserUnlockedLimit;
 use App\Models\Notification;
 use App\Models\Rank\Rank;
 use App\Models\WorldExpansion\Faction;
@@ -62,7 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     'bottom_border_id',
     'top_border_id',
     'is_deactivated',
-    'deactivater_id',
+    'deactivater_id', 'content_warning_visibility',
     'home_id',
     'home_changed',
     'faction_id',
@@ -221,6 +225,13 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->belongsToMany(Item::class, 'user_items')->withPivot('count', 'data', 'updated_at', 'id')->whereNull('user_items.deleted_at');
   }
 
+    /**
+     * Get the user's pets.
+     */
+    public function pets() {
+        return $this->belongsToMany(Pet::class, 'user_pets')->withPivot('data', 'updated_at', 'id', 'character_id', 'pet_name', 'has_image', 'evolution_id')->whereNull('user_pets.deleted_at');
+    }
+
   /**
    * Get all of the user's gallery submissions.
    */
@@ -303,6 +314,13 @@ class User extends Authenticatable implements MustVerifyEmail {
         return $this->belongsToMany('App\Models\Cultivation\CultivationArea', 'user_area', 'user_id', 'area_id');
     }
 
+    /**
+     * Gets all of the user's unlocked limits.
+     */
+    public function unlockedLimits() {
+        return $this->hasMany(UserUnlockedLimit::class);
+    }
+
 
   /**********************************************************************************************
 
@@ -371,6 +389,19 @@ class User extends Authenticatable implements MustVerifyEmail {
 
     return $this->attributes['has_alias'];
   }
+
+    /**
+     * Checks if the user has an email.
+     *
+     * @return bool
+     */
+    public function getHasEmailAttribute() {
+        if (!config('lorekeeper.settings.require_email')) {
+            return true;
+        }
+
+        return $this->attributes['email'] && $this->attributes['email_verified_at'];
+    }
 
   /**
    * Checks if the user has an admin rank.
@@ -712,31 +743,56 @@ class User extends Authenticatable implements MustVerifyEmail {
   /**
    * Get the user's held currencies.
    *
-   * @param bool $showAll
+   * @param bool       $showAll
+     * @param mixed|null $user
+     * @param mixed      $showCategories
    *
    * @return \Illuminate\Support\Collection
    */
-  public function getCurrencies($showAll = false) {
+  public function getCurrencies($showAll = false, $showCategories = false, $user = null) {
     // Get a list of currencies that need to be displayed
     // On profile: only ones marked is_displayed
     // In bank: ones marked is_displayed + the ones the user has
 
     $owned = UserCurrency::where('user_id', $this->id)->pluck('quantity', 'currency_id')->toArray();
 
-    $currencies = Currency::where('is_user_owned', 1);
+    $currencies = Currency::where('is_user_owned', 1)
+            ->whereHas('category', function ($query) use ($user) {
+                $query->visible($user);
+            })
+            ->orWhereNull('currency_category_id')
+            ->visible($user);
     if ($showAll) {
       $currencies->where(function ($query) use ($owned) {
         $query->where('is_displayed', 1)->orWhereIn('id', array_keys($owned));
       });
+
+            if ($showCategories) {
+                $categories = CurrencyCategory::visible()->orderBy('sort', 'DESC')->get();
+
+                if ($categories->count()) {
+                    $currencies->orderByRaw('FIELD(currency_category_id,'.implode(',', $categories->pluck('id')->toArray()).')');
+                }
+            }
     } else {
       $currencies = $currencies->where('is_displayed', 1);
     }
 
     $currencies = $currencies->orderBy('sort_user', 'DESC')->get();
 
-    foreach ($currencies as $currency) {
-      $currency->quantity = $owned[$currency->id] ?? 0;
-    }
+        foreach ($currencies as $currency) {
+            $currency->quantity = $owned[$currency->id] ?? 0;
+        }
+
+        if ($showAll && $showCategories) {
+            $currencies = $currencies->groupBy(function ($currency) use ($categories) {
+                if (!$currency->category) {
+                    return 'Miscellaneous';
+                }
+
+                return $categories->where('id', $currency->currency_category_id)->first()->name;
+            });
+        }
 
     return $currencies;
   }
@@ -812,6 +868,27 @@ class User extends Authenticatable implements MustVerifyEmail {
       return $query->paginate(30);
     }
   }
+
+    /**
+     * Get the user's pet logs.
+     *
+     * @param int $limit
+     *
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Support\Collection
+     */
+    public function getPetLogs($limit = 10) {
+        $user = $this;
+        $query = PetLog::with('sender')->with('recipient')->with('pet')->where(function ($query) use ($user) {
+            $query->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Staff Removal']);
+        })->orWhere(function ($query) use ($user) {
+            $query->where('recipient_id', $user->id);
+        })->orderBy('id', 'DESC');
+        if ($limit) {
+            return $query->take($limit)->get();
+        } else {
+            return $query->paginate(30);
+        }
+    }
 
     /**
      * Get the user's shop purchase logs.
@@ -934,7 +1011,7 @@ class User extends Authenticatable implements MustVerifyEmail {
       ->viewable($user ? $user : null)
       ->where('user_id', $this->id)
       ->orderBy('id', 'DESC')
-      ->paginate(30);
+      ;
   }
 
     /**

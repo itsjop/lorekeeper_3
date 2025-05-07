@@ -8,7 +8,8 @@
       'data-off' => 'Use specific Borders',
   ]) !!}
 </a>
-<br /><br />
+<br />
+<br />
 <div class="collapse {{ is_array($tag->getData()) ? 'show' : '' }}" id="collapseExample">
   <div class="card card-body">
     <div class="text-right mb-3">
@@ -31,7 +32,8 @@
                     'placeholder' => 'Select Border',
                 ]) !!}
               </td>
-              <td class="text-right"><a href="#" class="btn btn-danger remove-loot-button">Remove</a></td>
+              <td class="text-right">
+<a href="#" class="btn btn-danger remove-loot-button">Remove</a></td>
             </tr>
           @endforeach
         @endif

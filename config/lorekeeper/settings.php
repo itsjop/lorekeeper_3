@@ -51,20 +51,25 @@ return [
 */
   'site_desc' => 'Welcome to the world of Reverie!',
 
-  /*
-|--------------------------------------------------------------------------
-| Alias Requirement
-|--------------------------------------------------------------------------
-|
-| Whether or not users are required to link an off-site account to access
-| the site's full features. Note that this does not disable aliases outright,
-| and you should still set up at least one of the auth options provided.
-| Note also that any functionality which makes use of the alias system
-| (e.g. ownership checking for characters only associated with an off-site account)
-| will still work provided users link the relevant alias(es).
-|
-*/
-  'require_alias' => 1,
+    /*
+    |--------------------------------------------------------------------------
+    | Alias | Email Requirement
+    |--------------------------------------------------------------------------
+    |
+    | Whether or not users are required to link an off-site account to access
+    | the site's full features. Note that this does not disable aliases outright,
+    | and you should still set up at least one of the auth options provided.
+    | Note also that any functionality which makes use of the alias system
+    | (e.g. ownership checking for characters only associated with an off-site account)
+    | will still work provided users link the relevant alias(es).
+    |
+    | The email option functions as a fallback for users who register with an off-site provider.
+    | If they do not have an email associated with their off-site account, they will be prompted to
+    | provide one on registration / login / site interaction (if this setting is enabled).
+    |
+    */
+    'require_alias'                                     => 1,
+    'require_email'                                     => 1,
 
   /*
 |--------------------------------------------------------------------------
@@ -238,31 +243,50 @@ return [
 | It will automatically add transparent borders to the images to make them square,
 | based on the bigger dimension (between width/height).
 | Thumbnails will effectively be small previews of the full masterlist images.
-| This feature will not replace the manual uploading of thumbnails.
+| This feature does not disable the manual uploading of thumbnail images.
 |
 | Simply change to "1" to enable, or keep at "0" to disable.
 |
 */
   'masterlist_image_automation' => 0,
 
-  /*
-|--------------------------------------------------------------------------
-| Masterlist Image Automation Removing Manual Upload For Users
-|--------------------------------------------------------------------------
-|
-| NOTE: This feature will only function if the above feature, the
-| Masterlist Image Automation Replacing Cropper, is also enabled.
-|
-| The following option is for if you DO want to disable the manual uploading
-| of thumbnails, to ensure users do not attempt to upload their
-| own thumbnails regardless of the automation.
-| This will remove it purely for users, not administration.
-|
-| 0: Keeps the manual thumbnail upload for users.
-| 1: Hides the thumbnail upload for users.
-|
-*/
-  'masterlist_image_automation_hide_manual_thumbnail' => 0,
+    /*
+    |--------------------------------------------------------------------------
+    | Masterlist Image Automation Hide Manual Thumbnail
+    |--------------------------------------------------------------------------
+    |
+    | NOTE: If the "Masterlist Image Automation Replacing Cropper"
+    | setting above is disabled, this setting has no effect.
+    |
+    | This disables the option for users to manually upload their own
+    | thumbnail images in design updates, including use of the cropper.
+    | Note that this does not prevent permissioned staff from uploading
+    | custom thumbnail images.
+    |
+    | 0: Allows custom thumbnail uploads.
+    | 1: Disallows custom thumbnail uploads.
+    |
+    */
+    'masterlist_image_automation_hide_manual_thumbnail' => 0,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Remove Manual Thumbnail Image Upload
+    |--------------------------------------------------------------------------
+    |
+    | NOTE: If the "Masterlist Image Automation Hide Manual Thumbnail"
+    | setting above is enabled, this setting has no effect.
+    |
+    | This disables the option for users to manually upload their own
+    | thumbnail images in design updates, requiring use of the cropper.
+    | Note that this does not prevent permissioned staff from uploading
+    | custom thumbnail images.
+    |
+    | 0: Allows custom thumbnail uploads.
+    | 1: Disallows custom thumbnail uploads.
+    |
+    */
+    'hide_manual_thumbnail_image_upload' => 0,
 
   /*
 |--------------------------------------------------------------------------
@@ -354,26 +378,67 @@ return [
 */
   'wysiwyg_comments' => 1,
 
-  /*
-|--------------------------------------------------------------------------
-| Allow Gallery Submissions on Prompts
-|--------------------------------------------------------------------------
-|
-| Whether or not to allow gallery submissions on prompts.
-|
-*/
-  'allow_gallery_submissions_on_prompts' => 1,
+    /*
+    |--------------------------------------------------------------------------
+    | Allow Gallery Submissions on Prompts
+    |--------------------------------------------------------------------------
+    |
+    | Whether or not to allow gallery submissions on prompts.
+    |
+    */
+    'allow_gallery_submissions_on_prompts'              => 1,
 
-  /*
-|--------------------------------------------------------------------------
-| Site Logging Webhook
-|--------------------------------------------------------------------------
-|
-| This is the webhook URL for site actions logging.
-| This is used to send a webhook to the site administrators alerting them
-| of any actions that may be considered suspicious or harmful.
-| This is intended to be a Discord webhook, but can be used with other services with minor modifications.
-|
-*/
-  'site_logging_webhook' => env('SITE_LOGGING_WEBHOOK', null),
+    /*
+    |--------------------------------------------------------------------------
+    | Hideable Textarea on Gallery Submissions
+    |--------------------------------------------------------------------------
+    |
+    | Whether or not to be able to hide the textarea on gallery Submissions.
+    |
+    | enable: Set to 1 to show a button to hide the textarea.
+    |
+    | on_image Set to 1 to auto-hide on image upload- will only work
+    | if 'enable' is set to 1.
+    |
+    */
+    'hide_textarea_on_gallery_submissions'              => [
+        'enable'   => 0,
+        'on_image' => 0,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Site FontAwesome Icon Version
+    |--------------------------------------------------------------------------
+    |
+    | What version of FontAwesome the site uses.
+    | 0: Version 5. (Default) 1: Version 6.
+    | 2: A mixed version where icons with v5 classes (i.e. fas) show
+    | the v5 icons and icons with v6 classes (i.e. fa-solid) show the v6 icons.
+    |
+    */
+    'fa_version'                                  => 0,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Site Logging Webhook
+    |--------------------------------------------------------------------------
+    |
+    | This is the webhook URL for site actions logging.
+    | This is used to send a webhook to the site administrators alerting them
+    | of any actions that may be considered suspicious or harmful.
+    | This is intended to be a Discord webhook, but can be used with other services with minor modifications.
+    |
+    */
+    'site_logging_webhook'                              => env('SITE_LOGGING_WEBHOOK', null),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Character Content Warnings
+    |--------------------------------------------------------------------------
+    |
+    | Allows characters to have content warnings.
+    |
+    */
+    'enable_character_content_warnings'                 => 1,
 ];

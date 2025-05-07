@@ -7,7 +7,8 @@
   } ?>
   <div class="mt-1 mx-auto" style="max-width:{{ max(200, $width) }}px; overflow: hidden; text-overflow: ellipsis;">
     @if (isset($submission->content_warning))
-      <p><span class="text-danger"><strong>Content Warning:</strong></span> {!! nl2br(htmlentities($submission->content_warning)) !!}</p>
+      <p>
+<span class="text-danger"><strong>Content Warning:</strong></span> {!! nl2br(htmlentities($submission->content_warning)) !!}</p>
     @endif
     <a href="{{ $submission->url }}" class="h5 mb-0">
       @if (!$submission->isVisible)

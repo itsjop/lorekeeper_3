@@ -12,7 +12,7 @@
   </h1>
 
   <div class="text-center">
-    <img src="{{ asset('images/donation_shop.png') }}" style="max-width:100%" />
+    <img src="{{ asset('images/lorekeeper/donation_shop.png') }}" style="max-width:100%" />
     <p>{!! $text->parsed_text !!}</p>
 
     @if (Auth::check() && Auth::user()->donationShopCooldown)
@@ -31,7 +31,8 @@
             @foreach ($chunk as $item)
               <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $item->id }}">
                 <div class="mb-1">
-                  <a href="#" class="inventory-stack"><img src="{{ $item->item->imageUrl }}" /></a>
+                  <a href="#" class="inventory-stack">
+<img src="{{ $item->item->imageUrl }}" /></a>
                 </div>
                 <div>
                   <a href="#" class="inventory-stack inventory-stack-name"><strong>{{ $item->item->name }}</strong></a>

@@ -43,57 +43,60 @@
             Home
           </a>
 
-          <div class="dropdown-menu" aria-labelledby="inventoryDropdown">
-            <a class="dropdown-item" href="{{ url('characters') }}">
-              My Characters
-            </a>
-            <a class="dropdown-item" href="{{ url('characters/myos') }}">
-              My MYO Slots
-            </a>
-            <a class="dropdown-item" href="{{ url('inventory') }}">
-              Inventory
-            </a>
-            <a class="dropdown-item" href="{{ url('bank') }}">
-              Bank
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ url('comments/liked') }}">
-              Liked Comments
-            </a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a id="queueDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            Activity
-          </a>
-          <div class="dropdown-menu" aria-labelledby="queueDropdown">
-            <a class="dropdown-item" href="{{ url('submissions') }}">
-              Prompt Submissions
-            </a>
-            <a class="dropdown-item" href="{{ url('claims') }}">
-              Claims
-            </a>
-            <a class="dropdown-item" href="{{ url('reports') }}">
-              My Reports
-            </a>
-            <a class="dropdown-item" href="{{ url('designs') }}">
-              Design Approvals
-            </a>
-            <div class="dropdown-divider">
-            </div>
-            <a class="dropdown-item" href="{{ url('characters/transfers/incoming') }}">
-              Character Transfers
-            </a>
-            <a class="dropdown-item" href="{{ url('trades/open') }}">
-              Trades
-            </a>
-          </div>
-        </li>
-      @endif
-      <li class="nav-item dropdown">
-        <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-          Browse
-        </a>
+                        <div class="dropdown-menu" aria-labelledby="inventoryDropdown">
+                            <a class="dropdown-item" href="{{ url('characters') }}">
+                                My Characters
+                            </a>
+                            <a class="dropdown-item" href="{{ url('characters/myos') }}">
+                                My MYO Slots
+                            </a>
+                            <a class="dropdown-item" href="{{ url('pets') }}">
+                                My Pets
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('inventory') }}">
+                                Inventory
+                            </a>
+                            <a class="dropdown-item" href="{{ url('bank') }}">
+                                Bank
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('comments/liked') }}">
+                                Liked Comments
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="queueDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Activity
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="queueDropdown">
+                            <a class="dropdown-item" href="{{ url('submissions') }}">
+                                Prompt Submissions
+                            </a>
+                            <a class="dropdown-item" href="{{ url('claims') }}">
+                                Claims
+                            </a>
+                            <a class="dropdown-item" href="{{ url('reports') }}">
+                                Reports
+                            </a>
+                            <a class="dropdown-item" href="{{ url('designs') }}">
+                                Design Approvals
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('characters/transfers/incoming') }}">
+                                Character Transfers
+                            </a>
+                            <a class="dropdown-item" href="{{ url('trades/open') }}">
+                                Trades
+                            </a>
+                        </div>
+                    </li>
+                @endif
+                <li class="nav-item dropdown">
+                    <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        Browse
+                    </a>
 
         <div class="dropdown-menu" aria-labelledby="browseDropdown">
           <a class="dropdown-item" href="{{ url('users') }}">
@@ -184,12 +187,14 @@
       @else
         @if (Auth::user()->isStaff)
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin') }}"><i class="fas fa-crown"></i></a>
+            <a class="nav-link" href="{{ url('admin') }}">
+<i class="fas fa-crown"></i></a>
           </li>
         @endif
         @if (Auth::user()->notifications_unread)
           <li class="nav-item">
-            <a class="nav-link btn btn-secondary btn-sm" href="{{ url('notifications') }}"><span class="fas fa-envelope"></span> {{ Auth::user()->notifications_unread }}</a>
+            <a class="nav-link btn btn-secondary btn-sm" href="{{ url('notifications') }}">
+<span class="fas fa-envelope"></span> {{ Auth::user()->notifications_unread }}</a>
           </li>
         @endif
 

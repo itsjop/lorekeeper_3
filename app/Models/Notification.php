@@ -19,6 +19,15 @@ class Notification extends Model {
    */
   protected $table = 'notifications';
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'data' => 'array',
+    ];
+
   /**
    * Whether the model contains timestamps to be saved and updated.
    *
@@ -142,6 +151,10 @@ class Notification extends Model {
   public const REPORT_CLOSED = 221;
   public const COMMENT_MADE = 239;
   public const COMMENT_REPLY = 240;
+    public const PET_REMOVAL = 241;
+    public const PET_TRANSFER = 242;
+    public const FORCED_PET_TRANSFER = 243;
+    public const PET_GRANT = 244;
   public const CHARACTER_ITEM_GRANT = 501;
   public const CHARACTER_ITEM_REMOVAL = 502;
   public const GALLERY_SUBMISSION_COLLABORATOR = 505;

@@ -52,7 +52,6 @@ return [
         'loot_tables'     => [
             // Adds the ability to use either rarity criteria for items or item categories with rarity criteria in loot tables. Note that disabling this does not apply retroactively.
             'enable'              => 0,
-            'alternate_filtering' => 0, // By default this uses more broadly compatible methods to filter by rarity. If you are on Dreamhost/know your DB software can handle searching in JSON, it's recommended to set this to 1 instead.
         ],
     ],
 
@@ -121,4 +120,8 @@ return [
 
     // Allow users to return a pending design update to drafts, for instance if they make a mistake. - Uri
     'design_return_to_draft' => 1,
+
+    // Multiple Subtypes - Newt
+    'exclusionary_search'    => 0, // If enabled, searching for multiple subtypes will only return results that have all of the subtypes specified. If disabled, it will return results that have any of the subtypes specified.
+    'multiple_subtype_limit' => 10, // The maximum number of subtypes a character can have.
 ];

@@ -6,10 +6,12 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Location" href="{{ url('admin/world/locations/edit/') . '/' . $location->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
+    <a data-toggle="tooltip" title="[ADMIN] Edit Location" href="{{ url('admin/world/locations/edit/') . '/' . $location->id }}" class="mb-2 float-right">
+<i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Locations' => 'world/locations', $location->style => 'world/locations/' . $location->id]) !!}
-  <h1 style="clear:both;"><img src="{{ $location->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $location->style !!}</h1>
+  <h1 style="clear:both;">
+<img src="{{ $location->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $location->style !!}</h1>
   <h5 class="mb-0">{!! ucfirst($location->type->displayName) !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!}</h5>
 
   @if (($user_enabled && $location->is_user_home) || ($ch_enabled && $location->is_character_home))
@@ -23,7 +25,8 @@
 
 
   @if ($location->image_extension)
-    <div class="text-center"><img src="{{ $location->imageUrl }}" class="mw-100" /></div>
+    <div class="text-center">
+<img src="{{ $location->imageUrl }}" class="mw-100" /></div>
   @endif
 
   @isset($location->summary)
@@ -46,7 +49,8 @@
                                                                                       <p class="mb-0">
                                                                                           @foreach ($location->children as $key => $child)
   @if ($child->thumb_extension)
-  <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/><img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+  <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/>
+<img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $child->displayName !!}
   @endif
@@ -106,7 +110,8 @@
           @endforeach
         </div>
         @if (count($location->gallerysubmissions) > 2)
-          <p class="text-right mr-4 mb-0"><a href="{{ url('world/locations/') . '/' . $location->id . '/submissions' }}">See All {{ count($location->gallerysubmissions) }}</p>
+          <p class="text-right mr-4 mb-0">
+<a href="{{ url('world/locations/') . '/' . $location->id . '/submissions' }}">See All {{ count($location->gallerysubmissions) }}</p>
         @endif
   @endif
 

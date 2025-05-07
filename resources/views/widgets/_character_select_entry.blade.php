@@ -10,7 +10,9 @@
 
 <div class="submission-character mb-3 card">
   <div class="card-body">
-    <div class="text-right"><a href="#" class="remove-character text-muted"><i class="fas fa-times"></i></a></div>
+    <div class="text-right">
+<a href="#" class="remove-character text-muted">
+<i class="fas fa-times"></i></a></div>
     <div class="row">
       <div class="col-md-2 align-items-stretch d-flex">
         <div class="d-flex text-center align-items-center">
@@ -34,10 +36,12 @@
               <div class="col">
                 <span class="btn {{ $character->character->is_gift_writing_allowed == 1 ? 'badge-success' : ($character->character->is_gift_writing_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }}" data-toggle="tooltip"
                   data-placement="top"
-                  title="{{ $character->character->is_gift_writing_allowed == 1 ? 'OPEN for gift writing.' : ($character->character->is_gift_writing_allowed == 2 ? 'PLEASE ASK before gift writing.' : 'CLOSED for gift writing.') }}"><i
+                  title="{{ $character->character->is_gift_writing_allowed == 1 ? 'OPEN for gift writing.' : ($character->character->is_gift_writing_allowed == 2 ? 'PLEASE ASK before gift writing.' : 'CLOSED for gift writing.') }}">
+<i
                     class="fas fa-file-alt"></i></span>
                 <span class="btn {{ $character->character->is_gift_art_allowed == 1 ? 'badge-success' : ($character->character->is_gift_art_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }} ml-2" data-toggle="tooltip"
-                  data-placement="top" title="{{ $character->character->is_gift_art_allowed == 1 ? 'OPEN for gift art.' : ($character->character->is_gift_art_allowed == 2 ? 'PLEASE ASK before gift art.' : 'CLOSED for gift art.') }}"><i
+                  data-placement="top" title="{{ $character->character->is_gift_art_allowed == 1 ? 'OPEN for gift art.' : ($character->character->is_gift_art_allowed == 2 ? 'PLEASE ASK before gift art.' : 'CLOSED for gift art.') }}">
+<i
                     class="fas fa-pencil-ruler"></i></span>
               </div>
             </div>
@@ -89,7 +93,8 @@
                   @endif
                   <td class="d-flex align-items-center">
                     {!! Form::number('character_rewardable_quantity[' . $character->character_id . '][]', $reward->quantity, ['class' => 'form-control mr-2 character-rewardable-quantity']) !!}
-                    <a href="#" class="remove-reward d-block"><i class="fas fa-times text-muted"></i></a>
+                    <a href="#" class="remove-reward d-block">
+<i class="fas fa-times text-muted"></i></a>
                   </td>
                 </tr>
               @endforeach

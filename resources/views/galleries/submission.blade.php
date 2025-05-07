@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ isset($submission->hash) ? $submission->thumbnailUrl : asset('images/meta-image.png') }}
+  {{ isset($submission->hash) ? $submission->thumbnailUrl : asset('images/lorekeeper/meta-image.png') }}
 @endsection
 
 @section('gallery-content')
@@ -27,9 +27,11 @@
           ]) !!}
         @endif
         @if ($submission->user->id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
-          <a class="btn btn-outline-primary" href="/gallery/queue/{{ $submission->id }}" data-toggle="tooltip" title="View Log Details"><i class="fas fa-clipboard-list"></i></a>
+          <a class="btn btn-outline-primary" href="/gallery/queue/{{ $submission->id }}" data-toggle="tooltip" title="View Log Details">
+<i class="fas fa-clipboard-list"></i></a>
           @if ($submission->status != 'Rejected')
-            <a class="btn btn-outline-primary" href="/gallery/edit/{{ $submission->id }}"><i class="fas fa-edit"></i> Edit</a>
+            <a class="btn btn-outline-primary" href="/gallery/edit/{{ $submission->id }}">
+<i class="fas fa-edit"></i> Edit</a>
           @endif
         @endif
         {!! Form::close() !!}
@@ -85,7 +87,8 @@
           <div class="card">
             <div class="card-header">
               <h5>{{ $submission->displayTitle }}
-                <a class="float-right" href="{{ url('reports/new?url=') . $submission->url }}"><i class="fas fa-exclamation-triangle" data-toggle="tooltip" title="Click here to report this submission." style="opacity: 50%;"></i></a>
+                <a class="float-right" href="{{ url('reports/new?url=') . $submission->url }}">
+<i class="fas fa-exclamation-triangle" data-toggle="tooltip" title="Click here to report this submission." style="opacity: 50%;"></i></a>
               </h5>
               <div class="float-right">
                 @if (Auth::check() && ($submission->user->id != Auth::user()->id && $submission->collaborators->where('user_id', Auth::user()->id)->first() == null) && $submission->isVisible)
@@ -145,7 +148,8 @@
               @foreach ($submission->collaborators as $collaborator)
                 @if ($collaborator->user_id == Auth::user()->id)
                   <div class="mb-2">
-                    <div class="d-flex">{!! $collaborator->has_approved ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>' : '' !!}{!! $collaborator->user->displayName !!}:
+                    <div class="d-flex">{!! $collaborator->has_approved ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved">
+<i class="fas fa-check"></i></div>' : '' !!}{!! $collaborator->user->displayName !!}:
                     </div>
                     <div class="d-flex">
                       {!! Form::text('collaborator_data[]', $collaborator->data, ['class' => 'form-control mr-2', 'placeholder' => 'Role (Sketch, Lines, etc.)']) !!}
@@ -155,7 +159,8 @@
                   </div>
                 @else
                   <div class="d-flex">
-                    {!! $collaborator->has_approved ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>' : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
+                    {!! $collaborator->has_approved ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved">
+<i class="fas fa-check"></i></div>' : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                   </div>
                 @endif
               @endforeach
@@ -166,7 +171,8 @@
             @else
               @foreach ($submission->collaborators as $collaborator)
                 <div class="d-flex">
-                  {!! $submission->status == 'Pending' && $collaborator->has_approved ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>' : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
+                  {!! $submission->status == 'Pending' && $collaborator->has_approved ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved">
+<i class="fas fa-check"></i></div>' : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                 </div>
               @endforeach
             @endif
@@ -212,7 +218,8 @@
           </div>
           <div class="card-body">
             @foreach ($submission->promptSubmissions as $promptSubmission)
-              <strong><a href="{{ $promptSubmission->viewUrl }}">#{{ $promptSubmission->id }} for {!! $promptSubmission->prompt->name !!}</a></strong> by {!! $promptSubmission->user->displayName !!}<br />
+              <strong>
+<a href="{{ $promptSubmission->viewUrl }}">#{{ $promptSubmission->id }} for {!! $promptSubmission->prompt->name !!}</a></strong> by {!! $promptSubmission->user->displayName !!}<br />
             @endforeach
           </div>
         </div>

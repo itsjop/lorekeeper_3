@@ -21,7 +21,8 @@
     </div>
 
     {!! $user->displayName !!}
-    <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
+    <a href="{{ url('reports/new?url=') . $user->url }}">
+<i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
 
     @if ($user->settings->is_fto)
       <span class="badge badge-success float-right" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
@@ -101,7 +102,8 @@
               <div>{!! $currency->display($currency->quantity) !!}</div>
             @endforeach
           </div>
-          <div class="text-right"><a href="{{ $user->url . '/bank' }}">View all...</a></div>
+          <div class="text-right">
+<a href="{{ $user->url . '/bank' }}">View all...</a></div>
         </div>
       </div>
       <div class="card profile-inventory profile-assets-card">
@@ -124,7 +126,8 @@
               <div>No items owned.</div>
             @endif
           </div>
-          <div class="text-right"><a href="{{ $user->url . '/inventory' }}">View all...</a></div>
+          <div class="text-right">
+<a href="{{ $user->url . '/inventory' }}">View all...</a></div>
         </div>
       </div>
     </div>
@@ -143,7 +146,8 @@
         @foreach ($chunk as $character)
           <div class="col-md-3 col-6 text-center">
             <div>
-              <a href="{{ $character->url }}"><img src="{{ $character?->image?->thumbnailUrl }}" class="img-thumbnail" alt="{{ $character->fullName }}" /></a>
+              <a href="{{ $character->url }}">
+<img src="{{ $character?->image?->thumbnailUrl }}" class="img-thumbnail" alt="{{ $character->fullName }}" /></a>
             </div>
             <div class="mt-1">
               <a href="{{ $character->url }}" class="h5 mb-0">
@@ -157,9 +161,11 @@
       </div>
     @endforeach
 
-    <div class="text-right"><a href="{{ $user->url . '/characters' }}">View all...</a></div>
+    <div class="text-right">
+<a href="{{ $user->url . '/characters' }}">View all...</a></div>
     <hr>
-    <br><br>
+    <br>
+<br>
 
     @comments(['model' => $user->profile, 'perPage' => 5])
   @endsection

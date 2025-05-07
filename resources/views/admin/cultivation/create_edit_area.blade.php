@@ -39,7 +39,8 @@
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($area->background_extension)
-          <a href="{{ $area->backgroundImageUrl }}" data-lightbox="entry" data-title="{{ $area->name }}"><img src="{{ $area->backgroundImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $area->backgroundImageUrl }}" data-lightbox="entry" data-title="{{ $area->name }}">
+<img src="{{ $area->backgroundImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Background Image (Optional)') !!} {!! add_help('This image will serve as the background to the area which plots will be rendered on to.') !!}
         <div>{!! Form::file('background_image') !!}</div>
@@ -53,7 +54,8 @@
 
       <div class="form-group col-md-6">
         @if ($area->plot_extension)
-          <a href="{{ $area->plotImageUrl }}" data-lightbox="entry" data-title="{{ $area->name }}"><img src="{{ $area->plotImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $area->plotImageUrl }}" data-lightbox="entry" data-title="{{ $area->name }}">
+<img src="{{ $area->plotImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Default Plot Image (Optional)') !!} {!! add_help('This image is for plots that are not yet ready for planting.') !!}
         <div>{!! Form::file('plot_image') !!}</div>
@@ -97,7 +99,8 @@
                 <td class="loot-row-select">
                   {!! Form::select('plot_id[]', $plots, $plot->id, ['class' => 'form-control item-select', 'placeholder' => 'Select Plot']) !!}
                 </td>
-                <td class="text-right"><a href="#" class="btn btn-danger remove-plot-button">Remove</a></td>
+                <td class="text-right">
+<a href="#" class="btn btn-danger remove-plot-button">Remove</a></td>
               </tr>
             @endforeach
           @endif
@@ -126,7 +129,8 @@
           <td class="loot-row-select">
             {!! Form::select('plot_id[]', $plots, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Plot']) !!}
           </td>
-          <td class="text-right"><a href="#" class="btn btn-danger remove-plot-button">Remove</a></td>
+          <td class="text-right">
+<a href="#" class="btn btn-danger remove-plot-button">Remove</a></td>
         </tr>
       </tbody>
     </table>

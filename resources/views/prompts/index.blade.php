@@ -12,12 +12,14 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-body text-center">
-          <img src="{{ asset('images/inventory.png') }}" alt="Prompts" />
+          <img src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Prompts" />
           <h5 class="card-title">Prompts</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><a href="{{ url('prompts/prompt-categories') }}">Prompts Categories</a></li>
-          <li class="list-group-item"><a href="{{ url('prompts/prompts') }}">All Prompts</a></li>
+          <li class="list-group-item">
+<a href="{{ url('prompts/prompt-categories') }}">Prompts Categories</a></li>
+          <li class="list-group-item">
+<a href="{{ url('prompts/prompts') }}">All Prompts</a></li>
         </ul>
       </div>
     </div>

@@ -14,7 +14,9 @@
   <p>The sorting order reflects the order in which the border categories will be displayed in characters' border lists, as
     well as on the world pages.</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/border-categories/create') }}"><i class="fas fa-plus"></i> Create New Border Category</a></div>
+  <div class="text-right mb-3">
+<a class="btn btn-primary" href="{{ url('admin/data/border-categories/create') }}">
+<i class="fas fa-plus"></i> Create New Border Category</a></div>
   @if (!count($categories))
     <p>No border categories found.</p>
   @else

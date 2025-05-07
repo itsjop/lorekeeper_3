@@ -9,14 +9,16 @@
     <i class="fas fa-crown"></i></a>
 @endif
 {!! breadcrumbs(['World' => 'world', 'Fauna' => 'world/faunas', $fauna->name => 'world/faunas/' . $fauna->id]) !!}
-<h1 style="clear:both;"><img src="{{ $fauna->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $fauna->displayName !!}@isset($fauna->scientific_name)
+<h1 style="clear:both;">
+<img src="{{ $fauna->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $fauna->displayName !!}@isset($fauna->scientific_name)
   <span class="ml-2" style="opacity:0.5; font-size:0.7em;font-style:italic">{!! $fauna->scientific_name !!}</span>
 @endisset
 </h1>
 <h5>{!! $fauna->category ? ucfirst($fauna->category->displayName) : 'Miscellaneous' !!}</h5>
 
 @if ($fauna->image_extension)
-<div class="text-center"><img src="{{ $fauna->imageUrl }}" class="mw-100 mb-3" /></div>
+<div class="text-center">
+<img src="{{ $fauna->imageUrl }}" class="mw-100 mb-3" /></div>
 @endif
 
 @isset($fauna->summary)

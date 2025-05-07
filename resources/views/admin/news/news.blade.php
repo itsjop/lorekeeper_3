@@ -11,7 +11,9 @@
 
   <p>You can create new news posts here. Creating a news post alerts every user that there is a new post, unless the post is marked as not viewable (see the post creation page for details).</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/news/create') }}"><i class="fas fa-plus"></i> Create New Post</a></div>
+  <div class="text-right mb-3">
+<a class="btn btn-primary" href="{{ url('admin/news/create') }}">
+<i class="fas fa-plus"></i> Create New Post</a></div>
   @if (!count($newses))
     <p>No news found.</p>
   @else
@@ -53,7 +55,8 @@
                 <div class="logs-table-cell">{!! pretty_date($news->updated_at) !!}</div>
               </div>
               <div class="col-12 col-md-1 text-right">
-                <div class="logs-table-cell"><a href="{{ url('admin/news/edit/' . $news->id) }}" class="btn btn-primary py-0 px-2 w-100">Edit</a></div>
+                <div class="logs-table-cell">
+<a href="{{ url('admin/news/edit/' . $news->id) }}" class="btn btn-primary py-0 px-2 w-100">Edit</a></div>
               </div>
             </div>
           </div>

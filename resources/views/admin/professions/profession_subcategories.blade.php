@@ -13,8 +13,10 @@
   <p>The sorting order reflects the order in which the profession subcategories will be displayed on the world pages.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-secondary" href="{{ url('admin/data/professions') }}"><i class="fas fa-undo-alt mr-2"></i> Back to Professions</a>
-    <a class="btn btn-primary" href="{{ url('admin/data/profession-subcategories/create') }}"><i class="fas fa-plus"></i> Create New Profession Subcategory</a>
+    <a class="btn btn-secondary" href="{{ url('admin/data/professions') }}">
+<i class="fas fa-undo-alt mr-2"></i> Back to Professions</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/profession-subcategories/create') }}">
+<i class="fas fa-plus"></i> Create New Profession Subcategory</a>
   </div>
   @if (!count($subcategories))
     <p>No profession subcategories found.</p>

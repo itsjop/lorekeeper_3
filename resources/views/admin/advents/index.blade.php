@@ -11,7 +11,9 @@
 
   <p>This is a list of advent calendars.</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/advent-calendars/create') }}"><i class="fas fa-plus"></i> Create New Advent Calendar</a></div>
+  <div class="text-right mb-3">
+<a class="btn btn-primary" href="{{ url('admin/data/advent-calendars/create') }}">
+<i class="fas fa-plus"></i> Create New Advent Calendar</a></div>
 
   @if (!count($advents))
     <p>No advent calendars found.</p>

@@ -21,7 +21,8 @@
   <p class="mb-0">These are relatively short definitions of terms that will be displayed together on a searchable page for your users.</p>
 
   <div class="text-right mb-3 mt-2">
-    <a class="btn btn-primary" href="{{ url('admin/world/glossary/create') }}"><i class="fas fa-plus mr-2"></i> Glossary Term</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/glossary/create') }}">
+<i class="fas fa-plus mr-2"></i> Glossary Term</a>
   </div>
 
   @if (!count($glossaries))

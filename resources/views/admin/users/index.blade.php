@@ -64,7 +64,8 @@
         <div class="logs-table-row">
           <div class="row flex-wrap">
             <div class="col-12 col-md-4 ">
-              <div class="logs-table-cell"><a href="{{ $user->adminUrl }}">{!! $user->is_banned ? '<strike>' : '' !!}{{ $user->name }}{!! $user->is_banned ? '</strike>' : '' !!}</a></div>
+              <div class="logs-table-cell">
+<a href="{{ $user->adminUrl }}">{!! $user->is_banned ? '<strike>' : '' !!}{{ $user->name }}{!! $user->is_banned ? '</strike>' : '' !!}</a></div>
             </div>
             <div class="col-4 col-md-3">
               <div class="logs-table-cell">{!! $user->displayAlias !!}</div>

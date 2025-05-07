@@ -181,12 +181,12 @@ class CultivationPlot extends Model
      */
     public function getStageImage($stage)
     {
-        //stage 1 = nothing planted 
-        if (!$this->stage_1_extension && $stage == 1) return "/images/stage1.png";
-        if (!$this->stage_2_extension && $stage == 2) return "/images/stage2.png";
-        if (!$this->stage_3_extension && $stage == 3) return "/images/stage3.png";
-        if (!$this->stage_4_extension && $stage == 4) return "/images/stage4.png";
-        if (!$this->stage_5_extension && $stage == 5) return "/images/stage5.png";
+        //stage 1 = nothing planted
+        if (!$this->stage_1_extension && $stage == 1) return "/images/lorekeeper/stage1.png";
+        if (!$this->stage_2_extension && $stage == 2) return "/images/lorekeeper/stage2.png";
+        if (!$this->stage_3_extension && $stage == 3) return "/images/lorekeeper/stage3.png";
+        if (!$this->stage_4_extension && $stage == 4) return "/images/lorekeeper/stage4.png";
+        if (!$this->stage_5_extension && $stage == 5) return "/images/lorekeeper/stage5.png";
 
         return asset($this->imageDirectory . '/' . $this->getStageImageFileNameAttribute($stage));
     }

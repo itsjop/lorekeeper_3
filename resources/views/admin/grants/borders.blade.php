@@ -23,13 +23,16 @@
     <div id="borderList">
       <div class="d-flex mb-2">
         {!! Form::select('border_ids[]', $borders, null, ['class' => 'form-control mr-2 default border-select', 'placeholder' => 'Select Border']) !!}
-        <a href="#" class="remove-border btn btn-danger mb-2 disabled"><i class="fas fa-times"></i></a>
+        <a href="#" class="remove-border btn btn-danger mb-2 disabled">
+<i class="fas fa-times"></i></a>
       </div>
     </div>
-    <div><a href="#" class="btn btn-primary" id="add-border">Add Border</a></div>
+    <div>
+<a href="#" class="btn btn-primary" id="add-border">Add Border</a></div>
     <div class="border-row hide mb-2">
       {!! Form::select('border_ids[]', $borders, null, ['class' => 'form-control mr-2 border-select', 'placeholder' => 'Select Border']) !!}
-      <a href="#" class="remove-border btn btn-danger mb-2"><i class="fas fa-times"></i></a>
+      <a href="#" class="remove-border btn btn-danger mb-2">
+<i class="fas fa-times"></i></a>
     </div>
   </div>
 

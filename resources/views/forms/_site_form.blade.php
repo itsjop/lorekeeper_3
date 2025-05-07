@@ -35,11 +35,13 @@
   @if (!$page)
     <hr>
     <div class="text-right mb-2 mr-2">
-      <a class="btn" href="{{ $form->url }}"><i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</a>
+      <a class="btn" href="{{ $form->url }}">
+<i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</a>
     </div>
   @else
     <div class="text-right mb-2 mr-2">
-      <span class="btn"><i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</span>
+      <span class="btn">
+<i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</span>
     </div>
   @endif
 </div>

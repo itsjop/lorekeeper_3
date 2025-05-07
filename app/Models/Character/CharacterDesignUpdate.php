@@ -22,7 +22,7 @@ class CharacterDesignUpdate extends Model {
         'character_id', 'status', 'user_id', 'staff_id',
         'comments', 'staff_comments', 'data', 'extension',
         'use_cropper', 'x0', 'x1', 'y0', 'y1',
-        'hash', 'species_id', 'subtype_id', 'rarity_id',
+        'hash', 'species_id', 'subtype_ids', 'rarity_id',
         'has_comments', 'has_image', 'has_addons', 'has_features',
         'submitted_at', 'update_type', 'fullsize_hash',
         'approval_votes', 'rejection_votes'
@@ -42,6 +42,8 @@ class CharacterDesignUpdate extends Model {
      */
     protected $casts = [
         'submitted_at' => 'datetime',
+        'subtype_ids'  => 'array',
+        'data'         => 'array',
     ];
 
     /**
@@ -95,13 +97,6 @@ class CharacterDesignUpdate extends Model {
      */
     public function species() {
         return $this->belongsTo(Species::class, 'species_id');
-    }
-
-    /**
-     * Get the subtype of the design update.
-     */
-    public function subtype() {
-        return $this->belongsTo(Subtype::class, 'subtype_id');
     }
 
     /**
@@ -217,15 +212,6 @@ class CharacterDesignUpdate extends Model {
         ACCESSORS
 
     **********************************************************************************************/
-
-    /**
-     * Get the data attribute as an associative array.
-     *
-     * @return array
-     */
-    public function getDataAttribute() {
-        return json_decode($this->attributes['data'], true);
-    }
 
     /**
      * Get the items (UserItem IDs) attached to this update request.
@@ -350,7 +336,7 @@ class CharacterDesignUpdate extends Model {
      * @return string
      */
     public function getVoteDataAttribute() {
-        return collect(json_decode($this->attributes['vote_data'], true));
+        return collect($this->attributes['vote_data'], true);
     }
 
     /**********************************************************************************************
@@ -382,5 +368,25 @@ class CharacterDesignUpdate extends Model {
         }
 
         return $result;
+    }
+
+    /**
+     * Get the subtypes of the design update.
+     */
+    public function subtypes() {
+        return $this->subtype_ids;
+    }
+
+    /**
+     * Get the subtypes of the design update.
+     */
+    public function displaySubtypes() {
+        $subtypes = $this->subtypes();
+        $result = [];
+        foreach ($subtypes as $subtype) {
+            $result[] = Subtype::find($subtype)->displayName;
+        }
+
+        return implode(', ', $result);
     }
 }

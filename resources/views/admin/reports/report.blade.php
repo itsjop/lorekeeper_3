@@ -29,7 +29,8 @@
         <div class="col-md-2 col-4">
           <h5>URL / Title</h5>
         </div>
-        <div class="col-md-10 col-8"><a href="{{ $report->url }}">{{ $report->url }}</a></div>
+        <div class="col-md-10 col-8">
+<a href="{{ $report->url }}">{{ $report->url }}</a></div>
       </div>
       @if ($report->is_br == 1)
         <div class="row">

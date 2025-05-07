@@ -9,12 +9,14 @@
 
   @if ((Auth::check() && Auth::user()->id === $shop->user_id) || Auth::user()->hasPower('edit_inventories'))
     <a data-toggle="tooltip" title="Edit Shop" href="{{ url('user-shops/edit') . '/' . $shop->id }}" class="mb-2 float-right">
-      <h3><i class="fas fa-pencil-alt"></i></h3>
+      <h3>
+<i class="fas fa-pencil-alt"></i></h3>
     </a>
   @endif
 
   <h1>
-    {{ $shop->name }} <a href="{{ url('reports/new?url=') . $shop->url }}"><i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this shop." style="opacity: 50%; font-size:0.5em;"></i></a>
+    {{ $shop->name }} <a href="{{ url('reports/new?url=') . $shop->url }}">
+<i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this shop." style="opacity: 50%; font-size:0.5em;"></i></a>
   </h1>
   <div class="mb-3">
     Owned by {!! $shop->user->displayName !!}
@@ -50,7 +52,8 @@
                   @foreach ($chunk as $item)
                     <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $item->pivot->id }}">
                       <div class="mb-1">
-                        <a href="#" class="inventory-stack"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
+                        <a href="#" class="inventory-stack">
+<img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
                       </div>
                       <div>
                         <a href="#" class="inventory-stack inventory-stack-name"><strong>{{ $item->name }}</strong></a>

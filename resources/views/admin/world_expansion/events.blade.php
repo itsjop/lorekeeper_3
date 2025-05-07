@@ -10,8 +10,10 @@
   <h1>Events</h1>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/event-categories') }}"><i class="fas fa-folder mr-2"></i> Event Categories</a>
-    <a class="btn btn-primary" href="{{ url('admin/world/events/create') }}"><i class="fas fa-plus mr-2"></i> Create New Event</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/event-categories') }}">
+<i class="fas fa-folder mr-2"></i> Event Categories</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/events/create') }}">
+<i class="fas fa-plus mr-2"></i> Create New Event</a>
   </div>
   @if (!count($events))
     <p>No events found.</p>
@@ -43,7 +45,8 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $event->url !!}
-                @if ($event->thumb_extension) data-toggle="tooltip" title="<img src='{{ $event->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($event->name) }} " @endif />{!! $event->name !!}</a>
+                @if ($event->thumb_extension) data-toggle="tooltip" title="<img src='{{ $event->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+<br> {{ ucfirst($event->name) }} " @endif />{!! $event->name !!}</a>
             </td>
             <td>
               {!! $event->category ? $event->category->displayName : '' !!}

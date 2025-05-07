@@ -23,14 +23,14 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="og:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
+  <meta property="og:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif">
   <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="og:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="twitter:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
+  <meta property="twitter:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif">
   <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="twitter:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
@@ -38,24 +38,21 @@
   <meta name="robots" content="noai">
   <meta name="robots" content="noimageai">
 
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/site.js') }}"></script>
-  <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap4-toggle.min.js') }}"></script>
-  <script src="{{ asset('js/tinymce.min.js') }}"></script>
-  <script src="{{ asset('js/jquery.tinymce.min.js') }}"></script>
-  <script src="{{ asset('js/lightbox.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
-  <script src="{{ asset('js/bs-custom-file-input.min.js') }}"></script>
-  <script src="{{ asset('js/selectize.min.js') }}"></script>
-  <script src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>
-  <script src="{{ asset('js/croppie.min.js') }}"></script>
-
-  <!-- Scripts for wheel of fortune dailies -->
-  <script src="{{ asset('js/winwheel.min.js') }}"></script>
-  <script src="{{ asset('js/tweenmax.min.js') }}"></script>
-  <script src="{{ asset('js/image-map-resize.js') }}"></script>
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script defer src="{{ mix('js/app-secondary.js') }}"></script>
+    <script defer src="{{ asset('js/site.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+    <script defer src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>
+    <script defer src="{{ asset('js/croppie.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/bs-custom-file-input.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.tinymce.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
+    <script src="{{ asset('js/tinymce.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap4-toggle.min.js') }}"></script>
+    <script src="{{ asset('js/lightbox.min.js') }}"></script>
+    <script src="{{ asset('js/selectize.min.js') }}"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -66,7 +63,11 @@
   {{-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet"> --}}
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Stylish&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
+    <!-- Styles -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/lorekeeper.css'))) }}" rel="stylesheet">
+
+     <!-- Styles -->
   <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/all.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/jquery-ui.min.css') }}" rel="stylesheet">
@@ -78,7 +79,25 @@
   <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
 
-  <!-- Custom Styles -->
+    {{-- Font Awesome --}}
+    <link defer href="{{ faVersion() }}" rel="stylesheet">
+
+    {{-- jQuery UI --}}
+    <link defer href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
+
+    {{-- Bootstrap Toggle --}}
+    <link defer href="{{ asset('css/bootstrap4-toggle.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/lightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/croppie.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/selectize.bootstrap4.css') }}" rel="stylesheet">
+
+    @if (file_exists(public_path() . '/css/custom.css'))
+        <link href="{{ asset('css/custom.css') . '?v=' . filemtime(public_path('css/lorekeeper.css')) }}" rel="stylesheet">
+    @endif
+    <!-- Custom Styles -->
   <link href="{{ asset('css/mixins.css') }}" rel="stylesheet">
   <link href="{{ asset('css/sitewide.css') }}" rel="stylesheet">
   <link href="{{ asset('css/global-vars.css') }}" rel="stylesheet">
@@ -99,6 +118,8 @@
   @include('feed::links')
 
   @include('js._external_link_alert_js')
+
+    @yield('head')
 </head>
 
 <body>
@@ -145,14 +166,17 @@
         @endif
         @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
           @if (Auth::user()->is_news_unread)
-            <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
+            <div class="alert alert-info">
+<a href="{{ url('news') }}">There is a new news post!</a></div>
           @endif
           @if (Auth::user()->is_sales_unread)
-            <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
+            <div class="alert alert-info">
+<a href="{{ url('sales') }}">There is a new sales post!</a></div>
           @endif
         @endif
         @if (Auth::check() && Auth::user()->is_polls_unread)
-          <div class="alert alert-info"><a href="{{ url('forms') }}">There is a new site poll!</a></div>
+          <div class="alert alert-info">
+<a href="{{ url('forms') }}">There is a new site poll!</a></div>
         @endif
         @include('flash::message')
         @yield('content')
@@ -176,46 +200,45 @@
         </div>
       </div>
 
-      @yield('scripts')
-      @include('layouts._pagination_js')
-      <script>
-        $(document).on('focusin', function(e) {
-          if ($(e.target).closest(
-              ".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
-            e.stopImmediatePropagation();
-          }
-        });
-
-        $(function() {
-          $('[data-toggle="tooltip"]').tooltip({
-            html: true
+        @yield('scripts')
+        @include('layouts._pagination_js')
+        <script>
+          $(document).on('focusin', function(e) {
+            if ($(e.target).closest(
+                ".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+              e.stopImmediatePropagation();
+            }
           });
-          $('.cp').colorpicker();
-          tinymce.init({
-            selector: '.wysiwyg',
-            height: 500,
-            menubar: false,
-            convert_urls: false,
-            plugins: [
-              'advlist autolink lists link image charmap print preview anchor',
-              'searchreplace visualblocks code fullscreen spoiler',
-              'insertdatetime media table paste code help wordcount'
-            ],
-            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
-            content_css: [
-              '{{ asset('css/vendor/app.css') }}',
-              '{{ asset('css/vendor/lorekeeper.css') }}'
-            ],
-            spoiler_caption: 'Toggle Spoiler',
-            target_list: false
-          });
-          bsCustomFileInput.init();
-          var $mobileMenuButton = $('#mobileMenuButton');
-          var $sidebar = $('#sidebar');
-          $('#mobileMenuButton').on('click', function(e) {
-            e.preventDefault();
-            $sidebar.toggleClass('active');
-          });
+            $(function() {
+                $('[data-toggle="tooltip"]').tooltip({
+                    html: true
+                });
+                $('.cp').colorpicker();
+                tinymce.init({
+                    selector: '.wysiwyg',
+                    height: 500,
+                    menubar: false,
+                    convert_urls: false,
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen spoiler',
+                        'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
+                    content_css: [
+                        '{{ asset('css/app.css') }}',
+                        '{{ asset('css/lorekeeper.css') }}'
+                    ],
+                    spoiler_caption: 'Toggle Spoiler',
+                    target_list: false
+                });
+                bsCustomFileInput.init();
+                var $mobileMenuButton = $('#mobileMenuButton');
+                var $sidebar = $('#sidebar');
+                $('#mobileMenuButton').on('click', function(e) {
+                    e.preventDefault();
+                    $sidebar.toggleClass('active');
+                });
 
           $('.inventory-log-stack').on('click', function(e) {
             e.preventDefault();

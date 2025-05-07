@@ -6,10 +6,12 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Event Categories' => 'world/event-categories', $category->name => 'world/event-categories/' . $category->id]) !!}
-  <h1><img src="{{ $category->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" /> {!! $category->displayName !!}</h1>
+  <h1>
+<img src="{{ $category->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" /> {!! $category->displayName !!}</h1>
 
   @if ($category->image_extension)
-    <div class="text-center"><img src="{{ $category->imageUrl }}" class="mw-100 mb-3" /></div>
+    <div class="text-center">
+<img src="{{ $category->imageUrl }}" class="mw-100 mb-3" /></div>
   @endif
 
   @if (count($category->events))

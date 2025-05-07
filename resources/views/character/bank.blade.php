@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ $character->image->thumbnailUrl }}
+  {{ $character->image->content_warnings ? asset('images/lorekeeper/content-warning.png') : $character->image->thumbnailUrl }}
 @endsection
 
 @section('profile-content')
@@ -19,7 +19,8 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal">
+<i class="fas fa-cog"></i> Admin</a>
     @endif
     Currencies
   </h3>

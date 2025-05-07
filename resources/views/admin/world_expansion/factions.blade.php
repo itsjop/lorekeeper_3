@@ -9,9 +9,11 @@
 
 
   <div class="float-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/faction-types') }}"><i class="fas fa-folder mr-2"></i> Faction Types</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/faction-types') }}">
+<i class="fas fa-folder mr-2"></i> Faction Types</a>
     @if (count($types))
-      <a class="btn btn-primary" href="{{ url('admin/world/factions/create') }}"><i class="fas fa-plus mr-2"></i> Create New Faction</a>
+      <a class="btn btn-primary" href="{{ url('admin/world/factions/create') }}">
+<i class="fas fa-plus mr-2"></i> Create New Faction</a>
     @endif
   </div>
   <h1>Factions</h1>
@@ -33,7 +35,8 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $faction->url !!}
-                @if ($faction->thumb_extension) data-toggle="tooltip" title="<img src='{{ $faction->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($faction->style) }} " @endif />{!! $faction->name !!}</a>
+                @if ($faction->thumb_extension) data-toggle="tooltip" title="<img src='{{ $faction->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+<br> {{ ucfirst($faction->style) }} " @endif />{!! $faction->name !!}</a>
             </td>
             <td class="text-right">
               <a href="{{ url('admin/world/factions/edit/' . $faction->id) }}" class="btn btn-primary">Edit</a>

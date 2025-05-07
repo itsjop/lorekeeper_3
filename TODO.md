@@ -1,4 +1,11 @@
+this fuckass merge, make sure
+- species_id also has subtype_ids (plural)
+- transformations made the cut
+- accidental ≥
+- rearrage/remove duplicate js/css in main
 # CRITICAL
+
+- [ ] pets
 - [ ] Mailersend Error Fix
 - [x] Item Preview Error
 - [ ] appprovals

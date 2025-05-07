@@ -13,7 +13,8 @@
     </div>
     <div class="col-lg-5 col-12 text-lg-right text-center">
       <a href="/professions/{{ $category->id }}">
-        <div class="btn btn-primary"><i class="fas fa-search"></i> View professions</div>
+        <div class="btn btn-primary">
+<i class="fas fa-search"></i> View professions</div>
       </a>
     </div>
   </div>
@@ -39,7 +40,8 @@
                 <div class="row w-100 m-0">
                   @foreach ($characters as $character)
                     <div class="col-lg-3 col-md-4 col-12 mb-2">
-                      <a href="{{ $character->url }}"><img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail ml-thumbnail" style="max-width:50px;" alt="{{ $character->fullName }}" /></a>
+                      <a href="{{ $character->url }}">
+<img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail ml-thumbnail" style="max-width:50px;" alt="{{ $character->fullName }}" /></a>
 
                       {!! $character->displayName !!}
                     </div>
