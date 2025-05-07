@@ -23,14 +23,16 @@
     function attachListeners(node) {
       node.find('.character-code').on('change', function(e) {
         var $parent = $(this).parent().parent().parent().parent();
-        $parent.find('.character-image-loaded').load('{{ url('submissions/new/character') }}/' + $(this).val(), function(response, status, xhr) {
+        $parent.find('.character-image-loaded').load('{{ url('submissions/new/character') }}/' + $(this).val(), function(
+          response, status, xhr) {
           $parent.find('.character-image-blank').addClass('hide');
           $parent.find('.character-image-loaded').removeClass('hide');
           $parent.find('.gift-notifs').removeClass('hide');
           $parent.find('.character-rewards').removeClass('hide');
           updateRewardNames(node, node.find('.character-info').data('id'));
         });
-        $parent.find('.character-gift-permissions').load('{{ url('submissions/new/character-permissions') }}/' + $(this).val());
+        $parent.find('.character-gift-permissions').load('{{ url('submissions/new/character-permissions') }}/' + $(this)
+          .val());
       });
       node.find('.remove-character').on('click', function(e) {
         e.preventDefault();
@@ -71,6 +73,20 @@
           $cell.children('.character-tables').removeClass('hide');
         }
       });
+    }
+
+    function updateOptions() {
+      if (flat) $('#flatOptions').removeClass('hide');
+      else $('#flatOptions').addClass('hide');
+
+      if (range) $('#rangeOptions').removeClass('hide');
+      else $('#rangeOptions').addClass('hide');
+
+      if (min) $('#minOptions').removeClass('hide');
+      else $('#minOptions').addClass('hide');
+
+      if (rate) $('#rateOptions').removeClass('hide');
+      else $('#rateOptions').addClass('hide');
     }
 
     function updateRewardNames(node, id) {
