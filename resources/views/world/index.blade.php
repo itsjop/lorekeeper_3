@@ -25,7 +25,9 @@
             <li class="list-group-item"><a href="{{ url('world/universaltraits') }}">Universal Trait Index</a></li>
           @endif
           <li class="list-group-item"><a href="{{ url('world/character-categories') }}">Character Categories</a></li>
-          <li class="list-group-item"><a href="{{ url('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a></li>
+          <li class="list-group-item"><a
+              href="{{ url('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -39,6 +41,7 @@
           <li class="list-group-item"><a href="{{ url('world/item-categories') }}">Item Categories</a></li>
           <li class="list-group-item"><a href="{{ url('world/items') }}">All Items</a></li>
           <li class="list-group-item"><a href="{{ url('world/currencies') }}">Currencies</a></li>
+          <li class="list-group-item"><a href="{{ url('world/maps') }}">Maps</a></li>
         </ul>
       </div>
     </div>

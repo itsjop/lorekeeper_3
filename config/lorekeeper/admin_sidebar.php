@@ -69,6 +69,10 @@ return [
         'name' => 'Forms & Polls',
         'url' => 'admin/forms'
       ],
+      [
+        'name' => 'Maps',
+        'url' => 'admin/maps'
+      ]
     ],
   ],
   'Users'      => [
