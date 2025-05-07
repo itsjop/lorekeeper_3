@@ -55,7 +55,7 @@
   <!-- Scripts for wheel of fortune dailies -->
   <script src="{{ asset('js/winwheel.min.js') }}"></script>
   <script src="{{ asset('js/tweenmax.min.js') }}"></script>
-    <script src="{{ asset('js/image-map-resize.js') }}"></script>
+  <script src="{{ asset('js/image-map-resize.js') }}"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -227,33 +227,36 @@
           $('.spoiler-toggle').click(function() {
             $(this).next().toggle();
           });
-                });
+        });
 
-                $(document).ready(function() {
-                    var $imageMaps = $('img[usemap]');
-                    // loop through each element
-                    $imageMaps.each(function() {
-                        // get the map name
-                        var mapName = $(this).attr('usemap').replace('#', '');
-                        // get the map object
-                        var $map = $('map[name="' + mapName + '"]');
-                        // resize image map
-                        $map.imageMapResize();
-                    });
-                });
+        $(document).ready(function() {
+          var $imageMaps = $('img[usemap]');
+          // loop through each element
+          $imageMaps.each(function() {
+            // get the map name
+            var mapName = $(this).attr('usemap').replace('#', '');
+            // get the map object
+            var $map = $('map[name="' + mapName + '"]');
+            // resize image map
+            $map.imageMapResize();
+          });
+        });
 
-                $('.tooltip-bot, .tooltip-bot a, .nav-social-links a').tooltip({
-                    placement: "top"
-                });
+        $('.tooltip-bot, .tooltip-bot a, .nav-social-links a').tooltip({
+          placement: "top"
+        });
 
-                $(document).mousemove( function(e) {
-                    // check if $('#Image-Maps-Com-process-map') exists
-                    if($('#Image-Maps-Com-process-map').length == 0) {
-                        return;
-                    }
-                    var mouseX = e.pageX - $('#Image-Maps-Com-process-map').offset().left ;
-                    var mouseY = e.pageY - $('#Image-Maps-Com-process-map').offset().top - 5;
-                    $('.tooltip').css({'top':mouseY,'left':mouseX}).fadeIn('slow');
+        $(document).mousemove(function(e) {
+          // check if $('#Image-Maps-Com-process-map') exists
+          if ($('#Image-Maps-Com-process-map').length == 0) {
+            return;
+          }
+          var mouseX = e.pageX - $('#Image-Maps-Com-process-map').offset().left;
+          var mouseY = e.pageY - $('#Image-Maps-Com-process-map').offset().top - 5;
+          $('.tooltip').css({
+            'top': mouseY,
+            'left': mouseX
+          }).fadeIn('slow');
         });
       </script>
     </div>
