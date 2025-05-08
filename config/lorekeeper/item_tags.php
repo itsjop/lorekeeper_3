@@ -13,63 +13,15 @@ return [
     |
     */
 
-  'box'  => [
-    'name'             => 'Box',
-    'text_color'       => '#ffffff',
-    'background_color' => '#f6993f',
-  ],
+    'box' => [
+        'name' => 'Box',
+        'text_color' => '#ffffff',
+        'background_color' => '#f6993f'
+    ],
 
-  'slot' => [
-    'name'             => 'Slot',
-    'text_color'       => '#ffffff',
-    'background_color' => '#1fd1a7',
-  ],
-
-  'splice' => [
-    'name'             => 'Splice',
-    'text_color'       => '#ffffff',
-    'background_color' => '#a69bc6',
-  ],
-
-  // pokemon ftw
-  // if you want to change this, just edit the 'name' part.
-  'rare_candy' => [
-    'name'             => 'Rare Candy',
-    'text_color'       => '#ffffff',
-    'background_color' => '#96afdb',
-  ],
-
-  'coupon' => [
-    'name'             => 'Coupon',
-    'text_color'       => '#ffffff',
-    'background_color' => '#ff5ca8',
-  ],
-  'donateable' => [
-    'name' => 'Donateable',
-    'text_color' => '#ffffff',
-    'background_color' => '#9e5663'
-  ],
-
-  'border' => [
-    'name' => 'Border',
-    'text_color' => '#ffffff',
-    'background_color' => '#bb6e7d'
-  ],
-
-  'seed' => [
-    'name' => 'Seed',
-    'text_color' => '#ffffff',
-    'background_color' => '#3E7C5D'
-  ],
-
-  'tool' => [
-    'name' => 'Tool',
-    'text_color' => '#ffffff',
-    'background_color' => '#332312'
-  ],
-  'exploration' => [
-    'name' => 'Exploration',
-    'text_color' => '#ffffff',
-    'background_color' => '#808000'
-  ],
+    'slot' => [
+        'name' => 'Slot',
+        'text_color' => '#ffffff',
+        'background_color' => '#1fd1a7'
+    ],
 ];

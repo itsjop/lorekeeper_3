@@ -116,6 +116,9 @@ class AddSiteSettings extends Command {
 
         $this->addSiteSetting('allow_users_to_delete_profile_comments', 0, '0: Users cannot delete profile comments, 1: Users can delete profile comments.');
 
+        $this->addSiteSetting('trait_remover_needed', 0, '0: No item needed to remove traits via design update. 1: Trait Remover item needed to remove traits via design update.');
+        $this->addSiteSetting('trait_per_item', 0, '0: One item unlocks x traits for selection, and x of them can be chosen. 1: One item unlocks x traits for selection, only one of them can be chosen.');
+
         $this->line("\nSite settings up to date!");
     }
 
