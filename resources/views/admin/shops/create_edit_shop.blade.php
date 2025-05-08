@@ -62,15 +62,15 @@
     </div>
   </div>
 
-  <div class="form-group">
+  {{-- <div class="form-group">
     {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle', 'id' => 'use_coupons']) !!}
     {!! Form::label('use_coupons', 'Allow Coupons?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Note that ALL coupons will be allowed to be used, unless specified otherwise.') !!}
-  </div>
-  <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
+  </div> --}}
+  {{-- <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
     {!! Form::label('allowed_coupons', 'Allowed Coupon(s)', ['class' => 'form-check-label']) !!}
     <p>Leave blank to allow ALL coupons.</p>
     {!! Form::select('allowed_coupons[]', $coupons, json_decode($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!}
-  </div>
+  </div> --}}
 
   <div class="form-group">
     {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, ['class' => 'form-check-input shop-timed shop-toggle shop-field', 'data-toggle' => 'toggle', 'id' => 'is_timed_shop']) !!}
@@ -134,14 +134,14 @@
     {!! Form::label('is_staff', 'For Staff?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, the shop will not be visible to regular users, only staff.') !!}
   </div>
 
-  <div class="form-group">
+  {{-- <div class="form-group">
     {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle', 'id' => 'use_coupons']) !!}
     {!! Form::label('use_coupons', 'Allow Coupons?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Note that ALL coupons will be allowed to be used, unless specified otherwise.') !!}
-  </div>
-  <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
+  </div> --}}
+  {{-- <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
     {!! Form::label('allowed_coupons', 'Allowed Coupon(s)', ['class' => 'form-check-label']) !!}
     <p>Leave blank to allow ALL coupons.</p>
-    {!! Form::select('allowed_coupons[]', $coupons, json_decode($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!}
+    {!! Form::select('allowed_coupons[]', $coupons, json_decode($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!} --}}
 
   </div>
 
@@ -194,7 +194,7 @@
     </div>
     <div id="shopStock">
       @foreach ($shop->stock as $key => $stock)
-        @include('admin.shops._stock', ['stock' => $stock, 'key' => $key])
+        @include('admin.shops._stock_item', ['stock' => $stock, 'key' => $key])
       @endforeach
     </div>
     <div class="text-right">
@@ -202,7 +202,7 @@
     </div>
     {!! Form::close() !!}
     <div class="" id="shopStockData">
-      @include('admin.shops._stock', ['stock' => null, 'key' => 0])
+      @include('admin.shops._stock_item', ['stock' => null, 'key' => 0])
     </div>
   @endif
 
@@ -234,17 +234,17 @@
       var $shopStock = $('#shopStock');
       var $stock = $('#shopStockData').find('.stock');
 
-      $('#use_coupons').change(function() {
-        if ($(this).is(':checked')) {
-          $('.coupon-row').removeClass('hide');
-        } else {
-          $('.coupon-row').addClass('hide');
-        }
-      });
+      // $('#use_coupons').change(function() {
+      //   if ($(this).is(':checked')) {
+      //     $('.coupon-row').removeClass('hide');
+      //   } else {
+      //     $('.coupon-row').addClass('hide');
+      //   }
+      // });
 
-      $('#allowed_coupons').selectize({
-        maxItems: 5
-      });
+      // $('#allowed_coupons').selectize({
+      //   maxItems: 5
+      // });
 
       $('.delete-shop-button').on('click', function(e) {
         e.preventDefault();

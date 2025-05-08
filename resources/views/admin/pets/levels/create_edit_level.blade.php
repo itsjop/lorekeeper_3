@@ -27,7 +27,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        {!! Form::label('Name') !!} {!! add_help('The name of the level, this should describe how the pet feels about the character at this level. For example, "Hates", "Indifferent", "Likes", "Loves".') !!}
+        {!! Form::label('Name') !!} {!! add_help('The name of the level, this should describe how the pet feels about the character at this level. For example, \'Hates\', \'Indifferent\', \'Likes\', \'Loves\'.') !!}
         {!! Form::text('name', $level->name, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
       </div>
     </div>

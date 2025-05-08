@@ -1,5 +1,5 @@
 this fuckass merge, make sure
-- [ ] checkboxes dont work
+- [ ] raffles dont work
 
 # CRITICAL
 - [ ] pets

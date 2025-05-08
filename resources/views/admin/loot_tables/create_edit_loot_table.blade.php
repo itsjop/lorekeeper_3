@@ -24,7 +24,7 @@
   </div>
 
   <div class="form-group">
-    {!! Form::label('Display Name') !!} {!! add_help('This is the name that will be shown to users, for example when displaying the rewards for doing a prompt. This is for display purposes and can be something more vague than the above, e.g. "A Random Rare Item"') !!}
+    {!! Form::label('Display Name') !!} {!! add_help('This is the name that will be shown to users, for example when displaying the rewards for doing a prompt. This is for display purposes and can be something more vague than the above, e.g. \'A Random Rare Item\'') !!}
     {!! Form::text('display_name', $table->getRawOriginal('display_name'), ['class' => 'form-control']) !!}
   </div>
 

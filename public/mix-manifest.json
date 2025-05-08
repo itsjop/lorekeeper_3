@@ -1,5 +1,10 @@
 {
-    "/js/vendor/app.js": "/js/vendor/app.js?id=8b1a5e8fe4d902bfbfc49a5d39f3c283",
-    "/js/vendor/app-secondary.js": "/js/vendor/app-secondary.js?id=909ddf775398ed251427cbd3a0e9f71a",
-    "/css/vendor/app.css": "/css/vendor/app.css?id=24702d11518d9cdf82e1b37dad35904e"
+  "/js/vendor/app.js": "/js/vendor/app.js",
+  "/js/vendor/app-secondary.js": "/js/vendor/app-secondary.js",
+  "/css/vendor/app.css": "/css/vendor/app.css",
+  "ihatejsonCommment": [
+    "/js/vendor/app.js?id=8b1a5e8fe4d902bfbfc49a5d39f3c283",
+    "/js/vendor/app-secondary.js?id=909ddf775398ed251427cbd3a0e9f71a",
+    "/css/vendor/app.css?id=24702d11518d9cdf82e1b37dad35904e"
+  ]
 }
