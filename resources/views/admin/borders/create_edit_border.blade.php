@@ -160,7 +160,7 @@
                   <div class="text-center">
                     <h5>{!! $layer->name !!}</h5>
                     <a href="#" class="btn btn-sm btn-primary edit-top" data-id="{{ $layer->id }}">
-<i class="fas fa-cog mr-1"></i>Edit</a>
+                      <i class="fas fa-cog mr-1"></i>Edit</a>
                   </div>
                 </div>
               @endforeach
@@ -182,7 +182,7 @@
                   <div class="text-center">
                     <h5>{!! $layer->name !!}</h5>
                     <a href="#" class="btn btn-sm btn-primary edit-bottom" data-id="{{ $layer->id }}">
-<i class="fas fa-cog mr-1"></i>Edit</a>
+                      <i class="fas fa-cog mr-1"></i>Edit</a>
                   </div>
                 </div>
               @endforeach
@@ -210,7 +210,7 @@
                   <div class="text-center">
                     <h5>{!! $variant->name !!}</h5>
                     <a href="#" class="btn btn-sm btn-primary edit-variant" data-id="{{ $variant->id }}">
-<i class="fas fa-cog mr-1"></i>Edit</a>
+                      <i class="fas fa-cog mr-1"></i>Edit</a>
                   </div>
                 </div>
               @endforeach

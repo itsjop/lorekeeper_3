@@ -32,7 +32,7 @@
       <div class="form-group col-md-6">
         @if ($profession->icon_extension)
           <a href="{{ $profession->iconUrl }}" data-lightbox="entry" data-title="{{ $profession->name }}">
-<img src="{{ $profession->iconUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+            <img src="{{ $profession->iconUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Icon Image (Optional)') !!} {!! add_help('This icon is used on the profession page.') !!}
         <div>{!! Form::file('image_icon') !!}</div>
@@ -47,7 +47,7 @@
       <div class="form-group col-md-6">
         @if ($profession->image_extension)
           <a href="{{ $profession->imageUrl }}" data-lightbox="entry" data-title="{{ $profession->name }}">
-<img src="{{ $profession->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+            <img src="{{ $profession->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Main Image (Optional)') !!} {!! add_help('This image is used as the main profession image.') !!}
         <div>{!! Form::file('image') !!}</div>

@@ -9,10 +9,10 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/location-types') }}">
-<i class="fas fa-folder mr-2"></i> Location Types</a>
+      <i class="fas fa-folder mr-2"></i> Location Types</a>
     @if (count($types))
       <a class="btn btn-primary" href="{{ url('admin/world/locations/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Location</a>
+        <i class="fas fa-plus mr-2"></i> Create New Location</a>
     @endif
   </div>
   <h1>Locations</h1>

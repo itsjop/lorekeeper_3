@@ -15,7 +15,8 @@
           <div class="col-12">No Gallery Submissions.</div>
         @endif
         <div class="col-12">
-<a class="float-right" href="gallery/all">View all Recent Submissions...</a></div>
+          <a class="float-right" href="gallery/all">View all Recent Submissions...</a>
+        </div>
       </div>
     </div>
   </div>

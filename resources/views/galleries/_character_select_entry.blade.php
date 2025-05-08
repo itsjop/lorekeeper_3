@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-1 text-right">
       <a href="#" class="remove-character text-muted">
-<i class="fas fa-times"></i></a>
+        <i class="fas fa-times"></i></a>
     </div>
   </div>
 </div>

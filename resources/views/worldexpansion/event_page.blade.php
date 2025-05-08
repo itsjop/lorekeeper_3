@@ -7,11 +7,12 @@
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
     <a data-toggle="tooltip" title="[ADMIN] Edit Event" href="{{ url('admin/world/events/edit/') . '/' . $event->id }}" class="mb-2 float-right">
-<i class="fas fa-crown"></i></a>
+      <i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Event' => 'world/events', $event->name => 'world/events/' . $event->id]) !!}
   <h1 style="clear:both;">
-<img src="{{ $event->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $event->displayName !!}</h1>
+    <img src="{{ $event->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $event->displayName !!}
+  </h1>
   <h5>{!! $event->category ? ucfirst($event->category->displayName) : 'Miscellaneous' !!}
 
     @if ($event->occur_start || $event->occur_end)
@@ -21,7 +22,8 @@
 
   @if ($event->image_extension)
     <div class="text-center">
-<img src="{{ $event->imageUrl }}" class="mw-100 mb-3" /></div>
+      <img src="{{ $event->imageUrl }}" class="mw-100 mb-3" />
+    </div>
   @endif
 
   @isset($event->summary)

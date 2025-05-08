@@ -9,9 +9,9 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/faction-types/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Faction Type</a>
+      <i class="fas fa-plus mr-2"></i> Create New Faction Type</a>
     <a class="btn btn-secondary" href="{{ url('admin/world/factions') }}">
-<i class="fas fa-undo-alt mr-2"></i> Back to Factions</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Factions</a>
   </div>
   <h1>Faction types</h1>
 

@@ -19,7 +19,7 @@
           @if ($shop->has_image)
             <div class="shop-image">
               <a href="{{ $shop->url }}">
-<img src="{{ $shop->shopImageUrl }}" alt="{{ $shop->name }}" /></a>
+                <img src="{{ $shop->shopImageUrl }}" alt="{{ $shop->name }}" /></a>
             </div>
           @endif
           <div class="shop-name mt-1">

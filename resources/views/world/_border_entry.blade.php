@@ -33,7 +33,7 @@
     <h3>
       {!! $border->displayName !!}@if (isset($border->idUrl) && $border->idUrl)
         <a href="{{ $border->idUrl }}" class="world-entry-search text-muted">
-<i class="fas fa-search"></i></a>
+          <i class="fas fa-search"></i></a>
       @endif
       @if ($border->admin_only)
         <i class="fas fa-user-lock text-warning" data-toggle="tooltip" title="This border is exclusive to staff members."></i>

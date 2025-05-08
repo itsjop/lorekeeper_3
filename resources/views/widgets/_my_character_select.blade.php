@@ -29,7 +29,7 @@
               @if (!(isset($selected) && in_array($character->id, $selected)) && !$character->isAvailable) data-toggle="tooltip" title="{{ $character->trade_id ? 'This character is in a trade.' : 'This character has an active design update.' }}" @endif>
               <div class="mb-1">
                 <a class="character-stack">
-<img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->fullName }}" /></a>
+                  <img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->fullName }}" /></a>
               </div>
               <div>
                 <a class="character-stack character-stack-name">{{ $character->slug }}</a>

@@ -12,8 +12,9 @@
   <div class="submission-character mb-3 card">
     <div class="card-body">
       <div class="text-right">
-<a href="#" class="remove-character text-muted">
-<i class="fas fa-times"></i></a></div>
+        <a href="#" class="remove-character text-muted">
+          <i class="fas fa-times"></i></a>
+      </div>
       <div class="row">
         <div class="col-md-2 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
@@ -85,7 +86,7 @@
       <td class="d-flex align-items-center">
         {!! Form::number('character_rewardable_quantity[]', 1, ['class' => 'form-control mr-2 character-rewardable-quantity']) !!}
         <a href="#" class="remove-reward d-block">
-<i class="fas fa-times text-muted"></i></a>
+          <i class="fas fa-times text-muted"></i></a>
       </td>
     </tr>
   </table>

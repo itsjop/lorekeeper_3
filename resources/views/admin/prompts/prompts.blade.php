@@ -13,9 +13,9 @@
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/prompt-categories') }}">
-<i class="fas fa-folder"></i> Prompt Categories</a>
+      <i class="fas fa-folder"></i> Prompt Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/data/prompts/create') }}">
-<i class="fas fa-plus"></i> Create New Prompt</a>
+      <i class="fas fa-plus"></i> Create New Prompt</a>
   </div>
 
   <div>

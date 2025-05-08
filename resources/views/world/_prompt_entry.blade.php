@@ -1,8 +1,9 @@
 <div class="row world-entry">
   @if ($prompt->has_image)
     <div class="col-md-3 world-entry-image">
-<a href="{{ $prompt->imageUrl }}" data-lightbox="entry" data-title="{{ $prompt->name }}">
-<img src="{{ $prompt->imageUrl }}" class="world-entry-image" /></a></div>
+      <a href="{{ $prompt->imageUrl }}" data-lightbox="entry" data-title="{{ $prompt->name }}">
+        <img src="{{ $prompt->imageUrl }}" class="world-entry-image" /></a>
+    </div>
   @endif
   <div class="{{ $prompt->has_image ? 'col-md-9' : 'col-12' }}">
     <div class="mb-3">
@@ -20,7 +21,8 @@
     <div class="world-entry-text">
       <p>{{ $prompt->summary }}</p>
       <div class="text-right">
-<a data-toggle="collapse" href="#prompt-{{ $prompt->id }}" class="text-primary"><strong>Show details...</strong></a></div>
+        <a data-toggle="collapse" href="#prompt-{{ $prompt->id }}" class="text-primary"><strong>Show details...</strong></a>
+      </div>
       <div class="collapse" id="prompt-{{ $prompt->id }}">
         <h4>Details</h4>
         @if ($prompt->parsed_description)

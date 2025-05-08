@@ -48,7 +48,8 @@
         <h5>URL</h5>
       </div>
       <div class="col-md-10 col-8">
-<a href="{{ $submission->url }}">{{ $submission->url }}</a></div>
+        <a href="{{ $submission->url }}">{{ $submission->url }}</a>
+      </div>
     </div>
     @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && $submission->data['gallery_submission_id'])
       <div class="row mb-2 no-gutters">
@@ -56,7 +57,8 @@
           <h5 class="mb-0">Gallery Submission</h5>
         </div>
         <div class="col-md-10">
-<a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a></div>
+          <a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a>
+        </div>
       </div>
     @endif
     <div class="row">
@@ -173,8 +175,9 @@
       <div class="submission-character mb-3 card">
         <div class="card-body">
           <div class="text-right">
-<a href="#" class="remove-character text-muted">
-<i class="fas fa-times"></i></a></div>
+            <a href="#" class="remove-character text-muted">
+              <i class="fas fa-times"></i></a>
+          </div>
           <div class="row">
             <div class="col-md-2 align-items-stretch d-flex">
               <div class="d-flex text-center align-items-center">
@@ -241,7 +244,7 @@
           <td class="d-flex align-items-center">
             {!! Form::text('character_quantity[]', 0, ['class' => 'form-control mr-2  character-rewardable-quantity']) !!}
             <a href="#" class="remove-reward d-block">
-<i class="fas fa-times text-muted"></i></a>
+              <i class="fas fa-times text-muted"></i></a>
           </td>
         </tr>
       </table>

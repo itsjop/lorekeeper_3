@@ -72,7 +72,8 @@
           </div>
           <div class="col-6 col-md-3">{!! Form::text('attachment_data[]', $attachment->data, ['class' => 'form-control']) !!}</div>
           <div class="col-6 col-md text-right">
-<a href="#" class="btn btn-danger remove-attachment-button">Remove</a></div>
+            <a href="#" class="btn btn-danger remove-attachment-button">Remove</a>
+          </div>
         </div>
       @endforeach
     @endif

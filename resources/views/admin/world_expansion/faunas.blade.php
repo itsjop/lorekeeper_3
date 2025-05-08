@@ -13,9 +13,9 @@
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/fauna-categories') }}">
-<i class="fas fa-folder mr-2"></i> Fauna Categories</a>
+      <i class="fas fa-folder mr-2"></i> Fauna Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/world/faunas/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Fauna</a>
+      <i class="fas fa-plus mr-2"></i> Create New Fauna</a>
   </div>
 
   @if (!count($faunas))

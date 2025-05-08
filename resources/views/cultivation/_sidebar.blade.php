@@ -1,6 +1,7 @@
 <ul>
   <li class="sidebar-header">
-<a href="{{ url(__('cultivation.cultivation')) }}" class="card-link">{{ ucfirst(__('cultivation.cultivation')) }}</a></li>
+    <a href="{{ url(__('cultivation.cultivation')) }}" class="card-link">{{ ucfirst(__('cultivation.cultivation')) }}</a>
+  </li>
 
   <li class="sidebar-section">
     <div class="sidebar-item">

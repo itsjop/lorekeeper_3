@@ -54,7 +54,7 @@
     {!! Form::text('transferrable_at', $character->transferrable_at, ['class' => 'form-control datepickeralt']) !!}
     <div class="input-group-append">
       <a class="btn btn-info collapsed" href="#collapsedt" data-toggle="collapse">
-<i class="fas fa-calendar-alt"></i></a>
+        <i class="fas fa-calendar-alt"></i></a>
     </div>
   </div>
   <div class="collapse datepicker" id="collapsedt"></div>

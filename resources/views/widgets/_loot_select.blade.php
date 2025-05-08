@@ -4,7 +4,7 @@
   // doing so this way enables better compatibility across disparate extensions
   $characterCurrencies = \App\Models\Currency\Currency::where('is_character_owned', 1)->orderBy('sort_character', 'DESC')->pluck('name', 'id');
   $items = \App\Models\Item\Item::orderBy('name')->pluck('name', 'id');
-    $pets = \App\Models\Pet\Pet::orderBy('name')->get()->pluck('fullName', 'id');
+  $pets = \App\Models\Pet\Pet::orderBy('name')->get()->pluck('fullName', 'id');
   $currencies = \App\Models\Currency\Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id');
   if (isset($showLootTables) && $showLootTables) {
       $tables = \App\Models\Loot\LootTable::orderBy('name')->pluck('name', 'id');
@@ -44,8 +44,8 @@
               {!! Form::select('rewardable_id[]', $items, $loot->rewardable_id, ['class' => 'form-control item-select selectize', 'placeholder' => 'Select Item']) !!}
             @elseif($loot->rewardable_type == 'Currency')
               {!! Form::select('rewardable_id[]', $currencies, $loot->rewardable_id, ['class' => 'form-control currency-select selectize', 'placeholder' => 'Select Currency']) !!}
-                        @elseif($loot->rewardable_type == 'Pet')
-                            {!! Form::select('rewardable_id[]', $pets, $loot->rewardable_id, ['class' => 'form-control pet-select selectize', 'placeholder' => 'Select Pet']) !!}
+            @elseif($loot->rewardable_type == 'Pet')
+              {!! Form::select('rewardable_id[]', $pets, $loot->rewardable_id, ['class' => 'form-control pet-select selectize', 'placeholder' => 'Select Pet']) !!}
             @elseif($showLootTables && $loot->rewardable_type == 'LootTable')
               {!! Form::select('rewardable_id[]', $tables, $loot->rewardable_id, ['class' => 'form-control table-select selectize', 'placeholder' => 'Select Loot Table']) !!}
             @elseif($showRaffles && $loot->rewardable_type == 'Raffle')

@@ -5,8 +5,8 @@
 </div>
 
 <div class="form-group" id="subtypes">
-    {!! Form::label('Subtypes (Optional)') !!}
-    {!! Form::select('subtype_ids[]', $subtypes, $image->subtypes()->pluck('subtype_id')->toArray() ?? [], ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
+  {!! Form::label('Subtypes (Optional)') !!}
+  {!! Form::select('subtype_ids[]', $subtypes, $image->subtypes()->pluck('subtype_id')->toArray() ?? [], ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
 </div>
 
 <hr>
@@ -33,7 +33,8 @@
 <div class="form-group">
   {!! Form::label('Traits') !!}
   <div>
-<a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a></div>
+    <a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a>
+  </div>
   <div id="featureList">
     @foreach ($image->features as $feature)
       <div class="d-flex mb-2">
@@ -103,8 +104,9 @@
     }
 
     function featureSelectedRender(item, escape) {
-      return '<div>
-<span>' + escape(item["text"].trim()) + ' (' + escape(item["optgroup"].trim()) + ')' + '</span></div>';
+      return '<div> <
+        span > ' + escape(item["text"].trim()) + '(' + escape(item["optgroup"].trim()) + ')
+      ' + ' < /span></div > ';
     }
     refreshSubtype();
   });
@@ -122,15 +124,15 @@
       dataType: "text"
     }).done(function(res) {
       $("#subtypes").html(res);
-            $("#subtype").selectize({
-                maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-            });
+      $("#subtype").selectize({
+        maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+      });
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert("AJAX call failed: " + textStatus + ", " + errorThrown);
     });
   };
 
-    $("#subtype").selectize({
-        maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-    });
+  $("#subtype").selectize({
+    maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+  });
 </script>

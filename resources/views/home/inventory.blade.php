@@ -12,11 +12,11 @@
     <div class="float-right mb-3">
       <a class="btn btn-secondary consolidate-inventory" href="#">Consolidate</a>
       <a class="btn btn-primary" href="{{ url('inventory/account-search') }}">
-<i class="fas fa-search"></i> Account Search</a>
+        <i class="fas fa-search"></i> Account Search</a>
       <a class="btn btn-primary" href="{{ url('inventory/full-inventory') }}">
-<i class="fas fa-warehouse"></i> Full Inventory</a>
+        <i class="fas fa-warehouse"></i> Full Inventory</a>
       <a class="btn btn-primary" href="{{ url('inventory/quickstock') }}">
-<i class="fas fa-truck"></i> Quickstock</a>
+        <i class="fas fa-truck"></i> Quickstock</a>
     </div>
   </h1>
   <p>This is your inventory. Click on an item to view more details and actions you can perform on it.</p>
@@ -24,35 +24,35 @@
   <div class="text-right mb-3">
     <div class="btn-group">
       <button type="button" class="btn btn-secondary active def-view-button" data-toggle="tooltip" title="Default View" alt="Default View">
-<i class="fas fa-th"></i></button>
+        <i class="fas fa-th"></i></button>
       <button type="button" class="btn btn-secondary sum-view-button" data-toggle="tooltip" title="Summarized View" alt="Summarized View">
-<i class="fas fa-bars"></i></button>
+        <i class="fas fa-bars"></i></button>
     </div>
   </div>
 
-    <div>
-        {!! Form::open(['method' => 'GET', 'class' => '']) !!}
-        <div class="form-inline justify-content-end">
-            <div class="form-group ml-3 mb-3">
-                {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
-            </div>
-            <div class="form-group ml-3 mb-3">
-                {!! Form::select('item_category_id', $categories->pluck('name', 'id'), Request::get('item_category_id'), ['class' => 'form-control', 'placeholder' => 'Any Category']) !!}
-            </div>
-            @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
-                <div class="form-group ml-3 mb-3">
-                    {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group ml-3 mb-3">
-                    {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control', 'placeholder' => 'Any Artist']) !!}
-                </div>
-            @endif
-            <div class="form-group ml-3 mb-3">
-                {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
-            </div>
+  <div>
+    {!! Form::open(['method' => 'GET', 'class' => '']) !!}
+    <div class="form-inline justify-content-end">
+      <div class="form-group ml-3 mb-3">
+        {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+      </div>
+      <div class="form-group ml-3 mb-3">
+        {!! Form::select('item_category_id', $categories->pluck('name', 'id'), Request::get('item_category_id'), ['class' => 'form-control', 'placeholder' => 'Any Category']) !!}
+      </div>
+      @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
+        <div class="form-group ml-3 mb-3">
+          {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control']) !!}
         </div>
-        {!! Form::close() !!}
+        <div class="form-group ml-3 mb-3">
+          {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control', 'placeholder' => 'Any Artist']) !!}
+        </div>
+      @endif
+      <div class="form-group ml-3 mb-3">
+        {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+      </div>
     </div>
+    {!! Form::close() !!}
+  </div>
 
   <div id="defView" class="hide">
     @foreach ($items as $categoryId => $categoryItems)

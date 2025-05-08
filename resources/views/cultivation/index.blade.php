@@ -14,7 +14,8 @@
     <div class="col">
       @if (Settings::get('cultivation_care_cooldown') > 0)
         <h4>
-<span class="float-right badge badge-secondary m-2">Plots tended to: {{ $caredPlots ?? 0 }} / {{ Settings::get('cultivation_care_cooldown') }}</span></h4>
+          <span class="float-right badge badge-secondary m-2">Plots tended to: {{ $caredPlots ?? 0 }} / {{ Settings::get('cultivation_care_cooldown') }}</span>
+        </h4>
       @endif
     </div>
   </div>

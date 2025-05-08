@@ -1,6 +1,7 @@
 <ul>
   <li class="sidebar-header">
-<a href="{{ url('admin') }}" class="card-link">Admin Home</a></li>
+    <a href="{{ url('admin') }}" class="card-link">Admin Home</a>
+  </li>
 
   @foreach (config('lorekeeper.admin_sidebar') as $key => $section)
     @if (Auth::user()->isAdmin || Auth::user()->hasPower($section['power']))

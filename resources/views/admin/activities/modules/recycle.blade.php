@@ -24,7 +24,8 @@
             @endif
           </td>
           <td class="text-right">
-<a href="#" class="btn btn-danger remove-recyclable-button">Remove</a></td>
+            <a href="#" class="btn btn-danger remove-recyclable-button">Remove</a>
+          </td>
         </tr>
       @endforeach
     @endif

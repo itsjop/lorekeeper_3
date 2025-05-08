@@ -39,7 +39,8 @@
           </td>
           <td>{!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!}</td>
           <td class="text-right">
-<a href="#" class="btn btn-danger remove-loot-button">Remove</a></td>
+            <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
+          </td>
         </tr>
       @endforeach
     @endif

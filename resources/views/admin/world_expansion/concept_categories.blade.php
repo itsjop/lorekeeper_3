@@ -9,9 +9,9 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/concept-categories/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Concept Category</a>
+      <i class="fas fa-plus mr-2"></i> Create New Concept Category</a>
     <a class="btn btn-secondary" href="{{ url('admin/world/concepts') }}">
-<i class="fas fa-undo-alt mr-2"></i> Back to Concepts</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Concepts</a>
   </div>
   <h1>Concept Categories</h1>
 

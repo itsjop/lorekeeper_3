@@ -13,8 +13,9 @@
   <p>The sorting order reflects the order in which the activities will be listed on the activity index.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/data/activities/create') }}">
-<i class="fas fa-plus"></i> Create New Activity</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/data/activities/create') }}">
+      <i class="fas fa-plus"></i> Create New Activity</a>
+  </div>
   @if (!count($activities))
     <p>No activies found.</p>
   @else

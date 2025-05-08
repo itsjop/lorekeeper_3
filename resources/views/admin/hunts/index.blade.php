@@ -12,8 +12,9 @@
   <p>This is a list of scavenger hunts.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/data/hunts/create') }}">
-<i class="fas fa-plus"></i> Create New Hunt</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/data/hunts/create') }}">
+      <i class="fas fa-plus"></i> Create New Hunt</a>
+  </div>
 
   @if (!count($hunts))
     <p>No hunts found.</p>

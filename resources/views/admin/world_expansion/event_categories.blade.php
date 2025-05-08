@@ -9,9 +9,9 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/event-categories/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Event Category</a>
+      <i class="fas fa-plus mr-2"></i> Create New Event Category</a>
     <a class="btn btn-secondary" href="{{ url('admin/world/events') }}">
-<i class="fas fa-undo-alt mr-2"></i> Back to Events</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Events</a>
   </div>
   <h1>Event Categories</h1>
 

@@ -97,7 +97,8 @@
             </div>
             <div class="col-3 col-md-1">
               <div class="logs-table-cell">
-<a href="{{ $report->adminUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a></div>
+                <a href="{{ $report->adminUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
+              </div>
             </div>
           </div>
         </div>

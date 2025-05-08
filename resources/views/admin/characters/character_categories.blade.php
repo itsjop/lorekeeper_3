@@ -13,8 +13,9 @@
   <p>The sorting order reflects the order in which the character categories will be displayed on the world pages.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/data/character-categories/create') }}">
-<i class="fas fa-plus"></i> Create New Character Category</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/data/character-categories/create') }}">
+      <i class="fas fa-plus"></i> Create New Character Category</a>
+  </div>
   @if (!count($categories))
     <p>No character categories found.</p>
   @else

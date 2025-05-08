@@ -13,8 +13,9 @@
     important pages such as the terms of service and privacy policy cannot be deleted. You can, however, edit their names and visibility.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/pages/create') }}">
-<i class="fas fa-plus"></i> Create New Page</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/pages/create') }}">
+      <i class="fas fa-plus"></i> Create New Page</a>
+  </div>
   @if (!count($pages))
     <p>No pages found.</p>
   @else
@@ -39,7 +40,8 @@
             <div class="row flex-wrap">
               <div class="col-12 col-md-5">
                 <div class="logs-table-cell">
-<a href="{{ $page->url }}">{{ $page->title }}</a></div>
+                  <a href="{{ $page->url }}">{{ $page->title }}</a>
+                </div>
               </div>
               <div class="col-3 col-md-3">
                 <div class="logs-table-cell">{{ $page->key }}</div>
@@ -49,7 +51,8 @@
               </div>
               <div class="col-3 col-md-1 text-right">
                 <div class="logs-table-cell">
-<a href="{{ url('admin/pages/edit/' . $page->id) }}" class="btn btn-primary py-0 px-2">Edit</a></div>
+                  <a href="{{ url('admin/pages/edit/' . $page->id) }}" class="btn btn-primary py-0 px-2">Edit</a>
+                </div>
               </div>
             </div>
           </div>

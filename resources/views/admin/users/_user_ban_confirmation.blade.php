@@ -1,7 +1,8 @@
 @if (!$user->is_banned)
   <p>Are you sure you want to ban {!! $user->displayName !!}?</p>
   <div class="text-right">
-<a href="#" class="btn btn-danger ban-confirm-button">Ban</a></div>
+    <a href="#" class="btn btn-danger ban-confirm-button">Ban</a>
+  </div>
 
   <script>
     $('.ban-confirm-button').on('click', function(e) {

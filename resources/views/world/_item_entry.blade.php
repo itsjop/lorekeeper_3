@@ -44,9 +44,9 @@
               <div class="col">
                 {!! $tag->displayTag !!}
               </div>
-                            @if ($tag->is_active && View::exists('world.tags._' . $tag->tag))
-                                @include('world.tags._' . $tag->tag, ['tag' => $tag])
-                            @endif
+              @if ($tag->is_active && View::exists('world.tags._' . $tag->tag))
+                @include('world.tags._' . $tag->tag, ['tag' => $tag])
+              @endif
             @endif
           @endforeach
         </div>

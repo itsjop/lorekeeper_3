@@ -3,9 +3,9 @@
 {!! Form::select('variant_ids[]', ['default' => 'Default'] + $variants, isset($tag->getData()['variant_ids']) ? $tag->getData()['variant_ids'] : null, ['class' => 'form-control selectize', 'multiple', 'placeholder' => 'Select Variants']) !!}
 
 <script>
-    $(document).ready(function() {
-        $('.selectize').selectize({
-            maxItems: 20
-        });
+  $(document).ready(function() {
+    $('.selectize').selectize({
+      maxItems: 20
     });
+  });
 </script>

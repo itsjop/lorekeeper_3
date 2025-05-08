@@ -10,9 +10,9 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/figure-categories') }}">
-<i class="fas fa-folder mr-2"></i> Figure Categories</a>
+      <i class="fas fa-folder mr-2"></i> Figure Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/world/figures/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Figure</a>
+      <i class="fas fa-plus mr-2"></i> Create New Figure</a>
   </div>
   <h1>Figures</h1>
 

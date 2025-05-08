@@ -9,9 +9,9 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/location-types/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Location Type</a>
+      <i class="fas fa-plus mr-2"></i> Create New Location Type</a>
     <a class="btn btn-secondary" href="{{ url('admin/world/locations') }}">
-<i class="fas fa-undo-alt mr-2"></i> Back to Locations</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Locations</a>
   </div>
   <h1>Location types</h1>
 
