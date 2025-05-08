@@ -65,7 +65,7 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/lorekeeper.css'))) }}" rel="stylesheet">
+    <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
 
      <!-- Styles -->
   <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
