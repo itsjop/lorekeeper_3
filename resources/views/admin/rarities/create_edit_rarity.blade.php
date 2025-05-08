@@ -28,7 +28,7 @@
       {!! Form::text('color', $rarity->color, ['class' => 'form-control']) !!}
       <span class="input-group-append">
         <span class="input-group-text colorpicker-input-addon">
-<i></i></span>
+          <i></i></span>
       </span>
     </div>
   </div>
@@ -71,13 +71,13 @@
             'imageUrl' => $rarity->rarityImageUrl,
             'name' => $rarity->displayName,
             'description' => $rarity->parsed_description,
-                    'searchItemsUrl' => $rarity->searchItemsUrl,
+            'searchItemsUrl' => $rarity->searchItemsUrl,
             'searchFeaturesUrl' => $rarity->searchFeaturesUrl,
             'searchCharactersUrl' => $rarity->searchCharactersUrl,
-                    'edit' => [
-                        'title' => 'Edit Rarity',
-                        'object' => $rarity,
-                    ],
+            'edit' => [
+                'title' => 'Edit Rarity',
+                'object' => $rarity,
+            ],
         ])
       </div>
     </div>

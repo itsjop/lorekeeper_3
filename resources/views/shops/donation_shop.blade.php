@@ -32,7 +32,7 @@
               <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $item->id }}">
                 <div class="mb-1">
                   <a href="#" class="inventory-stack">
-<img src="{{ $item->item->imageUrl }}" /></a>
+                    <img src="{{ $item->item->imageUrl }}" /></a>
                 </div>
                 <div>
                   <a href="#" class="inventory-stack inventory-stack-name"><strong>{{ $item->item->name }}</strong></a>

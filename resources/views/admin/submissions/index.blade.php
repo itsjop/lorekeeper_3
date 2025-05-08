@@ -92,7 +92,7 @@
             <div class="col-6 {{ !$isClaims ? 'col-md-3' : 'col-md-4' }}">
               <div class="logs-table-cell">
                 <span class="ubt-texthide">
-<a href="{{ $submission->url }}">{{ $submission->url }}</a></span>
+                  <a href="{{ $submission->url }}">{{ $submission->url }}</a></span>
               </div>
             </div>
             <div class="col-6 col-md-3">
@@ -105,7 +105,8 @@
             </div>
             <div class="col-3 col-md-1">
               <div class="logs-table-cell">
-<a href="{{ $submission->adminUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a></div>
+                <a href="{{ $submission->adminUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
+              </div>
             </div>
           </div>
         </div>

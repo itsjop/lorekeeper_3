@@ -3,10 +3,12 @@
 @else
   <div class="text-center">
     <div class="mb-1 inventory-main-img">
-<a href="{{ $item->url }}">
-<img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a></div>
+      <a href="{{ $item->url }}">
+        <img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
+    </div>
     <div @if (count($item->tags)) class="mb-1 inventory-main-img" @endif>
-<a href="{{ $item->url }}">{{ $item->name }}</a></div>
+      <a href="{{ $item->url }}">{{ $item->name }}</a>
+    </div>
   </div>
 
   <h5>Item Variations</h5>
@@ -21,7 +23,8 @@
         <tr class="d-flex">
           @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
             <th class="col-1">
-<input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)"></th>
+              <input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)">
+            </th>
           @endif
           @if ($item->category->can_name)
             <th class="col-2">Name</th>
@@ -30,7 +33,8 @@
           <th class="col">Notes</th>
           <th class="col-2">Quantity</th>
           <th class="col-1">
-<i class="fas fa-lock invisible"></i></th>
+            <i class="fas fa-lock invisible"></i>
+          </th>
         </tr>
       </thead>
       <tbody>

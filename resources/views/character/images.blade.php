@@ -26,8 +26,8 @@
               <a href="{{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? $image->fullsizeUrl : $image->imageUrl }}" data-lightbox="entry"
                 data-title="{{ $character->fullName }} [#{{ $image->id }}] {{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? ' : Full-size Image' : '' }}">
                 <img src="{{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? $image->fullsizeUrl : $image->imageUrl }}"
-                class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="{{ $image->character->fullName }}" />
-       </a>
+                  class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="{{ $image->character->fullName }}" />
+              </a>
             </div>
             @if ($image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)))
               <div class="text-right">You are viewing the full-size image. <a href="{{ $image->imageUrl }}">View watermarked image</a>?</div>
@@ -50,7 +50,7 @@
     Images
     @if ($canManage)
       <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm">
-<i class="fas fa-plus"></i> Add Image</a>
+        <i class="fas fa-plus"></i> Add Image</a>
     @endif
   </h3>
 
@@ -58,8 +58,7 @@
     @foreach ($character->images($user)->get() as $image)
       <li class="col-md-3 col-6 text-center nav-item sort-item" data-id="{{ $image->id }}">
         <a id="thumbnail-{{ $image->id }}" data-toggle="tab" href="#image-{{ $image->id }}" role="tab" class="{{ $image->id == $character->character_image_id ? 'active' : '' }}">
-<img src="{{ $image->thumbnailUrl }}" class="img-thumbnail {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
-            alt="Thumbnail for {{ $image->character->fullName }}" /></a>
+          <img src="{{ $image->thumbnailUrl }}" class="img-thumbnail {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="Thumbnail for {{ $image->character->fullName }}" /></a>
       </li>
     @endforeach
   </ul>
@@ -69,10 +68,10 @@
     {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 
-        <div class="mobile-handle handle-clone badge badge-primary rounded-circle hide">
-            <i class="fas fa-hand-point-up" aria-hidden="true"></i>
-            <span class="sr-only">Drag Handle</span>
-        </div>
+    <div class="mobile-handle handle-clone badge badge-primary rounded-circle hide">
+      <i class="fas fa-hand-point-up" aria-hidden="true"></i>
+      <span class="sr-only">Drag Handle</span>
+    </div>
   @endif
 @endsection
 @section('scripts')
@@ -97,23 +96,23 @@
         });
         $("#sortable").disableSelection();
 
-                function isTouch() {
-                    try {
-                        document.createEvent("TouchEvent");
-                        return true;
-                    } catch (e) {
-                        return false;
-                    }
-                }
+        function isTouch() {
+          try {
+            document.createEvent("TouchEvent");
+            return true;
+          } catch (e) {
+            return false;
+          }
+        }
 
-                if (isTouch()) {
-                    $('#sortable').children().each(function() {
-                        var $clone = $('.handle-clone').clone();
-                        $(this).append($clone);
-                        $clone.removeClass('hide handle-clone');
-                    });
-                    $("#sortable").sortable("option", "handle", ".mobile-handle");
-                }
+        if (isTouch()) {
+          $('#sortable').children().each(function() {
+            var $clone = $('.handle-clone').clone();
+            $(this).append($clone);
+            $clone.removeClass('hide handle-clone');
+          });
+          $("#sortable").sortable("option", "handle", ".mobile-handle");
+        }
       });
     </script>
   @endif

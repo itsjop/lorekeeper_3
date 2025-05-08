@@ -9,6 +9,6 @@
   @include('forms._site_form', ['form' => $form, 'page' => true])
   <hr>
   <br>
-<br>
+  <br>
   @comments(['model' => $form, 'perPage' => 5])
 @endsection

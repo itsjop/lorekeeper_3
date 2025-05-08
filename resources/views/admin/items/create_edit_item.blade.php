@@ -151,7 +151,8 @@
             <td>{!! $tag->displayTag !!}</td>
             <td class="{{ $tag->is_active ? 'text-success' : 'text-danger' }}">{{ $tag->is_active ? 'Yes' : 'No' }}</td>
             <td class="text-right">
-<a href="{{ url('admin/data/items/tag/' . $item->id . '/' . $tag->tag) }}" class="btn btn-outline-primary">Edit</a></td>
+              <a href="{{ url('admin/data/items/tag/' . $item->id . '/' . $tag->tag) }}" class="btn btn-outline-primary">Edit</a>
+            </td>
           </tr>
         @endforeach
       </table>

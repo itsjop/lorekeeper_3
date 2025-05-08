@@ -61,21 +61,21 @@
           </div>
         </div>
       </div>
-            <div class="row">
-                <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
-              <div class="form-group">
-                {!! Form::label('Character Code') !!} {!! add_help('This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).') !!}
-                {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
-                    </div>
-                </div>
-                @if (config('lorekeeper.settings.enable_character_content_warnings'))
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::label('Content Warnings') !!} {!! add_help('These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.') !!}
-                            {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
-                        </div>
-                    </div>
-                @endif
+      <div class="row">
+        <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
+          <div class="form-group">
+            {!! Form::label('Character Code') !!} {!! add_help('This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).') !!}
+            {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
+          </div>
+        </div>
+        @if (config('lorekeeper.settings.enable_character_content_warnings'))
+          <div class="col-md-6">
+            <div class="form-group">
+              {!! Form::label('Content Warnings') !!} {!! add_help('These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.') !!}
+              {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
+            </div>
+          </div>
+        @endif
       </div>
     @endif
 
@@ -270,7 +270,8 @@
         ) !!}
       @endif
       <div>
-<a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a></div>
+        <a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a>
+      </div>
       <div id="featureList">
       </div>
       <div class="feature-row hide mb-2">
@@ -293,7 +294,7 @@
   @include('widgets._character_create_options_js')
   @include('widgets._image_upload_js')
   @include('widgets._datetimepicker_js')
-    @include('widgets._character_warning_js')
+  @include('widgets._character_warning_js')
   @if (!$isMyo)
     @include('widgets._character_code_js')
   @endif
@@ -308,9 +309,9 @@
         dataType: "text"
       }).done(function(res) {
         $("#subtypes").html(res);
-                $("#subtype").selectize({
-                    maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-                });
+        $("#subtype").selectize({
+          maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+        });
       }).fail(function(jqXHR, textStatus, errorThrown) {
         alert("AJAX call failed: " + textStatus + ", " + errorThrown);
       });
@@ -325,8 +326,8 @@
       });
     });
 
-        $("#subtype").selectize({
-            maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-        });
+    $("#subtype").selectize({
+      maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+    });
   </script>
 @endsection

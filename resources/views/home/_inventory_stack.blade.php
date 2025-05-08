@@ -5,15 +5,13 @@
   <div class="text-center">
     @if ($item->has_image)
       <div class="mb-1 inventory-main-img">
-<a href="{{ $item->url }}">
-<img
-            src="{{ $item->imageUrl }}"
-            class="img-fluid"
-            alt="{{ $item->name }}"
-          /></a></div>
+        <a href="{{ $item->url }}">
+          <img src="{{ $item->imageUrl }}" class="img-fluid" alt="{{ $item->name }}" /></a>
+      </div>
     @endif
     <div @if (count($item->tags)) class="mb-1" @endif>
-<a href="{{ $item->idUrl }}">{{ $item->name }}</a></div>
+      <a href="{{ $item->idUrl }}">{{ $item->name }}</a>
+    </div>
     @if (count($item->tags))
       <div>
         @foreach ($item->tags as $tag)
@@ -40,11 +38,8 @@
         <tr class="d-flex">
           @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
             <th class="col-1">
-<input
-                id="toggle-checks"
-                type="checkbox"
-                onclick="toggleChecks(this)"
-              ></th>
+              <input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)">
+            </th>
             <th class="col-4">Source</th>
           @else
             <th class="col-5">Source</th>
@@ -52,7 +47,8 @@
           <th class="col-3">Notes</th>
           <th class="col-3">Quantity</th>
           <th class="col-1">
-<i class="fas fa-lock invisible"></i></th>
+            <i class="fas fa-lock invisible"></i>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -70,7 +66,7 @@
                 <td class="col-3">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, [
                     'class' => 'quantity-select',
                     'type' => 'number',
-                    'style' => 'min-width:40px;'
+                    'style' => 'min-width:40px;',
                 ]) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
                     {{ $itemRow->getOthers() }}
                   @endif
@@ -80,7 +76,7 @@
                     'class' => 'quantity-select',
                     'type' => 'number',
                     'style' => 'min-width:40px;',
-                    'disabled'
+                    'disabled',
                 ]) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
                     {{ $itemRow->getOthers() }}
                   @endif
@@ -91,11 +87,7 @@
             @endif
             <td class="col-1">
               @if (!$itemRow->isTransferrable)
-                <i
-                  class="fas fa-lock"
-                  data-toggle="tooltip"
-                  title="Account-bound items cannot be transferred but can be deleted."
-                ></i>
+                <i class="fas fa-lock" data-toggle="tooltip" title="Account-bound items cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -117,11 +109,7 @@
 
         @if (isset($item->category) && $item->category->is_character_owned)
           <li class="list-group-item">
-            <a
-              class="card-title h5 collapse-title"
-              data-toggle="collapse"
-              href="#characterTransferForm"
-            >
+            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#characterTransferForm">
               @if ($stack->first()->user_id != $user->id)
                 [ADMIN]
               @endif Transfer Item to Character
@@ -131,7 +119,7 @@
               <div class="form-group">
                 {!! Form::select('character_id', $characterOptions, null, [
                     'class' => 'form-control mr-2 default character-select',
-                    'placeholder' => 'Select Character'
+                    'placeholder' => 'Select Character',
                 ]) !!}
               </div>
               <div class="text-right">
@@ -139,22 +127,15 @@
                     'class' => 'btn btn-primary',
                     'name' => 'action',
                     'value' => 'characterTransfer',
-                    'type' => 'submit'
+                    'type' => 'submit',
                 ]) !!}
               </div>
             </div>
           </li>
         @endif
-        @if (isset($item->data['resell']) &&
-                App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() &&
-                config('lorekeeper.extensions.item_entry_expansion.resale_function')
-        )
+        @if (isset($item->data['resell']) && App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() && config('lorekeeper.extensions.item_entry_expansion.resale_function'))
           <li class="list-group-item">
-            <a
-              class="card-title h5 collapse-title"
-              data-toggle="collapse"
-              href="#resellForm"
-            >
+            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#resellForm">
               @if ($stack->first()->user_id != $user->id)
                 [ADMIN]
               @endif Sell Item
@@ -169,11 +150,7 @@
           </li>
         @endif
         <li class="list-group-item">
-          <a
-            class="card-title h5 collapse-title"
-            data-toggle="collapse"
-            href="#transferForm"
-          >
+          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer Item
@@ -188,17 +165,13 @@
                   'class' => 'btn btn-primary',
                   'name' => 'action',
                   'value' => 'transfer',
-                  'type' => 'submit'
+                  'type' => 'submit',
               ]) !!}
             </div>
           </div>
         </li>
         <li class="list-group-item">
-          <a
-            class="card-title h5 collapse-title"
-            data-toggle="collapse"
-            href="#deleteForm"
-          >
+          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Delete Item

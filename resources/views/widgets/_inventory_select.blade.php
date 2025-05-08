@@ -44,7 +44,8 @@
           <thead class="thead-light">
             <tr class="d-flex">
               <th class="col-1">
-<input id="toggle-checks" type="checkbox"></th>
+                <input id="toggle-checks" type="checkbox">
+              </th>
               <th class="col-2">Item</th>
               <th class="col-4">Source</th>
               <th class="col-3">Notes</th>

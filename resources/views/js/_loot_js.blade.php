@@ -33,7 +33,7 @@
       var $clone = null;
       if (val == 'Item') $clone = $itemSelect.clone();
       else if (val == 'Currency') $clone = $currencySelect.clone();
-            else if (val == 'Pet') $clone = $petSelect.clone();
+      else if (val == 'Pet') $clone = $petSelect.clone();
       @if ($showLootTables)
         else if (val == 'LootTable') $clone = $tableSelect.clone();
       @endif
@@ -55,7 +55,7 @@
 
         var $clone = null;
         if (val == 'Item') $clone = $itemSelect.clone();
-                else if (val == 'Pet') $clone = $petSelect.clone();
+        else if (val == 'Pet') $clone = $petSelect.clone();
         else if (val == 'Currency') $clone = $currencySelect.clone();
         @if ($showLootTables)
           else if (val == 'LootTable') $clone = $tableSelect.clone();

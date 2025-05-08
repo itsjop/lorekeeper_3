@@ -13,8 +13,9 @@
     image tab on the character's profile.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/data/transformations/create') }}">
-<i class="fas fa-plus"></i> Create New {{ ucfirst(__('transformations.transformation')) }}</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/data/transformations/create') }}">
+      <i class="fas fa-plus"></i> Create New {{ ucfirst(__('transformations.transformation')) }}</a>
+  </div>
   @if (!count($transformations))
     <p>No {{ __('transformations.transformations') }} found.</p>
   @else

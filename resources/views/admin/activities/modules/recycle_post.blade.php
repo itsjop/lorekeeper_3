@@ -5,7 +5,8 @@
         <td>{!! Form::select('recyclable_type[]', ['Item' => 'Item', 'ItemCategory' => 'Item Category'], null, ['class' => 'form-control recyclable-type', 'placeholder' => 'Select Recyclable Type']) !!}</td>
         <td class="recyclable-row-select"></td>
         <td class="text-right">
-<a href="#" class="btn btn-danger remove-recyclable-button">Remove</a></td>
+          <a href="#" class="btn btn-danger remove-recyclable-button">Remove</a>
+        </td>
       </tr>
     </tbody>
   </table>

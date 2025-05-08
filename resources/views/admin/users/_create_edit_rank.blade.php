@@ -17,7 +17,7 @@
       {!! Form::text('color', $rank->color, ['class' => 'form-control']) !!}
       <span class="input-group-append">
         <span class="input-group-text colorpicker-input-addon">
-<i></i></span>
+          <i></i></span>
       </span>
     </div>
   </div>

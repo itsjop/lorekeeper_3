@@ -74,26 +74,26 @@
   @parent
   @include('widgets._character_create_options_js')
 
-    <script>
-        $("#species").change(function() {
-            var species = $('#species').val();
-            var myo = '<?php echo $isMyo; ?>';
-            $.ajax({
-                type: "GET",
-                url: "{{ url('admin/masterlist/check-subtype') }}?species=" + species + "&myo=" + myo,
-                dataType: "text"
-            }).done(function(res) {
-                $("#subtypes").html(res);
-                $("#subtype").selectize({
-                    maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-                });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-            });
+  <script>
+    $("#species").change(function() {
+      var species = $('#species').val();
+      var myo = '<?php echo $isMyo; ?>';
+      $.ajax({
+        type: "GET",
+        url: "{{ url('admin/masterlist/check-subtype') }}?species=" + species + "&myo=" + myo,
+        dataType: "text"
+      }).done(function(res) {
+        $("#subtypes").html(res);
+        $("#subtype").selectize({
+          maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
         });
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+      });
+    });
 
-        $('#subtype').selectize({
-            maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-        });
-    </script>
+    $('#subtype').selectize({
+      maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+    });
+  </script>
 @endsection

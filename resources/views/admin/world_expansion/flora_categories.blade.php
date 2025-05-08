@@ -9,9 +9,9 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/flora-categories/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Flora Category</a>
+      <i class="fas fa-plus mr-2"></i> Create New Flora Category</a>
     <a class="btn btn-secondary" href="{{ url('admin/world/floras') }}">
-<i class="fas fa-undo-alt mr-2"></i> Back to Flora</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Flora</a>
   </div>
   <h1>Flora Categories</h1>
 

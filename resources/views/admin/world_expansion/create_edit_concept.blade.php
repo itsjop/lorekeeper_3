@@ -45,7 +45,7 @@
       <div class="form-group col-md-6">
         @if ($concept->thumb_extension)
           <a href="{{ $concept->thumbUrl }}" data-lightbox="entry" data-title="{{ $concept->name }}">
-<img src="{{ $concept->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+            <img src="{{ $concept->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the concept index.') !!}
         <div>{!! Form::file('image_th') !!}</div>
@@ -60,7 +60,7 @@
       <div class="form-group col-md-6">
         @if ($concept->image_extension)
           <a href="{{ $concept->imageUrl }}" data-lightbox="entry" data-title="{{ $concept->name }}">
-<img src="{{ $concept->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+            <img src="{{ $concept->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Event Image (Optional)') !!} {!! add_help('This image is used on the concept page as a header.') !!}
         <div>{!! Form::file('image') !!}</div>
@@ -89,7 +89,8 @@
     <div class="card mb-3">
       <h2 class="card-header h3">
         <div class="float-right">
-<a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a></div>
+          <a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a>
+        </div>
         Attachments
       </h2>
       <div class="card-body">

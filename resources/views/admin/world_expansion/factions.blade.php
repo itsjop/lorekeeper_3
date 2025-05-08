@@ -10,10 +10,10 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/faction-types') }}">
-<i class="fas fa-folder mr-2"></i> Faction Types</a>
+      <i class="fas fa-folder mr-2"></i> Faction Types</a>
     @if (count($types))
       <a class="btn btn-primary" href="{{ url('admin/world/factions/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Faction</a>
+        <i class="fas fa-plus mr-2"></i> Create New Faction</a>
     @endif
   </div>
   <h1>Factions</h1>

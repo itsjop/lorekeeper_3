@@ -56,7 +56,7 @@
     <hr />
     <div class="text-right my-3">
       <a class="btn btn-primary create-location">
-<i class="fas fa-plus"></i> Create New Location</a>
+        <i class="fas fa-plus"></i> Create New Location</a>
     </div>
     @if (!count($map->locations))
       <p>No locations found.</p>
@@ -76,11 +76,11 @@
               <td>{{ $location->cords }}</td>
               <td>
                 <a href="#" class="btn btn-primary btn-sm edit-location" data-id="{{ $location->id }}">
-<i class="fas fa-edit"></i></a>
+                  <i class="fas fa-edit"></i></a>
               </td>
               <td>
                 <a href="#" class="btn btn-danger btn-sm delete-location" data-id="{{ $location->id }}">
-<i class="fas fa-trash"></i></a>
+                  <i class="fas fa-trash"></i></a>
               </td>
             </tr>
           @endforeach

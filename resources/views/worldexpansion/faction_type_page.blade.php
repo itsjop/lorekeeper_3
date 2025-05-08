@@ -7,11 +7,13 @@
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Factions Types' => 'world/faction-types', $type->names => 'world/factions/' . $type->id]) !!}
   <h1>
-<img src="{{ $type->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $type->displayName !!} ({!! $type->names !!})</h1>
+    <img src="{{ $type->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $type->displayName !!} ({!! $type->names !!})
+  </h1>
 
   @if ($type->image_extension)
     <div class="text-center">
-<img src="{{ $type->imageUrl }}" class="mw-100 mb-3" /></div>
+      <img src="{{ $type->imageUrl }}" class="mw-100 mb-3" />
+    </div>
   @endif
 
   @isset($type->summary)

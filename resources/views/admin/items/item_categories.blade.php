@@ -13,8 +13,9 @@
   <p>The sorting order reflects the order in which the item categories will be displayed in the inventory, as well as on the world pages.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/data/item-categories/create') }}">
-<i class="fas fa-plus"></i> Create New Item Category</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/data/item-categories/create') }}">
+      <i class="fas fa-plus"></i> Create New Item Category</a>
+  </div>
   @if (!count($categories))
     <p>No item categories found.</p>
   @else

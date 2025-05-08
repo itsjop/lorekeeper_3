@@ -15,64 +15,64 @@
   <div class="text-right mb-3">
     @if (Auth::user()->hasPower('edit_inventories'))
       <a class="btn btn-primary" href="{{ url('admin/grants/item-search') }}">
-<i class="fas fa-search"></i> Item Search</a>
+        <i class="fas fa-search"></i> Item Search</a>
     @endif
     <a class="btn btn-primary" href="{{ url('admin/data/item-categories') }}">
-<i class="fas fa-folder"></i> Item Categories</a>
+      <i class="fas fa-folder"></i> Item Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/data/items/create') }}">
-<i class="fas fa-plus"></i> Create New Item</a>
+      <i class="fas fa-plus"></i> Create New Item</a>
   </div>
 
-    <div>
-        {!! Form::open(['method' => 'GET', 'class' => '']) !!}
-        <div class="form-inline justify-content-end">
-            <div class="form-group ml-3 mb-3">
-                {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
-            </div>
-            <div class="form-group ml-3 mb-3">
-                {!! Form::select('item_category_id', $categories, Request::get('item_category_id'), ['class' => 'form-control']) !!}
-            </div>
-            @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
-                <div class="form-group ml-3 mb-3">{!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control', 'placeholder' => 'Any Rarity']) !!}
-                </div>
-                <div class="form-group ml-3 mb-3">
-                    {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control']) !!}
-                </div>
-            @endif
+  <div>
+    {!! Form::open(['method' => 'GET', 'class' => '']) !!}
+    <div class="form-inline justify-content-end">
+      <div class="form-group ml-3 mb-3">
+        {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+      </div>
+      <div class="form-group ml-3 mb-3">
+        {!! Form::select('item_category_id', $categories, Request::get('item_category_id'), ['class' => 'form-control']) !!}
+      </div>
+      @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
+        <div class="form-group ml-3 mb-3">{!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control', 'placeholder' => 'Any Rarity']) !!}
         </div>
-        <div class="form-inline justify-content-end">
-            <div class="form-group ml-3 mb-3">
-                {!! Form::select(
-                    'visibility',
-                    [
-                        'none' => 'Any Visibility',
-                        'visibleOnly' => 'Released Only',
-                        'hiddenOnly' => 'Hidden Only',
-                    ],
-                    Request::get('visibility') ?: 'none',
-                    ['class' => 'form-control', 'placeholder' => 'Any Visibility'],
-                ) !!}
-            </div>
-            <div class="form-group ml-3 mb-3">
-                {!! Form::select(
-                    'sort',
-                    [
-                        'alpha' => 'Sort Alphabetically (A-Z)',
-                        'alpha-reverse' => 'Sort Alphabetically (Z-A)',
-                        'category' => 'Sort by Category',
-                        'newest' => 'Newest First',
-                        'oldest' => 'Oldest First',
-                    ],
-                    Request::get('sort') ?: 'oldest',
-                    ['class' => 'form-control'],
-                ) !!}
-            </div>
-            <div class="form-group ml-3 mb-3">
-                {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
-            </div>
+        <div class="form-group ml-3 mb-3">
+          {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control']) !!}
         </div>
-        {!! Form::close() !!}
+      @endif
     </div>
+    <div class="form-inline justify-content-end">
+      <div class="form-group ml-3 mb-3">
+        {!! Form::select(
+            'visibility',
+            [
+                'none' => 'Any Visibility',
+                'visibleOnly' => 'Released Only',
+                'hiddenOnly' => 'Hidden Only',
+            ],
+            Request::get('visibility') ?: 'none',
+            ['class' => 'form-control', 'placeholder' => 'Any Visibility'],
+        ) !!}
+      </div>
+      <div class="form-group ml-3 mb-3">
+        {!! Form::select(
+            'sort',
+            [
+                'alpha' => 'Sort Alphabetically (A-Z)',
+                'alpha-reverse' => 'Sort Alphabetically (Z-A)',
+                'category' => 'Sort by Category',
+                'newest' => 'Newest First',
+                'oldest' => 'Oldest First',
+            ],
+            Request::get('sort') ?: 'oldest',
+            ['class' => 'form-control'],
+        ) !!}
+      </div>
+      <div class="form-group ml-3 mb-3">
+        {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+      </div>
+    </div>
+    {!! Form::close() !!}
+  </div>
 
   @if (!count($items))
     <p>No items found.</p>

@@ -13,9 +13,9 @@
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/flora-categories') }}">
-<i class="fas fa-folder mr-2"></i> Flora Categories</a>
+      <i class="fas fa-folder mr-2"></i> Flora Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/world/floras/create') }}">
-<i class="fas fa-plus mr-2"></i> Create New Flora</a>
+      <i class="fas fa-plus mr-2"></i> Create New Flora</a>
   </div>
   @if (!count($floras))
     <p>No flora found.</p>

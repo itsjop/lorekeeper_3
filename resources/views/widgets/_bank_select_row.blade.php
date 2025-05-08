@@ -10,7 +10,8 @@
             ]) !!}</td>
             <td>{!! Form::text('currency_quantity[' . strtolower($owner->logType) . '-' . $owner->id . '][]', 0, ['class' => 'form-control']) !!}</td>
             <td class="text-right">
-<a href="#" class="btn btn-danger remove-currency-button">Remove</a></td>
+              <a href="#" class="btn btn-danger remove-currency-button">Remove</a>
+            </td>
           </tr>
         </tbody>
       @endif

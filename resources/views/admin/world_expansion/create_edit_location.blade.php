@@ -65,7 +65,7 @@
       <div class="form-group col-md-6">
         @if ($location->thumb_extension)
           <a href="{{ $location->thumbUrl }}" data-lightbox="entry" data-title="{{ $location->name }}">
-<img src="{{ $location->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+            <img src="{{ $location->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the location index.') !!}
         <div>{!! Form::file('image_th') !!}</div>
@@ -79,7 +79,7 @@
       <div class="form-group col-md-6">
         @if ($location->image_extension)
           <a href="{{ $location->imageUrl }}" data-lightbox="entry" data-title="{{ $location->name }}">
-<img src="{{ $location->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+            <img src="{{ $location->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('location Image (Optional)') !!} {!! add_help('This image is used on the location page as a header.') !!}
         <div>{!! Form::file('image') !!}</div>
@@ -108,7 +108,8 @@
     <div class="card mb-3">
       <h2 class="card-header h3">
         <div class="float-right">
-<a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a></div>
+          <a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a>
+        </div>
         Attachments
       </h2>
       <div class="card-body">

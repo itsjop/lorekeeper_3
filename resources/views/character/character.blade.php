@@ -42,32 +42,34 @@
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
           @if (isset($character->profile->professionObj))
             <h5 class="p-0 m-0">
-<img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/lorekeeper/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}</h5>
+              <img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/lorekeeper/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}
+            </h5>
           @else
             <h5 class="p-0 m-0">
-<img class="fr-fic fr-dii mr-2" src="/images/lorekeeper/profession.png" style="max-width:50px;">{{ $character->profile->profession }}</h5>
+              <img class="fr-fic fr-dii mr-2" src="/images/lorekeeper/profession.png" style="max-width:50px;">{{ $character->profile->profession }}
+            </h5>
           @endif
         </a>
       </div>
     </div>
   @endif
 
-    {{-- Main Image --}}
-    <div class="row mb-3" id="main-tab">
-        <div class="col-md-7">
-            <div class="text-center">
-                <a href="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                    data-lightbox="entry" data-title="{{ $character->fullName }}">
-                    <img src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                        class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="{{ $character->fullName }}" />
-                </a>
-            </div>
-            @if ($character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
-                <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked image</a>?</div>
-            @endif
-        </div>
-        @include('character._image_info', ['image' => $character->image])
+  {{-- Main Image --}}
+  <div class="row mb-3" id="main-tab">
+    <div class="col-md-7">
+      <div class="text-center">
+        <a href="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+          data-lightbox="entry" data-title="{{ $character->fullName }}">
+          <img src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+            class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="{{ $character->fullName }}" />
+        </a>
+      </div>
+      @if ($character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
+        <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked image</a>?</div>
+      @endif
     </div>
+    @include('character._image_info', ['image' => $character->image])
+  </div>
 
   {{-- Info --}}
   <div class="card character-bio">
@@ -82,7 +84,7 @@
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
             <a class="nav-link" id="settingsTab" data-toggle="tab" href="#settings-{{ $character->slug }}" role="tab">
-<i class="fas fa-cog"></i></a>
+              <i class="fas fa-cog"></i></a>
           </li>
         @endif
       </ul>

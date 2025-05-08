@@ -1,12 +1,12 @@
 <div class="card mb-3">
   <div class="card-header">
     <h2 class="mb-0">
-    <span class="float-right badge badge-{{ $trade->status == 'Pending' || $trade->status == 'Open' || $trade->status == 'Canceled' ? 'secondary' : ($trade->status == 'Completed' ? 'success' : 'danger') }}">{{ $trade->status }}</span>
-    <a href="{{ $trade->url }} ">Trade (#{{ $trade->id }})</a>
-        </h2>
-        @if ($trade->staff)
-            Processed by {!! $trade->staff->displayName !!}
-        @endif
+      <span class="float-right badge badge-{{ $trade->status == 'Pending' || $trade->status == 'Open' || $trade->status == 'Canceled' ? 'secondary' : ($trade->status == 'Completed' ? 'success' : 'danger') }}">{{ $trade->status }}</span>
+      <a href="{{ $trade->url }} ">Trade (#{{ $trade->id }})</a>
+    </h2>
+    @if ($trade->staff)
+      Processed by {!! $trade->staff->displayName !!}
+    @endif
   </div>
   <div class="card-body">
     @if ($trade->comments)

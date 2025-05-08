@@ -16,8 +16,9 @@
   @endif
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('user-shops/create') }}">
-<i class="fas fa-plus"></i> Create New Shop</a></div>
+    <a class="btn btn-primary" href="{{ url('user-shops/create') }}">
+      <i class="fas fa-plus"></i> Create New Shop</a>
+  </div>
   @if (!count($shops))
     <p>No item shops found.</p>
   @else

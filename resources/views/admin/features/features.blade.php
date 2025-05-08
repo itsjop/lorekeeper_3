@@ -13,9 +13,9 @@
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/trait-categories') }}">
-<i class="fas fa-folder"></i> Trait Categories</a>
+      <i class="fas fa-folder"></i> Trait Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/data/traits/create') }}">
-<i class="fas fa-plus"></i> Create New Trait</a>
+      <i class="fas fa-plus"></i> Create New Trait</a>
   </div>
 
   <div>
@@ -125,7 +125,8 @@
               </div>
               <div class="col-12 col-md-1">
                 <div class="logs-table-cell">
-<a href="{{ url('admin/data/traits/edit/' . $feature->id) }}" class="btn btn-primary py-0 px-1 w-100">Edit</a></div>
+                  <a href="{{ url('admin/data/traits/edit/' . $feature->id) }}" class="btn btn-primary py-0 px-1 w-100">Edit</a>
+                </div>
               </div>
             </div>
           </div>

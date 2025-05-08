@@ -134,7 +134,8 @@
                     {!! Form::text('options[' . $question->id . '][' . $option->id . ']', $option->option, ['class' => 'form-control']) !!}
                   </div>
                   <div class="col">
-<a href="#" class="btn btn-secondary float-right remove-option-button">X</a></div>
+                    <a href="#" class="btn btn-secondary float-right remove-option-button">X</a>
+                  </div>
                 </div>
               </div>
             @endforeach
@@ -144,7 +145,8 @@
                   {!! Form::text('options[' . $question->id . '][]', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="col">
-<a href="#" class="btn btn-secondary float-right remove-option-button">X</a></div>
+                  <a href="#" class="btn btn-secondary float-right remove-option-button">X</a>
+                </div>
               </div>
             </div>
           </div>
@@ -181,7 +183,8 @@
                 {!! Form::text('options[default][]', null, ['class' => 'form-control']) !!}
               </div>
               <div class="col">
-<a href="#" class="btn btn-secondary float-right remove-option-button">X</a></div>
+                <a href="#" class="btn btn-secondary float-right remove-option-button">X</a>
+              </div>
             </div>
           </div>
         </div>

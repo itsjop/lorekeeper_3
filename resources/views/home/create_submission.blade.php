@@ -28,27 +28,27 @@
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
 
-                <div class="modal-content hide" id="confirmContent">
-                    <div class="modal-header">
-                        <span class="modal-title h5 mb-0">Confirm {{ $isClaim ? 'Claim' : 'Submission' }}</span>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            This will submit the form and put it into the {{ $isClaim ? 'claims' : 'prompt' }} approval queue.
-                            You will not be able to edit the contents after the {{ $isClaim ? 'claim' : 'submission' }} has been made.
-                            If you aren't certain that you are ready, consider saving as a draft instead.
-                            Click the Confirm button to complete the {{ $isClaim ? 'claim' : 'submission' }}.
-                        </p>
-                        @if (!$isClaim)
-                            <div id="requirementsWarning">
-                            </div>
-                        @endif
-                        <div class="text-right">
-                            <a href="#" id="confirmSubmit" class="btn btn-primary">Confirm</a>
-                        </div>
-                    </div>
-                </div>
+        <div class="modal-content hide" id="confirmContent">
+          <div class="modal-header">
+            <span class="modal-title h5 mb-0">Confirm {{ $isClaim ? 'Claim' : 'Submission' }}</span>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>
+              This will submit the form and put it into the {{ $isClaim ? 'claims' : 'prompt' }} approval queue.
+              You will not be able to edit the contents after the {{ $isClaim ? 'claim' : 'submission' }} has been made.
+              If you aren't certain that you are ready, consider saving as a draft instead.
+              Click the Confirm button to complete the {{ $isClaim ? 'claim' : 'submission' }}.
+            </p>
+            @if (!$isClaim)
+              <div id="requirementsWarning">
+              </div>
+            @endif
+            <div class="text-right">
+              <a href="#" id="confirmSubmit" class="btn btn-primary">Confirm</a>
+            </div>
+          </div>
+        </div>
 
         <div class="modal-content hide" id="draftContent">
           <div class="modal-header">
@@ -99,18 +99,18 @@
         @if (!$isClaim)
           var $prompt = $('#prompt');
           var $rewards = $('#rewards');
-                    var $requirementsWarning = $('#requirementsWarning');
+          var $requirementsWarning = $('#requirementsWarning');
 
           $prompt.selectize();
           $prompt.on('change', function(e) {
             $rewards.load('{{ url('submissions/new/prompt') }}/' + $(this).val());
-                        $requirementsWarning.load('{{ url('submissions/new/prompt') }}/' + $(this).val() + '/requirements');
+            $requirementsWarning.load('{{ url('submissions/new/prompt') }}/' + $(this).val() + '/requirements');
           });
 
-                    if ($prompt.val()) {
-                        $rewards.load('{{ url('submissions/new/prompt') }}/' + $prompt.val());
-                        $requirementsWarning.load('{{ url('submissions/new/prompt') }}/' + $prompt.val() + '/requirements');
-                    }
+          if ($prompt.val()) {
+            $rewards.load('{{ url('submissions/new/prompt') }}/' + $prompt.val());
+            $requirementsWarning.load('{{ url('submissions/new/prompt') }}/' + $prompt.val() + '/requirements');
+          }
         @endif
 
         $confirmButton.on('click', function(e) {
@@ -122,11 +122,11 @@
 
         $confirmSubmit.on('click', function(e) {
           e.preventDefault();
-                    let $confirm = $('#requirementsWarning').find('#confirm').length ? $('#requirementsWarning').find('#confirm').is(':checked') : true;
-                    if ("{{ !$isClaim }}" && !$confirm) {
-                        alert('You must confirm that you understand that you will not be able to edit this submission after it has been made.');
-                        return;
-                    }
+          let $confirm = $('#requirementsWarning').find('#confirm').length ? $('#requirementsWarning').find('#confirm').is(':checked') : true;
+          if ("{{ !$isClaim }}" && !$confirm) {
+            alert('You must confirm that you understand that you will not be able to edit this submission after it has been made.');
+            return;
+          }
           $submissionForm.attr('action', '{{ url()->current() }}');
           $submissionForm.submit();
         });

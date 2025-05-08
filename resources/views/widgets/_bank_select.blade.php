@@ -20,7 +20,8 @@
             <td>{!! Form::select('currency_id[' . strtolower($owner->logType) . '-' . $owner->id . '][]', $currencySelect, $currencyId, ['class' => 'form-control selectize', 'placeholder' => 'Select Currency    ']) !!}</td>
             <td>{!! Form::text('currency_quantity[' . strtolower($owner->logType) . '-' . $owner->id . '][]', $quantity, ['class' => 'form-control']) !!}</td>
             <td class="text-right">
-<a href="#" class="btn btn-danger remove-currency-button">Remove</a></td>
+              <a href="#" class="btn btn-danger remove-currency-button">Remove</a>
+            </td>
           </tr>
         @endforeach
       @endif

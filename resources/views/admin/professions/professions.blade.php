@@ -14,12 +14,12 @@
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/profession-categories') }}">
-<i class="fas fa-folder"></i> Profession Categories</a>
+      <i class="fas fa-folder"></i> Profession Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/data/profession-subcategories') }}">
-<i class="fas fa-folder"></i> Profession Subcategories</a>
+      <i class="fas fa-folder"></i> Profession Subcategories</a>
 
     <a class="btn btn-primary" href="{{ url('admin/data/professions/create') }}">
-<i class="fas fa-plus"></i> Create New Profession</a>
+      <i class="fas fa-plus"></i> Create New Profession</a>
   </div>
 
   <div>

@@ -13,8 +13,9 @@
   <p>Both categories and species can be assigned to sublists, but each can only be assigned to ONE sublist.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/data/sublists/create') }}">
-<i class="fas fa-plus"></i> Create New Sub Masterlist</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/data/sublists/create') }}">
+      <i class="fas fa-plus"></i> Create New Sub Masterlist</a>
+  </div>
 
   @if (!count($sublists))
     <p>No sub masterlists found.</p>

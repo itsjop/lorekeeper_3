@@ -3,10 +3,12 @@
 @else
   <div class="text-center mb-3">
     <div class="mb-1">
-<a href="{{ $stock->item->idUrl }}">
-<img src="{{ $stock->item->imageUrl }}" /></a></div>
+      <a href="{{ $stock->item->idUrl }}">
+        <img src="{{ $stock->item->imageUrl }}" /></a>
+    </div>
     <div>
-<a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a></div>
+      <a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a>
+    </div>
     <div>Stock: {{ $stock->stock }}</div>
   </div>
 

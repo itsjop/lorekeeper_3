@@ -22,7 +22,7 @@
 
   <div class="text-right mb-3 mt-2">
     <a class="btn btn-primary" href="{{ url('admin/world/glossary/create') }}">
-<i class="fas fa-plus mr-2"></i> Glossary Term</a>
+      <i class="fas fa-plus mr-2"></i> Glossary Term</a>
   </div>
 
   @if (!count($glossaries))

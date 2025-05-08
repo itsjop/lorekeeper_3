@@ -121,7 +121,8 @@
           <div id="ticketList">
           </div>
           <div>
-<a href="#" class="btn btn-primary" id="add-ticket">Add Ticket</a></div>
+            <a href="#" class="btn btn-primary" id="add-ticket">Add Ticket</a>
+          </div>
           <div class="text-right">
             {!! Form::submit('Add', ['class' => 'btn btn-primary']) !!}
           </div>

@@ -14,11 +14,14 @@
   </div>
   <ul class="nav nav-tabs mb-3">
     <li class="nav-item">
-<a href="{{ url()->current() }}" class="nav-link {{ Request::get('is_active') ? '' : 'active' }}">Current Raffles</a></li>
+      <a href="{{ url()->current() }}" class="nav-link {{ Request::get('is_active') ? '' : 'active' }}">Current Raffles</a>
+    </li>
     <li class="nav-item">
-<a href="{{ url()->current() }}?is_active=1" class="nav-link {{ Request::get('is_active') == 1 ? 'active' : '' }}">Open Raffles</a></li>
+      <a href="{{ url()->current() }}?is_active=1" class="nav-link {{ Request::get('is_active') == 1 ? 'active' : '' }}">Open Raffles</a>
+    </li>
     <li class="nav-item">
-<a href="{{ url()->current() }}?is_active=2" class="nav-link {{ Request::get('is_active') == 2 ? 'active' : '' }}">Completed Raffles</a></li>
+      <a href="{{ url()->current() }}?is_active=2" class="nav-link {{ Request::get('is_active') == 2 ? 'active' : '' }}">Completed Raffles</a>
+    </li>
   </ul>
   @if (Request::get('is_active') == 1)
     <p>

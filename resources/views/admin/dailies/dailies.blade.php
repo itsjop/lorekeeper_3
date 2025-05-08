@@ -13,8 +13,9 @@
   <p>The sorting order reflects the order in which the {{ __('dailies.daily') }} will be listed on the {{ __('dailies.daily') }} index.</p>
 
   <div class="text-right mb-3">
-<a class="btn btn-primary" href="{{ url('admin/data/dailies/create') }}">
-<i class="fas fa-plus"></i> Create New {{ __('dailies.daily') }}</a></div>
+    <a class="btn btn-primary" href="{{ url('admin/data/dailies/create') }}">
+      <i class="fas fa-plus"></i> Create New {{ __('dailies.daily') }}</a>
+  </div>
   @if (!count($dailies))
     <p>No {{ __('dailies.dailies') }} found.</p>
   @else

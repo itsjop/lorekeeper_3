@@ -14,15 +14,16 @@
 
   @if (!$folder)
     <div class="text-right mb-3">
-<a class="btn btn-outline-primary" id="createFolder" href="#">
-<i class="fas fa-plus"></i> Create New Folder</a></div>
+      <a class="btn btn-outline-primary" id="createFolder" href="#">
+        <i class="fas fa-plus"></i> Create New Folder</a>
+    </div>
     <div class="row mb-3">
       @foreach ($folders as $f)
         <div class="col-md-4 col-xs-4 col-6 mb-3">
           <div class="card">
             <div class="card-body">
               <a href="{{ url('admin/files/' . basename($f)) }}">
-<i class="fas fa-folder"></i> {{ basename($f) }}</a>
+                <i class="fas fa-folder"></i> {{ basename($f) }}</a>
             </div>
           </div>
         </div>
@@ -36,8 +37,9 @@
   @endif
 
   <div class="text-right mb-3">
-<a href="#" class="btn btn-outline-primary" id="uploadButton">
-<i class="fas fa-plus"></i> Upload File</a></div>
+    <a href="#" class="btn btn-outline-primary" id="uploadButton">
+      <i class="fas fa-plus"></i> Upload File</a>
+  </div>
   <div class="mb-4 logs-table">
     <div class="logs-table-header">
       <div class="row">
@@ -55,7 +57,8 @@
           <div class="row flex-wrap">
             <div class="col-6 col-md-7">
               <div class="logs-table-cell">
-<a href="{{ asset('files/' . ($folder ? $folder . '/' : '') . $file) }}">{{ $file }}</a></div>
+                <a href="{{ asset('files/' . ($folder ? $folder . '/' : '') . $file) }}">{{ $file }}</a>
+              </div>
             </div>
             <div class="col-6 col-md-5">
               <div class="logs-table-cell text-right">

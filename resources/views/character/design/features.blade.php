@@ -27,26 +27,26 @@
 
     </div>
 
-        <div class="form-group">
-            {!! Form::label('subtype_ids', 'Species Subtype(s)') !!}
-            @if ($request->character->is_myo_slot && count($request->character->image->subtypes))
-                <div class="alert alert-secondary">{!! $request->character->image->displaySubtypes() !!}</div>
-            @else
-                <div id="subtypes">
-                    {!! Form::select('subtype_ids[]', $subtypes, $request->subtypes(), ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
-                </div>
-            @endif
-          </div>
+    <div class="form-group">
+      {!! Form::label('subtype_ids', 'Species Subtype(s)') !!}
+      @if ($request->character->is_myo_slot && count($request->character->image->subtypes))
+        <div class="alert alert-secondary">{!! $request->character->image->displaySubtypes() !!}</div>
+      @else
+        <div id="subtypes">
+          {!! Form::select('subtype_ids[]', $subtypes, $request->subtypes(), ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
+        </div>
+      @endif
+    </div>
 
-          <hr>
-          <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
-          <div class="form-group">
-            {!! Form::label('transformation_id', 'Transformation') !!}
-            @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
-              <div class="alert alert-secondary">{!! $request->character->image->transformation->displayName !!}</div>
-            @else
-              <div id="transformations">
-                {!! Form::select('transformation_id', $transformations, $request->transformation_id, ['class' => 'form-control', 'id' => 'transformation']) !!}
+    <hr>
+    <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
+    <div class="form-group">
+      {!! Form::label('transformation_id', 'Transformation') !!}
+      @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
+        <div class="alert alert-secondary">{!! $request->character->image->transformation->displayName !!}</div>
+      @else
+        <div id="transformations">
+          {!! Form::select('transformation_id', $transformations, $request->transformation_id, ['class' => 'form-control', 'id' => 'transformation']) !!}
         </div>
       @endif
     </div>
@@ -72,7 +72,8 @@
     <div class="form-group">
       {!! Form::label('Traits') !!}
       <div>
-<a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a></div>
+        <a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a>
+      </div>
       <div id="featureList">
         {{-- Add in the compulsory traits for MYO slots --}}
         @if ($request->character->is_myo_slot && $request->character->image->features)
@@ -200,34 +201,34 @@
 @section('scripts')
   @include('widgets._image_upload_js')
 
-    <script>
-        $("#species").change(function() {
-            var species = $('#species').val();
-            var id = '<?php echo $request->id; ?>';
-            $.ajax({
-                type: "GET",
-                url: "{{ url('designs/traits/subtype') }}?species=" + species + "&id=" + id,
-                dataType: "text"
-            }).done(function(res) {
-                $("#subtypes").html(res);
-                $("#subtype").selectize({
-                    maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-                });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+  <script>
+    $("#species").change(function() {
+          var species = $('#species').val();
+          var id = '<?php echo $request->id; ?>';
+          $.ajax({
+            type: "GET",
+            url: "{{ url('designs/traits/subtype') }}?species=" + species + "&id=" + id,
+            dataType: "text"
+          }).done(function(res) {
+            $("#subtypes").html(res);
+            $("#subtype").selectize({
+              maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
             });
-      $.ajax({
-        type: "GET",
-        url: "{{ url('designs/traits/transformation') }}?species=" + species + "&id=" + id,
-        dataType: "text"
-      }).done(function(res) {
-        $("#transformations").html(res);
-      }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-      });
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+          });
+          $.ajax({
+            type: "GET",
+            url: "{{ url('designs/traits/transformation') }}?species=" + species + "&id=" + id,
+            dataType: "text"
+          }).done(function(res) {
+            $("#transformations").html(res);
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+          });
 
-        $("#subtype").selectize({
+          $("#subtype").selectize({
             maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-        });
-    </script>
+          });
+  </script>
 @endsection

@@ -70,7 +70,7 @@
               <div class="text-center inventory-item">
                 <div class="mb-1">
                   <a class="inventory-stack">
-<img src="{{ $character['asset']->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character['asset']->fullName }}" /></a>
+                    <img src="{{ $character['asset']->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character['asset']->fullName }}" /></a>
                 </div>
                 <div>
                   <a class="inventory-stack inventory-stack-name">{!! $character['asset']->displayName !!}</a>

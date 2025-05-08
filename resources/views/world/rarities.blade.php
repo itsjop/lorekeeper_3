@@ -31,7 +31,7 @@
             'imageUrl' => $rarity->rarityImageUrl,
             'name' => $rarity->displayName,
             'description' => $rarity->parsed_description,
-                    'searchItemsUrl' => $rarity->searchItemsUrl,
+            'searchItemsUrl' => $rarity->searchItemsUrl,
             'searchFeaturesUrl' => $rarity->searchFeaturesUrl,
             'searchCharactersUrl' => $rarity->searchCharactersUrl,
         ])
