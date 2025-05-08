@@ -63,9 +63,9 @@
   {{-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet"> --}}
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Stylish&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
+  <!-- Styles -->
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
 
   <!-- Styles -->
   <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
