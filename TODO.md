@@ -1,5 +1,5 @@
 this fuckass merge, make sure
-- rearrage/remove duplicate js/css in main
+- [ ] checkboxes dont work
 
 # CRITICAL
 - [ ] pets

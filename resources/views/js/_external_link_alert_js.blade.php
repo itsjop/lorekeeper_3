@@ -13,11 +13,12 @@
         link.addClass('external-link');
       }
     });
-
-    $('.external-link').on('click', function(event) {
-      event.preventDefault();
-      let url = $(this).attr('href');
-      let externalHtml = `
+    const externalLinkWarning = false;
+    if (externalLinkWarning) {
+      $('.external-link').on('click', function(event) {
+        event.preventDefault();
+        let url = $(this).attr('href');
+        let externalHtml = `
                 <p>
                     You are about to leave this site. Are you sure you want to continue?
                 </p>
@@ -32,10 +33,11 @@
                     Cancel
                 </button>
             `;
-      $('#modal').find('.modal-body').html('');
-      $('#modal').find('.modal-title').html('External Link');
-      $('#modal').find('.modal-body').html(externalHtml);
-      $('#modal').modal('show');
-    });
+        $('#modal').find('.modal-body').html('');
+        $('#modal').find('.modal-title').html('External Link');
+        $('#modal').find('.modal-body').html(externalHtml);
+        $('#modal').modal('show');
+      });
+    }
   });
 </script>
