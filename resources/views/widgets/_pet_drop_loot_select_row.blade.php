@@ -15,8 +15,7 @@
                 <td class="loot-row-select"></td>
                 <td>{!! Form::text('min_quantity[]', 1, ['class' => 'form-control min-quantity', 'min' => 1]) !!}</td>
                 <td>{!! Form::text('max_quantity[]', 1, ['class' => 'form-control max-quantity']) !!}</td>
-                <td class="text-right">
-<a href="#" class="btn btn-danger remove-loot-button">Remove</a></td>
+                <td class="text-right"><a href="#" class="btn btn-danger remove-loot-button">Remove</a></td>
             </tr>
         </tbody>
     </table>

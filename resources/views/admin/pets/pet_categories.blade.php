@@ -13,10 +13,8 @@
     <p>The sorting order reflects the order in which the pet categories will be displayed in the inventory, as well as on the world pages.</p>
 
     <div class="text-right mb-3">
-        <a class="btn btn-secondary" href="{{ url('admin/data/pets') }}">
-<i class="fas fa-undo-alt mr-1"></i> Return to Pets</a>
-        <a class="btn btn-primary" href="{{ url('admin/data/pet-categories/create') }}">
-<i class="fas fa-plus mr-1"></i> Create New Pet Category</a>
+        <a class="btn btn-secondary" href="{{ url('admin/data/pets') }}"><i class="fas fa-undo-alt mr-1"></i> Return to Pets</a>
+        <a class="btn btn-primary" href="{{ url('admin/data/pet-categories/create') }}"><i class="fas fa-plus mr-1"></i> Create New Pet Category</a>
     </div>
     @if (!count($categories))
         <p>No pet categories found.</p>

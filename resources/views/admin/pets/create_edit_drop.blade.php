@@ -54,8 +54,7 @@
                         <td class="drop-row-select">{!! Form::text('label[]', $label, ['class' => 'form-control']) !!}</td>
                         <td class="drop-row-weight">{!! Form::number('weight[]', $weight, ['class' => 'form-control drop-weight']) !!}</td>
                         <td class="drop-row-chance"></td>
-                        <td class="text-right">
-<a href="#" class="btn btn-danger remove-drop-button">Remove</a></td>
+                        <td class="text-right"><a href="#" class="btn btn-danger remove-drop-button">Remove</a></td>
                     </tr>
                 @endforeach
             @endif
@@ -139,8 +138,7 @@
                     <td class="drop-row-select">{!! Form::text('label[]', null, ['class' => 'form-control']) !!}</td>
                     <td class="drop-row-weight">{!! Form::text('weight[]', 1, ['class' => 'form-control drop-weight']) !!}</td>
                     <td class="drop-row-chance"></td>
-                    <td class="text-right">
-<a href="#" class="btn btn-danger remove-drop-button">Remove</a></td>
+                    <td class="text-right"><a href="#" class="btn btn-danger remove-drop-button">Remove</a></td>
                 </tr>
             </tbody>
         </table>

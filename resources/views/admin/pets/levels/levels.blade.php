@@ -15,10 +15,8 @@
     </p>
 
     <div class="text-right mb-3">
-        <a class="btn btn-primary" href="{{ url('admin/data/pets') }}">
-<i class="fas fa-arrow-left mr-1"></i> Back to Pets</a>
-        <a class="btn btn-primary" href="{{ url('admin/data/pets/levels/create') }}">
-<i class="fas fa-plus mr-1"></i> Create New Level</a>
+        <a class="btn btn-primary" href="{{ url('admin/data/pets') }}"><i class="fas fa-arrow-left mr-1"></i> Back to Pets</a>
+        <a class="btn btn-primary" href="{{ url('admin/data/pets/levels/create') }}"><i class="fas fa-plus mr-1"></i> Create New Level</a>
     </div>
 
     @if (!config('lorekeeper.pets.pet_bonding_enabled'))

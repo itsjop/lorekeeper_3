@@ -115,11 +115,9 @@
                                                 @endif
                                                 <div class="h5 my-2">{{ $variant->name }}</div>
                                                 <div>
-                                                    <a href="{{ $variant->adminUrl }}" class="btn btn-sm btn-primary edit-variant">
-<i class="fas fa-cog mr-1"></i>Edit</a>
+                                                    <a href="{{ $variant->adminUrl }}" class="btn btn-sm btn-primary edit-variant"><i class="fas fa-cog mr-1"></i>Edit</a>
                                                     @if ($variant->dropData)
-                                                        <a href="{{ url('/admin/data/pets/drops/edit') . '/' . $variant->id }}" class="btn btn-sm btn-primary">
-<i class="fas fa-gift mr-1"></i>Drops</a>
+                                                        <a href="{{ url('/admin/data/pets/drops/edit') . '/' . $variant->id }}" class="btn btn-sm btn-primary"><i class="fas fa-gift mr-1"></i>Drops</a>
                                                     @endif
                                                 </div>
                                             </div>
@@ -161,8 +159,7 @@
                                                 @endif
                                             </div>
                                             <div>
-                                                <a href="#" class="btn btn-sm btn-primary edit-evolution" data-id="{{ $evolution->id }}">
-<i class="fas fa-cog mr-1"></i>Edit</a>
+                                                <a href="#" class="btn btn-sm btn-primary edit-evolution" data-id="{{ $evolution->id }}"><i class="fas fa-cog mr-1"></i>Edit</a>
                                             </div>
                                         </div>
                                     </div>

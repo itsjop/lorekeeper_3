@@ -7,8 +7,7 @@
                 <img class="img-fluid" src="{{ $stack->pet->image($stack->id) }}" />
             </a>
         </div>
-        <div class="mb-1">
-<a href="{{ $stack->pet->url }}">{{ $stack->pet->name }}</a></div>
+        <div class="mb-1"><a href="{{ $stack->pet->url }}">{{ $stack->pet->name }}</a></div>
     </div>
 
     @if (isset($stack->data['notes']) || isset($stack->data['data']))
@@ -241,14 +240,12 @@
                         </li>
                     @else
                         <li class="list-group-item bg-light">
-                            <h5 class="card-title mb-0 text-muted">
-<i class="fas fa-lock mr-2"></i> Currently attached to {!! $stack->character->displayName !!}</h5>
+                            <h5 class="card-title mb-0 text-muted"><i class="fas fa-lock mr-2"></i> Currently attached to {!! $stack->character->displayName !!}</h5>
                         </li>
                     @endif
                 @else
                     <li class="list-group-item bg-light">
-                        <h5 class="card-title mb-0 text-muted">
-<i class="fas fa-lock mr-2"></i> Account-bound</h5>
+                        <h5 class="card-title mb-0 text-muted"><i class="fas fa-lock mr-2"></i> Account-bound</h5>
                     </li>
                 @endif
                 <li class="list-group-item">

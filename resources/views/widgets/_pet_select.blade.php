@@ -27,8 +27,7 @@
                         data-name="{{ $user->name }}'s {{ $item->item->name }}">
                         <div class="text-center pet-item">
                             <div class="mb-1">
-                                <a class="pet-stack">
-<img src="{{ $item->item->imageUrl }}" /></a>
+                                <a class="pet-stack"><img src="{{ $item->item->imageUrl }}" /></a>
                             </div>
                             <div>
                                 <a class="pet-stack pet-stack-name">{{ $item->item->name }}</a>

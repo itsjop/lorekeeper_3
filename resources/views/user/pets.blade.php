@@ -40,13 +40,11 @@
                                             <i class="fas fa-brush ml-1" data-toggle="tooltip" title="This pet has custom art."></i>
                                         @endif
                                         @if ($pet->pivot->character_id)
-                                            <span data-toggle="tooltip" title="Attached to {!! strip_tags(getDisplayName(\App\Models\Character\Character::class, $pet->pivot->character_id)) !!}">
-<i class="fas fa-link ml-1"></i></span>
+                                            <span data-toggle="tooltip" title="Attached to {!! strip_tags(getDisplayName(\App\Models\Character\Character::class, $pet->pivot->character_id)) !!}"><i class="fas fa-link ml-1"></i></span>
                                         @endif
                                         @if ($pet->pivot->evolution_id)
                                             <span data-toggle="tooltip" title="This pet has evolved. Stage
-                                            {{ $pet->evolutions->where('id', $pet->pivot->evolution_id)->first()->evolution_stage }}.">
-<i
+                                            {{ $pet->evolutions->where('id', $pet->pivot->evolution_id)->first()->evolution_stage }}."><i
                                                     class="fas fa-angle-double-up ml-1"></i>
                                             </span>
                                         @endif

@@ -29,8 +29,7 @@
                 <a href="#" class="remove-pet btn btn-danger mb-2 disabled">×</a>
             </div>
         </div>
-        <div>
-<a href="#" class="btn btn-primary" id="add-pet">Add Pet</a></div>
+        <div><a href="#" class="btn btn-primary" id="add-pet">Add Pet</a></div>
     </div>
 
     <div class="form-group">

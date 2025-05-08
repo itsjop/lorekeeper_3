@@ -13,10 +13,8 @@
     <p>Pet drops are items that can be collected from pets at set intervals. In the code, they are called "Pet Drop Data" whereas "Pet Drop" refers to specific pets' drops.</p>
 
     <div class="text-right mb-3">
-        <a class="btn btn-secondary" href="{{ url('admin/data/pets') }}">
-<i class="fas fa-undo-alt mr-1"></i> Return to Pets</a>
-        <a class="btn btn-primary" href="{{ url('admin/data/pets/drops/create') }}">
-<i class="fas fa-plus mr-1"></i> Create New Pet Drop</a>
+        <a class="btn btn-secondary" href="{{ url('admin/data/pets') }}"><i class="fas fa-undo-alt mr-1"></i> Return to Pets</a>
+        <a class="btn btn-primary" href="{{ url('admin/data/pets/drops/create') }}"><i class="fas fa-plus mr-1"></i> Create New Pet Drop</a>
     </div>
 
     @if (!count($drops))
@@ -36,8 +34,7 @@
                     <div class="col-6 col-md-2">{!! $drop->isActive ? '<i class="text-success fas fa-check"></i>' : '' !!}</div>
                     <div class="col-12 col-md-3">{!! $drop->pet->displayName !!}</div>
                     <div class="col-6 col-md-2">{!! implode(', ', $drop->parameterArray) !!}</div>
-                    <div class="col-3 col-md text-right">
-<a href="{{ $drop->url }}" class="btn btn-primary py-0">Edit</a></div>
+                    <div class="col-3 col-md text-right"><a href="{{ $drop->url }}" class="btn btn-primary py-0">Edit</a></div>
                 </div>
             @endforeach
 
