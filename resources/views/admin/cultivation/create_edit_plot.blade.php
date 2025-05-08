@@ -39,7 +39,8 @@
 
       <div class="form-group col-md p-4 m-2 border">
         @if ($plot->stage_1_extension)
-          <a href="{{ $plot->getStageImage(1) }}" data-lightbox="entry" data-title="{{ $plot->name }}"><img src="{{ $plot->getStageImage(1) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $plot->getStageImage(1) }}" data-lightbox="entry" data-title="{{ $plot->name }}">
+            <img src="{{ $plot->getStageImage(1) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Stage 1 Image (Optional)') !!} {!! add_help('Image of the empty plot.') !!}
         <div>{!! Form::file('stage_1_image') !!}</div>
@@ -52,7 +53,8 @@
 
       <div class="form-group col-md p-4 m-2 border">
         @if ($plot->stage_2_extension)
-          <a href="{{ $plot->getStageImage(2) }}" data-lightbox="entry" data-title="{{ $plot->name }}"><img src="{{ $plot->getStageImage(2) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $plot->getStageImage(2) }}" data-lightbox="entry" data-title="{{ $plot->name }}">
+            <img src="{{ $plot->getStageImage(2) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Stage 2 Image (Optional)') !!} {!! add_help('Image of a tiny first growth, after planting something.') !!}
         <div>{!! Form::file('stage_2_image') !!}</div>
@@ -65,7 +67,8 @@
 
       <div class="form-group col-md p-4 m-2 border">
         @if ($plot->stage_3_extension)
-          <a href="{{ $plot->getStageImage(3) }}" data-lightbox="entry" data-title="{{ $plot->name }}"><img src="{{ $plot->getStageImage(3) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $plot->getStageImage(3) }}" data-lightbox="entry" data-title="{{ $plot->name }}">
+            <img src="{{ $plot->getStageImage(3) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Stage 3 Image (Optional)') !!} {!! add_help('Mid sized growth stage.') !!}
         <div>{!! Form::file('stage_3_image') !!}</div>
@@ -78,7 +81,8 @@
 
       <div class="form-group col-md p-4 m-2 border">
         @if ($plot->stage_4_extension)
-          <a href="{{ $plot->getStageImage(4) }}" data-lightbox="entry" data-title="{{ $plot->name }}"><img src="{{ $plot->getStageImage(4) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $plot->getStageImage(4) }}" data-lightbox="entry" data-title="{{ $plot->name }}">
+            <img src="{{ $plot->getStageImage(4) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Stage 4 Image (Optional)') !!} {!! add_help('Fully grown stage.') !!}
         <div>{!! Form::file('stage_4_image') !!}</div>
@@ -91,7 +95,8 @@
 
       <div class="form-group col-md p-4 m-2 border">
         @if ($plot->stage_5_extension)
-          <a href="{{ $plot->getStageImage(5) }}" data-lightbox="entry" data-title="{{ $plot->name }}"><img src="{{ $plot->getStageImage(5) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $plot->getStageImage(5) }}" data-lightbox="entry" data-title="{{ $plot->name }}">
+            <img src="{{ $plot->getStageImage(5) }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Stage 5 Image (Optional)') !!} {!! add_help('Ready for harvest with fruit/whatever!') !!}
         <div>{!! Form::file('stage_5_image') !!}</div>
@@ -134,7 +139,9 @@
                 <td class="loot-row-select">
                   {!! Form::select('item_id[]', $items, $item->id, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
                 </td>
-                <td class="text-right"><a href="#" class="btn btn-danger remove-area-button">Remove</a></td>
+                <td class="text-right">
+                  <a href="#" class="btn btn-danger remove-area-button">Remove</a>
+                </td>
               </tr>
             @endforeach
           @endif
@@ -162,7 +169,9 @@
           <td class="loot-row-select">
             {!! Form::select('item_id[]', $items, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
           </td>
-          <td class="text-right"><a href="#" class="btn btn-danger remove-plot-button">Remove</a></td>
+          <td class="text-right">
+            <a href="#" class="btn btn-danger remove-plot-button">Remove</a>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -3,11 +3,13 @@
 namespace App\Models\Character;
 
 use App\Models\Currency\Currency;
+use App\Models\User\UserItem;
 use App\Models\Model;
 use App\Models\Rarity;
 use App\Models\Species\Species;
 use App\Models\Species\Subtype;
 use App\Models\User\User;
+use App\Models\Feature\Feature;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CharacterDesignUpdate extends Model {
@@ -22,7 +24,7 @@ class CharacterDesignUpdate extends Model {
         'character_id', 'status', 'user_id', 'staff_id',
         'comments', 'staff_comments', 'data', 'extension',
         'use_cropper', 'x0', 'x1', 'y0', 'y1',
-        'hash', 'species_id', 'subtype_id', 'rarity_id',
+        'hash', 'species_id', 'subtype_ids', 'rarity_id',
         'has_comments', 'has_image', 'has_addons', 'has_features',
         'submitted_at', 'update_type', 'fullsize_hash',
         'approval_votes', 'rejection_votes'
@@ -42,6 +44,8 @@ class CharacterDesignUpdate extends Model {
      */
     protected $casts = [
         'submitted_at' => 'datetime',
+        'subtype_ids'  => 'array',
+        'data'         => 'array',
     ];
 
     /**
@@ -95,13 +99,6 @@ class CharacterDesignUpdate extends Model {
      */
     public function species() {
         return $this->belongsTo(Species::class, 'species_id');
-    }
-
-    /**
-     * Get the subtype of the design update.
-     */
-    public function subtype() {
-        return $this->belongsTo(Subtype::class, 'subtype_id');
     }
 
     /**
@@ -217,15 +214,6 @@ class CharacterDesignUpdate extends Model {
         ACCESSORS
 
     **********************************************************************************************/
-
-    /**
-     * Get the data attribute as an associative array.
-     *
-     * @return array
-     */
-    public function getDataAttribute() {
-        return json_decode($this->attributes['data'], true);
-    }
 
     /**
      * Get the items (UserItem IDs) attached to this update request.
@@ -350,7 +338,7 @@ class CharacterDesignUpdate extends Model {
      * @return string
      */
     public function getVoteDataAttribute() {
-        return collect(json_decode($this->attributes['vote_data'], true));
+        return collect($this->attributes['vote_data'], true);
     }
 
     /**********************************************************************************************
@@ -382,5 +370,131 @@ class CharacterDesignUpdate extends Model {
         }
 
         return $result;
+    }
+
+    /**
+     * Get the subtypes of the design update.
+     */
+    public function subtypes() {
+        return $this->subtype_ids;
+    }
+
+    /**
+     * Get the subtypes of the design update.
+     */
+    public function displaySubtypes() {
+        $subtypes = $this->subtypes();
+        $result = [];
+        foreach ($subtypes as $subtype) {
+            $result[] = Subtype::find($subtype)->displayName;
+        }
+
+        return implode(', ', $result);
+    }
+
+    /**
+     * Check if trait is within the attached items.
+     *
+     * @param  string  $type
+     * @return array
+     */
+    public function isAttachedOrOnCharacter($featureId)
+    {
+        $addedItems = UserItem::whereIn('id', array_keys($this->inventory))->get();
+        $featureIds = $addedItems->filter(function ($userItem) {
+            return $userItem->item->hasTag('trait');
+        })->map(function ($userItem) {
+            return $userItem->item->tag('trait')->getData();
+        })->flatten();
+
+        $characterFeatures = $this->character->image->features->pluck('id') ?? [];
+
+        if($featureIds->contains($featureId) || ($characterFeatures->contains($featureId))){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Get all attached traits.
+     *
+     * @param  string  $type
+     * @return array
+     */
+    public function getAttachedTraitIds()
+    {
+        $addedItems = UserItem::whereIn('id', array_keys($this->inventory))->get();
+        $featureIds = $addedItems->filter(function ($userItem) {
+            return $userItem->item->hasTag('trait');
+        })->map(function ($userItem) {
+            return $userItem->item->tag('trait')->getData();
+        })->flatten()->toArray();
+
+        return $featureIds;
+    }
+
+    /**
+     * Gets the selects list based on attached trait items.
+     *
+     * @param  string  $type
+     * @return array
+     */
+    public function getAttachedTraitSelects()
+    {
+        $selects = [];
+        $addedItems = UserItem::whereIn('id', array_keys($this->inventory))->get();
+        foreach($addedItems as $userItem){
+            if($userItem->item->hasTag('trait')){
+                $features = Feature::whereIn('id', $userItem->item->tag('trait')->getData());
+                $alreadyAddedFeatures = $this->features->whereIn('feature_id', $userItem->item->tag('trait')->getData());
+                $amount = $this->inventory[$userItem->id] - $alreadyAddedFeatures->count();
+                //add the select for each item
+                if($amount > 0){
+                    foreach(range(1,$amount) as $i){
+                        $choices = $features->whereNotIn('id', $alreadyAddedFeatures->pluck('id'))->orderBy('name')->pluck('name', 'id')->toArray();
+                        if(count($choices) > 0) $selects[] = $features->whereNotIn('id', $alreadyAddedFeatures->pluck('id'))->orderBy('name')->pluck('name', 'id')->toArray();
+                    }
+                }
+            }
+        }
+        return $selects;
+    }
+
+    /**
+     * Gets the select list based on attached items.
+     *
+     * @param  string  $type
+     * @return array
+     */
+    public function getAttachedTraitSelect()
+    {
+        $select = [];
+        $addedItems = UserItem::whereIn('id', array_keys($this->inventory))->get();
+        foreach($addedItems as $userItem){
+            if($userItem->item->hasTag('trait')){
+                $features = Feature::whereIn('id', $userItem->item->tag('trait')->getData());
+                //add trait to select
+                $choices = $features->orderBy('name')->pluck('name', 'id')->toArray();
+                $select = $select + $choices;
+            }
+        }
+        return $select;
+    }
+
+    /**
+     * Checks if a trait remover item was added to this request, allowing users to remove locked in traits.
+     *
+     * @param  string  $type
+     * @return array
+     */
+    public function canRemoveTrait()
+    {
+        $addedItems = UserItem::whereIn('id', array_keys($this->inventory))->get();
+        $traitRemover = $addedItems->filter(function ($userItem) {
+            return $userItem->item->hasTag('trait_remover');
+        })->first();
+
+        return isset($traitRemover);
     }
 }

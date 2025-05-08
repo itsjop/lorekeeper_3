@@ -19,56 +19,6 @@
 
 **************************************************************************************************/
 
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #ddd;
-}
-
-main {
-  flex-grow: 1;
-  display: flex;
-}
-
-main > .row {
-  flex-grow: 1;
-}
-
-/* Header */
-
-.site-header-image {
-  /*background-color: #eee;*/
-  background-repeat: repeat;
-  min-height: 200px;
-}
-
-/* Footer */
-
-/**************************************************************************************************
-
-    Content
-
-**************************************************************************************************/
-.modal-header {
-  border-bottom: 0px;
-}
-.modal-header .modal-title {
-  line-height: 1em;
-}
-
-.tooltip-inner {
-  max-width: 350px !important;
-}
-
-.nav-tabs .nav-link.active {
-  background-color: transparent;
-}
-
-.display-user,
-.display-character {
-  font-weight: bold;
-}
 
 .help-icon {
   /*vertical-align: middle;*/

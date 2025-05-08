@@ -22,7 +22,7 @@ class DailyReward extends Model
      * @var string
      */
     protected $table = 'daily_rewards';
-    
+
     /**
      * Validation rules for creation.
      *
@@ -33,7 +33,7 @@ class DailyReward extends Model
         'rewardable_id' => 'required',
         'quantity' => 'required|integer|min:1',
     ];
-    
+
     /**
      * Validation rules for updating.
      *
@@ -46,15 +46,15 @@ class DailyReward extends Model
     ];
 
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
-    
+
     /**
      * Get the reward attached to the daily reward.
      */
-    public function reward() 
+    public function reward()
     {
         switch ($this->rewardable_type)
         {
@@ -88,23 +88,23 @@ class DailyReward extends Model
         switch ($this->rewardable_type)
         {
             case 'Item':
-                return (isset($this->reward()->first()->imageUrl)) ? $this->reward()->first()->imageUrl : '/images/inventory.png';
+                return (isset($this->reward()->first()->imageUrl)) ? $this->reward()->first()->imageUrl : '/images/lorekeeper/inventory.png';
                 break;
             case 'Currency':
-                return (isset($this->reward()->first()->currencyImageUrl)) ? $this->reward()->first()->currencyImageUrl : '/images/currency.png';
+                return (isset($this->reward()->first()->currencyImageUrl)) ? $this->reward()->first()->currencyImageUrl : '/images/lorekeeper/currency.png';
             //uncomment if you use awards, may still have to edit the loot select blade files
             /**case 'Award':
                 return $this->belongsTo('App\Models\Award\Award', 'rewardable_id');
                 break;**/
             case 'LootTable':
-                return '/images/loot.png';
+                return '/images/lorekeeper/loot.png';
                 break;
             //uncomment if you use pets, may still have to edit the loot select blade files
             /**case 'Pet':
                 return $this->belongsTo('App\Models\Pet\Pet', 'rewardable_id');**/
             break;
             case 'Raffle':
-                return '/images/raffle.png';
+                return '/images/lorekeeper/raffle.png';
             break;
         }
         return null;

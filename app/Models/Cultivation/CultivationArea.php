@@ -65,7 +65,7 @@ class CultivationArea extends Model
         return $this->belongsToMany('App\Models\Cultivation\CultivationPlot', 'plot_area', 'area_id', 'plot_id');
     }
 
-    
+
     /**
      * Get the plot areas.
      */
@@ -178,7 +178,7 @@ class CultivationArea extends Model
      */
     public function getBackgroundImageUrlAttribute()
     {
-        if (!$this->background_extension) return "/images/area.png";
+        if (!$this->background_extension) return "/images/lorekeeper/area.png";
         return asset($this->imageDirectory . '/' . $this->backgroundImageFileName);
     }
 
@@ -189,7 +189,7 @@ class CultivationArea extends Model
      */
     public function getPlotImageUrlAttribute()
     {
-        if (!$this->plot_extension) return "/images/stage0.png";
+        if (!$this->plot_extension) return "/images/lorekeeper/stage0.png";
         return asset($this->imageDirectory . '/' . $this->plotImageFileName);
     }
 

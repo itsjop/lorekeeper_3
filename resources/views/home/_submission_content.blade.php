@@ -28,14 +28,18 @@
       <div class="col-md-2">
         <h5 class="mb-0">URL</h5>
       </div>
-      <div class="col-md-10"><a href="{{ $submission->url }}">{{ $submission->url }}</a></div>
+      <div class="col-md-10">
+        <a href="{{ $submission->url }}">{{ $submission->url }}</a>
+      </div>
     </div>
     @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && $submission->data['gallery_submission_id'])
       <div class="row mb-2 no-gutters">
         <div class="col-md-2">
           <h5 class="mb-0">Gallery Submission</h5>
         </div>
-        <div class="col-md-10"><a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a></div>
+        <div class="col-md-10">
+          <a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a>
+        </div>
       </div>
     @endif
     <div class="row mb-2 no-gutters">
@@ -114,12 +118,15 @@
     @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
       <div class="submission-character-row mb-2">
         <div class="submission-character-thumbnail">
-          <a href="{{ $character->character->url }}"><img src="{{ $character->character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->character->fullName }}" /></a>
+          <a href="{{ $character->character->url }}">
+            <img src="{{ $character->character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->character->fullName }}" /></a>
         </div>
         <div class="submission-character-info card ml-2">
           <div class="card-body">
             <div class="submission-character-info-content">
-              <h3 class="mb-2 submission-character-info-header"><a href="{{ $character->character->url }}">{{ $character->character->fullName }}</a></h3>
+              <h3 class="mb-2 submission-character-info-header">
+                <a href="{{ $character->character->url }}">{{ $character->character->fullName }}</a>
+              </h3>
               <div class="submission-character-info-body">
                 @if (array_filter(parseAssetData($character->data)))
                   <table class="table table-sm mb-0">

@@ -448,6 +448,51 @@ function prettyProfileName($url) {
     }
 }
 
+/**
+ * Gets the displayName attribute from a given model.
+ *
+ * @param mixed $model
+ * @param mixed $id
+ */
+function getDisplayName($model, $id) {
+    return $model::find($id)?->displayName;
+}
+
+/**
+ * Returns the given objects limits, if any.
+ *
+ * @param mixed $object
+ *
+ * @return bool
+ */
+function getLimits($object) {
+    return App\Models\Limit\Limit::where('object_model', get_class($object))->where('object_id', $object->id)->get();
+}
+
+/**
+ * Checks the site setting and returns the appropriate FontAwesome version.
+ *
+ * @return string
+ */
+function faVersion() {
+    $setting = config('lorekeeper.settings.fa_version');
+    $directory = 'css/vendor';
+
+    switch ($setting) {
+        case 0:
+            $version = 'allv5';
+            break;
+        case 1:
+            $version = 'allv6';
+            break;
+        case 2:
+            $version = 'allvmix';
+            break;
+    }
+
+    return asset($directory.'/'.$version.'.min.css');
+}
+
 // World Expansion attachments
 function allAttachments($model) {
     $attachments = $model->attachments;

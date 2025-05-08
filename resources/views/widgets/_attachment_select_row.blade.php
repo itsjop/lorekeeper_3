@@ -40,7 +40,9 @@
         </div>
         <div class="col-6 col-md-3 attachment-row-select"></div>
         <div class="col-6 col-md-3">{!! Form::text('attachment_data[]', null, ['class' => 'form-control']) !!}</div>
-        <div class="col-6 col-md text-right"><a href="#" class="btn btn-danger remove-attachment-button">Remove</a></div>
+        <div class="col-6 col-md text-right">
+          <a href="#" class="btn btn-danger remove-attachment-button">Remove</a>
+        </div>
       </div>
     </div>
   </div>

@@ -39,7 +39,8 @@
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($category->thumb_extension)
-          <a href="{{ $category->thumbUrl }}" data-lightbox="entry" data-title="{{ $category->name }}"><img src="{{ $category->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $category->thumbUrl }}" data-lightbox="entry" data-title="{{ $category->name }}">
+            <img src="{{ $category->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the category index.') !!}
         <div>{!! Form::file('image_th') !!}</div>
@@ -52,7 +53,8 @@
       </div>
       <div class="form-group col-md-6">
         @if ($category->image_extension)
-          <a href="{{ $category->imageUrl }}" data-lightbox="entry" data-title="{{ $category->name }}"><img src="{{ $category->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $category->imageUrl }}" data-lightbox="entry" data-title="{{ $category->name }}">
+            <img src="{{ $category->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Category Image (Optional)') !!} {!! add_help('This image is used on the category page as a header.') !!}
         <div>{!! Form::file('image') !!}</div>

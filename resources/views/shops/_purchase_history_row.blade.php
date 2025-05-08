@@ -1,5 +1,8 @@
 <div class="row flex-wrap">
   <div class="col-12 col-md-2">
+    <div class="logs-table-cell">{!! $log->item ? $log->item->displayName : '(Deleted ' . $log->stockType . ')' !!}</div>
+  </div>
+  <div class="col-12 col-md-2">
     <div class="logs-table-cell">{!! $log->item ? $log->item->displayName : '(Deleted Item)' !!}</div>
   </div>
   <div class="col-12 col-md-2">
@@ -13,6 +16,9 @@
   </div>
   <div class="col-12 col-md-2">
     <div class="logs-table-cell">{!! $log->currency ? $log->currency->display($log->cost) : $log->cost . ' (Deleted Currency)' !!}</div>
+  </div>
+  <div class="col-12 col-md-2">
+    <div class="logs-table-cell">{!! $log->displayCost ?? 'Free' !!}</div>
   </div>
   <div class="col-12 col-md-2">
     <div class="logs-table-cell">{!! pretty_date($log->created_at) !!}</div>

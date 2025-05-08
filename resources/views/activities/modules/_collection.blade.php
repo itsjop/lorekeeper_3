@@ -9,9 +9,13 @@
             $userOwned = \App\Models\User\UserItem::where('user_id', $user->id)->where('item_id', $ingredient->ingredient->id)->where('count', '>', 0)->get();
           @endphp
           @if ($userOwned->count() || Auth::user()->hasCollection($collection->id))
-            <div class="img-thumbnail" style="border: 1px solid grey;"><img src="{{ $ingredient->ingredient->image_url }}" /></div>
+            <div class="img-thumbnail" style="border: 1px solid grey;">
+              <img src="{{ $ingredient->ingredient->image_url }}" />
+            </div>
           @elseif(!Auth::user()->hasCollection($collection->id))
-            <div class="img-thumbnail"><img class="greyscale" src="{{ $ingredient->ingredient->image_url }}" /></div>
+            <div class="img-thumbnail">
+              <img class="greyscale" src="{{ $ingredient->ingredient->image_url }}" />
+            </div>
           @endif
         @endswitch
         <div class="text-center">{!! $ingredient->ingredient->displayName !!}</div>

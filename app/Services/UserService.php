@@ -425,17 +425,64 @@ class UserService extends Service {
   }
 
     /**
-     * Updates the user's avatar.
+     * Updates user's warning visibility setting.
      *
-     * @param \App\Models\User\User $user
-     * @param mixed                 $avatar
+     * @param mixed $data
+     * @param mixed $user
      *
      * @return bool
      */
-    public function updateAvatar($avatar, $user) {
+    public function updateContentWarningVisibility($data, $user) {
+        DB::beginTransaction();
+
+        try {
+            $user->settings->content_warning_visibility = $data;
+            $user->settings->save();
+
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Updates user's profile comment setting.
+     *
+     * @param mixed $data
+     * @param mixed $user
+     *
+     * @return bool
+     */
+    public function updateProfileCommentSetting($data, $user) {
+        DB::beginTransaction();
+
+        try {
+            $user->settings->allow_profile_comments = $data ?? 0;
+            $user->settings->save();
+
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Updates the user's avatar.
+     *
+     * @param \App\Models\User\User $user
+     * @param mixed                 $data
+     *
+     * @return bool
+     */
+    public function updateAvatar($data, $user) {
         DB::beginTransaction();
 
     try {
+            $avatar = $data['avatar'];
       if (!$avatar) {
         throw new \Exception(message: 'Please upload a file.');
       }
@@ -443,7 +490,7 @@ class UserService extends Service {
 
       if ($user->avatar !== 'default.jpg') {
         $file = 'images/avatars/' . $user->avatar;
-        //$destinationPath = 'uploads/' . $id . '/';
+        // $destinationPath = 'uploads/' . $id . '/';
 
         if (File::exists($file)) {
           if (!unlink($file)) {
@@ -452,26 +499,24 @@ class UserService extends Service {
         }
       }
 
-      // Checks if uploaded file is a GIF
-      if ($avatar->getClientOriginalExtension() == 'gif') {
-        if (!copy($avatar, $file)) {
-          throw new \Exception('Failed to copy file.');
-        }
-        if (!$file->move(public_path('images/avatars', $filename))) {
-          throw new \Exception('Failed to move file.');
-        }
-        if (!$avatar->move(public_path('images/avatars', $filename))) {
-          throw new \Exception('Failed to move file.');
-        }
-      } else {
-        if (
-          !Image::make($avatar)
-            ->resize(150, 150)
-            ->save(public_path('images/avatars/' . $filename))
-        ) {
-          throw new \Exception('Failed to process avatar.');
-        }
-      }
+            // Checks if uploaded file is a GIF
+            if ($avatar->getClientOriginalExtension() == 'gif') {
+                if (!$avatar->move(public_path('images/avatars'), $filename)) {
+                    throw new \Exception('Failed to move file.');
+                }
+            } else {
+
+                // crop image first
+                $cropWidth = $data['x1'] - $data['x0'];
+                $cropHeight = $data['y1'] - $data['y0'];
+
+                $image = Image::make($avatar);
+                $image->crop($cropWidth, $cropHeight, $data['x0'], $data['y0']);
+                if (!$image->resize(150, 150)->save(public_path('images/avatars/'.$filename)))
+
+                    throw new \Exception('Failed to process avatar.');
+
+            }
 
       $user->avatar = $filename;
       $user->save();
@@ -725,10 +770,10 @@ class UserService extends Service {
         UserUpdateLog::create([
           'staff_id' => $staff->id,
           'user_id' => $user->id,
-          'data' => json_encode([
+          'data' => [
             'is_banned' => 'Yes',
             'ban_reason' => $data['ban_reason'] ?? null
-          ]),
+          ],
           'type' => 'Ban'
         ]);
 
@@ -741,7 +786,7 @@ class UserService extends Service {
         UserUpdateLog::create([
           'staff_id' => $staff->id,
           'user_id' => $user->id,
-          'data' => json_encode(['ban_reason' => $data['ban_reason'] ?? null]),
+          'data' => ['ban_reason' => $data['ban_reason'] ?? null],
           'type' => 'Ban Update'
         ]);
       }
@@ -784,7 +829,7 @@ class UserService extends Service {
         UserUpdateLog::create([
           'staff_id' => $staff->id,
           'user_id' => $user->id,
-          'data' => json_encode(['is_banned' => 'No']),
+          'data' => ['is_banned' => 'No'],
           'type' => 'Unban'
         ]);
       }
@@ -862,7 +907,7 @@ class UserService extends Service {
           $tradeManager->rejectTrade(['trade' => $trade, 'reason' => 'User\'s account was deactivated.'], $staff);
         }
 
-        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['is_deactivated' => 'Yes', 'deactivate_reason' => $data['deactivate_reason'] ?? null]), 'type' => 'Deactivation']);
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => ['is_deactivated' => 'Yes', 'deactivate_reason' => $data['deactivate_reason'] ?? null], 'type' => 'Deactivation']);
 
         $user->settings->deactivated_at = Carbon::now();
 
@@ -878,7 +923,7 @@ class UserService extends Service {
           'staff_name' => $staff->name,
         ]);
       } else {
-        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['deactivate_reason' => $data['deactivate_reason'] ?? null]), 'type' => 'Deactivation Update']);
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => ['deactivate_reason' => $data['deactivate_reason'] ?? null], 'type' => 'Deactivation Update']);
       }
 
       $user->settings->deactivate_reason = isset($data['deactivate_reason']) && $data['deactivate_reason'] ? $data['deactivate_reason'] : null;
@@ -895,32 +940,42 @@ class UserService extends Service {
     /**
      * Reactivates a user account.
      *
-     * @param \App\Models\User\User $user
-     * @param \App\Models\User\User $staff
+     * @param User $user
+     * @param User $staff
      *
      * @return bool
      */
     public function reactivate($user, $staff = null) {
-        DB::beginTransaction();
+      DB::beginTransaction();
 
-        try {
-            if (!$staff) {
-                $staff = $user;
-            }
-            if ($user->is_deactivated) {
-                $user->is_deactivated = 0;
-                $user->deactivater_id = null;
-                $user->save();
+      try {
+          if (!$staff) {
+              $staff = $user;
+          }
+          if ($user->is_deactivated) {
+              $user->is_deactivated = 0;
+              $user->deactivater_id = null;
+              $user->save();
 
-        $user->settings->border_settings = ['border_flip' => $data['border_flip'] ?? 0];
-        $user->settings->save();
+              $user->settings->deactivate_reason = null;
+              $user->settings->deactivated_at = null;
+              $user->settings->save();
+              UserUpdateLog::create(['staff_id' => $staff ? $staff->id : $user->id, 'user_id' => $user->id, 'data' => ['is_deactivated' => 'No'], 'type' => 'Reactivation']);
+          }
+
+          Notifications::create('USER_REACTIVATED', User::find(Settings::get('admin_user')), [
+              'user_url'   => $user->url,
+              'user_name'  => ucfirst($user->name),
+              'staff_url'  => $staff->url,
+              'staff_name' => $staff->name,
+          ]);
+
+          return $this->commitReturn(true);
+      } catch (\Exception $e) {
+          $this->setError('error', $e->getMessage());
       }
 
-      return $this->commitReturn(true);
-    } catch (\Exception $e) {
-      $this->setError('error', $e->getMessage());
-    }
-    return $this->rollbackReturn(false);
+      return $this->rollbackReturn(false);
   }
 
   /**

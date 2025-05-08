@@ -16,7 +16,8 @@
       <div class="col-md-3 col-6 mb-3 text-center">
         @if ($daily->has_image)
           <div class="daily-image">
-            <a href="{{ $daily->url }}"><img src="{{ $daily->dailyImageUrl }}" alt="{{ $daily->name }}" /></a>
+            <a href="{{ $daily->url }}">
+              <img src="{{ $daily->dailyImageUrl }}" alt="{{ $daily->name }}" /></a>
           </div>
         @endif
         <div class="daily-name mt-1">

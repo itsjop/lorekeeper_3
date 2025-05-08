@@ -50,6 +50,10 @@
             <a class="dropdown-item" href="{{ url('characters/myos') }}">
               My MYO Slots
             </a>
+            <a class="dropdown-item" href="{{ url('pets') }}">
+              My Pets
+            </a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ url('inventory') }}">
               Inventory
             </a>
@@ -74,13 +78,12 @@
               Claims
             </a>
             <a class="dropdown-item" href="{{ url('reports') }}">
-              My Reports
+              Reports
             </a>
             <a class="dropdown-item" href="{{ url('designs') }}">
               Design Approvals
             </a>
-            <div class="dropdown-divider">
-            </div>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ url('characters/transfers/incoming') }}">
               Character Transfers
             </a>
@@ -184,12 +187,14 @@
       @else
         @if (Auth::user()->isStaff)
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin') }}"><i class="fas fa-crown"></i></a>
+            <a class="nav-link" href="{{ url('admin') }}">
+              <i class="fas fa-crown"></i></a>
           </li>
         @endif
         @if (Auth::user()->notifications_unread)
           <li class="nav-item">
-            <a class="nav-link btn btn-secondary btn-sm" href="{{ url('notifications') }}"><span class="fas fa-envelope"></span> {{ Auth::user()->notifications_unread }}</a>
+            <a class="nav-link btn btn-secondary btn-sm" href="{{ url('notifications') }}">
+              <span class="fas fa-envelope"></span> {{ Auth::user()->notifications_unread }}</a>
           </li>
         @endif
 

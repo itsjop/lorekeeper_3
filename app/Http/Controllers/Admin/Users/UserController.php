@@ -230,7 +230,7 @@ class UserController extends Controller {
         return redirect()->back();
       }
 
-      UserUpdateLog::create(['staff_id' => Auth::user()->id, 'user_id' => $user->id, 'data' => json_encode(['is_fto' => $request->get('is_fto') ? 'Yes' : 'No']), 'type' => 'FTO Status Change']);
+      UserUpdateLog::create(['staff_id' => Auth::user()->id, 'user_id' => $user->id, 'data' => ['is_fto' => $request->get('is_fto') ? 'Yes' : 'No'], 'type' => 'FTO Status Change']);
       flash('Updated user\'s account information successfully.')->success();
     } else {
       flash('Failed to update user\'s account information.')->error();
@@ -258,7 +258,7 @@ class UserController extends Controller {
     }
 
     if ($service->updateBirthday($formatDate, $user)) {
-      UserUpdateLog::create(['staff_id' => Auth::user()->id, 'user_id' => $user->id, 'data' => json_encode($logData), 'type' => 'Birth Date Change']);
+      UserUpdateLog::create(['staff_id' => Auth::user()->id, 'user_id' => $user->id, 'data' => $logData, 'type' => 'Birth Date Change']);
       flash('Birthday updated successfully!')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {

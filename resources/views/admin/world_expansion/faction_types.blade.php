@@ -8,8 +8,10 @@
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Faction types' => 'admin/world/faction-types']) !!}
 
   <div class="float-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/faction-types/create') }}"><i class="fas fa-plus mr-2"></i> Create New Faction Type</a>
-    <a class="btn btn-secondary" href="{{ url('admin/world/factions') }}"><i class="fas fa-undo-alt mr-2"></i> Back to Factions</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/faction-types/create') }}">
+      <i class="fas fa-plus mr-2"></i> Create New Faction Type</a>
+    <a class="btn btn-secondary" href="{{ url('admin/world/factions') }}">
+      <i class="fas fa-undo-alt mr-2"></i> Back to Factions</a>
   </div>
   <h1>Faction types</h1>
 
@@ -25,7 +27,8 @@
           <tr class="sort-item" data-id="{{ $type->id }}">
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              <a href={!! $type->url !!} @if ($type->thumb_extension) data-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($type->name) }} " @endif />{!! $type->name !!}</a>
+              <a href={!! $type->url !!} @if ($type->thumb_extension) data-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/>
+<br> {{ ucfirst($type->name) }} " @endif />{!! $type->name !!}</a>
               ({!! $type->names !!})
             </td>
             <td class="text-right">

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Browse Routes
@@ -15,6 +17,7 @@
 **************************************************************************************************/
 
 Route::get('items/{id}', 'Users\InventoryController@getStack');
+Route::get('pets/{id}', 'Users\PetController@getStack');
 Route::get('items/character/{id}', 'Users\InventoryController@getCharacterStack');
 
 /**************************************************************************************************
@@ -59,10 +62,13 @@ Route::group(['prefix' => 'user', 'namespace' => 'Users'], function () {
     Route::get('{name}/sublist/{key}', 'UserController@getUserSublist');
     Route::get('{name}/myos', 'UserController@getUserMyoSlots');
     Route::get('{name}/inventory', 'UserController@getUserInventory');
+    Route::get('{name}/pets', 'UserController@getUserPets');
+    Route::get('{name}/pets/{id}', 'UserController@getUserPet');
     Route::get('{name}/bank', 'UserController@getUserBank');
 
     Route::get('{name}/currency-logs', 'UserController@getUserCurrencyLogs');
     Route::get('{name}/item-logs', 'UserController@getUserItemLogs');
+    Route::get('{name}/pet-logs', 'UserController@getUserPetLogs');
     Route::get('{name}/ownership', 'UserController@getUserOwnershipLogs');
     Route::get('{name}/submissions', 'UserController@getUserSubmissions');
     Route::get('{name}/border-logs', 'UserController@getUserBorderLogs');
@@ -89,6 +95,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
     Route::get('{slug}/submissions', 'CharacterController@getCharacterSubmissions');
 
     Route::get('{slug}/gallery', 'CharacterController@getCharacterGallery');
+    Route::get('{slug}/pets', 'CharacterController@getCharacterPets');
     Route::get('{slug}/image/{id}', 'CharacterController@getCharacterImage');
 });
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
@@ -105,6 +112,7 @@ Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
 Route::group(['prefix' => 'world'], function () {
     Route::get('/', 'WorldController@getIndex');
 
+    Route::get('currency-categories', 'WorldController@getCurrencyCategories');
     Route::get('currencies', 'WorldController@getCurrencies');
     Route::get('rarities', 'WorldController@getRarities');
     Route::get('species', 'WorldController@getSpecieses');
@@ -119,6 +127,9 @@ Route::group(['prefix' => 'world'], function () {
     Route::get('trait-categories', 'WorldController@getFeatureCategories');
     Route::get('traits', 'WorldController@getFeatures');
     Route::get('traits/modal/{id}', 'WorldController@getFeatureDetail')->where(['id' => '[0-9]+']);
+    Route::get('pet-categories', 'WorldController@getPetCategories');
+    Route::get('pets', 'WorldController@getPets');
+    Route::get('pets/{id}', 'WorldController@getPet');
     Route::get('character-categories', 'WorldController@getCharacterCategories');
     Route::get(__('transformations.transformations'), 'WorldController@getTransformations');
     Route::get('border-categories', 'WorldController@getBorderCategories');

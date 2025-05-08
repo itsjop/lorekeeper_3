@@ -12,8 +12,10 @@
   <p class="mb-0">Fauna are the animals of your world. </p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/fauna-categories') }}"><i class="fas fa-folder mr-2"></i> Fauna Categories</a>
-    <a class="btn btn-primary" href="{{ url('admin/world/faunas/create') }}"><i class="fas fa-plus mr-2"></i> Create New Fauna</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/fauna-categories') }}">
+      <i class="fas fa-folder mr-2"></i> Fauna Categories</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/faunas/create') }}">
+      <i class="fas fa-plus mr-2"></i> Create New Fauna</a>
   </div>
 
   @if (!count($faunas))
@@ -26,7 +28,8 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $fauna->url !!}
-                @if ($fauna->thumb_extension) data-toggle="tooltip" title="<img src='{{ $fauna->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($fauna->name) }} " @endif />{!! $fauna->name !!}</a>
+                @if ($fauna->thumb_extension) data-toggle="tooltip" title="<img src='{{ $fauna->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+<br> {{ ucfirst($fauna->name) }} " @endif />{!! $fauna->name !!}</a>
               {{ $fauna->summary ? '(' . $fauna->summary . ')' : '' }}
             </td>
             <td class="text-right">

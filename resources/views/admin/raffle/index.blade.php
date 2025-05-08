@@ -1,4 +1,4 @@
-@extends('admin.layout', ['componentName' => 'admin/raffle/index'])
+@extends('admin.layout')
 
 @section('admin-title')
   Raffle Index

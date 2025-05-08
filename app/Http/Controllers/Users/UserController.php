@@ -20,11 +20,16 @@ use App\Models\Item\ItemCategory;
 use App\Models\Gallery\GalleryFavorite;
 use App\Models\Item\ItemLog;
 use App\Models\Character\CharacterCategory;
+use App\Models\Pet\Pet;
+use App\Models\Pet\PetCategory;
+use App\Models\Prompt\Prompt;
+use App\Models\Rarity;
 use App\Models\User\User;
 use App\Models\User\UserCurrency;
 use App\Models\Currency\CurrencyLog;
 use App\Models\User\UserItem;
 use App\Models\Border\Border;
+use App\Models\User\UserPet;
 use App\Models\User\UserUpdateLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -85,6 +90,7 @@ class UserController extends Controller {
       'user_enabled'          => Settings::get('WE_user_locations'),
       'user_factions_enabled' => Settings::get('WE_user_factions'),
       'aliases'               => $aliases->orderBy('is_primary_alias', 'DESC')->orderBy('site')->get(),
+      'pets'       => $this->user->pets()->orderBy('user_pets.updated_at', 'DESC')->take(5)->get(),
     ]);
   }
 
@@ -200,6 +206,103 @@ class UserController extends Controller {
     ]);
   }
 
+  /**
+   * Shows a user's inventory.
+   *
+   * @param string $name
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserInventory(Request $request, $name) {
+    $categories = ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get();
+    $query = Item::query();
+    $data = $request->only(['item_category_id', 'name', 'artist', 'rarity_id']);
+    if (isset($data['item_category_id'])) {
+      $query->where('item_category_id', $data['item_category_id']);
+    }
+    if (isset($data['name'])) {
+      $query->where('name', 'LIKE', '%' . $data['name'] . '%');
+    }
+    if (isset($data['artist'])) {
+      $query->where('artist_id', $data['artist']);
+    }
+    if (isset($data['rarity_id'])) {
+      if ($data['rarity_id'] == 'withoutOption') {
+        $query->whereNull('data->rarity_id');
+      } else {
+        $query->where('data->rarity_id', $data['rarity_id']);
+      }
+    }
+
+    $items = count($categories) ?
+      $this->user->items()
+      ->whereIn('items.id', $query->pluck('id')->toArray())
+      ->where('count', '>', 0)
+      ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['item_category_id', 'id']) :
+      $this->user->items()
+      ->whereIn('items.id', $query->pluck('id')->toArray())
+      ->where('count', '>', 0)
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['item_category_id', 'id']);
+
+    return view('user.inventory', [
+      'user'        => $this->user,
+      'categories'  => $categories->keyBy('id'),
+      'items'       => $items,
+      'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
+      'logs'        => $this->user->getItemLogs(),
+      'artists'     => User::whereIn('id', Item::whereNotNull('artist_id')->pluck('artist_id')->toArray())->pluck('name', 'id')->toArray(),
+      'rarities'    => ['withoutOption' => 'No Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
+    ]);
+  }
+
+
+
+  /**
+   * Shows a user's pets.
+   *
+   * @param string $name
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserPets($name) {
+    $categories = PetCategory::orderBy('sort', 'DESC')->get();
+    $pets = count($categories) ? $this->user->pets()->orderByRaw('FIELD(pet_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')->orderBy('name')->orderBy('updated_at')->get()->groupBy('pet_category_id') : $this->user->pets()->orderBy('name')->orderBy('updated_at')->get()->groupBy('pet_category_id');
+
+    return view('user.pets', [
+      'user'        => $this->user,
+      'categories'  => $categories->keyBy('id'),
+      'pets'        => $pets,
+      'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
+      'user'        => $this->user,
+      'logs'        => $this->user->getPetLogs(),
+    ]);
+  }
+
+  /**
+   * Shows a user's pets.
+   *
+   * @param string $name
+   * @param mixed  $id
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserPet($name, $id) {
+    $pet = UserPet::findOrFail($id);
+
+    return view('user.pet', [
+      'user'        => $this->user,
+      'pet'         => $pet,
+      'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
+      'logs'        => $this->user->getPetLogs(),
+    ]);
+  }
   /**
    * Shows a user's Bank.
    *
@@ -355,6 +458,7 @@ class UserController extends Controller {
       'user'       => $this->user,
       'characters' => false,
       'favorites'  => GallerySubmission::whereIn('id', $this->user->galleryFavorites()->pluck('gallery_submission_id')->toArray())->visible(Auth::user() ?? null)->orderBy('created_at', 'DESC')->paginate(20)->appends($request->query()),
+
     ]);
   }
 
@@ -438,41 +542,6 @@ class UserController extends Controller {
       'user' => $this->user,
       'shops' => $shops->orderBy('sort', 'DESC')->get(),
       'sublists' => Sublist::orderBy('sort', 'DESC')->get()
-    ]);
-  }
-
-
-
-  /**
-   * Shows a user's inventory.
-   *
-   * @param string $name
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function getUserInventory($name) {
-    $categories = ItemCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->get();
-    $items = count($categories) ?
-      $this->user->items()
-      ->where('count', '>', 0)
-      ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
-      ->orderBy('name')
-      ->orderBy('updated_at')
-      ->get()
-      ->groupBy(['item_category_id', 'id']) :
-      $this->user->items()
-      ->where('count', '>', 0)
-      ->orderBy('name')
-      ->orderBy('updated_at')
-      ->get()
-      ->groupBy(['item_category_id', 'id']);
-
-    return view('user.inventory', [
-      'user'        => $this->user,
-      'categories'  => $categories->keyBy('id'),
-      'items'       => $items,
-      'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
-      'logs'        => $this->user->getItemLogs(),
     ]);
   }
 }

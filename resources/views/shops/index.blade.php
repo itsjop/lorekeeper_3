@@ -22,15 +22,14 @@
         <div class="shop-name mt-1">
           <a href="{{ $shop->url }}" class="h5 mb-0">{{ $shop->name }}</a>
         </div>
+        @if ($shop->is_staff)
+          @if (Auth::check() && Auth::user()->isstaff)
+            @include('shops._shop')
+          @endif
+        @else
+          @include('shops._shop')
+        @endif
       </div>
     @endforeach
-    <div class="col-md-3 col-6 mb-3 text-center">
-      <div class="shop-image">
-        <a href="{{ url('shops/donation-shop') }}"><img src="{{ asset('images/donation_shop.png') }}" /></a>
-      </div>
-      <div class="shop-name mt-1">
-        <a href="{{ url('shops/donation-shop') }}" class="h5 mb-0">Donation Shop</a>
-      </div>
-    </div>
   </div>
 @endsection

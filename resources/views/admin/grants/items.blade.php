@@ -27,7 +27,9 @@
         <a href="#" class="remove-item btn btn-danger mb-2 disabled">×</a>
       </div>
     </div>
-    <div><a href="#" class="btn btn-primary" id="add-item">Add Item</a></div>
+    <div>
+      <a href="#" class="btn btn-primary" id="add-item">Add Item</a>
+    </div>
     <div class="item-row hide mb-2">
       {!! Form::select('item_ids[]', $items, null, ['class' => 'form-control mr-2 item-select', 'placeholder' => 'Select Item']) !!}
       {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}

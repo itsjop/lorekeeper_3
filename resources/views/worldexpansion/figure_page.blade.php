@@ -7,10 +7,13 @@
 @section('content')
 
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Figure" href="{{ url('admin/world/figures/edit/') . '/' . $figure->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
+    <a data-toggle="tooltip" title="[ADMIN] Edit Figure" href="{{ url('admin/world/figures/edit/') . '/' . $figure->id }}" class="mb-2 float-right">
+      <i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Figure' => 'world/figures', $figure->name => 'world/figures/' . $figure->id]) !!}
-  <h1 style="clear:both;"><img src="{{ $figure->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $figure->displayName !!}</h1>
+  <h1 style="clear:both;">
+    <img src="{{ $figure->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $figure->displayName !!}
+  </h1>
 
   <h5>{!! $figure->category ? ucfirst($figure->category->displayName) : 'Miscellaneous' !!}
     {!! $figure->faction ? '・ Part of ' . ucfirst($figure->faction->displayName) : '' !!}{!! $figure->factionRank ? ' (' . $figure->factionRank->name . ')' : null !!}
@@ -21,7 +24,9 @@
   </h5>
 
   @if ($figure->image_extension)
-    <div class="text-center"><img src="{{ $figure->imageUrl }}" class="mw-100 mb-3" /></div>
+    <div class="text-center">
+      <img src="{{ $figure->imageUrl }}" class="mw-100 mb-3" />
+    </div>
   @endif
 
   @isset($figure->summary)

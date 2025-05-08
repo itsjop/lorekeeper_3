@@ -248,7 +248,7 @@ class InventoryManager extends Service {
           throw new \Exception('Quantity to transfer exceeds item count.');
         }
 
-        //Check that hold count isn't being exceeded
+        // Check that hold count isn't being exceeded
         if ($stack->item->category->character_limit > 0) {
           $limit = $stack->item->category->character_limit;
         }
@@ -679,34 +679,24 @@ class InventoryManager extends Service {
           ['data', '=', $encoded_data]
         ])->first();
 
-        if (!$recipient_stack) {
-          $recipient_stack = UserItem::create([
-            'user_id' => $recipient->id,
-            'item_id' => $item->id,
-            'data' => $encoded_data
-          ]);
-        }
+                if (!$recipient_stack) {
+                    $recipient_stack = UserItem::create(['user_id' => $recipient->id, 'item_id' => $item->id, 'data' => $data]);
+                }
+                $recipient_stack->count += $quantity;
+                $recipient_stack->save();
+            } else {
+                $recipient_stack = CharacterItem::where([
+                    ['character_id', '=', $recipient->id],
+                    ['item_id', '=', $item->id],
+                    ['data', '=', $data],
+                ])->first();
 
-        $recipient_stack->count += $quantity;
-        $recipient_stack->save();
-      } else {
-        $recipient_stack = CharacterItem::where([
-          ['character_id', '=', $recipient->id],
-          ['item_id', '=', $item->id],
-          ['data', '=', $encoded_data]
-        ])->first();
-
-        if (!$recipient_stack) {
-          $recipient_stack = CharacterItem::create([
-            'character_id' => $recipient->id,
-            'item_id' => $item->id,
-            'data' => $encoded_data
-          ]);
-        }
-
-        $recipient_stack->count += $quantity;
-        $recipient_stack->save();
-      }
+                if (!$recipient_stack) {
+                    $recipient_stack = CharacterItem::create(['character_id' => $recipient->id, 'item_id' => $item->id, 'data' => $data]);
+                }
+                $recipient_stack->count += $quantity;
+                $recipient_stack->save();
+            }
 
       if (!$item->is_released) {
         $item->update([

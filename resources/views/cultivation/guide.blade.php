@@ -20,7 +20,9 @@
         <div class="col-12 mb-3 text-center">
           <div class="card h-100">
             <div class="row m-0 card-header">
-              <div class="col-lg-2 col"><img class="" src="{{ $area->backgroundImageUrl }}" alt="{{ $area->name }}" style="max-height:100px;"></div>
+              <div class="col-lg-2 col">
+                <img class="" src="{{ $area->backgroundImageUrl }}" alt="{{ $area->name }}" style="max-height:100px;">
+              </div>
               <div class="col-lg-9 col d-flex align-items-center">
                 <h4 class="p-0 m-0">{{ $area->name }}</h4>
               </div>
@@ -34,7 +36,9 @@
                     </div>
                     <div class="card-body text-justify">
                       <div class="row m-0">
-                        <div class="col-lg-4 col-12 text-center"><img class="" src="{{ $plot->getStageImage(4) }}" alt="{{ $plot->name }}" style="max-height:200px;"></div>
+                        <div class="col-lg-4 col-12 text-center">
+                          <img class="" src="{{ $plot->getStageImage(4) }}" alt="{{ $plot->name }}" style="max-height:200px;">
+                        </div>
                         <div class="col-lg-7 col-12">
                           <b> Created with: </b>
                           <table class="table table-sm">

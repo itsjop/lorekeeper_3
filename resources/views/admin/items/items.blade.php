@@ -14,10 +14,13 @@
 
   <div class="text-right mb-3">
     @if (Auth::user()->hasPower('edit_inventories'))
-      <a class="btn btn-primary" href="{{ url('admin/grants/item-search') }}"><i class="fas fa-search"></i> Item Search</a>
+      <a class="btn btn-primary" href="{{ url('admin/grants/item-search') }}">
+        <i class="fas fa-search"></i> Item Search</a>
     @endif
-    <a class="btn btn-primary" href="{{ url('admin/data/item-categories') }}"><i class="fas fa-folder"></i> Item Categories</a>
-    <a class="btn btn-primary" href="{{ url('admin/data/items/create') }}"><i class="fas fa-plus"></i> Create New Item</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/item-categories') }}">
+      <i class="fas fa-folder"></i> Item Categories</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/items/create') }}">
+      <i class="fas fa-plus"></i> Create New Item</a>
   </div>
 
   <div>
@@ -30,6 +33,8 @@
         {!! Form::select('item_category_id', $categories, Request::get('item_category_id'), ['class' => 'form-control']) !!}
       </div>
       @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
+        <div class="form-group ml-3 mb-3">{!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control', 'placeholder' => 'Any Rarity']) !!}
+        </div>
         <div class="form-group ml-3 mb-3">
           {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control']) !!}
         </div>
@@ -45,7 +50,7 @@
                 'hiddenOnly' => 'Hidden Only',
             ],
             Request::get('visibility') ?: 'none',
-            ['class' => 'form-control'],
+            ['class' => 'form-control', 'placeholder' => 'Any Visibility'],
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">

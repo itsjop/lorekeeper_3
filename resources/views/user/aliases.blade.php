@@ -33,7 +33,9 @@
               <div class="logs-table-cell">{!! $alias->displayAlias !!}</div>
             </div>
             <div class="col-3">
-              <div class="logs-table-cell"><i class="{{ $alias->config['icon'] }} fa-fw mr-1"></i> {{ $alias->config['full_name'] }}</div>
+              <div class="logs-table-cell">
+                <i class="{{ $alias->config['icon'] }} fa-fw mr-1"></i> {{ $alias->config['full_name'] }}
+              </div>
             </div>
             <div class="col-5">
               <div class="logs-table-cell">

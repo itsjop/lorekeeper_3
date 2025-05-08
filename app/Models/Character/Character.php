@@ -198,6 +198,10 @@ class Character extends Model {
         return $this->belongsTo(Rarity::class, 'rarity_id');
     }
 
+    public function pets() {
+        return $this->hasMany('App\Models\User\UserPet', 'character_id');
+    }
+
     /**
      * Get the character's associated gallery submissions.
      */
@@ -346,6 +350,17 @@ class Character extends Model {
         } else {
             return $this->slug.($this->name ? ': '.$this->name : '');
         }
+    }
+
+    /**
+     * Gets the character's warnings, if they exist.
+     */
+    public function getWarningsAttribute() {
+        if (config('lorekeeper.settings.enable_character_content_warnings') && $this->image->content_warnings) {
+            return '<i class="fa fa-exclamation-triangle text-danger" data-toggle="tooltip" title="'.implode(', ', $this->image->content_warnings).'"></i> ';
+        }
+
+        return null;
     }
 
     /**
@@ -634,14 +649,14 @@ class Character extends Model {
         return Submission::with('user.rank')->with('prompt')->where('status', 'Approved')->whereIn('id', SubmissionCharacter::where('character_id', $this->id)->pluck('submission_id')->toArray())->paginate(30);
 
         // Untested
-        //$character = $this;
-        //return Submission::where('status', 'Approved')->with(['characters' => function($query) use ($character) {
+        // $character = $this;
+        // return Submission::where('status', 'Approved')->with(['characters' => function($query) use ($character) {
         //    $query->where('submission_characters.character_id', 1);
-        //}])
-        //->whereHas('characters', function($query) use ($character) {
+        // }])
+        // ->whereHas('characters', function($query) use ($character) {
         //    $query->where('submission_characters.character_id', 1);
-        //});
-        //return Submission::where('status', 'Approved')->where('user_id', $this->id)->orderBy('id', 'DESC')->paginate(30);
+        // });
+        // return Submission::where('status', 'Approved')->where('user_id', $this->id)->orderBy('id', 'DESC')->paginate(30);
     }
 
     /**

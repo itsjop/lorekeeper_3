@@ -1,5 +1,7 @@
 <ul>
-  <li class="sidebar-header"><a href="{{ url('professions') }}" class="card-link">Professions</a></li>
+  <li class="sidebar-header">
+    <a href="{{ url('professions') }}" class="card-link">Professions</a>
+  </li>
 
   <li class="sidebar-section">
     <div class="sidebar-item">
@@ -9,7 +11,9 @@
     </div>
   </li>
 
-  <li class="sidebar-header"><a href="{{ url('professions') }}" class="card-link">Characters</a></li>
+  <li class="sidebar-header">
+    <a href="{{ url('professions') }}" class="card-link">Characters</a>
+  </li>
 
   <li class="sidebar-section">
     <div class="sidebar-item">

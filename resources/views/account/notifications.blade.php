@@ -44,7 +44,10 @@
                   <tr class="{{ $notification->is_unread ? 'unread' : '' }}">
                     <td>{!! $notification->message !!}</td>
                     <td>{!! format_date($notification->created_at) !!}</td>
-                    <td class="text-right"><a href="#" data-id="{{ $notification->id }}" class="clear-notification"><i class="fas fa-times" aria-hidden="true"></i></a></td>
+                    <td class="text-right">
+                      <a href="#" data-id="{{ $notification->id }}" class="clear-notification">
+                        <i class="fas fa-times" aria-hidden="true"></i></a>
+                    </td>
                   </tr>
                 @endforeach
               </tbody>

@@ -23,14 +23,14 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="og:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
+  <meta property="og:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif">
   <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="og:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="twitter:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
+  <meta property="twitter:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif">
   <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="twitter:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
@@ -38,67 +38,67 @@
   <meta name="robots" content="noai">
   <meta name="robots" content="noimageai">
 
+
+  <!------------------------------ LOREKEEPER RESOURCES ----------------------------->
   <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/site.js') }}"></script>
-  <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap4-toggle.min.js') }}"></script>
-  <script src="{{ asset('js/tinymce.min.js') }}"></script>
-  <script src="{{ asset('js/jquery.tinymce.min.js') }}"></script>
-  <script src="{{ asset('js/lightbox.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
-  <script src="{{ asset('js/bs-custom-file-input.min.js') }}"></script>
-  <script src="{{ asset('js/selectize.min.js') }}"></script>
-  <script src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>
-  <script src="{{ asset('js/croppie.min.js') }}"></script>
-
-  <!-- Scripts for wheel of fortune dailies -->
-  <script src="{{ asset('js/winwheel.min.js') }}"></script>
-  <script src="{{ asset('js/tweenmax.min.js') }}"></script>
-  <script src="{{ asset('js/image-map-resize.js') }}"></script>
-
-  <!-- Fonts -->
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {{-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet"> --}}
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Stylish&display=swap" rel="stylesheet">
-
+  <script src="{{ mix('js/vendor/app.js') }}"></script>
+  <script defer src="{{ asset('js/site.js') }}"></script>
   <!-- Styles -->
-  <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/all.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/jquery-ui.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/bootstrap4-toggle.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/lightbox.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/croppie.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
-
-  <!-- Custom Styles -->
   <link href="{{ asset('css/mixins.css') }}" rel="stylesheet">
   <link href="{{ asset('css/sitewide.css') }}" rel="stylesheet">
   <link href="{{ asset('css/global-vars.css') }}" rel="stylesheet">
-
   <link href="{{ asset('css/components/site-header.css') }}" rel="stylesheet">
   <link href="{{ asset('css/components/background.css') }}" rel="stylesheet">
   <link href="{{ asset('css/components/sidebar.css') }}" rel="stylesheet">
   <link href="{{ asset('css/components/navbar.css') }}" rel="stylesheet">
   <link href="{{ asset('css/components/footer.css') }}" rel="stylesheet">
-
   <link href="{{ asset('css/helpers/animation.css') }}" rel="stylesheet">
-
   <link href="{{ asset('css/pages/dashboard.css') }}" rel="stylesheet">
 
+  <!------------------------------ EXTERNAL RESOURCES ----------------------------->
+  <!-- Scripts -->
+  <script src="{{ asset('js/vendor/jquery-ui.min.js') }}"></script>
+  <script src="{{ asset('js/vendor/jquery.tinymce.min.js') }}"></script>
+  <script src="{{ asset('js/vendor/jquery.ui.touch-punch.min.js') }}"></script>
+  <script src="{{ asset('js/vendor/tinymce.min.js') }}"></script>
+  <script defer src="{{ asset('js/vendor/bootstrap4-toggle.min.js') }}"></script>
+  <script defer src="{{ asset('js/vendor/lightbox.min.js') }}"></script>
+  <script defer src="{{ asset('js/vendor/selectize.min.js') }}"></script>
+  {{-- <script defer src="{{ asset('js/vendor/app-secondary.js') }}"></script> --}}
+  {{-- <script defer src="{{ mix('js/vendor/app-secondary.js') }}"></script> --}}
+  <script defer src="{{ asset('js/vendor/bs-custom-file-input.min.js') }}"></script>
+  <script defer src="{{ asset('js/vendor/bootstrap-colorpicker.min.js') }}"></script>
+  <script defer src="{{ asset('js/vendor/jquery-ui-timepicker-addon.js') }}"></script>
+  <script defer src="{{ asset('js/vendor/croppie.min.js') }}"></script>
+  <!-- Fonts -->
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+  {{-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet"> --}}
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Stylish&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link href="{{ mix('css/vendor/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/vendor/all.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
+  <link defer href="{{ faVersion() }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/jquery-ui.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/bootstrap4-toggle.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/lightbox.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/vendor/croppie.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
 
-  @include('feed::links')
 
+  <!----------- Laravel Includes ----------->
+  @include('feed::links')
   @include('js._external_link_alert_js')
+  @yield('head')
 </head>
 
 <body>
@@ -145,14 +145,20 @@
         @endif
         @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
           @if (Auth::user()->is_news_unread)
-            <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
+            <div class="alert alert-info">
+              <a href="{{ url('news') }}">There is a new news post!</a>
+            </div>
           @endif
           @if (Auth::user()->is_sales_unread)
-            <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
+            <div class="alert alert-info">
+              <a href="{{ url('sales') }}">There is a new sales post!</a>
+            </div>
           @endif
         @endif
         @if (Auth::check() && Auth::user()->is_polls_unread)
-          <div class="alert alert-info"><a href="{{ url('forms') }}">There is a new site poll!</a></div>
+          <div class="alert alert-info">
+            <a href="{{ url('forms') }}">There is a new site poll!</a>
+          </div>
         @endif
         @include('flash::message')
         @yield('content')
@@ -185,7 +191,6 @@
             e.stopImmediatePropagation();
           }
         });
-
         $(function() {
           $('[data-toggle="tooltip"]').tooltip({
             html: true

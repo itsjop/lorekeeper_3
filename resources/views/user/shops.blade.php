@@ -18,7 +18,8 @@
         <div class="col-md-3 col-6 mb-3 text-center">
           @if ($shop->has_image)
             <div class="shop-image">
-              <a href="{{ $shop->url }}"><img src="{{ $shop->shopImageUrl }}" alt="{{ $shop->name }}" /></a>
+              <a href="{{ $shop->url }}">
+                <img src="{{ $shop->shopImageUrl }}" alt="{{ $shop->name }}" /></a>
             </div>
           @endif
           <div class="shop-name mt-1">

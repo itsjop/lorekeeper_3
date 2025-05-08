@@ -11,7 +11,8 @@
 
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/discord/rewards/create') }}"><i class="fas fa-plus"></i> Create New Reward</a>
+    <a class="btn btn-primary" href="{{ url('admin/discord/rewards/create') }}">
+      <i class="fas fa-plus"></i> Create New Reward</a>
   </div>
 
   <div class="mb-4 logs-table">

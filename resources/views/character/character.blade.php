@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ $character->image->thumbnailUrl }}
+  {{ $character->image->content_warnings ? asset('images/lorekeeper/content-warning.png') : $character->image->thumbnailUrl }}
 @endsection
 
 @section('profile-content')
@@ -41,9 +41,13 @@
       <div class="col-lg-2 ml-auto">
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
           @if (isset($character->profile->professionObj))
-            <h5 class="p-0 m-0"><img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}</h5>
+            <h5 class="p-0 m-0">
+              <img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/lorekeeper/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}
+            </h5>
           @else
-            <h5 class="p-0 m-0"><img class="fr-fic fr-dii mr-2" src="/images/profession.png" style="max-width:50px;">{{ $character->profile->profession }}</h5>
+            <h5 class="p-0 m-0">
+              <img class="fr-fic fr-dii mr-2" src="/images/lorekeeper/profession.png" style="max-width:50px;">{{ $character->profile->profession }}
+            </h5>
           @endif
         </a>
       </div>
@@ -57,7 +61,7 @@
         <a href="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
           data-lightbox="entry" data-title="{{ $character->fullName }}">
           <img src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            class="image" alt="{{ $character->fullName }}" />
+            class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="{{ $character->fullName }}" />
         </a>
       </div>
       @if ($character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
@@ -79,7 +83,8 @@
         </li>
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
-            <a class="nav-link" id="settingsTab" data-toggle="tab" href="#settings-{{ $character->slug }}" role="tab"><i class="fas fa-cog"></i></a>
+            <a class="nav-link" id="settingsTab" data-toggle="tab" href="#settings-{{ $character->slug }}" role="tab">
+              <i class="fas fa-cog"></i></a>
           </li>
         @endif
       </ul>

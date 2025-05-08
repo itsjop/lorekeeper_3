@@ -26,13 +26,15 @@
         <div class="card mb-3 p-3 h-100">
           <div class="world-entry-image">
             @isset($category->thumb_extension)
-              <a href="{{ $category->thumbUrl }}" data-lightbox="entry" data-title="{{ $category->name }}"><img src="{{ $category->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
+              <a href="{{ $category->thumbUrl }}" data-lightbox="entry" data-title="{{ $category->name }}">
+                <img src="{{ $category->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
             @endisset
           </div>
           <h3>
             {!! $category->displayName !!}
             @if (isset($category->searchUrl) && $category->searchUrl)
-              <a href="{{ $category->searchUrl }}" class="world-entry-search text-muted float-right"><i class="fas fa-search"></i></a>
+              <a href="{{ $category->searchUrl }}" class="world-entry-search text-muted float-right">
+                <i class="fas fa-search"></i></a>
             @endif
           </h3>
           <div class="world-entry-text">

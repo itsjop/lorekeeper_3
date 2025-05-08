@@ -12,8 +12,10 @@
   <p class="mb-0">From artistic concepts to planned storylines, concepts can be whatever you want! </p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/concept-categories') }}"><i class="fas fa-folder mr-2"></i> Concept Categories</a>
-    <a class="btn btn-primary" href="{{ url('admin/world/concepts/create') }}"><i class="fas fa-plus mr-2"></i> Create New Concept</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/concept-categories') }}">
+      <i class="fas fa-folder mr-2"></i> Concept Categories</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/concepts/create') }}">
+      <i class="fas fa-plus mr-2"></i> Create New Concept</a>
   </div>
 
   @if (!count($concepts))
@@ -26,7 +28,8 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $concept->url !!}
-                @if ($concept->thumb_extension) data-toggle="tooltip" title="<img src='{{ $concept->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($concept->name) }} " @endif />{!! $concept->name !!}</a>
+                @if ($concept->thumb_extension) data-toggle="tooltip" title="<img src='{{ $concept->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+<br> {{ ucfirst($concept->name) }} " @endif />{!! $concept->name !!}</a>
               {{ $concept->summary ? '(' . $concept->summary . ')' : '' }}
             </td>
             <td class="text-right">

@@ -12,7 +12,10 @@
   <p>This is a list of plots that users can cultivate and grow stuff in.</p>
   <p>The sorting order reflects the order in which the plots will be listed on plot index and info pages.</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/cultivation/plots/edit') }}"><i class="fas fa-plus"></i> Create New Plot</a></div>
+  <div class="text-right mb-3">
+    <a class="btn btn-primary" href="{{ url('admin/cultivation/plots/edit') }}">
+      <i class="fas fa-plus"></i> Create New Plot</a>
+  </div>
   @if (!count($plots))
     <p>No plots found.</p>
   @else

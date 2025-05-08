@@ -6,12 +6,16 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Locations' => 'world/locations', $location->style => 'world/locations/' . $location->id, 'Gallery Submissions' => 'world/locations/' . $location->id . '/submissions']) !!}
-  <h1><img src="{{ $location->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $location->fullDisplayNameUC !!}</h1>
+  <h1>
+    <img src="{{ $location->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $location->fullDisplayNameUC !!}
+  </h1>
   <h5>{!! ucfirst($location->type->displayName) !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!}</h5>
 
 
   @if ($location->image_extension)
-    <div class="text-center"><img src="{{ $location->imageUrl }}" class="mw-100" /></div>
+    <div class="text-center">
+      <img src="{{ $location->imageUrl }}" class="mw-100" />
+    </div>
   @endif
 
   @isset($location->summary)

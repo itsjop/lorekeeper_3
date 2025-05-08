@@ -1,8 +1,13 @@
+this fuckass merge, make sure
+- [ ] raffles dont work
+
 # CRITICAL
+- [ ] pets
 - [ ] Mailersend Error Fix
 - [x] Item Preview Error
 - [ ] appprovals
 - [ ] mobile css
+- [ ] background image fixed
 
 # HIGH PRIORITY
 - [ ] Critical CSS Render Path to avoid flickering
@@ -19,3 +24,7 @@
 # funsies!
 - [ ] all common quick links in the corner
 - [ ] SOUND EFFECT TOGGLE
+
+
+# low-prio
+- [ ] slim down google fonts payload

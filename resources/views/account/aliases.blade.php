@@ -36,7 +36,9 @@
         <div class="logs-table-row">
           <div class="row flex-wrap">
             <div class="col-3">
-              <div class="logs-table-cell"><a href="{{ $alias->url }}">{{ $alias->alias }}</a></div>
+              <div class="logs-table-cell">
+                <a href="{{ $alias->url }}">{{ $alias->alias }}</a>
+              </div>
             </div>
             <div class="col-3">
               <div class="logs-table-cell">
@@ -78,7 +80,9 @@
   @foreach (config('lorekeeper.sites') as $provider => $site)
     @if (isset($site['auth']) && $site['auth'])
       <div class="d-flex mb-3">
-        <div class="d-flex justify-content-end align-items-center"><i class="{{ $site['icon'] }} fa-fw mr-3"></i></div>
+        <div class="d-flex justify-content-end align-items-center">
+          <i class="{{ $site['icon'] }} fa-fw mr-3"></i>
+        </div>
         <div class="">
           <a href="{{ url('auth/redirect/' . $provider) }}" class="btn btn-outline-primary mr-3">Link <strong>{{ $site['full_name'] }}</strong> Account</a>
           @if (isset($site['primary_alias']) && $site['primary_alias'])

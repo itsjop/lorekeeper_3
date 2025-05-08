@@ -8,9 +8,11 @@
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Locations' => 'admin/world/locations']) !!}
 
   <div class="float-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/world/location-types') }}"><i class="fas fa-folder mr-2"></i> Location Types</a>
+    <a class="btn btn-primary" href="{{ url('admin/world/location-types') }}">
+      <i class="fas fa-folder mr-2"></i> Location Types</a>
     @if (count($types))
-      <a class="btn btn-primary" href="{{ url('admin/world/locations/create') }}"><i class="fas fa-plus mr-2"></i> Create New Location</a>
+      <a class="btn btn-primary" href="{{ url('admin/world/locations/create') }}">
+        <i class="fas fa-plus mr-2"></i> Create New Location</a>
     @endif
   </div>
   <h1>Locations</h1>
@@ -33,7 +35,8 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $location->url !!}
-                @if ($location->thumb_extension) data-toggle="tooltip" title="<img src='{{ $location->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($location->style) }} " @endif />{!! $location->name !!}</a>
+                @if ($location->thumb_extension) data-toggle="tooltip" title="<img src='{{ $location->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+<br> {{ ucfirst($location->style) }} " @endif />{!! $location->name !!}</a>
             </td>
             <td class="text-right">
               <a href="{{ url('admin/world/locations/edit/' . $location->id) }}" class="btn btn-primary">Edit</a>

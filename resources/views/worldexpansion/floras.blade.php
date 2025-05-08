@@ -48,7 +48,8 @@
           <div class="card-header">
             <div class="world-entry-image">
               @isset($flora->thumb_extension)
-                <a href="{{ $flora->thumbUrl }}" data-lightbox="entry" data-title="{{ $flora->name }}"><img src="{{ $flora->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
+                <a href="{{ $flora->thumbUrl }}" data-lightbox="entry" data-title="{{ $flora->name }}">
+                  <img src="{{ $flora->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
               @endisset
             </div>
             <h3 class="mb-0 text-center">{!! $flora->displayName !!}</h3>

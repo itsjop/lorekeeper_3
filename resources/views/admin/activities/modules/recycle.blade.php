@@ -23,7 +23,9 @@
               {!! Form::select('recyclable_id[]', $categories, $recyclable->rewardable_id, ['class' => 'form-control item-select selectize', 'placeholder' => 'Select Item Category']) !!}
             @endif
           </td>
-          <td class="text-right"><a href="#" class="btn btn-danger remove-recyclable-button">Remove</a></td>
+          <td class="text-right">
+            <a href="#" class="btn btn-danger remove-recyclable-button">Remove</a>
+          </td>
         </tr>
       @endforeach
     @endif

@@ -1,10 +1,13 @@
 <ul class="text-center">
-  <li class="sidebar-header"><a href="#" class="card-link">Featured Character</a></li>
+  <li class="sidebar-header">
+    <a href="#" class="card-link">Featured Character</a>
+  </li>
 
   <li class="sidebar-section p-2">
     @if (isset($featured) && $featured)
       <div>
-        <a href="{{ $featured->url }}"><img src="{{ $featured->image->thumbnailUrl }}" class="img-thumbnail" /></a>
+        <a href="{{ $featured->url }}">
+          <img src="{{ $featured->image->thumbnailUrl }}" class="img-thumbnail" /></a>
       </div>
       <div class="mt-1">
         <a href="{{ $featured->url }}" class="h5 mb-0">

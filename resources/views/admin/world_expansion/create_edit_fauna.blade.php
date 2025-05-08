@@ -48,7 +48,8 @@
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($fauna->thumb_extension)
-          <a href="{{ $fauna->thumbUrl }}" data-lightbox="entry" data-title="{{ $fauna->name }}"><img src="{{ $fauna->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $fauna->thumbUrl }}" data-lightbox="entry" data-title="{{ $fauna->name }}">
+            <img src="{{ $fauna->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the fauna index.') !!}
         <div>{!! Form::file('image_th') !!}</div>
@@ -62,7 +63,8 @@
 
       <div class="form-group col-md-6">
         @if ($fauna->image_extension)
-          <a href="{{ $fauna->imageUrl }}" data-lightbox="entry" data-title="{{ $fauna->name }}"><img src="{{ $fauna->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a href="{{ $fauna->imageUrl }}" data-lightbox="entry" data-title="{{ $fauna->name }}">
+            <img src="{{ $fauna->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
         @endif
         {!! Form::label('Fauna Image (Optional)') !!} {!! add_help('This image is used on the fauna page as a header.') !!}
         <div>{!! Form::file('image') !!}</div>
@@ -90,7 +92,9 @@
   @if ($fauna->id)
     <div class="card mb-3">
       <h2 class="card-header h3">
-        <div class="float-right"><a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a></div>
+        <div class="float-right">
+          <a href="#" class="btn btn-sm btn-primary" id="addAttachment">Add Attachment</a>
+        </div>
         Attachments
       </h2>
       <div class="card-body">

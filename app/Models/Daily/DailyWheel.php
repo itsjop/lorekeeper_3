@@ -123,7 +123,7 @@ class DailyWheel extends Model
      */
     public function getStopperUrlAttribute()
     {
-        if (!$this->stopper_extension) return '/images/stopper.png';
+        if (!$this->stopper_extension) return '/images/lorekeeper/stopper.png';
         return asset($this->imageDirectory . '/' . $this->stopperFileName);
     }
 

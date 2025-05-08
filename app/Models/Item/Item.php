@@ -12,6 +12,7 @@ use App\Models\Model;
 use App\Models\Item\ItemCategory;
 use App\Models\Shop\Shop;
 use App\Models\Prompt\Prompt;
+use App\Models\Rarity;
 use App\Models\Shop\ShopStock;
 use App\Models\User\User;
 
@@ -37,6 +38,15 @@ class Item extends Model {
     protected $table = 'items';
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'data' => 'array',
+    ];
+
+    /**
      * The relationships that should always be loaded.
      *
      * @var array
@@ -51,15 +61,15 @@ class Item extends Model {
      * @var array
      */
     public static $createRules = [
-        'item_category_id'  => 'nullable',
-        'name'              => 'required|unique:items|between:3,100',
-        'description'       => 'nullable',
-        'image'             => 'mimes:png',
-        'rarity'            => 'nullable',
-        'reference_url'     => 'nullable|between:3,200',
-        'uses'              => 'nullable|between:3,250',
-        'release'           => 'nullable|between:3,100',
-        'currency_quantity' => 'nullable|integer|min:1',
+        'item_category_id'   => 'nullable',
+        'name'               => 'required|unique:items|between:3,100',
+        'description'        => 'nullable',
+        'image'              => 'mimes:png',
+        'rarity_id'          => 'nullable',
+        'reference_url'      => 'nullable|between:3,200',
+        'uses'               => 'nullable|between:3,250',
+        'release'            => 'nullable|between:3,100',
+        'currency_quantity'  => 'nullable|integer|min:1',
     ];
 
     /**
@@ -106,10 +116,17 @@ class Item extends Model {
     }
 
     /**
+     * Gets the item's rarity.
+     */
+    public function rarity() {
+        return $this->belongsTo(Rarity::class, $this->attributes['rarity_id'] ?? null, 'id');
+    }
+
+    /**
      * Get shop stock for this item.
      */
     public function shopStock() {
-        return $this->hasMany(ShopStock::class, 'item_id');
+        return $this->hasMany(ShopStock::class, 'item_id')->where('is_visible', 1);
     }
 
     /**********************************************************************************************
@@ -213,7 +230,7 @@ class Item extends Model {
      * @return string
      */
     public function getImageFileNameAttribute() {
-        return $this->hash.$this->id.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.png';
     }
 
     /**
@@ -304,29 +321,16 @@ class Item extends Model {
     }
 
     /**
-     * Get the data attribute as an associative array.
-     *
-     * @return array
-     */
-    public function getDataAttribute() {
-        if (!$this->id) {
-            return null;
-        }
-
-        return json_decode($this->attributes['data'], true);
-    }
-
-    /**
      * Get the rarity attribute.
      *
      * @return string
      */
-    public function getRarityAttribute() {
-        if (!isset($this->data) || !isset($this->data['rarity'])) {
+    public function getRarityIdAttribute() {
+        if (!isset($this->data) || !isset($this->data['rarity_id'])) {
             return null;
         }
 
-        return $this->data['rarity'];
+        return $this->data['rarity_id'];
     }
 
     /**
@@ -366,21 +370,6 @@ class Item extends Model {
         }
 
         return collect($this->data['resell']);
-    }
-
-    /**
-     * Get the shops that stock this item.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getShopsAttribute() {
-        if (!config('lorekeeper.extensions.item_entry_expansion.extra_fields') || !$this->shop_stock_count) {
-            return null;
-        }
-
-        $shops = Shop::whereIn('id', $this->shopStock->pluck('shop_id')->toArray())->orderBy('sort', 'DESC')->get();
-
-        return $shops;
     }
 
     /**
@@ -552,5 +541,28 @@ class Item extends Model {
             return CultivationArea::where('id', $this->tag('exploration')->getData()['area_id'])->first();
         }
         return null;
+    }
+
+    /**
+     * Get the shops that stock this item.
+     *
+     * @param mixed|null $user
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function shops($user = null) {
+        if (!config('lorekeeper.extensions.item_entry_expansion.extra_fields') || !$this->shop_stock_count) {
+            return null;
+        }
+
+        $shops = Shop::where(function ($query) use ($user) {
+            if ($user && $user->hasPower('edit_data')) {
+                return $query;
+            }
+
+            return $query->where('is_hidden', 0)->where('is_staff', 0);
+        })->whereIn('id', $this->shopStock->pluck('shop_id')->toArray())->get();
+
+        return $shops;
     }
 }

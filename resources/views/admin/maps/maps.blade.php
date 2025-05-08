@@ -12,7 +12,8 @@
   <p>This is a list of maps in the game. Use @map(id) on pages to use interactive version or $map->display in code</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/maps/create') }}"><i class="fas fa-plus"></i> Create New Map</a>
+    <a class="btn btn-primary" href="{{ url('admin/maps/create') }}">
+      <i class="fas fa-plus"></i> Create New Map</a>
   </div>
 
   @if (!count($maps))

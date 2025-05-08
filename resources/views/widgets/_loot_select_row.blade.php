@@ -4,6 +4,7 @@
   // doing so this way enables better compatibility across disparate extensions
   $characterCurrencies = \App\Models\Currency\Currency::where('is_character_owned', 1)->orderBy('sort_character', 'DESC')->pluck('name', 'id');
   $items = \App\Models\Item\Item::orderBy('name')->pluck('name', 'id');
+  $pets = \App\Models\Pet\Pet::orderBy('name')->get()->pluck('fullName', 'id');
   $currencies = \App\Models\Currency\Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id');
   if (isset($showLootTables) && $showLootTables) {
       $tables = \App\Models\Loot\LootTable::orderBy('name')->pluck('name', 'id');
@@ -19,7 +20,7 @@
       <tr class="loot-row">
         <td>{!! Form::select(
             'rewardable_type[]',
-            ['Item' => 'Item', 'Currency' => 'Currency'] + ($showLootTables ? ['LootTable' => 'Loot Table'] : []) + ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) + (isset($showBorders) && $showBorders ? ['Border' => 'Border'] : []),
+            ['Item' => 'Item', 'Currency' => 'Currency', 'Pet' => 'Pet'] + ($showLootTables ? ['LootTable' => 'Loot Table'] : []) + ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) + (isset($showBorders) && $showBorders ? ['Border' => 'Border'] : []),
             null,
             [
                 'class' => 'form-control reward-type',
@@ -34,6 +35,7 @@
   </table>
   {!! Form::select('rewardable_id[]', $items, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
   {!! Form::select('rewardable_id[]', $currencies, null, ['class' => 'form-control currency-select', 'placeholder' => 'Select Currency']) !!}
+  {!! Form::select('rewardable_id[]', $pets, null, ['class' => 'form-control pet-select', 'placeholder' => 'Select Pet']) !!}
   @if ($showLootTables)
     {!! Form::select('rewardable_id[]', $tables, null, ['class' => 'form-control table-select', 'placeholder' => 'Select Loot Table']) !!}
   @endif

@@ -44,8 +44,8 @@
     </div>
     @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
       <div class="col-md form-group">
-        {!! Form::label('Item Rarity (Optional)') !!} {!! add_help('This should be a number.') !!}
-        {!! Form::number('rarity', $item && $item->rarity ? $item->rarity : '', ['class' => 'form-control']) !!}
+        {!! Form::label('Item Rarity (Optional)') !!}
+        {!! Form::select('rarity_id', $rarities, $item && $item->rarityId ? $item->rarityId : '', ['class' => 'form-control', 'placeholder' => 'Select a Rarity']) !!}
       </div>
     @endif
   </div>
@@ -150,7 +150,9 @@
           <tr>
             <td>{!! $tag->displayTag !!}</td>
             <td class="{{ $tag->is_active ? 'text-success' : 'text-danger' }}">{{ $tag->is_active ? 'Yes' : 'No' }}</td>
-            <td class="text-right"><a href="{{ url('admin/data/items/tag/' . $item->id . '/' . $tag->tag) }}" class="btn btn-outline-primary">Edit</a></td>
+            <td class="text-right">
+              <a href="{{ url('admin/data/items/tag/' . $item->id . '/' . $tag->tag) }}" class="btn btn-outline-primary">Edit</a>
+            </td>
           </tr>
         @endforeach
       </table>

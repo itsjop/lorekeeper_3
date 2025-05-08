@@ -105,10 +105,14 @@
               </div>
             @endif
             <div class="col-4 col-md-1">
-              <div class="logs-table-cell"><span class="btn btn-{{ $r->status == 'Pending' ? 'secondary' : ($r->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1">{{ $r->status }}</span></div>
+              <div class="logs-table-cell">
+                <span class="btn btn-{{ $r->status == 'Pending' ? 'secondary' : ($r->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1">{{ $r->status }}</span>
+              </div>
             </div>
             <div class="col-4 col-md-1">
-              <div class="logs-table-cell"><a href="{{ $r->url }}" class="btn btn-primary btn-sm">Details</a></div>
+              <div class="logs-table-cell">
+                <a href="{{ $r->url }}" class="btn btn-primary btn-sm">Details</a>
+              </div>
             </div>
           </div>
         </div>

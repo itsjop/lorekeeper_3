@@ -23,16 +23,43 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal">
+        <i class="fas fa-cog"></i> Admin</a>
     @endif
     Items
   </h3>
 
   <div class="text-right mb-3">
     <div class="btn-group">
-      <button type="button" class="btn btn-secondary active def-view-button" data-toggle="tooltip" title="Default View" alt="Default View"><i class="fas fa-th"></i></button>
-      <button type="button" class="btn btn-secondary sum-view-button" data-toggle="tooltip" title="Summarized View" alt="Summarized View"><i class="fas fa-bars"></i></button>
+      <button type="button" class="btn btn-secondary active def-view-button" data-toggle="tooltip" title="Default View" alt="Default View">
+        <i class="fas fa-th"></i></button>
+      <button type="button" class="btn btn-secondary sum-view-button" data-toggle="tooltip" title="Summarized View" alt="Summarized View">
+        <i class="fas fa-bars"></i></button>
     </div>
+  </div>
+
+  <div>
+    {!! Form::open(['method' => 'GET', 'class' => '']) !!}
+    <div class="form-inline justify-content-end">
+      <div class="form-group ml-3 mb-3">
+        {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+      </div>
+      <div class="form-group ml-3 mb-3">
+        {!! Form::select('item_category_id', $categories->pluck('name', 'id'), Request::get('item_category_id'), ['class' => 'form-control', 'placeholder' => 'Any Category']) !!}
+      </div>
+      @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
+        <div class="form-group ml-3 mb-3">
+          {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control', 'placeholder' => 'Any Rarity']) !!}
+        </div>
+        <div class="form-group ml-3 mb-3">
+          {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control', 'placeholder' => 'Any Artist']) !!}
+        </div>
+      @endif
+      <div class="form-group ml-3 mb-3">
+        {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+      </div>
+    </div>
+    {!! Form::close() !!}
   </div>
 
   <div id="defView" class="hide">
@@ -181,7 +208,9 @@
                   <a href="#" class="remove-item btn btn-danger mb-2 disabled">×</a>
                 </div>
               </div>
-              <div><a href="#" class="btn btn-primary" id="add-item">Add Item</a></div>
+              <div class="mb-2">
+                <a href="#" class="btn btn-primary" id="add-item">Add Item</a>
+              </div>
               <div class="item-row hide mb-2">
                 {!! Form::select('item_ids[]', $itemOptions, null, ['class' => 'form-control mr-2 item-select', 'placeholder' => 'Select Item']) !!}
                 {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}

@@ -2,8 +2,13 @@
   <div class="text-center">Invalid item selected.</div>
 @else
   <div class="text-center mb-3">
-    <div class="mb-1"><a href="{{ $stock->item->idUrl }}"><img src="{{ $stock->item->imageUrl }}" alt="{{ $stock->item->name }}" /></a></div>
-    <div><a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a></div>
+    <div class="mb-1">
+      <a href="{{ $stock->item->idUrl }}">
+        <img src="{{ $stock->item->imageUrl }}" alt="{{ $stock->item->name }}" /></a>
+    </div>
+    <div>
+      <a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a>
+    </div>
     <div><strong>Cost: </strong> {!! $stock->currency->display($stock->cost) !!}</div>
     <div>Stock: {{ $stock->quantity }}</div>
   </div>

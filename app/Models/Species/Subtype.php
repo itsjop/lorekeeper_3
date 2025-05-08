@@ -136,7 +136,7 @@ class Subtype extends Model {
      * @return string
      */
     public function getSubtypeImageFileNameAttribute() {
-        return $this->hash.$this->id.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.png';
     }
 
     /**
@@ -176,7 +176,7 @@ class Subtype extends Model {
      * @return string
      */
     public function getSearchUrlAttribute() {
-        return url('masterlist?subtype_id='.$this->id);
+        return url('masterlist?subtype_ids[]='.$this->id);
     }
 
     /**

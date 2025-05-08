@@ -12,7 +12,7 @@ class UserSettings extends Model {
      */
     protected $fillable = [
         'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting','border_settings',
-        'deactivate_reason', 'deactivated_at',
+        'deactivate_reason', 'deactivated_at', 'content_warning_visibility', 'allow_profile_comments',
     ];
 
     /**
@@ -39,7 +39,7 @@ class UserSettings extends Model {
      * @var string
      */
     public $primaryKey = 'user_id';
-    
+
     /**********************************************************************************************
 
         RELATIONS

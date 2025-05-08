@@ -73,7 +73,9 @@
                 @foreach ($rewards as $reward)
                   <div class="col-6">
                     @if ($reward->rewardImage)
-                      <div class="row justify-content-center"><img src="{{ $reward->rewardImage }}" alt="{{ $reward->reward()->first()->name }}" style="max-width:75px;width:100%;" /></div>
+                      <div class="row justify-content-center">
+                        <img src="{{ $reward->rewardImage }}" alt="{{ $reward->reward()->first()->name }}" style="max-width:75px;width:100%;" />
+                      </div>
                     @endif
                     <div class="row justify-content-center">{{ $reward->quantity }} {{ $reward->reward()->first()->name }}</div>
 
