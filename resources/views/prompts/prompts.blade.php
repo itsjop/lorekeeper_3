@@ -25,8 +25,8 @@
           {!! Form::select(
               'sort',
               [
-                  'alpha' => 'Sort Alphabetically (A-Z)',
-                  'alpha-reverse' => 'Sort Alphabetically (Z-A)',
+                  'alpha' => 'Sort Alphabetically A-Z',
+                  'alpha-reverse' => 'Sort Alphabetically Z-A',
                   'category' => 'Sort by Category',
                   'newest' => 'Newest First',
                   'oldest' => 'Oldest First',

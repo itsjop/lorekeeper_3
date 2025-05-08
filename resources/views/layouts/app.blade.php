@@ -41,19 +41,11 @@
 
   <!------------------------------ LOREKEEPER RESOURCES ----------------------------->
   <!-- Scripts -->
-  <script src="{{ mix('js/vendor/app.js') }}"></script>
-  <script defer src="{{ asset('js/site.js') }}"></script>
+  <script src="{{ mix('js/app.js') }}"></script>
+  <script src="{{ mix('js/app-deferred.js') }}"></script>
   <!-- Styles -->
-  <link href="{{ asset('css/mixins.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/sitewide.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/global-vars.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/components/site-header.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/components/background.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/components/sidebar.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/components/navbar.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/components/footer.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/helpers/animation.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/pages/dashboard.css') }}" rel="stylesheet">
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
 
   <!------------------------------ EXTERNAL RESOURCES ----------------------------->
   <!-- Scripts -->
@@ -64,8 +56,6 @@
   <script defer src="{{ asset('js/vendor/bootstrap4-toggle.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/lightbox.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/selectize.min.js') }}"></script>
-  {{-- <script defer src="{{ asset('js/vendor/app-secondary.js') }}"></script> --}}
-  {{-- <script defer src="{{ mix('js/vendor/app-secondary.js') }}"></script> --}}
   <script defer src="{{ asset('js/vendor/bs-custom-file-input.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/bootstrap-colorpicker.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/jquery-ui-timepicker-addon.js') }}"></script>
@@ -78,8 +68,6 @@
   {{-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet"> --}}
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Stylish&display=swap" rel="stylesheet">
   <!-- Styles -->
-  <link href="{{ mix('css/vendor/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/all.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
@@ -90,7 +78,7 @@
   <link defer href="{{ asset('css/vendor/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
   <link defer href="{{ asset('css/vendor/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/croppie.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
 

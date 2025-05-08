@@ -13,6 +13,8 @@ const mix = require('laravel-mix');
 
 // Scripts
 
-mix.js('resources/js/vendor/app.js', 'public/js').version();
-mix.js('resources/js/vendor/app-secondary.js', 'public/js').version();
-mix.sass('resources/sass/app.scss', 'public/css').version().vue();
+mix
+  .js('resources/js/app.js', 'public/js/')
+  .js('resources/js/app-deferred.js', 'public/js/')
+  .sass('resources/sass/app.scss', 'public/css')
+  .vue();

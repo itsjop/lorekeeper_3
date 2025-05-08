@@ -1,6 +1,6 @@
 <ul>
   <li class="sidebar-header">
-    <a=class="card-link">
+    <a class="card-link">
     <a href="{{ url('prompts') }}">Prompts</a></a>
   </li>
   <li class="sidebar-section">

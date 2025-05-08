@@ -1,8 +1,8 @@
-
 import { Vue, createApp } from 'vue';
-require('./bootstrap');
-require('./jquery-ui');
-require('./selectize');
+
+require('./vendor/jquery-ui');
+require('./vendor/bootstrap');
+require('./vendor/selectize');
 
 import App from './App.vue';
 import SubComponent from './components/SubComponent.vue';
