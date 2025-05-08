@@ -476,7 +476,7 @@ function getLimits($object) {
  */
 function faVersion() {
     $setting = config('lorekeeper.settings.fa_version');
-    $directory = 'css';
+    $directory = 'css/vendor';
 
     switch ($setting) {
         case 0:

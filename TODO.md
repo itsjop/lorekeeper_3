@@ -1,15 +1,13 @@
 this fuckass merge, make sure
-- species_id also has subtype_ids (plural)
-- transformations made the cut
-- accidental ≥
 - rearrage/remove duplicate js/css in main
-# CRITICAL
 
+# CRITICAL
 - [ ] pets
 - [ ] Mailersend Error Fix
 - [x] Item Preview Error
 - [ ] appprovals
 - [ ] mobile css
+- [ ] background image fixed
 
 # HIGH PRIORITY
 - [ ] Critical CSS Render Path to avoid flickering
@@ -26,3 +24,7 @@ this fuckass merge, make sure
 # funsies!
 - [ ] all common quick links in the corner
 - [ ] SOUND EFFECT TOGGLE
+
+
+# low-prio
+- [ ] slim down google fonts payload

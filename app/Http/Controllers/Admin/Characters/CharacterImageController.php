@@ -89,7 +89,7 @@ class CharacterImageController extends Controller {
    */
   public function postNewImage(Request $request, CharacterManager $service, $slug) {
     $request->validate(CharacterImage::$createRules);
-    $data = $request->only(['image', 'thumbnail', 'x0', 'x1', 'y0', 'y1', 'use_cropper', 'artist_url', 'artist_id', 'designer_url', 'designer_id', 'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'is_valid', 'is_visible', 'transformation_id','transformation_info','transformation_description']);
+    $data = $request->only(['image', 'thumbnail', 'x0', 'x1', 'y0', 'y1', 'use_cropper', 'artist_url', 'artist_id', 'designer_url', 'designer_id', 'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data','subtype_ids', 'is_valid', 'is_visible', 'transformation_id','transformation_info','transformation_description']);
 
     $this->character = Character::where('slug', $slug)->first();
     if (!$this->character) {
@@ -137,7 +137,7 @@ class CharacterImageController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postEditImageFeatures(Request $request, CharacterManager $service, $id) {
-        $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'transformation_id','transformation_info','transformation_description']);
+        $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'subtype_ids', 'transformation_id','transformation_info','transformation_description']);
         $image = CharacterImage::find($id);
         if (!$image) {
             abort(404);

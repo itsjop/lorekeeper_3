@@ -211,6 +211,7 @@ class CharacterManager extends Service {
         $data['slug'] = null;
         $data['species_id'] = isset($data['species_id']) && $data['species_id'] ? $data['species_id'] : null;
         $data['subtype_id'] = isset($data['subtype_id']) && $data['subtype_id'] ? $data['subtype_id'] : null;
+        $data['subtype_ids'] = isset($data['subtype_ids']) && $data['subtype_ids'] ? $data['subtype_ids'] : null;
         $data['rarity_id'] = isset($data['rarity_id']) && $data['rarity_id'] ? $data['rarity_id'] : null;
         $data['transformation_id'] = isset($data['transformation_id']) && $data['transformation_id'] ? $data['transformation_id'] : null;
         $data['transformation_info'] = isset($data['transformation_info']) && $data['transformation_info'] ? $data['transformation_info'] : null;
@@ -312,7 +313,16 @@ class CharacterManager extends Service {
       $imageData['character_id'] = $character->id;
 
       $image = CharacterImage::create($imageData);
-
+      
+      // create subtype relations
+      if (isset($data['subtype_ids']) && $data['subtype_ids']) {
+        foreach ($data['subtype_ids'] as $subtypeId) {
+          CharacterImageSubtype::create([
+            'character_image_id' => $image->id,
+            'subtype_id'         => $subtypeId,
+          ]);
+        }
+      }
       // Check if entered url(s) have aliases associated with any on-site users
       $designers = array_filter($data['designer_url']); // filter null values
       foreach ($designers as $key => $url) {
