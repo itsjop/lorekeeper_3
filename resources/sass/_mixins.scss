@@ -1,41 +1,14 @@
-/* Sizing */
-.w-100        { width: 100%; }
-/* Display */
-.flex          { display: flex; }
-.grid         { display: grid; }
-/* Justification */
-.j-c-start    { justify-content: start;         }
-.j-c-center   { justify-content: center;        }
-.j-c-around   { justify-content: space-around;  }
-.j-c-between  { justify-content: space-between; }
-.j-c-end      { justify-content: end;           }
-.j-i-start    { justify-items: start;           }
-.j-i-center   { justify-items: center;          }
-.j-i-around   { justify-items: space-around;    }
-.j-i-between  { justify-items: space-between;   }
-.j-i-end      { justify-items: end;             }
-.j-s-start    { justify-self: start;            }
-.j-s-center   { justify-self: center;           }
-.j-s-around   { justify-self: space-around;     }
-.j-s-between  { justify-self: space-between;    }
-.j-s-end      { justify-self: end;              }
-/* Alignment */
-.a-c-start    { align-content: start;         }
-.a-c-center   { align-content: center;        }
-.a-c-around   { align-content: space-around;  }
-.a-c-between  { align-content: space-between; }
-.a-c-end      { align-content: end;           }
-.a-i-start    { align-items: start;           }
-.a-i-center   { align-items: center;          }
-.a-i-around   { align-items: space-around;    }
-.a-i-between  { align-items: space-between;   }
-.a-i-end      { align-items: end;             }
-.a-s-start    { align-self: start;            }
-.a-s-center   { align-self: center;           }
-.a-s-around   { align-self: space-around;     }
-.a-s-between  { align-self: space-between;    }
-.a-s-end      { align-self: end;              }
-
-/* GAP */
-.gap-1 { gap: 1rem; } .gap-2 { gap: 2rem; } .gap-3 { gap: 3rem; } .gap-4  { gap: 4rem;  }
-.gap-5 { gap: 5rem; } .gap-6 { gap: 6rem; } .gap-8 { gap: 8rem; } .gap-10 { gap: 10rem; }
+@mixin neuo($color: #c2c0cf55, $offset: 20px) {
+  border-radius: 50px;
+  background: $color;
+  @include noise-background;
+  box-shadow:
+    $offset $offset ($offset * 2) $color,
+    (-1 * $offset) (-1 * $offset) ($offset * 2) #ffffff44;
+}
+@mixin noise-background() {
+  background-image: url(../../public/images/noise.png);
+  background-blend-mode: color-burn;
+  background-repeat: repeat;
+  background-size: 64px;
+}

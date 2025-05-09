@@ -4,7 +4,7 @@ use App\Models\Model;
 
 class UserLocalSettings extends Model {
   /** The attributes that are mass assignable. */
-  protected $fillable = ['high_contrast', 'reduced_motion', 'site_font', 'light_dark', 'theme'];
+  protected $fillable = ['high_contrast', 'reduced_motion', 'site_font', 'light_dark', 'theme', 'pinned_menu_items'];
 
   /** The table associated with the model. */
   protected $table = 'user_local_settings';
@@ -15,6 +15,7 @@ class UserLocalSettings extends Model {
     'reduced_motion' => 'boolean',
     'light_dark' => 'boolean',
     'site_font' => 'string',
+    'pinned_menu_items' => 'string',
     'theme' => 'string',
   ];
 

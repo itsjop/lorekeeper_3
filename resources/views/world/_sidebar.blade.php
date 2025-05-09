@@ -1,4 +1,4 @@
-<ul>
+<ul id="#sidebar-ul">
   <li class="sidebar-header"><a href="{{ url('world') }}" class="card-link">Encyclopedia</a></li>
   <li class="sidebar-section">
     <div class="sidebar-item"><a href="{{ url('world/info') }}">World Expanded</a></div>

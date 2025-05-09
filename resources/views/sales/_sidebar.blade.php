@@ -1,4 +1,4 @@
-<ul>
+<ul id="#sidebar-ul">
   <li class="sidebar-header">
     <a href="{{ url('sales') }}" class="card-link">Sales</a>
   </li>

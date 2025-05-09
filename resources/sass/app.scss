@@ -1,14 +1,7 @@
 // Variables
+@import 'support-classes';
 @import 'variables';
 @import 'mixins';
-
-// Components
-@import './components/background';
-@import './components/footer';
-@import './components/navbar';
-@import './components/sidebar';
-@import './components/site-header';
-
 //  >:o(
 @import '~bootstrap/scss/bootstrap';
 
@@ -23,21 +16,28 @@ ul { padding: 0; }
 
 /* General Styling */
 #app {
-  font-family: "Baloo 2", sans-serif;
+  font-family: 'Baloo 2', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  background-image: url("../../public/images/somnivores/raw/reveriefullres.webp");
-  background-position: fixed;
-  background-size: cover;
+  .site-background {
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    background-image: url('../../public/images/somnivores/raw/reveriefullres.webp');
+    background-size: cover;
+  }
   display: grid;
   justify-items: center;
+  justify-content: center;
   min-height: 100vh;
   padding-top: 40px;
   #site-wrapper {
     --sb-width: min(20vw, 200px);
     --app-width: 70vw;
     display: grid;
-    grid-template: "logo" 20vh "nav" max-content "main" auto / auto;
+    grid-template: 'logo' 20vh 'nav' max-content 'main' auto / auto;
     gap: 10px 0;
     position: relative;
     width: var(--app-width);
@@ -57,7 +57,7 @@ ul { padding: 0; }
       overflow: hidden;
     }
     .modal-dialog .modal-body .inventory-main-img img {
-      width: 100%
+      width: 100%;
     }
   }
 }
@@ -69,20 +69,13 @@ ul { padding: 0; }
 @media (width <= 992px) {
   /* @media screen and (max-width: var(--ss-medium)) { */
   #app {
-    background-image: url("../../public/images/somnivores/reveriehalfres.webp");
+    background-image: url('../../public/images/somnivores/reveriehalfres.webp');
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
     padding: 10px var(--m-app-padding);
     #site-wrapper {
       width: var(--m-app-width);
       &.has-sidebar {
-        --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
-        grid-template:
-          "logo" 20vh
-          "nav" auto
-          "sb-toggle" auto
-          "main" auto
-          / auto;
         gap: 10px;
         left: 0;
         margin-bottom: 15px;
@@ -90,3 +83,10 @@ ul { padding: 0; }
     }
   }
 }
+
+// Components
+@import './components/background';
+@import './components/footer';
+@import './components/navbar';
+@import './components/sidebar';
+@import './components/site-header';

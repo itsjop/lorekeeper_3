@@ -1,4 +1,4 @@
-<ul>
+<ul id="#sidebar-ul">
   <li class="sidebar-header">
     <a href="{{ $character->url }}" class="card-link">{{ $character->slug }}</a>
   </li>

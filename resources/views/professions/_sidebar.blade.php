@@ -1,4 +1,4 @@
-<ul>
+<ul id="#sidebar-ul">
   <li class="sidebar-header">
     <a href="{{ url('professions') }}" class="card-link">Professions</a>
   </li>

@@ -12,5 +12,4 @@ function init() {
   app.config.warnHandler = () => null;
   app.component('app', App).component('sub-component', SubComponent).mount('#app');
 }
-
 document.addEventListener('DOMContentLoaded', init, false);

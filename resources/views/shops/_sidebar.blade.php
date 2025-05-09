@@ -1,4 +1,4 @@
-<ul>
+<ul id="#sidebar-ul">
   <li class="sidebar-header"><a href="{{ url('shops') }}" class="card-link">Shops</a></li>
 
   @if (Auth::check())

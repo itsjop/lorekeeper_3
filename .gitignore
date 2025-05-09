@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/css
 /storage/*.key
 /vendor
 .env
@@ -16,3 +17,4 @@ yarn-error.log
 /composer.phar
 .idea
 /.vs
+public/js/app.js
