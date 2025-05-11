@@ -1,11 +1,6 @@
 <?php
 namespace App\Services;
 
-use DB;
-use Config;
-
-
-use App\Services\Service;
 use App\Models\Character\Character;
 use App\Models\Item\Item;
 use App\Models\Shop\Shop;
@@ -51,7 +46,7 @@ class ShopManager extends Service {
             }
 
             // Check that the stock exists and belongs to the shop
-            $shopStock = ShopStock::where('id', $data['stock_id'])->where('shop_id', $data['shop_id'])->first();
+            $shopStock = ShopStock::where('id', $data['stock_id'])->where('shop_id', $data['shop_id'])->with('currency')->with('item')->first();
             if (!$shopStock) {
                 throw new \Exception('Invalid item selected.');
             }
@@ -104,7 +99,7 @@ class ShopManager extends Service {
                 // make sure this item isn't free
                 if (!$shopStock->costs()->count()) {
                     throw new \Exception('Cannot use a coupon on an item that is free.');
-                }
+            }
 
                 // if the coupon isn't infinite kill it
                 if (!$coupon['infinite']) {
@@ -116,6 +111,10 @@ class ShopManager extends Service {
 
             $character = null;
             if ($data['bank'] == 'character') {
+                // Check if the user is using a character to pay
+                // - stock must be purchaseable with characters
+                // - currency must be character-held
+                // - character has enough currency
                 if (!$shopStock->use_character_bank || !$shopStock->currency->is_character_owned) {
                     throw new \Exception("You cannot use a character's bank to pay for this item.");
                 }
@@ -142,10 +141,8 @@ class ShopManager extends Service {
                         $base = ($costQuantity * $quantity);
                         if ($base <= 0) {
                             throw new \Exception('Cannot use a coupon on an item that is free.');
-                        }
-                        $new = $base - $minus;
-                        $costQuantity = round($new);
-                    } else {
+                }
+            } else {
                         $minus = ($coupon['discount'] / 100) * ($costQuantity);
                         $base = ($costQuantity * $quantity);
                         if ($base <= 0) {
@@ -161,8 +158,8 @@ class ShopManager extends Service {
                 if ($cost->item->assetType == 'currency') {
                     if ($data['bank'] == 'user') {
                         if (!$cost->item->is_user_owned) {
-                            throw new \Exception('You cannot use your user bank to pay for this item.');
-                        }
+                    throw new \Exception('You cannot use your user bank to pay for this item.');
+                }
 
                         addAsset($userCostAssets, $cost->item, -$costQuantity);
                     } else {
@@ -195,17 +192,17 @@ class ShopManager extends Service {
             }
 
             // If the item has a limited quantity, decrease the quantity
-            if($shopStock->is_limited_stock)
-            {
+            if ($shopStock->is_limited_stock) {
                 $shopStock->quantity -= $quantity;
                 $shopStock->save();
             }
 
             // Add a purchase log
             $shopLog = ShopLog::create([
-                'shop_id' => $shop->id,
+                'shop_id'      => $shop->id,
                 'character_id' => $character ? $character->id : null,
                 'user_id'      => $user->id,
+                'currency_id'  => $shopStock->currency->id,
                 'cost'         => [
                     'base'      => getDataReadyAssets($baseStockCost),
                     'user'      => getDataReadyAssets($userCostAssets),
@@ -232,7 +229,7 @@ class ShopManager extends Service {
           ], $shopStock->item, $quantity)) throw new \Exception("Failed to purchase item.");
 
             return $this->commitReturn($shop);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
 

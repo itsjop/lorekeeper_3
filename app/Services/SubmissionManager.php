@@ -6,6 +6,7 @@ use App\Facades\Notifications;
 use App\Facades\Settings;
 use App\Models\User\UserAward;
 use App\Models\Character\Character;
+use App\Models\Criteria\Criterion;
 use App\Models\Currency\Currency;
 use App\Models\Item\Item;
 use App\Models\Award\Award;
@@ -34,14 +35,14 @@ class SubmissionManager extends Service {
     /**
      * Creates a new submission.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param bool                  $isClaim
-     * @param mixed                 $isDraft
+     * @param array $data
+     * @param User  $user
+     * @param bool  $isClaim
+     * @param mixed $isDraft
      *
      * @return mixed
      */
-    public function createSubmission($data, $user, $isClaim = false, $isDraft = false, $isActivity = false) {
+    public function createSubmission($data, $user, $isClaim = false, $isDraft = false) {
         DB::beginTransaction();
 
         try {
@@ -53,17 +54,11 @@ class SubmissionManager extends Service {
             } elseif ($isClaim && !Settings::get('is_claims_open')) {
                 throw new \Exception('The claim queue is closed for submissions.');
             }
-
+            if (!$isClaim && !isset($data['prompt_id'])) {
+                throw new \Exception('Please select a prompt.');
+            }
             if (!$isClaim) {
-                if (!isset($data['prompt_id'])) {
-                    throw new \Exception('Please select a prompt.');
-                }
-                $prompt = Prompt::query()
-                    ->when(!$isActivity, fn ($query) => $query->active())
-                    ->where('id', $data['prompt_id'])
-                    ->with('rewards')
-                    ->first();
-
+                $prompt = Prompt::active()->where('id', $data['prompt_id'])->with('rewards')->first();
                 if (!$prompt) {
                     throw new \Exception('Invalid prompt selected.');
                 }
@@ -73,6 +68,15 @@ class SubmissionManager extends Service {
                 }
             } else {
                 $prompt = null;
+            }
+
+            $withCriteriaSelected = isset($data['criterion']) ? array_filter($data['criterion'], function ($obj) {
+                return isset($obj['id']);
+            }) : [];
+            if (count($withCriteriaSelected) > 0) {
+                $data['criterion'] = $withCriteriaSelected;
+            } else {
+                $data['criterion'] = null;
             }
 
             // Create the submission itself.
@@ -92,10 +96,11 @@ class SubmissionManager extends Service {
             $promptRewards = $assets['promptRewards'];
 
             $submission->update([
-                'data' => [
-                    'user'    => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
-                    'rewards' => getDataReadyAssets($promptRewards),
-                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : []),
+                'data' => json_encode([
+                    'user'      => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
+                    'rewards'   => getDataReadyAssets($promptRewards),
+                    'criterion' => $data['criterion'] ?? null,
+                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : [])),
             ]);
 
             // Set characters that have been attached.
@@ -155,8 +160,17 @@ class SubmissionManager extends Service {
                 if (!$prompt) {
                     throw new \Exception('Invalid prompt selected.');
                 }
-              } else {
+            } else {
                 $prompt = null;
+            }
+
+            $withCriteriaSelected = isset($data['criterion']) ? array_filter($data['criterion'], function ($obj) {
+                return isset($obj['id']);
+            }) : [];
+            if (count($withCriteriaSelected) > 0) {
+                $data['criterion'] = $withCriteriaSelected;
+            } else {
+                $data['criterion'] = null;
             }
 
             // First, return all items and currency applied.
@@ -179,10 +193,11 @@ class SubmissionManager extends Service {
                 'url'           => $data['url'] ?? null,
                 'updated_at'    => Carbon::now(),
                 'comments'      => $data['comments'],
-                'data'          => [
+                'data'          => json_encode([
                     'user'          => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
                     'rewards'       => getDataReadyAssets($promptRewards),
-                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : []),
+                    'criterion'     => $data['criterion'] ?? null,
+                ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : [])),
             ] + ($isClaim ? [] : ['prompt_id' => $prompt->id]));
 
             return $this->commitReturn($submission);
@@ -239,11 +254,12 @@ class SubmissionManager extends Service {
                     'updated_at'            => Carbon::now(),
                     'staff_id'              => $user->id,
                     'status'                => 'Draft',
-                    'data'                  => [
+                    'data'                  => json_encode([
                         'user'                  => $userAssets,
                         'rewards'               => getDataReadyAssets($promptRewards),
+                        'criterion'             => $assets['criterion'] ?? null,
                         'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
-                    ], // list of rewards and addons
+                    ]), // list of rewards and addons
                 ]);
 
                 Notifications::create($submission->prompt_id ? 'SUBMISSION_CANCELLED' : 'CLAIM_CANCELLED', $submission->user, [
@@ -256,11 +272,12 @@ class SubmissionManager extends Service {
                 $submission->update([
                     'status'     => 'Draft',
                     'updated_at' => Carbon::now(),
-                    'data'       => [
+                    'data'       => json_encode([
                         'user'                  => $userAssets,
                         'rewards'               => getDataReadyAssets($promptRewards),
+                        'criterion'             => $assets['criterion'] ?? null,
                         'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
-                    ], // list of rewards and addons
+                    ]), // list of rewards and addons
                 ]);
             }
 
@@ -422,12 +439,25 @@ class SubmissionManager extends Service {
             // Get the updated set of rewards
             $rewards = $this->processRewards($data, false, true);
 
-
             // Logging data
             $promptLogType = $submission->prompt_id ? 'Prompt Rewards' : 'Claim Rewards';
             $promptData = [
                 'data' => 'Received rewards for '.($submission->prompt_id ? 'submission' : 'claim').' (<a href="'.$submission->viewUrl.'">#'.$submission->id.'</a>)',
             ];
+
+            // Distribute currency from criteria
+            if (isset($data['criterion'])) {
+                foreach ($data['criterion'] as $key => $criterionData) {
+                    $criterion = Criterion::where('id', $criterionData['id'])->first();
+                    if (isset($criterionData['criterion_currency_id'])) {
+                        $criterion_currency = Currency::find($criterionData['criterion_currency_id']);
+                    } else {
+                        $criterion_currency = $criterion->currency;
+                    }
+
+                    addAsset($rewards, $criterion_currency, $criterion->calculateReward($criterionData));
+                }
+            }
 
             // Distribute user rewards
             if (!$rewards = fillUserAssets($rewards, $user, $submission->user, $promptLogType, $promptData)) {
@@ -435,11 +465,14 @@ class SubmissionManager extends Service {
             }
 
             // Retrieve all reward IDs for characters
-            $currencyIds = []; $itemIds = []; $tableIds = [];$awardIds = [];
-            if(isset($data['character_currency_id'])) {
-                foreach($data['character_currency_id'] as $c)
-                {
-                    foreach($c as $currencyId) $currencyIds[] = $currencyId;
+            $currencyIds = [];
+            $itemIds = [];
+            $tableIds = [];
+            if (isset($data['character_currency_id'])) {
+                foreach ($data['character_currency_id'] as $c) {
+                    foreach ($c as $currencyId) {
+                        $currencyIds[] = $currencyId;
+                    }
                 } // Non-expanded character rewards
             }
             elseif(isset($data['character_rewardable_id']))
@@ -472,7 +505,7 @@ class SubmissionManager extends Service {
             // Distribute character rewards
             foreach ($characters as $c) {
                 // Users might not pass in clean arrays (may contain redundant data) so we need to clean that up
-                $assets = $this->processRewards($data + ['character_id' => $c->id, 'currencies' => $currencies, 'items' => $items, 'tables' => $tables, 'awards' => $awards], true);
+                $assets = $this->processRewards($data + ['character_id' => $c->id, 'currencies' => $currencies, 'items' => $items, 'tables' => $tables], true);
 
                 if (!$assets = fillCharacterAssets($assets, $user, $c, $promptLogType, $promptData, $submission->user)) {
                     throw new \Exception('Failed to distribute rewards to character.');
@@ -508,11 +541,12 @@ class SubmissionManager extends Service {
                 'parsed_staff_comments' => $data['parsed_staff_comments'],
                 'staff_id'              => $user->id,
                 'status'                => 'Approved',
-                'data'                  => [
+                'data'                  => json_encode([
                     'user'                  => $addonData,
                     'rewards'               => getDataReadyAssets($rewards),
+                    'criterion'             => $data['criterion'] ?? null,
                     'gallery_submission_id' => $submission->data['gallery_submission_id'] ?? null,
-                ], // list of rewards
+                ]), // list of rewards
             ]);
 
             Notifications::create($submission->prompt_id ? 'SUBMISSION_APPROVED' : 'CLAIM_APPROVED', $submission->user, [

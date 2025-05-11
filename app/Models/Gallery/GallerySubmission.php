@@ -105,7 +105,7 @@ class GallerySubmission extends Model {
      * Get the user who made the submission.
      */
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -119,35 +119,35 @@ class GallerySubmission extends Model {
      * Get the collaborating users on the submission.
      */
     public function collaborators() {
-        return $this->hasMany(GalleryCollaborator::class)->where('type', 'Collab');
+        return $this->hasMany(GalleryCollaborator::class, 'gallery_submission_id')->where('type', 'Collab');
     }
 
     /**
      * Get the user(s) who are related to the submission in some way.
      */
     public function participants() {
-        return $this->hasMany(GalleryCollaborator::class)->where('type', '!=', 'Collab');
+        return $this->hasMany(GalleryCollaborator::class, 'gallery_submission_id')->where('type', '!=', 'Collab');
     }
 
     /**
      * Get the characters associated with the submission.
      */
     public function characters() {
-        return $this->hasMany(GalleryCharacter::class);
+        return $this->hasMany(GalleryCharacter::class, 'gallery_submission_id');
     }
 
     /**
      * Get any favorites on the submission.
      */
     public function favorites() {
-        return $this->hasMany(GalleryFavorite::class);
+        return $this->hasMany(GalleryFavorite::class, 'gallery_submission_id');
     }
 
     /**
      * Get the gallery this submission is in.
      */
     public function gallery() {
-        return $this->belongsTo(Gallery::class);
+        return $this->belongsTo(Gallery::class, 'gallery_id');
     }
 
     /**
@@ -196,9 +196,7 @@ class GallerySubmission extends Model {
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCollaboratorApproved($query) {
-        return $query->whereDoesntHave('collaborators', function ($query) {
-            $query->where('has_approved', 0);
-        })->orWhereDoesntHave('collaborators');
+        return $query->whereNotIn('id', GalleryCollaborator::where('has_approved', 0)->pluck('gallery_submission_id')->toArray());
     }
 
     /**
@@ -247,9 +245,7 @@ class GallerySubmission extends Model {
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeUserSubmissions($query, $user) {
-        return $query->where('user_id', $user->id)->orWhereHas('collaborators', function ($query) use ($user) {
-            $query->where('user_id', $user->id)->where('type', 'Collab');
-        });
+        return $query->where('user_id', $user->id)->orWhereIn('id', GalleryCollaborator::where('user_id', $user->id)->where('type', 'Collab')->pluck('gallery_submission_id')->toArray());
     }
 
     /**
@@ -368,6 +364,24 @@ class GallerySubmission extends Model {
     }
 
     /**
+     * Get the data attribute as an associative array.
+     *
+     * @return array
+     */
+    public function getDataAttribute() {
+        return json_decode($this->attributes['data'], true);
+    }
+
+    /**
+     * Gets the voting data of the gallery submission.
+     *
+     * @return string
+     */
+    public function getVoteDataAttribute() {
+        return collect(json_decode($this->attributes['vote_data'], true));
+    }
+
+    /**
      * Get the title of the submission, with prefix.
      *
      * @return string
@@ -395,7 +409,7 @@ class GallerySubmission extends Model {
     }
 
     /**
-     * Get the prefix for a submission.
+     * Checks if all of a submission's collaborators have approved or no.
      *
      * @return string
      */
@@ -463,7 +477,7 @@ class GallerySubmission extends Model {
      */
     public function getCreditsAttribute() {
         if ($this->collaborators->count()) {
-            foreach ($this->collaborators as $collaborator) {
+            foreach ($this->collaborators as $count=> $collaborator) {
                 $collaboratorList[] = $collaborator->user->displayName;
             }
 
@@ -480,7 +494,7 @@ class GallerySubmission extends Model {
      */
     public function getCreditsPlainAttribute() {
         if ($this->collaborators->count()) {
-            foreach ($this->collaborators as $collaborator) {
+            foreach ($this->collaborators as $count=> $collaborator) {
                 $collaboratorList[] = $collaborator->user->name;
             }
 
@@ -495,7 +509,7 @@ class GallerySubmission extends Model {
      *
      * @return string
      */
-    public function getCollaboratorApprovalAttribute() {
+    public function getCollaboratorApprovedAttribute() {
         if ($this->collaborators->where('has_approved', 0)->count()) {
             return false;
         }
@@ -511,7 +525,7 @@ class GallerySubmission extends Model {
     public function getPromptSubmissionsAttribute() {
         // Only returns submissions which are viewable to everyone,
         // but given that this is for the sake of public display, that's fine
-        return Submission::viewable()->whereNotNull('prompt_id')->where('url', 'like', '%'.request()->getHost().'/gallery/view/'.$this->id)->get();
+        return Submission::viewable()->whereNotNull('prompt_id')->where('url', $this->url)->get();
     }
 
     /**
@@ -523,28 +537,6 @@ class GallerySubmission extends Model {
         // Only returns submissions which are viewable to everyone,
         // but given that this is for the sake of public display, that's fine
         return Prompt::whereIn('id', $this->promptSubmissions->pluck('prompt_id'))->get();
-    }
-
-    /**
-     * Gets prompt submissions associated with this gallery submission.
-     *
-     * @return array
-     */
-    public function getLocationSubmissionsAttribute() {
-        // Only returns submissions which are viewable to everyone,
-        // but given that this is for the sake of public display, that's fine
-        return Submission::viewable()->whereNotNull('location_id')->where('url', $this->url)->get();
-    }
-
-    /**
-     * Gets prompts associated with this gallery submission.
-     *
-     * @return array
-     */
-    public function getLocationsAttribute() {
-        // Only returns submissions which are viewable to everyone,
-        // but given that this is for the sake of public display, that's fine
-        return Prompt::whereIn('id', $this->promptSubmissions->pluck('location_id'))->get();
     }
 
     /**

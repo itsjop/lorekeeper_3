@@ -78,18 +78,18 @@ Route::group(['prefix' => 'inventory', 'namespace' => 'Users'], function () {
   Route::post('quickstock-items', 'InventoryController@postQuickstock');
 });
 
-Route::group(['prefix' => __('awards.awardcase'), 'namespace' => 'Users'], function() {
-    Route::get('/', 'AwardCaseController@getIndex');
-    Route::post('edit', 'AwardCaseController@postEdit');
-    Route::post('claim/{id}', 'AwardCaseController@postClaimAward');
-    Route::get('selector', 'AwardCaseController@getSelector');
+Route::group(['prefix' => __('awards.awardcase'), 'namespace' => 'Users'], function () {
+  Route::get('/', 'AwardCaseController@getIndex');
+  Route::post('edit', 'AwardCaseController@postEdit');
+  Route::post('claim/{id}', 'AwardCaseController@postClaimAward');
+  Route::get('selector', 'AwardCaseController@getSelector');
 });
 
-Route::group(['prefix' => __('awards.awardcase'), 'namespace' => 'Users'], function() {
-    Route::get('/', 'AwardCaseController@getIndex');
-    Route::post('edit', 'AwardCaseController@postEdit');
-    Route::post('claim/{id}', 'AwardCaseController@postClaimAward');
-    Route::get('selector', 'AwardCaseController@getSelector');
+Route::group(['prefix' => __('awards.awardcase'), 'namespace' => 'Users'], function () {
+  Route::get('/', 'AwardCaseController@getIndex');
+  Route::post('edit', 'AwardCaseController@postEdit');
+  Route::post('claim/{id}', 'AwardCaseController@postClaimAward');
+  Route::get('selector', 'AwardCaseController@getSelector');
 });
 
 Route::group(['prefix' => 'pets', 'namespace' => 'Users'], function () {
@@ -207,7 +207,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
   Route::get('{slug}/profile/edit', 'CharacterController@getEditCharacterProfile');
   Route::post('{slug}/profile/edit', 'CharacterController@postEditCharacterProfile');
 
-    Route::post('{slug}/'.__('awards.awardcase').'/edit', 'CharacterController@postAwardEdit');
+  Route::post('{slug}/' . __('awards.awardcase') . '/edit', 'CharacterController@postAwardEdit');
   Route::post('{slug}/inventory/edit', 'CharacterController@postInventoryEdit');
 
   Route::post('{slug}/bank/transfer', 'CharacterController@postCurrencyTransfer');
@@ -246,6 +246,7 @@ Route::group(['prefix' => 'gallery'], function () {
   Route::get('submit/character/{slug}', 'GalleryController@getCharacterInfo');
   Route::get('edit/{id}', 'GalleryController@getEditGallerySubmission');
   Route::get('queue/{id}', 'GalleryController@getSubmissionLog');
+  Route::post('queue/totals/{id}', 'GalleryController@postSubmissionTotals');
   Route::post('submit', 'GalleryController@postCreateEditGallerySubmission');
   Route::post('edit/{id}', 'GalleryController@postCreateEditGallerySubmission');
 
@@ -377,7 +378,6 @@ Route::group(['prefix' => 'limits'], function () {
   Route::post('unlock/{id}', 'Admin\LimitController@postUnlockLimits');
 });
 
-
 /**************************************************************************************************
   Forms & Polls
  **************************************************************************************************/
@@ -392,7 +392,6 @@ Route::group(['prefix' => 'forms'], function () {
 /**************************************************************************************************
   Cultivation
  **************************************************************************************************/
-
 Route::group(['prefix' => __('cultivation.cultivation')], function () {
   Route::get('{id}', 'CultivationController@getArea');
 
@@ -405,22 +404,29 @@ Route::group(['prefix' => __('cultivation.cultivation')], function () {
   Route::post('plots/tend/{plotId}', 'CultivationController@postTendPlot');
   Route::post('plots/harvest/{plotId}', 'CultivationController@postHarvestPlot');
 });
+
 /**************************************************************************************************
   Advent Calendars
  **************************************************************************************************/
-
 Route::group(['prefix' => 'advent-calendars'], function () {
   Route::get('{id}', 'AdventController@getAdvent');
   Route::post('{id}', 'AdventController@postClaimPrize');
 });
-/**************************************************************************************************
-    Comments
- **************************************************************************************************/
-
 
 /**************************************************************************************************
     Comments
  **************************************************************************************************/
 Route::group(['prefix' => 'limits'], function () {
   Route::post('unlock/{id}', 'Admin\LimitController@postUnlockLimits');
+});
+
+/**************************************************************************************************
+    Criteria
+ **************************************************************************************************/
+Route::group(['prefix' => 'criteria'], function () {
+  Route::get('{entity}/{id}', 'CriterionController@getCriterionSelector')->where('entity', 'prompt|gallery');
+  Route::get('{entity}/{id}/{entity_id}/{form_id}', 'CriterionController@getCriterionForm')->where('entity', 'prompt|gallery');
+  Route::get('{id}', 'CriterionController@getCriterionFormLimited');
+  Route::post('rewards/{id}', 'CriterionController@postCriterionRewards');
+  Route::get('guide/{id}', 'CriterionController@getCriterionGuide');
 });

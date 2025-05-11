@@ -96,7 +96,7 @@ class UserController extends Controller {
       'aliases'               => $aliases->orderBy('is_primary_alias', 'DESC')->orderBy('site')->get(),
       'pets'                  => $this->user->pets()->orderBy('user_pets.updated_at', 'DESC')->take(5)->get(),
       'awards'                => $this->user->awards()->orderBy('user_awards.updated_at', 'DESC')
-                                  ->whereNull('deleted_at')->where('count', '>', 0)->take(4)->get(),
+       /* */                          ->whereNull('deleted_at')->where('count', '>', 0)->take(4)->get(),
     ]);
   }
 
