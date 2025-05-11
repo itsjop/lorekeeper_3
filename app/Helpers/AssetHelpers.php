@@ -418,87 +418,85 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
 
   foreach ($assets as $key => $contents) {
     if ($key == 'items' && count($contents)) {
-            $service = new App\Services\InventoryManager;
-            foreach ($contents as $asset) {
-                if (!$service->creditItem($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
-                    foreach ($service->errors()->getMessages()['error'] as $error) {
-                        flash($error)->error();
-                    }
+      $service = new App\Services\InventoryManager;
+      foreach ($contents as $asset) {
+        if (!$service->creditItem($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+            flash($error)->error();
+          }
 
-                    return false;
-                }
-            }
-    } elseif ($key == 'currencies' && count($contents)) {
-            $service = new App\Services\CurrencyManager;
-            foreach ($contents as $asset) {
-                if ($asset['quantity'] < 0) {
-                    if (!$service->debitCurrency($sender, $recipient, $logType, $data['data'], $asset['asset'], abs($asset['quantity']))) {
-                        foreach ($service->errors()->getMessages()['error'] as $error) {
-                            flash($error)->error();
-                        }
-
-                        return false;
-                    }
-                } else {
-                    if (!$service->creditCurrency($sender, $recipient, $logType, $data['data'], $asset['asset'], $asset['quantity'])) {
-                        foreach ($service->errors()->getMessages()['error'] as $error) {
-                            flash($error)->error();
-                        }
-
-                        return false;
-                    }
-                }
-            }
-        } elseif ($key == 'pets' && count($contents)) {
-            $service = new \App\Services\PetManager;
-            foreach ($contents as $asset) {
-                if (!$service->creditPet($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
-                    return false;
-                }
-            }
-    } elseif ($key == 'raffle_tickets' && count($contents)) {
-            $service = new App\Services\RaffleManager;
-            foreach ($contents as $asset) {
-                if (!$service->addTicket($recipient, $asset['asset'], $asset['quantity'])) {
-                    foreach ($service->errors()->getMessages()['error'] as $error) {
-                        flash($error)->error();
-                    }
-
-                    return false;
-                }
-            }
-        } elseif ($key == 'user_items' && count($contents)) {
-            $service = new App\Services\InventoryManager;
-            foreach ($contents as $asset) {
-                if (!$service->moveStack($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
-                    foreach ($service->errors()->getMessages()['error'] as $error) {
-                        flash($error)->error();
-                    }
-
-                    return false;
-                }
-            }
-    } elseif ($key == 'characters' && count($contents)) {
-            $service = new App\Services\CharacterManager;
-            foreach ($contents as $asset) {
-                if (!$service->moveCharacter($asset['asset'], $recipient, $data, $asset['quantity'], $logType)) {
-                    foreach ($service->errors()->getMessages()['error'] as $error) {
-                        flash($error)->error();
-                    }
-
-                    return false;
-                }
-                elseif($key == 'borders' && count($contents))
-        {
-            $service = new \App\Services\BorderService;
-            foreach($contents as $asset)
-                if(!$service->creditBorder($sender, $recipient, null, $logType, $data, $asset['asset'])) return false;
+          return false;
         }
-    }
-        }elseif ($key == 'areas' && count($contents)) {
-            $service = new \App\Services\CultivationManager;
-            foreach ($contents as $asset)
-                if (!$service->unlockArea($recipient, $asset['asset'])) return false;
+      }
+    } elseif ($key == 'currencies' && count($contents)) {
+      $service = new App\Services\CurrencyManager;
+      foreach ($contents as $asset) {
+        if ($asset['quantity'] < 0) {
+          if (!$service->debitCurrency($sender, $recipient, $logType, $data['data'], $asset['asset'], abs($asset['quantity']))) {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+              flash($error)->error();
+            }
+
+            return false;
+          }
+        } else {
+          if (!$service->creditCurrency($sender, $recipient, $logType, $data['data'], $asset['asset'], $asset['quantity'])) {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+              flash($error)->error();
+            }
+
+            return false;
+          }
+        }
+      }
+    } elseif ($key == 'pets' && count($contents)) {
+      $service = new \App\Services\PetManager;
+      foreach ($contents as $asset) {
+        if (!$service->creditPet($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
+          return false;
+        }
+      }
+    } elseif ($key == 'raffle_tickets' && count($contents)) {
+      $service = new App\Services\RaffleManager;
+      foreach ($contents as $asset) {
+        if (!$service->addTicket($recipient, $asset['asset'], $asset['quantity'])) {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+            flash($error)->error();
+          }
+
+          return false;
+        }
+      }
+    } elseif ($key == 'user_items' && count($contents)) {
+      $service = new App\Services\InventoryManager;
+      foreach ($contents as $asset) {
+        if (!$service->moveStack($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+            flash($error)->error();
+          }
+
+          return false;
+        }
+      }
+    } elseif ($key == 'characters' && count($contents)) {
+      $service = new App\Services\CharacterManager;
+      foreach ($contents as $asset) {
+        if (!$service->moveCharacter($asset['asset'], $recipient, $data, $asset['quantity'], $logType)) {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+            flash($error)->error();
+          }
+
+          return false;
+        } elseif ($key == 'borders' && count($contents)) {
+          $service = new \App\Services\BorderService;
+          foreach ($contents as $asset)
+            if (!$service->creditBorder($sender, $recipient, null, $logType, $data, $asset['asset'])) return false;
+        }
+      }
+    } elseif ($key == 'areas' && count($contents)) {
+      $service = new \App\Services\CultivationManager;
+      foreach ($contents as $asset)
+        if (!$service->unlockArea($recipient, $asset['asset'])) return false;
     }
   }
 
@@ -562,10 +560,7 @@ function fillCharacterAssets($assets, $sender, $recipient, $logType, $data, $sub
         if (!$service->creditItem($sender, (($asset['asset']->category && $asset['asset']->category->is_character_owned) ? $recipient : $item_recipient), $logType, $data, $asset['asset'], $asset['quantity'])) return false;
     }
   }
-        }
-    }
-
-    return $assets;
+  return $assets;
 }
 
 /**
@@ -578,32 +573,32 @@ function fillCharacterAssets($assets, $sender, $recipient, $logType, $data, $sub
  * @return string
  */
 function createRewardsString($array, $useDisplayName = true, $absQuantities = false) {
-    $string = [];
-    foreach ($array as $key => $contents) {
-        foreach ($contents as $asset) {
-            if ($useDisplayName) {
-                if ($key == 'currencies') {
-                    $name = $asset['asset'] ? $asset['asset']->display(($absQuantities ? abs($asset['quantity']) : $asset['quantity'])) : 'Deleted '.ucfirst(str_replace('_', ' ', $key));
-                    $string[] = $asset['asset'] ? $name : $name.' x'.($absQuantities ? abs($asset['quantity']) : $asset['quantity']);
-                } else {
-                    $name = $asset['asset']->displayName ?? ($asset['asset']->name ?? 'Deleted '.ucfirst(str_replace('_', ' ', $key)));
-                    $string[] = $name.' x'.($absQuantities ? abs($asset['quantity']) : $asset['quantity']);
-                }
-            } else {
-                $name = $asset['asset']->name ?? 'Deleted '.ucfirst(str_replace('_', ' ', $key));
-                $string[] = $name.' x'.($absQuantities ? abs($asset['quantity']) : $asset['quantity']);
-            }
+  $string = [];
+  foreach ($array as $key => $contents) {
+    foreach ($contents as $asset) {
+      if ($useDisplayName) {
+        if ($key == 'currencies') {
+          $name = $asset['asset'] ? $asset['asset']->display(($absQuantities ? abs($asset['quantity']) : $asset['quantity'])) : 'Deleted ' . ucfirst(str_replace('_', ' ', $key));
+          $string[] = $asset['asset'] ? $name : $name . ' x' . ($absQuantities ? abs($asset['quantity']) : $asset['quantity']);
+        } else {
+          $name = $asset['asset']->displayName ?? ($asset['asset']->name ?? 'Deleted ' . ucfirst(str_replace('_', ' ', $key)));
+          $string[] = $name . ' x' . ($absQuantities ? abs($asset['quantity']) : $asset['quantity']);
         }
+      } else {
+        $name = $asset['asset']->name ?? 'Deleted ' . ucfirst(str_replace('_', ' ', $key));
+        $string[] = $name . ' x' . ($absQuantities ? abs($asset['quantity']) : $asset['quantity']);
+      }
     }
-    if (!count($string)) {
-        return 'Nothing. :('; // :(
-    }
+  }
+  if (!count($string)) {
+    return 'Nothing. :('; // :(
+  }
 
-    if (count($string) == 1) {
-        return implode(', ', $string);
-    }
+  if (count($string) == 1) {
+    return implode(', ', $string);
+  }
 
-    return implode(', ', array_slice($string, 0, count($string) - 1)).(count($string) > 2 ? ', and ' : ' and ').end($string);
+  return implode(', ', array_slice($string, 0, count($string) - 1)) . (count($string) > 2 ? ', and ' : ' and ') . end($string);
 }
 
 /***********************************************************************************************
@@ -622,18 +617,18 @@ function createRewardsString($array, $useDisplayName = true, $absQuantities = fa
  * @return array
  */
 function parseDiscordAssetData($array) {
-    $assets = createAssetsArray();
-    foreach ($array as $key => $contents) {
-        $model = getAssetModelString($key);
-        if ($model) {
-            foreach ($contents as $id => $quantity) {
-                $assets[$key][$id] = [
-                    'asset'    => $model::find($id),
-                    'quantity' => $quantity->quantity,
-                ];
-            }
-        }
+  $assets = createAssetsArray();
+  foreach ($array as $key => $contents) {
+    $model = getAssetModelString($key);
+    if ($model) {
+      foreach ($contents as $id => $quantity) {
+        $assets[$key][$id] = [
+          'asset'    => $model::find($id),
+          'quantity' => $quantity->quantity,
+        ];
+      }
     }
+  }
 
   return $assets;
 }

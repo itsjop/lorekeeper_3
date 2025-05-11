@@ -80,8 +80,12 @@ class UserController extends Controller {
     $characters = $this->user->characters();
     if (!Auth::check() || !(Auth::check() && Auth::user()->hasPower('manage_characters'))) $characters->visible();
 
-    return view('user.profile', [
+    $aliases = $this->user->aliases();
+    if (!Auth::check() || !(Auth::check() && Auth::user()->hasPower('edit_user_info'))) {
+      $aliases->visible();
+    }
 
+    return view('user.profile', [
       'name'                  => $name,
       'user'                  => $this->user,
       'items'                 => $this->user->items()->where('count', '>', 0)->orderBy('user_items.updated_at', 'DESC')->take(4)->get(),
@@ -90,7 +94,9 @@ class UserController extends Controller {
       'user_enabled'          => Settings::get('WE_user_locations'),
       'user_factions_enabled' => Settings::get('WE_user_factions'),
       'aliases'               => $aliases->orderBy('is_primary_alias', 'DESC')->orderBy('site')->get(),
-      'pets'       => $this->user->pets()->orderBy('user_pets.updated_at', 'DESC')->take(5)->get(),
+      'pets'                  => $this->user->pets()->orderBy('user_pets.updated_at', 'DESC')->take(5)->get(),
+      'awards'                => $this->user->awards()->orderBy('user_awards.updated_at', 'DESC')
+                                  ->whereNull('deleted_at')->where('count', '>', 0)->take(4)->get(),
     ]);
   }
 

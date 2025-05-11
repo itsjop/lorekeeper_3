@@ -142,7 +142,7 @@
         <div class="card-body text-center">
             <h5 class="card-title">{{ ucfirst(__('awards.awards')) }}</h5>
             <div class="card-body">
-                @if(count($awards))
+                @if(count($awards ?: 0))
                     <div class="row">
                         @foreach($awards as $award)
                             <div class="col-md-3 col-6 profile-inventory-item">
