@@ -9,6 +9,9 @@
 @endsection
 
 @section('profile-content')
+
+@include('widgets._awardcase_feature', ['target' => $character, 'count' => Config::get('lorekeeper.extensions.awards.character_featured'), 'float' => true])
+
   @if ($character->is_myo_slot)
     {!! breadcrumbs(['MYO Slot Masterlist' => 'myos', $character->fullName => $character->url]) !!}
   @else
@@ -55,7 +58,7 @@
   @endif
 
   {{-- Main Image --}}
-  <div class="row mb-3" id="main-tab">
+  <div class="row mb-3" id="main-tab" style="clear:both;">
     <div class="col-md-7">
       <div class="text-center">
         <a href="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"

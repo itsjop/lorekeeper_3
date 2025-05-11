@@ -115,12 +115,12 @@
   </h3>
 
   <div class="form-group">
-    {!! Form::label('Species') !!}
+    {!! Form::label( ucfirst(__('lorekeeper.species'))) !!}
     {!! Form::select('species_id', $specieses, old('species_id') ?: $character->image->species_id, ['class' => 'form-control', 'id' => 'species']) !!}
   </div>
 
   <div class="form-group" id="subtypes">
-    {!! Form::label('Subtypes (Optional)') !!}
+    {!! Form::label(ucfirst(__('lorekeeper.subtypes')).' (Optional)') !!}
     {!! Form::select('subtype_ids[]', $subtypes, old('subtype_ids') ?: $character->image->subtypes()?->pluck('subtype_id')->toArray(), ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
   </div>
 

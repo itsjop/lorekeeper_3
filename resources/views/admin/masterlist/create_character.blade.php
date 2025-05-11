@@ -225,16 +225,16 @@
     <h3>Traits</h3>
 
     <div class="form-group">
-      {!! Form::label('Species') !!} @if ($isMyo)
-        {!! add_help('This will lock the slot into a particular species. Leave it blank if you would like to give the user a choice.') !!}
+      {!! Form::label( ucfirst(__('lorekeeper.species'))) !!} @if ($isMyo)
+        {!! add_help('This will lock the slot into a particular '.__('lorekeeper.species').'. Leave it blank if you would like to give the user a choice.') !!}
       @endif
       {!! Form::select('species_id', $specieses, old('species_id'), ['class' => 'form-control', 'id' => 'species']) !!}
     </div>
 
     <div class="form-group" id="subtypes">
-      {!! Form::label('Subtypes (Optional)') !!} @if ($isMyo)
+      {!! Form::label(ucfirst(__('lorekeeper.subtypes')).' (Optional)') !!} @if ($isMyo)
         {!! add_help(
-            'This will lock the slot into a particular subtype. Leave it blank if you would like to give the user a choice, or not select a subtype. The subtype must match the species selected above, and if no species is specified, the subtype will not be applied.',
+            'This will lock the slot into a particular '.__('lorekeeper.subtype').'. Leave it blank if you would like to give the user a choice, or not select a '.__('lorekeeper.subtype').'. The '.__('lorekeeper.subtype').' must match the '.__('lorekeeper.species').' selected above, and if no '.__('lorekeeper.species').' is specified, the '.__('lorekeeper.subtype').' will not be applied.',
         ) !!}
       @endif
       {!! Form::select('subtype_ids[]', $subtypes, old('subtype_ids'), ['class' => 'form-control disabled', 'id' => 'subtype', 'multiple', 'placeholder' => 'Pick a Species First']) !!}
@@ -266,7 +266,7 @@
     <div class="form-group">
       {!! Form::label('Traits') !!} @if ($isMyo)
         {!! add_help(
-            'These traits will be listed as required traits for the slot. The user will still be able to add on more traits, but not be able to remove these. This is allowed to conflict with the rarity above; you may add traits above the character\'s specified rarity.',
+            'These traits will be listed as required traits for the slot. The user will still be able to add on more traits, but not be able to remove these. This is allowed to conflict with the rarity above; you may add traits above the '.__('lorekeeper.character').'\'s specified rarity.',
         ) !!}
       @endif
       <div>

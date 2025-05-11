@@ -166,15 +166,12 @@ class DesignController extends Controller {
      */
     public function getAddons($id) {
         $r = CharacterDesignUpdate::find($id);
-        if (!$r || ($r->user_id != Auth::user()->id && !Auth::user()->hasPower('manage_characters'))) {
-            abort(404);
-        }
-        if ($r->status == 'Draft' && $r->user_id == Auth::user()->id) {
+        if(!$r || ($r->user_id != Auth::user()->id && !Auth::user()->hasPower('manage_characters'))) abort(404);
+        if($r->status == 'Draft' && $r->user_id == Auth::user()->id)
             $inventory = UserItem::with('item')->whereNull('deleted_at')->where('count', '>', '0')->where('user_id', $r->user_id)->get();
-        } else {
+        else
             $inventory = isset($r->data['user']) ? parseAssetData($r->data['user']) : null;
-        }
-
+æ
         return view('character.design.addons', [
             'request'     => $r,
             'categories'  => ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get(),
@@ -244,15 +241,14 @@ class DesignController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getFeaturesSubtype(Request $request) {
-        $species = $request->input('species');
-        $id = $request->input('id');
 
-        return view('character.design._features_subtype', [
-            'subtypes' => Subtype::visible()->where('species_id', '=', $species)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'subtype'  => $id,
-        ]);
+      $species = $request->input('species');
+      $id = $request->input('id');
+      return view('character.design._features_subtype', [
+          'subtypes' => ['0' => 'Select Subtype'] + Subtype::where('species_id','=',$species)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+          'subtype' => $id
+      ]);
     }
-
     /**
      * Shows the edit image transformation portion of the modal.
      *

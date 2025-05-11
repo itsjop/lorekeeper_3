@@ -22,6 +22,8 @@ class Subtype extends Model {
      */
     protected $table = 'subtypes';
 
+
+
     /**
      * Accessors to append to the model.
      *
@@ -43,6 +45,7 @@ class Subtype extends Model {
         'image'       => 'mimes:png',
     ];
 
+
     /**
      * Validation rules for updating.
      *
@@ -52,8 +55,9 @@ class Subtype extends Model {
         'species_id'  => 'required',
         'name'        => 'required|between:3,100',
         'description' => 'nullable',
-        'image'       => 'mimes:png',
+        'image' => 'mimes:png',
     ];
+
 
     /**********************************************************************************************
 
@@ -109,7 +113,7 @@ class Subtype extends Model {
      * @return string
      */
     public function getNameWithSpeciesAttribute() {
-        return $this->name.' ['.$this->species->name.' Subtype]';
+        return $this->name.' ['.$this->species->name.' ' . ucfirst(__('lorekeeper.subtype')) . ']';
     }
 
     /**
@@ -167,7 +171,7 @@ class Subtype extends Model {
      * @return string
      */
     public function getUrlAttribute() {
-        return url('world/subtypes?name='.$this->name);
+        return url('world/'.__('lorekeeper.subtypes').'?name='.$this->name);
     }
 
     /**
@@ -176,7 +180,7 @@ class Subtype extends Model {
      * @return string
      */
     public function getSearchUrlAttribute() {
-        return url('masterlist?subtype_ids[]='.$this->id);
+        return url('masterlist?'.__('lorekeeper.subtype').'_ids[]='.$this->id);
     }
 
     /**

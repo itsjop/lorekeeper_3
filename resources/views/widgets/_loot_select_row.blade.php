@@ -20,11 +20,11 @@
       <tr class="loot-row">
         <td>{!! Form::select(
             'rewardable_type[]',
-            ['Item' => 'Item', 'Currency' => 'Currency', 'Pet' => 'Pet'] + ($showLootTables ? ['LootTable' => 'Loot Table'] : []) + ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) + (isset($showBorders) && $showBorders ? ['Border' => 'Border'] : []),
+            ['Item' => 'Item', 'Currency' => 'Currency', 'Pet' => 'Pet', 'Award' => ucfirst(__('awards.award'))] + ($showLootTables ? ['LootTable' => 'Loot Table'] : []) + ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) + (isset($showBorders) && $showBorders ? ['Border' => 'Border'] : []),
             null,
             [
                 'class' => 'form-control reward-type',
-                'placeholder' => 'Select Reward Type',
+                'placeholder' => (isset($progression) && $progression ? 'Select Progression Type' : 'Select Reward Type'),
             ],
         ) !!}</td>
         <td class="loot-row-select"></td>
@@ -35,6 +35,7 @@
   </table>
   {!! Form::select('rewardable_id[]', $items, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
   {!! Form::select('rewardable_id[]', $currencies, null, ['class' => 'form-control currency-select', 'placeholder' => 'Select Currency']) !!}
+    {!! Form::select('rewardable_id[]', $awards, null, ['class' => 'form-control award-select', 'placeholder' => 'Select '.ucfirst(__('awards.award'))]) !!}
   {!! Form::select('rewardable_id[]', $pets, null, ['class' => 'form-control pet-select', 'placeholder' => 'Select Pet']) !!}
   @if ($showLootTables)
     {!! Form::select('rewardable_id[]', $tables, null, ['class' => 'form-control table-select', 'placeholder' => 'Select Loot Table']) !!}

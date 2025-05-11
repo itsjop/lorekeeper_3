@@ -5,6 +5,7 @@
         <img src="{{ $subtype->subtypeImageUrl }}" class="world-entry-image" alt="{{ $subtype->name }}" />
       </a>
     </div>
+    
   @endif
   <div class="{{ $subtype->subtypeImageUrl ? 'col-md-9' : 'col-12' }}">
     <x-admin-edit title="Subtype" :object="$subtype" />
@@ -18,12 +19,14 @@
       </a>
     </h3>
     @if (count($subtype->features) && config('lorekeeper.extensions.visual_trait_index.enable_subtype_index'))
-      <a href="{{ $subtype->visualTraitsUrl }}">
+      {{-- <a href="{{ $subtype->visualTraitsUrl }}"> --}}
         <strong>Visual Trait Index</strong>
       </a>
     @endif
-    <div class="world-entry-text">
-      {!! $subtype->parsed_description !!}
+    <div class="{{ $subtype->subtypeImageUrl ? 'col-md-9' : 'col-12' }}">
+        <h3>{!! $subtype->displayName !!} ({!! $subtype->species->displayName !!} Subtype) <a href="{{ $subtype->searchUrl }}" class="world-entry-search text-muted"><i class="fas fa-search"></i></a></h3>
+        <div class="world-entry-text">
+            {!! $subtype->parsed_description !!}
+        </div>
     </div>
-  </div>
 </div>

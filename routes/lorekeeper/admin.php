@@ -181,6 +181,24 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
   Route::get('items/tag/{id}', 'ItemController@getAddItemTag');
   Route::post('items/tag/{id}', 'ItemController@postAddItemTag');
 
+    # AWARDS
+    Route::get('award-categories', 'AwardController@getIndex');
+    Route::get('award-categories/create', 'AwardController@getCreateAwardCategory');
+    Route::get('award-categories/edit/{id}', 'AwardController@getEditAwardCategory');
+    Route::get('award-categories/delete/{id}', 'AwardController@getDeleteAwardCategory');
+    Route::post('award-categories/create', 'AwardController@postCreateEditAwardCategory');
+    Route::post('award-categories/edit/{id?}', 'AwardController@postCreateEditAwardCategory');
+    Route::post('award-categories/delete/{id}', 'AwardController@postDeleteAwardCategory');
+    Route::post('award-categories/sort', 'AwardController@postSortAwardCategory');
+
+    Route::get('awards', 'AwardController@getAwardIndex');
+    Route::get('awards/create', 'AwardController@getCreateAward');
+    Route::get('awards/edit/{id}', 'AwardController@getEditAward');
+    Route::get('awards/delete/{id}', 'AwardController@getDeleteAward');
+    Route::post('awards/create', 'AwardController@postCreateEditAward');
+    Route::post('awards/edit/{id?}', 'AwardController@postCreateEditAward');
+    Route::post('awards/delete/{id}', 'AwardController@postDeleteAward');
+
     // PETS
     Route::get('pet-categories', 'PetController@getIndex');
     Route::get('pet-categories/create', 'PetController@getCreatePetCategory');
@@ -526,7 +544,7 @@ Route::group(['prefix' => 'grants', 'namespace' => 'Users', 'middleware' => 'pow
     Route::get('pets/variants/{id}', 'GrantController@getPetVariants');
     Route::get('pets/evolutions/{id}', 'GrantController@getPetEvolutions');
 
-  Route::get('item-search', 'GrantController@getItemSearch');
+    Route::get('item-search', 'GrantController@getItemSearch');
   Route::get('borders', 'GrantController@getBorders');
   Route::post('borders', 'GrantController@postBorders');
 });
@@ -538,13 +556,13 @@ Route::group(['prefix' => 'pets', 'middleware' => 'power:edit_inventories'], fun
 
 // PETS
 Route::group(['prefix' => 'pets', 'middleware' => 'power:edit_inventories'], function () {
-    Route::post('pet/{id}', 'Data\PetController@postEditPetDrop');
+  Route::post('pet/{id}', 'Data\PetController@postEditPetDrop');
 });
 
 // MASTERLIST
-Route::group(['prefix' => 'masterlist', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function () {
-  Route::get('create-character', 'CharacterController@getCreateCharacter');
-  Route::post('create-character', 'CharacterController@postCreateCharacter');
+Route::group(['prefix' => 'masterlist', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function() {
+    Route::get('create-character', 'CharacterController@getCreateCharacter');
+    Route::post('create-character', 'CharacterController@postCreateCharacter');
 
   Route::get('get-number', 'CharacterController@getPullNumber');
 
@@ -568,6 +586,7 @@ Route::group(['prefix' => 'masterlist', 'namespace' => 'Characters', 'middleware
 Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware' => 'power:edit_inventories'], function () {
   Route::post('{slug}/grant', 'GrantController@postCharacterCurrency');
   Route::post('{slug}/grant-items', 'GrantController@postCharacterItems');
+    Route::post('{slug}/grant-awards', 'GrantController@postCharacterAwards');
 });
 Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function () {
   // IMAGES

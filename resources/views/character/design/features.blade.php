@@ -25,7 +25,7 @@
     </p>
     {!! Form::open(['url' => 'designs/' . $request->id . '/traits']) !!}
     <div class="form-group">
-      {!! Form::label('species_id', 'Species') !!}
+      {!! Form::label('species_id',  ucfirst(__('lorekeeper.species'))) !!}
       @if ($request->character->is_myo_slot && $request->character->image->species_id)
         <div class="alert alert-secondary">{!! $request->character->image->species->displayName !!}</div>
       @else
@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-group">
-      {!! Form::label('subtype_ids', 'Species Subtype(s)') !!}
+      {!! Form::label('subtype_ids', 'Species '.ucfirst(__('lorekeeper.subtype(s)'))) !!}
       @if ($request->character->is_myo_slot && count($request->character->image->subtypes))
         <div class="alert alert-secondary">{!! $request->character->image->displaySubtypes() !!}</div>
       @else
@@ -153,7 +153,7 @@
       <div class="mb-1">
         <div class="row">
           <div class="col-md-2 col-4">
-            <h5>Species</h5>
+            <h5>{{ ucfirst(__('lorekeeper.species')) }}</h5>
           </div>
           <div class="col-md-10 col-8">{!! $request->species ? $request->species->displayName : 'None Selected' !!}</div>
         </div>

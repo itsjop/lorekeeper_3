@@ -157,60 +157,125 @@ return [
         'url'  => 'admin/claims',
       ],
     ],
-  ],
-  'Grants'     => [
-    'power' => 'edit_inventories',
-    'links' => [
-      [
-        'name' => 'Currency Grants',
-        'url'  => 'admin/grants/user-currency',
-      ],
-      [
-        'name' => 'Item Grants',
-        'url'  => 'admin/grants/items',
-      ],
-      [
-        'name' => 'Pet Grants',
-        'url'  => 'admin/grants/pets',
-      ],
+    'Grants' => [
+        'power' => 'edit_inventories',
+        'links' => [
+            [
+                'name' => 'Currency Grants',
+                'url' => 'admin/grants/user-currency'
+            ],
+            [
+                'name' => 'Item Grants',
+                'url' => 'admin/grants/items'
+            ],
+            [
+              'name' => 'Pet Grants',
+              'url'  => 'admin/grants/pets',
+            ],
+            [
+                'name' => 'Award Grants',
+                'url' => 'admin/grants/awards'
+            ],
+        ]
     ],
-  ],
-  'Masterlist' => [
-    'power' => 'manage_characters',
-    'links' => [
-      [
-        'name' => 'Create Character',
-        'url'  => 'admin/masterlist/create-character',
-      ],
-      [
-        'name' => 'Create MYO Slot',
-        'url'  => 'admin/masterlist/create-myo',
-      ],
-      [
-        'name' => 'Character Transfers',
-        'url'  => 'admin/masterlist/transfers/incoming',
-      ],
-      [
-        'name' => 'Character Trades',
-        'url'  => 'admin/masterlist/trades/incoming',
-      ],
-      [
-        'name' => 'Design Updates',
-        'url'  => 'admin/design-approvals/pending',
-      ],
-      [
-        'name' => 'MYO Approvals',
-        'url'  => 'admin/myo-approvals/pending',
-      ],
+    'Masterlist' => [
+        'power' => 'manage_characters',
+        'links' => [
+            [
+                'name' => 'Create Character',
+                'url' => 'admin/masterlist/create-character'
+            ],
+            [
+                'name' => 'Create MYO Slot',
+                'url' => 'admin/masterlist/create-myo'
+            ],
+            [
+                'name' => 'Character Transfers',
+                'url' => 'admin/masterlist/transfers/incoming'
+            ],
+            [
+                'name' => 'Character Trades',
+                'url' => 'admin/masterlist/trades/incoming'
+            ],
+            [
+                'name' => 'Design Updates',
+                'url' => 'admin/design-approvals/pending'
+            ],
+            [
+                'name' => 'MYO Approvals',
+                'url' => 'admin/myo-approvals/pending'
+            ],
+        ]
     ],
-  ],
-  'Raffles'    => [
-    'power' => 'manage_raffles',
-    'links' => [
-      [
-        'name' => 'Raffles',
-        'url'  => 'admin/raffles',
-      ],
+    'Data' => [
+        'power' => 'edit_data',
+        'links' => [
+            [
+                'name' => 'Galleries',
+                'url' => 'admin/data/galleries'
+            ],
+            [
+                'name' => 'Award Categories',
+                'url' => 'admin/data/award-categories'
+            ],
+            [
+                'name' => 'Awards',
+                'url' => 'admin/data/awards'
+            ],
+            [
+                'name' => 'Character Categories',
+                'url' => 'admin/data/character-categories'
+            ],
+            [
+                'name' => 'Sub Masterlists',
+                'url' => 'admin/data/sublists'
+            ],
+            [
+                'name' => 'Rarities',
+                'url' => 'admin/data/rarities'
+            ],
+            [
+                'name' => 'Species',
+                'url' => 'admin/data/species'
+            ],
+            [
+                'name' => 'Subtypes',
+                'url' => 'admin/data/subtypes'
+            ],
+            [
+                'name' => 'Traits',
+                'url' => 'admin/data/traits'
+            ],
+            [
+                'name' => 'Shops',
+                'url' => 'admin/data/shops'
+            ],
+            [
+                'name' => 'Currencies',
+                'url' => 'admin/data/currencies'
+            ],
+            [
+                'name' => 'Prompts',
+                'url' => 'admin/data/prompts'
+            ],
+            [
+                'name' => 'Loot Tables',
+                'url' => 'admin/data/loot-tables'
+            ],
+            [
+                'name' => 'Items',
+                'url' => 'admin/data/items'
+            ],
+        ]
+    ],
+    'Raffles' => [
+        'power' => 'manage_raffles',
+        'links' => [
+            [
+                'name' => 'Raffles',
+                'url' => 'admin/raffles'
+            ],
+        ]
     ],
   ],
   'Settings'   => [

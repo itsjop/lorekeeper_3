@@ -5,19 +5,16 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Subtypes' => 'admin/data/subtypes']) !!}
+  {!! breadcrumbs(['Admin Panel' => 'admin', __('lorekeeper.subtypes')  => 'admin/data/subtypes']) !!}
 
-  <h1>Subtypes</h1>
+  <h1>{{ __('lorekeeper.subtypes') }}</h1>
 
-  <p>Subtypes are optional categories that can be added to species. Characters require a species, but do not require a subtype. Note that the sort order here reflects the sort order under the species name as well.</p>
+  <p>{{ ucfirst(__('lorekeeper.subtypes')) }} are optional categories that can be added to species. Characters require a species, but do not require a {{ __('lorekeeper.subtype') }}. Note that the sort order here reflects the sort order under the species name as well.</p>
 
-  <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/subtypes/create') }}">
-      <i class="fas fa-plus"></i> Create New Subtype</a>
-  </div>
-  @if (!count($subtypes))
+<div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/subtypes/create') }}"><i class="fas fa-plus"></i> Create New Subtype</a></div>
+@if(!count($subtypes))
     <p>No subtypes found.</p>
-  @else
+@else
     <table class="table table-sm subtypes-table">
       <tbody id="sortable" class="sortable">
         @foreach ($subtypes as $subtype)
@@ -47,6 +44,9 @@
       {!! Form::close() !!}
     </div>
   @endif
+@endif
+
+<div class="text-center mt-4 small text-muted">{{ $subtypes->count() }} {{ trans_choice('lorekeeper.subtypes_', $subtypes->count()) }} found.</div>
 
 @endsection
 

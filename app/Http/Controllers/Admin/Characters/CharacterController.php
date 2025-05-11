@@ -14,6 +14,7 @@ use App\Models\Species\Species;
 use App\Models\Species\Subtype;
 use App\Models\Trade;
 use App\Models\User\User;
+use App\Services\AwardCaseManager;
 use App\Services\CharacterManager;
 use App\Services\TradeManager;
 use Illuminate\Http\Request;
@@ -57,6 +58,9 @@ class CharacterController extends Controller {
       'features'    => Feature::getDropdownItems(1),
       'transformations' => ['0' => 'Pick a Species First'],
       'isMyo'       => false,
+      // 'specieses' => ['0' => 'Select '.ucfirst(__('lorekeeper.species'))] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      // 'subtypes' => ['0' => 'Pick a '.ucfirst(__('lorekeeper.species')).' First'],
+
     ]);
   }
 
@@ -74,6 +78,8 @@ class CharacterController extends Controller {
       'features'    => Feature::getDropdownItems(1),
       'transformations' => ['0' => 'Pick a Species First'],
       'isMyo'       => true,
+      // 'specieses' => ['0' => 'Select '.ucfirst(__('lorekeeper.species'))] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      // 'subtypes' => ['0' => 'Pick a '.ucfirst(__('lorekeeper.species')).' First'],
     ]);
   }
 
@@ -149,7 +155,7 @@ class CharacterController extends Controller {
       'content_warnings',
     ]);
     if ($character = $service->createCharacter($data, Auth::user())) {
-      flash('Character created successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' created successfully.')->success();
 
       return redirect()->to($character->url);
     } else {
@@ -281,7 +287,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterStats($data, $this->character, Auth::user())) {
-      flash('Character stats updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' stats updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -316,7 +322,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterStats($data, $this->character, Auth::user())) {
-      flash('Character stats updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' stats updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -383,7 +389,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterDescription($data, $this->character, Auth::user())) {
-      flash('Character description updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' description updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -412,7 +418,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterDescription($data, $this->character, Auth::user())) {
-      flash('Character description updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' description updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -441,7 +447,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterSettings($data, $this->character, Auth::user())) {
-      flash('Character settings updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' settings updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -470,7 +476,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterSettings($data, $this->character, Auth::user())) {
-      flash('Character settings updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' settings updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -535,7 +541,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->deleteCharacter($this->character, Auth::user())) {
-      flash('Character deleted successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' deleted successfully.')->success();
 
       return redirect()->to('masterlist');
     } else {
@@ -562,7 +568,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->deleteCharacter($this->character, Auth::user())) {
-      flash('Character deleted successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' deleted successfully.')->success();
 
       return redirect()->to('myos');
     } else {
@@ -589,7 +595,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->adminTransfer($request->only(['recipient_id', 'recipient_url', 'cooldown', 'reason']), $this->character, Auth::user())) {
-      flash('Character transferred successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' transferred successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
         flash($error)->error();
@@ -614,7 +620,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->adminTransfer($request->only(['recipient_id', 'recipient_url', 'cooldown', 'reason']), $this->character, Auth::user())) {
-      flash('Character transferred successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')).' transferred successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
         flash($error)->error();

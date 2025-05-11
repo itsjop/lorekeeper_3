@@ -49,11 +49,11 @@
       {!! Form::select('feature_category_id', $categories, $feature->feature_category_id, ['class' => 'form-control']) !!}
     </div>
     <div class="col-md-4 form-group">
-      {!! Form::label('Species Restriction (Optional)') !!}
+      {!! Form::label(ucfirst(__('lorekeeper.species')).' Restriction (Optional)') !!}
       {!! Form::select('species_id', $specieses, $feature->species_id, ['class' => 'form-control', 'id' => 'species']) !!}
     </div>
     <div class="col-md-4 form-group" id="subtypes">
-      {!! Form::label('Subtype (Optional)') !!} {!! add_help('This is cosmetic and does not limit choice of traits in selections.') !!}
+      {!! Form::label(ucfirst(__('lorekeeper.subtype')).' (Optional)') !!} {!! add_help('This is cosmetic and does not limit choice of traits in selections.') !!}
       {!! Form::select('subtype_id', $subtypes, $feature->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
     </div>
   </div>
@@ -84,32 +84,14 @@
 @endsection
 
 @section('scripts')
-  @parent
-  <script>
-    $(document).ready(function() {
-      $('.delete-feature-button').on('click', function(e) {
+@parent
+<script>
+$( document ).ready(function() {
+    $('.delete-feature-button').on('click', function(e) {
         e.preventDefault();
         loadModal("{{ url('admin/data/traits/delete') }}/{{ $feature->id }}", 'Delete Trait');
-      });
-      refreshSubtype();
     });
+});
 
-    $("#species").change(function() {
-      refreshSubtype();
-    });
-
-    function refreshSubtype() {
-      var species = $('#species').val();
-      var subtype_id = {{ $feature->subtype_id ?: 'null' }};
-      $.ajax({
-        type: "GET",
-        url: "{{ url('admin/data/traits/check-subtype') }}?species=" + species + "&subtype_id=" + subtype_id,
-        dataType: "text"
-      }).done(function(res) {
-        $("#subtypes").html(res);
-      }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-      });
-    };
-  </script>
+</script>
 @endsection

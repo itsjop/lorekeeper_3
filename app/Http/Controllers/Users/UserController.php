@@ -17,8 +17,12 @@ use App\Models\Gallery\GalleryCharacter;
 use App\Models\Gallery\GallerySubmission;
 use App\Models\Item\Item;
 use App\Models\Item\ItemCategory;
-use App\Models\Gallery\GalleryFavorite;
 use App\Models\Item\ItemLog;
+use App\Models\User\UserAward;
+use App\Models\Award\Award;
+use App\Models\Award\AwardCategory;
+use App\Models\Award\AwardLog;
+use App\Models\Gallery\GalleryFavorite;
 use App\Models\Character\CharacterCategory;
 use App\Models\Pet\Pet;
 use App\Models\Pet\PetCategory;
@@ -69,16 +73,12 @@ class UserController extends Controller {
   /**
    * Shows a user's profile.
    *
-   * @param string $name
-   *
+   * @param  string  $name
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getUser($name) {
     $characters = $this->user->characters();
-    $aliases = $this->user->aliases();
-
     if (!Auth::check() || !(Auth::check() && Auth::user()->hasPower('manage_characters'))) $characters->visible();
-    if (!Auth::check() || !(Auth::check() && Auth::user()->hasPower('edit_user_info')))  $aliases->visible();
 
     return view('user.profile', [
 
@@ -97,18 +97,15 @@ class UserController extends Controller {
   /**
    * Shows a user's aliases.
    *
-   * @param string $name
-   *
+   * @param  string  $name
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getUserAliases($name) {
     $aliases = $this->user->aliases();
-    if (!Auth::check() || !(Auth::check() && Auth::user()->hasPower('edit_user_info'))) {
-      $aliases->visible();
-    }
+    if (!Auth::check() || !(Auth::check() && Auth::user()->hasPower('edit_user_info'))) $aliases->visible();
 
     return view('user.aliases', [
-      'user'    => $this->user,
+      'user' => $this->user,
       'aliases' => $aliases->orderBy('is_primary_alias', 'DESC')->orderBy('site')->get(),
     ]);
   }
@@ -256,6 +253,7 @@ class UserController extends Controller {
       'categories'  => $categories->keyBy('id'),
       'items'       => $items,
       'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
+      'sublists' => Sublist::orderBy('sort', 'DESC')->get(),
       'logs'        => $this->user->getItemLogs(),
       'artists'     => User::whereIn('id', Item::whereNotNull('artist_id')->pluck('artist_id')->toArray())->pluck('name', 'id')->toArray(),
       'rarities'    => ['withoutOption' => 'No Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
@@ -282,6 +280,39 @@ class UserController extends Controller {
       'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
       'user'        => $this->user,
       'logs'        => $this->user->getPetLogs(),
+    ]);
+  }
+
+  /**
+   * Shows a user's awardcase.
+   *
+   * @param  string  $name
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserAwardCase($name) {
+    $categories = AwardCategory::orderBy('sort', 'DESC')->get();
+    $awards = count($categories) ?
+      $this->user->awards()
+      ->where('count', '>', 0)
+      ->orderByRaw('FIELD(award_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['award_category_id', 'id']) :
+      $this->user->awards()
+      ->where('count', '>', 0)
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['award_category_id', 'id']);
+    return view('user.awardcase', [
+      'user' => $this->user,
+      'categories' => $categories->keyBy('id'),
+      'awards' => $awards,
+      'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
+      'user' => $this->user,
+      'logs' => $this->user->getAwardLogs(),
+      'sublists' => Sublist::orderBy('sort', 'DESC')->get()
     ]);
   }
 
@@ -341,16 +372,15 @@ class UserController extends Controller {
   /**
    * Shows a user's item logs.
    *
-   * @param string $name
-   *
+   * @param  string  $name
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getUserItemLogs($name) {
     $user = $this->user;
-
     return view('user.item_logs', [
       'user' => $this->user,
       'logs' => $this->user->getItemLogs(0),
+      'sublists' => Sublist::orderBy('sort', 'DESC')->get()
     ]);
   }
 
