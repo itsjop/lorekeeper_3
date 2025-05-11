@@ -1,11 +1,17 @@
-# CRITICAL
+# BROKEN
+- [ ] merge in awards extension
 - [ ] appprovals
+- [ ] item category search no results
+- [ ] delete item doesnt work
+- [ ] server profile picture 500
+- [ ] shops are dispalying twice and unclickable
+- [ ] somnivores logo misalignment
+- [ ] broken pages:
+    - [ ] /characters 500 error
+    - [ ] /inventory 500 error
+    - [ ] /designs 500 error
 - [~] Mailersend Error Fix
 - [~] mobile css
-- [x] pets
-- [x] Item Preview Error
-- [x] background image fixed
-- [ ] somnivores logo misalignment
 
 # HIGH PRIORITY
 - [ ] Critical CSS Render Path to avoid flickering
@@ -27,7 +33,18 @@
 - [ ] pinnable quick links for each menu
 - [ ] all common quick links in the corner
 - [ ] SOUND EFFECT TOGGLE
+- [ ] rpg splitter text
 
 
 # low-prio
 - [ ] slim down google fonts payload
+
+
+
+
+
+
+### FIXED!! ###
+- [x] pets
+- [x] Item Preview Error
+- [x] background image fixed
