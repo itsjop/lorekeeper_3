@@ -634,4 +634,26 @@ class BrowseController extends Controller {
 
     return $query;
   }
+
+    /**
+     * Shows the MYO slot masterlist.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getMyos(Request $request) {
+      $query = Character::with('user.rank', 'image.features', 'rarity', 'image.species', 'image.rarity')->myo(1);
+      $imageQuery = CharacterImage::images(Auth::user() ?? null)->with('features', 'rarity', 'species');
+
+      $query = $this->handleMasterlistSearch($request, $query, $imageQuery, true);
+
+      return view('browse.myo_masterlist', [
+          'isMyo'       => true,
+          'slots'       => $query->paginate(30)->appends($request->query()),
+          'specieses'   => [0 => 'Any Species'] + Species::visible(Auth::user() ?? null)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray(),
+          'rarities'    => [0 => 'Any Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
+          'features'    => Feature::getDropdownItems(),
+          'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
+          'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+      ]);
+  }
 }

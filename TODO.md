@@ -2,11 +2,16 @@
 - [ ] appprovals
 - [ ] item category search no results
 - [ ] delete item doesnt work
-- [ ] server profile picture 500
 - [~] toggles arent toggling
+- [x] pets
+- [x] Item Preview Error
+- [x] background image fixed
+- [x] merge in awards extension
+- [x] server profile picture 500
 - [x] 'shops' are dispalying twice and unclickable
 - [x] somnivores logo misalignment
 - [ ] wysywig textboxes
+- [ ] admin/raffle create buttons dont work
 - [~] broken pages:
     - [x] /characters 500 error
     - [x] /inventory 500 error
@@ -17,11 +22,8 @@
 # HIGH PRIORITY
 - [ ] Critical CSS Render Path to avoid flickering
     - [ ] look into caching to avoid redraws?
-- [ ] request throttling issues
+- [ ] request-throttling issues
 - [ ] page transition api
-
-# MID PRIORITY
-- [ ] admin/raffle create buttons dont work
 
 # BONUSES
 - [ ] Combine News and Sales to a Newsfeed
@@ -36,7 +38,6 @@
 - [ ] SOUND EFFECT TOGGLE
 - [ ] rpg splitter text
 
-
 # low-prio
 - [ ] slim down google fonts payload
 
@@ -44,7 +45,3 @@
 
 
 ### FIXED!! ###
-- [x] pets
-- [x] Item Preview Error
-- [x] background image fixed
-- [x] merge in awards extension
