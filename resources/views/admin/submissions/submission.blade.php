@@ -6,16 +6,26 @@
 
 @section('admin-content')
   @if ($submission->prompt_id)
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Prompt Queue' => 'admin/submissions/pending', 'Submission (#' . $submission->id . ')' => $submission->viewUrl]) !!}
+    {!! breadcrumbs([
+        'Admin Panel' => 'admin',
+        'Prompt Queue' => 'admin/submissions/pending',
+        'Submission (#' . $submission->id . ')' => $submission->viewUrl
+    ]) !!}
   @else
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Claim Queue' => 'admin/claims/pending', 'Claim (#' . $submission->id . ')' => $submission->viewUrl]) !!}
+    {!! breadcrumbs([
+        'Admin Panel' => 'admin',
+        'Claim Queue' => 'admin/claims/pending',
+        'Claim (#' . $submission->id . ')' => $submission->viewUrl
+    ]) !!}
   @endif
 
   @if ($submission->status == 'Pending')
 
     <h1>
       {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
-      <span class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}">
+      <span
+        class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}"
+      >
         {{ $submission->status }}
       </span>
     </h1>
@@ -72,7 +82,10 @@
     <div class="card mb-3">
       <div class="card-body">{!! nl2br(htmlentities($submission->comments)) !!}</div>
     </div>
-    @if (Auth::check() && $submission->staff_comments && ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions')))
+    @if (Auth::check() &&
+            $submission->staff_comments &&
+            ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
+    )
       <h2>Staff Comments ({!! $submission->staff->displayName !!})</h2>
       <div class="card mb-3">
         <div class="card-body">
@@ -85,52 +98,82 @@
       </div>
     @endif
 
-    {!! Form::open(['url' => url()->current(), 'id' => 'submissionForm', 'onsubmit' => "$(this).find('input').prop('disabled', false)"]) !!}
+    {!! Form::open([
+        'url' => url()->current(),
+        'id' => 'submissionForm',
+        'onsubmit' => "$(this).find('input').prop('disabled', false)"
+    ]) !!}
     @if (isset($submission->data['criterion']))
-    <h2 class="mt-5">Criteria Rewards</h2>
-    @foreach ($submission->data['criterion'] as $key => $criterionData)
+      <h2 class="mt-5">Criteria Rewards</h2>
+      @foreach ($submission->data['criterion'] as $key => $criterionData)
         <div class="card p-3 mb-2">
-            @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
-            <h3>{!! $criterion->displayName !!}</h3>
-            {!! Form::hidden('criterion[' . $key . '][id]', $criterionData['id']) !!}
-            @include('criteria._minimum_requirements', [
-                'criterion' => $criterion,
-                'values' => $criterionData,
-                'minRequirements' => $submission->prompt->criteria->where('criterion_id', $criterionData['id'])->first()->minRequirements ?? null,
-                'title' => 'Selections',
-                'limitByMinReq' => true,
-                'id' => $key,
-                'criterion_currency' => isset($criterionData['criterion_currency_id']) ? $criterionData['criterion_currency_id'] : $criterion->currency_id,
-            ])
+          @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
+          <h3>{!! $criterion->displayName !!}</h3>
+          {!! Form::hidden('criterion[' . $key . '][id]', $criterionData['id']) !!}
+          @include('criteria._minimum_requirements', [
+              'criterion' => $criterion,
+              'values' => $criterionData,
+              'minRequirements' =>
+                  $submission->prompt->criteria->where('criterion_id', $criterionData['id'])->first()->minRequirements ??
+                  null,
+              'title' => 'Selections',
+              'limitByMinReq' => true,
+              'id' => $key,
+              'criterion_currency' => isset($criterionData['criterion_currency_id'])
+                  ? $criterionData['criterion_currency_id']
+                  : $criterion->currency_id
+          ])
         </div>
-    @endforeach
-@endif
-        <h2>Rewards</h2>
-        @include('widgets._loot_select', ['loots' => $submission->rewards, 'showLootTables' => true, 'showRaffles' => true])
-        @if ($submission->prompt_id)
-            <div class="mb-3">
-                @include('home._prompt', ['prompt' => $submission->prompt, 'staffView' => true])
-            </div>
-        @endif
+      @endforeach
+    @endif
+    <h2>Rewards</h2>
+    @include('widgets._loot_select', [
+        'loots' => $submission->rewards,
+        'showLootTables' => true,
+        'showRaffles' => true,
+        'showRecipes' => true
+    ])
+    @if ($submission->prompt_id)
+      <div class="mb-3">
+        @include('home._prompt', [
+            'prompt' => $submission->prompt,
+            'staffView' => true
+        ])
+      </div>
+    @endif
 
     <h2>Characters</h2>
     <div id="characters" class="mb-3">
-      @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($submission->characters()->get()))
+      @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) !=
+              count($submission->characters()->get())
+      )
         <div class="alert alert-warning">
           Some characters have been deleted since this submission was created.
         </div>
       @endif
       @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
-        @include('widgets._character_select_entry', ['characterCurrencies' => $characterCurrencies, 'items' => $items, 'tables' => $tables, 'character' => $character, 'characterAwards' => $characterAwards,'expanded_rewards' => $expanded_rewards])
+        @include('widgets._character_select_entry', [
+            'characterCurrencies' => $characterCurrencies,
+            'items' => $items,
+            'tables' => $tables,
+            'character' => $character,
+            'characterAwards' => $characterAwards,
+            'expanded_rewards' => $expanded_rewards
+        ])
       @endforeach
     </div>
     <div class="text-right mb-3">
-      <a href="#" class="btn btn-outline-info" id="addCharacter">Add Character</a>
+      <a
+        href="#"
+        class="btn btn-outline-info"
+        id="addCharacter"
+      >Add Character</a>
     </div>
 
     @if (isset($inventory['user_items']))
       <h2>Add-Ons</h2>
-      <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be refunded if the request is rejected or consumed if it is approved.</p>
+      <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be
+        refunded if the request is rejected or consumed if it is approved.</p>
       <table class="table table-sm">
         <thead class="thead-light">
           <tr class="d-flex">
@@ -145,10 +188,22 @@
             <tr class="d-flex">
               <td class="col-2">
                 @if (isset($itemsrow[$itemRow['asset']->item_id]->image_url))
-                  <img class="small-icon" src="{{ $itemsrow[$itemRow['asset']->item_id]->image_url }}" alt="{{ $itemsrow[$itemRow['asset']->item_id]->name }}">
+                  <img
+                    class="small-icon"
+                    src="{{ $itemsrow[$itemRow['asset']->item_id]->image_url }}"
+                    alt="{{ $itemsrow[$itemRow['asset']->item_id]->name }}"
+                  >
                 @endif {!! $itemsrow[$itemRow['asset']->item_id]->name !!}
-              <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data) ? ($itemRow['asset']->data['data'] ? $itemRow['asset']->data['data'] : 'N/A') : 'N/A' !!}</td>
-              <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data) ? ($itemRow['asset']->data['notes'] ? $itemRow['asset']->data['notes'] : 'N/A') : 'N/A' !!}</td>
+              <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data)
+                  ? ($itemRow['asset']->data['data']
+                      ? $itemRow['asset']->data['data']
+                      : 'N/A')
+                  : 'N/A' !!}</td>
+              <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data)
+                  ? ($itemRow['asset']->data['notes']
+                      ? $itemRow['asset']->data['notes']
+                      : 'N/A')
+                  : 'N/A' !!}</td>
               <td class="col-2">{!! $itemRow['quantity'] !!}
             </tr>
           @endforeach
@@ -182,9 +237,21 @@
     </div>
 
     <div class="text-right">
-      <a href="#" class="btn btn-danger mr-2" id="rejectionButton">Reject</a>
-      <a href="#" class="btn btn-secondary mr-2" id="cancelButton">Cancel</a>
-      <a href="#" class="btn btn-success" id="approvalButton">Approve</a>
+      <a
+        href="#"
+        class="btn btn-danger mr-2"
+        id="rejectionButton"
+      >Reject</a>
+      <a
+        href="#"
+        class="btn btn-secondary mr-2"
+        id="cancelButton"
+      >Cancel</a>
+      <a
+        href="#"
+        class="btn btn-success"
+        id="approvalButton"
+      >Approve</a>
     </div>
 
     {!! Form::close() !!}
@@ -206,12 +273,17 @@
             <div class="col-md-10">
               <div class="form-group">
                 {!! Form::label('slug', 'Character Code') !!}
-                {!! Form::select('slug[]', $characters, null, ['class' => 'form-control character-code', 'placeholder' => 'Select Character']) !!}
+                {!! Form::select('slug[]', $characters, null, [
+                    'class' => 'form-control character-code',
+                    'placeholder' => 'Select Character'
+                ]) !!}
               </div>
               <div class="form-group gift-notifs hide">
                 <h4>Notify Owner?</h4>
                 <div class="row">
-                  {!! Form::select('character-notify-owner[]', [0 => 'No', 1 => 'Yes'], 0, ['class' => 'form-control ml-lg-3 col-5 col-md-9 character-notify-owner']) !!}
+                  {!! Form::select('character-notify-owner[]', [0 => 'No', 1 => 'Yes'], 0, [
+                      'class' => 'form-control ml-lg-3 col-5 col-md-9 character-notify-owner'
+                  ]) !!}
                   <div class="col character-gift-permissions"></div>
                 </div>
               </div>
@@ -243,22 +315,42 @@
       <table>
         <tr class="character-reward-row">
 
-                    @if($expanded_rewards)
-                    <td>
-                        {!! Form::select('character_rewardable_type[]', ['Item' => 'Item', 'Currency' => 'Currency', 'LootTable' => 'Loot Table'], null, ['class' => 'form-control character-rewardable-type', 'placeholder' => 'Select Reward Type']) !!}
-                    </td>
-                    <td class="lootDivs">
-                        <div class="character-currencies hide">{!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, ['class' => 'form-control character-currency-id', 'placeholder' => 'Select Currency']) !!}</div>
-                        <div class="character-items hide">{!! Form::select('character_rewardable_id[]', $items, 0, ['class' => 'form-control character-item-id', 'placeholder' => 'Select Item']) !!}</div>
-                        <div class="character-awards hide">{!! Form::select('character_rewardable_id[]', $characterAwards, 0, ['class' => 'form-control character-award-id', 'placeholder' => 'Select '.ucfirst(__('awards.award'))]) !!}</div>
-                        <div class="character-tables hide">{!! Form::select('character_rewardable_id[]', $tables, 0, ['class' => 'form-control character-table-id', 'placeholder' => 'Select Loot Table']) !!}</div>
-                    </td>
-                    @else
-                        <td class="lootDivs">
-                            {!! Form::hidden('character_rewardable_type[]', 'Currency', ['class' => 'character-rewardable-type']) !!}
-                            {!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, ['class' => 'form-control character-currency-id', 'placeholder' => 'Select Currency']) !!}
-                        </td>
-                    @endif
+          @if ($expanded_rewards)
+            <td>
+              {!! Form::select(
+                  'character_rewardable_type[]',
+                  ['Item' => 'Item', 'Currency' => 'Currency', 'LootTable' => 'Loot Table'],
+                  null,
+                  ['class' => 'form-control character-rewardable-type', 'placeholder' => 'Select Reward Type']
+              ) !!}
+            </td>
+            <td class="lootDivs">
+              <div class="character-currencies hide">{!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, [
+                  'class' => 'form-control character-currency-id',
+                  'placeholder' => 'Select Currency'
+              ]) !!}</div>
+              <div class="character-items hide">{!! Form::select('character_rewardable_id[]', $items, 0, [
+                  'class' => 'form-control character-item-id',
+                  'placeholder' => 'Select Item'
+              ]) !!}</div>
+              <div class="character-awards hide">{!! Form::select('character_rewardable_id[]', $characterAwards, 0, [
+                  'class' => 'form-control character-award-id',
+                  'placeholder' => 'Select ' . ucfirst(__('awards.award'))
+              ]) !!}</div>
+              <div class="character-tables hide">{!! Form::select('character_rewardable_id[]', $tables, 0, [
+                  'class' => 'form-control character-table-id',
+                  'placeholder' => 'Select Loot Table'
+              ]) !!}</div>
+            </td>
+          @else
+            <td class="lootDivs">
+              {!! Form::hidden('character_rewardable_type[]', 'Currency', ['class' => 'character-rewardable-type']) !!}
+              {!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, [
+                  'class' => 'form-control character-currency-id',
+                  'placeholder' => 'Select Currency'
+              ]) !!}
+            </td>
+          @endif
 
           <td class="d-flex align-items-center">
             {!! Form::text('character_quantity[]', 0, ['class' => 'form-control mr-2  character-rewardable-quantity']) !!}
@@ -268,43 +360,74 @@
         </tr>
       </table>
     </div>
-    @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true])
+    @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
 
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+    <div
+      class="modal fade"
+      id="confirmationModal"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content hide" id="approvalContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm Approval</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
-            <p>This will approve the {{ $submission->prompt_id ? 'submission' : 'claim' }} and distribute the above rewards to the user.</p>
+            <p>This will approve the {{ $submission->prompt_id ? 'submission' : 'claim' }} and distribute the above rewards to the
+              user.</p>
             <div class="text-right">
-              <a href="#" id="approvalSubmit" class="btn btn-success">Approve</a>
+              <a
+                href="#"
+                id="approvalSubmit"
+                class="btn btn-success"
+              >Approve</a>
             </div>
           </div>
         </div>
         <div class="modal-content hide" id="cancelContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm Cancellation</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
-            <p>This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} and send it back to drafts. Make sure to include a staff comment if you do this!</p>
+            <p>This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} and send it back to drafts. Make sure to
+              include a staff comment if you do this!</p>
             <div class="text-right">
-              <a href="#" id="cancelSubmit" class="btn btn-secondary">Cancel</a>
+              <a
+                href="#"
+                id="cancelSubmit"
+                class="btn btn-secondary"
+              >Cancel</a>
             </div>
           </div>
         </div>
         <div class="modal-content hide" id="rejectionContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm Rejection</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
             <p>This will reject the {{ $submission->prompt_id ? 'submission' : 'claim' }}.</p>
             <div class="text-right">
-              <a href="#" id="rejectionSubmit" class="btn btn-danger">Reject</a>
+              <a
+                href="#"
+                id="rejectionSubmit"
+                class="btn btn-danger"
+              >Reject</a>
             </div>
           </div>
         </div>
@@ -320,7 +443,7 @@
 @section('scripts')
   @parent
   @if ($submission->status == 'Pending')
-    @include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true])
+    @include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
     @include('js._character_select_js')
 
     <script>

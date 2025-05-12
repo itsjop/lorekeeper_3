@@ -548,4 +548,11 @@ return [
       'url' => 'character/{character_slug}/awards'
   ],
 
+
+    // RECIPE_GRANT
+    600 => [
+        'name'    => 'Recipe Grant',
+        'message' => 'You have received a staff grant of the crafting recipe {recipe_name} from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Unlocked Recipes</a>)',
+        'url'     => 'crafting',
+    ],
 ];

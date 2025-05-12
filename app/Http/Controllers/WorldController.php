@@ -22,6 +22,7 @@ use App\Models\Prompt\PromptCategory;
 use App\Models\Pet\Pet;
 use App\Models\Pet\PetCategory;
 use App\Models\Rarity;
+use App\Models\Recipe\Recipe;
 use App\Models\Shop\Shop;
 use App\Models\Shop\ShopStock;
 use App\Models\Species\Species;
@@ -203,21 +204,20 @@ class WorldController extends Controller {
     ]);
   }
 
-        /**
-     * Shows the award categories page.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getAwardCategories(Request $request)
-    {
-        $query = AwardCategory::query();
-        $name = $request->get('name');
-        if($name) $query->where('name', 'LIKE', '%'.$name.'%');
-        return view('world.award_categories', [
-            'categories' => $query->orderBy('sort', 'DESC')->paginate(20)->appends($request->query()),
-        ]);
-    }
+  /**
+   * Shows the award categories page.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getAwardCategories(Request $request) {
+    $query = AwardCategory::query();
+    $name = $request->get('name');
+    if ($name) $query->where('name', 'LIKE', '%' . $name . '%');
+    return view('world.award_categories', [
+      'categories' => $query->orderBy('sort', 'DESC')->paginate(20)->appends($request->query()),
+    ]);
+  }
 
   /**
    * Shows the trait categories page.
@@ -319,7 +319,7 @@ class WorldController extends Controller {
     return view('world.features', [
       'features'   => $query->orderBy('id')->paginate(20)->appends($request->query()),
       'rarities'   => ['none' => 'Any Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'specieses'  => ['none' => 'Any '.ucfirst(__('lorekeeper.species'))] + ['withoutOption' => 'Without Species'] + Species::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'specieses'  => ['none' => 'Any ' . ucfirst(__('lorekeeper.species'))] + ['withoutOption' => 'Without Species'] + Species::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'subtypes'   => ['none' => 'Any Subtype'] + ['withoutOption' => 'Without Subtype'] + Subtype::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'categories' => ['none' => 'Any Category'] + ['withoutOption' => 'Without Category'] + FeatureCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
     ]);
@@ -597,95 +597,90 @@ class WorldController extends Controller {
     ]);
   }
 
-     /**
-     * Shows the awards page.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getAwards(Request $request)
-    {
-        $query = Award::with('category');
-        $data = $request->only(['award_category_id', 'name', 'sort', 'ownership']);
-        if(isset($data['award_category_id']) && $data['award_category_id'] != 'none')
-            $query->where('award_category_id', $data['award_category_id']);
-        if(isset($data['name']))
-            $query->where('name', 'LIKE', '%'.$data['name'].'%');
+  /**
+   * Shows the awards page.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getAwards(Request $request) {
+    $query = Award::with('category');
+    $data = $request->only(['award_category_id', 'name', 'sort', 'ownership']);
+    if (isset($data['award_category_id']) && $data['award_category_id'] != 'none')
+      $query->where('award_category_id', $data['award_category_id']);
+    if (isset($data['name']))
+      $query->where('name', 'LIKE', '%' . $data['name'] . '%');
 
-        if(isset($data['ownership']))
-        {
-            switch($data['ownership']) {
-                case 'all':
-                    $query->where('is_character_owned',1)->where('is_user_owned',1);
-                    break;
-                case 'character':
-                    $query->where('is_character_owned',1)->where('is_user_owned',0);
-                    break;
-                case 'user':
-                    $query->where('is_character_owned',0)->where('is_user_owned',1);
-                    break;
-            }
-        }
-
-        if(isset($data['sort']))
-        {
-            switch($data['sort']) {
-                case 'alpha':
-                    $query->sortAlphabetical();
-                    break;
-                case 'alpha-reverse':
-                    $query->sortAlphabetical(true);
-                    break;
-                case 'category':
-                    $query->sortCategory();
-                    break;
-                case 'newest':
-                    $query->sortNewest();
-                    break;
-                case 'oldest':
-                    $query->sortOldest();
-                    break;
-            }
-        }
-        else $query->sortAlphabetical();
-
-        if(!Auth::check() || !Auth::user()->isStaff) $query->released();
-
-        return view('world.awards', [
-            'awards' => $query->paginate(20)->appends($request->query()),
-            'categories' => ['none' => 'Any Category'] + AwardCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'shops' => Shop::orderBy('sort', 'DESC')->get()
-        ]);
+    if (isset($data['ownership'])) {
+      switch ($data['ownership']) {
+        case 'all':
+          $query->where('is_character_owned', 1)->where('is_user_owned', 1);
+          break;
+        case 'character':
+          $query->where('is_character_owned', 1)->where('is_user_owned', 0);
+          break;
+        case 'user':
+          $query->where('is_character_owned', 0)->where('is_user_owned', 1);
+          break;
+      }
     }
 
+    if (isset($data['sort'])) {
+      switch ($data['sort']) {
+        case 'alpha':
+          $query->sortAlphabetical();
+          break;
+        case 'alpha-reverse':
+          $query->sortAlphabetical(true);
+          break;
+        case 'category':
+          $query->sortCategory();
+          break;
+        case 'newest':
+          $query->sortNewest();
+          break;
+        case 'oldest':
+          $query->sortOldest();
+          break;
+      }
+    } else $query->sortAlphabetical();
 
-    /**
-     * Shows an individual award's page.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getAward($id)
-    {
-        $categories = AwardCategory::orderBy('sort', 'DESC')->get();
-        $award = Award::where('id', $id);
-        $released = $award->released()->count();
-        if((!Auth::check() || !Auth::user()->isStaff)) $award = $award->released();
-        $award = $award->first();
-        if(!$award) abort(404);
+    if (!Auth::check() || !Auth::user()->isStaff) $query->released();
 
-        if(!$released) flash('This '.__('awards.award').' is not yet released.')->error();
+    return view('world.awards', [
+      'awards' => $query->paginate(20)->appends($request->query()),
+      'categories' => ['none' => 'Any Category'] + AwardCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'shops' => Shop::orderBy('sort', 'DESC')->get()
+    ]);
+  }
 
 
-        return view('world.award_page', [
-            'award' => $award,
-            'imageUrl' => $award->imageUrl,
-            'name' => $award->displayName,
-            'description' => $award->parsed_description,
-            'categories' => $categories->keyBy('id'),
-            'shops' => Shop::orderBy('sort', 'DESC')->get()
-        ]);
-    }
+  /**
+   * Shows an individual award's page.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getAward($id) {
+    $categories = AwardCategory::orderBy('sort', 'DESC')->get();
+    $award = Award::where('id', $id);
+    $released = $award->released()->count();
+    if ((!Auth::check() || !Auth::user()->isStaff)) $award = $award->released();
+    $award = $award->first();
+    if (!$award) abort(404);
+
+    if (!$released) flash('This ' . __('awards.award') . ' is not yet released.')->error();
+
+
+    return view('world.award_page', [
+      'award' => $award,
+      'imageUrl' => $award->imageUrl,
+      'name' => $award->displayName,
+      'description' => $award->parsed_description,
+      'categories' => $categories->keyBy('id'),
+      'shops' => Shop::orderBy('sort', 'DESC')->get()
+    ]);
+  }
 
   /**
    * Shows the character categories page.
@@ -695,9 +690,8 @@ class WorldController extends Controller {
   public function getCharacterCategories(Request $request) {
     $query = CharacterCategory::query()->with('sublist');
     $name = $request->get('name');
-    if ($name) { {
-        $query->where('name', 'LIKE', '%' . $name . '%')->orWhere('code', 'LIKE', '%' . $name . '%');
-      }
+    if ($name) {
+      $query->where('name', 'LIKE', '%' . $name . '%')->orWhere('code', 'LIKE', '%' . $name . '%');
     }
 
     return view('world.character_categories', [
@@ -972,6 +966,66 @@ class WorldController extends Controller {
 
     return view('world.pet_page', [
       'pet' => $pet,
+    ]);
+  }
+
+  /**
+   * Shows the items page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getRecipes(Request $request) {
+    $query = Recipe::query();
+    $data = $request->only(['name', 'sort']);
+    if (isset($data['name'])) {
+      $query->where('name', 'LIKE', '%' . $data['name'] . '%');
+    }
+
+    if (isset($data['sort'])) {
+      switch ($data['sort']) {
+        case 'alpha':
+          $query->sortAlphabetical();
+          break;
+        case 'alpha-reverse':
+          $query->sortAlphabetical(true);
+          break;
+        case 'newest':
+          $query->sortNewest();
+          break;
+        case 'oldest':
+          $query->sortOldest();
+          break;
+        case 'locked':
+          $query->sortNeedsUnlocking();
+          break;
+      }
+    } else {
+      $query->sortNewest();
+    }
+
+    return view('world.recipes.recipes', [
+      'recipes' => $query->paginate(20)->appends($request->query()),
+    ]);
+  }
+
+  /**
+   * Shows an individual recipe;ss page.
+   *
+   * @param int $id
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getRecipe($id) {
+    $recipe = Recipe::where('id', $id)->first();
+    if (!$recipe) {
+      abort(404);
+    }
+
+    return view('world.recipes._recipe_page', [
+      'recipe'      => $recipe,
+      'imageUrl'    => $recipe->imageUrl,
+      'name'        => $recipe->displayName,
+      'description' => $recipe->parsed_description,
     ]);
   }
 }

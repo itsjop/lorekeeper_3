@@ -178,4 +178,5 @@ class Notification extends Model {
   public const GIFT_SUBMISSION_ALERT             = 1004;
   public const BORDER_GRANT                      = 1106;
   public const USER_SHOP_ITEM_SOLD               = 1104;
+  public const RECIPE_GRANT = 600; // Draginraptor - Crafting
 }

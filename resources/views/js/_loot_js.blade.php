@@ -15,6 +15,9 @@
     @if (isset($showBorders) && $showBorders)
       var $borderSelect = $('#lootRowData').find('.border-select');
     @endif
+    @if ($showRecipes)
+      var $recipeSelect = $('#lootRowData').find('.recipe-select');
+    @endif
 
     $('#lootTableBody .selectize').selectize();
     attachRemoveListener($('#lootTableBody .remove-loot-button'));
@@ -34,7 +37,7 @@
       var $clone = null;
       if (val == 'Item') $clone = $itemSelect.clone();
       else if (val == 'Currency') $clone = $currencySelect.clone();
-        else if (val == 'Award') $clone = $awardSelect.clone();
+      else if (val == 'Award') $clone = $awardSelect.clone();
       else if (val == 'Pet') $clone = $petSelect.clone();
       @if ($showLootTables)
         else if (val == 'LootTable') $clone = $tableSelect.clone();
@@ -44,6 +47,9 @@
       @endif
       @if (isset($showBorders) && $showBorders)
         else if (val == 'Border') $clone = $borderSelect.clone();
+      @endif
+      @if ($showRecipes)
+        else if (val == 'Recipe') $clone = $recipeSelect.clone();
       @endif
 
       $cell.html('');

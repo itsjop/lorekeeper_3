@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\User;
+
 use Auth;
 use Config;
 use Settings;
@@ -21,13 +22,10 @@ use App\Models\Shop\ShopLog;
 use App\Models\Shop\UserShopLog;
 use App\Models\Award\AwardLog;
 use App\Models\User\UserCharacterLog;
-use App\Models\Submission\Submission;
 use App\Models\Submission\SubmissionCharacter;
 use App\Models\Gallery\GallerySubmission;
 use App\Models\Gallery\GalleryCollaborator;
 use App\Models\Gallery\GalleryFavorite;
-use App\Traits\Commenter;
-
 use App\Models\Character\CharacterDesignUpdate;
 use App\Models\Character\CharacterTransfer;
 use App\Models\Trade;
@@ -41,9 +39,9 @@ use App\Models\Pet\PetLog;
 use App\Models\Limit\UserUnlockedLimit;
 use App\Models\Notification;
 use App\Models\Rank\Rank;
-use App\Models\WorldExpansion\Faction;
-use App\Models\WorldExpansion\FactionRankMember;
-use App\Models\WorldExpansion\Location;
+use App\Models\Submission\Submission;
+use App\Traits\Commenter;
+use App\Models\Recipe\Recipe;
 
 class User extends Authenticatable implements MustVerifyEmail {
   use Notifiable, Commenter;
@@ -65,13 +63,15 @@ class User extends Authenticatable implements MustVerifyEmail {
     'has_alias',
     'avatar',
     'is_sales_unread',
-    'birthday','is_polls_unread',
+    'birthday',
+    'is_polls_unread',
     'border_id',
     'border_variant_id',
     'bottom_border_id',
     'top_border_id',
     'is_deactivated',
-    'deactivater_id', 'content_warning_visibility',
+    'deactivater_id',
+    'content_warning_visibility',
     'home_id',
     'home_changed',
     'faction_id',
@@ -123,7 +123,7 @@ class User extends Authenticatable implements MustVerifyEmail {
 
     RELATIONS
 
-     **********************************************************************************************/
+   **********************************************************************************************/
 
   /**
    * Get all of the user's update logs.
@@ -230,20 +230,26 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->belongsToMany(Item::class, 'user_items')->withPivot('count', 'data', 'updated_at', 'id')->whereNull('user_items.deleted_at');
   }
 
-    /**
-     * Get the user's pets.
-     */
-    public function pets() {
-        return $this->belongsToMany(Pet::class, 'user_pets')->withPivot('data', 'updated_at', 'id', 'character_id', 'pet_name', 'has_image', 'evolution_id')->whereNull('user_pets.deleted_at');
-    }
+  /**
+   * Get the user's pets.
+   */
+  public function pets() {
+    return $this->belongsToMany(Pet::class, 'user_pets')->withPivot('data', 'updated_at', 'id', 'character_id', 'pet_name', 'has_image', 'evolution_id')->whereNull('user_pets.deleted_at');
+  }
 
-    /**
-     * Get the user's awards.
-     */
-    public function awards()
-    {
-        return $this->belongsToMany('App\Models\Award\Award', 'user_awards')->withPivot('count', 'data', 'updated_at', 'id')->whereNull('user_awards.deleted_at');
-    }
+  /**
+   * Get the user's awards.
+   */
+  public function awards() {
+    return $this->belongsToMany('App\Models\Award\Award', 'user_awards')->withPivot('count', 'data', 'updated_at', 'id')->whereNull('user_awards.deleted_at');
+  }
+
+  /**
+   * Get the user's items.
+   */
+  public function recipes() {
+    return $this->belongsToMany('App\Models\Recipe\Recipe', 'user_recipes')->withPivot('id');
+  }
 
   /**
    * Get all of the user's gallery submissions.
@@ -255,91 +261,87 @@ class User extends Authenticatable implements MustVerifyEmail {
       ->orderBy('created_at', 'DESC');
   }
 
-    /**
-     * Get all of the user's favorited gallery submissions.
-     */
-    public function galleryFavorites()
-    {
-        return $this->hasMany('App\Models\Gallery\GalleryFavorite')->where('user_id', $this->id);
-    }
+  /**
+   * Get all of the user's favorited gallery submissions.
+   */
+  public function galleryFavorites() {
+    return $this->hasMany('App\Models\Gallery\GalleryFavorite')->where('user_id', $this->id);
+  }
 
-    /**
-     * Get all of the user's character bookmarks.
-     */
-    public function bookmarks()
-    {
-        return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
-    }
+  /**
+   * Get all of the user's character bookmarks.
+   */
+  public function bookmarks() {
+    return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
+  }
 
-    /**
-     * Get the user's current discord chat level.
-     */
-    public function discord() {
-        return $this->belongsTo(UserDiscordLevel::class, 'user_id');
-    }
-    /**
-     * Get the user's rank data.
-     */
-    public function shops()
-    {
-        return $this->hasMany('App\Models\Shop\UserShop', 'user_id');
-    }
-    /**
-     * Get user's unlocked borders.
-     */
-    public function borders() {
-      return $this->belongsToMany('App\Models\Border\Border', 'user_borders')->withPivot('id');
-    }
+  /**
+   * Get the user's current discord chat level.
+   */
+  public function discord() {
+    return $this->belongsTo(UserDiscordLevel::class, 'user_id');
+  }
+  /**
+   * Get the user's rank data.
+   */
+  public function shops() {
+    return $this->hasMany('App\Models\Shop\UserShop', 'user_id');
+  }
+  /**
+   * Get user's unlocked borders.
+   */
+  public function borders() {
+    return $this->belongsToMany('App\Models\Border\Border', 'user_borders')->withPivot('id');
+  }
 
-    /**
-     * Get the border associated with this user.
-     */
-    public function border() {
-      return $this->belongsTo('App\Models\Border\Border', 'border_id');
-    }
+  /**
+   * Get the border associated with this user.
+   */
+  public function border() {
+    return $this->belongsTo('App\Models\Border\Border', 'border_id');
+  }
 
-    /**
-     * Get the border associated with this user.
-     */
-    public function borderVariant() {
-      return $this->belongsTo('App\Models\Border\Border', 'border_variant_id');
-    }
+  /**
+   * Get the border associated with this user.
+   */
+  public function borderVariant() {
+    return $this->belongsTo('App\Models\Border\Border', 'border_variant_id');
+  }
 
-    /**
-     * Get the border associated with this user.
-     */
-    public function borderTopLayer() {
-      return $this->belongsTo('App\Models\Border\Border', 'top_border_id');
-    }
+  /**
+   * Get the border associated with this user.
+   */
+  public function borderTopLayer() {
+    return $this->belongsTo('App\Models\Border\Border', 'top_border_id');
+  }
 
-    /**
-     * Get the border associated with this user.
-     */
-    public function borderBottomLayer() {
-      return $this->belongsTo('App\Models\Border\Border', 'bottom_border_id');
-    }
+  /**
+   * Get the border associated with this user.
+   */
+  public function borderBottomLayer() {
+    return $this->belongsTo('App\Models\Border\Border', 'bottom_border_id');
+  }
 
-    /**
-     * Get the user's areas.
-     */
-    public function areas()
-    {
-        return $this->belongsToMany('App\Models\Cultivation\CultivationArea', 'user_area', 'user_id', 'area_id');
-    }
+  /**
+   * Get the user's areas.
+   */
+  public function areas() {
+    return $this->belongsToMany('App\Models\Cultivation\CultivationArea', 'user_area', 'user_id', 'area_id');
+  }
 
-    /**
-     * Gets all of the user's unlocked limits.
-     */
-    public function unlockedLimits() {
-        return $this->hasMany(UserUnlockedLimit::class);
-    }
+  /**
+   * Gets all of the user's unlocked limits.
+   */
+  public function unlockedLimits() {
+    return $this->hasMany(UserUnlockedLimit::class);
+  }
 
 
   /**********************************************************************************************
 
     SCOPES
 
-     **********************************************************************************************/
+   **********************************************************************************************/
 
   /**
    * Scope a query to only include visible (non-banned) users.
@@ -379,7 +381,7 @@ class User extends Authenticatable implements MustVerifyEmail {
 
     ACCESSORS
 
-     **********************************************************************************************/
+   **********************************************************************************************/
 
   /**
    * Get the user's alias.
@@ -403,18 +405,18 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->attributes['has_alias'];
   }
 
-    /**
-     * Checks if the user has an email.
-     *
-     * @return bool
-     */
-    public function getHasEmailAttribute() {
-        if (!config('lorekeeper.settings.require_email')) {
-            return true;
-        }
-
-        return $this->attributes['email'] && $this->attributes['email_verified_at'];
+  /**
+   * Checks if the user has an email.
+   *
+   * @return bool
+   */
+  public function getHasEmailAttribute() {
+    if (!config('lorekeeper.settings.require_email')) {
+      return true;
     }
+
+    return $this->attributes['email'] && $this->attributes['email_verified_at'];
+  }
 
   /**
    * Checks if the user has an admin rank.
@@ -510,15 +512,14 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $log->data['old_name'];
   }
   /**
-     * Displays the user's name, linked to their profile page.
-     *
-     * @return string
-     */
-    public function getDisplayNamePronounsAttribute()
-    {
-        if($this->profile->pronouns) return ($this->displayName.' ('.$this->profile->pronouns.')');
-        else return ($this->displayName);
-    }
+   * Displays the user's name, linked to their profile page.
+   *
+   * @return string
+   */
+  public function getDisplayNamePronounsAttribute() {
+    if ($this->profile->pronouns) return ($this->displayName . ' (' . $this->profile->pronouns . ')');
+    else return ($this->displayName);
+  }
 
   /**
    * Displays the user's name, linked to their profile page.
@@ -725,20 +726,19 @@ class User extends Authenticatable implements MustVerifyEmail {
     }
   }
 
-    /**
-     * Check if user is of age
-     */
-    public function getcheckBirthdayAttribute()
-    {
-        $bday = $this->birthday;
-        if(!$bday || $bday->diffInYears(carbon::now()) < 13) return false;
-        else return true;
-    }
-    /**********************************************************************************************
+  /**
+   * Check if user is of age
+   */
+  public function getcheckBirthdayAttribute() {
+    $bday = $this->birthday;
+    if (!$bday || $bday->diffInYears(carbon::now()) < 13) return false;
+    else return true;
+  }
+  /**********************************************************************************************
 
     OTHER FUNCTIONS
 
-     **********************************************************************************************/
+   **********************************************************************************************/
 
   /**
    * Checks if the user can edit the given rank.
@@ -755,8 +755,8 @@ class User extends Authenticatable implements MustVerifyEmail {
    * Get the user's held currencies.
    *
    * @param bool       $showAll
-     * @param mixed|null $user
-     * @param mixed      $showCategories
+   * @param mixed|null $user
+   * @param mixed      $showCategories
    *
    * @return \Illuminate\Support\Collection
    */
@@ -768,42 +768,42 @@ class User extends Authenticatable implements MustVerifyEmail {
     $owned = UserCurrency::where('user_id', $this->id)->pluck('quantity', 'currency_id')->toArray();
 
     $currencies = Currency::where('is_user_owned', 1)
-            ->whereHas('category', function ($query) use ($user) {
-                $query->visible($user);
-            })
-            ->orWhereNull('currency_category_id')
-            ->visible($user);
+      ->whereHas('category', function ($query) use ($user) {
+        $query->visible($user);
+      })
+      ->orWhereNull('currency_category_id')
+      ->visible($user);
     if ($showAll) {
       $currencies->where(function ($query) use ($owned) {
         $query->where('is_displayed', 1)->orWhereIn('id', array_keys($owned));
       });
 
-            if ($showCategories) {
-                $categories = CurrencyCategory::visible()->orderBy('sort', 'DESC')->get();
+      if ($showCategories) {
+        $categories = CurrencyCategory::visible()->orderBy('sort', 'DESC')->get();
 
-                if ($categories->count()) {
-                    $currencies->orderByRaw('FIELD(currency_category_id,'.implode(',', $categories->pluck('id')->toArray()).')');
-                }
-            }
+        if ($categories->count()) {
+          $currencies->orderByRaw('FIELD(currency_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')');
+        }
+      }
     } else {
       $currencies = $currencies->where('is_displayed', 1);
     }
 
     $currencies = $currencies->orderBy('sort_user', 'DESC')->get();
 
-        foreach ($currencies as $currency) {
-            $currency->quantity = $owned[$currency->id] ?? 0;
+    foreach ($currencies as $currency) {
+      $currency->quantity = $owned[$currency->id] ?? 0;
+    }
+
+    if ($showAll && $showCategories) {
+      $currencies = $currencies->groupBy(function ($currency) use ($categories) {
+        if (!$currency->category) {
+          return 'Miscellaneous';
         }
 
-        if ($showAll && $showCategories) {
-            $currencies = $currencies->groupBy(function ($currency) use ($categories) {
-                if (!$currency->category) {
-                    return 'Miscellaneous';
-                }
-
-                return $categories->where('id', $currency->currency_category_id)->first()->name;
-            });
-        }
+        return $categories->where('id', $currency->currency_category_id)->first()->name;
+      });
+    }
 
     return $currencies;
   }
@@ -880,69 +880,88 @@ class User extends Authenticatable implements MustVerifyEmail {
     }
   }
 
-    /**
-     * Get the user's pet logs.
-     *
-     * @param int $limit
-     *
-     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Support\Collection
-     */
-    public function getPetLogs($limit = 10) {
-        $user = $this;
-        $query = PetLog::with('sender')->with('recipient')->with('pet')->where(function ($query) use ($user) {
-            $query->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Staff Removal']);
-        })->orWhere(function ($query) use ($user) {
-            $query->where('recipient_id', $user->id);
-        })->orderBy('id', 'DESC');
-        if ($limit) {
-            return $query->take($limit)->get();
-        } else {
-            return $query->paginate(30);
-        }
+  /**
+   * Get the user's recipe logs.
+   *
+   * @param int $limit
+   *
+   * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Support\Collection
+   */
+  public function getRecipeLogs($limit = 10) {
+    $user = $this;
+    $query = UserRecipeLog::with('recipe')->where(function ($query) use ($user) {
+      $query->with('sender')->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Claim Rewards']);
+    })->orWhere(function ($query) use ($user) {
+      $query->with('recipient')->where('recipient_id', $user->id)->where('log_type', '!=', 'Staff Removal');
+    })->orderBy('id', 'DESC');
+    if ($limit) {
+      return $query->take($limit)->get();
+    } else {
+      return $query->paginate(30);
     }
-        /**
-     * Get the user's award logs.
-     *
-     * @param  int  $limit
-     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function getAwardLogs($limit = 10) {
-        $user = $this;
-        $query = AwardLog::with('award')->where(function($query) use ($user) {
-            $query->with('sender')->where('sender_type', 'User')->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Claim Rewards']);
-        })->orWhere(function($query) use ($user) {
-            $query->with('recipient')->where('recipient_type', 'User')->where('recipient_id', $user->id)->where('log_type', '!=', 'Staff Removal');
-        })->orderBy('id', 'DESC');
-        if($limit) return $query->take($limit)->get();
-        else return $query->paginate(30);
-    }
+  }
 
-    /**
-     * Get the user's shop purchase logs.
-     *
-     * @param  int  $limit
-     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function getShopLogs($limit = 10)
-    {
-        $user = $this;
-        $query = ShopLog::where('user_id', $this->id)->with('character')->with('shop')->with('item')->with('currency')->orderBy('id', 'DESC');
-        if($limit) return $query->take($limit)->get();
-        else return $query->paginate(30);
+  /**
+   * Get the user's pet logs.
+   *
+   * @param int $limit
+   *
+   * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Support\Collection
+   */
+  public function getPetLogs($limit = 10) {
+    $user = $this;
+    $query = PetLog::with('sender')->with('recipient')->with('pet')->where(function ($query) use ($user) {
+      $query->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Staff Removal']);
+    })->orWhere(function ($query) use ($user) {
+      $query->where('recipient_id', $user->id);
+    })->orderBy('id', 'DESC');
+    if ($limit) {
+      return $query->take($limit)->get();
+    } else {
+      return $query->paginate(30);
     }
-    /**
-     * Get the user's shop purchase logs.
-     *
-     * @param  int  $limit
-     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function getUserShopLogs($limit = 10)
-    {
-        $user = $this;
-        $query = UserShopLog::where('user_id', $this->id)->with('shop')->with('item')->with('currency')->orderBy('id', 'DESC');
-        if($limit) return $query->take($limit)->get();
-        else return $query->paginate(30);
-    }
+  }
+  /**
+   * Get the user's award logs.
+   *
+   * @param  int  $limit
+   * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getAwardLogs($limit = 10) {
+    $user = $this;
+    $query = AwardLog::with('award')->where(function ($query) use ($user) {
+      $query->with('sender')->where('sender_type', 'User')->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Claim Rewards']);
+    })->orWhere(function ($query) use ($user) {
+      $query->with('recipient')->where('recipient_type', 'User')->where('recipient_id', $user->id)->where('log_type', '!=', 'Staff Removal');
+    })->orderBy('id', 'DESC');
+    if ($limit) return $query->take($limit)->get();
+    else return $query->paginate(30);
+  }
+
+  /**
+   * Get the user's shop purchase logs.
+   *
+   * @param  int  $limit
+   * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getShopLogs($limit = 10) {
+    $user = $this;
+    $query = ShopLog::where('user_id', $this->id)->with('character')->with('shop')->with('item')->with('currency')->orderBy('id', 'DESC');
+    if ($limit) return $query->take($limit)->get();
+    else return $query->paginate(30);
+  }
+  /**
+   * Get the user's shop purchase logs.
+   *
+   * @param  int  $limit
+   * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getUserShopLogs($limit = 10) {
+    $user = $this;
+    $query = UserShopLog::where('user_id', $this->id)->with('shop')->with('item')->with('currency')->orderBy('id', 'DESC');
+    if ($limit) return $query->take($limit)->get();
+    else return $query->paginate(30);
+  }
 
   /**
    * Get the user's character ownership logs.
@@ -1038,136 +1057,178 @@ class User extends Authenticatable implements MustVerifyEmail {
       ->viewable($user ? $user : null)
       ->where('user_id', $this->id)
       ->orderBy('id', 'DESC')
-      ;
+    ;
   }
 
-    /**
-     * Checks if the user has bookmarked a character.
-     * Returns the bookmark if one exists.
-     *
-     * @param mixed $character
-     *
-     * @return CharacterBookmark
-     */
-    public function hasBookmarked($character) {
-        return CharacterBookmark::where('user_id', $this->id)->where('character_id', $character->id)->first();
+  /**
+   * Checks if the user has bookmarked a character.
+   * Returns the bookmark if one exists.
+   *
+   * @param mixed $character
+   *
+   * @return CharacterBookmark
+   */
+  public function hasBookmarked($character) {
+    return CharacterBookmark::where('user_id', $this->id)->where('character_id', $character->id)->first();
+  }
+
+  /**
+   * Get the user's border logs.
+   *
+   * @param  int  $limit
+   * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getBorderLogs($limit = 10) {
+    $user = $this;
+    $query = UserBorderLog::with('border')
+      ->where(function ($query) use ($user) {
+        $query
+          ->with('sender')
+          ->where('sender_id', $user->id)
+          ->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Claim Rewards']);
+      })
+      ->orWhere(function ($query) use ($user) {
+        $query->with('recipient')->where('recipient_id', $user->id)->where('log_type', '!=', 'Staff Removal');
+      })
+      ->orderBy('id', 'DESC');
+    if ($limit) {
+      return $query->take($limit)->get();
+    } else {
+      return $query->paginate(30);
+    }
+  }
+
+  /**
+   * Checks if the user has the named border
+   *
+   * @return bool
+   */
+  public function hasBorder($border_id) {
+    $border = Border::find($border_id);
+    $user_has = $this->borders->contains($border);
+    $default = $border->is_default;
+    return $default ? true : $user_has;
+  }
+
+  /**
+   * display the user's icon and border styling
+   *
+   */
+  public function UserBorder() {
+    //basically just an ugly ass string of html for copypasting use
+    //would you want to keep posting this everywhere? yeah i thought so. me neither
+    //there's probably a less hellish way to do this but it beats having to paste this over everywhere... EVERY SINGLE TIME.
+    //especially with the checks
+
+    //get some fun variables for later
+    $avatar = '<!-- avatar --> <img class="avatar" src="' . $this->avatarUrl . '" alt="Avatar of ' . $this->name . '">';
+
+    // Check if variant border or regular border is under or over
+    if (isset($this->borderVariant) && $this->borderVariant->border_style == 0) {
+      $layer = 'under';
+    } elseif (isset($this->border) && $this->border->border_style == 0) {
+      $layer = 'under';
+    } else {
+      $layer = null;
     }
 
-    /**
-     * Get the user's border logs.
-     *
-     * @param  int  $limit
-     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
-     */
-    public function getBorderLogs($limit = 10) {
-      $user = $this;
-      $query = UserBorderLog::with('border')
-        ->where(function ($query) use ($user) {
-          $query
-            ->with('sender')
-            ->where('sender_id', $user->id)
-            ->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Claim Rewards']);
-        })
-        ->orWhere(function ($query) use ($user) {
-          $query->with('recipient')->where('recipient_id', $user->id)->where('log_type', '!=', 'Staff Removal');
-        })
-        ->orderBy('id', 'DESC');
-      if ($limit) {
-        return $query->take($limit)->get();
-      } else {
-        return $query->paginate(30);
-      }
+    $styling = '<div class="user-avatar">';
+
+    if (isset($this->settings->border_settings['border_flip']) && $this->settings->border_settings['border_flip']) {
+      $flip = 'transform: scaleX(-1)';
+    } else {
+      $flip = null;
     }
 
-    /**
-     * Checks if the user has the named border
-     *
-     * @return bool
-     */
-    public function hasBorder($border_id) {
-      $border = Border::find($border_id);
-      $user_has = $this->borders->contains($border);
-      $default = $border->is_default;
-      return $default ? true : $user_has;
-    }
+    $allStyle = $flip;
 
-    /**
-     * display the user's icon and border styling
-     *
-     */
-    public function UserBorder() {
-      //basically just an ugly ass string of html for copypasting use
-      //would you want to keep posting this everywhere? yeah i thought so. me neither
-      //there's probably a less hellish way to do this but it beats having to paste this over everywhere... EVERY SINGLE TIME.
-      //especially with the checks
-
-      //get some fun variables for later
-      $avatar = '<!-- avatar --> <img class="avatar" src="' . $this->avatarUrl . '" alt="Avatar of ' . $this->name . '">';
-
-      // Check if variant border or regular border is under or over
-      if (isset($this->borderVariant) && $this->borderVariant->border_style == 0) {
-        $layer = 'under';
-      } elseif (isset($this->border) && $this->border->border_style == 0) {
-        $layer = 'under';
-      } else {
-        $layer = null;
-      }
-
-      $styling = '<div class="user-avatar">';
-
-      if (isset($this->settings->border_settings['border_flip']) && $this->settings->border_settings['border_flip']) {
-        $flip = 'transform: scaleX(-1)';
-      } else {
-        $flip = null;
-      }
-
-      $allStyle = $flip;
-
-      //if the user has a border, we apply it
-      if (isset($this->border) || (isset($this->borderBottomLayer) && isset($this->borderTopLayer)) || isset($this->borderVariant)) {
-        //layers supersede variants
-        //variants supersede regular borders
-        if (isset($this->borderBottomLayer) && isset($this->borderTopLayer)) {
-          if ($this->borderTopLayer->border_style == 0 && $this->borderBottomLayer->border_style == 0) {
-            // If both layers are UNDER layers
-            // top layer's image
-            $mainframe = '<img src="' . $this->borderTopLayer->imageUrl . '" class="avatar-border under" alt="' . $this->borderTopLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
-            // bottom layer's image
-            $secondframe = '<img src="' . $this->borderBottomLayer->imageUrl . '" class="avatar-border bottom" alt="' . $this->borderBottomLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
-          } elseif ($this->borderTopLayer->border_style == 1 && $this->borderBottomLayer->border_style == 1) {
-            // If both layers are OVER layers
-            // top layer's image
-            $mainframe = '<img src="' . $this->borderTopLayer->imageUrl . '" class="avatar-border top" alt="' . $this->borderTopLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
-            // bottom layer's image
-            $secondframe = '<img src="' . $this->borderBottomLayer->imageUrl . '" class="avatar-border" alt="' . $this->borderBottomLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
-          } else {
-            // If one layer is UNDER and one is OVER
-            $mainlayer = $this->borderTopLayer->border_style == 0 ? 'under' : ' ';
-            $secondlayer = $this->borderBottomLayer->border_style == 0 ? 'under' : ' ';
-            // top layer's image
-            $mainframe = '<img src="' . $this->borderTopLayer->imageUrl . '" class="avatar-border ' . $mainlayer . '" alt="' . $this->borderTopLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
-            // bottom layer's image
-            $secondframe = '<img src="' . $this->borderBottomLayer->imageUrl . '" class="avatar-border ' . $secondlayer . '" alt="' . $this->borderBottomLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
-          }
-          return $styling . $avatar . $mainframe . $secondframe . '</div>';
-        } elseif (isset($this->borderVariant)) {
-          $mainframe = '<img src="' . $this->borderVariant->imageUrl . '" class="avatar-border ' . $layer . '" alt="' . $this->borderVariant->name . ' ' . $this->border->name . ' Avatar Frame" style="' . $allStyle . '">';
+    //if the user has a border, we apply it
+    if (isset($this->border) || (isset($this->borderBottomLayer) && isset($this->borderTopLayer)) || isset($this->borderVariant)) {
+      //layers supersede variants
+      //variants supersede regular borders
+      if (isset($this->borderBottomLayer) && isset($this->borderTopLayer)) {
+        if ($this->borderTopLayer->border_style == 0 && $this->borderBottomLayer->border_style == 0) {
+          // If both layers are UNDER layers
+          // top layer's image
+          $mainframe = '<img src="' . $this->borderTopLayer->imageUrl . '" class="avatar-border under" alt="' . $this->borderTopLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
+          // bottom layer's image
+          $secondframe = '<img src="' . $this->borderBottomLayer->imageUrl . '" class="avatar-border bottom" alt="' . $this->borderBottomLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
+        } elseif ($this->borderTopLayer->border_style == 1 && $this->borderBottomLayer->border_style == 1) {
+          // If both layers are OVER layers
+          // top layer's image
+          $mainframe = '<img src="' . $this->borderTopLayer->imageUrl . '" class="avatar-border top" alt="' . $this->borderTopLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
+          // bottom layer's image
+          $secondframe = '<img src="' . $this->borderBottomLayer->imageUrl . '" class="avatar-border" alt="' . $this->borderBottomLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
         } else {
-          $mainframe = '<img src="' . $this->border->imageUrl . '" class="avatar-border ' . $layer . '" alt="' . $this->border->name . ' Avatar Frame" style="' . $allStyle . '">';
+          // If one layer is UNDER and one is OVER
+          $mainlayer = $this->borderTopLayer->border_style == 0 ? 'under' : ' ';
+          $secondlayer = $this->borderBottomLayer->border_style == 0 ? 'under' : ' ';
+          // top layer's image
+          $mainframe = '<img src="' . $this->borderTopLayer->imageUrl . '" class="avatar-border ' . $mainlayer . '" alt="' . $this->borderTopLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
+          // bottom layer's image
+          $secondframe = '<img src="' . $this->borderBottomLayer->imageUrl . '" class="avatar-border ' . $secondlayer . '" alt="' . $this->borderBottomLayer->name . ' Avatar Frame" style="' . $allStyle . '">';
         }
+        return $styling . $avatar . $mainframe . $secondframe . '</div>';
+      } elseif (isset($this->borderVariant)) {
+        $mainframe = '<img src="' . $this->borderVariant->imageUrl . '" class="avatar-border ' . $layer . '" alt="' . $this->borderVariant->name . ' ' . $this->border->name . ' Avatar Frame" style="' . $allStyle . '">';
+      } else {
+        $mainframe = '<img src="' . $this->border->imageUrl . '" class="avatar-border ' . $layer . '" alt="' . $this->border->name . ' Avatar Frame" style="' . $allStyle . '">';
+      }
 
-        if (!isset($this->borderBottomLayer) && !isset($this->borderTopLayer)) {
-          return $styling . $avatar . $mainframe . '</div>';
+      if (!isset($this->borderBottomLayer) && !isset($this->borderTopLayer)) {
+        return $styling . $avatar . $mainframe . '</div>';
+      }
+    }
+    //if no border return standard avatar style
+    return $styling . $avatar . '</div>';
+  }
+  public function updateLocalSetting($setting, $property) {
+    if ($setting === 'high_contrast') $this->localSettings->high_contrast = $property;
+    if ($setting === 'reduced_motion') $this->localSettings->reduced_motion = $property;
+    if ($setting === 'light_dark') $this->localSettings->light_dark = $property;
+    if ($setting === 'site_font') $this->localSettings->site_font = $property;
+    if ($setting === 'theme') $this->localSettings->theme = $property;
+  }
+
+  /**
+   * Checks if the user has the named recipe.
+   *
+   * @param mixed $recipe_id
+   *
+   * @return bool
+   */
+  public function hasRecipe($recipe_id) {
+    $recipe = Recipe::find($recipe_id);
+    $user_has = $this->recipes->contains($recipe);
+    $default = !$recipe->needs_unlocking;
+
+    return $default ? true : $user_has;
+  }
+
+  /**
+   * Returned recipes listed that are owned
+   * Reversal simply.
+   *
+   * @param mixed $ids
+   * @param mixed $reverse
+   *
+   * @return object
+   */
+  public function ownedRecipes($ids, $reverse = false) {
+    $recipes = Recipe::find($ids);
+    $recipeCollection = [];
+    foreach ($recipes as $recipe) {
+      if ($reverse) {
+        if (!$this->recipes->contains($recipe)) {
+          $recipeCollection[] = $recipe;
+        }
+      } else {
+        if ($this->recipes->contains($recipe)) {
+          $recipeCollection[] = $recipe;
         }
       }
-      //if no border return standard avatar style
-      return $styling . $avatar . '</div>';
     }
-    public function updateLocalSetting($setting, $property) {
-      if($setting === 'high_contrast') $this->localSettings->high_contrast = $property;
-      if($setting === 'reduced_motion') $this->localSettings->reduced_motion = $property;
-      if($setting === 'light_dark') $this->localSettings->light_dark = $property;
-      if($setting === 'site_font') $this->localSettings->site_font = $property;
-      if($setting === 'theme') $this->localSettings->theme = $property;
-    }
+
+    return $recipeCollection;
+  }
 }

@@ -16,7 +16,8 @@
     <div class="sidebar-item">
       <a href="{{ url('inventory') }}" class="{{ set_active('inventory*') }}">Inventory</a>
     </div>
-        <div class="sidebar-item"><a href="{{ url(__('awards.awardcase')) }}" class="{{ set_active(__('awards.awardcase').'*') }}">{{__('awards.awardcase')}}</a></div>
+    <div class="sidebar-item"><a href="{{ url(__('awards.awardcase')) }}"
+        class="{{ set_active(__('awards.awardcase') . '*') }}">{{ __('awards.awardcase') }}</a></div>
     <div class="sidebar-item">
       <a href="{{ url('bank') }}" class="{{ set_active('bank*') }}">Bank</a>
     </div>
@@ -30,13 +31,20 @@
       <a href="{{ url('claims') }}" class="{{ set_active('claims*') }}">Claims</a>
     </div>
     <div class="sidebar-item">
-      <a href="{{ url('characters/transfers/incoming') }}" class="{{ set_active('characters/transfers*') }}">Character Transfers</a>
+      <a href="{{ url('characters/transfers/incoming') }}" class="{{ set_active('characters/transfers*') }}">Character
+        Transfers</a>
     </div>
     <div class="sidebar-item">
       <a href="{{ url('trades/open') }}" class="{{ set_active('trades/open*') }}">Trades</a>
     </div>
     <div class="sidebar-item">
       <a href="{{ url('comments/liked') }}" class="{{ set_active('comments/liked*') }}">Liked Comments</a>
+    </div>
+  </li>
+  <li class="sidebar-section">
+    <div class="sidebar-section-header">Crafting</div>
+    <div class="sidebar-item"><a href="{{ url('crafting') }}" class="{{ set_active('crafting') }}">My Recipes</a></div>
+    <div class="sidebar-item"><a href="{{ url('world/recipes') }}" class="{{ set_active('world/recipes') }}">All Recipes</a>
     </div>
   </li>
   <li class="sidebar-section">

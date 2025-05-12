@@ -6,7 +6,7 @@ use App\Models\Item\Item;
 use App\Services\InventoryManager;
 use App\Services\Service;
 use Illuminate\Support\Facades\DB;
-”use App\Models\Award\Award;
+use App\Models\Award\Award;
 use App\Models\Border\Border;
 
 class BoxService extends Service {
@@ -105,6 +105,9 @@ class BoxService extends Service {
                         break;
                     case 'Border':
                         $type = 'App\Models\Border\Border';
+                        break;
+                    case 'Recipe':
+                        $type = 'App\Models\Recipe\Recipe';
                         break;
                 }
                 $asset = $type::find($data['rewardable_id'][$key]);

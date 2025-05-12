@@ -67,6 +67,7 @@
   <script defer src="{{ asset('js/vendor/bs-custom-file-input.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/bootstrap-colorpicker.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/jquery-ui-timepicker-addon.js') }}"></script>
+  <script defer src="{{ asset('js/site.js') }}"></script>
   <script defer src="{{ asset('js/vendor/croppie.min.js') }}"></script>
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">

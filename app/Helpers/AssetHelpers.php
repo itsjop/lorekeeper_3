@@ -72,7 +72,7 @@ function calculateGroupCurrency($data) {
  */
 function getAssetKeys($isCharacter = false) {
   if (!$isCharacter) {
-    return ['items', 'awards', 'currencies', 'pets', 'raffle_tickets', 'loot_tables', 'user_items', 'user_awards', 'characters', 'borders', 'areas'];
+    return ['items', 'awards', 'currencies', 'pets', 'raffle_tickets', 'loot_tables', 'user_items', 'user_awards', 'characters', 'borders', 'areas', 'recipes'];
   } else {
     return ['currencies', 'items', 'character_items', 'loot_tables', 'awards'];
   }
@@ -132,6 +132,9 @@ function getAssetModelString($type, $namespaced = true) {
       if ($namespaced) return '\App\Models\Character\Character';
       else return 'Character';
 
+    case 'recipes':
+      if ($namespaced)  return '\App\Models\Recipe\Recipe';
+      else return 'Recipe';
 
     case 'character_items':
       if ($namespaced) return '\App\Models\Character\CharacterItem';
@@ -497,6 +500,13 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
       $service = new \App\Services\CultivationManager;
       foreach ($contents as $asset)
         if (!$service->unlockArea($recipient, $asset['asset'])) return false;
+    } else if ($key == 'recipes' && count($contents)) {
+      $service = new App\Services\RecipeService;
+      foreach ($contents as $asset) {
+        if (!$service->creditRecipe($sender, $recipient, null, $logType, $data, $asset['asset'])) {
+          return false;
+        }
+      }
     }
   }
 
