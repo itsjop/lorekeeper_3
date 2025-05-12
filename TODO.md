@@ -1,8 +1,9 @@
 # BROKEN
 - [ ] appprovals
 - [ ] item category search no results
-- [ ] delete item doesnt work
-- [~] toggles arent toggling
+- [ ] shop editing super broken
+- [p] delete item doesnt work
+- [p] toggles arent toggling
 - [x] pets
 - [x] Item Preview Error
 - [x] background image fixed
