@@ -10037,6 +10037,7 @@ ul {
      object-position: center;
   /* filter: drop-shadow(5px 10px 2px rgba(29, 1, 36, 0.3)); */
   position: relative;
+  opacity: 0.9;
 }
 #app #site-wrapper #site-logo-header picture::after {
   content: "";
@@ -10064,5 +10065,43 @@ ul {
     max-height: 10vh;
     -o-object-fit: contain;
        object-fit: contain;
+  }
+}
+/* Header Glint */
+#app #site-logo-header picture::after {
+  --glare-width: 5%;
+  -webkit-mask-image: linear-gradient(70deg, black 0%, black calc(50% - var(--glare-width)), white 50%, black calc(50% + var(--glare-width)), black 100%);
+          mask-image: linear-gradient(70deg, black 0%, black calc(50% - var(--glare-width)), white 50%, black calc(50% + var(--glare-width)), black 100%);
+  -webkit-mask-size: 200%;
+          mask-size: 200%;
+  -webkit-mask-position: 50% 50%;
+          mask-position: 50% 50%;
+  mask-mode: luminance;
+  filter: brightness(2);
+  mix-blend-mode: color-dodge;
+  position: relative;
+  animation: glare 10s ease-in-out forwards infinite;
+}
+
+@keyframes glare {
+  0% {
+    -webkit-mask-position: 0% 50%;
+            mask-position: 0% 50%;
+  }
+  40% {
+    -webkit-mask-position: 0% 50%;
+            mask-position: 0% 50%;
+  }
+  100% {
+    -webkit-mask-position: -200% 50%;
+            mask-position: -200% 50%;
+  }
+}
+@keyframes cloud-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(200vw);
   }
 }

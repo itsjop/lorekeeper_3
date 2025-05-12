@@ -5,7 +5,7 @@
 
   @foreach (config('lorekeeper.admin_sidebar') as $key => $section)
     @if (Auth::user()->isAdmin || $section['power'] === 'mixed' || Auth::user()->hasPower($section['power']))
-      <li class="{{'sidebar-section' . (array_key_exists('meta', $section) ? ' ' . $section['meta'] : '')}}">
+      <li class="{{ 'sidebar-section' . (array_key_exists('meta', $section) ? ' ' . $section['meta'] : '') }}">
         <div
           class="sidebar-section-header"
           data-toggle="collapse"

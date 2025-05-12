@@ -113,17 +113,17 @@ class AccountController extends Controller {
      */
     public function postAvatar(Request $request, UserService $service) {
       $data = $request->only([
-        'avatar', 'x0', 'x1', 'y0', 'y1',
-    ]);
-        if ($service->updateAvatar($request->file('avatar'), Auth::user())) {
-            flash('Avatar updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+          'avatar', 'x0', 'x1', 'y0', 'y1',
+      ]);
+      if ($service->updateAvatar($data, Auth::user())) {
+          flash('Avatar updated successfully.')->success();
+      } else {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+              flash($error)->error();
+          }
+      }
 
-    return redirect()->back();
+      return redirect()->back();
   }
 
 

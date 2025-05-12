@@ -4,3 +4,5 @@
  * via mix so that they can be processed at once and minified.
  */
 
+// require('./vendor/bootstrap4-toggle');
+// require('./vendor/lightbox');

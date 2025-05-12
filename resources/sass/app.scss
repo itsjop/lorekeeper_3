@@ -85,8 +85,9 @@ ul { padding: 0; }
 }
 
 // Components
-@import './components/background';
-@import './components/footer';
-@import './components/navbar';
-@import './components/sidebar';
-@import './components/site-header';
+@import './site-components/background';
+@import './site-components/footer';
+@import './site-components/navbar';
+@import './site-components/sidebar';
+@import './site-components/site-header';
+@import './site-components/animations';

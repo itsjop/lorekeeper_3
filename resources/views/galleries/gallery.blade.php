@@ -51,10 +51,10 @@
               'alpha' => 'Sort Alphabetically (A-Z)',
               'alpha-reverse' => 'Sort Alphabetically (Z-A)',
               'prompt' => 'Sort by Prompt (Newest to Oldest)',
-              'prompt-reverse' => 'Sort by Prompt (Oldest to Newest)',
+              'prompt-reverse' => 'Sort by Prompt (Oldest to Newest)'
           ],
           Request::get('sort') ?: 'category',
-          ['class' => 'form-control'],
+          ['class' => 'form-control']
       ) !!}
     </div>
     <div class="form-group mb-3">
@@ -63,24 +63,24 @@
     {!! Form::close() !!}
   </div>
 
-  @if ($gallery->submissions_count)
+  @if ($gallery->submissions->count())
     {!! $submissions->render() !!}
 
     <div class="d-flex align-content-around flex-wrap mb-2">
-      divforeach ($submissions as $submission)
-      @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
-  @endforeach
-  </div>
+      @foreach ($submissions as $submission)
+        @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
+      @endforeach
+    </div>
 
-  {!! $submissions->render() !!}
-@elseif($childSubmissions->count())
-  <div class="d-flex align-content-around flex-wrap mb-2">
-    @foreach ($childSubmissions->orderBy('created_at', 'DESC')->get()->take(20) as $submission)
-      @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
-    @endforeach
-  </div>
-@else
-  <p>No submissions found!</p>
+    {!! $submissions->render() !!}
+  @elseif($childSubmissions->count())
+    <div class="d-flex align-content-around flex-wrap mb-2">
+      @foreach ($childSubmissions->orderBy('created_at', 'DESC')->get()->take(20) as $submission)
+        @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
+      @endforeach
+    </div>
+  @else
+    <p>No submissions found!</p>
   @endif
 
 @endsection

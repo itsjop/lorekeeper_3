@@ -1,15 +1,16 @@
 # BROKEN
-- [ ] merge in awards extension
 - [ ] appprovals
 - [ ] item category search no results
 - [ ] delete item doesnt work
 - [ ] server profile picture 500
-- [ ] shops are dispalying twice and unclickable
-- [ ] somnivores logo misalignment
-- [ ] broken pages:
-    - [ ] /characters 500 error
-    - [ ] /inventory 500 error
-    - [ ] /designs 500 error
+- [~] toggles arent toggling
+- [x] 'shops' are dispalying twice and unclickable
+- [x] somnivores logo misalignment
+- [ ] wysywig textboxes
+- [~] broken pages:
+    - [x] /characters 500 error
+    - [x] /inventory 500 error
+    - [x] /designs 500 error
 - [~] Mailersend Error Fix
 - [~] mobile css
 
@@ -42,9 +43,8 @@
 
 
 
-
-
 ### FIXED!! ###
 - [x] pets
 - [x] Item Preview Error
 - [x] background image fixed
+- [x] merge in awards extension

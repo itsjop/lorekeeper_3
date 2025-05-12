@@ -495,18 +495,19 @@ class CharacterManager extends Service {
    * @param mixed          $isMyo
    */
   public function cropThumbnail($points, $characterImage, $isMyo = false) {
-    $imageProperties = getimagesize($characterImage->imagePath . '/' . $characterImage->imageFileName);
+    $imageProperties = getimagesize($characterImage->imagePath.'/'.$characterImage->imageFileName);
     if ($imageProperties[0] > 2000 || $imageProperties[1] > 2000) {
-      // For large images (in terms of dimensions),
-      // use imagick instead, as it's better at handling them
-      Config::set('image.driver', 'imagick');
+        // For large images (in terms of dimensions),
+        // use imagick instead, as it's better at handling them
+        Config::set('image.driver', 'imagick');
     }
-    $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName);
+
+    $image = Image::make($characterImage->imagePath.'/'.$characterImage->imageFileName);
 
     if (!in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) && config('lorekeeper.settings.masterlist_image_format') != null && config('lorekeeper.settings.masterlist_image_background') != null) {
-      $canvas = Image::canvas($image->width(), $image->height(), config('lorekeeper.settings.masterlist_image_background'));
-      $image = $canvas->insert($image, 'center');
-      $trimColor = true;
+        $canvas = Image::canvas($image->width(), $image->height(), config('lorekeeper.settings.masterlist_image_background'));
+        $image = $canvas->insert($image, 'center');
+        $trimColor = true;
     }
     if (Config::get('lorekeeper.settings.masterlist_image_format') != 'png' && Config::get('lorekeeper.settings.masterlist_image_format') != null && Config::get('lorekeeper.settings.masterlist_image_background') != null) {
       $canvas = Image::canvas($image->width(), $image->height(), Config::get('lorekeeper.settings.masterlist_image_background'));
@@ -514,121 +515,143 @@ class CharacterManager extends Service {
       $trimColor = TRUE;
     }
     if (Config::get('lorekeeper.settings.watermark_masterlist_thumbnails') == 1 && !$isMyo) {
-      // Trim transparent parts of image.
-      $image->trim(isset($trimColor) && $trimColor ? 'top-left' : 'transparent');
+        // Trim transparent parts of image.
+        $image->trim(isset($trimColor) && $trimColor ? 'top-left' : 'transparent');
       if (Config::get('lorekeeper.settings.masterlist_image_automation') == 1) {
-        // Make the image be square
+            // Make the image be square
         $imageWidth = $image->width();
         $imageHeight = $image->height();
         if ($imageWidth > $imageHeight) {
-          // Landscape
-          $canvas = Image::canvas($image->width(), $image->width());
-          $image = $canvas->insert($image, 'center');
-        } else {
-          // Portrait
-          $canvas = Image::canvas($image->height(), $image->height());
-          $image = $canvas->insert($image, 'center');
+                // Landscape
+                $canvas = Image::canvas($image->width(), $image->width());
+                $image = $canvas->insert($image, 'center');
+            } else {
+                // Portrait
+                $canvas = Image::canvas($image->height(), $image->height());
+                $image = $canvas->insert($image, 'center');
+            }
         }
-      }
       $cropWidth = Config::get('lorekeeper.settings.masterlist_thumbnails.width');
       $cropHeight = Config::get('lorekeeper.settings.masterlist_thumbnails.height');
-      $imageWidthOld = $image->width();
-      $imageHeightOld = $image->height();
-      $trimOffsetX = $imageWidthOld - $image->width();
-      $trimOffsetY = $imageHeightOld - $image->height();
+        $imageWidthOld = $image->width();
+        $imageHeightOld = $image->height();
+
+        $trimOffsetX = $imageWidthOld - $image->width();
+        $trimOffsetY = $imageHeightOld - $image->height();
       if (Config::get('lorekeeper.settings.watermark_masterlist_images') == 1) {
-        // Resize image if desired, so that the watermark is applied to the correct size of image
-        if (config('lorekeeper.settings.masterlist_image_dimension') != 0) {
-          if ($image->width() > $image->height()) {
-            // Landscape
-            $image->resize(null, config('lorekeeper.settings.masterlist_image_dimension'), function ($constraint) {
-              $constraint->aspectRatio();
-              $constraint->upsize();
-            });
-          } else {
-            // Portrait
-            $image->resize(config('lorekeeper.settings.masterlist_image_dimension'), null, function ($constraint) {
-              $constraint->aspectRatio();
-              $constraint->upsize();
-            });
-          }
-        }
-        // Watermark the image
+            // Resize image if desired, so that the watermark is applied to the correct size of image
+            if (config('lorekeeper.settings.masterlist_image_dimension') != 0) {
+                if ($image->width() > $image->height()) {
+                    // Landscape
+                    $image->resize(null, config('lorekeeper.settings.masterlist_image_dimension'), function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                } else {
+                    // Portrait
+                    $image->resize(config('lorekeeper.settings.masterlist_image_dimension'), null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                }
+            }
+            // Watermark the image
         $watermark = Image::make('images/lorekeeper/watermark.png');
-        if (config('lorekeeper.settings.watermark_resizing_thumb') == 1) {
-          $imageWidth = $image->width();
-          $imageHeight = $image->height();
-          $wmWidth = $watermark->width();
-          $wmHeight = $watermark->height();
-          $wmScale = config('lorekeeper.settings.watermark_percent');
-          // Assume Landscape by Default
-          $maxSize = $imageWidth * $wmScale;
-          if ($imageWidth > $imageHeight) {
-            // Landscape
-            $maxSize = $imageWidth * $wmScale;
-          } else {
-            // Portrait
-            $maxSize = $imageHeight * $wmScale;
-          }
-          if ($wmWidth > $wmHeight) {
-            // Landscape
-            $watermark->resize($maxSize, null, function ($constraint) {
-              $constraint->aspectRatio();
+            if (config('lorekeeper.settings.watermark_resizing_thumb') == 1) {
+                $imageWidth = $image->width();
+                $imageHeight = $image->height();
+
+                $wmWidth = $watermark->width();
+                $wmHeight = $watermark->height();
+
+                $wmScale = config('lorekeeper.settings.watermark_percent');
+
+                // Assume Landscape by Default
+                $maxSize = $imageWidth * $wmScale;
+
+                if ($imageWidth > $imageHeight) {
+                    // Landscape
+                    $maxSize = $imageWidth * $wmScale;
+                } else {
+                    // Portrait
+                    $maxSize = $imageHeight * $wmScale;
+                }
+
+                if ($wmWidth > $wmHeight) {
+                    // Landscape
+                    $watermark->resize($maxSize, null, function ($constraint) {
+                        $constraint->aspectRatio();
               $constraint->upsize();
-            });
-          } else {
-            // Portrait
+                    });
+                } else {
+                    // Portrait
             $image->resize(Config::get('lorekeeper.settings.masterlist_image_dimension'), null, function ($constraint) {
-              $constraint->aspectRatio();
+                        $constraint->aspectRatio();
               $constraint->upsize();
-            });
-          }
-        }
+                    });
+                }
+            }
         // Watermark the image
         $watermark = Image::make('images/watermark.png');
-        $image->insert($watermark, 'center');
-      }
-      // Now shrink the image
-      {
+            $image->insert($watermark, 'center');
+        }
+        // Now shrink the image
+
         $imageWidth = $image->width();
         $imageHeight = $image->height();
+
         if ($imageWidth > $imageHeight) {
-          // Landscape
-          $image->resize(null, $cropWidth, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-          });
+            // Landscape
+            $image->resize(null, $cropWidth, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
         } else {
-          // Portrait
-          $image->resize($cropHeight, null, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-          });
+            // Portrait
+            $image->resize($cropHeight, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
         }
-      }
-      if (Config::get('lorekeeper.settings.masterlist_image_automation') == 0) {
-        $xOffset = 0 + (($points['x0'] - $trimOffsetX) > 0 ? ($points['x0'] - $trimOffsetX) : 0);
-        if (($xOffset + $cropWidth) > $image->width()) $xOffsetNew = $cropWidth - ($image->width() - $xOffset);
-        if (isset($xOffsetNew)) if (($xOffsetNew + $cropWidth) > $image->width()) $xOffsetNew = $image->width() - $cropWidth;
-        $yOffset = 0 + (($points['y0'] - $trimOffsetY) > 0 ? ($points['y0'] - $trimOffsetY) : 0);
-        if (($yOffset + $cropHeight) > $image->height()) $yOffsetNew = $cropHeight - ($image->height() - $yOffset);
-        if (isset($yOffsetNew)) if (($yOffsetNew + $cropHeight) > $image->height()) $yOffsetNew = $image->height() - $cropHeight;
-        // Crop according to the selected area
+
+        if (config('lorekeeper.settings.masterlist_image_automation') == 0) {
+            $xOffset = 0 + (($points['x0'] - $trimOffsetX) > 0 ? ($points['x0'] - $trimOffsetX) : 0);
+            if (($xOffset + $cropWidth) > $image->width()) {
+                $xOffsetNew = $cropWidth - ($image->width() - $xOffset);
+            }
+            if (isset($xOffsetNew)) {
+                if (($xOffsetNew + $cropWidth) > $image->width()) {
+                    $xOffsetNew = $image->width() - $cropWidth;
+                }
+            }
+            $yOffset = 0 + (($points['y0'] - $trimOffsetY) > 0 ? ($points['y0'] - $trimOffsetY) : 0);
+            if (($yOffset + $cropHeight) > $image->height()) {
+                $yOffsetNew = $cropHeight - ($image->height() - $yOffset);
+            }
+            if (isset($yOffsetNew)) {
+                if (($yOffsetNew + $cropHeight) > $image->height()) {
+                    $yOffsetNew = $image->height() - $cropHeight;
+                }
+            }
+
+            // Crop according to the selected area
         $image->crop($cropWidth, $cropHeight, isset($xOffsetNew) ? $xOffsetNew : $xOffset, isset($yOffsetNew) ? $yOffsetNew : $yOffset);
-      }
+        }
     } else {
-      $cropWidth = $points['x1'] - $points['x0'];
-      $cropHeight = $points['y1'] - $points['y0'];
-      if (Config::get('lorekeeper.settings.masterlist_image_automation') == 0) {
-        // Crop according to the selected area
-        $image->crop($cropWidth, $cropHeight, $points['x0'], $points['y0']);
-      }
-      // Resize to fit the thumbnail size
-      $image->resize(Config::get('lorekeeper.settings.masterlist_thumbnails.width'), Config::get('lorekeeper.settings.masterlist_thumbnails.height'));
+        $cropWidth = $points['x1'] - $points['x0'];
+        $cropHeight = $points['y1'] - $points['y0'];
+        if (config('lorekeeper.settings.masterlist_image_automation') == 0) {
+            // Crop according to the selected area
+            $image->crop($cropWidth, $cropHeight, $points['x0'], $points['y0']);
+        }
+
+        // Resize to fit the thumbnail size
+        $image->resize(config('lorekeeper.settings.masterlist_thumbnails.width'), config('lorekeeper.settings.masterlist_thumbnails.height'));
     }
+
     // Save the thumbnail
-    $image->save($characterImage->thumbnailPath . '/' . $characterImage->thumbnailFileName, 100, Config::get('lorekeeper.settings.masterlist_image_format'));
-  }
+    $image->save($characterImage->thumbnailPath.'/'.$characterImage->thumbnailFileName, 100, config('lorekeeper.settings.masterlist_image_format'));
+}
 
   /**
    * Creates a character log.

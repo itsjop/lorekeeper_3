@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Users;
 
 use DB;
-use Auth;
+// use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Facades\Settings;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
@@ -16,13 +17,12 @@ use App\Models\Rarity;
 use App\Models\Submission\Submission;
 use App\Models\User\User;
 use App\Models\User\UserItem;
-use App\Models\Shop\UserShop;
-
-use App\Models\Item\UserItemLog;
-use Illuminate\Http\Request;
-use App\Models\Shop\UserShopStock;
 use App\Services\InventoryManager;
-
+use App\Models\Shop\UserShop;
+use App\Models\Shop\UserShopLog;
+use App\Services\UserShopManager;
+use App\Models\Shop\UserShopStock;
+use Illuminate\Http\Request;
 
 class InventoryController extends Controller {
   /*
@@ -34,53 +34,54 @@ class InventoryController extends Controller {
     |
     */
 
-    /**
-     * Shows the user's inventory page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getIndex() {
-        $categories = ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get();
-        $query = Item::query();
-        $data = $request->only(['item_category_id', 'name', 'artist', 'rarity_id']);
-        if (isset($data['item_category_id'])) {
-            $query->where('item_category_id', $data['item_category_id']);
-        }
-        if (isset($data['name'])) {
-            $query->where('name', 'LIKE', '%'.$data['name'].'%');
-        }
-        if (isset($data['artist'])) {
-            $query->where('artist_id', $data['artist']);
-        }
-        if (isset($data['rarity_id'])) {
-            if ($data['rarity_id'] == 'withoutOption') {
-                $query->whereNull('data->rarity_id');
-            } else {
-                $query->where('data->rarity_id', $data['rarity_id']);
-            }
-        }
-        $items = count($categories) ?
-            Auth::user()->items()
-                ->where('count', '>', 0)
-                ->orderByRaw('FIELD(item_category_id,'.implode(',', $categories->pluck('id')->toArray()).')')
-                ->orderBy('name')
-                ->orderBy('updated_at')
-                ->get()
-                ->groupBy(['item_category_id', 'id']) :
-            Auth::user()->items()
-                ->where('count', '>', 0)
-                ->orderBy('name')
-                ->orderBy('updated_at')
-                ->get()
-                ->groupBy(['item_category_id', 'id']);
+  /**
+   * Shows the user's inventory page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getIndex(Request $request) {
+    $categories = ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get();
+    $query = Item::query();
+    $data = $request->only(['item_category_id', 'name', 'artist', 'rarity_id']);
+    if (isset($data['item_category_id'])) {
+      $query->where('item_category_id', $data['item_category_id']);
+    }
+    if (isset($data['name'])) {
+      $query->where('name', 'LIKE', '%' . $data['name'] . '%');
+    }
+    if (isset($data['artist'])) {
+      $query->where('artist_id', $data['artist']);
+    }
+    if (isset($data['rarity_id'])) {
+      if ($data['rarity_id'] == 'withoutOption') {
+        $query->whereNull('data->rarity_id');
+      } else {
+        $query->where('data->rarity_id', $data['rarity_id']);
+      }
+    }
+
+    $items = count($categories) ?
+      Auth::user()->items()
+      ->where('count', '>', 0)
+      ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['item_category_id', 'id']) :
+      Auth::user()->items()
+      ->where('count', '>', 0)
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['item_category_id', 'id']);
 
     return view('home.inventory', [
       'categories'  => $categories->keyBy('id'),
       'items'       => $items,
       'userOptions' => User::visible()->where('id', '!=', Auth::user()->id)->orderBy('name')->pluck('name', 'id')->toArray(),
       'user'        => Auth::user(),
-            'artists'     => User::whereIn('id', Item::whereNotNull('artist_id')->pluck('artist_id')->toArray())->pluck('name', 'id')->toArray(),
-            'rarities'    => ['withoutOption' => 'Without Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'artists'     => User::whereIn('id', Item::whereNotNull('artist_id')->pluck('artist_id')->toArray())->pluck('name', 'id')->toArray(),
+      'rarities'    => ['withoutOption' => 'Without Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
     ]);
   }
 
@@ -93,16 +94,11 @@ class InventoryController extends Controller {
    */
   public function getStack(Request $request, $id) {
     $first_instance = UserItem::withTrashed()->where('id', $id)->first();
-    $readOnly =
-      $request->get('read_only')
-      ?: (
-        (Auth::check() && $first_instance && ($first_instance->user_id == Auth::user()->id || Auth::user()->hasPower('edit_inventories'))
-        ) ? 0 : 1);
+    $readOnly = $request->get('read_only') ?: ((Auth::check() && $first_instance && ($first_instance->user_id == Auth::user()->id || Auth::user()->hasPower('edit_inventories'))) ? 0 : 1);
     $stack = UserItem::where([['user_id', $first_instance->user_id], ['item_id', $first_instance->item_id], ['count', '>', 0]])->get();
     $item = Item::where('id', $first_instance->item_id)->first();
     $shops = UserShop::where('user_id', '=', Auth::user()->id)->pluck('name', 'id');
 
-    // dd($readOnly);
     return view('home._inventory_stack', [
       'stack'            => $stack,
       'item'             => $item,
@@ -256,6 +252,94 @@ class InventoryController extends Controller {
   }
 
   /**
+   * Show the full inventory page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getFullInventory() {
+    $user = Auth::user();
+
+    // Gather the user's characters
+    $characters = $user->allCharacters;
+
+    if (!Auth::check() || !$user->hasPower('manage_characters')) {
+      $characters = $characters->where('is_visible', 1);
+    }
+
+    // Set up Categories
+    $categories = ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get();
+
+    if (count($categories)) {
+      $items =
+        Auth::user()->items()
+        ->where('count', '>', 0)
+        ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+        ->orderBy('name')
+        ->orderBy('updated_at')
+        ->get();
+      foreach ($characters as $character) {
+        $itemCollect = $character->items()
+          ->where('count', '>', 0)
+          ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+          ->orderBy('name')
+          ->orderBy('updated_at')
+          ->get();
+        isset($items) ? $items = $items->mergeRecursive($itemCollect) : $items = $itemCollect;
+      }
+    } else {
+      $items =
+        Auth::user()->items()
+        ->where('count', '>', 0)
+        ->orderBy('name')
+        ->orderBy('updated_at')
+        ->get();
+      foreach ($characters as $character) {
+        $itemCollect = $character->items()
+          ->where('count', '>', 0)
+          ->orderBy('name')
+          ->orderBy('updated_at')
+          ->get();
+        isset($items) ? $items = $items->mergeRecursive($itemCollect) : $items = $itemCollect;
+      }
+    }
+
+    return view('home.inventory_full', [
+      'categories' => $categories->keyBy('id'),
+      'items'      => $items->sortBy('name')->sortBy('updated_at')->groupBy(['item_category_id', 'id']),
+      'user'       => $user,
+      'characters' => $characters,
+    ]);
+  }
+
+  /**
+   * Shows the confirmation modal for inventory consolidation.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getConsolidateInventory(Request $request) {
+    return view('home._inventory_consolidate');
+  }
+
+  /**
+   * Consolidates the user's inventory.
+   *
+   * @param App\Services\InventoryManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postConsolidateInventory(Request $request, InventoryManager $service) {
+    if ($service->consolidateInventory(Auth::user())) {
+      flash('Inventory consolidated.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+
+    return redirect()->back();
+  }
+
+  /**
    * Transfers inventory items to another user.
    *
    * @param App\Services\InventoryManager $service
@@ -366,95 +450,6 @@ class InventoryController extends Controller {
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
     }
-    return redirect()->back();
-  }
-
-
-  /**
-   * Show the full inventory page.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function getFullInventory() {
-    $user = Auth::user();
-
-    // Gather the user's characters
-    $characters = $user->allCharacters;
-
-    if (!Auth::check() || !$user->hasPower('manage_characters')) {
-      $characters = $characters->where('is_visible', 1);
-    }
-
-    // Set up Categories
-    $categories = ItemCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->get();
-
-    if (count($categories)) {
-      $items =
-        Auth::user()->items()
-        ->where('count', '>', 0)
-        ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
-        ->orderBy('name')
-        ->orderBy('updated_at')
-        ->get();
-      foreach ($characters as $character) {
-        $itemCollect = $character->items()
-          ->where('count', '>', 0)
-          ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
-          ->orderBy('name')
-          ->orderBy('updated_at')
-          ->get();
-        isset($items) ? $items = $items->mergeRecursive($itemCollect) : $items = $itemCollect;
-      }
-    } else {
-      $items =
-        Auth::user()->items()
-        ->where('count', '>', 0)
-        ->orderBy('name')
-        ->orderBy('updated_at')
-        ->get();
-      foreach ($characters as $character) {
-        $itemCollect = $character->items()
-          ->where('count', '>', 0)
-          ->orderBy('name')
-          ->orderBy('updated_at')
-          ->get();
-        isset($items) ? $items = $items->mergeRecursive($itemCollect) : $items = $itemCollect;
-      }
-    }
-
-    return view('home.inventory_full', [
-      'categories' => $categories->keyBy('id'),
-      'items'      => $items->sortBy('name')->sortBy('updated_at')->groupBy(['item_category_id', 'id']),
-      'user'       => $user,
-      'characters' => $characters,
-    ]);
-  }
-
-  /**
-   * Shows the confirmation modal for inventory consolidation.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function getConsolidateInventory(Request $request) {
-    return view('home._inventory_consolidate');
-  }
-
-  /**
-   * Consolidates the user's inventory.
-   *
-   * @param App\Services\InventoryManager $service
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postConsolidateInventory(Request $request, InventoryManager $service) {
-    if ($service->consolidateInventory(Auth::user())) {
-      flash('Inventory consolidated.')->success();
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
-
     return redirect()->back();
   }
 

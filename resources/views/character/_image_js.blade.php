@@ -19,7 +19,7 @@
           ],
           toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | codeeditor',
           content_css: [
-            '{{ asset('css/vendor/app.css') }}',
+            '{{ asset('css/app.css') }}',
             '{{ asset('css/vendor/lorekeeper.css') }}'
           ],
           spoiler_caption: 'Toggle Spoiler',
@@ -63,7 +63,7 @@
           ],
           toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | codeeditor',
           content_css: [
-            '{{ asset('css/vendor/app.css') }}',
+            '{{ asset('css/app.css') }}',
             '{{ asset('css/vendor/lorekeeper.css') }}'
           ],
           spoiler_caption: 'Toggle Spoiler',

@@ -165,21 +165,22 @@ class DesignController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getAddons($id) {
-        $r = CharacterDesignUpdate::find($id);
-        if(!$r || ($r->user_id != Auth::user()->id && !Auth::user()->hasPower('manage_characters'))) abort(404);
-        if($r->status == 'Draft' && $r->user_id == Auth::user()->id)
-            $inventory = UserItem::with('item')->whereNull('deleted_at')->where('count', '>', '0')->where('user_id', $r->user_id)->get();
-        else
-            $inventory = isset($r->data['user']) ? parseAssetData($r->data['user']) : null;
-æ
-        return view('character.design.addons', [
-            'request'     => $r,
-            'categories'  => ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get(),
-            'inventory'   => $inventory,
-            'items'       => Item::all()->keyBy('id'),
-            'item_filter' => Item::orderBy('name')->get()->keyBy('id'),
-            'page'        => 'update',
-        ]);
+      $r = CharacterDesignUpdate::find($id);
+      if (!$r || ($r->user_id != Auth::user()->id && !Auth::user()->hasPower('manage_characters')))
+          abort(404);
+      if ($r->status == 'Draft' && $r->user_id == Auth::user()->id)
+          $inventory = UserItem::with('item')->whereNull('deleted_at')->where('count', '>', '0')->where('user_id', $r->user_id)->get();
+      else
+          $inventory = isset($r->data['user']) ? parseAssetData($r->data['user']) : null;
+
+      return view('character.design.addons', [
+          'request'     => $r,
+          'categories'  => ItemCategory::visible(Auth::user() ?? null)->orderBy('sort', 'DESC')->get(),
+          'inventory'   => $inventory,
+          'items'       => Item::all()->keyBy('id'),
+          'item_filter' => Item::orderBy('name')->get()->keyBy('id'),
+          'page'        => 'update',
+      ]);
     }
 
     /**
@@ -229,7 +230,9 @@ class DesignController extends Controller {
             'subtypes'  => Subtype::visible()->where('species_id', '=', $r->species_id)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'rarities'  => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'features'  => Feature::getDropdownItems(),
-            'transformations' => ['0' => 'Select '.ucfirst(__('transformations.transformation'))] + Transformation::where('species_id','=',$r->species_id)->orWhereNull('species_id')->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),,
+            'transformations' => ['0' => 'Select '.ucfirst(__('transformations.transformation'))] +
+              Transformation::where('species_id','=',$r->species_id)->orWhereNull('species_id')
+              ->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'choiceFeatures' => $r->getAttachedTraitSelect(),
             'itemFeatures' => $r->getAttachedTraitSelects()
         ]);

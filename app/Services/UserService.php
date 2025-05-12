@@ -5,7 +5,7 @@ namespace App\Services;
 use DB;
 use Auth;
 use File;
-use Image;
+// use Image;
 use Carbon\Carbon;
 use App\Services\Service;
 use App\Models\Trade;
@@ -14,22 +14,20 @@ use App\Models\Rank\Rank;
 use App\Models\Character\CharacterTransfer;
 use App\Models\Character\CharacterDesignUpdate;
 use App\Models\Gallery\GallerySubmission;
+use App\Models\Invitation;
+use App\Models\Submission\Submission;
 use App\Models\User\UserUpdateLog;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Border\Border;
-use App\Models\Submission\Submission;
 use App\Facades\Notifications;
 use App\Facades\Settings;
-use App\Models\Invitation;
 use App\Models\WorldExpansion\Faction;
 use App\Models\WorldExpansion\FactionRankMember;
 use App\Models\WorldExpansion\Location;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 use Laravel\Fortify\Contracts\TwoFactorAuthenticationProvider;
-
-
-
 
 class UserService extends Service {
   /*
@@ -39,39 +37,39 @@ class UserService extends Service {
     |
     | Handles the creation and editing of users.
     |
-     */
+    */
 
-    /**
-     * Create a user.
-     *
-     * @param array $data
-     *
-     * @return \App\Models\User\User
-     */
-    public function createUser($data) {
-        // If the rank is not given, create a user with the lowest existing rank.
-        if (!isset($data['rank_id'])) {
-            $data['rank_id'] = Rank::orderBy('sort')->first()->id;
-        }
+  /**
+   * Create a user.
+   *
+   * @param array $data
+   *
+   * @return \App\Models\User\User
+   */
+  public function createUser($data) {
+    // If the rank is not given, create a user with the lowest existing rank.
+    if (!isset($data['rank_id'])) {
+      $data['rank_id'] = Rank::orderBy('sort')->first()->id;
+    }
 
     // Make birthday into format we can store
     $formatDate = Carbon::parse($data['dob']);
 
     $user = User::create([
-      'name' => $data['name'],
-      'email' => $data['email'] ?? null,
-      'rank_id' => $data['rank_id'],
-      'password' => isset($data['password']) ? Hash::make($data['password']) : null,
-      'birthday' => $formatDate,
+      'name'      => $data['name'],
+      'email'     => $data['email'] ?? null,
+      'rank_id'   => $data['rank_id'],
+      'password'  => isset($data['password']) ? Hash::make($data['password']) : null,
+      'birthday'  => $formatDate,
       'has_alias' => $data['has_alias'] ?? false,
       // Verify the email if we're logging them in with their social
-      'email_verified_at' => !isset($data['password']) && !isset($data['email']) ? now() : null
+      'email_verified_at' => (!isset($data['password']) && !isset($data['email'])) ? now() : null,
     ]);
     $user->settings()->create([
-      'user_id' => $user->id
+      'user_id' => $user->id,
     ]);
     $user->profile()->create([
-      'user_id' => $user->id
+      'user_id' => $user->id,
     ]);
 
     return $user;
@@ -85,66 +83,55 @@ class UserService extends Service {
    * @return \Illuminate\Contracts\Validation\Validator
    */
   public function validator(array $data, $socialite = false) {
-    return Validator::make(
-      $data,
-      [
-        'name' => ['required', 'string', 'min:3', 'max:25', 'alpha_dash', 'unique:users'],
-        'email' => ($socialite ? [] : ['required']) + [
-          'string',
-          'email',
-          'max:255',
-          'unique:users'
-        ],
-        'agreement' => ['required', 'accepted'],
-        'password' => ($socialite ? [] : ['required']) + ['string', 'min:8', 'confirmed'],
-        'dob' => [
-          'required',
-          function ($attribute, $value, $fail) {
-            $formatDate = Carbon::createFromFormat('Y-m-d', $value);
-            $now = Carbon::now();
-            if ($formatDate->diffInYears($now) < 13) {
-              $fail('You must be 13 or older to access this site.');
+    return Validator::make($data, [
+      'name'      => ['required', 'string', 'min:3', 'max:25', 'alpha_dash', 'unique:users'],
+      'email'     => ($socialite ? [] : ['required']) + ['string', 'email', 'max:255', 'unique:users'],
+      'agreement' => ['required', 'accepted'],
+      'password'  => ($socialite ? [] : ['required']) + ['string', 'min:8', 'confirmed'],
+      'dob'       => [
+        'required',
+        function ($attribute, $value, $fail) {
+          $formatDate = Carbon::createFromFormat('Y-m-d', $value);
+          $now = Carbon::now();
+          if ($formatDate->diffInYears($now) < 13) {
+            $fail('You must be 13 or older to access this site.');
+          }
+        },
+      ],
+      'code' => [
+        'string',
+        function ($attribute, $value, $fail) {
+          if (!Settings::get('is_registration_open')) {
+            if (!$value) {
+              $fail('An invitation code is required to register an account.');
+            }
+            $invitation = Invitation::where('code', $value)->whereNull('recipient_id')->first();
+            if (!$invitation) {
+              $fail('Invalid code entered.');
             }
           }
-        ],
-        'code' => [
-          'string',
-          function ($attribute, $value, $fail) {
-            if (!Settings::get('is_registration_open')) {
-              if (!$value) {
-                $fail('An invitation code is required to register an account.');
-              }
-              $invitation = Invitation::where('code', $value)->whereNull('recipient_id')->first();
-              if (!$invitation) {
-                $fail('Invalid code entered.');
-              }
-            }
-          }
-        ]
-      ] +
-        (config('app.env') == 'production'
-          ? [
-            'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
-          ]
-          : [])
-    );
+        },
+      ],
+    ] + (config('app.env') == 'production' && config('lorekeeper.extensions.use_recaptcha') ? [
+      'g-recaptcha-response' => 'required|recaptchav3:register,0.5',
+    ] : []));
   }
 
-    /**
-     * Updates a user. Used in modifying the admin user on the command line.
-     *
-     * @param array $data
-     *
-     * @return \App\Models\User\User
-     */
-    public function updateUser($data) {
-        $user = User::find($data['id']);
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-        if ($user) {
-            $user->update($data);
-        }
+  /**
+   * Updates a user. Used in modifying the admin user on the command line.
+   *
+   * @param array $data
+   *
+   * @return \App\Models\User\User
+   */
+  public function updateUser($data) {
+    $user = User::find($data['id']);
+    if (isset($data['password'])) {
+      $data['password'] = Hash::make($data['password']);
+    }
+    if ($user) {
+      $user->update($data);
+    }
 
     return $user;
   }
@@ -260,22 +247,21 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Updates the user's password.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return bool
-     */
-    public function updatePassword($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Updates the user's password.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return bool
+   */
+  public function updatePassword($data, $user) {
+    DB::beginTransaction();
 
     try {
       if (isset($user->password) && !Hash::check($data['old_password'], $user->password)) {
         throw new \Exception('Please enter your old password.');
       }
-
       if (Hash::make($data['new_password']) == $user->password) {
         throw new \Exception('Please enter a different password.');
       }
@@ -291,18 +277,18 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Updates the user's email and resends a verification email.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return bool
-     */
-    public function updateEmail($data, $user) {
-        $user->email = $data['email'];
-        $user->email_verified_at = null;
-        $user->save();
+  /**
+   * Updates the user's email and resends a verification email.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return bool
+   */
+  public function updateEmail($data, $user) {
+    $user->email = $data['email'];
+    $user->email_verified_at = null;
+    $user->save();
 
     $user->sendEmailVerificationNotification();
 
@@ -364,18 +350,11 @@ class UserService extends Service {
     DB::beginTransaction();
 
     try {
-      if (
-        app(TwoFactorAuthenticationProvider::class)->verify(
-          decrypt($data['two_factor_secret']),
-          $code['code']
-        )
-      ) {
-        $user
-          ->forceFill([
-            'two_factor_secret' => $data['two_factor_secret'],
-            'two_factor_recovery_codes' => $data['two_factor_recovery_codes']
-          ])
-          ->save();
+      if (app(TwoFactorAuthenticationProvider::class)->verify(decrypt($data['two_factor_secret']), $code['code'])) {
+        $user->forceFill([
+          'two_factor_secret'         => $data['two_factor_secret'],
+          'two_factor_recovery_codes' => $data['two_factor_recovery_codes'],
+        ])->save();
       } else {
         throw new \Exception('Provided code was invalid.');
       }
@@ -400,18 +379,11 @@ class UserService extends Service {
     DB::beginTransaction();
 
     try {
-      if (
-        app(TwoFactorAuthenticationProvider::class)->verify(
-          decrypt($user->two_factor_secret),
-          $code['code']
-        )
-      ) {
-        $user
-          ->forceFill([
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null
-          ])
-          ->save();
+      if (app(TwoFactorAuthenticationProvider::class)->verify(decrypt($user->two_factor_secret), $code['code'])) {
+        $user->forceFill([
+          'two_factor_secret'         => null,
+          'two_factor_recovery_codes' => null,
+        ])->save();
       } else {
         throw new \Exception('Provided code was invalid.');
       }
@@ -462,72 +434,70 @@ class UserService extends Service {
             $user->settings->allow_profile_comments = $data ?? 0;
             $user->settings->save();
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
-    }
-
-    /**
-     * Updates the user's avatar.
-     *
-     * @param \App\Models\User\User $user
-     * @param mixed                 $data
-     *
-     * @return bool
-     */
-    public function updateAvatar($data, $user) {
-        DB::beginTransaction();
-
-    try {
-            $avatar = $data['avatar'];
-      if (!$avatar) {
-        throw new \Exception(message: 'Please upload a file.');
-      }
-      $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
-
-      if ($user->avatar !== 'default.jpg') {
-        $file = 'images/avatars/' . $user->avatar;
-        // $destinationPath = 'uploads/' . $id . '/';
-
-        if (File::exists($file)) {
-          if (!unlink($file)) {
-            throw new \Exception('Failed to unlink old avatar.');
-          }
-        }
-      }
-
-            // Checks if uploaded file is a GIF
-            if ($avatar->getClientOriginalExtension() == 'gif') {
-                if (!$avatar->move(public_path('images/avatars'), $filename)) {
-                    throw new \Exception('Failed to move file.');
-                }
-            } else {
-
-                // crop image first
-                $cropWidth = $data['x1'] - $data['x0'];
-                $cropHeight = $data['y1'] - $data['y0'];
-
-                $image = Image::make($avatar);
-                $image->crop($cropWidth, $cropHeight, $data['x0'], $data['y0']);
-                if (!$image->resize(150, 150)->save(public_path('images/avatars/'.$filename)))
-
-                    throw new \Exception('Failed to process avatar.');
-
-            }
-
-      $user->avatar = $filename;
-      $user->save();
-
-      return $this->commitReturn($avatar);
+      return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
 
     return $this->rollbackReturn(false);
   }
+
+    /**
+     * Updates the user's avatar.
+     *
+     * @param User  $user
+     * @param mixed $data
+     *
+     * @return bool
+     */
+    public function updateAvatar($data, $user) {
+      DB::beginTransaction();
+
+      try {
+          $avatar = $data['avatar'];
+          if (!$avatar) {
+              throw new \Exception('Please upload a file.');
+          }
+          $filename = $user->id.'.'.$avatar->getClientOriginalExtension();
+
+          if ($user->avatar != 'default.jpg') {
+              $file = 'images/avatars/'.$user->avatar;
+              // $destinationPath = 'uploads/' . $id . '/';
+
+              if (File::exists($file)) {
+                  if (!unlink($file)) {
+                      throw new \Exception('Failed to unlink old avatar.');
+                  }
+              }
+          }
+
+          // Checks if uploaded file is a GIF
+          if ($avatar->getClientOriginalExtension() == 'gif') {
+              if (!$avatar->move(public_path('images/avatars'), $filename)) {
+                  throw new \Exception('Failed to move file.');
+              }
+          } else {
+              // crop image first
+              // $cropWidth = $data['x1'] - $data['x0'];
+              // $cropHeight = $data['y1'] - $data['y0'];
+              $image = Image::make($avatar);
+              // $image->crop($cropWidth, $cropHeight, $data['x0'], $data['y0']);
+              if (!$image->resize(150, 150)->save(public_path('images/avatars/'.$filename))) {
+                  throw new \Exception('Failed to process avatar.');
+              }
+          }
+
+          $user->avatar = $filename;
+          $user->save();
+
+          return $this->commitReturn($avatar);
+      } catch (\Exception $e) {
+          $this->setError('error', $e->getMessage());
+      }
+
+      return $this->rollbackReturn(false);
+  }
+
 
   /**
    * Updates the user's profile image.
@@ -593,16 +563,16 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Updates a user's username.
-     *
-     * @param string                $username
-     * @param \App\Models\User\User $user
-     *
-     * @return bool
-     */
-    public function updateUsername($username, $user) {
-        DB::beginTransaction();
+  /**
+   * Updates a user's username.
+   *
+   * @param string                $username
+   * @param \App\Models\User\User $user
+   *
+   * @return bool
+   */
+  public function updateUsername($username, $user) {
+    DB::beginTransaction();
 
     try {
       if (!config('lorekeeper.settings.allow_username_changes')) {
@@ -627,30 +597,19 @@ class UserService extends Service {
       if (config('lorekeeper.settings.username_change_cooldown')) {
         // these logs are different to the ones in the admin panel
         // different type
-        $last_change = UserUpdateLog::where('user_id', $user->id)
-          ->where('type', 'Username Change')
-          ->orderBy('created_at', 'desc')
-          ->first();
-        if (
-          $last_change &&
-          $last_change->created_at->diffInDays(Carbon::now()) <
-          config('lorekeeper.settings.username_change_cooldown')
-        ) {
-          throw new \Exception(
-            'You must wait ' .
-              config('lorekeeper.settings.username_change_cooldown') -
-              $last_change->created_at->diffInDays(Carbon::now()) .
-              ' days before changing your username again.'
-          );
+        $last_change = UserUpdateLog::where('user_id', $user->id)->where('type', 'Username Change')->orderBy('created_at', 'desc')->first();
+        if ($last_change && $last_change->created_at->diffInDays(Carbon::now()) < config('lorekeeper.settings.username_change_cooldown')) {
+          throw new \Exception('You must wait ' . config('lorekeeper.settings.username_change_cooldown') - $last_change->created_at->diffInDays(Carbon::now()) .
+            ' days before changing your username again.');
         }
       }
 
       // create log
       UserUpdateLog::create([
         'staff_id' => null,
-        'user_id' => $user->id,
-        'data' => json_encode(['old_name' => $user->name, 'new_name' => $username]),
-        'type' => 'Username Change'
+        'user_id'  => $user->id,
+        'data'     => json_encode(['old_name' => $user->name, 'new_name' => $username]),
+        'type'     => 'Username Change',
       ]);
 
       $user->name = $username;
@@ -658,24 +617,23 @@ class UserService extends Service {
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {
-    } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
 
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Bans a user.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param \App\Models\User\User $staff
-     *
-     * @return bool
-     */
-    public function ban($data, $user, $staff) {
-        DB::beginTransaction();
+  /**
+   * Bans a user.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   * @param \App\Models\User\User $staff
+   *
+   * @return bool
+   */
+  public function ban($data, $user, $staff) {
+    DB::beginTransaction();
 
     try {
       if (!$user->is_banned) {
@@ -685,97 +643,53 @@ class UserService extends Service {
         }
 
         // 1. Character transfers
-        $characterManager = new CharacterManager();
+        $characterManager = new CharacterManager;
         $transfers = CharacterTransfer::where(function ($query) use ($user) {
           $query->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
-        })
-          ->where('status', 'Pending')
-          ->get();
+        })->where('status', 'Pending')->get();
         foreach ($transfers as $transfer) {
-          $characterManager->processTransferQueue(
-            [
-              'transfer' => $transfer,
-              'action' => 'Reject',
-              'reason' => ($transfer->sender_id == $user->id ? 'Sender' : 'Recipient') .
-                ' has been banned from site activity.'
-            ],
-            $staff
-          );
+          $characterManager->processTransferQueue(['transfer' => $transfer, 'action' => 'Reject', 'reason' => ($transfer->sender_id == $user->id ? 'Sender' : 'Recipient') . ' has been banned from site activity.'], $staff);
         }
 
         // 2. Submissions and claims
-        $submissionManager = new SubmissionManager();
+        $submissionManager = new SubmissionManager;
         $submissions = Submission::where('user_id', $user->id)->where('status', 'Pending')->get();
         foreach ($submissions as $submission) {
-          $submissionManager->rejectSubmission(
-            [
-              'submission' => $submission,
-              'staff_comments' => 'User has been banned from site activity.'
-            ],
-            $staff
-          );
+          $submissionManager->rejectSubmission(['submission' => $submission, 'staff_comments' => 'User has been banned from site activity.'], $staff);
         }
 
         // 3. Gallery Submissions
-        $galleryManager = new GalleryManager();
-        $gallerySubmissions = GallerySubmission::where('user_id', $user->id)
-          ->where('status', 'Pending')
-          ->get();
+        $galleryManager = new GalleryManager;
+        $gallerySubmissions = GallerySubmission::where('user_id', $user->id)->where('status', 'Pending')->get();
         foreach ($gallerySubmissions as $submission) {
           $galleryManager->rejectSubmission($submission, $staff);
-          $galleryManager->postStaffComments(
-            $submission->id,
-            ['staff_comments' => 'User has been banned from site activity.'],
-            $staff
-          );
+          $galleryManager->postStaffComments($submission->id, ['staff_comments' => 'User has been banned from site activity.'], $staff);
         }
-        $gallerySubmissions = GallerySubmission::where('user_id', $user->id)
-          ->where('status', 'Accepted')
-          ->get();
+        $gallerySubmissions = GallerySubmission::where('user_id', $user->id)->where('status', 'Accepted')->get();
         foreach ($gallerySubmissions as $submission) {
           $submission->update(['is_visible' => 0]);
         }
 
         // 4. Design approvals
-        $requests = CharacterDesignUpdate::where('user_id', $user->id)
-          ->where(function ($query) {
-            $query->where('status', 'Pending')->orWhere('status', 'Draft');
-          })
-          ->get();
+        $requests = CharacterDesignUpdate::where('user_id', $user->id)->where(function ($query) {
+          $query->where('status', 'Pending')->orWhere('status', 'Draft');
+        })->get();
         foreach ($requests as $request) {
-          (new DesignUpdateManager())->rejectRequest(
-            ['staff_comments' => 'User has been banned from site activity.'],
-            $request,
-            $staff,
-            true
-          );
+          (new DesignUpdateManager)->rejectRequest(['staff_comments' => 'User has been banned from site activity.'], $request, $staff, true);
         }
 
         // 5. Trades
-        $tradeManager = new TradeManager();
+        $tradeManager = new TradeManager;
         $trades = Trade::where(function ($query) {
           $query->where('status', 'Open')->orWhere('status', 'Pending');
-        })
-          ->where(function ($query) use ($user) {
-            $query->where('sender_id', $user->id)->where('recipient_id', $user->id);
-          })
-          ->get();
+        })->where(function ($query) use ($user) {
+          $query->where('sender_id', $user->id)->where('recipient_id', $user->id);
+        })->get();
         foreach ($trades as $trade) {
-          $tradeManager->rejectTrade(
-            ['trade' => $trade, 'reason' => 'User has been banned from site activity.'],
-            $staff
-          );
+          $tradeManager->rejectTrade(['trade' => $trade, 'reason' => 'User has been banned from site activity.'], $staff);
         }
 
-        UserUpdateLog::create([
-          'staff_id' => $staff->id,
-          'user_id' => $user->id,
-          'data' => [
-            'is_banned' => 'Yes',
-            'ban_reason' => $data['ban_reason'] ?? null
-          ],
-          'type' => 'Ban'
-        ]);
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['is_banned' => 'Yes', 'ban_reason' => $data['ban_reason'] ?? null]), 'type' => 'Ban']);
 
         $user->settings->banned_at = Carbon::now();
 
@@ -783,16 +697,10 @@ class UserService extends Service {
         $user->rank_id = Rank::orderBy('sort')->first()->id;
         $user->save();
       } else {
-        UserUpdateLog::create([
-          'staff_id' => $staff->id,
-          'user_id' => $user->id,
-          'data' => ['ban_reason' => $data['ban_reason'] ?? null],
-          'type' => 'Ban Update'
-        ]);
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['ban_reason' => $data['ban_reason'] ?? null]), 'type' => 'Ban Update']);
       }
 
-      $user->settings->ban_reason =
-        isset($data['ban_reason']) && $data['ban_reason'] ? $data['ban_reason'] : null;
+      $user->settings->ban_reason = isset($data['ban_reason']) && $data['ban_reason'] ? $data['ban_reason'] : null;
       $user->settings->save();
 
       return $this->commitReturn(true);
@@ -803,16 +711,16 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Unbans a user.
-     *
-     * @param \App\Models\User\User $user
-     * @param \App\Models\User\User $staff
-     *
-     * @return bool
-     */
-    public function unban($user, $staff) {
-        DB::beginTransaction();
+  /**
+   * Unbans a user.
+   *
+   * @param \App\Models\User\User $user
+   * @param \App\Models\User\User $staff
+   *
+   * @return bool
+   */
+  public function unban($user, $staff) {
+    DB::beginTransaction();
 
     try {
       if (!$this->logAdminAction($staff, 'Unbanned User', 'Unbanned ' . $user->displayname)) {
@@ -826,12 +734,7 @@ class UserService extends Service {
         $user->settings->ban_reason = null;
         $user->settings->banned_at = null;
         $user->settings->save();
-        UserUpdateLog::create([
-          'staff_id' => $staff->id,
-          'user_id' => $user->id,
-          'data' => ['is_banned' => 'No'],
-          'type' => 'Unban'
-        ]);
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['is_banned' => 'No']), 'type' => 'Unban']);
       }
 
       return $this->commitReturn(true);
@@ -841,17 +744,17 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Deactivates a user.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param \App\Models\User\User $staff
-     *
-     * @return bool
-     */
-    public function deactivate($data, $user, $staff = null) {
-        DB::beginTransaction();
+  /**
+   * Deactivates a user.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   * @param \App\Models\User\User $staff
+   *
+   * @return bool
+   */
+  public function deactivate($data, $user, $staff = null) {
+    DB::beginTransaction();
 
     try {
       if (!$staff) {
@@ -907,7 +810,7 @@ class UserService extends Service {
           $tradeManager->rejectTrade(['trade' => $trade, 'reason' => 'User\'s account was deactivated.'], $staff);
         }
 
-        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => ['is_deactivated' => 'Yes', 'deactivate_reason' => $data['deactivate_reason'] ?? null], 'type' => 'Deactivation']);
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['is_deactivated' => 'Yes', 'deactivate_reason' => $data['deactivate_reason'] ?? null]), 'type' => 'Deactivation']);
 
         $user->settings->deactivated_at = Carbon::now();
 
@@ -923,7 +826,7 @@ class UserService extends Service {
           'staff_name' => $staff->name,
         ]);
       } else {
-        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => ['deactivate_reason' => $data['deactivate_reason'] ?? null], 'type' => 'Deactivation Update']);
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['deactivate_reason' => $data['deactivate_reason'] ?? null]), 'type' => 'Deactivation Update']);
       }
 
       $user->settings->deactivate_reason = isset($data['deactivate_reason']) && $data['deactivate_reason'] ? $data['deactivate_reason'] : null;
@@ -937,45 +840,45 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Reactivates a user account.
-     *
-     * @param User $user
-     * @param User $staff
-     *
-     * @return bool
-     */
-    public function reactivate($user, $staff = null) {
-      DB::beginTransaction();
+  /**
+   * Reactivates a user account.
+   *
+   * @param \App\Models\User\User $user
+   * @param \App\Models\User\User $staff
+   *
+   * @return bool
+   */
+  public function reactivate($user, $staff = null) {
+    DB::beginTransaction();
 
-      try {
-          if (!$staff) {
-              $staff = $user;
-          }
-          if ($user->is_deactivated) {
-              $user->is_deactivated = 0;
-              $user->deactivater_id = null;
-              $user->save();
+    try {
+      if (!$staff) {
+        $staff = $user;
+      }
+      if ($user->is_deactivated) {
+        $user->is_deactivated = 0;
+        $user->deactivater_id = null;
+        $user->save();
 
-              $user->settings->deactivate_reason = null;
-              $user->settings->deactivated_at = null;
-              $user->settings->save();
-              UserUpdateLog::create(['staff_id' => $staff ? $staff->id : $user->id, 'user_id' => $user->id, 'data' => ['is_deactivated' => 'No'], 'type' => 'Reactivation']);
-          }
-
-          Notifications::create('USER_REACTIVATED', User::find(Settings::get('admin_user')), [
-              'user_url'   => $user->url,
-              'user_name'  => ucfirst($user->name),
-              'staff_url'  => $staff->url,
-              'staff_name' => $staff->name,
-          ]);
-
-          return $this->commitReturn(true);
-      } catch (\Exception $e) {
-          $this->setError('error', $e->getMessage());
+        $user->settings->deactivate_reason = null;
+        $user->settings->deactivated_at = null;
+        $user->settings->save();
+        UserUpdateLog::create(['staff_id' => $staff ? $staff->id : $user->id, 'user_id' => $user->id, 'data' => json_encode(['is_deactivated' => 'No']), 'type' => 'Reactivation']);
       }
 
-      return $this->rollbackReturn(false);
+      Notifications::create('USER_REACTIVATED', User::find(Settings::get('admin_user')), [
+        'user_url'   => $user->url,
+        'user_name'  => ucfirst($user->name),
+        'staff_url'  => $staff->url,
+        'staff_name' => $staff->name,
+      ]);
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+
+    return $this->rollbackReturn(false);
   }
 
   /**

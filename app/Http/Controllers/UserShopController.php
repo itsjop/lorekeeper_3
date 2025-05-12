@@ -7,15 +7,15 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Services\UserShopManager;
 
 use App\Models\Shop\UserShop;
+use App\Models\Shop\UserShopLog;
+use App\Services\UserShopManager;
 use App\Models\Shop\UserShopStock;
 use App\Models\Item\Item;
 use App\Models\Currency\Currency;
 use App\Models\Item\ItemCategory;
 use App\Models\User\UserItem;
-use App\Models\Shop\UserShopLog;
 
 class UserShopController extends Controller
 {
@@ -41,7 +41,7 @@ class UserShopController extends Controller
 
         if($request->get('name')) $query->where(function($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->get('name') . '%');
-        }); 
+        });
 
         switch(isset($sort['sort']) ? $sort['sort'] : null) {
             default:
@@ -68,7 +68,7 @@ class UserShopController extends Controller
         }
 
         return view('home.user_shops.index_shop', [
-            'shops' => $query->paginate(30)->appends($request->query()), 
+            'shops' => $query->paginate(30)->appends($request->query()),
         ]);
     }
 
