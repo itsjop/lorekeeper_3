@@ -39,16 +39,17 @@ class CharacterImageController extends Controller {
     }
 
     return view('character.admin.upload_image', [
+      'isMyo'     => false,
       'character' => $this->character,
-      'rarities' => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'rarities'  => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'specieses' => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'subtypes' => ['0' => 'Select Subtype'] + Subtype::where('species_id', '=', $this->character->image->species_id)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'users' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
       'features' => Feature::orderBy('name')->pluck('name', 'id')->toArray(),
-      'isMyo' => false,
       'transformations' => ['0' => 'Select ' . ucfirst(__('transformations.transformation'))] + Transformation::where('species_id', '=', $this->character->image->species_id)->orWhereNull('species_id')->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
     ]);
   }
+
   /**
    * Shows the edit image subtype portion of the modal.
    *

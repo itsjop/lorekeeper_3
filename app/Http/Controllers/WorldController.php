@@ -29,9 +29,6 @@ use App\Models\Species\Species;
 use App\Models\Species\Subtype;
 use Illuminate\Http\Request;
 use App\Models\Character\CharacterTransformation as Transformation;
-use App\Models\Character\CharacterCategory;
-use App\Models\Map\Map;
-use App\Models\User\UserAward;
 
 class WorldController extends Controller {
   /*

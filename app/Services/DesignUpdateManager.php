@@ -37,13 +37,10 @@ class DesignUpdateManager extends Service {
   /**
    * Creates a character design update request (or a MYO design approval request).
    *
-   * @param Character $character
-   * @param User      $user
-   * @param Character $character
-   * @param User      $user
+   * @param \App\Models\Character\Character $character
+   * @param \App\Models\User\User           $user
    *
-   * @return bool|CharacterDesignUpdate
-   * @return bool|CharacterDesignUpdate
+   * @return \App\Models\Character\CharacterDesignUpdate|bool
    */
   public function createDesignUpdateRequest($character, $user, $image = null, $isImage = false) {
     DB::beginTransaction();
@@ -54,17 +51,24 @@ class DesignUpdateManager extends Service {
       } else {
         $image = $character->image;
       }
-      if ($character->user_id != $user->id) throw new \Exception("You do not own this character.");
-      if (CharacterDesignUpdate::where('character_id', $character->id)->active()->exists()) throw new \Exception("This " . ($character->is_myo_slot ? 'MYO slot' : 'character') . " already has an existing request. Please update that one, or delete it before creating a new one.");
-      if (!$character->isAvailable) throw new \Exception("This " . ($character->is_myo_slot ? 'MYO slot' : 'character') . " is currently in an open trade or transfer. Please cancel the trade or transfer before creating a design update.");
+
+      if ($character->user_id != $user->id) {
+        throw new \Exception('You do not own this character.');
+      }
+      if (CharacterDesignUpdate::where('character_id', $character->id)->active()->exists()) {
+        throw new \Exception('This ' . ($character->is_myo_slot ? 'MYO slot' : 'character') . ' already has an existing request. Please update that one, or delete it before creating a new one.');
+      }
+      if (!$character->isAvailable) {
+        throw new \Exception('This ' . ($character->is_myo_slot ? 'MYO slot' : 'character') . ' is currently in an open trade or transfer. Please cancel the trade or transfer before creating a design update.');
+      }
 
       $data = [
-        'user_id' => $user->id,
-        'character_id' => $character->id,
-        'status' => 'Draft',
-        'hash' => randomString(10),
+        'user_id'       => $user->id,
+        'character_id'  => $character->id,
+        'status'        => 'Draft',
+        'hash'          => randomString(10),
         'fullsize_hash' => randomString(15),
-        'update_type' => $character->is_myo_slot ? 'MYO' : 'Character',
+        'update_type'   => $character->is_myo_slot ? 'MYO' : 'Character',
 
         // Set some data based on the character's existing stats
         'rarity_id' => $image->rarity_id,
@@ -104,8 +108,8 @@ class DesignUpdateManager extends Service {
   /**
    * Saves the comment section of a character design update request.
    *
-   * @param array                 $data
-   * @param CharacterDesignUpdate $request
+   * @param array                                       $data
+   * @param \App\Models\Character\CharacterDesignUpdate $request
    *
    * @return bool
    */
@@ -253,6 +257,7 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
+
   /**
    * Saves the addons section of a character design update request.
    *
@@ -351,10 +356,10 @@ class DesignUpdateManager extends Service {
       }
 
       $request->has_addons = 1;
-      $request->data = [
+      $request->data = json_encode([
         'user'      => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
         'character' => Arr::only(getDataReadyAssets($characterAssets), ['currencies']),
-      ];
+      ]);
       $request->save();
 
       return $this->commitReturn(true);
@@ -426,6 +431,7 @@ class DesignUpdateManager extends Service {
       if ($transformation && $transformation->species_id != null) {
         if ($transformation->species_id != $species->id) throw new \Exception(ucfirst(__('transformations.transformation')) . " does not match the species.");
       }
+
       // Clear old features
       $request->features()->delete();
 
@@ -441,7 +447,7 @@ class DesignUpdateManager extends Service {
 
         // Skip the feature if the rarity is too high.
         // Comment out this check if rarities should have more berth for traits choice.
-        // if($features[$featureId]->rarity->sort > $rarity->sort) continue;
+        //if($features[$featureId]->rarity->sort > $rarity->sort) continue;
 
         // Skip the feature if it's not the correct species.
         if ($features[$featureId]->species_id && $features[$featureId]->species_id != $species->id) {
@@ -454,10 +460,11 @@ class DesignUpdateManager extends Service {
       // Update other stats
       $request->species_id = $species->id;
       $request->rarity_id = $rarity->id;
-      $request->subtype_ids = $subtypes ?? null;
+      $request->subtype_id = $subtype ? $subtype->id : null;
       $request->transformation_id = $transformation ? $transformation->id : null;
       $request->transformation_info = $transformation_info;
       $request->transformation_description = $transformation_description;
+
       $request->has_features = 1;
       $request->save();
 
@@ -505,7 +512,6 @@ class DesignUpdateManager extends Service {
 
     return $this->rollbackReturn(false);
   }
-
   /**
    * Approves a character design update request and processes it.
    *
@@ -600,6 +606,9 @@ class DesignUpdateManager extends Service {
           }
         }
       }
+
+      $extension = config('lorekeeper.settings.masterlist_image_format') != null ? config('lorekeeper.settings.masterlist_image_format') : $request->extension;
+
       // Create a new image with the request data
       $image = CharacterImage::create([
         'character_id'       => $request->character_id,
@@ -619,7 +628,7 @@ class DesignUpdateManager extends Service {
         'transformation_id' => ($request->character->is_myo_slot && isset($request->character->image->transformation_id)) ? $request->character->image->transformation_id : $request->transformation_id,
         'transformation_info' => ($request->character->is_myo_slot && isset($request->character->image->transformation_info)) ? $request->character->image->transformation_info : $request->transformation_info,
         'transformation_description' => ($request->character->is_myo_slot && isset($request->character->image->transformation_description)) ? $request->character->image->transformation_description : $request->transformation_description,
-        'sort'               => 0,
+        'sort'          => 0,
       ]);
 
       // Shift the image credits over to the new image
@@ -753,6 +762,7 @@ class DesignUpdateManager extends Service {
     return $this->rollbackReturn(false);
   }
 
+
   /**
    * Rejects a character design update request and processes it.
    * Rejection can be a soft rejection (reopens the request so the user can edit it and resubmit)
@@ -875,6 +885,7 @@ class DesignUpdateManager extends Service {
         // Set staff comment if this is not a self-cancel
         $request->staff_id = $user->id;
         $request->staff_comments = $data['staff_comments'] ?? null;
+        $request->status = 'Draft';
         if (!isset($data['preserve_queue'])) {
           $request->submitted_at = null;
         }
@@ -966,6 +977,57 @@ class DesignUpdateManager extends Service {
 
       // Delete the request
       $request->delete();
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Votes on a character design update request.
+   *
+   * @param string                                      $action
+   * @param \App\Models\Character\CharacterDesignUpdate $request
+   * @param \App\Models\User\User                       $user
+   *
+   * @return bool
+   */
+  public function voteRequest($action, $request, $user) {
+    DB::beginTransaction();
+
+    try {
+      if ($request->status != 'Pending') {
+        throw new \Exception('This request cannot be processed.');
+      }
+      if (!config('lorekeeper.extensions.design_update_voting')) {
+        throw new \Exception('This extension is not currently enabled.');
+      }
+
+      switch ($action) {
+        default:
+          flash('Invalid action.')->error();
+          break;
+        case 'approve':
+          $vote = 2;
+          break;
+        case 'reject':
+          $vote = 1;
+          break;
+      }
+
+      $voteData = (isset($request->vote_data) ? collect(json_decode($request->vote_data, true)) : collect([]));
+      $voteData->get($user->id) ? $voteData->pull($user->id) : null;
+      $voteData->put($user->id, $vote);
+      $request->vote_data = $voteData->toJson();
+
+      $request->save();
+
+      if (!$this->logAdminAction($user, 'Voted on Design Update', 'Voted on design update <a href="' . $request->url . '">#' . $request->id . '</a>')) {
+        throw new \Exception('Failed to log admin action.');
+      }
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {

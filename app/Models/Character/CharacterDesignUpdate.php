@@ -27,7 +27,7 @@ class CharacterDesignUpdate extends Model {
         'hash', 'species_id', 'subtype_ids', 'rarity_id',
         'has_comments', 'has_image', 'has_addons', 'has_features',
         'submitted_at', 'update_type', 'fullsize_hash',
-        'approval_votes', 'rejection_votes'
+        'approval_votes', 'rejection_votes', 'transformation_id','transformation_info','transformation_description'
     ];
 
     /**

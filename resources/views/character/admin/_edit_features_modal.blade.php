@@ -1,51 +1,83 @@
 {!! Form::open(['url' => 'admin/character/image/' . $image->id . '/traits']) !!}
 <div class="form-group">
-  {!! Form::label( ucfirst(__('lorekeeper.species'))) !!}
+  {!! Form::label(ucfirst(__('lorekeeper.species'))) !!}
   {!! Form::select('species_id', $specieses, $image->species_id, ['class' => 'form-control', 'id' => 'species']) !!}
 </div>
 
 <div class="form-group" id="subtypes">
-  {!! Form::label(ucfirst(__('lorekeeper.subtypes')).' (Optional)') !!}
-  {!! Form::select('subtype_ids[]', $subtypes, $image->subtypes()->pluck('subtype_id')->toArray() ?? [], ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
+  {!! Form::label(ucfirst(__('lorekeeper.subtypes')) . ' (Optional)') !!}
+  {!! Form::select('subtype_ids[]', $subtypes, $image->subtypes()->pluck('subtype_id')->toArray() ?? [], [
+      'class' => 'form-control',
+      'id' => 'subtype',
+      'multiple'
+  ]) !!}
 </div>
 
 <hr>
 <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
 <div class="form-group" id="transformations">
   {!! Form::label(ucfirst(__('transformations.transformation')) . ' (Optional)') !!}
-  {!! Form::select('transformation_id', $transformations, $image->transformation_id, ['class' => 'form-control', 'id' => 'transformation']) !!}
+  {!! Form::select('transformation_id', $transformations, $image->transformation_id, [
+      'class' => 'form-control',
+      'id' => 'transformation'
+  ]) !!}
 </div>
 <div class="form-group">
-  {!! Form::label(ucfirst(__('transformations.transformation')) . ' Tab Info (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name in the tabs, so try to keep it short.') !!}
-  {!! Form::text('transformation_info', $image->transformation_info, ['class' => 'form-control mr-2', 'placeholder' => 'Tab Info (Optional)']) !!}
+  {!! Form::label(ucfirst(__('transformations.transformation')) . ' Tab Info (Optional)') !!}{!! add_help(
+      'This is text that will show alongside the ' .
+          __('transformations.transformation') .
+          ' name in the tabs, so try to keep it short.'
+  ) !!}
+  {!! Form::text('transformation_info', $image->transformation_info, [
+      'class' => 'form-control mr-2',
+      'placeholder' => 'Tab Info (Optional)'
+  ]) !!}
 </div>
 <div class="form-group">
-  {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.') !!}
-  {!! Form::text('transformation_description', $image->transformation_description, ['class' => 'form-control mr-2', 'placeholder' => 'Origin Info (Optional)']) !!}
+  {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}{!! add_help(
+      'This is text that will show alongside the ' .
+          __('transformations.transformation') .
+          ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.'
+  ) !!}
+  {!! Form::text('transformation_description', $image->transformation_description, [
+      'class' => 'form-control mr-2',
+      'placeholder' => 'Origin Info (Optional)'
+  ]) !!}
 </div>
 <hr>
 
 <div class="form-group">
-  {!! Form::label(ucfirst(__('lorekeeper.character')).' Rarity') !!}
+  {!! Form::label(ucfirst(__('lorekeeper.character')) . ' Rarity') !!}
   {!! Form::select('rarity_id', $rarities, $image->rarity_id, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
   {!! Form::label('Traits') !!}
-  <div>
-    <a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a>
-  </div>
+  <div><a
+      href="#"
+      class="btn btn-primary mb-2"
+      id="add-feature"
+    >Add Trait</a></div>
   <div id="featureList">
     @foreach ($image->features as $feature)
       <div class="d-flex mb-2">
-        {!! Form::select('feature_id[]', $features, $feature->feature_id, ['class' => 'form-control mr-2 feature-select original', 'placeholder' => 'Select Trait']) !!}
-        {!! Form::text('feature_data[]', $feature->data, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
+        {!! Form::select('feature_id[]', $features, $feature->feature_id, [
+            'class' => 'form-control mr-2 feature-select original',
+            'placeholder' => 'Select Trait'
+        ]) !!}
+        {!! Form::text('feature_data[]', $feature->data, [
+            'class' => 'form-control mr-2',
+            'placeholder' => 'Extra Info (Optional)'
+        ]) !!}
         <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
       </div>
     @endforeach
   </div>
   <div class="feature-row hide mb-2">
-    {!! Form::select('feature_id[]', $features, null, ['class' => 'form-control mr-2 feature-select', 'placeholder' => 'Select Trait']) !!}
+    {!! Form::select('feature_id[]', $features, null, [
+        'class' => 'form-control mr-2 feature-select',
+        'placeholder' => 'Select Trait'
+    ]) !!}
     {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
     <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
   </div>
@@ -76,7 +108,6 @@
       removeFeatureRow($(this));
     })
 
-
     function addFeatureRow() {
       var $clone = $('.feature-row').clone();
       $('#featureList').append($clone);
@@ -97,7 +128,6 @@
         $clone.find('.feature-select').selectize();
       @endif
     }
-
 
     function removeFeatureRow($trigger) {
       $trigger.parent().remove();
@@ -130,9 +160,15 @@
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert("AJAX call failed: " + textStatus + ", " + errorThrown);
     });
-  };
+    $.ajax({
+      type: "GET",
+      url: "{{ url('admin/character/image/traits/transformation') }}?species=" + species + "&id=" + id,
+      dataType: "text"
+    }).done(function(res) {
+      $("#transformations").html(res);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+    });
 
-  $("#subtype").selectize({
-    maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-  });
+  };
 </script>

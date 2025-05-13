@@ -230,11 +230,9 @@ class DesignController extends Controller {
             'subtypes'  => Subtype::visible()->where('species_id', '=', $r->species_id)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'rarities'  => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'features'  => Feature::getDropdownItems(),
-            'transformations' => ['0' => 'Select '.ucfirst(__('transformations.transformation'))] +
-              Transformation::where('species_id','=',$r->species_id)->orWhereNull('species_id')
-              ->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'choiceFeatures' => $r->getAttachedTraitSelect(),
-            'itemFeatures' => $r->getAttachedTraitSelects()
+           'transformations' => ['0' => 'Select '.ucfirst(__('transformations.transformation'))] + Transformation::where('species_id','=',$r->species_id)->orWhereNull('species_id')->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+           'choiceFeatures' => $r->getAttachedTraitSelect(),
+           'itemFeatures' => $r->getAttachedTraitSelects()
         ]);
     }
 

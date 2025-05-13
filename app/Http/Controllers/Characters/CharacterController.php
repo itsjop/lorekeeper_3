@@ -32,7 +32,7 @@ use App\Models\Character\CharacterAward;
 use App\Models\Profession\Profession;
 use App\Models\Character\CharacterImage;
 use App\Services\AwardCaseManager;
-use App\Services\CharacterManager;
+use App\Services\CurrencyManager;
 use App\Services\DesignUpdateManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -796,18 +796,17 @@ class CharacterController extends Controller {
     ]);
   }
 
-  /**
-   * Opens a new design update approval request for a character. but with a specific image lmao
-   *
-   * @param App\Services\DesignUpdateManager $service
-   * @param string                           $slug
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-
-  public function postCharacterApprovalSpecificImage($slug, CharacterManager $service, $id) {
-    if (!Auth::check() || $this->character->user_id != Auth::user()->id) abort(404);
-    $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
+    /**
+     * Opens a new design update approval request for a character. but with a specific image lmao
+     *
+     * @param  App\Services\CharacterManager  $service
+     * @param  string                         $slug
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postCharacterApprovalSpecificImage($slug, CharacterManager $service, $id)
+    {
+        if(!Auth::check() || $this->character->user_id != Auth::user()->id) abort(404);
+        $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
 
     if ($request = $service->createDesignUpdateRequest($this->character, Auth::user(), $image, true)) {
       flash('Successfully created new design update request draft.')->success();

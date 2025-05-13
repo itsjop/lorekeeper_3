@@ -1,21 +1,21 @@
 @extends('world.layout', ['componentName' => 'world/index'])
 
 @section('world-title')
-  Home
+    Home
 @endsection
 
 @section('content')
-  {!! breadcrumbs(['Encyclopedia' => 'world']) !!}
+    {!! breadcrumbs(['Encyclopedia' => 'world']) !!}
 
-  <h1>World</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body text-center">
+    <h1>World</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body text-center">
           <img src="{{ asset('images/lorekeeper/characters.png') }}" alt="Characters" />
-          <h5 class="card-title">Characters</h5>
-        </div>
-        <ul class="list-group list-group-flush">
+                    <h5 class="card-title">Characters</h5>
+                </div>
+                <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <a href="{{ url('world/' . __('lorekeeper.specieses')) }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a>
           </li>
@@ -43,16 +43,16 @@
             <a
               href="{{ url('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
           </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body text-center">
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body text-center">
           <img src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Items and {{ ucfirst(__('awards.awards')) }}" />
           <h5 class="card-title">Items & Companions & {{ ucfirst(__('awards.awards')) }}</h5>
-        </div>
-        <ul class="list-group list-group-flush">
+                </div>
+                <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <a href="{{ url('world/item-categories') }}">Item Categories</a>
           </li>
@@ -81,8 +81,8 @@
           <li class="list-group-item">
             <a href="{{ url('world/recipes') }}">All Recipes</a>
           </li>
-        </ul>
-      </div>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 @endsection

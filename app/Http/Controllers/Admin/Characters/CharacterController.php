@@ -22,8 +22,10 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Character\CharacterTransformation as Transformation;
 
+
 class CharacterController extends Controller {
-  /*
+
+    /*
     |--------------------------------------------------------------------------
     | Admin / Character Controller
     |--------------------------------------------------------------------------
@@ -43,45 +45,40 @@ class CharacterController extends Controller {
     return $service->pullNumber($request->get('category'));
   }
 
-  /**
-   * Shows the create character page.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function getCreateCharacter() {
-    return view('admin.masterlist.create_character', [
-      'categories'  => CharacterCategory::orderBy('sort')->get(),
-      'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
-      'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'subtypes'    => [],
-      'features'    => Feature::getDropdownItems(1),
-      'transformations' => ['0' => 'Pick a Species First'],
-      'isMyo'       => false,
-      // 'specieses' => ['0' => 'Select '.ucfirst(__('lorekeeper.species'))] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      // 'subtypes' => ['0' => 'Pick a '.ucfirst(__('lorekeeper.species')).' First'],
+    /**
+     * Shows the create character page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getCreateCharacter() {
+      return view('admin.masterlist.create_character', [
+          'isMyo'       => false,
+            'categories'  => CharacterCategory::orderBy('sort')->get(),
+            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+            'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'subtypes'    => ['0' => 'Pick a Species First'],
+            'features'    => Feature::getDropdownItems(1),
+            'transformations' => ['0' => 'Pick a Species First'],
+        ]);
+    }
 
-    ]);
-  }
-
-  /**
-   * Shows the create MYO slot page.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function getCreateMyo() {
-    return view('admin.masterlist.create_character', [
-      'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
-      'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'subtypes'    => [],
-      'features'    => Feature::getDropdownItems(1),
-      'transformations' => ['0' => 'Pick a Species First'],
-      'isMyo'       => true,
-      // 'specieses' => ['0' => 'Select '.ucfirst(__('lorekeeper.species'))] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      // 'subtypes' => ['0' => 'Pick a '.ucfirst(__('lorekeeper.species')).' First'],
-    ]);
-  }
+    /**
+     * Shows the create MYO slot page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getCreateMyo() {
+        return view('admin.masterlist.create_character', [
+            'isMyo'       => true,
+            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+            'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'subtypes'    => ['0' => 'Pick a Species First'],
+            'features'    => Feature::getDropdownItems(1),
+            'transformations' => ['0' => 'Pick a Species First'],
+        ]);
+    }
 
   /**
    * Shows the edit image subtype portion of the modal.
@@ -110,52 +107,27 @@ class CharacterController extends Controller {
     ]);
   }
 
-  /**
-   * Creates a character.
-   *
-   * @param App\Services\CharacterManager $service
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postCreateCharacter(Request $request, CharacterManager $service) {
-    $request->validate(Character::$createRules);
-    $data = $request->only([
-      'user_id',
-      'owner_url',
-      'character_category_id',
-      'number',
-      'slug',
-      'description',
-      'is_visible',
-      'is_giftable',
-      'is_tradeable',
-      'is_sellable',
-      'sale_value',
-      'transferrable_at',
-      'use_cropper',
-      'x0',
-      'x1',
-      'y0',
-      'y1',
-      'designer_id',
-      'designer_url',
-      'artist_id',
-      'artist_url',
-      'species_id',
-      'subtype_ids',
-      'rarity_id',
-      'feature_id',
-      'feature_data',
-      'image',
-      'thumbnail',
-      'image_description',
-      'transformation_id',
-      'transformation_info',
-      'transformation_description',
-      'content_warnings',
-    ]);
-    if ($character = $service->createCharacter($data, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' created successfully.')->success();
+    /**
+     * Creates a character.
+     *
+     * @param App\Services\CharacterManager $service
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postCreateCharacter(Request $request, CharacterManager $service) {
+        $request->validate(Character::$createRules);
+        $data = $request->only([
+            'user_id', 'owner_url', 'character_category_id', 'number', 'slug',
+            'description', 'is_visible', 'is_giftable', 'is_tradeable', 'is_sellable',
+            'sale_value', 'transferrable_at', 'use_cropper',
+            'x0', 'x1', 'y0', 'y1',
+            'designer_id', 'designer_url',
+            'artist_id', 'artist_url',
+            'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
+            'image', 'thumbnail', 'image_description', 'transformation_id','transformation_info','transformation_description'
+        ]);
+        if ($character = $service->createCharacter($data, Auth::user())) {
+            flash('Character created successfully.')->success();
 
       return redirect()->to($character->url);
     } else {
@@ -167,48 +139,27 @@ class CharacterController extends Controller {
     return redirect()->back()->withInput();
   }
 
-  /**
-   * Creates an MYO slot.
-   *
-   * @param App\Services\CharacterManager $service
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postCreateMyo(Request $request, CharacterManager $service) {
-    $request->validate(Character::$myoRules);
-    $data = $request->only([
-      'user_id',
-      'owner_url',
-      'name',
-      'description',
-      'is_visible',
-      'is_giftable',
-      'is_tradeable',
-      'is_sellable',
-      'sale_value',
-      'transferrable_at',
-      'use_cropper',
-      'x0',
-      'x1',
-      'y0',
-      'y1',
-      'designer_id',
-      'designer_url',
-      'artist_id',
-      'artist_url',
-      'species_id',
-      'subtype_ids',
-      'rarity_id',
-      'feature_id',
-      'feature_data',
-      'image',
-      'thumbnail',
-      'transformation_id',
-      'transformation_info',
-      'transformation_description'
-    ]);
-    if ($character = $service->createCharacter($data, Auth::user(), true)) {
-      flash('MYO slot created successfully.')->success();
+    /**
+     * Creates an MYO slot.
+     *
+     * @param App\Services\CharacterManager $service
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postCreateMyo(Request $request, CharacterManager $service) {
+        $request->validate(Character::$myoRules);
+        $data = $request->only([
+            'user_id', 'owner_url', 'name',
+            'description', 'is_visible', 'is_giftable', 'is_tradeable', 'is_sellable',
+            'sale_value', 'transferrable_at', 'use_cropper',
+            'x0', 'x1', 'y0', 'y1',
+            'designer_id', 'designer_url',
+            'artist_id', 'artist_url',
+            'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
+            'image', 'thumbnail', 'transformation_id','transformation_info','transformation_description'
+        ]);
+        if ($character = $service->createCharacter($data, Auth::user(), true)) {
+            flash('MYO slot created successfully.')->success();
 
       return redirect()->to($character->url);
     } else {

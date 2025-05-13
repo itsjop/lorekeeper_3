@@ -27,7 +27,7 @@
         {!! Form::label('Name') !!} {!! add_help(
             'Enter a descriptive name for the type of character this slot can create, e.g. Rare MYO Slot. This will be listed on the MYO slot masterlist.'
         ) !!}
-        {!! Form::text('name', old('name'), ['class' => 'form-control ']) !!}
+        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
       </div>
     @endif
 
@@ -39,77 +39,84 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6 form-group">
-        {!! Form::label('Owner') !!}
-        {!! Form::select('user_id', $userOptions, old('user_id'), [
-            'class' => 'form-control',
-            'placeholder' => 'Select User',
-            'id' => 'userSelect'
-        ]) !!}
+      <div class="col-md-6">
+        <div class="form-group">
+          {!! Form::label('Owner') !!}
+          {!! Form::select('user_id', $userOptions, old('user_id'), [
+              'class' => 'form-control',
+              'placeholder' => 'Select User',
+              'id' => 'userSelect'
+          ]) !!}
+        </div>
       </div>
-      <div class="col-md-6 form-group">
-        {!! Form::label('Owner URL (Optional)') !!}
-        {!! Form::text('owner_url', old('owner_url'), ['class' => 'form-control']) !!}
+      <div class="col-md-6">
+        <div class="form-group">
+          {!! Form::label('Owner URL (Optional)') !!}
+          {!! Form::text('owner_url', old('owner_url'), ['class' => 'form-control']) !!}
+        </div>
       </div>
     </div>
 
     @if (!$isMyo)
       <div class="row">
-        <div class="col-md-6 form-group">
-          {!! Form::label('Character Category') !!}
-          <select
-            name="character_category_id"
-            id="category"
-            class="form-control"
-            placeholder="Select Category"
-          >
-            <option value="" data-code="">Select Category</option>
-            @foreach ($categories as $category)
-              <option
-                value="{{ $category->id }}"
-                data-code="{{ $category->code }}"
-                {{ old('character_category_id') == $category->id ? 'selected' : '' }}
-              >{{ $category->name }} ({{ $category->code }})</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="col-md-6 form-group">
-          {!! Form::label('Number') !!} {!! add_help(
-              'This number helps to identify the character and should preferably be unique either within the category, or among all characters.'
-          ) !!}
-          <div class="d-flex">
-            {!! Form::text('number', old('number'), ['class' => 'form-control mr-2', 'id' => 'number']) !!}
-            <a
-              href="#"
-              id="pull-number"
-              class="btn btn-primary"
-              data-toggle="tooltip"
-              title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code."
-            >Pull
-              Next Number</a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
+        <div class="col-md-6">
           <div class="form-group">
-            {!! Form::label('Character Code') !!} {!! add_help(
-                'This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).'
-            ) !!}
-            {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
+            {!! Form::label('Character Category') !!}
+            <select
+              name="character_category_id"
+              id="category"
+              class="form-control"
+              placeholder="Select Category"
+            >
+              <option value="" data-code="">Select Category</option>
+              @foreach ($categories as $category)
+                <option
+                  value="{{ $category->id }}"
+                  data-code="{{ $category->code }}"
+                  {{ old('character_category_id') == $category->id ? 'selected' : '' }}
+                >{{ $category->name }} ({{ $category->code }})</option>
+              @endforeach
+            </select>
           </div>
         </div>
-        @if (config('lorekeeper.settings.enable_character_content_warnings'))
-          <div class="col-md-6">
-            <div class="form-group">
-              {!! Form::label('Content Warnings') !!} {!! add_help(
-                  'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
-              ) !!}
-              {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
+        <div class="col-md-6">
+          <div class="form-group">
+            {!! Form::label('Number') !!} {!! add_help(
+                'This number helps to identify the character and should preferably be unique either within the category, or among all characters.'
+            ) !!}
+            <div class="d-flex">
+              {!! Form::text('number', old('number'), ['class' => 'form-control mr-2', 'id' => 'number']) !!}
+              <a
+                href="#"
+                id="pull-number"
+                class="btn btn-primary"
+                data-toggle="tooltip"
+                title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code."
+              >Pull
+                Next Number</a>
             </div>
           </div>
-        @endif
-      </div>
+        </div>
+        <div class="row">
+          <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
+            <div class="form-group">
+              {!! Form::label('Character Code') !!} {!! add_help(
+                  'This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).'
+              ) !!}
+              {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
+            </div>
+          </div>
+          @if (config('lorekeeper.settings.enable_character_content_warnings'))
+            <div class="col-md-6">
+              <div class="form-group">
+                {!! Form::label('Content Warnings') !!} {!! add_help(
+                    'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
+                ) !!}
+                {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
+              </div>
+            </div>
+          @endif
+        </div>
     @endif
 
     <div class="form-group">
@@ -192,7 +199,6 @@
         {!! Form::file('image', ['class' => 'custom-file-input', 'id' => 'mainImage']) !!}
       </div>
     </div>
-
     @if (config('lorekeeper.settings.masterlist_image_automation') === 1)
       <div class="form-group">
         {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
@@ -212,8 +218,7 @@
     @else
       <div class="form-group">
         {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
-        {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!}
-        {!! add_help(
+        {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
             'A thumbnail is required for the upload (used for the masterlist). You can use the image cropper (crop dimensions can be adjusted in the site code), or upload a custom thumbnail.'
         ) !!}
       </div>
@@ -396,6 +401,15 @@
     <hr>
 
     <div class="form-group">
+      {!! Form::label('Character Rarity') !!} @if ($isMyo)
+        {!! add_help(
+            'This will lock the slot into a particular rarity. Leave it blank if you would like to give the user more choices.'
+        ) !!}
+      @endif
+      {!! Form::select('rarity_id', $rarities, old('rarity_id'), ['class' => 'form-control']) !!}
+    </div>
+
+    <div class="form-group">
       {!! Form::label('Traits') !!} @if ($isMyo)
         {!! add_help(
             'These traits will be listed as required traits for the slot. The user will still be able to add on more traits, but not be able to remove these. This is allowed to conflict with the rarity above; you may add traits above the character\'s specified rarity.'
@@ -427,16 +441,15 @@
 @endsection
 
 @section('scripts')
-@parent
-@include('widgets._character_create_options_js')
-@include('widgets._image_upload_js')
-@include('widgets._datetimepicker_js')
-@include('widgets._character_warning_js')
-{{-- @include('widgets._modal_wysiwyg_js') --}}
-@if (!$isMyo)
+  @parent
+  @include('widgets._character_create_options_js')
+  @include('widgets._image_upload_js')
+  @include('widgets._datetimepicker_js')
+  @include('widgets._character_warning_js')
+  {{-- @include('widgets._modal_wysiwyg_js') --}}
+  @if (!$isMyo)
     @include('widgets._character_code_js')
-@endif
-
+  @endif
 
   <script>
     $("#species").change(function() {
@@ -474,6 +487,5 @@
     $("#subtype").selectize({
       maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
     });
-
   </script>
 @endsection
