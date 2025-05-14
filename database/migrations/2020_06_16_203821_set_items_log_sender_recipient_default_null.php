@@ -40,14 +40,14 @@ class SetItemsLogSenderRecipientDefaultNull extends Migration {
         // $table->dropConstrainedForeignId('recipient_id');
         // $table->dropConstrainedForeignId('item_id');
         // $table->dropConstrainedForeignId('stack_id');
-        // dropFK('recipient_id', 'users');
-        // dropFK('item_id', 'items');
-        // dropFK('stack_id', 'user_items');
-        // dropFK('sender_id', 'users');
-        $table->foreign('sender_id')->references('id')->on('users');
-        $table->foreign('recipient_id')->references('id')->on('users');
-        $table->foreign('item_id')->references('id')->on('items');
-        $table->foreign('stack_id')->references('id')->on('user_items');
+        dropFK('recipient_id', 'users');
+        dropFK('item_id', 'items');
+        dropFK('stack_id', 'user_items');
+        dropFK('sender_id', 'users');
+        // $table->foreign('sender_id')->references('id')->on('users');
+        // $table->foreign('recipient_id')->references('id')->on('users');
+        // $table->foreign('item_id')->references('id')->on('items');
+        // $table->foreign('stack_id')->references('id')->on('user_items');
       });
   }
 }

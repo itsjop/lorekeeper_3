@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        //z
         Schema::table('pet_variants', function (Blueprint $table) {
             $table->dropColumn('description');
         });
