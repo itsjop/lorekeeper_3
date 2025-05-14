@@ -21,7 +21,7 @@ class ChangeBirthdayColumnType extends Migration {
     public function down() {
         // #
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('birthday')->default(null)->change();
+            $table->datetime('birthday')->default(null)->change();
         });
     }
 }

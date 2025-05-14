@@ -19,9 +19,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down() {
-        Schema::table('character_images', function (Blueprint $table) {
-            //
-            $table->dropColumn('fullsize_extension');
-        });
+      dropColumnIfExists('character_images','fullsize_extension');
     }
 };

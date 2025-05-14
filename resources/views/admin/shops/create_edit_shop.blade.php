@@ -5,7 +5,11 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Shops' => 'admin/data/shops', ($shop->id ? 'Edit' : 'Create') . ' Shop' => $shop->id ? 'admin/data/shops/edit/' . $shop->id : 'admin/data/shops/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Shops' => 'admin/data/shops',
+      ($shop->id ? 'Edit' : 'Create') . ' Shop' => $shop->id ? 'admin/data/shops/edit/' . $shop->id : 'admin/data/shops/create'
+  ]) !!}
 
   <h1>{{ $shop->id ? 'Edit' : 'Create' }} Shop
     @if ($shop->id)
@@ -23,7 +27,7 @@
     {!! Form::text('name', $shop->name, ['class' => 'form-control']) !!}
   </div>
 
-  <div class="form-group">
+  <div class="form-group shop_shopImage">
     {!! Form::label('Shop Image (Optional)') !!} {!! add_help('This image is used on the shop index and on the shop page as a header.') !!}
     <div class="custom-file">
       {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
@@ -38,28 +42,36 @@
     @endif
   </div>
 
-  <div class="form-group">
+  <div class="form-group shop_shopDescription">
     {!! Form::label('Description (Optional)') !!}
     {!! Form::textarea('description', $shop->description, ['class' => 'form-control wysiwyg']) !!}
   </div>
 
-  <div class="row">
-    <div class="col-md form-group">
-      {!! Form::checkbox('is_active', 1, $shop->id ? $shop->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the shop will not be visible to regular users.') !!}
-    </div>
-    <div class="col-md form-group">
-      {!! Form::checkbox('is_hidden', 0, $shop->id ? $shop->is_hidden : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('is_hidden', 'Set Hidden', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the shop will not be visible on the shop index, but still accessible.') !!}
-    </div>
-    <div class="col-md form-group">
-      {!! Form::checkbox('is_staff', 1, $shop->id ? $shop->is_staff : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('is_staff', 'For Staff?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, the shop will not be visible to regular users, only staff.') !!}
-    </div>
-    <div class="col-md form-group">
-      {!! Form::checkbox('is_fto', 1, $shop->id ? $shop->is_fto : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('is_fto', 'FTO Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Only users who are currently FTO and staff can enter.') !!}
-    </div>
+  <div class="col-md form-group shop_isActive">
+    {!! Form::checkbox('is_active', 1, $shop->id ? $shop->is_active : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the shop will not be visible to regular users.') !!}
+  </div>
+  <div class="col-md form-group shop_isHidden">
+    {!! Form::checkbox('is_hidden', 0, $shop->id ? $shop->is_hidden : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('is_hidden', 'Set Hidden', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the shop will not be visible on the shop index, but still accessible.') !!}
+  </div>
+  <div class="col-md form-group shop_isStaffOnly">
+    {!! Form::checkbox('is_staff', 1, $shop->id ? $shop->is_staff : 0, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('is_staff', 'For Staff?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, the shop will not be visible to regular users, only staff.') !!}
+  </div>
+  <div class="col-md form-group shop_FTOonly">
+    {!! Form::checkbox('is_fto', 1, $shop->id ? $shop->is_fto : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle']) !!}
+    {!! Form::label('is_fto', 'FTO Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Only users who are currently FTO and staff can enter.') !!}
+
   </div>
 
   {{-- <div class="form-group">
@@ -72,14 +84,19 @@
     {!! Form::select('allowed_coupons[]', $coupons, json_decode($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!}
   </div> --}}
 
-  <div class="form-group">
-    {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, ['class' => 'form-check-input shop-timed shop-toggle shop-field', 'data-toggle' => 'toggle', 'id' => 'is_timed_shop']) !!}
-    {!! Form::label('is_timed_shop', 'Set Timed Shop', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Sets the shop as timed between the chosen dates.') !!}
+  <div class="form-group shop_timedShop">
+    {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, [
+        'class' => 'form-check-input shop-timed shop-toggle shop-field',
+        'data-toggle' => 'toggle',
+        'id' => 'is_timed_shop'
+    ]) !!}
+    {!! Form::label('is_timed_shop', 'Set as Timed Shop', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Sets the shop as timed between the chosen dates.') !!}
   </div>
   <div class="card mb-3 shop-timed-quantity {{ $shop->is_timed_shop ? '' : 'hide' }}">
     <div class="card-body">
       <h3>Shop Time Period</h3>
-      <p>Both of the below options can work together. If both are set, the shop will only be available during the specific time period, and on the specific days of the week and months.</p>
+      <p>Both of the below options can work together. If both are set, the shop will only be available during the specific time
+        period, and on the specific days of the week and months.</p>
 
       <h5>Specific Time Period</h5>
       <p>The time period below is between the specific dates and times, rather than an agnostic period like "every November".</p>
@@ -99,10 +116,23 @@
       <p><b>If months are set alongside days, the shop will only be available on those days in those months.</b></p>
       <div class="form-group">
         {!! Form::label('shop_days', 'Days of the Week') !!}
-        {!! Form::select('shop_days[]', ['Monday' => 'Monday', 'Tuesday' => 'Tuesday', 'Wednesday' => 'Wednesday', 'Thursday' => 'Thursday', 'Friday' => 'Friday', 'Saturday' => 'Saturday', 'Sunday' => 'Sunday'], $shop->days ?? null, [
-            'class' => 'form-control selectize',
-            'multiple' => 'multiple',
-        ]) !!}
+        {!! Form::select(
+            'shop_days[]',
+            [
+                'Monday' => 'Monday',
+                'Tuesday' => 'Tuesday',
+                'Wednesday' => 'Wednesday',
+                'Thursday' => 'Thursday',
+                'Friday' => 'Friday',
+                'Saturday' => 'Saturday',
+                'Sunday' => 'Sunday'
+            ],
+            $shop->days ?? null,
+            [
+                'class' => 'form-control selectize',
+                'multiple' => 'multiple'
+            ]
+        ) !!}
       </div>
       <div class="form-group">
         {!! Form::label('shop_months', 'Months of the Year') !!}
@@ -120,18 +150,13 @@
                 'September' => 'September',
                 'October' => 'October',
                 'November' => 'November',
-                'December' => 'December',
+                'December' => 'December'
             ],
             $shop->months ?? null,
-            ['class' => 'form-control selectize', 'multiple' => 'multiple'],
+            ['class' => 'form-control selectize', 'multiple' => 'multiple']
         ) !!}
       </div>
     </div>
-  </div>
-
-  <div class="form-group">
-    {!! Form::checkbox('is_staff', 1, $shop->id ? $shop->is_staff : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_staff', 'For Staff?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, the shop will not be visible to regular users, only staff.') !!}
   </div>
 
   {{-- <div class="form-group">
@@ -212,39 +237,26 @@
   @include('widgets._datetimepicker_js')
   @parent
   <script>
-    $('.selectize').selectize();
-
-    $('#is_timed_shop').change(function() {
-      if ($(this).is(':checked')) {
-        $('.shop-timed-quantity').removeClass('hide');
-      } else {
-        $('.shop-timed-quantity').addClass('hide');
-      }
-    });
-
-    // edit stock function
-    function editStock(id) {
-      loadModal("{{ url('admin/data/shops/stock/edit') }}/" + id, 'Edit Stock');
-    }
-
-    function deleteStock(id) {
-      loadModal("{{ url('admin/data/shops/stock/delete') }}/" + id, 'Delete Stock');
-    }
     $(document).ready(function() {
+      $('.selectize').selectize();
+
+
+      // edit stock function
+      function editStock(id) {
+        loadModal("{{ url('admin/data/shops/stock/edit') }}/" + id, 'Edit Stock');
+      }
+
+      function deleteStock(id) {
+        loadModal("{{ url('admin/data/shops/stock/delete') }}/" + id, 'Delete Stock');
+      }
+
       var $shopStock = $('#shopStock');
       var $stock = $('#shopStockData').find('.stock');
 
-      // $('#use_coupons').change(function() {
-      //   if ($(this).is(':checked')) {
-      //     $('.coupon-row').removeClass('hide');
-      //   } else {
-      //     $('.coupon-row').addClass('hide');
-      //   }
-      // });
-
-      // $('#allowed_coupons').selectize({
-      //   maxItems: 5
-      // });
+      $('#is_timed_shop').change(function() {
+        if ($(this).is(':checked')) $('.shop-timed-quantity').removeClass('hide');
+        else $('.shop-timed-quantity').addClass('hide');
+      });
 
       $('.delete-shop-button').on('click', function(e) {
         e.preventDefault();
@@ -252,7 +264,12 @@
       });
       $('.add-stock-button').on('click', function(e) {
         e.preventDefault();
-        loadModal("{{ url('admin/data/shops/stock') }}/{{ $shop->id }}", 'Add Stock');
+
+        var clone = $stock.clone();
+        $shopStock.append(clone);
+        clone.removeClass('hide');
+        attachStockListeners(clone);
+        refreshStockFieldNames();
       });
 
       $('#add-feature').on('click', function(e) {
@@ -280,10 +297,98 @@
         $trigger.parent().remove();
       }
 
-      $('.is-restricted-class').change(function(e) {
-        $('.br-form-group').css('display', this.checked ? 'block' : 'none')
-      })
+      $('.is-restricted-class').change((e) => $('.br-form-group').css('display', this.checked ? 'block' : 'none'))
       $('.br-form-group').css('display', $('.is-restricted-class').prop('checked') ? 'block' : 'none')
+
+
+      attachStockListeners($('#shopStock .stock'));
+
+      function attachStockListeners(stock) {
+        stock.find('.stock-toggle').bootstrapToggle();
+        stock.find('.stock-limited').on('change', function(e) {
+          var $this = $(this);
+          if ($this.is(':checked')) {
+            $this.parent().parent().parent().parent().find('.stock-limited-quantity').removeClass('hide');
+          } else {
+            $this.parent().parent().parent().parent().find('.stock-limited-quantity').addClass('hide');
+          }
+        });
+        stock.find('.remove-stock-button').on('click', function(e) {
+          e.preventDefault();
+          $(this).parent().parent().parent().remove();
+          refreshStockFieldNames();
+        });
+        stock.find('.card-body [data-toggle=tooltip]').tooltip({
+          html: true
+        });
+      }
+
+      function refreshStockFieldNames() {
+        $('.stock').each(function(index) {
+          var $this = $(this);
+          var key = index;
+          $this.find('.stock-field').each(function() {
+            $(this).attr('name', $(this).data('name') + '[' + key + ']');
+          });
+        });
+      }
+
+    });
+  </script>
+@endsection
+
+@section('scripts')
+  @parent
+  <script>
+    $(document).ready(function() {
+      var $shopStock = $('#shopStock');
+      var $stock = $('#shopStockData').find('.stock');
+
+      $('.delete-shop-button').on('click', function(e) {
+        e.preventDefault();
+        loadModal("{{ url('admin/data/shops/delete') }}/{{ $shop->id }}", 'Delete Shop');
+      });
+      $('.add-stock-button').on('click', function(e) {
+        e.preventDefault();
+
+        var clone = $stock.clone();
+        $shopStock.append(clone);
+        clone.removeClass('hide');
+        attachStockListeners(clone);
+        refreshStockFieldNames();
+      });
+
+      attachStockListeners($('#shopStock .stock'));
+
+      function attachStockListeners(stock) {
+        stock.find('.stock-toggle').bootstrapToggle();
+        stock.find('.stock-limited').on('change', function(e) {
+          var $this = $(this);
+          if ($this.is(':checked')) {
+            $this.parent().parent().parent().parent().find('.stock-limited-quantity').removeClass('hide');
+          } else {
+            $this.parent().parent().parent().parent().find('.stock-limited-quantity').addClass('hide');
+          }
+        });
+        stock.find('.remove-stock-button').on('click', function(e) {
+          e.preventDefault();
+          $(this).parent().parent().parent().remove();
+          refreshStockFieldNames();
+        });
+        stock.find('.card-body [data-toggle=tooltip]').tooltip({
+          html: true
+        });
+      }
+
+      function refreshStockFieldNames() {
+        $('.stock').each(function(index) {
+          var $this = $(this);
+          var key = index;
+          $this.find('.stock-field').each(function() {
+            $(this).attr('name', $(this).data('name') + '[' + key + ']');
+          });
+        });
+      }
     });
   </script>
 @endsection

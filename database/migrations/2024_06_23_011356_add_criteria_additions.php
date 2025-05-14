@@ -49,11 +49,7 @@ class AddCriteriaAdditions extends Migration {
     public function down() {
         Schema::dropIfExists('criteria_defaults');
         Schema::dropIfExists('default_criteria');
-        Schema::table('prompt_criteria', function (Blueprint $table) {
-            $table->dropcolumn('criterion_currency_id');
-        });
-        Schema::table('prompt_criteria', function (Blueprint $table) {
-            $table->dropcolumn('criterion_currency_id');
-        });
+        dropColumnIfExists('prompt_criteria', 'criterion_currency_id');
+        dropColumnIfExists('prompt_criteria', 'criterion_currency_id');
     }
 }
