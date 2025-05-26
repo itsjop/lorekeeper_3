@@ -38,7 +38,7 @@ class HomeController extends Controller {
         }
 
         $featured = [];
-        $specieses = Species::orderBy('specieses.sort', 'DESC')->pluck('id')->toArray();
+        $specieses = Species::visible(0)->orderBy('specieses.sort', 'DESC')->pluck('id')->toArray();
         
         foreach($specieses as $species) {
             $randomSpecies = HomeController::randomCharacter($species);
