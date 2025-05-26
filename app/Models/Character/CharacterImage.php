@@ -301,7 +301,7 @@ class CharacterImage extends Model {
             })->all();
         }
 
-        return '<div class="d-flex">'.implode('', $titles).'</div>';
+        return '<div class="d-flex flex-wrap">'.implode('', $titles).'</div>';
     }
 
     /**
