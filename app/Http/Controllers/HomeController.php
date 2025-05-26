@@ -59,21 +59,23 @@ class HomeController extends Controller {
     /**
      * Gets random character from specified species.
      *
-     * @param  int (species_id)          $species
+     * @param int (species_id) $species
      */
     public function randomCharacter(int $species) {
         $query = Character::with('user.rank')->with('image.features')->with('rarity')->with('image.species')->myo(0)->where(function ($query) {
-               $query->where('is_gift_art_allowed', '>=', 1)
-                     ->orWhere('is_gift_writing_allowed', '>=', 1);
-           });
-        $imageQuery = CharacterImage::images(Auth::check() ? Auth::user() : null)->with('features')->with('rarity')->with('species')->where('species_id', $species)->whereIn('id', $query->pluck('character_image_id')->toArray());
+            $query->where('is_gift_art_allowed', '>=', 1)
+                ->orWhere('is_gift_writing_allowed', '>=', 1);
+        });
+        $imageQuery = CharacterImage::images(Auth::user() ?? null)->with('features')->with('rarity')->with('species')->where('species_id', $species)->whereIn('id', $query->pluck('character_image_id')->toArray());
 
         $query->whereIn('id', $imageQuery->pluck('character_id')->toArray());
 
-        if(!Auth::check() || !Auth::user()->hasPower('manage_characters')) $query->visible();
+        if (!Auth::check() || !Auth::user()->hasPower('manage_characters')) {
+            $query->visible();
+        }
 
         $allCharacters = $query->get();
-        
+
         if (!count($allCharacters)) {
             return false;
         }
