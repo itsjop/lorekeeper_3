@@ -36,9 +36,25 @@
             {!! Form::label('Rarity (Optional)') !!}
             {!! Form::select('rarity_id', $rarities, $title->rarity_id, ['class' => 'form-control', 'placeholder' => 'Select a Rarity']) !!}
         </div>
-        <div class="col-md-6 form-group">
-            {!! Form::label('Colour (Optional)') !!}
-            {!! Form::color('colour', $title->colour, ['class' => 'form-control']) !!}
+        <div class="col-md-6 form-group" id="colours">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    {!! Form::label('colours', 'Colours (Optional)') !!}
+                </div>
+                <div class="btn btn-secondary" id="addColour">Add Colour</div>
+            </div>
+            @if (!$title->id)
+                {!! Form::color('colours[]', $title->colour, ['class' => 'form-control']) !!}
+            @else
+                @foreach($title->colours as $colour)
+                    <div class="form-group d-flex mt-1">
+                        {!! Form::color('colours[]', $colour, ['class' => 'form-control']) !!}
+                        <div class="text-right">
+                            <button type="button" class="btn btn-danger removeColour ml-2">X</button>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 
@@ -65,6 +81,13 @@
 
     {!! Form::close() !!}
 
+    <div class="colourForm hide form-group d-flex mt-1">
+        {!! Form::color('colours[]', null, ['class' => 'form-control']) !!}
+        <div class="text-right">
+            <button type="button" class="btn btn-danger removeColour ml-2">X</button>
+        </div>
+    </div>
+
     @if ($title->id)
         <h3>Preview</h3>
         <div class="card mb-3">
@@ -83,6 +106,27 @@
                 e.preventDefault();
                 loadModal("{{ url('admin/data/character-titles/delete') }}/{{ $title->id }}", 'Delete Title');
             });
+
+            $('#addColour').on('click', function(e) {
+                e.preventDefault();
+                let $colourForm = $('.colourForm').clone();
+                $('#colours').append($colourForm);
+                // Remove the 'hide' class to make it visible and the colourForm class to make it unique
+                $colourForm.removeClass('hide').removeClass('colourForm');
+
+                attachRemoveListener($colourForm.find('.removeColour'));
+            });
+
+            $('.removeColour').each(function() {
+                attachRemoveListener($(this));
+            });
+
+            function attachRemoveListener(node) {
+                node.on('click', function(e) {
+                    e.preventDefault();
+                    $(this).parent().parent().remove();
+                });
+            }
         });
     </script>
 @endsection

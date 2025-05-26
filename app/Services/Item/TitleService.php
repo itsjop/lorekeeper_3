@@ -41,7 +41,8 @@ class TitleService extends Service {
     public function getTagData($tag) {
         return [
             'type'      => $tag->data['type'] ?? null,
-            'title_ids' => $tag->data['title_ids'] ?? [],
+            'title_ids' => isset($tag->data['title_ids']) ? $tag->data['title_ids'] : [],
+            'titles'    => CharacterTitle::whereIn('id', isset($tag->data['title_ids']) ? $tag->data['title_ids'] : [])->orderBy('title')->pluck('title', 'id')->toArray(),
         ];
     }
 
@@ -80,7 +81,7 @@ class TitleService extends Service {
         DB::beginTransaction();
 
         try {
-            $character = Character::find($data['character_id']);
+            $character = Character::find($data['title_character_id']);
             if (!$character) {
                 throw new \Exception('Character not found.');
             }
@@ -91,11 +92,17 @@ class TitleService extends Service {
                     throw new \Exception('This item does not belong to you.');
                 }
 
+                $tag = $stack->item->tag('title');
+
+                // Check $data['title_id'] is in the title_ids array
+                if ($tag->getData()['type'] == 'choice' && !in_array($data['title_id'], $tag->getData()['title_ids'])) {
+                    throw new \Exception('Invalid title.');
+                }
+
                 // Next, try to delete the title item. If successful, we can start distributing rewards.
                 if ((new InventoryManager)->debitStack($stack->user, 'Title Used', [
                     'data' => 'Used on '.$character->displayName,
                 ], $stack, $data['quantities'][$key])) {
-                    $tag = $stack->item->tag('title');
                     if ($tag->getData()['type'] == 'choice') {
                         $title = CharacterTitle::find($data['title_id']);
                         if (!$title) {

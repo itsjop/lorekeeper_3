@@ -52,7 +52,7 @@ class CharacterImageTitle extends Model {
 
     /**********************************************************************************************
 
-        ATTRIBUTES
+        OTHER FUNCTIONS
 
     **********************************************************************************************/
 
@@ -61,11 +61,11 @@ class CharacterImageTitle extends Model {
      *
      * @return string
      */
-    public function getDisplayTitleAttribute() {
+    public function displayTitle($padding = true) {
         if ($this->title_id) {
-            return $this->title->displayTitle($this->data);
+            return $this->title->displayTitle($this->data, $padding);
         }
 
-        return '<div><span class="badge ml-1" style="color: white; background-color: #ddd;">'.($this->data['short'] ?? $this->data['full']).'</span></div>';
+        return '<div><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background-color: #ddd;">'.($this->data['short'] ?? $this->data['full']).'</span></div>';
     }
 }

@@ -282,10 +282,12 @@ class CharacterImage extends Model {
     public function getDisplayTitlesAttribute() {
         $titles = [];
         foreach ($this->titles as $title) {
-            $titles[] = $title->displayTitle;
+            $isFirst = $title === $this->titles->first();
+
+            $titles[] = $title->displayTitle(!$isFirst);
         }
 
-        return '<div class="row">'.implode('', $titles).'</div>';
+        return '<div class="d-flex">'.implode('', $titles).'</div>';
     }
 
     /**

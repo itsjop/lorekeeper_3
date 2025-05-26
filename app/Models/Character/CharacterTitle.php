@@ -12,7 +12,7 @@ class CharacterTitle extends Model {
      * @var array
      */
     protected $fillable = [
-        'title', 'short_title', 'sort', 'has_image', 'description', 'parsed_description', 'rarity_id', 'colour',
+        'title', 'short_title', 'sort', 'has_image', 'description', 'parsed_description', 'rarity_id', 'colours',
     ];
 
     /**
@@ -44,6 +44,15 @@ class CharacterTitle extends Model {
         'short_title' => 'nullable|between:3,25',
         'description' => 'nullable',
         'image'       => 'mimes:png',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'colours' => 'array',
     ];
 
     /**********************************************************************************************
@@ -89,7 +98,7 @@ class CharacterTitle extends Model {
      * @return string
      */
     public function getDisplayNameFullAttribute() {
-        return '<a href="'.$this->url.'" style="color: '.$this->colour.' !important;" class="display-rarity">'.$this->title.'</a>'.($this->short_title ? ' ('.$this->short_title.')' : '').($this->rarity ? ' ('.$this->rarity->displayName.')' : '');
+        return '<a href="'.$this->url.'" style="background-image: '.$this->backgroundColour.' !important;" class="gradient-text display-rarity">'.$this->title.'</a>'.($this->short_title ? ' ('.$this->short_title.')' : '').($this->rarity ? ' ('.$this->rarity->displayName.')' : '');
     }
 
     /**
@@ -179,6 +188,27 @@ class CharacterTitle extends Model {
 
     /**********************************************************************************************
 
+        ATTRIBUTES
+
+    **********************************************************************************************/
+
+    /**
+     * Returns the gradient of the colours for the title.
+     * 
+     * @return string
+     */
+    public function getBackgroundColourAttribute() {
+        if (!$this->colours) {
+            return 'linear-gradient(to right, #ddd)';
+        }
+
+        $colours = implode(', ', $this->colours);
+        return "linear-gradient(to right, {$colours})";
+    }
+
+
+    /**********************************************************************************************
+
         OTHER FUNCTIONS
 
     **********************************************************************************************/
@@ -188,8 +218,8 @@ class CharacterTitle extends Model {
      *
      * @param mixed $data
      */
-    public function displayTitle($data) {
-        return '<a href="'.$this->idUrl.'"><span class="badge ml-1" style="color: white; background-color: '.$this->colour.';"'.
+    public function displayTitle($data, $padding = true) {
+        return '<a href="'.$this->idUrl.'"><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background: '.$this->backgroundColour.';"'.
             (isset($data['full']) ? ' data-toggle="tooltip" title="'.$this->title.'">'.$data['full'] : '>'.$this->title)
         .'</span></a>';
     }

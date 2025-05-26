@@ -72,7 +72,7 @@ class CharacterTitleController extends Controller {
     public function postCreateEditTitle(Request $request, CharacterTitleService $service, $id = null) {
         $id ? $request->validate(CharacterTitle::$updateRules) : $request->validate(CharacterTitle::$createRules);
         $data = $request->only([
-            'title', 'short_title', 'rarity_id', 'description', 'image', 'remove_image', 'colour',
+            'title', 'short_title', 'rarity_id', 'description', 'image', 'remove_image', 'colours',
         ]);
         if ($id && $service->updateTitle(CharacterTitle::find($id), $data, Auth::user())) {
             flash('Title updated successfully.')->success();
