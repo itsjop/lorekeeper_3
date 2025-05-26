@@ -59,6 +59,8 @@ class CharacterImageTitle extends Model {
     /**
      * Displays the title.
      *
+     * @param mixed $padding
+     *
      * @return string
      */
     public function displayTitle($padding = true) {
@@ -66,6 +68,6 @@ class CharacterImageTitle extends Model {
             return $this->title->displayTitle($this->data, $padding);
         }
 
-        return '<div><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background-color: #ddd;">'.($this->data['short'] ?? $this->data['full']).'</span></div>';
+        return '<div><span class="badge '.($padding ? 'ml-1' : '').'" style="color: white; background-color: #ddd;">'.($this->data['short'] ?? $this->data['full']).'</span></div>';
     }
 }
