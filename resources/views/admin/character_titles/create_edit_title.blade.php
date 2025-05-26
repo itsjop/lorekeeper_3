@@ -46,7 +46,7 @@
             @if (!$title->id)
                 {!! Form::color('colours[]', $title->colour, ['class' => 'form-control']) !!}
             @else
-                @foreach($title->colours as $colour)
+                @foreach ($title->colours as $colour)
                     <div class="form-group d-flex mt-1">
                         {!! Form::color('colours[]', $colour, ['class' => 'form-control']) !!}
                         <div class="text-right">
