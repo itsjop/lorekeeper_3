@@ -10,6 +10,7 @@ use App\Models\Character\CharacterImage;
 use App\Services\LinkService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
@@ -51,6 +52,7 @@ class HomeController extends Controller {
             'about'               => SitePage::where('key', 'about')->first(),
             'gallerySubmissions'  => $gallerySubmissions,
             'featuredChars'       => $featured,
+            'featuredFirst'       => Arr::first($specieses),
         ]);
     }
 
