@@ -41,8 +41,8 @@ class TitleService extends Service {
     public function getTagData($tag) {
         return [
             'type'      => $tag->data['type'] ?? null,
-            'title_ids' => isset($tag->data['title_ids']) ? $tag->data['title_ids'] : [],
-            'titles'    => CharacterTitle::whereIn('id', isset($tag->data['title_ids']) ? $tag->data['title_ids'] : [])->orderBy('title')->pluck('title', 'id')->toArray(),
+            'title_ids' => $tag->data['title_ids'] ?? [],
+            'titles'    => CharacterTitle::whereIn('id', $tag->data['title_ids'] ?? [])->orderBy('title')->pluck('title', 'id')->toArray(),
         ];
     }
 

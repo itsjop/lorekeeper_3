@@ -23,6 +23,15 @@ class CharacterTitle extends Model {
     protected $table = 'character_titles';
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'colours' => 'array',
+    ];
+
+    /**
      * Validation rules for creation.
      *
      * @var array
@@ -44,15 +53,6 @@ class CharacterTitle extends Model {
         'short_title' => 'nullable|between:3,25',
         'description' => 'nullable',
         'image'       => 'mimes:png',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'colours' => 'array',
     ];
 
     /**********************************************************************************************
@@ -194,7 +194,7 @@ class CharacterTitle extends Model {
 
     /**
      * Returns the gradient of the colours for the title.
-     * 
+     *
      * @return string
      */
     public function getBackgroundColourAttribute() {
@@ -203,9 +203,9 @@ class CharacterTitle extends Model {
         }
 
         $colours = implode(', ', $this->colours);
+
         return "linear-gradient(to right, {$colours})";
     }
-
 
     /**********************************************************************************************
 
@@ -217,9 +217,10 @@ class CharacterTitle extends Model {
      * Displays the title like a typing.
      *
      * @param mixed $data
+     * @param mixed $padding
      */
     public function displayTitle($data, $padding = true) {
-        return '<a href="'.$this->idUrl.'"><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background: '.$this->backgroundColour.';"'.
+        return '<a href="'.$this->idUrl.'"><span class="badge '.($padding ? 'ml-1' : '').'" style="color: white; background: '.$this->backgroundColour.';"'.
             (isset($data['full']) ? ' data-toggle="tooltip" title="'.$this->title.'">'.$data['full'] : '>'.$this->title)
         .'</span></a>';
     }

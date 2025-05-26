@@ -2,16 +2,14 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::table('character_titles', function (Blueprint $table) {
             // rename colour to colours and convert existing data to array
             $table->renameColumn('colour', 'colours');
@@ -35,8 +33,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         // Revert the colours to a single string if they were previously a single colour
         DB::table('character_titles')->get()->each(function ($title) {
             // Convert the existing colours array back to a single string
