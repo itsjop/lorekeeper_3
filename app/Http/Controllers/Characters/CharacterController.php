@@ -197,7 +197,6 @@ class CharacterController extends Controller {
      * @param App\Services\CharacterManager $service
      * @param string                        $slug
      *
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postSortTitles(CharacterManager $service, Request $request, $slug) {

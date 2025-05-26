@@ -1357,7 +1357,7 @@ class CharacterManager extends Service {
     }
 
     /**
-     * Sorts a character's titles
+     * Sorts a character's titles.
      *
      * @param Character $character
      * @param array     $data
@@ -1368,7 +1368,6 @@ class CharacterManager extends Service {
         DB::beginTransaction();
 
         try {
-
             // explode the sort array and reverse it since the order is inverted
             $sort = array_reverse(explode(',', $data));
 

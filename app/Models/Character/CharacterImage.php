@@ -294,8 +294,9 @@ class CharacterImage extends Model {
                 return $title->title ? $title->title->sort : -1;
             })->values();
 
-            $titles = $sortedTitles->map(function ($title, $index) use ($sortedTitles) {
+            $titles = $sortedTitles->map(function ($title, $index) {
                 $isFirst = $index === 0;
+
                 return $title->displayTitle(!$isFirst);
             })->all();
         }
