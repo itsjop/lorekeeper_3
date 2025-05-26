@@ -281,10 +281,23 @@ class CharacterImage extends Model {
      */
     public function getDisplayTitlesAttribute() {
         $titles = [];
-        foreach ($this->titles as $title) {
-            $isFirst = $title === $this->titles->first();
+        // check sort is set on the titles
+        if (!$this->titles()->whereNull('sort')->count()) {
+            $firstTitle = $this->titles()->orderByDesc('sort')->first();
+            foreach ($this->titles()->orderByDesc('sort')->get() as $title) {
+                $isFirst = $title->id === ($firstTitle ? $firstTitle->id : null);
+                $titles[] = $title->displayTitle(!$isFirst);
+            }
+        } else {
+            // order them by the title->title->sort
+            $sortedTitles = $this->titles()->get()->sortByDesc(function ($title) {
+                return $title->title ? $title->title->sort : -1;
+            })->values();
 
-            $titles[] = $title->displayTitle(!$isFirst);
+            $titles = $sortedTitles->map(function ($title, $index) use ($sortedTitles) {
+                $isFirst = $index === 0;
+                return $title->displayTitle(!$isFirst);
+            })->all();
         }
 
         return '<div class="d-flex">'.implode('', $titles).'</div>';

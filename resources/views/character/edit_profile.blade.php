@@ -80,4 +80,56 @@
     </div>
     {!! Form::close() !!}
 
+    <hr />
+
+    <h5>Sort Character Titles</h5>
+    <p>Here you can order your character's titles however you like! By default, the titles will be ordered by the same sorting as appears on the world page.</p>
+    @if (!count($character->image->titles))
+        <p>No titles found.</p>
+    @else
+        <table class="table table-sm title-table">
+            <tbody id="sortable" class="sortable">
+                @foreach ($character->image->titles()->orderByDesc('sort')->get() as $title)
+                    <tr class="sort-item" data-id="{{ $title->id }}">
+                        <td>
+                            <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+                            {!! $title->title ? $title->title->displayName : $title->data['full'] !!}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="mb-4 float-right">
+            {!! Form::open(['url' => $character->url . '/profile/titles/sort']) !!}
+            {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
+            {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+            {!! Form::close() !!}
+        </div>
+    @endif
+@endsection
+@section('scripts')
+    @parent
+    <script>
+        $(document).ready(function() {
+            $('.handle').on('click', function(e) {
+                e.preventDefault();
+            });
+            $("#sortable").sortable({
+                items: '.sort-item',
+                handle: ".handle",
+                placeholder: "sortable-placeholder",
+                stop: function(event, ui) {
+                    $('#sortableOrder').val($(this).sortable("toArray", {
+                        attribute: "data-id"
+                    }));
+                },
+                create: function() {
+                    $('#sortableOrder').val($(this).sortable("toArray", {
+                        attribute: "data-id"
+                    }));
+                }
+            });
+            $("#sortable").disableSelection();
+        });
+    </script>
 @endsection

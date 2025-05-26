@@ -1357,6 +1357,34 @@ class CharacterManager extends Service {
     }
 
     /**
+     * Sorts a character's titles
+     *
+     * @param Character $character
+     * @param array     $data
+     *
+     * @return bool
+     */
+    public function sortCharacterTitles($character, $data) {
+        DB::beginTransaction();
+
+        try {
+
+            // explode the sort array and reverse it since the order is inverted
+            $sort = array_reverse(explode(',', $data));
+
+            foreach ($sort as $key => $s) {
+                CharacterImageTitle::where('id', $s)->where('character_image_id', $character->character_image_id)->update(['sort' => $key]);
+            }
+
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
+
+    /**
      * Deletes a character.
      *
      * @param \App\Models\Character\Character $character
