@@ -1,4 +1,5 @@
 # BROKEN
+- [ ] shops still fucked
 - [ ] appprovals
 - [ ] item category search no results
 - [ ] shop editing super broken
@@ -29,6 +30,7 @@
 # BONUSES
 - [ ] Combine News and Sales to a Newsfeed
 - [ ] Get recursive Image Optimization CLI script
+- [ ] re-add Recipies to prompt page
 
 # CSS
 - [ ] store current vanilla version of lorekeeper for the "accessible" version

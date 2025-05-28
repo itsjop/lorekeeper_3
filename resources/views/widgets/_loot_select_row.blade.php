@@ -50,9 +50,10 @@
         'placeholder' => 'Select Loot Table'
     ]) !!}
   @endif
-  @if ($showRecipes)
+  {{-- TODO: 'recipies' is undefined, not sure where its coming from --}}
+  {{-- @if ($showRecipes)
       {!! Form::select('rewardable_id[]', $recipes, null, ['class' => 'form-control recipe-select', 'placeholder' => 'Select Recipe']) !!}
-  @endif
+  @endif --}}
   @if ($showRaffles)
     {!! Form::select('rewardable_id[]', $raffles, null, [
         'class' => 'form-control raffle-select',

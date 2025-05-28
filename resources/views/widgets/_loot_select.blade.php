@@ -26,13 +26,6 @@
   >
     Add {{ isset($progression) && $progression ? 'Progression' : 'Reward' }}
   </a>
-  <a
-    href="#"
-    class="btn btn-outline-info"
-    id="addLoot"
-  >
-    Add {{ isset($progression) && $progression ? 'Progression' : 'Reward' }}
-  </a>
 
 </div>
 <table class="table table-sm" id="lootTable">

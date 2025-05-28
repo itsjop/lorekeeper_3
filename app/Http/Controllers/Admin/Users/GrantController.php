@@ -26,69 +26,81 @@ use App\Services\BorderService;
 use App\Services\AwardCaseManager;
 
 class GrantController extends Controller {
-    /**
-     * Show the currency grant page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getUserCurrency() {
-        return view('admin.grants.user_currency', [
-            'users'          => User::orderBy('id')->pluck('name', 'id'),
-            'userCurrencies' => Currency::where('is_user_owned', 1)->orderBy('sort_user', 'DESC')->pluck('name', 'id'),
-        ]);
+  /**
+   * Show the currency grant page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserCurrency() {
+    return view('admin.grants.user_currency', [
+      'users'          => User::orderBy('id')->pluck('name', 'id'),
+      'userCurrencies' => Currency::where('is_user_owned', 1)->orderBy('sort_user', 'DESC')->pluck('name', 'id'),
+    ]);
+  }
+
+  /**
+   * Grants or removes currency from multiple users.
+   *
+   * @param App\Services\CurrencyManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postUserCurrency(Request $request, CurrencyManager $service) {
+    $data = $request->only(['names', 'currency_id', 'quantity', 'data']);
+    if ($service->grantUserCurrencies($data, Auth::user())) {
+      flash('Currency granted successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Grants or removes currency from multiple users.
-     *
-     * @param App\Services\CurrencyManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postUserCurrency(Request $request, CurrencyManager $service) {
-        $data = $request->only(['names', 'currency_id', 'quantity', 'data']);
-        if ($service->grantUserCurrencies($data, Auth::user())) {
-            flash('Currency granted successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
+    return redirect()->back();
+  }
 
-        return redirect()->back();
+  /**
+   * Show the item grant page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getItems() {
+    return view('admin.grants.items', [
+      'users' => User::orderBy('id')->pluck('name', 'id'),
+      'items' => Item::orderBy('name')->pluck('name', 'id'),
+    ]);
+  }
+
+  /**
+   * Grants or removes items from multiple users.
+   *
+   * @param App\Services\InventoryManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postItems(Request $request, InventoryManager $service) {
+    $data = $request->only(['names', 'item_ids', 'quantities', 'data', 'disallow_transfer', 'notes']);
+    if ($service->grantItems($data, Auth::user())) {
+      flash('Items granted successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Show the item grant page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getItems() {
-        return view('admin.grants.items', [
-            'users' => User::orderBy('id')->pluck('name', 'id'),
-            'items' => Item::orderBy('name')->pluck('name', 'id'),
-        ]);
-    }
+    return redirect()->back();
+  }
 
-    /**
-     * Grants or removes items from multiple users.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postItems(Request $request, InventoryManager $service) {
-        $data = $request->only(['names', 'item_ids', 'quantities', 'data', 'disallow_transfer', 'notes']);
-        if ($service->grantItems($data, Auth::user())) {
-            flash('Items granted successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
+  /**
+   * Show the recipe grant page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getRecipes() {
+    return view('admin.grants.recipes', [
+      'users'   => User::orderBy('id')->pluck('name', 'id'),
+      'recipes' => Recipe::orderBy('name')->pluck('name', 'id'),
+    ]);
+  }
 
   /**
    * Show the pet grant page.
@@ -102,12 +114,12 @@ class GrantController extends Controller {
     ]);
   }
 
-    /**
-     * Gets all variants of a pet.
-     *
-     * @param mixed $id
-     */
-    public function getPetVariants($id) {
+  /**
+   * Gets all variants of a pet.
+   *
+   * @param mixed $id
+   */
+  public function getPetVariants($id) {
     $pet = Pet::find($id);
 
     return $pet->variants->pluck('name', 'id')->toArray();
@@ -122,9 +134,9 @@ class GrantController extends Controller {
     $pet = Pet::find($id);
 
     return $pet->evolutions->pluck('evolution_name', 'id')->toArray();
-    }
+  }
 
-/**
+  /**
    * Grants or removes pets from multiple users.
    *
    * @param App\Services\InvenntoryManager $service
@@ -185,61 +197,61 @@ class GrantController extends Controller {
     return redirect()->back();
   }
 
-    /**
-     * Grants or removes items from multiple users.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postRecipes(Request $request, RecipeService $service) {
-        $data = $request->only(['names', 'recipe_ids', 'data']);
-        if ($service->grantRecipes($data, Auth::user())) {
-            flash('Recipes granted successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
+  /**
+   * Grants or removes items from multiple users.
+   *
+   * @param App\Services\InventoryManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postRecipes(Request $request, RecipeService $service) {
+    $data = $request->only(['names', 'recipe_ids', 'data']);
+    if ($service->grantRecipes($data, Auth::user())) {
+      flash('Recipes granted successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
-    /**
-     * Show the item search page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getItemSearch(Request $request) {
-        $item = Item::find($request->only(['item_id']))->first();
+    return redirect()->back();
+  }
 
-        if ($item) {
-            // Gather all instances of this item
-            $userItems = UserItem::where('item_id', $item->id)->where('count', '>', 0)->get();
-            $characterItems = CharacterItem::where('item_id', $item->id)->where('count', '>', 0)->get();
+  /**
+   * Show the item search page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getItemSearch(Request $request) {
+    $item = Item::find($request->only(['item_id']))->first();
 
-            // Gather the users and characters that own them
-            $users = User::whereIn('id', $userItems->pluck('user_id')->toArray())->orderBy('name', 'ASC')->get();
-            $characters = Character::whereIn('id', $characterItems->pluck('character_id')->toArray())->orderBy('slug', 'ASC')->get();
+    if ($item) {
+      // Gather all instances of this item
+      $userItems = UserItem::where('item_id', $item->id)->where('count', '>', 0)->get();
+      $characterItems = CharacterItem::where('item_id', $item->id)->where('count', '>', 0)->get();
 
-            // Gather hold locations
-            $designUpdates = CharacterDesignUpdate::whereIn('user_id', $userItems->pluck('user_id')->toArray())->whereNotNull('data')->get();
-            $trades = Trade::whereIn('sender_id', $userItems->pluck('user_id')->toArray())->orWhereIn('recipient_id', $userItems->pluck('user_id')->toArray())->get();
-            $submissions = Submission::whereIn('user_id', $userItems->pluck('user_id')->toArray())->whereNotNull('data')->get();
-        }
+      // Gather the users and characters that own them
+      $users = User::whereIn('id', $userItems->pluck('user_id')->toArray())->orderBy('name', 'ASC')->get();
+      $characters = Character::whereIn('id', $characterItems->pluck('character_id')->toArray())->orderBy('slug', 'ASC')->get();
 
-        return view('admin.grants.item_search', [
-            'item'           => $item ? $item : null,
-            'items'          => Item::orderBy('name')->pluck('name', 'id'),
-            'userItems'      => $item ? $userItems : null,
-            'characterItems' => $item ? $characterItems : null,
-            'users'          => $item ? $users : null,
-            'characters'     => $item ? $characters : null,
-            'designUpdates'  => $item ? $designUpdates : null,
-            'trades'         => $item ? $trades : null,
-            'submissions'    => $item ? $submissions : null,
-        ]);
+      // Gather hold locations
+      $designUpdates = CharacterDesignUpdate::whereIn('user_id', $userItems->pluck('user_id')->toArray())->whereNotNull('data')->get();
+      $trades = Trade::whereIn('sender_id', $userItems->pluck('user_id')->toArray())->orWhereIn('recipient_id', $userItems->pluck('user_id')->toArray())->get();
+      $submissions = Submission::whereIn('user_id', $userItems->pluck('user_id')->toArray())->whereNotNull('data')->get();
     }
+
+    return view('admin.grants.item_search', [
+      'item'           => $item ? $item : null,
+      'items'          => Item::orderBy('name')->pluck('name', 'id'),
+      'userItems'      => $item ? $userItems : null,
+      'characterItems' => $item ? $characterItems : null,
+      'users'          => $item ? $users : null,
+      'characters'     => $item ? $characters : null,
+      'designUpdates'  => $item ? $designUpdates : null,
+      'trades'         => $item ? $trades : null,
+      'submissions'    => $item ? $submissions : null,
+    ]);
+  }
   /**
    * Show the border grant page.
    *

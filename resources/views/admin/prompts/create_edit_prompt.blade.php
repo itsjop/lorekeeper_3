@@ -214,7 +214,7 @@
     <div id="collapsable-" class="form collapse">Select a criterion to populate this area.</div>
   </div>
 
-  @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true])
+  @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true,])
 
   @if ($prompt->id)
     @include('widgets._add_limits', ['object' => $prompt])
@@ -230,7 +230,7 @@
 
 @section('scripts')
   @parent
-  @include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true])
+  @include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
   @include('widgets._datetimepicker_js')
   <script>
     $(document).ready(function() {

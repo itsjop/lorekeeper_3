@@ -30,7 +30,11 @@
 
   <div class="text-center">
     @if ($shop->has_image)
-      <img src="{{ $shop->shopImageUrl }}" style="max-width:100%" alt="{{ $shop->name }}" />
+      <img
+        src="{{ $shop->shopImageUrl }}"
+        style="max-width:100%"
+        alt="{{ $shop->name }}"
+      />
     @endif
     <p>{!! $shop->parsed_description !!}</p>
   </div>
@@ -44,7 +48,9 @@
     @endphp
     <div class="card mb-3 inventory-category">
       <h5 class="card-header inventory-header">
-        {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $visible . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
+        {!! isset($categories[$categoryId])
+            ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $visible . $categories[$categoryId]->name . '</a>'
+            : 'Miscellaneous' !!}
       </h5>
       <div class="card-body inventory-body">
         @foreach ($categoryItems->chunk(4) as $chunk)
@@ -81,6 +87,8 @@
       </div>
     </div>
   @endforeach
+  {!! $stocks->render() !!}
+
   @foreach ($stocks as $type => $stock)
     @if (count($stock))
       <h3>
@@ -93,13 +101,24 @@
       @foreach ($stock as $categoryId => $categoryItems)
         @php
           $visible = '';
-          if (isset($categoryItems->first()->category) && method_exists($categoryItems->first()->category, 'is_visible') && !$categoryItems->first()->category->is_visible) {
+          if (
+              isset($categoryItems->first()->category) &&
+              method_exists($categoryItems->first()->category, 'is_visible') &&
+              !$categoryItems->first()->category->is_visible
+          ) {
               $visible = '<i class="fas fa-eye-slash mr-1"></i>';
           }
         @endphp
         <div class="card mb-3 inventory-category">
           <h5 class="card-header inventory-header">
-            {!! isset($categoryItems->first()->category) ? '<a href="' . $categoryItems->first()->category->searchUrl . '">' . $visible . $categoryItems->first()->category->name . '</a>' : 'Miscellaneous' !!}
+            {!! isset($categoryItems->first()->category)
+                ? '<a href="' .
+                    $categoryItems->first()->category->searchUrl .
+                    '">' .
+                    $visible .
+                    $categoryItems->first()->category->name .
+                    '</a>'
+                : 'Miscellaneous' !!}
           </h5>
           <div class="card-body inventory-body">
             @foreach ($categoryItems->chunk(4) as $chunk)
@@ -108,7 +127,8 @@
                   <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $item->pivot->id }}">
                     @if ($item->has_image)
                       <div class="mb-1">
-                        <a href="#" class="inventory-stack"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
+                        <a href="#" class="inventory-stack"><img src="{{ $item->imageUrl }}"
+                            alt="{{ $item->name }}" /></a>
                       </div>
                     @endif
                     <div>
@@ -141,6 +161,7 @@
       @endforeach
     @endif
   @endforeach
+  {!! $stocks->render() !!}
 @endsection
 @section('scripts')
   <script>

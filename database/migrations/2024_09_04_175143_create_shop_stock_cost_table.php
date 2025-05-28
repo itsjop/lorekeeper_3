@@ -1,5 +1,6 @@
 <?php
 
+php artisan migrate --path=database/migrations/2024_09_04_175143_create_shop_stock_cost_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ return new class extends Migration {
             $table->string('cost_type');
             $table->integer('cost_id')->unsigned();
             $table->integer('quantity');
-
+            $table->integer('currency_id');
             $table->json('group')->nullable()->default(null);
         });
 
