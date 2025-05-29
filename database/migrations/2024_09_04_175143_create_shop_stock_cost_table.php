@@ -1,6 +1,5 @@
 <?php
 
-php artisan migrate --path=database/migrations/2024_09_04_175143_create_shop_stock_cost_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

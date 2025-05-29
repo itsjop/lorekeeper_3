@@ -128,8 +128,9 @@ class ShopController extends Controller {
    */
   public function getCreateShopStock($id) {
     $shop = Shop::find($id);
-    if (!$shop)      abort(404);
-
+    if (!$shop) {
+      abort(404);
+    }
 
     return view('admin.shops._stock_modal', [
       'shop'       => $shop,
@@ -166,7 +167,7 @@ class ShopController extends Controller {
     } else {
       $items = $model::orderBy('name')->pluck('name', 'id')->toArray();
     }
-    dd($stock);
+
     return view('admin.shops._stock_modal', [
       'shop'       => $stock->shop,
       'stock'      => $stock,
