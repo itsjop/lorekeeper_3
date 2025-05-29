@@ -4,7 +4,8 @@
   @if (Auth::check())
     <li class="sidebar-section">
       <div class="sidebar-section-header">History</div>
-      <div class="sidebar-item"><a href="{{ url('shops/history') }}" class="{{ set_active('shops/history') }}">My Purchase History</a></div>
+      <div class="sidebar-item"><a href="{{ url('shops/history') }}" class="{{ set_active('shops/history') }}">My Purchase
+          History</a></div>
       <div class="sidebar-section-header">My Currencies</div>
       @foreach (Auth::user()->getCurrencies(true) as $currency)
         <div class="sidebar-item pr-3">{!! $currency->display($currency->quantity) !!}</div>
@@ -17,12 +18,15 @@
     @foreach ($shops as $shop)
       @if ($shop->is_staff)
         @if (Auth::check() && Auth::user()->isstaff)
-          <div class="sidebar-item"><a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a></div>
+          <div class="sidebar-item"><a href="{{ $shop->url }}"
+              class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a></div>
         @endif
       @else
-        <div class="sidebar-item"><a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a></div>
+        <div class="sidebar-item"><a href="{{ $shop->url }}"
+            class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a></div>
       @endif
     @endforeach
-    <div class="sidebar-item"><a href="{{ url('shops/donation-shop') }}" class="{{ set_active('shops/donation-shop') }}">Donation Shop</a></div>
+    <div class="sidebar-item"><a href="{{ url('shops/donation-shop') }}" class="{{ set_active('shops/donation-shop') }}">Donation
+        Shop</a></div>
   </li>
 </ul>

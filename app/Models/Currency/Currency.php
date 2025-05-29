@@ -255,7 +255,7 @@ class Currency extends Model {
      * @return string
      */
     public function getDisplayNameAttribute() {
-        return '<a href="'.$this->url.'" class="display-currency">'.$this->name.'</a>';
+        return '<a href="'.$this->url.'" class="disssplay-currency">'.$this->name.'</a>';
     }
 
     /**

@@ -52,7 +52,7 @@
             {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.') !!}
           </div>
           <div class="text-right">
-            {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
           </div>
           {!! Form::close() !!}
           <hr />

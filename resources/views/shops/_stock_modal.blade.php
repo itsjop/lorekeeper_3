@@ -3,7 +3,11 @@
     Invalid item selected.</div>
 @else
   <div class="text-center mb-3">
-    <div class="mb-1"><a href="{{ $stock->item->idUrl }}"><img class="img-fluid" src="{{ $stock->item->imageUrl }}" alt="{{ $stock->item->name }}" /></a></div>
+    <div class="mb-1"><a href="{{ $stock->item->idUrl }}"><img
+          class="img-fluid"
+          src="{{ $stock->item->imageUrl }}"
+          alt="{{ $stock->item->name }}"
+        /></a></div>
     <div><a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a></div>
     <div><strong>Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!}</div>
     @if ($stock->is_limited_stock)
@@ -25,7 +29,11 @@
 
   @if ($stock->item->parsed_description)
     <div class="mb-2">
-      <a data-toggle="collapse" href="#itemDescription" class="h5">Description <i class="fas fa-caret-down"></i></a>
+      <a
+        data-toggle="collapse"
+        href="#itemDescription"
+        class="h5"
+      >Description <i class="fas fa-caret-down"></i></a>
       <div class="card collapse show mt-1" id="itemDescription">
         <div class="card-body">
           {!! $stock->item->parsed_description !!}
@@ -93,7 +101,8 @@
         {!! Form::selectRange('quantity', 1, $quantityLimit, 1, ['class' => 'form-control mb-3']) !!}
         @if ($stock->use_user_bank && $stock->use_character_bank)
           <p>
-            This item can be paid for with either your user account bank, or a character's bank. Please choose which you would like to use.
+            This item can be paid for with either your user account bank, or a character's bank. Please choose which you would
+            like to use.
             <br />
             <strong>
               Note: Only currencies are taken from character banks. Items are taken from user banks.
@@ -104,7 +113,8 @@
               <label class="h5">{{ Form::radio('bank', 'user', true, ['class' => 'bank-select mr-1']) }} User Bank</label>
             </div>
             <div>
-              <label class="h5">{{ Form::radio('bank', 'character', false, ['class' => 'bank-select mr-1']) }} Character Bank</label>
+              <label class="h5">{{ Form::radio('bank', 'character', false, ['class' => 'bank-select mr-1']) }} Character
+                Bank</label>
               <div class="card use-character-bank hide">
                 <div class="card-body">
                   <p>Enter the code of the character you would like to use to purchase the item.</p>
@@ -121,7 +131,8 @@
           {!! Form::hidden('bank', 'user') !!}
         @elseif($stock->use_character_bank)
           <p>
-            This item must be paid for using a character's bank. Enter the code of the character whose bank you would like to use to purchase the item.
+            This item must be paid for using a character's bank. Enter the code of the character whose bank you would like to use
+            to purchase the item.
             <br />
             <strong>
               Note: Only currencies are taken from character banks. Items are taken from user banks.
@@ -142,7 +153,10 @@
             {!! Form::label('use_coupon', 'Do you want to use a coupon?', ['class' => 'form-check-label  ml-3 mb-2']) !!}
           </div>
           <div class="br-form-group" style="display: none">
-            {!! Form::select('coupon', $userCoupons, null, ['class' => 'form-control mb-2', 'placeholder' => 'Select a Coupon to Use']) !!}
+            {!! Form::select('coupon', $userCoupons, null, [
+                'class' => 'form-control mb-2',
+                'placeholder' => 'Select a Coupon to Use'
+            ]) !!}
           </div>
         @elseif($stock->shop->use_coupons && $userCoupons == null)
           <div class="alert alert-danger">You do not own any coupons.</div>
