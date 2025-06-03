@@ -227,6 +227,26 @@ class CharacterController extends Controller {
     return redirect()->back();
   }
 
+    /**
+     * Sorts a character's titles.
+     *
+     * @param App\Services\CharacterManager $service
+     * @param string                        $slug
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postSortTitles(CharacterManager $service, Request $request, $slug) {
+        if ($service->sortCharacterTitles($this->character, $request->get('sort'))) {
+            flash('Title order updated successfully.')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
+        }
+
+        return redirect()->back();
+    }
+
   /**
    * Shows a character's gallery.
    *

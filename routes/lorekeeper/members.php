@@ -216,6 +216,7 @@ Route::group(['prefix' => 'crafting', 'namespace' => 'Users'], function () {
 Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function () {
   Route::get('{slug}/profile/edit', 'CharacterController@getEditCharacterProfile');
   Route::post('{slug}/profile/edit', 'CharacterController@postEditCharacterProfile');
+  Route::post('{slug}/profile/titles/sort', 'CharacterController@postSortTitles');
 
   Route::post('{slug}/' . __('awards.awardcase') . '/edit', 'CharacterController@postAwardEdit');
   Route::post('{slug}/inventory/edit', 'CharacterController@postInventoryEdit');

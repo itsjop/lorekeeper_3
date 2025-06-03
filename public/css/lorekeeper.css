@@ -759,3 +759,10 @@ tr.accountbound {
 .recipe-image {
     width: 150px;
 }
+
+.gradient-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}

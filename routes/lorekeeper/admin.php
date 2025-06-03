@@ -132,6 +132,16 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
   Route::post('rarities/delete/{id}', 'RarityController@postDeleteRarity');
   Route::post('rarities/sort', 'RarityController@postSortRarity');
 
+  // CHARACTER TITLES
+  Route::get('character-titles', 'CharacterTitleController@getIndex');
+  Route::get('character-titles/create', 'CharacterTitleController@getCreateTitle');
+  Route::get('character-titles/edit/{id}', 'CharacterTitleController@getEditTitle');
+  Route::get('character-titles/delete/{id}', 'CharacterTitleController@getDeleteTitle');
+  Route::post('character-titles/create', 'CharacterTitleController@postCreateEditTitle');
+  Route::post('character-titles/edit/{id?}', 'CharacterTitleController@postCreateEditTitle');
+  Route::post('character-titles/delete/{id}', 'CharacterTitleController@postDeleteTitle');
+  Route::post('character-titles/sort', 'CharacterTitleController@postSortTitle');
+
   // SPECIES
   Route::get('species', 'SpeciesController@getIndex');
   Route::get('species/create', 'SpeciesController@getCreateSpecies');
@@ -665,9 +675,9 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware'
 
   Route::post('{slug}/transfer', 'CharacterController@postTransfer');
 
-    # LINEAGE
-    Route::get('{slug}/lineage', 'CharacterLineageController@getEditCharacterLineage');
-    Route::post('{slug}/lineage', 'CharacterLineageController@postEditCharacterLineage');
+  # LINEAGE
+  Route::get('{slug}/lineage', 'CharacterLineageController@getEditCharacterLineage');
+  Route::post('{slug}/lineage', 'CharacterLineageController@postEditCharacterLineage');
 });
 // Might rewrite these parts eventually so there's less code duplication...
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function () {
@@ -688,9 +698,9 @@ Route::group(['prefix' => 'myo', 'namespace' => 'Characters', 'middleware' => 'p
 
   Route::post('{id}/transfer', 'CharacterController@postMyoTransfer');
 
-    # LINEAGE
-    Route::get('{id}/lineage', 'CharacterLineageController@getEditMyoLineage');
-    Route::post('{id}/lineage', 'CharacterLineageController@postEditMyoLineage');
+  # LINEAGE
+  Route::get('{id}/lineage', 'CharacterLineageController@getEditMyoLineage');
+  Route::post('{id}/lineage', 'CharacterLineageController@postEditMyoLineage');
 });
 
 // RAFFLES

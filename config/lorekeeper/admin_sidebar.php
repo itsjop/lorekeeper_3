@@ -37,6 +37,7 @@ return [
       ['name' => 'Criteria Rewards', 'url' => 'admin/data/criteria'],
       ['name' => 'Recipes', 'url' => 'admin/data/recipes',],
       ['name' => 'Transformations', 'url'  => 'admin/data/transformations',],
+      ['name' => 'Character Titles', 'url'  => 'admin/data/character-titles',],
     ],
   ],
   'Admin' => [

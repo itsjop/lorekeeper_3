@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Characters;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImage;
+use App\Models\Character\CharacterTitle;
 use App\Models\Feature\Feature;
 use App\Models\Rarity;
 use App\Models\Species\Species;
@@ -119,6 +120,7 @@ class CharacterImageController extends Controller {
 
     return view('character.admin._edit_features_modal', [
       'image'     => $image,
+      'titles'    => ['custom' => 'Custom Title'] + CharacterTitle::orderBy('sort', 'DESC')->pluck('title', 'id')->toArray(),
       'rarities'  => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'specieses' => ['0' => 'Select ' . ucfirst(__('lorekeeper.species'))] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'subtypes'  => ['0' => 'Select ' . ucfirst(__('lorekeeper.subtype'))] + Subtype::where('species_id', '=', $image->species_id)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
@@ -136,7 +138,7 @@ class CharacterImageController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postEditImageFeatures(Request $request, CharacterManager $service, $id) {
-    $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'subtype_ids', 'transformation_id', 'transformation_info', 'transformation_description']);
+    $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'subtype_ids', 'transformation_id', 'transformation_info', 'transformation_description', 'title_ids', 'title_data']);
     $image = CharacterImage::find($id);
     if (!$image) {
       abort(404);

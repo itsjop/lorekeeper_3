@@ -6,6 +6,7 @@ use App\Facades\Settings;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterCategory;
 use App\Models\Character\CharacterImage;
+use App\Models\Character\CharacterTitle;
 use App\Models\Character\Sublist;
 use App\Models\Feature\Feature;
 use App\Models\Rank\Rank;
@@ -248,6 +249,16 @@ class BrowseController extends Controller {
         });
       }
     }
+    if ($request->get('title_id')) {
+      if ($request->get('title_id') == 'custom') {
+        $imageQuery->whereRelation('titles', 'title_id', null)->whereNotNull('title_data');
+      } else {
+        $imageQuery->whereRelation('titles', 'title_id', $request->get('title_id'));
+      }
+    }
+    if ($request->get('title_id') == 'custom' && $request->get('title_data')) {
+      $imageQuery->whereRelation('titles', 'title_data', 'LIKE', '%' . $request->get('title_data') . '%');
+    }
     if ($request->get('transformation_id')) {
       $imageQuery->where('transformation_id', $request->get('transformation_id'));
     }
@@ -348,6 +359,7 @@ class BrowseController extends Controller {
       'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
       'transformations' => [0 => 'Any ' . ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'contentWarnings' => $contentWarnings,
+      'titles'      => [0 => 'Any Title', 'custom' => 'Custom Title'] + CharacterTitle::orderBy('character_titles.sort', 'DESC')->pluck('title', 'id')->toArray(),
     ]);
   }
 
@@ -545,44 +557,43 @@ class BrowseController extends Controller {
     $query->whereIn('id', $filteredImageIds->toArray());
 
 
-      switch ($request->get('sort')) {
-        default:
-          $query->orderBy('characters.number', 'DESC');
-          break;
-        case 'number_desc':
-          $query->orderBy('characters.number', 'DESC');
-          break;
-        case 'number_asc':
-          $query->orderBy('characters.number', 'ASC');
-          break;
-        case 'id_desc':
-          $query->orderBy('characters.id', 'DESC');
-          break;
-        case 'id_asc':
-          $query->orderBy('characters.id', 'ASC');
-          break;
-        case 'sale_value_desc':
-          $query->orderBy('characters.sale_value', 'DESC');
-          break;
-        case 'sale_value_asc':
-          $query->orderBy('characters.sale_value', 'ASC');
-          break;
-      }
+    switch ($request->get('sort')) {
+      default:
+        $query->orderBy('characters.number', 'DESC');
+        break;
+      case 'number_desc':
+        $query->orderBy('characters.number', 'DESC');
+        break;
+      case 'number_asc':
+        $query->orderBy('characters.number', 'ASC');
+        break;
+      case 'id_desc':
+        $query->orderBy('characters.id', 'DESC');
+        break;
+      case 'id_asc':
+        $query->orderBy('characters.id', 'ASC');
+        break;
+      case 'sale_value_desc':
+        $query->orderBy('characters.sale_value', 'DESC');
+        break;
+      case 'sale_value_asc':
+        $query->orderBy('characters.sale_value', 'ASC');
+        break;
+    }
 
-      if (!Auth::check() || !Auth::user()->hasPower('manage_characters')) {
-        $query->visible();
-      }
+    if (!Auth::check() || !Auth::user()->hasPower('manage_characters')) {
+      $query->visible();
+    }
 
-      return view('browse.myo_masterlist', [
-        'isMyo'       => true,
-        'slots'       => $query->paginate(30)->appends($request->query()),
-        'specieses'   => [0 => 'Any Species'] + Species::visible(Auth::check() ? Auth::user() : null)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray(),
-        'rarities'    => [0 => 'Any Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
-        'features'    => Feature::getDropdownItems(),
-        'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
-        'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
-      ]);
-
+    return view('browse.myo_masterlist', [
+      'isMyo'       => true,
+      'slots'       => $query->paginate(30)->appends($request->query()),
+      'specieses'   => [0 => 'Any Species'] + Species::visible(Auth::check() ? Auth::user() : null)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'rarities'    => [0 => 'Any Rarity'] + Rarity::orderBy('rarities.sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'features'    => Feature::getDropdownItems(),
+      'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
+      'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+    ]);
   }
 
   /**
@@ -707,6 +718,18 @@ class BrowseController extends Controller {
     if ($request->get('has_transformation')) {
       $imageQuery->whereNotNull('transformation_id');
     }
+
+    if ($request->get('title_id')) {
+      if ($request->get('title_id') == 'custom') {
+        $imageQuery->whereNull('title_id')->whereNotNull('title_data');
+      } else {
+        $imageQuery->where('title_id', $request->get('title_id'));
+      }
+    }
+    if ($request->get('title_id') == 'custom' && $request->get('title_data')) {
+      $imageQuery->where('title_data', 'LIKE', '%' . $request->get('title_data') . '%');
+    }
+
     if ($request->get('artist')) {
       $artist = User::find($request->get('artist'));
       $imageQuery->whereHas('artists', function ($query) use ($artist) {
@@ -783,6 +806,7 @@ class BrowseController extends Controller {
       'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
       'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
       'transformations' => [0 => 'Any ' . ucfirst(__('transformations.transformation'))] + Transformation::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'titles'      => [0 => 'Any Title', 'custom' => 'Custom Title'] + CharacterTitle::orderBy('character_titles.sort', 'DESC')->pluck('title', 'id')->toArray(),
     ]);
   }
 }

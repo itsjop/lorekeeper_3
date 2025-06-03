@@ -1,6 +1,6 @@
 @extends('character.design.layout', ['componentName' => 'character/design/features'])
 @section('design-title')
-Design Approval Request (#{{ $request->id }}) :: Traits
+  Design Approval Request (#{{ $request->id }}) :: Traits
 @endsection
 
 @section('design-content')
@@ -257,8 +257,22 @@ Design Approval Request (#{{ $request->id }}) :: Traits
 
 @section('scripts')
   @include('widgets._image_upload_js')
-
   <script>
+    $(document).ready(function() {
+      var $title = $('#charTitle');
+      var $titleOptions = $('#titleOptions');
+      var titleEntry = $title.val() != 0;
+      updateTitleEntry(titleEntry);
+      $title.on('change', function(e) {
+        var titleEntry = $title.val() != 0;
+        updateTitleEntry(titleEntry);
+      });
+      function updateTitleEntry($show) {
+        if ($show) $titleOptions.removeClass('hide');
+        else $titleOptions.addClass('hide');
+      }
+    });
+    
     $("#species").change(function() {
       var species = $('#species').val();
       var id = '<?php echo $request->id; ?>';

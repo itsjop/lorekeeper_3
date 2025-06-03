@@ -13,6 +13,7 @@ use App\Models\Character\CharacterFeature;
 use App\Models\Character\CharacterImage;
 use App\Models\Character\CharacterImageSubtype;
 use App\Models\Character\CharacterLog;
+use App\Models\Character\CharacterImageTitle;
 use App\Models\Character\CharacterTransfer;
 use App\Models\Character\CharacterLineage;
 use App\Models\Sales\SalesCharacter;
@@ -267,6 +268,7 @@ class CharacterManager extends Service {
         $data['species_id'] = isset($data['species_id']) && $data['species_id'] ? $data['species_id'] : null;
         $data['subtype_id'] = isset($data['subtype_id']) && $data['subtype_id'] ? $data['subtype_id'] : null;
         $data['rarity_id'] = isset($data['rarity_id']) && $data['rarity_id'] ? $data['rarity_id'] : null;
+
         $data['transformation_id'] =
           isset($data['transformation_id']) && $data['transformation_id'] ? $data['transformation_id'] : null;
         $data['transformation_info'] =
@@ -314,6 +316,16 @@ class CharacterManager extends Service {
       $imageData['content_warnings'] = isset($data['content_warnings']) ? explode(',', $data['content_warnings']) : null;
       $imageData['character_id'] = $character->id;
       $image = CharacterImage::create($imageData);
+      // Titles
+      if (isset($data['title_ids'])) {
+        foreach ($data['title_ids'] as $key => $titleId) {
+          CharacterImageTitle::create([
+            'character_image_id' => $image->id,
+            'title_id'           => $titleId == 'custom' ? null : $titleId,
+            'data'               => $data['title_data'][$titleId] ?? null,
+          ]);
+        }
+      }
       // create subtype relations
       if (isset($data['subtype_ids']) && $data['subtype_ids']) {
         foreach ($data['subtype_ids'] as $subtypeId) {
@@ -890,9 +902,15 @@ class CharacterManager extends Service {
       $old['species'] = $image->species_id ? $image->species->displayName : null;
       $old['subtypes'] = count($image->subtypes) ? $image->displaySubtypes() : null;
       $old['rarity'] = $image->rarity_id ? $image->rarity->displayName : null;
+      $old['titles'] = $image->titles->count() ? json_encode($image->titles) : null;
       $old['transformation'] = $image->transformation_id ? $image->transformation->displayName : null;
       $old['transformation_id'] = $image->transformation_id ? $image->transformation->displayName : null; // Clear old features
-      $image->features()->delete(); // Attach features
+
+      // Clear old features
+      $image->features()->delete();
+      // Clear old titles
+      $image->titles()->delete();
+      // Attach features
       foreach ($data['feature_id'] as $key => $featureId) {
         if ($featureId) {
           $feature = CharacterFeature::create([
@@ -901,7 +919,18 @@ class CharacterManager extends Service {
             'data' => $data['feature_data'][$key]
           ]);
         }
-      } // Update other stats
+      }
+      // Attach titles
+      if (isset($data['title_ids'])) {
+        foreach ($data['title_ids'] as $key => $titleId) {
+          CharacterImageTitle::create([
+            'character_image_id' => $image->id,
+            'title_id'           => $titleId == 'custom' ? null : $titleId,
+            'data'               => $data['title_data'][$titleId] ?? null,
+          ]);
+        }
+      }
+      // Update other stats
       $image->species_id = $data['species_id'];
       $image->subtype_id = $data['subtype_id'] ?: null;
       // SUBTYPES
@@ -927,6 +956,7 @@ class CharacterManager extends Service {
       $new['species'] = $image->species_id ? $image->species->displayName : null;
       $new['subtypes'] = count($image->subtypes) ? $image->displaySubtypes() : null;
       $new['rarity'] = $image->rarity_id ? $image->rarity->displayName : null;
+      $new['title'] = $image->titles->count() ? json_encode($image->titles) : null;
       $new['transformation'] = $image->transformation_id ? $image->transformation->displayName : null;
       $new['transformation_id'] = $image->transformation_id ? $image->transformation->displayName : null;
       $new['transformation_info'] = $image->transformation_info ? $image->transformation_info : null;
@@ -1741,6 +1771,29 @@ class CharacterManager extends Service {
       }
       if ($notifyGiftWriting) {
         $character->notifyBookmarkers('BOOKMARK_GIFT_WRITING');
+      }
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Sorts a character's titles.
+   *
+   * @param Character $character
+   * @param array     $data
+   *
+   * @return bool
+   */
+  public function sortCharacterTitles($character, $data) {
+    DB::beginTransaction();
+    try {
+      // explode the sort array and reverse it since the order is inverted
+      $sort = array_reverse(explode(',', $data));
+      foreach ($sort as $key => $s) {
+        CharacterImageTitle::where('id', $s)->where('character_image_id', $character->character_image_id)->update(['sort' => $key]);
       }
       return $this->commitReturn(true);
     } catch (\Exception $e) {

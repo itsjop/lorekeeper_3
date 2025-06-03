@@ -61,6 +61,18 @@
               ['class' => 'form-control', 'placeholder' => 'Any']
           ) !!}
         </div>
+        <div class="masterlist-search-field">
+          {!! Form::label('title_id', 'Title: ') !!}
+          {!! Form::select('title_id', $titles, Request::get('title_id'), [
+              'class' => 'form-control',
+              'id' => 'customTitle',
+              'style' => 'width: 250px'
+          ]) !!}
+        </div>
+        <div class="masterlist-search-field" id="customTitleOptions">
+          {!! Form::label('title_data', 'Custom Title: ') !!}
+          {!! Form::text('title_data', Request::get('title_data'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
+        </div>
         <hr />
       @endif
       <div class="masterlist-search-field">
@@ -318,7 +330,7 @@
                   class="img-thumbnail"
                   alt="Thumbnail for {{ $character->fullName }}"
                 /></a>
-                    <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div>
+              <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div>
             </div>
             <div class="mt-1">
               <a href="{{ $character->url }}" class="h5 mb-0">
@@ -352,6 +364,9 @@
           <th>Name</th>
           <th>Rarity</th>
           <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
+          @if (Settings::get('character_title_display'))
+            <th>Title</th>
+          @endif
           <th>Created</th>
         </tr>
       </thead>
@@ -366,6 +381,15 @@
             </td>
             <td>{!! $character->image->rarity_id ? $character->image->rarity->displayName : 'None' !!}</td>
             <td>{!! $character->image->species_id ? $character->image->species->displayName : 'None' !!}</td>
+            @if (Settings::get('character_title_display'))
+              <td>{!! $character->image->hasTitle
+                  ? ($character->image->title_id
+                      ? $character->image->title->displayNameShort
+                      : (isset($character->image->title_data['short'])
+                          ? nl2br(htmlentities($character->image->title_data['short']))
+                          : nl2br(htmlentities($character->image->title_data['full']))))
+                  : 'None' !!}</td>
+            @endif
             <td>{!! format_date($character->created_at) !!}</td>
           </tr>
         @endforeach

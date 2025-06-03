@@ -147,6 +147,18 @@
             </div>
             <div class="col-lg-8 col-7 pl-1">{!! $image->rarity_id ? $image->rarity->displayName : 'None' !!}</div>
           </div>
+          @if ($image->titles->count() > 0)
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-4">
+                <h5>Titles</h5>
+              </div>
+              <div class="col-lg-8 col-md-6 col-8">
+                <div class="h5">
+                  {!! $image->displayTitles !!}
+                </div>
+              </div>
+            </div>
+          @endif
 
           <div class="mb-3">
             <div>

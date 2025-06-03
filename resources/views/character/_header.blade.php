@@ -64,6 +64,9 @@
     <i data-toggle="tooltip" title="Click to Copy the Character Code" id="copy" style="font-size: 14px; vertical-align: middle;" class="far fa-copy text-small"></i>
   @endif
 </h1>
+@if (Settings::get('character_title_display'))
+    <div class="h5">{!! $character->image->displayTitles !!}</div>
+@endif
 <div class="mb-3">
   Owned by {!! $character->displayOwner !!}
 </div>

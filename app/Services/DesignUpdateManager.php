@@ -631,6 +631,15 @@ class DesignUpdateManager extends Service {
         'sort'          => 0,
       ]);
 
+      // Add old image titles to the new image
+      $image->titles()->createMany($request->character->image->titles->map(function ($title) use ($image) {
+        return [
+          'title_id'           => $title->title_id,
+          'character_image_id' => $image->id,
+          'data'               => $title->data,
+        ];
+      })->toArray());
+
       // Shift the image credits over to the new image
       $request->designers()->update(['character_type' => 'Character', 'character_image_id' => $image->id]);
       $request->artists()->update(['character_type' => 'Character', 'character_image_id' => $image->id]);
