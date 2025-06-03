@@ -5,52 +5,61 @@ namespace App\Models\User;
 use App\Models\Model;
 
 class UserSettings extends Model {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting','show_image_blocks','border_settings',
-        'deactivate_reason', 'deactivated_at', 'content_warning_visibility', 'allow_profile_comments',
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'is_fto',
+    'submission_count',
+    'banned_at',
+    'ban_reason',
+    'birthday_setting',
+    'allow_character_likes',
+    'show_image_blocks',
+    'border_settings',
+    'deactivate_reason',
+    'deactivated_at',
+    'content_warning_visibility',
+    'allow_profile_comments',
+  ];
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'user_settings';
+  /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'user_settings';
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'banned_at'      => 'datetime',
-        'deactivated_at' => 'datetime',
-        'border_settings' => 'array',
-    ];
+  /**
+   * The attributes that should be cast to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'banned_at'      => 'datetime',
+    'deactivated_at' => 'datetime',
+    'border_settings' => 'array',
+  ];
 
-    /**
-     * The primary key of the model.
-     *
-     * @var string
-     */
-    public $primaryKey = 'user_id';
+  /**
+   * The primary key of the model.
+   *
+   * @var string
+   */
+  public $primaryKey = 'user_id';
 
-    /**********************************************************************************************
+  /**********************************************************************************************
 
         RELATIONS
 
-    **********************************************************************************************/
+   **********************************************************************************************/
 
-    /**
-     * Get the user this set of settings belongs to.
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User\User');
-    }
+  /**
+   * Get the user this set of settings belongs to.
+   */
+  public function user() {
+    return $this->belongsTo('App\Models\User\User');
+  }
 }

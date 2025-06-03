@@ -91,11 +91,14 @@ class AddSiteSettings extends Command {
 
     $this->addSiteSetting('group_currency', 1, 'ID of the group currency to award from gallery submissions (if enabled).');
 
-    $this->addSiteSetting('character_title_display', 0, '0: Characters\' titles only display in their image info. 1: Characters\'s titles display alongside their category, species, rarity.');
+    $this->addSiteSetting('character_title_display', 0, '0: Characters\' titles only display in their image info.
+1: Characters\'s titles display alongside their category, species, rarity.');
 
-    $this->addSiteSetting('character_title_display', 0, '0: Characters\' titles only display in their image info. 1: Characters\'s titles display alongside their category, species, rarity.');
+    $this->addSiteSetting('character_title_display', 0, '0: Characters\' titles only display in their image info.
+1: Characters\'s titles display alongside their category, species, rarity.');
 
-    $this->addSiteSetting('is_maintenance_mode', 0, '0: Site is normal, 1: Users without the Has Maintenance Access power will be redirected to the home page.');
+    $this->addSiteSetting('is_maintenance_mode', 0, '0: Site is normal,
+1: Users without the Has Maintenance Access power will be redirected to the home page.');
 
     //cultivation
     $this->addSiteSetting('cultivation_plot_usability', 0, 'Do plots become unusable once an item was cultivated? 0=no / 1=yes');
@@ -164,6 +167,10 @@ class AddSiteSettings extends Command {
 1: Trait Remover item needed to remove traits via design update.');
     $this->addSiteSetting('trait_per_item', 0, '0: One item unlocks x traits for selection, and x of them can be chosen.
 1: One item unlocks x traits for selection, only one of them can be chosen.');
+    $this->addSiteSetting('character_likes', 1, '0: Characters can be liked only once,
+1: Characters can be liked daily.');
+    $this->addSiteSetting('character_likes_leaderboard_enable', 1, '0: Disable leaderboard,
+1: Enable leaderboard.');
 
     $this->line("\nSite settings up to date!");
   }
@@ -172,7 +179,8 @@ class AddSiteSettings extends Command {
    * Add a site setting.
    *
    * Example usage:
-   * $this->addSiteSetting("site_setting_key", 1, "0: does nothing. 1: does something.");
+   * $this->addSiteSetting("site_setting_key", 1, "0: does nothing.
+1: does something.");
    *
    * @param string $key
    * @param int    $value

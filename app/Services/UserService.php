@@ -248,17 +248,16 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Updates the user's password.
-     *
-     * @param  array                  $data
-     * @param  \App\Models\User\User  $user
-     * @return bool
-     */
-    public function updatePassword($data, $user)
-    {
+  /**
+   * Updates the user's password.
+   *
+   * @param  array                  $data
+   * @param  \App\Models\User\User  $user
+   * @return bool
+   */
+  public function updatePassword($data, $user) {
 
-        DB::beginTransaction();
+    DB::beginTransaction();
 
     try {
       if (isset($user->password) && !Hash::check($data['old_password'], $user->password)) {
@@ -271,25 +270,24 @@ class UserService extends Service {
       $user->password = Hash::make($data['new_password']);
       $user->save();
 
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
+    return $this->rollbackReturn(false);
+  }
 
-    /**
-     * Updates the user's email and resends a verification email.
-     *
-     * @param  array                  $data
-     * @param  \App\Models\User\User  $user
-     * @return bool
-     */
-    public function updateEmail($data, $user)
-    {
-        $user->email = $data['email'];
-        $user->email_verified_at = null;
-        $user->save();
+  /**
+   * Updates the user's email and resends a verification email.
+   *
+   * @param  array                  $data
+   * @param  \App\Models\User\User  $user
+   * @return bool
+   */
+  public function updateEmail($data, $user) {
+    $user->email = $data['email'];
+    $user->email_verified_at = null;
+    $user->save();
 
     $user->sendEmailVerificationNotification();
 
@@ -397,90 +395,86 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Updates user's warning visibility setting.
-     *
-     * @param mixed $data
-     * @param mixed $user
-     *
-     * @return bool
-     */
-    public function updateContentWarningVisibility($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Updates user's warning visibility setting.
+   *
+   * @param mixed $data
+   * @param mixed $user
+   *
+   * @return bool
+   */
+  public function updateContentWarningVisibility($data, $user) {
+    DB::beginTransaction();
 
-        try {
-            $user->settings->content_warning_visibility = $data;
-            $user->settings->save();
+    try {
+      $user->settings->content_warning_visibility = $data;
+      $user->settings->save();
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Updates the user's avatar.
-     *
-     * @param mixed $data
-     * @param mixed $user
-     *
-     * @return bool
-     */
-    public function updateProfileCommentSetting($data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            if(!$avatar) throw new \Exception ("Please upload a file.");
-            $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
+  /**
+   * Updates the user's avatar.
+   *
+   * @param mixed $data
+   * @param mixed $user
+   *
+   * @return bool
+   */
+  public function updateProfileCommentSetting($data, $user) {
+    DB::beginTransaction();
 
-            if ($user->avatar !== 'default.jpg') {
-                $file = 'images/avatars/' . $user->avatar;
-                //$destinationPath = 'uploads/' . $id . '/';
+    try {
+      if (!$avatar) throw new \Exception("Please upload a file.");
+      $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
 
-              if (File::exists($file)) {
-                  if (!unlink($file)) {
-                      throw new \Exception('Failed to unlink old avatar.');
-                  }
-              }
+      if ($user->avatar !== 'default.jpg') {
+        $file = 'images/avatars/' . $user->avatar;
+        //$destinationPath = 'uploads/' . $id . '/';
+
+        if (File::exists($file)) {
+          if (!unlink($file)) {
+            throw new \Exception('Failed to unlink old avatar.');
           }
-
-            // Checks if uploaded file is a GIF
-            if ($avatar->getClientOriginalExtension() == 'gif') {
-
-                if(!copy($avatar, $file)) throw new \Exception("Failed to copy file.");
-                if(!$file->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
-                if(!$avatar->move( public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
-
-            }
-
-            else {
-                if(!Image::make($avatar)->resize(150, 150)->save( public_path('images/avatars/' . $filename)))
-                throw new \Exception("Failed to process avatar.");
-            }
-
-          $user->avatar = $filename;
-          $user->save();
-
-            return $this->commitReturn($avatar);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
         }
-        return $this->rollbackReturn(false);
-    }
+      }
 
-    /**
-     * Bans a user.
-     *
-     * @param  array                  $data
-     * @param  \App\Models\User\User  $user
-     * @param  \App\Models\User\User  $staff
-     * @return bool
-     */
-    public function ban($data, $user, $staff)
-    {
-        DB::beginTransaction();
+      // Checks if uploaded file is a GIF
+      if ($avatar->getClientOriginalExtension() == 'gif') {
+
+        if (!copy($avatar, $file)) throw new \Exception("Failed to copy file.");
+        if (!$file->move(public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
+        if (!$avatar->move(public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
+      } else {
+        if (!Image::make($avatar)->resize(150, 150)->save(public_path('images/avatars/' . $filename)))
+          throw new \Exception("Failed to process avatar.");
+      }
+
+      $user->avatar = $filename;
+      $user->save();
+
+      return $this->commitReturn($avatar);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Bans a user.
+   *
+   * @param  array                  $data
+   * @param  \App\Models\User\User  $user
+   * @param  \App\Models\User\User  $staff
+   * @return bool
+   */
+  public function ban($data, $user, $staff) {
+    DB::beginTransaction();
 
     try {
       if (!$user->is_banned) {
@@ -550,39 +544,47 @@ class UserService extends Service {
       $user->settings->ban_reason = isset($data['ban_reason']) && $data['ban_reason'] ? $data['ban_reason'] : null;
       $user->settings->save();
 
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
+    return $this->rollbackReturn(false);
+  }
 
-    /**
-     * Unbans a user.
-     *
-     * @param  \App\Models\User\User  $user
-     * @param  \App\Models\User\User  $staff
-     * @return bool
-     */
-    public function unban($user, $staff)
-    {
-        DB::beginTransaction();
+  /**
+   * Unbans a user.
+   *
+   * @param  \App\Models\User\User  $user
+   * @param  \App\Models\User\User  $staff
+   * @return bool
+   */
+  public function unban($user, $staff) {
+    DB::beginTransaction();
 
-        try {
-            if($user->is_banned) {
-                $user->is_banned = 0;
-                $user->save();
+    try {
+      if ($user->is_banned) {
+        $user->is_banned = 0;
+        $user->save();
 
-                $user->settings->ban_reason = null;
-                $user->settings->banned_at = null;
-                $user->settings->save();
-                UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['is_banned' => 'No']), 'type' => 'Unban']);
-            }
+        $user->settings->ban_reason = null;
+        $user->settings->banned_at = null;
+        $user->settings->save();
+        UserUpdateLog::create(['staff_id' => $staff->id, 'user_id' => $user->id, 'data' => json_encode(['is_banned' => 'No']), 'type' => 'Unban']);
+      }
 
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
+    return $this->rollbackReturn(false);
+  }
+  /**
+   * Change character like settings
+   */
+  public function updateAllowCharacterLikes($data, $user) {
+    $user->settings->allow_character_likes = $data;
+    $user->settings->save();
+
+    return true;
+  }
 }

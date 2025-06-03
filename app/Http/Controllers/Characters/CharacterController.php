@@ -116,6 +116,10 @@ class CharacterController extends Controller {
         View::share('extPrevAndNextBtns', $extPrevAndNextBtns);
       }
 
+
+      if (Auth::check()) {
+        Auth::user()->checkLike($this->character);
+      }
       return $next($request);
     });
   }
@@ -227,25 +231,25 @@ class CharacterController extends Controller {
     return redirect()->back();
   }
 
-    /**
-     * Sorts a character's titles.
-     *
-     * @param App\Services\CharacterManager $service
-     * @param string                        $slug
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postSortTitles(CharacterManager $service, Request $request, $slug) {
-        if ($service->sortCharacterTitles($this->character, $request->get('sort'))) {
-            flash('Title order updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
+  /**
+   * Sorts a character's titles.
+   *
+   * @param App\Services\CharacterManager $service
+   * @param string                        $slug
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postSortTitles(CharacterManager $service, Request $request, $slug) {
+    if ($service->sortCharacterTitles($this->character, $request->get('sort'))) {
+      flash('Title order updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
+
+    return redirect()->back();
+  }
 
   /**
    * Shows a character's gallery.
@@ -816,17 +820,16 @@ class CharacterController extends Controller {
     ]);
   }
 
-    /**
-     * Opens a new design update approval request for a character. but with a specific image lmao
-     *
-     * @param  App\Services\CharacterManager  $service
-     * @param  string                         $slug
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postCharacterApprovalSpecificImage($slug, CharacterManager $service, $id)
-    {
-        if(!Auth::check() || $this->character->user_id != Auth::user()->id) abort(404);
-        $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
+  /**
+   * Opens a new design update approval request for a character. but with a specific image lmao
+   *
+   * @param  App\Services\CharacterManager  $service
+   * @param  string                         $slug
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postCharacterApprovalSpecificImage($slug, CharacterManager $service, $id) {
+    if (!Auth::check() || $this->character->user_id != Auth::user()->id) abort(404);
+    $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
 
     if ($request = $service->createDesignUpdateRequest($this->character, Auth::user(), $image, true)) {
       flash('Successfully created new design update request draft.')->success();
@@ -847,5 +850,25 @@ class CharacterController extends Controller {
     return view('character.pets', [
       'character'             => $this->character,
     ]);
+  }
+
+  /**
+   * Like a character
+   */
+  public function postLikeCharacter(Request $request, CharacterManager $service, $slug) {
+    if (!Auth::check()) abort(404);
+
+    //owned by same user
+    if (Auth::user()->id == $this->character->user->id) abort(404);
+
+    //user disabled likes
+    if (!$this->character->user->settings->allow_character_likes) abort(404);
+
+    if ($service->likeCharacter($this->character, Auth::user())) {
+      flash('Character ' . __('character_likes.liked') . ' successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+    }
+    return redirect()->back();
   }
 }

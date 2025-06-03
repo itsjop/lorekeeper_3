@@ -1,4 +1,5 @@
 # BROKEN
+- [ ] featured character only from active participants
 - [ ] shops still fucked
 - [ ] appprovals
 - [ ] item category search no results

@@ -51,7 +51,7 @@ return [
 */
   'site_desc' => 'Welcome to the world of Reverie!',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Alias | Email Requirement
     |--------------------------------------------------------------------------
@@ -68,8 +68,8 @@ return [
     | provide one on registration / login / site interaction (if this setting is enabled).
     |
     */
-    'require_alias'                                     => 1,
-    'require_email'                                     => 1,
+  'require_alias'                                     => 1,
+  'require_email'                                     => 1,
 
   /*
 |--------------------------------------------------------------------------
@@ -141,7 +141,8 @@ return [
 | Masterlist Images
 |--------------------------------------------------------------------------
 |
-| 0: Do not watermark. 1: Automatically watermark masterlist images.
+| 0: Do not watermark.
+1: Automatically watermark masterlist images.
 |
 | Dimension, in pixels, to scale submitted masterlist images to. Enter "0" to disable resizing.
 |
@@ -174,7 +175,8 @@ return [
 |--------------------------------------------------------------------------
 |
 | 0: Do not store full-sized masterlist images (for view by the character\'s owner) and staff.
-| 1: Store full-sized images uploaded to the masterlist. Not retroactive either way.
+|
+1: Store full-sized images uploaded to the masterlist. Not retroactive either way.
 |
 | Size, in pixels, to cap full-sized masterlist images at (if storing full-sized images is enabled).
 | Images above this cap in either dimension will be resized to suit. Enter "0" to disable resizing.
@@ -198,7 +200,8 @@ return [
 | Using a smallish size is recommended to reduce the amount of time
 | needed to load the masterlist pages.
 |
-| 0: Default thumbnail cropping behavior. 1: Watermark thumbnails.
+| 0: Default thumbnail cropping behavior.
+1: Watermark thumbnails.
 | Expects the whole of the character to be visible in the thumbnail.
 |
 */
@@ -217,7 +220,8 @@ return [
 | This affects the size of the watermark, resizing it to fit the masterlist image.
 | This requires the 'watermark_masterlist_images' option to be set to 1.
 |
-| 0: Does not automatically resize watermark. 1: Resize watermarks.
+| 0: Does not automatically resize watermark.
+1: Resize watermarks.
 | Expects the whole of the character to be visible in the thumbnail.
 |
 | The watermark percent is the scale of the watermark.
@@ -225,7 +229,8 @@ return [
 |
 | The final option is to also resize watermarks on thumbnails.
 | It will assume the same scale as masterlist image.
-| 0: Does not resize thumbnail watermarks. 1: Resizes thumbnail watermarks.
+| 0: Does not resize thumbnail watermarks.
+1: Resizes thumbnail watermarks.
 | This requires the 'watermark_masterlist_thumbnails' option to be set to 1.
 |
 */
@@ -250,7 +255,7 @@ return [
 */
   'masterlist_image_automation' => 0,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Masterlist Image Automation Hide Manual Thumbnail
     |--------------------------------------------------------------------------
@@ -264,12 +269,13 @@ return [
     | custom thumbnail images.
     |
     | 0: Allows custom thumbnail uploads.
-    | 1: Disallows custom thumbnail uploads.
+    |
+1: Disallows custom thumbnail uploads.
     |
     */
-    'masterlist_image_automation_hide_manual_thumbnail' => 0,
+  'masterlist_image_automation_hide_manual_thumbnail' => 0,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Remove Manual Thumbnail Image Upload
     |--------------------------------------------------------------------------
@@ -283,10 +289,11 @@ return [
     | custom thumbnail images.
     |
     | 0: Allows custom thumbnail uploads.
-    | 1: Disallows custom thumbnail uploads.
+    |
+1: Disallows custom thumbnail uploads.
     |
     */
-    'hide_manual_thumbnail_image_upload' => 0,
+  'hide_manual_thumbnail_image_upload' => 0,
 
   /*
 |--------------------------------------------------------------------------
@@ -330,7 +337,8 @@ return [
   'default_purchase_limit' => 99,
   /*
 | Donation Shop:
-| Item donations: Controls restrictions (or lack thereof) on user item donations. 0: No restrictions. Any item can be donated. 1: Only items of certain categories may be donated (configure when creating/editing item categories). 2: Only items with the 'donatable' tag may be donated. 3: Items in certain categories or that have the 'donateable' tag may be donated. Default: 0.
+| Item donations: Controls restrictions (or lack thereof) on user item donations. 0: No restrictions. Any item can be donated.
+1: Only items of certain categories may be donated (configure when creating/editing item categories). 2: Only items with the 'donatable' tag may be donated. 3: Items in certain categories or that have the 'donateable' tag may be donated. Default: 0.
 | Cooldown: Time (in minutes) that users must wait between "purchases". Default: 5.
 | Expiry: Time (in months) before items are automatically deleted from the donation shop. Set to 0 to disable expiry. Default: 0.
 |
@@ -373,12 +381,13 @@ return [
 |--------------------------------------------------------------------------
 |
 | Whether or not to use a WYSIWYG editor for comments.
-| 1: Use WYSIWYG editor. 0: Use markdown / plain text editor.
+|
+1: Use WYSIWYG editor. 0: Use markdown / plain text editor.
 |
 */
   'wysiwyg_comments' => 1,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Allow Gallery Submissions on Prompts
     |--------------------------------------------------------------------------
@@ -386,9 +395,9 @@ return [
     | Whether or not to allow gallery submissions on prompts.
     |
     */
-    'allow_gallery_submissions_on_prompts'              => 1,
+  'allow_gallery_submissions_on_prompts'              => 1,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Hideable Textarea on Gallery Submissions
     |--------------------------------------------------------------------------
@@ -401,25 +410,26 @@ return [
     | if 'enable' is set to 1.
     |
     */
-    'hide_textarea_on_gallery_submissions'              => [
-        'enable'   => 0,
-        'on_image' => 0,
-    ],
+  'hide_textarea_on_gallery_submissions'              => [
+    'enable'   => 0,
+    'on_image' => 0,
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Site FontAwesome Icon Version
     |--------------------------------------------------------------------------
     |
     | What version of FontAwesome the site uses.
-    | 0: Version 5. (Default) 1: Version 6.
+    | 0: Version 5. (Default)
+1: Version 6.
     | 2: A mixed version where icons with v5 classes (i.e. fas) show
     | the v5 icons and icons with v6 classes (i.e. fa-solid) show the v6 icons.
     |
     */
-    'fa_version'                                  => 0,
+  'fa_version'                                  => 0,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Site Logging Webhook
     |--------------------------------------------------------------------------
@@ -430,9 +440,9 @@ return [
     | This is intended to be a Discord webhook, but can be used with other services with minor modifications.
     |
     */
-    'site_logging_webhook'                              => env('SITE_LOGGING_WEBHOOK', null),
+  'site_logging_webhook'                              => env('SITE_LOGGING_WEBHOOK', null),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable Character Content Warnings
     |--------------------------------------------------------------------------
@@ -440,5 +450,5 @@ return [
     | Allows characters to have content warnings.
     |
     */
-    'enable_character_content_warnings'                 => 1,
+  'enable_character_content_warnings'                 => 1,
 ];

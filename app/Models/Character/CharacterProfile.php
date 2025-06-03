@@ -11,7 +11,7 @@ class CharacterProfile extends Model {
      * @var array
      */
     protected $fillable = [
-        'character_id', 'text', 'parsed_text', 'link', 'profession','profession_id'
+        'character_id', 'text', 'parsed_text', 'link', 'profession','profession_id','like_count'
     ];
 
     /**

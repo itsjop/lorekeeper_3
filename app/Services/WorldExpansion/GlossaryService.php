@@ -8,7 +8,7 @@ use DB;
 use Settings;
 
 class GlossaryService extends Service {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Glossary Service
     |--------------------------------------------------------------------------
@@ -17,121 +17,122 @@ class GlossaryService extends Service {
     |
     */
 
-    /**
-     * Creates a new term.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return \App\Models\Event\WorldExpansion|bool
-     */
-    public function createTerm($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Creates a new term.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return \App\Models\Event\WorldExpansion|bool
+   */
+  public function createTerm($data, $user) {
+    DB::beginTransaction();
 
-        try {
-            $data['is_active'] = isset($data['is_active']) ? 1 : 0;
-            if (isset($data['description']) && $data['description']) {
-                $data['parsed_description'] = parse($data['description']);
-            }
-            $data['link_type'] = isset($data['attachment_type']) ? $data['attachment_type'][0] : null;
-            $data['link_id'] = isset($data['attachment_id']) ? $data['attachment_id'][0] : null;
+    try {
+      $data['is_active'] = isset($data['is_active']) ? 1 : 0;
+      if (isset($data['description']) && $data['description']) {
+        $data['parsed_description'] = parse($data['description']);
+      }
+      $data['link_type'] = isset($data['attachment_type']) ? $data['attachment_type'][0] : null;
+      $data['link_id'] = isset($data['attachment_id']) ? $data['attachment_id'][0] : null;
 
-            $term = Glossary::create($data);
+      $term = Glossary::create($data);
 
-            return $this->commitReturn($term);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($term);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Updates a term.
-     *
-     * @param Glossary $term
-     * @param array    $data
-     *
-     * @return \App\Models\WorldExpansion\WorldExpansion|bool
-     */
-    public function updateTerm($term, $data) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // More specific validation
-            if (Glossary::where('name', $data['name'])->where('id', '!=', $term->id)->exists()) {
-                throw new \Exception('The name has already been taken.');
-            }
+  /**
+   * Updates a term.
+   *
+   * @param Glossary $term
+   * @param array    $data
+   *
+   * @return \App\Models\WorldExpansion\WorldExpansion|bool
+   */
+  public function updateTerm($term, $data) {
+    DB::beginTransaction();
 
-            $data['is_active'] = isset($data['is_active']) ? 1 : 0;
-            $data['link_type'] = isset($data['attachment_type']) ? $data['attachment_type'][0] : null;
-            $data['link_id'] = isset($data['attachment_id']) ? $data['attachment_id'][0] : null;
-            if (isset($data['description']) && $data['description']) {
-                $data['parsed_description'] = parse($data['description']);
-            }
+    try {
+      // More specific validation
+      if (Glossary::where('name', $data['name'])->where('id', '!=', $term->id)->exists()) {
+        throw new \Exception('The name has already been taken.');
+      }
 
-            $term->update($data);
+      $data['is_active'] = isset($data['is_active']) ? 1 : 0;
+      $data['link_type'] = isset($data['attachment_type']) ? $data['attachment_type'][0] : null;
+      $data['link_id'] = isset($data['attachment_id']) ? $data['attachment_id'][0] : null;
+      if (isset($data['description']) && $data['description']) {
+        $data['parsed_description'] = parse($data['description']);
+      }
 
-            return $this->commitReturn($term);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      $term->update($data);
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($term);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Deletes a term.
-     *
-     * @param Glossary $term
-     *
-     * @return bool
-     */
-    public function deleteTerm($term) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            $term->delete();
+  /**
+   * Deletes a term.
+   *
+   * @param Glossary $term
+   *
+   * @return bool
+   */
+  public function deleteTerm($term) {
+    DB::beginTransaction();
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+    try {
+      $term->delete();
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Toggles the setting.
-     *
-     * @return bool
-     */
-    public function toggleSetting() {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            if (!DB::table('site_settings')->where('key', 'WE_glossary')->exists()) {
-                // Implied turned off by default
-                DB::table('site_settings')->insert([
-                    [
-                        'key'         => 'WE_glossary',
-                        'value'       => 1,
-                        'description' => '0: Glossary Page is not shown to users. 1: Glossary Page is shown to users.',
-                    ],
-                ]);
-            } else {
-                if (Settings::get('WE_glossary') == 1) {
-                    DB::table('site_settings')->where('key', 'WE_glossary')->update(['value' => 0]);
-                } else {
-                    DB::table('site_settings')->where('key', 'WE_glossary')->update(['value' => 1]);
-                }
-            }
+  /**
+   * Toggles the setting.
+   *
+   * @return bool
+   */
+  public function toggleSetting() {
+    DB::beginTransaction();
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
+    try {
+      if (!DB::table('site_settings')->where('key', 'WE_glossary')->exists()) {
+        // Implied turned off by default
+        DB::table('site_settings')->insert([
+          [
+            'key'         => 'WE_glossary',
+            'value'       => 1,
+            'description' => '0: Glossary Page is not shown to users.
+                        1: Glossary Page is shown to users.',
+          ],
+        ]);
+      } else {
+        if (Settings::get('WE_glossary') == 1) {
+          DB::table('site_settings')->where('key', 'WE_glossary')->update(['value' => 0]);
+        } else {
+          DB::table('site_settings')->where('key', 'WE_glossary')->update(['value' => 1]);
         }
+      }
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
+
+    return $this->rollbackReturn(false);
+  }
 }
