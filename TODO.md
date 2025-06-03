@@ -3,7 +3,9 @@
 - [ ] appprovals
 - [ ] item category search no results
 - [ ] shop editing super broken
-- [~] toggles arent toggling
+- [ ] wysywig textboxes
+- [ ] admin/raffle create buttons dont work
+- [x] toggles arent toggling
 - [x] delete item doesnt work
 - [x] pets
 - [x] Item Preview Error
@@ -12,8 +14,6 @@
 - [x] server profile picture 500
 - [x] 'shops' are dispalying twice and unclickable
 - [x] somnivores logo misalignment
-- [ ] wysywig textboxes
-- [ ] admin/raffle create buttons dont work
 - [~] broken pages:
     - [x] /characters 500 error
     - [x] /inventory 500 error

@@ -9,7 +9,22 @@
 
   <h1>{{ $rarity->id ? 'Edit' : 'Create' }} Rarity
     @if ($rarity->id)
-      <a href="#" class="btn btn-danger float-right delete-rarity-button">Delete Rarity</a>
+        <h3>Preview</h3>
+        <div class="card mb-3">
+            <div class="card-body">
+                @include('world._rarity_entry', [
+                    'imageUrl' => $rarity->rarityImageUrl,
+                    'name' => $rarity->displayName,
+                    'description' => $rarity->parsed_description,
+                    'searchFeaturesUrl' => $rarity->searchFeaturesUrl,
+                    'searchCharactersUrl' => $rarity->searchCharactersUrl,
+                    'edit' => [
+                        'title' => 'Edit Rarity',
+                        'object' => $rarity,
+                    ],
+                ])
+            </div>
+        </div>
     @endif
   </h1>
 
