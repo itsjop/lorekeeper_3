@@ -39,7 +39,7 @@ class CopyDefaultImages extends Command {
 
         $images = config('lorekeeper.image_files');
 
-        $sourceDir = base_path().'/data/images/';
+        $sourceDir = base_path().'/data/images/lorekeeper/';
         $destDir = public_path().'/images/lorekeeper/';
 
         foreach ($images as $image) {

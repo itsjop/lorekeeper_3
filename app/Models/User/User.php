@@ -45,7 +45,6 @@ use App\Models\Submission\Submission;
 use App\Traits\Commenter;
 use App\Models\User\UserImageBlock;
 use App\Models\Recipe\Recipe;
-use Settings;
 
 class User extends Authenticatable implements MustVerifyEmail {
   use Notifiable, Commenter;
