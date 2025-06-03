@@ -432,6 +432,51 @@
       </div>
     </div>
 
+    <hr class="my-4">
+
+    <h3>Lineage (Optional)</h3>
+    <div class="alert alert-info">Do not enter anything if there are no ancestors in that slot.</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group text-center pb-1 border-bottom">
+          {!! Form::label('father_id', 'Father (Optional)', ['class' => 'font-weight-bold']) !!}
+          <div class="row">
+            <div class="col-sm-6 pr-sm-1">
+              {!! Form::select('father_id', $characterOptions, null, [
+                  'class' => 'form-control text-left character-select mb-1',
+                  'placeholder' => 'None'
+              ]) !!}
+            </div>
+            <div class="col-sm-6 pl-sm-1">
+              {!! Form::text('father_name', old('father_name'), [
+                  'class' => 'form-control mb-1',
+                  'placeholder' => 'Father\'s Name (Optional)'
+              ]) !!}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group text-center pb-1 border-bottom">
+          {!! Form::label('mpther_id', 'Mother (Optional)', ['class' => 'font-weight-bold']) !!}
+          <div class="row">
+            <div class="col-sm-6 pr-sm-1">
+              {!! Form::select('mother_id', $characterOptions, null, [
+                  'class' => 'form-control text-left character-select mb-1',
+                  'placeholder' => 'None'
+              ]) !!}
+            </div>
+            <div class="col-sm-6 pl-sm-1">
+              {!! Form::text('mother_name', old('mother_name'), [
+                  'class' => 'form-control mb-1',
+                  'placeholder' => 'Mother\'s Name (Optional)'
+              ]) !!}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="text-right">
       {!! Form::submit('Create Character', ['class' => 'btn btn-primary']) !!}
     </div>
@@ -486,6 +531,13 @@
 
     $("#subtype").selectize({
       maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+    });
+
+    $(document).ready(function() {
+      $('.character-select').selectize();
+      $('#advanced_lineage').on('click', function(e) {
+        e.preventDefault();
+      });
     });
   </script>
 @endsection

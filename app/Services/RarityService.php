@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImage;
+use App\Models\Character\CharacterLineageBlacklist;
 use App\Models\Rarity;
 use Illuminate\Support\Facades\DB;
 
@@ -52,6 +53,7 @@ class RarityService extends Service {
             }
 
             $rarity = Rarity::create($data);
+            $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'rarity', $rarity->id);
 
             if ($image) {
                 $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
@@ -106,6 +108,7 @@ class RarityService extends Service {
             }
 
             $rarity->update($data);
+            $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'rarity', $rarity->id);
 
             if ($rarity) {
                 $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
@@ -143,6 +146,7 @@ class RarityService extends Service {
                 $this->deleteImage($rarity->rarityImagePath, $rarity->rarityImageFileName);
             }
             $rarity->delete();
+            CharacterLineageBlacklist::searchAndSet(0, 'rarity', $rarity->id);
 
             return $this->commitReturn(true);
         } catch (\Exception $e) {

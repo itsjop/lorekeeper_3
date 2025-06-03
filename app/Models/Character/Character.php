@@ -5,6 +5,7 @@ namespace App\Models\Character;
 use App\Facades\Notifications;
 use App\Models\Currency\Currency;
 use App\Models\Currency\CurrencyLog;
+use App\Models\Character\CharacterLineageBlacklist;
 use App\Models\Gallery\GalleryCharacter;
 use App\Models\Item\Item;
 use App\Models\Item\ItemLog;
@@ -223,6 +224,22 @@ class Character extends Model {
     public function awards()
     {
         return $this->belongsToMany('App\Models\Award\Award', 'character_awards')->withPivot('count', 'data', 'updated_at', 'id')->whereNull('character_awards.deleted_at');
+    }
+
+    /**
+     * Get the lineage of the character.
+     */
+    public function lineage()
+    {
+        return $this->hasOne('App\Models\Character\CharacterLineage', 'character_id');
+    }
+
+    /**
+     * Get the character's children from the lineages.
+     */
+    public function children()
+    {
+        return $this->hasMany('App\Models\Character\CharacterLineage', 'father_id')->orWhere('mother_id', $this->id);
     }
 
     /**********************************************************************************************
@@ -733,5 +750,18 @@ class Character extends Model {
                 ]);
             }
         }
+    }
+
+    /**
+     * Finds the lineage blacklist level of this character.
+     * 0 is no restriction at all
+     * 1 is ancestors but no children
+     * 2 is no lineage at all
+     *
+     * @return int
+     */
+    public function getLineageBlacklistLevel($maxLevel = 2)
+    {
+        return CharacterLineageBlacklist::getBlacklistLevel($this, $maxLevel);
     }
 }

@@ -14,6 +14,7 @@ use App\Models\Character\CharacterImage;
 use App\Models\Character\CharacterImageSubtype;
 use App\Models\Character\CharacterLog;
 use App\Models\Character\CharacterTransfer;
+use App\Models\Character\CharacterLineage;
 use App\Models\Sales\SalesCharacter;
 use App\Models\Species\Species;
 use App\Models\Species\Subtype;
@@ -128,7 +129,13 @@ class CharacterManager extends Service {
       $character = $this->handleCharacter($data, $isMyo);
       if (!$character) {
         throw new \Exception('Error happened while trying to create character.');
-      } // Create character image
+      }
+      // Create character lineage
+      $lineage = $this->handleCharacterLineage($data, $character, $isMyo);
+      if (!$lineage) {
+        throw new \Exception('Error happened while trying to create lineage.');
+      }
+      // Create character image
       $data['is_valid'] = true; // New image of new characters are always valid
       $image = $this->handleCharacterImage($data, $character, $isMyo);
       if (!$image) {
@@ -3144,5 +3151,83 @@ class CharacterManager extends Service {
       $this->setError('error', $e->getMessage());
     }
     return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Updates a character's lineage.
+   *
+   * @param  array                            $data
+   * @param  \App\Models\Character\Character  $character
+   * @param  \App\Models\User\User            $user
+   * @param  bool                             $isAdmin
+   * @return  bool
+   */
+  public function updateCharacterLineage($data, $character, $user, $isAdmin = false) {
+    DB::beginTransaction();
+
+    try {
+      if (!$user->hasPower('manage_characters')) throw new \Exception('You do not have the required permissions to do this.');
+
+      if (!$character->lineage) {
+        return $this->handleCharacterLineage($data, $character, $character->is_myo_slot);
+      } else {
+        $character->lineage->update([
+          'father_id'   => $data['father_id'] ?? null,
+          'father_name' => $data['father_id'] ? null : ($data['father_name'] ?? null),
+          'mother_id'   => $data['mother_id'] ?? null,
+          'mother_name' => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+          'depth'       => $data['depth'] ?? 0,
+        ]);
+      }
+      // CUSTOM ANCESTRY
+
+
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Handles character lineage data.
+   *
+   * @param  array                            $data
+   * @return \App\Models\Character\Character  $character
+   * @param  bool                             $isMyo
+   * @return \App\Models\Character\CharacterLineage|bool
+   */
+  private function handleCharacterLineage($data, $character, $isMyo = false) {
+    try {
+
+      // check mother and father id if set to see if character exists
+      if (isset($data['father_id']) && $data['father_id']) {
+        $father = Character::find($data['father_id']);
+        if (!$father) {
+          throw new \Exception('Father is invalid.');
+        }
+      }
+      if (isset($data['mother_id']) && $data['mother_id']) {
+        $mother = Character::find($data['mother_id']);
+        if (!$mother) {
+          throw new \Exception('Mother is invalid.');
+        }
+      }
+
+      $lineage = CharacterLineage::create([
+        'character_id' => $character->id,
+        'father_id'    => $data['father_id'] ?? null,
+        'father_name'  => $data['father_id'] ? null : ($data['father_name'] ?? null),
+        'mother_id'    => $data['mother_id'] ?? null,
+        'mother_name'  => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+        'depth'        => $data['depth'] ?? 0,
+      ]);
+
+      return $this->commitReturn($lineage);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return false;
   }
 };

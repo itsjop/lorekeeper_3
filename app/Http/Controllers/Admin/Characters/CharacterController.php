@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterCategory;
 use App\Models\Character\CharacterImage;
+use App\Models\Character\CharacterLineageBlacklist;
 use App\Models\Character\CharacterTransfer;
 use App\Models\Feature\Feature;
 use App\Models\Rarity;
@@ -60,6 +61,8 @@ class CharacterController extends Controller {
             'subtypes'    => ['0' => 'Pick a Species First'],
             'features'    => Feature::getDropdownItems(1),
             'transformations' => ['0' => 'Pick a Species First'],
+            'characterOptions' => CharacterLineageBlacklist::getAncestorOptions(),
+
         ]);
     }
 
@@ -77,6 +80,7 @@ class CharacterController extends Controller {
             'subtypes'    => ['0' => 'Pick a Species First'],
             'features'    => Feature::getDropdownItems(1),
             'transformations' => ['0' => 'Pick a Species First'],
+            'characterOptions' => CharacterLineageBlacklist::getAncestorOptions(),
         ]);
     }
 
@@ -124,7 +128,8 @@ class CharacterController extends Controller {
             'designer_id', 'designer_url',
             'artist_id', 'artist_url',
             'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
-            'image', 'thumbnail', 'image_description', 'transformation_id','transformation_info','transformation_description'
+            'image', 'thumbnail', 'image_description', 'transformation_id','transformation_info','transformation_description',
+            'father_id', 'mother_id',
         ]);
         if ($character = $service->createCharacter($data, Auth::user())) {
             flash('Character created successfully.')->success();
@@ -156,7 +161,8 @@ class CharacterController extends Controller {
             'designer_id', 'designer_url',
             'artist_id', 'artist_url',
             'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
-            'image', 'thumbnail', 'transformation_id','transformation_info','transformation_description'
+            'image', 'thumbnail', 'transformation_id','transformation_info','transformation_description',
+            'father_id', 'mother_id',
         ]);
         if ($character = $service->createCharacter($data, Auth::user(), true)) {
             flash('MYO slot created successfully.')->success();
