@@ -66,11 +66,11 @@ Route::group(['prefix' => 'user', 'namespace' => 'Users'], function () {
   Route::get('{name}/inventory', 'UserController@getUserInventory');
   Route::get('{name}/pets', 'UserController@getUserPets');
   Route::get('{name}/pets/{id}', 'UserController@getUserPet');
+  Route::get('{name}/pet-logs', 'UserController@getUserPetLogs');
   Route::get('{name}/bank', 'UserController@getUserBank');
-
+  Route::get('{name}/redeem-logs', 'UserController@getUserRedeemLogs');
   Route::get('{name}/currency-logs', 'UserController@getUserCurrencyLogs');
   Route::get('{name}/item-logs', 'UserController@getUserItemLogs');
-  Route::get('{name}/pet-logs', 'UserController@getUserPetLogs');
   Route::get('{name}/' . __('awards.award') . '-logs', 'UserController@getUserAwardLogs');
   Route::get('{name}/ownership', 'UserController@getUserOwnershipLogs');
   Route::get('{name}/submissions', 'UserController@getUserSubmissions');

@@ -441,3 +441,8 @@ Route::group(['prefix' => 'criteria'], function () {
   Route::post('rewards/{id}', 'CriterionController@postCriterionRewards');
   Route::get('guide/{id}', 'CriterionController@getCriterionGuide');
 });
+
+Route::group(['prefix' => 'redeem-code', 'namespace' => 'Users'], function () {
+  Route::get('/', 'PrizeCodeController@getIndex');
+  Route::post('/redeem', 'PrizeCodeController@postRedeemPrize');
+});

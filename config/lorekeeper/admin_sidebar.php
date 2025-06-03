@@ -82,6 +82,7 @@ return [
       ['name' => 'Pet Grants', 'url' => 'admin/grants/pets',],
       ['name' => 'Award Grants', 'url' => 'admin/grants/awards'],
       ['name' => 'Recipe Grants', 'url' => 'admin/grants/recipes'],
+      ['name' => 'Codes', 'url' => 'admin/prizecodes'],
     ]
   ],
   'Masterlist' => [

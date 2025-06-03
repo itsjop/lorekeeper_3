@@ -62,6 +62,26 @@ Route::group(['prefix' => 'invitations', 'middleware' => 'power:edit_site_settin
   Route::post('delete/{id}', 'InvitationController@postDeleteKey');
 });
 
+Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function() {
+    Route::get('/', 'PrizeCodeController@getIndex');
+    Route::get('/create', 'PrizeCodeController@getCreatePrize');
+    Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
+    Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
+    Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
+});
+
+Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function() {
+    Route::get('/', 'PrizeCodeController@getIndex');
+    Route::get('/create', 'PrizeCodeController@getCreatePrize');
+    Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
+    Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
+    Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
+});
+
 // FILE MANAGER
 Route::group(['prefix' => 'files', 'middleware' => 'power:edit_site_settings'], function () {
   Route::get('/{folder?}', 'FileController@getIndex');

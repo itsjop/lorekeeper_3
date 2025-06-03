@@ -198,9 +198,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->hasMany(Character::class)->where('is_myo_slot', 0)->orderBy('sort', 'DESC');
   }
 
-  /**
-   * Get the user's MYO slots.
-   */
+  /** * Get the user's MYO slots. */
   public function myoSlots() {
     return $this->hasMany(Character::class)->where('is_myo_slot', 1)->orderBy('id', 'DESC');
   }
@@ -715,7 +713,6 @@ class User extends Authenticatable implements MustVerifyEmail {
     if ($bday->format('d M') == Carbon::now()->format('d M')) {
       $icon = '<i class="fas fa-birthday-cake ml-1"></i>';
     }
-
     //
     switch ($this->settings->birthday_setting) {
       case 0:
@@ -1222,5 +1219,18 @@ class User extends Authenticatable implements MustVerifyEmail {
     }
 
     return $recipeCollection;
+  }
+
+  /**
+   * Get the user's redeem logs.
+   *
+   * @param  int  $limit
+   * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getRedeemLogs($limit = 10) {
+    $user = $this;
+    $query = UserPrizeLog::with('prize')->where('user_id', $user->id)->orderBy('id', 'DESC');
+    if ($limit) return $query->take($limit)->get();
+    else return $query->paginate(30);
   }
 }
