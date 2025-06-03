@@ -9,7 +9,7 @@ class Rarity extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'sort', 'color', 'has_image', 'description', 'parsed_description', 'hash',
+        'name', 'sort', 'color', 'has_image', 'description', 'parsed_description', 'hash', 'has_icon', 'icon_hash',
     ];
 
     /**
@@ -28,6 +28,7 @@ class Rarity extends Model {
         'color'       => 'nullable|regex:/^#?[0-9a-fA-F]{6}$/i',
         'description' => 'nullable',
         'image'       => 'mimes:png',
+        'icon'        => 'mimes:png',
     ];
 
     /**
@@ -40,6 +41,7 @@ class Rarity extends Model {
         'color'       => 'nullable|regex:/^#?[0-9a-fA-F]{6}$/i',
         'description' => 'nullable',
         'image'       => 'mimes:png',
+        'icon'        => 'mimes:png',
     ];
 
     /**********************************************************************************************
@@ -54,6 +56,21 @@ class Rarity extends Model {
      * @return string
      */
     public function getDisplayNameAttribute() {
+        $string = '';
+
+        if ($this->has_icon) {
+            $string = '<img src="'.$this->rarityIconUrl.'"/> ';
+        }
+
+        return $string.'<a href="'.$this->url.'" class="display-rarity" '.($this->color ? 'style="color: #'.$this->color.';"' : '').'>'.$this->name.'</a>';
+    }
+
+    /**
+     * Displays the model's name, linked to its encyclopedia page.
+     *
+     * @return string
+     */
+    public function getDisplayNameNoIconAttribute() {
         return '<a href="'.$this->url.'" class="display-rarity" '.($this->color ? 'style="color: #'.$this->color.';"' : '').'>'.$this->name.'</a>';
     }
 
@@ -147,5 +164,27 @@ class Rarity extends Model {
      */
     public function getAdminPowerAttribute() {
         return 'edit_data';
+    }
+
+    /**
+     * Gets the file name of the model's icon.
+     *
+     * @return string
+     */
+    public function getRarityIconFileNameAttribute() {
+        return $this->icon_hash.$this->id.'-icon.png';
+    }
+
+    /**
+     * Gets the URL of the model's icon.
+     *
+     * @return string
+     */
+    public function getRarityIconUrlAttribute() {
+        if (!$this->has_icon) {
+            return null;
+        }
+
+        return asset($this->imageDirectory.'/'.$this->rarityIconFileName);
     }
 }

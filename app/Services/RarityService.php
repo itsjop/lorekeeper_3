@@ -41,10 +41,24 @@ class RarityService extends Service {
                 $data['has_image'] = 0;
             }
 
+            $icon = null;
+            if (isset($data['icon']) && $data['icon']) {
+                $data['icon_hash'] = randomString(10);
+                $data['has_icon'] = 1;
+                $icon = $data['icon'];
+                unset($data['icon']);
+            } else {
+                $data['has_icon'] = 0;
+            }
+
             $rarity = Rarity::create($data);
 
             if ($image) {
                 $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
+            }
+
+            if ($icon) {
+                $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityIconFileName);
             }
 
             return $this->commitReturn($rarity);
@@ -83,10 +97,22 @@ class RarityService extends Service {
                 unset($data['image']);
             }
 
+            $icon = null;
+            if (isset($data['icon']) && $data['icon']) {
+                $data['has_icon'] = 1;
+                $data['icon_hash'] = randomString(10);
+                $icon = $data['icon'];
+                unset($data['icon']);
+            }
+
             $rarity->update($data);
 
             if ($rarity) {
                 $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
+            }
+
+            if ($icon) {
+                $this->handleImage($icon, $rarity->rarityImagePath, $rarity->rarityIconFileName);
             }
 
             return $this->commitReturn($rarity);
@@ -175,6 +201,14 @@ class RarityService extends Service {
                 $this->deleteImage($rarity->rarityImagePath, $rarity->rarityImageFileName);
             }
             unset($data['remove_image']);
+        }
+
+        if (isset($data['remove_icon'])) {
+            if ($rarity && $rarity->has_icon && $data['remove_icon']) {
+                $data['has_icon'] = 0;
+                $this->deleteImage($rarity->rarityImagePath, $rarity->rarityIconFileName);
+            }
+            unset($data['remove_icon']);
         }
 
         return $data;
