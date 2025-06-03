@@ -20,7 +20,8 @@
     @if ($feature->feature_category_id)
       <div>
         <strong>Category:</strong> {!! $feature->category->displayName !!}
-      </div>
+      @include('widgets._object_block', ['object' => $feature])
+        </div>
     @endif
     @if ($feature->species_id)
       <div>

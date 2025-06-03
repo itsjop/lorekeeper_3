@@ -19,5 +19,8 @@
     <div class="sidebar-item">
       <a href="{{ url('account/deactivate') }}" class="{{ set_active('account/deactivate') }}">Deactivate</a>
     </div>
+    <div class="sidebar-item">
+      <a href="{{ url('account/blocked-images') }}" class="{{ set_active('account/blocked-images') }}">Blocked Images</a>
+    </div>
   </li>
 </ul>

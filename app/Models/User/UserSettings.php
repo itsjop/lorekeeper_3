@@ -11,7 +11,7 @@ class UserSettings extends Model {
      * @var array
      */
     protected $fillable = [
-        'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting','border_settings',
+        'is_fto', 'submission_count', 'banned_at', 'ban_reason', 'birthday_setting','show_image_blocks','border_settings',
         'deactivate_reason', 'deactivated_at', 'content_warning_visibility', 'allow_profile_comments',
     ];
 

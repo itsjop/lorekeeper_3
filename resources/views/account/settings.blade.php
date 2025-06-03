@@ -65,9 +65,9 @@
   </div>
 
   {{-- YOUR PROFILE --}}
-  <div class="card p-3 mb-2">
-    <h3>Profile</h3>
-    {!! Form::open(['url' => 'account/profile']) !!}
+      <div class="card p-3 mb-2">
+        <h3>Profile</h3>
+        {!! Form::open(['url' => 'account/profile']) !!}
     <div class="form-group">
       {!! Form::label('pronouns', 'Preferred Pronouns') !!} {!! add_help('Your preferred pronouns will be displayed in various places across the site. This field can be changed or removed at anytime.') !!}
       {!! Form::text('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
@@ -79,8 +79,8 @@
     <div class="text-right">
       {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     </div>
-    {!! Form::close() !!}
-  </div>
+        {!! Form::close() !!}
+      </div>
 
   @if ($user_enabled == 1 || (Auth::user()->isStaff && $user_enabled == 2))
     <div class="card p-3 mb-2">
@@ -276,21 +276,25 @@
     </div>
   @endif
   {{-- YOUR BIRTHDAY --}}
-    <div class="card p-3 mb-2">
-        <h3>Birthday Publicity</h3>
-        {!! Form::open(['url' => 'account/dob']) !!}
+        <div class="card p-3 mb-2">
+            <h3>Birthday Publicity</h3>
+            {!! Form::open(['url' => 'account/dob']) !!}
         <div class="form-group row">
             <label class="col-md-2 col-form-label">Setting</label>
             <div class="col-md-10">
                 {!! Form::select(
+
                     'birthday_setting',
+
             [
                 '0' => '0: No one can see your birthday.',
                 '1' => '1: Members can see your day and month.',
                 '2' => '2: Anyone can see your day and month.',
                 '3' => '3: Full date public.',
             ],
+
                     Auth::user()->settings->birthday_setting,
+
                     ['class' => 'form-control'],
                 ) !!}
             </div>
@@ -329,6 +333,7 @@
                     ['0' => '0: Character has pop-up warning and censored icons.', '1' => '1: Character has pop-up warnings only.', '2' => '2: No warnings will appear on characters.'],
                     Auth::user()->settings->content_warning_visibility,
                     ['class' => 'form-control'],
+                ,
                 ) !!}
             </div>
         </div>
@@ -351,12 +356,12 @@
         <div class="text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         </div>
-        {!! Form::close() !!}
-    </div>
+            {!! Form::close() !!}
+        </div>
   {{-- PASSWORD UPDATE --}}
-    <div class="card p-3 mb-2">
-        <h3>Change Password</h3>
-        {!! Form::open(['url' => 'account/password']) !!}
+        <div class="card p-3 mb-2">
+            <h3>Change Password</h3>
+            {!! Form::open(['url' => 'account/password']) !!}
         <div class="form-group row">
             <label class="col-md-2 col-form-label">Old Password</label>
             <div class="col-md-10">
@@ -378,7 +383,24 @@
         <div class="text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         </div>
-        {!! Form::close() !!}
+    {!! Form::close() !!}
+</div>
+
+    <div class="card p-3 mb-2">
+        <h3>Image Block Settings</h3>
+        <p>This will disable or enable the image block widgets from showing.</p>
+        <p>Note that this won't delete or unblock your existing image blocks, they will remain blurred for you.</p>
+        {!! Form::open(['url' => 'account/blocked-image-setting']) !!}
+        <div class="row">
+            <div class="col form-group">
+                {!! Form::checkbox('show_image_blocks', 1, Auth::user()->settings->show_image_blocks ? 1 : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+                {!! Form::label('show_image_blocks', 'Show widgets?', ['class' => 'form-check-label ml-3']) !!}
+            </div>
+        </div>
+        <div class="text-right">
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+        </div>
+ {!! Form::close() !!}
     </div>
   {{-- TWO FACTOR AUTH --}}
     <div class="card p-3 mb-2">
@@ -422,6 +444,22 @@
     $(document).ready(() => $('.selectize').selectize(););
   </script>
 
+    <div class="card p-3 mb-2">
+        <h3>Image Block Settings</h3>
+        <p>This will disable or enable the image block widgets from showing.</p>
+        <p>Note that this won't delete or unblock your existing image blocks, they will remain blurred for you.</p>
+        {!! Form::open(['url' => 'account/blocked-image-setting']) !!}
+        <div class="row">
+            <div class="col form-group">
+                {!! Form::checkbox('show_image_blocks', 1, Auth::user()->settings->show_image_blocks ? 1 : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+                {!! Form::label('show_image_blocks', 'Show widgets?', ['class' => 'form-check-label ml-3']) !!}
+            </div>
+        </div>
+        <div class="text-right">
+            {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+        </div>
+        {!! Form::close() !!}
+    </div>
 @endsection
 
 @section('scripts')

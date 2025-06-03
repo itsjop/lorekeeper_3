@@ -90,17 +90,18 @@
   >
     <div class="col-md-7">
       <div class="text-center">
-        <a
+            <a
           href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
           data-lightbox="entry"
           data-title="{{ $character->fullName }}"
-        >
+            >
           <img
             src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+            class="image {{Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : ''}} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
             alt="{{ $character->fullName }}"
           />
-        </a>
+            </a>
+            <div class="mt-2 text-center">@include('widgets._object_block', ['object' => $character])</div>
       </div>
       @if (
           $character->image->canViewFull(Auth::check() ? Auth::user() : null) &&
@@ -189,6 +190,11 @@
 
 @section('scripts')
   @parent
+    <style>
+    .image-blur {
+        filter: blur(5px);
+    }
+    </style>
   @include('character._image_js', ['character' => $character])
   @include('character._transformation_js')
 @endsection

@@ -4,7 +4,8 @@
       <a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}">
         <img src="{{ $imageUrl }}" class="world-entry-image" alt="{{ $name }}" />
       </a>
-    </div>
+     @include('widgets._object_block', ['object' => $item])
+        </div>
   @endif
   <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
     <x-admin-edit title="Item" :object="$item" />

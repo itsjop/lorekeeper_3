@@ -14,6 +14,8 @@ use App\Models\Character\Character;
 use App\Models\Character\CharacterBookmark;
 use App\Models\Character\CharacterImageCreator;
 use App\Models\Rank\RankPower;
+use App\Models\User\Location;
+use App\Models\User\Faction;
 use App\Models\Currency\Currency;
 use App\Models\Currency\CurrencyCategory;
 use App\Models\Currency\CurrencyLog;
@@ -41,6 +43,7 @@ use App\Models\Notification;
 use App\Models\Rank\Rank;
 use App\Models\Submission\Submission;
 use App\Traits\Commenter;
+use App\Models\User\UserImageBlock;
 use App\Models\Recipe\Recipe;
 
 class User extends Authenticatable implements MustVerifyEmail {
@@ -251,6 +254,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->belongsToMany('App\Models\Recipe\Recipe', 'user_recipes')->withPivot('id');
   }
 
+
   /**
    * Get all of the user's gallery submissions.
    */
@@ -274,7 +278,12 @@ class User extends Authenticatable implements MustVerifyEmail {
   public function bookmarks() {
     return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
   }
-
+  /**
+   * Get all of the user's blocked images
+   */
+  public function blockedImages() {
+    return $this->hasMany(UserImageBlock::class, 'user_id');
+  }
   /**
    * Get the user's current discord chat level.
    */
@@ -335,7 +344,6 @@ class User extends Authenticatable implements MustVerifyEmail {
   public function unlockedLimits() {
     return $this->hasMany(UserUnlockedLimit::class);
   }
-
 
   /**********************************************************************************************
 
@@ -712,17 +720,13 @@ class User extends Authenticatable implements MustVerifyEmail {
     switch ($this->settings->birthday_setting) {
       case 0:
         return null;
-        break;
       case 1:
         if (Auth::check())
           return $bday->format('d M') . $icon;
-        break;
       case 2:
         return $bday->format('d M') . $icon;
-        break;
       case 3:
         return $bday->format('d M Y') . $icon;
-        break;
     }
   }
 
@@ -1058,18 +1062,6 @@ class User extends Authenticatable implements MustVerifyEmail {
       ->where('user_id', $this->id)
       ->orderBy('id', 'DESC')
     ;
-  }
-
-  /**
-   * Checks if the user has bookmarked a character.
-   * Returns the bookmark if one exists.
-   *
-   * @param mixed $character
-   *
-   * @return CharacterBookmark
-   */
-  public function hasBookmarked($character) {
-    return CharacterBookmark::where('user_id', $this->id)->where('character_id', $character->id)->first();
   }
 
   /**
