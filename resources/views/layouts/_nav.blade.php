@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md" id="header-nav">
   {{-- <a class="navbar-brand" href="{{ url('/') }}">
-      {{-- <img class="navbar-brand-image" src="{{ asset('images/somnivores/logo.png') }}"> --}}
+      {{-- <img class="navbar-brand-image" src="{{ asset('images/site/logo.png') }}"> --}}
   {{-- {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}
     </a> --}}
 

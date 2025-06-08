@@ -51,7 +51,6 @@
   <!------------------------------ LOREKEEPER RESOURCES ----------------------------->
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}"></script>
-  <script src="{{ mix('js/app-deferred.js') }}"></script>
   <!-- Styles -->
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
@@ -154,9 +153,9 @@
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">
         <picture>
-          <source srcset="{{ asset('images/somnivores/raw/logo_raw.webp') }}" media="(min-width: 1200px)" />
-          <source srcset="{{ asset('images/somnivores/logo.webp') }}" media="(min-width: 768px)" />
-          <img src="{{ asset('images/somnivores/logo.webp') }}" alt="" />
+          <source srcset="{{ asset('images/site/raw/logo_raw.webp') }}" media="(min-width: 1200px)" />
+          <source srcset="{{ asset('images/site/logo.webp') }}" media="(min-width: 768px)" />
+          <img src="{{ asset('images/site/logo.webp') }}" alt="" />
         </picture>
       </a>
 

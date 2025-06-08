@@ -12,10 +12,9 @@
 
 @section('content')
   @if (Auth::check())
-    {{-- vue component babey!!! --}}
-    {{-- <sub-component generic-prop-name="BRAND NEW"></sub-component> --}}
-
-    @include('pages._dashboard')
+    <lore-page generic-prop-name="BRAND NEW"></lore-page>
+  {{-- TODO: Re-enable normal dashboard --}}
+    {{-- @include('pages._dashboard') --}}
   @else
     @include('pages._logged_out')
   @endif

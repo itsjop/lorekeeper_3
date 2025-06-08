@@ -13,6 +13,7 @@
 - [ ] shop editing super broken
 - [ ] wysywig textboxes
 - [ ] admin/raffle create buttons dont work
+- [ ] re-enable default dashboard (resources/views/welcome.blade.php)
 - [x] ironically logs page is broken
 - [x] toggles arent toggling
 - [x] delete item doesnt work

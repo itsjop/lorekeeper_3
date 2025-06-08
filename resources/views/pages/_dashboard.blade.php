@@ -1,4 +1,5 @@
 <div id="dashboard">
+   {{-- vue component babey!!! --}}
   <h1>Welcome, {!! Auth::user()->displayName !!}!</h1>
   <div class="card mb-4 timestamp">
     <div class="card-body">
