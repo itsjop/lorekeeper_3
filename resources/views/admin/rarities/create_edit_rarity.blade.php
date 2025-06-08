@@ -15,6 +15,7 @@
 
   <h1>{{ $rarity->id ? 'Edit' : 'Create' }} Rarity
     @if ($rarity->id)
+    <a href="#" class="btn btn-danger float-right delete-rarity-button">Delete Rarity</a>
       <h3>Preview</h3>
       <div class="card mb-3">
         <div class="card-body">
@@ -22,6 +23,7 @@
               'imageUrl' => $rarity->rarityImageUrl,
               'name' => $rarity->displayName,
               'description' => $rarity->parsed_description,
+              'searchItemsUrl' => $rarity->searchItemsUrl,
               'searchFeaturesUrl' => $rarity->searchFeaturesUrl,
               'searchCharactersUrl' => $rarity->searchCharactersUrl,
               'edit' => [
@@ -95,7 +97,7 @@
 
     @include('admin.lineage._edit_lineage_blacklist', [
         'lineageBlacklist' => $lineageBlacklist,
-        'type' => 'rarity',
+        'type' => 'rarity'
     ])
 
     <div class="text-right">
@@ -104,25 +106,6 @@
 
     {!! Form::close() !!}
 
-    @if ($rarity->id)
-      <h3>Preview</h3>
-      <div class="card mb-3">
-        <div class="card-body">
-          @include('world._rarity_entry', [
-              'imageUrl' => $rarity->rarityImageUrl,
-              'name' => $rarity->displayName,
-              'description' => $rarity->parsed_description,
-              'searchItemsUrl' => $rarity->searchItemsUrl,
-              'searchFeaturesUrl' => $rarity->searchFeaturesUrl,
-              'searchCharactersUrl' => $rarity->searchCharactersUrl,
-              'edit' => [
-                  'title' => 'Edit Rarity',
-                  'object' => $rarity
-              ]
-          ])
-        </div>
-      </div>
-    @endif
   @endsection
 
   @section('scripts')

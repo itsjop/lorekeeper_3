@@ -598,6 +598,7 @@ Route::group(['prefix' => 'grants', 'namespace' => 'Users', 'middleware' => 'pow
   Route::get('user-currency', 'GrantController@getUserCurrency');
   Route::post('user-currency', 'GrantController@postUserCurrency');
 
+  Route::get('item-search', 'GrantController@getItemSearch');
   Route::get('items', 'GrantController@getItems');
   Route::post('items', 'GrantController@postItems');
 
@@ -605,8 +606,8 @@ Route::group(['prefix' => 'grants', 'namespace' => 'Users', 'middleware' => 'pow
   Route::post('pets', 'GrantController@postPets');
   Route::get('pets/variants/{id}', 'GrantController@getPetVariants');
   Route::get('pets/evolutions/{id}', 'GrantController@getPetEvolutions');
-
-  Route::get('item-search', 'GrantController@getItemSearch');
+  Route::get('awards', 'GrantController@getAwards');
+  Route::post('awards', 'GrantController@postAwards');
   Route::get('borders', 'GrantController@getBorders');
   Route::post('borders', 'GrantController@postBorders');
   Route::get('recipes', 'GrantController@getRecipes');

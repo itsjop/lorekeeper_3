@@ -78,17 +78,17 @@ class UpdatePets extends Command {
         }
 
         // update variant images to use ID instead of name
-        $variants = \App\Models\Pet\PetVariant::all();
-        foreach ($variants as $variant) {
-            $this->line('Updating variant image for variant: '.$variant->variant_name.'...');
-            // rename image
-            $old_image = $variant->imageDirectory.'/'.$variant->pet_id.'-'.$variant->variant_name.'-image.png';
-            // rename
-            if (File::exists(public_path($old_image))) {
-                $new_image = $variant->imageDirectory.'/'.$variant->pet_id.'-variant-'.$variant->id.'-image.png';
-                File::move(public_path($old_image), public_path($new_image));
-            }
-        }
+        // $variants = \App\Models\Pet\PetVariant::all();
+        // foreach ($variants as $variant) {
+        //     $this->line('Updating variant image for variant: '.$variant->variant_name.'...');
+        //     // rename image
+        //     $old_image = $variant->imageDirectory.'/'.$variant->pet_id.'-'.$variant->variant_name.'-image.png';
+        //     // rename
+        //     if (File::exists(public_path($old_image))) {
+        //         $new_image = $variant->imageDirectory.'/'.$variant->pet_id.'-variant-'.$variant->id.'-image.png';
+        //         File::move(public_path($old_image), public_path($new_image));
+        //     }
+        // }
     }
 
     private function convertItems($drop, $data) {

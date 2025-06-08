@@ -155,17 +155,27 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, [
+          'class' => 'form-check-label',
+          'data-toggle' => 'toggle',
+          'id' => 'use_coupons'
+      ]) !!}
+      {!! Form::label('use_coupons', 'Allow Coupons?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Note that ALL coupons will be allowed to be used, unless specified otherwise.') !!}
+    </div>
+    <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
+      {!! Form::label('allowed_coupons', 'Allowed Coupon(s)', ['class' => 'form-check-label']) !!}
+      <p>Leave blank to allow ALL coupons.</p>
+      {!! Form::select('allowed_coupons[]', $coupons, json_decode($shop->allowed_coupons, 1), [
+          'multiple',
+          'class' => 'form-check-label',
+          'placeholder' => 'Select Coupons',
+          'id' => 'allowed_coupons'
+      ]) !!}
 
-    {{-- <div class="form-group">
-        {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle', 'id' => 'use_coupons']) !!}
-        {!! Form::label('use_coupons', 'Allow Coupons?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Note that ALL coupons will be allowed to be used, unless specified otherwise.') !!}
-  </div> --}}
-    {{-- <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
-        {!! Form::label('allowed_coupons', 'Allowed Coupon(s)', ['class' => 'form-check-label']) !!}
-        <p>Leave blank to allow ALL coupons.</p>
-        {!! Form::select('allowed_coupons[]', $coupons, json_decode($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!}
-
-  </div> --}}
+    </div>
 
     <div class="text-right">
       {!! Form::submit($shop->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
@@ -175,27 +185,29 @@
 
     @if ($shop->id)
       <hr />
+      <div class="row">
 
-      @include('widgets._add_limits', ['object' => $shop])
-
-      <hr />
-
-      <h3>Shop Stock</h3>
-      {{-- {!! Form::open(['url' => 'admin/data/shops/stock/' . $shop->id]) !!} --}}
-      <div class="text-right mb-3">
-        <a href="#" class="add-stock-button btn btn-outline-primary">Add Stock</a>
+        @include('widgets._add_limits', ['object' => $shop])
       </div>
-      <div id="shopStock">
-        @foreach ($shop->stock as $key => $stock)
-          @include('admin.shops._stock_item', ['stock' => $stock, 'key' => $key])
-        @endforeach
-      </div>
-      <div class="text-right">
-        {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
-      </div>
-      {!! Form::close() !!}
-      <div class="" id="shopStockData">
-        @include('admin.shops._stock_item', ['stock' => null, 'key' => 0])
+      <div class="row">
+        <hr />
+        <h3>Shop Stock</h3>
+        {!! Form::open(['url' => 'admin/data/shops/stock/' . $shop->id]) !!}
+        <div class="text-right mb-3">
+          <a href="#" class="add-stock-button btn btn-outline-primary">Adddd Stock</a>
+        </div>
+        <div id="shopStock">
+          @foreach ($shop->stock as $key => $stock)
+            @include('admin.shops._stock_item', ['stock' => $stock, 'key' => $key])
+          @endforeach
+        </div>
+        <div class="text-right">
+          {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+        </div>
+        {!! Form::close() !!}
+        <div class="" id="shopStockData">
+          @include('admin.shops._stock_item', ['stock' => null, 'key' => 0])
+        </div>
       </div>
     @endif
 
@@ -205,111 +217,27 @@
     @parent
     @include('widgets._datetimepicker_js')
     <script>
-      $('.selectize').selectize();
-
-
-      // edit stock function
-      function editStock(id) {
-        loadModal("{{ url('admin/data/shops/stock/edit') }}/" + id, 'Edit Stock');
-      }
-
-      function deleteStock(id) {
-        loadModal("{{ url('admin/data/shops/stock/delete') }}/" + id, 'Delete Stock');
-      }
-
-      var $shopStock = $('#shopStock');
-      var $stock = $('#shopStockData').find('.stock');
-
-      $('#is_timed_shop').change(function() {
-        if ($(this).is(':checked')) $('.shop-timed-quantity').removeClass('hide');
-        else $('.shop-timed-quantity').addClass('hide');
-      });
-
-      $('.delete-shop-button').on('click', function(e) {
-        e.preventDefault();
-        loadModal("{{ url('admin/data/shops/delete') }}/{{ $shop->id }}", 'Delete Shop');
-      });
-      $('.add-stock-button').on('click', function(e) {
-        e.preventDefault();
-        loadModal("{{ url('admin/data/shops/stock') }}/{{ $shop->id }}", 'Add Stock');
-        var clone = $stock.clone();
-        $shopStock.append(clone);
-        clone.removeClass('hide');
-        attachStockListeners(clone);
-        refreshStockFieldNames();
-      });
-
-      $('#add-feature').on('click', function(e) {
-        e.preventDefault();
-        addFeatureRow();
-      });
-      $('.remove-feature').on('click', function(e) {
-        e.preventDefault();
-        removeFeatureRow($(this));
-      });
-
-      function addFeatureRow() {
-        var $clone = $('.feature-row').clone();
-        $('#featureList').append($clone);
-        $clone.removeClass('hide feature-row');
-        $clone.addClass('d-flex');
-        $clone.find('.remove-feature').on('click', function(e) {
-          e.preventDefault();
-          removeFeatureRow($(this));
-        })
-        $clone.find('.feature-select').selectize();
-      }
-
-      function removeFeatureRow($trigger) {
-        $trigger.parent().remove();
-      }
-
-      $('.is-restricted-class').change(function(e) {
-        $('.br-form-group').css('display', this.checked ? 'block' : 'none')
-      })
-      $('.br-form-group').css('display', $('.is-restricted-class').prop('checked') ? 'block' : 'none')
-
-
-      attachStockListeners($('#shopStock .stock'));
-
-      function attachStockListeners(stock) {
-        stock.find('.stock-toggle').bootstrapToggle();
-        stock.find('.stock-limited').on('change', function(e) {
-          var $this = $(this);
-          if ($this.is(':checked')) {
-            $this.parent().parent().parent().parent().find('.stock-limited-quantity').removeClass('hide');
-          } else {
-            $this.parent().parent().parent().parent().find('.stock-limited-quantity').addClass('hide');
-          }
-        });
-        stock.find('.remove-stock-button').on('click', function(e) {
-          e.preventDefault();
-          $(this).parent().parent().parent().remove();
-          refreshStockFieldNames();
-        });
-        stock.find('.card-body [data-toggle=tooltip]').tooltip({
-          html: true
-        });
-      }
-
-      function refreshStockFieldNames() {
-        $('.stock').each(function(index) {
-          var $this = $(this);
-          var key = index;
-          $this.find('.stock-field').each(function() {
-            $(this).attr('name', $(this).data('name') + '[' + key + ']');
-          });
-        });
-      }
-
-      });
-    </script>
-  @endsection
-
-  @section('scripts')
-    @parent
-    <script>
       $(document).ready(function() {
+
+        $('.selectize').selectize();
+
+        // edit stock function
+        function editStock(id) {
+          loadModal("{{ url('admin/data/shops/stock/edit') }}/" + id, 'Edit Stock');
+        }
+
+        function deleteStock(id) {
+          loadModal("{{ url('admin/data/shops/stock/delete') }}/" + id, 'Delete Stock');
+        }
+
+        var $shopStock = $('#shopStock');
+        var $stock = $('#shopStockData').find('.stock');
+
+        $('#is_timed_shop').change(function() {
+          if ($(this).is(':checked')) $('.shop-timed-quantity').removeClass('hide');
+          else $('.shop-timed-quantity').addClass('hide');
+        });
+
         var $shopStock = $('#shopStock');
         var $stock = $('#shopStockData').find('.stock');
 
@@ -319,13 +247,44 @@
         });
         $('.add-stock-button').on('click', function(e) {
           e.preventDefault();
-
+          loadModal("{{ url('admin/data/shops/stock') }}/{{ $shop->id }}", 'Add Stock');
           var clone = $stock.clone();
           $shopStock.append(clone);
           clone.removeClass('hide');
           attachStockListeners(clone);
           refreshStockFieldNames();
         });
+
+        $('#add-feature').on('click', function(e) {
+          e.preventDefault();
+          addFeatureRow();
+        });
+        $('.remove-feature').on('click', function(e) {
+          e.preventDefault();
+          removeFeatureRow($(this));
+        });
+
+        function addFeatureRow() {
+          var $clone = $('.feature-row').clone();
+          $('#featureList').append($clone);
+          $clone.removeClass('hide feature-row');
+          $clone.addClass('d-flex');
+          $clone.find('.remove-feature').on('click', function(e) {
+            e.preventDefault();
+            removeFeatureRow($(this));
+          })
+          $clone.find('.feature-select').selectize();
+        }
+
+        function removeFeatureRow($trigger) {
+          $trigger.parent().remove();
+        }
+
+        $('.is-restricted-class').change(function(e) {
+          $('.br-form-group').css('display', this.checked ? 'block' : 'none')
+        })
+        $('.br-form-group').css('display', $('.is-restricted-class').prop('checked') ? 'block' : 'none')
+
 
         attachStockListeners($('#shopStock .stock'));
 

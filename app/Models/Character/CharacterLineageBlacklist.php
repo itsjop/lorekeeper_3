@@ -119,7 +119,7 @@ class CharacterLineageBlacklist extends Model
      * @param  int                            $level
      * @return int
      */
-    public function getBlacklistLevel($character, $maxLevel = 2)
+    public static function getBlacklistLevel($character, $maxLevel = 2)
     {
         if(!$character) return 0;
         $level = [
@@ -154,7 +154,7 @@ class CharacterLineageBlacklist extends Model
      *
      * @return array
      */
-    public function getAncestorOptions($character = null)
+    public static function getAncestorOptions($character = null)
     {
         $query = Character::myo(0)
             ->whereNotIn('character_category_id', CharacterLineageBlacklist::getBlacklistCategories())
@@ -163,11 +163,11 @@ class CharacterLineageBlacklist extends Model
             ->whereNotIn('species_id', CharacterLineageBlacklist::getBlacklistSpecies())
             ->whereNotIn('suptype_id', CharacterLineageBlacklist::getBlacklistSubtypes())
             ->orderBy('characters.slug'); // Ensure orderBy is correct
-        
+
         if ($character) {
             $query->where('characters.id', '!=', $character->id);
         }
-        
+
         // Now pluck using the alias
         return $query->get()->pluck('fullName', 'character_id')->toArray();
     }
@@ -181,7 +181,7 @@ class CharacterLineageBlacklist extends Model
      *
      * @return App\Models\Character\CharacterLineageBlacklist|null
      */
-    public function searchAndSet($level, $type, $typeID)
+    public static function searchAndSet($level, $type, $typeID)
     {
         $blacklistEntry = CharacterLineageBlacklist::where('type', $type)->where('type_id', $typeID)->get()->first();
         $blacklist = false;

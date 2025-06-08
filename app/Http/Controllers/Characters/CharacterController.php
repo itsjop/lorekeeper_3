@@ -32,7 +32,6 @@ use App\Models\Character\CharacterAward;
 use App\Models\Profession\Profession;
 use App\Models\Character\CharacterImage;
 use App\Services\AwardCaseManager;
-use App\Services\CurrencyManager;
 use App\Services\DesignUpdateManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

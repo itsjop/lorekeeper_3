@@ -764,27 +764,26 @@ class Character extends Model {
 
       $bookmarkers = User::whereIn('id', $bookmarkers->pluck('user_id')->toArray())->get();
 
-            // This may have to be redone more efficiently in the case of large numbers of bookmarkers,
-            // but since we're not expecting many users on the site to begin with it should be fine
-            foreach($bookmarkers as $bookmarker)
-                Notifications::create($type, $bookmarker, [
-                    'character_url' => $this->url,
-                    'character_name' => $this->fullName
-                ]);
-            }
-        }
-    
-
-    /**
-     * Finds the lineage blacklist level of this character.
-     * 0 is no restriction at all
-     * 1 is ancestors but no children
-     * 2 is no lineage at all
-     *
-     * @return int
-     */
-    public function getLineageBlacklistLevel($maxLevel = 2)
-    {
-        return CharacterLineageBlacklist::getBlacklistLevel($this, $maxLevel);
+      // This may have to be redone more efficiently in the case of large numbers of bookmarkers,
+      // but since we're not expecting many users on the site to begin with it should be fine
+      foreach ($bookmarkers as $bookmarker)
+        Notifications::create($type, $bookmarker, [
+          'character_url' => $this->url,
+          'character_name' => $this->fullName
+        ]);
     }
+  }
+
+
+  /**
+   * Finds the lineage blacklist level of this character.
+   * 0 is no restriction at all
+   * 1 is ancestors but no children
+   * 2 is no lineage at all
+   *
+   * @return int
+   */
+  public function getLineageBlacklistLevel($maxLevel = 2) {
+    return CharacterLineageBlacklist::getBlacklistLevel($this, $maxLevel);
+  }
 }

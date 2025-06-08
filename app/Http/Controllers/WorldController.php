@@ -9,6 +9,7 @@ use App\Models\User\User;
 use App\Models\Border\Border;
 use App\Models\Border\BorderCategory;
 
+use App\Models\Character\CharacterCategory;
 use App\Models\Character\CharacterTitle;
 use App\Models\Currency\Currency;
 use App\Models\Currency\CurrencyCategory;

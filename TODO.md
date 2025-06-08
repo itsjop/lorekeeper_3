@@ -1,7 +1,14 @@
+# KNOWN ISSUES
+- [ ] /inventory MYO item broken, no idea how it submits???
+- [ ] shop stock popup fucked
+- [ ] need wysywig textboxes
+- [ ] titles missing on create myo
+- [ ] ironically logs page is broken
+
 # BROKEN
 - [ ] featured character only from active participants
 - [ ] shops still fucked
-- [ ] appprovals
+- [ ] appprovals?
 - [ ] item category search no results
 - [ ] shop editing super broken
 - [ ] wysywig textboxes
@@ -32,6 +39,7 @@
 - [ ] Combine News and Sales to a Newsfeed
 - [ ] Get recursive Image Optimization CLI script
 - [ ] re-add Recipies to prompt page
+- [ ] change sidebar routes to array for better `active` matching
 
 # CSS
 - [ ] store current vanilla version of lorekeeper for the "accessible" version

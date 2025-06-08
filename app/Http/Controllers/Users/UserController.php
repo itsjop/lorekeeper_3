@@ -599,19 +599,18 @@ class UserController extends Controller {
     ]);
   }
 
-        /**
-     * Shows a user's redeem logs.
-     *
-     * @param  string  $name
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getUserRedeemLogs($name)
-    {
-        $user = $this->user;
-        return view('home._redeem_logs', [
-            'user' => $this->user,
-            'logs' => $this->user->getRedeemLogs(0),
-            'sublists' => Sublist::orderBy('sort', 'DESC')->get()
-        ]);
-    }
+  /**
+   * Shows a user's redeem logs.
+   *
+   * @param  string  $name
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserRedeemLogs($name) {
+    $user = $this->user;
+    return view('home._redeem_logs', [
+      'user' => $this->user,
+      'logs' => $this->user->getRedeemLogs(0),
+      'sublists' => Sublist::orderBy('sort', 'DESC')->get()
+    ]);
+  }
 }

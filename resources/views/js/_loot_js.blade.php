@@ -6,16 +6,16 @@
     var $currencySelect = $('#lootRowData').find('.currency-select');
     var $petSelect = $('#lootRowData').find('.pet-select');
     var $awardSelect = $('#lootRowData').find('.award-select');
-    @if ($showLootTables)
+    @if (isset($showLootTables) && $showLootTables)
       var $tableSelect = $('#lootRowData').find('.table-select');
     @endif
-    @if ($showRaffles)
+    @if (isset($showRaffles) && $showRaffles)
       var $raffleSelect = $('#lootRowData').find('.raffle-select');
     @endif
     @if (isset($showBorders) && $showBorders)
       var $borderSelect = $('#lootRowData').find('.border-select');
     @endif
-    @if ($showRecipes)
+    @if (isset($showRecipes) && $showRecipes)
       var $recipeSelect = $('#lootRowData').find('.recipe-select');
     @endif
 
@@ -39,16 +39,16 @@
       else if (val == 'Currency') $clone = $currencySelect.clone();
       else if (val == 'Award') $clone = $awardSelect.clone();
       else if (val == 'Pet') $clone = $petSelect.clone();
-      @if ($showLootTables)
+      @if (isset($showLootTables) && $showLootTables)
         else if (val == 'LootTable') $clone = $tableSelect.clone();
       @endif
-      @if ($showRaffles)
+      @if (isset($showRaffles) && $showRaffles)
         else if (val == 'Raffle') $clone = $raffleSelect.clone();
       @endif
       @if (isset($showBorders) && $showBorders)
         else if (val == 'Border') $clone = $borderSelect.clone();
       @endif
-      @if ($showRecipes)
+      @if (isset($showRecipes) && $showRecipes)
         else if (val == 'Recipe') $clone = $recipeSelect.clone();
       @endif
 
@@ -65,7 +65,7 @@
         if (val == 'Item') $clone = $itemSelect.clone();
         else if (val == 'Pet') $clone = $petSelect.clone();
         else if (val == 'Currency') $clone = $currencySelect.clone();
-            else if (val == 'Award') $clone = $awardSelect.clone();
+        else if (val == 'Award') $clone = $awardSelect.clone();
         @if ($showLootTables)
           else if (val == 'LootTable') $clone = $tableSelect.clone();
         @endif

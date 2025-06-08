@@ -92,31 +92,31 @@
                 class="btn btn-primary"
                 data-toggle="tooltip"
                 title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code."
-              >Pull
-                Next Number</a>
+              >Pull Next Number</a>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
+      </div>
+      <div class="row">
+        <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
+          <div class="form-group">
+            {!! Form::label('Character Code') !!} {!! add_help(
+                'This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).'
+            ) !!}
+            {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
+          </div>
+        </div>
+        @if (config('lorekeeper.settings.enable_character_content_warnings'))
+          <div class="col-md-6">
             <div class="form-group">
-              {!! Form::label('Character Code') !!} {!! add_help(
-                  'This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).'
+              {!! Form::label('Content Warnings') !!} {!! add_help(
+                  'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
               ) !!}
-              {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
+              {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
             </div>
           </div>
-          @if (config('lorekeeper.settings.enable_character_content_warnings'))
-            <div class="col-md-6">
-              <div class="form-group">
-                {!! Form::label('Content Warnings') !!} {!! add_help(
-                    'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
-                ) !!}
-                {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
-              </div>
-            </div>
-          @endif
-        </div>
+        @endif
+      </div>
     @endif
 
     <div class="form-group">

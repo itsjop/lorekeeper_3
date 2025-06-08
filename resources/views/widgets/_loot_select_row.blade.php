@@ -23,10 +23,10 @@
         <td>{!! Form::select(
             'rewardable_type[]',
             ['Item' => 'Item', 'Currency' => 'Currency', 'Pet' => 'Pet', 'Award' => ucfirst(__('awards.award'))] +
-                ($showLootTables ? ['LootTable' => 'Loot Table'] : []) +
-                ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) +
+                (isset($showLootTables) && $showLootTables ? ['LootTable' => 'Loot Table'] : []) +
+                (isset($showRaffles) && $showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) +
                 (isset($showBorders) && $showBorders ? ['Border' => 'Border'] : []) +
-                ($showRecipes ? ['Recipe' => 'Recipe'] : []),
+                (isset($showRecipes) && $showRecipes ? ['Recipe' => 'Recipe'] : []),
             null,
             [
                 'class' => 'form-control reward-type',

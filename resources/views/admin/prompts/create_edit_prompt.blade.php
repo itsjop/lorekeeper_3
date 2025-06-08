@@ -214,7 +214,7 @@
     <div id="collapsable-" class="form collapse">Select a criterion to populate this area.</div>
   </div>
 
-  @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true,])
+  @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
 
   @if ($prompt->id)
     @include('widgets._add_limits', ['object' => $prompt])
@@ -238,6 +238,52 @@
         e.preventDefault();
         loadModal("{{ url('admin/data/prompts/delete') }}/{{ $prompt->id }}", 'Delete Prompt');
       });
+
+      $(".datepicker").datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: 'HH:mm:ss',
+      });
+
+      $('.add-calc').on('click', function(e) {
+        e.preventDefault();
+        var clone = $('#copy-calc').clone();
+        clone.removeClass('hide');
+        clone.find('.criterion-select').on('change', loadForm);
+        clone.find('.delete-calc').on('click', deleteCriterion);
+        clone.removeAttr('id');
+        const key = $('[data-toggle]').length;
+        clone.find('[data-toggle]').attr('href', '#collapsable-' + key);
+        clone.find('.collapse').attr('id', 'collapsable-' + key);
+        $('#criteria').append(clone);
+      });
+
+      $('.delete-calc').on('click', deleteCriterion);
+
+      function deleteCriterion(e) {
+        e.preventDefault();
+        var toDelete = $(this).closest('.card');
+        toDelete.remove();
+      }
+
+      function loadForm(e) {
+        var id = $(this).val();
+        if (id) {
+          var form = $(this).closest('.card').find('.form');
+          form.load("{{ url('criteria') }}/" + id, (response, status, xhr) => {
+            if (status == "error") {
+              var msg = "Error: ";
+              console.error(msg + xhr.status + " " + xhr.statusText);
+            } else {
+              form.find('[data-toggle=tooltip]').tooltip({
+                html: true
+              });
+              form.find('[data-toggle=toggle]').bootstrapToggle();
+            }
+          });
+        }
+      }
+
+      $('.criterion-select').on('change', loadForm)
     });
   </script>
 @endsection

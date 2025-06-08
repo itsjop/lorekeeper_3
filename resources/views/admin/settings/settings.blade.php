@@ -41,7 +41,7 @@
                 <div class="logs-table-cell">{{ $setting->key }}</div>
               </div>
               <div class="col-6 col-md-5">
-                <div class="logs-table-cell">{{ $setting->description }}</div>
+                <div class="logs-table-cell log-description">{{ $setting->description }}</div>
               </div>
               <div class="col-6 col-md-3">
                 <div class="logs-table-cell">
@@ -63,5 +63,9 @@
     </div>
     {!! $settings->render() !!}
   @endif
-
 @endsection
+  <style>
+    .log-description {
+      white-space: pre-line;
+    }
+  </style>

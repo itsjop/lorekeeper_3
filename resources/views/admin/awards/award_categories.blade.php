@@ -3,7 +3,7 @@
 @section('admin-title') {{ucfirst(__('awards.award'))}} Categories @endsection
 
 @section('admin-content')
-{!! breadcrumbs(['Admin Panel' => 'admin', ucfirst(__('awards.award')).' Categories' => 'admin/data/award-categories']) !!}
+{!! breadcrumbs(['Admin Panel' => 'admin', ucfirst(__('awards.awards')) => 'admin/data/awards' ,ucfirst(__('awards.award')).' Categories' => 'admin/data/award-categories']) !!}
 
 <h1>{{ucfirst(__('awards.award'))}} Categories</h1>
 

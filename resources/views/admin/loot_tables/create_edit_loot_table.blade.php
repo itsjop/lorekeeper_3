@@ -381,8 +381,9 @@
 
 
         $('#lootTableBody .loot-row-chance').each(function(index) {
+          const digits = 3;
           var chance = weights[index] / total
-          var percentage = Math.round(((chance) * 10000).toFixed(2)) / 100;
+          var percentage = Math.round(((chance) * 100*(10**digits)).toFixed(digits)) / 10**digits;
           $(this).html(percentage.toString() + '%');
         });
       }
