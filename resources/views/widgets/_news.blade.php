@@ -12,12 +12,12 @@
                             {!! $news->displayName !!}
                         </h5>
                         <span class="ml-2 small">
-                            Posted {!! $news->post_at ? pretty_date($news->post_at) : pretty_date($news->created_at) !!}{!! $news->created_at != $news->updated_at ? ' || Last edited '.pretty_date($news->updated_at) : '' !!}
+                            Posted {!! $news->post_at ? pretty_date($news->post_at) : pretty_date($news->created_at) !!}{!! $news->created_at != $news->updated_at ? ' || Last edited ' . pretty_date($news->updated_at) : '' !!}
                         </span>
                     </span>
                     @if ($textPreview)
                         <p class="pl-3">
-                            {!! substr(strip_tags(str_replace("<br />", "&nbsp;", $news->parsed_text)), 0, 300) !!}...
+                            {!! substr(strip_tags(str_replace('<br />', '&nbsp;', $news->parsed_text)), 0, 300) !!}...
                             <a href="{!! $news->url !!}">Read more <i class="fas fa-arrow-right"></i></a>
                         </p>
                     @endif
