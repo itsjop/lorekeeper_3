@@ -3266,28 +3266,24 @@ class CharacterManager extends Service {
       // check mother and father id if set to see if character exists
       if (isset($data['father_id']) && $data['father_id']) {
         $father = Character::find($data['father_id']);
-        dd($father);
         if (!$father) {
           throw new \Exception('Father is invalid.');
         }
       }
       if (isset($data['mother_id']) && $data['mother_id']) {
         $mother = Character::find($data['mother_id']);
-        dd($mother);
         if (!$mother) {
           throw new \Exception('Mother is invalid.');
         }
       }
       $lineage = CharacterLineage::create([
         'character_id' => $character->id,
-        'father_id'    => $data ?? null,
-        // 'father_id'    => $data['father_id'] ?? null,
-        // 'father_name'  => $data['father_id'] ? null : ($data['father_name'] ?? null),
-        // 'mother_id'    => $data['mother_id'] ?? null,
-        // 'mother_name'  => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
-        // 'depth'        => $data['depth'] ?? 0,
+        'father_id'    => $data['father_id'] ?? null,
+        'father_name'  => $data['father_id'] ? null : ($data['father_name'] ?? null),
+        'mother_id'    => $data['mother_id'] ?? null,
+        'mother_name'  => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+        'depth'        => $data['depth'] ?? 0,
       ]);
-      dd($lineage);
       return $this->commitReturn($lineage);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
