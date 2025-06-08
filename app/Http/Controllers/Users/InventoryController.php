@@ -433,7 +433,7 @@ class InventoryController extends Controller {
       }
     }
 
-    dd( $tag, $service, $service->act($stacks, Auth::user(), $request->all()), $stacks->first()->item->hasTag($tag));
+    // dd( $tag, $service, $service->act($stacks, Auth::user(), $request->all()), $stacks->first()->item->hasTag($tag));
     return redirect()->back();
   }
 

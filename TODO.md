@@ -1,9 +1,9 @@
 # KNOWN ISSUES
-- [ ] /inventory MYO item broken, no idea how it submits???
+- [ ] */ inventory MYO item broken, no idea how it submits???
 - [ ] shop stock popup fucked
 - [ ] need wysywig textboxes
 - [ ] titles missing on create myo
-- [ ] ironically logs page is broken
+- [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
 
 # BROKEN
 - [ ] featured character only from active participants
@@ -13,6 +13,7 @@
 - [ ] shop editing super broken
 - [ ] wysywig textboxes
 - [ ] admin/raffle create buttons dont work
+- [x] ironically logs page is broken
 - [x] toggles arent toggling
 - [x] delete item doesnt work
 - [x] pets
