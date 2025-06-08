@@ -13,7 +13,11 @@
 
       <div class="col-6 col-md-3">
         @if (isset($stock->item->image_url))
-          <img class="small-icon" src="{{ $stock->item->image_url }}" alt="{{ $stock->item->name }}">
+          <img
+            class="small-icon"
+            src="{{ $stock->item->image_url }}"
+            alt="{{ $stock->item->name }}"
+          >
         @endif
         {!! $stock->item->name !!} - {{ $stock->stock_type }}
         @if (!$stock->is_visible)
@@ -27,7 +31,7 @@
       <div class="col-6 col-md-3 order-3 order-md-2">
         {!! Form::checkbox('is_visible[' . $stock->id . ']', 1, $stock->is_visible ?? 1, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-toggle' => 'toggle'
         ]) !!}
       </div>
 
@@ -39,7 +43,7 @@
           <div class="col-8">
             {!! Form::select('currency_id[]', $currencies, $stock->currency_id, [
                 'class' => 'form-control currency-select selectize',
-                'placeholder' => 'Select Currency',
+                'placeholder' => 'Select Currency'
             ]) !!}
           </div>
         </div>
@@ -49,7 +53,7 @@
         {!! Form::selectRange('quantity[]', 0, $stock->quantity, 0, [
             'class' => 'quantity-select',
             'type' => 'number',
-            'style' => 'min-width:40px;',
+            'style' => 'min-width:40px;'
         ]) !!} /{{ $stock->quantity }}
       </div>
     </div>

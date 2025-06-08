@@ -545,3 +545,26 @@ function allAttachments($model) {
 
   return $totals;
 }
+
+/**
+ * Check if user blocked an object's image
+ *
+ */
+function checkImageBlock($object, $user)
+{
+    //just in case?
+    if(!$user) {
+        return false;
+    }
+
+    $block = $user->blockedImages()->where([
+        ['object_id', $object->id],
+        ['object_type', get_class($object)],
+    ])->first();
+
+    if ($block) {
+        return true;
+    }
+    return false;
+
+}

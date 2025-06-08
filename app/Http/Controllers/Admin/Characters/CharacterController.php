@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterCategory;
 use App\Models\Character\CharacterImage;
+use App\Models\Character\CharacterLineageBlacklist;
+use App\Models\Character\CharacterTitle;
 use App\Models\Character\CharacterTransfer;
 use App\Models\Feature\Feature;
 use App\Models\Rarity;
@@ -25,7 +27,7 @@ use App\Models\Character\CharacterTransformation as Transformation;
 
 class CharacterController extends Controller {
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Admin / Character Controller
     |--------------------------------------------------------------------------
@@ -45,40 +47,43 @@ class CharacterController extends Controller {
     return $service->pullNumber($request->get('category'));
   }
 
-    /**
-     * Shows the create character page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getCreateCharacter() {
-      return view('admin.masterlist.create_character', [
-          'isMyo'       => false,
-            'categories'  => CharacterCategory::orderBy('sort')->get(),
-            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
-            'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'subtypes'    => ['0' => 'Pick a Species First'],
-            'features'    => Feature::getDropdownItems(1),
-            'transformations' => ['0' => 'Pick a Species First'],
-        ]);
-    }
+  /**
+   * Shows the create character page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getCreateCharacter() {
+    return view('admin.masterlist.create_character', [
+      'isMyo'       => false,
+      'categories'  => CharacterCategory::orderBy('sort')->get(),
+      'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+      'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'subtypes'    => ['0' => 'Pick a Species First'],
+      'features'    => Feature::getDropdownItems(1),
+      'transformations' => ['0' => 'Pick a Species First'],
+      'characterOptions' => CharacterLineageBlacklist::getAncestorOptions(),
+      'titles'      => ['custom' => 'Custom Title'] + CharacterTitle::orderBy('sort', 'DESC')->pluck('title', 'id')->toArray(),
+    ]);
+  }
 
-    /**
-     * Shows the create MYO slot page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getCreateMyo() {
-        return view('admin.masterlist.create_character', [
-            'isMyo'       => true,
-            'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
-            'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'subtypes'    => ['0' => 'Pick a Species First'],
-            'features'    => Feature::getDropdownItems(1),
-            'transformations' => ['0' => 'Pick a Species First'],
-        ]);
-    }
+  /**
+   * Shows the create MYO slot page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getCreateMyo() {
+    return view('admin.masterlist.create_character', [
+      'isMyo'       => true,
+      'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+      'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'subtypes'    => ['0' => 'Pick a Species First'],
+      'features'    => Feature::getDropdownItems(1),
+      'transformations' => ['0' => 'Pick a Species First'],
+      'characterOptions' => CharacterLineageBlacklist::getAncestorOptions(),
+    ]);
+  }
 
   /**
    * Shows the edit image subtype portion of the modal.
@@ -107,27 +112,56 @@ class CharacterController extends Controller {
     ]);
   }
 
-    /**
-     * Creates a character.
-     *
-     * @param App\Services\CharacterManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postCreateCharacter(Request $request, CharacterManager $service) {
-        $request->validate(Character::$createRules);
-        $data = $request->only([
-            'user_id', 'owner_url', 'character_category_id', 'number', 'slug',
-            'description', 'is_visible', 'is_giftable', 'is_tradeable', 'is_sellable',
-            'sale_value', 'transferrable_at', 'use_cropper',
-            'x0', 'x1', 'y0', 'y1',
-            'designer_id', 'designer_url',
-            'artist_id', 'artist_url',
-            'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
-            'image', 'thumbnail', 'image_description', 'transformation_id','transformation_info','transformation_description'
-        ]);
-        if ($character = $service->createCharacter($data, Auth::user())) {
-            flash('Character created successfully.')->success();
+  /**
+   * Creates a character.
+   *
+   * @param App\Services\CharacterManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postCreateCharacter(Request $request, CharacterManager $service) {
+    $request->validate(Character::$createRules);
+    $data = $request->only([
+      'user_id',
+      'owner_url',
+      'character_category_id',
+      'number',
+      'slug',
+      'description',
+      'is_visible',
+      'is_giftable',
+      'is_tradeable',
+      'is_sellable',
+      'sale_value',
+      'transferrable_at',
+      'use_cropper',
+      'x0',
+      'x1',
+      'y0',
+      'y1',
+      'designer_id',
+      'designer_url',
+      'artist_id',
+      'artist_url',
+      'species_id',
+      'subtype_id',
+      'rarity_id',
+      'feature_id',
+      'feature_data',
+      'image',
+      'thumbnail',
+      'image_description',
+      'title_ids',
+      'title_data',
+      'transformation_id',
+      'transformation_info',
+      'transformation_description',
+      'father_id',
+      'mother_id',
+    ]);
+
+    if ($character = $service->createCharacter($data, Auth::user())) {
+      flash('Character created successfully.')->success();
 
       return redirect()->to($character->url);
     } else {
@@ -139,27 +173,50 @@ class CharacterController extends Controller {
     return redirect()->back()->withInput();
   }
 
-    /**
-     * Creates an MYO slot.
-     *
-     * @param App\Services\CharacterManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postCreateMyo(Request $request, CharacterManager $service) {
-        $request->validate(Character::$myoRules);
-        $data = $request->only([
-            'user_id', 'owner_url', 'name',
-            'description', 'is_visible', 'is_giftable', 'is_tradeable', 'is_sellable',
-            'sale_value', 'transferrable_at', 'use_cropper',
-            'x0', 'x1', 'y0', 'y1',
-            'designer_id', 'designer_url',
-            'artist_id', 'artist_url',
-            'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
-            'image', 'thumbnail', 'transformation_id','transformation_info','transformation_description'
-        ]);
-        if ($character = $service->createCharacter($data, Auth::user(), true)) {
-            flash('MYO slot created successfully.')->success();
+  /**
+   * Creates an MYO slot.
+   *
+   * @param App\Services\CharacterManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postCreateMyo(Request $request, CharacterManager $service) {
+    $request->validate(Character::$myoRules);
+    $data = $request->only([
+      'user_id',
+      'owner_url',
+      'name',
+      'description',
+      'is_visible',
+      'is_giftable',
+      'is_tradeable',
+      'is_sellable',
+      'sale_value',
+      'transferrable_at',
+      'use_cropper',
+      'x0',
+      'x1',
+      'y0',
+      'y1',
+      'designer_id',
+      'designer_url',
+      'artist_id',
+      'artist_url',
+      'species_id',
+      'subtype_id',
+      'rarity_id',
+      'feature_id',
+      'feature_data',
+      'image',
+      'thumbnail',
+      'transformation_id',
+      'transformation_info',
+      'transformation_description',
+      'father_id',
+      'mother_id',
+    ]);
+    if ($character = $service->createCharacter($data, Auth::user(), true)) {
+      flash('MYO slot created successfully.')->success();
 
       return redirect()->to($character->url);
     } else {
@@ -238,7 +295,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterStats($data, $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' stats updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' stats updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -273,7 +330,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterStats($data, $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' stats updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' stats updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -340,7 +397,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterDescription($data, $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' description updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' description updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -369,7 +426,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterDescription($data, $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' description updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' description updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -398,7 +455,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterSettings($data, $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' settings updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' settings updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -427,7 +484,7 @@ class CharacterController extends Controller {
       abort(404);
     }
     if ($service->updateCharacterSettings($data, $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' settings updated successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' settings updated successfully.')->success();
 
       return redirect()->to($this->character->url);
     } else {
@@ -492,7 +549,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->deleteCharacter($this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' deleted successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' deleted successfully.')->success();
 
       return redirect()->to('masterlist');
     } else {
@@ -519,7 +576,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->deleteCharacter($this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' deleted successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' deleted successfully.')->success();
 
       return redirect()->to('myos');
     } else {
@@ -546,7 +603,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->adminTransfer($request->only(['recipient_id', 'recipient_url', 'cooldown', 'reason']), $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' transferred successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' transferred successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
         flash($error)->error();
@@ -571,7 +628,7 @@ class CharacterController extends Controller {
     }
 
     if ($service->adminTransfer($request->only(['recipient_id', 'recipient_url', 'cooldown', 'reason']), $this->character, Auth::user())) {
-      flash(ucfirst(__('lorekeeper.character')).' transferred successfully.')->success();
+      flash(ucfirst(__('lorekeeper.character')) . ' transferred successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
         flash($error)->error();

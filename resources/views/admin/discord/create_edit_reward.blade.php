@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Discord Rewards' => 'admin/discord/rewards', ($reward->id ? 'Edit' : 'Create') . ' Discord Reward' => $reward->id ? 'admin/discord/rewards/edit/' . $reward->id : 'admin/discord/rewards/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Discord Rewards' => 'admin/discord/rewards',
+      ($reward->id ? 'Edit' : 'Create') . ' Discord Reward' => $reward->id
+          ? 'admin/discord/rewards/edit/' . $reward->id
+          : 'admin/discord/rewards/create'
+  ]) !!}
 
   <h1>{{ $reward->id ? 'Edit' : 'Create' }} Discord Reward
     @if ($reward->id)
@@ -29,7 +35,6 @@
 
   <h3>Rewards</h3>
   @include('widgets._loot_select', ['loots' => $reward->rewards, 'showLootTables' => true, 'showRaffles' => true])
-
 
   <div class="text-right">
     {!! Form::submit($reward->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}

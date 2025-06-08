@@ -494,6 +494,7 @@ tr.outflow {
 }
 .logs-table .logs-table-header .logs-table-cell,
 .logs-table .logs-table-body .logs-table-cell {
+  word-wrap: break-word;
     padding: .3rem;
 }
 .logs-table .logs-table-body > .logs-table-row:first-of-type {
@@ -757,4 +758,11 @@ tr.accountbound {
 /* RECIPES ***************************************************************************************/
 .recipe-image {
     width: 150px;
+}
+
+.gradient-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }

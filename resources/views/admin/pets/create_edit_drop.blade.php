@@ -234,8 +234,10 @@
           weights.push(current);
         });
         $('#lootTableBody .drop-row-chance').each(function(index) {
-          var current = (weights[index] / total) * 100;
-          $(this).html(current.toString() + '%');
+          const digits = 3;
+          var chance = weights[index] / total
+          var percentage = Math.round(((chance) * 100*(10**digits)).toFixed(digits)) / 10**digits;
+          $(this).html(percentage.toString() + '%');
         });
       }
       $('.default.item-select').selectize();

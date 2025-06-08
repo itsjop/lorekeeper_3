@@ -40,8 +40,6 @@ class ReportManager extends Service {
             if (!isset($data['is_br'])) {
                 $data['is_br'] = 0;
             }
-            // dd($data['error']);
-
             $report = Report::create([
                 'user_id'    => $user->id,
                 'url'        => $data['url'],

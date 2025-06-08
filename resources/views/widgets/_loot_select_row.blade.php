@@ -23,10 +23,10 @@
         <td>{!! Form::select(
             'rewardable_type[]',
             ['Item' => 'Item', 'Currency' => 'Currency', 'Pet' => 'Pet', 'Award' => ucfirst(__('awards.award'))] +
-                ($showLootTables ? ['LootTable' => 'Loot Table'] : []) +
-                ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) +
+                (isset($showLootTables) && $showLootTables ? ['LootTable' => 'Loot Table'] : []) +
+                (isset($showRaffles) && $showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) +
                 (isset($showBorders) && $showBorders ? ['Border' => 'Border'] : []) +
-                ($showRecipes ? ['Recipe' => 'Recipe'] : []),
+                (isset($showRecipes) && $showRecipes ? ['Recipe' => 'Recipe'] : []),
             null,
             [
                 'class' => 'form-control reward-type',
@@ -50,9 +50,10 @@
         'placeholder' => 'Select Loot Table'
     ]) !!}
   @endif
-  @if ($showRecipes)
+  {{-- TODO: 'recipies' is undefined, not sure where its coming from --}}
+  {{-- @if ($showRecipes)
       {!! Form::select('rewardable_id[]', $recipes, null, ['class' => 'form-control recipe-select', 'placeholder' => 'Select Recipe']) !!}
-  @endif
+  @endif --}}
   @if ($showRaffles)
     {!! Form::select('rewardable_id[]', $raffles, null, [
         'class' => 'form-control raffle-select',

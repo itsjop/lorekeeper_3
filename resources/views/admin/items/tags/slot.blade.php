@@ -80,7 +80,6 @@
 </div>
 
 <h3>Traits</h3>
-
 <div class="form-group">
   {!! Form::label('Species') !!} {!! add_help(
       'This will lock the slot into a particular species. Leave it blank if you would like to give the user a choice.'
@@ -92,7 +91,7 @@
   {!! Form::label('Subtype (Optional)') !!} {!! add_help(
       'This will lock the slot into a particular subtype. Leave it blank if you would like to give the user a choice, or not select a subtype. The subtype must match the species selected above, and if no species is specified, the subtype will not be applied.'
   ) !!}
-  {!! Form::select('subtype_id', $subtypes, $tag->getData()['subtype_id'], ['class' => 'form-control', 'id' => 'subtype']) !!}
+  {!! Form::select('subtype_ids', $subtypes, $tag->getData()['subtype_ids'], ['class' => 'form-control', 'id' => 'subtype']) !!}
 </div>
 
 <div class="form-group">

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\Character\Character;
@@ -99,7 +100,7 @@ class ShopManager extends Service {
                 // make sure this item isn't free
                 if (!$shopStock->costs()->count()) {
                     throw new \Exception('Cannot use a coupon on an item that is free.');
-            }
+                }
 
                 // if the coupon isn't infinite kill it
                 if (!$coupon['infinite']) {
@@ -141,8 +142,10 @@ class ShopManager extends Service {
                         $base = ($costQuantity * $quantity);
                         if ($base <= 0) {
                             throw new \Exception('Cannot use a coupon on an item that is free.');
-                }
-            } else {
+                        }
+                        $new = $base - $minus;
+                        $costQuantity = round($new);
+                    } else {
                         $minus = ($coupon['discount'] / 100) * ($costQuantity);
                         $base = ($costQuantity * $quantity);
                         if ($base <= 0) {
@@ -158,8 +161,8 @@ class ShopManager extends Service {
                 if ($cost->item->assetType == 'currency') {
                     if ($data['bank'] == 'user') {
                         if (!$cost->item->is_user_owned) {
-                    throw new \Exception('You cannot use your user bank to pay for this item.');
-                }
+                            throw new \Exception('You cannot use your user bank to pay for this item.');
+                        }
 
                         addAsset($userCostAssets, $cost->item, -$costQuantity);
                     } else {

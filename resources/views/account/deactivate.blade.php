@@ -25,7 +25,7 @@
       {!! Form::textarea('deactivate_reason', Auth::user()->settings->deactivate_reason, ['class' => 'form-control']) !!}
     </div>
     <div class="text-right">
-      {!! Form::submit(Auth::user()->is_deactivated ? 'Edit' : 'Deactivate', ['class' => 'btn btn' . (Auth::user()->is_deactivated ? '' : '-outline') . '-danger deactivate-button']) !!}
+      {!! Form::submit(Auth::user()->is_deactivated ? 'Save' : 'Deactivate', ['class' => 'btn btn' . (Auth::user()->is_deactivated ? '' : '-outline') . '-danger deactivate-button']) !!}
     </div>
     {!! Form::close() !!}
   </div>

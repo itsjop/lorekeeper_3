@@ -105,21 +105,23 @@
     @section('scripts')
       @parent
       <script>
-        $('.edit-group').on('click', function(e) {
-          e.preventDefault();
-          loadModal("{{ url('/admin/raffles/edit/group/') }}/" + $(this).data('id'), 'Edit Raffle Group');
-        });
-        $('.edit-raffle').on('click', function(e) {
-          e.preventDefault();
-          loadModal("{{ url('/admin/raffles/edit/raffle/') }}/" + $(this).data('id'), 'Edit Raffle');
-        });
-        $('.roll-raffle').on('click', function(e) {
-          e.preventDefault();
-          loadModal("{{ url('/admin/raffles/roll/raffle/') }}/" + $(this).data('id'), 'Roll Raffle');
-        });
-        $('.roll-group').on('click', function(e) {
-          e.preventDefault();
-          loadModal("{{ url('/admin/raffles/roll/group/') }}/" + $(this).data('id'), 'Roll Raffle Group');
+        $(document).ready(function() {
+          $('.edit-group').on('click', function(e) {
+            e.preventDefault();
+            loadModal("{{ url('/admin/raffles/edit/group/') }}/" + $(this).data('id'), 'Edit Raffle Group');
+          });
+          $('.edit-raffle').on('click', function(e) {
+            e.preventDefault();
+            loadModal("{{ url('/admin/raffles/edit/raffle/') }}/" + $(this).data('id'), 'Edit Raffle');
+          });
+          $('.roll-raffle').on('click', function(e) {
+            e.preventDefault();
+            loadModal("{{ url('/admin/raffles/roll/raffle/') }}/" + $(this).data('id'), 'Roll Raffle');
+          });
+          $('.roll-group').on('click', function(e) {
+            e.preventDefault();
+            loadModal("{{ url('/admin/raffles/roll/group/') }}/" + $(this).data('id'), 'Roll Raffle Group');
+          });
         });
       </script>
     @endsection

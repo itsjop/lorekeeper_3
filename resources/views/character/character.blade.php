@@ -90,17 +90,18 @@
   >
     <div class="col-md-7">
       <div class="text-center">
-        <a
+            <a
           href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
           data-lightbox="entry"
           data-title="{{ $character->fullName }}"
-        >
+            >
           <img
             src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+            class="image {{Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : ''}} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
             alt="{{ $character->fullName }}"
           />
-        </a>
+            </a>
+            <div class="mt-2 text-center">@include('widgets._object_block', ['object' => $character])</div>
       </div>
       @if (
           $character->image->canViewFull(Auth::check() ? Auth::user() : null) &&
@@ -135,6 +136,11 @@
             role="tab"
           >Description</a>
         </li>
+                @if ($character->getLineageBlacklistLevel() < 2)
+                    <li class="nav-item">
+                        <a class="nav-link" id="lineageTab" data-toggle="tab" href="#lineage" role="tab">Lineage</a>
+                    </li>
+                @endif
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
             <a
@@ -156,6 +162,11 @@
       <div class="tab-pane fade" id="notes">
         @include('character._tab_notes', ['character' => $character])
       </div>
+            @if ($character->getLineageBlacklistLevel() < 2)
+                <div class="tab-pane fade" id="lineage">
+                    @include('character._tab_lineage', ['character' => $character])
+                </div>
+            @endif
       @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
         <div class="tab-pane fade" id="settings-{{ $character->slug }}">
           {!! Form::open([
@@ -170,7 +181,7 @@
             ) !!}
           </div>
           <div class="text-right">
-            {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
           </div>
           {!! Form::close() !!}
           <hr />
@@ -189,6 +200,11 @@
 
 @section('scripts')
   @parent
+    <style>
+    .image-blur {
+        filter: blur(5px);
+    }
+    </style>
   @include('character._image_js', ['character' => $character])
   @include('character._transformation_js')
 @endsection

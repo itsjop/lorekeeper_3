@@ -13,7 +13,9 @@ use App\Models\Character\CharacterFeature;
 use App\Models\Character\CharacterImage;
 use App\Models\Character\CharacterImageSubtype;
 use App\Models\Character\CharacterLog;
+use App\Models\Character\CharacterImageTitle;
 use App\Models\Character\CharacterTransfer;
+use App\Models\Character\CharacterLineage;
 use App\Models\Sales\SalesCharacter;
 use App\Models\Species\Species;
 use App\Models\Species\Subtype;
@@ -128,7 +130,22 @@ class CharacterManager extends Service {
       $character = $this->handleCharacter($data, $isMyo);
       if (!$character) {
         throw new \Exception('Error happened while trying to create character.');
-      } // Create character image
+      }
+      // Create character lineage
+      $lineage = $this->handleCharacterLineage($data, $character, $isMyo);
+      // dd(
+      //   // ($this->handleCharacterImage($data, $character, $isMyo)),
+      //   $lineage,
+      //   $url,
+      //   $recipient,
+      //   $character,
+      //   $data,
+      //   $isMyo
+      // );
+      if (!$lineage) {
+        throw new \Exception('Error happened while trying to create lineage.');
+      }
+      // Create character image
       $data['is_valid'] = true; // New image of new characters are always valid
       $image = $this->handleCharacterImage($data, $character, $isMyo);
       if (!$image) {
@@ -260,6 +277,7 @@ class CharacterManager extends Service {
         $data['species_id'] = isset($data['species_id']) && $data['species_id'] ? $data['species_id'] : null;
         $data['subtype_id'] = isset($data['subtype_id']) && $data['subtype_id'] ? $data['subtype_id'] : null;
         $data['rarity_id'] = isset($data['rarity_id']) && $data['rarity_id'] ? $data['rarity_id'] : null;
+
         $data['transformation_id'] =
           isset($data['transformation_id']) && $data['transformation_id'] ? $data['transformation_id'] : null;
         $data['transformation_info'] =
@@ -307,6 +325,16 @@ class CharacterManager extends Service {
       $imageData['content_warnings'] = isset($data['content_warnings']) ? explode(',', $data['content_warnings']) : null;
       $imageData['character_id'] = $character->id;
       $image = CharacterImage::create($imageData);
+      // Titles
+      if (isset($data['title_ids'])) {
+        foreach ($data['title_ids'] as $key => $titleId) {
+          CharacterImageTitle::create([
+            'character_image_id' => $image->id,
+            'title_id'           => $titleId == 'custom' ? null : $titleId,
+            'data'               => $data['title_data'][$titleId] ?? null,
+          ]);
+        }
+      }
       // create subtype relations
       if (isset($data['subtype_ids']) && $data['subtype_ids']) {
         foreach ($data['subtype_ids'] as $subtypeId) {
@@ -883,9 +911,15 @@ class CharacterManager extends Service {
       $old['species'] = $image->species_id ? $image->species->displayName : null;
       $old['subtypes'] = count($image->subtypes) ? $image->displaySubtypes() : null;
       $old['rarity'] = $image->rarity_id ? $image->rarity->displayName : null;
+      $old['titles'] = $image->titles->count() ? json_encode($image->titles) : null;
       $old['transformation'] = $image->transformation_id ? $image->transformation->displayName : null;
       $old['transformation_id'] = $image->transformation_id ? $image->transformation->displayName : null; // Clear old features
-      $image->features()->delete(); // Attach features
+
+      // Clear old features
+      $image->features()->delete();
+      // Clear old titles
+      $image->titles()->delete();
+      // Attach features
       foreach ($data['feature_id'] as $key => $featureId) {
         if ($featureId) {
           $feature = CharacterFeature::create([
@@ -894,7 +928,18 @@ class CharacterManager extends Service {
             'data' => $data['feature_data'][$key]
           ]);
         }
-      } // Update other stats
+      }
+      // Attach titles
+      if (isset($data['title_ids'])) {
+        foreach ($data['title_ids'] as $key => $titleId) {
+          CharacterImageTitle::create([
+            'character_image_id' => $image->id,
+            'title_id'           => $titleId == 'custom' ? null : $titleId,
+            'data'               => $data['title_data'][$titleId] ?? null,
+          ]);
+        }
+      }
+      // Update other stats
       $image->species_id = $data['species_id'];
       $image->subtype_id = $data['subtype_id'] ?: null;
       // SUBTYPES
@@ -920,6 +965,7 @@ class CharacterManager extends Service {
       $new['species'] = $image->species_id ? $image->species->displayName : null;
       $new['subtypes'] = count($image->subtypes) ? $image->displaySubtypes() : null;
       $new['rarity'] = $image->rarity_id ? $image->rarity->displayName : null;
+      $new['title'] = $image->titles->count() ? json_encode($image->titles) : null;
       $new['transformation'] = $image->transformation_id ? $image->transformation->displayName : null;
       $new['transformation_id'] = $image->transformation_id ? $image->transformation->displayName : null;
       $new['transformation_info'] = $image->transformation_info ? $image->transformation_info : null;
@@ -1734,6 +1780,29 @@ class CharacterManager extends Service {
       }
       if ($notifyGiftWriting) {
         $character->notifyBookmarkers('BOOKMARK_GIFT_WRITING');
+      }
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Sorts a character's titles.
+   *
+   * @param Character $character
+   * @param array     $data
+   *
+   * @return bool
+   */
+  public function sortCharacterTitles($character, $data) {
+    DB::beginTransaction();
+    try {
+      // explode the sort array and reverse it since the order is inverted
+      $sort = array_reverse(explode(',', $data));
+      foreach ($sort as $key => $s) {
+        CharacterImageTitle::where('id', $s)->where('character_image_id', $character->character_image_id)->update(['sort' => $key]);
       }
       return $this->commitReturn(true);
     } catch (\Exception $e) {
@@ -3139,6 +3208,128 @@ class CharacterManager extends Service {
       $voteData->put($user->id, $vote);
       $request->vote_data = $voteData->toJson();
       $request->save();
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Updates a character's lineage.
+   *
+   * @param  array                            $data
+   * @param  \App\Models\Character\Character  $character
+   * @param  \App\Models\User\User            $user
+   * @param  bool                             $isAdmin
+   * @return  bool
+   */
+  public function updateCharacterLineage($data, $character, $user, $isAdmin = false) {
+    DB::beginTransaction();
+
+    try {
+      if (!$user->hasPower('manage_characters')) throw new \Exception('You do not have the required permissions to do this.');
+
+      if (!$character->lineage) {
+        return $this->handleCharacterLineage($data, $character, $character->is_myo_slot);
+      } else {
+        $character->lineage->update([
+          'father_id'   => $data['father_id'] ?? null,
+          'father_name' => $data['father_id'] ? null : ($data['father_name'] ?? null),
+          'mother_id'   => $data['mother_id'] ?? null,
+          'mother_name' => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+          'depth'       => $data['depth'] ?? 0,
+        ]);
+      }
+      // CUSTOM ANCESTRY
+
+
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+  }
+
+
+  /**
+   * Handles character lineage data.
+   *
+   * @param  array                            $data
+   * @return \App\Models\Character\Character  $character
+   * @param  bool                             $isMyo
+   * @return \App\Models\Character\CharacterLineage|bool
+   */
+  private function handleCharacterLineage($data, $character, $isMyo = false) {
+    try {
+      // check mother and father id if set to see if character exists
+      if (isset($data['father_id']) && $data['father_id']) {
+        $father = Character::find($data['father_id']);
+        dd($father);
+        if (!$father) {
+          throw new \Exception('Father is invalid.');
+        }
+      }
+      if (isset($data['mother_id']) && $data['mother_id']) {
+        $mother = Character::find($data['mother_id']);
+        dd($mother);
+        if (!$mother) {
+          throw new \Exception('Mother is invalid.');
+        }
+      }
+      $lineage = CharacterLineage::create([
+        'character_id' => $character->id,
+        'father_id'    => $data ?? null,
+        // 'father_id'    => $data['father_id'] ?? null,
+        // 'father_name'  => $data['father_id'] ? null : ($data['father_name'] ?? null),
+        // 'mother_id'    => $data['mother_id'] ?? null,
+        // 'mother_name'  => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+        // 'depth'        => $data['depth'] ?? 0,
+      ]);
+      dd($lineage);
+      return $this->commitReturn($lineage);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return false;
+  }
+
+  /**
+   * Like a character
+   *
+   */
+  public function likeCharacter($character, $user) {
+    DB::beginTransaction();
+
+    try {
+      //throw in another like check
+      $user->checkLike($character);
+
+      //check all the like criteria
+      if (!$user->canLike($character)) {
+        throw new \Exception("You cannot " . __('character_likes.like') . " this character.");
+      }
+
+      //character is owned by you!
+      if ($user->id == $character->user->id) {
+        throw new \Exception("You cannot " . __('character_likes.like') . " a character that you own.");
+      }
+
+      //character's owner disabled likes
+      if (!$character->user->settings->allow_character_likes) {
+        throw new \Exception("This character's user is not allowing " . __('character_likes.likes') . ".");
+      }
+
+      //increment like count
+      $character->profile->like_count += 1;
+      $character->profile->save();
+
+      //mark the like as liked now
+      $like = $user->characterLikes()->where('character_id', $character->id)->first();
+      $like->liked_at = Carbon::now();
+      $like->save();
+
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());

@@ -1,0 +1,18 @@
+php artisan optimize:clear
+php artisan migrate
+php artisan setup-admin-user
+php artisan add-site-settings
+php artisan add-text-pages
+php artisan copy-default-images
+php artisan add-donation-shop
+php artisan add-image-hashes
+php artisan add-world-expansion
+php artisan fix-registered-users
+php artisan update-pet-variants
+php artisan update-pets
+php artisan update-extension-tracker
+php artisan change-feature
+
+ // ONLY ON LIVE
+php artisan optimize
+php artisan optimize

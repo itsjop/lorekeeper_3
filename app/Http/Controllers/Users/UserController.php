@@ -37,6 +37,7 @@ use App\Models\User\UserPet;
 use App\Models\User\UserUpdateLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use App\Models\User\UserPrizeLog;
 use App\Models\Shop\UserShop;
 
 class UserController extends Controller {
@@ -540,7 +541,9 @@ class UserController extends Controller {
         ->orderBy('created_at', 'DESC')
         ->paginate(20)
         ->appends($request->query())
-        : null
+        : null,
+      // 'sublists' => Sublist::orderBy('sort', 'DESC')->get()
+
     ]);
   }
 
@@ -576,9 +579,7 @@ class UserController extends Controller {
       'logs' => $this->user->getBorderLogs(0),
       'sublists' => Sublist::orderBy('sort', 'DESC')->get(),
       'characters' => true,
-
       'favorites' => $this->user->characters->count() ? GallerySubmission::whereIn('id', $userFavorites)->whereIn('id', GalleryCharacter::whereIn('character_id', $userCharacters)->pluck('gallery_submission_id')->toArray())->visible(Auth::check() ? Auth::user() : null)->accepted()->orderBy('created_at', 'DESC')->paginate(20) : null,
-      'sublists' => Sublist::orderBy('sort', 'DESC')->get()
     ]);
   }
 
@@ -594,6 +595,21 @@ class UserController extends Controller {
     return view('user.shops', [
       'user' => $this->user,
       'shops' => $shops->orderBy('sort', 'DESC')->get(),
+      'sublists' => Sublist::orderBy('sort', 'DESC')->get()
+    ]);
+  }
+
+  /**
+   * Shows a user's redeem logs.
+   *
+   * @param  string  $name
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserRedeemLogs($name) {
+    $user = $this->user;
+    return view('home._redeem_logs', [
+      'user' => $this->user,
+      'logs' => $this->user->getRedeemLogs(0),
       'sublists' => Sublist::orderBy('sort', 'DESC')->get()
     ]);
   }

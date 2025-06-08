@@ -54,6 +54,7 @@ Route::group(['prefix' => 'account', 'namespace' => 'Users'], function () {
   Route::get('deactivate', 'AccountController@getDeactivate');
   Route::get('deactivate-confirm', 'AccountController@getDeactivateConfirmation');
   Route::post('deactivate', 'AccountController@postDeactivate');
+  Route::post('character-likes', 'AccountController@postAllowCharacterLikes');
 
   Route::get('bookmarks', 'BookmarkController@getBookmarks');
   Route::get('bookmarks/create', 'BookmarkController@getCreateBookmark');
@@ -62,6 +63,10 @@ Route::group(['prefix' => 'account', 'namespace' => 'Users'], function () {
   Route::post('bookmarks/edit/{id}', 'BookmarkController@postCreateEditBookmark');
   Route::get('bookmarks/delete/{id}', 'BookmarkController@getDeleteBookmark');
   Route::post('bookmarks/delete/{id}', 'BookmarkController@postDeleteBookmark');
+
+  Route::get('blocked-images', 'AccountController@getImageBlocks');
+  Route::post('blocked-image-setting', 'AccountController@postImageBlockSettings');
+  Route::post('blocked-images/block/{model}/{id}', 'AccountController@postBlockUnblockImage');
 });
 
 Route::group(['prefix' => 'inventory', 'namespace' => 'Users'], function () {
@@ -201,9 +206,9 @@ Route::group(['prefix' => 'user-shops',], function () {
 });
 
 Route::group(['prefix' => 'crafting', 'namespace' => 'Users'], function () {
-    Route::get('/', 'CraftingController@getIndex');
-    Route::get('craft/{id}', 'CraftingController@getCraftRecipe');
-    Route::post('craft/{id}', 'CraftingController@postCraftRecipe');
+  Route::get('/', 'CraftingController@getIndex');
+  Route::get('craft/{id}', 'CraftingController@getCraftRecipe');
+  Route::post('craft/{id}', 'CraftingController@postCraftRecipe');
 });
 
 /**************************************************************************************************
@@ -212,6 +217,7 @@ Route::group(['prefix' => 'crafting', 'namespace' => 'Users'], function () {
 Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function () {
   Route::get('{slug}/profile/edit', 'CharacterController@getEditCharacterProfile');
   Route::post('{slug}/profile/edit', 'CharacterController@postEditCharacterProfile');
+  Route::post('{slug}/profile/titles/sort', 'CharacterController@postSortTitles');
 
   Route::post('{slug}/' . __('awards.awardcase') . '/edit', 'CharacterController@postAwardEdit');
   Route::post('{slug}/inventory/edit', 'CharacterController@postInventoryEdit');
@@ -224,6 +230,8 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
   Route::post('{slug}/approval', 'CharacterController@postCharacterApproval');
   Route::get('{slug}/approval', 'CharacterController@getCharacterApproval');
   Route::post('{slug}/approval/{id}', 'CharacterController@postCharacterApprovalSpecificImage');
+
+  Route::post('{slug}/like', 'CharacterController@postLikeCharacter');
 });
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
   Route::get('{id}/profile/edit', 'MyoController@getEditCharacterProfile');
@@ -435,4 +443,9 @@ Route::group(['prefix' => 'criteria'], function () {
   Route::get('{id}', 'CriterionController@getCriterionFormLimited');
   Route::post('rewards/{id}', 'CriterionController@postCriterionRewards');
   Route::get('guide/{id}', 'CriterionController@getCriterionGuide');
+});
+
+Route::group(['prefix' => 'redeem-code', 'namespace' => 'Users'], function () {
+  Route::get('/', 'PrizeCodeController@getIndex');
+  Route::post('/redeem', 'PrizeCodeController@postRedeemPrize');
 });

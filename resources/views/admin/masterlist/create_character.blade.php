@@ -92,31 +92,31 @@
                 class="btn btn-primary"
                 data-toggle="tooltip"
                 title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code."
-              >Pull
-                Next Number</a>
+              >Pull Next Number</a>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
+      </div>
+      <div class="row">
+        <div class="col-md-{{ config('lorekeeper.settings.enable_character_content_warnings') ? 6 : 12 }}">
+          <div class="form-group">
+            {!! Form::label('Character Code') !!} {!! add_help(
+                'This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).'
+            ) !!}
+            {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
+          </div>
+        </div>
+        @if (config('lorekeeper.settings.enable_character_content_warnings'))
+          <div class="col-md-6">
             <div class="form-group">
-              {!! Form::label('Character Code') !!} {!! add_help(
-                  'This code identifies the character itself. You don\'t have to use the automatically generated code, but this must be unique among all characters (as it\'s used to generate the character\'s page URL).'
+              {!! Form::label('Content Warnings') !!} {!! add_help(
+                  'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
               ) !!}
-              {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'code']) !!}
+              {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
             </div>
           </div>
-          @if (config('lorekeeper.settings.enable_character_content_warnings'))
-            <div class="col-md-6">
-              <div class="form-group">
-                {!! Form::label('Content Warnings') !!} {!! add_help(
-                    'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
-                ) !!}
-                {!! Form::text('content_warnings', old('content_warnings'), ['class' => 'form-control', 'id' => 'warningList']) !!}
-              </div>
-            </div>
-          @endif
-        </div>
+        @endif
+      </div>
     @endif
 
     <div class="form-group">
@@ -409,6 +409,31 @@
       {!! Form::select('rarity_id', $rarities, old('rarity_id'), ['class' => 'form-control']) !!}
     </div>
 
+    @if (!$isMyo)
+      <div class="row">
+        <div class="col-md-6 pr-2">
+          <div class="form-group">
+            {!! Form::label('Character Titles') !!} {!! add_help('If a character has multiple titles, the title with the highest rarity / sort will display first.') !!}
+            {!! Form::select('title_ids[]', $titles, old('title_ids'), [
+                'class' => 'form-control',
+                'multiple',
+                'id' => 'charTitle',
+                'placeholder' => 'Select Titles'
+            ]) !!}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group hide" id="titleOptions">
+            {!! Form::label('Extra Info / Custom Title (Optional)') !!} {!! add_help(
+                'If \'custom title\' is selected, this will be displayed as the title. If a preexisting title is selected, it will be displayed in addition to it. The short version is only used in the case of a custom title.'
+            ) !!}
+            <div id="titleData">
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
+
     <div class="form-group">
       {!! Form::label('Traits') !!} @if ($isMyo)
         {!! add_help(
@@ -432,16 +457,70 @@
       </div>
     </div>
 
+    <hr class="my-4">
+
+    <h3>Lineage (Optional)</h3>
+    <div class="alert alert-info">Do not enter anything if there are no ancestors in that slot.</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group text-center pb-1 border-bottom">
+          {!! Form::label('father_id', 'Father (Optional)', ['class' => 'font-weight-bold']) !!}
+          <div class="row">
+            <div class="col-sm-6 pr-sm-1">
+              {!! Form::select('father_id', $characterOptions, null, [
+                  'class' => 'form-control text-left character-select mb-1',
+                  'placeholder' => 'None'
+              ]) !!}
+            </div>
+            <div class="col-sm-6 pl-sm-1">
+              {!! Form::text('father_name', old('father_name'), [
+                  'class' => 'form-control mb-1',
+                  'placeholder' => 'Father\'s Name (Optional)'
+              ]) !!}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group text-center pb-1 border-bottom">
+          {!! Form::label('mpther_id', 'Mother (Optional)', ['class' => 'font-weight-bold']) !!}
+          <div class="row">
+            <div class="col-sm-6 pr-sm-1">
+              {!! Form::select('mother_id', $characterOptions, null, [
+                  'class' => 'form-control text-left character-select mb-1',
+                  'placeholder' => 'None'
+              ]) !!}
+            </div>
+            <div class="col-sm-6 pl-sm-1">
+              {!! Form::text('mother_name', old('mother_name'), [
+                  'class' => 'form-control mb-1',
+                  'placeholder' => 'Mother\'s Name (Optional)'
+              ]) !!}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="text-right">
       {!! Form::submit('Create Character', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
+
+    <div class="form-group title-data original hide d-flex">
+      <div class="mb-0 title-name col-3"></div>
+      {!! Form::text('full', null, ['class' => 'form-control mr-2', 'placeholder' => 'Full Title']) !!}
+      @if (Settings::get('character_title_display'))
+        {!! Form::text('short', null, ['class' => 'form-control mr-2', 'placeholder' => 'Short Title (Optional)']) !!}
+      @endif
+    </div>
   @endif
 
 @endsection
 
 @section('scripts')
   @parent
+  @include('widgets._character_titles_js')
   @include('widgets._character_create_options_js')
   @include('widgets._image_upload_js')
   @include('widgets._datetimepicker_js')
@@ -486,6 +565,13 @@
 
     $("#subtype").selectize({
       maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+    });
+
+    $(document).ready(function() {
+      $('.character-select').selectize();
+      $('#advanced_lineage').on('click', function(e) {
+        e.preventDefault();
+      });
     });
   </script>
 @endsection

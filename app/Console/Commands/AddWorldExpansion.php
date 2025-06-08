@@ -46,7 +46,13 @@ class AddWorldExpansion extends Command {
                 [
                     'key'         => 'WE_change_timelimit',
                     'value'       => 0,
-                    'description' => 'Is there a limit to how often users can change their location? 0: No Limit. 1: Yearly. 2: Quarterly. 3: Monthly. 4: Weekly. 5: Daily.',
+                    'description' => 'Is there a limit to how often users can change their location?
+0: No Limit.
+1: Yearly.
+2: Quarterly.
+3: Monthly.
+4: Weekly.
+5: Daily.',
                 ],
 
             ]);
@@ -60,7 +66,11 @@ class AddWorldExpansion extends Command {
                 [
                     'key'         => 'WE_user_locations',
                     'value'       => 1,
-                    'description' => '0: Users do not have locations. 1: Users can freely change locations. 2: Only admins can freely change user locations.',
+                    'description' => '0: Users do not have locations.
+
+1: Users can freely change locations.
+
+2: Only admins can freely change user locations.',
                 ],
 
             ]);
@@ -74,7 +84,9 @@ class AddWorldExpansion extends Command {
                 [
                     'key'         => 'WE_user_factions',
                     'value'       => 0,
-                    'description' => '0: Users do not have factions. 1: Users can freely change factions. 2: Only admins can freely change user factions.',
+                    'description' => '0: Users do not have factions.
+1: Users can freely change factions.
+2: Only admins can freely change user factions.',
                 ],
 
             ]);
@@ -88,7 +100,10 @@ class AddWorldExpansion extends Command {
                 [
                     'key'         => 'WE_character_locations',
                     'value'       => 0,
-                    'description' => '0: Characters do not have locations. 1: Characters\' locations are the same as their owners. 2: Users can edit their own character locations. 3: Only admins can edit character locations.',
+                    'description' => '0: Characters do not have locations.
+1: Characters\' locations are the same as their owners.
+2: Users can edit their own character locations.
+3: Only admins can edit character locations.',
                 ],
 
             ]);
@@ -102,7 +117,10 @@ class AddWorldExpansion extends Command {
                 [
                     'key'         => 'WE_character_factions',
                     'value'       => 0,
-                    'description' => '0: Characters do not have factions. 1: Characters\' factions are the same as their owners. 2: Users can edit their own character factions. 3: Only admins can edit character factions.',
+                    'description' => '0: Characters do not have factions.
+1: Characters\' factions are the same as their owners.
+2: Users can edit their own character factions.
+3: Only admins can edit character factions.',
                 ],
 
             ]);
@@ -116,7 +134,8 @@ class AddWorldExpansion extends Command {
                 [
                     'key'         => 'WE_glossary',
                     'value'       => 0,
-                    'description' => '0: Glossary Page is not shown to users. 1: Glossary Page is shown to users.',
+                    'description' => '0: Glossary Page is not shown to users.
+1: Glossary Page is shown to users.',
                 ],
 
             ]);

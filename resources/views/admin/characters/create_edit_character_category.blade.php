@@ -51,6 +51,11 @@
     @endif
   </div>
 
+    @include('admin.lineage._edit_lineage_blacklist', [
+        'lineageBlacklist' => $lineageBlacklist,
+        'type' => 'category',
+    ])
+
   <div class="form-group">
     {!! Form::label('Description (Optional)') !!}
     {!! Form::textarea('description', $category->description, ['class' => 'form-control wysiwyg']) !!}
@@ -62,7 +67,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

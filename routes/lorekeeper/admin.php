@@ -62,6 +62,26 @@ Route::group(['prefix' => 'invitations', 'middleware' => 'power:edit_site_settin
   Route::post('delete/{id}', 'InvitationController@postDeleteKey');
 });
 
+Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function() {
+    Route::get('/', 'PrizeCodeController@getIndex');
+    Route::get('/create', 'PrizeCodeController@getCreatePrize');
+    Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
+    Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
+    Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
+});
+
+Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function() {
+    Route::get('/', 'PrizeCodeController@getIndex');
+    Route::get('/create', 'PrizeCodeController@getCreatePrize');
+    Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
+    Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
+    Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
+    Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
+});
+
 // FILE MANAGER
 Route::group(['prefix' => 'files', 'middleware' => 'power:edit_site_settings'], function () {
   Route::get('/{folder?}', 'FileController@getIndex');
@@ -131,6 +151,16 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
   Route::post('rarities/edit/{id?}', 'RarityController@postCreateEditRarity');
   Route::post('rarities/delete/{id}', 'RarityController@postDeleteRarity');
   Route::post('rarities/sort', 'RarityController@postSortRarity');
+
+  // CHARACTER TITLES
+  Route::get('character-titles', 'CharacterTitleController@getIndex');
+  Route::get('character-titles/create', 'CharacterTitleController@getCreateTitle');
+  Route::get('character-titles/edit/{id}', 'CharacterTitleController@getEditTitle');
+  Route::get('character-titles/delete/{id}', 'CharacterTitleController@getDeleteTitle');
+  Route::post('character-titles/create', 'CharacterTitleController@postCreateEditTitle');
+  Route::post('character-titles/edit/{id?}', 'CharacterTitleController@postCreateEditTitle');
+  Route::post('character-titles/delete/{id}', 'CharacterTitleController@postDeleteTitle');
+  Route::post('character-titles/sort', 'CharacterTitleController@postSortTitle');
 
   // SPECIES
   Route::get('species', 'SpeciesController@getIndex');
@@ -568,6 +598,7 @@ Route::group(['prefix' => 'grants', 'namespace' => 'Users', 'middleware' => 'pow
   Route::get('user-currency', 'GrantController@getUserCurrency');
   Route::post('user-currency', 'GrantController@postUserCurrency');
 
+  Route::get('item-search', 'GrantController@getItemSearch');
   Route::get('items', 'GrantController@getItems');
   Route::post('items', 'GrantController@postItems');
 
@@ -575,8 +606,8 @@ Route::group(['prefix' => 'grants', 'namespace' => 'Users', 'middleware' => 'pow
   Route::post('pets', 'GrantController@postPets');
   Route::get('pets/variants/{id}', 'GrantController@getPetVariants');
   Route::get('pets/evolutions/{id}', 'GrantController@getPetEvolutions');
-
-  Route::get('item-search', 'GrantController@getItemSearch');
+  Route::get('awards', 'GrantController@getAwards');
+  Route::post('awards', 'GrantController@postAwards');
   Route::get('borders', 'GrantController@getBorders');
   Route::post('borders', 'GrantController@postBorders');
   Route::get('recipes', 'GrantController@getRecipes');
@@ -664,6 +695,10 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware'
   Route::post('{slug}/settings', 'CharacterController@postCharacterSettings');
 
   Route::post('{slug}/transfer', 'CharacterController@postTransfer');
+
+  # LINEAGE
+  Route::get('{slug}/lineage', 'CharacterLineageController@getEditCharacterLineage');
+  Route::post('{slug}/lineage', 'CharacterLineageController@postEditCharacterLineage');
 });
 // Might rewrite these parts eventually so there's less code duplication...
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function () {
@@ -683,6 +718,10 @@ Route::group(['prefix' => 'myo', 'namespace' => 'Characters', 'middleware' => 'p
   Route::post('{id}/settings', 'CharacterController@postMyoSettings');
 
   Route::post('{id}/transfer', 'CharacterController@postMyoTransfer');
+
+  # LINEAGE
+  Route::get('{id}/lineage', 'CharacterLineageController@getEditMyoLineage');
+  Route::post('{id}/lineage', 'CharacterLineageController@postEditMyoLineage');
 });
 
 // RAFFLES

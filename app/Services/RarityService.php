@@ -4,11 +4,12 @@ namespace App\Services;
 
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImage;
+use App\Models\Character\CharacterLineageBlacklist;
 use App\Models\Rarity;
 use Illuminate\Support\Facades\DB;
 
 class RarityService extends Service {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Rarity Service
     |--------------------------------------------------------------------------
@@ -17,166 +18,203 @@ class RarityService extends Service {
     |
     */
 
-    /**
-     * Creates a new rarity.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return bool|Rarity
-     */
-    public function createRarity($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Creates a new rarity.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return bool|Rarity
+   */
+  public function createRarity($data, $user) {
+    DB::beginTransaction();
 
-        try {
-            $data = $this->populateData($data);
+    try {
+      $data = $this->populateData($data);
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['hash'] = randomString(10);
-                $data['has_image'] = 1;
-                $image = $data['image'];
-                unset($data['image']);
-            } else {
-                $data['has_image'] = 0;
-            }
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['hash'] = randomString(10);
+        $data['has_image'] = 1;
+        $image = $data['image'];
+        unset($data['image']);
+      } else {
+        $data['has_image'] = 0;
+      }
 
-            $rarity = Rarity::create($data);
+      $icon = null;
+      if (isset($data['icon']) && $data['icon']) {
+        $data['icon_hash'] = randomString(10);
+        $data['has_icon'] = 1;
+        $icon = $data['icon'];
+        unset($data['icon']);
+      } else {
+        $data['has_icon'] = 0;
+      }
 
-            if ($image) {
-                $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
-            }
+      $rarity = Rarity::create($data);
+      $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'rarity', $rarity->id);
 
-            return $this->commitReturn($rarity);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
 
-        return $this->rollbackReturn(false);
+      if ($image) {
+        $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
+      }
+
+      if ($icon) {
+        $this->handleImage($icon, $rarity->rarityImagePath, $rarity->rarityIconFileName);
+      }
+      return $this->commitReturn($rarity);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Updates a rarity.
-     *
-     * @param Rarity                $rarity
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return bool|Rarity
-     */
-    public function updateRarity($rarity, $data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // More specific validation
-            if (Rarity::where('name', $data['name'])->where('id', '!=', $rarity->id)->exists()) {
-                throw new \Exception('The name has already been taken.');
-            }
+  /**
+   * Updates a rarity.
+   *
+   * @param Rarity                $rarity
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return bool|Rarity
+   */
+  public function updateRarity($rarity, $data, $user) {
+    DB::beginTransaction();
 
-            $data = $this->populateData($data, $rarity);
+    try {
+      // More specific validation
+      if (Rarity::where('name', $data['name'])->where('id', '!=', $rarity->id)->exists()) {
+        throw new \Exception('The name has already been taken.');
+      }
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $data['hash'] = randomString(10);
-                $image = $data['image'];
-                unset($data['image']);
-            }
+      $data = $this->populateData($data, $rarity);
 
-            $rarity->update($data);
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $data['hash'] = randomString(10);
+        $image = $data['image'];
+        unset($data['image']);
+      }
 
-            if ($rarity) {
-                $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
-            }
+      $icon = null;
+      if (isset($data['icon']) && $data['icon']) {
+        $data['has_icon'] = 1;
+        $data['icon_hash'] = randomString(10);
+        $icon = $data['icon'];
+        unset($data['icon']);
+      }
 
-            return $this->commitReturn($rarity);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      $rarity->update($data);
+      $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'rarity', $rarity->id);
 
-        return $this->rollbackReturn(false);
+      if ($rarity) {
+        $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
+      }
+
+      if ($icon) {
+        $this->handleImage($icon, $rarity->rarityImagePath, $rarity->rarityIconFileName);
+      }
+
+      return $this->commitReturn($rarity);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Deletes a rarity.
-     *
-     * @param Rarity $rarity
-     *
-     * @return bool
-     */
-    public function deleteRarity($rarity) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // Check first if characters with this rarity exist
-            if (CharacterImage::where('rarity_id', $rarity->id)->exists() || Character::where('rarity_id', $rarity->id)->exists()) {
-                throw new \Exception('A character or character image with this rarity exists. Please change its rarity first.');
-            }
+  /**
+   * Deletes a rarity.
+   *
+   * @param Rarity $rarity
+   *
+   * @return bool
+   */
+  public function deleteRarity($rarity) {
+    DB::beginTransaction();
 
-            if ($rarity->has_image) {
-                $this->deleteImage($rarity->rarityImagePath, $rarity->rarityImageFileName);
-            }
-            $rarity->delete();
+    try {
+      // Check first if characters with this rarity exist
+      if (CharacterImage::where('rarity_id', $rarity->id)->exists() || Character::where('rarity_id', $rarity->id)->exists()) {
+        throw new \Exception('A character or character image with this rarity exists. Please change its rarity first.');
+      }
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      if ($rarity->has_image) {
+        $this->deleteImage($rarity->rarityImagePath, $rarity->rarityImageFileName);
+      }
+      $rarity->delete();
+      CharacterLineageBlacklist::searchAndSet(0, 'rarity', $rarity->id);
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Sorts rarity order.
-     *
-     * @param array $data
-     *
-     * @return bool
-     */
-    public function sortRarity($data) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // explode the sort array and reverse it since the order is inverted
-            $sort = array_reverse(explode(',', $data));
+  /**
+   * Sorts rarity order.
+   *
+   * @param array $data
+   *
+   * @return bool
+   */
+  public function sortRarity($data) {
+    DB::beginTransaction();
 
-            foreach ($sort as $key => $s) {
-                Rarity::where('id', $s)->update(['sort' => $key]);
-            }
+    try {
+      // explode the sort array and reverse it since the order is inverted
+      $sort = array_reverse(explode(',', $data));
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      foreach ($sort as $key => $s) {
+        Rarity::where('id', $s)->update(['sort' => $key]);
+      }
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Processes user input for creating/updating a rarity.
-     *
-     * @param array  $data
-     * @param Rarity $rarity
-     *
-     * @return array
-     */
-    private function populateData($data, $rarity = null) {
-        if (isset($data['description']) && $data['description']) {
-            $data['parsed_description'] = parse($data['description']);
-        }
+    return $this->rollbackReturn(false);
+  }
 
-        if (isset($data['color'])) {
-            $data['color'] = str_replace('#', '', $data['color']);
-        }
-
-        if (isset($data['remove_image'])) {
-            if ($rarity && $rarity->has_image && $data['remove_image']) {
-                $data['has_image'] = 0;
-                $this->deleteImage($rarity->rarityImagePath, $rarity->rarityImageFileName);
-            }
-            unset($data['remove_image']);
-        }
-
-        return $data;
+  /**
+   * Processes user input for creating/updating a rarity.
+   *
+   * @param array  $data
+   * @param Rarity $rarity
+   *
+   * @return array
+   */
+  private function populateData($data, $rarity = null) {
+    if (isset($data['description']) && $data['description']) {
+      $data['parsed_description'] = parse($data['description']);
     }
+
+    if (isset($data['color'])) {
+      $data['color'] = str_replace('#', '', $data['color']);
+    }
+
+    if (isset($data['remove_image'])) {
+      if ($rarity && $rarity->has_image && $data['remove_image']) {
+        $data['has_image'] = 0;
+        $this->deleteImage($rarity->rarityImagePath, $rarity->rarityImageFileName);
+      }
+      unset($data['remove_image']);
+    }
+
+    if (isset($data['remove_icon'])) {
+      if ($rarity && $rarity->has_icon && $data['remove_icon']) {
+        $data['has_icon'] = 0;
+        $this->deleteImage($rarity->rarityImagePath, $rarity->rarityIconFileName);
+      }
+      unset($data['remove_icon']);
+    }
+
+    return $data;
+  }
 }

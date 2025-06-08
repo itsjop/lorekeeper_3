@@ -155,7 +155,6 @@ class InventoryController extends Controller {
     if (!$request->quantities) {
       flash('Quantities not set.')->error();
     }
-
     if ($request->ids && $request->quantities) {
       switch ($request->action) {
         case 'transfer':
@@ -434,6 +433,7 @@ class InventoryController extends Controller {
       }
     }
 
+    // dd( $tag, $service, $service->act($stacks, Auth::user(), $request->all()), $stacks->first()->item->hasTag($tag));
     return redirect()->back();
   }
 

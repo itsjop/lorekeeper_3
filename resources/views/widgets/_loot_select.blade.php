@@ -26,13 +26,6 @@
   >
     Add {{ isset($progression) && $progression ? 'Progression' : 'Reward' }}
   </a>
-  <a
-    href="#"
-    class="btn btn-outline-info"
-    id="addLoot"
-  >
-    Add {{ isset($progression) && $progression ? 'Progression' : 'Reward' }}
-  </a>
 
 </div>
 <table class="table table-sm" id="lootTable">
@@ -50,10 +43,10 @@
           <td>{!! Form::select(
               'rewardable_type[]',
               ['Item' => 'Item', 'Currency' => 'Currency', 'Pet' => 'Pet', 'Award' => ucfirst(__('awards.award'))] +
-                  ($showLootTables ? ['LootTable' => 'Loot Table'] : []) +
-                  ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) +
+                  (isset($showLootTables) && $showLootTables ? ['LootTable' => 'Loot Table'] : []) +
+                  (isset($showRaffles) && $showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) +
                   (isset($showBorders) && $showBorders ? ['Border' => 'Border'] : []) +
-                  ($showRecipes ? ['Recipe' => 'Recipe'] : []),
+                  (isset($showRecipes) && $showRecipes ? ['Recipe' => 'Recipe'] : []),
               isset($progression) && $progression ? $loot->type : $loot->rewardable_type,
               [
                   'class' => 'form-control reward-type',

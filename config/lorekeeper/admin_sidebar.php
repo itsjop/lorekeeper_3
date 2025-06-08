@@ -32,11 +32,11 @@ return [
       ['name' => 'Items', 'url' => 'admin/data/items',],
       ['name' => 'Pets', 'url' => 'admin/data/pets',],
       ['name' => 'Dynamic Limits', 'url' => 'admin/data/limits',],
-      ['name' => 'Award Categories', 'url' => 'admin/data/award-categories'],
-      ['name' => 'Awards', 'url' => 'admin/data/awards'],
+      ['name' => 'Badges', 'url' => 'admin/data/awards'],
       ['name' => 'Criteria Rewards', 'url' => 'admin/data/criteria'],
       ['name' => 'Recipes', 'url' => 'admin/data/recipes',],
       ['name' => 'Transformations', 'url'  => 'admin/data/transformations',],
+      ['name' => 'Character Titles', 'url'  => 'admin/data/character-titles',],
     ],
   ],
   'Admin' => [
@@ -81,9 +81,10 @@ return [
       ['name' => 'Pet Grants', 'url' => 'admin/grants/pets',],
       ['name' => 'Award Grants', 'url' => 'admin/grants/awards'],
       ['name' => 'Recipe Grants', 'url' => 'admin/grants/recipes'],
+      ['name' => 'Codes', 'url' => 'admin/prizecodes'],
     ]
   ],
-  'Masterlist' => [
+  'Characters' => [
     'power' => 'manage_characters',
     'links' => [
       ['name' => 'Create Character', 'url' => 'admin/masterlist/create-character'],

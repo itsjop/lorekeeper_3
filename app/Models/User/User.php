@@ -14,6 +14,8 @@ use App\Models\Character\Character;
 use App\Models\Character\CharacterBookmark;
 use App\Models\Character\CharacterImageCreator;
 use App\Models\Rank\RankPower;
+use App\Models\User\Location;
+use App\Models\User\Faction;
 use App\Models\Currency\Currency;
 use App\Models\Currency\CurrencyCategory;
 use App\Models\Currency\CurrencyLog;
@@ -41,6 +43,7 @@ use App\Models\Notification;
 use App\Models\Rank\Rank;
 use App\Models\Submission\Submission;
 use App\Traits\Commenter;
+use App\Models\User\UserImageBlock;
 use App\Models\Recipe\Recipe;
 
 class User extends Authenticatable implements MustVerifyEmail {
@@ -195,9 +198,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->hasMany(Character::class)->where('is_myo_slot', 0)->orderBy('sort', 'DESC');
   }
 
-  /**
-   * Get the user's MYO slots.
-   */
+  /** * Get the user's MYO slots. */
   public function myoSlots() {
     return $this->hasMany(Character::class)->where('is_myo_slot', 1)->orderBy('id', 'DESC');
   }
@@ -251,6 +252,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->belongsToMany('App\Models\Recipe\Recipe', 'user_recipes')->withPivot('id');
   }
 
+
   /**
    * Get all of the user's gallery submissions.
    */
@@ -274,7 +276,12 @@ class User extends Authenticatable implements MustVerifyEmail {
   public function bookmarks() {
     return $this->hasMany('App\Models\Character\CharacterBookmark')->where('user_id', $this->id);
   }
-
+  /**
+   * Get all of the user's blocked images
+   */
+  public function blockedImages() {
+    return $this->hasMany(UserImageBlock::class, 'user_id');
+  }
   /**
    * Get the user's current discord chat level.
    */
@@ -336,6 +343,12 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->hasMany(UserUnlockedLimit::class);
   }
 
+  /**
+   * Get all of the user's character like data.
+   */
+  public function characterLikes() {
+    return $this->hasMany('App\Models\Character\CharacterLike')->where('user_id', $this->id);
+  }
 
   /**********************************************************************************************
 
@@ -707,22 +720,17 @@ class User extends Authenticatable implements MustVerifyEmail {
     if ($bday->format('d M') == Carbon::now()->format('d M')) {
       $icon = '<i class="fas fa-birthday-cake ml-1"></i>';
     }
-
     //
     switch ($this->settings->birthday_setting) {
       case 0:
         return null;
-        break;
       case 1:
         if (Auth::check())
           return $bday->format('d M') . $icon;
-        break;
       case 2:
         return $bday->format('d M') . $icon;
-        break;
       case 3:
         return $bday->format('d M Y') . $icon;
-        break;
     }
   }
 
@@ -1061,18 +1069,6 @@ class User extends Authenticatable implements MustVerifyEmail {
   }
 
   /**
-   * Checks if the user has bookmarked a character.
-   * Returns the bookmark if one exists.
-   *
-   * @param mixed $character
-   *
-   * @return CharacterBookmark
-   */
-  public function hasBookmarked($character) {
-    return CharacterBookmark::where('user_id', $this->id)->where('character_id', $character->id)->first();
-  }
-
-  /**
    * Get the user's border logs.
    *
    * @param  int  $limit
@@ -1230,5 +1226,73 @@ class User extends Authenticatable implements MustVerifyEmail {
     }
 
     return $recipeCollection;
+  }
+
+  /**
+   * Get the user's redeem logs.
+   *
+   * @param  int  $limit
+   * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getRedeemLogs($limit = 10) {
+    $user = $this;
+    $query = UserPrizeLog::with('prize')->where('user_id', $user->id)->orderBy('id', 'DESC');
+    if ($limit) return $query->take($limit)->get();
+    else return $query->paginate(30);
+  }
+
+  /**
+   * Check the user's like for the character
+   */
+  public function checkLike($character) {
+
+    //check for the like and create if nonexistent
+
+    $like = $this->characterLikes()->where('character_id', $character->id)->first();
+
+    if (!$like) {
+      $createdlike = $this->characterLikes()->create([
+        'user_id'       => $this->id,
+        'character_id'     => $character->id,
+      ]);
+      $this->refresh();
+      $createdlike->refresh();
+    }
+  }
+
+  /**
+   * Check if user can like the character again
+   */
+  public function canLike($character) {
+
+    //triplecheck that a like exists even though we spammed this check literally everywhere.
+    $like = $this->characterLikes()->where('character_id', $character->id)->first();
+
+    if (!$like) {
+      $createdlike = $this->characterLikes()->create([
+        'user_id'       => $this->id,
+        'character_id'     => $character->id,
+      ]);
+      $this->refresh();
+      $createdlike->refresh();
+    }
+
+    //user disabled likes on their characters
+    if (!$character->user->settings->allow_character_likes) return false;
+
+    //already liked
+    if ($like->liked_at) {
+
+      //can only like once
+      if (!Settings::get('character_likes')) {
+        return false;
+      }
+      //can like daily
+      if ($like->liked_at->isToday()) {
+        return false;
+      }
+    }
+    //else you can :)
+    return true;
   }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Users;
 
-use Auth;
+// use Auth;
+use Illuminate\Support\Facades\Auth;
+
 use File;
 use Image;
 
@@ -44,12 +46,12 @@ class AccountController extends Controller {
    * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Http\RedirectResponse
    */
   public function getBanned() {
-    if (Auth::user()->is_banned) {
+    if (Auth::user()->is_banned)
       return view('account.banned');
-    } else {
-      return view('account.deactivated');
-    }
+    else
+      return redirect()->to('/');
   }
+
 
 
   /**
@@ -68,29 +70,18 @@ class AccountController extends Controller {
     );
 
     if (Auth::user()->isStaff) {
-      $borderOptions = ['0' => 'Select Border'] + Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->get()->pluck('settingsName', 'id')->toArray() + Border::base()->where('admin_only', 1)->get()->pluck('settingsName', 'id')->toArray();
+      $borderOptions =
+        ['0' => 'Select Border'] + Border::base()->active(Auth::user() ?? null)
+        ->where('is_default', 1)->get()->pluck('settingsName', 'id')->toArray() + Border::base()
+        ->where('admin_only', 1)->get()->pluck('settingsName', 'id')->toArray();
     } else {
-      $borderOptions = ['0' => 'Select Border'] + Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->where('admin_only', 0)->get()->pluck('settingsName', 'id')->toArray();
+      $borderOptions =
+        ['0' => 'Select Border'] + Border::base()->active(Auth::user() ?? null)
+        ->where('is_default', 1)
+        ->where('admin_only', 0)->get()->pluck('settingsName', 'id')->toArray();
     }
-
-    $default = Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->get();
-    $admin = Border::base()->where('admin_only', 1)->get();
-
-    return view('account.settings', [
-      'admin' => $admin,
-      'default' => $default,
-      'border_variants' => ['0' => 'Pick a Border First'],
-      'borders' => $borderOptions + Auth::user()->borders()->get()->pluck('settingsName', 'id')->toArray(),
-      'locations' => Location::all()->where('is_user_home')->pluck('style', 'id')->toArray(),
-      'factions' => Faction::all()->where('is_user_faction')->pluck('style', 'id')->toArray(),
-      'bottom_layers' => ['0' => 'Pick a Border First'],
-      'user_enabled' => Settings::get('WE_user_locations'),
-      'user_faction_enabled' => Settings::get('WE_user_factions'),
-      'char_enabled' => Settings::get('WE_character_locations'),
-      'char_faction_enabled' => Settings::get('WE_character_factions'),
-      'location_interval' => $interval[Settings::get('WE_change_timelimit')]
-    ]);
   }
+
   /**
    * Edits the user's profile.
    *
@@ -106,137 +97,45 @@ class AccountController extends Controller {
     return redirect()->back();
   }
 
-    /**
-     * Edits the user's avatar.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postAvatar(Request $request, UserService $service) {
-      $data = $request->only([
-          'avatar', 'x0', 'x1', 'y0', 'y1',
-      ]);
-      if ($service->updateAvatar($data, Auth::user())) {
-          flash('Avatar updated successfully.')->success();
-      } else {
-          foreach ($service->errors()->getMessages()['error'] as $error) {
-              flash($error)->error();
-          }
-      }
-
-      return redirect()->back();
-  }
-
-
   /**
-   * Edits the user's profile image.
+   * Edits the user's avatar.
    *
    * @return \Illuminate\Http\RedirectResponse
    */
-  public function postProfileImg(Request $request, UserService $service) {
-    if ($service->updateProfileImg($request->file('profile_img'), Auth::user())) {
-      flash('Profile Image updated successfully.')->success();
+  public function postAvatar(Request $request, UserService $service) {
+    if ($service->updateAvatar($request->file('avatar'), Auth::user())) {
+      flash('Avatar updated successfully.')->success();
     } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
+      foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
     }
-
-    return redirect()->back();
-  }
-
-  /**
-   * Edits the user's username.
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postUsername(Request $request, UserService $service) {
-    if ($service->updateUsername($request->get('username'), Auth::user())) {
-      flash('Username updated successfully.')->success();
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
-
-    return redirect()->back();
-  }
-
-  /**
-   * Edits the user's location from a list of locations that users can make their home.
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postLocation(Request $request, UserService $service) {
-    if ($service->updateLocation($request->input('location'), Auth::user())) {
-      flash('Location updated successfully.')->success();
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
-
-    return redirect()->back();
-  }
-
-  /**
-   * Edits the user's faction from a list of factions that users can make their home.
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postFaction(Request $request, UserService $service) {
-    if ($service->updateFaction($request->input('faction'), Auth::user())) {
-      flash('Faction updated successfully.')->success();
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
-
     return redirect()->back();
   }
 
   /**
    * Changes the user's password.
    *
-   * @param App\Services\UserService $service
-   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  App\Services\UserService  $service
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postPassword(Request $request, UserService $service) {
-    $user = Auth::user();
-    if (!isset($user->password) && (!isset($user->email) || !isset($user->email_verified_at))) {
-      flash('Please set and verify an email before setting a password for email login.')->error();
-
-      return redirect()->back();
-    }
-
-    $request->validate(
-      [
-        'old_password' => 'required|string',
-        'new_password' => 'required|string|min:8|confirmed'
-      ] + (isset($user->password) ? ['old_password' => 'required|string'] : [])
-    );
-    if (
-      $service->updatePassword(
-        $request->only(['old_password', 'new_password', 'new_password_confirmation']),
-        Auth::user()
-      )
-    ) {
+    $request->validate([
+      'old_password' => 'required|string',
+      'new_password' => 'required|string|min:8|confirmed'
+    ]);
+    if ($service->updatePassword($request->only(['old_password', 'new_password', 'new_password_confirmation']), Auth::user())) {
       flash('Password updated successfully.')->success();
     } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
+      foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
     }
-
     return redirect()->back();
   }
 
   /**
    * Changes the user's email address and sends a verification email.
    *
-   * @param App\Services\UserService $service
-   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  App\Services\UserService  $service
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postEmail(Request $request, UserService $service) {
@@ -244,29 +143,22 @@ class AccountController extends Controller {
       'email' => 'required|string|email|max:255|unique:users'
     ]);
     if ($service->updateEmail($request->only(['email']), Auth::user())) {
-      flash(
-        'Email updated successfully. A verification email has been sent to your new email address.'
-      )->success();
+      flash('Email updated successfully. A verification email has been sent to your new email address.')->success();
     } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
+      foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
     }
-
     return redirect()->back();
   }
 
   /**
-   * Changes user birthday setting.
+   * Changes user character warning visibility setting.
    *
    * @param App\Services\UserService $service
    *
    * @return \Illuminate\Http\RedirectResponse
    */
-  public function postBirthday(Request $request, UserService $service) {
-    if (
-      $service->updateBirthdayVisibilitySetting($request->input('birthday_setting'), Auth::user())
-    ) {
+  public function postWarningVisibility(Request $request, UserService $service) {
+    if ($service->updateContentWarningVisibility($request->input('content_warning_visibility'), Auth::user())) {
       flash('Setting updated successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
@@ -278,140 +170,6 @@ class AccountController extends Controller {
   }
 
   /**
-   * Enables the user's two factor auth.
-   *
-   * @param App\Services\UserService $service
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postEnableTwoFactor(Request $request, UserService $service) {
-    if (
-      !$request->session()->put([
-        'two_factor_secret' => encrypt(
-          app(TwoFactorAuthenticationProvider::class)->generateSecretKey()
-        ),
-        'two_factor_recovery_codes' => encrypt(
-          json_encode(
-            Collection::times(8, function () {
-              return RecoveryCode::generate();
-            })->all()
-          )
-        )
-      ])
-    ) {
-      flash('2FA info generated. Please confirm to enable 2FA.')->success();
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
-
-    return redirect()->to('account/two-factor/confirm');
-  }
-
-  /**
-   * Shows the confirm two-factor auth page.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function getConfirmTwoFactor(Request $request) {
-    // Assemble URL and QR Code svg from session information
-    $qrUrl = app(TwoFactorAuthenticationProvider::class)->qrCodeUrl(
-      config('app.name'),
-      Auth::user()->email,
-      decrypt($request->session()->get('two_factor_secret'))
-    );
-    $qrCode = (new Writer(
-      new ImageRenderer(
-        new RendererStyle(
-          192,
-          0,
-          null,
-          null,
-          Fill::uniformColor(new Rgb(255, 255, 255), new Rgb(45, 55, 72))
-        ),
-        new SvgImageBackEnd()
-      )
-    ))->writeString($qrUrl);
-    $qrCode = trim(substr($qrCode, strpos($qrCode, "\n") + 1));
-
-    return view('auth.confirm_two_factor', [
-      'qrCode' => $qrCode,
-      'recoveryCodes' => json_decode(decrypt($request->session()->get('two_factor_recovery_codes')))
-    ]);
-  }
-
-  /**
-   * Confirms and fully enables the user's two factor auth.
-   *
-   * @param App\Services\UserService $service
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postConfirmTwoFactor(Request $request, UserService $service) {
-    $request->validate([
-      'code' => 'required'
-    ]);
-    if (
-      $service->confirmTwoFactor(
-        $request->only(['code']),
-        $request->session()->only(['two_factor_secret', 'two_factor_recovery_codes']),
-        Auth::user()
-      )
-    ) {
-      flash('2FA enabled succesfully.')->success();
-      $request->session()->forget(['two_factor_secret', 'two_factor_recovery_codes']);
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
-
-    return redirect()->to('account/settings');
-  }
-
-  /**
-   * Confirms and disables the user's two factor auth.
-   *
-   * @param App\Services\UserService $service
-   *
-   * @return \Illuminate\Http\RedirectResponse
-   */
-  public function postDisableTwoFactor(Request $request, UserService $service) {
-    $request->validate([
-      'code' => 'required'
-    ]);
-    if ($service->disableTwoFactor($request->only(['code']), Auth::user())) {
-      flash('2FA disabled succesfully.')->success();
-    } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) {
-        flash($error)->error();
-      }
-    }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Changes user character warning visibility setting.
-     *
-     * @param App\Services\UserService $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postWarningVisibility(Request $request, UserService $service) {
-      if ($service->updateContentWarningVisibility($request->input('content_warning_visibility'), Auth::user())) {
-          flash('Setting updated successfully.')->success();
-      } else {
-          foreach ($service->errors()->getMessages()['error'] as $error) {
-              flash($error)->error();
-          }
-      }
-
-      return redirect()->back();
-  }
-
-  /**
    * Changes user profile comment visibility setting.
    *
    * @param App\Services\UserService $service
@@ -419,15 +177,15 @@ class AccountController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postProfileComments(Request $request, UserService $service) {
-      if ($service->updateProfileCommentSetting($request->input('allow_profile_comments'), Auth::user())) {
-          flash('Setting updated successfully.')->success();
-      } else {
-          foreach ($service->errors()->getMessages()['error'] as $error) {
-              flash($error)->error();
-          }
+    if ($service->updateProfileCommentSetting($request->input('allow_profile_comments'), Auth::user())) {
+      flash('Setting updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
       }
+    }
 
-      return redirect()->back();
+    return redirect()->back();
   }
   /**
    * Shows the notifications page.
@@ -443,25 +201,18 @@ class AccountController extends Controller {
     Auth::user()->save();
 
     return view('account.notifications', [
-      'notifications' => $notifications,
+      'notifications' => $notifications
     ]);
   }
 
   /**
    * Deletes a notification and returns a response.
    *
-   * @param mixed $id
-   *
    * @return \Illuminate\Http\Response
    */
   public function getDeleteNotification($id) {
-    $notification = Notification::where('id', $id)
-      ->where('user_id', Auth::user()->id)
-      ->first();
-    if ($notification) {
-      $notification->delete();
-    }
-
+    $notification = Notification::where('id', $id)->where('user_id', Auth::user()->id)->first();
+    if ($notification) $notification->delete();
     return response(200);
   }
 
@@ -684,6 +435,68 @@ class AccountController extends Controller {
     }
     return redirect()->back();
   }
+
+  /**
+   * Create (or remove) image block
+   *
+   */
+  public function postBlockUnblockImage(Request $request, UserService $service, $model, $id) {
+    if (!$service->blockUnblockImage($model, $id, Auth::user())) {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+
+    return redirect()->back();
+  }
+
+  /**
+   * Get a page of all the user's blocked images.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getImageBlocks(Request $request) {
+    $query = Auth::user()->blockedImages()->with('object');
+
+    $name = $request->get('name');
+    if ($name) $query->whereRelation('object', 'name',  'LIKE', '%' . $name . '%');
+
+    switch ($request->get('sort')) {
+      case 'desc':
+        $query->orderBy('id', 'DESC');
+        break;
+      case 'asc':
+        $query->orderBy('id', 'ASC');
+        break;
+      default:
+        $query->orderBy('id', 'DESC');
+        break;
+    }
+
+    return view('account.blocked_images', [
+      'images' => $query->paginate(20)->appends($request->query()),
+    ]);
+  }
+
+  /**
+   * Changes user's image  block setting
+   *
+   * @param App\Services\UserService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postImageBlockSettings(Request $request, UserService $service) {
+    $data = $request->only(['show_image_blocks']);
+    if ($service->updateImageBlockSetting($data, Auth::user())) {
+      flash('Image block setting updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+
+    return redirect()->back();
+  }
   /**
    * Get applicable variants
    *
@@ -754,4 +567,22 @@ class AccountController extends Controller {
         ->toArray()
     ]);
   }
+
+     /**
+     * Change if the user's characters can be liked
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Services\UserService  $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postAllowCharacterLikes(Request $request, UserService $service)
+    {
+        if($service->updateAllowCharacterLikes($request->input('allow_character_likes'), Auth::user())) {
+            flash('Like status updated successfully.')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
+    }
 }
