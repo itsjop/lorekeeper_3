@@ -5,6 +5,7 @@ namespace App\Models\Sales;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImage;
 use App\Models\Model;
+use Config;
 
 class SalesCharacter extends Model {
     /**
@@ -74,7 +75,7 @@ class SalesCharacter extends Model {
      * Get the image being attached to the sale.
      */
     public function image() {
-        return $this->belongsTo(CharacterImage::class, 'image_id');
+        return $this->belongsTo('App\Models\Character\CharacterImage', 'image_id');
     }
 
     /**********************************************************************************************
@@ -90,27 +91,13 @@ class SalesCharacter extends Model {
      */
     public function getDisplayTypeAttribute() {
         switch ($this->attributes['type']) {
-            case 'flatsale':
-                return 'Flatsale';
-                break;
-            case 'auction':
-                return 'Auction';
-                break;
-            case 'ota':
-                return 'OTA';
-                break;
-            case 'xta':
-                return 'XTA';
-                break;
-            case 'flaffle':
-                return 'Flatsale Raffle';
-                break;
-            case 'raffle':
-                return 'Raffle';
-                break;
-            case 'pwyw':
-                return 'PWYW';
-                break;
+            case 'flatsale': return 'Flatsale';
+            case 'auction': return 'Auction';
+            case 'ota': return 'OTA';
+            case 'xta': return 'XTA';
+            case 'flaffle': return 'Flatsale Raffle';
+            case 'raffle': return 'Raffle';
+            case 'pwyw': return 'PWYW';
         }
     }
 
@@ -121,27 +108,13 @@ class SalesCharacter extends Model {
      */
     public function getTypeLinkAttribute() {
         switch ($this->attributes['type']) {
-            case 'flatsale':
-                return 'Claim Here';
-                break;
-            case 'auction':
-                return 'Bid Here';
-                break;
-            case 'ota':
-                return 'Offer Here';
-                break;
-            case 'xta':
-                return 'Enter Here';
-                break;
-            case 'flaffle':
-                return 'Enter Here';
-                break;
-            case 'raffle':
-                return 'Enter Here';
-                break;
-            case 'pwyw':
-                return 'Claim Here';
-                break;
+            case 'flatsale': return 'Claim Here';
+            case 'auction': return 'Bid Here';
+            case 'ota': return 'Offer Here';
+            case 'xta': return 'Enter Here';
+            case 'flaffle': return 'Enter Here';
+            case 'raffle': return 'Enter Here';
+            case 'pwyw': return 'Claim Here';
         }
     }
 
@@ -158,27 +131,21 @@ class SalesCharacter extends Model {
 
         switch ($this->type) {
             case 'flatsale':
-                return 'Price: '.$symbol.$this->data['price'];
-                break;
+                return 'Price: '.$symbol.$this->data['price'];;
             case 'auction':
                 return 'Starting Bid: '.$symbol.$this->data['starting_bid'].'<br/>'.
                 'Minimum Increment: '.$symbol.$this->data['min_increment'].
-                (isset($this->data['autobuy']) ? '<br/>Autobuy: '.$symbol.$this->data['autobuy'] : '');
-                break;
+                (isset($this->data['autobuy']) ? '<br/>Autobuy: '.$symbol.$this->data['autobuy'] : '');;
             case 'ota':
                 return (isset($this->data['autobuy']) ? 'Autobuy: '.$symbol.$this->data['autobuy'].'<br/>' : '').
-                (isset($this->data['minimum']) ? 'Minimum: '.$symbol.$this->data['minimum'].'<br/>' : '');
-                break;
+                (isset($this->data['minimum']) ? 'Minimum: '.$symbol.$this->data['minimum'].'<br/>' : '');;
             case 'xta':
                 return (isset($this->data['autobuy']) ? 'Autobuy: '.$symbol.$this->data['autobuy'].'<br/>' : '').
-                (isset($this->data['minimum']) ? 'Minimum: '.$symbol.$this->data['minimum'].'<br/>' : '');
-                break;
+                (isset($this->data['minimum']) ? 'Minimum: '.$symbol.$this->data['minimum'].'<br/>' : '');;
             case 'flaffle':
-                return 'Price: '.$symbol.$this->data['price'];
-                break;
+                return 'Price: '.$symbol.$this->data['price'];;
             case 'pwyw':
-                return isset($this->data['minimum']) ? 'Minimum: '.$symbol.$this->data['minimum'].'<br/>' : '';
-                break;
+                return isset($this->data['minimum']) ? 'Minimum: '.$symbol.$this->data['minimum'].'<br/>' : '';;
         }
     }
 

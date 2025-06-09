@@ -179,4 +179,8 @@ class Notification extends Model {
   public const BORDER_GRANT                      = 1106;
   public const USER_SHOP_ITEM_SOLD               = 1104;
   public const RECIPE_GRANT = 600; // Draginraptor - Crafting
+  public const PAIRING_APPROVED = 1300;
+  public const PAIRING_REJECTED = 1301;
+  public const PAIRING_NEW_APPROVAL = 1302;
+  public const PAIRING_CANCELLED = 1303;
 }

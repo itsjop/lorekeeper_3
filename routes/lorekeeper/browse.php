@@ -85,22 +85,25 @@ Route::group(['prefix' => 'user', 'namespace' => 'Users'], function () {
 Route::get('/masterlist', 'BrowseController@getCharacters');
 Route::get('/myos', 'BrowseController@getMyos');
 Route::get('/sublist/{key}', 'BrowseController@getSublist');
-Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function() {
-    Route::get('{slug}', 'CharacterController@getCharacter');
-    Route::get('{slug}/profile', 'CharacterController@getCharacterProfile');
+Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function () {
+  Route::get('{slug}', 'CharacterController@getCharacter');
+  Route::get('{slug}/profile', 'CharacterController@getCharacterProfile');
   Route::get('{slug}/' . __('awards.awardcase'), 'CharacterController@getCharacterAwards');
-    Route::get('{slug}/bank', 'CharacterController@getCharacterBank');
-    Route::get('{slug}/inventory', 'CharacterController@getCharacterInventory');
-    Route::get('{slug}/images', 'CharacterController@getCharacterImages');
+  Route::get('{slug}/bank', 'CharacterController@getCharacterBank');
+  Route::get('{slug}/inventory', 'CharacterController@getCharacterInventory');
+  Route::get('{slug}/images', 'CharacterController@getCharacterImages');
 
-    Route::get('{slug}/currency-logs', 'CharacterController@getCharacterCurrencyLogs');
-    Route::get('{slug}/item-logs', 'CharacterController@getCharacterItemLogs');
-    Route::get('{slug}/ownership', 'CharacterController@getCharacterOwnershipLogs');
-    Route::get('{slug}/change-log', 'CharacterController@getCharacterLogs');
-    Route::get('{slug}/submissions', 'CharacterController@getCharacterSubmissions');
-    Route::get('{slug}/gallery', 'CharacterController@getCharacterGallery');
+  Route::get('{slug}/currency-logs', 'CharacterController@getCharacterCurrencyLogs');
+  Route::get('{slug}/item-logs', 'CharacterController@getCharacterItemLogs');
+  Route::get('{slug}/ownership', 'CharacterController@getCharacterOwnershipLogs');
+  Route::get('{slug}/change-log', 'CharacterController@getCharacterLogs');
+  Route::get('{slug}/submissions', 'CharacterController@getCharacterSubmissions');
+  Route::get('{slug}/gallery', 'CharacterController@getCharacterGallery');
   Route::get('{slug}/pets', 'CharacterController@getCharacterPets');
   Route::get('{slug}/image/{id}', 'CharacterController@getCharacterImage');
+
+  # lineage
+  Route::get('{slug}/lineage', 'CharacterLineageController@getCharacterLineage');
 
   # lineage
   Route::get('{slug}/lineage', 'CharacterLineageController@getCharacterLineage');

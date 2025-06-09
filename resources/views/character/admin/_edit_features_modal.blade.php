@@ -92,6 +92,11 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('Character Sex (Optional)') !!}
+    {!! Form::select('sex', [null => 'Select Sex', 'Male' => 'Male', 'Female' => 'Female'], $image->sex, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
   {!! Form::label('Traits') !!}
   <div><a
       href="#"

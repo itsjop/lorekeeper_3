@@ -23,7 +23,7 @@ class Prompt extends Model {
      * @var string
      */
     protected $table = 'prompts';
-
+    
     /**
      * The attributes that should be cast to native types.
      *

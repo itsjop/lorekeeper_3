@@ -13,14 +13,14 @@
     @if ($max_depth > 0)
         <div class="row">
             @include('character._tab_lineage_col', [
-                'character' => $character?->lineage?->father,
+                'character' => $character?->lineage?->parent_1,
                 'max_depth' => $max_depth - 1,
-                'parent' => $parent . "'s Father",
+                'parent' => $parent . "'s " . ($character?->lineage?->parent_1?->parentType ?? 'Parent'),
             ])
             @include('character._tab_lineage_col', [
-                'character' => $character?->lineage?->mother,
+                'character' => $character?->lineage?->parent_2,
                 'max_depth' => $max_depth - 1,
-                'parent' => $parent . "'s Mother",
+                'parent' => $parent . "'s " . ($character?->lineage?->parent_2?->parentType ?? 'Parent'),
             ])
         </div>
     @endif

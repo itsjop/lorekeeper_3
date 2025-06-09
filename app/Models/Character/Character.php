@@ -5,6 +5,7 @@ namespace App\Models\Character;
 use App\Facades\Notifications;
 use App\Models\Currency\Currency;
 use App\Models\Currency\CurrencyLog;
+use App\Models\Character\CharacterLineage;
 use App\Models\Character\CharacterLineageBlacklist;
 use App\Models\Gallery\GalleryCharacter;
 use App\Models\Item\Item;
@@ -246,24 +247,24 @@ class Character extends Model {
   }
 
   /**
+   * Get all of the likes that are not NULL
+   */
+  public function characterLikes() {
+    return $this->hasMany('App\Models\Character\CharacterLike')->where('character_id', $this->id)->whereNotNull('liked_at');
+  }
+
+  /**
    * Get the lineage of the character.
    */
   public function lineage() {
-    return $this->hasOne('App\Models\Character\CharacterLineage', 'character_id');
+    return $this->hasOne(CharacterLineage::class, 'character_id');
   }
 
   /**
    * Get the character's children from the lineages.
    */
   public function children() {
-    return $this->hasMany('App\Models\Character\CharacterLineage', 'father_id')->orWhere('mother_id', $this->id);
-  }
-
-  /**
-   * Get all of the likes that are not NULL
-   */
-  public function characterLikes() {
-    return $this->hasMany('App\Models\Character\CharacterLike')->where('character_id', $this->id)->whereNotNull('liked_at');
+    return $this->hasMany(CharacterLineage::class, 'parent_1_id')->orWhere('parent_2_id', $this->id);
   }
 
   /**********************************************************************************************
@@ -785,5 +786,19 @@ class Character extends Model {
    */
   public function getLineageBlacklistLevel($maxLevel = 2) {
     return CharacterLineageBlacklist::getBlacklistLevel($this, $maxLevel);
+  }
+
+  /**
+   * Gets the character's parent type (ex father, mother, parent) based on sex
+   *
+   */
+  public function getParentTypeAttribute() {
+    if (!$this->image->sex) {
+      return "Parent";
+    } else if ($this->image->sex == "Male") {
+      return "Father";
+    } else {
+      return "Mother";
+    }
   }
 }

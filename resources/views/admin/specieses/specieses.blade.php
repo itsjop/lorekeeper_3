@@ -9,15 +9,17 @@
 
   <h1>{{ ucfirst(__('lorekeeper.species')) }}</h1>
 
-<div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/species/create') }}"><i class="fas fa-plus"></i> Create New Species</a></div>
-@if(!count($specieses))
+  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/species/create') }}"><i class="fas fa-plus"></i>
+      Create New Species</a></div>
+  @if (!count($specieses))
     <p>No species found.</p>
-@else
+  @else
     <table class="table table-sm species-table">
       <thead>
         <tr>
           <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
           <th>Sub Masterlist</th>
+          <th>Inherit Chance</th>
           <th></th>
         </tr>
       </thead>
@@ -38,6 +40,9 @@
                 --
               @endif
             </td>
+            <td>
+              {!! $species->inherit_chance !!}%
+            </td>
             <td class="text-right">
               <a href="{{ url('admin/data/species/edit/' . $species->id) }}" class="btn btn-primary">Edit</a>
             </td>
@@ -53,7 +58,10 @@
       {!! Form::close() !!}
     </div>
 
-    <div class="text-center mt-4 small text-muted">{{ count($specieses) }} {{ trans_choice('lorekeeper.specieses_', $specieses->count()) }} found.</div>
+    <div class="text-center mt-4 small text-muted">
+      {{ count($specieses) }}
+      {{ trans_choice('lorekeeper.specieses_', $specieses->count()) }} found.
+    </div>
   @endif
 
 @endsection

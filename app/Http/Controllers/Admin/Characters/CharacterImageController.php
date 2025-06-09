@@ -89,7 +89,31 @@ class CharacterImageController extends Controller {
    */
   public function postNewImage(Request $request, CharacterManager $service, $slug) {
     $request->validate(CharacterImage::$createRules);
-    $data = $request->only(['image', 'thumbnail', 'x0', 'x1', 'y0', 'y1', 'use_cropper', 'artist_url', 'artist_id', 'designer_url', 'designer_id', 'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'subtype_ids', 'is_valid', 'is_visible', 'transformation_id', 'transformation_info', 'transformation_description']);
+    $data = $request->only([
+      'image',
+      'thumbnail',
+      'x0',
+      'x1',
+      'y0',
+      'y1',
+      'use_cropper',
+      'artist_url',
+      'artist_id',
+      'designer_url',
+      'designer_id',
+      'species_id',
+      'subtype_id',
+      'rarity_id',
+      'feature_id',
+      'feature_data',
+      'subtype_ids',
+      'is_valid',
+      'is_visible',
+      'transformation_id',
+      'transformation_info',
+      'transformation_description',
+      'sex',
+    ]);
 
     $this->character = Character::where('slug', $slug)->first();
     if (!$this->character) {
@@ -138,7 +162,7 @@ class CharacterImageController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postEditImageFeatures(Request $request, CharacterManager $service, $id) {
-    $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'subtype_ids', 'transformation_id', 'transformation_info', 'transformation_description', 'title_ids', 'title_data']);
+    $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'sex', 'subtype_ids', 'transformation_id', 'transformation_info', 'transformation_description', 'title_ids', 'title_data']);
     $image = CharacterImage::find($id);
     if (!$image) {
       abort(404);
@@ -415,6 +439,34 @@ class CharacterImageController extends Controller {
       flash('Images sorted successfully.')->success();
 
       return redirect()->back();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+
+    return redirect()->back();
+  }
+
+  /**
+   * Generates an images character colours.
+   *
+   * @param App\Services\CharacterManager $service
+   * @param int                           $id
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postImageColours(Request $request, CharacterManager $service, $id) {
+    $image = CharacterImage::find($id);
+    if (!$image) {
+      abort(404);
+    }
+    $colours = null;
+    if ($request->input('edit')) {
+      $colours = $request->input('colours');
+    }
+    if ($service->imageColours($image, Auth::user(), $colours)) {
+      flash('Character image colours updated successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
         flash($error)->error();

@@ -34,6 +34,13 @@
         class="{{ set_active('character/' . $character->slug . '/' . __('awards.awardcase')) }}"
       >{{ ucfirst(__('awards.awards')) }}</a>
     </div>
+    @if ($character->getLineageBlacklistLevel() < 2)
+      <div class="sidebar-item">
+        <a href="{{ $character->url . '/lineage' }}" class="{{ set_active('character/' . $character->slug . '/lineage') }}">
+          Lineage
+        </a>
+      </div>
+    @endif
   </li>
   <li class="sidebar-section">
     <div class="sidebar-section-header">History</div>

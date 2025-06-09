@@ -37,6 +37,7 @@ return [
       ['name' => 'Recipes', 'url' => 'admin/data/recipes',],
       ['name' => 'Transformations', 'url'  => 'admin/data/transformations',],
       ['name' => 'Character Titles', 'url'  => 'admin/data/character-titles',],
+      ['name' => 'Pairing Roller', 'url'  => 'admin/pairings/roller',],
     ],
   ],
   'Admin' => [
@@ -101,7 +102,7 @@ return [
       ['name' => 'Raffles', 'url' => 'admin/raffles'],
     ]
   ],
-  'Settings' => [
+  'Site Settings' => [
     'power' => 'edit_site_settings',
     'links' => [
       ['name' => 'Site Settings', 'url' => 'admin/settings',],

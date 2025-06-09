@@ -433,6 +433,15 @@
         </div>
       </div>
     @endif
+    {{-- TODO: remove sex --}}
+    <div class="form-group">
+      {!! Form::label('Character Sex (Optional)') !!} @if ($isMyo)
+        {!! add_help('This assign the character a biological sex. Leave it blank if you do not intend to use this.') !!}
+      @endif
+      {!! Form::select('sex', [null => 'Select Sex', 'Male' => 'Male', 'Female' => 'Female'], old('sex'), [
+          'class' => 'form-control'
+      ]) !!}
+    </div>
 
     <div class="form-group">
       {!! Form::label('Traits') !!} @if ($isMyo)
@@ -460,22 +469,26 @@
     <hr class="my-4">
 
     <h3>Lineage (Optional)</h3>
-    <div class="alert alert-info">Do not enter anything if there are no ancestors in that slot.</div>
+    <div class="alert alert-info">
+      If you want to assign parents to the character, you can do so here. If you don't want to assign parents, leave these fields
+      blank.
+      <br />If you want to assign parents, but they aren't in the system, you can enter their names here.
+    </div>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group text-center pb-1 border-bottom">
-          {!! Form::label('father_id', 'Father (Optional)', ['class' => 'font-weight-bold']) !!}
+          {!! Form::label('parent_1_id', 'Parent (Optional)', ['class' => 'font-weight-bold']) !!}
           <div class="row">
             <div class="col-sm-6 pr-sm-1">
-              {!! Form::select('father_id', $characterOptions, null, [
+              {!! Form::select('parent_1_id', $characterOptions, null, [
                   'class' => 'form-control text-left character-select mb-1',
                   'placeholder' => 'None'
               ]) !!}
             </div>
             <div class="col-sm-6 pl-sm-1">
-              {!! Form::text('father_name', old('father_name'), [
+              {!! Form::text('fparent_1_name', old('parent_1_name'), [
                   'class' => 'form-control mb-1',
-                  'placeholder' => 'Father\'s Name (Optional)'
+                  'placeholder' => 'Parent\'s Name (Optional)'
               ]) !!}
             </div>
           </div>
@@ -483,18 +496,18 @@
       </div>
       <div class="col-md-6">
         <div class="form-group text-center pb-1 border-bottom">
-          {!! Form::label('mpther_id', 'Mother (Optional)', ['class' => 'font-weight-bold']) !!}
+          {!! Form::label('parent_2_id', 'Parent (Optional)', ['class' => 'font-weight-bold']) !!}
           <div class="row">
             <div class="col-sm-6 pr-sm-1">
-              {!! Form::select('mother_id', $characterOptions, null, [
+              {!! Form::select('parent_2_id', $characterOptions, null, [
                   'class' => 'form-control text-left character-select mb-1',
                   'placeholder' => 'None'
               ]) !!}
             </div>
             <div class="col-sm-6 pl-sm-1">
-              {!! Form::text('mother_name', old('mother_name'), [
+              {!! Form::text('parent_2_name', old('parent_2_name'), [
                   'class' => 'form-control mb-1',
-                  'placeholder' => 'Mother\'s Name (Optional)'
+                  'placeholder' => 'Parents\'s Name (Optional)'
               ]) !!}
             </div>
           </div>
@@ -565,6 +578,13 @@
 
     $("#subtype").selectize({
       maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+    });
+
+    $(document).ready(function() {
+      $('.character-select').selectize();
+      $('#advanced_lineage').on('click', function(e) {
+        e.preventDefault();
+      });
     });
 
     $(document).ready(function() {

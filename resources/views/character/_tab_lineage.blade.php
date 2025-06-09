@@ -10,14 +10,14 @@
     <h5>{{ $character->fullName }}'s Lineage</h5>
     <div class="row">
         @include('character._tab_lineage_col', [
-            'character' => $character?->lineage?->father,
+            'character' => $character?->lineage?->parent_1,
             'max_depth' => config('lorekeeper.lineage.tab_lineage_depth') - 1,
-            'parent' => 'Father',
+            'parent' => $character?->lineage?->parent_1?->parentType ?? 'Parent',
         ])
         @include('character._tab_lineage_col', [
-            'character' => $character?->lineage?->mother,
+            'character' => $character?->lineage?->parent_2,
             'max_depth' => config('lorekeeper.lineage.tab_lineage_depth') - 1,
-            'parent' => 'Mother',
+            'parent' => $character?->lineage?->parent_2?->parentType ?? 'Parent',
         ])
     </div>
 </div>

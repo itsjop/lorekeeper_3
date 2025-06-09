@@ -85,6 +85,8 @@ class FeatureController extends Controller {
       'image',
       'remove_image',
       'is_visible',
+      'min_inheritable',
+      'max_inheritable',
     ]);
     if ($id && $service->updateFeatureCategory(FeatureCategory::find($id), $data, Auth::user())) {
       flash('Category updated successfully.')->success();
