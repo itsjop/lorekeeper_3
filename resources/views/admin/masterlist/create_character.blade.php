@@ -435,7 +435,8 @@
     @endif
     {{-- TODO: remove sex --}}
     <div class="form-group">
-      {!! Form::label('Character Sex (Optional)') !!} @if ($isMyo)
+      {!! Form::label('Character Sex (Optional)') !!}
+      @if ($isMyo)
         {!! add_help('This assign the character a biological sex. Leave it blank if you do not intend to use this.') !!}
       @endif
       {!! Form::select('sex', [null => 'Select Sex', 'Male' => 'Male', 'Female' => 'Female'], old('sex'), [
