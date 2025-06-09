@@ -62,24 +62,24 @@ Route::group(['prefix' => 'invitations', 'middleware' => 'power:edit_site_settin
   Route::post('delete/{id}', 'InvitationController@postDeleteKey');
 });
 
-Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function() {
-    Route::get('/', 'PrizeCodeController@getIndex');
-    Route::get('/create', 'PrizeCodeController@getCreatePrize');
-    Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
-    Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
-    Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
-    Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
-    Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
+Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function () {
+  Route::get('/', 'PrizeCodeController@getIndex');
+  Route::get('/create', 'PrizeCodeController@getCreatePrize');
+  Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
+  Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
+  Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
+  Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
+  Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
 });
 
-Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function() {
-    Route::get('/', 'PrizeCodeController@getIndex');
-    Route::get('/create', 'PrizeCodeController@getCreatePrize');
-    Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
-    Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
-    Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
-    Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
-    Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
+Route::group(['prefix' => 'prizecodes', 'middleware' => 'power:edit_site_settings'], function () {
+  Route::get('/', 'PrizeCodeController@getIndex');
+  Route::get('/create', 'PrizeCodeController@getCreatePrize');
+  Route::get('/edit/{id}', 'PrizeCodeController@getEditPrize');
+  Route::get('/delete/{id}', 'PrizeCodeController@getDeletePrize');
+  Route::post('/create', 'PrizeCodeController@postCreateEditPrize');
+  Route::post('/edit/{id?}', 'PrizeCodeController@postCreateEditPrize');
+  Route::post('/delete/{id}', 'PrizeCodeController@postDeletePrize');
 });
 
 // FILE MANAGER
@@ -679,6 +679,8 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware'
   Route::get('image/transformation', 'CharacterImageController@getNewImageTransformation');
   Route::get('image/traits/transformation', 'CharacterImageController@getEditImageTransformation');
 
+  Route::post('image/{id}/colours', 'CharacterImageController@postImageColours');
+
   // CHARACTER
   Route::get('{slug}/stats', 'CharacterController@getEditCharacterStats');
   Route::post('{slug}/stats', 'CharacterController@postEditCharacterStats');
@@ -1002,4 +1004,10 @@ Route::group(['prefix' => 'maps', 'middleware' => 'power:manage_maps'], function
   Route::post('locations/edit/{id}/{map_id}', 'MapController@postCreateEditLocation');
   Route::get('locations/delete/{id}', 'MapController@getDeleteLocation');
   Route::post('locations/delete/{id}', 'MapController@postDeleteLocation');
+});
+
+// PAIRINGS
+Route::group(['prefix' => 'pairings', 'middleware' => 'power:manage_raffles'], function () {
+  Route::get('roller', 'PairingController@getRoller');
+  Route::post('roller', 'PairingController@postRoll');
 });

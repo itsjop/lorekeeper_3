@@ -40,6 +40,8 @@ class CharacterImage extends Model {
     'transformation_info',
     'transformation_description',
     'content_warnings',
+    'sex',
+    'colours',
   ];
 
   /**

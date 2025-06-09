@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Trait Categories' => 'admin/data/trait-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/trait-categories/edit/' . $category->id : 'admin/data/trait-categories/create',
+      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id
+          ? 'admin/data/trait-categories/edit/' . $category->id
+          : 'admin/data/trait-categories/create'
   ]) !!}
 
   <h1>{{ $category->id ? 'Edit' : 'Create' }} Trait Category
@@ -17,7 +19,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $category->id ? 'admin/data/trait-categories/edit/' . $category->id : 'admin/data/trait-categories/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $category->id ? 'admin/data/trait-categories/edit/' . $category->id : 'admin/data/trait-categories/create',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -41,20 +46,36 @@
     @endif
   </div>
 
+  <div class="row w-100 p-2">
+    <div class="col form-group">
+      {!! Form::label('Minimum inherited traits') !!} {!! add_help('For pairings, how many traits of this category the offspring must have at minimum.') !!}
+      {!! Form::number('min_inheritable', $category->min_inheritable ?? 0, ['class' => 'form-control']) !!}
+
+    </div>
+    <div class="col form-group">
+      {!! Form::label('Maximum inherited traits') !!} {!! add_help('For pairings, how many traits of this category the offspring can have at maximum.') !!}
+      {!! Form::number('max_inheritable', $category->max_inheritable ?? 5, ['class' => 'form-control']) !!}
+    </div>
+  </div>
+
   <div class="form-group">
     {!! Form::label('Description (Optional)') !!}
     {!! Form::textarea('description', $category->description, ['class' => 'form-control wysiwyg']) !!}
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the category will not be visible in the category list or available for selection in search. Permissioned staff will still be able to add traits to them, however.') !!}
+    {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'If turned off, the category will not be visible in the category list or available for selection in search. Permissioned staff will still be able to add traits to them, however.'
+    ) !!}
   </div>
 
   <div class="text-right">
     {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
-
   {!! Form::close() !!}
 
   @if ($category->id)
@@ -66,7 +87,7 @@
             'name' => $category->displayName,
             'description' => $category->parsed_description,
             'searchUrl' => $category->searchUrl,
-            'visible' => $category->is_visible,
+            'visible' => $category->is_visible
         ])
       </div>
     </div>

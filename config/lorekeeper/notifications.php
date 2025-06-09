@@ -291,33 +291,33 @@ return [
     'url'     => 'account/bookmarks',
   ],
 
-    // USER_REACTIVATED
-    103 => [
-        'name'      => 'User Reactivated',
-        'message'   => '<a href="{user_url}">{user_name}\'s</a> account has been reactivated by <a href="{staff_url}">{staff_name}</a>.',
-        'url'       => '',
-    ],
+  // USER_REACTIVATED
+  103 => [
+    'name'      => 'User Reactivated',
+    'message'   => '<a href="{user_url}">{user_name}\'s</a> account has been reactivated by <a href="{staff_url}">{staff_name}</a>.',
+    'url'       => '',
+  ],
 
-    // USER_DEACTIVATED
-    104 => [
-        'name'      => 'User Deactivated',
-        'message'   => '<a href="{user_url}">{user_name}\'s</a> account has been deactivated by <a href="{staff_url}">{staff_name}</a>.',
-        'url'       => '',
-    ],
+  // USER_DEACTIVATED
+  104 => [
+    'name'      => 'User Deactivated',
+    'message'   => '<a href="{user_url}">{user_name}\'s</a> account has been deactivated by <a href="{staff_url}">{staff_name}</a>.',
+    'url'       => '',
+  ],
 
-    // SUBMISSION_CANCELLED
-    108 => [
-        'name'    => 'Submission Cancelled',
-        'message' => 'Your submission (#{submission_id}) was cancelled and sent back to drafts by <a href="{staff_url}">{staff_name}</a>. (<a href="{url}">View Submission</a>)',
-        'url'     => 'submissions/view/{submission_id}',
-    ],
+  // SUBMISSION_CANCELLED
+  108 => [
+    'name'    => 'Submission Cancelled',
+    'message' => 'Your submission (#{submission_id}) was cancelled and sent back to drafts by <a href="{staff_url}">{staff_name}</a>. (<a href="{url}">View Submission</a>)',
+    'url'     => 'submissions/view/{submission_id}',
+  ],
 
-    // CLAIM_CANCELLED
-    109 => [
-        'name'    => 'Claim Cancelled',
-        'message' => 'Your claim (#{submission_id}) was cancelled and sent back to drafts by <a href="{staff_url}">{staff_name}</a>. (<a href="{url}">View Claim</a>)',
-        'url'     => 'claims/view/{submission_id}',
-    ],
+  // CLAIM_CANCELLED
+  109 => [
+    'name'    => 'Claim Cancelled',
+    'message' => 'Your claim (#{submission_id}) was cancelled and sent back to drafts by <a href="{staff_url}">{staff_name}</a>. (<a href="{url}">View Claim</a>)',
+    'url'     => 'claims/view/{submission_id}',
+  ],
 
   // REPORT_ASSIGNED
   220 => [
@@ -347,30 +347,30 @@ return [
     'message' => '<a href="{sender_url}">{sender}</a> has made a reply to your comment. <a href="comment/{comment_url}">See Reply.</a>',
     'url'     => '',
   ],
-    // PET_REMOVAL
-    241 => [
-        'name'    => 'Pet Removal',
-        'message' => '{pet_name} (×{pet_quantity}) was removed from your inventory by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
-        'url'     => 'pets',
-    ],
-    // PET_TRANSFER
-    242 => [
-        'name'    => 'Pet Transfer',
-        'message' => 'You have received {pet_name} (×{pet_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
-        'url'     => 'pets',
-    ],
-    // FORCED_PET_TRANSFER
-    243 => [
-        'name'    => 'Forced Pet Transfer',
-        'message' => '{pet_name} (×{pet_quantity}) was transferred out of your inventory by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
-        'url'     => 'pets',
-    ],
-    // PET_GRANT
-    244 => [
-        'name'    => 'Pet Grant',
-        'message' => 'You have received a staff grant of {pet_name} (×{pet_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
-        'url'     => 'pets',
-    ],
+  // PET_REMOVAL
+  241 => [
+    'name'    => 'Pet Removal',
+    'message' => '{pet_name} (×{pet_quantity}) was removed from your inventory by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
+    'url'     => 'pets',
+  ],
+  // PET_TRANSFER
+  242 => [
+    'name'    => 'Pet Transfer',
+    'message' => 'You have received {pet_name} (×{pet_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
+    'url'     => 'pets',
+  ],
+  // FORCED_PET_TRANSFER
+  243 => [
+    'name'    => 'Forced Pet Transfer',
+    'message' => '{pet_name} (×{pet_quantity}) was transferred out of your inventory by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
+    'url'     => 'pets',
+  ],
+  // PET_GRANT
+  244 => [
+    'name'    => 'Pet Grant',
+    'message' => 'You have received a staff grant of {pet_name} (×{pet_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Pets</a>)',
+    'url'     => 'pets',
+  ],
   // CHARACTER_ITEM_GRANT
   501 => [
     'name'    => 'Character Item Grant',
@@ -498,7 +498,7 @@ return [
     'url' => 'user-shops/shop/{shop_id}'
   ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Notifications
     |--------------------------------------------------------------------------
@@ -508,51 +508,80 @@ return [
     */
   // AWARD_GRANT
   341 => [
-      'name' => 'Award Grant',
-      'message' => 'You have earned the following award(s): {award_name} (×{award_quantity}). Congratulations! (<a href="{url}">View Awards</a>)',
-      'url' => 'awardcase'
+    'name' => 'Award Grant',
+    'message' => 'You have earned the following award(s): {award_name} (×{award_quantity}). Congratulations! (<a href="{url}">View Awards</a>)',
+    'url' => 'awardcase'
   ],
 
   // AWARD_REMOVAL
   342 => [
-      'name' => 'Award Removal',
-      'message' => '{award_name} (×{award_quantity}) was removed from your Awards by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-      'url' => 'awardcase'
+    'name' => 'Award Removal',
+    'message' => '{award_name} (×{award_quantity}) was removed from your Awards by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
+    'url' => 'awardcase'
   ],
 
   // AWARD_TRANSFER
   343 => [
-      'name' => 'Award Transfer',
-      'message' => 'You have received {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-      'url' => 'awardcase'
+    'name' => 'Award Transfer',
+    'message' => 'You have received {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
+    'url' => 'awardcase'
   ],
 
   // FORCED_AWARD_TRANSFER
   344 => [
-      'name' => 'Forced Award Transfer',
-      'message' => '{item_name} (×{item_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
-      'url' => 'character/{character_slug}/inventory'
+    'name' => 'Forced Award Transfer',
+    'message' => '{item_name} (×{item_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
+    'url' => 'character/{character_slug}/inventory'
   ],
 
   // CHARACTER_AWARD_GRANT
   345 => [
-      'name' => 'Character Award Grant',
-      'message' => '{character_name} has received a staff grant of {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-      'url' => 'character/{character_slug}/awards'
+    'name' => 'Character Award Grant',
+    'message' => '{character_name} has received a staff grant of {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
+    'url' => 'character/{character_slug}/awards'
   ],
 
   // CHARACTER_AWARD_REMOVAL
   346 => [
-      'name' => 'Character Award Removal',
-      'message' => '{award_name} (×{award_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-      'url' => 'character/{character_slug}/awards'
+    'name' => 'Character Award Removal',
+    'message' => '{award_name} (×{award_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
+    'url' => 'character/{character_slug}/awards'
   ],
 
 
-    // RECIPE_GRANT
-    600 => [
-        'name'    => 'Recipe Grant',
-        'message' => 'You have received a staff grant of the crafting recipe {recipe_name} from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Unlocked Recipes</a>)',
-        'url'     => 'crafting',
-    ],
+  // RECIPE_GRANT
+  600 => [
+    'name'    => 'Recipe Grant',
+    'message' => 'You have received a staff grant of the crafting recipe {recipe_name} from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Unlocked Recipes</a>)',
+    'url'     => 'crafting',
+  ],
+
+  // PAIRING_APPROVED
+  1300 => [
+    'name'    => 'Pairing Approved',
+    'message' => 'Your pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> has been approved! (<a href="{url}">View Pairings</a>)',
+    'url'     => '/characters/pairings?type=pending',
+  ],
+
+  // PAIRING_REJECTED
+  1301 => [
+    'name'    => 'Pairing Rejected',
+    'message' => 'Your pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> has been rejected. (<a href="{url}">View Pairings</a>)',
+    'url'     => '/characters/pairings?type=closed',
+  ],
+
+  // PAIRING_NEW_APPROVAL
+  1302 => [
+    'name'    => 'Pairing Approval Request',
+    'message' => 'A new pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> is awaiting your approval! (<a href="{url}">View Pairings</a>)',
+    'url'     => '/characters/pairings?type=approval',
+  ],
+
+  // PAIRING_CANCELLED
+  1303 => [
+    'name'    => 'Pairings Cancelled',
+    'message' => 'The pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> has been cancelled.',
+    'url'     => '',
+  ],
+
 ];

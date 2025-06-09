@@ -34,6 +34,9 @@
       <a href="{{ url('characters/transfers/incoming') }}" class="{{ set_active('characters/transfers*') }}">Character
         Transfers</a>
     </div>
+    <div class="sidebar-item"><a href="{{ url('characters/pairings') }}"
+        class="{{ set_active('characters/pairings') }}">Character Pairings</a>
+    </div>
     <div class="sidebar-item">
       <a href="{{ url('trades/open') }}" class="{{ set_active('trades/open*') }}">Trades</a>
     </div>

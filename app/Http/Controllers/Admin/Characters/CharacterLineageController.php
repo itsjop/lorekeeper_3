@@ -134,7 +134,7 @@ class CharacterLineageController extends Controller
         $this->character = $isMyo ? Character::where('is_myo_slot', 1)->where('id', $id)->first() : Character::where('slug', $id)->first();
         if(!$this->character) abort(404);
 
-        $data = $request->only(['father_id', 'father_name', 'mother_id', 'mother_name']);
+        $data = $request->only(['parent_1_id', 'parent_1_name', 'parent_2_id', 'parent_2_name']);
         if ($service->updateCharacterLineage($data, $this->character, Auth::user())) {
             flash('Character lineage updated successfully.')->success();
             return redirect()->to($this->character->url);
