@@ -55,7 +55,6 @@ class RarityService extends Service {
       $rarity = Rarity::create($data);
       $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'rarity', $rarity->id);
 
-
       if ($image) {
         $this->handleImage($image, $rarity->rarityImagePath, $rarity->rarityImageFileName);
       }

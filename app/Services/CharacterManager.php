@@ -25,6 +25,7 @@ use App\Models\User\UserPet;
 use App\Models\User\UserCharacterLog;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
@@ -33,12 +34,15 @@ use App\Models\Rarity;
 use App\Models\Currency\Currency;
 use App\Models\Feature\Feature;
 use App\Models\Character\CharacterTransformation as Transformation;
-
+use League\ColorExtractor\Palette;
+use League\ColorExtractor\ColorExtractor;
+use League\ColorExtractor\Color;
 /* Character Manager
 |--------------------------------------------------------------------------
 | Handles creation and modification of character data. */
 
 class CharacterManager extends Service {
+
   /**
    * Retrieves the next number to be used for a character's masterlist code.
    *
@@ -71,6 +75,7 @@ class CharacterManager extends Service {
     $result = format_masterlist_number($number + 1, $digits);
     return $result;
   }
+
 
   /**
    * Creates a new character or MYO slot.
@@ -126,69 +131,50 @@ class CharacterManager extends Service {
         $data['user_id'] = $recipient->id;
       } else {
         $url = $recipient;
-      } // Create character
+      }
+      // Create character
       $character = $this->handleCharacter($data, $isMyo);
       if (!$character) {
         throw new \Exception('Error happened while trying to create character.');
       }
       // Create character lineage
-      $lineage = $this->handleCharacterLineage($data, $character, $isMyo);
-      // dd(
-      //   // ($this->handleCharacterImage($data, $character, $isMyo)),
-      //   $lineage,
-      //   $url,
-      //   $recipient,
-      //   $character,
-      //   $data,
-      //   $isMyo
-      // );
-      if (!$lineage) {
-        throw new \Exception('Error happened while trying to create lineage.');
+      if (isset($data['parent_1_id']) || isset($data['parent_1_name']) || isset($data['parent_2_id']) || isset($data['parent_2_name'])) {
+        $lineage = $this->handleCharacterLineage($data, $character);
+        if (!$lineage) {
+          throw new \Exception('Error happened while trying to create lineage.');
+        }
       }
       // Create character image
       $data['is_valid'] = true; // New image of new characters are always valid
       $image = $this->handleCharacterImage($data, $character, $isMyo);
       if (!$image) {
         throw new \Exception('Error happened while trying to create image.');
-      } // Update the character's image ID
+      }
+      // Update the character's image ID
       $character->character_image_id = $image->id;
-      $character->save(); // Add a log for the character
+      $character->save();
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        $recipientId,
-        $url,
-        $character->id,
-        $isMyo ? 'MYO Slot Created' : 'Character Created',
-        'Initial upload',
-        'character'
-      ); // Add a log for the user
+      $this->createLog($user->id, null, $recipientId, $url, $character->id, $isMyo ? 'MYO Slot Created' : 'Character Created', 'Initial upload', 'character');
+      // Add a log for the user
       // This logs ownership of the character
-      $this->createLog(
-        $user->id,
-        null,
-        $recipientId,
-        $url,
-        $character->id,
-        $isMyo ? 'MYO Slot Created' : 'Character Created',
-        'Initial upload',
-        'user'
-      ); // Update the user's FTO status and character count
+      $this->createLog($user->id, null, $recipientId, $url, $character->id, $isMyo ? 'MYO Slot Created' : 'Character Created', 'Initial upload', 'user');
+      // Update the user's FTO status and character count
       if (is_object($recipient)) {
         if (!$isMyo) {
           $recipient->settings->is_fto = 0; // MYO slots don't affect the FTO status - YMMV
         }
         $recipient->settings->save();
-      } // If the recipient has an account, send them a notification
+      }
+      // If the recipient has an account, send them a notification
       if (is_object($recipient) && $user->id != $recipient->id) {
-        Notifications::create(
-          $isMyo ? 'MYO_GRANT' : 'CHARACTER_UPLOAD',
-          $recipient,
-          [
-            'character_url' => $character->url
-          ] + ($isMyo ? ['name' => $character->name] : ['character_slug' => $character->slug])
-        );
+        Notifications::create($isMyo ? 'MYO_GRANT' : 'CHARACTER_UPLOAD', $recipient, [
+          'character_url' => $character->url,
+        ] + (
+          $isMyo ?
+          ['name' => $character->name] :
+          ['character_slug' => $character->slug]
+        ));
       }
       if (!$this->logAdminAction($user, 'Created Character', 'Created ' . $character->displayName)) {
         throw new \Exception('Failed to log admin action.');
@@ -236,9 +222,9 @@ class CharacterManager extends Service {
         'description',
         'sale_value',
         'transferrable_at',
-        'is_visible'
+        'is_visible',
       ]);
-      $characterData['name'] = $isMyo && isset($data['name']) ? $data['name'] : null;
+      $characterData['name'] = ($isMyo && isset($data['name'])) ? $data['name'] : null;
       $characterData['owner_url'] = isset($characterData['user_id']) ? null : $data['owner_url'];
       $characterData['is_sellable'] = isset($data['is_sellable']);
       $characterData['is_tradeable'] = isset($data['is_tradeable']);
@@ -252,7 +238,8 @@ class CharacterManager extends Service {
       if ($isMyo) {
         $characterData['is_myo_slot'] = 1;
       }
-      $character = Character::create($characterData); // Create character profile row
+      $character = Character::create($characterData);
+      // Create character profile row
       $character->profile()->create([]);
       return $character;
     } catch (\Exception $e) {
@@ -274,7 +261,7 @@ class CharacterManager extends Service {
   private function handleCharacterImage($data, $character, $isMyo = false) {
     try {
       if ($isMyo) {
-        $data['species_id'] = isset($data['species_id']) && $data['species_id'] ? $data['species_id'] : null;
+        $data['species_id'] = (isset($data['species_id']) && $data['species_id']) ? $data['species_id'] : null;
         $data['subtype_id'] = isset($data['subtype_id']) && $data['subtype_id'] ? $data['subtype_id'] : null;
         $data['rarity_id'] = isset($data['rarity_id']) && $data['rarity_id'] ? $data['rarity_id'] : null;
 
@@ -306,7 +293,8 @@ class CharacterManager extends Service {
         'y1',
         'transformation_id',
         'transformation_info',
-        'transformation_description'
+        'transformation_description',
+        'sex'
       ]);
       $imageData['use_cropper'] = isset($data['use_cropper']);
       $imageData['description'] = isset($data['image_description']) ? $data['image_description'] : null;
@@ -350,15 +338,15 @@ class CharacterManager extends Service {
         $recipient = checkAlias($url, false);
         if (is_object($recipient)) {
           $data['designer_id'][$key] = $recipient->id;
-          $data['designer_url'][$key] = null;
+          $designers[$key] = null;
         }
       }
-      $artists = array_filter($data['artist_url']); // filter null values
+      $artists = array_filter($data['artist_url']);  // filter null values
       foreach ($artists as $key => $url) {
         $recipient = checkAlias($url, false);
         if (is_object($recipient)) {
           $data['artist_id'][$key] = $recipient->id;
-          $data['artist_url'][$key] = null;
+          $artists[$key] = null;
         }
       }
       // Check that users with the specified id(s) exist on site
@@ -377,14 +365,15 @@ class CharacterManager extends Service {
             throw new \Exception('One or more artists is invalid.');
           }
         }
-      } // Attach artists/designers
+      }
+      // Attach artists/designers
       foreach ($data['designer_id'] as $key => $id) {
         if ($id || $data['designer_url'][$key]) {
           DB::table('character_image_creators')->insert([
             'character_image_id' => $image->id,
-            'type' => 'Designer',
-            'url' => $data['designer_url'][$key],
-            'user_id' => $id
+            'type'               => 'Designer',
+            'url'                => $data['designer_url'][$key],
+            'user_id'            => $id,
           ]);
         }
       }
@@ -392,34 +381,32 @@ class CharacterManager extends Service {
         if ($id || $data['artist_url'][$key]) {
           DB::table('character_image_creators')->insert([
             'character_image_id' => $image->id,
-            'type' => 'Artist',
-            'url' => $data['artist_url'][$key],
-            'user_id' => $id
+            'type'               => 'Artist',
+            'url'                => $data['artist_url'][$key],
+            'user_id'            => $id,
           ]);
         }
-      } // Save image
-      $this->handleImage($data['image'], $image->imageDirectory, $image->imageFileName, null, isset($data['default_image'])); // Save thumbnail first before processing full image
+      }
+      // Save image
+      $this->handleImage($data['image'], $image->imageDirectory, $image->imageFileName, null, isset($data['default_image']));
+      // Save thumbnail first before processing full image
       if (isset($data['use_cropper'])) {
         $this->cropThumbnail(Arr::only($data, ['x0', 'x1', 'y0', 'y1']), $image, $isMyo);
       } else {
-        $this->handleImage(
-          $data['thumbnail'],
-          $image->imageDirectory,
-          $image->thumbnailFileName,
-          null,
-          isset($data['default_image'])
-        );
-      } // Process and save the image itself
+        $this->handleImage($data['thumbnail'], $image->imageDirectory, $image->thumbnailFileName, null, isset($data['default_image']));
+      }
+      // Process and save the image itself
       if (!$isMyo) {
         $this->processImage($image);
-      } // Attach features
+        // Auto-generate colours
+        if (config('lorekeeper.character_pairing.auto_generate_colours')) {
+          $this->imageColours($image, Auth::user());
+        }
+      }
+      // Attach features
       foreach ($data['feature_id'] as $key => $featureId) {
         if ($featureId) {
-          $feature = CharacterFeature::create([
-            'character_image_id' => $image->id,
-            'feature_id' => $featureId,
-            'data' => $data['feature_data'][$key]
-          ]);
+          $feature = CharacterFeature::create(['character_image_id' => $image->id, 'feature_id' => $featureId, 'data' => $data['feature_data'][$key]]);
         }
       }
       return $image;
@@ -440,7 +427,8 @@ class CharacterManager extends Service {
       // For large images (in terms of dimensions),
       // use imagick instead, as it's better at handling them
       Config::set('image.driver', 'imagick');
-    } // Trim transparent parts of image.
+    }
+    // Trim transparent parts of image.
     $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName)->trim('transparent');
     if (config('lorekeeper.settings.masterlist_image_automation') == 1) {
       // Make the image be square
@@ -455,12 +443,9 @@ class CharacterManager extends Service {
         $canvas = Image::canvas($image->height(), $image->height());
         $image = $canvas->insert($image, 'center');
       }
-    } // Add background fill if destination format is not transparent
-    if (
-      !in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) &&
-      config('lorekeeper.settings.masterlist_image_format') != null &&
-      config('lorekeeper.settings.masterlist_image_background') != null
-    ) {
+    }
+    // Add background fill if destination format is not transparent
+    if (!in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) && config('lorekeeper.settings.masterlist_image_format') != null && config('lorekeeper.settings.masterlist_image_background') != null) {
       $canvas = Image::canvas($image->width(), $image->height(), config('lorekeeper.settings.masterlist_image_background'));
       $image = $canvas->insert($image, 'center');
     }
@@ -485,22 +470,16 @@ class CharacterManager extends Service {
             $constraint->upsize();
           });
         }
-      } // Save the processed image
-      $image->save(
-        $characterImage->imagePath . '/' . $characterImage->fullsizeFileName,
-        100,
-        config('lorekeeper.settings.masterlist_fullsizes_format')
-      );
+      }
+      // Save the processed image
+      $image->save($characterImage->imagePath . '/' . $characterImage->fullsizeFileName, 100, config('lorekeeper.settings.masterlist_fullsizes_format'));
     } else {
       // Delete fullsize if it was previously created.
-      if (
-        isset($characterImage->fullsize_hash)
-        ? file_exists(public_path($characterImage->imageDirectory . '/' . $characterImage->fullsizeFileName))
-        : false
-      ) {
+      if (isset($characterImage->fullsize_hash) ? file_exists(public_path($characterImage->imageDirectory . '/' . $characterImage->fullsizeFileName)) : false) {
         unlink($characterImage->imagePath . '/' . $characterImage->fullsizeFileName);
       }
-    } // Resize image if desired
+    }
+    // Resize image if desired
     if (config('lorekeeper.settings.masterlist_image_dimension') != 0) {
       if ($image->width() > $image->height()) {
         // Landscape
@@ -538,7 +517,8 @@ class CharacterManager extends Service {
         $imageHeight = $image->height();
         $wmWidth = $watermark->width();
         $wmHeight = $watermark->height();
-        $wmScale = config('lorekeeper.settings.watermark_percent'); //Assume Landscape by Default
+        $wmScale = config('lorekeeper.settings.watermark_percent');
+        //Assume Landscape by Default
         $maxSize = $imageWidth * $wmScale;
         if ($imageWidth > $imageHeight) {
           //Landscape
@@ -568,6 +548,7 @@ class CharacterManager extends Service {
     );
   }
 
+
   /**
    * Crops a thumbnail for the given image.
    *
@@ -583,11 +564,7 @@ class CharacterManager extends Service {
       Config::set('image.driver', 'imagick');
     }
     $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName);
-    if (
-      !in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) &&
-      config('lorekeeper.settings.masterlist_image_format') != null &&
-      config('lorekeeper.settings.masterlist_image_background') != null
-    ) {
+    if (!in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) && config('lorekeeper.settings.masterlist_image_format') != null && config('lorekeeper.settings.masterlist_image_background') != null) {
       $canvas = Image::canvas($image->width(), $image->height(), config('lorekeeper.settings.masterlist_image_background'));
       $image = $canvas->insert($image, 'center');
       $trimColor = true;
@@ -646,7 +623,8 @@ class CharacterManager extends Service {
           $imageHeight = $image->height();
           $wmWidth = $watermark->width();
           $wmHeight = $watermark->height();
-          $wmScale = config('lorekeeper.settings.watermark_percent'); //Assume Landscape by Default
+          $wmScale = config('lorekeeper.settings.watermark_percent');
+          //Assume Landscape by Default
           $maxSize = $imageWidth * $wmScale;
           if ($imageWidth > $imageHeight) {
             //Landscape
@@ -673,7 +651,8 @@ class CharacterManager extends Service {
         $watermark = Image::make('images/watermark.png');
         $image->insert($watermark, 'center');
       }
-      // Now shrink the image      $imageWidth = $image->width();
+      // Now shrink the image
+      $imageWidth = $image->width();
       $imageHeight = $image->height();
       if ($imageWidth > $imageHeight) {
         // Landscape
@@ -689,21 +668,21 @@ class CharacterManager extends Service {
         });
       }
       if (config('lorekeeper.settings.masterlist_image_automation') == 0) {
-        $xOffset = 0 + ($points['x0'] - $trimOffsetX > 0 ? $points['x0'] - $trimOffsetX : 0);
-        if ($xOffset + $cropWidth > $image->width()) {
+        $xOffset = 0 + (($points['x0'] - $trimOffsetX) > 0 ? ($points['x0'] - $trimOffsetX) : 0);
+        if (($xOffset + $cropWidth) > $image->width()) {
           $xOffsetNew = $cropWidth - ($image->width() - $xOffset);
         }
         if (isset($xOffsetNew)) {
-          if ($xOffsetNew + $cropWidth > $image->width()) {
+          if (($xOffsetNew + $cropWidth) > $image->width()) {
             $xOffsetNew = $image->width() - $cropWidth;
           }
         }
-        $yOffset = 0 + ($points['y0'] - $trimOffsetY > 0 ? $points['y0'] - $trimOffsetY : 0);
-        if ($yOffset + $cropHeight > $image->height()) {
+        $yOffset = 0 + (($points['y0'] - $trimOffsetY) > 0 ? ($points['y0'] - $trimOffsetY) : 0);
+        if (($yOffset + $cropHeight) > $image->height()) {
           $yOffsetNew = $cropHeight - ($image->height() - $yOffset);
         }
         if (isset($yOffsetNew)) {
-          if ($yOffsetNew + $cropHeight > $image->height()) {
+          if (($yOffsetNew + $cropHeight) > $image->height()) {
             $yOffsetNew = $image->height() - $cropHeight;
           }
         } // Crop according to the selected area
@@ -720,17 +699,12 @@ class CharacterManager extends Service {
       if (config('lorekeeper.settings.masterlist_image_automation') == 0) {
         // Crop according to the selected area
         $image->crop($cropWidth, $cropHeight, $points['x0'], $points['y0']);
-      } // Resize to fit the thumbnail size
-      $image->resize(
-        config('lorekeeper.settings.masterlist_thumbnails.width'),
-        config('lorekeeper.settings.masterlist_thumbnails.height')
-      );
-    } // Save the thumbnail
-    $image->save(
-      $characterImage->thumbnailPath . '/' . $characterImage->thumbnailFileName,
-      100,
-      config('lorekeeper.settings.masterlist_image_format')
-    );
+      }
+      // Resize to fit the thumbnail size
+      $image->resize(config('lorekeeper.settings.masterlist_thumbnails.width'), config('lorekeeper.settings.masterlist_thumbnails.height'));
+    }
+    // Save the thumbnail
+    $image->save($characterImage->thumbnailPath . '/' . $characterImage->thumbnailFileName, 100, config('lorekeeper.settings.masterlist_image_format'));
   }
 
   /**
@@ -750,42 +724,26 @@ class CharacterManager extends Service {
    *
    * @return bool
    */
-  public function createLog(
-    $senderId,
-    $senderUrl,
-    $recipientId,
-    $recipientUrl,
-    $characterId,
-    $type,
-    $data,
-    $logType,
-    $isUpdate = false,
-    $oldData = null,
-    $newData = null
-  ) {
+  public function createLog($senderId, $senderUrl, $recipientId, $recipientUrl, $characterId, $type, $data, $logType, $isUpdate = false, $oldData = null, $newData = null) {
     return DB::table($logType == 'character' ? 'character_log' : 'user_character_log')->insert(
       [
-        'sender_id' => $senderId,
-        'sender_url' => $senderUrl,
-        'recipient_id' => $recipientId,
+        'sender_id'     => $senderId,
+        'sender_url'    => $senderUrl,
+        'recipient_id'  => $recipientId,
         'recipient_url' => $recipientUrl,
-        'character_id' => $characterId,
-        'log' => $type . ($data ? ' (' . $data . ')' : ''),
-        'log_type' => $type,
-        'data' => $data,
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now()
-      ] +
-        ($logType == 'character'
-          ? [
-            'change_log' => $isUpdate
-              ? json_encode([
-                'old' => $oldData,
-                'new' => $newData
-              ])
-              : null
-          ]
-          : [])
+        'character_id'  => $characterId,
+        'log'           => $type . ($data ? ' (' . $data . ')' : ''),
+        'log_type'      => $type,
+        'data'          => $data,
+        'created_at'    => Carbon::now(),
+        'updated_at'    => Carbon::now(),
+      ] + ($logType == 'character' ?
+        [
+          'change_log' => $isUpdate ? json_encode([
+            'old' => $oldData,
+            'new' => $newData,
+          ]) : null,
+        ] : [])
     );
   }
 
@@ -825,42 +783,32 @@ class CharacterManager extends Service {
       } else {
         $data['subtype_id'] = null;
       }
-      $data['is_visible'] = 1; // Create character image
+      $data['is_visible'] = 1;
+      // Create character image
       $image = $this->handleCharacterImage($data, $character);
       if (!$image) {
         throw new \Exception('Error happened while trying to create image.');
-      } // Update the character's image ID
+      }
+      // Update the character's image ID
       $character->character_image_id = $image->id;
       $character->save();
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Created Image',
-          'Created character image <a href="' . $character->url . '">#' . $image->id . '</a>'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Created Image', 'Created character image <a href="' . $character->url . '">#' . $image->id . '</a>')) {
         throw new \Exception('Failed to log admin action.');
-      } // Add a log for the character
+      }
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        $character->user_id,
-        $character->user_id ? null : $character->owner_url,
-        $character->id,
-        'Character Image Uploaded',
-        '[#' . $image->id . ']',
-        'character'
-      ); // If the recipient has an account, send them a notification
+      $this->createLog($user->id, null, $character->user_id, ($character->user_id ? null : $character->owner_url), $character->id, 'Character Image Uploaded', '[#' . $image->id . ']', 'character');
+      // If the recipient has an account, send them a notification
       if ($character->user && $user->id != $character->user_id && $character->is_visible) {
         Notifications::create('IMAGE_UPLOAD', $character->user, [
-          'character_url' => $character->url,
+          'character_url'  => $character->url,
           'character_slug' => $character->slug,
           'character_name' => $character->name,
-          'sender_url' => $user->url,
-          'sender_name' => $user->name
+          'sender_url'     => $user->url,
+          'sender_name'    => $user->name,
         ]);
-      } // Notify bookmarkers
+      }
+      // Notify bookmarkers
       $character->notifyBookmarkers('BOOKMARK_IMAGE');
       return $this->commitReturn($character);
     } catch (\Exception $e) {
@@ -897,15 +845,10 @@ class CharacterManager extends Service {
           }
         }
       }
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Updated Image',
-          'Updated character image features on <a href="' . $image->character->url . '">#' . $image->id . '</a>'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Updated Image', 'Updated character image features on <a href="' . $image->character->url . '">#' . $image->id . '</a>')) {
         throw new \Exception('Failed to log admin action.');
-      } // Log old features
+      }
+      // Log old features
       $old = [];
       $old['features'] = $this->generateFeatureList($image);
       $old['species'] = $image->species_id ? $image->species->displayName : null;
@@ -922,11 +865,7 @@ class CharacterManager extends Service {
       // Attach features
       foreach ($data['feature_id'] as $key => $featureId) {
         if ($featureId) {
-          $feature = CharacterFeature::create([
-            'character_image_id' => $image->id,
-            'feature_id' => $featureId,
-            'data' => $data['feature_data'][$key]
-          ]);
+          $feature = CharacterFeature::create(['character_image_id' => $image->id, 'feature_id' => $featureId, 'data' => $data['feature_data'][$key]]);
         }
       }
       // Attach titles
@@ -971,27 +910,17 @@ class CharacterManager extends Service {
       $new['transformation_info'] = $image->transformation_info ? $image->transformation_info : null;
       $new['transformation_description'] = $image->transformation_description ? $image->transformation_description : null; // Character also keeps track of these features
       $image->character->rarity_id = $image->rarity_id;
-      $image->character->save(); // Add a log for the character
+      $image->character->save();
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        null,
-        null,
-        $image->character_id,
-        'Traits Updated',
-        '#' . $image->id,
-        'character',
-        true,
-        $old,
-        $new
-      );
+      $this->createLog($user->id, null, null, null, $image->character_id, 'Traits Updated', '#' . $image->id, 'character', true, $old, $new);
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
     return $this->rollbackReturn(false);
   }
+
 
   /**
    * Generates a list of features for displaying.
@@ -1002,11 +931,7 @@ class CharacterManager extends Service {
   private function generateFeatureList($image) {
     $result = '';
     foreach ($image->features as $feature) {
-      $result .=
-        '<div>' .
-        ($feature->feature->category ? '<strong>' . $feature->feature->category->displayName . ':</strong> ' : '') .
-        $feature->feature->displayName .
-        '</div>';
+      $result .= '<div>' . ($feature->feature->category ? '<strong>' . $feature->feature->category->displayName . ':</strong> ' : '') . $feature->feature->displayName . '</div>';
     }
     return $result;
   }
@@ -1023,39 +948,24 @@ class CharacterManager extends Service {
   public function updateImageNotes($data, $image, $user) {
     DB::beginTransaction();
     try {
-      $old = $image->parsed_description; // Update the image's notes
+      $old = $image->parsed_description;
+      // Update the image's notes
       $image->description = $data['description'];
       $image->parsed_description = parse($data['description']);
       $image->save();
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Updated Image Notes',
-          'Updated image <a href="' . $image->character->url . '">#' . $image->id . '</a>'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Updated Image Notes', 'Updated image <a href="' . $image->character->url . '">#' . $image->id . '</a>')) {
         throw new \Exception('Failed to log admin action.');
-      } // Add a log for the character
+      }
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        null,
-        null,
-        $image->character_id,
-        'Image Notes Updated',
-        '[#' . $image->id . ']',
-        'character',
-        true,
-        $old,
-        $image->parsed_description
-      );
+      $this->createLog($user->id, null, null, null, $image->character_id, 'Image Notes Updated', '[#' . $image->id . ']', 'character', true, $old, $image->parsed_description);
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
     return $this->rollbackReturn(false);
   }
+
 
   /**
    * Updates image credits.
@@ -1069,32 +979,30 @@ class CharacterManager extends Service {
   public function updateImageCredits($data, $image, $user) {
     DB::beginTransaction();
     try {
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Updated Image Credits',
-          'Updated character image credits on <a href="' . $image->character->url . '">#' . $image->id . '</a>'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Updated Image Credits', 'Updated character image credits on <a href="' . $image->character->url . '">#' . $image->id . '</a>')) {
         throw new \Exception('Failed to log admin action.');
       }
-      $old = $this->generateCredits($image); // Clear old artists/designers
-      $image->creators()->delete(); // Check if entered url(s) have aliases associated with any on-site users
+      $old = $this->generateCredits($image);
+      // Clear old artists/designers
+      $image->creators()->delete();
+      // Check if entered url(s) have aliases associated with any on-site users
       $designers = array_filter($data['designer_url']); // filter null values
       foreach ($designers as $key => $url) {
         $recipient = checkAlias($url, false);
         if (is_object($recipient)) {
           $data['designer_id'][$key] = $recipient->id;
-          $data['designer_url'][$key] = null;
+          $designers[$key] = null;
         }
       }
-      foreach ($data['artist_url'] as $key => $url) {
+      $artists = array_filter($data['artist_url']);  // filter null values
+      foreach ($artists as $key => $url) {
         $recipient = checkAlias($url, false);
         if (is_object($recipient)) {
           $data['artist_id'][$key] = $recipient->id;
-          $data['artist_url'][$key] = null;
+          $artists[$key] = null;
         }
-      } // Check that users with the specified id(s) exist on site
+      }
+      // Check that users with the specified id(s) exist on site
       foreach ($data['designer_id'] as $id) {
         if (isset($id) && $id) {
           $user = User::find($id);
@@ -1110,14 +1018,15 @@ class CharacterManager extends Service {
             throw new \Exception('One or more artists is invalid.');
           }
         }
-      } // Attach artists/designers
+      }
+      // Attach artists/designers
       foreach ($data['designer_id'] as $key => $id) {
         if ($id || $data['designer_url'][$key]) {
           DB::table('character_image_creators')->insert([
             'character_image_id' => $image->id,
-            'type' => 'Designer',
-            'url' => $data['designer_url'][$key],
-            'user_id' => $id
+            'type'               => 'Designer',
+            'url'                => $data['designer_url'][$key],
+            'user_id'            => $id,
           ]);
         }
       }
@@ -1125,32 +1034,22 @@ class CharacterManager extends Service {
         if ($id || $data['artist_url'][$key]) {
           DB::table('character_image_creators')->insert([
             'character_image_id' => $image->id,
-            'type' => 'Artist',
-            'url' => $data['artist_url'][$key],
-            'user_id' => $id
+            'type'               => 'Artist',
+            'url'                => $data['artist_url'][$key],
+            'user_id'            => $id,
           ]);
         }
-      } // Add a log for the character
+      }
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        null,
-        null,
-        $image->character_id,
-        'Image Credits Updated',
-        '[#' . $image->id . ']',
-        'character',
-        true,
-        $old,
-        $this->generateCredits($image)
-      );
+      $this->createLog($user->id, null, null, null, $image->character_id, 'Image Credits Updated', '[#' . $image->id . ']', 'character', true, $old, $this->generateCredits($image));
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
     return $this->rollbackReturn(false);
   }
+
 
   /**
    * Generates a list of image credits for displaying.
@@ -1169,6 +1068,7 @@ class CharacterManager extends Service {
     return $result;
   }
 
+
   /**
    * Reuploads an image.
    *
@@ -1181,24 +1081,22 @@ class CharacterManager extends Service {
   public function reuploadImage($data, $image, $user) {
     DB::beginTransaction();
     try {
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Reuploaded Image',
-          'Reuploaded character image <a href="' . $image->character->url . '">#' . $image->id . '</a>'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Reuploaded Image', 'Reuploaded character image <a href="' . $image->character->url . '">#' . $image->id . '</a>')) {
         throw new \Exception('Failed to log admin action.');
       }
       if (config('lorekeeper.settings.masterlist_image_format') != null) {
         // Remove old versions so that images in various filetypes don't pile up
-        unlink($image->imagePath . '/' . $image->imageFileName);
-        if (
-          isset($image->fullsize_hash) ? file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) : false
-        ) {
-          unlink($image->imagePath . '/' . $image->fullsizeFileName);
+        if (file_exists($image->imagePath . '/' . $image->imageFileName)) {
+          unlink($image->imagePath . '/' . $image->imageFileName);
         }
-        unlink($image->imagePath . '/' . $image->thumbnailFileName);
+        if (isset($image->fullsize_hash) ? file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) : false) {
+          if (file_exists($image->imagePath . '/' . $image->fullsizeFileName)) {
+            unlink($image->imagePath . '/' . $image->fullsizeFileName);
+          }
+        }
+        if (file_exists($image->imagePath . '/' . $image->thumbnailFileName)) {
+          unlink($image->imagePath . '/' . $image->thumbnailFileName);
+        }
         // Set the image's extension in the DB as defined in settings
         $image->extension = config('lorekeeper.settings.masterlist_image_format');
         $image->save();
@@ -1206,7 +1104,8 @@ class CharacterManager extends Service {
         // Get uploaded image's extension and save it to the DB
         $image->extension = $data['image']->getClientOriginalExtension();
         $image->save();
-      } // Save image
+      }
+      // Save image
       $this->handleImage($data['image'], $image->imageDirectory, $image->imageFileName);
       $isMyo = $image->character->is_myo_slot ? true : false;
       // Save thumbnail
@@ -1214,27 +1113,21 @@ class CharacterManager extends Service {
         $this->cropThumbnail(Arr::only($data, ['x0', 'x1', 'y0', 'y1']), $image, $isMyo);
       } else {
         $this->handleImage($data['thumbnail'], $image->thumbnailPath, $image->thumbnailFileName);
-      } // Process and save the image itself
+      }
+      // Process and save the image itself
       if (!$isMyo) {
         $this->processImage($image);
-      } // Add a log for the character
+      }
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        null,
-        null,
-        $image->character_id,
-        'Image Reuploaded',
-        '[#' . $image->id . ']',
-        'character'
-      );
+      $this->createLog($user->id, null, null, null, $image->character_id, 'Image Reuploaded', '[#' . $image->id . ']', 'character');
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
     return $this->rollbackReturn(false);
   }
+
 
   /**
    * Deletes an image.
@@ -1248,33 +1141,27 @@ class CharacterManager extends Service {
   public function deleteImage($image, $user, $forceDelete = false) {
     DB::beginTransaction();
     try {
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Deleted Image',
-          'Deleted character image <a href="' . $image->character->url . '">#' . $image->id . '</a>'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Deleted Image', 'Deleted character image <a href="' . $image->character->url . '">#' . $image->id . '</a>')) {
         throw new \Exception('Failed to log admin action.');
       }
       if (!$forceDelete && $image->character->character_image_id == $image->id) {
         throw new \Exception("Cannot delete a character's active image.");
       }
       $image->features()->delete();
-      $image->delete(); // Delete the image files
+      $image->delete();
+      // Delete the image files
       if (file_exists($image->imagePath . '/' . $image->imageFileName)) {
         unlink($image->imagePath . '/' . $image->imageFileName);
       }
-      if (
-        isset($image->fullsize_hash) ? file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) : false
-      ) {
+      if (isset($image->fullsize_hash) ? file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) : false) {
         if (file_exists($image->imagePath . '/' . $image->fullsizeFileName)) {
           unlink($image->imagePath . '/' . $image->fullsizeFileName);
         }
       }
       if (file_exists($image->imagePath . '/' . $image->thumbnailFileName)) {
         unlink($image->imagePath . '/' . $image->thumbnailFileName);
-      } // Add a log for the character
+      }
+      // Add a log for the character
       // This logs all the updates made to the character
       $this->createLog($user->id, null, null, null, $image->character_id, 'Image Deleted', '[#' . $image->id . ']', 'character');
       return $this->commitReturn(true);
@@ -1296,13 +1183,7 @@ class CharacterManager extends Service {
   public function updateImageSettings($data, $image, $user) {
     DB::beginTransaction();
     try {
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Updated Image',
-          'Updated character image settings on <a href="' . $image->character->url . '">#' . $image->id . '</a>'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Updated Image', 'Updated character image settings on <a href="' . $image->character->url . '">#' . $image->id . '</a>')) {
         throw new \Exception('Failed to log admin action.');
       }
       if ($image->character->character_image_id == $image->id && !isset($data['is_visible'])) {
@@ -1314,16 +1195,7 @@ class CharacterManager extends Service {
       $image->save();
       // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        null,
-        null,
-        $image->character_id,
-        'Image Visibility/Validity Updated',
-        '[#' . $image->id . ']',
-        'character'
-      );
+      $this->createLog($user->id, null, null, null, $image->character_id, 'Image Visibility/Validity Updated', '[#' . $image->id . ']', 'character');
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
@@ -1342,13 +1214,7 @@ class CharacterManager extends Service {
   public function updateActiveImage($image, $user) {
     DB::beginTransaction();
     try {
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Updated Image',
-          'Set image <a href="' . $image->character->url . '">#' . $image->id . '</a> to active image'
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Updated Image', 'Set image <a href="' . $image->character->url . '">#' . $image->id . '</a> to active image')) {
         throw new \Exception('Failed to log admin action.');
       }
       if ($image->character->character_image_id == $image->id) {
@@ -1358,18 +1224,10 @@ class CharacterManager extends Service {
         throw new \Exception("Cannot set a non-visible image as the character's active image.");
       }
       $image->character->character_image_id = $image->id;
-      $image->character->save(); // Add a log for the character
+      $image->character->save();
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        null,
-        null,
-        $image->character_id,
-        'Active Image Updated',
-        '[#' . $image->id . ']',
-        'character'
-      );
+      $this->createLog($user->id, null, null, null, $image->character_id, 'Active Image Updated', '[#' . $image->id . ']', 'character');
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
@@ -1390,10 +1248,7 @@ class CharacterManager extends Service {
     DB::beginTransaction();
     try {
       $ids = explode(',', $data['sort']);
-      $images = CharacterImage::whereIn('id', $ids)
-        ->where('character_id', $character->id)
-        ->orderBy(DB::raw('FIELD(id, ' . implode(',', $ids) . ')'))
-        ->get();
+      $images = CharacterImage::whereIn('id', $ids)->where('character_id', $character->id)->orderBy(DB::raw('FIELD(id, ' . implode(',', $ids) . ')'))->get();
       if (count($images) != count($ids)) {
         throw new \Exception('Invalid image included in sorting order.');
       }
@@ -1411,7 +1266,8 @@ class CharacterManager extends Service {
         $image->sort = $count;
         $image->save();
         $count++;
-      } // Add a log for the character
+      }
+      // Add a log for the character
       // This logs all the updates made to the character
       $this->createLog($user->id, null, null, null, $image->character_id, 'Image Order Updated', '', 'character');
       return $this->commitReturn(true);
@@ -1433,12 +1289,7 @@ class CharacterManager extends Service {
     DB::beginTransaction();
     try {
       $ids = array_reverse(explode(',', $data['sort']));
-      $characters = Character::myo(0)
-        ->whereIn('id', $ids)
-        ->where('user_id', $user->id)
-        ->where('is_visible', 1)
-        ->orderBy(DB::raw('FIELD(id, ' . implode(',', $ids) . ')'))
-        ->get();
+      $characters = Character::myo(0)->whereIn('id', $ids)->where('user_id', $user->id)->where('is_visible', 1)->orderBy(DB::raw('FIELD(id, ' . implode(',', $ids) . ')'))->get();
       if (count($characters) != count($ids)) {
         throw new \Exception('Invalid character included in sorting order.');
       }
@@ -1505,7 +1356,11 @@ class CharacterManager extends Service {
       if (!$character->is_myo_slot && Character::where('slug', $data['slug'])->where('id', '!=', $character->id)->exists()) {
         throw new \Exception('Character code must be unique.');
       }
-      $characterData = Arr::only($data, ['character_category_id', 'number', 'slug']);
+      $characterData = Arr::only($data, [
+        'character_category_id',
+        'number',
+        'slug',
+      ]);
       $characterData['is_sellable'] = isset($data['is_sellable']);
       $characterData['is_tradeable'] = isset($data['is_tradeable']);
       $characterData['is_giftable'] = isset($data['is_giftable']);
@@ -1565,21 +1420,10 @@ class CharacterManager extends Service {
         $new['transferrable_at'] = $characterData['transferrable_at'];
       }
       if (count($result)) {
-        $character->update($characterData); // Add a log for the character
+        $character->update($characterData);
+        // Add a log for the character
         // This logs all the updates made to the character
-        $this->createLog(
-          $user->id,
-          null,
-          null,
-          null,
-          $character->id,
-          'Character Updated',
-          ucfirst(implode(', ', $result)) . ' edited',
-          'character',
-          true,
-          $old,
-          $new
-        );
+        $this->createLog($user->id, null, null, null, $character->id, 'Character Updated', ucfirst(implode(', ', $result)) . ' edited', 'character', true, $old, $new);
       }
       return $this->commitReturn(true);
     } catch (\Exception $e) {
@@ -1600,33 +1444,17 @@ class CharacterManager extends Service {
   public function updateCharacterDescription($data, $character, $user) {
     DB::beginTransaction();
     try {
-      if (
-        !$this->logAdminAction(
-          $user,
-          'Updated Character Description',
-          'Updated character description on ' . $character->displayname
-        )
-      ) {
+      if (!$this->logAdminAction($user, 'Updated Character Description', 'Updated character description on ' . $character->displayname)) {
         throw new \Exception('Failed to log admin action.');
       }
-      $old = $character->parsed_description; // Update the image's notes
+      $old = $character->parsed_description;
+      // Update the image's notes
       $character->description = $data['description'];
       $character->parsed_description = parse($data['description']);
-      $character->save(); // Add a log for the character
+      $character->save();
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog(
-        $user->id,
-        null,
-        null,
-        null,
-        $character->id,
-        'Character Description Updated',
-        '',
-        'character',
-        true,
-        $old,
-        $character->parsed_description
-      );
+      $this->createLog($user->id, null, null, null, $character->id, 'Character Description Updated', '', 'character', true, $old, $character->parsed_description);
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
@@ -1646,18 +1474,15 @@ class CharacterManager extends Service {
   public function updateCharacterSettings($data, $character, $user) {
     DB::beginTransaction();
     try {
-      if (
-        !$this->logAdminAction($user, 'Updated Character Settings', 'Updated character settings on ' . $character->displayname)
-      ) {
+      if (!$this->logAdminAction($user, 'Updated Character Settings', 'Updated character settings on ' . $character->displayname)) {
         throw new \Exception('Failed to log admin action.');
       }
       $old = ['is_visible' => $character->is_visible];
       $character->is_visible = isset($data['is_visible']);
-      $character->save(); // Add a log for the character
+      $character->save();
+      // Add a log for the character
       // This logs all the updates made to the character
-      $this->createLog($user->id, null, null, null, $character->id, 'Character Visibility Updated', '', 'character', true, $old, [
-        'is_visible' => $character->is_visible
-      ]);
+      $this->createLog($user->id, null, null, null, $character->id, 'Character Visibility Updated', '', 'character', true, $old, ['is_visible' => $character->is_visible]);
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
@@ -1680,7 +1505,8 @@ class CharacterManager extends Service {
     try {
       $notifyTrading = false;
       $notifyGiftArt = false;
-      $notifyGiftWriting = false; // Allow updating the gift art/trading options if the editing
+      $notifyGiftWriting = false;
+      // Allow updating the gift art/trading options if the editing
       // user owns the character
       if (!$isAdmin) {
         if ($character->user_id != $user->id) {
@@ -1695,19 +1521,16 @@ class CharacterManager extends Service {
         if (isset($data['is_gift_writing_allowed']) && $character->is_gift_writing_allowed != $data['is_gift_writing_allowed']) {
           $notifyGiftWriting = true;
         }
-        $character->is_gift_art_allowed =
-          isset($data['is_gift_art_allowed']) && $data['is_gift_art_allowed'] <= 2 ? $data['is_gift_art_allowed'] : 0;
-        $character->is_gift_writing_allowed =
-          isset($data['is_gift_writing_allowed']) && $data['is_gift_writing_allowed'] <= 2 ? $data['is_gift_writing_allowed'] : 0;
+        $character->is_gift_art_allowed = isset($data['is_gift_art_allowed']) && $data['is_gift_art_allowed'] <= 2 ? $data['is_gift_art_allowed'] : 0;
+        $character->is_gift_writing_allowed = isset($data['is_gift_writing_allowed']) && $data['is_gift_writing_allowed'] <= 2 ? $data['is_gift_writing_allowed'] : 0;
         $character->is_trading = isset($data['is_trading']);
         $character->save();
       } else {
-        if (
-          !$this->logAdminAction($user, 'Updated Character Profile', 'Updated character profile on ' . $character->displayname)
-        ) {
+        if (!$this->logAdminAction($user, 'Updated Character Profile', 'Updated character profile on ' . $character->displayname)) {
           throw new \Exception('Failed to log admin action.');
         }
-      } // Update the character's profile
+      }
+      // Update the character's profile
       if (!$character->is_myo_slot) {
         $character->name = $data['name'];
       }
@@ -1768,8 +1591,8 @@ class CharacterManager extends Service {
         Notifications::create('CHARACTER_PROFILE_EDIT', $character->user, [
           'character_name' => $character->name,
           'character_slug' => $character->is_myo_slot ? $character->id : $character->slug,
-          'sender_url' => $user->url,
-          'sender_name' => $user->name
+          'sender_url'     => $user->url,
+          'sender_name'    => $user->name,
         ]);
       }
       if ($notifyTrading) {
@@ -1830,16 +1653,21 @@ class CharacterManager extends Service {
       }
       if (!$this->logAdminAction($user, 'Deleted Character', 'Deleted character ' . $character->slug)) {
         throw new \Exception('Failed to log admin action.');
-      } // Delete associated bookmarks
-      CharacterBookmark::where('character_id', $character->id)->delete(); // Delete associated features and images
+      }
+      // Delete associated bookmarks
+      CharacterBookmark::where('character_id', $character->id)->delete();
+      // Delete associated features and images
       // Images use soft deletes
       foreach ($character->images as $image) {
         $image->features()->delete();
         $image->delete();
-      } // Delete associated currencies
-      CharacterCurrency::where('character_id', $character->id)->delete(); // Delete associated design updates
+      }
+      // Delete associated currencies
+      CharacterCurrency::where('character_id', $character->id)->delete();
+      // Delete associated design updates
       // Design updates use soft deletes
-      CharacterDesignUpdate::where('character_id', $character->id)->delete(); // Delete character
+      CharacterDesignUpdate::where('character_id', $character->id)->delete();
+      // Delete character
       // This is a soft delete, so the character still kind of exists
       $character->delete();
       return $this->commitReturn(true);
@@ -1882,37 +1710,31 @@ class CharacterManager extends Service {
       }
       if ($recipient->is_banned) {
         throw new \Exception('Cannot transfer character to a banned member.');
-      } // deletes any pending design drafts
+      }
+      // deletes any pending design drafts
       foreach ($character->designUpdate as $update) {
         if ($update->status == 'Draft') {
-          if (
-            !(new DesignUpdateManager())->rejectRequest(
-              'Cancelled by ' . $user->displayName . ' in order to transfer character to another user',
-              $update,
-              $user,
-              true,
-              false
-            )
-          ) {
+          if (!(new DesignUpdateManager)->rejectRequest('Cancelled by ' . $user->displayName . ' in order to transfer character to another user', $update, $user, true, false)) {
             throw new \Exception('Could not cancel pending request.');
           }
         }
       }
       $queueOpen = Settings::get('open_transfers_queue');
       CharacterTransfer::create([
-        'user_reason' => $data['user_reason'], // pulls from this characters user_reason collum
+        'user_reason'  => $data['user_reason'],  // pulls from this characters user_reason collum
         'character_id' => $character->id,
-        'sender_id' => $user->id,
+        'sender_id'    => $user->id,
         'recipient_id' => $recipient->id,
-        'status' => 'Pending', // if the queue is closed, all transfers are auto-approved
-        'is_approved' => !$queueOpen
+        'status'       => 'Pending',
+        // if the queue is closed, all transfers are auto-approved
+        'is_approved'  => !$queueOpen,
       ]);
       if (!$queueOpen) {
         Notifications::create('CHARACTER_TRANSFER_RECEIVED', $recipient, [
-          'character_url' => $character->url,
+          'character_url'  => $character->url,
           'character_name' => $character->slug,
-          'sender_name' => $user->name,
-          'sender_url' => $user->url
+          'sender_name'    => $user->name,
+          'sender_url'     => $user->url,
         ]);
       }
       return $this->commitReturn(true);
@@ -1942,26 +1764,19 @@ class CharacterManager extends Service {
         if ($character->user_id == $recipient->id) {
           throw new \Exception('Cannot transfer a character to the same user.');
         }
-        if (
-          !$this->logAdminAction(
-            $user,
-            'Admin Transfer',
-            'Admin transferred ' . $character->displayname . ' to ' . $recipient->displayName
-          )
-        ) {
+        if (!$this->logAdminAction($user, 'Admin Transfer', 'Admin transferred ' . $character->displayname . ' to ' . $recipient->displayName)) {
           throw new \Exception('Failed to log admin action.');
         }
       } elseif (isset($data['recipient_url']) && $data['recipient_url']) {
         // Transferring to an off-site user
         $recipient = checkAlias($data['recipient_url']);
-        if (
-          !$this->logAdminAction($user, 'Admin Transfer', 'Admin transferred ' . $character->displayname . ' to ' . $recipient)
-        ) {
+        if (!$this->logAdminAction($user, 'Admin Transfer', 'Admin transferred ' . $character->displayname . ' to ' . $recipient)) {
           throw new \Exception('Failed to log admin action.');
         }
       } else {
         throw new \Exception('Please enter a recipient for the transfer.');
-      } // If the character is in an active transfer, cancel it
+      }
+      // If the character is in an active transfer, cancel it
       $transfer = CharacterTransfer::active()->where('character_id', $character->id)->first();
       if ($transfer) {
         $transfer->status = 'Canceled';
@@ -1971,26 +1786,14 @@ class CharacterManager extends Service {
       // deletes any pending design drafts
       foreach ($character->designUpdate as $update) {
         if ($update->status == 'Draft') {
-          if (
-            !(new DesignUpdateManager())->rejectRequest(
-              'Cancelled by ' . $user->displayName . ' in order to transfer character to another user',
-              $update,
-              $user,
-              true,
-              false
-            )
-          ) {
+          if (!(new DesignUpdateManager)->rejectRequest('Cancelled by ' . $user->displayName . ' in order to transfer character to another user', $update, $user, true, false)) {
             throw new \Exception('Could not cancel pending request.');
           }
         }
       }
       $sender = $character->user;
-      $this->moveCharacter(
-        $character,
-        $recipient,
-        'Transferred by ' . $user->displayName . (isset($data['reason']) ? ': ' . $data['reason'] : ''),
-        $data['cooldown'] ?? -1
-      ); // Add notifications for the old and new owners
+      $this->moveCharacter($character, $recipient, 'Transferred by ' . $user->displayName . (isset($data['reason']) ? ': ' . $data['reason'] : ''), $data['cooldown'] ?? -1);
+      // Add notifications for the old and new owners
       if ($sender) {
         Notifications::create('CHARACTER_SENT', $sender, [
           'character_slug' => $character->slug,
@@ -1999,7 +1802,7 @@ class CharacterManager extends Service {
           'sender_name' => $user->name,
           'sender_url' => $user->url,
           'recipient_name' => is_object($recipient) ? $recipient->name : prettyProfileName($recipient),
-          'recipient_url' => is_object($recipient) ? $recipient->url : $recipient
+          'recipient_url'  => is_object($recipient) ? $recipient->url : $recipient,
         ]);
       }
       if (is_object($recipient)) {
@@ -2035,7 +1838,8 @@ class CharacterManager extends Service {
       }
       if ($data['action'] == 'Accept') {
         $cooldown = Settings::get('transfer_cooldown');
-        $transfer->status = 'Accepted'; // Process the character move if the transfer has already been approved
+        $transfer->status = 'Accepted';
+        // Process the character move if the transfer has already been approved
         if ($transfer->is_approved) {
           //check the cooldown saved
           if (isset($transfer->data['cooldown'])) {
@@ -2045,26 +1849,28 @@ class CharacterManager extends Service {
           if (!Settings::get('open_transfers_queue')) {
             $transfer->data = json_encode([
               'cooldown' => $cooldown,
-              'staff_id' => null
+              'staff_id' => null,
             ]);
-          } // Notify sender of the successful transfer
+          }
+          // Notify sender of the successful transfer
           Notifications::create('CHARACTER_TRANSFER_ACCEPTED', $transfer->sender, [
             'character_name' => $transfer->character->slug,
-            'character_url' => $transfer->character->url,
-            'sender_name' => $transfer->recipient->name,
-            'sender_url' => $transfer->recipient->url
+            'character_url'  => $transfer->character->url,
+            'sender_name'    => $transfer->recipient->name,
+            'sender_url'     => $transfer->recipient->url,
           ]);
         }
       } else {
         $transfer->status = 'Rejected';
         $transfer->data = json_encode([
-          'staff_id' => null
-        ]); // Notify sender that transfer has been rejected
+          'staff_id' => null,
+        ]);
+        // Notify sender that transfer has been rejected
         Notifications::create('CHARACTER_TRANSFER_REJECTED', $transfer->sender, [
           'character_name' => $transfer->character->slug,
-          'character_url' => $transfer->character->url,
-          'sender_name' => $transfer->recipient->name,
-          'sender_url' => $transfer->recipient->url
+          'character_url'  => $transfer->character->url,
+          'sender_name'    => $transfer->recipient->name,
+          'sender_url'     => $transfer->recipient->url,
         ]);
       }
       $transfer->save();
@@ -2091,12 +1897,13 @@ class CharacterManager extends Service {
         throw new \Exception('Invalid transfer selected.');
       }
       $transfer->status = 'Canceled';
-      $transfer->save(); // Notify recipient of the cancelled transfer
+      $transfer->save();
+      // Notify recipient of the cancelled transfer
       Notifications::create('CHARACTER_TRANSFER_CANCELED', $transfer->recipient, [
         'character_name' => $transfer->character->slug,
-        'character_url' => $transfer->character->url,
-        'sender_name' => $transfer->sender->name,
-        'sender_url' => $transfer->sender->url
+        'character_url'  => $transfer->character->url,
+        'sender_name'    => $transfer->sender->name,
+        'sender_url'     => $transfer->sender->url,
       ]);
       return $this->commitReturn(true);
     } catch (\Exception $e) {
@@ -2131,71 +1938,56 @@ class CharacterManager extends Service {
           'cooldown' => isset($data['cooldown']) ? $data['cooldown'] : Settings::get('transfer_cooldown')
         ]); // Process the character move if the recipient has already accepted the transfer
         if ($transfer->status == 'Accepted') {
-          if (
-            !$this->logAdminAction(
-              $user,
-              'Approved Transfer',
-              'Approved transfer of ' . $transfer->character->displayname . ' to ' . $transfer->recipient->displayname
-            )
-          ) {
+          if (!$this->logAdminAction($user, 'Approved Transfer', 'Approved transfer of ' . $transfer->character->displayname . ' to ' . $transfer->recipient->displayname)) {
             throw new \Exception('Failed to log admin action.');
           }
-          $this->moveCharacter($transfer->character, $transfer->recipient, 'User Transfer', $data['cooldown'] ?? -1); // Notify both parties of the successful transfer
+          $this->moveCharacter($transfer->character, $transfer->recipient, 'User Transfer', $data['cooldown'] ?? -1);
+          // Notify both parties of the successful transfer
           Notifications::create('CHARACTER_TRANSFER_APPROVED', $transfer->sender, [
             'character_name' => $transfer->character->slug,
-            'character_url' => $transfer->character->url,
-            'sender_name' => $user->name,
-            'sender_url' => $user->url
+            'character_url'  => $transfer->character->url,
+            'sender_name'    => $user->name,
+            'sender_url'     => $user->url,
           ]);
           Notifications::create('CHARACTER_TRANSFER_APPROVED', $transfer->recipient, [
             'character_name' => $transfer->character->slug,
-            'character_url' => $transfer->character->url,
-            'sender_name' => $user->name,
-            'sender_url' => $user->url
+            'character_url'  => $transfer->character->url,
+            'sender_name'    => $user->name,
+            'sender_url'     => $user->url,
           ]);
         } else {
-          if (
-            !$this->logAdminAction(
-              $user,
-              'Approved Transfer',
-              'Approved transfer of ' . $transfer->character->displayname . ' to ' . $transfer->recipient->displayname
-            )
-          ) {
+          if (!$this->logAdminAction($user, 'Approved Transfer', 'Approved transfer of ' . $transfer->character->displayname . ' to ' . $transfer->recipient->displayname)) {
             throw new \Exception('Failed to log admin action.');
-          } // Still pending a response from the recipient
+          }
+          // Still pending a response from the recipient
           Notifications::create('CHARACTER_TRANSFER_ACCEPTABLE', $transfer->recipient, [
             'character_name' => $transfer->character->slug,
-            'character_url' => $transfer->character->url,
-            'sender_name' => $user->name,
-            'sender_url' => $user->url
+            'character_url'  => $transfer->character->url,
+            'sender_name'    => $user->name,
+            'sender_url'     => $user->url,
           ]);
         }
       } else {
-        if (
-          !$this->logAdminAction(
-            $user,
-            'Rejected Transfer',
-            'Rejected transfer of ' . $transfer->character->displayname . ' to ' . $transfer->recipient->displayname
-          )
-        ) {
+        if (!$this->logAdminAction($user, 'Rejected Transfer', 'Rejected transfer of ' . $transfer->character->displayname . ' to ' . $transfer->recipient->displayname)) {
           throw new \Exception('Failed to log admin action.');
         }
         $transfer->status = 'Rejected';
         $transfer->reason = isset($data['reason']) ? $data['reason'] : null;
         $transfer->data = json_encode([
-          'staff_id' => $user->id
-        ]); // Notify both parties that the request was denied
+          'staff_id' => $user->id,
+        ]);
+        // Notify both parties that the request was denied
         Notifications::create('CHARACTER_TRANSFER_DENIED', $transfer->sender, [
           'character_name' => $transfer->character->slug,
-          'character_url' => $transfer->character->url,
-          'sender_name' => $user->name,
-          'sender_url' => $user->url
+          'character_url'  => $transfer->character->url,
+          'sender_name'    => $user->name,
+          'sender_url'     => $user->url,
         ]);
         Notifications::create('CHARACTER_TRANSFER_DENIED', $transfer->recipient, [
           'character_name' => $transfer->character->slug,
-          'character_url' => $transfer->character->url,
-          'sender_name' => $user->name,
-          'sender_url' => $user->url
+          'character_url'  => $transfer->character->url,
+          'sender_name'    => $user->name,
+          'sender_url'     => $user->url,
         ]);
       }
       $transfer->save();
@@ -2209,11 +2001,11 @@ class CharacterManager extends Service {
   /**
    * Moves a character from one user to another.
    *
-   * @param  \App\Models\Character\Character  $character
-   * @param  \App\Models\User\User            $recipient
-   * @param  string                           $data
-   * @param  int                              $cooldown
-   * @param  string                           $logType
+   * @param \App\Models\Character\Character $character
+   * @param \App\Models\User\User           $recipient
+   * @param string                          $data
+   * @param int                             $cooldown
+   * @param string                          $logType
    */
   public function moveCharacter($character, $recipient, $data, $cooldown = -1, $logType = null) {
     $sender = $character->user;
@@ -2253,21 +2045,21 @@ class CharacterManager extends Service {
     $character->save();
     // Notify bookmarkers
     $character->notifyBookmarkers('BOOKMARK_OWNER');
-    if (Config::get('lorekeeper.settings.reset_character_status_on_transfer')) {
+    if (config('lorekeeper.settings.reset_character_status_on_transfer')) {
       // Reset trading status, gift art status, and writing status
       $character->update([
-        'is_gift_art_allowed' => 0,
+        'is_gift_art_allowed'     => 0,
         'is_gift_writing_allowed' => 0,
-        'is_trading' => 0
+        'is_trading'              => 0,
       ]);
     }
-    if (Config::get('lorekeeper.settings.reset_character_profile_on_transfer') && !$character->is_myo_slot) {
+    if (config('lorekeeper.settings.reset_character_profile_on_transfer') && !$character->is_myo_slot) {
       // Reset name and profile
       $character->update(['name' => null]);
       // Reset profile
       $character->profile->update([
-        'text' => null,
-        'parsed_text' => null
+        'text'        => null,
+        'parsed_text' => null,
       ]);
     }
     // Add a log for the ownership change
@@ -2670,7 +2462,6 @@ class CharacterManager extends Service {
       // Attach features
       // We'll do the compulsory ones at the time of approval.
       $features = Feature::whereIn('id', $data['feature_id'])->with('rarity')->get()->keyBy('id');
-
       foreach ($data['feature_id'] as $key => $featureId) {
         if (!$featureId) continue;
         // Skip the feature if the rarity is too high.
@@ -3226,32 +3017,26 @@ class CharacterManager extends Service {
    */
   public function updateCharacterLineage($data, $character, $user, $isAdmin = false) {
     DB::beginTransaction();
-
     try {
       if (!$user->hasPower('manage_characters')) throw new \Exception('You do not have the required permissions to do this.');
-
       if (!$character->lineage) {
-        return $this->handleCharacterLineage($data, $character, $character->is_myo_slot);
+        return $this->handleCharacterLineage($data, $character);
       } else {
         $character->lineage->update([
-          'father_id'   => $data['father_id'] ?? null,
-          'father_name' => $data['father_id'] ? null : ($data['father_name'] ?? null),
-          'mother_id'   => $data['mother_id'] ?? null,
-          'mother_name' => $data['mother_id'] ? null : ($data['mother_name'] ?? null),
+          'parent_1_id'   => $data['parent_1_id'] ?? null,
+          'parent_1_name' => $data['parent_1_id'] ? null : ($data['parent_1_name'] ?? null),
+          'parent_1_id'   => $data['parent_2_id'] ?? null,
+          'parent_2_name' => $data['parent_2_id'] ? null : ($data['parent_2_name'] ?? null),
           'depth'       => $data['depth'] ?? 0,
         ]);
       }
-      // CUSTOM ANCESTRY
-
-
-
+      // CUSTOM ANCESTRY - TODO
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
     return $this->rollbackReturn(false);
   }
-
 
   /**
    * Handles character lineage data.
@@ -3261,28 +3046,31 @@ class CharacterManager extends Service {
    * @param  bool                             $isMyo
    * @return \App\Models\Character\CharacterLineage|bool
    */
-  private function handleCharacterLineage($data, $character, $isMyo = false) {
+  private function handleCharacterLineage($data, $character) {
     try {
-      // check mother and father id if set to see if character exists
-      if (isset($data['father_id']) && $data['father_id']) {
-        $father = Character::find($data['father_id']);
-        if (!$father) {
-          throw new \Exception('Father is invalid.');
+      if (!isset($data['parent_1_id']) && !isset($data['parent_1_name']) && !isset($data['parent_2_id']) && !isset($data['parent_2_name'])) {
+        throw new \Exception('No lineage data provided.');
+      }
+      // check parent ids if set to see if character exists
+      if (isset($data['parent_1_id']) && $data['parent_1_id']) {
+        $parent_1 = Character::find($data['parent_1_id']);
+        if (!$parent_1) {
+          throw new \Exception('Parent 1 is invalid.');
         }
       }
-      if (isset($data['mother_id']) && $data['mother_id']) {
-        $mother = Character::find($data['mother_id']);
-        if (!$mother) {
-          throw new \Exception('Mother is invalid.');
+      if (isset($data['parent_2_id']) && $data['parent_2_id']) {
+        $parent_2 = Character::find($data['parent_2_id']);
+        if (!$parent_2) {
+          throw new \Exception('Parent 2 is invalid.');
         }
       }
       $lineage = CharacterLineage::create([
-        'character_id' => $character->id,
-        'father_id'    => $data['father_id'] ?? null,
-        'father_name'  => $data['father_name'] ?? null,
-        'mother_id'    => $data['mother_id'] ?? null,
-        'mother_name'  => $data['mother_id'] ?? null,
-        'depth'        => $data['depth'] ?? 0,
+        'character_id'   => $character->id,
+        'parent_1_id'    => $data['parent_1_id'] ?? null,
+        'parent_1_name'  => $data['parent_1_id'] ? null : ($data['parent_1_name'] ?? null),
+        'parent_2_id'    => $data['parent_2_id'] ?? null,
+        'parent_2_name'  => $data['parent_2_id'] ? null : ($data['parent_2_name'] ?? null),
+        'depth'          => $data['depth'] ?? 0,
       ]);
       return $this->commitReturn($lineage);
     } catch (\Exception $e) {
@@ -3297,39 +3085,58 @@ class CharacterManager extends Service {
    */
   public function likeCharacter($character, $user) {
     DB::beginTransaction();
-
     try {
       //throw in another like check
       $user->checkLike($character);
-
       //check all the like criteria
       if (!$user->canLike($character)) {
         throw new \Exception("You cannot " . __('character_likes.like') . " this character.");
       }
-
       //character is owned by you!
       if ($user->id == $character->user->id) {
         throw new \Exception("You cannot " . __('character_likes.like') . " a character that you own.");
       }
-
       //character's owner disabled likes
       if (!$character->user->settings->allow_character_likes) {
         throw new \Exception("This character's user is not allowing " . __('character_likes.likes') . ".");
       }
-
       //increment like count
       $character->profile->like_count += 1;
       $character->profile->save();
-
       //mark the like as liked now
       $like = $user->characterLikes()->where('character_id', $character->id)->first();
       $like->liked_at = Carbon::now();
       $like->save();
-
       return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
     return $this->rollbackReturn(false);
   }
-};
+
+
+  /**
+   * Generates a colour palette based on the image.
+   */
+  public function imageColours($character_image, $user, $colours = null) {
+    DB::beginTransaction();
+    try {
+      $created = $colours ? false : true;
+      if (!$colours) {
+        $palette = Palette::fromFilename($character_image->imagePath . '/' . $character_image->imageFileName);
+        $extractor = new ColorExtractor($palette);
+        $colours = $extractor->extract(config('lorekeeper.character_pairing.colour_count'));
+        foreach ($colours as $key => $colour) {
+          $colours[$key] = Color::fromIntToHex($colour);
+        }
+      }
+      $character_image->colours = json_encode($colours);
+      $character_image->save();
+      $this->createLog($user->id, null, null, null, $character_image->character_id, 'Image Colours ' . ($created ? 'Generated' : 'Updated'), '', 'character');
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+    return $this->rollbackReturn(false);
+  }
+}

@@ -5,7 +5,8 @@
 - [ ] titles missing on create myo
 - [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
 
-# BROKEN
+# TODO
+- [ ] remove sex
 - [ ] featured character only from active participants
 - [ ] shops still fucked
 - [ ] appprovals?

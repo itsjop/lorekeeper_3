@@ -73,14 +73,14 @@
             <div class="card card-body">
                 <div class="row text-center">
                     @include('character._lineage_tree', [
-                        'character' => $character->lineage ? $character->lineage->father : null,
+                        'character' => $character->lineage?->parent_1,
                         'max_depth' => config('lorekeeper.lineage.lineage_depth') - 1,
-                        'parent' => 'Father',
+                        'parent' => $character->lineage?->parent_1->parentType ?? 'Parent',
                     ])
                     @include('character._lineage_tree', [
-                        'character' => $character->lineage ? $character->lineage->mother : null,
+                        'character' => $character->lineage?->parent_2,
                         'max_depth' => config('lorekeeper.lineage.lineage_depth') - 1,
-                        'parent' => 'Mother',
+                        'parent' => $character->lineage?->parent_2->parentType ?? 'Parent',
                     ])
                 </div>
             </div>
