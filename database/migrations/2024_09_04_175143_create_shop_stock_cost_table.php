@@ -31,7 +31,6 @@ return new class extends Migration {
 
     Schema::table('shop_stock', function (Blueprint $table) {
       // dropColumnIfExists('shop_stock', 'cost');
-      dropColumnIfExists('shop_stock', 'currency_id');
       $table->json('data')->nullable()->default(null);
     });
   }
@@ -42,6 +41,8 @@ return new class extends Migration {
   public function down(): void {
     dropColumnIfExists('shop_stock', 'currency_id');
     Schema::table('shop_stock', function (Blueprint $table) {
+      dropColumnIfExists('shop_stock', 'cost');
+      dropColumnIfExists('shop_stock', 'currency_id');
       $table->integer('currency_id')->unsigned();
       $table->integer('cost');
 

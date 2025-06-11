@@ -80,6 +80,19 @@ class AccountController extends Controller {
         ->where('is_default', 1)
         ->where('admin_only', 0)->get()->pluck('settingsName', 'id')->toArray();
     }
+
+    $default = Border::base()->active(Auth::user() ?? null)->where('is_default', 1)->get();
+    $admin = Border::base()->where('admin_only', 1)->get();
+
+    return view('account.settings', [
+      'user_enabled' => Settings::get('WE_user_factions'),
+      'user_faction_enabled' => Settings::get('WE_user_factions'),
+      'borders' => $borderOptions + Auth::user()->borders()->get()->pluck('settingsName', 'id')->toArray(),
+      'default' => $default,
+      'admin' => $admin,
+      'border_variants' => ['0' => 'Pick a Border First'],
+      'bottom_layers' => ['0' => 'Pick a Border First'],
+    ]);
   }
 
   /**
@@ -568,21 +581,19 @@ class AccountController extends Controller {
     ]);
   }
 
-     /**
-     * Change if the user's characters can be liked
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  App\Services\UserService  $service
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postAllowCharacterLikes(Request $request, UserService $service)
-    {
-        if($service->updateAllowCharacterLikes($request->input('allow_character_likes'), Auth::user())) {
-            flash('Like status updated successfully.')->success();
-        }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
-        return redirect()->back();
+  /**
+   * Change if the user's characters can be liked
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  App\Services\UserService  $service
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postAllowCharacterLikes(Request $request, UserService $service) {
+    if ($service->updateAllowCharacterLikes($request->input('allow_character_likes'), Auth::user())) {
+      flash('Like status updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
     }
+    return redirect()->back();
+  }
 }

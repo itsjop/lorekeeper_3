@@ -2,10 +2,9 @@
   $(document).ready(function() {
     $('#charTitle').selectize();
 
-
     // TODO: restore undefined $titles array
     let titles = []
-    {{-- let titles = JSON.parse('{!! json_encode($titles) !!}'); --}}
+    {{-- /* let titles = JSON.parse('{!! json_encode($titles) !!}'); */ --}}
     let $title = $('#charTitle');
     let $titleOptions = $('#titleOptions');
     let $titleDataForm = $('.title-data');

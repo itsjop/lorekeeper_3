@@ -11,7 +11,7 @@ use App\Models\User\UserPetLevel;
 use DB;
 
 class PetService extends Service {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Pet Service
     |--------------------------------------------------------------------------
@@ -20,671 +20,672 @@ class PetService extends Service {
     |
     */
 
-    /**********************************************************************************************
+  /**********************************************************************************************
 
         PET CATEGORIES
 
-    **********************************************************************************************/
+   **********************************************************************************************/
 
-    /**
-     * Create a category.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return \App\Models\Pet\PetCategory|bool
-     */
-    public function createPetCategory($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Create a category.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return \App\Models\Pet\PetCategory|bool
+   */
+  public function createPetCategory($data, $user) {
+    DB::beginTransaction();
 
-        try {
-            $data = $this->populateCategoryData($data);
+    try {
+      $data = $this->populateCategoryData($data);
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $image = $data['image'];
-                unset($data['image']);
-            } else {
-                $data['has_image'] = 0;
-            }
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $image = $data['image'];
+        unset($data['image']);
+      } else {
+        $data['has_image'] = 0;
+      }
 
-            $category = PetCategory::create($data);
+      $category = PetCategory::create($data);
 
-            if ($image) {
-                $this->handleImage($image, $category->categoryImagePath, $category->categoryImageFileName);
-            }
+      if ($image) {
+        $this->handleImage($image, $category->categoryImagePath, $category->categoryImageFileName);
+      }
 
-            return $this->commitReturn($category);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($category);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Update a category.
-     *
-     * @param \App\Models\Pet\PetCategory $category
-     * @param array                       $data
-     * @param \App\Models\User\User       $user
-     *
-     * @return \App\Models\Pet\PetCategory|bool
-     */
-    public function updatePetCategory($category, $data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // More specific validation
-            if (PetCategory::where('name', $data['name'])->where('id', '!=', $category->id)->exists()) {
-                throw new \Exception('The name has already been taken.');
-            }
+  /**
+   * Update a category.
+   *
+   * @param \App\Models\Pet\PetCategory $category
+   * @param array                       $data
+   * @param \App\Models\User\User       $user
+   *
+   * @return \App\Models\Pet\PetCategory|bool
+   */
+  public function updatePetCategory($category, $data, $user) {
+    DB::beginTransaction();
 
-            $data = $this->populateCategoryData($data, $category);
+    try {
+      // More specific validation
+      if (PetCategory::where('name', $data['name'])->where('id', '!=', $category->id)->exists()) {
+        throw new \Exception('The name has already been taken.');
+      }
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $image = $data['image'];
-                unset($data['image']);
-            }
+      $data = $this->populateCategoryData($data, $category);
 
-            $category->update($data);
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $image = $data['image'];
+        unset($data['image']);
+      }
 
-            if ($category) {
-                $this->handleImage($image, $category->categoryImagePath, $category->categoryImageFileName);
-            }
+      $category->update($data);
 
-            return $this->commitReturn($category);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      if ($category) {
+        $this->handleImage($image, $category->categoryImagePath, $category->categoryImageFileName);
+      }
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($category);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Delete a category.
-     *
-     * @param \App\Models\Pet\PetCategory $category
-     *
-     * @return bool
-     */
-    public function deletePetCategory($category) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // Check first if the category is currently in use
-            if (Pet::where('pet_category_id', $category->id)->exists()) {
-                throw new \Exception('An pet with this category exists. Please change its category first.');
-            }
+  /**
+   * Delete a category.
+   *
+   * @param \App\Models\Pet\PetCategory $category
+   *
+   * @return bool
+   */
+  public function deletePetCategory($category) {
+    DB::beginTransaction();
 
-            if ($category->has_image) {
-                $this->deleteImage($category->categoryImagePath, $category->categoryImageFileName);
-            }
-            $category->delete();
+    try {
+      // Check first if the category is currently in use
+      if (Pet::where('pet_category_id', $category->id)->exists()) {
+        throw new \Exception('An pet with this category exists. Please change its category first.');
+      }
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      if ($category->has_image) {
+        $this->deleteImage($category->categoryImagePath, $category->categoryImageFileName);
+      }
+      $category->delete();
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Sorts category order.
-     *
-     * @param string $data
-     *
-     * @return bool
-     */
-    public function sortPetCategory($data) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // explode the sort array and reverse it since the order is inverted
-            $sort = array_reverse(explode(',', $data));
+  /**
+   * Sorts category order.
+   *
+   * @param string $data
+   *
+   * @return bool
+   */
+  public function sortPetCategory($data) {
+    DB::beginTransaction();
 
-            foreach ($sort as $key => $s) {
-                PetCategory::where('id', $s)->update(['sort' => $key]);
-            }
+    try {
+      // explode the sort array and reverse it since the order is inverted
+      $sort = array_reverse(explode(',', $data));
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      foreach ($sort as $key => $s) {
+        PetCategory::where('id', $s)->update(['sort' => $key]);
+      }
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**********************************************************************************************
+    return $this->rollbackReturn(false);
+  }
+
+  /**********************************************************************************************
 
         PETS
 
-    **********************************************************************************************/
+   **********************************************************************************************/
 
-    /**
-     * Creates a new pet.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return \App\Models\Pet\Pet|bool
-     */
-    public function createPet($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Creates a new pet.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return \App\Models\Pet\Pet|bool
+   */
+  public function createPet($data, $user) {
+    DB::beginTransaction();
 
-        try {
-            if (isset($data['pet_category_id']) && $data['pet_category_id'] == 'none') {
-                $data['pet_category_id'] = null;
-            }
+    try {
+      if (isset($data['pet_category_id']) && $data['pet_category_id'] == 'none') {
+        $data['pet_category_id'] = null;
+      }
 
-            if ((isset($data['pet_category_id']) && $data['pet_category_id']) && !PetCategory::where('id', $data['pet_category_id'])->exists()) {
-                throw new \Exception('The selected pet category is invalid.');
-            }
+      if ((isset($data['pet_category_id']) && $data['pet_category_id']) && !PetCategory::where('id', $data['pet_category_id'])->exists()) {
+        throw new \Exception('The selected pet category is invalid.');
+      }
 
-            $data = $this->populateData($data);
+      $data = $this->populateData($data);
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $image = $data['image'];
-                unset($data['image']);
-            } else {
-                $data['has_image'] = 0;
-            }
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $image = $data['image'];
+        unset($data['image']);
+      } else {
+        $data['has_image'] = 0;
+      }
 
-            $pet = Pet::create($data);
+      $pet = Pet::create($data);
 
-            if ($image) {
-                $this->handleImage($image, $pet->imagePath, $pet->imageFileName);
-            }
+      if ($image) {
+        $this->handleImage($image, $pet->imagePath, $pet->imageFileName);
+      }
 
-            return $this->commitReturn($pet);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($pet);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Updates an pet.
-     *
-     * @param \App\Models\Pet\Pet   $pet
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return \App\Models\Pet\Pet|bool
-     */
-    public function updatePet($pet, $data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            if (isset($data['pet_category_id']) && $data['pet_category_id'] == 'none') {
-                $data['pet_category_id'] = null;
-            }
+  /**
+   * Updates an pet.
+   *
+   * @param \App\Models\Pet\Pet   $pet
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return \App\Models\Pet\Pet|bool
+   */
+  public function updatePet($pet, $data, $user) {
+    DB::beginTransaction();
 
-            // More specific validation
-            if (Pet::where('name', $data['name'])->where('id', '!=', $pet->id)->exists()) {
-                throw new \Exception('The name has already been taken.');
-            }
-            if ((isset($data['pet_category_id']) && $data['pet_category_id']) && !PetCategory::where('id', $data['pet_category_id'])->exists()) {
-                throw new \Exception('The selected pet category is invalid.');
-            }
+    try {
+      if (isset($data['pet_category_id']) && $data['pet_category_id'] == 'none') {
+        $data['pet_category_id'] = null;
+      }
 
-            $data = $this->populateData($data);
+      // More specific validation
+      if (Pet::where('name', $data['name'])->where('id', '!=', $pet->id)->exists()) {
+        throw new \Exception('The name has already been taken.');
+      }
+      if ((isset($data['pet_category_id']) && $data['pet_category_id']) && !PetCategory::where('id', $data['pet_category_id'])->exists()) {
+        throw new \Exception('The selected pet category is invalid.');
+      }
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $image = $data['image'];
-                unset($data['image']);
-            }
+      $data = $this->populateData($data);
 
-            $pet->update($data);
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $image = $data['image'];
+        unset($data['image']);
+      }
 
-            if ($pet) {
-                $this->handleImage($image, $pet->imagePath, $pet->imageFileName);
-            }
+      $pet->update($data);
 
-            return $this->commitReturn($pet);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      if ($pet) {
+        $this->handleImage($image, $pet->imagePath, $pet->imageFileName);
+      }
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($pet);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Deletes an pet.
-     *
-     * @param \App\Models\Pet\Pet $pet
-     *
-     * @return bool
-     */
-    public function deletePet($pet) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // Check first if the pet is currently owned or if some other site feature uses it
-            if (DB::table('user_pets')->where('pet_id', $pet->id)->where('count', '>', 0)->where('deleted_at', '!=', null)->exists()) {
-                throw new \Exception('At least one user currently owns this pet. Please remove the pet(s) before deleting it.');
-            }
-            if (DB::table('loots')->where('rewardable_type', 'Pet')->where('rewardable_id', $pet->id)->exists()) {
-                throw new \Exception('A loot table currently distributes this pet as a potential reward. Please remove the pet before deleting it.');
-            }
-            if (DB::table('prompt_rewards')->where('rewardable_type', 'Pet')->where('rewardable_id', $pet->id)->exists()) {
-                throw new \Exception('A prompt currently distributes this pet as a reward. Please remove the pet before deleting it.');
-            }
-            if (DB::table('user_pets_log')->where('pet_id', $pet->id)->exists()) {
-                throw new \Exception('At least one log currently has this pet. Please remove the log(s) before deleting it.');
-            }
-            if (DB::table('shop_stock')->where('item_id', $pet->id)->where('stock_type', 'Pet')->exists()) {
-                throw new \Exception('A shop currently stocks this pet. Please remove the pet before deleting it.');
-            }
+  /**
+   * Deletes an pet.
+   *
+   * @param \App\Models\Pet\Pet $pet
+   *
+   * @return bool
+   */
+  public function deletePet($pet) {
+    DB::beginTransaction();
 
-            // Delete character drops and drop data if they exist
-            if ($pet->dropData) {
-                $pet->dropData->petDrops()->delete();
-                $pet->dropData->delete();
-            }
+    try {
+      // Check first if the pet is currently owned or if some other site feature uses it
+      if (DB::table('user_pets')->where('pet_id', $pet->id)->where('count', '>', 0)->where('deleted_at', '!=', null)->exists()) {
+        throw new \Exception('At least one user currently owns this pet. Please remove the pet(s) before deleting it.');
+      }
+      if (DB::table('loots')->where('rewardable_type', 'Pet')->where('rewardable_id', $pet->id)->exists()) {
+        throw new \Exception('A loot table currently distributes this pet as a potential reward. Please remove the pet before deleting it.');
+      }
+      if (DB::table('prompt_rewards')->where('rewardable_type', 'Pet')->where('rewardable_id', $pet->id)->exists()) {
+        throw new \Exception('A prompt currently distributes this pet as a reward. Please remove the pet before deleting it.');
+      }
+      if (DB::table('user_pets_log')->where('pet_id', $pet->id)->exists()) {
+        throw new \Exception('At least one log currently has this pet. Please remove the log(s) before deleting it.');
+      }
+      if (DB::table('shop_stock')->where('item_id', $pet->id)->where('stock_type', 'Pet')->exists()) {
+        throw new \Exception('A shop currently stocks this pet. Please remove the pet before deleting it.');
+      }
 
-            $pet->delete();
+      // Delete character drops and drop data if they exist
+      if ($pet->dropData) {
+        $pet->dropData->petDrops()->delete();
+        $pet->dropData->delete();
+      }
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      $pet->delete();
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**********************************************************************************************
+    return $this->rollbackReturn(false);
+  }
+
+  /**********************************************************************************************
 
         PET EVOLUTIONS
 
-    **********************************************************************************************/
+   **********************************************************************************************/
 
-    /**
-     * Creates a pet evolution.
-     *
-     * @param mixed $pet
-     * @param mixed $data
-     */
-    public function createEvolution($pet, $data) {
-        DB::beginTransaction();
+  /**
+   * Creates a pet evolution.
+   *
+   * @param mixed $pet
+   * @param mixed $data
+   */
+  public function createEvolution($pet, $data) {
+    DB::beginTransaction();
 
-        try {
-            if (!isset($data['evolution_name']) || !$data['evolution_name']) {
-                throw new \Exception('Please enter a valid evolution name.');
-            }
-            // check name is unique
-            if (PetEvolution::where('evolution_name', $data['evolution_name'])->where('pet_id', $pet->id)->exists()) {
-                throw new \Exception('The name has already been taken.');
-            }
+    try {
+      if (!isset($data['evolution_name']) || !$data['evolution_name']) {
+        throw new \Exception('Please enter a valid evolution name.');
+      }
+      // check name is unique
+      if (PetEvolution::where('evolution_name', $data['evolution_name'])->where('pet_id', $pet->id)->exists()) {
+        throw new \Exception('The name has already been taken.');
+      }
 
-            $image = null;
-            if (isset($data['evolution_image']) && $data['evolution_image']) {
-                $data['has_image'] = 1;
-                $image = $data['evolution_image'];
-                unset($data['evolution_image']);
-            }
+      $image = null;
+      if (isset($data['evolution_image']) && $data['evolution_image']) {
+        $data['has_image'] = 1;
+        $image = $data['evolution_image'];
+        unset($data['evolution_image']);
+      }
 
-            $data['pet_id'] = $pet->id;
+      $data['pet_id'] = $pet->id;
 
-            if (!$image) {
-                throw new \Exception('Please upload an image for this evolution.');
-            }
+      if (!$image) {
+        throw new \Exception('Please upload an image for this evolution.');
+      }
 
-            $evolution = PetEvolution::create($data);
+      $evolution = PetEvolution::create($data);
 
-            if ($image) {
-                $this->handleImage($image, $evolution->imagePath, $evolution->imageFileName);
-            }
+      if ($image) {
+        $this->handleImage($image, $evolution->imagePath, $evolution->imageFileName);
+      }
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Edits the evolutions on a pet.
-     *
-     * @param mixed $evolution
-     * @param mixed $data
-     */
-    public function editEvolution($evolution, $data) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            if (!isset($data['evolution_name']) || !$data['evolution_name']) {
-                throw new \Exception('Please enter a valid evolution name.');
-            }
-            if (PetEvolution::where('evolution_name', $data['evolution_name'])->where('pet_id', $evolution->pet->id)->where('id', '!=', $evolution->id)->exists()) {
-                throw new \Exception('The name has already been taken.');
-            }
-            if (!isset($data['evolution_stage']) || !$data['evolution_stage']) {
-                throw new \Exception('Please enter a valid evolution stage.');
-            }
+  /**
+   * Edits the evolutions on a pet.
+   *
+   * @param mixed $evolution
+   * @param mixed $data
+   */
+  public function editEvolution($evolution, $data) {
+    DB::beginTransaction();
 
-            $image = null;
-            if (isset($data['evolution_image']) && $data['evolution_image']) {
-                $image = $data['evolution_image'];
-                unset($data['evolution_image']);
-            }
+    try {
+      if (!isset($data['evolution_name']) || !$data['evolution_name']) {
+        throw new \Exception('Please enter a valid evolution name.');
+      }
+      if (PetEvolution::where('evolution_name', $data['evolution_name'])->where('pet_id', $evolution->pet->id)->where('id', '!=', $evolution->id)->exists()) {
+        throw new \Exception('The name has already been taken.');
+      }
+      if (!isset($data['evolution_stage']) || !$data['evolution_stage']) {
+        throw new \Exception('Please enter a valid evolution stage.');
+      }
 
-            $evolution->update([
-                'evolution_name'  => $data['evolution_name'],
-                'evolution_stage' => $data['evolution_stage'],
-            ]);
+      $image = null;
+      if (isset($data['evolution_image']) && $data['evolution_image']) {
+        $image = $data['evolution_image'];
+        unset($data['evolution_image']);
+      }
 
-            if ($image) {
-                $this->handleImage($image, $evolution->imagePath, $evolution->imageFileName);
-            }
+      $evolution->update([
+        'evolution_name'  => $data['evolution_name'],
+        'evolution_stage' => $data['evolution_stage'],
+      ]);
 
-            if (isset($data['delete']) && $data['delete']) {
-                // check that no user pets exist with this evolution before deleting
-                if (UserPet::where('evolution_id', $evolution->id)->exists()) {
-                    throw new \Exception('At least one user pet currently is this evolution. Please remove the pet(s) before deleting it.');
-                }
-                // delete image
-                $this->deleteImage($evolution->imagePath, $evolution->imageFileName);
+      if ($image) {
+        $this->handleImage($image, $evolution->imagePath, $evolution->imageFileName);
+      }
 
-                $evolution->delete();
-                flash('Evolution deleted successfully.')->success();
-            } else {
-                flash('Evolution updated successfully.')->success();
-            }
-
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
+      if (isset($data['delete']) && $data['delete']) {
+        // check that no user pets exist with this evolution before deleting
+        if (UserPet::where('evolution_id', $evolution->id)->exists()) {
+          throw new \Exception('At least one user pet currently is this evolution. Please remove the pet(s) before deleting it.');
         }
+        // delete image
+        $this->deleteImage($evolution->imagePath, $evolution->imageFileName);
 
-        return $this->rollbackReturn(false);
+        $evolution->delete();
+        flash('Evolution deleted successfully.')->success();
+      } else {
+        flash('Evolution updated successfully.')->success();
+      }
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Handle category data.
-     *
-     * @param array                            $data
-     * @param \App\Models\Pet\PetCategory|null $category
-     *
-     * @return array
-     */
-    private function populateCategoryData($data, $category = null) {
-        if (isset($data['description']) && $data['description']) {
-            $data['parsed_description'] = parse($data['description']);
-        }
-        if (!isset($data['is_visible'])) {
-            $data['is_visible'] = 0;
-        }
-        if (!isset($data['allow_attach'])) {
-            $data['allow_attach'] = 0;
-            $data['limit'] = null;
-        }
-        // If attachments are allowed, but no limit is set, set it to null.
-        if (isset($data['allow_attach']) && $data['allow_attach'] && !isset($data['limit'])) {
-            $data['limit'] = null;
-        }
+    return $this->rollbackReturn(false);
+  }
 
-        if (isset($data['remove_image'])) {
-            if ($category && $category->has_image && $data['remove_image']) {
-                $data['has_image'] = 0;
-                $this->deleteImage($category->categoryImagePath, $category->categoryImageFileName);
-            }
-            unset($data['remove_image']);
-        }
-
-        return $data;
+  /**
+   * Handle category data.
+   *
+   * @param array                            $data
+   * @param \App\Models\Pet\PetCategory|null $category
+   *
+   * @return array
+   */
+  private function populateCategoryData($data, $category = null) {
+    if (isset($data['description']) && $data['description']) {
+      $data['parsed_description'] = parse($data['description']);
+    }
+    if (!isset($data['is_visible'])) {
+      $data['is_visible'] = 0;
+    }
+    if (!isset($data['allow_attach'])) {
+      $data['allow_attach'] = 0;
+      $data['limit'] = null;
+    }
+    // If attachments are allowed, but no limit is set, set it to null.
+    if (isset($data['allow_attach']) && $data['allow_attach'] && !isset($data['limit'])) {
+      $data['limit'] = null;
     }
 
-    /**
-     * Processes user input for creating/updating an pet.
-     *
-     * @param array               $data
-     * @param \App\Models\Pet\Pet $pet
-     *
-     * @return array
-     */
-    private function populateData($data, $pet = null) {
-        if (isset($data['description']) && $data['description']) {
-            $data['parsed_description'] = parse($data['description']);
-        }
-
-        // If attachments are allowed, but no limit is set, set it to null.
-        if (isset($data['allow_attach']) && $data['allow_attach'] && !isset($data['limit'])) {
-            $data['limit'] = null;
-        }
-
-        if (!isset($data['allow_transfer'])) {
-            $data['allow_transfer'] = 0;
-        }
-
-        if (!isset($data['is_visible'])) {
-            $data['is_visible'] = 0;
-        }
-
-        if (isset($data['remove_image'])) {
-            if ($pet && $pet->has_image && $data['remove_image']) {
-                $data['has_image'] = 0;
-                $this->deleteImage($pet->imagePath, $pet->imageFileName);
-            }
-            unset($data['remove_image']);
-        }
-
-        return $data;
+    if (isset($data['remove_image'])) {
+      if ($category && $category->has_image && $data['remove_image']) {
+        $data['has_image'] = 0;
+        $this->deleteImage($category->categoryImagePath, $category->categoryImageFileName);
+      }
+      unset($data['remove_image']);
     }
 
-    /**********************************************************************************************
+    return $data;
+  }
+
+  /**
+   * Processes user input for creating/updating an pet.
+   *
+   * @param array               $data
+   * @param \App\Models\Pet\Pet $pet
+   *
+   * @return array
+   */
+  private function populateData($data, $pet = null) {
+    if (isset($data['description']) && $data['description']) {
+      $data['parsed_description'] = parse($data['description']);
+    }
+
+    // If attachments are allowed, but no limit is set, set it to null.
+    if (isset($data['allow_attach']) && $data['allow_attach'] && !isset($data['limit'])) {
+      $data['limit'] = null;
+    }
+
+    if (!isset($data['allow_transfer'])) {
+      $data['allow_transfer'] = 0;
+    }
+
+    if (!isset($data['is_visible'])) {
+      $data['is_visible'] = 0;
+    }
+
+    if (isset($data['remove_image'])) {
+      if ($pet && $pet->has_image && $data['remove_image']) {
+        $data['has_image'] = 0;
+        $this->deleteImage($pet->imagePath, $pet->imageFileName);
+      }
+      unset($data['remove_image']);
+    }
+
+    return $data;
+  }
+
+  /**********************************************************************************************
 
         PET LEVELS
 
-    **********************************************************************************************/
+   **********************************************************************************************/
 
-    /**
-     * Creates a new pet level.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     *
-     * @return \App\Models\Pet\PetLevel|bool
-     */
-    public function createPetLevel($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Creates a new pet level.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $user
+   *
+   * @return \App\Models\Pet\PetLevel|bool
+   */
+  public function createPetLevel($data, $user) {
+    DB::beginTransaction();
 
-        try {
+    try {
+      // if (!isset($data['level']) || !$data['level']) {
+      if ((!isset($data['level']) && $data['level'] !== "0")) {
+        throw new \Exception('Please enter a valid level.');
+      }
+      // check that level is unique
+      if (PetLevel::where('level', $data['level'])->exists()) {
+        throw new \Exception('The level has already been taken.');
+      }
 
-            if (!isset($data['level']) || !$data['level']) {
-                throw new \Exception('Please enter a valid level.');
-            }
-            // check that level is unique
-            if (PetLevel::where('level', $data['level'])->exists()) {
-                throw new \Exception('The level has already been taken.');
-            }
+      $level = PetLevel::create($data);
 
-            $level = PetLevel::create($data);
+      $rewards = createAssetsArray();
+      if (isset($data['rewardable_type']) && $data['rewardable_type']) {
+        foreach ($data['rewardable_type'] as $key => $type) {
+          $model = getAssetModelString(strtolower($type));
+          $reward = $model::find($data['rewardable_id'][$key]);
 
-            $rewards = createAssetsArray();
-            if (isset($data['rewardable_type']) && $data['rewardable_type']) {
-                foreach($data['rewardable_type'] as $key => $type) {
-                    $model = getAssetModelString(strtolower($type));
-                    $reward = $model::find($data['rewardable_id'][$key]);
-
-                    addAsset($rewards, $reward, $data['quantity'][$key]);
-                }
-            }
-
-            $level->update([
-                'rewards' => getDataReadyAssets($rewards),
-            ]);
-
-            return $this->commitReturn($level);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
+          addAsset($rewards, $reward, $data['quantity'][$key]);
         }
+      }
 
-        return $this->rollbackReturn(false);
+      $level->update([
+        'rewards' => getDataReadyAssets($rewards),
+      ]);
+
+      return $this->commitReturn($level);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Updates a pet level.
-     *
-     * @param \App\Models\Pet\PetLevel $level
-     * @param array                    $data
-     * @param \App\Models\User\User    $user
-     *
-     * @return \App\Models\Pet\PetLevel|bool
-     */
-    public function updatePetLevel($level, $data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            if (!isset($data['level']) || !$data['level']) {
-                throw new \Exception('Please enter a valid level.');
-            }
-            // check that level is unique
-            if (PetLevel::where('level', $data['level'])->where('id', '!=', $level->id)->exists()) {
-                throw new \Exception('The level has already been taken.');
-            }
+  /**
+   * Updates a pet level.
+   *
+   * @param \App\Models\Pet\PetLevel $level
+   * @param array                    $data
+   * @param \App\Models\User\User    $user
+   *
+   * @return \App\Models\Pet\PetLevel|bool
+   */
+  public function updatePetLevel($level, $data, $user) {
+    DB::beginTransaction();
 
-            $rewards = createAssetsArray();
-            if (isset($data['rewardable_id']) && $data['rewardable_id']) {
-                foreach($data['rewardable_type'] as $key => $type) {
-                    $model = getAssetModelString(strtolower($type));
-                    if (!$model) {
-                        throw new \Exception('Invalid rewardable type selected: ' . $type);
-                    }
-                    $reward = $model::find($data['rewardable_id'][$key]);
-                    if (!$reward) {
-                        throw new \Exception('Invalid rewardable selected.');
-                    }
+    try {
+      // if ((!isset($data['level']) && $data['level'] !== "0") || !$data['level']) {
+      if ((!isset($data['level']) && $data['level'] !== "0")) {
+        throw new \Exception('Please enter a valid level.');
+      }
+      // check that level is unique
+      if (PetLevel::where('level', $data['level'])->where('id', '!=', $level->id)->exists()) {
+        throw new \Exception('The level has already been taken.');
+      }
 
-                    addAsset($rewards, $reward, $data['quantity'][$key]);
-                }
-            }
+      $rewards = createAssetsArray();
+      if (isset($data['rewardable_id']) && $data['rewardable_id']) {
+        foreach ($data['rewardable_type'] as $key => $type) {
+          $model = getAssetModelString(strtolower($type));
+          if (!$model) {
+            throw new \Exception('Invalid rewardable type selected: ' . $type);
+          }
+          $reward = $model::find($data['rewardable_id'][$key]);
+          if (!$reward) {
+            throw new \Exception('Invalid rewardable selected.');
+          }
 
-            $level->update([
-                'name'             => $data['name'],
-                'level'            => $data['level'],
-                'bonding_required' => $data['bonding_required'],
-                'rewards'          => getDataReadyAssets($rewards),
-            ]);
-
-            return $this->commitReturn($level);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
+          addAsset($rewards, $reward, $data['quantity'][$key]);
         }
+      }
 
-        return $this->rollbackReturn(false);
+      $level->update([
+        'name'             => $data['name'],
+        'level'            => $data['level'],
+        'bonding_required' => $data['bonding_required'],
+        'rewards'          => getDataReadyAssets($rewards),
+      ]);
+
+      return $this->commitReturn($level);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Deletes a pet level.
-     *
-     * @param \App\Models\Pet\PetLevel $level
-     *
-     * @return bool
-     */
-    public function deletePetLevel($level) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // make sure no pets are using this level
-            if (UserPetLevel::where('bonding_level', $level->level)->exists()) {
-                throw new \Exception('At least one user pet is currently using this level. Please remove the pet(s) before deleting it.');
-            }
+  /**
+   * Deletes a pet level.
+   *
+   * @param \App\Models\Pet\PetLevel $level
+   *
+   * @return bool
+   */
+  public function deletePetLevel($level) {
+    DB::beginTransaction();
 
-            $level->delete();
+    try {
+      // make sure no pets are using this level
+      if (UserPetLevel::where('bonding_level', $level->level)->exists()) {
+        throw new \Exception('At least one user pet is currently using this level. Please remove the pet(s) before deleting it.');
+      }
 
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      $level->delete();
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Adds pets to a level.
-     *
-     * @param array                 $pet_ids
-     * @param \App\Models\Pet\PetLevel $level
-     *
-     * @return bool
-     */
-    public function addPetsToLevel($pet_ids, $level) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            $existingPets = $level->pets()->pluck('pet_id')->toArray();
+  /**
+   * Adds pets to a level.
+   *
+   * @param array                 $pet_ids
+   * @param \App\Models\Pet\PetLevel $level
+   *
+   * @return bool
+   */
+  public function addPetsToLevel($pet_ids, $level) {
+    DB::beginTransaction();
 
-            // get the ids that need to be deleted
-            $deletePets = array_diff($existingPets, $pet_ids);
-            $level->pets()->whereIn('pet_id', $deletePets)->delete();
+    try {
+      $existingPets = $level->pets()->pluck('pet_id')->toArray();
 
-            $pet_ids = array_unique($pet_ids);
-            foreach ($pet_ids as $pet_id) {
-                $pet = Pet::find($pet_id);
-                if (!$pet) {
-                    throw new \Exception('Invalid pet selected.');
-                }
+      // get the ids that need to be deleted
+      $deletePets = array_diff($existingPets, $pet_ids);
+      $level->pets()->whereIn('pet_id', $deletePets)->delete();
 
-                if ($level->pets()->where('pet_id', $pet_id)->exists()) {
-                    continue;
-                }
-                $level->pets()->create([
-                    'pet_id' => $pet_id,
-                ]);
-            }
-
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
+      $pet_ids = array_unique($pet_ids);
+      foreach ($pet_ids as $pet_id) {
+        $pet = Pet::find($pet_id);
+        if (!$pet) {
+          throw new \Exception('Invalid pet selected.');
         }
 
-        return $this->rollbackReturn(false);
-    }
-
-    /**
-     * Adds rewards to a pet on a level.
-     */
-    public function editPetLevelPetRewards($petLevel, $data) {
-        DB::beginTransaction();
-
-        try {
-
-            $rewards = createAssetsArray();
-            if (isset($data['rewardable_type']) && $data['rewardable_type']) {
-                foreach($data['rewardable_type'] as $key => $type) {
-                    $model = getAssetModelString(strtolower($type));
-                    if (!$model) {
-                        throw new \Exception('Invalid rewardable type selected: ' . $type);
-                    }
-                    $reward = $model::find($data['rewardable_id'][$key]);
-                    if (!$reward) {
-                        throw new \Exception('Invalid rewardable selected.');
-                    }
-
-                    addAsset($rewards, $reward, $data['quantity'][$key]);
-                }
-            }
-
-            $petLevel->update([
-                'rewards' => getDataReadyAssets($rewards),
-            ]);
-
-            return $this->commitReturn($petLevel);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
+        if ($level->pets()->where('pet_id', $pet_id)->exists()) {
+          continue;
         }
+        $level->pets()->create([
+          'pet_id' => $pet_id,
+        ]);
+      }
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
+
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Adds rewards to a pet on a level.
+   */
+  public function editPetLevelPetRewards($petLevel, $data) {
+    DB::beginTransaction();
+
+    try {
+
+      $rewards = createAssetsArray();
+      if (isset($data['rewardable_type']) && $data['rewardable_type']) {
+        foreach ($data['rewardable_type'] as $key => $type) {
+          $model = getAssetModelString(strtolower($type));
+          if (!$model) {
+            throw new \Exception('Invalid rewardable type selected: ' . $type);
+          }
+          $reward = $model::find($data['rewardable_id'][$key]);
+          if (!$reward) {
+            throw new \Exception('Invalid rewardable selected.');
+          }
+
+          addAsset($rewards, $reward, $data['quantity'][$key]);
+        }
+      }
+
+      $petLevel->update([
+        'rewards' => getDataReadyAssets($rewards),
+      ]);
+
+      return $this->commitReturn($petLevel);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+
+    return $this->rollbackReturn(false);
+  }
 }

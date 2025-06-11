@@ -299,7 +299,7 @@
       </div>
     </div>
   </div>
-  <div class="text-right mb-3">
+  {{-- <div class="text-right mb-3">
     <div class="btn-group">
       <button
         type="button"
@@ -316,10 +316,9 @@
         alt="List View"
       ><i class="fas fa-bars"></i></button>
     </div>
-  </div>
-
+  </div> --}}
   {!! $characters->render() !!}
-  <div id="gridView" class="hide">
+  <div id="gridView" >
     @foreach ($characters->chunk(4) as $chunk)
       <div class="row">
         @foreach ($chunk as $character)
@@ -398,5 +397,6 @@
   </div>
   {!! $characters->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $characters->total() }} result{{ $characters->total() == 1 ? '' : 's' }}
-    found.</div>
+  <div class="text-center mt-4 small text-muted">
+    {{ $characters->total() }} result{{ $characters->total() == 1 ? '' : 's' }} found.
+  </div>

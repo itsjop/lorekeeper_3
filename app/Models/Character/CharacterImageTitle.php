@@ -70,7 +70,11 @@ class CharacterImageTitle extends Model {
     if ($this->title_id) {
       return $this->title->displayTitle($this->data, $padding);
     }
-
-    return '<div><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background-color: #ddd;">' . ($this->data['short'] ?? $this->data['full']) . '</span></div>';
+    $short = isset($this->data['short'])
+      ? (isset($this->data['full'])
+        ?  $this->data['short']
+        :  $this->data['short'])
+      :  '';
+    return '<div><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background-color: #ddd;">' . $short . '</span></div>';
   }
 }

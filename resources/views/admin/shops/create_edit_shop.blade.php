@@ -157,7 +157,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group">
+    {{-- <div class="form-group">
       {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, [
           'class' => 'form-check-label',
           'data-toggle' => 'toggle',
@@ -174,8 +174,7 @@
           'placeholder' => 'Select Coupons',
           'id' => 'allowed_coupons'
       ]) !!}
-
-    </div>
+    </div> --}}
 
     <div class="text-right">
       {!! Form::submit($shop->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}

@@ -14,6 +14,8 @@
 - [ ] shop editing super broken
 - [ ] wysywig textboxes
 - [ ] admin/raffle create buttons dont work
+- [ ] re-enable coupons
+- [ ] re-enable custom names on character creation
 - [x] ironically logs page is broken
 - [x] toggles arent toggling
 - [x] delete item doesnt work

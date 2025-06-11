@@ -133,56 +133,6 @@
       {!! Form::textarea('description', old('description'), ['class' => 'form-control wysiwyg']) !!}
     </div>
 
-    <div class="form-group">
-      {!! Form::checkbox('is_visible', 1, old('is_visible'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
-          'Turn this off to hide the ' .
-              ($isMyo ? 'MYO slot' : 'character') .
-              '. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the ' .
-              ($isMyo ? 'MYO slot' : 'character') .
-              '\'s page.'
-      ) !!}
-    </div>
-
-    <h3>Transfer Information</h3>
-
-    <div class="alert alert-info">
-      These are displayed on the {{ $isMyo ? 'MYO slot' : 'character' }}'s profile, but don't have any effect on site functionality
-      except for the following:
-      <ul>
-        <li>If all switches are off, the {{ $isMyo ? 'MYO slot' : 'character' }} cannot be transferred by the user (directly or
-          through trades).</li>
-        <li>If a transfer cooldown is set, the {{ $isMyo ? 'MYO slot' : 'character' }} also cannot be transferred by the user
-          (directly or through trades) until the cooldown is up.</li>
-      </ul>
-    </div>
-    <div class="form-group">
-      {!! Form::checkbox('is_giftable', 1, old('is_giftable'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('is_giftable', 'Is Giftable', ['class' => 'form-check-label ml-3']) !!}
-    </div>
-    <div class="form-group">
-      {!! Form::checkbox('is_tradeable', 1, old('is_tradeable'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
-    </div>
-    <div class="form-group">
-      {!! Form::checkbox('is_sellable', 1, old('is_sellable'), [
-          'class' => 'form-check-input',
-          'data-toggle' => 'toggle',
-          'id' => 'resellable'
-      ]) !!}
-      {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}
-    </div>
-    <div class="card mb-3" id="resellOptions">
-      <div class="card-body">
-        {!! Form::label('Resale Value') !!} {!! add_help('This value is publicly displayed on the ' . ($isMyo ? 'MYO slot' : 'character') . '\'s page.') !!}
-        {!! Form::text('sale_value', old('sale_value'), ['class' => 'form-control']) !!}
-      </div>
-    </div>
-    <div class="form-group">
-      {!! Form::label('On Transfer Cooldown Until (Optional)') !!}
-      {!! Form::text('transferrable_at', old('transferrable_at'), ['class' => 'form-control datepicker']) !!}
-    </div>
-
     <h3>Image Upload</h3>
 
     <div class="form-group">
@@ -370,6 +320,31 @@
       {!! Form::select('rarity_id', $rarities, old('rarity_id'), ['class' => 'form-control']) !!}
     </div>
 
+    @if (!$isMyo)
+      <div class="row">
+        <div class="col-md-6 pr-2">
+          <div class="form-group">
+            {!! Form::label('Character Titles') !!} {!! add_help('If a character has multiple titles, the title with the highest rarity / sort will display first.') !!}
+            {!! Form::select('title_ids[]', $titles, old('title_ids'), [
+                'class' => 'form-control',
+                'multiple',
+                'id' => 'charTitle',
+                'placeholder' => 'Select Titles'
+            ]) !!}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group hide" id="titleOptions">
+            {!! Form::label('Extra Info / Custom Title (Optional)') !!} {!! add_help(
+                'If \'custom title\' is selected, this will be displayed as the title. If a preexisting title is selected, it will be displayed in addition to it. The short version is only used in the case of a custom title.'
+            ) !!}
+            <div id="titleData">
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
+
     <hr>
     <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
     <div class="form-group" id="transformations">
@@ -400,41 +375,8 @@
     </div>
     <hr>
 
-    <div class="form-group">
-      {!! Form::label('Character Rarity') !!} @if ($isMyo)
-        {!! add_help(
-            'This will lock the slot into a particular rarity. Leave it blank if you would like to give the user more choices.'
-        ) !!}
-      @endif
-      {!! Form::select('rarity_id', $rarities, old('rarity_id'), ['class' => 'form-control']) !!}
-    </div>
-
-    @if (!$isMyo)
-      <div class="row">
-        <div class="col-md-6 pr-2">
-          <div class="form-group">
-            {!! Form::label('Character Titles') !!} {!! add_help('If a character has multiple titles, the title with the highest rarity / sort will display first.') !!}
-            {!! Form::select('title_ids[]', $titles, old('title_ids'), [
-                'class' => 'form-control',
-                'multiple',
-                'id' => 'charTitle',
-                'placeholder' => 'Select Titles'
-            ]) !!}
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group hide" id="titleOptions">
-            {!! Form::label('Extra Info / Custom Title (Optional)') !!} {!! add_help(
-                'If \'custom title\' is selected, this will be displayed as the title. If a preexisting title is selected, it will be displayed in addition to it. The short version is only used in the case of a custom title.'
-            ) !!}
-            <div id="titleData">
-            </div>
-          </div>
-        </div>
-      </div>
-    @endif
     {{-- TODO: remove sex --}}
-    <div class="form-group">
+    {{-- <div class="form-group">
       {!! Form::label('Character Sex (Optional)') !!}
       @if ($isMyo)
         {!! add_help('This assign the character a biological sex. Leave it blank if you do not intend to use this.') !!}
@@ -442,7 +384,7 @@
       {!! Form::select('sex', [null => 'Select Sex', 'Male' => 'Male', 'Female' => 'Female'], old('sex'), [
           'class' => 'form-control'
       ]) !!}
-    </div>
+    </div> --}}
 
     <div class="form-group">
       {!! Form::label('Traits') !!} @if ($isMyo)
@@ -468,6 +410,56 @@
     </div>
 
     <hr class="my-4">
+
+    <h3>Transfer Information</h3>
+
+    <div class="alert alert-info">
+      These are displayed on the {{ $isMyo ? 'MYO slot' : 'character' }}'s profile, but don't have any effect on site functionality
+      except for the following:
+      <ul>
+        <li>If all switches are off, the {{ $isMyo ? 'MYO slot' : 'character' }} cannot be transferred by the user (directly or
+          through trades).</li>
+        <li>If a transfer cooldown is set, the {{ $isMyo ? 'MYO slot' : 'character' }} also cannot be transferred by the user
+          (directly or through trades) until the cooldown is up.</li>
+      </ul>
+    </div>
+    <div class="form-group">
+      {!! Form::checkbox('is_giftable', 1, old('is_giftable'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::label('is_giftable', 'Is Giftable', ['class' => 'form-check-label ml-3']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::checkbox('is_tradeable', 1, old('is_tradeable'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
+    </div>
+    <div class="form-group">
+      {!! Form::checkbox('is_sellable', 1, old('is_sellable'), [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle',
+          'id' => 'resellable'
+      ]) !!}
+      {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}
+    </div>
+    <div class="card mb-3" id="resellOptions">
+      <div class="card-body">
+        {!! Form::label('Resale Value') !!} {!! add_help('This value is publicly displayed on the ' . ($isMyo ? 'MYO slot' : 'character') . '\'s page.') !!}
+        {!! Form::text('sale_value', old('sale_value'), ['class' => 'form-control']) !!}
+      </div>
+    </div>
+    <div class="form-group">
+      {!! Form::label('On Transfer Cooldown Until (Optional)') !!}
+      {!! Form::text('transferrable_at', old('transferrable_at'), ['class' => 'form-control datepicker']) !!}
+    </div>
+
+    <div class="form-group">
+      {!! Form::checkbox('is_visible', 1, old('is_visible'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+          'Turn this off to hide the ' .
+              ($isMyo ? 'MYO slot' : 'character') .
+              '. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the ' .
+              ($isMyo ? 'MYO slot' : 'character') .
+              '\'s page.'
+      ) !!}
+    </div>
 
     <h3>Lineage (Optional)</h3>
     <div class="alert alert-info">
