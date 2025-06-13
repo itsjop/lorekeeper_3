@@ -10,8 +10,8 @@
 - [x] character creation 'subtypes'/'transformation' select a species first
 - [x] profile page still busted
 - [x] 'my characters' page not listing characters
-- [ ] settings page avatar upload broken
-  - [ ] profile pronouns (maybe) not saving
+- [ ] settings page avatar upload broken (CYL: it works for me locally?)
+  - [x] profile pronouns (maybe) not saving
   - [ ] image block settings twice
 - [ ] 500 editing character profile from sidebar
 - [ ] 404 badge logs not found
