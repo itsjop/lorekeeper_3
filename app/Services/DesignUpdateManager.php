@@ -442,8 +442,7 @@ class DesignUpdateManager extends Service {
 
       // Attach features
       // We'll do the compulsory ones at the time of approval.
-      // dd('DesignUpdateManager', $data);
-      $features = Feature::whereIn('id', isset($data['feature_id']) ? $data['feature_id'] : 0)->with('rarity')->get()->keyBy('id');
+      $features = Feature::whereIn('id', $data['feature_id'])->with('rarity')->get()->keyBy('id');
 
       foreach ($data['feature_id'] as $key => $featureId) {
         if (!$featureId) {

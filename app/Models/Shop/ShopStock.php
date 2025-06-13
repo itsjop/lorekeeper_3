@@ -13,10 +13,8 @@ class ShopStock extends Model {
    * @var array
    */
   protected $fillable = [
-    'cost',
     'shop_id',
     'item_id',
-    'currency_id',
     'use_user_bank',
     'use_character_bank',
     'is_limited_stock',

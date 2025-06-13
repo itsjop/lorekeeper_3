@@ -12,6 +12,7 @@ use App\Models\Shop\UserItemDonation;
 use App\Models\Item\ItemLog;
 use App\Models\Shop\ShopLog;
 use Settings;
+use Illuminate\Support\Facades\DB;
 
 class ShopManager extends Service {
     /*
@@ -47,7 +48,7 @@ class ShopManager extends Service {
             }
 
             // Check that the stock exists and belongs to the shop
-            $shopStock = ShopStock::where('id', $data['stock_id'])->where('shop_id', $data['shop_id'])->with('currency')->with('item')->first();
+            $shopStock = ShopStock::where('id', $data['stock_id'])->where('shop_id', $data['shop_id'])->first();
             if (!$shopStock) {
                 throw new \Exception('Invalid item selected.');
             }
@@ -112,10 +113,6 @@ class ShopManager extends Service {
 
             $character = null;
             if ($data['bank'] == 'character') {
-                // Check if the user is using a character to pay
-                // - stock must be purchaseable with characters
-                // - currency must be character-held
-                // - character has enough currency
                 if (!$shopStock->use_character_bank || !$shopStock->currency->is_character_owned) {
                     throw new \Exception("You cannot use a character's bank to pay for this item.");
                 }
@@ -134,6 +131,7 @@ class ShopManager extends Service {
             $baseStockCost = mergeAssetsArrays(createAssetsArray(true), createAssetsArray());
             $userCostAssets = createAssetsArray();
             $characterCostAssets = createAssetsArray(true);
+            $selected = [];
             foreach ($costs as $cost) {
                 $costQuantity = abs($cost->quantity);
                 if ($coupon) { // coupon applies to ALL costs in the selected group.
@@ -158,7 +156,7 @@ class ShopManager extends Service {
                     $costQuantity *= $quantity;
                 }
 
-                if ($cost->item->assetType == 'currency') {
+                if ($cost->item->assetType == 'currencies') {
                     if ($data['bank'] == 'user') {
                         if (!$cost->item->is_user_owned) {
                             throw new \Exception('You cannot use your user bank to pay for this item.');
@@ -172,6 +170,47 @@ class ShopManager extends Service {
 
                         addAsset($characterCostAssets, $cost->item, -$costQuantity);
                     }
+                } elseif ($cost->item->assetType == 'items') {
+                    $requiredQuantity = $costQuantity;
+                    if (isset($data['stack_id'])) {
+                        foreach ($data['stack_id'] as $userItemStackId) {
+                            $stack = UserItem::where('id', $userItemStackId)->where('user_id', $user->id)->where('item_id', $cost->item->id)->where('count', '>', '0')->first();
+                            if (!$stack) {
+                                continue;
+                            }
+
+                            $stackQuantity = $data['stack_quantity'][$userItemStackId] ?? $stack->count;
+                            $requiredQuantity -= $stackQuantity;
+                            $selected[] = [
+                                'stack'    => $stack,
+                                'quantity' => $stackQuantity,
+                            ];
+                        }
+                    } else {
+                        $stacks = UserItem::where('user_id', $user->id)->where('item_id', $cost->item->id)->where('count', '>', '0')->get();
+                        foreach ($stacks as $stack) {
+                            if ($stack->count >= $requiredQuantity) {
+                                $selected[] = [
+                                    'stack'    => $stack,
+                                    'quantity' => $requiredQuantity,
+                                ];
+                                $requiredQuantity = 0;
+                                break;
+                            } else {
+                                $selected[] = [
+                                    'stack'    => $stack,
+                                    'quantity' => $stack->count,
+                                ];
+                                $requiredQuantity -= $stack->count;
+                            }
+                        }
+                    }
+
+                    if ($requiredQuantity > 0) {
+                        throw new \Exception('You do not have enough, or have not selected enough, of the required item to purchase this item.');
+                    }
+
+                    addAsset($userCostAssets, $cost->item, -$costQuantity);
                 } else {
                     addAsset($userCostAssets, $cost->item, -$costQuantity);
                 }
@@ -190,7 +229,7 @@ class ShopManager extends Service {
             if (!fillUserAssets($userCostAssets, $user, null, 'Shop Purchase', [
                 'data' => 'Purchased '.$shopStock->item->name.' x'.$quantity.' from '.$shop->name.
                 ($coupon ? '. Coupon used: '.$couponUserItem->item->name : ''),
-            ])) {
+            ], $selected)) {
                 throw new \Exception('Failed to purchase item - could not debit costs.');
             }
 
@@ -205,7 +244,6 @@ class ShopManager extends Service {
                 'shop_id'      => $shop->id,
                 'character_id' => $character ? $character->id : null,
                 'user_id'      => $user->id,
-                'currency_id'  => $shopStock->currency->id,
                 'cost'         => [
                     'base'      => getDataReadyAssets($baseStockCost),
                     'user'      => getDataReadyAssets($userCostAssets),
@@ -221,15 +259,12 @@ class ShopManager extends Service {
             $assets = createAssetsArray();
             addAsset($assets, $shopStock->item, $quantity);
 
-            if(!fillUserAssets($assets, null, $user, 'Shop Purchase', [
-                'data' => $shopLog->itemData,
-                'notes' => 'Purchased ' . format_date($shopLog->created_at)
-            ] + ($shopStock->disallow_transfer ? ['disallow_transfer' => true] : []))) throw new \Exception("Failed to purchase item - could not credit item.");
-
-            if(!(new InventoryManager)->creditItem(null, $user, 'Shop Purchase', [
-              'data' => $shopLog->itemData,
-              'notes' => 'Purchased ' . format_date($shopLog->created_at)
-          ], $shopStock->item, $quantity)) throw new \Exception("Failed to purchase item.");
+            if (!fillUserAssets($assets, null, $user, 'Shop Purchase', [
+                'data'  => $shopLog->itemData,
+                'notes' => 'Purchased '.format_date($shopLog->created_at),
+            ] + ($shopStock->disallow_transfer ? ['disallow_transfer' => true] : []))) {
+                throw new \Exception('Failed to purchase item - could not credit item.');
+            }
 
             return $this->commitReturn($shop);
         } catch (\Exception $e) {
@@ -238,6 +273,7 @@ class ShopManager extends Service {
 
         return $this->rollbackReturn(false);
     }
+
 
     /**
      * Checks if the purchase limit for an item from a shop has been reached.

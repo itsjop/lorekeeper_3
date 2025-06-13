@@ -46,92 +46,84 @@ class ShopController extends Controller {
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getShop($id) {
-    $categories = ItemCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->get();
-    $shop = Shop::where('id', $id)->where('is_active', 1)->first();
+      $shop = Shop::where('id', $id)->where('is_active', 1)->first();
 
-    if (!$shop) {
-      abort(404);
-    }
-
-    $query = $shop->displayStock()->where(function ($query) use ($categories) {
-      $query->whereIn('item_category_id', $categories->pluck('id')->toArray())
-        ->orWhereNull('item_category_id');
-    });
-    if ($shop->is_staff) {
-      if (!Auth::check()) {
-        abort(404);
-      }
-      if (!Auth::user()->isStaff) {
-        abort(404);
-      }
-    }
-
-    if (count(getLimits($shop))) {
-      if (!Auth::check()) {
-        flash('You must be logged in to enter this shop.')->error();
-
-        return redirect()->to('shops');
+      if (!$shop) {
+          abort(404);
       }
 
-      $limitService = new LimitManager;
-      if (!$limitService->checkLimits($shop)) {
-        flash($limitService->errors()->getMessages()['error'][0])->error();
-
-        return redirect()->to('shops');
+      if ($shop->is_staff) {
+          if (!Auth::check()) {
+              abort(404);
+          }
+          if (!Auth::user()->isStaff) {
+              abort(404);
+          }
       }
-    }
 
-    if ($shop->is_fto) {
-      if (!Auth::check()) {
-        flash('You must be logged in to enter this shop.')->error();
+      if (count(getLimits($shop))) {
+          if (!Auth::check()) {
+              flash('You must be logged in to enter this shop.')->error();
 
-        return redirect()->to('/shops');
+              return redirect()->to('shops');
+          }
+
+          $limitService = new LimitManager;
+          if (!$limitService->checkLimits($shop)) {
+              flash($limitService->errors()->getMessages()['error'][0])->error();
+
+              return redirect()->to('shops');
+          }
       }
-      if (!Auth::user()->settings->is_fto && !Auth::user()->isStaff) {
-        flash('You must be a FTO to enter this shop.')->error();
 
-        return redirect()->to('/shops');
+      if ($shop->is_fto) {
+          if (!Auth::check()) {
+              flash('You must be logged in to enter this shop.')->error();
+
+              return redirect()->to('/shops');
+          }
+          if (!Auth::user()->settings->is_fto && !Auth::user()->isStaff) {
+              flash('You must be a FTO to enter this shop.')->error();
+
+              return redirect()->to('/shops');
+          }
       }
-    }
 
-    // get all types of stock in the shop
-    $stock_types = ShopStock::where('shop_id', $shop->id)->pluck('stock_type')->unique();
-    $stocks = [];
-    foreach ($stock_types as $type) {
-      // get the model for the stock type (item, pet, etc)
-      $type = strtolower($type);
-      $model = getAssetModelString($type);
-      // get the category of the stock
-      if (!class_exists($model . 'Category')) {
-        $stock = $shop->displayStock($model, $type)->where('stock_type', $type)->orderBy('name')->get()->groupBy($type . '_category_id');
-        $stocks[$type] = $stock;
-        continue; // If the category model doesn't exist, skip it
+      // get all types of stock in the shop
+      $stock_types = ShopStock::where('shop_id', $shop->id)->pluck('stock_type')->unique();
+      $stocks = [];
+      foreach ($stock_types as $type) {
+          // get the model for the stock type (item, pet, etc)
+          $type = strtolower($type);
+          $model = getAssetModelString($type);
+          // get the category of the stock
+          if (!class_exists($model.'Category')) {
+              $stock = $shop->displayStock($model, $type)->where('stock_type', $type)->orderBy('name')->get()->groupBy($type.'_category_id');
+              $stocks[$type] = $stock;
+              continue; // If the category model doesn't exist, skip it
+          }
+          $stock_category = ($model.'Category')::orderBy('sort', 'DESC')->get();
+          // order the stock
+          $stock = count($stock_category) ? $shop->displayStock($model, $type)->where('stock_type', $type)
+              ->orderByRaw('FIELD('.$type.'_category_id,'.implode(',', $stock_category->pluck('id')->toArray()).')')
+              ->orderBy('name')->get()->groupBy($type.'_category_id')
+          : $shop->displayStock($model, $type)->where('stock_type', $type)->orderBy('name')->get()->groupBy($type.'_category_id');
+
+          // make it so key "" appears last
+          $stock = $stock->sortBy(function ($item, $key) {
+              return $key == '' ? 1 : 0;
+          });
+
+          $stocks[$type] = $stock;
       }
-      $stock_category = ($model . 'Category')::orderBy('sort', 'DESC')->get();
-      // order the stock
-      $stock = count($stock_category) ? $shop->displayStock($model, $type)->where('stock_type', $type)
-        ->orderByRaw('FIELD(' . $type . '_category_id,' . implode(',', $stock_category->pluck('id')->toArray()) . ')')
-        ->orderBy('name')->get()->groupBy($type . '_category_id')
-        : $shop->displayStock($model, $type)->where('stock_type', $type)->orderBy('name')->get()->groupBy($type . '_category_id');
 
-      // make it so key "" appears last
-      $stock = $stock->sortBy(function ($item, $key) {
-        return $key == '' ? 1 : 0;
-      });
-
-      $stocks[$type] = $stock;
-    }
-    $items = count($categories) ? $query->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')->orderBy('name')->get()->groupBy('item_category_id') : $shop->displayStock()->orderBy('name')->get()->groupBy('item_category_id');
-
-    return view('shops.shop', [
-      'shop'       => $shop,
-      'categories' => $categories->keyBy('id'),
-      'items'      => $items,
-      'stocks'     => $stocks,
-      'shops'      => Shop::where('is_active', 1)->orderBy('sort', 'DESC')->get(),
-      'currencies' => Currency::whereIn('id', ShopStock::where('shop_id', $shop->id)->pluck('currency_id')->toArray())->get()->keyBy('id'),
-    ]);
+      return view('shops.shop', [
+          'shop'       => $shop,
+          'stocks'     => $stocks,
+          'shops'      => Shop::where('is_active', 1)->orderBy('sort', 'DESC')->get(),
+      ]);
   }
+
 
   /**
    * Gets the shop stock modal.
@@ -144,8 +136,7 @@ class ShopController extends Controller {
    */
   public function getShopStock(ShopManager $service, $id, $stockId) {
     $shop = Shop::where('id', $id)->where('is_active', 1)->first();
-    // $stock = ShopStock::where('id', $stockId)->where('shop_id', $id)->first();
-    $stock = ShopStock::with('item')->where('id', $stockId)->where('shop_id', $id)->first();
+    $stock = ShopStock::where('id', $stockId)->where('shop_id', $id)->first();
 
     if (!$shop) {
       abort(404);
@@ -168,8 +159,7 @@ class ShopController extends Controller {
       $quantityLimit = $service->getStockPurchaseLimit($stock, Auth::user());
       $userPurchaseCount = $service->checkUserPurchases($stock, Auth::user());
       $purchaseLimitReached = $service->checkPurchaseLimitReached($stock, Auth::user());
-      // $userOwned = $service->getUserOwned($stock, Auth::user());
-      $userOwned = UserItem::where('user_id', $user->id)->where('item_id', $stock->item->id)->where('count', '>', 0)->get();
+      $userOwned = $service->getUserOwned($stock, Auth::user());
     }
     if (!$shop)      abort(404);
 

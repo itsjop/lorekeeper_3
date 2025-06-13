@@ -37,7 +37,7 @@
 
     <div class="form-group">
       {!! Form::label('subtype_ids', 'Species ' . ucfirst(__('lorekeeper.subtypes'))) !!}
-      @if ($request->character->is_myo_slot && count($request->character->image->subtypes))
+      @if ($request->character->is_myo_slot && count($request->character->image->subtypes) > 0)
         <div class="alert alert-secondary">{!! $request->character->image->displaySubtypes() !!}</div>
       @else
         <div id="subtypes">
@@ -165,6 +165,11 @@
             </div>
           @endforeach
         @endif
+      </div>
+      <div class="feature-row hide mb-2">
+        {!! Form::select('feature_id[]', ($request->character->myo_type != 'regular') ? $features : $choiceFeatures, null, ['class' => 'form-control mr-2 feature-select', 'placeholder' => 'Select Trait']) !!}
+        {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
+        <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
       </div>
       <div class="text-right">
         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

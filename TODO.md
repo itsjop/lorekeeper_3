@@ -1,11 +1,12 @@
 # fuck it
-- [ ] trait during myo creation
+- [x] trait during myo creation
   - final tab on myo submission
   - make item, add myo tag, make sure its 'active' (reorder?), grant it, use it (slot created), click the link, submit, then final tab is 'traits'
+- [ ] the BE and db code for the traits page would need changing for allowing multiple subtypes (it does not save correctly right now in the design update and might not transfer to the character upon approval either)
 
 # KNOWN ISSUES
 - [x] rarity incorrectly requires an icon
-- [ ] multiple shop issues
+- [x] multiple shop issues (fixed as to where creating stock and buying from the shop works)
 - [ ] character creation 'subtypes'/'transformation' select a species first
 - [x] profile page still busted
 - [x] 'my characters' page not listing characters
