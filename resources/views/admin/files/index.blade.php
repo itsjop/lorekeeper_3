@@ -74,7 +74,7 @@
   </div>
 
   @if ($folder && !count($files))
-    <div class="modal fade" id="editFolderModal" tabindex="-1" role="dialog">
+    <dialog class="modal fade" id="editFolderModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -103,9 +103,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
   @elseif(!$folder)
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog">
+    <dialog class="modal fade" id="createModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -126,10 +126,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
   @endif
 
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+  <dialog class="modal fade" id="editModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -208,7 +208,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </dialog>
 
 @endsection
 

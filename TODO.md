@@ -1,11 +1,25 @@
+# fuck it
+- [ ] trait during myo creation
+  - final tab on myo submission
+  - make item, add myo tag, make sure its 'active' (reorder?), grant it, use it (slot created), click the link, submit, then final tab is 'traits'
+
 # KNOWN ISSUES
-- [ ] */ inventory MYO item broken, no idea how it submits???
+- [x] rarity incorrectly requires an icon
+- [ ] multiple shop issues
+- [ ] character creation 'subtypes'/'transformation' select a species first
+- [x] profile page still busted
+- [x] 'my characters' page not listing characters
+- [ ] settings page avatar upload broken
+  - [ ] profile pronouns (maybe) not saving
+  - [ ] image block settings twice
+- [ ] 500 editing character profile from sidebar
+- [ ] 404 badge logs not found
+- [ ] Cultivation/professions/dailies settings not linked properly
 - [ ] shop stock popup fucked
 - [ ] need wysywig textboxes
 - [ ] titles missing on create myo
 - [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
-
-# TODO
+- [x] profile comments
 - [ ] remove sex
 - [ ] featured character only from active participants
 - [ ] shops still fucked
@@ -14,8 +28,7 @@
 - [ ] shop editing super broken
 - [ ] wysywig textboxes
 - [ ] admin/raffle create buttons dont work
-- [ ] re-enable coupons
-- [ ] re-enable custom names on character creation
+- [x] inventory MYO item broken, no idea how it submits???
 - [x] ironically logs page is broken
 - [x] toggles arent toggling
 - [x] delete item doesnt work
@@ -33,11 +46,17 @@
 - [~] Mailersend Error Fix
 - [~] mobile css
 
+# Re-enable
+- [ ] Profile Header Image
+- [ ] shop coupons
+- [ ] custom titles on character creation
+
 # HIGH PRIORITY
 - [ ] Critical CSS Render Path to avoid flickering
     - [ ] look into caching to avoid redraws?
 - [ ] request-throttling issues
 - [ ] page transition api
+- [ ] fucking backdrop-filter breaks positioning
 
 # BONUSES
 - [ ] Combine News and Sales to a Newsfeed
@@ -55,6 +74,7 @@
 - [ ] rpg splitter text
 
 # low-prio
+- [ ] no ::backdrop on modals
 - [ ] slim down google fonts payload
 
 

@@ -16,9 +16,11 @@
     Traits</h2>
 
   @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id)
-    <p>Select the traits for the {{ $request->character->is_myo_slot ? 'created' : 'updated' }} character. @if ($request->character->is_myo_slot)
+    <p>Select the traits for the {{ $request->character->is_myo_slot ? 'created' : 'updated' }} character.
+      @if ($request->character->is_myo_slot)
         Some traits may have been restricted for you - you cannot change them.
-      @endif Staff will not be able to modify these traits for you during approval, so if in doubt, please
+      @endif
+      Staff will not be able to modify these traits for you during approval, so if in doubt, please
       communicate with them beforehand to make sure that your design is acceptable.
       Once you save, the traits will be locked in.
     </p>
@@ -34,7 +36,7 @@
     </div>
 
     <div class="form-group">
-      {!! Form::label('subtype_ids', 'Species ' . ucfirst(__('lorekeeper.subtype(s)'))) !!}
+      {!! Form::label('subtype_ids', 'Species ' . ucfirst(__('lorekeeper.subtypes'))) !!}
       @if ($request->character->is_myo_slot && count($request->character->image->subtypes))
         <div class="alert alert-secondary">{!! $request->character->image->displaySubtypes() !!}</div>
       @else
@@ -132,9 +134,9 @@
                   'placeholder' => 'Extra Info (Optional)'
               ]) !!}
 
-              @if ($request->canRemoveTrait() || Settings::get('trait_remover_needed') == 0)<a href="#"
-                  class="remove-feature btn btn-danger mb-2"
-                >×</a>@endif
+              @if ($request->canRemoveTrait() || Settings::get('trait_remover_needed') == 0)
+                <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
+              @endif
             </div>
           @endforeach
         @endif
@@ -161,6 +163,8 @@
               {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
               <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
             </div>
+          @endforeach
+        @endif
       </div>
       <div class="text-right">
         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -181,7 +185,7 @@
             </div>
             <div class="col-md-10 col-8">
               @if ($request->character->is_myo_slot && $request->character->image->subtype_id)
-                {!! $request->character->image->subtype->displayName !!}
+                {!! $request->character->image->subtype ? $request->character->image->subtype->displayName : 'None Selected' !!}
               @else
                 {!! $request->subtype_id ? $request->subtype->displayName : 'None Selected' !!}
               @endif
@@ -267,12 +271,13 @@
         var titleEntry = $title.val() != 0;
         updateTitleEntry(titleEntry);
       });
+
       function updateTitleEntry($show) {
         if ($show) $titleOptions.removeClass('hide');
         else $titleOptions.addClass('hide');
       }
     });
-    
+
     $("#species").change(function() {
       var species = $('#species').val();
       var id = '<?php echo $request->id; ?>';

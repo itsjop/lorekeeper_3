@@ -43,7 +43,7 @@
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
     <div class="text-muted">Recommended size: 200px x 200px</div>
-    @if ($subtype->has_image)
+        @if ($subtype->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
         {!! Form::label('remove_image', 'Remove current image', ['class' => 'form-check-label']) !!}
@@ -83,7 +83,7 @@
   </div>
 
   {!! Form::close() !!}
-
+  
   @if ($subtype->id)
     <h3>Preview</h3>
     <div class="card mb-3">

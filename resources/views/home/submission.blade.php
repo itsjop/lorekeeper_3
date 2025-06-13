@@ -21,7 +21,7 @@
           This prompt cannot be edited after submission. If you need to make changes, please contact a staff member.
         </div>
       @endif
-      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+      <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content hide" id="cancellationContent">
             <div class="modal-header">
@@ -39,7 +39,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </dialog>
 
       {!! Form::close() !!}
     @endif

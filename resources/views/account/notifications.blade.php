@@ -63,7 +63,7 @@
 
   {!! $notifications->render() !!}
 
-  <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+  <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </dialog>
 @endsection
 @section('scripts')
   @parent

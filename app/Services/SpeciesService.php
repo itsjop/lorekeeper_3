@@ -200,7 +200,6 @@ class SpeciesService extends Service {
             }
 
             $subtype = Subtype::create($data);
-
             if ($image) {
                 $this->handleImage($image, $subtype->subtypeImagePath, $subtype->subtypeImageFileName);
             }
@@ -236,7 +235,6 @@ class SpeciesService extends Service {
                 $image = $data['image'];
                 unset($data['image']);
             }
-
             $subtype->update($data);
 
             if ($subtype) {
@@ -290,7 +288,6 @@ class SpeciesService extends Service {
         try {
             // Check first if characters with this subtype exists
             if(CharacterImage::where('subtype_id', $subtype->id)->exists()) throw new \Exception("A character image with this subtype exists. Please change or remove its subtype first.");
-
             if($subtype->has_image) $this->deleteImage($subtype->subtypeImagePath, $subtype->subtypeImageFileName);
             $subtype->delete();
 

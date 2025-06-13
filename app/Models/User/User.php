@@ -530,7 +530,8 @@ class User extends Authenticatable implements MustVerifyEmail {
    * @return string
    */
   public function getDisplayNamePronounsAttribute() {
-    if ($this->profile->pronouns) return ($this->displayName . ' (' . $this->profile->pronouns . ')');
+    if ($this->profile->pronouns)
+      return ($this->displayName . ' (' . $this->profile->pronouns . ')');
     else return ($this->displayName);
   }
 
@@ -543,7 +544,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     return ($this->is_banned ? '<strike>' : '') .
       '<small><a href="' .
       $this->url .
-      '" class="btn btn-primary btn-sm"' .
+      '" class="btn btn-primary btn-sm ' .
       ($this->rank->color ? 'style="background-color: #' . $this->rank->color . '!important;color:#000!important;' : '') .
       ($this->is_deactivated ? 'opacity: 0.5;' : '') .
       '"><i class="' .

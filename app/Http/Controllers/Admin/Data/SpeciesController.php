@@ -192,7 +192,6 @@ class SpeciesController extends Controller {
     if (!$subtype) {
       abort(404);
     }
-
     return view('admin.specieses.create_edit_subtype', [
       'subtype'          => $subtype,
       'specieses'        => Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
@@ -225,7 +224,6 @@ class SpeciesController extends Controller {
       flash(ucfirst(__('lorekeeper.subtype')) . ' updated successfully.')->success();
     } elseif (!$id && $subtype = $service->createSubtype($data, Auth::user())) {
       flash(ucfirst(__('lorekeeper.subtype')) . ' created successfully.')->success();
-
       return redirect()->to('admin/data/subtypes/edit/' . $subtype->id);
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
@@ -245,7 +243,6 @@ class SpeciesController extends Controller {
    */
   public function getDeleteSubtype($id) {
     $subtype = Subtype::find($id);
-
     return view('admin.specieses._delete_subtype', [
       'subtype' => $subtype,
     ]);

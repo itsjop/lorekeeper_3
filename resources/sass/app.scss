@@ -49,8 +49,10 @@ ul { padding: 0; }
       grid-area: main;
       max-width: 100%;
       background-color: #fffc;
-      backdrop-filter: blur(5px);
       border-radius: 15px;
+      position: relative;
+      //  TODO: this breaks position: fixed for some dumbass spec reason
+      // backdrop-filter: blur(5px);
     }
     .card {
       border-radius: 10px;
@@ -91,4 +93,5 @@ ul { padding: 0; }
 @import './site-components/sidebar';
 @import './site-components/site-header';
 @import './site-components/animations';
+@import './site-components/modal';
 @import './site-components/misc';

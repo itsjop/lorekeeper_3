@@ -100,7 +100,7 @@
     </div>
     {!! Form::close() !!}
 
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+    <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content hide" id="closalContent">
           <div class="modal-header">
@@ -127,7 +127,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
   @else
     <div class="alert alert-danger">This report has already been closed.</div>
     @include('home._report_content', ['report' => $report])

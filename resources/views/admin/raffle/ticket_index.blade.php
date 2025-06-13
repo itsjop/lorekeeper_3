@@ -108,7 +108,7 @@
   </div>
   <div class="text-right">{!! $tickets->render() !!}</div>
 
-  <div class="modal fade" id="raffle-modal" tabindex="-1" role="dialog">
+  <dialog class="modal fade" id="raffle-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -136,7 +136,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </dialog>
 @endsection
 @section('scripts')
   @parent

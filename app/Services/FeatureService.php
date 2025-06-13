@@ -375,6 +375,7 @@ class FeatureService extends Service {
         DB::beginTransaction();
 
         try {
+          
             // Check first if the feature is currently in use
             if(DB::table('character_features')->where('feature_id', $feature->id)->exists()) throw new \Exception("A character with this trait exists. Please remove the trait first.");
 

@@ -281,7 +281,6 @@ class DesignController extends Controller {
     if ($r->user_id != Auth::user()->id) {
       abort(404);
     }
-
     if ($service->saveRequestFeatures($request->all(), $r)) {
       flash('Request edited successfully.')->success();
     } else {

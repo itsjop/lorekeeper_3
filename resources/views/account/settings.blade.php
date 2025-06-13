@@ -51,8 +51,9 @@
       </div>
     </div>
 
+    
     {{-- PROFILE HEADER --}}
-    <div class="col-12">
+    {{-- <div class="col-12">
       <div class="card p-3 mb-2">
         <h3>Profile Header Image</h3>
         {!! Form::open(['url' => 'account/profile_img', 'files' => true]) !!}
@@ -67,7 +68,7 @@
         </div>
         {!! Form::close() !!}
       </div>
-    </div>
+    </div> --}}
   </div>
 
   {{-- YOUR PROFILE --}}
@@ -78,7 +79,7 @@
       {!! Form::label('pronouns', 'Preferred Pronouns') !!} {!! add_help(
           'Your preferred pronouns will be displayed in various places across the site. This field can be changed or removed at anytime.'
       ) !!}
-      {!! Form::text('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
+      {!! Form::textarea('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
       {!! Form::label('text', 'Profile Text') !!}
@@ -482,7 +483,7 @@
   </div>
 
   <script>
-    $(document).ready(() => $('.selectize').selectize(););
+    $(document).ready(() => $('.selectize').selectize());
   </script>
 
   <div class="card p-3 mb-2">

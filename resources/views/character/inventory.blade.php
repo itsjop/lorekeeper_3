@@ -185,7 +185,7 @@
   </div>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-    <div class="modal fade" id="grantModal" tabindex="-1" role="dialog">
+    <dialog class="modal fade" id="grantModal" tabindex="-1" role="dialog">
       <div class="modal-dialog Inventory" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -243,7 +243,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
   @endif
 @endsection
 

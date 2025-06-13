@@ -82,7 +82,6 @@ class TraitService extends Service
             $species = $designUpdate->character->image->species_id ? $designUpdate->character->image->species_id : $designUpdate->species_id ?? null;
             $subtype = $designUpdate->character->image->subtype_id ? $designUpdate->character->image->subtype_id : $designUpdate->subtype_id ?? null;
             $feature = Feature::find($tag->getData());
-
             if($species == null) throw new \Exception("Please select a species and subtype under the traits tab first, so that valid traits can be determined.");
 
             //check that the trait isnt already on the char

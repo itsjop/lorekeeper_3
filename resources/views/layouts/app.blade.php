@@ -216,7 +216,7 @@
 
       </main>
 
-      <div
+      <dialog
         class="modal fade"
         id="modal"
         tabindex="-1"
@@ -236,7 +236,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </dialog>
       @yield('scripts')
       @include('layouts._pagination_js')
     </div>

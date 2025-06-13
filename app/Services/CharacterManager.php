@@ -863,6 +863,7 @@ class CharacterManager extends Service {
       // Clear old titles
       $image->titles()->delete();
       // Attach features
+      dd($data);
       foreach ($data['feature_id'] as $key => $featureId) {
         if ($featureId) {
           $feature = CharacterFeature::create(['character_image_id' => $image->id, 'feature_id' => $featureId, 'data' => $data['feature_data'][$key]]);
@@ -2461,6 +2462,7 @@ class CharacterManager extends Service {
       $request->features()->delete(); // Attach features
       // Attach features
       // We'll do the compulsory ones at the time of approval.
+      dd($data);
       $features = Feature::whereIn('id', $data['feature_id'])->with('rarity')->get()->keyBy('id');
       foreach ($data['feature_id'] as $key => $featureId) {
         if (!$featureId) continue;
@@ -2487,7 +2489,7 @@ class CharacterManager extends Service {
       // Update other stats
       $request->species_id = $species->id;
       $request->rarity_id = $rarity->id;
-      $request->subtype_id = $subtype ? $subtype->id : null;
+            $request->subtype_id = $subtype ? $subtype->id : null;
       $request->transformation_id = $transformation ? $transformation->id : null;
       $request->transformation_info = $transformation_info;
       $request->transformation_description = $transformation_description;

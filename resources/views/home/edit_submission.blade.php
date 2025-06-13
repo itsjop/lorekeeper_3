@@ -30,7 +30,7 @@
   @else
     @include('home._submission_form', ['submission' => $submission, 'criteria' => $isClaim ? null : $criteria, 'isClaim' => $isClaim, 'userGallerySubmissions' => $userGallerySubmissions])
 
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+    <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
 
         <div class="modal-content hide" id="confirmContent">
@@ -90,7 +90,7 @@
         </div>
 
       </div>
-    </div>
+    </dialog>
   @endif
 @endsection
 

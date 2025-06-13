@@ -43,6 +43,7 @@ class RarityService extends Service {
       }
 
       $icon = null;
+      $data['icon_hash'] = "";
       if (isset($data['icon']) && $data['icon']) {
         $data['icon_hash'] = randomString(10);
         $data['has_icon'] = 1;

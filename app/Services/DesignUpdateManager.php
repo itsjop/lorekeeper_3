@@ -383,6 +383,7 @@ class DesignUpdateManager extends Service {
    * @return bool
    */
   public function saveRequestFeatures($data, $request) {
+
     DB::beginTransaction();
 
     try {
@@ -429,7 +430,7 @@ class DesignUpdateManager extends Service {
       if (!$species) {
         throw new \Exception('Invalid species selected.');
       }
-      if ($subtype && $subtype->species_id != $species->id) {
+      if (isset($subtype) && $subtype->species_id != $species->id) {
         throw new \Exception('Subtype does not match the species.');
       }
       if ($transformation && $transformation->species_id != null) {
@@ -441,8 +442,8 @@ class DesignUpdateManager extends Service {
 
       // Attach features
       // We'll do the compulsory ones at the time of approval.
-
-      $features = Feature::whereIn('id', $data['feature_id'])->with('rarity')->get()->keyBy('id');
+      // dd('DesignUpdateManager', $data);
+      $features = Feature::whereIn('id', isset($data['feature_id']) ? $data['feature_id'] : 0)->with('rarity')->get()->keyBy('id');
 
       foreach ($data['feature_id'] as $key => $featureId) {
         if (!$featureId) {
