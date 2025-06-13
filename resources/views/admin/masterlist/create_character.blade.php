@@ -537,54 +537,48 @@
   @endif
 
   <script>
-    $("#species").change(function() {
-      var species = $('#species').val();
-      var myo = '<?php echo $isMyo; ?>';
+
+
+    $(document).ready(function() {
 
       $("#species").change(function() {
         var species = $('#species').val();
         var myo = '<?php echo $isMyo; ?>';
+        console.log("hi");
+        $.ajax({
+            type: "GET",
+            url: "{{ url('admin/masterlist/check-subtype') }}?species=" + species + "&myo=" + myo,
+            dataType: "text"
+          }).done(function(res) {
+            $("#subtypes").html(res);
+            $("#subtype").selectize({
+              maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+            });
+          }).fail(function(jqXHR, textStatus, errorThrown) {
+            alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+          });
+
         $.ajax({
           type: "GET",
-          url: "{{ url('admin/masterlist/check-subtype') }}?species=" + species + "&myo=" + myo,
+          url: "{{ url('admin/masterlist/check-transformation') }}?species=" + species + "&myo=" + myo,
           dataType: "text"
         }).done(function(res) {
-          $("#subtypes").html(res);
-          $("#subtype").selectize({
-            maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-          });
+          $("#transformations").html(res);
         }).fail(function(jqXHR, textStatus, errorThrown) {
           alert("AJAX call failed: " + textStatus + ", " + errorThrown);
         });
+
       });
 
-      $.ajax({
-        type: "GET",
-        url: "{{ url('admin/masterlist/check-transformation') }}?species=" + species + "&myo=" + myo,
-        dataType: "text"
-      }).done(function(res) {
-        $("#transformations").html(res);
-      }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+      $("#subtype").selectize({
+        maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
       });
-    });
 
-    $("#subtype").selectize({
-      maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-    });
-
-    $(document).ready(function() {
       $('.character-select').selectize();
       $('#advanced_lineage').on('click', function(e) {
-        e.preventDefault();
+          e.preventDefault();
       });
     });
 
-    $(document).ready(function() {
-      $('.character-select').selectize();
-      $('#advanced_lineage').on('click', function(e) {
-        e.preventDefault();
-      });
-    });
   </script>
 @endsection

@@ -7,7 +7,7 @@
 # KNOWN ISSUES
 - [x] rarity incorrectly requires an icon
 - [x] multiple shop issues (fixed as to where creating stock and buying from the shop works)
-- [ ] character creation 'subtypes'/'transformation' select a species first
+- [x] character creation 'subtypes'/'transformation' select a species first
 - [x] profile page still busted
 - [x] 'my characters' page not listing characters
 - [ ] settings page avatar upload broken
