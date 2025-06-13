@@ -23,12 +23,7 @@
         {!! Form::open(['url' => 'account/avatar', 'files' => true]) !!}
         <div class="card mb-3 hide" id="avatarCrop">
           <div class="card-body">
-            <img
-              src="#"
-              id="cropper"
-              class="hide"
-              alt=""
-            />
+            <img src="#" id="cropper" class="hide" alt="" />
             {!! Form::hidden('x0', null, ['id' => 'cropX0']) !!}
             {!! Form::hidden('x1', null, ['id' => 'cropX1']) !!}
             {!! Form::hidden('y0', null, ['id' => 'cropY0']) !!}
@@ -51,7 +46,7 @@
       </div>
     </div>
 
-    
+
     {{-- PROFILE HEADER --}}
     {{-- <div class="col-12">
       <div class="card p-3 mb-2">
@@ -76,9 +71,7 @@
     <h3>Profile</h3>
     {!! Form::open(['url' => 'account/profile']) !!}
     <div class="form-group">
-      {!! Form::label('pronouns', 'Preferred Pronouns') !!} {!! add_help(
-          'Your preferred pronouns will be displayed in various places across the site. This field can be changed or removed at anytime.'
-      ) !!}
+      {!! Form::label('pronouns', 'Preferred Pronouns') !!} {!! add_help('Your preferred pronouns will be displayed in various places across the site. This field can be changed or removed at anytime.') !!}
       {!! Form::textarea('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
@@ -106,12 +99,7 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Location</label>
           <div class="col-md-9">
-            {!! Form::select(
-                'location',
-                [0 => 'Choose a Location'] + $locations,
-                isset(Auth::user()->home_id) ? Auth::user()->home_id : 0,
-                ['class' => 'form-control selectize']
-            ) !!}
+            {!! Form::select('location', [0 => 'Choose a Location'] + $locations, isset(Auth::user()->home_id) ? Auth::user()->home_id : 0, ['class' => 'form-control selectize']) !!}
           </div>
           <div class="col-md text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -145,7 +133,7 @@
         {!! Form::label('Border Variant') !!}
         {!! Form::select('border_variant_id', $border_variants, Auth::user()->border_variant_id, [
             'class' => 'form-control',
-            'id' => 'bordervariant'
+            'id' => 'bordervariant',
         ]) !!}
       </div>
     </div>
@@ -163,7 +151,7 @@
             {!! Form::label('border_flip', 'Flip Border (Horizontally)', ['class' => 'form-check-label ml-3']) !!}
             {!! Form::checkbox('border_flip', 1, Auth::user()->settings->border_settings['border_flip'] ?? 0, [
                 'class' => 'form-check-input',
-                'data-toggle' => 'toggle'
+                'data-toggle' => 'toggle',
             ]) !!}
           </div>
         </div>
@@ -283,12 +271,7 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Faction</label>
           <div class="col-md-9">
-            {!! Form::select(
-                'faction',
-                [0 => 'Choose a Faction'] + $factions,
-                isset(Auth::user()->faction_id) ? Auth::user()->faction_id : 0,
-                ['class' => 'form-control selectize']
-            ) !!}
+            {!! Form::select('faction', [0 => 'Choose a Faction'] + $factions, isset(Auth::user()->faction_id) ? Auth::user()->faction_id : 0, ['class' => 'form-control selectize']) !!}
           </div>
           <div class="col-md text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -313,17 +296,17 @@
       <div class="col-md-10">
         {!! Form::select(
             'birthday_setting',
-
+        
             [
                 '0' => '0: No one can see your birthday.',
                 '1' => '1: Members can see your day and month.',
                 '2' => '2: Anyone can see your day and month.',
-                '3' => '3: Full date public.'
+                '3' => '3: Full date public.',
             ],
-
+        
             Auth::user()->settings->birthday_setting,
-
-            ['class' => 'form-control']
+        
+            ['class' => 'form-control'],
         ) !!}
       </div>
     </div>
@@ -340,12 +323,7 @@
     <div class="form-group row">
       <label class="col-md-2 col-form-label">Setting</label>
       <div class="col-md-10">
-        {!! Form::select(
-            'allow_profile_comments',
-            ['0' => '0: No one can comment on your profile.', '1' => '1: Users can comment on your profile.'],
-            Auth::user()->settings->allow_profile_comments,
-            ['class' => 'form-control']
-        ) !!}
+        {!! Form::select('allow_profile_comments', ['0' => '0: No one can comment on your profile.', '1' => '1: Users can comment on your profile.'], Auth::user()->settings->allow_profile_comments, ['class' => 'form-control']) !!}
       </div>
     </div>
     <div class="text-right">
@@ -366,10 +344,10 @@
             [
                 '0' => '0: Character has pop-up warning and censored icons.',
                 '1' => '1: Character has pop-up warnings only.',
-                '2' => '2: No warnings will appear on characters.'
+                '2' => '2: No warnings will appear on characters.',
             ],
             Auth::user()->settings->content_warning_visibility,
-            ['class' => 'form-control']
+            ['class' => 'form-control'],
         ) !!}
       </div>
     </div>
@@ -431,7 +409,7 @@
       <div class="col form-group">
         {!! Form::checkbox('show_image_blocks', 1, Auth::user()->settings->show_image_blocks ? 1 : 0, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle'
+            'data-toggle' => 'toggle',
         ]) !!}
         {!! Form::label('show_image_blocks', 'Show widgets?', ['class' => 'form-check-label ml-3']) !!}
       </div>
@@ -495,7 +473,7 @@
       <div class="col form-group">
         {!! Form::checkbox('show_image_blocks', 1, Auth::user()->settings->show_image_blocks ? 1 : 0, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle'
+            'data-toggle' => 'toggle',
         ]) !!}
         {!! Form::label('show_image_blocks', 'Show widgets?', ['class' => 'form-check-label ml-3']) !!}
       </div>
@@ -514,10 +492,10 @@
               'allow_character_likes',
               [
                   '0' => 'Do not allow other users to ' . __('character_likes.like') . ' your characters.',
-                  '1' => 'Other users can ' . __('character_likes.like') . ' your characters.'
+                  '1' => 'Other users can ' . __('character_likes.like') . ' your characters.',
               ],
               Auth::user()->settings->allow_character_likes,
-              ['class' => 'form-control']
+              ['class' => 'form-control'],
           ) !!}
         </div>
       </div>

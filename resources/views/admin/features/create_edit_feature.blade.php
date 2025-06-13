@@ -49,11 +49,11 @@
       {!! Form::select('feature_category_id', $categories, $feature->feature_category_id, ['class' => 'form-control']) !!}
     </div>
     <div class="col-md-4 form-group">
-      {!! Form::label(ucfirst(__('lorekeeper.species')).' Restriction (Optional)') !!}
+      {!! Form::label(ucfirst(__('lorekeeper.species')) . ' Restriction (Optional)') !!}
       {!! Form::select('species_id', $specieses, $feature->species_id, ['class' => 'form-control', 'id' => 'species']) !!}
     </div>
     <div class="col-md-4 form-group" id="subtypes">
-      {!! Form::label(ucfirst(__('lorekeeper.subtype')).' (Optional)') !!} {!! add_help('This is cosmetic and does not limit choice of traits in selections.') !!}
+      {!! Form::label(ucfirst(__('lorekeeper.subtype')) . ' (Optional)') !!} {!! add_help('This is cosmetic and does not limit choice of traits in selections.') !!}
       {!! Form::select('subtype_id', $subtypes, $feature->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
     </div>
   </div>
@@ -84,14 +84,13 @@
 @endsection
 
 @section('scripts')
-@parent
-<script>
-$( document ).ready(function() {
-    $('.delete-feature-button').on('click', function(e) {
+  @parent
+  <script>
+    $(document).ready(function() {
+      $('.delete-feature-button').on('click', function(e) {
         e.preventDefault();
         loadModal("{{ url('admin/data/traits/delete') }}/{{ $feature->id }}", 'Delete Trait');
+      });
     });
-});
-
-</script>
+  </script>
 @endsection

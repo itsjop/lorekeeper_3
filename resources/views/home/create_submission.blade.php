@@ -29,24 +29,15 @@
         'submission' => $submission,
         'criteria' => $isClaim ? null : $criteria,
         'isClaim' => $isClaim,
-        'userGallerySubmissions' => $userGallerySubmissions
+        'userGallerySubmissions' => $userGallerySubmissions,
     ])
-    <div
-      class="modal fade"
-      id="confirmationModal"
-      tabindex="-1"
-      role="dialog"
-    >
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
 
         <div class="modal-content hide" id="confirmContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm {{ $isClaim ? 'Claim' : 'Submission' }}</span>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-            >&times;</button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <p>
@@ -60,11 +51,7 @@
               </div>
             @endif
             <div class="text-right">
-              <a
-                href="#"
-                id="confirmSubmit"
-                class="btn btn-primary"
-              >Confirm</a>
+              <a href="#" id="confirmSubmit" class="btn btn-primary">Confirm</a>
             </div>
           </div>
         </div>
@@ -72,11 +59,7 @@
         <div class="modal-content hide" id="draftContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Create Draft</span>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-            >&times;</button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <p>
@@ -84,11 +67,7 @@
               Items and other attachments will be held, similar to in design update drafts.
             </p>
             <div class="text-right">
-              <a
-                href="#"
-                id="draftSubmit"
-                class="btn btn-success"
-              >
+              <a href="#" id="draftSubmit" class="btn btn-success">
                 Save as Draft
               </a>
             </div>
@@ -106,13 +85,13 @@
       @include('js._loot_js', [
           'showLootTables' => false,
           'showRaffles' => true,
-          'showRecipes' => true
+          'showRecipes' => true,
       ])
     @else
       @include('js._loot_js', [
           'showLootTables' => false,
           'showRaffles' => false,
-          'showRecipes' => false
+          'showRecipes' => false,
       ])
     @endif
     @include('js._character_select_js')

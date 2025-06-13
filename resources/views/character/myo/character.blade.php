@@ -12,16 +12,8 @@
   {{-- Main Image --}}
   <div class="row mb-3">
     <div class="text-center col-md-7">
-      <a
-        href="{{ $character->image->imageUrl }}"
-        data-lightbox="entry"
-        data-title="{{ $character->fullName }}"
-      >
-        <img
-          src="{{ $character->image->imageUrl }}"
-          class="image"
-          alt="{{ $character->fullName }}"
-        />
+      <a href="{{ $character->image->imageUrl }}" data-lightbox="entry" data-title="{{ $character->fullName }}">
+        <img src="{{ $character->image->imageUrl }}" class="image" alt="{{ $character->fullName }}" />
       </a>
     </div>
     @include('character._image_info', ['image' => $character->image])
@@ -32,43 +24,19 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a
-            class="nav-link active"
-            id="statsTab"
-            data-toggle="tab"
-            href="#stats"
-            role="tab"
-          > Stats </a>
+          <a class="nav-link active" id="statsTab" data-toggle="tab" href="#stats" role="tab"> Stats </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            id="notesTab"
-            data-toggle="tab"
-            href="#notes"
-            role="tab"
-          > Description </a>
+          <a class="nav-link" id="notesTab" data-toggle="tab" href="#notes" role="tab"> Description </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            id="lineageTab"
-            data-toggle="tab"
-            href="#lineage"
-            role="tab"
-          >
+          <a class="nav-link" id="lineageTab" data-toggle="tab" href="#lineage" role="tab">
             Lineage
           </a>
         </li>
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
-            <a
-              class="nav-link"
-              id="settingsTab"
-              data-toggle="tab"
-              href="#settings-all"
-              role="tab"
-            >
+            <a class="nav-link" id="settingsTab" data-toggle="tab" href="#settings-all" role="tab">
               <i class="fas fa-cog"></i></a>
           </li>
         @endif
@@ -87,15 +55,11 @@
       @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
         <div class="tab-pane fade" id="settings-all">
           {!! Form::open([
-              'url' => $character->is_myo_slot
-                  ? 'admin/myo/' . $character->id . '/settings'
-                  : 'admin/character/' . $character->slug . '/settings'
+              'url' => $character->is_myo_slot ? 'admin/myo/' . $character->id . '/settings' : 'admin/character/' . $character->slug . '/settings',
           ]) !!}
           <div class="form-group">
             {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-            {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
-                'Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.'
-            ) !!}
+            {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.') !!}
           </div>
           <div class="text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -103,11 +67,7 @@
           {!! Form::close() !!}
           <hr />
           <div class="text-right">
-            <a
-              href="#"
-              class="btn btn-outline-danger btn-sm delete-character"
-              data-id="{{ $character->id }}"
-            >Delete</a>
+            <a href="#" class="btn btn-outline-danger btn-sm delete-character" data-id="{{ $character->id }}">Delete</a>
           </div>
         </div>
       @endif

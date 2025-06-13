@@ -3,11 +3,7 @@
     Invalid item selected.</div>
 @else
   <div class="text-center mb-3">
-    <div class="mb-1"><a href="{{ $stock->item->idUrl }}"><img
-          class="img-fluid"
-          src="{{ $stock->item->imageUrl }}"
-          alt="{{ $stock->item->name }}"
-        /></a></div>
+    <div class="mb-1"><a href="{{ $stock->item->idUrl }}"><img class="img-fluid" src="{{ $stock->item->imageUrl }}" alt="{{ $stock->item->name }}" /></a></div>
     <div><a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a></div>
     <div><strong>Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!}</div>
     @if ($stock->is_limited_stock)
@@ -29,11 +25,7 @@
 
   @if ($stock->item->parsed_description)
     <div class="mb-2">
-      <a
-        data-toggle="collapse"
-        href="#itemDescription"
-        class="h5"
-      >Description <i class="fas fa-caret-down"></i></a>
+      <a data-toggle="collapse" href="#itemDescription" class="h5">Description <i class="fas fa-caret-down"></i></a>
       <div class="card collapse show mt-1" id="itemDescription">
         <div class="card-body">
           {!! $stock->item->parsed_description !!}
@@ -155,7 +147,7 @@
           <div class="br-form-group" style="display: none">
             {!! Form::select('coupon', $userCoupons, null, [
                 'class' => 'form-control mb-2',
-                'placeholder' => 'Select a Coupon to Use'
+                'placeholder' => 'Select a Coupon to Use',
             ]) !!}
           </div>
         @elseif($stock->shop->use_coupons && $userCoupons == null)

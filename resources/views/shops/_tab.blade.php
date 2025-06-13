@@ -3,13 +3,8 @@
     <ul class="nav nav-tabs card-header-tabs">
       @foreach ($stock as $categoryId => $categoryItems)
         <li class="nav-item">
-          <a
-            class="nav-link {{ $loop->first ? 'active' : '' }}"
-            id="categoryTab-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}"
-            data-toggle="tab"
-            href="#category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}"
-            role="tab"
-          >
+          <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="categoryTab-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}" data-toggle="tab"
+            href="#category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}" role="tab">
             {!! isset($categoryItems->first()->category) ? $categoryItems->first()->category->name : 'Miscellaneous' !!}
           </a>
         </li>
@@ -18,9 +13,7 @@
   </div>
   <div class="card-body tab-content">
     @foreach ($stock as $categoryId => $categoryItems)
-      <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-        id="category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}"
-      >
+      <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}">
         @foreach ($categoryItems->chunk(4) as $chunk)
           <div class="row mb-3">
             @foreach ($chunk as $item)

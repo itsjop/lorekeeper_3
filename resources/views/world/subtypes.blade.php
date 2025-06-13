@@ -20,7 +20,7 @@
   </div>
 
   {!! $subtypes->render() !!}
-    @foreach ($subtypes as $subtype)
+  @foreach ($subtypes as $subtype)
     <div class="card mb-3">
       <div class="card-body">
         @include('world._subtype_entry', ['subtype' => $subtype])

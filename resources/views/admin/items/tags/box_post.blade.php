@@ -3,5 +3,5 @@
     'currencies' => $currencies,
     'showLootTables' => true,
     'showRaffles' => true,
-    'showRecipes' => true
+    'showRecipes' => true,
 ])

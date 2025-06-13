@@ -35,9 +35,7 @@
       </a>
     </div>
     <div class="sidebar-item">
-      <a href="{{ url('world/' . __('transformations.transformations')) }}"
-        class="{{ set_active('world/' . __('transformations.transformations')) }}"
-      >{{ ucfirst(__('transformations.transformations')) }}</a>
+      <a href="{{ url('world/' . __('transformations.transformations')) }}" class="{{ set_active('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
     </div>
     <div class="sidebar-item">
       <a href="{{ url('world/character-titles') }}" class="{{ set_active('world/character-titles*') }}">
@@ -92,9 +90,7 @@
     <div class="sidebar-section-header">{{ ucfirst(__('awards.awards')) }}
     </div>
     <div class="sidebar-item">
-      <a href="{{ url('world/' . __('awards.award') . '-categories') }}"
-        class="{{ set_active('world/' . __('awards.award') . '-categories*') }}"
-      >
+      <a href="{{ url('world/' . __('awards.award') . '-categories') }}" class="{{ set_active('world/' . __('awards.award') . '-categories*') }}">
         {{ ucfirst(__('awards.award')) }} Categories
       </a>
     </div>

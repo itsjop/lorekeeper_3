@@ -8,9 +8,7 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('lorekeeper.subtypes')) => 'admin/data/subtypes',
-      ($subtype->id ? 'Edit' : 'Create') . ' ' . ucfirst(__('lorekeeper.subtype')) => $subtype->id
-          ? 'admin/data/subtypes/edit/' . $subtype->id
-          : 'admin/data/subtypes/create'
+      ($subtype->id ? 'Edit' : 'Create') . ' ' . ucfirst(__('lorekeeper.subtype')) => $subtype->id ? 'admin/data/subtypes/edit/' . $subtype->id : 'admin/data/subtypes/create',
   ]) !!}
 
   <h1>{{ $subtype->id ? 'Edit' : 'Create' }} {{ ucfirst(__('lorekeeper.subtype')) }}
@@ -21,7 +19,7 @@
 
   {!! Form::open([
       'url' => $subtype->id ? 'admin/data/subtypes/edit/' . $subtype->id : 'admin/data/subtypes/create',
-      'files' => true
+      'files' => true,
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -43,7 +41,7 @@
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
     <div class="text-muted">Recommended size: 200px x 200px</div>
-        @if ($subtype->has_image)
+    @if ($subtype->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
         {!! Form::label('remove_image', 'Remove current image', ['class' => 'form-check-label']) !!}
@@ -57,25 +55,21 @@
   </div>
 
   <div class="col form-group">
-    {!! Form::label('Chance to inherit') !!} {!! add_help(
-        'For pairings, how likely this subtype is to be passed on in percent. Must be a number between 1-100. Defaults to 50. Does not guarantee a subtypes is inherited 100% of the time as the chances for both subtypes are added!'
-    ) !!}
+    {!! Form::label('Chance to inherit') !!} {!! add_help('For pairings, how likely this subtype is to be passed on in percent. Must be a number between 1-100. Defaults to 50. Does not guarantee a subtypes is inherited 100% of the time as the chances for both subtypes are added!') !!}
     {!! Form::number('inherit_chance', $subtype->inherit_chance ?? 50, ['class' => 'form-control']) !!}
   </div>
 
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $subtype->id ? $subtype->is_visible : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle'
+        'data-toggle' => 'toggle',
     ]) !!}
-    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
-        'If turned off, the subtype will not be visible in the subtypes list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.'
-    ) !!}
+    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the subtype will not be visible in the subtypes list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.') !!}
   </div>
 
   @include('admin.lineage._edit_lineage_blacklist', [
       'lineageBlacklist' => $lineageBlacklist,
-      'type' => 'subtype'
+      'type' => 'subtype',
   ])
 
   <div class="text-right">
@@ -83,7 +77,7 @@
   </div>
 
   {!! Form::close() !!}
-  
+
   @if ($subtype->id)
     <h3>Preview</h3>
     <div class="card mb-3">

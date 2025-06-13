@@ -10,9 +10,7 @@
       'Criteria' => 'admin/data/criteria',
       'Default Criteria' => 'admin/data/criteria-defaults',
       'Default Criteria' => 'admin/data/criteria-defaults',
-      ($default->id ? 'Edit' : 'Create') . ' Default Criteria' => $default->id
-          ? 'admin/data/criteria-defaults/edit/' . $default->id
-          : 'admin/data/criteria-defaults/create'
+      ($default->id ? 'Edit' : 'Create') . ' Default Criteria' => $default->id ? 'admin/data/criteria-defaults/edit/' . $default->id : 'admin/data/criteria-defaults/create',
   ]) !!}
 
   <h1>{{ $default->id ? 'Edit' : 'Create' }} Criteria Default
@@ -22,7 +20,7 @@
   </h1>
 
   {!! Form::open([
-      'url' => $default->id ? 'admin/data/criteria-defaults/edit/' . $default->id : 'admin/data/criteria-defaults/create'
+      'url' => $default->id ? 'admin/data/criteria-defaults/edit/' . $default->id : 'admin/data/criteria-defaults/create',
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -46,17 +44,13 @@
     @foreach ($default->criteria as $criterion)
       <div class="card p-3 mb-2 pl-0">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <a
-            class="col-1 p-0"
-            data-toggle="collapse"
-            href="#collapsable-{{ $criterion->id }}"
-          >
+          <a class="col-1 p-0" data-toggle="collapse" href="#collapsable-{{ $criterion->id }}">
             <i class="fas fa-angle-down" style="font-size: 24px"></i>
           </a>
           <div class="flex-grow-1 mr-2">
             {!! Form::select('criterion_id[]', $criteria, $criterion->criterion_id, [
                 'class' => 'form-control criterion-select',
-                'placeholder' => 'Select a Criterion to set Minimum Requirements'
+                'placeholder' => 'Select a Criterion to set Minimum Requirements',
             ]) !!}
           </div>
           <div>
@@ -69,9 +63,7 @@
               'minRequirements' => $criterion->minRequirements,
               'id' => $criterion->criterion_id,
               'isAdmin' => true,
-              'criterion_currency' => isset($criterion->criterion_currency_id)
-                  ? $criterion->criterion_currency_id
-                  : $criterion->criterion->currency_id
+              'criterion_currency' => isset($criterion->criterion_currency_id) ? $criterion->criterion_currency_id : $criterion->criterion->currency_id,
           ])
         </div>
       </div>
@@ -86,17 +78,13 @@
 
   <div id="copy-calc" class="card p-3 mb-2 pl-0 hide">
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <a
-        class="col-1 p-0"
-        data-toggle="collapse"
-        href="#collapsable-"
-      >
+      <a class="col-1 p-0" data-toggle="collapse" href="#collapsable-">
         <i class="fas fa-angle-down" style="font-size: 24px"></i>
       </a>
       <div class="flex-grow-1 mr-2">
         {!! Form::select('criterion_id[]', $criteria, null, [
             'class' => 'form-control criterion-select',
-            'placeholder' => 'Select a Criterion to set Minimum Requirements'
+            'placeholder' => 'Select a Criterion to set Minimum Requirements',
         ]) !!}
       </div>
       <div>

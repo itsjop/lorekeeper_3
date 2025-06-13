@@ -9,26 +9,14 @@
 
   <h1>Raffle Index</h1>
   <div class="text-right form-group">
-    <a
-      class="btn btn-success edit-group"
-      href="#"
-      data-id=""
-    >Create Raffle Group</a>
-    <a
-      class="btn btn-success edit-raffle"
-      href="#"
-      data-id=""
-    >Create Raffle</a>
+    <a class="btn btn-success edit-group" href="#" data-id="">Create Raffle Group</a>
+    <a class="btn btn-success edit-raffle" href="#" data-id="">Create Raffle</a>
   </div>
   <ul class="nav nav-tabs mb-3">
     <li class="nav-item"><a href="{{ url()->current() }}" class="nav-link {{ Request::get('is_active') ? '' : 'active' }}">Current
         Raffles</a></li>
-    <li class="nav-item"><a href="{{ url()->current() }}?is_active=1"
-        class="nav-link {{ Request::get('is_active') == 1 ? 'active' : '' }}"
-      >Open Raffles</a></li>
-    <li class="nav-item"><a href="{{ url()->current() }}?is_active=2"
-        class="nav-link {{ Request::get('is_active') == 2 ? 'active' : '' }}"
-      >Completed Raffles</a></li>
+    <li class="nav-item"><a href="{{ url()->current() }}?is_active=1" class="nav-link {{ Request::get('is_active') == 1 ? 'active' : '' }}">Open Raffles</a></li>
+    <li class="nav-item"><a href="{{ url()->current() }}?is_active=2" class="nav-link {{ Request::get('is_active') == 2 ? 'active' : '' }}">Completed Raffles</a></li>
   </ul>
   @if (Request::get('is_active') == 1)
     <p>
@@ -54,23 +42,13 @@
   @endif
   <div class="card mb-3">
     <div class="card-header">
-      <h3 class="d-inline">{{ $groups[$raffle->group_id]->name }} <span
-          class="badge badge-xs {{ $groups[$raffle->group_id]->is_active ? 'badge-success' : 'badge-danger' }}"
-        >{{ $groups[$raffle->group_id]->is_active ? 'Visible' : 'Hidden' }}</span>
+      <h3 class="d-inline">{{ $groups[$raffle->group_id]->name }} <span class="badge badge-xs {{ $groups[$raffle->group_id]->is_active ? 'badge-success' : 'badge-danger' }}">{{ $groups[$raffle->group_id]->is_active ? 'Visible' : 'Hidden' }}</span>
       </h3>
 
       @if ($raffle->is_active < 2)
         <div class="float-right">
-          <a
-            href="#"
-            class="roll-group btn btn-outline-danger btn-sm"
-            data-id="{{ $groups[$raffle->group_id]->id }}"
-          >Roll Group</a>
-          <a
-            href="#"
-            class="edit-group btn btn-outline-primary btn-sm"
-            data-id="{{ $groups[$raffle->group_id]->id }}"
-          >Edit Group</a>
+          <a href="#" class="roll-group btn btn-outline-danger btn-sm" data-id="{{ $groups[$raffle->group_id]->id }}">Roll Group</a>
+          <a href="#" class="edit-group btn btn-outline-primary btn-sm" data-id="{{ $groups[$raffle->group_id]->id }}">Edit Group</a>
         </div>
       @endif
     </div>
@@ -83,17 +61,9 @@
         @if ($raffle->is_active < 2)
           <div class="float-right">
             @if (!$raffle->group_id)
-              <a
-                href="#"
-                class="roll-raffle btn btn-outline-danger btn-xs p-2"
-                data-id="{{ $raffle->id }}"
-              >Roll Raffle</a>
+              <a href="#" class="roll-raffle btn btn-outline-danger btn-xs p-2" data-id="{{ $raffle->id }}">Roll Raffle</a>
             @endif
-            <a
-              href="#"
-              class="edit-raffle btn btn-xs btn-outline-primary p-2"
-              data-id="{{ $raffle->id }}"
-            >
+            <a href="#" class="edit-raffle btn btn-xs btn-outline-primary p-2" data-id="{{ $raffle->id }}">
               Edit Raffle
             </a>
           </div>

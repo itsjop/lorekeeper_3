@@ -23,7 +23,7 @@
         @foreach ($subtypes as $subtype)
           <tr class="sort-item" data-id="{{ $subtype->id }}">
             <td>
-                            <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               @if (!$subtype->is_visible)
                 <i class="fas fa-eye-slash mr-1"></i>
               @endif
@@ -36,7 +36,7 @@
               Inherit Chance: {!! $subtype->inherit_chance !!}%
             </td>
             <td class="text-right">
-                            <a href="{{ url('admin/data/subtypes/edit/' . $subtype->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/subtypes/edit/' . $subtype->id) }}" class="btn btn-primary">Edit</a>
             </td>
           </tr>
         @endforeach

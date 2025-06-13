@@ -3,7 +3,7 @@
     <a href="{{ $character->url }}" class="card-link">{{ $character->fullName }}</a>
   </li>
   <li class="sidebar-section">
-    <div class="sidebar-section-header">{{ucfirst(__('lorekeeper.character'))}}</div>
+    <div class="sidebar-section-header">{{ ucfirst(__('lorekeeper.character')) }}</div>
     <div class="sidebar-item">
       <a href="{{ $character->url . '/profile' }}" class="{{ set_active('myo/' . $character->id . '/profile') }}">Profile</a>
     </div>

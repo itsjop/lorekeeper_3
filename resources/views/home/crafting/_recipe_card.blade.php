@@ -1,8 +1,4 @@
-<div
-  class="card mb-3"
-  data-id="{{ $recipe->id }}"
-  data-name="{{ $recipe->name }}"
->
+<div class="card mb-3" data-id="{{ $recipe->id }}" data-name="{{ $recipe->name }}">
   <div class="card-header">
     <h2 class="mb-0">{{ $recipe->name }}</h2>
   </div>

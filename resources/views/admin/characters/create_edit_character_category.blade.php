@@ -51,10 +51,10 @@
     @endif
   </div>
 
-    @include('admin.lineage._edit_lineage_blacklist', [
-        'lineageBlacklist' => $lineageBlacklist,
-        'type' => 'category',
-    ])
+  @include('admin.lineage._edit_lineage_blacklist', [
+      'lineageBlacklist' => $lineageBlacklist,
+      'type' => 'category',
+  ])
 
   <div class="form-group">
     {!! Form::label('Description (Optional)') !!}

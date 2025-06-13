@@ -5,7 +5,7 @@
         <td class="loot-row-select">
           {!! Form::select('rewardable_id[]', $recipes, null, [
               'class' => 'form-control recipe-select',
-              'placeholder' => 'Select Recipe'
+              'placeholder' => 'Select Recipe',
           ]) !!}
         </td>
         <td>{!! Form::text('quantity[]', 1, ['class' => 'form-control']) !!}</td>

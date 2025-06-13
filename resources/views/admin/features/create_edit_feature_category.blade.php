@@ -8,9 +8,7 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Trait Categories' => 'admin/data/trait-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id
-          ? 'admin/data/trait-categories/edit/' . $category->id
-          : 'admin/data/trait-categories/create'
+      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/trait-categories/edit/' . $category->id : 'admin/data/trait-categories/create',
   ]) !!}
 
   <h1>{{ $category->id ? 'Edit' : 'Create' }} Trait Category
@@ -21,7 +19,7 @@
 
   {!! Form::open([
       'url' => $category->id ? 'admin/data/trait-categories/edit/' . $category->id : 'admin/data/trait-categories/create',
-      'files' => true
+      'files' => true,
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -66,11 +64,9 @@
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle'
+        'data-toggle' => 'toggle',
     ]) !!}
-    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
-        'If turned off, the category will not be visible in the category list or available for selection in search. Permissioned staff will still be able to add traits to them, however.'
-    ) !!}
+    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the category will not be visible in the category list or available for selection in search. Permissioned staff will still be able to add traits to them, however.') !!}
   </div>
 
   <div class="text-right">
@@ -87,7 +83,7 @@
             'name' => $category->displayName,
             'description' => $category->parsed_description,
             'searchUrl' => $category->searchUrl,
-            'visible' => $category->is_visible
+            'visible' => $category->is_visible,
         ])
       </div>
     </div>

@@ -41,9 +41,7 @@
       </tbody>
 
     </table>
-    @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields') &&
-            config('lorekeeper.extensions.item_entry_expansion.loot_tables.enable')
-    )
+    @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields') && config('lorekeeper.extensions.item_entry_expansion.loot_tables.enable'))
       <div class="alert alert-info mb-2">
         Note that changing the order of rarities may have unintended consequences on criteria loot tables.
       </div>

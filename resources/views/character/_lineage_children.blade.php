@@ -8,11 +8,7 @@
           <div class="col text-center">
             <div>
               <a href="{{ $child->character->url }}">
-                <img
-                  src="{{ $child->character->image->thumbnailUrl }}"
-                  class="img-thumbnail"
-                  alt="Thumbnail for {{ $child->character->fullName }}"
-                />
+                <img src="{{ $child->character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $child->character->fullName }}" />
               </a>
             </div>
             <div class="mt-1">
@@ -28,11 +24,7 @@
                 @include('character._lineage_children', [
                     'character' => $child->character,
                     'max_depth' => $max_depth - 1,
-                    'title' =>
-                        $max_depth == config('lorekeeper.lineage.descendant_depth') - 1
-                            ? 'Grandchildren'
-                            : str_repeat('Great-', config('lorekeeper.lineage.descendant_depth') - $max_depth - 1) .
-                                'Grandchildren'
+                    'title' => $max_depth == config('lorekeeper.lineage.descendant_depth') - 1 ? 'Grandchildren' : str_repeat('Great-', config('lorekeeper.lineage.descendant_depth') - $max_depth - 1) . 'Grandchildren',
                 ])
               </div>
             @endif

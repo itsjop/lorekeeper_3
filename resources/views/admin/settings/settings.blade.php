@@ -64,8 +64,8 @@
     {!! $settings->render() !!}
   @endif
 @endsection
-  <style>
-    .log-description {
-      white-space: pre-line;
-    }
-  </style>
+<style>
+  .log-description {
+    white-space: pre-line;
+  }
+</style>

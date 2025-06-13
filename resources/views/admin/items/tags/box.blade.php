@@ -8,5 +8,5 @@
     'showLootTables' => true,
     'showRaffles' => true,
     'showBorders' => true,
-    'showRecipes' => true
+    'showRecipes' => true,
 ])

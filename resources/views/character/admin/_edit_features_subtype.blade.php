@@ -3,5 +3,5 @@
     'class' => 'form-control',
     'id' => 'subtype',
     'multiple',
-    'placeholder' => 'Select Subtype(s)' 
+    'placeholder' => 'Select Subtype(s)',
 ]) !!}

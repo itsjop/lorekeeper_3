@@ -8,9 +8,7 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Discord Rewards' => 'admin/discord/rewards',
-      ($reward->id ? 'Edit' : 'Create') . ' Discord Reward' => $reward->id
-          ? 'admin/discord/rewards/edit/' . $reward->id
-          : 'admin/discord/rewards/create'
+      ($reward->id ? 'Edit' : 'Create') . ' Discord Reward' => $reward->id ? 'admin/discord/rewards/edit/' . $reward->id : 'admin/discord/rewards/create',
   ]) !!}
 
   <h1>{{ $reward->id ? 'Edit' : 'Create' }} Discord Reward

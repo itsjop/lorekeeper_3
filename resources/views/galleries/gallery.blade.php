@@ -51,10 +51,10 @@
               'alpha' => 'Sort Alphabetically (A-Z)',
               'alpha-reverse' => 'Sort Alphabetically (Z-A)',
               'prompt' => 'Sort by Prompt (Newest to Oldest)',
-              'prompt-reverse' => 'Sort by Prompt (Oldest to Newest)'
+              'prompt-reverse' => 'Sort by Prompt (Oldest to Newest)',
           ],
           Request::get('sort') ?: 'category',
-          ['class' => 'form-control']
+          ['class' => 'form-control'],
       ) !!}
     </div>
     <div class="form-group mb-3">
