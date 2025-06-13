@@ -61,7 +61,6 @@
         {!! Form::text('profession', $character->profile->profession, ['class' => 'form-control']) !!}
       </div>
     </div>
-    </div>
   @endif
 
   @if (!$character->is_myo_slot && ($char_enabled == 2 || (Auth::user()->isStaff && $char_enabled == 3)))

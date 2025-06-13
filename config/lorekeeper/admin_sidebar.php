@@ -37,8 +37,17 @@ return [
       ['name' => 'Recipes', 'url' => 'admin/data/recipes',],
       ['name' => 'Transformations', 'url'  => 'admin/data/transformations',],
       ['name' => 'Character Titles', 'url'  => 'admin/data/character-titles',],
+      ['name' => 'Professions', 'url' => 'admin/data/professions',],
+      ['name' => 'Dailies', 'url' => 'admin/data/dailies',],
       ['name' => 'Pairing Roller', 'url'  => 'admin/pairings/roller',],
     ],
+  ],
+  'Cultivation' => [
+        'power' => 'edit_data',
+        'links' => [
+            ['name' => 'Areas','url' => 'admin/cultivation/areas',],
+            ['name' => 'Plots','url' => 'admin/cultivation/plots',],
+        ]
   ],
   'Admin' => [
     'power' => 'mixed',

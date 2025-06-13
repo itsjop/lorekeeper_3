@@ -58,7 +58,7 @@ class ExplorationService extends Service
         
         try {
             //get pairingData array and put it into the 'data' column of the DB for this tag
-            $tag->update(['data' => json_encode($exData)]);
+            $tag->update(['data' => $exData]);
         
             return $this->commitReturn(true);
         } catch(\Exception $e) {

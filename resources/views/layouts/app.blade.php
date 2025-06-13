@@ -69,6 +69,11 @@
   <script defer src="{{ asset('js/vendor/jquery-ui-timepicker-addon.js') }}"></script>
   <script defer src="{{ asset('js/site.js') }}"></script>
   <script defer src="{{ asset('js/vendor/croppie.min.js') }}"></script>
+
+  <!-- Scripts for wheel of fortune dailies -->
+  <script src="{{ asset('js/winwheel.min.js') }}"></script>
+  <script src="{{ asset('js/tweenmax.min.js') }}"></script>
+
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link

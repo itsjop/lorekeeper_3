@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Characters;
-
+use App\Services\CharacterManager;
 use App\Services\CurrencyManager;
 use App\Services\InventoryManager;
 use Route;

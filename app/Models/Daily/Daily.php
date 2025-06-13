@@ -167,7 +167,7 @@ class Daily extends Model
      */
     public function getUrlAttribute()
     {
-        return url('admin/data/'.__('dailies.dailies').'/edit/'.$this->id);
+        return url(__('dailies.dailies').'/'.$this->id);
     }
 
     /**

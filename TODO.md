@@ -6,28 +6,29 @@
 
 # KNOWN ISSUES
 - [x] rarity incorrectly requires an icon
-- [x] multiple shop issues (fixed as to where creating stock and buying from the shop works)
+- [x] multiple shop issues -> CYL: fixed as to where creating stock and buying from the shop works
 - [x] character creation 'subtypes'/'transformation' select a species first
 - [x] profile page still busted
 - [x] 'my characters' page not listing characters
-- [ ] settings page avatar upload broken (CYL: it works for me locally?)
+- [ ] settings page avatar upload broken -> CYL: it works for me locally?
   - [x] profile pronouns (maybe) not saving
   - [ ] image block settings twice
-- [ ] 500 editing character profile from sidebar
+- [x] 500 editing character profile from sidebar -> CYL: make sure composer update/install ran for the league dependency
 - [ ] 404 badge logs not found
-- [ ] Cultivation/professions/dailies settings not linked properly
-- [ ] shop stock popup fucked
+- [x] Cultivation/professions/dailies settings not linked properly -> CYL: added to admin sidebar and checked for basic functionality, errors I saw below!
+- [ ] wheels on wheel dailies don't show up properly even after adding the necessary js files -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me...
+- [x] shop stock popup fucked -> CYL: fixed with the multiple shop issues I think
 - [ ] need wysywig textboxes
 - [ ] titles missing on create myo
 - [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
 - [x] profile comments
-- [ ] remove sex
+- [ ] remove sex -> CYL: would strongly discourage this as long as pairings is in here because the code depends on it, and it's not worth the effort - since unless you set one, no character will have or show one.
 - [ ] featured character only from active participants
-- [ ] shops still fucked
+- [x] shops still fucked -> CYL: fixed with the multiple shop issues I think
 - [ ] appprovals?
 - [ ] item category search no results
-- [ ] shop editing super broken
-- [ ] wysywig textboxes
+- [x] shop editing super broken -> CYL: fixed with the multiple shop issues I think
+- [ ] wysywig textboxes -> CYL: this is an extension iirc! It's called tinymce or smth
 - [ ] admin/raffle create buttons dont work
 - [x] inventory MYO item broken, no idea how it submits???
 - [x] ironically logs page is broken

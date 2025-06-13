@@ -138,7 +138,7 @@ class SeedService extends Service
             if($image) $this->handleImage($image, public_path('images/data/items/seeds/'), $saveName);
             else $assets['stage_5_image'] = ( $tag->getData() ? $tag->getData()['stage_5_image'] : null);
 
-            $tag->update(['data' => json_encode($assets)]);
+            $tag->update(['data' => $assets]);
 
             return $this->commitReturn(true);
         } catch(\Exception $e) { 
