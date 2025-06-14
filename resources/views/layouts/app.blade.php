@@ -49,6 +49,7 @@
     <script src="{{ asset('js/jquery.tinymce.min.js') }}"></script>
     <script src="{{ asset('js/lightbox.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('js/bs-custom-file-input.min.js') }}"></script>
     <script src="{{ asset('js/selectize.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>
     <script src="{{ asset('js/croppie.min.js') }}"></script>
@@ -108,7 +109,7 @@
                                 @endif
                             </div>
                         @endif
-                        @if (Auth::check() && Auth::user()->hasUnseenMail)
+                        @if (Auth::check() && Auth::user()->hasUnseenMail && !Auth::user()->is_banned)
                             <div class="alert alert-danger">
                                 <h5 class="mb-0"><i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages from staff. <a href="{{ url('mail#modMail') }}">View here.</a></h5>
                             </div>
@@ -173,6 +174,7 @@
                     spoiler_caption: 'Toggle Spoiler',
                     target_list: false
                 });
+                bsCustomFileInput.init();
                 var $mobileMenuButton = $('#mobileMenuButton');
                 var $sidebar = $('#sidebar');
                 $('#mobileMenuButton').on('click', function(e) {

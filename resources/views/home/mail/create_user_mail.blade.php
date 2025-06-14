@@ -5,11 +5,11 @@
 @endsection
 
 @section('home-content')
-    {!! breadcrumbs(['Inbox' => 'inbox', 'Create Message' => 'inbox/new']) !!}
+    {!! breadcrumbs(['Inbox' => 'mail', 'Create Message' => 'mail/new']) !!}
 
     <h1>Create Direct Message</h1>
 
-    {!! Form::open(['url' => 'inbox/new']) !!}
+    {!! Form::open(['url' => 'mail/new']) !!}
 
     <div class="form-group">
         {!! Form::label('recipient_id', 'Recipient Username') !!}

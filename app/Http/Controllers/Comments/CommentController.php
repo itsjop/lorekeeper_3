@@ -152,7 +152,7 @@ class CommentController extends Controller {
                 $mail = ModMail::find($comment->commentable_id);
                 $recipient = $mail->staff;
                 $post = 'your sent mod mails';
-                $link = 'mail/view/'.$comment->commentable_id.'/#comment-'.$comment->getKey();
+                $link = 'mail/staff-sent/view/'.$comment->commentable_id.'/#comment-'.$comment->getKey();
                 break;
             default:
                 throw new \Exception('Comment type not supported.');

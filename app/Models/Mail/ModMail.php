@@ -84,7 +84,7 @@ class ModMail extends Model {
      * @return string
      */
     public function getDisplayNameAttribute() {
-        return '<a href="'.$this->url.'">'.$this->subject.'</a>';
+        return '<a href="'.$this->viewUrl.'">'.$this->subject.'</a>';
     }
 
     /**
@@ -94,9 +94,9 @@ class ModMail extends Model {
      */
     public function getViewUrlAttribute() {
         if (Auth::user()->id != $this->recipient_id || Auth::user()->id == $this->user_id) {
-            return url('admin/mail/view/'.$this->id);
+            return url('mail/staff-sent/view/'.$this->id);
         }
 
-        return url('inbox/view/'.$this->id);
+        return url('mail/staff-sent/view/'.$this->id);
     }
 }
