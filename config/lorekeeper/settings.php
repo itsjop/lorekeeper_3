@@ -68,8 +68,8 @@ return [
     | provide one on registration / login / site interaction (if this setting is enabled).
     |
     */
-  'require_alias'                                     => 1,
-  'require_email'                                     => 1,
+  'require_alias'  => 1,
+  'require_email'  => 1,
 
   /*
 |--------------------------------------------------------------------------
@@ -337,8 +337,12 @@ return [
   'default_purchase_limit' => 99,
   /*
 | Donation Shop:
-| Item donations: Controls restrictions (or lack thereof) on user item donations. 0: No restrictions. Any item can be donated.
-1: Only items of certain categories may be donated (configure when creating/editing item categories). 2: Only items with the 'donatable' tag may be donated. 3: Items in certain categories or that have the 'donateable' tag may be donated. Default: 0.
+| Item donations: Controls restrictions (or lack thereof) on user item donations.
+    0: No restrictions. Any item can be donated.
+    1: Only items of certain categories may be donated (configure when creating/editing item categories).
+    2: Only items with the 'donatable' tag may be donated.
+    3: Items in certain categories or that have the 'donateable' tag may be donated.
+    Default: 0.
 | Cooldown: Time (in minutes) that users must wait between "purchases". Default: 5.
 | Expiry: Time (in months) before items are automatically deleted from the donation shop. Set to 0 to disable expiry. Default: 0.
 |
@@ -395,7 +399,7 @@ return [
     | Whether or not to allow gallery submissions on prompts.
     |
     */
-  'allow_gallery_submissions_on_prompts'              => 1,
+  'allow_gallery_submissions_on_prompts'    => 1,
 
   /*
     |--------------------------------------------------------------------------
@@ -410,7 +414,7 @@ return [
     | if 'enable' is set to 1.
     |
     */
-  'hide_textarea_on_gallery_submissions'              => [
+  'hide_textarea_on_gallery_submissions'    => [
     'enable'   => 0,
     'on_image' => 0,
   ],
@@ -427,7 +431,7 @@ return [
     | the v5 icons and icons with v6 classes (i.e. fa-solid) show the v6 icons.
     |
     */
-  'fa_version'                                  => 0,
+  'fa_version'    => 0,
 
   /*
     |--------------------------------------------------------------------------
@@ -440,7 +444,7 @@ return [
     | This is intended to be a Discord webhook, but can be used with other services with minor modifications.
     |
     */
-  'site_logging_webhook'                              => env('SITE_LOGGING_WEBHOOK', null),
+  'site_logging_webhook'=> env('SITE_LOGGING_WEBHOOK', null),
 
   /*
     |--------------------------------------------------------------------------
@@ -450,7 +454,5 @@ return [
     | Allows characters to have content warnings.
     |
     */
-  'enable_character_content_warnings'                 => 1,
-
-
+  'enable_character_content_warnings'  => 1,
 ];
