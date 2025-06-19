@@ -1,11 +1,17 @@
 <h3>Recipes</h3>
 
-<a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+<a
+  data-toggle="collapse"
+  href="#collapseExample"
+  role="button"
+  aria-expanded="false"
+  aria-controls="collapseExample"
+>
   {!! Form::checkbox('all_recipes', 1, !is_array($tag->getData()), [
       'class' => 'form-check-input',
       'data-toggle' => 'toggle',
       'data-on' => 'Take from all unlockable Recipes',
-      'data-off' => 'Use specific Recipes',
+      'data-off' => 'Use specific Recipes'
   ]) !!}
 </a>
 <br /><br />
@@ -13,7 +19,11 @@
   <div class="card card-body">
 
     <div class="text-right mb-3">
-      <a href="#" class="btn btn-outline-info" id="addLoot">Add Reward</a>
+      <a
+        href="#"
+        class="btn btn-outline-info"
+        id="addLoot"
+      >Add Reward</a>
     </div>
     <table class="table table-sm" id="lootTable">
       <thead>
@@ -30,11 +40,13 @@
               <td class="loot-row-select">
                 {!! Form::select('rewardable_id[]', $recipes, $loot->rewardable_id, [
                     'class' => 'form-control recipe-select selectize',
-                    'placeholder' => 'Select Recipe',
+                    'placeholder' => 'Select Recipe'
                 ]) !!}
               </td>
               <td>{!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!}</td>
-              <td class="text-right"><a href="#" class="btn btn-danger remove-loot-button">Remove</a></td>
+              <td class="text-right">
+                <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
+              </td>
             </tr>
           @endforeach
         @endif

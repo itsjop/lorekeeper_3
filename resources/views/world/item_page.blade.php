@@ -33,7 +33,17 @@
         <div class="card-body">
           <div class="row world-entry">
             @if ($imageUrl)
-              <div class="col-md-3 world-entry-image"><a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}"><img src="{{ $imageUrl }}" class="world-entry-image" alt="{{ $name }}" /></a></div>
+              <div class="col-md-3 world-entry-image">
+                <a
+                  href="{{ $imageUrl }}"
+                  data-lightbox="entry"
+                  data-title="{{ $name }}"
+                ><img
+                    src="{{ $imageUrl }}"
+                    class="world-entry-image"
+                    alt="{{ $name }}"
+                  /></a>
+              </div>
             @endif
             <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
               <h1>
@@ -98,14 +108,24 @@
                   </p>
                 @endif
                 {!! $description !!}
-                @if (((isset($item->uses) && $item->uses) || (isset($item->source) && $item->source) || $item->shop_stock_count || (isset($item->data['prompts']) && $item->data['prompts'])) && config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
+                @if (
+                    ((isset($item->uses) && $item->uses) ||
+                        (isset($item->source) && $item->source) ||
+                        $item->shop_stock_count ||
+                        (isset($item->data['prompts']) && $item->data['prompts'])) &&
+                        config('lorekeeper.extensions.item_entry_expansion.extra_fields')
+                )
 
                   @if (isset($item->uses) && $item->uses)
                     <p>
                       <strong>Uses:</strong> {!! $item->uses !!}
                     </p>
                   @endif
-                  @if ((isset($item->source) && $item->source) || $item->shop_stock_count || (isset($item->data['prompts']) && $item->data['prompts']))
+                  @if (
+                      (isset($item->source) && $item->source) ||
+                          $item->shop_stock_count ||
+                          (isset($item->data['prompts']) && $item->data['prompts'])
+                  )
                     <h5>Availability</h5>
                     <div class="row">
                       @if (isset($item->data['release']) && $item->data['release'])
@@ -149,7 +169,9 @@
                 @endif
                 @if ($item->canUserSell)
                   <div class="text-right mb-4">
-                    <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}"><i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
+                    <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}"><i
+                        class="fas fa-shopping-cart mr-2"
+                      ></i>User Shops</a>
                   </div>
                 @endif
               </div>

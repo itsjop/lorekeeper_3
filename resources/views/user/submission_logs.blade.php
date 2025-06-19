@@ -15,17 +15,21 @@
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
     <div class="form-inline justify-content-end">
       <div class="form-group ml-3 mb-2 col-3">
-        {!! Form::select('prompt_ids[]', $prompts, Request::get('prompt_ids'), ['class' => 'form-control selectize col-12', 'multiple', 'placeholder' => 'Any Prompt']) !!}
+        {!! Form::select('prompt_ids[]', $prompts, Request::get('prompt_ids'), [
+            'class' => 'form-control selectize col-12',
+            'multiple',
+            'placeholder' => 'Any Prompt'
+        ]) !!}
       </div>
       <div class="form-group ml-1 mb-3">
         {!! Form::select(
             'sort',
             [
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'newest',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -61,7 +65,8 @@
             </div>
             <div class="col-6 col-md-4">
               <div class="logs-table-cell">
-                <span class="ubt-texthide"><a href="{{ $log->url }}">{{ $log->url }}</a></span>
+                <span class="ubt-texthide">
+                  <a href="{{ $log->url }}">{{ $log->url }}</a></span>
               </div>
             </div>
             <div class="col-6 col-md-5">

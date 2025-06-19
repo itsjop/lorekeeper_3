@@ -7,7 +7,9 @@
         <img class="img-fluid" src="{{ $stack->pet->image($stack->id) }}" />
       </a>
     </div>
-    <div class="mb-1"><a href="{{ $stack->pet->url }}">{{ $stack->pet->name }}</a></div>
+    <div class="mb-1">
+      <a href="{{ $stack->pet->url }}">{{ $stack->pet->name }}</a>
+    </div>
   </div>
 
   @if (isset($stack->data['notes']) || isset($stack->data['data']))
@@ -29,13 +31,18 @@
     </div>
   @endif
 
-  <a class="btn btn-primary btn-lg btn-block h5 mt-3" href="{{ $stack->pageUrl(Auth::check() ? Auth::user()->id : null) }}">View Page</a>
+  <a class="btn btn-primary btn-lg btn-block h5 mt-3" href="{{ $stack->pageUrl(Auth::check() ? Auth::user()->id : null) }}">View
+    Page</a>
 
   @if ($user && !$readOnly && ($stack->user_id == $user->id || $user->hasPower('edit_inventories')))
     <div class="card mt-3">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#nameForm">
+          <a
+            class="card-title h5 collapse-title"
+            data-toggle="collapse"
+            href="#nameForm"
+          >
             @if ($stack->user_id != $user->id)
               [ADMIN]
             @endif Name Pet
@@ -52,7 +59,11 @@
           {!! Form::close() !!}
         </li>
         <li class="list-group-item">
-          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#descForm">
+          <a
+            class="card-title h5 collapse-title"
+            data-toggle="collapse"
+            href="#descForm"
+          >
             @if ($stack->user_id != Auth::user()->id)
               [ADMIN]
             @endif Edit Profile
@@ -74,7 +85,11 @@
             $diff = $now->addDays(Settings::get('claymore_cooldown'));
           @endphp
           @if ($stack->character_id != null && $diff < Carbon\Carbon::now())
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#attachForm">
+            <a
+              class="card-title h5 collapse-title"
+              data-toggle="collapse"
+              href="#attachForm"
+            >
               @if ($stack->user_id != $user->id)
                 [ADMIN]
               @endif Detach Pet from Character
@@ -86,13 +101,18 @@
             </div>
             {!! Form::close() !!}
           @elseif($stack->character_id == null || $diff < Carbon\Carbon::now())
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#attachForm">
+            <a
+              class="card-title h5 collapse-title"
+              data-toggle="collapse"
+              href="#attachForm"
+            >
               @if ($stack->user_id != $user->id)
                 [ADMIN]
               @endif Attach Pet to Character
             </a>
             {!! Form::open(['url' => 'pets/attach/' . $stack->id, 'id' => 'attachForm', 'class' => 'collapse']) !!}
-            <p>Attach this pet to a character you own! They'll appear on the character's page and any stat bonuses will automatically be applied.</p>
+            <p>Attach this pet to a character you own! They'll appear on the character's page and any stat bonuses will
+              automatically be applied.</p>
             <p>Pets can be detached.</p>
             <div class="form-group">
               {!! Form::label('id', 'Slug') !!} {!! add_help('Insert your character\'s slug.') !!}
@@ -108,7 +128,11 @@
         </li>
         @if ($user && count($splices) && $user->id == $stack->user_id)
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#userVariantForm">Change Pet Variant</a>
+            <a
+              class="card-title h5 collapse-title"
+              data-toggle="collapse"
+              href="#userVariantForm"
+            >Change Pet Variant</a>
             {!! Form::open(['url' => 'pets/variant/' . $stack->id, 'id' => 'userVariantForm', 'class' => 'collapse']) !!}
             <p>
               This will use a splice item!
@@ -121,7 +145,11 @@
             </div>
             <div class="form-group">
               @php
-                $variants = ['0' => 'Default'] + ($stack->pet->isVariant ? $stack->pet->parent->variants()->pluck('name', 'id')->toArray() : $stack->pet->variants()->pluck('name', 'id')->toArray());
+                $variants =
+                    ['0' => 'Default'] +
+                    ($stack->pet->isVariant
+                        ? $stack->pet->parent->variants()->pluck('name', 'id')->toArray()
+                        : $stack->pet->variants()->pluck('name', 'id')->toArray());
               @endphp
               {!! Form::select('variant_id', $variants, $stack->pet->parent_id, ['class' => 'form-control']) !!}
             </div>
@@ -135,7 +163,11 @@
           {{-- TODO --}}
           {{-- variant --}}
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#variantForm">[ADMIN] Change Pet Variant</a>
+            <a
+              class="card-title h5 collapse-title"
+              data-toggle="collapse"
+              href="#variantForm"
+            >[ADMIN] Change Pet Variant</a>
             {!! Form::open(['url' => 'pets/variant/' . $stack->id, 'id' => 'variantForm', 'class' => 'collapse']) !!}
             {!! Form::hidden('is_staff', 1) !!}
             <p>
@@ -145,7 +177,11 @@
             </p>
             <div class="form-group">
               @php
-                $variants = ['0' => 'Default'] + ($stack->pet->isVariant ? $stack->pet->parent->variants()->pluck('name', 'id')->toArray() : $stack->pet->variants()->pluck('name', 'id')->toArray());
+                $variants =
+                    ['0' => 'Default'] +
+                    ($stack->pet->isVariant
+                        ? $stack->pet->parent->variants()->pluck('name', 'id')->toArray()
+                        : $stack->pet->variants()->pluck('name', 'id')->toArray());
               @endphp
               {!! Form::select('variant_id', $variants, $stack->pet->isVariant ? $stack->pet_id : 0, ['class' => 'form-control mt-2']) !!}
             </div>
@@ -156,12 +192,17 @@
           </li>
           {{-- evolution --}}
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#evolutionForm">[ADMIN] Change Pet Evolution</a>
+            <a
+              class="card-title h5 collapse-title"
+              data-toggle="collapse"
+              href="#evolutionForm"
+            >[ADMIN] Change Pet Evolution</a>
             {!! Form::open(['url' => 'pets/evolution/' . $stack->id, 'id' => 'evolutionForm', 'class' => 'collapse']) !!}
             {!! Form::hidden('is_staff', 1) !!}
             <p>
               @if ($stack->evolution_id)
-                <br><b>Current evolution:</b> {{ $stack->evolution->evolution_name }} (Stage {{ $stack->evolution->evolution_stage }})
+                <br><b>Current evolution:</b> {{ $stack->evolution->evolution_name }} (Stage
+                {{ $stack->evolution->evolution_stage }})
               @endif
             </p>
             <div class="form-group">
@@ -177,7 +218,11 @@
           </li>
           {{-- custom pet image --}}
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#imageForm">[ADMIN] Change Image</a>
+            <a
+              class="card-title h5 collapse-title"
+              data-toggle="collapse"
+              href="#imageForm"
+            >[ADMIN] Change Image</a>
             {!! Form::open(['url' => 'pets/image/' . $stack->id, 'id' => 'imageForm', 'class' => 'collapse', 'files' => true]) !!}
             <div class="form-group">
               {!! Form::label('Image') !!}
@@ -195,12 +240,17 @@
               <div class="row">
                 <div class="col-md">
                   <div class="form-group">
-                    {!! Form::select('artist_id', $userCreditOptions, $stack->artist_id ? $stack->artist_id : null, ['class' => 'form-control mr-2 selectize']) !!}
+                    {!! Form::select('artist_id', $userCreditOptions, $stack->artist_id ? $stack->artist_id : null, [
+                        'class' => 'form-control mr-2 selectize'
+                    ]) !!}
                   </div>
                 </div>
                 <div class="col-md">
                   <div class="form-group">
-                    {!! Form::text('artist_url', $stack->artist_url ? $stack->artist_url : '', ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
+                    {!! Form::text('artist_url', $stack->artist_url ? $stack->artist_url : '', [
+                        'class' => 'form-control mr-2',
+                        'placeholder' => 'Artist URL'
+                    ]) !!}
                   </div>
                 </div>
               </div>
@@ -220,14 +270,19 @@
         @if ($stack->isTransferrable || $user->hasPower('edit_inventories'))
           @if (!$stack->character_id)
             <li class="list-group-item">
-              <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
+              <a
+                class="card-title h5 collapse-title"
+                data-toggle="collapse"
+                href="#transferForm"
+              >
                 @if ($stack->user_id != $user->id)
                   [ADMIN]
                 @endif Transfer Pet
               </a>
               {!! Form::open(['url' => 'pets/transfer/' . $stack->id, 'id' => 'transferForm', 'class' => 'collapse']) !!}
               @if (!$stack->isTransferrable)
-                <p class="alert alert-warning my-2">This pet is account-bound, but your rank allows you to transfer it to another user.</p>
+                <p class="alert alert-warning my-2">This pet is account-bound, but your rank allows you to transfer it to another
+                  user.</p>
               @endif
               <div class="form-group">
                 {!! Form::label('user_id', 'Recipient') !!} {!! add_help('You can only transfer pets to verified users.') !!}
@@ -240,7 +295,8 @@
             </li>
           @else
             <li class="list-group-item bg-light">
-              <h5 class="card-title mb-0 text-muted"><i class="fas fa-lock mr-2"></i> Currently attached to {!! $stack->character->displayName !!}</h5>
+              <h5 class="card-title mb-0 text-muted"><i class="fas fa-lock mr-2"></i> Currently attached to
+                {!! $stack->character->displayName !!}</h5>
             </li>
           @endif
         @else
@@ -249,7 +305,11 @@
           </li>
         @endif
         <li class="list-group-item">
-          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
+          <a
+            class="card-title h5 collapse-title"
+            data-toggle="collapse"
+            href="#deleteForm"
+          >
             @if ($stack->user_id != $user->id)
               [ADMIN]
             @endif Delete Pet

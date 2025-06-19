@@ -12,7 +12,9 @@
   <p>This is a list of shops that users can use currency to purchase from.</p>
   <p>The sorting order reflects the order in which the shops will be listed on the shop index.</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/shops/create') }}"><i class="fas fa-plus"></i> Create New Shop</a></div>
+  <div class="text-right mb-3">
+    <a class="btn btn-primary" href="{{ url('admin/data/shops/create') }}"><i class="fas fa-plus"></i> Create New Shop</a>
+  </div>
   @if (!count($shops))
     <p>No item shops found.</p>
   @else

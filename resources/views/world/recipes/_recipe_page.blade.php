@@ -20,19 +20,42 @@
       <div class="card mb-3">
         <div class="card-body">
           @if ($recipe->imageUrl)
-            <div class="world-entry-image text-center mb-2"><a href="{{ $recipe->imageUrl }}" data-lightbox="entry" data-title="{{ $recipe->name }}"><img src="{{ $recipe->imageUrl }}" class="world-entry-image mw-100" style="max-height:300px;" /></a></div>
+            <div class="world-entry-image text-center mb-2">
+              <a
+                href="{{ $recipe->imageUrl }}"
+                data-lightbox="entry"
+                data-title="{{ $recipe->name }}"
+              ><img
+                  src="{{ $recipe->imageUrl }}"
+                  class="world-entry-image mw-100"
+                  style="max-height:300px;"
+                /></a>
+            </div>
           @endif
 
           <div>
             <h1>
               @if ($recipe->needs_unlocking)
                 @if (Auth::check() && Auth::user()->hasRecipe($recipe->id))
-                  <i class="fas fa-lock-open" data-toggle="tooltip" title="You have this recipe!"></i>
+                  <i
+                    class="fas fa-lock-open"
+                    data-toggle="tooltip"
+                    title="You have this recipe!"
+                  ></i>
                 @else
-                  <i class="fas fa-lock" style="opacity:0.5" data-toggle="tooltip" title="You do not have this recipe."></i>
+                  <i
+                    class="fas fa-lock"
+                    style="opacity:0.5"
+                    data-toggle="tooltip"
+                    title="You do not have this recipe."
+                  ></i>
                 @endif
               @else
-                <i class="fas fa-lock-open" data-toggle="tooltip" title="This recipe is automatically unlocked."></i>
+                <i
+                  class="fas fa-lock-open"
+                  data-toggle="tooltip"
+                  title="This recipe is automatically unlocked."
+                ></i>
               @endif
               {!! $recipe->name !!}
             </h1>
@@ -82,9 +105,11 @@
 
             @if (!$recipe->needs_unlocking || (Auth::check() && Auth::user()->hasRecipe($recipe->id)))
               <div class="text-center">
-                <h5><a href="{{ url('crafting') }}" class="btn btn-primary">
+                <h5>
+                  <a href="{{ url('crafting') }}" class="btn btn-primary">
                     Craft this from your Recipe Book!
-                  </a></h5>
+                  </a>
+                </h5>
               </div>
             @endif
 

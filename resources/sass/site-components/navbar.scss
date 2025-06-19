@@ -1,7 +1,7 @@
 #app {
   #site-wrapper {
     #header-nav {
-      background-color: #635bbe;
+      background-color: var(--main-accent);
       grid-area: nav;
       border-radius: 20px;
       .nav-item > a {

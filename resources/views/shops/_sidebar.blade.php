@@ -1,30 +1,53 @@
-<ul id="#sidebar-ul">
-  <li class="sidebar-header"><a href="{{ url('shops') }}" class="card-link">Shops</a></li>
+<div id="sidebar-ul">
+  <div class="sidebar-header">
+    <a href="{{ url('shops') }}" class="card-link">Shops</a>
+  </div>
 
   @if (Auth::check())
-    <li class="sidebar-section">
-      <div class="sidebar-section-header">History</div>
-      <div class="sidebar-item"><a href="{{ url('shops/history') }}" class="{{ set_active('shops/history') }}">My Purchase
-          History</a></div>
-      <div class="sidebar-section-header">My Currencies</div>
-      @foreach (Auth::user()->getCurrencies(true) as $currency)
-        <div class="sidebar-item pr-3">{!! $currency->display($currency->quantity) !!}</div>
-      @endforeach
-    </li>
+    <details class="sidebar-section">
+      <summary class="sidebar-section-header">History</summary>
+      <ul>
+        <li class="sidebar-item">
+          <a href="{{ url('shops/history') }}" class="{{ set_active('shops/history') }}">
+            My Purchase History
+          </a>
+        </li>
+      </ul>
+    </details>
+    <details class="sidebar-section">
+      <summary class="sidebar-section-header">My Currencies</summary>
+      <ul>
+        @foreach (Auth::user()->getCurrencies(true) as $currency)
+          <li class="sidebar-item pr-3">
+            {!! $currency->display($currency->quantity) !!}
+          </li>
+        @endforeach
+      </ul>
+    </details>
   @endif
-
-  <li class="sidebar-section">
-    <div class="sidebar-section-header">Shops</div>
-    @foreach ($shops as $shop)
-      @if ($shop->is_staff)
-        @if (Auth::check() && Auth::user()->isstaff)
-          <div class="sidebar-item"><a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a></div>
+  <details class="sidebar-section">
+    <summary class="sidebar-section-header">Shops</summary>
+    <ul>
+      @foreach ($shops as $shop)
+        @if ($shop->is_staff)
+          @if (Auth::check() && Auth::user()->isstaff)
+            <li class="sidebar-item">
+              <a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}">
+                {{ $shop->name }}
+              </a>
+            </li>
+          @endif
+        @else
+          <li class="sidebar-item">
+            <a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a>
+          </li>
         @endif
-      @else
-        <div class="sidebar-item"><a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a></div>
-      @endif
-    @endforeach
-    <div class="sidebar-item"><a href="{{ url('shops/donation-shop') }}" class="{{ set_active('shops/donation-shop') }}">Donation
-        Shop</a></div>
-  </li>
-</ul>
+      @endforeach
+      <li class="sidebar-item">
+        <a href="{{ url('shops/donation-shop') }}" class="{{ set_active('shops/donation-shop') }}">
+          Donation Shop
+        </a>
+      </li>
+    </ul>
+  </details>
+</div>

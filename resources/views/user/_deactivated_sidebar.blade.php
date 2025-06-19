@@ -1,8 +1,9 @@
-<ul id="#sidebar-ul">
-  <li class="sidebar-header">
+<div id="sidebar-ul">
+  <div class="sidebar-header">
     <a href="{{ $user->url }}" class="card-link">{{ Illuminate\Support\Str::limit($user->name, 10, $end = '...') }}</a>
-  </li>
-  <li class="sidebar-section">
-    <div class="sidebar-item px-2">This account has been deactivated</div>
-  </li>
-</ul>
+  </div>
+  <details class="sidebar-section">
+    <summary class="sidebar-section-header">Deactivated</summary>
+    <li class="sidebar-item px-2">This account has been deactivated</li>
+  </details>
+</div>

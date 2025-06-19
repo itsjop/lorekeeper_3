@@ -9,9 +9,12 @@
 
   <h1>Character Titles</h1>
 
-  <p>This is a list of titles that can be applied to characters. Titles are optional, and pre-set titles may be created here for ease of use, or custom titles can be given to individual characters when editing their traits, etc.</p>
+  <p>This is a list of titles that can be applied to characters. Titles are optional, and pre-set titles may be created here for
+    ease of use, or custom titles can be given to individual characters when editing their traits, etc.</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/character-titles/create') }}"><i class="fas fa-plus"></i> Create New Title</a></div>
+  <div class="text-right mb-3">
+    <a class="btn btn-primary" href="{{ url('admin/data/character-titles/create') }}"><i class="fas fa-plus"></i> Create New Title</a>
+  </div>
   @if (!count($titles))
     <p>No titles found.</p>
   @else

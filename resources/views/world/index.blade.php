@@ -40,7 +40,8 @@
             <a href="{{ url('world/character-categories') }}">Character Categories</a>
           </li>
           <li class="list-group-item">
-            <a href="{{ url('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
+            <a
+              href="{{ url('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
           </li>
         </ul>
       </div>
@@ -80,7 +81,9 @@
           <li class="list-group-item">
             <a href="{{ url('world/recipes') }}">All Recipes</a>
           </li>
-          <li class="list-group-item"><a href="{{ url('world/character-titles') }}">All Character Titles</a></li>
+          <li class="list-group-item">
+            <a href="{{ url('world/character-titles') }}">All Character Titles</a>
+          </li>
         </ul>
       </div>
     </div>

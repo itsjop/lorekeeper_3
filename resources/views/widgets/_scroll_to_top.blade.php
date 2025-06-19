@@ -1,4 +1,9 @@
-<a id="backToTop" data-toggle="tooltip" data-title="Scroll to Top" title="Scroll to Top">
+<a
+  id="backToTop"
+  data-toggle="tooltip"
+  data-title="Scroll to Top"
+  title="Scroll to Top"
+>
   <i class="fas fa-angle-double-up"></i></a>
 
 <script>
@@ -13,14 +18,14 @@
       });
       //scroll smoothly back to the top of the page
     });
-    window.addEventListener("scroll", function() {
-      if (window.scrollY == 0) {
-        //user is at the top of the page; no need to show the back to top button
-        goToTop.style.display = "";
-      } else {
-        goToTop.style.display = "block";
-      }
-    });
+    // window.addEventListener("scroll", function() {
+    //   if (window.scrollY == 0) {
+    //     //user is at the top of the page; no need to show the back to top button
+    //     goToTop.style.display = "";
+    //   } else {
+    //     goToTop.style.display = "block";
+    //   }
+    // });
   });
 </script>
 

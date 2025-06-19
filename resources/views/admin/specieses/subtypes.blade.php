@@ -13,8 +13,10 @@
     but do not require a {{ __('lorekeeper.subtype') }}. Note that the sort order here reflects the sort order under the species
     name as well.</p>
 
-  <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/subtypes/create') }}"><i class="fas fa-plus"></i>
-      Create New Subtype</a></div>
+  <div class="text-right mb-3">
+    <a class="btn btn-primary" href="{{ url('admin/data/subtypes/create') }}"><i class="fas fa-plus"></i>
+      Create New Subtype</a>
+  </div>
   @if (!count($subtypes))
     <p>No subtypes found.</p>
   @else

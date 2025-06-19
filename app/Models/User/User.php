@@ -542,7 +542,8 @@ class User extends Authenticatable implements MustVerifyEmail {
    */
   public function getCommentDisplayNameAttribute() {
     return ($this->is_banned ? '<strike>' : '') .
-      '<small><a href="' .
+      '<small>
+<a href="' .
       $this->url .
       '" class="btn btn-primary btn-sm ' .
       ($this->rank->color ? 'style="background-color: #' . $this->rank->color . '!important;color:#000!important;' : '') .

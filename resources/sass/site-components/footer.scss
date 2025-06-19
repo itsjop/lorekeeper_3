@@ -1,14 +1,41 @@
 #app {
   #site-wrapper {
     #footer {
-      margin: 2rem -1.5rem -1.5rem -1.5rem;
-      border-radius: 0 0 15px 15px;
-      background-image: linear-gradient(to bottom, #7654763c 0%, #ffcaff33 10%, #ffcaff33 100%);
-      backdrop-filter: blur(5px) brightness(95%);
+      grid-area: footer;
+      border-radius: 15px;
+      background-color: var(--body-color);
+      backdrop-filter: blur(5px);
+      width: 100%;
       display: grid;
+      grid-template:
+        '. links top'
+        '. credit top'
+        / 10% auto 10%;
       justify-content: center;
       text-align: center;
       gap: 10px;
+      place-content: center;
+      place-items: center;
+      margin-top: 10px;
+      max-height: 150px;
+      .navbar-nav {
+        grid-area: links;
+      }
+      .copyright {
+        grid-area: credit;
+      }
+      #backToTop {
+        grid-area: top;
+        border-radius: 50px;
+        border: 3px solid #007bffaa;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        display: flex;
+        justify-self: end;
+        place-content: center;
+        place-items: center;
+      }
       &::before {
         content: '';
         width: 80%;

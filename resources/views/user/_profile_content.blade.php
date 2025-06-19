@@ -2,18 +2,31 @@
   <div style="filter:grayscale(1); opacity:0.75">
 @endif
 
-<div class="row pt-3 pb-3" style="border: 7px double white; border-radius: 10px;  background-image: url('{{ $user->profileImgUrl }}'); background-position: top middle; text-align: center; background-size: cover;">
+<div class="row pt-3 pb-3"
+  style="border: 7px double white; border-radius: 10px;  background-image: url('{{ $user->profileImgUrl }}'); background-position: top middle; text-align: center; background-size: cover;"
+>
   <div class="col-lg-12" style="text-shadow: 0 0 5px white ;">
     <h1>
       <div style="position: relative; margin: auto;">
-        <img src="/images/avatars/{{ $user->avatar }}" style="width:125px; height:125px; border-radius:50%;" alt="{{ $user->name }}" />
+        <img
+          src="/images/avatars/{{ $user->avatar }}"
+          style="width:125px; height:125px; border-radius:50%;"
+          alt="{{ $user->name }}"
+        />
       </div>
       <div style="position: relative; margin: auto;">
         {!! $user->displayName !!}
-        <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
+        <a href="{{ url('reports/new?url=') . $user->url }}"><i
+            class="fas fa-exclamation-triangle fa-xs"
+            data-toggle="tooltip"
+            title="Click here to report this user."
+            style="opacity: 50%; font-size:0.5em;"
+          ></i></a>
       </div>
     </h1>
-    <div class="row no-gutters justify-content-center mb-5" style="background-color: rgba(255, 255, 255, .60); padding: 5px; border-radius: 10px;">
+    <div class="row no-gutters justify-content-center mb-5"
+      style="background-color: rgba(255, 255, 255, .60); padding: 5px; border-radius: 10px;"
+    >
       <div class="col-md-1 text-center">
         <i class="fas fa-users"></i> {!! $user->rank->displayName !!}{!! add_help($user->rank->parsed_description) !!}
       </div>
@@ -29,7 +42,11 @@
         </div>
       @endif
       @if ($user->settings->is_fto)
-        <span class="badge badge-success" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
+        <span
+          class="badge badge-success"
+          data-toggle="tooltip"
+          title="This user has not owned any characters from this world before."
+        >FTO</span>
       @endif
     </div>
   </div>
@@ -54,7 +71,9 @@
           <div>{!! $currency->display($currency->quantity) !!}</div>
         @endforeach
       </div>
-      <div class="text-right"><a href="{{ $user->url . '/bank' }}">View all...</a></div>
+      <div class="text-right">
+        <a href="{{ $user->url . '/bank' }}">View all...</a>
+      </div>
     </div>
   </div>
   <div class="card profile-inventory profile-assets-card">
@@ -66,7 +85,12 @@
             @foreach ($items as $item)
               <div class="col-md-3 col-6 profile-inventory-item">
                 @if ($item->imageUrl)
-                  <img src="{{ $item->imageUrl }}" data-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
+                  <img
+                    src="{{ $item->imageUrl }}"
+                    data-toggle="tooltip"
+                    title="{{ $item->name }}"
+                    alt="{{ $item->name }}"
+                  />
                 @else
                   <p>{{ $item->name }}</p>
                 @endif
@@ -77,7 +101,9 @@
           <div>No items owned.</div>
         @endif
       </div>
-      <div class="text-right"><a href="{{ $user->url . '/inventory' }}">View all...</a></div>
+      <div class="text-right">
+        <a href="{{ $user->url . '/inventory' }}">View all...</a>
+      </div>
     </div>
   </div>
 </div>
@@ -92,8 +118,13 @@
             <div class="col-md-2 profile-inventory-item">
               <a href="{{ url($user->url . '/pets') }}" class="inventory-stack">
                 @if ($pet->has_image)
-                  <img class="img-fluid" src="{{ $pet->image($pet->pivot->id) }}" data-toggle="tooltip" title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
-                    alt="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}" />
+                  <img
+                    class="img-fluid"
+                    src="{{ $pet->image($pet->pivot->id) }}"
+                    data-toggle="tooltip"
+                    title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
+                    alt="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
+                  />
                 @else
                   <p>
                     @if (!$pet->is_visible)
@@ -110,7 +141,9 @@
         <div>No pets owned.</div>
       @endif
     </div>
-    <div class="text-right"><a href="{{ $user->url . '/pets' }}">View all...</a></div>
+    <div class="text-right">
+      <a href="{{ $user->url . '/pets' }}">View all...</a>
+    </div>
   </div>
 </div>
 
@@ -128,10 +161,21 @@
     @foreach ($chunk as $character)
       <div class="col-md-3 col-6 text-center">
         <div>
-          @if ((Auth::check() && Auth::user()->settings->content_warning_visibility == 0 && isset($character->character_warning)) || (isset($character->character_warning) && !Auth::check()))
-            <a href="{{ $character->url }}"><img src="{{ asset('images/lorekeeper/content-warning.png') }}" class="img-thumbnail" alt="Content Warning - {{ $character->fullName }}" /></a>
+          @if (
+              (Auth::check() && Auth::user()->settings->content_warning_visibility == 0 && isset($character->character_warning)) ||
+                  (isset($character->character_warning) && !Auth::check())
+          )
+            <a href="{{ $character->url }}"><img
+                src="{{ asset('images/lorekeeper/content-warning.png') }}"
+                class="img-thumbnail"
+                alt="Content Warning - {{ $character->fullName }}"
+              /></a>
           @else
-            <a href="{{ $character->url }}"><img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="{{ $character->fullName }}" /></a>
+            <a href="{{ $character->url }}"><img
+                src="{{ $character->image->thumbnailUrl }}"
+                class="img-thumbnail"
+                alt="{{ $character->fullName }}"
+              /></a>
           @endif
         </div>
         <div class="mt-1">
@@ -141,7 +185,10 @@
             @endif {{ Illuminate\Support\Str::limit($character->fullName, 20, $end = '...') }}
           </a>
         </div>
-        @if ((Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->character_warning)) || (isset($character->character_warning) && !Auth::check()))
+        @if (
+            (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->character_warning)) ||
+                (isset($character->character_warning) && !Auth::check())
+        )
           <div class="small">
             <p><span class="text-danger"><strong>Character Warning:</strong></span> {!! nl2br(htmlentities($character->character_warning)) !!}</p>
           </div>
@@ -151,7 +198,9 @@
   </div>
 @endforeach
 
-<div class="text-right"><a href="{{ $user->url . '/characters' }}">View all...</a></div>
+<div class="text-right">
+  <a href="{{ $user->url . '/characters' }}">View all...</a>
+</div>
 <hr class="mb-5" />
 
 <div class="row col-12">
@@ -163,7 +212,12 @@
   <div class="col-md-{{ $user->settings->allow_profile_comments ? 4 : 12 }}">
 
     <div class="card mb-4">
-      <div class="card-header" data-toggle="collapse" data-target="#mentionHelp" aria-expanded="{{ $user->settings->allow_profile_comments ? 'true' : 'false' }}">
+      <div
+        class="card-header"
+        data-toggle="collapse"
+        data-target="#mentionHelp"
+        aria-expanded="{{ $user->settings->allow_profile_comments ? 'true' : 'false' }}"
+      >
 
         <h5>Mention This User</h5>
       </div>
@@ -188,7 +242,8 @@
         @if (!config('lorekeeper.settings.wysiwyg_comments'))
           In a comment:
           <div class="alert alert-secondary">
-            [![{{ $user->name }}'s Avatar]({{ $user->avatarUrl }})]({{ $user->url }}) [{{ $user->name }}]({{ $user->url }})
+            [![{{ $user->name }}'s Avatar]({{ $user->avatarUrl }})]({{ $user->url }})
+            [{{ $user->name }}]({{ $user->url }})
           </div>
         @endif
       </div>

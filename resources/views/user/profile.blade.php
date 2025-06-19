@@ -15,7 +15,7 @@
   @include('widgets._awardcase_feature', [
       'target' => $user,
       'count' => Config::get('lorekeeper.extensions.awards.user_featured'),
-      'float' => false,
+      'float' => false
   ])
 
   @if ($user->is_banned)
@@ -30,10 +30,19 @@
 
     {!! $user->displayName !!}
     <a href="{{ url('reports/new?url=') . $user->url }}">
-      <i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
+      <i
+        class="fas fa-exclamation-triangle fa-xs"
+        data-toggle="tooltip"
+        title="Click here to report this user."
+        style="opacity: 50%; font-size:0.5em;"
+      ></i></a>
 
     @if ($user->settings->is_fto)
-      <span class="badge badge-success float-right" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
+      <span
+        class="badge badge-success float-right"
+        data-toggle="tooltip"
+        title="This user has not owned any characters from this world before."
+      >FTO</span>
     @endif
   </h1>
 
@@ -126,7 +135,12 @@
                 @foreach ($items as $item)
                   <div class="col-md-3 col-6 profile-inventory-item">
                     @if ($item->imageUrl)
-                      <img src="{{ $item->imageUrl }}" data-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
+                      <img
+                        src="{{ $item->imageUrl }}"
+                        data-toggle="tooltip"
+                        title="{{ $item->name }}"
+                        alt="{{ $item->name }}"
+                      />
                     @else
                       <p>{{ $item->name }}</p>
                     @endif
@@ -152,7 +166,11 @@
               @foreach ($awards as $award)
                 <div class="col-md-3 col-6 profile-inventory-item">
                   @if ($award->imageUrl)
-                    <img src="{{ $award->imageUrl }}" data-toggle="tooltip" title="{{ $award->name }}" />
+                    <img
+                      src="{{ $award->imageUrl }}"
+                      data-toggle="tooltip"
+                      title="{{ $award->name }}"
+                    />
                   @else
                     <p>{{ $award->name }}</p>
                   @endif
@@ -163,7 +181,9 @@
             <div>No {{ __('awards.awards') }} earned.</div>
           @endif
         </div>
-        <div class="text-right"><a href="{{ $user->url . '/' . __('awards.awardcase') }}">View all...</a></div>
+        <div class="text-right">
+          <a href="{{ $user->url . '/' . __('awards.awardcase') }}">View all...</a>
+        </div>
       </div>
     </div>
 
@@ -182,7 +202,11 @@
           <div class="col-md-3 col-6 text-center">
             <div>
               <a href="{{ $character->url }}">
-                <img src="{{ $character?->image?->thumbnailUrl }}" class="img-thumbnail" alt="{{ $character->fullName }}" /></a>
+                <img
+                  src="{{ $character?->image?->thumbnailUrl }}"
+                  class="img-thumbnail"
+                  alt="{{ $character->fullName }}"
+                /></a>
             </div>
             <div class="mt-1">
               <a href="{{ $character->url }}" class="h5 mb-0">

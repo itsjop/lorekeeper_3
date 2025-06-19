@@ -3,7 +3,9 @@
 @else
   <div class="text-center">
     @if ($award->has_image)
-      <div class="mb-1"><a href="{{ $award->idUrl }}"><img src="{{ $award->imageUrl }}" alt="{{ $award->name }}" /></a></div>
+      <div class="mb-1">
+        <a href="{{ $award->idUrl }}"><img src="{{ $award->imageUrl }}" alt="{{ $award->name }}" /></a>
+      </div>
     @endif
     <a href="{{ $award->idUrl }}">{{ $award->name }}</a>
   </div>
@@ -22,7 +24,11 @@
       <thead class="thead">
         <tr class="d-flex">
           @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
-            <th class="col-1"><input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)"></th>
+            <th class="col-1"><input
+                id="toggle-checks"
+                type="checkbox"
+                onclick="toggleChecks(this)"
+              ></th>
           @endif
           <th class="col">Source</th>
           <th class="col">Notes</th>
@@ -42,7 +48,11 @@
               @if ($awardRow->availableQuantity)
                 <td class="col-2">
                   <div class="input-group">
-                    {!! Form::selectRange('', 1, $awardRow->availableQuantity, 1, ['class' => 'quantity-select input-group-prepend', 'type' => 'number', 'style' => 'min-width:40px;']) !!}
+                    {!! Form::selectRange('', 1, $awardRow->availableQuantity, 1, [
+                        'class' => 'quantity-select input-group-prepend',
+                        'type' => 'number',
+                        'style' => 'min-width:40px;'
+                    ]) !!}
                     <div class="input-group-append">
                       <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
                     </div>
@@ -51,7 +61,12 @@
               @else
                 <td class="col-2">
                   <div class="input-group">
-                    {!! Form::selectRange('', 0, 0, 0, ['class' => 'quantity-select input-group-prepend', 'type' => 'number', 'style' => 'min-width:40px;', 'disabled']) !!}
+                    {!! Form::selectRange('', 0, 0, 0, [
+                        'class' => 'quantity-select input-group-prepend',
+                        'type' => 'number',
+                        'style' => 'min-width:40px;',
+                        'disabled'
+                    ]) !!}
                     <div class="input-group-append">
                       <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
                     </div>
@@ -63,7 +78,11 @@
             @endif
             <td class="col-1">
               @if (!$awardRow->isTransferrable)
-                <i class="fas fa-lock" data-toggle="tooltip" title="{{ ucfirst(__('lorekeeper.character')) }}-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
+                <i
+                  class="fas fa-lock"
+                  data-toggle="tooltip"
+                  title="{{ ucfirst(__('lorekeeper.character')) }}-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."
+                ></i>
               @endif
             </td>
           </tr>
@@ -76,14 +95,21 @@
     <div class="card mt-3">
       <div class="card-body">
         @if ($owner_id != null && ($award->is_transferrable || $user->hasPower('edit_inventories')) && $award->is_user_owned)
-          <div><a class="card-title h5 btn btn-sm btn-outline-primary" data-toggle="collapse" href="#transferForm">
+          <div>
+            <a
+              class="card-title h5 btn btn-sm btn-outline-primary"
+              data-toggle="collapse"
+              href="#transferForm"
+            >
               @if ($owner_id != $user->id)
                 [ADMIN]
               @endif Transfer {{ ucfirst(__('awards.award')) }}
-            </a></div>
+            </a>
+          </div>
           <div id="transferForm" class="collapse">
             @if ($user && $user->hasPower('edit_inventories'))
-              <p class="alert alert-warning my-2">Note: Your rank allows you to transfer {{ __('lorekeeper.character') }}-bound {{ __('awards.awards') }}.</p>
+              <p class="alert alert-warning my-2">Note: Your rank allows you to transfer {{ __('lorekeeper.character') }}-bound
+                {{ __('awards.awards') }}.</p>
             @endif
             <p>This will transfer this {{ __('awards.award') }} back to @if ($owner_id != $user->id)
                 this user's
@@ -95,11 +121,17 @@
             </div>
           </div>
         @endif
-        <div><a class="card-title h5 btn btn-sm btn-outline-primary" data-toggle="collapse" href="#deleteForm">
+        <div>
+          <a
+            class="card-title h5 btn btn-sm btn-outline-primary"
+            data-toggle="collapse"
+            href="#deleteForm"
+          >
             @if ($owner_id != $user->id)
               [ADMIN]
             @endif Delete {{ ucfirst(__('awards.award')) }}
-          </a></div>
+          </a>
+        </div>
         <div id="deleteForm" class="collapse">
           <p>This action is not reversible. Are you sure you want to delete this {{ __('awards.award') }}?</p>
           <div class="text-right">

@@ -150,10 +150,7 @@ main > .row {
 .sidebar .sidebar-header a {
     color: white;
 }
-.sidebar .sidebar-header a:hover {
-    background-color: transparent;
-    color: rgba(255,255,255,0.8);
-}
+
 
 .sidebar a,
 .sidebar-section-header {
@@ -291,10 +288,6 @@ main > .row {
     padding-left: .5rem;
 }
 
-.site-footer .copyright {
-    padding: 0 1rem 1rem;
-    color: rgba(0,0,0,.3);
-}
 
 .mce-content-body {
     padding: 20px;

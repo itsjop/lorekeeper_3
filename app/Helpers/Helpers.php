@@ -66,7 +66,9 @@ function add_help($text) {
 function breadcrumbs($links) {
   $ret = '<nav><ol class="breadcrumb">';
   $count = 0;
-  $ret .= '<li class="breadcrumb-item"><a href="' . url('/') . '">' . config('lorekeeper.settings.site_name', 'Lorekeeper') . '</a></li>';
+  $ret .= '<li class="breadcrumb-item">
+<a href="' . url('/') . '">' . config('lorekeeper.settings.site_name', 'Lorekeeper') . '</a>
+</li>';
   foreach ($links as $key => $link) {
     $isLast = ($count == count($links) - 1);
 
@@ -550,33 +552,31 @@ function allAttachments($model) {
  * Check if user blocked an object's image
  *
  */
-function checkImageBlock($object, $user)
-{
-    //just in case?
-    if(!$user) {
-        return false;
-    }
-
-    $block = $user->blockedImages()->where([
-        ['object_id', $object->id],
-        ['object_type', get_class($object)],
-    ])->first();
-
-    if ($block) {
-        return true;
-    }
+function checkImageBlock($object, $user) {
+  //just in case?
+  if (!$user) {
     return false;
+  }
 
+  $block = $user->blockedImages()->where([
+    ['object_id', $object->id],
+    ['object_type', get_class($object)],
+  ])->first();
+
+  if ($block) {
+    return true;
+  }
+  return false;
 }
 
 /**
  * Returns the euclidean distance between two colours.
- * 
+ *
  * @param array $rgb1
  * @param array $rgb2
- * 
+ *
  * @return float
  */
 function colourDistance($rgb1, $rgb2) {
-    return sqrt(pow($rgb1[0] - $rgb2[0], 2) + pow($rgb1[1] - $rgb2[1], 2) + pow($rgb1[2] - $rgb2[2], 2));
+  return sqrt(pow($rgb1[0] - $rgb2[0], 2) + pow($rgb1[1] - $rgb2[1], 2) + pow($rgb1[2] - $rgb2[2], 2));
 }
