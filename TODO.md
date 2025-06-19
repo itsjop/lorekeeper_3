@@ -8,18 +8,19 @@
 
 # Known Issues:
 - [ ] 404 badge logs not found
+    -> CYL: Not sure what page this is / what url
 - [ ] wheels on the wheel-dailies don't show up properly even after adding the necessary js files
     -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me...
 - [ ] titles missing on create myo 
     -> CYL: this is intended by the creator and explicitly disabled for MYOs, only characters can have titles.
 - [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
-    -> I think you might have installed the character spotlight extension and not the featured character extension. One is a random spotlight on refresh, the other is a set feature.
+    -> CYL: I think you might have installed the character spotlight extension and not the featured character extension. One is a random spotlight on refresh, the other is a set feature.
 - [ ] remove sex selectors
 - [ ] featured character only from active participants
 
 # In-progress / Partial Fixes:
 - [ ] item category search no results
-    -> can't find where this occurs so I can't fix it :c
+    -> CYL: can't find where this occurs so I can't fix it :c
 - [ ] wysywig textboxes
     -> CYL: tinymce should be included by default, but it does not go on any and all textboxes/areas ever by default
 - [ ] admin/raffle create buttons dont work
