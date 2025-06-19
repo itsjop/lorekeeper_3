@@ -1,5 +1,6 @@
 - [ ] character profile
-  - [ ] visit profile error
+  - [ ] visit profile error 
+      -> CYL: works on my local install, so I can't fix it on my end (probably an issue with different data/old incorrect data?)
   - [ ] should display under your character
   - [ ] character /titles on settings menu missing
   - [ ] icon next to title?
@@ -9,19 +10,23 @@
 - [ ] 404 badge logs not found
 - [ ] wheels on the wheel-dailies don't show up properly even after adding the necessary js files
     -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me...
-- [ ] titles missing on create myo
+- [ ] titles missing on create myo 
+    -> CYL: this is intended by the creator and explicitly disabled for MYOs, only characters can have titles.
 - [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
+    -> I think you might have installed the character spotlight extension and not the featured character extension. One is a random spotlight on refresh, the other is a set feature.
 - [ ] remove sex selectors
 - [ ] featured character only from active participants
 
 # In-progress / Partial Fixes:
 - [ ] item category search no results
+    -> can't find where this occurs so I can't fix it :c
 - [ ] wysywig textboxes
-    -> CYL: this is an extension iirc! It's called tinymce or smth
+    -> CYL: tinymce should be included by default, but it does not go on any and all textboxes/areas ever by default
 - [ ] admin/raffle create buttons dont work
+    -> CYL: Works on my local install, what's the exact errors?
 - [x] settings page avatar upload broken
   - [x] profile pronouns (maybe) not saving
-  - [ ] image block settings twice
+  - [x] image block settings twice
 - [x] 500 editing character profile from sidebar
     -> CYL: make sure composer update/install ran for the league dependency
 - [x] Cultivation/professions/dailies settings not linked properly

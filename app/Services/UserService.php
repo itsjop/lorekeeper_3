@@ -835,4 +835,26 @@ class UserService extends Service {
 
     return $this->rollbackReturn(false);
   }
+
+    /**
+   * Updates user's image block setting.
+   *
+   * @param mixed $data
+   * @param mixed $user
+   *
+   * @return bool
+   */
+  public function updateImageBlockSetting($data, $user) {
+    DB::beginTransaction();
+    try {
+      $user->settings->show_image_blocks = isset($data['show_image_blocks']) && $data['show_image_blocks'] ? $data['show_image_blocks'] : 0;
+      $user->settings->save();
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+
+    return $this->rollbackReturn(false);
+  }
 }
