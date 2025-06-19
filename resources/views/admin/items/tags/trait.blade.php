@@ -3,11 +3,7 @@
 <p>This item can grant these traits to a design when added to the myo/design update submission.</p>
 
 <div class="text-right mb-3">
-  <a
-    href="#"
-    class="btn btn-outline-info"
-    id="addTrait"
-  >Add traits</a>
+  <a href="#" class="btn btn-outline-info" id="addTrait">Add traits</a>
 </div>
 
 <table class="table table-sm" id="traitTable">
@@ -17,7 +13,7 @@
       <td class="loot-row-select">
         {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control item-select',
-            'placeholder' => 'Select Trait'
+            'placeholder' => 'Select Trait',
         ]) !!}
       </td>
       <td class="text-right">
@@ -30,7 +26,7 @@
           <td class="loot-row-select">
             {!! Form::select('feature_id[]', $features, $feature_id, [
                 'class' => 'form-control item-select',
-                'placeholder' => 'Select Trait'
+                'placeholder' => 'Select Trait',
             ]) !!}
 
           </td>

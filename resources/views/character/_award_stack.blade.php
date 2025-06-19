@@ -24,11 +24,7 @@
       <thead class="thead">
         <tr class="d-flex">
           @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
-            <th class="col-1"><input
-                id="toggle-checks"
-                type="checkbox"
-                onclick="toggleChecks(this)"
-              ></th>
+            <th class="col-1"><input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)"></th>
           @endif
           <th class="col">Source</th>
           <th class="col">Notes</th>
@@ -51,7 +47,7 @@
                     {!! Form::selectRange('', 1, $awardRow->availableQuantity, 1, [
                         'class' => 'quantity-select input-group-prepend',
                         'type' => 'number',
-                        'style' => 'min-width:40px;'
+                        'style' => 'min-width:40px;',
                     ]) !!}
                     <div class="input-group-append">
                       <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
@@ -65,7 +61,7 @@
                         'class' => 'quantity-select input-group-prepend',
                         'type' => 'number',
                         'style' => 'min-width:40px;',
-                        'disabled'
+                        'disabled',
                     ]) !!}
                     <div class="input-group-append">
                       <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
@@ -78,11 +74,7 @@
             @endif
             <td class="col-1">
               @if (!$awardRow->isTransferrable)
-                <i
-                  class="fas fa-lock"
-                  data-toggle="tooltip"
-                  title="{{ ucfirst(__('lorekeeper.character')) }}-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."
-                ></i>
+                <i class="fas fa-lock" data-toggle="tooltip" title="{{ ucfirst(__('lorekeeper.character')) }}-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -96,11 +88,7 @@
       <div class="card-body">
         @if ($owner_id != null && ($award->is_transferrable || $user->hasPower('edit_inventories')) && $award->is_user_owned)
           <div>
-            <a
-              class="card-title h5 btn btn-sm btn-outline-primary"
-              data-toggle="collapse"
-              href="#transferForm"
-            >
+            <a class="card-title h5 btn btn-sm btn-outline-primary" data-toggle="collapse" href="#transferForm">
               @if ($owner_id != $user->id)
                 [ADMIN]
               @endif Transfer {{ ucfirst(__('awards.award')) }}
@@ -122,11 +110,7 @@
           </div>
         @endif
         <div>
-          <a
-            class="card-title h5 btn btn-sm btn-outline-primary"
-            data-toggle="collapse"
-            href="#deleteForm"
-          >
+          <a class="card-title h5 btn btn-sm btn-outline-primary" data-toggle="collapse" href="#deleteForm">
             @if ($owner_id != $user->id)
               [ADMIN]
             @endif Delete {{ ucfirst(__('awards.award')) }}

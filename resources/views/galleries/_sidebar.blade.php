@@ -11,21 +11,15 @@
           <a href="{{ url('gallery/submissions/pending') }}" class="{{ set_active('gallery/submissions*') }}">My Submission Queue</a>
         </li>
         <li class="sidebar-item">
-          <a href="{{ url('user/' . Auth::user()->name . '/gallery') }}"
-            class="{{ set_active('user/' . Auth::user()->name . '/gallery') }}"
-          >My Gallery</a>
+          <a href="{{ url('user/' . Auth::user()->name . '/gallery') }}" class="{{ set_active('user/' . Auth::user()->name . '/gallery') }}">My Gallery</a>
         </li>
         <li class="sidebar-item">
-          <a href="{{ url('user/' . Auth::user()->name . '/favorites') }}"
-            class="{{ set_active('user/' . Auth::user()->name . '/favorites') }}"
-          >My Favorites</a>
+          <a href="{{ url('user/' . Auth::user()->name . '/favorites') }}" class="{{ set_active('user/' . Auth::user()->name . '/favorites') }}">My Favorites</a>
         </li>
       </ul>
     </details>
   @endauth
-  @if (config('lorekeeper.extensions.show_all_recent_submissions.enable') &&
-          config('lorekeeper.extensions.show_all_recent_submissions.links.sidebar')
-  )
+  @if (config('lorekeeper.extensions.show_all_recent_submissions.enable') && config('lorekeeper.extensions.show_all_recent_submissions.links.sidebar'))
     <details class="sidebar-section">
       <summary class="sidebar-section-header">Submissions</summary>
       <ul>
@@ -42,8 +36,7 @@
       <ul>
         @foreach ($sideGallery->children()->visible()->get() as $child)
           <li class="sidebar-item">
-            <a href="{{ url('gallery/' . $child->id) }}"
-              class="{{ set_active('gallery/' . $child->id) }}">{{ $child->name }}</a>
+            <a href="{{ url('gallery/' . $child->id) }}" class="{{ set_active('gallery/' . $child->id) }}">{{ $child->name }}</a>
           </li>
         @endforeach
       </ul>
@@ -71,8 +64,7 @@
       <ul>
         @foreach ($sideGallery->avunculi()->visible()->get() as $avunculus)
           <li class="sidebar-item">
-            <a href="{{ url('gallery/' . $avunculus->id) }}"
-              class="{{ set_active('gallery/' . $avunculus->id) }}">{{ $avunculus->name }}</a>
+            <a href="{{ url('gallery/' . $avunculus->id) }}" class="{{ set_active('gallery/' . $avunculus->id) }}">{{ $avunculus->name }}</a>
           </li>
         @endforeach
       </ul>
@@ -84,8 +76,7 @@
     <ul>
       @foreach ($sidebarGalleries as $gallery)
         <li class="sidebar-item">
-          <a href="{{ url('gallery/' . $gallery->id) }}"
-            class="{{ set_active('gallery/' . $gallery->id) }}">{{ $gallery->name }}</a>
+          <a href="{{ url('gallery/' . $gallery->id) }}" class="{{ set_active('gallery/' . $gallery->id) }}">{{ $gallery->name }}</a>
         </li>
       @endforeach
     </ul>

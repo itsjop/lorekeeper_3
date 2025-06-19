@@ -18,7 +18,7 @@
         {!! Form::select('prompt_ids[]', $prompts, Request::get('prompt_ids'), [
             'class' => 'form-control selectize col-12',
             'multiple',
-            'placeholder' => 'Any Prompt'
+            'placeholder' => 'Any Prompt',
         ]) !!}
       </div>
       <div class="form-group ml-1 mb-3">
@@ -26,10 +26,10 @@
             'sort',
             [
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First'
+                'oldest' => 'Oldest First',
             ],
             Request::get('sort') ?: 'newest',
-            ['class' => 'form-control']
+            ['class' => 'form-control'],
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">

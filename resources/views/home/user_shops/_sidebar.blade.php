@@ -25,9 +25,7 @@
       @auth
         @if (Auth::user()->shops()->count() && Settings::get('user_shop_limit') == 1)
           <li class="sidebar-item">
-            <a href="{{ url(Auth::user()->shops()->first()->editUrl) }}"
-              class="{{ set_active(Auth::user()->shops()->first()->editUrl) }}"
-            >My Shop</a>
+            <a href="{{ url(Auth::user()->shops()->first()->editUrl) }}" class="{{ set_active(Auth::user()->shops()->first()->editUrl) }}">My Shop</a>
           </li>
         @else
           <li class="sidebar-item">

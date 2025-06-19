@@ -30,9 +30,7 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $user->url . '/favorites/own-characters' }}"
-          class="{{ set_active('user/' . $user->name . '/favorites/own-characters*') }}"
-        >
+        <a href="{{ $user->url . '/favorites/own-characters' }}" class="{{ set_active('user/' . $user->name . '/favorites/own-characters*') }}">
           Own Character Favorites
         </a>
       </li>
@@ -66,9 +64,7 @@
       @if (isset($sublists) && $sublists->count() > 0)
         @foreach ($sublists as $sublist)
           <li class="sidebar-item">
-            <a href="{{ $user->url . '/sublist/' . $sublist->key }}"
-              class="{{ set_active('user/' . $user->name . '/sublist/' . $sublist->key) }}"
-            >
+            <a href="{{ $user->url . '/sublist/' . $sublist->key }}" class="{{ set_active('user/' . $user->name . '/sublist/' . $sublist->key) }}">
               {{ $sublist->name }}
             </a>
           </li>
@@ -85,9 +81,7 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $user->url . '/' . __('awards.awardcase') }}"
-          class="{{ set_active('user/' . $user->name . '/awardcase*') }}"
-        >
+        <a href="{{ $user->url . '/' . __('awards.awardcase') }}" class="{{ set_active('user/' . $user->name . '/awardcase*') }}">
           {{ ucfirst(ucfirst(__('awards.awardcase'))) }}
         </a>
       </li>

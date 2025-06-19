@@ -35,8 +35,7 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="{{ $character->url . '/transfer' }}"
-            class="{{ set_active('myo/' . $character->id . '/transfer') }}">Transfer</a>
+          <a href="{{ $character->url . '/transfer' }}" class="{{ set_active('myo/' . $character->id . '/transfer') }}">Transfer</a>
         </li>
         @if (Auth::user()->id == $character->user_id)
           <li class="sidebar-item">
