@@ -172,6 +172,8 @@ class AddSiteSettings extends Command {
     $this->addSiteSetting('character_likes_leaderboard_enable', 1, '0: Disable leaderboard,
 1: Enable leaderboard.');
 
+    $this->addSiteSetting('encounter_energy', 5, 'Amount of energy for encounters a user should get each day. Resets daily.');
+
     $this->line("\nSite settings up to date!");
   }
 
