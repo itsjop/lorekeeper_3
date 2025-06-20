@@ -34,8 +34,6 @@ use App\Models\Profession\Profession;
 use App\Models\Character\CharacterImage;
 use App\Services\AwardCaseManager;
 use App\Services\CharacterLinkService;
-use App\Services\CharacterManager;
-use App\Services\CurrencyManager;
 use App\Services\DesignUpdateManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -644,23 +642,6 @@ class CharacterController extends Controller {
         }
 
         return redirect()->back();
-    }
-
-    /**
-     * Transfers inventory items back to a user.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postItemTransfer(Request $request, InventoryManager $service) {
-        if ($service->transferCharacterStack($this->character, $this->character->user, CharacterItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
-            flash('Item transferred successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
     }
 
   /**

@@ -18,6 +18,11 @@
         </a>
       </li>
       <li class="sidebar-item">
+        <a href="{{ $character->url . '/links' }}" class="{{ set_active('character/' . $character->slug . '/links') }}">
+          Links
+        </a>
+      </li>
+      <li class="sidebar-item">
         <a href="{{ $character->url . '/gallery' }}" class="{{ set_active('character/' . $character->slug . '/gallery') }}">
           Gallery
         </a>
@@ -116,6 +121,12 @@
             Edit Profile
           </a>
         </li>
+        <li class="sidebar-item">
+          <a href="{{ $character->url . '/links/edit' }}" class="{{ set_active('character/' . $character->slug . '/links/edit') }}">
+            Request Link
+          </a>
+        </li>
+
         <li class="sidebar-item">
           <a href="{{ $character->url . '/transfer' }}" class="{{ set_active('character/' . $character->slug . '/transfer') }}">
             Transfer
