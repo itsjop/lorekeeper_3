@@ -247,7 +247,18 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
     }
     return \App\Models\Character\Character::where('slug', $slug)->first()?->image->displayColours();
   });
+
+  // LINKS
+  Route::get('{slug}/links/edit', 'CharacterController@getCreateEditCharacterLinks');
+  Route::post('{slug}/links/edit', 'CharacterController@postCreateEditCharacterLinks');
+  Route::post('{slug}/links/info/{id}', 'CharacterController@postEditCharacterLinkInfo');
+  Route::get('{slug}/links/delete/{id}', 'CharacterController@getDeleteCharacterLink');
+  Route::post('{slug}/links/delete/{id}', 'CharacterController@postDeleteCharacterLink');
 });
+
+// CHARACTER RELATIONSHIPS
+Route::post('links/{action}/{id}', 'LinkController@postHandleLink')->where('action', 'accept|reject');
+
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
   Route::get('{id}/profile/edit', 'MyoController@getEditCharacterProfile');
   Route::post('{id}/profile/edit', 'MyoController@postEditCharacterProfile');

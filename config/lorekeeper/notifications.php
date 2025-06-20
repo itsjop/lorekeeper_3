@@ -326,6 +326,30 @@ return [
     'url'     => 'reports/view/{report_id}',
   ],
 
+  // LINK_REQUESTED
+  200 => [
+    'name'    => 'Link Requested',
+    'message' => '<a href="{link}">{user}</a> has requested to link your character {requested} to {character}.'
+        .'<div class="btn btn-sm btn-success m-1 accept-link" data-link-id="{id}">Accept</div>'
+        .'<div class="btn btn-sm btn-danger m-1 reject-link" data-link-id="{id}">Reject</div>',
+    'url'  => '',
+    'view' => 'links',
+  ],
+
+    // LINK_ACCEPTED
+  201 => [
+    'name'    => 'Link Accepted',
+    'message' => '<a href="{link}">{user}</a> has accepted your link request to {requested}. (<a href="{character}/links">View Character Links.</a>)',
+    'url'     => '',
+  ],
+
+  // REPORT_ASSIGNED
+  220 => [
+    'name'    => 'Report Assigned',
+    'message' => 'Your report (#{report_id}) was assigned to <a href="{staff_url}">{staff_name}</a>, you can expect a response soon. (<a href="{url}">View Report</a>)',
+    'url'     => 'reports/view/{report_id}',
+  ],
+
   // REPORT_CLOSED
   221 => [
     'name'    => 'Report Closed',

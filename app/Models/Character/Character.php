@@ -60,6 +60,7 @@ class Character extends Model {
     'home_changed',
     'faction_id',
     'faction_changed',
+    'is_links_open',
   ];
 
   /**
@@ -265,6 +266,14 @@ class Character extends Model {
    */
   public function children() {
     return $this->hasMany(CharacterLineage::class, 'parent_1_id')->orWhere('parent_2_id', $this->id);
+  }
+
+  /*
+  * Get the links for this character
+  */
+  public function links() {
+      // character id can be in either column
+      return $this->hasMany(CharacterRelation::class, 'character_1_id')->orWhere('character_2_id', $this->id);
   }
 
   /**********************************************************************************************

@@ -92,6 +92,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
   Route::get('{slug}/bank', 'CharacterController@getCharacterBank');
   Route::get('{slug}/inventory', 'CharacterController@getCharacterInventory');
   Route::get('{slug}/images', 'CharacterController@getCharacterImages');
+  Route::get('{slug}/links', 'CharacterController@getCharacterLinks');
 
   Route::get('{slug}/currency-logs', 'CharacterController@getCharacterCurrencyLogs');
   Route::get('{slug}/item-logs', 'CharacterController@getCharacterItemLogs');
