@@ -34,6 +34,8 @@ class Kernel extends ConsoleKernel {
     $schedule->command('update-timed-stock')->everyMinute();
     $schedule->command('check-pet-drops')->everyMinute();
     $schedule->exec('rm public/images/avatars/*.tmp')->daily();
+    $schedule->command('refresh-encounter-energy')->daily();
+    $schedule->command('update-timed-areas')->everyMinute();
   }
 
   /**

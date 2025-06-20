@@ -24,6 +24,7 @@ use App\Services\PetManager;
 use App\Models\Border\Border;
 use App\Services\BorderService;
 use App\Services\AwardCaseManager;
+use App\Services\EncounterService;
 
 class GrantController extends Controller {
   /**
@@ -280,4 +281,43 @@ class GrantController extends Controller {
     }
     return redirect()->back();
   }
+    /**
+     * Show the encounter energy grant page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getEncounterEnergyGrants()
+    {
+        $use_energy = Config::get('lorekeeper.encounters.use_energy');
+            //abort if currency is selected
+            //no point in using this page if so lmao.
+            if(!$use_energy){
+                abort(404);
+            }
+
+        return view('admin.grants.encounters', [
+            'users' => User::orderBy('id')->pluck('name', 'id'),
+            'characterOptions'      => Character::myo(0)->orderBy('name')->get()->pluck('fullName', 'id'),
+        ]);
+    }
+
+    /**
+     * Grant or remove encounter energy
+     *
+     * @param  \Illuminate\Http\Request      $request
+     * @param  App\Services\EncounterService  $service
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postEncounterEnergyGrant(Request $request, EncounterService $service)
+    {
+        $data = $request->only(['names','quantity', 'character_names']);
+        if($service->grantEncounterEnergy($data, Auth::user())) {
+            flash('Energy granted successfully.')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
+    }
+
 }

@@ -61,6 +61,7 @@ class Character extends Model {
     'faction_id',
     'faction_changed',
     'is_links_open',
+    'encounter_energy',
   ];
 
   /**

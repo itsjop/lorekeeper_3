@@ -180,7 +180,7 @@ class AddSiteSettings extends Command {
    *
    * Example usage:
    * $this->addSiteSetting("site_setting_key", 1, "0: does nothing.
-1: does something.");
+   * 1: does something.");
    *
    * @param string $key
    * @param int    $value

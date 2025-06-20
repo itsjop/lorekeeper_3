@@ -183,6 +183,9 @@
           <a class="dropdown-item" href="{{ url(__('dailies.dailies')) }}">
             {{ __('dailies.dailies') }}
           </a>
+          <a class="dropdown-item" href="{{ url('encounter-areas') }}">
+            Encounters
+          </a>
         </div>
       </li>
       <li class="nav-item">
