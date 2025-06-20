@@ -17,9 +17,7 @@
     <details class="sidebar-section">
       <summary class="sidebar-section-header">Character {{ ucfirst(__('character_likes.likes')) }}</summary>
       <li class="sidebar-item">
-        <a href="{{ url(__('character_likes.likes') . '-leaderboard') }}"
-          class="{{ set_active(__('character_likes.likes') . '-leaderboard*') }}"
-        >
+        <a href="{{ url(__('character_likes.likes') . '-leaderboard') }}" class="{{ set_active(__('character_likes.likes') . '-leaderboard*') }}">
           {{ ucfirst(__('character_likes.likes')) }} Leaderboard</a>
       </li>
       </ul>
@@ -31,8 +29,7 @@
       <ul>
         @foreach ($sublists as $sublist)
           <li class="sidebar-item">
-            <a href="{{ url('sublist/' . $sublist->key) }}"
-              class="{{ set_active('sublist/' . $sublist->key) }}">{{ $sublist->name }}</a>
+            <a href="{{ url('sublist/' . $sublist->key) }}" class="{{ set_active('sublist/' . $sublist->key) }}">{{ $sublist->name }}</a>
           </li>
         @endforeach
         </li>

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title') 
-    Encounters :: 
-    @yield('encounters-title')
+@section('title')
+  Encounters ::
+  @yield('encounters-title')
 @endsection
 
 @section('sidebar')
-    @include('encounters._sidebar')
+  @include('encounters._sidebar')
 @endsection
 
 @section('scripts')
-@parent
+  @parent
 @endsection

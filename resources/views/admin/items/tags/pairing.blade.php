@@ -9,7 +9,7 @@
     <div class="form-group">
       {!! Form::select('pairing_type', ['Species', 'Subtype'], $tag->getData()['pairing_type'] ?? null, [
           'class' => 'form-control mr-2',
-          'placeholder' => 'Select Pairing Type'
+          'placeholder' => 'Select Pairing Type',
       ]) !!}
     </div>
     <div class="row mt-3">
@@ -27,13 +27,7 @@
     <h3>Offspring Traits (Optional)</h3>
 
     <div class="card mb-3">
-      <div
-        class="card-header"
-        data-toggle="collapse"
-        data-target="#guaranteed"
-        aria-expanded="false"
-        aria-controls="guaranteed"
-      >
+      <div class="card-header" data-toggle="collapse" data-target="#guaranteed" aria-expanded="false" aria-controls="guaranteed">
         <h2 class="h3">
           <i class="fas fa-chevron-down"></i> Guaranteed Offspring Attributes
         </h2>
@@ -53,8 +47,8 @@
           <p>Choose a trait that this pairing item will always grant the offspring.</p>
           {!! Form::select('feature_id', $features, $tag->getData()['feature_id'] ?? null, [
               'class' => 'form-control mr-2
-                                                                                  feature-select',
-              'placeholder' => 'Select Offspring Trait'
+                                                                                            feature-select',
+              'placeholder' => 'Select Offspring Trait',
           ]) !!}
         </div>
 
@@ -63,8 +57,8 @@
           <p>Choose a species that this pairing item will grant the offspring.</p>
           {!! Form::select('species_id', $specieses, $tag->getData()['species_id'] ?? null, [
               'class' => 'form-control mr-2
-                                                                                  feature-select',
-              'placeholder' => 'Select Offspring Species'
+                                                                                            feature-select',
+              'placeholder' => 'Select Offspring Species',
           ]) !!}
         </div>
 
@@ -74,21 +68,15 @@
             the subtype.</p>
           {!! Form::select('subtype_id', $subtypes, $tag->getData()['subtype_id'] ?? null, [
               'class' => 'form-control mr-2
-                                                                                  feature-select',
-              'placeholder' => 'Select Offspring Subtype'
+                                                                                            feature-select',
+              'placeholder' => 'Select Offspring Subtype',
           ]) !!}
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div
-        class="card-header"
-        data-toggle="collapse"
-        data-target="#required"
-        aria-expanded="false"
-        aria-controls="required"
-      >
+      <div class="card-header" data-toggle="collapse" data-target="#required" aria-expanded="false" aria-controls="required">
         <h2 class="h3">
           <i class="fas fa-chevron-down"></i> Required Offspring Attributes
         </h2>
@@ -108,13 +96,13 @@
               <td class="border-0">
                 {!! Form::select('feature_category_ids[]', $categories, null, [
                     'class' => 'form-control item-select',
-                    'placeholder' => 'Select Category'
+                    'placeholder' => 'Select Category',
                 ]) !!}
               </td>
               <td class="d-flex border-0">
                 {!! Form::text('feature_category_number[]', null, [
                     'class' => 'form-control item-select col-10',
-                    'placeholder' => 'Input Number of Traits to Inherit'
+                    'placeholder' => 'Input Number of Traits to Inherit',
                 ]) !!}
               </td>
               <td class="text-right border-0">
@@ -127,13 +115,13 @@
                   <td class="border-0">
                     {!! Form::select('feature_category_ids[]', $categories, $required_category['id'], [
                         'class' => 'form-control item-select',
-                        'placeholder' => 'Select Category'
+                        'placeholder' => 'Select Category',
                     ]) !!}
                   </td>
                   <td class="d-flex border-0">
                     {!! Form::text('feature_category_number[]', $required_category['number'], [
                         'class' => 'form-control item-select col-10',
-                        'placeholder' => 'Input Number of Traits to Inherit'
+                        'placeholder' => 'Input Number of Traits to Inherit',
                     ]) !!}
                   </td>
                   <td class="text-right border-0">
@@ -146,11 +134,7 @@
         </table>
 
         <div class="text-right mb-3">
-          <a
-            href="#"
-            class="btn btn-outline-info"
-            id="addCategory"
-          >Add Required Category</a>
+          <a href="#" class="btn btn-outline-info" id="addCategory">Add Required Category</a>
         </div>
       </div>
     </div>
@@ -167,8 +151,8 @@
       {!! Form::label('Default Species (Optional)') !!} {!! add_help('Choose a species that should be set if both parent species are excluded.') !!}
       {!! Form::select('default_species_id', $specieses, $tag->getData()['default_species_id'] ?? null, [
           'class' => 'form-control mr-2
-                                              feature-select',
-          'placeholder' => 'Select Default Species'
+                                                    feature-select',
+          'placeholder' => 'Select Default Species',
       ]) !!}
     </div>
 
@@ -178,7 +162,7 @@
           <td class="border-0">
             {!! Form::select('illegal_species_ids[]', $specieses, null, [
                 'class' => 'form-control item-select',
-                'placeholder' => 'Select Species'
+                'placeholder' => 'Select Species',
             ]) !!}
           </td>
           <td class="text-right border-0">
@@ -191,7 +175,7 @@
               <td class="border-0">
                 {!! Form::select('illegal_species_ids[]', $specieses, $illegal_species_id, [
                     'class' => 'form-control item-select',
-                    'placeholder' => 'Select Species'
+                    'placeholder' => 'Select Species',
                 ]) !!}
               </td>
               <td class="text-right border-0">
@@ -204,11 +188,7 @@
     </table>
 
     <div class="text-right mb-3">
-      <a
-        href="#"
-        class="btn btn-outline-info my-2"
-        id="addSpecies"
-      >Add Excluded Species</a>
+      <a href="#" class="btn btn-outline-info my-2" id="addSpecies">Add Excluded Species</a>
     </div>
 
     <h5>Subtype Exclusions</h5>
@@ -222,8 +202,8 @@
       <p>Choose a subtype that should be set if both parent subtypes are excluded.</p>
       {!! Form::select('default_subtype_ids', $subtypes, $tag->getData()['default_subtype_ids'] ?? null, [
           'class' => 'form-control mr-2
-                                              feature-select',
-          'placeholder' => 'Select Default Subtype'
+                                                    feature-select',
+          'placeholder' => 'Select Default Subtype',
       ]) !!}
     </div>
 
@@ -233,7 +213,7 @@
           <td class="border-0">
             {!! Form::select('illegal_subtype_ids[]', $subtypes, null, [
                 'class' => 'form-control item-select',
-                'placeholder' => 'Select Subtype'
+                'placeholder' => 'Select Subtype',
             ]) !!}
           </td>
           <td class="text-right border-0">
@@ -246,7 +226,7 @@
               <td class="border-0">
                 {!! Form::select('illegal_subtype_ids[]', $subtypes, $illegal_subtype_id, [
                     'class' => 'form-control item-select',
-                    'placeholder' => 'Select Subtype'
+                    'placeholder' => 'Select Subtype',
                 ]) !!}
 
               </td>
@@ -260,11 +240,7 @@
     </table>
 
     <div class="text-right my-3">
-      <a
-        href="#"
-        class="btn btn-outline-info"
-        id="addSubtype"
-      >Add Excluded Subtype</a>
+      <a href="#" class="btn btn-outline-info" id="addSubtype">Add Excluded Subtype</a>
     </div>
 
     <h5>Trait Exclusions</h5>
@@ -280,7 +256,7 @@
           <td class="border-0">
             {!! Form::select('illegal_feature_ids[]', $features, null, [
                 'class' => 'form-control item-select',
-                'placeholder' => 'Select Trait'
+                'placeholder' => 'Select Trait',
             ]) !!}
           </td>
           <td class="text-right border-0">
@@ -293,7 +269,7 @@
               <td class="border-0">
                 {!! Form::select('illegal_feature_ids[]', $features, $illegal_feature_id, [
                     'class' => 'form-control item-select',
-                    'placeholder' => 'Select Trait'
+                    'placeholder' => 'Select Trait',
                 ]) !!}
 
               </td>
@@ -307,11 +283,7 @@
     </table>
 
     <div class="text-right mb-3">
-      <a
-        href="#"
-        class="btn btn-outline-info"
-        id="addTrait"
-      >Add Excluded Trait</a>
+      <a href="#" class="btn btn-outline-info" id="addTrait">Add Excluded Trait</a>
     </div>
 
     @section('scripts')

@@ -20,8 +20,7 @@
         @foreach ($saleses as $sales)
           @php $salelink = 'sales/'.$sales->slug; @endphp
           <li class="sidebar-item">
-            <a href="{{ $sales->url }}"
-              class="{{ set_active($salelink) }}">{{ '[' . ($sales->is_open ? 'OPEN' : 'CLOSED') . '] ' . $sales->title }}</a>
+            <a href="{{ $sales->url }}" class="{{ set_active($salelink) }}">{{ '[' . ($sales->is_open ? 'OPEN' : 'CLOSED') . '] ' . $sales->title }}</a>
           </li>
         @endforeach
         </li>
@@ -34,8 +33,7 @@
         @foreach ($recentsales as $sales)
           @php $salelink = 'sales/'.$sales->slug; @endphp
           <li class="sidebar-item">
-            <a href="{{ $sales->url }}"
-              class="{{ set_active($salelink) }}">{{ '[' . ($sales->is_open ? 'OPEN' : 'CLOSED') . '] ' . $sales->title }}</a>
+            <a href="{{ $sales->url }}" class="{{ set_active($salelink) }}">{{ '[' . ($sales->is_open ? 'OPEN' : 'CLOSED') . '] ' . $sales->title }}</a>
           </li>
         @endforeach
         </li>

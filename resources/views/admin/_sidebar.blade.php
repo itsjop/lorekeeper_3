@@ -15,10 +15,7 @@
             });
           @endphp
           @foreach ($section['links'] as $item)
-            @if (
-                $section['power'] !== 'mixed' ||
-                    ($section['power'] === 'mixed' && array_key_exists('power', $item) && Auth::user()->hasPower($item['power']))
-            )
+            @if ($section['power'] !== 'mixed' || ($section['power'] === 'mixed' && array_key_exists('power', $item) && Auth::user()->hasPower($item['power'])))
               <li class="sidebar-item">
                 <a href="{{ url($item['url']) }}" class="collapse-link {{ set_active($item['url'] . '*') }}">{{ $item['name'] }}
                 </a>

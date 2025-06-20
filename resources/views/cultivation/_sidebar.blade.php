@@ -7,9 +7,7 @@
     <summary class="sidebar-section-header">Cultivation</summary>
     <ul>
       <li class="sidebar-item">
-        <a href="{{ url(__('cultivation.cultivation') . '/guide') }}"
-          class="{{ set_active(__('cultivation.cultivation') . '/guide') }} btn text-left"
-        >
+        <a href="{{ url(__('cultivation.cultivation') . '/guide') }}" class="{{ set_active(__('cultivation.cultivation') . '/guide') }} btn text-left">
           Cultivation Guide
         </a>
       </li>
@@ -26,9 +24,7 @@
               <i class="fa fa-unlock mr-2"></i>
             </a>
           @else
-            <a href="{{ $area->idUrl }}"
-              class="{{ set_active(__('cultivation.cultivation') . '/' . $area->id) }} btn disabled text-left"
-            >
+            <a href="{{ $area->idUrl }}" class="{{ set_active(__('cultivation.cultivation') . '/' . $area->id) }} btn disabled text-left">
               {{ $area->name }}
               <i class="fa fa-lock mr-2"></i>
             </a>

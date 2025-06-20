@@ -10,8 +10,7 @@
           <a href="{{ $request->url }}" class="{{ set_active('designs/' . $request->id) }}">View</a>
         </li>
         <li class="sidebar-item">
-          <a href="{{ $request->url . '/comments' }}"
-            class="{{ set_active('designs/' . $request->id . '/comments') }}">Comments</a>
+          <a href="{{ $request->url . '/comments' }}" class="{{ set_active('designs/' . $request->id . '/comments') }}">Comments</a>
         </li>
         <li class="sidebar-item">
           <a href="{{ $request->url . '/image' }}" class="{{ set_active('designs/' . $request->id . '/image') }}">Image</a>
