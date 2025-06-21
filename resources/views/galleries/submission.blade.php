@@ -150,7 +150,7 @@
                   <div class="mb-2">
                     <div class="d-flex">{!! $collaborator->has_approved
                         ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved">
-                                                                                                                                            <i class="fas fa-check"></i></div>'
+                                                                                                                                                                <i class="fas fa-check"></i></div>'
                         : '' !!}{!! $collaborator->user->displayName !!}:
                     </div>
                     <div class="d-flex">
@@ -163,7 +163,7 @@
                   <div class="d-flex">
                     {!! $collaborator->has_approved
                         ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved">
-                                                                                                                                            <i class="fas fa-check"></i></div>'
+                                                                                                                                                                <i class="fas fa-check"></i></div>'
                         : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                   </div>
                 @endif
@@ -177,7 +177,7 @@
                 <div class="d-flex">
                   {!! $submission->status == 'Pending' && $collaborator->has_approved
                       ? '<div class="mb-2 mr-2 text-success" data-toggle="tooltip" title="Has Approved">
-                                                                                                                              <i class="fas fa-check"></i></div>'
+                                                                                                                                                <i class="fas fa-check"></i></div>'
                       : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                 </div>
               @endforeach
