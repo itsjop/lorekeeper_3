@@ -685,3 +685,4 @@ function getDiscordDataReadyAssets($array, $isCharacter = false) {
 
   return $result;
 }
+

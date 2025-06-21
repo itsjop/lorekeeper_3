@@ -23,6 +23,8 @@ class UserSettings extends Model {
     'deactivated_at',
     'content_warning_visibility',
     'allow_profile_comments',
+    'encounter_energy',
+    'encounter_character_id',
   ];
 
   /**
@@ -61,5 +63,12 @@ class UserSettings extends Model {
    */
   public function user() {
     return $this->belongsTo('App\Models\User\User');
+  }
+
+  /**
+     * Get the character the user selected for encounters
+     */
+  public function encounterCharacter() {
+    return $this->belongsTo('App\Models\Character\Character');
   }
 }

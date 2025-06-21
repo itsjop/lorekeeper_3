@@ -25,4 +25,5 @@ return [
   'title'         => ['name' => 'Character Title', 'text_color' => '#ffffff',      'background_color' => '#f44336'],
   'pairing'       => ['name' => 'Pairing',         'text_color' => 'antiquewhite', 'background_color' => '#ff5050'],
   'boost'         => ['name' => 'Boost',           'text_color' => 'antiquewhite', 'background_color' => '#cc33ff'],
+  'encounterpotion' => ['name' => 'Encounter Potion', 'text_color' => '#ffffff', 'background_color' => '#1fd1a7'],
 ];

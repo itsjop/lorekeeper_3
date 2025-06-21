@@ -41,21 +41,16 @@ class HomeController extends Controller {
             $gallerySubmissions = [];
         }
 
-        $featured = [];
-        $specieses = Species::visible(0)->orderBy('specieses.sort', 'DESC')->pluck('id')->toArray();
-
-        foreach ($specieses as $species) {
-            $randomSpecies = self::randomCharacter($species);
-            if ($randomSpecies) {
-                array_push($featured, $randomSpecies);
-            }
+        if(Settings::get('featured_character')) {
+          $character = Character::find(Settings::get('featured_character'));
+        } else {
+          $character = null;
         }
 
         return view('welcome', [
             'about'               => SitePage::where('key', 'about')->first(),
             'gallerySubmissions'  => $gallerySubmissions,
-            'featuredChars'       => $featured,
-            'featuredFirst'       => Arr::first($specieses),
+            'featured' => $character,
         ]);
     }
 

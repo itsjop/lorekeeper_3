@@ -155,5 +155,14 @@ return [
     ]),
     'version' => '1.1.6',
   ],
+  'encounters' => [
+    'key' => 'encounters',
+    'wiki_key' => 'Encounters',
+    'creators' => json_encode([
+        'CH3RVB' => 'https://github.com/CH3RVB/',
+        'LostInProgres' => 'https://github.com/LostInProgres',
+    ]),
+    'version' => '2.0.0',
+  ],
 
 ];

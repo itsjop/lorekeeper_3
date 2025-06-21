@@ -40,6 +40,8 @@ return [
       ['name' => 'Professions', 'url' => 'admin/data/professions',],
       ['name' => 'Dailies', 'url' => 'admin/data/dailies',],
       ['name' => 'Pairing Roller', 'url'  => 'admin/pairings/roller',],
+      ['name' => 'Encounters', 'url' => 'admin/data/encounters',],
+      ['name' => 'Encounter Areas', 'url' => 'admin/data/encounters/areas',],
     ],
   ],
   'Cultivation' => [
