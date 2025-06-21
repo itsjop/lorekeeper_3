@@ -17,4 +17,8 @@ mix
   .js('resources/js/app.js', 'public/js/')
   .js('resources/js/app-deferred.js', 'public/js/')
   .sass('resources/sass/app.scss', 'public/css')
-  .vue();
+  .minify([
+    'public/js/app-deferred.js',
+    'public/css/app.css',
+    'public/js/app.js']
+  ).vue();

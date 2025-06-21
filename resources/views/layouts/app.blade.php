@@ -43,7 +43,7 @@
   <script src="{{ mix('js/app.js') }}"></script>
   <script src="{{ mix('js/app-deferred.js') }}"></script>
   <!-- Styles -->
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  <link href="{{ mix('css/app.min.css') }}" rel="stylesheet">
 
   <!------------------------------ EXTERNAL RESOURCES ----------------------------->
   <!-- Scripts -->

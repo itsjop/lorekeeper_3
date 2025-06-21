@@ -113,7 +113,7 @@
         '   .     nav  ' min-content
         'sidebar  main ' auto
         'sidebar footer' auto
-        / var(--sb-width) calc(100% - var(--sb-width));
+        / var(--sb-width) min(var(--max-site-width), calc(100% - var(--sb-width)));
       #sidebar-container {
         grid-area: sidebar;
         max-width: 100%;
