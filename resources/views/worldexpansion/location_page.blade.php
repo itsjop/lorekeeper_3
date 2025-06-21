@@ -6,10 +6,19 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Location" href="{{ url('admin/world/locations/edit/') . '/' . $location->id }}" class="mb-2 float-right">
+    <a
+      data-toggle="tooltip"
+      title="[ADMIN] Edit Location"
+      href="{{ url('admin/world/locations/edit/') . '/' . $location->id }}"
+      class="mb-2 float-right"
+    >
       <i class="fas fa-crown"></i></a>
   @endif
-  {!! breadcrumbs(['World' => 'world', 'Locations' => 'world/locations', $location->style => 'world/locations/' . $location->id]) !!}
+  {!! breadcrumbs([
+      'World' => 'world',
+      'Locations' => 'world/locations',
+      $location->style => 'world/locations/' . $location->id
+  ]) !!}
   <h1 style="clear:both;">
     <img src="{{ $location->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $location->style !!}
   </h1>
@@ -23,7 +32,6 @@
         {!! $ch_enabled && $location->is_character_home ? 'characters.' : '' !!}
       </strong></p>
   @endif
-
 
   @if ($location->image_extension)
     <div class="text-center">
@@ -48,18 +56,18 @@
           <h5 class="mb-0">Contains the following</h5>
 
           <!-- <hr>
-                                                                                          <p class="mb-0">
-                                                                                              @foreach ($location->children as $key => $child)
+                              <p class="mb-0">
+                            @foreach ($location->children as $key => $child)
   @if ($child->thumb_extension)
   <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/>
-              <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+                          <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $child->displayName !!}
   @endif
   @endforeach
-                                                                                          </p>
+                              </p>
 
-                                                                              <hr> -->
+                              <hr> -->
           @foreach ($location->children->groupBy('type_id') as $group => $children)
             <p class="mb-0">
               <strong>
@@ -77,7 +85,6 @@
         </div>
       </div>
     @endif
-
 
     @if (count(allAttachments($location)))
       @foreach (allAttachments($location) as $type => $attachments)
@@ -113,13 +120,10 @@
         </div>
         @if (count($location->gallerysubmissions) > 2)
           <p class="text-right mr-4 mb-0">
-            <a href="{{ url('world/locations/') . '/' . $location->id . '/submissions' }}">See All {{ count($location->gallerysubmissions) }}
+            <a href="{{ url('world/locations/') . '/' . $location->id . '/submissions' }}">See All
+              {{ count($location->gallerysubmissions) }}
           </p>
         @endif
   @endif
-
-
-
-
 
 @endsection
