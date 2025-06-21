@@ -6,12 +6,7 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a
-      data-toggle="tooltip"
-      title="[ADMIN] Edit Faction"
-      href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}"
-      class="mb-2 float-right"
-    >
+    <a data-toggle="tooltip" title="[ADMIN] Edit Faction" href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}" class="mb-2 float-right">
       <i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Factions' => 'world/factions', $faction->style => 'world/factions/' . $faction->id]) !!}
@@ -52,17 +47,17 @@
           <h5 class="mb-0">Contains the following</h5>
 
           <!-- <hr>
-    <p class="mb-0">
-  @foreach ($faction->children as $key => $child)
+      <p class="mb-0">
+    @foreach ($faction->children as $key => $child)
   @if ($child->thumb_extension)
   <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/>
-      <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+        <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $child->displayName !!}
   @endif
   @endforeach
-    </p>
-    <hr> -->
+      </p>
+      <hr> -->
           @foreach ($faction->children->groupBy('type_id') as $group => $children)
             <p class="mb-0">
               <strong>
@@ -87,16 +82,16 @@
           <h5 class="mb-0">Member Figure{{ count($faction->members) == 1 ? '' : 's' }}</h5>
 
           <!-- <hr>
-    <p class="mb-0">
-  @foreach ($faction->members as $key => $member)
+      <p class="mb-0">
+    @foreach ($faction->members as $key => $member)
   @if ($member->thumb_extension)
   <a href="{{ $member->url }}" data-toggle="tooltip" title="{{ $member->name }}"/>
-      <img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+        <img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $member->displayName !!}
   @endif
   @endforeach
-    </p> -->
+      </p> -->
 
           <hr>
           @foreach ($faction->members->groupBy('category_id') as $key => $members)
