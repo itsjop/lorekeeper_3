@@ -465,45 +465,28 @@
   </script>
 
   <div class="card p-3 mb-2">
-    <h3>Image Block Settings</h3>
-    <p>This will disable or enable the image block widgets from showing.</p>
-    <p>Note that this won't delete or unblock your existing image blocks, they will remain blurred for you.</p>
-    {!! Form::open(['url' => 'account/blocked-image-setting']) !!}
-    <div class="row">
-      <div class="col form-group">
-        {!! Form::checkbox('show_image_blocks', 1, Auth::user()->settings->show_image_blocks ? 1 : 0, [
-            'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
-        ]) !!}
-        {!! Form::label('show_image_blocks', 'Show widgets?', ['class' => 'form-check-label ml-3']) !!}
+
+    <h3>Character {{ ucfirst(__('character_likes.likes')) }} Setting</h3>
+    {!! Form::open(['url' => 'account/character-likes']) !!}
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Setting</label>
+      <div class="col-md-10">
+        {!! Form::select(
+            'allow_character_likes',
+            [
+                '0' => 'Do not allow other users to ' . __('character_likes.like') . ' your characters.',
+                '1' => 'Other users can ' . __('character_likes.like') . ' your characters.',
+            ],
+            Auth::user()->settings->allow_character_likes,
+            ['class' => 'form-control'],
+        ) !!}
       </div>
     </div>
     <div class="text-right">
       {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
-    <div class="card p-3 mb-2">
-      <h3>Character {{ ucfirst(__('character_likes.likes')) }} Setting</h3>
-      {!! Form::open(['url' => 'account/character-likes']) !!}
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label">Setting</label>
-        <div class="col-md-10">
-          {!! Form::select(
-              'allow_character_likes',
-              [
-                  '0' => 'Do not allow other users to ' . __('character_likes.like') . ' your characters.',
-                  '1' => 'Other users can ' . __('character_likes.like') . ' your characters.',
-              ],
-              Auth::user()->settings->allow_character_likes,
-              ['class' => 'form-control'],
-          ) !!}
-        </div>
-      </div>
-      <div class="text-right">
-        {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
-      </div>
-      {!! Form::close() !!}
-    </div>
+  </div>
   </div>
 
 @endsection

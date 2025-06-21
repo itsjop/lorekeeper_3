@@ -46,7 +46,7 @@
               {!! Form::label('character_codes', 'First Character') !!}
               {!! Form::select('character_codes[]', $characters, $character[0] ?? null, [
                   'class' => 'form-control selectize character-code',
-                  'placeholder' => 'Select Character'
+                  'placeholder' => 'Select Character',
               ]) !!}
             </div>
           </div>
@@ -69,7 +69,7 @@
               {!! Form::label('character_codes', 'Second Character') !!}
               {!! Form::select('character_codes[]', $characters, $character[1] ?? null, [
                   'class' => 'form-control selectize character-code',
-                  'placeholder' => 'Select Character'
+                  'placeholder' => 'Select Character',
               ]) !!}
             </div>
           </div>
@@ -90,7 +90,7 @@
       </p>
       {!! Form::select('pairing_item_id[]', $pairing_items, $pairing_item_id ?? null, [
           'class' => 'form-control item-select',
-          'placeholder' => 'Select Item'
+          'placeholder' => 'Select Item',
       ]) !!}
     </div>
     <div class="col-md-6">
@@ -98,11 +98,7 @@
       <p>
         Decide which boost items to use. Boost items are optional.
       <div class="text-right mb-3">
-        <a
-          href="#"
-          class="btn btn-outline-info"
-          id="addItem"
-        >Add Items</a>
+        <a href="#" class="btn btn-outline-info" id="addItem">Add Items</a>
       </div>
       </p>
       <table class="table table-sm" id="traitTable">
@@ -111,7 +107,7 @@
             <td class="loot-row-select">
               {!! Form::select('boost_item_ids[]', $boost_items, null, [
                   'class' => 'form-control item-select',
-                  'placeholder' => 'Select Item'
+                  'placeholder' => 'Select Item',
               ]) !!}
             </td>
             <td class="text-right">
@@ -124,7 +120,7 @@
                 <td class="loot-row-select">
                   {!! Form::select('boost_item_ids[]', $boost_items, $id, [
                       'class' => 'form-control item-select',
-                      'placeholder' => 'Select Item'
+                      'placeholder' => 'Select Item',
                   ]) !!}
                 </td>
                 <td class="text-right">
@@ -139,11 +135,7 @@
   </div>
 
   <div class="text-right">
-    <a
-      href="#"
-      class="btn btn-success"
-      id="pairingSubmit"
-    >Roll!</a>
+    <a href="#" class="btn btn-success" id="pairingSubmit">Roll!</a>
   </div>
 
   {!! Form::close() !!}

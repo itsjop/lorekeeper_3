@@ -24,11 +24,7 @@
       <thead class="thead">
         <tr class="d-flex">
           @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
-            <th class="col-1"><input
-                id="toggle-checks"
-                type="checkbox"
-                onclick="toggleChecks(this)"
-              ></th>
+            <th class="col-1"><input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)"></th>
             <th class="col-4">Source</th>
           @else
             <th class="col-5">Source</th>
@@ -54,7 +50,7 @@
                   {!! Form::selectRange('', 1, $awardRow->availableQuantity, 1, [
                       'class' => 'quantity-select',
                       'type' => 'number',
-                      'style' => 'min-width:40px;'
+                      'style' => 'min-width:40px;',
                   ]) !!}
                   <div class="input-group-append">
                     <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
@@ -69,7 +65,7 @@
                       'class' => 'quantity-select',
                       'type' => 'number',
                       'style' => 'min-width:40px;',
-                      'disabled'
+                      'disabled',
                   ]) !!}
                   <div class="input-group-append">
                     <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
@@ -84,11 +80,7 @@
             @endif
             <td class="col-1">
               @if (!$awardRow->isTransferrable)
-                <i
-                  class="fas fa-lock"
-                  data-toggle="tooltip"
-                  title="Account-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."
-                ></i>
+                <i class="fas fa-lock" data-toggle="tooltip" title="Account-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -102,11 +94,7 @@
 
       @if ($award->is_character_owned)
         <h5 class="card-title">
-          <a
-            class="h5 collapse-toggle collapsed"
-            href="#characterTransferForm"
-            data-toggle="collapse"
-          >
+          <a class="h5 collapse-toggle collapsed" href="#characterTransferForm" data-toggle="collapse">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer {{ ucfirst(__('awards.award')) }} to Character
@@ -122,18 +110,14 @@
                 'class' => 'btn btn-primary',
                 'name' => 'action',
                 'value' => 'characterTransfer',
-                'type' => 'submit'
+                'type' => 'submit',
             ]) !!}
           </div>
         </div>
       @endif
       @if ($award->allow_transfer || ($user && $user->hasPower('edit_inventories')))
         <h5 class="card-title">
-          <a
-            class="h5 collapse-toggle collapsed"
-            href="#transferForm"
-            data-toggle="collapse"
-          >
+          <a class="h5 collapse-toggle collapsed" href="#transferForm" data-toggle="collapse">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer {{ ucfirst(__('awards.award')) }}
@@ -153,18 +137,14 @@
                 'class' => 'btn btn-primary',
                 'name' => 'action',
                 'value' => 'transfer',
-                'type' => 'submit'
+                'type' => 'submit',
             ]) !!}
           </div>
         </div>
       @endif
 
       <h5 class="card-title">
-        <a
-          class="h5 collapse-toggle collapsed"
-          href="#deleteForm"
-          data-toggle="collapse"
-        >
+        <a class="h5 collapse-toggle collapsed" href="#deleteForm" data-toggle="collapse">
           @if ($stack->first()->user_id != $user->id)
             [ADMIN]
           @endif Delete {{ ucfirst(__('awards.award')) }}
