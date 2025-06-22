@@ -205,103 +205,78 @@
       </div>
       <hr />
       <a href="#" class="float-right btn btn-sm btn-outline-primary add-feature-button">Add Trait</a>
-      {!! Form::label('Has Traits: ') !!} {!! add_help('This will narrow the search to characters that have ALL of the selected traits at the same time.') !!}
-      <div id="featureBody" class="row w-100">
-        @if (Request::get('feature_id'))
-          @foreach (Request::get('feature_id') as $featureId)
-            <div class="feature-block col-md-4 col-sm-6 mt-3 p-1">
-              <div class="card">
-                <div class="card-body d-flex">
-                  {!! Form::select('feature_id[]', $features, $featureId, [
-                      'class' => 'form-control feature-select selectize',
-                      'placeholder' => 'Select Trait'
-                  ]) !!}
-                  <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
-                </div>
-              </div>
-            </div>
-          @endforeach
-        @endif
 
-        <div class="form-group">
-          {!! Form::label('Has Traits: ') !!} {!! add_help('This will narrow the search to characters that have ALL of the selected traits at the same time.') !!}
-          {!! Form::select('feature_ids[]', $features, Request::get('feature_ids'), [
-              'class' => 'form-control feature-select userselectize',
-              'placeholder' => 'Select Traits',
-              'multiple'
-          ]) !!}
-        </div>
-        <div class="form-group">
-          {!! Form::label('Has Traits: ') !!} {!! add_help('This will narrow the search to characters that have ALL of the selected traits at the same time.') !!}
-          {!! Form::select('feature_ids[]', $features, Request::get('feature_ids'), [
-              'class' => 'form-control feature-select userselectize',
-              'placeholder' => 'Select Traits',
-              'multiple'
-          ]) !!}
-        </div>
-        <hr />
-        <div class="masterlist-search-field">
-          {!! Form::checkbox('search_images', 1, Request::get('search_images'), [
-              'class' => 'form-check-input mr-3',
-              'data-toggle' => 'toggle'
-          ]) !!}
-          <span class="ml-2">Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
-              'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.'
-          ) !!}</span>
-        </div>
-
+      <div class="form-group">
+        {!! Form::label('Has Traits: ') !!} {!! add_help('This will narrow the search to characters that have ALL of the selected traits at the same time.') !!}
+        {!! Form::select('feature_ids[]', $features, Request::get('feature_ids'), [
+            'class' => 'form-control feature-select userselectize',
+            'placeholder' => 'Select Traits',
+            'multiple'
+        ]) !!}
+      </div>
+      <hr />
+      <div class="masterlist-search-field">
+        {!! Form::checkbox('search_images', 1, Request::get('search_images'), [
+            'class' => 'form-check-input mr-3',
+            'data-toggle' => 'toggle'
+        ]) !!}
+        <span class="ml-2">Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
+            'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.'
+        ) !!}</span>
       </div>
 
     </div>
-    <div class="form-inline justify-content-end mb-3">
-      <div class="form-group mr-3">
-        {!! Form::label('sort', 'Sort: ', ['class' => 'mr-2']) !!}
-        @if (!$isMyo)
-          {!! Form::select(
-              'sort',
-              [
-                  'number_desc' => 'Number Descending',
-                  'number_asc' => 'Number Ascending',
-                  'id_desc' => 'Newest First',
-                  'id_asc' => 'Oldest First',
-                  'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value'
-              ],
-              Request::get('sort'),
-              ['class' => 'form-control']
-          ) !!}
-        @else
-          {!! Form::select(
-              'sort',
-              [
-                  'id_desc' => 'Newest First',
-                  'id_asc' => 'Oldest First',
-                  'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value'
-              ],
-              Request::get('sort'),
-              ['class' => 'form-control']
-          ) !!}
-        @endif
-      </div>
-      {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
-    </div>
-    {!! Form::close() !!}
+
   </div>
-  <div class="hide" id="featureContent">
-    <div class="feature-block col-md-4 col-sm-6 mt-3 p-1">
-      <div class="card">
-        <div class="card-body d-flex">
-          {!! Form::select('feature_id[]', $features, null, [
-              'class' => 'form-control feature-select selectize',
-              'placeholder' => 'Select Trait'
-          ]) !!}
-          <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
-        </div>
+  <div class="form-inline justify-content-end mb-3">
+    <div class="form-group mr-3">
+      {!! Form::label('sort', 'Sort: ', ['class' => 'mr-2']) !!}
+      @if (!$isMyo)
+        {!! Form::select(
+            'sort',
+            [
+                'number_desc' => 'Number Descending',
+                'number_asc' => 'Number Ascending',
+                'id_desc' => 'Newest First',
+                'id_asc' => 'Oldest First',
+                'sale_value_desc' => 'Highest Sale Value',
+                'sale_value_asc' => 'Lowest Sale Value'
+            ],
+            Request::get('sort'),
+            ['class' => 'form-control']
+        ) !!}
+      @else
+        {!! Form::select(
+            'sort',
+            [
+                'id_desc' => 'Newest First',
+                'id_asc' => 'Oldest First',
+                'sale_value_desc' => 'Highest Sale Value',
+                'sale_value_asc' => 'Lowest Sale Value'
+            ],
+            Request::get('sort'),
+            ['class' => 'form-control']
+        ) !!}
+      @endif
+    </div>
+    {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+  </div>
+  {!! Form::close() !!}
+</div>
+<div class="hide" id="featureContent">
+  <div class="feature-block col-md-4 col-sm-6 mt-3 p-1">
+    <div class="card">
+      <div class="card-body d-flex">
+        {!! Form::select('feature_id[]', $features, null, [
+            'class' => 'form-control feature-select selectize',
+            'placeholder' => 'Select Trait'
+        ]) !!}
+        <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
       </div>
     </div>
   </div>
-  {{-- <div class="text-right mb-3">
+</div>
+{{-- <div class="text-right mb-3">
     <div class="btn-group">
       <button
         type="button"
@@ -319,87 +294,87 @@
       ><i class="fas fa-bars"></i></button>
     </div>
   </div> --}}
-  {!! $characters->render() !!}
-  <div id="gridView">
-    @foreach ($characters->chunk(4) as $chunk)
-      <div class="row">
-        @foreach ($chunk as $character)
-          <div class="col-md-3 col-6 text-center">
-            <div class="thumbnail">
-              <a href="{{ $character->url }}">
-                <img
-                  src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                  class="img-thumbnail"
-                  alt="Thumbnail for {{ $character->fullName }}"
-                /></a>
-              <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div>
-            </div>
-            <div class="mt-1">
-              <a href="{{ $character->url }}" class="h5 mb-0">
-                @if (!$character->is_visible)
-                  <i class="fas fa-eye-slash"></i>
-                @endif {!! $character->warnings !!}
-                {{ Illuminate\Support\Str::limit($character->fullName, 20, $end = '...') }}
-              </a>
-            </div>
-            <div class="small">
-              {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!} ・ {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!} ・ {!! $character->displayOwner !!}
-              @if (count($character->image->content_warnings ?? []) &&
-                      (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2))
-              )
-                <p class="mb-0">
-                  <span class="text-danger mr-1"><strong>Character Warning:</strong></span>
-                  {{ implode(', ', $character->image->content_warnings) }}
-                </p>
-              @endif
-            </div>
+{!! $characters->render() !!}
+<div id="gridView">
+  @foreach ($characters->chunk(4) as $chunk)
+    <div class="row">
+      @foreach ($chunk as $character)
+        <div class="col-md-3 col-6 text-center">
+          <div class="thumbnail">
+            <a href="{{ $character->url }}">
+              <img
+                src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+                class="img-thumbnail"
+                alt="Thumbnail for {{ $character->fullName }}"
+              /></a>
+            <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div>
           </div>
-        @endforeach
-      </div>
-    @endforeach
-  </div>
-  <div id="listView" class="hide">
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th>Owner</th>
-          <th>Name</th>
-          <th>Rarity</th>
-          <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
-          @if (Settings::get('character_title_display'))
-            <th>Title</th>
-          @endif
-          <th>Created</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($characters as $character)
-          <tr>
-            <td>{!! $character->displayOwner !!}</td>
-            <td>
+          <div class="mt-1">
+            <a href="{{ $character->url }}" class="h5 mb-0">
               @if (!$character->is_visible)
                 <i class="fas fa-eye-slash"></i>
-              @endif {!! $character->displayName !!}
-            </td>
-            <td>{!! $character->image->rarity_id ? $character->image->rarity->displayName : 'None' !!}</td>
-            <td>{!! $character->image->species_id ? $character->image->species->displayName : 'None' !!}</td>
-            @if (Settings::get('character_title_display'))
-              <td>{!! $character->image->hasTitle
-                  ? ($character->image->title_id
-                      ? $character->image->title->displayNameShort
-                      : (isset($character->image->title_data['short'])
-                          ? nl2br(htmlentities($character->image->title_data['short']))
-                          : nl2br(htmlentities($character->image->title_data['full']))))
-                  : 'None' !!}</td>
+              @endif {!! $character->warnings !!}
+              {{ Illuminate\Support\Str::limit($character->fullName, 20, $end = '...') }}
+            </a>
+          </div>
+          <div class="small">
+            {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!} ・ {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!} ・ {!! $character->displayOwner !!}
+            @if (count($character->image->content_warnings ?? []) &&
+                    (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2))
+            )
+              <p class="mb-0">
+                <span class="text-danger mr-1"><strong>Character Warning:</strong></span>
+                {{ implode(', ', $character->image->content_warnings) }}
+              </p>
             @endif
-            <td>{!! format_date($character->created_at) !!}</td>
-          </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-  {!! $characters->render() !!}
+          </div>
+        </div>
+      @endforeach
+    </div>
+  @endforeach
+</div>
+<div id="listView" class="hide">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>Owner</th>
+        <th>Name</th>
+        <th>Rarity</th>
+        <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
+        @if (Settings::get('character_title_display'))
+          <th>Title</th>
+        @endif
+        <th>Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($characters as $character)
+        <tr>
+          <td>{!! $character->displayOwner !!}</td>
+          <td>
+            @if (!$character->is_visible)
+              <i class="fas fa-eye-slash"></i>
+            @endif {!! $character->displayName !!}
+          </td>
+          <td>{!! $character->image->rarity_id ? $character->image->rarity->displayName : 'None' !!}</td>
+          <td>{!! $character->image->species_id ? $character->image->species->displayName : 'None' !!}</td>
+          @if (Settings::get('character_title_display'))
+            <td>{!! $character->image->hasTitle
+                ? ($character->image->title_id
+                    ? $character->image->title->displayNameShort
+                    : (isset($character->image->title_data['short'])
+                        ? nl2br(htmlentities($character->image->title_data['short']))
+                        : nl2br(htmlentities($character->image->title_data['full']))))
+                : 'None' !!}</td>
+          @endif
+          <td>{!! format_date($character->created_at) !!}</td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+{!! $characters->render() !!}
 
-  <div class="text-center mt-4 small text-muted">
-    {{ $characters->total() }} result{{ $characters->total() == 1 ? '' : 's' }} found.
-  </div>
+<div class="text-center mt-4 small text-muted">
+  {{ $characters->total() }} result{{ $characters->total() == 1 ? '' : 's' }} found.
+</div>

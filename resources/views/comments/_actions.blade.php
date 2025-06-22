@@ -71,7 +71,7 @@
             <span>&times;</span>
           </button>
         </div>
-        <dialog class="modal-body">
+        <div class="modal-body">
           <div class="form-group">
             {!! Form::label('message', 'Update your message here:') !!}
             {!! Form::textarea('message', $comment->comment, [
@@ -83,7 +83,7 @@
               <a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax">Markdown</a>
               cheatsheet.</small>
           </div>
-        </dialog>
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase" data-dismiss="modal">Cancel</button>
           {!! Form::submit('Update', ['class' => 'btn btn-sm btn-outline-success text-uppercase']) !!}
@@ -91,7 +91,7 @@
         </form>
       </div>
     </div>
-    </div>
+  </dialog>
   @endcan
   {{-- modal large --}}
   @can('reply-to-comment', $comment)

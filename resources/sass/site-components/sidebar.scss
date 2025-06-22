@@ -2,45 +2,43 @@
 @import '../variables';
 
 // ACTUAL SIDEBAR
-#app {
-  #site-wrapper {
-    &.has-sidebar {
-      #sidebar-container {
-        grid-area: sidebar;
-        max-width: 100%;
-        position: relative;
-        #site-mobile-header {
-          display: none;
+#app #site-wrapper {
+  &.has-sidebar {
+    #sidebar-container {
+      grid-area: sidebar;
+      max-width: 100%;
+      position: relative;
+      #site-mobile-header {
+        display: none;
+      }
+      #sidebar {
+        display: block;
+        .sidebar-header {
+          border-radius: 15px 15px 0 0;
+          background-color: var(--main-accent);
         }
-        #sidebar {
-          display: block;
-          #sidebar-ul {
-            border-radius: 20px;
-            .sidebar-header {
-              border-radius: 15px 15px 0 0;
-              background-color: var(--main-accent);
+        #sidebar-ul {
+          border-radius: 20px;
+          .sidebar-section {
+            ul {
+              margin: 0;
+              padding: 0;
             }
-            .sidebar-section {
-              ul {
-                margin: 0;
-                padding: 0;
+            .sidebar-item {
+              display: flex;
+              align-items: center;
+              & + * {
+                // border-top: 1px solid #8888;
+              } /* Owl Syntax */
+              a {
+                &.active {
+                  font-weight: 700;
+                  color: white;
+                }
               }
-              .sidebar-item {
-                display: flex;
-                align-items: center;
-                & + * {
-                  // border-top: 1px solid #8888;
-                } /* Owl Syntax */
-                a {
-                  &.active {
-                    font-weight: 700;
-                    color: white;
-                  }
-                }
-                &:has(a.active) {
-                  height: 2rem;
-                  background-color: var(--main-accent_light);
-                }
+              &:has(a.active) {
+                height: 2rem;
+                background-color: var(--main-accent_light);
               }
             }
           }

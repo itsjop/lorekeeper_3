@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 
-// require('./vendor/jquery-ui');
-// require('./vendor/bootstrap');
+require('./vendor/jquery-ui');
+require('./vendor/bootstrap');
 // require('./vendor/selectize');
 
 import App from './App.vue';

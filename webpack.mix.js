@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 // Scripts
+mix.webpackConfig({ watchOptions: { ignored: /node_modules|dist|mix-manifest.json/, }, });
 
 mix
   .js('resources/js/app.js', 'public/js/')
