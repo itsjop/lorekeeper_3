@@ -1,4 +1,4 @@
-<summary id="sidebar-ul">
+<div id="sidebar-ul">
   <div class="sidebar-header">
     <a href="{{ $user->url }}" class="card-link">
       {{ Illuminate\Support\Str::limit($user->name, 10, $end = '...') }}

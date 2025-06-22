@@ -318,7 +318,7 @@
     </div>
     @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
 
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+    <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content hide" id="approvalContent">
           <div class="modal-header">

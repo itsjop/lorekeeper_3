@@ -61,7 +61,7 @@
 
 {{-- Modals --}}
 @can('edit-comment', $comment)
-  <div class="modal fade" id="comment-modal-{{ $comment->getKey() }}" tabindex="-1" role="dialog">
+  <dialog class="modal fade" id="comment-modal-{{ $comment->getKey() }}" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         {{ Form::model($comment, ['route' => ['comments.update', $comment->getKey()]]) }}
@@ -181,7 +181,7 @@
   </div>
 </dialog>
 
-<div class="modal fade" id="show-likes-{{ $comment->id }}" tabindex="-1" role="dialog">
+<dialog class="modal fade" id="show-likes-{{ $comment->id }}" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -232,12 +232,12 @@
       </div>
     </div>
   </div>
-</div>
+</dialog>
 
 {{-- edits modal --}}
 {{-- the button for this appears in the main view, but to keep it from being cluttered we will keep the models within this section --}}
 @if (Auth::check() && Auth::user()->isStaff)
-  <div class="modal fade" id="show-edits-{{ $comment->id }}" tabindex="-1" role="dialog">
+  <dialog class="modal fade" id="show-edits-{{ $comment->id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -296,5 +296,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </dialog>
 @endif

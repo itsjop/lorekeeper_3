@@ -31,7 +31,7 @@
         'isClaim' => $isClaim,
         'userGallerySubmissions' => $userGallerySubmissions,
     ])
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+    <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
 
         <div class="modal-content hide" id="confirmContent">
