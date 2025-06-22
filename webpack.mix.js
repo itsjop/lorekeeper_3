@@ -12,9 +12,13 @@ const mix = require('laravel-mix');
  */
 
 // Scripts
-mix.webpackConfig({ watchOptions: { ignored: /node_modules|dist|mix-manifest.json/, }, });
+mix.webpackConfig({
+  watchOptions: {
+    ignored: [
+      '**/public/**',
+      '**/mix-manifest.json',
+    ],
+  },
+});
 
-mix
-  .js('resources/js/app.js', 'public/js/')
-  .sass('resources/sass/app.scss', 'public/css')
-  .vue();
+mix.js('resources/js/app.js', 'public/js/').sass('resources/sass/app.scss', 'public/css').vue();

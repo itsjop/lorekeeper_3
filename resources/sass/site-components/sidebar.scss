@@ -3,44 +3,41 @@
 
 // ACTUAL SIDEBAR
 #app #site-wrapper {
-  &.has-sidebar {
-    #sidebar-container {
-      grid-area: sidebar;
-      max-width: 100%;
-      position: relative;
-      #site-mobile-header {
-        display: none;
-      }
-      #sidebar {
-        display: block;
-        .sidebar-header {
-          border-radius: 15px 15px 0 0;
-          background-color: var(--main-accent);
+  &.has-sidebar #sidebar-container {
+    grid-area: sidebar;
+    max-width: 100%;
+    position: relative;
+    #site-mobile-header {
+      display: none;
+    }
+  }
+  #sidebar {
+    .sidebar-header {
+      border-radius: 15px 15px 0 0;
+      background-color: var(--main-accent);
+    }
+    #sidebar-ul {
+      border-radius: 20px;
+      .sidebar-section {
+        ul {
+          margin: 0;
+          padding: 0;
         }
-        #sidebar-ul {
-          border-radius: 20px;
-          .sidebar-section {
-            ul {
-              margin: 0;
-              padding: 0;
+        .sidebar-item {
+          display: flex;
+          align-items: center;
+          & + * {
+            // border-top: 1px solid #8888;
+          } /* Owl Syntax */
+          a {
+            &.active {
+              font-weight: 700;
+              color: white;
             }
-            .sidebar-item {
-              display: flex;
-              align-items: center;
-              & + * {
-                // border-top: 1px solid #8888;
-              } /* Owl Syntax */
-              a {
-                &.active {
-                  font-weight: 700;
-                  color: white;
-                }
-              }
-              &:has(a.active) {
-                height: 2rem;
-                background-color: var(--main-accent_light);
-              }
-            }
+          }
+          &:has(a.active) {
+            height: 2rem;
+            background-color: var(--main-accent_light);
           }
         }
       }
@@ -199,7 +196,6 @@
   .sidebar {
     padding-left: 0px;
     text-align: left;
-    background-color: #ddd;
     z-index: 3;
     right: 0px;
     bottom: 0px;
@@ -243,7 +239,8 @@
       'thumb' auto
       'name ' auto
       'owner' auto
-      'meta ' auto
+      'species ' auto
+      'rarity ' auto
       / max-content;
     background-color: var(--body-color);
     border-radius: 0 0 15px 15px;
@@ -335,14 +332,18 @@
         mix-blend-mode: soft-light;
       }
     }
+
     .name {
       grid-area: name;
     }
-    .owner {
+    .display-user {
       grid-area: owner;
     }
-    .meta {
-      grid-area: meta;
+    .species {
+      grid-area: species;
+    }
+    .rarity {
+      grid-area: rarity;
     }
   }
 }
@@ -368,5 +369,37 @@
   }
   to {
     background-position: 100% -300%;
+  }
+}
+
+@media (width <= 992px) {
+  #app #site-wrapper {
+    --sb-width: min(50vw, 300px);
+  }
+  .featured-character {
+    .sidebar-section {
+      grid-template:
+        'thumb name' auto
+        'thumb owner ' auto
+        'thumb species' auto
+        'thumb rarity' auto
+        / auto max-content;
+      align-content: center;
+      align-items: center;
+      .display-user,
+      .species,
+      .rarity,
+      .name {
+        &::before {
+          content: '・';
+        }
+      }
+    }
+    font-size: 2rem;
+  }
+}
+@media (width <= 576px) {
+  #app #site-wrapper {
+    --sb-width: min(30vw, 300px);
   }
 }

@@ -25,16 +25,12 @@
           <i class="fas fa-eye-slash"></i>
         @endif {{ $featured->fullName }}
       </a>
-      <a
-        class="owner"
-        href="{{ $featured->url }}"
-        class="h5 flex mb-0"
-      >
-        {!! $featured->displayOwner !!}
-      </a>
-      <div class="meta" class="small">
+      {!! $featured->displayOwner !!}
+      <div class="species" class="small">
         {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!}
-        ・ {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
+      </div>
+      <div class="rarity" class="small">
+        {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
       </div>
     @else
       <p>There is no featured character.</p>
