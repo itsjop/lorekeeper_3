@@ -19,7 +19,13 @@ ul { padding: 0; }
   font-family: 'Baloo 2', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  --min-site-width: 800px;
   --max-site-width: 1800px;
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 40px;
   .site-background {
     position: fixed;
     width: 100dvw;
@@ -29,14 +35,7 @@ ul { padding: 0; }
     background-image: url('../../public/images/somnivores/raw/reveriefullres.webp');
     background-size: cover;
   }
-  display: grid;
-  justify-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding-top: 40px;
   #site-wrapper {
-    --sb-width: min(20vw, 200px);
-    --app-width: min(var(--max-site-width) - var(--sb-width), 70vw);
     display: grid;
     grid-template:
       'logo' 20vh
@@ -49,23 +48,75 @@ ul { padding: 0; }
     width: var(--app-width);
     height: min-content;
     margin-bottom: 35px;
-    /* background-color: #8f83;
-    border: 3px solid #8f8f; */
-    #main-content {
-      grid-area: main;
-      max-width: 100%;
-      background-color: var(--body-color);
-      border-radius: 15px;
-      position: relative;
-      //  TODO: this breaks position: fixed for some dumbass spec reason
-      // backdrop-filter: blur(5px);
-    }
-    .card {
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .modal-dialog .modal-body .inventory-main-img img {
-      width: 100%;
+    &.has-sidebar {
+      --sb-width: min(20vw, 300px);
+      --app-width: min(var(--max-site-width) - var(--sb-width), 70vw);
+      left: calc(var(--sb-width) * -0.5); /* sidebar offset */
+      grid-template:
+        '   .     logo ' 20vh
+        '   .     nav  ' min-content
+        'sidebar  main ' auto
+        'sidebar footer' auto
+        /
+        var(--sb-width)
+        clamp(var(--min-site-width), calc(100% - var(--sb-width)), var(--max-site-width));
+      #main-content {
+        grid-area: main;
+        max-width: 100%;
+        background-color: var(--body-color);
+        border-radius: 15px;
+        position: relative;
+      }
+      #sidebar-container {
+        grid-area: sidebar;
+        max-width: 100%;
+        position: relative;
+        #site-mobile-header {
+          display: none;
+        }
+        #sidebar {
+          display: block;
+          #sidebar-ul {
+            border-radius: 20px;
+            .sidebar-header {
+              background-color: var(--main-accent);
+            }
+            .sidebar-section {
+              ul {
+                margin: 0;
+                padding: 0;
+              }
+              .sidebar-item {
+                display: flex;
+                align-items: center;
+                & + * {
+                  // border-top: 1px solid #8888;
+                } /* Owl Syntax */
+                a {
+                  &.active {
+                    font-weight: 700;
+                    color: white;
+                  }
+                }
+                &:has(a.active) {
+                  height: 2rem;
+                  background-color: var(--main-accent_light);
+                }
+              }
+            }
+          }
+        }
+      }
+      #sidebar {
+        display: none;
+      }
+      .card {
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .modal-dialog .modal-body .inventory-main-img img {
+        width: 100%;
+      }
     }
   }
 }
