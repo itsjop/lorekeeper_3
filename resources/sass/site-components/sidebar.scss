@@ -383,44 +383,52 @@
     place-content: center;
     place-items: center;
     grid-template:
-      'thumb' 80%
-      'name ' 100%
-      'owner' 100%
-      'meta ' 100%
+      'thumb' auto
+      'name ' auto
+      'owner' auto
+      'meta ' auto
       / max-content;
     .thumb {
       grid-area: thumb;
       display: grid;
       justify-items: center;
       position: relative;
-      padding: 10px;
-      width: calc(100% - 20px);
+      place-content: center;
+      place-items: center;
+      --cb-size: 0.8;
+      width: calc(1 * var(--sb-width));
+      height: calc(1 * var(--sb-width));
       img {
         border: 0;
-        border-radius: 100vw;
+        // border-radius: 100vw;
+        position: relative;
+        z-index: 100;
         overflow: hidden;
-        width: calc(1 * var(--sb-width));
+        filter: drop-shadow(2px 2px 3px #111111aa);
+        width: calc(0.7 * var(--sb-width));
+        height: calc(0.7 * var(--sb-width));
         aspect-ratio: 1/1;
         padding: 0;
       }
       .character-border {
-        width: 100%;
         mask-mode: luminance;
-        mask-image: radial-gradient(black 0%, black 63%, white 63%, white 100%);
+        // mask-image: radial-gradient(black 0%, black 63%, white 63%, white 100%);
         transform-origin: center;
-        animation: hr 3s linear infinite forwards;
         position: absolute;
-        height: 100%;
-        &::after,
-        &::before {
-          content: '';
+        width: calc(0.9 * var(--sb-width));
+        height: calc(0.9 * var(--sb-width));
+        border-radius: 100vh;
+        overflow: hidden;
+        .rainbow,
+        .stars {
           position: absolute;
           left: 0;
-          width: calc(1 * var(--sb-width));
+          width: 100%;
           border-radius: 100vh;
           aspect-ratio: 1/1;
         }
-        &::before {
+        .rainbow {
+          animation: hr 6s linear infinite forwards;
           --r-value: 0.8;
           --r-sat: 0.2;
           background-image: conic-gradient(
@@ -433,10 +441,28 @@
             oklch(var(--r-value) var(--r-sat) 360deg) 100%
           );
         }
-        &::after {
-          background-image: url('../../../public/images/starring.png'); // TODO: fragile path
-          animation: star 20s linear infinite forwards;
+        .stars {
           mix-blend-mode: overlay;
+          // opacity: .8;
+          position: relative;
+          transform: rotateZ(-30deg);
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            width: calc(0.9 * var(--sb-width));
+            height: calc(0.9 * var(--sb-width));
+            animation: stars 10s linear forwards infinite;
+            background-image: url('../../../public/images/starring.png'); // TODO: fragile path
+            background-repeat: repeat;
+            transform: translateX(0%);
+          }
+          &::before {
+            left: -100%;
+          }
+          &::after {
+            left: 0%;
+          }
         }
       }
     }
@@ -453,10 +479,20 @@
 }
 @keyframes hr {
   from {
-    filter: hue-rotate(0);
+    // filter: hue-rotate(0deg);
+    transform: rotateZ(0);
   }
   to {
-    filter: hue-rotate(360deg);
+    // filter: hue-rotate(360deg);
+    transform: rotateZ(360deg);
+  }
+}
+@keyframes stars {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
   }
 }
 @keyframes star {

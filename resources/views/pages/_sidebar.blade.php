@@ -6,10 +6,13 @@
   <div class="sidebar-section p-2">
     @if (isset($featured) && $featured)
       <a class="thumb" href="{{ $featured->url }}">
+        <div class="character-border">
+          <div class="rainbow"></div>
+          <div class="stars"></div>
+        </div>
         <img
             src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
-         class="img-thumbnail" />
-         <div class="character-border"></div>
+         class="img-char-thumbnail" />
       </a>
       <a class="name" href="{{ $featured->url }}" class="h5 mb-0">
         @if (!$featured->is_visible)
@@ -21,7 +24,6 @@
       </a>
       <div class="meta" class="small">
         {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!}
-
         ・ {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
       </div>
     @else
