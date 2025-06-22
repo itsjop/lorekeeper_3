@@ -267,7 +267,7 @@
         height: calc(0.8 * var(--sb-width));
         aspect-ratio: 1/1;
         padding: 0;
-        animation: char-fly 3s cubic-bezier(0.395, 0.000, 0.685, 1.000) forwards infinite;
+        animation: char-fly 3.5s cubic-bezier(0.380, 0.015, 0.580, 1.000) forwards infinite;
         // animation: char-fly 3s var(--spring_linear) forwards infinite;
         transform-origin: 200%;
       }
@@ -403,8 +403,7 @@
 
 /* prettier-ignore */
 @keyframes char-fly {
-  0% { transform:  rotate(-1deg); }
-  48% { transform:  rotate(1deg); }
-  52% { transform:  rotate(1deg); }
-  100% { transform:  rotate(-1deg); }
+  0% { transform:  rotate(-.8deg); }
+  50% { transform:  rotate(1.5deg); }
+  100% { transform:  rotate(-.8deg); }
 }
