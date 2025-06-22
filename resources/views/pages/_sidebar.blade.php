@@ -1,6 +1,9 @@
 <div class="featured-character">
   <div class="sidebar-header">
-    <a href="#" class="card-link">Star of the Week!</a>
+    <a href="#" class="card-link">
+      <i class="fas fa-star mr-2"></i>
+      Star of the Week!
+    </a>
   </div>
 
   <div class="sidebar-section p-2">
@@ -11,10 +14,16 @@
           <div class="stars"></div>
           <div class="char-filter"></div>
         </div>
-        <img src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
-          class="img-char-thumbnail" />
+        <img
+          src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
+          class="img-char-thumbnail"
+        />
       </a>
-      <a class="name" href="{{ $featured->url }}" class="h5 mb-0">
+      <a
+        class="name"
+        href="{{ $featured->url }}"
+        class="h5 mb-0"
+      >
         @if (!$featured->is_visible)
           <i class="fas fa-eye-slash"></i>
         @endif {{ $featured->fullName }}
