@@ -13,11 +13,7 @@
     </div>
   </div>
   <div class="text-right mb-3">
-    <a
-      href="#advancedSearch"
-      class="btn btn-sm btn-outline-info"
-      data-toggle="collapse"
-    >Show Advanced Search Options <i class="fas fa-caret-down"></i></a>
+    <a href="#advancedSearch" class="btn btn-sm btn-outline-info" data-toggle="collapse">Show Advanced Search Options <i class="fas fa-caret-down"></i></a>
   </div>
   <div class="card bg-light mb-3 collapse" id="advancedSearch">
     <div class="card-body masterlist-advanced-search">
@@ -26,20 +22,16 @@
           {!! Form::label('character_category_id', 'Category: ') !!}
           {!! Form::select('character_category_id', $categories, Request::get('character_category_id'), [
               'class' => 'form-control mr-2',
-              'style' => 'width: 250px'
+              'style' => 'width: 250px',
           ]) !!}
         </div>
         <div class="col-md-6">
           <div class="form-group">
             {!! Form::label('subtype_ids[]', 'Species Subtype: ') !!}
-            {!! add_help(
-                'Search for characters that have <strong>' .
-                    (config('lorekeeper.extensions.exclusionary_search') ? 'all' : 'any') .
-                    '</strong> of the selected subtypes.'
-            ) !!}
+            {!! add_help('Search for characters that have <strong>' . (config('lorekeeper.extensions.exclusionary_search') ? 'all' : 'any') . '</strong> of the selected subtypes.') !!}
             {!! Form::select('subtype_ids[]', $subtypes, Request::get('subtype_ids'), [
                 'class' => 'form-control userselectize',
-                'multiple'
+                'multiple',
             ]) !!}
           </div>
         </div>
@@ -47,7 +39,7 @@
           {!! Form::label('subtype_id', ucfirst(__('lorekeeper.species')) . ' ' . ucfirst(__('lorekeeper.subtype')) . ':') !!}
           {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), [
               'class' => 'form-control mr-2',
-              'style' => 'width: 250px'
+              'style' => 'width: 250px',
           ]) !!}
         </div>
         <div class="masterlist-search-field">
@@ -56,19 +48,14 @@
         </div>
         <div class="masterlist-search-field">
           {!! Form::label('has_transformation', 'Has a ' . ucfirst(__('transformations.transformation')) . ': ') !!}
-          {!! Form::select(
-              'has_transformation',
-              ['1' => 'Has a ' . __('transformations.transformation') . '.'],
-              Request::get('has_transformation'),
-              ['class' => 'form-control', 'placeholder' => 'Any']
-          ) !!}
+          {!! Form::select('has_transformation', ['1' => 'Has a ' . __('transformations.transformation') . '.'], Request::get('has_transformation'), ['class' => 'form-control', 'placeholder' => 'Any']) !!}
         </div>
         <div class="masterlist-search-field">
           {!! Form::label('title_id', 'Title: ') !!}
           {!! Form::select('title_id', $titles, Request::get('title_id'), [
               'class' => 'form-control',
               'id' => 'customTitle',
-              'style' => 'width: 250px'
+              'style' => 'width: 250px',
           ]) !!}
         </div>
         <div class="masterlist-search-field" id="customTitleOptions">
@@ -82,7 +69,7 @@
         {!! Form::select('owner', $userOptions, Request::get('owner'), [
             'class' => 'form-control mr-2 userselectize',
             'style' => 'width: 250px',
-            'placeholder' => 'Select a User'
+            'placeholder' => 'Select a User',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -90,7 +77,7 @@
         {!! Form::select('artist', $userOptions, Request::get('artist'), [
             'class' => 'form-control mr-2 userselectize',
             'style' => 'width: 250px',
-            'placeholder' => 'Select a User'
+            'placeholder' => 'Select a User',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -98,7 +85,7 @@
         {!! Form::select('designer', $userOptions, Request::get('designer'), [
             'class' => 'form-control mr-2 userselectize',
             'style' => 'width: 250px',
-            'placeholder' => 'Select a User'
+            'placeholder' => 'Select a User',
         ]) !!}
       </div>
       <hr />
@@ -107,7 +94,7 @@
         {!! Form::text('owner_url', Request::get('owner_url'), [
             'class' => 'form-control mr-2',
             'style' => 'width: 250px',
-            'placeholder' => 'Type a Username'
+            'placeholder' => 'Type a Username',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -115,7 +102,7 @@
         {!! Form::text('artist_url', Request::get('artist_url'), [
             'class' => 'form-control mr-2',
             'style' => 'width: 250px',
-            'placeholder' => 'Type a Username'
+            'placeholder' => 'Type a Username',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -123,7 +110,7 @@
         {!! Form::text('designer_url', Request::get('designer_url'), [
             'class' => 'form-control mr-2',
             'style' => 'width: 250px',
-            'placeholder' => 'Type a Username'
+            'placeholder' => 'Type a Username',
         ]) !!}
       </div>
       <hr />
@@ -131,34 +118,24 @@
         {!! Form::label('sale_value_min', 'Resale Minimum ($): ') !!}
         {!! Form::text('sale_value_min', Request::get('sale_value_min'), [
             'class' => 'form-control mr-2',
-            'style' => 'width: 250px'
+            'style' => 'width: 250px',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
         {!! Form::label('sale_value_max', 'Resale Maximum ($): ') !!}
         {!! Form::text('sale_value_max', Request::get('sale_value_max'), [
             'class' => 'form-control mr-2',
-            'style' => 'width: 250px'
+            'style' => 'width: 250px',
         ]) !!}
       </div>
       @if (!$isMyo)
         <div class="masterlist-search-field">
           {!! Form::label('is_gift_art_allowed', 'Gift Art Status: ') !!}
-          {!! Form::select(
-              'is_gift_art_allowed',
-              [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'],
-              Request::get('is_gift_art_allowed'),
-              ['class' => 'form-control', 'style' => 'width: 250px']
-          ) !!}
+          {!! Form::select('is_gift_art_allowed', [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'], Request::get('is_gift_art_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
         </div>
         <div class="masterlist-search-field">
           {!! Form::label('is_gift_writing_allowed', 'Gift Writing Status: ') !!}
-          {!! Form::select(
-              'is_gift_writing_allowed',
-              [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'],
-              Request::get('is_gift_writing_allowed'),
-              ['class' => 'form-control', 'style' => 'width: 250px']
-          ) !!}
+          {!! Form::select('is_gift_writing_allowed', [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'], Request::get('is_gift_writing_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
         </div>
       @endif
       <br />
@@ -170,7 +147,7 @@
             'data-on' => 'Open For Trade',
             'data-off' => 'Any Trading Status',
             'data-width' => '200',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -180,7 +157,7 @@
             'data-on' => 'Can Be Sold',
             'data-off' => 'Any Sellable Status',
             'data-width' => '204',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -190,7 +167,7 @@
             'data-on' => 'Can Be Traded',
             'data-off' => 'Any Tradeable Status',
             'data-width' => '220',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -200,7 +177,7 @@
             'data-on' => 'Can Be Gifted',
             'data-off' => 'Any Giftable Status',
             'data-width' => '202',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <hr />

@@ -11,16 +11,10 @@
           <div class="stars"></div>
           <div class="char-filter"></div>
         </div>
-        <img
-          src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
-          class="img-char-thumbnail"
-        />
+        <img src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
+          class="img-char-thumbnail" />
       </a>
-      <a
-        class="name"
-        href="{{ $featured->url }}"
-        class="h5 mb-0"
-      >
+      <a class="name" href="{{ $featured->url }}" class="h5 mb-0">
         @if (!$featured->is_visible)
           <i class="fas fa-eye-slash"></i>
         @endif {{ $featured->fullName }}
