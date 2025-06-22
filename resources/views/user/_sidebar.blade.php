@@ -160,4 +160,4 @@
       </ul>
     </details>
   @endif
-  </div>
+</div>

@@ -359,10 +359,10 @@
           </div>
         </div>
       </div>
-    </div>
-  @else
-    <div class="alert alert-danger">This {{ $submission->prompt_id ? 'submission' : 'claim' }} has already been processed.</div>
-    @include('home._submission_content', ['submission' => $submission])
+      </div>
+    @else
+      <div class="alert alert-danger">This {{ $submission->prompt_id ? 'submission' : 'claim' }} has already been processed.</div>
+      @include('home._submission_content', ['submission' => $submission])
   @endif
 
 @endsection

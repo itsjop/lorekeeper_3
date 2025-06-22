@@ -15,11 +15,7 @@
             @else
               <div>
                 <a href="{{ $character->url }}">
-                  <img
-                    src="{{ $character->image->thumbnailUrl }}"
-                    style="width: 150px;"
-                    class="img-thumbnail"
-                  />
+                  <img src="{{ $character->image->thumbnailUrl }}" style="width: 150px;" class="img-thumbnail" />
                 </a>
               </div>
               <div class="mt-1">
@@ -32,7 +28,7 @@
             {!! Form::open(['url' => 'encounter-areas/select-character']) !!}
             {!! Form::select('character_id', $characters, $user->settings->encounter_character_id, [
                 'class' => 'form-control m-1',
-                'placeholder' => 'None Selected'
+                'placeholder' => 'None Selected',
             ]) !!}
             {!! Form::submit('Select Character', ['class' => 'btn btn-primary mb-2']) !!}
             {!! Form::close() !!}
