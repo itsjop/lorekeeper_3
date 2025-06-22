@@ -121,13 +121,16 @@
           </div>
         @endif
         {{-- Actual Sidebar --}}
-        <div id="sidebar" class="sidebar">
+        <div id="sidebar" class="sidebar sidebar-side">
           @yield('sidebar')
         </div>
       </div>
 
       <div id="main-content" class="main-content p-4">
-
+        {{-- inline Sidebar --}}
+        <div id="sidebar" class="sidebar sidebar-inline">
+          @yield('sidebar')
+        </div>
         @if (Settings::get('is_maintenance_mode'))
           <div class="alert alert-secondary">
             The site is currently in maintenance mode!
