@@ -13,15 +13,19 @@
   @include('widgets._awardcase_feature', [
       'target' => $character,
       'count' => Config::get('lorekeeper.extensions.awards.character_featured'),
-      'float' => true,
+      'float' => true
   ])
 
   @if ($character->is_myo_slot)
     {!! breadcrumbs(['MYO Slot Masterlist' => 'myos', $character->fullName => $character->url]) !!}
   @else
     {!! breadcrumbs([
-        $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
-        $character->fullName => $character->url,
+        $character->category->masterlist_sub_id
+            ? $character->category->sublist->name . ' Masterlist'
+            : 'Character masterlist' => $character->category->masterlist_sub_id
+            ? 'sublist/' . $character->category->sublist->key
+            : 'masterlist',
+        $character->fullName => $character->url
     ]) !!}
   @endif
 
@@ -32,14 +36,25 @@
       <ul class="nav nav-tabs card-header-tabs">
         @foreach ($character->images()->where('is_valid', 1)->get() as $image)
           <li class="nav-item">
-            <a class="nav-link form-data-button {{ $image->id == $character->image->id ? 'active' : '' }}" data-toggle="tab" role="tab" data-id="{{ $image->id }}">
+            <a
+              class="nav-link form-data-button {{ $image->id == $character->image->id ? 'active' : '' }}"
+              data-toggle="tab"
+              role="tab"
+              data-id="{{ $image->id }}"
+            >
               {{ $image->transformation_id ? $image->transformation->name : 'Main' }}
               {{ $image->transformation_info ? ' (' . $image->transformation_info . ')' : '' }}
             </a>
           </li>
         @endforeach
         <li>
-          <h3>{!! add_help('Click on a ' . __('transformations.transformation') . ' to view the image. If you don\'t see the ' . __('transformations.transformation') . ' you\'re looking for, it may not have been uploaded yet.') !!}</h3>
+          <h3>{!! add_help(
+              'Click on a ' .
+                  __('transformations.transformation') .
+                  ' to view the image. If you don\'t see the ' .
+                  __('transformations.transformation') .
+                  ' you\'re looking for, it may not have been uploaded yet.'
+          ) !!}</h3>
         </li>
       </ul>
     </div>
@@ -51,11 +66,19 @@
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
           @if (isset($character->profile->professionObj))
             <h5 class="p-0 m-0">
-              <img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/lorekeeper/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}
+              <img
+                class="fr-fic fr-dii mr-2"
+                src="{{ $character->profile->professionObj->iconUrl ?? '/images/lorekeeper/profession.png' }}"
+                style="max-width:50px;"
+              >{{ $character->profile->professionObj->name }}
             </h5>
           @else
             <h5 class="p-0 m-0">
-              <img class="fr-fic fr-dii mr-2" src="/images/lorekeeper/profession.png" style="max-width:50px;">{{ $character->profile->profession }}
+              <img
+                class="fr-fic fr-dii mr-2"
+                src="/images/lorekeeper/profession.png"
+                style="max-width:50px;"
+              >{{ $character->profile->profession }}
             </h5>
           @endif
         </a>
@@ -64,17 +87,30 @@
   @endif
 
   {{-- Main Image --}}
-  <div class="row mb-3" id="main-tab" style="clear:both;">
+  <div
+    class="row mb-3"
+    id="main-tab"
+    style="clear:both;"
+  >
     <div class="col-md-7">
       <div class="text-center">
-        <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-          data-lightbox="entry" data-title="{{ $character->fullName }}">
-          <img src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="{{ $character->fullName }}" />
+        <a
+          href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+          data-lightbox="entry"
+          data-title="{{ $character->fullName }}"
+        >
+          <img
+            src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+            class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+            alt="{{ $character->fullName }}"
+          />
         </a>
         <div class="mt-2 text-center">@include('widgets._object_block', ['object' => $character])</div>
       </div>
-      @if ($character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)))
+      @if (
+          $character->image->canViewFull(Auth::check() ? Auth::user() : null) &&
+              file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
+      )
         <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked
             image</a>?</div>
       @endif
@@ -87,19 +123,43 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link active" id="statsTab" data-toggle="tab" href="#stats" role="tab">Stats</a>
+          <a
+            class="nav-link active"
+            id="statsTab"
+            data-toggle="tab"
+            href="#stats"
+            role="tab"
+          >Stats</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="notesTab" data-toggle="tab" href="#notes" role="tab">Description</a>
+          <a
+            class="nav-link"
+            id="notesTab"
+            data-toggle="tab"
+            href="#notes"
+            role="tab"
+          >Description</a>
         </li>
         @if ($character->getLineageBlacklistLevel() < 2)
           <li class="nav-item">
-            <a class="nav-link" id="lineageTab" data-toggle="tab" href="#lineage" role="tab">Lineage</a>
+            <a
+              class="nav-link"
+              id="lineageTab"
+              data-toggle="tab"
+              href="#lineage"
+              role="tab"
+            >Lineage</a>
           </li>
         @endif
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
-            <a class="nav-link" id="settingsTab" data-toggle="tab" href="#settings-{{ $character->slug }}" role="tab">
+            <a
+              class="nav-link"
+              id="settingsTab"
+              data-toggle="tab"
+              href="#settings-{{ $character->slug }}"
+              role="tab"
+            >
               <i class="fas fa-cog"></i></a>
           </li>
         @endif
@@ -120,11 +180,15 @@
       @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
         <div class="tab-pane fade" id="settings-{{ $character->slug }}">
           {!! Form::open([
-              'url' => $character->is_myo_slot ? 'admin/myo/' . $character->id . '/settings' : 'admin/character/' . $character->slug . '/settings',
+              'url' => $character->is_myo_slot
+                  ? 'admin/myo/' . $character->id . '/settings'
+                  : 'admin/character/' . $character->slug . '/settings'
           ]) !!}
           <div class="form-group">
             {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-            {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.') !!}
+            {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+                'Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.'
+            ) !!}
           </div>
           <div class="text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -132,7 +196,11 @@
           {!! Form::close() !!}
           <hr />
           <div class="text-right">
-            <a href="#" class="btn btn-outline-danger btn-sm delete-character" data-slug="{{ $character->slug }}">Delete</a>
+            <a
+              href="#"
+              class="btn btn-outline-danger btn-sm delete-character"
+              data-slug="{{ $character->slug }}"
+            >Delete</a>
           </div>
         </div>
       @endif

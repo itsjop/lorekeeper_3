@@ -1,4 +1,7 @@
-<div>
+<div id="sidebar-ul">
+  <div class="sidebar-header">
+    <a href="{{ url('/') }}" class="card-link">User Shops</a>
+  </div>
   @if (Auth::check())
     <details class="sidebar-section">
       <summary class="sidebar-section-header">History</summary>
@@ -25,7 +28,9 @@
       @auth
         @if (Auth::user()->shops()->count() && Settings::get('user_shop_limit') == 1)
           <li class="sidebar-item">
-            <a href="{{ url(Auth::user()->shops()->first()->editUrl) }}" class="{{ set_active(Auth::user()->shops()->first()->editUrl) }}">My Shop</a>
+            <a href="{{ url(Auth::user()->shops()->first()->editUrl) }}"
+              class="{{ set_active(Auth::user()->shops()->first()->editUrl) }}"
+            >My Shop</a>
           </li>
         @else
           <li class="sidebar-item">

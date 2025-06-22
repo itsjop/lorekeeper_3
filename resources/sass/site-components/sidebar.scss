@@ -55,6 +55,8 @@
         position: relative;
         &::before {
           content: '';
+          user-select: none;
+          pointer-events: none;
           position: absolute;
           width: 100%;
           height: 1em;
@@ -368,5 +370,100 @@
       padding: 0.4em 0;
       box-shadow: none;
     }
+  }
+}
+
+.featured-character {
+  background-color: var(--body-color);
+  .sidebar-header {
+    background-color: var(--main-accent);
+  }
+  .sidebar-section {
+    display: grid;
+    place-content: center;
+    place-items: center;
+    grid-template:
+      'thumb' 80%
+      'name ' 100%
+      'owner' 100%
+      'meta ' 100%
+      / max-content;
+    .thumb {
+      grid-area: thumb;
+      display: grid;
+      justify-items: center;
+      position: relative;
+      padding: 10px;
+      width: calc(100% - 20px);
+      img {
+        border: 0;
+        border-radius: 100vw;
+        overflow: hidden;
+        width: calc(1 * var(--sb-width));
+        aspect-ratio: 1/1;
+        padding: 0;
+      }
+      .character-border {
+        width: 100%;
+        mask-mode: luminance;
+        mask-image: radial-gradient(black 0%, black 63%, white 63%, white 100%);
+        transform-origin: center;
+        animation: hr 3s linear infinite forwards;
+        position: absolute;
+        height: 100%;
+        &::after,
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: calc(1 * var(--sb-width));
+          border-radius: 100vh;
+          aspect-ratio: 1/1;
+        }
+        &::before {
+          --r-value: 0.8;
+          --r-sat: 0.2;
+          background-image: conic-gradient(
+            oklch(var(--r-value) var(--r-sat) 000deg) 00%,
+            oklch(var(--r-value) var(--r-sat) 060deg) 18%,
+            oklch(var(--r-value) var(--r-sat) 120deg) 35%,
+            oklch(var(--r-value) var(--r-sat) 180deg) 50%,
+            oklch(var(--r-value) var(--r-sat) 240deg) 68%,
+            oklch(var(--r-value) var(--r-sat) 300deg) 80%,
+            oklch(var(--r-value) var(--r-sat) 360deg) 100%
+          );
+        }
+        &::after {
+          background-image: url('../../../public/images/starring.png'); // TODO: fragile path
+          animation: star 20s linear infinite forwards;
+          mix-blend-mode: overlay;
+        }
+      }
+    }
+    .name {
+      grid-area: name;
+    }
+    .owner {
+      grid-area: owner;
+    }
+    .meta {
+      grid-area: meta;
+    }
+  }
+}
+@keyframes hr {
+  from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+@keyframes star {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 100% -300%;
   }
 }

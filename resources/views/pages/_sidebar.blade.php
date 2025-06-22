@@ -1,26 +1,31 @@
-<ul class="text-center">
-  <li class="sidebar-header">
+<div class="featured-character">
+  <div class="sidebar-header">
     <a href="#" class="card-link">Featured Character</a>
-  </li>
+  </div>
 
-  <li class="sidebar-section p-2">
+  <div class="sidebar-section p-2">
     @if (isset($featured) && $featured)
-      <div>
-        <a href="{{ $featured->url }}">
-          <img src="{{ $featured->image->thumbnailUrl }}" class="img-thumbnail" /></a>
-      </div>
-      <div class="mt-1">
-        <a href="{{ $featured->url }}" class="h5 mb-0">
-          @if (!$featured->is_visible)
-            <i class="fas fa-eye-slash"></i>
-          @endif {{ $featured->fullName }}
-        </a>
-      </div>
-      <div class="small">
-        {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!} ・ {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!} ・ {!! $featured->displayOwner !!}
+      <a class="thumb" href="{{ $featured->url }}">
+        <img
+            src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
+         class="img-thumbnail" />
+         <div class="character-border"></div>
+      </a>
+      <a class="name" href="{{ $featured->url }}" class="h5 mb-0">
+        @if (!$featured->is_visible)
+          <i class="fas fa-eye-slash"></i>
+        @endif {{ $featured->fullName }}
+      </a>
+      <a class="owner" href="{{ $featured->url }}" class="h5 flex mb-0">
+        {!! $featured->displayOwner !!}
+      </a>
+      <div class="meta" class="small">
+        {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!}
+
+        ・ {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
       </div>
     @else
       <p>There is no featured character.</p>
     @endif
-  </li>
-</ul>
+  </div>
+</div>
