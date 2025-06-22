@@ -48,6 +48,13 @@ ul { padding: 0; }
     width: var(--app-width);
     height: min-content;
     margin-bottom: 35px;
+    #main-content {
+      grid-area: main;
+      max-width: 100%;
+      background-color: var(--body-color);
+      border-radius: 15px;
+      position: relative;
+    }
     &.has-sidebar {
       --sb-width: min(20vw, 300px);
       --app-width: min(var(--max-site-width) - var(--sb-width), 70vw);
@@ -60,13 +67,6 @@ ul { padding: 0; }
         /
         var(--sb-width)
         clamp(var(--min-site-width), calc(100% - var(--sb-width)), var(--max-site-width));
-      #main-content {
-        grid-area: main;
-        max-width: 100%;
-        background-color: var(--body-color);
-        border-radius: 15px;
-        position: relative;
-      }
       #sidebar-container {
         grid-area: sidebar;
         max-width: 100%;
