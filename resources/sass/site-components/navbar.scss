@@ -1,11 +1,11 @@
 #app {
   #site-wrapper {
     #header-nav {
-      background-color: var(--main-accent);
+      background-color: var(--clr_purple-600);
       grid-area: nav;
       border-radius: 20px;
       .nav-item > a {
-        color: white;
+        color: var(--clr_purple-bgtext);
       }
       .navbar-brand .navbar-brand-image {
         max-width: 40vw;
@@ -73,6 +73,129 @@
   }
 }
 
+// Desktop Dropdown styling
+@media (width > 992px) {
+  .dt-nav-page {
+    display: none;
+    opacity: 0;
+    transform: scale(0.5);
+    &.show {
+      opacity: 1;
+      transform: scale(1);
+      display: grid;
+    }
+    transition:
+      all 0.3s var(--spring_linear) allow-discrete,
+      display 0.3s var(--spring_linear) allow-discrete;
+    background-color: var(--body-color);
+    transform-origin: 50% 0;
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+    min-width: max-content;
+    position: relative;
+    width: 100%;
+    padding: 0 0 10px;
+    border-radius: 15px;
+    .dt-nav-group {
+      position: relative;
+      min-width: max-content;
+      width: 100%;
+      display: grid;
+      grid-auto-rows: min-content;
+      border-radius: 15px;
+      .dt-nav-header {
+        background-color: var(--clr_purple-200);
+        color: var(--clr_purple-700);
+        font-weight: 600;
+        text-transform: uppercase;
+        width: 100%;
+        padding: 5px 10px;
+        font-size: 1.3em;
+        margin: 0;
+        text-align: center;
+        &._first {
+          border-radius: 15px 15px 0 0;
+        }
+        &:hover {
+          border-radius: 100vw;
+          transform: scale(1.1);
+          z-index: 2;
+        }
+      }
+      .dt-nav-item {
+        width: min(max-content, 100%);
+        display: grid;
+        color: var(--clr_purple-700);
+        background-color: var(--body-color);
+        grid-template-columns: 1.5rem auto;
+        padding: 4px 10px;
+        gap: 10px;
+        font-weight: 500;
+        text-decoration: none;
+        &:first-child {
+          border-radius: 15px 15px 0 0;
+        }
+        i {
+          display: flex;
+          place-content: center;
+          place-items: center;
+        }
+        &:hover {
+          background-color: var(--clr_purple-300);
+          transform: scale(1.2);
+          border-radius: 100vw;
+          z-index: 2;
+        }
+      }
+      // wall of sibling selectors
+      .dt-nav-header:has(+ .dt-nav-item:hover),
+      .dt-nav-item:has(+ .dt-nav-item:hover),
+      hr:has(+ .dt-nav-item:hover), //has hovered item
+      .dt-nav-header:has(+ .dt-nav-header:hover),
+      .dt-nav-item:has(+ .dt-nav-header:hover),
+      hr:has(+ .dt-nav-header:hover), // has hovered heading
+      .dt-nav-header:hover + .dt-nav-item,
+      .dt-nav-header:hover + .dt-nav-header,
+      .dt-nav-header:hover + hr, // adjacent hovered item
+      .dt-nav-item:hover + .dt-nav-item,
+      .dt-nav-item:hover + .dt-nav-header,
+      .dt-nav-item:hover + hr {
+        // adjacent hovered heading
+        transform: scale(1.05);
+        z-index: 1;
+        border-radius: 15px;
+      }
+      .dt-nav-item:has(+ .dt-nav-item:hover),
+      .dt-nav-item:has(+ .dt-nav-header:hover),
+      .dt-nav-item:hover + .dt-nav-item,
+      .dt-nav-item:hover + .dt-nav-header {
+        background-color: var(--clr_purple-100);
+      }
+      .dt-nav-item,
+      .dt-nav-header,
+      hr {
+        transition:
+          transform 0.5s var(--elastic_linear),
+          border-radius 0.3s linear,
+          background-color 0.3s linear,
+          all 0.1s linear;
+      }
+      hr {
+        width: calc(100% - 20px);
+        justify-self: center;
+        margin: 5px;
+      }
+    }
+  }
+}
+
+@starting-style {
+  .dt-nav-page.show {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
 /* Mobile Only */
 @media (width < 768px) {
   #header-nav {
@@ -95,7 +218,7 @@
         transition: 1.3s var(--smoothIn_linear);
         &:hover {
           transition: 0.3s var(--smoothIn_linear);
-          background: #4b535c;
+          background: var(--clr_purple-900);
         }
         .dropdown-menu {
           --dd-height: 50px;
@@ -131,7 +254,7 @@
               transition: 0.5s ease-in;
               &:hover {
                 transition: 0.1s linear;
-                background: #d4dee7;
+                background: var(--clr_purple-100);
               }
             }
           }

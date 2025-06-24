@@ -1,17 +1,19 @@
+- finalize navbar links
+
 - [ ] character profile
-  - [ ] visit profile error 
+  - [ ] visit profile error
       -> CYL: works on my local install, so I can't fix it on my end (probably an issue with different data/old incorrect data?)
   - [ ] should display under your character
   - [ ] character /titles on settings menu missing
   - [ ] icon next to title?
-- [ ] cool sidebar
 
 # Known Issues:
+- [ ] No 18+ popup banner
 - [ ] 404 badge logs not found
     -> CYL: Not sure what page this is / what url
 - [ ] wheels on the wheel-dailies don't show up properly even after adding the necessary js files
     -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me...
-- [ ] titles missing on create myo 
+- [ ] titles missing on create myo
     -> CYL: this is intended by the creator and explicitly disabled for MYOs, only characters can have titles.
 - [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
     -> CYL: I think you might have installed the character spotlight extension and not the featured character extension. One is a random spotlight on refresh, the other is a set feature.
