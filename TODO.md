@@ -1,41 +1,27 @@
-- finalize navbar links
-
-- [ ] character profile
-  - [ ] visit profile error
-      -> CYL: works on my local install, so I can't fix it on my end (probably an issue with different data/old incorrect data?)
-  - [ ] should display under your character
-  - [ ] character /titles on settings menu missing
-  - [ ] icon next to title?
-
 # Known Issues:
+- [ ] finalize navbar links
 - [ ] No 18+ popup banner
+- [ ] Modals don't scroll
+- [ ] Sidebar expand animation broke (firefox)?
+
+# Potential Issues
+- [ ] character profile
 - [ ] 404 badge logs not found
-    -> CYL: Not sure what page this is / what url
 - [ ] wheels on the wheel-dailies don't show up properly even after adding the necessary js files
-    -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me...
-- [ ] titles missing on create myo
-    -> CYL: this is intended by the creator and explicitly disabled for MYOs, only characters can have titles.
-- [ ] Featured Character is 'character of the moment'??? on refresh??? wtf
-    -> CYL: I think you might have installed the character spotlight extension and not the featured character extension. One is a random spotlight on refresh, the other is a set feature.
+    -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me..
 - [ ] remove sex selectors
 - [ ] featured character only from active participants
 
 # In-progress / Partial Fixes:
 - [ ] item category search no results
-    -> CYL: can't find where this occurs so I can't fix it :c
 - [ ] wysywig textboxes
-    -> CYL: tinymce should be included by default, but it does not go on any and all textboxes/areas ever by default
-- [ ] admin/raffle create buttons dont work
-    -> CYL: Works on my local install, what's the exact errors?
+- [x] admin/raffle create buttons dont work
 - [x] settings page avatar upload broken
   - [x] profile pronouns (maybe) not saving
   - [x] image block settings twice
 - [x] 500 editing character profile from sidebar
-    -> CYL: make sure composer update/install ran for the league dependency
 - [x] Cultivation/professions/dailies settings not linked properly
-    -> CYL: added to admin sidebar and checked for basic functionality, errors I saw below!
 - [x] shop editing super broken
-    -> CYL: fixed with the multiple shop issues I think
 
 # To Re-enable
 - [ ] Custom Profile Header Image

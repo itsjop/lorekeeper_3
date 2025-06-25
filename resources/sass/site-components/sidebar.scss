@@ -28,10 +28,12 @@
         .sidebar-item {
           display: flex;
           align-items: center;
+          background-color: var(--clr_purple-50);
           & + * {
             // border-top: 1px solid #8888;
           } /* Owl Syntax */
           a {
+            padding: 3px 0;
             &.active {
               font-weight: 700;
               color: white;
@@ -52,9 +54,10 @@
   details {
     width: 100%;
     font-size: 1em;
-    background-color: var(--body-color);
-    transition: 0.3s var(--spring_linear);
+    background-color: var(--clr_purple-50);
+    transition: 0.4s var(--spring_linear);
     overflow: clip;
+    border-width: 0 2px;
     &:last-of-type {
       border-radius: 0 0 15px 15px;
     }
@@ -62,7 +65,7 @@
       position: relative;
       text-align: center;
       padding: 5px 0;
-      background-color: var(--body-color);
+      background-color: var(--clr_purple-100);
       &::marker {
         content: '';
       }
@@ -90,8 +93,7 @@
   }
   details[open] {
     background-color: transparent;
-    margin-bottom: 20px;
-    border-radius: 0 0 15px 15px;
+    background-color: var(--clr_purple-100);
     li {
       padding: 0;
       &:last-of-type {
@@ -111,16 +113,20 @@
       a {
         width: 100%;
         text-align: center;
+        transition: 0.3s ease-out;
         &:hover {
+          transition: 0.1s linear;
           background-color: var(--clr_purple-300);
         }
       }
     }
-    summary::after {
-      transform: rotate(90deg);
+    summary {
+      background-color: var(--clr_purple-200);
+      &::after {
+        transform: rotate(90deg);
+      }
     }
     + details {
-      border-radius: 15px 15px 0 0;
       &:last-of-type {
         border-radius: 15px;
       }
@@ -194,7 +200,7 @@
   }
 }
 
-@media (max-width: 991px) {
+@media (width <= 992px) {
   .sidebar {
     padding-left: 0px;
     text-align: left;
@@ -203,11 +209,13 @@
     bottom: 0px;
     top: 0px;
     overflow-y: scroll;
-
     left: -100%;
     transition: left 0.2s;
     &.active {
       left: 0%;
+    }
+    .sidebar-ul {
+      border: 2px solid var(--clr_purple-500);
     }
     > ul {
       padding-top: 0px;
@@ -221,9 +229,13 @@
     ul li {
       background-color: var(--clr_purple-bgtext);
       border-radius: 0;
-      margin-bottom: 1em;
-      padding: 0.4em 0;
+      border: 0px solid var(--clr_purple-100);
+      border-bottom-width: 1px;
+      padding: 1em 0;
       box-shadow: none;
+      &:last-of-type {
+        border-bottom-width: 0px;
+      }
     }
   }
 }
@@ -253,6 +265,7 @@
       position: relative;
       place-content: center;
       place-items: center;
+      contain: paint;
       --cb-size: 0.8;
       width: calc(1 * var(--sb-width));
       height: calc(1 * var(--sb-width));
@@ -267,7 +280,7 @@
         height: calc(0.8 * var(--sb-width));
         aspect-ratio: 1/1;
         padding: 0;
-        animation: char-fly 3.5s cubic-bezier(0.380, 0.015, 0.580, 1.000) forwards infinite;
+        animation: char-fly 3.5s cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
         // animation: char-fly 3s var(--spring_linear) forwards infinite;
         transform-origin: 50% 200%;
       }

@@ -48,13 +48,13 @@
               @endif
               <a class="dt-nav-item" href="{{ url('trades/open') }}">
                 <i class="fas fa-right-left"></i> Trades </a>
-              <a class="dt-nav-item" href="{{ url('inbox') }}">
-                <i class="fas fa-envelope"></i> Inbox </a>
+              <a class="dt-nav-item" href="{{ url('notifications') }}">
+                <i class="fas fa-envelope"></i> Notifications </a>
             </div>
             <div class="dt-nav-group">
               <h2 class="dt-nav-header">Characters</h2>
               <a class="dt-nav-item" href="{{ url('characters') }}">
-                <i class="fas fa-person-burst"></i> My Characters </a>
+                <i class="fas fa-heart"></i> My Characters </a>
               <a class="dt-nav-item" href="{{ url('characters/myos') }}">
                 <i class="fas fa-clipboard-user"></i> My MYO Slots </a>
               <a class="dt-nav-item" href="{{ url('designs') }}">
@@ -217,7 +217,7 @@
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('____') }}">
-              <i class="fas fa-comments"></i>Discord</a>
+              <i class="fas fa-comments" style="cursor: alias;"></i>Discord</a>
             <a class="dt-nav-item" href="{{ url('info/terms') }}">
               <i class="fas fa-circle-exclamation"></i>Rules & ToS</a>
             <hr>
@@ -272,16 +272,15 @@
           >
             Submit
           </a>
-          <div class="dropdown-menu" aria-labelledby="browseDropdown">
-            <a class="dt-nav-item" href="{{ url('submissions/new') }}">
-              Submit Prompt
-            </a>
-            <a class="dt-nav-item" href="{{ url('claims/new') }}">
-              Submit Claim
-            </a>
-            <a class="dt-nav-item" href="{{ url('reports/new') }}">
-              Submit Report
-            </a>
+          <div class="dropdown-menu dt-nav-page" aria-labelledby="browseDropdown">
+            <div class="dt-nav-group" aria-labelledby="browseDropdown">
+              <a class="dt-nav-item" href="{{ url('submissions/new') }}">
+                <i class="fas fa-paintbrush"></i> Submit Prompt </a>
+              <a class="dt-nav-item" href="{{ url('claims/new') }}">
+                <i class="fas fa-paintbrush"></i> Submit Claim </a>
+              <a class="dt-nav-item" href="{{ url('reports/new') }}">
+                <i class="fas fa-paintbrush"></i> Submit Report </a>
+            </div>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -297,35 +296,33 @@
           >
             {{ Auth::user()->name }} <span class="caret"></span>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dt-nav-item" href="{{ Auth::user()->url }}">
-              Profile
-            </a>
-            <a class="dt-nav-item" href="{{ url('notifications') }}">
-              Notifications
-            </a>
-            <a class="dt-nav-item" href="{{ url('account/bookmarks') }}">
-              Bookmarks
-            </a>
-            <a class="dt-nav-item" href="{{ url('account/settings') }}">
-              Settings
-            </a>
-            <a
-              class="dt-nav-item"
-              href="{{ route('logout') }}"
-              onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"
-            >
-              {{ __('Logout') }}
-            </a>
-            <form
-              id="logout-form"
-              action="{{ route('logout') }}"
-              method="POST"
-              style="display: none;"
-            >
-              @csrf
-            </form>
+          <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="navbarDropdown">
+            <div class="dt-nav-group">
+              <a class="dt-nav-item" href="{{ Auth::user()->url }}">
+                <i class="fas fa-paintbrush"></i> Profile </a>
+              <a class="dt-nav-item" href="{{ url('notifications') }}">
+                <i class="fas fa-paintbrush"></i> Notifications </a>
+              <a class="dt-nav-item" href="{{ url('account/bookmarks') }}">
+                <i class="fas fa-paintbrush"></i> Bookmarks </a>
+              <a class="dt-nav-item" href="{{ url('account/settings') }}">
+                <i class="fas fa-paintbrush"></i> Settings </a>
+              <a
+                class="dt-nav-item"
+                href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"
+              >
+                {{ __('Logout') }}
+              </a>
+              <form
+                id="logout-form"
+                action="{{ route('logout') }}"
+                method="POST"
+                style="display: none;"
+              >
+                @csrf
+              </form>
+            </div>
           </div>
         </li>
       @endguest

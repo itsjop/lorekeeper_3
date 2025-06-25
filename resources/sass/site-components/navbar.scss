@@ -1,9 +1,40 @@
+// Navbar itself
 #app {
   #site-wrapper {
     #header-nav {
       background-color: var(--clr_purple-600);
       grid-area: nav;
       border-radius: 20px;
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        .dropdown {
+          border-radius: 10px 10px 0 0;
+          transition: 0.1s ease;
+          border: 2px transparent solid;
+          .dropdown-toggle {
+            display: flex;
+            place-content: center;
+            place-items: center;
+            transition: 0.1s ease;
+            &::after {
+              transition: 1s var(--elastic_linear);
+              transform: rotate(-90deg);
+            }
+          }
+          &.show {
+            border: 2px var(--clr_purple-300) solid;
+            background-color: var(--clr_purple-50);
+            z-index: 1;
+            .dropdown-toggle {
+              color: var(--clr_purple-700);
+              &::after {
+                transform: rotate(0);
+              }
+            }
+          }
+        }
+      }
       .nav-item > a {
         color: var(--clr_purple-bgtext);
       }
@@ -60,25 +91,48 @@
   }
 }
 
-/* Desktop Only */
-@media (width >= 992px) {
-  .nav-mobile-gap {
-    display: none;
-  }
-  .nav-item .dropdown-toggle {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+// global dropdowns styling
+.dt-nav-page {
+  .dt-nav-group {
+    .dt-nav-header {
+      background-color: var(--clr_purple-200);
+      color: var(--clr_purple-700);
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 600;
+    }
+    .dt-nav-item {
+      color: var(--clr_purple-700);
+      background-color: var(--body-color);
+      font-weight: 500;
+      text-decoration: none;
+      display: grid;
+      padding: 4px 10px;
+      grid-template-columns: 1.5rem auto;
+      gap: 10px;
+      i {
+        display: flex;
+        place-content: center;
+        place-items: center;
+      }
+    }
   }
 }
 
-// Desktop Dropdown styling
-@media (width > 992px) {
+// Desktop-only Dropdown styling
+@media (width > 768px) {
+  .navbar-nav {
+    .dropdown {
+      display: flex;
+    }
+  }
   .dt-nav-page {
     display: none;
     opacity: 0;
     transform: scale(0.5);
+    border: 2px var(--clr_purple-300) solid;
+    border-top: 0;
+    margin: -2px 0 0 -1.5px;
     &.show {
       opacity: 1;
       transform: scale(1);
@@ -95,7 +149,8 @@
     position: relative;
     width: 100%;
     padding: 0 0 10px;
-    border-radius: 15px;
+    contain: layout;
+    border-radius: 0 15px 15px 15px;
     .dt-nav-group {
       position: relative;
       min-width: max-content;
@@ -104,17 +159,14 @@
       grid-auto-rows: min-content;
       border-radius: 15px;
       .dt-nav-header {
-        background-color: var(--clr_purple-200);
-        color: var(--clr_purple-700);
-        font-weight: 600;
-        text-transform: uppercase;
         width: 100%;
         padding: 5px 10px;
         font-size: 1.3em;
         margin: 0;
         text-align: center;
+        cursor: default;
         &._first {
-          border-radius: 15px 15px 0 0;
+          border-radius: 0 15px 0 0;
         }
         &:hover {
           border-radius: 10px;
@@ -124,28 +176,34 @@
       }
       .dt-nav-item {
         width: min(max-content, 100%);
-        display: grid;
-        color: var(--clr_purple-700);
-        background-color: var(--body-color);
-        grid-template-columns: 1.5rem auto;
-        padding: 4px 10px;
-        gap: 10px;
-        font-weight: 500;
-        text-decoration: none;
+        border: 0 transparent solid;
+        border-width: 2px;
         &:first-child {
           border-radius: 15px 15px 0 0;
         }
-        i {
-          display: flex;
-          place-content: center;
-          place-items: center;
-        }
         &:hover {
           background-color: var(--clr_purple-300);
-          transform: scale(1.2);
+          border-color: var(--clr_purple-400);
+          transform: scale(1.15);
           border-radius: 100vw;
           z-index: 2;
         }
+      }
+      .dt-nav-header,
+      .dt-nav-item,
+      hr {
+        transition:
+          transform 0.5s var(--elastic_linear),
+          border 0.3s linear,
+          border-radius 0.3s linear,
+          background-color 0.3s linear,
+          all 0.1s linear;
+      }
+
+      .dt-nav-header,
+      hr {
+        border-width: 0 2px;
+        border: 0px transparent solid;
       }
       // wall of sibling selectors
       .dt-nav-header:has(+ .dt-nav-item:hover),
@@ -159,11 +217,13 @@
       .dt-nav-header:hover + hr, // adjacent hovered item
       .dt-nav-item:hover + .dt-nav-item,
       .dt-nav-item:hover + .dt-nav-header,
-      .dt-nav-item:hover + hr {
-        // adjacent hovered heading
+      .dt-nav-item:hover + hr
+      // adjacent hovered heading
+      {
         transform: scale(1.05);
         z-index: 1;
-        border-radius: 8px;
+        border-radius: 10px;
+        border-color: transparent var(--clr_purple-300);
       }
       .dt-nav-item:has(+ .dt-nav-item:hover),
       .dt-nav-item:has(+ .dt-nav-header:hover),
@@ -171,15 +231,6 @@
       .dt-nav-item:hover + .dt-nav-header {
         background-color: var(--clr_purple-100);
         border-radius: 15px;
-      }
-      .dt-nav-item,
-      .dt-nav-header,
-      hr {
-        transition:
-          transform 0.5s var(--elastic_linear),
-          border-radius 0.3s linear,
-          background-color 0.3s linear,
-          all 0.1s linear;
       }
       hr {
         width: calc(100% - 20px);
@@ -189,7 +240,6 @@
     }
   }
 }
-
 @starting-style {
   .dt-nav-page.show {
     opacity: 0;
@@ -197,7 +247,7 @@
   }
 }
 
-/* Mobile Only */
+/* Mobile Only Dropdown-styling */
 @media (width < 768px) {
   #header-nav {
     padding: 0;
@@ -215,6 +265,8 @@
       .nav-item {
         align-self: center;
         text-align: center;
+        justify-items: center;
+        justify-content: center;
         width: 100%;
         transition: 1.3s var(--smoothIn_linear);
         &:hover {
@@ -235,22 +287,31 @@
           display: flex;
           flex-wrap: wrap;
           justify-content: space-around;
+          --dd-height: 50px;
+          transition: 0.3s var(--smoothIn_linear);
           height: 0;
+          padding: 0;
           margin-bottom: 0;
+          overflow: hidden;
           border: 0;
+          z-index: 3;
+          gap: 10px;
+          padding: 0 15px;
           @supports not (height: calc-size(auto, size)) {
             height: calc(100% - var(--dd-height));
             max-height: 0;
           }
           &.show {
+            display: flex;
             transform: translateX(0%);
-            padding-bottom: 15px;
+            padding: 15px;
             @supports (height: calc-size(auto, size)) {
               height: calc-size(auto, size);
             }
             @supports not (height: calc-size(auto, size)) {
-              max-height: 250px;
+              max-height: 550px;
             }
+
             .dropdown-item {
               transition: 0.5s ease-in;
               &:hover {
@@ -258,6 +319,47 @@
                 background: var(--clr_purple-100);
               }
             }
+          }
+        }
+        .dt-nav-group {
+          display: grid;
+          grid-auto-rows: max-content;
+          height: max-content;
+          flex-grow: 10;
+          border-radius: 15px;
+          background-color: var(--body-color);
+          contain: paint;
+          .dt-nav-header,
+          .dt-nav-item {
+            padding: 0 10px;
+          }
+          .dt-nav-header {
+            grid-column: 1/2;
+            grid-row: 1/2;
+            margin: 0;
+            font-size: 1.5em;
+            border-radius: 13px 13px 0 0;
+            height: 2rem;
+            align-content: center;
+          }
+          .dt-nav-item {
+            color: var(--clr_purple-700);
+            padding: 10px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.2s ease;
+            justify-content: start;
+            align-items: center;
+            border-bottom: 1px var(--clr_purple-300) solid;
+            &:last-of-type {
+              border: 0;
+            }
+            &:hover {
+              background-color: var(--clr_purple-100);
+            }
+          }
+          hr {
+            display: none;
           }
         }
       }
