@@ -133,11 +133,6 @@
     border: 2px var(--clr_purple-300) solid;
     border-top: 0;
     margin: -2px 0 0 -1.5px;
-    &.show {
-      opacity: 1;
-      transform: scale(1);
-      display: grid;
-    }
     transition:
       all 0.3s var(--spring_linear) allow-discrete,
       display 0.3s var(--spring_linear) allow-discrete;
@@ -150,7 +145,16 @@
     width: 100%;
     padding: 0 0 10px;
     contain: layout;
-    border-radius: 0 15px 15px 15px;
+    border-radius: 15px;
+    &.show {
+      border-radius: 0 15px 15px 15px;
+      opacity: 1;
+      transform: scale(1);
+      display: grid;
+      .dt-nav-group .dt-nav-header._first {
+        border-radius: 0 15px 0 0;
+      }
+    }
     .dt-nav-group {
       position: relative;
       min-width: max-content;
@@ -166,7 +170,7 @@
         text-align: center;
         cursor: default;
         &._first {
-          border-radius: 0 15px 0 0;
+          border-radius: 15px 15px 0 0;
         }
         &:hover {
           border-radius: 10px;

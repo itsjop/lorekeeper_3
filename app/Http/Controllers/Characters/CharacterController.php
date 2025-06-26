@@ -485,7 +485,6 @@ class CharacterController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postAwardEdit(Request $request, AwardCaseManager $service, $slug) {
-    // TODO: THIS
     if (!Auth::check()) abort(404);
     switch ($request->get('action')) {
       default:

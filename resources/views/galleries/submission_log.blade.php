@@ -78,18 +78,6 @@
                   @else
                     <p>This submission didn't have any criteria specified for rewards. Hitting submit will confirm this and clear it from the queue.</p>
                   @endif
-
-                  {{-- TODO: Cover the commissioned participant case
-                                                    -- current thought is to expose ability to add criterion to apply specifically to the commissioned person
-                                                    -- expectation is that person who uploaded image would have selected the right criterion for their own rewards
-                                        @if ($submission->participants->count())
-                                            @foreach ($submission->participants as $key => $participant)
-                                                <div class="form-group">
-                                                    {!! Form::label($participant->user->name.' ('.$participant->displayType.')') !!}:
-                                                    {!! Form::number('value[participant]['.$participant->user->id.']', isset($submission->data['total']) ? ($participant->type == 'Comm' ? round(($submission->characters->count() ? round($submission->data['total'] * $submission->characters->count()) : $submission->data['total']) / ($submission->collaborators->count() ? $submission->collaborators->count() : '1')/2) : 0) : 0, ['class' => 'form-control']) !!}
-                                                </div>
-                                            @endforeach
-                                        @endif --}}
                   <div class="form-group">
                     {!! Form::checkbox('ineligible', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-onstyle' => 'danger']) !!}
                     {!! Form::label('ineligible', 'Inelegible/Award No Currency', ['class' => 'form-check-label ml-3']) !!} {!! add_help('When on, this will mark the submission as valued, but will not award currency to any of the users listed.') !!}
@@ -123,15 +111,6 @@
                         @endforeach
                       </div>
                     @endif
-                    {{-- TODO: --}}
-                    {{-- @if ($submission->participants->count())
-                                            <div class="col-md-4">
-                                            @foreach ($submission->participants as $participant)
-                                                {!! $participant->user->displayName !!} ({{ $participant->displayType }}): {!! $total['currency']->display($total['value'] / ($collaboratorsCount ?? 1)) !!}
-                                            <br/>
-                                            @endforeach
-                                            </div>
-                                        @endif --}}
                   </div>
                 @endforeach
               @else

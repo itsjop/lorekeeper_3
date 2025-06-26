@@ -163,7 +163,7 @@ return [
 */
   'watermark_masterlist_images' => 0,
 
-  'masterlist_image_dimension' => 0,
+  'masterlist_image_dimension' => 1500,
   'masterlist_image_dimension_target' => 'shorter',
 
   'masterlist_image_format' => null,
@@ -189,7 +189,7 @@ return [
 */
   'store_masterlist_fullsizes' => 0,
   'masterlist_fullsizes_cap' => 0,
-  'masterlist_fullsizes_format' => null,
+  'masterlist_fullsizes_format' => 'png',
 
   /*
 |--------------------------------------------------------------------------
@@ -206,8 +206,8 @@ return [
 |
 */
   'masterlist_thumbnails' => [
-    'width' => 200,
-    'height' => 200,
+    'width' => 300,
+    'height' => 300,
   ],
 
   'watermark_masterlist_thumbnails' => 0,
@@ -253,7 +253,7 @@ return [
 | Simply change to "1" to enable, or keep at "0" to disable.
 |
 */
-  'masterlist_image_automation' => 0,
+  'masterlist_image_automation' => 1,
 
   /*
     |--------------------------------------------------------------------------
@@ -273,7 +273,7 @@ return [
 1: Disallows custom thumbnail uploads.
     |
     */
-  'masterlist_image_automation_hide_manual_thumbnail' => 0,
+  'masterlist_image_automation_hide_manual_thumbnail' => 1,
 
   /*
     |--------------------------------------------------------------------------
@@ -293,7 +293,7 @@ return [
 1: Disallows custom thumbnail uploads.
     |
     */
-  'hide_manual_thumbnail_image_upload' => 0,
+  'hide_manual_thumbnail_image_upload' => 1,
 
   /*
 |--------------------------------------------------------------------------
@@ -311,7 +311,7 @@ return [
 | 'gallery_images_format' => null,
 |
 */
-  'gallery_images_cap' => 0,
+  'gallery_images_cap' => 1500,
   'gallery_images_format' => null,
 
   /*
@@ -415,7 +415,7 @@ return [
     |
     */
   'hide_textarea_on_gallery_submissions'    => [
-    'enable'   => 0,
+    'enable'   => 1,
     'on_image' => 0,
   ],
 

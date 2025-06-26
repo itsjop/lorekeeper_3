@@ -282,7 +282,8 @@
     <hr>
     <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
     <div class="form-group" id="transformations">
-      {!! Form::label(ucfirst(__('transformations.transformation')) . ' (Optional)') !!} {!! add_help('This will make the image have the selected ' . __('transformations.transformation') . ' id.') !!}
+      {!! Form::label(ucfirst(__('transformations.transformation')) . ' (Optional)') !!}
+      {!! add_help('This will make the image have the selected ' . __('transformations.transformation') . ' id.') !!}
       {!! Form::select('transformation_id', $transformations, old('transformation_id'), ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
@@ -293,7 +294,8 @@
       ]) !!}
     </div>
     <div class="form-group">
-      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.') !!}
+      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}
+      {!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.') !!}
       {!! Form::text('transformation_description', old('transformation_description'), [
           'class' => 'form-control mr-2',
           'placeholder' => 'Origin Info (Optional)',

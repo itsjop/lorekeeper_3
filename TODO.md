@@ -4,6 +4,21 @@
 - [ ] Modals don't scroll
 - [ ] Sidebar expand animation broke (firefox)?
 
+# make it pretty
+- [ ] system clock
+- [ ] currency counter? [root-level](app/Models/Currency/Currency.php#310)
+- [ ] add padding between buttons they all touch rn
+- [ ] gotta make the masterlist look nice. we can start on this after i actually upload some characters so you can get a good idea of how it will actually look. https://www.cupidcats.online/masterlist for ref
+- [ ] http://127.0.0.1:8000/character/tst-001/profile/edit have any profile content [root-level](resources/views/character/character.blade.php#64)
+- [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
+
+# character page hell
+- [ ] make it so the bat transformation is listed first. changing the order of the list in the transformation settings has no effect
+- [ ] upload multiple images at once?
+- [ ] another thing about transformations. we need to address the fields that users can enter text into, the transformation description and transformation info it asks for when you submit a design or design update. these are useful pieces of info, but will be SUPERRR ugly if displayed in the tab you can click on, which is what they do by default. bad. i want to see if you can pull this info and place it somewhere else. see how cupid cats does it - https://www.cupidcats.online/character/MYO-535 - click "guise" and see how the sidebar changes, super nice.
+- [ ] the masterlist pages will need a whole rehaul. profile in its own box, pulled from the text field that users can enter things in that's hidden away in the sidebar by default. everyone tells me this is a very simple fix. we will also need to make a field that nicely displays pets and inventory in two tabs that you can click between. cupid cats did this too - you can see theirs. ours would be profile, then pets / inventory https://www.cupidcats.online/character/MYO-545 (random chara example)
+- [ ] need to customize and make the homepages nice, both for logged out and logged in.
+
 # Potential Issues
 - [ ] character profile
 - [ ] 404 badge logs not found
@@ -26,13 +41,13 @@
 # To Re-enable
 - [ ] Custom Profile Header Image
 - [ ] Shop coupons
-- [ ] custom titles on character creation
 - [ ] re-add Recipies to prompt page
 
 # First-round enhancement
 - [ ] request-throttling issues
 - [ ] page transition api
 - [ ] fuckign... backdrop-filter breaks positioning 😮‍💨
+- [ ] selected character extension
 
 # Bonuses:
 - [ ] move all modal dialogs to [root-level](resources/views/layouts/app.blade.php#L173)
