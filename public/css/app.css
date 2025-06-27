@@ -179,9 +179,9 @@
   /* Colors */
   --clr_raw_purple-50: #f4eefc;
   --clr_raw_purple-100: #eee5fa;
-  --clr_raw_purple-200: #d3bff9;
-  --clr_raw_purple-300: #dabdff;
-  --clr_raw_purple-400: #c19bff;
+  --clr_raw_purple-200: #d9c5fe;
+  --clr_raw_purple-300: #cfbdff;
+  --clr_raw_purple-400: #b29bff;
   --clr_raw_purple-500: #8e76ed;
   --clr_raw_purple-600: #6e4dd0;
   --clr_raw_purple-700: #4b33a3;
@@ -9494,7 +9494,7 @@ ul {
   height: 100dvh;
   top: 0;
   left: 0;
-  background-image: url(/images/reveriefullres.webp?f7e63e5b8d8982829c5daaaabeabda42);
+  background-image: url(/images/reveriefullres.webp?4d4f4c85265de40668608b5e4e2468cf);
   background-size: cover;
 }
 #app #site-wrapper {
@@ -9534,7 +9534,7 @@ ul {
 @media (width <= 992px) {
   /* @media screen and (max-width: var(--ss-medium)) { */
   #app {
-    background-image: url(/images/reveriehalfres.webp?f7e63e5b8d8982829c5daaaabeabda42);
+    background-image: url(/images/reveriehalfres.webp?4d4f4c85265de40668608b5e4e2468cf);
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
     padding: 10px var(--m-app-padding);
@@ -9756,7 +9756,7 @@ ul {
     transform: scale(0.5);
     border: 2px var(--clr_purple-300) solid;
     border-top: 0;
-    margin: -2px 0 0 -1.5px;
+    margin: -2px 0 0 -2px;
     transition: all 0.3s var(--spring_linear) allow-discrete, display 0.3s var(--spring_linear) allow-discrete;
     background-color: var(--body-color);
     transform-origin: 50% 0;
@@ -9842,7 +9842,7 @@ ul {
   .dt-nav-page .dt-nav-group .dt-nav-item:hover + .dt-nav-item,
   .dt-nav-page .dt-nav-group .dt-nav-item:hover + .dt-nav-header,
   .dt-nav-page .dt-nav-group .dt-nav-item:hover + hr {
-    transform: scale(1.05);
+    transform: scale(1.06);
     z-index: 1;
     border-radius: 10px;
     border-color: transparent var(--clr_purple-300);
@@ -9858,6 +9858,8 @@ ul {
     width: calc(100% - 20px);
     justify-self: center;
     margin: 5px;
+    height: 1px;
+    background-color: var(--clr_purple-600);
   }
 }
 @starting-style {
@@ -10002,9 +10004,9 @@ ul {
   /* Colors */
   --clr_raw_purple-50: #f4eefc;
   --clr_raw_purple-100: #eee5fa;
-  --clr_raw_purple-200: #d3bff9;
-  --clr_raw_purple-300: #dabdff;
-  --clr_raw_purple-400: #c19bff;
+  --clr_raw_purple-200: #d9c5fe;
+  --clr_raw_purple-300: #cfbdff;
+  --clr_raw_purple-400: #b29bff;
   --clr_raw_purple-500: #8e76ed;
   --clr_raw_purple-600: #6e4dd0;
   --clr_raw_purple-700: #4b33a3;
@@ -10336,7 +10338,7 @@ ul {
   width: calc(0.8 * var(--sb-width));
   height: calc(0.8 * var(--sb-width));
   animation: stars 10s linear forwards infinite;
-  background-image: url(/images/starring.png?870fe8295d8ef983536bc2d0fca21fb0);
+  background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913);
   background-repeat: repeat;
   background-size: 50%;
   transform: translateX(0%);
@@ -10462,7 +10464,7 @@ ul {
 #app #site-wrapper #site-logo-header picture::after {
   content: "";
   max-width: unset;
-  background-image: url(/images/logo.webp?498b00ec3eb35aead4c55793fbf443ed);
+  background-image: url(/images/logo.webp?339e76dd7b97f7db4b642ba977e50a53);
   background-size: contain;
   background-position: center;
   z-index: 5;
@@ -10578,4 +10580,67 @@ because the nesting selector cannot represent pseudo-elements. */
   dialog:open::backdrop {
     background-color: rgba(0, 0, 0, 0);
   }
+}
+#app .breadcrumb {
+  contain: paint;
+}
+#app .breadcrumb .breadcrumb-item {
+  --bc_chevron-width: 20px;
+  --bc_chevron-size: 10px;
+  position: relative;
+  --bc-bg: var(--clr_purple-500);
+  --bc-col: var(--clr_purple-100);
+  display: flex;
+  padding: 0 10px 0 20px;
+  --bc-clip: polygon(
+    calc(100% - var(--bc_chevron-size)) 0%,
+    100% 50%,
+    calc(100% - var(--bc_chevron-size)) 100%,
+    0% 100%,
+    var(--bc_chevron-size) 50%,
+    0% 0%
+  );
+}
+#app .breadcrumb .breadcrumb-item a,
+#app .breadcrumb .breadcrumb-item span {
+  color: var(--bc-col);
+  z-index: 1;
+}
+#app .breadcrumb .breadcrumb-item:nth-of-type(1) {
+  --bc-bg: var(--clr_purple-600);
+  --bc-col: var(--clr_purple-100);
+}
+#app .breadcrumb .breadcrumb-item:nth-of-type(2) {
+  --bc-bg: var(--clr_purple-500);
+  --bc-col: var(--clr_purple-100);
+}
+#app .breadcrumb .breadcrumb-item.active {
+  --bc-bg: var(--clr_purple-300);
+  --bc-col: var(--clr_purple-700);
+}
+#app .breadcrumb .breadcrumb-item:first-of-type {
+  --bc-clip: polygon(
+    0% 0%,
+    calc(100% - var(--bc_chevron-size)) 0%,
+    100% 50%,
+    calc(100% - var(--bc_chevron-size)) 100%,
+    0% 100%
+  );
+  padding: 0 15px 0 10px;
+}
+#app .breadcrumb .breadcrumb-item:first-of-type::before {
+  width: calc(100% + 0.25 * var(--bc_chevron-width));
+  transform: translateX(calc(-0.5 * var(--bc_chevron-width)));
+  overflow: hidden;
+  border-radius: 5px 0 0 5px;
+}
+#app .breadcrumb .breadcrumb-item::before {
+  content: "";
+  display: block;
+  background: var(--bc-bg);
+  clip-path: var(--bc-clip);
+  width: calc(100% + 0.25 * var(--bc_chevron-width));
+  height: 100%;
+  position: absolute;
+  transform: translateX(calc(-1 * var(--bc_chevron-width)));
 }

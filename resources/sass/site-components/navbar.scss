@@ -132,7 +132,7 @@
     transform: scale(0.5);
     border: 2px var(--clr_purple-300) solid;
     border-top: 0;
-    margin: -2px 0 0 -1.5px;
+    margin: -2px 0 0 -2px;
     transition:
       all 0.3s var(--spring_linear) allow-discrete,
       display 0.3s var(--spring_linear) allow-discrete;
@@ -224,7 +224,7 @@
       .dt-nav-item:hover + hr
       // adjacent hovered heading
       {
-        transform: scale(1.05);
+        transform: scale(1.06);
         z-index: 1;
         border-radius: 10px;
         border-color: transparent var(--clr_purple-300);
@@ -240,6 +240,8 @@
         width: calc(100% - 20px);
         justify-self: center;
         margin: 5px;
+        height: 1px;
+        background-color: var(--clr_purple-600);
       }
     }
   }

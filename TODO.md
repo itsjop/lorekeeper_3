@@ -3,14 +3,18 @@
 - [ ] No 18+ popup banner
 - [ ] Modals don't scroll
 - [ ] Sidebar expand animation broke (firefox)?
+- [ ] scale rarity icons appropriately
+- [ ] 
 
 # make it pretty
 - [ ] system clock
+- [ ] minification cli
 - [ ] currency counter? [root-level](app/Models/Currency/Currency.php#310)
 - [ ] add padding between buttons they all touch rn
 - [ ] gotta make the masterlist look nice. we can start on this after i actually upload some characters so you can get a good idea of how it will actually look. https://www.cupidcats.online/masterlist for ref
 - [ ] http://127.0.0.1:8000/character/tst-001/profile/edit have any profile content [root-level](resources/views/character/character.blade.php#64)
 - [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
+- [ ] break up name into two elements
 
 # character page hell
 - [ ] make it so the bat transformation is listed first. changing the order of the list in the transformation settings has no effect

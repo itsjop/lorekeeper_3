@@ -23844,7 +23844,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'SubComponent',
   props: {
-    genericPropName: {
+    character_prop: {
+      type: String,
+      "default": ''
+    },
+    colours_prop: {
+      type: String,
+      "default": ''
+    },
+    Auth: {
       type: String,
       "default": ''
     }
@@ -23853,15 +23861,27 @@ __webpack_require__.r(__webpack_exports__);
     var __expose = _ref.expose;
     __expose();
     var props = __props;
+
+    // const character = ref(props.characterProp);
+
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      console.log('sub mounted!!!');
+      console.log('sub mounted!!!', props.colours_prop, props.character_prop);
+      console.log('removeColorFormatting(props.character_prop)', removeColorFormatting(props.character_prop));
+      console.log('props.Auth', props.Auth);
+      // removeColorFormatting(character)
+      // console.log('props.character', typeof character, character);
+      // console.log(' JSON.parse(props.character)', JSON.parse(character));
     });
-    var dosomething = function dosomething() {
-      alert();
+    var removeColorFormatting = function removeColorFormatting(jsonString) {
+      var jayson = JSON.parse(jsonString.replace("\"colours\":".concat(props.colours_prop, ","), ''));
+      jayson.image.colors = props.colours_prop;
+      return jayson;
     };
     var __returned__ = {
       props: props,
-      dosomething: dosomething,
+      removeColorFormatting: removeColorFormatting,
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -23910,7 +23930,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", null, "the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.genericPropName) + " vue component", 1 /* TEXT */);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", null, "the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.genericPropName) + " vue component", 1 /* TEXT */);
 }
 
 /***/ }),

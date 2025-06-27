@@ -80,10 +80,14 @@ function breadcrumbs($links) {
 
     if (!$isLast) {
       $ret .= '<a href="' . url($link) . '">';
+    } else {
+      $ret .= '<span>';
     }
     $ret .= $key;
     if (!$isLast) {
       $ret .= '</a>';
+    } else {
+      $ret .= '</span>';
     }
 
     $ret .= '</li>';

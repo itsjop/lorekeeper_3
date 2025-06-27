@@ -10,7 +10,7 @@
 
 @section('profile-content')
   {!! breadcrumbs([
-      $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+      $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character Masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
       $character->fullName => $character->url,
       'Submissions' => $character->url . '/submissions',
   ]) !!}

@@ -13,7 +13,7 @@
     {!! breadcrumbs(['MYO Slot Masterlist' => 'myos', $character->fullName => $character->url, 'Profile' => $character->url . '/profile']) !!}
   @else
     {!! breadcrumbs([
-        $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+        $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character Masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
         $character->fullName => $character->url,
         'Profile' => $character->url . '/profile',
     ]) !!}
@@ -21,7 +21,7 @@
 
   @include('character._header', ['character' => $character])
 
-  @if (isset($character->profile->professionObj) || isset($character->profile->profession))
+  {{-- @if (isset($character->profile->professionObj) || isset($character->profile->profession))
     <div class="card-header mb-2 p-0 text-right">
       <div class="col-lg-2 ml-auto">
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
@@ -37,7 +37,7 @@
         </a>
       </div>
     </div>
-  @endif
+  @endif --}}
 
   <div class="mb-3">
     <div class="text-center">

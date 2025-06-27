@@ -22,12 +22,19 @@
     {!! breadcrumbs([
         $character->category->masterlist_sub_id
             ? $character->category->sublist->name . ' Masterlist'
-            : 'Character masterlist' => $character->category->masterlist_sub_id
+            : 'Character Masterlist' => $character->category->masterlist_sub_id
             ? 'sublist/' . $character->category->sublist->key
             : 'masterlist',
         $character->fullName => $character->url
     ]) !!}
   @endif
+
+  <div>
+    {{-- <sub-component :character_prop="'{{ json_encode($character) }}'"
+      :colours_prop="'{{ json_encode($character->image->colours) }}'"
+      :Auth="'{{ json_encode(Auth::check()) }}'"
+      /> --}}
+  </div>
 
   @include('character._header', ['character' => $character])
 
@@ -60,7 +67,7 @@
     </div>
   @endif
 
-  @if (isset($character->profile->professionObj) || isset($character->profile->profession))
+  {{-- @if (isset($character->profile->professionObj) || isset($character->profile->profession))
     <div class="card-header mb-2 p-0 text-right">
       <div class="col-lg-2 ml-auto">
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
@@ -84,7 +91,7 @@
         </a>
       </div>
     </div>
-  @endif
+  @endif --}}
 
   {{-- Main Image --}}
   <div

@@ -398,6 +398,14 @@ class Character extends Model {
   public function getDisplayNameAttribute() {
     return '<a href="' . $this->url . '" class="display-character">' . $this->fullName . '</a>';
   }
+  /**
+   * Displays the character's name, linked to their character page.
+   *
+   * @return string
+   */
+  public function getOnlyNameAttribute() {
+    return '<a href="' . $this->url . '" class="display-character">' . $this->name . '</a>';
+  }
 
   /**
    * Gets the character's name, including their code and user-assigned name.
