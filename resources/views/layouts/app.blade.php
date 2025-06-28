@@ -68,10 +68,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   {{-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet"> --}}
-  <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&Fredoka:wght@300..700&family=Stylish&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&Fredoka:wght@300..700&family=Stylish&display=swap" rel="stylesheet">
   <!-- Styles -->
   <link href="{{ asset('css/vendor/all.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
@@ -95,12 +92,7 @@
 </head>
 
 <body>
-  <div
-    id="app"
-    class="app"
-    {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
-    {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
-  >
+  <div id="app" class="app" {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }} {{ isset($pageName) ? 'data-page=' . $pageName : '' }}>
     <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
       <div class="site-background"></div>
       {{-- Header Logo --}}

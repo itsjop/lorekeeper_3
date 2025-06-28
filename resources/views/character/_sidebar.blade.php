@@ -50,9 +50,7 @@
         </li>
       @endif
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/' . __('awards.awardcase') }}"
-          class="{{ set_active('character/' . $character->slug . '/' . __('awards.awardcase')) }}"
-        >{{ ucfirst(__('awards.awards')) }}
+        <a href="{{ $character->url . '/' . __('awards.awardcase') }}" class="{{ set_active('character/' . $character->slug . '/' . __('awards.awardcase')) }}">{{ ucfirst(__('awards.awards')) }}
         </a>
       </li>
       @if ($character->getLineageBlacklistLevel() < 2)
@@ -73,38 +71,28 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/change-log' }}"
-          class="{{ set_active('character/' . $character->slug . '/change-log') }}"
-        >Change Log
+        <a href="{{ $character->url . '/change-log' }}" class="{{ set_active('character/' . $character->slug . '/change-log') }}">Change Log
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/ownership' }}"
-          class="{{ set_active('character/' . $character->slug . '/ownership') }}">Ownership History
+        <a href="{{ $character->url . '/ownership' }}" class="{{ set_active('character/' . $character->slug . '/ownership') }}">Ownership History
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/item-logs' }}"
-          class="{{ set_active('character/' . $character->slug . '/item-logs') }}">Item
+        <a href="{{ $character->url . '/item-logs' }}" class="{{ set_active('character/' . $character->slug . '/item-logs') }}">Item
           Logs
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/currency-logs' }}"
-          class="{{ set_active('character/' . $character->slug . '/currency-logs') }}"
-        >Currency Logs
+        <a href="{{ $character->url . '/currency-logs' }}" class="{{ set_active('character/' . $character->slug . '/currency-logs') }}">Currency Logs
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/submissions' }}"
-          class="{{ set_active('character/' . $character->slug . '/submissions') }}"
-        > Submissions
+        <a href="{{ $character->url . '/submissions' }}" class="{{ set_active('character/' . $character->slug . '/submissions') }}"> Submissions
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/' . __('awards.award') . '-logs' }}"
-          class="{{ set_active('character/' . $character->slug . '/' . __('awards.award') . '-logs') }}"
-        >
+        <a href="{{ $character->url . '/' . __('awards.award') . '-logs' }}" class="{{ set_active('character/' . $character->slug . '/' . __('awards.award') . '-logs') }}">
           {{ ucfirst(__('awards.award')) }} Logs
         </a>
       </li>
@@ -115,16 +103,12 @@
       <summary class="sidebar-section-header">Settings</summary>
       <ul>
         <li class="sidebar-item">
-          <a href="{{ $character->url . '/profile/edit' }}"
-            class="{{ set_active('character/' . $character->slug . '/profile/edit') }}"
-          >
+          <a href="{{ $character->url . '/profile/edit' }}" class="{{ set_active('character/' . $character->slug . '/profile/edit') }}">
             Edit Profile
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="{{ $character->url . '/links/edit' }}"
-            class="{{ set_active('character/' . $character->slug . '/links/edit') }}"
-          >
+          <a href="{{ $character->url . '/links/edit' }}" class="{{ set_active('character/' . $character->slug . '/links/edit') }}">
             Request Link
           </a>
         </li>
@@ -136,9 +120,7 @@
         </li>
         @if (Auth::user()->id == $character->user_id)
           <li class="sidebar-item">
-            <a href="{{ $character->url . '/approval' }}"
-              class="{{ set_active('character/' . $character->slug . '/approval') }}"
-            >
+            <a href="{{ $character->url . '/approval' }}" class="{{ set_active('character/' . $character->slug . '/approval') }}">
               Update Design
             </a>
           </li>
