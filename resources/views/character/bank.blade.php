@@ -42,7 +42,8 @@
                 </strong>
               </div>
               <div class="col-lg-10 col-md-9 col-6">
-                {{ $currency->quantity }} @if ($currency->has_icon)
+                {{ $currency->quantity }}
+                @if ($currency->has_icon)
                   {!! $currency->displayIcon !!}
                 @endif
               </div>

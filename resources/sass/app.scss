@@ -1,114 +1,20 @@
-// Variables
-@import 'support-classes';
-@import 'variables';
-@import 'mixins';
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Itim&display=swap');
+
 //  >:o(
 @import '~bootstrap/scss/bootstrap';
 
-/* prettier-ignore */
-*, *::before, *::after {  box-sizing: border-box; }
-/* prettier-ignore */
-h1, h2, h3 { font-family: "Sour Gummy", system-ui; font-weight: 400; text-transform: lowercase;}
-/* prettier-ignore */
-h4, h5, h6 { font-family: "Stylish", system-ui; font-weight: 400;}
-/* prettier-ignore */
-ul { padding: 0; }
+// Variables
+@import './support/_support-classes';
+@import './support/_variables';
+@import './support/_mixins';
 
-/* General Styling */
-#app {
-  font-family: 'Baloo 2', sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  --min-site-width: 800px;
-  --max-site-width: 1800px;
-  display: grid;
-  justify-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding-top: 40px;
-  .site-background {
-    position: fixed;
-    width: 100dvw;
-    height: 100dvh;
-    top: 0;
-    left: 0;
-    background-image: url('../../public/images/somnivores/reveriefullres.webp');
-    background-size: cover;
-  }
-  #site-wrapper {
-    display: grid;
-    grid-template:
-      'logo' 20vh
-      'nav' max-content
-      'main' auto
-      'footer' max-content
-      / auto;
-    gap: 10px 20px;
-    position: relative;
-    width: var(--app-width);
-    height: min-content;
-    margin-bottom: 35px;
-    #main-content {
-      grid-area: main;
-      max-width: 100%;
-      background-color: var(--body-color);
-      border-radius: 15px;
-      position: relative;
-    }
-    --sb-width: min(20vw, 300px);
-    --app-width: min(var(--max-site-width) - var(--sb-width), 70vw);
-    &.has-sidebar {
-      left: calc(var(--sb-width) * -0.5); /* sidebar offset */
-      grid-template:
-        '   .     logo ' 20vh
-        '   .     nav  ' min-content
-        'sidebar  main ' auto
-        'sidebar footer' auto
-        /
-        var(--sb-width)
-        clamp(var(--min-site-width), calc(100% - var(--sb-width)), var(--max-site-width));
-    }
-    .card {
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .modal-dialog .modal-body .inventory-main-img img {
-      width: 100%;
-    }
-  }
-}
+// Global changes
+@import './global/elements';
+@import './global/site-frame';
+@import './global/misc';
 
-/* Desktop Only */
-/* @media (width >= 992px) {} */
-
-/* Tablet Down */
-@media (width <= 992px) {
-  /* @media screen and (max-width: var(--ss-medium)) { */
-  #app {
-    background-image: url('../../public/images/somnivores/reveriehalfres.webp');
-    --m-app-padding: 10px;
-    --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
-    padding: 10px var(--m-app-padding);
-    #site-wrapper {
-      width: var(--m-app-width);
-      &.has-sidebar {
-        gap: 10px;
-        left: 0;
-        margin-bottom: 15px;
-        padding: 10px;
-        grid-template:
-          'logo' 20vh
-          'nav' max-content
-          'sidebar' max-content
-          'main' auto
-          'footer' max-content
-          / 100%;
-      }
-    }
-  }
-}
-
-// Components
+// Component-specific
 @import './site-components/background';
 @import './site-components/footer';
 @import './site-components/navbar';
@@ -116,4 +22,3 @@ ul { padding: 0; }
 @import './site-components/site-header';
 @import './site-components/animations';
 @import './site-components/modal';
-@import './site-components/misc';

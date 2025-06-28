@@ -1,10 +1,11 @@
 # Known Issues:
-- [ ] finalize navbar links
+- [x] finalize navbar links
 - [ ] No 18+ popup banner
 - [ ] Modals don't scroll
-- [ ] Sidebar expand animation broke (firefox)?
-- [ ] scale rarity icons appropriately
-- [ ] 
+- [x] Sidebar expand animation broke (firefox)?
+- [x] scale rarity icons appropriately
+- [ ] imageMagick module not availible with this php installation
+- [x] link color purple and change on hover
 
 # make it pretty
 - [ ] system clock
@@ -15,7 +16,7 @@
 - [ ] http://127.0.0.1:8000/character/tst-001/profile/edit have any profile content [root-level](resources/views/character/character.blade.php#64)
 - [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
 - [ ] break up name into two elements
-
+com
 # character page hell
 - [ ] make it so the bat transformation is listed first. changing the order of the list in the transformation settings has no effect
 - [ ] upload multiple images at once?

@@ -1,0 +1,38 @@
+/* prettier-ignore */
+*, *::before, *::after {  box-sizing: border-box; }
+/* prettier-ignore */
+#app {
+h1,h2,h3 {
+  font-family: 'Fredoka', sans-serif, system-ui;
+  font-weight: 600;
+  font-size: 1.9rem;
+}
+h1 {
+  text-transform: uppercase;
+  color: var(--clr_purple-700);
+}
+h2, h3 {
+  font-family: 'Itim', sans-serif, system-ui;
+  text-transform: lowercase;
+  color: var(--clr_purple-600);
+}
+h2 { font-size: 1.8rem;}
+h3 { font-size: 1.5rem;}
+
+h4, h5, h6 {
+  font-family: "Itim", system-ui;  font-weight: 400;
+  text-transform: lowercase;
+  color: var(--clr_purple-700);
+  font-style: italic;
+}
+}
+#app {
+  /* prettier-ignore */
+  ul { padding: 0; }
+  a {
+    color: var(--clr_purple-500);
+    &:hover {
+      color: var(--clr_purple-700);
+    }
+  }
+}

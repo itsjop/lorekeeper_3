@@ -1,0 +1,95 @@
+/* General Styling */
+#app {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: var(--clr_purple-950);
+  --min-site-width: 800px;
+  --max-site-width: 1800px;
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 40px;
+  .site-background {
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    background-image: url('../../../public/images/somnivores/reveriefullres.webp');
+    background-size: cover;
+  }
+  #site-wrapper {
+    display: grid;
+    grid-template:
+      'logo' 20vh
+      'nav' max-content
+      'main' auto
+      'footer' max-content
+      / auto;
+    gap: 10px 20px;
+    position: relative;
+    width: var(--app-width);
+    height: min-content;
+    margin-bottom: 35px;
+    #main-content {
+      grid-area: main;
+      max-width: 100%;
+      background-color: var(--body-color);
+      border-radius: 15px;
+      position: relative;
+    }
+    --sb-width: min(20vw, 300px);
+    --app-width: min(var(--max-site-width) - var(--sb-width), 70vw);
+    &.has-sidebar {
+      left: calc(var(--sb-width) * -0.5); /* sidebar offset */
+      grid-template:
+        '   .     logo ' 20vh
+        '   .     nav  ' min-content
+        'sidebar  main ' auto
+        'sidebar footer' auto
+        /
+        var(--sb-width)
+        clamp(var(--min-site-width), calc(100% - var(--sb-width)), var(--max-site-width));
+    }
+    .card {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .modal-dialog .modal-body .inventory-main-img img {
+      width: 100%;
+    }
+  }
+}
+
+/* Desktop Only */
+/* @media (width >= 992px) {} */
+
+/* Tablet Down */
+@media (width <= 992px) {
+  /* @media screen and (max-width: var(--ss-medium)) { */
+  #app {
+    background-image: url('../../../public/images/somnivores/reveriehalfres.webp');
+    --m-app-padding: 10px;
+    --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
+    padding: 10px var(--m-app-padding);
+    #site-wrapper {
+      width: var(--m-app-width);
+      &.has-sidebar {
+        gap: 10px;
+        left: 0;
+        margin-bottom: 15px;
+        padding: 10px;
+        grid-template:
+          'logo' 20vh
+          'nav' max-content
+          'sidebar' max-content
+          'main' auto
+          'footer' max-content
+          / 100%;
+      }
+    }
+  }
+}

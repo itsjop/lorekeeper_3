@@ -1,5 +1,5 @@
-@import '../mixins';
-@import '../variables';
+@import '../support/mixins';
+@import '../support/variables';
 
 // ACTUAL SIDEBAR
 #app #site-wrapper {
@@ -17,6 +17,9 @@
       background-color: var(--clr_purple-600);
       padding: 5px;
       font-weight: 500;
+      a {
+        color: var(--clr_purple-100);
+      }
     }
     #sidebar-ul {
       border-radius: 20px;

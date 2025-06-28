@@ -1,5 +1,4 @@
 #app {
-
   .scolling-bg {
     position: fixed;
     top: 0;
@@ -10,7 +9,7 @@
       --cloud-width: 50vw;
       height: var(--cloud-width);
       animation: cloud-scroll 5s linear forwards infinite;
-      background-image: url("https://transparenttextures.com/patterns/nice-snow.png");
+      background-image: url('https://transparenttextures.com/patterns/nice-snow.png');
       background-repeat: repeat;
     }
     .cloud-1,

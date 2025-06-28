@@ -14,6 +14,17 @@
       <span class="line"></span>
     </span>
   </button>
+  <div class="global-site-info">
+    <div class="currency">
+      {{-- <div class="col-lg-10 col-md-9 col-6">
+        {{ $currency->quantity }}
+        @if ($currency->has_icon)
+          {!! $currency->displayIcon !!}
+        @endif
+      </div> --}}
+    </div>
+    <div class="clock"></div>
+  </div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <!-- Left Side Of Navbar -->
     <ul class="navbar-nav mr-auto">
@@ -184,10 +195,10 @@
             {{-- <a class="dt-nav-item" href="{{ url('masterlist') }}">
               <i class="fas fa-star"></i> Official Somnivores </a>
             <a class="dt-nav-item" href="{{ url('sublist/MYO') }}">
-              <i class="fas fa-star"></i> MYO Somnivores </a> --}}
+              <i class="fas fa-star"></i> MYO Somnivores </a>
             <hr>
             <a class="dt-nav-item" href="{{ url('characters/myos') }}">
-              <i class="far fa-star"></i> MYO Slots </a>
+              <i class="far fa-star"></i> MYO Slots </a> --}}
           </div>
         </div>
       </li>
@@ -294,7 +305,7 @@
           >
             Submit
           </a>
-          <div class="dropdown-menu dt-nav-page" aria-labelledby="browseDropdown">
+          <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="browseDropdown">
             <div class="dt-nav-group" aria-labelledby="browseDropdown">
               <a class="dt-nav-item" href="{{ url('submissions/new') }}">
                 <i class="fas fa-paintbrush"></i> Submit Prompt </a>

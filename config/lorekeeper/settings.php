@@ -444,7 +444,7 @@ return [
     | This is intended to be a Discord webhook, but can be used with other services with minor modifications.
     |
     */
-  'site_logging_webhook'=> env('SITE_LOGGING_WEBHOOK', null),
+  'site_logging_webhook' => env('SITE_LOGGING_WEBHOOK', null),
 
   /*
     |--------------------------------------------------------------------------

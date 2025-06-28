@@ -70,7 +70,7 @@ class Rarity extends Model {
     $string = '';
 
     if ($this->has_icon) {
-      $string = '<img src="' . $this->rarityIconUrl . '"/> ';
+      $string = '<span class="rarity-icon"> <img src="' . $this->rarityIconUrl . '"/> </span>';
     }
 
     return $string . '<a href="' . $this->url . '" class="display-rarity" ' . ($this->color ? 'style="color: #' . $this->color . ';"' : '') . '>' . $this->name . '</a>';
