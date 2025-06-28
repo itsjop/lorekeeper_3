@@ -149,6 +149,7 @@
 <body>
   <div
     id="app"
+    class="app"
     {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
     {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
   >

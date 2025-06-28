@@ -9,14 +9,14 @@
 
 # make it pretty
 - [ ] system clock
-- [ ] minification cli
+- [x] minification cli
 - [ ] currency counter? [root-level](app/Models/Currency/Currency.php#310)
 - [ ] add padding between buttons they all touch rn
 - [ ] gotta make the masterlist look nice. we can start on this after i actually upload some characters so you can get a good idea of how it will actually look. https://www.cupidcats.online/masterlist for ref
 - [ ] http://127.0.0.1:8000/character/tst-001/profile/edit have any profile content [root-level](resources/views/character/character.blade.php#64)
 - [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
 - [ ] break up name into two elements
-com
+
 # character page hell
 - [ ] make it so the bat transformation is listed first. changing the order of the list in the transformation settings has no effect
 - [ ] upload multiple images at once?
@@ -26,6 +26,7 @@ com
 
 # Potential Issues
 - [ ] character profile
+- [ ] "remove current image" checkbox not functioning
 - [ ] 404 badge logs not found
 - [ ] wheels on the wheel-dailies don't show up properly even after adding the necessary js files
     -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me..
@@ -74,8 +75,6 @@ com
 # low-prio
 - [ ] fix no ::backdrop on modals
 - [ ] slim down google fonts payload
-
-
 
 # FIXED!!!
 - [x] rarity incorrectly requires an icon

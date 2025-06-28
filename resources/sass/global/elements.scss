@@ -1,7 +1,7 @@
 /* prettier-ignore */
 *, *::before, *::after {  box-sizing: border-box; }
 /* prettier-ignore */
-#app {
+.app {
 h1,h2,h3 {
   font-family: 'Fredoka', sans-serif, system-ui;
   font-weight: 600;
@@ -26,7 +26,7 @@ h4, h5, h6 {
   font-style: italic;
 }
 }
-#app {
+.app {
   /* prettier-ignore */
   ul { padding: 0; }
   a {
