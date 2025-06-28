@@ -91,7 +91,6 @@ class ShopService extends Service {
             }
 
             $data['is_timed_shop'] = isset($data['is_timed_shop']);
-
             $shop->update($data);
 
             if ($shop) {
@@ -438,6 +437,7 @@ class ShopService extends Service {
         $data['is_hidden'] = isset($data['is_hidden']);
         $data['is_staff'] = isset($data['is_staff']);
         $data['use_coupons'] = isset($data['use_coupons']);
+        $data['is_fto'] = isset($data['is_fto']);
         $data['allowed_coupons'] ??= null;
         $data['data'] = [
             'shop_days'   => $data['shop_days'] ?? null,

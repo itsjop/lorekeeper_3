@@ -174,16 +174,16 @@
           </div>
           <div class="col-md-10 col-8">{!! $request->species ? $request->species->displayName : 'None Selected' !!}</div>
         </div>
-        @if ($request->subtype_id)
+        @if ($request->subtype_ids || count($request->character->image->subtypes))
           <div class="row">
             <div class="col-md-2 col-4">
-              <h5>Subtype</h5>
+              <h5>Subtype(s)</h5>
             </div>
             <div class="col-md-10 col-8">
-              @if ($request->character->is_myo_slot && $request->character->image->subtype_id)
-                {!! $request->character->image->subtype ? $request->character->image->subtype->displayName : 'None Selected' !!}
+              @if ($request->subtype_ids)
+                {!! $request->subtype_ids ? $request->displaySubtypes() : 'None Selected' !!}
               @else
-                {!! $request->subtype_id ? $request->subtype->displayName : 'None Selected' !!}
+                {!! $request->character->image->displaySubtypes() ?? 'None Selected' !!}
               @endif
             </div>
           </div>

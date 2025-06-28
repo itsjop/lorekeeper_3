@@ -470,7 +470,7 @@
         $('.remove-collaborator').on('click', function(e) {
           e.preventDefault();
           removeCollaboratorRow($(this));
-        })
+        });
 
         function addCollaboratorRow() {
           var $clone = $('.collaborator-row').clone();
@@ -495,7 +495,7 @@
         $('.remove-participant').on('click', function(e) {
           e.preventDefault();
           removeParticipantRow($(this));
-        })
+        });
 
         function addParticipantRow() {
           var $clone = $('.participant-row').clone();
@@ -523,27 +523,26 @@
               $('#imageContainer').removeClass('hide');
             }
             reader.readAsDataURL(input.files[0]);
-            //   @if (config('lorekeeper.settings.hide_textarea_on_gallery_submissions.enable') && config('lorekeeper.settings.hide_textarea_on_gallery_submissions.on_image'))
-            //     // hide text editor if image is uploaded
-            //     $('#writingForm').collapse('hide')
-            //   @endif
-            // } else {
-            //   @if (config('lorekeeper.settings.hide_textarea_on_gallery_submissions.enable') && config('lorekeeper.settings.hide_textarea_on_gallery_submissions.on_image'))
-            //     $('#writingForm').collapse('show')
-            //   @endif
+            @if (config('lorekeeper.settings.hide_textarea_on_gallery_submissions.enable') && config('lorekeeper.settings.hide_textarea_on_gallery_submissions.on_image'))
+              // hide text editor if image is uploaded
+              $('#writingForm').collapse('hide')
+            @endif
+            @if (config('lorekeeper.settings.hide_textarea_on_gallery_submissions.enable') && config('lorekeeper.settings.hide_textarea_on_gallery_submissions.on_image'))
+              $('#writingForm').collapse('show')
+            @endif
           }
         }
         $("#mainImage").change(function() {
           readURL(this);
         });
-        // @if (config('lorekeeper.settings.hide_textarea_on_gallery_submissions.enable'))
-        //   $('#writingForm').on('hide.bs.collapse', function() {
-        //     $('#writingFormCollapseBtn').text("Show Textarea");
-        //   })
-        //   $('#writingForm').on('show.bs.collapse', function() {
-        //     $('#writingFormCollapseBtn').text("Hide Textarea");
-        //   })
-        // @endif
+        @if (config('lorekeeper.settings.hide_textarea_on_gallery_submissions.enable'))
+          $('#writingForm').on('hide.bs.collapse', function() {
+            $('#writingFormCollapseBtn').text("Show Textarea");
+          })
+          $('#writingForm').on('show.bs.collapse', function() {
+            $('#writingFormCollapseBtn').text("Hide Textarea");
+          })
+        @endif
 
         $('.original.gallery-select').selectize();
 
