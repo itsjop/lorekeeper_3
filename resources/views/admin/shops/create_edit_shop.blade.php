@@ -226,7 +226,6 @@
   @parent
   @include('widgets._datetimepicker_js')
   <script>
-
     $('#is_timed_shop').change(function() {
       if ($(this).is(':checked')) {
         $('.shop-timed-quantity').removeClass('hide');

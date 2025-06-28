@@ -379,35 +379,33 @@
       }
 
       $("#species").change(function() {
-          var species = $('#species').val();
-          var id = '<?php echo $character->image->id; ?>';
-          $.ajax({
-            type: "GET",
-            url: "{{ url('admin/character/image/subtype') }}?species=" + species + "&id=" + id,
-            dataType: "text"
-          }).done(function(res) {
-            $("#subtypes").html(res);
-          }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-          });
-          $.ajax({
-            type: "GET",
-            url: "{{ url('admin/character/image/transformation') }}?species=" + species + "&id=" + id,
-            dataType: "text"
-          }).done(function(res) {
-            $("#transformations").html(res);
-          }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-          });
+        var species = $('#species').val();
+        var id = '<?php echo $character->image->id; ?>';
+        $.ajax({
+          type: "GET",
+          url: "{{ url('admin/character/image/subtype') }}?species=" + species + "&id=" + id,
+          dataType: "text"
+        }).done(function(res) {
+          $("#subtypes").html(res);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+          alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+        });
+        $.ajax({
+          type: "GET",
+          url: "{{ url('admin/character/image/transformation') }}?species=" + species + "&id=" + id,
+          dataType: "text"
+        }).done(function(res) {
+          $("#transformations").html(res);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+          alert("AJAX call failed: " + textStatus + ", " + errorThrown);
+        });
 
-          $('#subtype').selectize({
-            maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-           });
+        $('#subtype').selectize({
+          maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+        });
       });
 
 
     });
-
-
   </script>
 @endsection

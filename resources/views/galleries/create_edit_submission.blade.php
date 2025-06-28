@@ -441,7 +441,6 @@
     @include('galleries._character_select_js')
 
     <script>
-
       $(document).ready(function() {
         var $submitButton = $('#submitButton');
         var $confirmationModal = $('#confirmationModal');
