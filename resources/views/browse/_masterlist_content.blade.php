@@ -188,17 +188,17 @@
         {!! Form::select('feature_ids[]', $features, Request::get('feature_ids'), [
             'class' => 'form-control feature-select userselectize',
             'placeholder' => 'Select Traits',
-            'multiple'
+            'multiple',
         ]) !!}
       </div>
       <hr />
       <div class="masterlist-search-field">
         {!! Form::checkbox('search_images', 1, Request::get('search_images'), [
             'class' => 'form-check-input mr-3',
-            'data-toggle' => 'toggle'
+            'data-toggle' => 'toggle',
         ]) !!}
         <span class="ml-2">Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
-            'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.'
+            'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.',
         ) !!}</span>
       </div>
 
@@ -217,10 +217,10 @@
                 'id_desc' => 'Newest First',
                 'id_asc' => 'Oldest First',
                 'sale_value_desc' => 'Highest Sale Value',
-                'sale_value_asc' => 'Lowest Sale Value'
+                'sale_value_asc' => 'Lowest Sale Value',
             ],
             Request::get('sort'),
-            ['class' => 'form-control']
+            ['class' => 'form-control'],
         ) !!}
       @else
         {!! Form::select(
@@ -229,10 +229,10 @@
                 'id_desc' => 'Newest First',
                 'id_asc' => 'Oldest First',
                 'sale_value_desc' => 'Highest Sale Value',
-                'sale_value_asc' => 'Lowest Sale Value'
+                'sale_value_asc' => 'Lowest Sale Value',
             ],
             Request::get('sort'),
-            ['class' => 'form-control']
+            ['class' => 'form-control'],
         ) !!}
       @endif
     </div>
@@ -246,7 +246,7 @@
       <div class="card-body d-flex">
         {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control feature-select selectize',
-            'placeholder' => 'Select Trait'
+            'placeholder' => 'Select Trait',
         ]) !!}
         <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
       </div>
@@ -281,9 +281,7 @@
             <a href="{{ $character->url }}">
               <img
                 src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                class="img-thumbnail"
-                alt="Thumbnail for {{ $character->fullName }}"
-              /></a>
+                class="img-thumbnail" alt="Thumbnail for {{ $character->fullName }}" /></a>
             <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div>
           </div>
           <div class="mt-1">
@@ -296,9 +294,7 @@
           </div>
           <div class="small">
             {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!} ・ {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!} ・ {!! $character->displayOwner !!}
-            @if (count($character->image->content_warnings ?? []) &&
-                    (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2))
-            )
+            @if (count($character->image->content_warnings ?? []) && (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2)))
               <p class="mb-0">
                 <span class="text-danger mr-1"><strong>Character Warning:</strong></span>
                 {{ implode(', ', $character->image->content_warnings) }}
