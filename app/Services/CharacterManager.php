@@ -880,7 +880,7 @@ class CharacterManager extends Service {
       }
       // Update other stats
       $image->species_id = $data['species_id'];
-      $image->subtype_id = $data['subtype_id'] ?: null;
+      $image->subtype_id = $data['subtype_id'] ?? null;
       // SUBTYPES
       $image->subtypes()->delete();
       if (isset($data['subtype_ids']) && $data['subtype_ids']) {

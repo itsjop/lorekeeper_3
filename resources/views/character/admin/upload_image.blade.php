@@ -212,32 +212,7 @@
   </div>
   {!! Form::close() !!}
 
-  <div class="form-group">
-    {!! Form::label('Character Rarity') !!}
-    {!! Form::select('rarity_id', $rarities, old('rarity_id') ?: $character->image->rarity_id, ['class' => 'form-control']) !!}
-  </div>
 
-  <div class="form-group">
-    {!! Form::label('Traits') !!}
-    <div id="featureList">
-    </div>
-    <div>
-      <a href="#" class="btn btn-primary" id="add-feature">Add Trait</a>
-    </div>
-    <div class="feature-row hide mb-2">
-      {!! Form::select('feature_id[]', $features, null, [
-          'class' => 'form-control mr-2 feature-select',
-          'placeholder' => 'Select Trait',
-      ]) !!}
-      {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
-      <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
-    </div>
-  </div>
-
-  <div class="text-right">
-    {!! Form::submit('Create Image', ['class' => 'btn btn-primary']) !!}
-  </div>
-  {!! Form::close() !!}
 @endsection
 
 @section('scripts')
@@ -403,12 +378,7 @@
         $y1.val(values.points[3]);
       }
 
-
-    });
-
-
-
-    $("#species").change(function() {
+      $("#species").change(function() {
           var species = $('#species').val();
           var id = '<?php echo $character->image->id; ?>';
           $.ajax({
@@ -432,6 +402,12 @@
 
           $('#subtype').selectize({
             maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-          });
+           });
+      });
+
+
+    });
+
+
   </script>
 @endsection

@@ -226,7 +226,6 @@
   @parent
   @include('widgets._datetimepicker_js')
   <script>
-    $('.selectize').selectize();
 
     $('#is_timed_shop').change(function() {
       if ($(this).is(':checked')) {
@@ -262,6 +261,7 @@
         e.preventDefault();
         loadModal("{{ url('admin/data/shops/delete') }}/{{ $shop->id }}", 'Delete Shop');
       });
+
       $('.add-stock-button').on('click', function(e) {
         e.preventDefault();
         loadModal("{{ url('admin/data/shops/stock') }}/{{ $shop->id }}", 'Add Stock');
