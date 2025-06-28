@@ -63,10 +63,14 @@
   }
 }
 
-#app .rarity-icon {
-  align-content: center;
-  img {
-    width: 1.6em;
-    height: 1.6em;
+#app {
+  .rarity-icon,
+  .currency-icon {
+    align-content: center;
+    justify-content: center;
+    img {
+      width: 1.6em;
+      height: 1.6em;
+    }
   }
 }
