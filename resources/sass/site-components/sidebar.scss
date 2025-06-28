@@ -37,10 +37,16 @@
             // border-top: 1px solid #8888;
           } /* Owl Syntax */
           a {
+            color: var(--clr_purple-500);
             padding: 3px 0;
             &.active {
               font-weight: 700;
               color: white;
+            }
+            &:hover {
+              transition: 0.1s linear;
+              background-color: var(--clr_purple-300);
+              color: var(--clr_purple-800);
             }
           }
           &:has(a.active) {
@@ -118,10 +124,6 @@
         width: 100%;
         text-align: center;
         transition: 0.3s ease-out;
-        &:hover {
-          transition: 0.1s linear;
-          background-color: var(--clr_purple-300);
-        }
       }
     }
     summary {

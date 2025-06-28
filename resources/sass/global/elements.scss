@@ -35,4 +35,12 @@ h4, h5, h6 {
       color: var(--clr_purple-700);
     }
   }
+  a.btn-primary,
+  a.btn-danger,
+  a.btn-secondary {
+    color: var(--clr_purple-50);
+  }
+  a.btn-outline-primary:hover {
+    color: var(--clr_purple-50);
+  }
 }

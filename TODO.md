@@ -1,4 +1,20 @@
-# Known Issues:
+# Functional Issues (for Cyl) (Sorted by priority)
+## MYO
+- [ ] Upon activating an MYO-tagged item in your inventory `/inventory`, the following error is thrown:
+  - production.ERROR: count(): Argument #1 (value) must be of type Countable|array, string given {"userId":1,"exception":"object} (TypeError(code: 0): count(): Argument #1 ($value) must be of type Countable|array, string given [at](/app/Services/CharacterManager.php#107))
+## Shops
+- [ ] Cannot add stock
+- [ ] 'Set Active' and 'FTO Only' toggles does not save successfully
+## Character Profile Page
+- [ ] `Undefined array key "subtype_id"` toast when attempting to edit a character MYO page
+- [ ] Make it so the Bat transformation is always listed first.
+    - Changing the order of the list in the transformation settings has no effect
+- [ ] Is it possible to enable uploading multiple images at once?
+## Low-prio
+- [ ] "remove current image" checkbox not functioning on relevant admin pages (such as `/admin/data/rarities/edit/1`)
+- [ ] Transformation info and transformation Origin
+
+# Styling Issues (for joz):
 - [x] finalize navbar links
 - [ ] No 18+ popup banner
 - [ ] Modals don't scroll
@@ -6,8 +22,6 @@
 - [x] scale rarity icons appropriately
 - [ ] imageMagick module not availible with this php installation
 - [x] link color purple and change on hover
-
-# make it pretty
 - [ ] system clock
 - [x] minification cli
 - [ ] currency counter? [root-level](app/Models/Currency/Currency.php#310)
@@ -15,22 +29,15 @@
 - [ ] gotta make the masterlist look nice. we can start on this after i actually upload some characters so you can get a good idea of how it will actually look. https://www.cupidcats.online/masterlist for ref
 - [ ] http://127.0.0.1:8000/character/tst-001/profile/edit have any profile content [root-level](resources/views/character/character.blade.php#64)
 - [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
-- [ ] break up name into two elements
-
-# character page hell
-- [ ] make it so the bat transformation is listed first. changing the order of the list in the transformation settings has no effect
-- [ ] upload multiple images at once?
-- [ ] another thing about transformations. we need to address the fields that users can enter text into, the transformation description and transformation info it asks for when you submit a design or design update. these are useful pieces of info, but will be SUPERRR ugly if displayed in the tab you can click on, which is what they do by default. bad. i want to see if you can pull this info and place it somewhere else. see how cupid cats does it - https://www.cupidcats.online/character/MYO-535 - click "guise" and see how the sidebar changes, super nice.
-- [ ] the masterlist pages will need a whole rehaul. profile in its own box, pulled from the text field that users can enter things in that's hidden away in the sidebar by default. everyone tells me this is a very simple fix. we will also need to make a field that nicely displays pets and inventory in two tabs that you can click between. cupid cats did this too - you can see theirs. ours would be profile, then pets / inventory https://www.cupidcats.online/character/MYO-545 (random chara example)
 - [ ] need to customize and make the homepages nice, both for logged out and logged in.
+- [ ] break up name into two elements
+- [ ] the masterlist pages will need a whole rehaul. profile in its own box, pulled from the text field that users can enter things in that's hidden away in the sidebar by default. everyone tells me this is a very simple fix. we will also need to make a field that nicely displays pets and inventory in two tabs that you can click between. cupid cats did this too - you can see theirs. ours would be profile, then pets / inventory https://www.cupidcats.online/character/MYO-545 (random chara example)
 
-# Potential Issues
-- [ ] character profile
-- [ ] "remove current image" checkbox not functioning
+
+# Future Issues
 - [ ] 404 badge logs not found
 - [ ] wheels on the wheel-dailies don't show up properly even after adding the necessary js files
-    -> CYL: it seems you did some changes there so you may have to look into that yourself as it works on base lk for me..
-- [ ] remove sex selectors
+- [x] remove sex selectors
 - [ ] featured character only from active participants
 
 # In-progress / Partial Fixes:

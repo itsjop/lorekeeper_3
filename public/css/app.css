@@ -9499,6 +9499,14 @@ a.text-dark:hover, a.text-dark:focus {
 .app a:hover {
   color: var(--clr_purple-700);
 }
+.app a.btn-primary,
+.app a.btn-danger,
+.app a.btn-secondary {
+  color: var(--clr_purple-50);
+}
+.app a.btn-outline-primary:hover {
+  color: var(--clr_purple-50);
+}
 
 /* General Styling */
 #app {
@@ -10177,11 +10185,17 @@ a.text-dark:hover, a.text-dark:focus {
   /* Owl Syntax */
 }
 #app #site-wrapper #sidebar #sidebar-ul .sidebar-section .sidebar-item a {
+  color: var(--clr_purple-500);
   padding: 3px 0;
 }
 #app #site-wrapper #sidebar #sidebar-ul .sidebar-section .sidebar-item a.active {
   font-weight: 700;
   color: white;
+}
+#app #site-wrapper #sidebar #sidebar-ul .sidebar-section .sidebar-item a:hover {
+  transition: 0.1s linear;
+  background-color: var(--clr_purple-300);
+  color: var(--clr_purple-800);
 }
 #app #site-wrapper #sidebar #sidebar-ul .sidebar-section .sidebar-item:has(a.active) {
   height: 2rem;
@@ -10255,10 +10269,6 @@ a.text-dark:hover, a.text-dark:focus {
   width: 100%;
   text-align: center;
   transition: 0.3s ease-out;
-}
-#sidebar details[open] li a:hover {
-  transition: 0.1s linear;
-  background-color: var(--clr_purple-300);
 }
 #sidebar details[open] summary {
   background-color: var(--clr_purple-200);
