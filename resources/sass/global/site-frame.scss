@@ -12,13 +12,16 @@
   padding-top: 40px;
   max-width: 100dvw;
   max-height: 100dvh;
-  --sb-width: min(20vw, 300px);
+  --app-gap-x: 20px;
+  --app-gap-y: 10px;
+  --sidebar-width: min(20vw, 300px);
   --gutter-width: 5vw;
   --gutters-width: (2 * var(--gutter-width));
-  --min-content-width: 600px;
-  --max-content-width: 1600px;
-  --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sb-width));
-  --content-width: clamp(var(--min-content-width), var(--ideal-content-width), var(--max-content-width));
+  --content-min-width: 600px;
+  --content-max-width: 1600px;
+  --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sidebar-width));
+  --content-width: clamp(var(--content-min-width), var(--ideal-content-width), var(--content-max-width));
+  --app-width: calc(var(--content-width) + var(--app-gap-x) + var(--sidebar-width));
   #site-wrapper {
     display: grid;
     grid-template:
@@ -27,11 +30,10 @@
       'main' auto
       'footer' max-content
       / auto;
-    gap: 10px 20px;
+    gap: var(--app-gap-x) var(--app-gap-y);
     position: relative;
     max-width: calc(100dvw - var(--gutters-width));
     height: min-content;
-    // left: calc(100dvw - var(--content-width) - var(--sb-width)); /* sidebar offset */
     &.has-sidebar {
       grid-template:
         '   .     logo ' 20vh
@@ -39,11 +41,12 @@
         'sidebar  main ' auto
         'sidebar footer' auto
         /
-        var(--sb-width) var(--content-width);
+        var(--sidebar-width) var(--content-width);
     }
+    left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
   }
   #site-wrapper {
-    margin-bottom: 35px;
+    padding-bottom: 35px;
     #main-content {
       grid-area: main;
       max-width: 100%;
@@ -81,9 +84,13 @@
     background-image: url('../../../public/images/somnivores/reveriehalfres.webp');
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
+    --sidebar-width: 0;
     --gutter-width: 1vw;
-    --min-content-width: 200px;
+    --content-min-width: 200px;
+    --content-max-width: calc(992px - var(--gutters-width));
     --ideal-content-width: calc(100dvw - 40px - var(--gutters-width));
+    --app-gap-x: 00px;
+    --app-gap-y: 10px;
     padding: 10px var(--m-app-padding);
     #site-wrapper {
       width: var(--m-app-width);

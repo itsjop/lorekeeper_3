@@ -1,5 +1,5 @@
 <div class="lore grid ji-center jc-center text-center">
-  <div class="grid w-content-80 grid-1-8-col pc-center pi-center text-left card p-4">
+  <div class="grid w-content-80 grid-1-8-col pc-center pi-center text-left card gap-2 p-4">
     <i class="fa fa-tools" style="font-size: 2em;"></i>
     <p class="m-0">
       <strong>Somnivores.com</strong> is currently under construction!

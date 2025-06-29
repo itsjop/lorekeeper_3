@@ -4,7 +4,7 @@
     clamp(
       200px,
       $scale * var(--content-width),
-      $max * var(--max-content-width)
+      $max * var(--content-max-width)
     );
 }
 

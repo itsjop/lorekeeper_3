@@ -9407,63 +9407,63 @@ a.text-dark:hover, a.text-dark:focus {
 
 /* Placement */
 .pc-start {
-  align-content: start;
+  place-content: start;
 }
 
 .pc-center {
-  align-content: center;
+  place-content: center;
 }
 
 .pc-around {
-  align-content: space-around;
+  place-content: space-around;
 }
 
 .pc-between {
-  align-content: space-between;
+  place-content: space-between;
 }
 
 .pc-end {
-  align-content: end;
+  place-content: end;
 }
 
 .pi-start {
-  align-items: start;
+  place-items: start;
 }
 
 .pi-center {
-  align-items: center;
+  place-items: center;
 }
 
 .pi-around {
-  align-items: space-around;
+  place-items: space-around;
 }
 
 .pi-between {
-  align-items: space-between;
+  place-items: space-between;
 }
 
 .pi-end {
-  align-items: end;
+  place-items: end;
 }
 
 .ps-start {
-  align-self: start;
+  place-self: start;
 }
 
 .ps-center {
-  align-self: center;
+  place-self: center;
 }
 
 .ps-around {
-  align-self: space-around;
+  place-self: space-around;
 }
 
 .ps-between {
-  align-self: space-between;
+  place-self: space-between;
 }
 
 .ps-end {
-  align-self: end;
+  place-self: end;
 }
 
 /* Grid-Gap */
@@ -9574,7 +9574,7 @@ a.text-dark:hover, a.text-dark:focus {
   text-align: right;
 }
 
-#app {
+body {
   /* Breakpoints */
   --ss-xsmall: 400px;
   --ss-small: 576px;
@@ -9687,28 +9687,32 @@ a.text-dark:hover, a.text-dark:focus {
   padding-top: 40px;
   max-width: 100dvw;
   max-height: 100dvh;
-  --sb-width: min(20vw, 300px);
+  --app-gap-x: 20px;
+  --app-gap-y: 10px;
+  --sidebar-width: min(20vw, 300px);
   --gutter-width: 5vw;
   --gutters-width: (2 * var(--gutter-width));
-  --min-content-width: 600px;
-  --max-content-width: 1600px;
-  --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sb-width));
-  --content-width: clamp(var(--min-content-width), var(--ideal-content-width), var(--max-content-width));
+  --content-min-width: 600px;
+  --content-max-width: 1600px;
+  --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sidebar-width));
+  --content-width: clamp(var(--content-min-width), var(--ideal-content-width), var(--content-max-width));
+  --app-width: calc(var(--content-width) + var(--app-gap-x) + var(--sidebar-width));
 }
 #app #site-wrapper {
   display: grid;
   grid-template: "logo" 20vh "nav" max-content "main" auto "footer" max-content/auto;
-  gap: 10px 20px;
+  gap: var(--app-gap-x) var(--app-gap-y);
   position: relative;
   max-width: calc(100dvw - var(--gutters-width));
   height: -moz-min-content;
   height: min-content;
+  left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
 }
 #app #site-wrapper.has-sidebar {
-  grid-template: "   .     logo " 20vh "   .     nav  " min-content "sidebar  main " auto "sidebar footer" auto/var(--sb-width) var(--content-width);
+  grid-template: "   .     logo " 20vh "   .     nav  " min-content "sidebar  main " auto "sidebar footer" auto/var(--sidebar-width) var(--content-width);
 }
 #app #site-wrapper {
-  margin-bottom: 35px;
+  padding-bottom: 35px;
 }
 #app #site-wrapper #main-content {
   grid-area: main;
@@ -9744,9 +9748,13 @@ a.text-dark:hover, a.text-dark:focus {
     background-image: url(/images/reveriehalfres.webp?4d4f4c85265de40668608b5e4e2468cf);
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
+    --sidebar-width: 0;
     --gutter-width: 1vw;
-    --min-content-width: 200px;
+    --content-min-width: 200px;
+    --content-max-width: calc(992px - var(--gutters-width));
     --ideal-content-width: calc(100dvw - 40px - var(--gutters-width));
+    --app-gap-x: 00px;
+    --app-gap-y: 10px;
     padding: 10px var(--m-app-padding);
   }
   #app #site-wrapper {
@@ -9869,7 +9877,7 @@ a.text-dark:hover, a.text-dark:focus {
   text-transform: none;
 }
 .app .lore > p {
-  width: clamp(200px, 0.7 * var(--content-width), 0.7 * var(--max-content-width));
+  width: clamp(200px, 0.7 * var(--content-width), 0.7 * var(--content-max-width));
 }
 .app .lore .card {
   background-color: var(--clr_purple-50);
@@ -9909,37 +9917,37 @@ a.text-dark:hover, a.text-dark:focus {
   width: 10%;
 }
 .app .w-content-100 {
-  width: clamp(200px, 1 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 1 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-90 {
-  width: clamp(200px, 0.9 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.9 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-80 {
-  width: clamp(200px, 0.8 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.8 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-75 {
-  width: clamp(200px, 0.75 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.75 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-66 {
-  width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-60 {
-  width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-50 {
-  width: clamp(200px, 0.5 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.5 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-40 {
-  width: clamp(200px, 0.4 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.4 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-33 {
-  width: clamp(200px, 0.33 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.33 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-25 {
-  width: clamp(200px, 0.25 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.25 * var(--content-width), 0.56 * var(--content-max-width));
 }
 .app .w-content-10 {
-  width: clamp(200px, 0.1 * var(--content-width), 0.56 * var(--max-content-width));
+  width: clamp(200px, 0.1 * var(--content-width), 0.56 * var(--content-max-width));
 }
 @media (width <= 992px) {
   .app .w-content-100 {
@@ -10493,7 +10501,7 @@ a.text-dark:hover, a.text-dark:focus {
     display: none;
   }
 }
-#app {
+body {
   /* Breakpoints */
   --ss-xsmall: 400px;
   --ss-small: 576px;
@@ -10712,7 +10720,7 @@ a.text-dark:hover, a.text-dark:focus {
   text-align: center;
 }
 .sidebar .sidebar-header a {
-  font-size: 1.1em;
+  font-size: 0.8em;
   color: var(--clr_purple-50);
 }
 .sidebar .sidebar-header a:hover {
@@ -10783,8 +10791,8 @@ a.text-dark:hover, a.text-dark:focus {
   place-items: center;
   contain: paint;
   --cb-size: 0.8;
-  width: calc(1 * var(--sb-width));
-  height: calc(1 * var(--sb-width));
+  width: calc(1 * var(--sidebar-width));
+  height: calc(1 * var(--sidebar-width));
 }
 .featured-character .sidebar-section .thumb img {
   border: 0;
@@ -10792,8 +10800,8 @@ a.text-dark:hover, a.text-dark:focus {
   z-index: 100;
   overflow: hidden;
   filter: drop-shadow(2px 2px 3px rgba(17, 17, 17, 0.6666666667));
-  width: calc(0.8 * var(--sb-width));
-  height: calc(0.8 * var(--sb-width));
+  width: calc(0.8 * var(--sidebar-width));
+  height: calc(0.8 * var(--sidebar-width));
   aspect-ratio: 1/1;
   padding: 0;
   animation: char-fly 3.5s cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
@@ -10803,8 +10811,8 @@ a.text-dark:hover, a.text-dark:focus {
   mask-mode: luminance;
   transform-origin: center;
   position: absolute;
-  width: calc(0.8 * var(--sb-width));
-  height: calc(0.8 * var(--sb-width));
+  width: calc(0.8 * var(--sidebar-width));
+  height: calc(0.8 * var(--sidebar-width));
   border-radius: 100vh;
   overflow: hidden;
 }
@@ -10841,8 +10849,8 @@ a.text-dark:hover, a.text-dark:focus {
 .featured-character .sidebar-section .thumb .character-border .stars::before, .featured-character .sidebar-section .thumb .character-border .stars::after {
   content: "";
   position: absolute;
-  width: calc(0.8 * var(--sb-width));
-  height: calc(0.8 * var(--sb-width));
+  width: calc(0.8 * var(--sidebar-width));
+  height: calc(0.8 * var(--sidebar-width));
   animation: stars 10s linear forwards infinite;
   background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913);
   background-repeat: repeat;
@@ -10857,8 +10865,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 .featured-character .sidebar-section .thumb .char-filter {
   position: absolute;
-  width: calc(0.8 * var(--sb-width));
-  height: calc(0.8 * var(--sb-width));
+  width: calc(0.8 * var(--sidebar-width));
+  height: calc(0.8 * var(--sidebar-width));
   background-color: --clr_purple-300;
   mix-blend-mode: soft-light;
 }
@@ -10877,7 +10885,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 @media (width <= 992px) {
   #app #site-wrapper {
-    --sb-width: min(50vw, 300px);
+    --sidebar-width: min(50vw, 300px);
   }
   .featured-character {
     font-size: 2rem;
@@ -10896,7 +10904,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 @media (width <= 576px) {
   #app #site-wrapper {
-    --sb-width: min(30vw, 300px);
+    --sidebar-width: min(30vw, 300px);
   }
 }
 /* prettier-ignore */

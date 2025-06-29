@@ -45,21 +45,21 @@
 .as-between  { align-self: space-between;      }
 .as-end      { align-self: end;                }
 /* Placement */
-.pc-start    { align-content: start;           }
-.pc-center   { align-content: center;          }
-.pc-around   { align-content: space-around;    }
-.pc-between  { align-content: space-between;   }
-.pc-end      { align-content: end;             }
-.pi-start    { align-items: start;             }
-.pi-center   { align-items: center;            }
-.pi-around   { align-items: space-around;      }
-.pi-between  { align-items: space-between;     }
-.pi-end      { align-items: end;               }
-.ps-start    { align-self: start;              }
-.ps-center   { align-self: center;             }
-.ps-around   { align-self: space-around;       }
-.ps-between  { align-self: space-between;      }
-.ps-end      { align-self: end;                }
+.pc-start    { place-content: start;           }
+.pc-center   { place-content: center;          }
+.pc-around   { place-content: space-around;    }
+.pc-between  { place-content: space-between;   }
+.pc-end      { place-content: end;             }
+.pi-start    { place-items: start;             }
+.pi-center   { place-items: center;            }
+.pi-around   { place-items: space-around;      }
+.pi-between  { place-items: space-between;     }
+.pi-end      { place-items: end;               }
+.ps-start    { place-self: start;              }
+.ps-center   { place-self: center;             }
+.ps-around   { place-self: space-around;       }
+.ps-between  { place-self: space-between;      }
+.ps-end      { place-self: end;                }
 
 /* Grid-Gap */
 .gap-1 { gap: 1rem; } .gap-2 { gap: 2rem; } .gap-3 { gap: 3rem; } .gap-4  { gap: 4rem;  }

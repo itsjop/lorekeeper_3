@@ -191,7 +191,7 @@
   .sidebar-header {
     text-align: center;
     a {
-      font-size: 1.1em;
+      font-size: .8em;
       color: var(--clr_purple-50);
       &:hover {
         background-color: transparent;
@@ -273,8 +273,8 @@
       place-items: center;
       contain: paint;
       --cb-size: 0.8;
-      width: calc(1 * var(--sb-width));
-      height: calc(1 * var(--sb-width));
+      width: calc(1 * var(--sidebar-width));
+      height: calc(1 * var(--sidebar-width));
       img {
         border: 0;
         // border-radius: 100vw;
@@ -282,8 +282,8 @@
         z-index: 100;
         overflow: hidden;
         filter: drop-shadow(2px 2px 3px #111111aa);
-        width: calc(0.8 * var(--sb-width));
-        height: calc(0.8 * var(--sb-width));
+        width: calc(0.8 * var(--sidebar-width));
+        height: calc(0.8 * var(--sidebar-width));
         aspect-ratio: 1/1;
         padding: 0;
         animation: char-fly 3.5s cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
@@ -295,8 +295,8 @@
         // mask-image: radial-gradient(black 0%, black 63%, white 63%, white 100%);
         transform-origin: center;
         position: absolute;
-        width: calc(0.8 * var(--sb-width));
-        height: calc(0.8 * var(--sb-width));
+        width: calc(0.8 * var(--sidebar-width));
+        height: calc(0.8 * var(--sidebar-width));
         border-radius: 100vh;
         overflow: hidden;
         .rainbow,
@@ -332,8 +332,8 @@
           &::after {
             content: '';
             position: absolute;
-            width: calc(0.8 * var(--sb-width));
-            height: calc(0.8 * var(--sb-width));
+            width: calc(0.8 * var(--sidebar-width));
+            height: calc(0.8 * var(--sidebar-width));
             animation: stars 10s linear forwards infinite;
             background-image: url('../../../public/images/starring.png'); // TODO: fragile path
             background-repeat: repeat;
@@ -350,8 +350,8 @@
       }
       .char-filter {
         position: absolute;
-        width: calc(0.8 * var(--sb-width));
-        height: calc(0.8 * var(--sb-width));
+        width: calc(0.8 * var(--sidebar-width));
+        height: calc(0.8 * var(--sidebar-width));
         background-color: --clr_purple-300;
         mix-blend-mode: soft-light;
       }
@@ -374,7 +374,7 @@
 
 @media (width <= 992px) {
   #app #site-wrapper {
-    --sb-width: min(50vw, 300px);
+    --sidebar-width: min(50vw, 300px);
   }
   .featured-character {
     .sidebar-section {
@@ -400,7 +400,7 @@
 }
 @media (width <= 576px) {
   #app #site-wrapper {
-    --sb-width: min(30vw, 300px);
+    --sidebar-width: min(30vw, 300px);
   }
 }
 
