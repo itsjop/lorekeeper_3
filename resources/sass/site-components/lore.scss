@@ -1,0 +1,66 @@
+.app {
+  // Lore page overrides
+  .lore {
+    padding: 10px;
+    title {
+      font-family: "Fredoka";  font-size: 2.5em; font-weight: 500;
+      color: var(--clr_purple-600); text-transform: none; }
+    h1 {
+      font-family: "Fredoka";  font-size: 2em; font-weight: 500;
+      color: var(--clr_purple-600); text-transform: none; }
+    h2 {
+      font-family: "Itim";  font-size: 1.5em; font-weight: 800;
+      color: var(--clr_purple-500); text-transform: none; }
+    p {
+      font-family: "Baloo 2";  font-size: 1em; font-weight: 500;
+      color: var(--clr_purple-900); text-transform: none; }
+    .card { background-color: var(--clr_purple-50); padding: 10px; }
+  }
+
+  /* Breakpoints */
+  .w-100 { width: 100%; }
+  .w-90  { width: 90%;  }
+  .w-80  { width: 80%;  }
+  .w-75  { width: 75%;  }
+  .w-66  { width: 66%;  }
+  .w-60  { width: 60%;  }
+  .w-50  { width: 50%;  }
+  .w-40  { width: 40%;  }
+  .w-33  { width: 33%;  }
+  .w-25  { width: 25%;  }
+  .w-10  { width: 10%;  }
+
+  // TODO: figure out how tf to clamp to mobile 100% one day
+  @mixin relative-content-width($scale) {
+    width: calc(
+      clamp(
+        min($scale * 100% ),
+        calc($scale * var(--content-width)),
+        calc($scale * 0.8 * var(--max-content-width))
+      ) - 40px);
+  }
+  .w-content-100 { @include relative-content-width(1.00); }
+  .w-content-90  { @include relative-content-width(0.90); }
+  .w-content-80  { @include relative-content-width(0.80); }
+  .w-content-75  { @include relative-content-width(0.75); }
+  .w-content-66  { @include relative-content-width(0.66); }
+  .w-content-60  { @include relative-content-width(0.66); }
+  .w-content-50  { @include relative-content-width(0.50); }
+  .w-content-40  { @include relative-content-width(0.40); }
+  .w-content-33  { @include relative-content-width(0.33); }
+  .w-content-25  { @include relative-content-width(0.25); }
+  .w-content-10  { @include relative-content-width(0.10); }
+  @media (width <= 992px) {
+    .w-content-100 {width: calc(var(--content-width) - 80px); }
+    .w-content-90  {width: calc(var(--content-width) - 80px); }
+    .w-content-80  {width: calc(var(--content-width) - 80px); }
+    .w-content-75  {width: calc(var(--content-width) - 80px); }
+    .w-content-66  {width: calc(var(--content-width) - 80px); }
+    .w-content-60  {width: calc(var(--content-width) - 80px); }
+    .w-content-50  {width: calc(var(--content-width) - 80px); }
+    .w-content-40  {width: calc(var(--content-width) - 80px); }
+    .w-content-33  {width: calc(var(--content-width) - 80px); }
+    .w-content-25  {width: calc(var(--content-width) - 80px); }
+    .w-content-10  {width: calc(var(--content-width) - 80px); }
+  }
+}

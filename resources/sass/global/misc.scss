@@ -75,13 +75,4 @@
       height: 1.6em;
     }
   }
-
-  // Lore page overrides
-  .lore {
-    title { font-family: "Fredoka"; text-transform: none; font-weight: 500; color: var(--clr_purple-600);}
-    h1 { font-family: "Fredoka"; text-transform: none; font-weight: 500; color: var(--clr_purple-600);}
-    h2 { font-family: "Itim"; text-transform: none; font-weight: 800; color: var(--clr_purple-500);}
-    p { font-family: "Baloo 2"; text-transform: none; font-weight: 400; color: var(--clr_purple-900);}
-    .card { background-color: var(--clr_purple-50); padding: 10px; }
   }
-}

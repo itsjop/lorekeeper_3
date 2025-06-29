@@ -13,10 +13,12 @@
   max-width: 100dvw;
   max-height: 100dvh;
   --sb-width: min(20vw, 300px);
-  --min-content-width: 800px;
-  --max-content-width: 1400px;
-  --content-width: calc(100% - var(--sb-width));
-  --content-width: min(var(--max-content-width) - var(--sb-width), 70vw);
+  --gutter-width: 5vw;
+  --gutters-width: (2 * var(--gutter-width));
+  --min-content-width: 600px;
+  --max-content-width: 1600px;
+  --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sb-width));
+  --content-width: clamp(var(--min-content-width), var(--ideal-content-width), var(--max-content-width));
   #site-wrapper {
     display: grid;
     grid-template:
@@ -27,9 +29,9 @@
       / auto;
     gap: 10px 20px;
     position: relative;
-    max-width: 100dvw;
+    max-width: calc(100dvw - var(--gutters-width));
     height: min-content;
-    // left: calc(var(--sb-width) * -0.5); /* sidebar offset */
+    // left: calc(100dvw - var(--content-width) - var(--sb-width)); /* sidebar offset */
     &.has-sidebar {
       grid-template:
         '   .     logo ' 20vh
@@ -37,8 +39,7 @@
         'sidebar  main ' auto
         'sidebar footer' auto
         /
-        var(--sb-width)
-        clamp(var(--min-content-width), calc(100dvw - 40px - var(--sb-width)), var(--max-content-width));
+        var(--sb-width) var(--content-width);
     }
   }
   #site-wrapper {
@@ -80,6 +81,9 @@
     background-image: url('../../../public/images/somnivores/reveriehalfres.webp');
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
+    --gutter-width: 1vw;
+    --min-content-width: 200px;
+    --ideal-content-width: calc(100dvw - 40px - var(--gutters-width));
     padding: 10px var(--m-app-padding);
     #site-wrapper {
       width: var(--m-app-width);
