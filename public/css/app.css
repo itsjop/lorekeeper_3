@@ -9864,9 +9864,12 @@ a.text-dark:hover, a.text-dark:focus {
 .app .lore p {
   font-family: "Baloo 2";
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--clr_purple-900);
   text-transform: none;
+}
+.app .lore > p {
+  width: clamp(200px, 0.7 * var(--content-width), 0.7 * var(--max-content-width));
 }
 .app .lore .card {
   background-color: var(--clr_purple-50);
@@ -9906,37 +9909,37 @@ a.text-dark:hover, a.text-dark:focus {
   width: 10%;
 }
 .app .w-content-100 {
-  width: calc(clamp(100%, 1 * var(--content-width), 0.8 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 1 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-90 {
-  width: calc(clamp(90%, 0.9 * var(--content-width), 0.72 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.9 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-80 {
-  width: calc(clamp(80%, 0.8 * var(--content-width), 0.64 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.8 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-75 {
-  width: calc(clamp(75%, 0.75 * var(--content-width), 0.6 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.75 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-66 {
-  width: calc(clamp(66%, 0.66 * var(--content-width), 0.528 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-60 {
-  width: calc(clamp(66%, 0.66 * var(--content-width), 0.528 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-50 {
-  width: calc(clamp(50%, 0.5 * var(--content-width), 0.4 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.5 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-40 {
-  width: calc(clamp(40%, 0.4 * var(--content-width), 0.32 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.4 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-33 {
-  width: calc(clamp(33%, 0.33 * var(--content-width), 0.264 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.33 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-25 {
-  width: calc(clamp(25%, 0.25 * var(--content-width), 0.2 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.25 * var(--content-width), 0.56 * var(--max-content-width));
 }
 .app .w-content-10 {
-  width: calc(clamp(10%, 0.1 * var(--content-width), 0.08 * var(--max-content-width)) - 40px);
+  width: clamp(200px, 0.1 * var(--content-width), 0.56 * var(--max-content-width));
 }
 @media (width <= 992px) {
   .app .w-content-100 {

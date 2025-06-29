@@ -1,5 +1,5 @@
 <div class="lore grid ji-center jc-center text-center">
-  <div class="grid grid-1-8-col pc-center pi-center text-left card p-4">
+  <div class="grid w-content-80 grid-1-8-col pc-center pi-center text-left card p-4">
     <i class="fa fa-tools" style="font-size: 2em;"></i>
     <p class="m-0">
       <strong>Somnivores.com</strong> is currently under construction!
@@ -73,7 +73,7 @@
   <img
     src="{{ asset('images/lore_pages/homepage/reveriesmall.png') }}"
     alt="World Map of Reverie"
-    class="w-content-100 br-15"
+    class="w-content-90 br-15"
   >
   <hr>
   <p>Reverie is the magical realm in which the vast majority of the somnivore population resides. Founded by the first colony of
@@ -94,8 +94,7 @@
     🌟 What we offer 🌟
   </h2>
 
-  <div class="grid grid-3-col">
-
+  <div class="grid grid-3-col w-content-66">
     <div>
       <img
         src="{{ asset('images/lore_pages/homepage/characters.png') }}"
@@ -104,7 +103,6 @@
       >
       <p>A unique subtype system and 30+ traits to mix and match, with more to come 🦇</p>
     </div>
-
     <div>
       <img
         src="{{ asset('images/lore_pages/homepage/starlitacres.png') }}"

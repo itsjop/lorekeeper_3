@@ -1,3 +1,13 @@
+// TODO: figure out how tf to clamp to mobile 100% one day
+@mixin relative-content-width($scale, $max: 0.56) {
+  width:
+    clamp(
+      200px,
+      $scale * var(--content-width),
+      $max * var(--max-content-width)
+    );
+}
+
 .app {
   // Lore page overrides
   .lore {
@@ -12,8 +22,10 @@
       font-family: "Itim";  font-size: 1.5em; font-weight: 800;
       color: var(--clr_purple-500); text-transform: none; }
     p {
-      font-family: "Baloo 2";  font-size: 1em; font-weight: 500;
-      color: var(--clr_purple-900); text-transform: none; }
+      font-family: "Baloo 2";  font-size: 1em; font-weight: 600;
+      color: var(--clr_purple-900); text-transform: none;
+    }
+    >p { @include relative-content-width(0.7, 0.7); }
     .card { background-color: var(--clr_purple-50); padding: 10px; }
   }
 
@@ -30,15 +42,6 @@
   .w-25  { width: 25%;  }
   .w-10  { width: 10%;  }
 
-  // TODO: figure out how tf to clamp to mobile 100% one day
-  @mixin relative-content-width($scale) {
-    width: calc(
-      clamp(
-        min($scale * 100% ),
-        calc($scale * var(--content-width)),
-        calc($scale * 0.8 * var(--max-content-width))
-      ) - 40px);
-  }
   .w-content-100 { @include relative-content-width(1.00); }
   .w-content-90  { @include relative-content-width(0.90); }
   .w-content-80  { @include relative-content-width(0.80); }
