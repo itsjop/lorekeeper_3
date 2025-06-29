@@ -191,7 +191,7 @@
   .sidebar-header {
     text-align: center;
     a {
-      font-size: .8em;
+      font-size: 0.8em;
       color: var(--clr_purple-50);
       &:hover {
         background-color: transparent;
@@ -383,13 +383,14 @@
         'thumb owner ' auto
         'thumb species' auto
         'thumb rarity' auto
-        / auto max-content;
+        / 40vw max-content;
       align-content: center;
       align-items: center;
       .display-user,
       .species,
       .rarity,
       .name {
+        font-size: 0.7em;
         &::before {
           content: '・';
         }
@@ -400,7 +401,7 @@
 }
 @media (width <= 576px) {
   #app #site-wrapper {
-    --sidebar-width: min(30vw, 300px);
+    --sidebar-width: min(40vw, 300px);
   }
 }
 

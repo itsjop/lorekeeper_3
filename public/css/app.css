@@ -9540,6 +9540,11 @@ a.text-dark:hover, a.text-dark:focus {
   grid-template-columns: 1fr 8fr;
 }
 
+@media (width < 576px) {
+  .grid-mobile-1 {
+    grid-template-columns: 1fr;
+  }
+}
 /* Border-radius */
 .br-5 {
   border-radius: 5px;
@@ -9765,7 +9770,7 @@ body {
     left: 0;
     margin-bottom: 15px;
     padding: 10px;
-    grid-template: "logo" 20vh "nav" max-content "sidebar" max-content "main" auto "footer" max-content/100%;
+    grid-template: "logo" 25vmin "nav" max-content "sidebar" max-content "main" auto "footer" max-content/100%;
   }
 }
 .app .breadcrumb {
@@ -10891,9 +10896,15 @@ body {
     font-size: 2rem;
   }
   .featured-character .sidebar-section {
-    grid-template: "thumb name" auto "thumb owner " auto "thumb species" auto "thumb rarity" auto/auto max-content;
+    grid-template: "thumb name" auto "thumb owner " auto "thumb species" auto "thumb rarity" auto/40vw max-content;
     align-content: center;
     align-items: center;
+  }
+  .featured-character .sidebar-section .display-user,
+  .featured-character .sidebar-section .species,
+  .featured-character .sidebar-section .rarity,
+  .featured-character .sidebar-section .name {
+    font-size: 0.7em;
   }
   .featured-character .sidebar-section .display-user::before,
   .featured-character .sidebar-section .species::before,
@@ -10904,7 +10915,7 @@ body {
 }
 @media (width <= 576px) {
   #app #site-wrapper {
-    --sidebar-width: min(30vw, 300px);
+    --sidebar-width: min(40vw, 300px);
   }
 }
 /* prettier-ignore */
