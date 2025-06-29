@@ -29,7 +29,7 @@
   <img
     src="{{ asset('images/lore_pages/homepage/keytraits.png') }}"
     alt="Somnivores Key Traits"
-    class="w-content-66"
+    class="w-content-50"
   >
   <p> Similar to their vampire ancestors, somnivores possess the ability to shapeshift from their bat form into a humanoid - this
     is referred to as their demon form. These demons often sport unnatural skin tones and always maintain their horns and spindly
@@ -54,7 +54,7 @@
   <img
     src="{{ asset('images/lore_pages/homepage/dreaming.png') }}"
     alt="Demonstration of the Dream Essence"
-    class="w-content-50"
+    class="w-content-40"
   >
 
   <p>Every dream is unique and the resulting dream essence possesses an appearance and flavor influenced by the contents and
