@@ -495,7 +495,7 @@ class User extends Authenticatable implements MustVerifyEmail {
   public function getDisplayNameAttribute() {
     return (
       $this->is_banned  ? '<strike>'  : '')
-      . '<a href="' . $this->url . '" class="display-user" style="' . ($this->rank->color ? 'color: #' . $this->rank->color . ';' : '') . ($this->is_deactivated ? 'opacity: 0.5;' : '') . '
+      . '<a class="display-user" href="' . $this->url . '" style="' . ($this->rank->color ? 'color: #' . $this->rank->color . ';' : '') . ($this->is_deactivated ? 'opacity: 0.5;' : '') . '
       "><i class="' . ($this->rank->icon ? $this->rank->icon : 'fas fa-user') . ' mr-1" style="opacity: 50%;"></i>' . $this->name . '</a>' . ($this->is_banned ? '</strike>' : '');
   }
 

@@ -1,0 +1,50 @@
+#ml-gridView {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  .masterlist-character {
+    display: grid;
+    grid-template:
+      'name  name ' 2em
+      'thumb thumb' auto
+      'user  user ' 2em
+      'code  type ' 2em
+      / 1fr 1fr;
+    border-radius: 15px 15px 5px 5px;
+    border: 2px solid var(--clr_purple-600);
+    .name {
+      grid-area: name;
+      background-color: var(--clr_purple-600);
+      border-radius: 13px 13px 0 0;
+      display: flex;
+      place-items: center;
+      place-content: center;
+      a {
+        color: var(--clr_purple-50);
+      }
+    }
+    .thumbnail {
+      width: 80%;
+      grid-area: thumb;
+      place-self: center;
+      .ml-thumbnail {
+        object-fit: contain;
+        width: 100%;
+        height: 80%;
+        aspect-ratio: 1/1;
+      }
+    }
+    .slug {
+      grid-area: code;
+    }
+    .display-species {
+      grid-area: type;
+    }
+    // .display-rarity {
+    //   grid-area: name;
+    // }
+    .display-user {
+      grid-area: user;
+    }
+  }
+}

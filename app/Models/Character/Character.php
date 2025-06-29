@@ -273,8 +273,8 @@ class Character extends Model {
   * Get the links for this character
   */
   public function links() {
-      // character id can be in either column
-      return $this->hasMany(CharacterRelation::class, 'character_1_id')->orWhere('character_2_id', $this->id);
+    // character id can be in either column
+    return $this->hasMany(CharacterRelation::class, 'character_1_id')->orWhere('character_2_id', $this->id);
   }
 
   /**********************************************************************************************
@@ -420,7 +420,18 @@ class Character extends Model {
       return $this->slug . ($this->name ? ': ' . $this->name : '');
     }
   }
-
+  public function getNameFallbackAttribute() {
+    if ($this->is_myo_slot) {
+      return $this->name;
+    } else {
+      return ($this->name ? $this->name : $this->slug);
+    }
+  }
+  public function getNameAttribute() {
+    if ($this->is_myo_slot) {
+      return $this->name;
+    }
+  }
   /**
    * Gets the character's warnings, if they exist.
    */

@@ -382,13 +382,6 @@ tr.accountbound {
   max-height: 100%;
 }
 
-.square-grid .square-column .img-thumbnail {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1;
-}
-
 .image-info-box {
   overflow-y: auto;
   max-height: 60vh;

@@ -1,41 +1,69 @@
 /* Sizing */
 .w-100        { width: 100%; }
+.w-80         { width: 80%; }
+.w-75         { width: 75%; }
+.w-66         { width: 66%; }
+.w-50         { width: 50%; }
+.w-40         { width: 40%; }
+.w-33         { width: 33%; }
+.w-25         { width: 25%; }
+
 /* Display */
 .flex          { display: flex; }
 .grid         { display: grid; }
-/* Justification */
-.j-c-start    { justify-content: start;         }
-.j-c-center   { justify-content: center;        }
-.j-c-around   { justify-content: space-around;  }
-.j-c-between  { justify-content: space-between; }
-.j-c-end      { justify-content: end;           }
-.j-i-start    { justify-items: start;           }
-.j-i-center   { justify-items: center;          }
-.j-i-around   { justify-items: space-around;    }
-.j-i-between  { justify-items: space-between;   }
-.j-i-end      { justify-items: end;             }
-.j-s-start    { justify-self: start;            }
-.j-s-center   { justify-self: center;           }
-.j-s-around   { justify-self: space-around;     }
-.j-s-between  { justify-self: space-between;    }
-.j-s-end      { justify-self: end;              }
-/* Alignment */
-.a-c-start    { align-content: start;         }
-.a-c-center   { align-content: center;        }
-.a-c-around   { align-content: space-around;  }
-.a-c-between  { align-content: space-between; }
-.a-c-end      { align-content: end;           }
-.a-i-start    { align-items: start;           }
-.a-i-center   { align-items: center;          }
-.a-i-around   { align-items: space-around;    }
-.a-i-between  { align-items: space-between;   }
-.a-i-end      { align-items: end;             }
-.a-s-start    { align-self: start;            }
-.a-s-center   { align-self: center;           }
-.a-s-around   { align-self: space-around;     }
-.a-s-between  { align-self: space-between;    }
-.a-s-end      { align-self: end;              }
 
-/* GAP */
+/* Justification */
+.jc-start    { justify-content: start;         }
+.jc-center   { justify-content: center;        }
+.jc-around   { justify-content: space-around;  }
+.jc-between  { justify-content: space-between; }
+.jc-end      { justify-content: end;           }
+.ji-start    { justify-items: start;           }
+.ji-center   { justify-items: center;          }
+.ji-around   { justify-items: space-around;    }
+.ji-between  { justify-items: space-between;   }
+.ji-end      { justify-items: end;             }
+.js-start    { justify-self: start;            }
+.js-center   { justify-self: center;           }
+.js-around   { justify-self: space-around;     }
+.js-between  { justify-self: space-between;    }
+.js-end      { justify-self: end;              }
+/* Alignment */
+.ac-start    { align-content: start;           }
+.ac-center   { align-content: center;          }
+.ac-around   { align-content: space-around;    }
+.ac-between  { align-content: space-between;   }
+.ac-end      { align-content: end;             }
+.ai-start    { align-items: start;             }
+.ai-center   { align-items: center;            }
+.ai-around   { align-items: space-around;      }
+.ai-between  { align-items: space-between;     }
+.ai-end      { align-items: end;               }
+.as-start    { align-self: start;              }
+.as-center   { align-self: center;             }
+.as-around   { align-self: space-around;       }
+.as-between  { align-self: space-between;      }
+.as-end      { align-self: end;                }
+
+/* Grid-Gap */
 .gap-1 { gap: 1rem; } .gap-2 { gap: 2rem; } .gap-3 { gap: 3rem; } .gap-4  { gap: 4rem;  }
 .gap-5 { gap: 5rem; } .gap-6 { gap: 6rem; } .gap-8 { gap: 8rem; } .gap-10 { gap: 10rem; }
+
+/* Grid Columns */
+.grid-2-col { grid-template-columns: repeat(2, 1fr); }
+.grid-3-col { grid-template-columns: repeat(3, 1fr); }
+.grid-4-col { grid-template-columns: repeat(4, 1fr); }
+.grid-5-col { grid-template-columns: repeat(5, 1fr); }
+.grid-6-col { grid-template-columns: repeat(6, 1fr); }
+
+/* Border-radius */
+.br-5   { border-radius: 5px;   }
+.br-10  { border-radius: 10px;  }
+.br-15  { border-radius: 15px;  }
+.br-20  { border-radius: 20px;  }
+.br-100 { border-radius: 100vw; }
+
+/* Text-align */
+.ta-left   { text-align: left;   }
+.ta-center { text-align: center; }
+.ta-right  { text-align: right;  }

@@ -107,7 +107,7 @@ class Species extends Model {
      * @return string
      */
     public function getDisplayNameAttribute() {
-        return '<a href="'.$this->url.'" class="display-species">'.$this->name.'</a>';
+        return '<a class="display-species" href="'.$this->url.'">'.$this->name.'</a>';
     }
 
     /**
