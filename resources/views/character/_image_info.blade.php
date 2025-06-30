@@ -58,14 +58,12 @@
             </div>
             <div class="col-lg-8 col-7 pl-1">{!! $image->species_id ? $image->species->displayName : 'None' !!}</div>
           </div>
-          @if (count($image->subtypes))
+          @if($image->subtype_id)
             <div class="row no-gutters">
               <div class="col-lg-4 col-5">
-                <h5>Subtype{{ count($image->subtypes) > 1 ? 's' : '' }}</h5>
+                  <h5>Subtype</h5>
               </div>
-              <div class="col-lg-8 col-7 pl-1">
-                {!! $image->displaySubtypes() !!}
-              </div>
+              <div class="col-lg-8 col-7 pl-1">{!! $image->subtype_id ? $image->subtype->displayName : 'None' !!}</div>
             </div>
           @endif
           @if ($image->character->homeSetting)

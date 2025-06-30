@@ -139,9 +139,9 @@
   </div>
 
   <div class="form-group" id="subtypes">
-    {!! Form::label(ucfirst(__('lorekeeper.subtypes')) . ' (Optional)') !!}
-    {!! Form::select('subtype_ids[]', $subtypes, old('subtype_ids') ?: $character->image->subtypes()?->pluck('subtype_id')->toArray(), ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
-  </div>
+        {!! Form::label('Subtype (Optional)') !!}
+        {!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $character->image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
+    </div>
 
   <hr>
   <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>

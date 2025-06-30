@@ -29,20 +29,6 @@
               'style' => 'width: 250px'
           ]) !!}
         </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            {!! Form::label('subtype_ids[]', 'Species Subtype: ') !!}
-            {!! add_help(
-                'Search for characters that have <strong>' .
-                    (config('lorekeeper.extensions.exclusionary_search') ? 'all' : 'any') .
-                    '</strong> of the selected subtypes.'
-            ) !!}
-            {!! Form::select('subtype_ids[]', $subtypes, Request::get('subtype_ids'), [
-                'class' => 'form-control userselectize',
-                'multiple'
-            ]) !!}
-          </div>
-        </div>
         <div class="masterlist-search-field">
           {!! Form::label('subtype_id', ucfirst(__('lorekeeper.species')) . ' ' . ucfirst(__('lorekeeper.subtype')) . ':') !!}
           {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), [
