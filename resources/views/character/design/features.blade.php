@@ -36,14 +36,14 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('subtype_id', ucfirst(__('lorekeeper.subtype'))) !!}
-        @if($request->character->image->subtype_id && !$request->canModifyCharacter('subtype') && !$request->canModifyCharacter('species'))
+      {!! Form::label('subtype_id', ucfirst(__('lorekeeper.subtype'))) !!}
+      @if ($request->character->image->subtype_id && !$request->canModifyCharacter('subtype') && !$request->canModifyCharacter('species'))
         <div class="p-2 rounded border">{!! $request->character->image->subtype->displayName !!}</div>
-        @else
+      @else
         <div id="subtypes">
-            {!! Form::select('subtype_id', $subtypes, $request->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
+          {!! Form::select('subtype_id', $subtypes, $request->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
         </div>
-        @endif
+      @endif
     </div>
 
     <hr>
@@ -159,14 +159,14 @@
           </div>
           <div class="col-md-10 col-8">{!! $request->species ? $request->species->displayName : 'None Selected' !!}</div>
         </div>
-        @if($request->subtype_id)
+        @if ($request->subtype_id)
           <div class="row">
-              <div class="col-md-2 col-4">
-                  <h5>{{ ucfirst(__('lorekeeper.subtype')) }}</h5>
-              </div>
-              <div class="col-md-10 col-8">
-                  {!! $request->subtype_id ? $request->subtype->displayName : 'None' !!} 
-              </div>
+            <div class="col-md-2 col-4">
+              <h5>{{ ucfirst(__('lorekeeper.subtype')) }}</h5>
+            </div>
+            <div class="col-md-10 col-8">
+              {!! $request->subtype_id ? $request->subtype->displayName : 'None' !!}
+            </div>
           </div>
         @endif
         @if ($request->transformation_id)

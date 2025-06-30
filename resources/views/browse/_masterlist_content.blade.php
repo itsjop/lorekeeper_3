@@ -13,11 +13,7 @@
     </div>
   </div>
   <div class="text-right mb-3">
-    <a
-      href="#advancedSearch"
-      class="btn btn-sm btn-outline-info"
-      data-toggle="collapse"
-    >Show Advanced Search Options <i class="fas fa-caret-down"></i></a>
+    <a href="#advancedSearch" class="btn btn-sm btn-outline-info" data-toggle="collapse">Show Advanced Search Options <i class="fas fa-caret-down"></i></a>
   </div>
   <div class="card bg-light mb-3 collapse" id="advancedSearch">
     <div class="card-body masterlist-advanced-search">
@@ -26,14 +22,14 @@
           {!! Form::label('character_category_id', 'Category: ') !!}
           {!! Form::select('character_category_id', $categories, Request::get('character_category_id'), [
               'class' => 'form-control mr-2',
-              'style' => 'width: 250px'
+              'style' => 'width: 250px',
           ]) !!}
         </div>
         <div class="masterlist-search-field">
           {!! Form::label('subtype_id', ucfirst(__('lorekeeper.species')) . ' ' . ucfirst(__('lorekeeper.subtype')) . ':') !!}
           {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), [
               'class' => 'form-control mr-2',
-              'style' => 'width: 250px'
+              'style' => 'width: 250px',
           ]) !!}
         </div>
         <div class="masterlist-search-field">
@@ -42,19 +38,14 @@
         </div>
         <div class="masterlist-search-field">
           {!! Form::label('has_transformation', 'Has a ' . ucfirst(__('transformations.transformation')) . ': ') !!}
-          {!! Form::select(
-              'has_transformation',
-              ['1' => 'Has a ' . __('transformations.transformation') . '.'],
-              Request::get('has_transformation'),
-              ['class' => 'form-control', 'placeholder' => 'Any']
-          ) !!}
+          {!! Form::select('has_transformation', ['1' => 'Has a ' . __('transformations.transformation') . '.'], Request::get('has_transformation'), ['class' => 'form-control', 'placeholder' => 'Any']) !!}
         </div>
         <div class="masterlist-search-field">
           {!! Form::label('title_id', 'Title: ') !!}
           {!! Form::select('title_id', $titles, Request::get('title_id'), [
               'class' => 'form-control',
               'id' => 'customTitle',
-              'style' => 'width: 250px'
+              'style' => 'width: 250px',
           ]) !!}
         </div>
         <div class="masterlist-search-field" id="customTitleOptions">
@@ -68,7 +59,7 @@
         {!! Form::select('owner', $userOptions, Request::get('owner'), [
             'class' => 'form-control mr-2 userselectize',
             'style' => 'width: 250px',
-            'placeholder' => 'Select a User'
+            'placeholder' => 'Select a User',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -76,7 +67,7 @@
         {!! Form::select('artist', $userOptions, Request::get('artist'), [
             'class' => 'form-control mr-2 userselectize',
             'style' => 'width: 250px',
-            'placeholder' => 'Select a User'
+            'placeholder' => 'Select a User',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -84,7 +75,7 @@
         {!! Form::select('designer', $userOptions, Request::get('designer'), [
             'class' => 'form-control mr-2 userselectize',
             'style' => 'width: 250px',
-            'placeholder' => 'Select a User'
+            'placeholder' => 'Select a User',
         ]) !!}
       </div>
       <hr />
@@ -93,7 +84,7 @@
         {!! Form::text('owner_url', Request::get('owner_url'), [
             'class' => 'form-control mr-2',
             'style' => 'width: 250px',
-            'placeholder' => 'Type a Username'
+            'placeholder' => 'Type a Username',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -101,7 +92,7 @@
         {!! Form::text('artist_url', Request::get('artist_url'), [
             'class' => 'form-control mr-2',
             'style' => 'width: 250px',
-            'placeholder' => 'Type a Username'
+            'placeholder' => 'Type a Username',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -109,7 +100,7 @@
         {!! Form::text('designer_url', Request::get('designer_url'), [
             'class' => 'form-control mr-2',
             'style' => 'width: 250px',
-            'placeholder' => 'Type a Username'
+            'placeholder' => 'Type a Username',
         ]) !!}
       </div>
       <hr />
@@ -117,34 +108,24 @@
         {!! Form::label('sale_value_min', 'Resale Minimum ($): ') !!}
         {!! Form::text('sale_value_min', Request::get('sale_value_min'), [
             'class' => 'form-control mr-2',
-            'style' => 'width: 250px'
+            'style' => 'width: 250px',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
         {!! Form::label('sale_value_max', 'Resale Maximum ($): ') !!}
         {!! Form::text('sale_value_max', Request::get('sale_value_max'), [
             'class' => 'form-control mr-2',
-            'style' => 'width: 250px'
+            'style' => 'width: 250px',
         ]) !!}
       </div>
       @if (!$isMyo)
         <div class="masterlist-search-field">
           {!! Form::label('is_gift_art_allowed', 'Gift Art Status: ') !!}
-          {!! Form::select(
-              'is_gift_art_allowed',
-              [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'],
-              Request::get('is_gift_art_allowed'),
-              ['class' => 'form-control', 'style' => 'width: 250px']
-          ) !!}
+          {!! Form::select('is_gift_art_allowed', [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'], Request::get('is_gift_art_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
         </div>
         <div class="masterlist-search-field">
           {!! Form::label('is_gift_writing_allowed', 'Gift Writing Status: ') !!}
-          {!! Form::select(
-              'is_gift_writing_allowed',
-              [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'],
-              Request::get('is_gift_writing_allowed'),
-              ['class' => 'form-control', 'style' => 'width: 250px']
-          ) !!}
+          {!! Form::select('is_gift_writing_allowed', [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'], Request::get('is_gift_writing_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
         </div>
       @endif
       <br />
@@ -156,7 +137,7 @@
             'data-on' => 'Open For Trade',
             'data-off' => 'Any Trading Status',
             'data-width' => '200',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -166,7 +147,7 @@
             'data-on' => 'Can Be Sold',
             'data-off' => 'Any Sellable Status',
             'data-width' => '204',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -176,7 +157,7 @@
             'data-on' => 'Can Be Traded',
             'data-off' => 'Any Tradeable Status',
             'data-width' => '220',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <div class="masterlist-search-field">
@@ -186,7 +167,7 @@
             'data-on' => 'Can Be Gifted',
             'data-off' => 'Any Giftable Status',
             'data-width' => '202',
-            'data-height' => '46'
+            'data-height' => '46',
         ]) !!}
       </div>
       <hr />
@@ -197,17 +178,17 @@
         {!! Form::select('feature_ids[]', $features, Request::get('feature_ids'), [
             'class' => 'form-control feature-select userselectize',
             'placeholder' => 'Select Traits',
-            'multiple'
+            'multiple',
         ]) !!}
       </div>
       <hr />
       <div class="masterlist-search-field">
         {!! Form::checkbox('search_images', 1, Request::get('search_images'), [
             'class' => 'form-check-input mr-3',
-            'data-toggle' => 'toggle'
+            'data-toggle' => 'toggle',
         ]) !!}
         <span class="ml-2">Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
-            'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.'
+            'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.',
         ) !!}</span>
       </div>
 
@@ -226,10 +207,10 @@
                 'id_desc' => 'Newest First',
                 'id_asc' => 'Oldest First',
                 'sale_value_desc' => 'Highest Sale Value',
-                'sale_value_asc' => 'Lowest Sale Value'
+                'sale_value_asc' => 'Lowest Sale Value',
             ],
             Request::get('sort'),
-            ['class' => 'form-control']
+            ['class' => 'form-control'],
         ) !!}
       @else
         {!! Form::select(
@@ -238,10 +219,10 @@
                 'id_desc' => 'Newest First',
                 'id_asc' => 'Oldest First',
                 'sale_value_desc' => 'Highest Sale Value',
-                'sale_value_asc' => 'Lowest Sale Value'
+                'sale_value_asc' => 'Lowest Sale Value',
             ],
             Request::get('sort'),
-            ['class' => 'form-control']
+            ['class' => 'form-control'],
         ) !!}
       @endif
     </div>
@@ -255,7 +236,7 @@
       <div class="card-body d-flex">
         {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control feature-select selectize',
-            'placeholder' => 'Select Trait'
+            'placeholder' => 'Select Trait',
         ]) !!}
         <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
       </div>
@@ -296,11 +277,8 @@ alt="List View"
           </a>
         </div>
         <a class="thumbnail" href="{{ $character->url }}">
-          <img
-            src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            class="ml-thumbnail"
-            alt="Thumbnail for {{ $character->nameFallback }}"
-          /></a>
+          <img src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+            class="ml-thumbnail" alt="Thumbnail for {{ $character->nameFallback }}" /></a>
         {{-- <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div> --}}
         {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!}
         {{-- {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!} --}}
@@ -308,9 +286,7 @@ alt="List View"
         <div class="slug">
           {{ Illuminate\Support\Str::limit($character->slug, 20, $end = '...') }}
         </div>
-        @if (count($character->image->content_warnings ?? []) &&
-                (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2))
-        )
+        @if (count($character->image->content_warnings ?? []) && (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2)))
           <p class="mb-0">
             <span class="text-danger mr-1"><strong>Character Warning:</strong></span>
             {{ implode(', ', $character->image->content_warnings) }}

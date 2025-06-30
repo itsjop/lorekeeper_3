@@ -58,10 +58,10 @@
             </div>
             <div class="col-lg-8 col-7 pl-1">{!! $image->species_id ? $image->species->displayName : 'None' !!}</div>
           </div>
-          @if($image->subtype_id)
+          @if ($image->subtype_id)
             <div class="row no-gutters">
               <div class="col-lg-4 col-5">
-                  <h5>Subtype</h5>
+                <h5>Subtype</h5>
               </div>
               <div class="col-lg-8 col-7 pl-1">{!! $image->subtype_id ? $image->subtype->displayName : 'None' !!}</div>
             </div>

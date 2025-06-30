@@ -5,8 +5,8 @@
 </div>
 
 <div class="form-group" id="subtypes">
-    {!! Form::label(ucfirst(__('lorekeeper.subtype')).' (Optional)') !!}
-    {!! Form::select('subtype_id', $subtypes, $image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
+  {!! Form::label(ucfirst(__('lorekeeper.subtype')) . ' (Optional)') !!}
+  {!! Form::select('subtype_id', $subtypes, $image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
 </div>
 
 <div class="form-group">
