@@ -79,7 +79,8 @@
                           <img src="{{ $evolution->imageUrl }}" class="img-fluid" style="max-height: 10em;" alt="{{ $evolution->evolution_name }}" data-toggle="tooltip" data-title="{{ $evolution->evolution_name }}" style="max-height:200px" />
                         </a>
                         <div class="h5">
-                          {{ $evolution->evolution_name }} (Stage {{ $evolution->evolution_stage }})
+                          {{ $evolution->evolution_name }}
+                           {{-- (Stage {{ $evolution->evolution_stage }}) --}}
                           @if (!$loop->last)
                             <i class="fas fa-arrow-right fa-lg mt-2"></i>
                           @endif

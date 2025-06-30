@@ -1485,9 +1485,6 @@ select.form-control:focus::-ms-value {
   background-color: var(--gray-500);
 }
 
-.nav-link.disabled {
-  color: var(--gray-600);
-}
 
 .nav-tabs {
   border-bottom: 1px solid var(--gray-900);

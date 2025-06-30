@@ -337,16 +337,6 @@ main > .row {
   max-width: 350px !important;
 }
 
-.nav-tabs .nav-link.active {
-  background-color: transparent;
-}
-.nav-tabs .nav-link {
-  text-transform: uppercase;
-  font-family:
-    Roboto Condensed,
-    serif;
-}
-
 .display-user,
 .display-character {
   font-weight: bold;
@@ -359,25 +349,6 @@ main > .row {
   color: rgba(0, 0, 0, 0.3);
 }
 
-.breadcrumb {
-  background-color: transparent;
-  padding: 0;
-  font-family:
-    Roboto Condensed,
-    serif;
-  text-transform: uppercase;
-  align-items: center;
-}
-.breadcrumb a {
-  color: rgba(0, 0, 0, 0.3);
-}
-.breadcrumb a:hover {
-  color: rgba(0, 0, 0, 0.4);
-  text-decoration: none;
-}
-.breadcrumb-item + .breadcrumb-item:before {
-  content: "»";
-}
 .collapse-title {
   position: relative;
 }

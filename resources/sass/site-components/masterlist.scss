@@ -11,16 +11,16 @@
       'code  type ' 2em
       / 1fr 1fr;
     border-radius: 15px 15px 5px 5px;
-    border: 2px solid var(--clr_purple-600);
+    border: 2px solid var(--purple-clr_600);
     .name {
       grid-area: name;
-      background-color: var(--clr_purple-600);
+      background-color: var(--purple-clr_600);
       border-radius: 13px 13px 0 0;
       display: flex;
       place-items: center;
       place-content: center;
       a {
-        color: var(--clr_purple-50);
+        color: var(--purple-clr_50);
       }
     }
     .thumbnail {
