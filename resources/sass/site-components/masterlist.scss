@@ -1,3 +1,40 @@
+#masterlist {
+  container: mlsearch / inline-size;
+}
+fieldset.masterlist-search-grid {
+  display: grid;
+  grid-template:
+    'name  species sortby submit a-btn' 1fr
+    'a-box a-box   a-box  a-box  a-box' 1fr
+    / 1fr 1fr 1fr 1fr 1fr;
+  .character-name {
+    grid-area: name;
+  }
+  .species {
+    grid-area: species;
+  }
+  .sortby {
+    grid-area: sortby;
+  }
+  .advanced-search-toggle {
+    grid-area: a-btn;
+  }
+  #advancedSearch {
+    grid-area: a-box;
+  }
+  .searchbutton {
+    grid-area: submit;
+  }
+}
+@container mlsearch (width < 800px) {
+  fieldset.masterlist-search-grid {
+    grid-template:
+      'name   name    submit' 1fr
+      'sortby species a-btn ' 1fr
+      'a-box  a-box   a-box ' 0px
+      / 1fr   1fr     1fr;
+  }
+}
 #ml-gridView {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

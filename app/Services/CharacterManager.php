@@ -564,6 +564,8 @@ class CharacterManager extends Service {
       Config::set('image.driver', 'imagick');
     }
     $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName);
+
+
     if (!in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) && config('lorekeeper.settings.masterlist_image_format') != null && config('lorekeeper.settings.masterlist_image_background') != null) {
       $canvas = Image::canvas($image->width(), $image->height(), config('lorekeeper.settings.masterlist_image_background'));
       $image = $canvas->insert($image, 'center');
@@ -2487,7 +2489,7 @@ class CharacterManager extends Service {
       // Update other stats
       $request->species_id = $species->id;
       $request->rarity_id = $rarity->id;
-            $request->subtype_id = $subtype ? $subtype->id : null;
+      $request->subtype_id = $subtype ? $subtype->id : null;
       $request->transformation_id = $transformation ? $transformation->id : null;
       $request->transformation_info = $transformation_info;
       $request->transformation_description = $transformation_description;

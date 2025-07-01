@@ -484,6 +484,10 @@ body {
 .app a:hover {
   color: var(--purple-clr_700);
 }
+.app .btn {
+  margin: 5px;
+  border-radius: 10px;
+}
 .app .btn-primary,
 .app .btn-info,
 .app .btn-danger,
@@ -501,7 +505,7 @@ body {
   background-color: var(--purple-clr_400);
   color: var(--purple-clr_700);
 }
-.app .unread {
+.app .notifications-table.unread {
   background-color: var(--purple-clr_100);
 }
 
@@ -966,6 +970,38 @@ body {
   }
 }
 
+#masterlist {
+  container: mlsearch/inline-size;
+}
+
+fieldset.masterlist-search-grid {
+  display: grid;
+  grid-template: "name  species sortby submit a-btn" 1fr "a-box a-box   a-box  a-box  a-box" 1fr/1fr 1fr 1fr 1fr 1fr;
+}
+fieldset.masterlist-search-grid .character-name {
+  grid-area: name;
+}
+fieldset.masterlist-search-grid .species {
+  grid-area: species;
+}
+fieldset.masterlist-search-grid .sortby {
+  grid-area: sortby;
+}
+fieldset.masterlist-search-grid .advanced-search-toggle {
+  grid-area: a-btn;
+}
+fieldset.masterlist-search-grid #advancedSearch {
+  grid-area: a-box;
+}
+fieldset.masterlist-search-grid .searchbutton {
+  grid-area: submit;
+}
+
+@container mlsearch (width < 800px) {
+  fieldset.masterlist-search-grid {
+    grid-template: "name   name    submit" 1fr "sortby species a-btn " 1fr "a-box  a-box   a-box " 0px/1fr 1fr 1fr;
+  }
+}
 #ml-gridView {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

@@ -38,6 +38,7 @@ h4, h5, h6 {
       color: var(--purple-clr_700);
     }
   }
+  .btn { margin: 5px; border-radius: 10px;}
   .btn-primary,
   .btn-info,
   .btn-danger,
@@ -50,5 +51,5 @@ h4, h5, h6 {
   }
   .btn-primary, .badge-primary { background-color: var(--teal-clr_600); }
   .btn-secondary { background-color: var(--purple-clr_400);  color: var(--purple-clr_700); }
-  .unread { background-color: var(--purple-clr_100); }
+  .notifications-table.unread { background-color: var(--purple-clr_100); }
 }
