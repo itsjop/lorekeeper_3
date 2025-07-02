@@ -26,6 +26,7 @@
           &.show {
             border: 2px var(--purple-clr_300) solid;
             background-color: var(--purple-clr_50);
+            padding: 0 10px;
             z-index: 1;
             .dropdown-toggle {
               color: var(--purple-clr_700);
@@ -40,7 +41,7 @@
         &.nav-notifications {
           width: 2em;
           transform-origin: 50% 300%;
-          animation: wobble-hor-bottom  5s var(--smoothIn_linear)forwards infinite;
+          animation: wobble-hor-bottom 5s var(--smoothIn_linear) forwards infinite;
         }
         > a {
           color: var(--purple-clr_bgtext);
@@ -140,6 +141,7 @@
     border: 2px var(--purple-clr_300) solid;
     border-top: 0;
     margin: -2px 0 0 -2px;
+    width: max-content;
     transition:
       all 0.3s var(--spring_linear) allow-discrete,
       display 0.3s var(--spring_linear) allow-discrete;
@@ -149,7 +151,8 @@
     grid-auto-rows: auto;
     min-width: max-content;
     position: relative;
-    width: 100%;
+    top: 100%;
+    left: 0;
     padding: 0 0 10px;
     contain: layout;
     border-radius: 15px;
@@ -388,12 +391,28 @@
 }
 
 @keyframes wobble-hor-bottom {
-  0%   { transform: rotate(0deg); }
-  85%  { transform: rotate(0deg); }
-  87%  { transform: rotate(5deg); }
-  90%  { transform: rotate(-4deg); }
-  94%  { transform: rotate(3deg); }
-  96%  { transform: rotate(-2deg); }
-  98%  { transform: rotate(1deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(0deg);
+  }
+  87% {
+    transform: rotate(5deg);
+  }
+  90% {
+    transform: rotate(-4deg);
+  }
+  94% {
+    transform: rotate(3deg);
+  }
+  96% {
+    transform: rotate(-2deg);
+  }
+  98% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
