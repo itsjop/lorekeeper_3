@@ -22,6 +22,7 @@ class CharacterImage extends Model {
     'user_id',
     'species_id',
     'rarity_id',
+    'subtype_id',
     'url',
     'extension',
     'use_cropper',
@@ -122,10 +123,10 @@ class CharacterImage extends Model {
   }
 
   /**
-   * Get the subtype of the character image.
-   */
-  public function subtypes() {
-    return $this->hasMany(CharacterImageSubtype::class, 'character_image_id');
+    * Get the subtype of the character image.
+  */
+  public function subtype() {
+      return $this->belongsTo(Subtype::class, 'subtype_id');
   }
 
   /**
@@ -331,21 +332,6 @@ class CharacterImage extends Model {
         OTHER FUNCTIONS
 
    **********************************************************************************************/
-
-  /**
-   * Displays the image's subtypes as an imploded string.
-   */
-  public function displaySubtypes() {
-    if (!count($this->subtypes)) {
-      return 'None';
-    }
-    $subtypes = [];
-    foreach ($this->subtypes as $subtype) {
-      $subtypes[] = $subtype->subtype->displayName;
-    }
-
-    return implode(', ', $subtypes);
-  }
 
   /**
    * Determines if the character has content warning display.

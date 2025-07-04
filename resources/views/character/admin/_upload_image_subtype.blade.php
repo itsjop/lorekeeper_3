@@ -1,8 +1,2 @@
-{!! Form::label(ucfirst(__('lorekeeper.subtypes')) . ' (Optional)') !!}
-{!! Form::select('subtype_ids', $subtypes, old('subtype_ids') ?: $image->subtypes()?->pluck('subtype_id')->toArray() ?? [], ['class' => 'form-control', 'id' => 'subtype', 'multiple']) !!}
-
-<script>
-  $('#subtype').selectize({
-    maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-  });
-</script>
+{!! Form::label('Subtype (Optional)') !!}
+{!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $subtype, ['class' => 'form-control', 'id' => 'subtype']) !!}

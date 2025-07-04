@@ -61,20 +61,6 @@
                 'style' => 'width: 250px'
             ]) !!}
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              {!! Form::label('subtype_ids[]', 'Species Subtype: ') !!}
-              {!! add_help(
-                  'Search for characters that have <strong>' .
-                      (config('lorekeeper.extensions.exclusionary_search') ? 'all' : 'any') .
-                      '</strong> of the selected subtypes.'
-              ) !!}
-              {!! Form::select('subtype_ids[]', $subtypes, Request::get('subtype_ids'), [
-                  'class' => 'form-control userselectize',
-                  'multiple'
-              ]) !!}
-            </div>
-          </div>
           <div class="masterlist-search-field">
             {!! Form::label('subtype_id', ucfirst(__('lorekeeper.species')) . ' ' . ucfirst(__('lorekeeper.subtype')) . ':') !!}
             {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), [
@@ -163,7 +149,7 @@
           {!! Form::label('sale_value_min', 'Resale Minimum ($): ') !!}
           {!! Form::text('sale_value_min', Request::get('sale_value_min'), [
               'class' => 'form-control mr-2',
-              'style' => 'width: 250px'
+              'style' => 'width: 250px',
           ]) !!}
         </div>
         <div class="masterlist-search-field">
@@ -271,7 +257,7 @@
       <div class="card-body d-flex">
         {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control feature-select selectize',
-            'placeholder' => 'Select Trait'
+            'placeholder' => 'Select Trait',
         ]) !!}
         <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
       </div>
@@ -312,11 +298,8 @@ alt="List View"
           </a>
         </div>
         <a class="thumbnail" href="{{ $character->url }}">
-          <img
-            src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            class="ml-thumbnail"
-            alt="Thumbnail for {{ $character->nameFallback }}"
-          /></a>
+          <img src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+            class="ml-thumbnail" alt="Thumbnail for {{ $character->nameFallback }}" /></a>
         {{-- <div class="mt-1">@include('widgets._object_block', ['object' => $character->image])</div> --}}
         {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!}
         {{-- {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!} --}}
@@ -324,9 +307,7 @@ alt="List View"
         <div class="slug">
           {{ Illuminate\Support\Str::limit($character->slug, 20, $end = '...') }}
         </div>
-        @if (count($character->image->content_warnings ?? []) &&
-                (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2))
-        )
+        @if (count($character->image->content_warnings ?? []) && (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2)))
           <p class="mb-0">
             <span class="text-danger mr-1"><strong>Character Warning:</strong></span>
             {{ implode(', ', $character->image->content_warnings) }}

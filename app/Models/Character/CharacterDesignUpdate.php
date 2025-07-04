@@ -36,7 +36,7 @@ class CharacterDesignUpdate extends Model {
     'y1',
     'hash',
     'species_id',
-    'subtype_ids',
+    'subtype_id',
     'rarity_id',
     'has_comments',
     'has_image',
@@ -66,7 +66,6 @@ class CharacterDesignUpdate extends Model {
    */
   protected $casts = [
     'submitted_at' => 'datetime',
-    'subtype_ids'  => 'array',
     'data'         => 'array',
   ];
 
@@ -121,6 +120,14 @@ class CharacterDesignUpdate extends Model {
    */
   public function species() {
     return $this->belongsTo(Species::class, 'species_id');
+  }
+
+  
+  /**
+  * Get the subtype of the design update.
+  */
+  public function subtype() {
+      return $this->belongsTo(Subtype::class, 'subtype_id');
   }
 
   /**
@@ -392,26 +399,6 @@ class CharacterDesignUpdate extends Model {
     }
 
     return $result;
-  }
-
-  /**
-   * Get the subtypes of the design update.
-   */
-  public function subtypes() {
-    return $this->subtype_ids;
-  }
-
-  /**
-   * Get the subtypes of the design update.
-   */
-  public function displaySubtypes() {
-    $subtypes = $this->subtypes();
-    $result = [];
-    foreach ($subtypes as $subtype) {
-            $result[] = Subtype::find($subtype)->displayName;
-    }
-
-    return implode(', ', $result);
   }
 
   /**

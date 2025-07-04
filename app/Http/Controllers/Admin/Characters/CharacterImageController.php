@@ -106,7 +106,6 @@ class CharacterImageController extends Controller {
       'rarity_id',
       'feature_id',
       'feature_data',
-      'subtype_ids',
       'is_valid',
       'is_visible',
       'transformation_id',
@@ -162,7 +161,7 @@ class CharacterImageController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postEditImageFeatures(Request $request, CharacterManager $service, $id) {
-    $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'sex', 'subtype_ids', 'transformation_id', 'transformation_info', 'transformation_description', 'title_ids', 'title_data']);
+    $data = $request->only(['species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data', 'sex', 'transformation_id', 'transformation_info', 'transformation_description', 'title_ids', 'title_data']);
     $image = CharacterImage::find($id);
     if (!$image) {
       abort(404);
