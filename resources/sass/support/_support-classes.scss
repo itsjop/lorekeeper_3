@@ -44,6 +44,22 @@
 .as-around   { align-self: space-around;       }
 .as-between  { align-self: space-between;      }
 .as-end      { align-self: end;                }
+/* Placement */
+.pc-start    { place-content: start;           }
+.pc-center   { place-content: center;          }
+.pc-around   { place-content: space-around;    }
+.pc-between  { place-content: space-between;   }
+.pc-end      { place-content: end;             }
+.pi-start    { place-items: start;             }
+.pi-center   { place-items: center;            }
+.pi-around   { place-items: space-around;      }
+.pi-between  { place-items: space-between;     }
+.pi-end      { place-items: end;               }
+.ps-start    { place-self: start;              }
+.ps-center   { place-self: center;             }
+.ps-around   { place-self: space-around;       }
+.ps-between  { place-self: space-between;      }
+.ps-end      { place-self: end;                }
 
 /* Grid-Gap */
 .gap-1 { gap: 1rem; } .gap-2 { gap: 2rem; } .gap-3 { gap: 3rem; } .gap-4  { gap: 4rem;  }
@@ -55,6 +71,15 @@
 .grid-4-col { grid-template-columns: repeat(4, 1fr); }
 .grid-5-col { grid-template-columns: repeat(5, 1fr); }
 .grid-6-col { grid-template-columns: repeat(6, 1fr); }
+.grid-1-2-col { grid-template-columns: 1fr 2fr }
+.grid-1-3-col { grid-template-columns: 1fr 3fr }
+.grid-1-4-col { grid-template-columns: 1fr 4fr }
+.grid-1-6-col { grid-template-columns: 1fr 6fr }
+.grid-1-8-col { grid-template-columns: 1fr 8fr }
+
+@media (width < 576px){
+  .grid-mobile-1 { grid-template-columns: 1fr; }
+}
 
 /* Border-radius */
 .br-5   { border-radius: 5px;   }

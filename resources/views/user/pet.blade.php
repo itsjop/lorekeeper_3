@@ -56,7 +56,8 @@
           @if ($pet->evolution)
             <h2 class="h5">Evolved</h2>
             <p>
-              {{ $pet->evolution->evolution_name }} (Stage {{ $pet->evolution->evolution_stage }})
+              {{ $pet->evolution->evolution_name }}
+              {{-- (Stage {{ $pet->evolution->evolution_stage }}) --}}
             </p>
           @endif
         </div>

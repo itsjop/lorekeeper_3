@@ -117,6 +117,7 @@ class DesignController extends Controller {
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getImage($id) {
+
     $r = CharacterDesignUpdate::find($id);
     if (!$r || ($r->user_id != Auth::user()->id && !Auth::user()->hasPower('manage_characters'))) {
       abort(404);
@@ -154,6 +155,7 @@ class DesignController extends Controller {
         flash($error)->error();
       }
     }
+
 
     return redirect()->back();
   }

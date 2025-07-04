@@ -25,7 +25,7 @@
         align-items: center;
         &:first-of-type::before,
         &::after {
-          color: var(--clr_purple-300);
+          color: var(--purple-clr_300);
         }
         &:first-of-type::before {
           content: '✦';
@@ -41,13 +41,13 @@
       .copyright {
         grid-area: credit;
         font-size: 0.8em;
-        color: var(--clr_purple-800);
+        color: var(--purple-clr_800);
       }
       #backToTop {
         grid-area: top;
         border-radius: 50px;
-        color: var(--clr_purple-100);
-        background-color: var(--clr_purple-400);
+        color: var(--purple-clr_100);
+        background-color: var(--purple-clr_400);
         width: 2rem;
         height: 2rem;
         cursor: pointer;

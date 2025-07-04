@@ -6,20 +6,9 @@
       <span class="line"></span>
     </span>
   </button>
-  <div class="global-site-info">
-    <div class="currency">
-      {{-- <div class="col-lg-10 col-md-9 col-6">
-        {{ $currency->quantity }}
-        @if ($currency->has_icon)
-          {!! $currency->displayIcon !!}
-        @endif
-      </div> --}}
-    </div>
-    <div class="clock"></div>
-  </div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <!-- Left Side Of Navbar -->
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav">
       <li class="nav-item dropdown">
         <a id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Site
@@ -216,7 +205,7 @@
           </li>
         @endif
         @if (Auth::user()->notifications_unread)
-          <li class="nav-item">
+          <li class="nav-item nav-notifications">
             <a class="nav-link btn btn-secondary btn-sm" href="{{ url('notifications') }}"><span class="fas fa-envelope"></span>
               {{ Auth::user()->notifications_unread }}</a>
           </li>

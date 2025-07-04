@@ -14,12 +14,12 @@
   #sidebar {
     .sidebar-header {
       border-radius: 15px 15px 0 0;
-      background-color: var(--clr_purple-600);
+      background-color: var(--purple-clr_600);
       padding: 5px;
       font-weight: 500;
       font-size: 1.2em;
       a {
-        color: var(--clr_purple-100);
+        color: var(--purple-clr_100);
       }
     }
     #sidebar-ul {
@@ -32,12 +32,12 @@
         .sidebar-item {
           display: flex;
           align-items: center;
-          background-color: var(--clr_purple-50);
+          background-color: var(--purple-clr_50);
           & + * {
             // border-top: 1px solid #8888;
           } /* Owl Syntax */
           a {
-            color: var(--clr_purple-500);
+            color: var(--purple-clr_500);
             padding: 3px 0;
             &.active {
               font-weight: 700;
@@ -45,13 +45,13 @@
             }
             &:hover {
               transition: 0.1s linear;
-              background-color: var(--clr_purple-300);
-              color: var(--clr_purple-800);
+              background-color: var(--purple-clr_300);
+              color: var(--purple-clr_800);
             }
           }
           &:has(a.active) {
             height: 2rem;
-            background-color: var(--clr_purple-400);
+            background-color: var(--purple-clr_400);
           }
         }
       }
@@ -64,7 +64,7 @@
   details {
     width: 100%;
     font-size: 1em;
-    background-color: var(--clr_purple-50);
+    background-color: var(--purple-clr_50);
     transition: 0.4s var(--spring_linear);
     overflow: clip;
     border-width: 0 2px;
@@ -75,7 +75,7 @@
       position: relative;
       text-align: center;
       padding: 5px 0;
-      background-color: var(--clr_purple-100);
+      background-color: var(--purple-clr_100);
       &::marker {
         content: '';
       }
@@ -87,7 +87,7 @@
         display: inline-block;
         width: 0.7em;
         height: 0.7em;
-        background-color: var(--clr_purple-600);
+        background-color: var(--purple-clr_600);
         transform: rotate(0deg);
         clip-path: polygon(0 0, 0% 100%, 100% 50%);
         transform-origin: 50%;
@@ -103,7 +103,7 @@
   }
   details[open] {
     background-color: transparent;
-    background-color: var(--clr_purple-100);
+    background-color: var(--purple-clr_100);
     li {
       padding: 0;
       &:last-of-type {
@@ -127,7 +127,7 @@
       }
     }
     summary {
-      background-color: var(--clr_purple-200);
+      background-color: var(--purple-clr_200);
       &::after {
         transform: rotate(90deg);
       }
@@ -167,7 +167,7 @@
   a {
     color: rgba(0, 0, 0, 0.4);
     &:hover {
-      color: var(--clr_purple-900);
+      color: var(--purple-clr_900);
     }
     &:hover,
     &:active,
@@ -179,7 +179,7 @@
   details {
     list-style-type: none;
     ul {
-      background-color: var(--clrclr_purple-bgtext);
+      background-color: var(--purple-clr_300);
       border-top-left-radius: 0.25rem;
       border-bottom-left-radius: 0.25rem;
       margin-bottom: 1em;
@@ -191,11 +191,11 @@
   .sidebar-header {
     text-align: center;
     a {
-      font-size: 1.1em;
-      color: var(--clr_purple-50);
+      font-size: 0.8em;
+      color: var(--purple-clr_50);
       &:hover {
         background-color: transparent;
-        color: var(--clr_purple-50);
+        color: var(--purple-clr_50);
       }
     }
   }
@@ -221,7 +221,7 @@
       left: 0%;
     }
     .sidebar-ul {
-      border: 2px solid var(--clr_purple-500);
+      border: 2px solid var(--purple-clr_500);
     }
     > ul {
       padding-top: 0px;
@@ -233,9 +233,9 @@
       padding-left: 0px;
     }
     ul li {
-      background-color: var(--clr_purple-bgtext);
+      background-color: var(--purple-clr_bgtext);
       border-radius: 0;
-      border: 0px solid var(--clr_purple-100);
+      border: 0px solid var(--purple-clr_100);
       border-bottom-width: 1px;
       padding: 1em 0;
       box-shadow: none;
@@ -249,7 +249,7 @@
 // FEATURED CHARACTER
 .featured-character {
   .sidebar-header {
-    background-color: var(--clr_purple-600);
+    background-color: var(--purple-clr_600);
   }
   .sidebar-section {
     display: grid;
@@ -273,8 +273,8 @@
       place-items: center;
       contain: paint;
       --cb-size: 0.8;
-      width: calc(1 * var(--sb-width));
-      height: calc(1 * var(--sb-width));
+      width: calc(1 * var(--sidebar-width));
+      height: calc(1 * var(--sidebar-width));
       img {
         border: 0;
         // border-radius: 100vw;
@@ -282,8 +282,8 @@
         z-index: 100;
         overflow: hidden;
         filter: drop-shadow(2px 2px 3px #111111aa);
-        width: calc(0.8 * var(--sb-width));
-        height: calc(0.8 * var(--sb-width));
+        width: calc(0.8 * var(--sidebar-width));
+        height: calc(0.8 * var(--sidebar-width));
         aspect-ratio: 1/1;
         padding: 0;
         animation: char-fly 3.5s cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
@@ -295,8 +295,8 @@
         // mask-image: radial-gradient(black 0%, black 63%, white 63%, white 100%);
         transform-origin: center;
         position: absolute;
-        width: calc(0.8 * var(--sb-width));
-        height: calc(0.8 * var(--sb-width));
+        width: calc(0.8 * var(--sidebar-width));
+        height: calc(0.8 * var(--sidebar-width));
         border-radius: 100vh;
         overflow: hidden;
         .rainbow,
@@ -332,8 +332,8 @@
           &::after {
             content: '';
             position: absolute;
-            width: calc(0.8 * var(--sb-width));
-            height: calc(0.8 * var(--sb-width));
+            width: calc(0.8 * var(--sidebar-width));
+            height: calc(0.8 * var(--sidebar-width));
             animation: stars 10s linear forwards infinite;
             background-image: url('../../../public/images/starring.png'); // TODO: fragile path
             background-repeat: repeat;
@@ -350,9 +350,9 @@
       }
       .char-filter {
         position: absolute;
-        width: calc(0.8 * var(--sb-width));
-        height: calc(0.8 * var(--sb-width));
-        background-color: --clr_purple-300;
+        width: calc(0.8 * var(--sidebar-width));
+        height: calc(0.8 * var(--sidebar-width));
+        background-color: --purple-clr_300;
         mix-blend-mode: soft-light;
       }
     }
@@ -374,7 +374,7 @@
 
 @media (width <= 992px) {
   #app #site-wrapper {
-    --sb-width: min(50vw, 300px);
+    --sidebar-width: min(50vw, 300px);
   }
   .featured-character {
     .sidebar-section {
@@ -383,13 +383,14 @@
         'thumb owner ' auto
         'thumb species' auto
         'thumb rarity' auto
-        / auto max-content;
+        / 40vw max-content;
       align-content: center;
       align-items: center;
       .display-user,
       .species,
       .rarity,
       .name {
+        font-size: 0.7em;
         &::before {
           content: '・';
         }
@@ -400,7 +401,7 @@
 }
 @media (width <= 576px) {
   #app #site-wrapper {
-    --sb-width: min(30vw, 300px);
+    --sidebar-width: min(40vw, 300px);
   }
 }
 
@@ -423,6 +424,6 @@
 /* prettier-ignore */
 @keyframes char-fly {
   0% { transform: rotate(-1.5deg); }
-  50% { transform: rotate(1.5deg); }
+  50% { transform: rotate(2deg); }
   100% { transform: rotate(-1.5deg); }
 }

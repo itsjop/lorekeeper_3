@@ -6,8 +6,8 @@
       --bc_chevron-width: 20px;
       --bc_chevron-size: 10px;
       position: relative;
-      --bc-bg: var(--clr_purple-500);
-      --bc-col: var(--clr_purple-100);
+      --bc-bg: var(--purple-clr_500);
+      --bc-col: var(--purple-clr_100);
       display: flex;
       padding: 0 10px 0 20px;
       a,
@@ -16,16 +16,16 @@
         z-index: 1;
       }
       &:nth-of-type(1) {
-        --bc-bg: var(--clr_purple-600);
-        --bc-col: var(--clr_purple-100);
+        --bc-bg: var(--purple-clr_600);
+        --bc-col: var(--purple-clr_100);
       }
       &:nth-of-type(2) {
-        --bc-bg: var(--clr_purple-500);
-        --bc-col: var(--clr_purple-100);
+        --bc-bg: var(--purple-clr_500);
+        --bc-col: var(--purple-clr_100);
       }
       &.active {
-        --bc-bg: var(--clr_purple-300);
-        --bc-col: var(--clr_purple-700);
+        --bc-bg: var(--purple-clr_300);
+        --bc-col: var(--purple-clr_700);
       }
       // CLIPPING / LAYOUT
       --bc-clip: polygon(
@@ -74,14 +74,5 @@
       width: 1.6em;
       height: 1.6em;
     }
-  }
-
-  // Lore page overrides
-  .lore {
-    title { font-family: "Fredoka"; text-transform: none; font-weight: 500; color: var(--clr_purple-600);}
-    h1 { font-family: "Fredoka"; text-transform: none; font-weight: 500; color: var(--clr_purple-600);}
-    h2 { font-family: "Itim"; text-transform: none; font-weight: 800; color: var(--clr_purple-500);}
-    p { font-family: "Baloo 2"; text-transform: none; font-weight: 400; color: var(--clr_purple-900);}
-    .card { background-color: var(--clr_purple-50); padding: 10px; }
   }
 }

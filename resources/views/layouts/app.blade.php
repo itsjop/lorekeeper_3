@@ -74,6 +74,7 @@
   <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
   <link defer href="{{ faVersion() }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/bootstrap.css') }}" rel="stylesheet">
   <link defer href="{{ asset('css/vendor/jquery-ui.min.css') }}" rel="stylesheet">
   <link defer href="{{ asset('css/vendor/bootstrap4-toggle.min.css') }}" rel="stylesheet">
   <link defer href="{{ asset('css/vendor/lightbox.min.css') }}" rel="stylesheet">

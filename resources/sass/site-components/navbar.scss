@@ -2,11 +2,12 @@
 #app {
   #site-wrapper {
     #header-nav {
-      background-color: var(--clr_purple-600);
+      background-color: var(--purple-clr_600);
       grid-area: nav;
       border-radius: 20px;
       .navbar-nav {
         display: flex;
+        gap: 0.5vw;
         align-items: center;
         .dropdown {
           border-radius: 10px 10px 0 0;
@@ -23,11 +24,11 @@
             }
           }
           &.show {
-            border: 2px var(--clr_purple-300) solid;
-            background-color: var(--clr_purple-50);
+            border: 2px var(--purple-clr_300) solid;
+            background-color: var(--purple-clr_50);
             z-index: 1;
             .dropdown-toggle {
-              color: var(--clr_purple-700);
+              color: var(--purple-clr_700);
               &::after {
                 transform: rotate(0);
               }
@@ -35,8 +36,15 @@
           }
         }
       }
-      .nav-item > a {
-        color: var(--clr_purple-bgtext);
+      .nav-item {
+        &.nav-notifications {
+          width: 2em;
+          transform-origin: 50% 300%;
+          animation: wobble-hor-bottom  5s var(--smoothIn_linear)forwards infinite;
+        }
+        > a {
+          color: var(--purple-clr_bgtext);
+        }
       }
       .navbar-brand .navbar-brand-image {
         max-width: 40vw;
@@ -94,14 +102,14 @@
 .dt-nav-page {
   .dt-nav-group {
     .dt-nav-header {
-      background-color: var(--clr_purple-200);
-      color: var(--clr_purple-700);
+      background-color: var(--purple-clr_200);
+      color: var(--purple-clr_700);
       text-transform: uppercase;
       text-align: center;
       font-weight: 600;
     }
     .dt-nav-item {
-      color: var(--clr_purple-700);
+      color: var(--purple-clr_700);
       background-color: var(--body-color);
       font-weight: 500;
       text-decoration: none;
@@ -129,7 +137,7 @@
     display: none;
     opacity: 0;
     transform: scale(0.5);
-    border: 2px var(--clr_purple-300) solid;
+    border: 2px var(--purple-clr_300) solid;
     border-top: 0;
     margin: -2px 0 0 -2px;
     transition:
@@ -192,8 +200,8 @@
           border-radius: 15px 15px 0 0;
         }
         &:hover {
-          background-color: var(--clr_purple-300);
-          border-color: var(--clr_purple-400);
+          background-color: var(--purple-clr_300);
+          border-color: var(--purple-clr_400);
           transform: scale(1.15);
           border-radius: 100vw;
           z-index: 2;
@@ -233,13 +241,13 @@
         transform: scale(1.06);
         z-index: 1;
         border-radius: 10px;
-        border-color: transparent var(--clr_purple-300);
+        border-color: transparent var(--purple-clr_300);
       }
       .dt-nav-item:has(+ .dt-nav-item:hover),
       .dt-nav-item:has(+ .dt-nav-header:hover),
       .dt-nav-item:hover + .dt-nav-item,
       .dt-nav-item:hover + .dt-nav-header {
-        background-color: var(--clr_purple-100);
+        background-color: var(--purple-clr_100);
         border-radius: 15px;
       }
       hr {
@@ -247,7 +255,7 @@
         justify-self: center;
         margin: 5px;
         height: 1px;
-        background-color: var(--clr_purple-600);
+        background-color: var(--purple-clr_600);
       }
     }
   }
@@ -283,7 +291,7 @@
         transition: 1.3s var(--smoothIn_linear);
         &:hover {
           transition: 0.3s var(--smoothIn_linear);
-          background: var(--clr_purple-900);
+          background: var(--purple-clr_900);
         }
         .dropdown-menu {
           --dd-height: 50px;
@@ -328,7 +336,7 @@
               transition: 0.5s ease-in;
               &:hover {
                 transition: 0.1s linear;
-                background: var(--clr_purple-100);
+                background: var(--purple-clr_100);
               }
             }
           }
@@ -355,19 +363,19 @@
             align-content: center;
           }
           .dt-nav-item {
-            color: var(--clr_purple-700);
+            color: var(--purple-clr_700);
             padding: 10px;
             font-weight: 500;
             text-decoration: none;
             transition: 0.2s ease;
             justify-content: start;
             align-items: center;
-            border-bottom: 1px var(--clr_purple-300) solid;
+            border-bottom: 1px var(--purple-clr_300) solid;
             &:last-of-type {
               border: 0;
             }
             &:hover {
-              background-color: var(--clr_purple-100);
+              background-color: var(--purple-clr_100);
             }
           }
           hr {
@@ -377,4 +385,15 @@
       }
     }
   }
+}
+
+@keyframes wobble-hor-bottom {
+  0%   { transform: rotate(0deg); }
+  85%  { transform: rotate(0deg); }
+  87%  { transform: rotate(5deg); }
+  90%  { transform: rotate(-4deg); }
+  94%  { transform: rotate(3deg); }
+  96%  { transform: rotate(-2deg); }
+  98%  { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
 }
