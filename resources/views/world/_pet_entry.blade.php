@@ -1,16 +1,8 @@
 <div class="row world-entry">
   @if ($pet->imageUrl)
     <div class="col-md-3 world-entry-image">
-      <a
-        href="{{ $pet->imageUrl }}"
-        data-lightbox="entry"
-        data-title="{{ $pet->name }}"
-      >
-        <img
-          src="{{ $pet->imageUrl }}"
-          class="world-entry-image"
-          alt="{{ $pet->name }}"
-        />
+      <a href="{{ $pet->imageUrl }}" data-lightbox="entry" data-title="{{ $pet->name }}">
+        <img src="{{ $pet->imageUrl }}" class="world-entry-image" alt="{{ $pet->name }}" />
       </a>
     </div>
   @endif
@@ -40,24 +32,12 @@
               <div class="row">
                 @foreach ($chunk as $evolution)
                   <div class="col text-center">
-                    <a
-                      href="{{ $evolution->imageUrl }}"
-                      data-lightbox="entry"
-                      data-title="{{ $evolution->evolution_name }}"
-                    >
-                      <img
-                        src="{{ $evolution->imageUrl }}"
-                        class="img-fluid"
-                        style="max-height: 10em;"
-                        alt="{{ $evolution->evolution_name }}"
-                        data-toggle="tooltip"
-                        data-title="{{ $evolution->evolution_name }}"
-                        style="max-height:200px"
-                      />
+                    <a href="{{ $evolution->imageUrl }}" data-lightbox="entry" data-title="{{ $evolution->evolution_name }}">
+                      <img src="{{ $evolution->imageUrl }}" class="img-fluid" style="max-height: 10em;" alt="{{ $evolution->evolution_name }}" data-toggle="tooltip" data-title="{{ $evolution->evolution_name }}" style="max-height:200px" />
                     </a>
                     <div class="h5">
                       {{ $evolution->evolution_name }}
-                       {{-- (Stage {{ $evolution->evolution_stage }}) --}}
+                      {{-- (Stage {{ $evolution->evolution_stage }}) --}}
                       @if (!$loop->last)
                         <i class="fas fa-arrow-right fa-lg mt-2"></i>
                       @endif
@@ -79,15 +59,7 @@
                   <div class="col-md text-center">
                     <a href="{{ $variant->idUrl }}">
                       @if ($variant->has_image)
-                        <img
-                          src="{{ $variant->imageUrl }}"
-                          class="img-fluid"
-                          style="max-height: 10em;"
-                          alt="{{ $variant->name }}"
-                          data-toggle="tooltip"
-                          data-title="{{ $variant->name }}"
-                          style="max-height:200px"
-                        />
+                        <img src="{{ $variant->imageUrl }}" class="img-fluid" style="max-height: 10em;" alt="{{ $variant->name }}" data-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
                       @else
                         {{ $variant->name }}
                       @endif
