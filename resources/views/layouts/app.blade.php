@@ -18,31 +18,21 @@
 
   <!-- Primary Meta Tags -->
   <meta name="title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
-  <meta name="description"
-    content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  >
+  <meta name="description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="og:image"
-    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif"
-  >
+  <meta property="og:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif">
   <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
-  <meta property="og:description"
-    content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  >
+  <meta property="og:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
-  <meta property="twitter:image"
-    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif"
-  >
+  <meta property="twitter:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif">
   <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
-  <meta property="twitter:description"
-    content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  >
+  <meta property="twitter:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
 
   <!-- No AI scraping directives -->
   <meta name="robots" content="noai">
@@ -74,75 +64,26 @@
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito"
-    rel="stylesheet"
-    type="text/css"
-  >
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   {{-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Chewy&display=swap" rel="stylesheet"> --}}
-  <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&Fredoka:wght@300..700&family=Stylish&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Jua&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Potta+One&Fredoka:wght@300..700&family=Stylish&display=swap" rel="stylesheet">
   <!-- Styles -->
   <link href="{{ asset('css/vendor/all.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}"
-    rel="stylesheet">
-  <link
-    defer
-    href="{{ faVersion() }}"
-    rel="stylesheet"
-  >
-  <link
-    defer
-    href="{{ asset('css/vendor/bootstrap.css') }}"
-    rel="stylesheet"
-  >
-  <link
-    defer
-    href="{{ asset('css/vendor/jquery-ui.min.css') }}"
-    rel="stylesheet"
-  >
-  <link
-    defer
-    href="{{ asset('css/vendor/bootstrap4-toggle.min.css') }}"
-    rel="stylesheet"
-  >
-  <link
-    defer
-    href="{{ asset('css/vendor/lightbox.min.css') }}"
-    rel="stylesheet"
-  >
-  <link
-    defer
-    href="{{ asset('css/vendor/bootstrap-colorpicker.min.css') }}"
-    rel="stylesheet"
-  >
-  <link
-    defer
-    href="{{ asset('css/vendor/jquery-ui-timepicker-addon.css') }}"
-    rel="stylesheet"
-  >
+  <link href="{{ asset('css/vendor/lorekeeper.css?v=' . filemtime(public_path('css/vendor/lorekeeper.css'))) }}" rel="stylesheet">
+  <link defer href="{{ faVersion() }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/bootstrap.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/jquery-ui.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/bootstrap4-toggle.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/lightbox.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
+  <link defer href="{{ asset('css/vendor/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">
   <link href="{{ asset('css/vendor/croppie.css') }}" rel="stylesheet">
-  <link
-    defer
-    href="{{ asset('css/vendor/selectize.bootstrap4.css') }}"
-    rel="stylesheet"
-  >
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <link defer href="{{ asset('css/vendor/selectize.bootstrap4.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
 
   <!----------- Laravel Includes ----------->
   @include('js._app_inline_js') {{-- JS typically at the bottom of the file moved here --}}
@@ -152,12 +93,7 @@
 </head>
 
 <body>
-  <div
-    id="app"
-    class="app"
-    {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
-    {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
-  >
+  <div id="app" class="app" {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }} {{ isset($pageName) ? 'data-page=' . $pageName : '' }}>
     <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
       <div class="site-background"></div>
       {{-- Header Logo --}}
@@ -220,23 +156,14 @@
 
       </main>
 
-      @include('layouts._footer')
+    @include('layouts._footer')
 
-      <dialog
-        class="modal fade"
-        id="modal"
-        tabindex="-1"
-        role="dialog"
-      >
+      <dialog class="modal fade" id="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <span class="modal-title h5 mb-0"></span>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-              >&times;</button>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               {{-- Add all dialogs to top-level --}}

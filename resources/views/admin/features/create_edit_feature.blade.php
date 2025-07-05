@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Traits' => 'admin/data/traits', ($feature->id ? 'Edit' : 'Create') . ' Trait' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Traits' => 'admin/data/traits',
+      ($feature->id ? 'Edit' : 'Create') . ' Trait' => $feature->id
+          ? 'admin/data/traits/edit/' . $feature->id
+          : 'admin/data/traits/create'
+  ]) !!}
 
   <h1>{{ $feature->id ? 'Edit' : 'Create' }} Trait
     @if ($feature->id)
@@ -13,7 +19,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -52,6 +61,7 @@
       {!! Form::label(ucfirst(__('lorekeeper.species')) . ' Restriction (Optional)') !!}
       {!! Form::select('species_id', $specieses, $feature->species_id, ['class' => 'form-control', 'id' => 'species']) !!}
     </div>
+    {{-- TODO: SUBTYPES make this only select one --}}
     <div class="col-md-4 form-group" id="subtypes">
       {!! Form::label(ucfirst(__('lorekeeper.subtype')) . ' (Optional)') !!} {!! add_help('This is cosmetic and does not limit choice of traits in selections.') !!}
       {!! Form::select('subtype_id', $subtypes, $feature->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
@@ -63,8 +73,13 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('is_visible', 1, $feature->id ? $feature->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the trait will not be visible in the trait list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.') !!}
+    {!! Form::checkbox('is_visible', 1, $feature->id ? $feature->is_visible : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'If turned off, the trait will not be visible in the trait list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.'
+    ) !!}
   </div>
 
   <div class="text-right">
