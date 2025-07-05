@@ -135,6 +135,7 @@
   }
   .dt-nav-page {
     display: none;
+    top: 100%;
     opacity: 0;
     transform: scale(0.5);
     border: 2px var(--purple-clr_300) solid;
