@@ -1,3 +1,9 @@
+# top prio
+- [ ] figure out how to make dialogs launch at root
+- [ ] tiny notification box
+- [ ] subtypes (plural) still around
+
+
 # Functional Issues (for Cyl) (Sorted by priority)
 ## MYO
 - [ ] Upon activating an MYO-tagged item in your inventory `/inventory`, the following error is thrown:

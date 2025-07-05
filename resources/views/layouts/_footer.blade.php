@@ -1,4 +1,4 @@
-<nav id="footer">
+<footer id="footer">
   <ul class="navbar-ul">
     <li class="footer-nav-item">
       <a href="{{ url('info/terms') }}" class="nav-link">Terms</a>
@@ -22,4 +22,4 @@
   @if (config('lorekeeper.extensions.scroll_to_top'))
     @include('widgets/_scroll_to_top')
   @endif
-</nav>
+</footer>
