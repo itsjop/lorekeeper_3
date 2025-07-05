@@ -35,17 +35,13 @@
     </div>
 
     <div class="form-group">
-      {!! Form::label('subtype_ids', 'Species ' . ucfirst(__('lorekeeper.subtypes'))) !!}
-      @if ($request->character->is_myo_slot && count($request->character->image->subtypes) > 0)
-        <div class="alert alert-secondary">{!! $request->character->image->displaySubtypes() !!}</div>
+      {!! Form::label('subtype_id', ucfirst(__('lorekeeper.subtype'))) !!}
+      @if ($request->character->image->subtype_id && !$request->canModifyCharacter('subtype') && !$request->canModifyCharacter('species'))
+        <div class="p-2 rounded border">{!! $request->character->image->subtype->displayName !!}</div>
       @else
         {{-- TODO: SUBTYPES make this only select one --}}
         <div id="subtypes">
-          {!! Form::select('subtype_ids[]', $subtypes, $request->subtypes(), [
-              'class' => 'form-control',
-              'id' => 'subtype',
-              'multiple'
-          ]) !!}
+          {!! Form::select('subtype_id', $subtypes, $request->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
         </div>
       @endif
     </div>
@@ -152,6 +148,7 @@
               {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
 
             </div>
+<<<<<<< HEAD
             <div>
               <a
                 href="#"
@@ -167,6 +164,8 @@
               {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
               <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
             </div>
+=======
+>>>>>>> 9a8d334d671faea14c81b711025ab2e73467d897
           @endforeach
         @endif
       </div>
@@ -190,17 +189,13 @@
           </div>
           <div class="col-md-10 col-8">{!! $request->species ? $request->species->displayName : 'None Selected' !!}</div>
         </div>
-        @if ($request->subtype_ids || count($request->character->image->subtypes))
+        @if ($request->subtype_id)
           <div class="row">
             <div class="col-md-2 col-4">
-              <h5>Subtype(s)</h5>
+              <h5>{{ ucfirst(__('lorekeeper.subtype')) }}</h5>
             </div>
             <div class="col-md-10 col-8">
-              @if ($request->subtype_ids)
-                {!! $request->subtype_ids ? $request->displaySubtypes() : 'None Selected' !!}
-              @else
-                {!! $request->character->image->displaySubtypes() ?? 'None Selected' !!}
-              @endif
+              {!! $request->subtype_id ? $request->subtype->displayName : 'None' !!}
             </div>
           </div>
         @endif
@@ -299,9 +294,6 @@
         dataType: "text"
       }).done(function(res) {
         $("#subtypes").html(res);
-        $("#subtype").selectize({
-          maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-        });
       }).fail(function(jqXHR, textStatus, errorThrown) {
         alert("AJAX call failed: " + textStatus + ", " + errorThrown);
       });

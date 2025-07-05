@@ -1,7 +1,2 @@
-{!! Form::label(ucfirst(__('lorekeeper.subtypes')) . ' (Optional)') !!}
-{!! Form::select('subtype_ids[]', $subtypes, $image->subtypes()?->pluck('subtype_id')->toArray(), [
-    'class' => 'form-control',
-    'id' => 'subtype',
-    'multiple',
-    'placeholder' => 'Select Subtype(s)',
-]) !!}
+{!! Form::label(ucfirst(__('lorekeeper.subtype')) . ' (Optional)') !!}
+{!! Form::select('subtype_id', $subtypes, $image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}

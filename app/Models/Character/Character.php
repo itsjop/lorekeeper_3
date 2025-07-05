@@ -427,11 +427,7 @@ class Character extends Model {
       return ($this->name ? $this->name : $this->slug);
     }
   }
-  public function getNameAttribute() {
-    if ($this->is_myo_slot) {
-      return $this->name;
-    }
-  }
+
   /**
    * Gets the character's warnings, if they exist.
    */

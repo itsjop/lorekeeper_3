@@ -78,7 +78,6 @@ class DesignUpdateManager extends Service {
         'rarity_id' => $image->rarity_id,
         'species_id' => $image->species_id,
         'subtype_id' => $image->subtype_id,
-        'subtype_ids'   => $character->image->subtypes()->pluck('subtype_id'),
         'transformation_id' => $image->transformation_id,
         'transformation_info' => $image->transformation_info,
         'transformation_description' => $image->transformation_description
@@ -360,11 +359,20 @@ class DesignUpdateManager extends Service {
       }
 
       $request->has_addons = 1;
-      $request->data = json_encode([
+      $request->data = [
         'user'      => Arr::only(getDataReadyAssets($userAssets), ['user_items', 'currencies']),
         'character' => Arr::only(getDataReadyAssets($characterAssets), ['currencies']),
-      ]);
+      ];
       $request->save();
+
+      //make trait page red again once user changed items, so that they have to save again.
+      $request->has_features = false;
+      $request->save();
+
+      //clear features that the character does not originally have or has been added via item.
+      $currentFeatureIds = array_merge($request->character->image->features->pluck("id")->toArray() ?? [], $request->getAttachedTraitIds());
+      if(count($currentFeatureIds) > 0) $request->features()->whereNotIn('feature_id', array_merge($currentFeatureIds, $request->getAttachedTraitIds()))->delete();
+      else $request->features()->delete();
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {
@@ -396,24 +404,10 @@ class DesignUpdateManager extends Service {
 
       $rarity = ($request->character->is_myo_slot && $request->character->image->rarity_id) ? $request->character->image->rarity : Rarity::find($data['rarity_id']);
       $species = ($request->character->is_myo_slot && $request->character->image->species_id) ? $request->character->image->species : Species::find($data['species_id']);
-      if (($request->character->is_myo_slot && count($request->character->image->subtypes))) {
-        $subtypes = $request->character->image->subtypes()->pluck('subtype_id')->toArray();
+      if (isset($data['subtype_id']) && $data['subtype_id']) {
+        $subtype = ($request->character->is_myo_slot && $request->character->image->subtype_id) ? $request->character->image->subtype : Subtype::find($data['subtype_id']);
       } else {
-        if (isset($data['subtype_ids']) && $data['subtype_ids']) {
-          if (count($data['subtype_ids']) > config('lorekeeper.extensions.multiple_subtype_limit')) {
-            throw new \Exception('Too many subtypes selected.');
-          }
-          $subtypes = $data['subtype_ids'];
-          foreach ($data['subtype_ids'] as $subtypeId) {
-            $subtype = Subtype::find($subtypeId);
-            if (!$subtype) {
-              throw new \Exception('Invalid subtype selected.');
-            }
-            if ($subtype && $subtype->species_id != $species->id) {
-              throw new \Exception('Subtype does not match the species.');
-            }
-          }
-        }
+          $subtype = null;
       }
       if (isset($data['transformation_id']) && $data['transformation_id']) {
         $transformation = ($request->character->is_myo_slot && $request->character->image->transformation_id) ? $request->character->image->transformation : Transformation::find($data['transformation_id']);

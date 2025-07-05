@@ -80,7 +80,7 @@
                         </a>
                         <div class="h5">
                           {{ $evolution->evolution_name }}
-                           {{-- (Stage {{ $evolution->evolution_stage }}) --}}
+                          {{-- (Stage {{ $evolution->evolution_stage }}) --}}
                           @if (!$loop->last)
                             <i class="fas fa-arrow-right fa-lg mt-2"></i>
                           @endif

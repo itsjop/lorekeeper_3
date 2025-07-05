@@ -6,12 +6,8 @@
 
 {{-- TODO: SUBTYPES make this only select one --}}
 <div class="form-group" id="subtypes">
-  {!! Form::label(ucfirst(__('lorekeeper.subtypes')) . ' (Optional)') !!}
-  {!! Form::select('subtype_ids[]', $subtypes, $image->subtypes()->pluck('subtype_id')->toArray() ?? [], [
-      'class' => 'form-control',
-      'id' => 'subtype',
-      'multiple',
-  ]) !!}
+  {!! Form::label(ucfirst(__('lorekeeper.subtype')) . ' (Optional)') !!}
+  {!! Form::select('subtype_id', $subtypes, $image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
 </div>
 
 <div class="form-group">
@@ -214,9 +210,6 @@
       dataType: "text"
     }).done(function(res) {
       $("#subtypes").html(res);
-      $("#subtype").selectize({
-        maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
-      });
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert("AJAX call failed: " + textStatus + ", " + errorThrown);
     });
