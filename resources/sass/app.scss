@@ -10,7 +10,6 @@
 // Global changes
 @import './global/elements';
 @import './global/site-frame';
-@import './global/misc';
 
 // Component-specific
 @import './site-components/animations';
@@ -22,3 +21,4 @@
 @import './site-components/navbar';
 @import './site-components/sidebar';
 @import './site-components/site-header';
+@import './site-components/misc';
