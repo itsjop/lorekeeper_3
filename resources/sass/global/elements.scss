@@ -1,7 +1,7 @@
 /* prettier-ignore */
 *, *::before, *::after {  box-sizing: border-box; }
 /* prettier-ignore */
-* {  transition: background-color 1s ease, border-color 1s ease, color 1s ease; }
+* {  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
 
 /* prettier-ignore */
 .app {
@@ -39,16 +39,13 @@ h4, h5, h6 {
     }
   }
   .btn { margin: 5px; border-radius: 10px;}
-  .btn-primary,
-  .btn-info,
-  .btn-danger,
-  .btn-success,
-  .btn-secondary {
+  .toggle-group .btn { margin: 0; }
+  .btn-primary, .btn-info, .btn-danger, .btn-success, .btn-secondary {
     color: var(--purple-clr_50);
   }
-  .btn-outline-primary:hover {
+  .btn-outline-primary, .btn-primary { &:hover {
     color: var(--purple-clr_50);
-  }
+  }}
   .btn-primary, .badge-primary { background-color: var(--teal-clr_600); }
   .btn-secondary { background-color: var(--purple-clr_400);  color: var(--purple-clr_700); }
   .notifications-table .unread { background-color: var(--purple-clr_100); }

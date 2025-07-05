@@ -21,7 +21,6 @@
         <tr>
           <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
           <th>Sub Masterlist</th>
-          <th>Inherit Chance</th>
           <th></th>
         </tr>
       </thead>

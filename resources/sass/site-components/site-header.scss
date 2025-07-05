@@ -5,12 +5,22 @@
       display: grid;
       justify-items: center;
       align-items: center;
+      contain: layout;
+      transform-origin: 50% 50%;
+      &:hover {
+        animation:
+          mirage 15s .5s ease-in-out forwards infinite,
+          mirage-shift 15s 0s ease-in-out forwards infinite;
+        animation-composition: add;
+
+      }
       picture {
         display: grid;
         grid-template: "logo";
         justify-content: center;
         justify-items: center;
         align-content: center;
+        transition: transform .5s var(--elastic_linear);
         img,
         source,
         &::after {
@@ -61,3 +71,28 @@
     }
   }
 }
+// TODO: Mirage animation
+// @keyframes mirage {
+//   0% { transform: skewX(0) }
+//   10% { transform: skewX(-20deg)  }
+//   20% { transform: skewX(20deg)  }
+//   30% { transform: skewX(-20deg)  }
+//   50% { transform: skewX(20deg) }
+//   60% { transform: skewX(-20deg) }
+//   70% { transform: skewX(20deg) }
+//   80% { transform: skewX(-20deg) }
+//   90% { transform: skewX(20deg) }
+//   100% { transform: skewX(0) }
+// }
+// @keyframes mirage-shift {
+//   0% { transform: skewX(0) }
+//   10% { transform: translateX(10%)}
+//   20% { transform: translateX(-10%)}
+//   30% { transform: translateX(10%)}
+//   50% { transform: translateX(-10%)}
+//   60% { transform: translateX(10%)}
+//   70% { transform: translateX(-10%)}
+//   80% { transform: translateX(10%)}
+//   90% { transform: translateX(-10%)}
+//   100% { transform: skewX(0) }
+// }

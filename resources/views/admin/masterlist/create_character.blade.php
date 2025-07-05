@@ -487,7 +487,7 @@
             <div class="col-sm-6 pl-sm-1">
               {!! Form::text('parent_2_name', old('parent_2_name'), [
                   'class' => 'form-control mb-1',
-                  'placeholder' => 'Parents\'s Name (Optional)'
+                  'placeholder' => 'Parent\'s Name (Optional)'
               ]) !!}
             </div>
           </div>
@@ -500,13 +500,13 @@
     </div>
     {!! Form::close() !!}
 
-    <div class="form-group title-data original hide d-flex">
+    {{-- <div class="form-group title-data original hide d-flex">
       <div class="mb-0 title-name col-3"></div>
       {!! Form::text('full', null, ['class' => 'form-control mr-2', 'placeholder' => 'Full Title']) !!}
       @if (Settings::get('character_title_display'))
         {!! Form::text('short', null, ['class' => 'form-control mr-2', 'placeholder' => 'Short Title (Optional)']) !!}
       @endif
-    </div>
+    </div> --}}
   @endif
 
 @endsection

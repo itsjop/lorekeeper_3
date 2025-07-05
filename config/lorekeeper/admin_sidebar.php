@@ -16,7 +16,7 @@ return [
 
   'Data' => [
     'power' => 'edit_data',
-    'meta' => 'tworow',
+    'meta' => 'tworow nonlinear',
     'links' => [
       ['name' => 'Galleries', 'url' => 'admin/data/galleries',],
       ['name' => 'Character Categories', 'url' => 'admin/data/character-categories',],

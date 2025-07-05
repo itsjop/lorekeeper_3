@@ -26,6 +26,7 @@
         &:first-of-type::before,
         &::after {
           color: var(--purple-clr_300);
+          margin: 0 10px;
         }
         &:first-of-type::before {
           content: '✦';
@@ -41,7 +42,7 @@
       .copyright {
         grid-area: credit;
         font-size: 0.8em;
-        color: var(--purple-clr_800);
+        color: var(--purple-clr_300);
       }
       #backToTop {
         grid-area: top;

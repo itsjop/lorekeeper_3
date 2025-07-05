@@ -36,7 +36,7 @@
 
     <div class="form-group">
       {!! Form::label('subtype_id', ucfirst(__('lorekeeper.subtype'))) !!}
-      @if ($request->character->image->subtype_id && !$request->canModifyCharacter('subtype') && !$request->canModifyCharacter('species'))
+      @if ($request->character->is_myo_slot && $request->character->image->subtype_id)
         <div class="p-2 rounded border">{!! $request->character->image->subtype->displayName !!}</div>
       @else
         {{-- TODO: SUBTYPES make this only select one --}}
@@ -148,121 +148,120 @@
               {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
 
             </div>
-<<<<<<< HEAD
-            <div>
+            <<<<<<< HEAD <div>
               <a
                 href="#"
                 class="btn btn-primary"
                 id="add-feature"
               >Add Trait</a>
-            </div>
-            <div class="feature-row hide mb-2">
-              {!! Form::select('feature_id[]', $features, null, [
-                  'class' => 'form-control mr-2 feature-select',
-                  'placeholder' => 'Select Trait'
-              ]) !!}
-              {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
-              <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
-            </div>
-=======
->>>>>>> 9a8d334d671faea14c81b711025ab2e73467d897
-          @endforeach
-        @endif
       </div>
       <div class="feature-row hide mb-2">
-        {!! Form::select('feature_id[]', $request->character->myo_type != 'regular' ? $features : $choiceFeatures, null, [
+        {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control mr-2 feature-select',
             'placeholder' => 'Select Trait'
         ]) !!}
         {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
         <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
       </div>
-      <div class="text-right">
-        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+      =======
+      >>>>>>> 9a8d334d671faea14c81b711025ab2e73467d897
+  @endforeach
+  @endif
+  </div>
+  <div class="feature-row hide mb-2">
+    {!! Form::select('feature_id[]', $request->character->myo_type != 'regular' ? $features : $choiceFeatures, null, [
+        'class' => 'form-control mr-2 feature-select',
+        'placeholder' => 'Select Trait'
+    ]) !!}
+    {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
+    <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
+  </div>
+  <div class="text-right">
+    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+  </div>
+  {!! Form::close() !!}
+@else
+  <div class="mb-1">
+    <div class="row">
+      <div class="col-md-2 col-4">
+        <h5>{{ ucfirst(__('lorekeeper.species')) }}</h5>
       </div>
-      {!! Form::close() !!}
-    @else
-      <div class="mb-1">
-        <div class="row">
-          <div class="col-md-2 col-4">
-            <h5>{{ ucfirst(__('lorekeeper.species')) }}</h5>
-          </div>
-          <div class="col-md-10 col-8">{!! $request->species ? $request->species->displayName : 'None Selected' !!}</div>
+      <div class="col-md-10 col-8">{!! $request->species ? $request->species->displayName : 'None Selected' !!}</div>
+    </div>
+    @if ($request->subtype_id)
+      <div class="row">
+        <div class="col-md-2 col-4">
+          <h5>{{ ucfirst(__('lorekeeper.subtype')) }}</h5>
         </div>
-        @if ($request->subtype_id)
-          <div class="row">
-            <div class="col-md-2 col-4">
-              <h5>{{ ucfirst(__('lorekeeper.subtype')) }}</h5>
-            </div>
-            <div class="col-md-10 col-8">
-              {!! $request->subtype_id ? $request->subtype->displayName : 'None' !!}
-            </div>
-          </div>
-        @endif
-        @if ($request->transformation_id)
-          <div class="row">
-            <div class="col-md-2 col-4">
-              <h5>{{ ucfirst(__('transformations.transformation')) }}</h5>
-            </div>
-            <div class="col-md-10 col-8">
-              @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
-                {!! $request->character->image->transformation->displayName !!}
-              @else
-                {!! $request->transformation_id ? $request->transformation->displayName : 'None Selected' !!}
-              @endif
-            </div>
-            <div class="col-md-2 col-4">
-              <strong>Tab Info</strong>
-            </div>
-            <div class="col-md-10 col-8">
-              @if ($request->character->is_myo_slot && $request->character->image->transformation_info)
-                {{ $request->character->image->transformation_info }}
-              @else
-                {!! $request->transformation_info ? $request->transformation_info : 'No tab info given.' !!}
-              @endif
-            </div>
-            <div class="col-md-2 col-4">
-              <strong>Description</strong>
-            </div>
-            <div class="col-md-10 col-8">
-              @if ($request->character->is_myo_slot && $request->character->image->transformation_description)
-                {{ $request->character->image->transformation_description }}
-              @else
-                {!! $request->transformation_description ? $request->transformation_description : 'No description given.' !!}
-              @endif
-            </div>
-          </div>
-        @endif
-        <div class="row">
-          <div class="col-md-2 col-4">
-            <h5>Rarity</h5>
-          </div>
-          <div class="col-md-10 col-8">{!! $request->rarity ? $request->rarity->displayName : 'None Selected' !!}</div>
+        <div class="col-md-10 col-8">
+          {!! $request->subtype_id ? $request->subtype->displayName : 'None' !!}
         </div>
       </div>
-      <h5>Traits</h5>
+    @endif
+    @if ($request->transformation_id)
+      <div class="row">
+        <div class="col-md-2 col-4">
+          <h5>{{ ucfirst(__('transformations.transformation')) }}</h5>
+        </div>
+        <div class="col-md-10 col-8">
+          @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
+            {!! $request->character->image->transformation->displayName !!}
+          @else
+            {!! $request->transformation_id ? $request->transformation->displayName : 'None Selected' !!}
+          @endif
+        </div>
+        <div class="col-md-2 col-4">
+          <strong>Tab Info</strong>
+        </div>
+        <div class="col-md-10 col-8">
+          @if ($request->character->is_myo_slot && $request->character->image->transformation_info)
+            {{ $request->character->image->transformation_info }}
+          @else
+            {!! $request->transformation_info ? $request->transformation_info : 'No tab info given.' !!}
+          @endif
+        </div>
+        <div class="col-md-2 col-4">
+          <strong>Description</strong>
+        </div>
+        <div class="col-md-10 col-8">
+          @if ($request->character->is_myo_slot && $request->character->image->transformation_description)
+            {{ $request->character->image->transformation_description }}
+          @else
+            {!! $request->transformation_description ? $request->transformation_description : 'No description given.' !!}
+          @endif
+        </div>
+      </div>
+    @endif
+    <div class="row">
+      <div class="col-md-2 col-4">
+        <h5>Rarity</h5>
+      </div>
+      <div class="col-md-10 col-8">{!! $request->rarity ? $request->rarity->displayName : 'None Selected' !!}</div>
+    </div>
+  </div>
+  <h5>Traits</h5>
+  <div>
+    @if ($request->character && $request->character->is_myo_slot && $request->character->image->features)
+      @foreach ($request->character->image->features as $feature)
+        <div>
+          @if ($feature->feature->feature_category_id)
+            <strong>{!! $feature->feature->category->displayName !!}:</strong>
+            @endif {!! $feature->feature->displayName !!} @if ($feature->data)
+              ({{ $feature->data }})
+            @endif <span class="text-danger">*Required</span>
+        </div>
+      @endforeach
+    @endif
+    @foreach ($request->features as $feature)
       <div>
-        @if ($request->character && $request->character->is_myo_slot && $request->character->image->features)
-          @foreach ($request->character->image->features as $feature)
-            <div>
-              @if ($feature->feature->feature_category_id)
-                <strong>{!! $feature->feature->category->displayName !!}:</strong>
-                @endif {!! $feature->feature->displayName !!} @if ($feature->data)
-                  ({{ $feature->data }})
-                @endif <span class="text-danger">*Required</span>
-            </div>
-          @endforeach
-        @endif
-        @foreach ($request->features as $feature)
-          <div>
-            @if ($feature->feature->feature_category_id)
-              <strong>{!! $feature->feature->category->displayName !!}:</strong>
-              @endif {!! $feature->feature->displayName !!} @if ($feature->data)
-                ({{ $feature->data }})
-              @endif
-          </div>
-        @endforeach
+        @if ($feature->feature->feature_category_id)
+          <strong>{!! $feature->feature->category->displayName !!}:</strong>
+          @endif {!! $feature->feature->displayName !!} @if ($feature->data)
+            ({{ $feature->data }})
+          @endif
       </div>
+    @endforeach
+  </div>
   @endif
 @endsection
 

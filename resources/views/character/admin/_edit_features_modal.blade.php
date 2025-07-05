@@ -122,13 +122,13 @@
 </div>
 {!! Form::close() !!}
 
-<div class="form-group title-data original hide d-flex">
+{{-- <div class="form-group title-data original hide d-flex">
   <div class="mb-0 title-name col-4 col-md-4 col-sm-12"></div>
   {!! Form::text('full', null, ['class' => 'form-control mr-2', 'placeholder' => 'Full Title']) !!}
   @if (Settings::get('character_title_display'))
     {!! Form::text('short', null, ['class' => 'form-control mr-2', 'placeholder' => 'Short Title (Optional)']) !!}
   @endif
-</div>
+</div> --}}
 
 @include('widgets._character_titles_js')
 <script>

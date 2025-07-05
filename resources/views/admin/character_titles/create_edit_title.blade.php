@@ -81,12 +81,12 @@
 
   {!! Form::close() !!}
 
-  <div class="colourForm hide form-group d-flex mt-1">
+  {{-- <div class="colourForm hide form-group d-flex mt-1">
     {!! Form::color('colours[]', null, ['class' => 'form-control']) !!}
     <div class="text-right">
       <button type="button" class="btn btn-danger removeColour ml-2">X</button>
     </div>
-  </div>
+  </div> --}}
 
   @if ($title->id)
     <h3>Preview</h3>
