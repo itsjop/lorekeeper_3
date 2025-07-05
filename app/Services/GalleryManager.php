@@ -847,7 +847,7 @@ class GalleryManager extends Service {
     if ($imageProperties[0] > 2000 || $imageProperties[1] > 2000) {
       // For large images (in terms of dimensions),
       // use imagick instead, as it's better at handling them
-      Config::set('image.driver', 'imagick');
+      Config::set('image.driver', 'gd');
     }
 
     if (config('lorekeeper.settings.gallery_images_cap') || config('lorekeeper.settings.gallery_images_format')) {

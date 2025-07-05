@@ -2452,11 +2452,6 @@ fieldset:disabled a.btn {
   background-color: #6c757d;
   border-color: #6c757d;
 }
-.btn-secondary:hover {
-  color: #fff;
-  background-color: #5a6268;
-  border-color: #545b62;
-}
 .btn-secondary.focus,
 .btn-secondary:focus {
   color: #fff;
@@ -3962,7 +3957,6 @@ input[type="submit"].btn-block {
 }
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem;
 }
 .nav-link:focus,
 .nav-link:hover {

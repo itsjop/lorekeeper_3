@@ -32,7 +32,6 @@
       @else
         {!! Form::select('species_id', $specieses, $request->species_id, ['class' => 'form-control', 'id' => 'species']) !!}
       @endif
-
     </div>
 
     <div class="form-group">

@@ -97,12 +97,6 @@
   padding-right: 0.5rem;
 }
 
-/* NOTIFICATIONS *********************************************************************************/
-
-.notifications-table .unread,
-.notifications-table .unread td {
-  background-color: #fffdf0;
-}
 
 /* BROWSE ****************************************************************************************/
 
