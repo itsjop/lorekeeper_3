@@ -7,7 +7,7 @@
   {!! breadcrumbs([
       'Design Approvals' => 'designs',
       'Request (#' . $request->id . ')' => 'designs/' . $request->id,
-      'Traits' => 'designs/' . $request->id . '/traits',
+      'Traits' => 'designs/' . $request->id . '/traits'
   ]) !!}
 
   @include('character.design._header', ['request' => $request])
@@ -40,6 +40,7 @@
       @if ($request->character->image->subtype_id && !$request->canModifyCharacter('subtype') && !$request->canModifyCharacter('species'))
         <div class="p-2 rounded border">{!! $request->character->image->subtype->displayName !!}</div>
       @else
+        {{-- TODO: SUBTYPES make this only select one --}}
         <div id="subtypes">
           {!! Form::select('subtype_id', $subtypes, $request->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
         </div>
@@ -56,23 +57,31 @@
         <div id="transformations">
           {!! Form::select('transformation_id', $transformations, $request->transformation_id, [
               'class' => 'form-control',
-              'id' => 'transformation',
+              'id' => 'transformation'
           ]) !!}
         </div>
       @endif
     </div>
     <div class="form-group">
-      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Tab Info (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name in the tabs, so try to keep it short.') !!}
+      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Tab Info (Optional)') !!}{!! add_help(
+          'This is text that will show alongside the ' .
+              __('transformations.transformation') .
+              ' name in the tabs, so try to keep it short.'
+      ) !!}
       {!! Form::text('transformation_info', $request->transformation_info, [
           'class' => 'form-control mr-2',
-          'placeholder' => 'Tab Info (Optional)',
+          'placeholder' => 'Tab Info (Optional)'
       ]) !!}
     </div>
     <div class="form-group">
-      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}{!! add_help('This is text that will show alongside the ' . __('transformations.transformation') . ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.') !!}
+      {!! Form::label(ucfirst(__('transformations.transformation')) . ' Origin/Lore (Optional)') !!}{!! add_help(
+          'This is text that will show alongside the ' .
+              __('transformations.transformation') .
+              ' name on the image info area. Explains why the character takes this form, how, etc. Should be pretty short.'
+      ) !!}
       {!! Form::text('transformation_description', $request->transformation_description, [
           'class' => 'form-control mr-2',
-          'placeholder' => 'Origin Info (Optional)',
+          'placeholder' => 'Origin Info (Optional)'
       ]) !!}
     </div>
     <hr>
@@ -90,7 +99,11 @@
       {!! Form::label('Traits') !!}
       @if (Settings::get('trait_per_item') == 0 && count($request->getAttachedTraitIds()) > 0)
         <div>
-          <a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a>
+          <a
+            href="#"
+            class="btn btn-primary mb-2"
+            id="add-feature"
+          >Add Trait</a>
         </div>
       @else
         <i>You must attach a trait item in order to pick new traits for your character.</i>
@@ -113,11 +126,11 @@
             <div class="mb-2 d-flex">
               {!! Form::select('feature_id[]', $features, $feature->feature_id, [
                   'class' => 'form-control mr-2 feature-select',
-                  'placeholder' => 'Select Trait',
+                  'placeholder' => 'Select Trait'
               ]) !!}
               {!! Form::text('feature_data[]', $feature->data, [
                   'class' => 'form-control mr-2',
-                  'placeholder' => 'Extra Info (Optional)',
+                  'placeholder' => 'Extra Info (Optional)'
               ]) !!}
 
               @if ($request->canRemoveTrait() || Settings::get('trait_remover_needed') == 0)
@@ -131,7 +144,7 @@
             <div class="mb-2 d-flex">
               <!--- These selects are built based on the trait item added and only allow the specified traits to be chosen! --->
               {!! Form::select('feature_id[]', $itemFeature, array_key_first($itemFeature), [
-                  'class' => 'form-control mr-2 feature-select',
+                  'class' => 'form-control mr-2 feature-select'
               ]) !!}
               {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
 
@@ -142,7 +155,7 @@
       <div class="feature-row hide mb-2">
         {!! Form::select('feature_id[]', $request->character->myo_type != 'regular' ? $features : $choiceFeatures, null, [
             'class' => 'form-control mr-2 feature-select',
-            'placeholder' => 'Select Trait',
+            'placeholder' => 'Select Trait'
         ]) !!}
         {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
         <a href="#" class="remove-feature btn btn-danger mb-2">×</a>

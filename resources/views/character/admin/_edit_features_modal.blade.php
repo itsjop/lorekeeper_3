@@ -4,6 +4,7 @@
   {!! Form::select('species_id', $specieses, $image->species_id, ['class' => 'form-control', 'id' => 'species']) !!}
 </div>
 
+{{-- TODO: SUBTYPES make this only select one --}}
 <div class="form-group" id="subtypes">
   {!! Form::label(ucfirst(__('lorekeeper.subtype')) . ' (Optional)') !!}
   {!! Form::select('subtype_id', $subtypes, $image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}

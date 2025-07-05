@@ -138,6 +138,8 @@
     ]) !!}
   </div>
 
+  {{-- TODO: SUBTYPES make this only select one --}}
+
   <div class="form-group" id="subtypes">
     {!! Form::label('Subtype (Optional)') !!}
     {!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $character->image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
@@ -161,7 +163,7 @@
     {!! Form::text('transformation_description', old('transformation_description') ?: $character->image->transformation_description, ['class' => 'form-control mr-2', 'placeholder' => 'Origin Info (Optional)']) !!}
   </div>
   <hr>
-
+  
   <div class="form-group" id="subtypes">
     {!! Form::label('Subtype (Optional)') !!}
     {!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $character->image->subtype_id, [
