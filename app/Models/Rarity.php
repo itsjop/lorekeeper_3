@@ -73,7 +73,7 @@ class Rarity extends Model {
       $string = '<span class="rarity-icon"> <img src="' . $this->rarityIconUrl . '"/> </span>';
     }
 
-    return $string . '<a class="display-rarity" href="' . $this->url . '"  ' . ($this->color ? 'style="color: #' . $this->color . ';"' : '') . '>' . $this->name . '</a>';
+    return $string . '<a class="display-rarity ' . lcfirst(__($this->name)) . ' " href="' . $this->url . '"  ' . ($this->color ? 'style="color: #' . $this->color . ';"' : '') . '>' . $this->name . '</a>';
   }
 
   /**
@@ -82,7 +82,7 @@ class Rarity extends Model {
    * @return string
    */
   public function getDisplayNameNoIconAttribute() {
-    return '<a class="display-rarity" href="' . $this->url . '"  ' . ($this->color ? 'style="color: #' . $this->color . ';"' : '') . '>' . $this->name . '</a>';
+    return '<a class="display-rarity ' . lcfirst(__($this->name)) . ' " href="' . $this->url . '"  ' . ($this->color ? 'style="color: #' . $this->color . ';"' : '') . '>' . $this->name . '</a>';
   }
 
   /**

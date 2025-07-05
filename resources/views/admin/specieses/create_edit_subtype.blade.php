@@ -54,11 +54,6 @@
     {!! Form::textarea('description', $subtype->description, ['class' => 'form-control wysiwyg']) !!}
   </div>
 
-  <div class="col form-group">
-    {!! Form::label('Chance to inherit') !!} {!! add_help('For pairings, how likely this subtype is to be passed on in percent. Must be a number between 1-100. Defaults to 50. Does not guarantee a subtypes is inherited 100% of the time as the chances for both subtypes are added!') !!}
-    {!! Form::number('inherit_chance', $subtype->inherit_chance ?? 50, ['class' => 'form-control']) !!}
-  </div>
-
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $subtype->id ? $subtype->is_visible : 1, [
         'class' => 'form-check-input',

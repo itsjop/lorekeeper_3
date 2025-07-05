@@ -225,7 +225,7 @@ class FeatureController extends Controller {
       'features'   => $query->paginate(20)->appends($request->query()),
       'rarities'   => ['none' => 'Any Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'specieses'  => ['none' => 'Any ' . ucfirst(__('lorekeeper.species'))] + ['withoutOption' => 'Without Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'subtypes'   => ['none' => 'Any ' . ucfirst('lorekeeper.subtype')] + ['withoutOption' => 'Without Subtype'] + Subtype::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'subtypes'   => ['none' => 'Any ' . ucfirst(__('lorekeeper.subtype'))] + ['withoutOption' => 'Without Subtype'] + Subtype::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'categories' => ['none' => 'Any Category'] + ['withoutOption' => 'Without Category'] + FeatureCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
     ]);
   }

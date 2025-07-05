@@ -83,9 +83,7 @@ class SpeciesController extends Controller {
       'remove_image',
       'masterlist_sub_id',
       'is_visible',
-      'lineage-blacklist',
       'inherit_chance',
-      'lineage-blacklist',
     ]);
     if ($id && $service->updateSpecies(Species::find($id), $data, Auth::user())) {
       flash(ucfirst(__('lorekeeper.species')) . ' updated successfully.')->success();
@@ -216,9 +214,9 @@ class SpeciesController extends Controller {
       'image',
       'remove_image',
       'is_visible',
-      'lineage-blacklist',
+
       'inherit_chance',
-      'lineage-blacklist',
+
     ]);
     if ($id && $service->updateSubtype(Subtype::find($id), $data, Auth::user())) {
       flash(ucfirst(__('lorekeeper.subtype')) . ' updated successfully.')->success();

@@ -2,12 +2,13 @@
 - [ ] figure out how to make dialogs launch at root
 - [ ] tiny notification box
 - [ ] subtypes (plural) still around
-
+- [x] checkboxes are offset / too tall?
+- [ ] Remove MYO Image (resources/views/admin/designs/_approve_request_modal.blade.php)
 
 # Functional Issues (for Cyl) (Sorted by priority)
 ## MYO
 - [ ] Upon activating an MYO-tagged item in your inventory `/inventory`, the following error is thrown:
-  - production.ERROR: count(): Argument #1 (value) must be of type Countable|array, string given {"userId":1,"exception":"object} (TypeError(code: 0): count(): Argument #1 ($value) must be of type Countable|array, string given [at](/app/Services/CharacterManager.php#107))
+- production.ERROR: count(): Argument #1 (value) must be of type Countable|array, string given {"userId":1,"exception":"object} (TypeError(code: 0): count(): Argument #1 ($value) must be of type Countable|array, string given [at](/app/Services/CharacterManager.php#107))
 ## Shops
 - [ ] Cannot add stock
 - [ ] 'Set Active' and 'FTO Only' toggles does not save successfully
@@ -67,6 +68,8 @@
 - [ ] page transition api
 - [ ] fuckign... backdrop-filter breaks positioning 😮‍💨
 - [ ] selected character extension
+- [ ] logo mirage animation
+- [ ] rarity glow
 
 # Bonuses:
 - [ ] move all modal dialogs to [root-level](resources/views/layouts/app.blade.php#L173)

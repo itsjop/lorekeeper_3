@@ -16,9 +16,6 @@ return new class extends Migration {
                 $table->integer('subtype_id')->unsigned();
             });
 
-            Schema::table('design_updates', function (Blueprint $table) {
-                $table->string('subtype_ids')->nullable()->default(null);
-            });
         }
     }
 
