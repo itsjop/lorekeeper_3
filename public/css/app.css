@@ -505,8 +505,11 @@ body {
   background-color: var(--purple-clr_400);
   color: var(--purple-clr_700);
 }
-.app .notifications-table.unread {
+.app .notifications-table .unread {
   background-color: var(--purple-clr_100);
+}
+.app .btn-secondary:hover {
+  background-color: var(--purple-clr_700);
 }
 
 /* General Styling */
@@ -1070,18 +1073,27 @@ because the nesting selector cannot represent pseudo-elements. */
   z-index: 1;
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown.show .dropdown-toggle {
+  padding: 5px;
   color: var(--purple-clr_700);
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown.show .dropdown-toggle::after {
   transform: rotate(0);
 }
 #app #site-wrapper #header-nav .nav-item.nav-notifications {
-  width: 2em;
+  width: 2.5em;
   transform-origin: 50% 300%;
-  animation: wobble-hor-bottom 5s var(--smoothIn_linear) forwards infinite;
+  animation: wobble-hor-bottom 10s var(--smoothIn_linear) forwards infinite;
 }
 #app #site-wrapper #header-nav .nav-item > a {
   color: var(--purple-clr_bgtext);
+  padding: 5px 0;
+}
+#app #site-wrapper #header-nav .nav-item .btn-secondary {
+  display: flex;
+  place-items: center;
+  place-content: center;
+  gap: 5px;
+  margin: 0;
 }
 #app #site-wrapper #header-nav .navbar-brand .navbar-brand-image {
   max-width: 40vw;
@@ -1410,22 +1422,22 @@ because the nesting selector cannot represent pseudo-elements. */
   0% {
     transform: rotate(0deg);
   }
-  85% {
+  90% {
     transform: rotate(0deg);
   }
-  87% {
-    transform: rotate(5deg);
-  }
-  90% {
-    transform: rotate(-4deg);
-  }
-  94% {
+  92% {
     transform: rotate(3deg);
   }
+  94% {
+    transform: rotate(-3deg);
+  }
   96% {
-    transform: rotate(-2deg);
+    transform: rotate(2deg);
   }
   98% {
+    transform: rotate(-1deg);
+  }
+  99% {
     transform: rotate(1deg);
   }
   100% {
@@ -1547,7 +1559,6 @@ body {
   padding: 0;
 }
 #sidebar details[open] li:last-of-type {
-  border-radius: 0 0 15px 15px;
   position: relative;
 }
 #sidebar details[open] li:last-of-type::before {

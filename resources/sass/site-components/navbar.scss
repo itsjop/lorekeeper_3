@@ -28,6 +28,7 @@
             background-color: var(--purple-clr_50);
             z-index: 1;
             .dropdown-toggle {
+              padding: 5px;
               color: var(--purple-clr_700);
               &::after {
                 transform: rotate(0);
@@ -38,12 +39,20 @@
       }
       .nav-item {
         &.nav-notifications {
-          width: 2em;
+          width: 2.5em;
           transform-origin: 50% 300%;
-          animation: wobble-hor-bottom  5s var(--smoothIn_linear)forwards infinite;
+          animation: wobble-hor-bottom 10s var(--smoothIn_linear) forwards infinite;
         }
         > a {
           color: var(--purple-clr_bgtext);
+          padding: 5px 0;
+        }
+        .btn-secondary {
+          display: flex;
+          place-items: center;
+          place-content: center;
+          gap: 5px;
+          margin: 0;
         }
       }
       .navbar-brand .navbar-brand-image {
@@ -388,13 +397,14 @@
   }
 }
 
+// prettier-ignore
 @keyframes wobble-hor-bottom {
   0%   { transform: rotate(0deg); }
-  85%  { transform: rotate(0deg); }
-  87%  { transform: rotate(5deg); }
-  90%  { transform: rotate(-4deg); }
-  94%  { transform: rotate(3deg); }
-  96%  { transform: rotate(-2deg); }
-  98%  { transform: rotate(1deg); }
+  90%  { transform: rotate(0deg); }
+  92%  { transform: rotate(3deg); }
+  94%  { transform: rotate(-3deg); }
+  96%  { transform: rotate(2deg); }
+  98%  { transform: rotate(-1deg); }
+  99%  { transform: rotate(1deg); }
   100% { transform: rotate(0deg); }
 }

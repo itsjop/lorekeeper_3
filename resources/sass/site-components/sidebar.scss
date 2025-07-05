@@ -107,7 +107,7 @@
     li {
       padding: 0;
       &:last-of-type {
-        border-radius: 0 0 15px 15px;
+        // border-radius: 0 0 15px 15px;
         position: relative;
         &::before {
           content: '';

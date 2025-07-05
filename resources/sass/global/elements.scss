@@ -51,5 +51,6 @@ h4, h5, h6 {
   }
   .btn-primary, .badge-primary { background-color: var(--teal-clr_600); }
   .btn-secondary { background-color: var(--purple-clr_400);  color: var(--purple-clr_700); }
-  .notifications-table.unread { background-color: var(--purple-clr_100); }
+  .notifications-table .unread { background-color: var(--purple-clr_100); }
+  .btn-secondary:hover { background-color: var(--purple-clr_700); }
 }

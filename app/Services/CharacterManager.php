@@ -426,7 +426,7 @@ class CharacterManager extends Service {
     if ($imageProperties[0] > 2000 || $imageProperties[1] > 2000) {
       // For large images (in terms of dimensions),
       // use imagick instead, as it's better at handling them
-      Config::set('image.driver', 'imagick');
+      Config::set('image.driver', 'gd');
     }
     // Trim transparent parts of image.
     $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName)->trim('transparent');
@@ -561,7 +561,7 @@ class CharacterManager extends Service {
     if ($imageProperties[0] > 2000 || $imageProperties[1] > 2000) {
       // For large images (in terms of dimensions),
       // use imagick instead, as it's better at handling them
-      Config::set('image.driver', 'imagick');
+      Config::set('image.driver', 'gd');
     }
     $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName);
 

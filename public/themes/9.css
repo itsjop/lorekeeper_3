@@ -687,11 +687,6 @@ select.form-control:focus::-ms-value {
   border-color: var(--gray-500);
 }
 
-.btn-secondary:hover {
-  color: var(--dark);
-  background-color: var(--secondary);
-  border-color: var(--secondary);
-}
 
 .btn-secondary:focus,
 .btn-secondary.focus {
