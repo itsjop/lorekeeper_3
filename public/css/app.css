@@ -984,10 +984,14 @@ dialog,
   top: 50%;
   width: auto;
   height: auto;
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, -50%);
+  max-height: 70vh;
   background: transparent;
   border: 0;
   opacity: 0;
+  background-color: var(--purple-clr_400);
+  box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.5333333333);
+  border-radius: 15px;
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, overlay 0.7s ease-out allow-discrete, display 0.7s ease-out allow-discrete;
   /* Equivalent to
   transition: all 0.7s allow-discrete; */
@@ -995,7 +999,7 @@ dialog,
 }
 dialog::backdrop,
 .modal::backdrop {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
   transition: display 0.7s allow-discrete, overlay 0.7s allow-discrete, background-color 0.7s;
   /* Equivalent to
   transition: all 0.7s allow-discrete; */
@@ -1003,7 +1007,16 @@ dialog::backdrop,
 dialog:open,
 .modal:open {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+}
+dialog .modal-dialog,
+.modal .modal-dialog {
+  max-height: calc(70vh - 40px);
+  margin: 0;
+  overflow-y: scroll;
+}
+dialog .modal-dialog .modal-content,
+.modal .modal-dialog .modal-content {
+  border-radius: 15px;
 }
 
 /* Before open state  */
@@ -1012,11 +1025,10 @@ dialog:open,
 @starting-style {
   dialog:open {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
   }
 }
 /* Transition the :backdrop when the dialog modal is promoted to the top layer */
-dialog dialog:open::backdrop {
+::backdrop {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
@@ -1024,7 +1036,7 @@ dialog dialog:open::backdrop {
 because the nesting selector cannot represent pseudo-elements. */
 @starting-style {
   dialog:open::backdrop {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgb(0, 0, 0);
   }
 }
 #app #site-wrapper #header-nav {

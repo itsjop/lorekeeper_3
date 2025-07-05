@@ -1,14 +1,26 @@
 {{-- Image Data --}}
 <div class="col-md-5 d-flex">
   <div class="w-100">
-    @if ((isset($image->content_warnings) && !Auth::check()) || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($image->content_warnings)))
+    @if (
+        (isset($image->content_warnings) && !Auth::check()) ||
+            (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($image->content_warnings))
+    )
       <div class="alert alert-danger text-center">
         <span class="float-right">
-          <a href="#" data-dismiss="alert" class="close">
+          <a
+            href="#"
+            data-dismiss="alert"
+            class="close"
+          >
             <i class="fas fa-times" aria-hidden="true"></i>
           </a>
         </span>
-        <img src="{{ asset('images/lorekeeper/content-warning.png') }}" class="mb-1" alt="Content Warning" style="height: 10vh;" />
+        <img
+          src="{{ asset('images/lorekeeper/content-warning.png') }}"
+          class="mb-1"
+          alt="Content Warning"
+          style="height: 10vh;"
+        />
         <h5>
           <i class="fa fa-exclamation-triangle mr-2"></i>Character Warnings<i class="fa fa-exclamation-triangle ml-2"></i>
         </h5>
@@ -19,22 +31,52 @@
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class="nav-link active" id="infoTab-{{ $image->id }}" data-toggle="tab" href="#info-{{ $image->id }}" role="tab">Info</a>
+            <a
+              class="nav-link active"
+              id="infoTab-{{ $image->id }}"
+              data-toggle="tab"
+              href="#info-{{ $image->id }}"
+              role="tab"
+            >Info</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="notesTab-{{ $image->id }}" data-toggle="tab" href="#notes-{{ $image->id }}" role="tab">Notes</a>
+            <a
+              class="nav-link"
+              id="notesTab-{{ $image->id }}"
+              data-toggle="tab"
+              href="#notes-{{ $image->id }}"
+              role="tab"
+            >Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="creditsTab-{{ $image->id }}" data-toggle="tab" href="#credits-{{ $image->id }}" role="tab">Credits</a>
+            <a
+              class="nav-link"
+              id="creditsTab-{{ $image->id }}"
+              data-toggle="tab"
+              href="#credits-{{ $image->id }}"
+              role="tab"
+            >Credits</a>
           </li>
           @if (isset($showMention) && $showMention)
             <li class="nav-item">
-              <a class="nav-link" id="mentionTab-{{ $image->id }}" data-toggle="tab" href="#mention-{{ $image->id }}" role="tab">Mention</a>
+              <a
+                class="nav-link"
+                id="mentionTab-{{ $image->id }}"
+                data-toggle="tab"
+                href="#mention-{{ $image->id }}"
+                role="tab"
+              >Mention</a>
             </li>
           @endif
           @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
             <li class="nav-item">
-              <a class="nav-link" id="settingsTab-{{ $image->id }}" data-toggle="tab" href="#settings-{{ $image->id }}" role="tab"><i class="fas fa-cog"></i></a>
+              <a
+                class="nav-link"
+                id="settingsTab-{{ $image->id }}"
+                data-toggle="tab"
+                href="#settings-{{ $image->id }}"
+                role="tab"
+              ><i class="fas fa-cog"></i></a>
             </li>
           @endif
         </ul>
@@ -126,7 +168,9 @@
                       <h5>
                         Colours
                         @if ($image->character->is_myo_slot)
-                          {!! add_help('These colours are created from the parents of the MYO slot. They are not editable until the MYO is created.') !!}
+                          {!! add_help(
+                              'These colours are created from the parents of the MYO slot. They are not editable until the MYO is created.'
+                          ) !!}
                         @endif
                       </h5>
                     </div>
@@ -218,7 +262,14 @@
 
           @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
             <div class="mt-3">
-              <a href="#" class="btn btn-outline-info btn-sm edit-features mb-3" data-id="{{ $image->id }}"><i class="fas fa-cog"></i> Edit</a>
+              <a
+                href="#"
+                class="btn btn-outline-info btn-sm edit-features mb-3"
+                data-id="{{ $image->id }}"
+              >
+                <i class="fas fa-cog"></i>
+                Edit
+              </a>
             </div>
           @endif
 
@@ -229,7 +280,11 @@
             <div class="row justify-content-center text-center">
               {{-- get one random pet --}}
               @php
-                $pets = $image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get();
+                $pets = $image->character
+                    ->pets()
+                    ->orderBy('sort', 'DESC')
+                    ->limit(config('lorekeeper.pets.display_pet_count'))
+                    ->get();
               @endphp
               @foreach ($pets as $pet)
                 @if (config('lorekeeper.pets.pet_bonding_enabled'))
@@ -258,7 +313,11 @@
           @endif
           @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
             <div class="mt-3">
-              <a href="#" class="btn btn-outline-info btn-sm edit-notes" data-id="{{ $image->id }}">
+              <a
+                href="#"
+                class="btn btn-outline-info btn-sm edit-notes"
+                data-id="{{ $image->id }}"
+              >
                 <i class="fas fa-cog"></i> Edit</a>
             </div>
           @endif
@@ -290,7 +349,11 @@
 
           @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
             <div class="mt-3">
-              <a href="#" class="btn btn-outline-info btn-sm edit-credits" data-id="{{ $image->id }}"><i class="fas fa-cog"></i> Edit</a>
+              <a
+                href="#"
+                class="btn btn-outline-info btn-sm edit-credits"
+                data-id="{{ $image->id }}"
+              ><i class="fas fa-cog"></i> Edit</a>
             </div>
           @endif
         </div>
@@ -334,15 +397,19 @@
             </div>
             <div class="form-group">
               {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-              {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.') !!}
+              {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+                  'If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.'
+              ) !!}
             </div>
             @if (config('lorekeeper.settings.enable_character_content_warnings'))
               <div class="form-group">
-                {!! Form::label('Content Warnings') !!} {!! add_help('These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.') !!}
+                {!! Form::label('Content Warnings') !!} {!! add_help(
+                    'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
+                ) !!}
                 {!! Form::text('content_warnings', null, [
                     'class' => 'form-control',
                     'id' => 'warningList',
-                    'data-init-value' => $image->editWarnings,
+                    'data-init-value' => $image->editWarnings
                 ]) !!}
               </div>
             @endif
@@ -353,9 +420,20 @@
 
             <div class="text-right">
               @if ($character->character_image_id != $image->id)
-                <a href="#" class="btn btn-outline-info btn-sm active-image" data-id="{{ $image->id }}">Set Active</a>
-              @endif <a href="#" class="btn btn-outline-info btn-sm reupload-image" data-id="{{ $image->id }}">Reupload Image</a> <a href="#" class="btn btn-outline-danger btn-sm delete-image"
-                data-id="{{ $image->id }}">Delete</a>
+                <a
+                  href="#"
+                  class="btn btn-outline-info btn-sm active-image"
+                  data-id="{{ $image->id }}"
+                >Set Active</a>
+              @endif <a
+                href="#"
+                class="btn btn-outline-info btn-sm reupload-image"
+                data-id="{{ $image->id }}"
+              >Reupload Image</a> <a
+                href="#"
+                class="btn btn-outline-danger btn-sm delete-image"
+                data-id="{{ $image->id }}"
+              >Delete</a>
             </div>
           </div>
         @endif
