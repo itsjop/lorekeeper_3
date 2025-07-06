@@ -91,7 +91,7 @@ abstract class Service {
      * Empty the errors MessageBag.
      */
     public function resetErrors() {
-        $this->errors = new MessageBag;
+        $this->errors = new MessageBag();
     }
 
     public function remember($key = null, $fn = null) {
@@ -324,9 +324,12 @@ abstract class Service {
             }
             chmod($dir, 0755);
         }
-        if($copy) File::copy($image, $dir . '/' . $name);
-        else File::move($image, $dir . '/' . $name);
-        chmod($dir . '/' . $name, 0755);
+        if ($copy) {
+            File::copy($image, $dir.'/'.$name);
+        } else {
+            File::move($image, $dir.'/'.$name);
+        }
+        chmod($dir.'/'.$name, 0755);
 
         return true;
     }

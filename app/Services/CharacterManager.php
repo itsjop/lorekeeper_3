@@ -106,13 +106,13 @@ class CharacterManager extends Service {
       if (isset($data['subtype_id']) && $data['subtype_id']) {
         $subtype = Subtype::find($data['subtype_id']);
         if (!(isset($data['species_id']) && $data['species_id'])) {
-            throw new \Exception('Species must be selected to select a subtype.');
+          throw new \Exception('Species must be selected to select a subtype.');
         }
         if (!$subtype || $subtype->species_id != $data['species_id']) {
-            throw new \Exception('Selected subtype invalid or does not match species.');
+          throw new \Exception('Selected subtype invalid or does not match species.');
         }
       } else {
-          $data['subtype_id'] = null;
+        $data['subtype_id'] = null;
       }
       // Get owner info
       $url = null;
@@ -259,7 +259,6 @@ class CharacterManager extends Service {
         $data['species_id'] = (isset($data['species_id']) && $data['species_id']) ? $data['species_id'] : null;
         $data['subtype_id'] = isset($data['subtype_id']) && $data['subtype_id'] ? $data['subtype_id'] : null;
         $data['rarity_id'] = isset($data['rarity_id']) && $data['rarity_id'] ? $data['rarity_id'] : null;
-
         $data['transformation_id'] =
           isset($data['transformation_id']) && $data['transformation_id'] ? $data['transformation_id'] : null;
         $data['transformation_info'] =
@@ -299,12 +298,8 @@ class CharacterManager extends Service {
       $imageData['sort'] = 0;
       $imageData['is_valid'] = isset($data['is_valid']);
       $imageData['is_visible'] = isset($data['is_visible']);
-      $imageData['extension'] =
-        config('lorekeeper.settings.masterlist_image_format') ??
-        ($data['extension'] ?? $data['image']->getClientOriginalExtension());
-      $imageData['fullsize_extension'] =
-        config('lorekeeper.settings.masterlist_fullsizes_format') ??
-        ($data['fullsize_extension'] ?? $data['image']->getClientOriginalExtension());
+      $imageData['extension'] = (config('lorekeeper.settings.masterlist_image_format') ?? ($data['extension'] ?? $data['image']->getClientOriginalExtension()));
+      $imageData['fullsize_extension'] = (config('lorekeeper.settings.masterlist_fullsizes_format') ?? ($data['fullsize_extension'] ?? $data['image']->getClientOriginalExtension()));
       $imageData['content_warnings'] = isset($data['content_warnings']) ? explode(',', $data['content_warnings']) : null;
       $imageData['character_id'] = $character->id;
       $image = CharacterImage::create($imageData);
@@ -319,7 +314,7 @@ class CharacterManager extends Service {
           ]);
         }
       }
-      
+
       // Check if entered url(s) have aliases associated with any on-site users
       $designers = array_filter($data['designer_url']); // filter null values
       foreach ($designers as $key => $url) {
@@ -391,16 +386,19 @@ class CharacterManager extends Service {
           $this->imageColours($image, Auth::user());
         }
       }
+
       // Attach features
       foreach ($data['feature_id'] as $key => $featureId) {
         if ($featureId) {
           $feature = CharacterFeature::create(['character_image_id' => $image->id, 'feature_id' => $featureId, 'data' => $data['feature_data'][$key]]);
         }
       }
+
       return $image;
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
+
     return false;
   }
 
@@ -416,12 +414,15 @@ class CharacterManager extends Service {
       // use imagick instead, as it's better at handling them
       Config::set('image.driver', 'gd');
     }
+
     // Trim transparent parts of image.
     $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName)->trim('transparent');
+
     if (config('lorekeeper.settings.masterlist_image_automation') == 1) {
       // Make the image be square
       $imageWidth = $image->width();
       $imageHeight = $image->height();
+
       if ($imageWidth > $imageHeight) {
         // Landscape
         $canvas = Image::canvas($image->width(), $image->width());
@@ -432,11 +433,13 @@ class CharacterManager extends Service {
         $image = $canvas->insert($image, 'center');
       }
     }
+
     // Add background fill if destination format is not transparent
     if (!in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) && config('lorekeeper.settings.masterlist_image_format') != null && config('lorekeeper.settings.masterlist_image_background') != null) {
       $canvas = Image::canvas($image->width(), $image->height(), config('lorekeeper.settings.masterlist_image_background'));
       $image = $canvas->insert($image, 'center');
     }
+
     if (config('lorekeeper.settings.store_masterlist_fullsizes') == 1) {
       // Generate fullsize hash if not already generated,
       // then save the full-sized image
@@ -444,6 +447,7 @@ class CharacterManager extends Service {
         $characterImage->fullsize_hash = randomString(15);
         $characterImage->save();
       }
+
       if (config('lorekeeper.settings.masterlist_fullsizes_cap') != 0) {
         if ($image->width() > $image->height()) {
           // Landscape
@@ -459,19 +463,21 @@ class CharacterManager extends Service {
           });
         }
       }
+
       // Save the processed image
-      $image->save($characterImage->imagePath . '/' . $characterImage->fullsizeFileName, 100, config('lorekeeper.settings.masterlist_fullsizes_format'));
+      $image->save($characterImage->imagePath . '/' . $characterImage->fullsizeFileName, 100, config('lorekeeper.settings.masterlist_fullsizes_format') != null ? config('lorekeeper.settings.masterlist_fullsizes_format') : $characterImage->fullsize_extension);
     } else {
       // Delete fullsize if it was previously created.
       if (isset($characterImage->fullsize_hash) ? file_exists(public_path($characterImage->imageDirectory . '/' . $characterImage->fullsizeFileName)) : false) {
         unlink($characterImage->imagePath . '/' . $characterImage->fullsizeFileName);
       }
     }
+
     // Resize image if desired
     if (config('lorekeeper.settings.masterlist_image_dimension') != 0) {
       if ($image->width() > $image->height()) {
         // Landscape
-        if (config('lorekeeper.settings.masterlist_image_dimension_target') == 'short') {
+        if (config('lorekeeper.settings.masterlist_image_dimension_target') == 'shorter') {
           $image->resize(null, config('lorekeeper.settings.masterlist_image_dimension'), function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
@@ -484,7 +490,7 @@ class CharacterManager extends Service {
         }
       } else {
         // Portrait
-        if (config('lorekeeper.settings.masterlist_image_dimension_target') == 'short') {
+        if (config('lorekeeper.settings.masterlist_image_dimension_target') == 'shorter') {
           $image->resize(config('lorekeeper.settings.masterlist_image_dimension'), null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
@@ -528,12 +534,10 @@ class CharacterManager extends Service {
         }
       }
       $image->insert($watermark, 'center');
-    } // Save the processed image
-    $image->save(
-      $characterImage->imagePath . '/' . $characterImage->imageFileName,
-      100,
-      config('lorekeeper.settings.masterlist_image_format')
-    );
+    }
+
+    // Save the processed image
+    $image->save($characterImage->imagePath . '/' . $characterImage->imageFileName, 100, config('lorekeeper.settings.masterlist_image_format'));
   }
 
 
@@ -551,8 +555,8 @@ class CharacterManager extends Service {
       // use imagick instead, as it's better at handling them
       Config::set('image.driver', 'gd');
     }
-    $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName);
 
+    $image = Image::make($characterImage->imagePath . '/' . $characterImage->imageFileName);
 
     if (!in_array(config('lorekeeper.settings.masterlist_image_format'), ['png', 'webp']) && config('lorekeeper.settings.masterlist_image_format') != null && config('lorekeeper.settings.masterlist_image_background') != null) {
       $canvas = Image::canvas($image->width(), $image->height(), config('lorekeeper.settings.masterlist_image_background'));
@@ -571,6 +575,7 @@ class CharacterManager extends Service {
     if (Config::get('lorekeeper.settings.watermark_masterlist_thumbnails') == 1 && !$isMyo) {
       // Trim transparent parts of image.
       $image->trim(isset($trimColor) && $trimColor ? 'top-left' : 'transparent');
+
       if (config('lorekeeper.settings.masterlist_image_automation') == 1) {
         // Make the image be square
         if ($image->width() > $image->height()) {
@@ -627,13 +632,13 @@ class CharacterManager extends Service {
             //Landscape
             $watermark->resize($maxSize, null, function ($constraint) {
               $constraint->aspectRatio();
-              $constraint->upsize();
+              // $constraint->upsize();
             });
           } else {
             // Portrait
             $image->resize(Config::get('lorekeeper.settings.masterlist_image_dimension'), null, function ($constraint) {
               $constraint->aspectRatio();
-              $constraint->upsize();
+              // $constraint->upsize();
             });
           }
         }
@@ -642,8 +647,10 @@ class CharacterManager extends Service {
         $image->insert($watermark, 'center');
       }
       // Now shrink the image
+
       $imageWidth = $image->width();
       $imageHeight = $image->height();
+
       if ($imageWidth > $imageHeight) {
         // Landscape
         $image->resize(null, $cropWidth, function ($constraint) {
@@ -657,6 +664,7 @@ class CharacterManager extends Service {
           $constraint->upsize();
         });
       }
+
       if (config('lorekeeper.settings.masterlist_image_automation') == 0) {
         $xOffset = 0 + (($points['x0'] - $trimOffsetX) > 0 ? ($points['x0'] - $trimOffsetX) : 0);
         if (($xOffset + $cropWidth) > $image->width()) {
@@ -675,23 +683,39 @@ class CharacterManager extends Service {
           if (($yOffsetNew + $cropHeight) > $image->height()) {
             $yOffsetNew = $image->height() - $cropHeight;
           }
-        } // Crop according to the selected area
-        $image->crop(
-          $cropWidth,
-          $cropHeight,
-          isset($xOffsetNew) ? $xOffsetNew : $xOffset,
-          isset($yOffsetNew) ? $yOffsetNew : $yOffset
-        );
+        }
+
+        // Crop according to the selected area
+        $image->crop($cropWidth, $cropHeight, $xOffsetNew ?? $xOffset, $yOffsetNew ?? $yOffset);
       }
     } else {
       $cropWidth = $points['x1'] - $points['x0'];
       $cropHeight = $points['y1'] - $points['y0'];
+
       if (config('lorekeeper.settings.masterlist_image_automation') == 0) {
         // Crop according to the selected area
         $image->crop($cropWidth, $cropHeight, $points['x0'], $points['y0']);
       }
+
       // Resize to fit the thumbnail size
-      $image->resize(config('lorekeeper.settings.masterlist_thumbnails.width'), config('lorekeeper.settings.masterlist_thumbnails.height'));
+      $tn_width = config('lorekeeper.settings.masterlist_thumbnails.width');
+      $tn_height = config('lorekeeper.settings.masterlist_thumbnails.height');
+
+      $image->resize(
+        $tn_width,
+        $tn_height,
+        function ($constraint) {
+          $constraint->aspectRatio();
+        }
+      );
+
+      if ($tn_width > $tn_height) $tn_width = null;
+      else $tn_height = null;
+
+      $image->resizeCanvas(
+        $tn_width,
+        $tn_height,
+      );
     }
     // Save the thumbnail
     $image->save($characterImage->thumbnailPath . '/' . $characterImage->thumbnailFileName, 100, config('lorekeeper.settings.masterlist_image_format'));
@@ -758,15 +782,15 @@ class CharacterManager extends Service {
         }
       }
       if (isset($data['subtype_id']) && $data['subtype_id']) {
-          $subtype = Subtype::find($data['subtype_id']);
-          if (!(isset($data['species_id']) && $data['species_id'])) {
-              throw new \Exception('Species must be selected to select a subtype.');
-          }
-          if (!$subtype || $subtype->species_id != $data['species_id']) {
-              throw new \Exception('Selected subtype invalid or does not match species.');
-          }
+        $subtype = Subtype::find($data['subtype_id']);
+        if (!(isset($data['species_id']) && $data['species_id'])) {
+          throw new \Exception('Species must be selected to select a subtype.');
+        }
+        if (!$subtype || $subtype->species_id != $data['species_id']) {
+          throw new \Exception('Selected subtype invalid or does not match species.');
+        }
       } else {
-          $data['subtype_id'] = null;
+        $data['subtype_id'] = null;
       }
       $data['is_visible'] = 1;
       // Create character image
@@ -818,10 +842,10 @@ class CharacterManager extends Service {
       if (isset($data['subtype_id']) && $data['subtype_id']) {
         $subtype = Subtype::find($data['subtype_id']);
         if (!(isset($data['species_id']) && $data['species_id'])) {
-            throw new \Exception('Species must be selected to select a subtype.');
+          throw new \Exception('Species must be selected to select a subtype.');
         }
         if (!$subtype || $subtype->species_id != $data['species_id']) {
-            throw new \Exception('Selected subtype invalid or does not match species.');
+          throw new \Exception('Selected subtype invalid or does not match species.');
         }
       }
 
@@ -861,7 +885,7 @@ class CharacterManager extends Service {
       // Update other stats
       $image->species_id = $data['species_id'];
       $image->subtype_id = $data['subtype_id'] ?? null;
-      
+
       $image->rarity_id = $data['rarity_id'];
       $image->transformation_id = $data['transformation_id'] ?: null;
       $image->transformation_info = $data['transformation_info'] ?: null;
