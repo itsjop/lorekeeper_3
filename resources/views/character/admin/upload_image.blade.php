@@ -163,7 +163,7 @@
     {!! Form::text('transformation_description', old('transformation_description') ?: $character->image->transformation_description, ['class' => 'form-control mr-2', 'placeholder' => 'Origin Info (Optional)']) !!}
   </div>
   <hr>
-  
+
   <div class="form-group" id="subtypes">
     {!! Form::label('Subtype (Optional)') !!}
     {!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $character->image->subtype_id, [
@@ -400,10 +400,6 @@
           $("#transformations").html(res);
         }).fail(function(jqXHR, textStatus, errorThrown) {
           alert("AJAX call failed: " + textStatus + ", " + errorThrown);
-        });
-
-        $('#subtype').selectize({
-          maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
         });
       });
 

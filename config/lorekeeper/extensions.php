@@ -31,8 +31,8 @@ return [
      */
     'visual_trait_index' => [
         'enable_species_index'   => 1, // Enables the Species Trait Index
-        'enable_subtype_index'   => 0, // Enables the Subtype Trait Index
-        'enable_universal_index' => 0, // Enables the Universal Trait Index
+        'enable_subtype_index'   => 1, // Enables the Subtype Trait Index
+        'enable_universal_index' => 1, // Enables the Universal Trait Index
         'trait_modals'           => 1, // Enables modals when you click on a trait for more info instead of linking to the traits page
     ],
 
@@ -56,7 +56,7 @@ return [
     ],
 
     // Group Traits By Category - Uri
-    'traits_by_category'            => 0,
+    'traits_by_category'            => 1,
 
     // Scroll To Top - Uri
     'scroll_to_top' => 1, // 1 - On, 0 - off
@@ -129,5 +129,5 @@ return [
 
     // Multiple Subtypes - Newt
     'exclusionary_search'    => 0, // If enabled, searching for multiple subtypes will only return results that have all of the subtypes specified. If disabled, it will return results that have any of the subtypes specified.
-    'multiple_subtype_limit' => 10, // The maximum number of subtypes a character can have.
+    'multiple_subtype_limit' => 1, // The maximum number of subtypes a character can have.
 ];

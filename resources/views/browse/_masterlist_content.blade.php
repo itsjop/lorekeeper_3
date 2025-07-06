@@ -286,7 +286,7 @@ alt="List View"
 <div id="ml-gridView">
   @foreach ($characters->chunk(4) as $chunk)
     @foreach ($chunk as $character)
-      {{-- {{ dd(json_encode($character)) }} --}}
+      {{ dd(json_encode($character)) }}
       <div class="masterlist-character text-center">
         <div class="name">
           <a href="{{ $character->url }}" class="">
