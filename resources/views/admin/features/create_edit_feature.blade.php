@@ -8,9 +8,7 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Traits' => 'admin/data/traits',
-      ($feature->id ? 'Edit' : 'Create') . ' Trait' => $feature->id
-          ? 'admin/data/traits/edit/' . $feature->id
-          : 'admin/data/traits/create'
+      ($feature->id ? 'Edit' : 'Create') . ' Trait' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create',
   ]) !!}
 
   <h1>{{ $feature->id ? 'Edit' : 'Create' }} Trait
@@ -21,7 +19,7 @@
 
   {!! Form::open([
       'url' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create',
-      'files' => true
+      'files' => true,
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -75,11 +73,9 @@
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $feature->id ? $feature->is_visible : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle'
+        'data-toggle' => 'toggle',
     ]) !!}
-    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
-        'If turned off, the trait will not be visible in the trait list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.'
-    ) !!}
+    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the trait will not be visible in the trait list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.') !!}
   </div>
 
   <div class="text-right">
