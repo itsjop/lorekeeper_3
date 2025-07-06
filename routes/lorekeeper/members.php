@@ -146,6 +146,7 @@ Route::group(['prefix' => 'characters', 'namespace' => 'Users'], function () {
   Route::post('sort', 'CharacterController@postSortCharacters');
 
   Route::post('{slug}/pets/sort', 'CharacterController@postSortCharacterPets');
+  Route::post('select-character', 'CharacterController@postSelectCharacter');
 
   Route::get('transfers/{type}', 'CharacterController@getTransfers');
   Route::post('transfer/act/{id}', 'CharacterController@postHandleTransfer');
@@ -361,14 +362,14 @@ Route::group(['prefix' => 'designs', 'namespace' => 'Characters'], function () {
 
 /**************************************************************************************************
     Encounters
-**************************************************************************************************/
+ **************************************************************************************************/
 
-Route::group(['prefix' => 'encounter-areas'], function() {
-    Route::get('/', 'EncounterController@getEncounterAreas');
+Route::group(['prefix' => 'encounter-areas'], function () {
+  Route::get('/', 'EncounterController@getEncounterAreas');
 
-    Route::get('{id}', 'EncounterController@exploreArea')->where('id', '[0-9]+');
-    Route::post('{id}/act', 'EncounterController@postAct')->where('id', '[0-9]+');
-    Route::post('select-character', 'EncounterController@postSelectCharacter');
+  Route::get('{id}', 'EncounterController@exploreArea')->where('id', '[0-9]+');
+  Route::post('{id}/act', 'EncounterController@postAct')->where('id', '[0-9]+');
+  Route::post('select-character', 'EncounterController@postSelectCharacter');
 });
 
 /**************************************************************************************************
