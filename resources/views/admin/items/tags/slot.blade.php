@@ -119,5 +119,9 @@
         alert("AJAX call failed: " + textStatus + ", " + errorThrown);
       });
     });
+
+    $('#subtype').selectize({
+      maxItems: {{ config('lorekeeper.extensions.multiple_subtype_limit') }},
+    });
   </script>
 @endsection
