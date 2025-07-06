@@ -142,7 +142,10 @@
 
   <div class="form-group" id="subtypes">
     {!! Form::label('Subtype (Optional)') !!}
-    {!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $character->image->subtype_id, ['class' => 'form-control', 'id' => 'subtype']) !!}
+    {!! Form::select('subtype_id', $subtypes, old('subtype_id') ?: $character->image->subtype_id, [
+        'class' => 'form-control',
+        'id' => 'subtype',
+    ]) !!}
   </div>
 
   <hr>
@@ -213,7 +216,6 @@
     {!! Form::submit('Create Image', ['class' => 'btn btn-primary']) !!}
   </div>
   {!! Form::close() !!}
-
 
 @endsection
 
@@ -402,8 +404,6 @@
           alert("AJAX call failed: " + textStatus + ", " + errorThrown);
         });
       });
-
-
     });
   </script>
 @endsection

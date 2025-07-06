@@ -159,10 +159,18 @@ return [
     'key' => 'encounters',
     'wiki_key' => 'Encounters',
     'creators' => json_encode([
-        'CH3RVB' => 'https://github.com/CH3RVB/',
-        'LostInProgres' => 'https://github.com/LostInProgres',
+      'CH3RVB' => 'https://github.com/CH3RVB/',
+      'LostInProgres' => 'https://github.com/LostInProgres',
     ]),
     'version' => '2.0.0',
+  ],
+  'selected_character' => [
+    'key' => 'selected_character',
+    'wiki_key' => 'Selected_Character',
+    'creators' => json_encode([
+      'Mercury' => 'https://github.com/itinerare/',
+    ]),
+    'version' => '1.0.1',
   ],
 
 ];
