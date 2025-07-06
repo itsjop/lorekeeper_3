@@ -156,7 +156,7 @@
 
       </main>
 
-      @include('layouts._footer')
+    @include('layouts._footer')
 
       <dialog class="modal fade" id="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">

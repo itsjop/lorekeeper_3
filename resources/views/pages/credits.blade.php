@@ -51,14 +51,17 @@
           Character Warnings
         </strong>
       </a> by
-      <a href="https://github.com/redcr0wz">Lexi</a>, <a href="https://github.com/SpeedyD">Speedy</a>, <a href="https://github.com/ScuffedNewt">ScuffedNewt</a>, & <a href="https://github.com/itinerare">itinerare</a>
+      <a href="https://github.com/redcr0wz">Lexi</a>, <a href="https://github.com/SpeedyD">Speedy</a>, <a
+        href="https://github.com/ScuffedNewt"
+      >ScuffedNewt</a>, & <a href="https://github.com/itinerare">itinerare</a>
     </p>
     <p class="mb-0 col-md-4">
       <a href="http://wiki.lorekeeper.me/index.php?title=Extensions:Comments">
         <strong>
           Comments
         </strong>
-      </a> by <a href="https://github.com/preimpression">Preimpression</a> & <a href="https://github.com/ScuffedNewt">ScuffedNewt</a>
+      </a> by <a href="https://github.com/preimpression">Preimpression</a> & <a
+        href="https://github.com/ScuffedNewt">ScuffedNewt</a>
     </p>
     <p class="mb-0 col-md-4">
       <a href="http://wiki.lorekeeper.me/index.php?title=Extensions:Deactivate_Account">
