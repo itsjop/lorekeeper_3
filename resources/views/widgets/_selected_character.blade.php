@@ -4,8 +4,11 @@
     <div class="profile-assets-content">
       @if ($character)
         <div>
-          <a href="{{ $character->url }}"><img src="{{ isset($fullImage) && $fullImage ? $character->image->imageUrl : $character->image->thumbnailUrl }}" class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }}"
-              alt="{{ $character->fullName }}" /></a>
+          <a href="{{ $character->url }}"><img
+              src="{{ isset($fullImage) && $fullImage ? $character->image->imageUrl : $character->image->thumbnailUrl }}"
+              class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }}"
+              alt="{{ $character->fullName }}"
+            /></a>
         </div>
         <div class="my-1">
           <a href="{{ $character->url }}" class="h5 mb-0">
