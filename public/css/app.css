@@ -2038,7 +2038,7 @@ body {
 
 .inventory-category .inventory-item {
   display: grid;
-  grid-template: "name  " 2em "thumb " min(100% - 4.5em, 200px) "rarity" 2.5em/1fr;
+  grid-template: "thumb " calc(100% - 4.5em) "name  " 2em "rarity" 2.5em/1fr;
 }
 .inventory-category .inventory-item .title {
   grid-area: name;
@@ -2048,7 +2048,8 @@ body {
   place-items: center;
   place-content: center;
   font-weight: 700;
-  font-size: 1.2em;
+  font-size: 1.3em;
+  border-bottom: 2px solid var(--purple-clr_700);
 }
 .inventory-category .inventory-item .title a {
   color: var(--purple-clr_700);
@@ -2059,12 +2060,13 @@ body {
   grid-area: thumb;
   place-self: center;
   z-index: 5;
+  max-height: 200px;
 }
 .inventory-category .inventory-item .badge .feature-image {
   -o-object-fit: contain;
      object-fit: contain;
   width: 100%;
-  height: 80%;
+  height: 95%;
   aspect-ratio: 1/1;
 }
 .inventory-category .inventory-item .rarity {
