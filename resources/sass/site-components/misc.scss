@@ -120,10 +120,13 @@
     }
     .rarity {
       grid-area: rarity;
+      font-family: 'Itim', system-ui;
       width: 100%;
       height: 100%;
-      font-size: 1.2em;
+      font-size: 1.6em;
       font-weight: 700;
+      text-transform: lowercase;
+      font-style: italic;
     }
     .card-bg_animated {
       grid-area: thumb;
@@ -173,13 +176,13 @@
   }
 
   &.common {
-    --card_background: lightblue;
+    --card_background: #a4e1ff;
     --card_star_opacity: 0.3;
     --card_star_animation-duration: 30s;
     --card_star_blend-mode: normal;
   }
   &.uncommon {
-    --card_background: #ca8ee4;
+    --card_background: #e4a5ff;
     --card_star_opacity: 0.5;
     --card_star_animation-duration: 25s;
     --card_star_blend-mode: normal;

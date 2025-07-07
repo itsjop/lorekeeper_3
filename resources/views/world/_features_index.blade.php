@@ -17,7 +17,7 @@
               </div>
               @if ($feature->first()->has_image)
                 <a class="badge" style="border-radius:.5em; ">
-                  <img class="my-1 modal-image" style="max-height:150px; border-radius:.5em;" src="{{ $feature->first()->imageUrl }}" alt="{{ $feature->first()->name }}" data-id="{{ $feature->first()->id }}" />
+                  <img class="my-1 modal-image" src="{{ $feature->first()->imageUrl }}" alt="{{ $feature->first()->name }}" data-id="{{ $feature->first()->id }}" />
                 </a>
               @else
                 <a class="badge" style="border-radius:.5em; ">
