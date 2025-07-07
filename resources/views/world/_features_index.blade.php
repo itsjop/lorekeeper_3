@@ -1,17 +1,11 @@
 @foreach ($features as $categoryId => $categoryFeatures)
-  @if (
-      !isset($categories[$categoryId]) ||
-          (Auth::check() && Auth::user()->hasPower('edit_data')) ||
-          $categories[$categoryId]->is_visible
-  )
+  @if (!isset($categories[$categoryId]) || (Auth::check() && Auth::user()->hasPower('edit_data')) || $categories[$categoryId]->is_visible)
     <div class="card mb-3 inventory-category">
       <h5 class="card-header inventory-header">
         @if (isset($categories[$categoryId]) && !$categories[$categoryId]->is_visible)
           <i class="fas fa-eye-slash mr-1"></i>
         @endif
-        {!! isset($categories[$categoryId])
-            ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
-            : 'Miscellaneous' !!}
+        {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
       </h5>
       <div class="card-body inventory-body">
         <div class="grid grid-4-col gap-2">
@@ -23,13 +17,7 @@
               </div>
               @if ($feature->first()->has_image)
                 <a class="badge" style="border-radius:.5em; ">
-                  <img
-                    class="my-1 modal-image"
-                    style="max-height:150px; border-radius:.5em;"
-                    src="{{ $feature->first()->imageUrl }}"
-                    alt="{{ $feature->first()->name }}"
-                    data-id="{{ $feature->first()->id }}"
-                  />
+                  <img class="my-1 modal-image" style="max-height:150px; border-radius:.5em;" src="{{ $feature->first()->imageUrl }}" alt="{{ $feature->first()->name }}" data-id="{{ $feature->first()->id }}" />
                 </a>
               @else
                 <a class="badge" style="border-radius:.5em; ">

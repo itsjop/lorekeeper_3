@@ -9,7 +9,7 @@
       'World' => 'world',
       ucfirst(__('lorekeeper.species')) => 'world/species',
       $species->name => $species->url,
-      'Traits' => 'world/species/' . $species->id . 'traits'
+      'Traits' => 'world/species/' . $species->id . 'traits',
   ]) !!}
   <h1>{{ $species->name }} Traits</h1>
 
