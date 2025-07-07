@@ -16,6 +16,7 @@ class UserSettings extends Model {
     'banned_at',
     'ban_reason',
     'birthday_setting',
+    'selected_character_id',
     'allow_character_likes',
     'show_image_blocks',
     'border_settings',

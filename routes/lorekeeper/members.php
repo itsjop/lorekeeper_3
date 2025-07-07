@@ -146,6 +146,7 @@ Route::group(['prefix' => 'characters', 'namespace' => 'Users'], function () {
   Route::post('sort', 'CharacterController@postSortCharacters');
 
   Route::post('{slug}/pets/sort', 'CharacterController@postSortCharacterPets');
+    Route::post('select-character', 'CharacterController@postSelectCharacter');
 
   Route::get('transfers/{type}', 'CharacterController@getTransfers');
   Route::post('transfer/act/{id}', 'CharacterController@postHandleTransfer');
