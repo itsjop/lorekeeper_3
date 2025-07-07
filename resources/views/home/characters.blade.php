@@ -39,60 +39,65 @@
     Selected Character
   </h1>
 
-<p>You can select one of your characters to be featured on your profile here.</p>
-{!! Form::open(['url' => 'characters/select-character']) !!}
-    {!! Form::select('character_id', $characters->pluck('fullName', 'id'), Auth::user()->settings->selected_character_id, ['class' => 'form-control mb-2 default character-select', 'placeholder' => 'Select Character']) !!}
-    <div class="text-right">
-        {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
-    </div>
-{!! Form::close() !!}
+  <p>You can select one of your characters to be featured on your profile here.</p>
+  {!! Form::open(['url' => 'characters/select-character']) !!}
+  {!! Form::select('character_id', $characters->pluck('fullName', 'id'), Auth::user()->settings->selected_character_id, [
+      'class' => 'form-control mb-2 default character-select',
+      'placeholder' => 'Select Character'
+  ]) !!}
+  <div class="text-right">
+    {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+  </div>
+  {!! Form::close() !!}
+  </div>
+  {!! Form::close() !!}
   </div>
   {!! Form::open(['url' => 'characters/sort', 'class' => 'text-right']) !!}
   {!! Form::hidden('sort', null, ['id' => 'sortableOrder']) !!}
   {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
   {!! Form::close() !!}
 
-    <div class="mobile-handle handle-clone badge badge-primary rounded-circle hide">
-      <i class="fas fa-hand-point-up" aria-hidden="true"></i>
-      <span class="sr-only">Drag Handle</span>
-    </div>
-  @endsection
-  @section('scripts')
-    <script>
-      $(document).ready(function() {
-        $("#sortable").sortable({
-          characters: '.sort-item',
-          placeholder: "sortable-placeholder col-md-3 col-6",
-          stop: function(event, ui) {
-            $('#sortableOrder').val($(this).sortable("toArray", {
-              attribute: "data-id"
-            }));
-          },
-          create: function() {
-            $('#sortableOrder').val($(this).sortable("toArray", {
-              attribute: "data-id"
-            }));
-          }
-        });
-        $("#sortable").disableSelection();
-
-        function isTouch() {
-          try {
-            document.createEvent("TouchEvent");
-            return true;
-          } catch (e) {
-            return false;
-          }
-        }
-
-        if (isTouch()) {
-          $('#sortable').children().each(function() {
-            var $clone = $('.handle-clone').clone();
-            $(this).append($clone);
-            $clone.removeClass('hide handle-clone');
-          });
-          $("#sortable").sortable("option", "handle", ".mobile-handle");
+  <div class="mobile-handle handle-clone badge badge-primary rounded-circle hide">
+    <i class="fas fa-hand-point-up" aria-hidden="true"></i>
+    <span class="sr-only">Drag Handle</span>
+  </div>
+@endsection
+@section('scripts')
+  <script>
+    $(document).ready(function() {
+      $("#sortable").sortable({
+        characters: '.sort-item',
+        placeholder: "sortable-placeholder col-md-3 col-6",
+        stop: function(event, ui) {
+          $('#sortableOrder').val($(this).sortable("toArray", {
+            attribute: "data-id"
+          }));
+        },
+        create: function() {
+          $('#sortableOrder').val($(this).sortable("toArray", {
+            attribute: "data-id"
+          }));
         }
       });
-    </script>
-  @endsection
+      $("#sortable").disableSelection();
+
+      function isTouch() {
+        try {
+          document.createEvent("TouchEvent");
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      if (isTouch()) {
+        $('#sortable').children().each(function() {
+          var $clone = $('.handle-clone').clone();
+          $(this).append($clone);
+          $clone.removeClass('hide handle-clone');
+        });
+        $("#sortable").sortable("option", "handle", ".mobile-handle");
+      }
+    });
+  </script>
+@endsection

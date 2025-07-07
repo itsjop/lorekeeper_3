@@ -6,11 +6,13 @@
     <div class="profile-assets-content">
       @if ($character)
         <div>
-          <a href="{{ $character->url }}"><img
+          <a href="{{ $character->url }}">
+            <img
               src="{{ isset($fullImage) && $fullImage ? $character->image->thumbnailUrl : $character->image->imageUrl }}"
               class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }}"
               alt="{{ $character->fullName }}"
-            /></a>
+            />
+          </a>
         </div>
         <div class="my-1">
           <a href="{{ $character->url }}" class="h5 mb-0">
