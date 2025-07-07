@@ -2,8 +2,9 @@
 /bootstrap
 /public/hot
 /public/storage
-/public/css/app.css
 /storage/*.key
+public/js/app.js
+public/css/app.css
 /vendor
 .env
 *.env
@@ -18,4 +19,3 @@ yarn-error.log
 /composer.phar
 .idea
 /.vs
-public/js/app.js
