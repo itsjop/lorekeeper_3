@@ -529,9 +529,6 @@ tr.outflow {
 
 /* INVENTORY *************************************************************************************/
 
-.inventory-category .inventory-body .inventory-item img {
-  max-width: 100%;
-}
 .inventory-stack-name,
 .inventory-character-name {
   color: rgba(0, 0, 0, 0.7);
