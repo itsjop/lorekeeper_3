@@ -235,15 +235,15 @@
       li {
         a {
           padding: 3px 6px;
-          &:hover{
+          &:hover {
             background-color: transparent;
           }
         }
         padding: 0;
         border-radius: 10px;
         border: solid 2px transparent;
-        &:hover{
-          border: solid 2px  var(--purple-clr_900)
+        &:hover {
+          border: solid 2px var(--purple-clr_900);
         }
       }
     }

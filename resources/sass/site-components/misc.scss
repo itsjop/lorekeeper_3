@@ -88,7 +88,7 @@
     display: grid;
     grid-template:
       'name  ' 2em
-      'thumb ' 8em
+      'thumb ' calc(100% - 4.5em)
       'rarity' 2.5em
       / 1fr;
     border-radius: 15px 15px 5px 5px;
@@ -129,36 +129,26 @@
     }
   }
 }
+
 .card-bg_animated {
   width: 100%;
   height: 100%;
   position: relative;
   contain: paint;
-  &.common {
-    opacity: 0.3;
-    background-color: lightblue;
-  }
-  &.uncommon {
-    opacity: 0.5;
-    background-color: var(--purple-clr_200);
-  }
-  &.rare {
-    opacity: 0.7;
-    background-color: orange;
-  }
-  &.mystic {
-    opacity: 0.9;
-    mix-blend-mode: hard-light;
-    background-image: linear-gradient(to top left, blue, orange);
-  }
+  --card_background-color: var(--purple-clr_100);
+  --card_star_opacity: 1;
+  --card_star_animation-duration: 10s;
+  --card_star_blend-mode: normal;
+  background: var(--card_background);
   .stars {
     position: relative;
-    top: -20%;
-    left: -20%;
-    width: 150%;
-    height: 150%;
-    transform: rotateZ(-30deg);
+    width: 120%;
+    height: 200%;
+    transform-origin: 0 50%;
+    transform: rotateZ(-30deg) translateY(5%);
     transition: all allow-discrete;
+    mix-blend-mode: var(--card_star_blend-mode);
+    opacity: var(--card_star_opacity);
     &::before,
     &::after {
       content: '';
@@ -166,9 +156,10 @@
       width: 100%;
       height: 100%;
       animation: stars 20s linear forwards infinite;
+      animation-duration: var(--card_star_animation-duration);
       background-image: url('../../../public/images/starring.png'); // TODO: fragile path
       background-repeat: repeat;
-      background-size: 50%;
+      background-size: 20%;
       transform: translateX(0%);
     }
     &::before {
@@ -177,5 +168,30 @@
     &::after {
       left: 0%;
     }
+  }
+
+  &.common {
+    --card_background: lightblue;
+    --card_star_opacity: 0.3;
+    --card_star_animation-duration: 30s;
+    --card_star_blend-mode: normal;
+  }
+  &.uncommon {
+    --card_background: #ca8ee4;
+    --card_star_opacity: 0.5;
+    --card_star_animation-duration: 22s;
+    --card_star_blend-mode: normal;
+  }
+  &.rare {
+    --card_background: #ffd582;
+    --card_star_opacity: 0.5;
+    --card_star_animation-duration: 15s;
+    --card_star_blend-mode: normal;
+  }
+  &.mystic {
+    --card_background: linear-gradient(to top right, #0099ff, #b050ff);
+    --card_star_opacity: 0.9;
+    --card_star_animation-duration: 10s;
+    --card_star_blend-mode: overlay;
   }
 }

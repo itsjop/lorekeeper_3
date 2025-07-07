@@ -19,7 +19,9 @@
             @foreach ($chunk as $featureId => $feature)
               <div class="inventory-item pi-center pc-center">
                 <div class="title">{!! $feature->first()->title !!}</div>
-                <div class="{{ 'card-bg_animated '. lcfirst(__($feature->first()->rarity->name)) }}"><div class="stars"></div></div>
+                <div class="{{ 'card-bg_animated ' . lcfirst(__($feature->first()->rarity->name)) }}">
+                  <div class="stars"></div>
+                </div>
                 @if ($feature->first()->has_image)
                   <a class="badge" style="border-radius:.5em; ">
                     <img
