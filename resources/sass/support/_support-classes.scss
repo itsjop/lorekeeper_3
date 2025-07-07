@@ -92,3 +92,17 @@
 .ta-left   { text-align: left;   }
 .ta-center { text-align: center; }
 .ta-right  { text-align: right;  }
+
+
+@media (width < 992px) {
+.grid-6-col { grid-template-columns: repeat(4, 1fr); }
+.grid-5-col { grid-template-columns: repeat(3, 1fr); }
+.grid-4-col { grid-template-columns: repeat(2, 1fr); }
+.grid-3-col { grid-template-columns: repeat(2, 1fr); }
+}
+@media (width < 576px) {
+.grid-6-col { grid-template-columns: repeat(3, 1fr); }
+.grid-5-col { grid-template-columns: repeat(2, 1fr); }
+.grid-4-col { grid-template-columns: repeat(1, 1fr); }
+.grid-3-col { grid-template-columns: repeat(1, 1fr); }
+}
