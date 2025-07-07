@@ -7,11 +7,7 @@
       @if ($character)
         <div>
           <a href="{{ $character->url }}">
-            <img
-              src="{{ isset($fullImage) && $fullImage ? $character->image->thumbnailUrl : $character->image->imageUrl }}"
-              class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }}"
-              alt="{{ $character->fullName }}"
-            />
+            <img src="{{ isset($fullImage) && $fullImage ? $character->image->thumbnailUrl : $character->image->imageUrl }}" class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }}" alt="{{ $character->fullName }}" />
           </a>
         </div>
         <div class="my-1">
