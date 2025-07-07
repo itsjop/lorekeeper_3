@@ -91,19 +91,19 @@
       'thumb ' calc(100% - 4.5em)
       'rarity' 2.5em
       / 1fr;
-    border-radius: 15px 15px 5px 5px;
-    border: 2px solid var(--purple-clr_600);
+    // border-radius: 15px 15px 5px 5px;
+    // border: 2px solid var(--purple-clr_600);
     .title {
       grid-area: name;
       width: 100%;
       height: 100%;
-      background-color: var(--purple-clr_600);
-      border-radius: 13px 13px 0 0;
       display: flex;
       place-items: center;
       place-content: center;
+      font-weight: 700;
+      font-size: 1.2em;
       a {
-        color: var(--purple-clr_50);
+        color: var(--purple-clr_700);
       }
     }
     .badge {
@@ -122,10 +122,12 @@
       grid-area: rarity;
       width: 100%;
       height: 100%;
-      background-color: var(--purple-clr_700);
+      font-size: 1.2em;
+      font-weight: 700;
     }
     .card-bg_animated {
       grid-area: thumb;
+      border-radius: 20px;
     }
   }
 }
@@ -179,19 +181,19 @@
   &.uncommon {
     --card_background: #ca8ee4;
     --card_star_opacity: 0.5;
-    --card_star_animation-duration: 22s;
+    --card_star_animation-duration: 25s;
     --card_star_blend-mode: normal;
   }
   &.rare {
     --card_background: #ffd582;
     --card_star_opacity: 0.5;
-    --card_star_animation-duration: 15s;
+    --card_star_animation-duration: 20s;
     --card_star_blend-mode: normal;
   }
   &.mystic {
     --card_background: linear-gradient(to top right, #0099ff, #b050ff);
     --card_star_opacity: 0.9;
-    --card_star_animation-duration: 10s;
+    --card_star_animation-duration: 20s;
     --card_star_blend-mode: overlay;
   }
 }
