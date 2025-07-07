@@ -15,7 +15,7 @@
   @include('widgets._awardcase_feature', [
       'target' => $user,
       'count' => Config::get('lorekeeper.extensions.awards.user_featured'),
-      'float' => false,
+      'float' => false
   ])
 
   @if ($user->is_banned)
@@ -30,10 +30,19 @@
 
     {!! $user->displayName !!}
     <a href="{{ url('reports/new?url=') . $user->url }}">
-      <i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
+      <i
+        class="fas fa-exclamation-triangle fa-xs"
+        data-toggle="tooltip"
+        title="Click here to report this user."
+        style="opacity: 50%; font-size:0.5em;"
+      ></i></a>
 
     @if ($user->settings->is_fto)
-      <span class="badge badge-success float-right" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
+      <span
+        class="badge badge-success float-right"
+        data-toggle="tooltip"
+        title="This user has not owned any characters from this world before."
+      >FTO</span>
     @endif
   </h1>
 
@@ -108,7 +117,7 @@
         @include('widgets._selected_character', [
             'character' => $user->settings->selectedCharacter,
             'user' => $user,
-            'fullImage' => true,
+            'fullImage' => true
         ])
       </div>
       <div class="col-md-6 mb-4 profile-assets" style="clear:both;">
@@ -120,9 +129,7 @@
                 <div>{!! $currency->display($currency->quantity) !!}</div>
               @endforeach
             </div>
-            <div class="text-right">
-              <a href="{{ $user->url . '/bank' }}">View all...</a>
-            </div>
+            <div class="text-right"><a href="{{ $user->url . '/bank' }}">View all...</a></div>
           </div>
         </div>
         <div class="card profile-inventory profile-assets-card">
@@ -134,7 +141,12 @@
                   @foreach ($items as $item)
                     <div class="col-md-3 col-6 profile-inventory-item">
                       @if ($item->imageUrl)
-                        <img src="{{ $item->imageUrl }}" data-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
+                        <img
+                          src="{{ $item->imageUrl }}"
+                          data-toggle="tooltip"
+                          title="{{ $item->name }}"
+                          alt="{{ $item->name }}"
+                        />
                       @else
                         <p>{{ $item->name }}</p>
                       @endif
@@ -145,76 +157,85 @@
                 <div>No items owned.</div>
               @endif
             </div>
-            <div class="text-right">
-              <a href="{{ $user->url . '/inventory' }}">View all...</a>
-              {{-- </div> --}}
+            <div class="text-right"><a href="{{ $user->url . '/inventory' }}">View all...</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-right"><a href="{{ $user->url . '/characters' }}">View all...</a></div>
+
+    <div class="card mb-3">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ ucfirst(__('awards.awards')) }}</h5>
+        <div class="card-body">
+          @if (count($awards ?: 0))
+            <div class="row">
+              @foreach ($awards as $award)
+                <div class="col-md-3 col-6 profile-inventory-item">
+                  @if ($award->imageUrl)
+                    <img
+                      src="{{ $award->imageUrl }}"
+                      data-toggle="tooltip"
+                      title="{{ $award->name }}"
+                    />
+                  @else
+                    <p>{{ $award->name }}</p>
+                  @endif
+                </div>
+              @endforeach
+            </div>
+          @else
+            <div>No {{ __('awards.awards') }} earned.</div>
+          @endif
+        </div>
+        <div class="text-right">
+          <a href="{{ $user->url . '/' . __('awards.awardcase') }}">View all...</a>
+        </div>
+      </div>
+    </div>
+
+    <h2>
+      <a href="{{ $user->url . '/characters' }}">Characters</a>
+      @if (isset($sublists) && $sublists->count() > 0)
+        @foreach ($sublists as $sublist)
+          / <a href="{{ $user->url . '/sublist/' . $sublist->key }}">{{ $sublist->name }}</a>
+        @endforeach
+      @endif
+    </h2>
+
+    @foreach ($characters->take(4)->get()->chunk(4) as $chunk)
+      <div class="row mb-4">
+        @foreach ($chunk as $character)
+          <div class="col-md-3 col-6 text-center">
+            <div>
+              <a href="{{ $character->url }}">
+                <img
+                  src="{{ $character?->image?->thumbnailUrl }}"
+                  class="img-thumbnail"
+                  alt="{{ $character->fullName }}"
+                /></a>
+            </div>
+            <div class="mt-1">
+              <a href="{{ $character->url }}" class="h5 mb-0">
+                @if (!$character->is_visible)
+                  <i class="fas fa-eye-slash"></i>
+                @endif {{ $character->fullName }}
+              </a>
             </div>
           </div>
-        </div>
+        @endforeach
       </div>
-      <div class="card mb-3">
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ ucfirst(__('awards.awards')) }}</h5>
-          <div class="card-body">
-            @if (count($awards ?: 0))
-              <div class="row">
-                @foreach ($awards as $award)
-                  <div class="col-md-3 col-6 profile-inventory-item">
-                    @if ($award->imageUrl)
-                      <img src="{{ $award->imageUrl }}" data-toggle="tooltip" title="{{ $award->name }}" />
-                    @else
-                      <p>{{ $award->name }}</p>
-                    @endif
-                  </div>
-                @endforeach
-              </div>
-            @else
-              <div>No {{ __('awards.awards') }} earned.</div>
-            @endif
-          </div>
-          <div class="text-right">
-            <a href="{{ $user->url . '/' . __('awards.awardcase') }}">View all...</a>
-          </div>
-        </div>
-      </div>
+    @endforeach
 
-      <!-- Uncomment this to restore the original character display. -->
-      <h2>
-        <a href="{{ $user->url . '/characters' }}">Characters</a>
-        @if (isset($sublists) && $sublists->count() > 0)
-          @foreach ($sublists as $sublist)
-            / <a href="{{ $user->url . '/sublist/' . $sublist->key }}">{{ $sublist->name }}</a>
-          @endforeach
-        @endif
-      </h2>
+    <div class="text-right">
+      <a href="{{ $user->url . '/characters' }}">View all...</a>
+    </div>
+    <hr>
+    <br>
+    <br>
 
-      @foreach ($characters->take(4)->get()->chunk(4) as $chunk)
-        <div class="row mb-4">
-          @foreach ($chunk as $character)
-            <div class="col-md-3 col-6 text-center">
-              <div>
-                <a href="{{ $character->url }}">
-                  <img src="{{ $character?->image?->thumbnailUrl }}" class="img-thumbnail" alt="{{ $character->fullName }}" /></a>
-              </div>
-              <div class="mt-1">
-                <a href="{{ $character->url }}" class="h5 mb-0">
-                  @if (!$character->is_visible)
-                    <i class="fas fa-eye-slash"></i>
-                  @endif {{ $character->fullName }}
-                </a>
-              </div>
-            </div>
-          @endforeach
-        </div>
-      @endforeach
-
-      <div class="text-right">
-        <a href="{{ $user->url . '/characters' }}">View all...</a>
-      </div>
-      <hr>
-      <br>
-      <br>
-      {{-- --> --}}
-
+    <div class="text-right">
       @comments(['model' => $user->profile, 'perPage' => 5])
-    @endsection
+    </div>
+  @endsection

@@ -1329,7 +1329,6 @@ class CharacterManager extends Service {
     }
     return $this->rollbackReturn(false);
   }
-
   /**
    * Selects a character for a user.
    *
@@ -1357,6 +1356,7 @@ class CharacterManager extends Service {
     }
     return $this->rollbackReturn(false);
   }
+
 
   /**
    * Updates a character's stats.
@@ -2042,6 +2042,7 @@ class CharacterManager extends Service {
       }
       $recipient->settings->save();
     }
+
     // Unset the owner's selected character if it's this character
     if ($character->user && $character->user->settings->selected_character_id == $character->id) {
       $character->user->settings->update([

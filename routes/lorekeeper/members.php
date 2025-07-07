@@ -488,4 +488,3 @@ Route::group(['prefix' => 'redeem-code', 'namespace' => 'Users'], function () {
   Route::get('/', 'PrizeCodeController@getIndex');
   Route::post('/redeem', 'PrizeCodeController@postRedeemPrize');
 });
-
