@@ -14,40 +14,38 @@
             : 'Miscellaneous' !!}
       </h5>
       <div class="card-body inventory-body">
-        @foreach ($categoryFeatures->chunk(4) as $chunk)
-          <div class="grid grid-4-col gap-2">
-            @foreach ($chunk as $featureId => $feature)
-              <div class="inventory-item pi-center pc-center">
-                <div class="title">{!! $feature->first()->title !!}</div>
-                <div class="{{ 'card-bg_animated ' . lcfirst(__($feature->first()->rarity->name)) }}">
-                  <div class="stars"></div>
-                </div>
-                @if ($feature->first()->has_image)
-                  <a class="badge" style="border-radius:.5em; ">
-                    <img
-                      class="my-1 modal-image"
-                      style="max-height:150px; border-radius:.5em;"
-                      src="{{ $feature->first()->imageUrl }}"
-                      alt="{{ $feature->first()->name }}"
-                      data-id="{{ $feature->first()->id }}"
-                    />
-                  </a>
-                @else
-                  <a class="badge" style="border-radius:.5em; ">
-                  </a>
-                @endif
-
-                @if (!$feature->first()->is_visible)
-                  <i class="fas fa-eye-slash mr-1"></i>
-                @endif
-                <div class="rarity flex gap-_5 pi-center pc-center">{!! $feature->first()->rarityName !!}</div>
-                @if ($showSubtype && $feature->first()->subtype)
-                  <br />({!! $feature->first()->subtype->twolineDisplayName !!} Subtype)
-                @endif
+        <div class="grid grid-4-col gap-2">
+          @foreach ($categoryFeatures as $featureId => $feature)
+            <div class="inventory-item pi-center pc-center">
+              <div class="title">{!! $feature->first()->title !!}</div>
+              <div class="{{ 'card-bg_animated ' . lcfirst(__($feature->first()->rarity->name)) }}">
+                <div class="stars"></div>
               </div>
-            @endforeach
-          </div>
-        @endforeach
+              @if ($feature->first()->has_image)
+                <a class="badge" style="border-radius:.5em; ">
+                  <img
+                    class="my-1 modal-image"
+                    style="max-height:150px; border-radius:.5em;"
+                    src="{{ $feature->first()->imageUrl }}"
+                    alt="{{ $feature->first()->name }}"
+                    data-id="{{ $feature->first()->id }}"
+                  />
+                </a>
+              @else
+                <a class="badge" style="border-radius:.5em; ">
+                </a>
+              @endif
+
+              @if (!$feature->first()->is_visible)
+                <i class="fas fa-eye-slash mr-1"></i>
+              @endif
+              <div class="rarity flex gap-_5 pi-center pc-center">{!! $feature->first()->rarityName !!}</div>
+              @if ($showSubtype && $feature->first()->subtype)
+                <br />({!! $feature->first()->subtype->twolineDisplayName !!} Subtype)
+              @endif
+            </div>
+          @endforeach
+        </div>
       </div>
     </div>
   @endif
