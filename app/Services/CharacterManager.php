@@ -1357,6 +1357,7 @@ class CharacterManager extends Service {
     return $this->rollbackReturn(false);
   }
 
+
   /**
    * Updates a character's stats.
    *

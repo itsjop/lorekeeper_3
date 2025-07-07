@@ -53,18 +53,25 @@ class UserSettings extends Model {
    */
   public $primaryKey = 'user_id';
 
-  /**********************************************************************************************
+    /**********************************************************************************************
 
         RELATIONS
 
-   **********************************************************************************************/
+    **********************************************************************************************/
 
-  /**
-   * Get the user this set of settings belongs to.
-   */
-  public function user() {
-    return $this->belongsTo('App\Models\User\User');
-  }
+    /**
+     * Get the user this set of settings belongs to.
+     */
+    public function user() {
+        return $this->belongsTo('App\Models\User\User');
+    }
+    /**
+     * Get the character the user has selected if appropriate.
+     */
+    public function selectedCharacter()
+    {
+        return $this->belongsTo('App\Models\Character\Character', 'selected_character_id')->visible();
+    }
 
   /**
      * Get the character the user selected for encounters
