@@ -25,7 +25,7 @@ body {
   --clr_raw_teal-950: #0d3244;
 
   // Calculated Values
-  --purple-clr_50:  light-dark(var(--clr_raw_purple-50),  var(--clr_raw_purple-950));
+  --purple-clr_50: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
   --purple-clr_100: light-dark(var(--clr_raw_purple-100), var(--clr_raw_purple-900));
   --purple-clr_200: light-dark(var(--clr_raw_purple-200), var(--clr_raw_purple-800));
   --purple-clr_300: light-dark(var(--clr_raw_purple-300), var(--clr_raw_purple-700));
@@ -35,9 +35,9 @@ body {
   --purple-clr_700: light-dark(var(--clr_raw_purple-700), var(--clr_raw_purple-300));
   --purple-clr_800: light-dark(var(--clr_raw_purple-800), var(--clr_raw_purple-200));
   --purple-clr_900: light-dark(var(--clr_raw_purple-900), var(--clr_raw_purple-100));
-  --purple-clr_950: light-dark(var(--clr_raw_purple-950), var(--clr_raw_purple-50) );
+  --purple-clr_950: light-dark(var(--clr_raw_purple-950), var(--clr_raw_purple-50));
 
-  --teal-clr_50:  light-dark(var(--clr_raw_teal-50),  var(--clr_raw_teal-950));
+  --teal-clr_50: light-dark(var(--clr_raw_teal-50), var(--clr_raw_teal-950));
   --teal-clr_100: light-dark(var(--clr_raw_teal-100), var(--clr_raw_teal-900));
   --teal-clr_200: light-dark(var(--clr_raw_teal-200), var(--clr_raw_teal-800));
   --teal-clr_300: light-dark(var(--clr_raw_teal-300), var(--clr_raw_teal-700));
@@ -47,12 +47,23 @@ body {
   --teal-clr_700: light-dark(var(--clr_raw_teal-700), var(--clr_raw_teal-300));
   --teal-clr_800: light-dark(var(--clr_raw_teal-800), var(--clr_raw_teal-200));
   --teal-clr_900: light-dark(var(--clr_raw_teal-900), var(--clr_raw_teal-100));
-  --teal-clr_950: light-dark(var(--clr_raw_teal-950), var(--clr_raw_teal-50) );
+  --teal-clr_950: light-dark(var(--clr_raw_teal-950), var(--clr_raw_teal-50));
 
   --purple-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
   --teal-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
 
   .app {
+    --clr-active-50: var(--purple-clr_50);
+    --clr-active-100: var(--purple-clr_100);
+    --clr-active-200: var(--purple-clr_200);
+    --clr-active-300: var(--purple-clr_300);
+    --clr-active-400: var(--purple-clr_400);
+    --clr-active-500: var(--purple-clr_500);
+    --clr-active-600: var(--purple-clr_600);
+    --clr-active-700: var(--purple-clr_700);
+    --clr-active-800: var(--purple-clr_800);
+    --clr-active-900: var(--purple-clr_900);
+    --clr-active-950: var(--purple-clr_950);
     &.purple {
       --clr-active-50: var(--purple-clr_50);
       --clr-active-100: var(--purple-clr_100);

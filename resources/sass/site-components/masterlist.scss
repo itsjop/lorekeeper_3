@@ -4,8 +4,8 @@
 fieldset.masterlist-search-grid {
   display: grid;
   grid-template:
-    'name  species sortby submit a-btn' 1fr
-    'a-box a-box   a-box  a-box  a-box' 1fr
+    'name  species sortby submit a-btn' max-content
+    'a-box a-box   a-box  a-box  a-box' auto
     / 1fr 1fr 1fr 1fr 1fr;
   .character-name {
     grid-area: name;
@@ -32,54 +32,91 @@ fieldset.masterlist-search-grid {
       'name   name    submit' 1fr
       'sortby species a-btn ' 1fr
       'a-box  a-box   a-box ' 0px
-      / 1fr   1fr     1fr;
+      / 1fr 1fr 1fr;
   }
 }
 #ml-gridView {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  // grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 10px;
   .masterlist-character {
     display: grid;
     grid-template:
-      'name  name ' 2em
+      'name  name ' 3em
       'thumb thumb' auto
-      'user  user ' 2em
-      'code  type ' 2em
-      / 1fr 1fr;
-    border-radius: 15px 15px 5px 5px;
+      'code  user ' 4em
+      / min-content auto;
+    border-radius: 15px;
     border: 2px solid var(--purple-clr_600);
+    background: linear-gradient(to top right, #bf9afe, #abf0ab);
+    position: relative;
+    padding: 0 15px;
+    .ml-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+      img {
+        width: max(50px, 3cqw);
+        height: max(50px, 3cqw);
+      }
+    }
     .name {
       grid-area: name;
-      background-color: var(--purple-clr_600);
       border-radius: 13px 13px 0 0;
       display: flex;
       place-items: center;
-      place-content: center;
+      place-content: start;
+      padding: 0 0 0 10px;
+      margin: 10px 0;
       a {
-        color: var(--purple-clr_50);
+        font-size: clamp(1em, 2vw, 2em);
+        max-width: calc(100% - max(50px, 3cqw));
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: var(--purple-clr_600);
       }
     }
     .thumbnail {
-      width: 80%;
+      width: 100%;
       grid-area: thumb;
       place-self: center;
-      .ml-thumbnail {
+      border: 2px solid var(--purple-clr_600);
+      background-color: var(--clr-active-50);
+      border-radius: 15px;
+      contain: paint;
+      display: grid;
+      .ml-thumbnail,
+      .tn-background {
         object-fit: contain;
         width: 100%;
-        height: 80%;
         aspect-ratio: 1/1;
+        grid-area: 1/2;
       }
+      .ml-thumbnail {
+        z-index: 2;
+        filter: drop-shadow(5px 5px 5px #010151);
+      }
+      .tn-background {
+        z-index: 1;
+        filter: brightness(1);
+      }
+    }
+    .slug,
+    .display-user {
+      align-self: center;
+      justify-self: start;
+      color: var(--purple-clr_800);
     }
     .slug {
       grid-area: code;
     }
-    .display-species {
-      grid-area: type;
-    }
     .display-user {
       grid-area: user;
+      justify-self: end;
     }
+    // .display-species {
+    //   grid-area: type;
+    // }
   }
 }
