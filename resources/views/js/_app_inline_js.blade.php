@@ -1,33 +1,33 @@
 <script>
-  $(document).on('focusin', function(e) {
-    if ($(e.target).closest(
-        ".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
-      e.stopImmediatePropagation();
-    }
-  });
-  $(function() {
+  // $(document).on('focusin', function(e) {
+  //   if ($(e.target).closest(
+  //       ".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+  //     e.stopImmediatePropagation();
+  //   }
+  // });
+  $(document).ready(function() {
+    $('.cp').colorpicker();
     $('[data-toggle="tooltip"]').tooltip({
       html: true
     });
     $('.cp').colorpicker();
+
     tinymce.init({
-      selector: '.wysiwyg',
+      selector: 'textarea',
+      license_key: 'gpl',
       height: 500,
       menubar: false,
       convert_urls: false,
-      plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks code fullscreen spoiler',
-        'insertdatetime media table paste code help wordcount'
-      ],
+      plugins: 'advlist autolink print spoiler paste lists link image charmap preview anchor code fullscreen insertdatetime media table code help wordcount',
+
       toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
       content_css: [
-        '{{ asset('css/app.css') }}',
         '{{ asset('css/vendor/lorekeeper.css') }}'
       ],
       spoiler_caption: 'Toggle Spoiler',
       target_list: false
     });
+
     bsCustomFileInput.init();
     var $mobileMenuButton = $('#mobileMenuButton');
     var $sidebar = $('#sidebar');

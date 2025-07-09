@@ -42,9 +42,10 @@
       }
       .nav-item {
         padding: 0 5px;
+        border-radius: 15px;
         &:hover {
-          transition: 0.1s ease;
           border-radius: 15px;
+          transition: 0.1s ease;
           background-color: var(--clr-active-700);
         }
         &.nav-notifications {

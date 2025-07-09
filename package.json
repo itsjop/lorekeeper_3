@@ -17,8 +17,8 @@
     "@shufo/prettier-plugin-blade": "^1.15.3",
     "axios": "^1.7.9",
     "blade-formatter": "^1.42.1",
-    "bootstrap": "^4.6",
-    "browser-sync": "^2.29.3",
+    "bootstrap": "^5.3.7",
+    "browser-sync": "^3.0.4",
     "browser-sync-webpack-plugin": "^2.3.0",
     "cross-env": "^7.0",
     "jquery": "^3.7",
@@ -31,13 +31,14 @@
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
     "vue": "^3.4.37",
-    "vue-template-compiler": "^2.7.16"
+    "vue-template-compiler": "^0.1.0"
   },
   "dependencies": {
     "colcade": "^0.2.0",
     "magic-grid": "^3.4.7",
     "masonry-layout": "^4.2.2",
-    "pm2": "^5.2.0",
+    "pm2": "^6.0.8",
+    "tinymce": "^7.9.1",
     "vue-loader": "^17.4.2"
   }
 }

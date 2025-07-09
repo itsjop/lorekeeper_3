@@ -46,9 +46,9 @@
 
   <!------------------------------ EXTERNAL RESOURCES ----------------------------->
   <!-- Scripts -->
-  <script src="{{ asset('js/vendor/jquery.tinymce.min.js') }}"></script>
+  {{-- <script src="{{ asset('js/vendor/jquery.tinymce.min.js') }}"></script> --}}
   <script src="{{ asset('js/vendor/jquery.ui.touch-punch.min.js') }}"></script>
-  <script src="{{ asset('js/vendor/tinymce.min.js') }}"></script>
+  <script src="{{ asset('js/vendor/tinymce/tinymce.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/bootstrap4-toggle.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/lightbox.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/selectize.min.js') }}"></script>
