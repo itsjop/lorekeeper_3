@@ -27,7 +27,6 @@ class AddPetTables extends Migration {
             $table->text('description')->nullable()->default(null);
             $table->text('parsed_description')->nullable()->default(null);
             $table->boolean('has_image')->default(0);
-
             $table->foreign('pet_category_id')->references('id')->on('pet_categories');
             $table->boolean('allow_transfer')->default(1);
         });

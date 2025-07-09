@@ -110,7 +110,6 @@ function getAssetModelString($type, $namespaced = true) {
       if ($namespaced) return '\App\Models\Pet\Pet';
       else return 'Pet';
 
-
     case 'raffle_tickets':
       if ($namespaced) return '\App\Models\Raffle\Raffle';
       else return 'Raffle';

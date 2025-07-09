@@ -41,9 +41,6 @@
                 --
               @endif
             </td>
-            <td>
-              {!! $species->inherit_chance !!}%
-            </td>
             <td class="text-right">
               <a href="{{ url('admin/data/species/edit/' . $species->id) }}" class="btn btn-primary">Edit</a>
             </td>
