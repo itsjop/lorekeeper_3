@@ -1,9 +1,7 @@
 <div class="masterlist-character text-center">
   {{-- Subtype Badge --}}
   <div class="ml-badge">
-    <img src="{{ asset('images/somnivores/masterlist/type_badges/currency-lunes.png') }}"
-      alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
-    >
+    <img src="{{ asset('images/somnivores/masterlist/type_badges/currency-lunes.png') }}" alt="{{ 'Subtype badge for ' . $character->url . '.' }}">
   </div>
   {{-- Name --}}
   <div class="name">
@@ -20,13 +18,8 @@
     <img class="tn-background" src="{{ asset('images/somnivores/masterlist/char_profile_bg.png') }}">
     <img
       src="
-        {{ $character->image->canViewFull(Auth::user() ?? null) &&
-        file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
-            ? $character->image->thumbnailUrl
-            : $character->image->thumbnailUrl }}"
-      class="ml-thumbnail"
-      alt="Thumbnail for {{ $character->nameFallback }}"
-    />
+        {{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl }}"
+      class="ml-thumbnail" alt="Thumbnail for {{ $character->nameFallback }}" />
   </a>
   {{-- Owner --}}
   {!! $character->displayOwner !!}
