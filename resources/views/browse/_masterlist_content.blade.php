@@ -10,11 +10,12 @@
       {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control mr-2']) !!}
     </div> --}}
     <div class="species form-group m-0">
+      {!! Form::label('species_id', 'Species: ') !!}
       {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control']) !!}
     </div>
     <div class="sortby form-inline ji-start mb-3">
       <div class="form-group mr-3">
-        {!! Form::label('sort', 'Sort: ', ['class' => 'mr-2']) !!}
+        {!! Form::label('sort', 'Sort: ') !!}
         @if (!$isMyo)
           {!! Form::select(
               'sort',

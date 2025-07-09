@@ -47,7 +47,7 @@ fieldset.masterlist-search-grid {
       / min-content auto;
     border-radius: 15px;
     border: 2px solid var(--purple-clr_600);
-    background: linear-gradient(to top right, #bf9afe, #abf0ab);
+    background: linear-gradient(to top right, oklch(0.7 0.1444 142.61), oklch(0.7 0.1444 260.12), oklch(0.7 0.1444 348.25));
     position: relative;
     padding: 0 15px;
     .ml-badge {
@@ -68,6 +68,7 @@ fieldset.masterlist-search-grid {
       place-content: start;
       padding: 0 0 0 10px;
       margin: 10px 0;
+      // background-color: ;
       a {
         font-size: clamp(1em, 2vw, 2em);
         max-width: calc(100% - max(50px, 3cqw));

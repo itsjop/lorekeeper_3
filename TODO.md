@@ -70,6 +70,7 @@
 - [ ] selected character extension
 - [ ] logo mirage animation
 - [ ] rarity glow
+- [ ] CSS Color mixing for custom color palettes
 
 # Bonuses:
 - [ ] move all modal dialogs to [root-level](resources/views/layouts/app.blade.php#L173)
