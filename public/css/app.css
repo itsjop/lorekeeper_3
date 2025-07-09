@@ -1151,7 +1151,7 @@ because the nesting selector cannot represent pseudo-elements. */
   align-items: center;
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown {
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
   transition: 0.3s ease;
   border: 2px transparent solid;
 }
@@ -1166,6 +1166,7 @@ because the nesting selector cannot represent pseudo-elements. */
   transform: rotate(-90deg);
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown.show {
+  border-radius: 10px 10px 0 0;
   border: 2px var(--purple-clr_300) solid;
   background-color: var(--purple-clr_50);
   z-index: 1;
@@ -1181,10 +1182,8 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 #app #site-wrapper #header-nav .nav-item {
   padding: 0 5px;
-  border-radius: 15px;
 }
 #app #site-wrapper #header-nav .nav-item:hover {
-  border-radius: 15px;
   transition: 0.1s ease;
   background-color: var(--clr-active-700);
 }
