@@ -1,5 +1,6 @@
 <script>
-  $('.pageSelectPopover').popover()
+  if ($('.pageSelectPopover').length)
+    $('.pageSelectPopover')?.popover()
 
   function onPaginationClick(e) {
     const pageCurrent = new URL(window.location.href);

@@ -56,7 +56,7 @@ return [
     ],
 
     // Group Traits By Category - Uri
-    'traits_by_category'            => 0,
+    'traits_by_category'            => 1,
 
     // Scroll To Top - Uri
     'scroll_to_top' => 1, // 1 - On, 0 - off
@@ -79,7 +79,7 @@ return [
 
     // Auto-populate New Image Traits - Mercury
     // Automatically adds the traits present on a character's active image to the list when uploading a new image for an extant character.
-    'autopopulate_image_features' => 0,
+    'autopopulate_image_features' => 1,
 
     // Staff Rewards - Mercury
     'staff_rewards' => [
@@ -88,7 +88,7 @@ return [
     ],
 
     // Organised Traits Dropdown - Draginraptor
-    'organised_traits_dropdown' => 0,
+    'organised_traits_dropdown' => 1,
 
     // Previous & Next buttons on Character pages - Speedy
     // Adds buttons linking to the previous character as well as the next character on all character pages.
@@ -102,7 +102,7 @@ return [
 
     // Show All Recent Submissions - Speedy
     'show_all_recent_submissions' => [
-        'enable' => 0,
+        'enable' => 1,
         'links'  => [
             'sidebar'      => 1, // By default, ON, and will display in the sidebar.
             'indexbutton'  => 1, // By default, ON, and will display a button on the index.
@@ -122,12 +122,8 @@ return [
 
     // Show Small Badges on the User's Characters/MYO Slots Page
     // Indicating Trading Status (and Gift Art & Gift Writing Status)
-    'badges_on_user_character_page' => 0,
+    'badges_on_user_character_page' => 1,
 
     // Allow users to return a pending design update to drafts, for instance if they make a mistake. - Uri
     'design_return_to_draft' => 1,
-
-    // Multiple Subtypes - Newt
-    'exclusionary_search'    => 0, // If enabled, searching for multiple subtypes will only return results that have all of the subtypes specified. If disabled, it will return results that have any of the subtypes specified.
-    'multiple_subtype_limit' => 10, // The maximum number of subtypes a character can have.
 ];

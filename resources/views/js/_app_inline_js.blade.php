@@ -1,31 +1,68 @@
 <script>
-  // $(document).on('focusin', function(e) {
-  //   if ($(e.target).closest(
-  //       ".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
-  //     e.stopImmediatePropagation();
-  //   }
-  // });
-  $(document).ready(function() {
+  $(document).on('focusin', function(e) {
+    if ($(e.target).closest(
+        ".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+      e.stopImmediatePropagation();
+    }
+  });
+  $(function() {
+
     $('.cp').colorpicker();
     $('[data-toggle="tooltip"]').tooltip({
       html: true
     });
-    $('.cp').colorpicker();
 
     tinymce.init({
-      selector: 'textarea',
+      selector: '.wysiwyg',
       license_key: 'gpl',
       height: 500,
       menubar: false,
       convert_urls: false,
       plugins: 'advlist autolink print spoiler paste lists link image charmap preview anchor code fullscreen insertdatetime media table code help wordcount',
-
       toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
       content_css: [
         '{{ asset('css/vendor/lorekeeper.css') }}'
       ],
       spoiler_caption: 'Toggle Spoiler',
       target_list: false
+    });
+
+    function closeMenuOnBodyClick(event) {
+      // get the event path
+      const path = event.composedPath();
+      // check if it has the menu element
+      if (path.some(elem => elem.id === 'site-navbar')) {
+        // terminate this function if it does
+        return;
+      }
+      unShowAllDropdowns();
+    }
+
+    function openMenu(dd) {
+      document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
+      unShowAllDropdowns();
+      showDropdown(dd);
+      document.documentElement.addEventListener('click', closeMenuOnBodyClick);
+    }
+
+    function closeMenu() {
+      unShowAllDropdowns();
+      document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
+    }
+
+    function showDropdown(dd) {
+      dd.classList.toggle('show');
+      dd.querySelector(".dropdown-menu").classList.toggle('show');
+    }
+
+    function unShowAllDropdowns() {
+      document.querySelectorAll("#site-navbar .dropdown").forEach(dd => {
+        dd.classList.remove('show');
+        dd.querySelector(".dropdown-menu").classList.remove('show');
+      })
+    };
+    document.querySelectorAll("#site-navbar .dropdown").forEach(dropdown => {
+      dropdown.addEventListener('click', () => openMenu(dropdown));
     });
 
     bsCustomFileInput.init();
@@ -61,9 +98,11 @@
     });
   });
 
-  $('.tooltip-bot, .tooltip-bot a, .nav-social-links a').tooltip({
-    placement: "top"
-  });
+  // if ($('.tooltip-bot, .tooltip-bot a, .nav-social-links a')) {
+  //   $('.tooltip-bot, .tooltip-bot a, .nav-social-links a').tooltip({
+  //     placement: "top"
+  //   });
+  // }
   $(document).mousemove(function(e) {
     // check if $('#Image-Maps-Com-process-map') exists
     if ($('#Image-Maps-Com-process-map').length == 0) {
