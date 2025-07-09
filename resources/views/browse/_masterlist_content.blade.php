@@ -25,10 +25,10 @@
                   'id_desc' => 'Newest First',
                   'id_asc' => 'Oldest First',
                   'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value'
+                  'sale_value_asc' => 'Lowest Sale Value',
               ],
               Request::get('sort'),
-              ['class' => 'form-control']
+              ['class' => 'form-control'],
           ) !!}
         @else
           {!! Form::select(
@@ -37,20 +37,16 @@
                   'id_desc' => 'Newest First',
                   'id_asc' => 'Oldest First',
                   'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value'
+                  'sale_value_asc' => 'Lowest Sale Value',
               ],
               Request::get('sort'),
-              ['class' => 'form-control']
+              ['class' => 'form-control'],
           ) !!}
         @endif
       </div>
     </div>
     <div class="advanced-search-toggle text-right mb-3">
-      <a
-        href="#advancedSearch"
-        class="btn btn-sm btn-outline-info"
-        data-toggle="collapse"
-      > Advanced <i class="fas fa-caret-down"></i></a>
+      <a href="#advancedSearch" class="btn btn-sm btn-outline-info" data-toggle="collapse"> Advanced <i class="fas fa-caret-down"></i></a>
     </div>
     <div class="card bg-light mb-3 collapse" id="advancedSearch">
 
@@ -68,7 +64,7 @@
       <div class="card-body d-flex">
         {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control feature-select selectize',
-            'placeholder' => 'Select Trait'
+            'placeholder' => 'Select Trait',
         ]) !!}
         <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
       </div>

@@ -1,13 +1,5 @@
 <nav class="navbar navbar-expand-md" id="header-nav">
-  <button
-    class="navbar-toggler collapsed"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="{{ __('Toggle navigation') }}"
-  >
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
     <span class="navbar-toggler-icon">
       <span class="line"></span>
       <span class="line"></span>
@@ -18,16 +10,7 @@
     <!-- Left Side Of Navbar -->
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <a
-          id="inventoryDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Site
         </a>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -43,16 +26,7 @@
       </li>
       @if (Auth::check())
         <li class="nav-item dropdown">
-          <a
-            id="inventoryDropdown"
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
+          <a id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             Account
           </a>
           <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -88,16 +62,7 @@
         </li>
       @endif
       <li class="nav-item dropdown">
-        <a
-          id="queueDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="queueDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Info
         </a>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -122,16 +87,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a
-          id="browseDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Guides
         </a>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -165,16 +121,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a
-          id="loreDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="loreDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Masterlist
         </a>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -192,16 +139,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a
-          id="playDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="playDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Play
         </a>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -227,16 +165,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a
-          id="communityDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
+        <a id="communityDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
           Community
         </a>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -285,16 +214,7 @@
           </li>
         @endif
         <li class="nav-item dropdown">
-          <a
-            id="browseDropdown"
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
+          <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             Submit
           </a>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="browseDropdown">
@@ -309,16 +229,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a
-            id="navbarDropdown"
-            class="nav-link dropdown-toggle"
-            href="{{ Auth::user()->url }}"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ Auth::user()->url }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->name }} <span class="caret"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="navbarDropdown">
@@ -331,19 +242,10 @@
                 <i class="fas fa-bookmark"></i> Bookmarks </a>
               <a class="dt-nav-item" href="{{ url('account/settings') }}">
                 <i class="fas fa-cog"></i> Settings </a>
-              <a
-                class="dt-nav-item"
-                href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-              >
+              <a class="dt-nav-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }} </a>
               </a>
-              <form
-                id="logout-form"
-                action="{{ route('logout') }}"
-                method="POST"
-                style="display: none;"
-              >
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
               </form>
             </div>
