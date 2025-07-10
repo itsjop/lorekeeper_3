@@ -35,18 +35,18 @@
         // terminate this function if it does
         return;
       }
-      unShowAllDropdowns();
+      closeMenu();
     }
 
     function openMenu(dd) {
       document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
-      unShowAllDropdowns();
+      unShowAllDropdownsExcept(dd);
       showDropdown(dd);
       document.documentElement.addEventListener('click', closeMenuOnBodyClick);
     }
 
-    function closeMenu() {
-      unShowAllDropdowns();
+    function closeMenu(dd = null) {
+      unShowAllDropdownsExcept(dd);
       document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
     }
 
@@ -55,12 +55,14 @@
       dd.querySelector(".dropdown-menu").classList.toggle('show');
     }
 
-    function unShowAllDropdowns() {
+    function unShowAllDropdownsExcept(dropdown) {
       document.querySelectorAll("#site-navbar .dropdown").forEach(dd => {
+        if (dropdown === null || dropdown.isSameNode(dd)) return;
         dd.classList.remove('show');
         dd.querySelector(".dropdown-menu").classList.remove('show');
       })
     };
+
     document.querySelectorAll("#site-navbar .dropdown").forEach(dropdown => {
       dropdown.addEventListener('click', () => openMenu(dropdown));
     });
