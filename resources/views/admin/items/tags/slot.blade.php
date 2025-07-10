@@ -101,6 +101,5 @@
         alert("AJAX call failed: " + textStatus + ", " + errorThrown);
       });
     });
-
   </script>
 @endsection
