@@ -40,17 +40,18 @@ fieldset.masterlist-search-grid {
 #ml-gridView {
   display: grid;
   gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   .masterlist-character {
     display: grid;
     grid-template:
-      'name  name ' 3em
+      'name  name ' 2.2em
       'thumb thumb' auto
-      'code  user ' 3em
+      'code  user ' 2.2em
       / min-content auto;
     border-radius: 15px;
     position: relative;
     padding: 6px;
-    aspect-ratio: 3/4;
+    // aspect-ratio: 3/4;
     --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
     --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
     --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
@@ -67,10 +68,10 @@ fieldset.masterlist-search-grid {
       position: absolute;
       top: 15px;
       right: 15px;
-      z-index: 10;
+      z-index: 8;
       img {
-        width: max(3.5em, 3cqw);
-        height: max(3.5em, 3cqw);
+        width: min(3.5em, 3cqw);
+        height: min(3.5em, 3cqw);
       }
     }
     .thumbnail {
@@ -79,7 +80,7 @@ fieldset.masterlist-search-grid {
       place-self: center;
       background-color: var(--clr-active-50);
       border-radius: 15px;
-      contain: paint;
+      // contain: paint;
       display: grid;
       .ml-thumbnail,
       .tn-background {
@@ -87,20 +88,27 @@ fieldset.masterlist-search-grid {
         width: 100%;
         aspect-ratio: 1/1;
         grid-area: 1/2;
+        border-radius: 15px;
       }
       .ml-thumbnail {
-        z-index: 2;
-        background-image: url('../../../public/images/starring.png'), var(--card_profile-bg_color);
-        filter: drop-shadow(5px 5px 5px #010151);
+        z-index: 10;
+        filter: drop-shadow(3px 3px 3px #10045c68);
+        transition: 1.5s var(--elastic_linear);
+        transform: scale(1);
+        &:hover {
+          transform: scale(1.2);
+          filter: drop-shadow(4px 10px 5px #10045c63);
+        }
       }
       .tn-background {
+        background-image: url('../../../public/images/starring.png'), var(--card_profile-bg_color);
         z-index: 1;
         filter: brightness(1);
       }
     }
 
     .name {
-      padding: 10px 0 0 10px;
+      padding: 0 0 0 10px;
     }
     .slug {
       padding-left: 10px;
@@ -116,7 +124,7 @@ fieldset.masterlist-search-grid {
       text-overflow: ellipsis;
       white-space: nowrap;
       font-weight: 700;
-      color: var(--purple-clr_50);
+      color: white;
     }
     .name {
       grid-area: name;
@@ -124,9 +132,10 @@ fieldset.masterlist-search-grid {
       place-items: center;
       place-content: start;
       font-family: 'Baloo 2', sans-serif;
+      text-transform: uppercase;
       a {
         max-width: calc(100% - max(50px, 3cqw));
-        color: var(--purple-clr_50);
+        color: white;
         overflow: hidden;
       }
     }
@@ -136,6 +145,7 @@ fieldset.masterlist-search-grid {
       justify-self: start;
       align-items: center;
       font-family: 'Itim', sans-serif;
+      font-size: 0.8em;
     }
     .slug {
       grid-area: code;

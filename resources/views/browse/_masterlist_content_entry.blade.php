@@ -19,24 +19,27 @@
   {{-- Thumbnail / Main Image --}}
   <a class="thumbnail" href="{{ $character->url }}">
     <div class="tn-background"></div>
-    <img
+    <div class="ml-thumbnail">
+      <img
       src="
-        {{ $character->image->canViewFull(Auth::user() ?? null) &&
+      {{ $character->image->canViewFull(Auth::user() ?? null) &&
         file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
-            ? $character->image->thumbnailUrl
-            : $character->image->thumbnailUrl }}"
+        ? $character->image->thumbnailUrl
+        : $character->image->thumbnailUrl }}"
       class="ml-thumbnail"
       alt="Thumbnail for {{ $character->nameFallback }}"
-    />
+      />
+    </div>
   </a>
   {{-- Character Number ID --}}
-  <div class="slug flex">
+  <div class="slug gap-_5 flex">
     <div class="fas fa-star"></div>
     {{ Illuminate\Support\Str::limit($character->slug, 20, $end = '...') }}
   </div>
   {{-- Owner --}}
-  <div class="display-user flex">
+  <div class="display-user flex  gap-_5 ">
     {!! $character->user->name !!}
+    <div class="fas fa-user"></div>
   </div>
   {{-- vvv Disabled Content vvv --}}
   {{--   Somnivore Species Label --}}

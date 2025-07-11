@@ -3,6 +3,7 @@
 - [ ] tiny notification box
 - [ ] subtypes (plural) still around
 - [x] checkboxes are offset / too tall?
+- [ ] "___ somnivore" when you hover over the palate icons
 - [ ] Remove MYO Image (resources/views/admin/designs/_approve_request_modal.blade.php)
 
 # Functional Issues (for Cyl) (Sorted by priority)
