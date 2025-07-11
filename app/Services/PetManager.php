@@ -697,7 +697,6 @@ class PetManager extends Service {
 
       return $this->commitReturn(true);
     } catch (\Exception $e) {
-      dd($e);
       $this->setError('error', $e->getMessage());
     }
 

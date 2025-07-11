@@ -1,6 +1,4 @@
 <div class="card mb-4">
-
-  {{-- {{ dd($character) }} --}}
   <div class="card-body text-center">
     <h5 class="card-title">Selected Character</h5>
     <div class="profile-assets-content">

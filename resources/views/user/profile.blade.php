@@ -91,7 +91,6 @@
 
     @if (isset($user->profile->parsed_text))
       <div class="card mb-3" style="clear:both;">
-        {{-- {{ dd('pf',$user->profile) }} --}}
         @if ($user->profile->pronouns)
           <h5 class="card-header">
             {{ $user->profile->pronouns }}
