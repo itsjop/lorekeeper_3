@@ -1,8 +1,11 @@
 <div class="masterlist-character text-center">
   {{-- Subtype Badge --}}
   <div class="ml-badge">
-    <img src="{{ asset('images/somnivores/masterlist/type_badges/currency-lunes.png') }}" alt="{{ 'Subtype badge for ' . $character->url . '.' }}">
+    <img src="{{ asset('images/somnivores/masterlist/type_badges/currency-lunes.png') }}"
+      alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
+    >
   </div>
+  <div class="border-background"></div>
   {{-- Name --}}
   <div class="name">
     <a href="{{ $character->url }}" class="">
@@ -15,19 +18,23 @@
   </div>
   {{-- Thumbnail / Main Image --}}
   <a class="thumbnail" href="{{ $character->url }}">
-    <img class="tn-background" src="{{ asset('images/somnivores/masterlist/char_profile_bg.png') }}">
+    <div class="tn-background"></div>
     <img
       src="
         {{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl }}"
-      class="ml-thumbnail" alt="Thumbnail for {{ $character->nameFallback }}" />
+      class="ml-thumbnail"
+      alt="Thumbnail for {{ $character->nameFallback }}"
+    />
   </a>
-  {{-- Owner --}}
-  {!! $character->displayOwner !!}
   {{-- Character Number ID --}}
-  <div class="slug">
+  <div class="slug flex">
+    <div class="fas fa-star"></div>
     {{ Illuminate\Support\Str::limit($character->slug, 20, $end = '...') }}
   </div>
-
+  {{-- Owner --}}
+  <div class="display-user flex">
+    {!! $character->user->name !!}
+  </div>
   {{-- vvv Disabled Content vvv --}}
   {{--   Somnivore Species Label --}}
   {{--     {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!} --}}

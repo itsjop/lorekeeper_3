@@ -7,6 +7,14 @@
     </span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    {{-- <div class="currency">
+      <div class="col-lg-10 col-md-9 col-6">
+        {{ $currency->quantity }}
+        @if ($currency->has_icon)
+          {!! $currency->displayIcon !!}
+        @endif
+      </div>
+    </div> --}}
     <!-- Left Side Of Navbar -->
     <ul id="site-navbar" class=" navbar-nav">
       <li class="nav-item dropdown">

@@ -1,3 +1,5 @@
+@import 'masterlist/subtype_colors';
+
 #masterlist {
   container: mlsearch / inline-size;
 }
@@ -37,49 +39,42 @@ fieldset.masterlist-search-grid {
 }
 #ml-gridView {
   display: grid;
-  gap: 10px;
+  gap: 20px;
   .masterlist-character {
     display: grid;
     grid-template:
       'name  name ' 3em
       'thumb thumb' auto
-      'code  user ' 4em
+      'code  user ' 3em
       / min-content auto;
     border-radius: 15px;
-    border: 2px solid var(--purple-clr_600);
-    background: linear-gradient(to top right, oklch(0.7 0.1444 142.61), oklch(0.7 0.1444 260.12), oklch(0.7 0.1444 348.25));
     position: relative;
-    padding: 0 15px;
+    padding: 6px;
+    aspect-ratio: 3/4;
+    --card_gradient: linear-gradient(to bottom left, #0081b0, #007c3c, #01b224, rgb(19, 187, 0));
+    --card_card-border: linear-gradient(to bottom left,  #dc3300, #ba3500);
+    --card_profile-bg_color: linear-gradient(to right, #9e00dc, #3500ba);
+    --card_badge-img: 'public/img/masterlist/badge_sweet.png';
+    --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
+    background-image: var(--card_card-border);
+    box-shadow: 5px 5px 5px #040430;
+    .border-background {
+      grid-area: 1 / 1 / 4 / 3;
+      border-radius: 14px;
+      background-image: var(--card_gradient);
+    }
     .ml-badge {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 20px;
+      right: 20px;
       z-index: 10;
       img {
         width: max(50px, 3cqw);
         height: max(50px, 3cqw);
       }
     }
-    .name {
-      grid-area: name;
-      border-radius: 13px 13px 0 0;
-      display: flex;
-      place-items: center;
-      place-content: start;
-      padding: 0 0 0 10px;
-      margin: 10px 0;
-      // background-color: ;
-      a {
-        font-size: clamp(1em, 2vw, 2em);
-        max-width: calc(100% - max(50px, 3cqw));
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: var(--purple-clr_600);
-      }
-    }
     .thumbnail {
-      width: 100%;
+      width: calc(100% - 20px);
       grid-area: thumb;
       place-self: center;
       border: 2px solid var(--purple-clr_600);
@@ -96,6 +91,7 @@ fieldset.masterlist-search-grid {
       }
       .ml-thumbnail {
         z-index: 2;
+        background-image: url('../../../public/images/starring.png'), var(--card_profile-bg_color);
         filter: drop-shadow(5px 5px 5px #010151);
       }
       .tn-background {
@@ -103,11 +99,43 @@ fieldset.masterlist-search-grid {
         filter: brightness(1);
       }
     }
+
+    .name {
+      padding: 10px 0 0 10px;
+    }
+    .slug{
+      padding-left: 10px;
+    }
+    .display-user {
+      padding-right: 10px;
+    }
+    .name,
+    .slug,
+    .display-user {
+      text-shadow: 0 0 5px #d8d8fc66;
+      font-size: clamp(1em, 1.2vw, 1.3em);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--purple-clr_50);
+    }
+    .name {
+      grid-area: name;
+      display: flex;
+      place-items: center;
+      place-content: start;
+      font-family: 'Baloo 2', sans-serif;
+      a {
+        max-width: calc(100% - max(50px, 3cqw));
+        color: var(--purple-clr_50);
+        overflow: hidden;
+      }
+    }
     .slug,
     .display-user {
       align-self: center;
       justify-self: start;
-      color: var(--purple-clr_800);
+      align-items: center;
     }
     .slug {
       grid-area: code;
