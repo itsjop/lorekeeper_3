@@ -1,7 +1,7 @@
 <div class="masterlist-character text-center">
   {{-- Subtype Badge --}}
   <div class="ml-badge">
-    <img src="{{ asset('images/somnivores/masterlist/type_badges/currency-lunes.png') }}"
+    <img src="{{ asset('images/somnivores/masterlist/type_badges/bittersweeticon.png') }}"
       alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
     >
   </div>
@@ -21,7 +21,10 @@
     <div class="tn-background"></div>
     <img
       src="
-        {{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl }}"
+        {{ $character->image->canViewFull(Auth::user() ?? null) &&
+        file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
+            ? $character->image->thumbnailUrl
+            : $character->image->thumbnailUrl }}"
       class="ml-thumbnail"
       alt="Thumbnail for {{ $character->nameFallback }}"
     />

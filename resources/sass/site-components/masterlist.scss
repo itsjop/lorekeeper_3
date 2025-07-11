@@ -51,13 +51,13 @@ fieldset.masterlist-search-grid {
     position: relative;
     padding: 6px;
     aspect-ratio: 3/4;
-    --card_gradient: linear-gradient(to bottom left, #0081b0, #007c3c, #01b224, #13bb00);
-    --card_card-border: linear-gradient(to bottom left,  #dc3300, #ba3500);
-    --card_profile-bg_color: linear-gradient(to right, #9e00dc, #3500ba);
+    --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
+    --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
+    --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
     --card_badge-img: 'public/img/masterlist/badge_sweet.png';
     --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
     background-image: var(--card_card-border);
-    box-shadow: 5px 5px 5px #040430;
+    box-shadow: 5px 5px 5px #04043078;
     .border-background {
       grid-area: 1 / 1 / 4 / 3;
       border-radius: 14px;
@@ -65,19 +65,18 @@ fieldset.masterlist-search-grid {
     }
     .ml-badge {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 15px;
+      right: 15px;
       z-index: 10;
       img {
-        width: max(50px, 3cqw);
-        height: max(50px, 3cqw);
+        width: max(3.5em, 3cqw);
+        height: max(3.5em, 3cqw);
       }
     }
     .thumbnail {
       width: calc(100% - 20px);
       grid-area: thumb;
       place-self: center;
-      border: 2px solid var(--purple-clr_600);
       background-color: var(--clr-active-50);
       border-radius: 15px;
       contain: paint;
@@ -103,7 +102,7 @@ fieldset.masterlist-search-grid {
     .name {
       padding: 10px 0 0 10px;
     }
-    .slug{
+    .slug {
       padding-left: 10px;
     }
     .display-user {
@@ -136,6 +135,7 @@ fieldset.masterlist-search-grid {
       align-self: center;
       justify-self: start;
       align-items: center;
+      font-family: 'Itim', sans-serif;
     }
     .slug {
       grid-area: code;
