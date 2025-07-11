@@ -38,7 +38,7 @@
       closeMenu();
     }
 
-    $('#header-nav .navbar-toggler').on( "click", () => {
+    $('#header-nav .navbar-toggler').on("click", () => {
       $('#navbarSupportedContent').toggleClass('show')
     })
 
@@ -49,14 +49,17 @@
       showDropdown(dd);
       document.documentElement.addEventListener('click', closeMenuOnBodyClick);
     }
+
     function closeMenu(dd = null) {
       unShowAllDropdownsExcept(dd);
       document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
     }
+
     function showDropdown(dd) {
       dd.classList.toggle('show');
       dd.querySelector(".dropdown-menu").classList.toggle('show');
     }
+
     function unShowAllDropdownsExcept(dropdown) {
       document.querySelectorAll("#site-navbar .dropdown").forEach(dd => {
         if (dropdown === null || dropdown.isSameNode(dd)) return;
