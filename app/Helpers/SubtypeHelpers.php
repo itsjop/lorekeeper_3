@@ -32,6 +32,10 @@ function getSubtypeInfo(int $id, string $info = 'label', $prop = null) {
     14 => "bittersweet",
     15 => "sensational",
     16 => "fiery",
+    17 => "???",
+    18 => "???",
+    19 => "???",
+    20 => "???",
   ];
 
   $label = $subtypeLabels[$id];
