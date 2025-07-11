@@ -51,12 +51,12 @@ fieldset.masterlist-search-grid {
     border-radius: 15px;
     position: relative;
     padding: 6px;
-    // aspect-ratio: 3/4;
-    --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
-    --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
-    --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
-    --card_badge-img: 'public/img/masterlist/badge_sweet.png';
-    --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
+    // // aspect-ratio: 3/4;
+    // --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
+    // --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
+    // --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
+    // --card_badge-img: 'public/img/masterlist/badge_sweet.png';
+    // --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
     background-image: var(--card_card-border);
     box-shadow: 5px 5px 5px #04043078;
     .border-background {
@@ -95,13 +95,14 @@ fieldset.masterlist-search-grid {
         filter: drop-shadow(3px 3px 3px #10045c68);
         transition: 1.5s var(--elastic_linear);
         transform: scale(1);
+        perspective: 50px;
         &:hover {
-          transform: scale(1.2);
+          transform: scale(1.1);
           filter: drop-shadow(4px 10px 5px #10045c63);
         }
       }
       .tn-background {
-        background-image: url('../../../public/images/starring.png'), var(--card_profile-bg_color);
+        background-image: url('../../../public/images/starring.png'), var(--card_profile_bg_color);
         z-index: 1;
         filter: brightness(1);
       }

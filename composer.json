@@ -71,7 +71,8 @@
     ],
     "files": [
       "app/Helpers/Helpers.php",
-      "app/Helpers/AssetHelpers.php"
+      "app/Helpers/AssetHelpers.php",
+      "app/Helpers/SubtypeHelpers.php"
     ]
   },
   "autoload-dev": {

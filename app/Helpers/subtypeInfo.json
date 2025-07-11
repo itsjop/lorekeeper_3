@@ -1,0 +1,82 @@
+ {
+  "sweet": {
+    "gradient": ["#ffb3e5", "#ff75dd", "#8e60d3", "#bdafff"],
+    "card_border": ["#fff", "#ffc3fd"],
+    "profile_bg_color": ["#ffcbf3", "#ded3ff"]
+  },
+  "energetic": {
+    "gradient": ["#fffab3", "#ff8e5f", "#ff5757", "#ffad99"],
+    "card_border": ["#fff", "#ffe1c3"],
+    "profile_bg_color": ["#ffeec5", "#ffe0ca"]
+  },
+  "dreadful": {
+    "gradient": ["#6548d5", "#311ca5", "#782f8c", "#951c37"],
+    "card_border": ["#fff", "#ffc3e7"],
+    "profile_bg_color": ["#c5d5ff", "#facceb"]
+  },
+  "mundane": {
+    "gradient": ["#c5c3cc", "#8e8e95", "#5a5c6f", "#9899a0"],
+    "card_border": ["#fff", "#cdccd3"],
+    "profile_bg_color": ["#e1e3ea", "#cfced6"]
+  },
+  "strange": {
+    "gradient": ["#b7ff8f", "#61ba5a", "#009157", "#7dc58c"],
+    "card_border": ["#fff", "#f7ffc3"],
+    "profile_bg_color": ["#d3ffc5", "#ccfaee"]
+  },
+  "passionate": {
+    "gradient": ["#fffab3", "#ff8e5f", "#ff5757", "#ffad99"],
+    "card_border": ["#fff", "#ffe1c3"],
+    "profile_bg_color": ["#ffeec5", "#ffe0ca"]
+  },
+  "playful": {
+    "gradient": ["#a9ebff", "#5a8cff", "#cc9bff", "#ff9fe1"],
+    "card_border": ["#fff", "#c1d7ff"],
+    "profile_bg_color": ["#d3fbff", "#ffc6f6"]
+  },
+  "dazzling": {
+    "gradient": ["#ffd273", "#ff5a5a", "#aed457", "#6eed88"],
+    "card_border": ["#fff", "#fff4ca"],
+    "profile_bg_color": ["#f7f5bc", "#b8ecd3"]
+  },
+  "whimsical": {
+    "gradient": ["#ffbee1", "#b671ff", "#0e8871", "#98cf6f"],
+    "card_border": ["#fff", "#ffd7ef"],
+    "profile_bg_color": ["#fbd3ff", "#c7ecd1"]
+  },
+  "thrilling": {
+    "gradient": ["#b5fffe", "#0d46e4", "#711997", "#c11f4b"],
+    "card_border": ["#fff", "#d7f3ff"],
+    "profile_bg_color": ["#d3f3ff", "#ffd5f0"]
+  },
+  "surreal": {
+    "gradient": ["#efffc2", "#26be6e", "#4525c5", "#dd1295"],
+    "card_border": ["#fff", "#dbffcf"],
+    "profile_bg_color": ["#d1f4d4", "#ffd0ff"]
+  },
+  "charming": {
+    "gradient": ["#ffd0fd", "#ff8fed", "#ff8339", "#f4cd98"],
+    "card_border": ["#fff", "#f7c8ff"],
+    "profile_bg_color": ["#ffd3f3", "#fffed5"]
+  },
+  "melodramatic": {
+    "gradient": ["#ffc868", "#a71c68", "#2d2076", "#ff5356"],
+    "card_border": ["#fff", "#ffea9b"],
+    "profile_bg_color": ["#ffeac1", "#fac6ff"]
+  },
+  "bittersweet": {
+    "gradient": ["#ffc2e0", "#cb2e76", "#3819b5", "#a693ff"],
+    "card_border": ["#fff", "#ffcfea"],
+    "profile_bg_color": ["#ffc9f0", "#ddd0ff"]
+  },
+  "sensational": {
+    "gradient": ["#d3ff90", "#46b756", "#0092c8", "#77bdff"],
+    "card_border": ["#fff", "#f3ffbb"],
+    "profile_bg_color": ["#caf0c5", "#c2f1ff"]
+  },
+  "fiery": {
+    "gradient": ["#98f8ff", "#2168ec", "#ff452a", "#ff9a15"],
+    "card_border": ["#fff", "#ffe8bb"],
+    "profile_bg_color": ["#c9f5ff", "#ffe8d0"]
+  }
+}

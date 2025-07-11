@@ -13,7 +13,6 @@ use Illuminate\Database\Schema\Blueprint;
 |
 */
 
-
 function isFK(string $table, string $column): bool {
   $fkColumns = Schema::getConnection()->getDoctrineSchemaManager()->listTableForeignKeys($table);
   $fkColumns = collect($fkColumns);

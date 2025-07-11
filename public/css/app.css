@@ -961,132 +961,85 @@ body {
   }
 }
 
-.subtype-sweet {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_sweet.png";
-  --card_profile-bg: "public/img/masterlist/profile_sweet.png";
+.masterlist-character.sweet {
+  --card_gradient: linear-gradient(to bottom left, #ffb3e5, #ff75dd, #8e60d3, #bdafff);
+  --card_card_border: linear-gradient(180deg, #fff, #ffc3fd);
+  --card_profile_bg_color: linear-gradient(45deg, #ffcbf3, #ded3ff);
 }
-
-.subtype-dreadful {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_dreadful.png";
-  --card_profile-bg: "public/img/masterlist/profile_dreadful.png";
+.masterlist-character.energetic {
+  --card_gradient: linear-gradient(to bottom left, #fffab3, #ff8e5f, #ff5757, #ffad99);
+  --card_card_border: linear-gradient(180deg, #fff, #ffe1c3);
+  --card_profile_bg_color: linear-gradient(45deg, #ffeec5, #ffe0ca);
 }
-
-.subtype-energetic {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_energetic.png";
-  --card_profile-bg: "public/img/masterlist/profile_energetic.png";
+.masterlist-character.dreadful {
+  --card_gradient: linear-gradient(to bottom left, #6548d5, #311ca5, #782f8c, #951c37);
+  --card_card_border: linear-gradient(180deg, #fff, #ffc3e7);
+  --card_profile_bg_color: linear-gradient(45deg, #c5d5ff, #facceb);
 }
-
-.subtype-passionate {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_passionate.png";
-  --card_profile-bg: "public/img/masterlist/profile_passionate.png";
+.masterlist-character.mundane {
+  --card_gradient: linear-gradient(to bottom left, #c5c3cc, #8e8e95, #5a5c6f, #9899a0);
+  --card_card_border: linear-gradient(180deg, #fff, #cdccd3);
+  --card_profile_bg_color: linear-gradient(45deg, #e1e3ea, #cfced6);
 }
-
-.subtype-strange {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_strange.png";
-  --card_profile-bg: "public/img/masterlist/profile_strange.png";
+.masterlist-character.strange {
+  --card_gradient: linear-gradient(to bottom left, #b7ff8f, #61ba5a, #009157, #7dc58c);
+  --card_card_border: linear-gradient(180deg, #fff, #f7ffc3);
+  --card_profile_bg_color: linear-gradient(45deg, #d3ffc5, #ccfaee);
 }
-
-.subtype-mundane {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_mundane.png";
-  --card_profile-bg: "public/img/masterlist/profile_mundane.png";
+.masterlist-character.passionate {
+  --card_gradient: linear-gradient(to bottom left, #fffab3, #ff8e5f, #ff5757, #ffad99);
+  --card_card_border: linear-gradient(180deg, #fff, #ffe1c3);
+  --card_profile_bg_color: linear-gradient(45deg, #ffeec5, #ffe0ca);
 }
-
-.subtype-playful {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_playful.png";
-  --card_profile-bg: "public/img/masterlist/profile_playful.png";
+.masterlist-character.playful {
+  --card_gradient: linear-gradient(to bottom left, #a9ebff, #5a8cff, #cc9bff, #ff9fe1);
+  --card_card_border: linear-gradient(180deg, #fff, #c1d7ff);
+  --card_profile_bg_color: linear-gradient(45deg, #d3fbff, #ffc6f6);
 }
-
-.subtype-thrilling {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_thrilling.png";
-  --card_profile-bg: "public/img/masterlist/profile_thrilling.png";
+.masterlist-character.dazzling {
+  --card_gradient: linear-gradient(to bottom left, #ffd273, #ff5a5a, #aed457, #6eed88);
+  --card_card_border: linear-gradient(180deg, #fff, #fff4ca);
+  --card_profile_bg_color: linear-gradient(45deg, #f7f5bc, #b8ecd3);
 }
-
-.subtype-surreal {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_surreal.png";
-  --card_profile-bg: "public/img/masterlist/profile_surreal.png";
+.masterlist-character.whimsical {
+  --card_gradient: linear-gradient(to bottom left, #ffbee1, #b671ff, #0e8871, #98cf6f);
+  --card_card_border: linear-gradient(180deg, #fff, #ffd7ef);
+  --card_profile_bg_color: linear-gradient(45deg, #fbd3ff, #c7ecd1);
 }
-
-.subtype-sensational {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_sensational.png";
-  --card_profile-bg: "public/img/masterlist/profile_sensational.png";
+.masterlist-character.thrilling {
+  --card_gradient: linear-gradient(to bottom left, #b5fffe, #0d46e4, #711997, #c11f4b);
+  --card_card_border: linear-gradient(180deg, #fff, #d7f3ff);
+  --card_profile_bg_color: linear-gradient(45deg, #d3f3ff, #ffd5f0);
 }
-
-.subtype-bittersweet {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_bittersweet.png";
-  --card_profile-bg: "public/img/masterlist/profile_bittersweet.png";
+.masterlist-character.surreal {
+  --card_gradient: linear-gradient(to bottom left, #efffc2, #26be6e, #4525c5, #dd1295);
+  --card_card_border: linear-gradient(180deg, #fff, #dbffcf);
+  --card_profile_bg_color: linear-gradient(45deg, #d1f4d4, #ffd0ff);
 }
-
-.subtype-whimsical {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_whimsical.png";
-  --card_profile-bg: "public/img/masterlist/profile_whimsical.png";
+.masterlist-character.charming {
+  --card_gradient: linear-gradient(to bottom left, #ffd0fd, #ff8fed, #ff8339, #f4cd98);
+  --card_card_border: linear-gradient(180deg, #fff, #f7c8ff);
+  --card_profile_bg_color: linear-gradient(45deg, #ffd3f3, #fffed5);
 }
-
-.subtype-fiery {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_fiery.png";
-  --card_profile-bg: "public/img/masterlist/profile_fiery.png";
+.masterlist-character.melodramatic {
+  --card_gradient: linear-gradient(to bottom left, #ffc868, #a71c68, #2d2076, #ff5356);
+  --card_card_border: linear-gradient(180deg, #fff, #ffea9b);
+  --card_profile_bg_color: linear-gradient(45deg, #ffeac1, #fac6ff);
 }
-
-.subtype-charming {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_charming.png";
-  --card_profile-bg: "public/img/masterlist/profile_charming.png";
+.masterlist-character.bittersweet {
+  --card_gradient: linear-gradient(to bottom left, #ffc2e0, #cb2e76, #3819b5, #a693ff);
+  --card_card_border: linear-gradient(180deg, #fff, #ffcfea);
+  --card_profile_bg_color: linear-gradient(45deg, #ffc9f0, #ddd0ff);
 }
-
-.subtype-dazzling {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_dazzling.png";
-  --card_profile-bg: "public/img/masterlist/profile_dazzling.png";
+.masterlist-character.sensational {
+  --card_gradient: linear-gradient(to bottom left, #d3ff90, #46b756, #0092c8, #77bdff);
+  --card_card_border: linear-gradient(180deg, #fff, #f3ffbb);
+  --card_profile_bg_color: linear-gradient(45deg, #caf0c5, #c2f1ff);
 }
-
-.subtype-melodramatic {
-  --card_gradient: linear-gradient(to bottom right, black, white, gray, blue);
-  --card_card-border: linear-gradient(to bottom left, white, black);
-  --card_profile-bg_color: linear-gradient(to right, white, black);
-  --card_badge-img: "public/img/masterlist/badge_melodramatic.png";
-  --card_profile-bg: "public/img/masterlist/profile_melodramatic.png";
+.masterlist-character.fiery {
+  --card_gradient: linear-gradient(to bottom left, #98f8ff, #2168ec, #ff452a, #ff9a15);
+  --card_card_border: linear-gradient(180deg, #fff, #ffe8bb);
+  --card_profile_bg_color: linear-gradient(45deg, #c9f5ff, #ffe8d0);
 }
 
 #masterlist {
@@ -1132,11 +1085,6 @@ fieldset.masterlist-search-grid .searchbutton {
   border-radius: 15px;
   position: relative;
   padding: 6px;
-  --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
-  --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
-  --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
-  --card_badge-img: "public/img/masterlist/badge_sweet.png";
-  --card_profile-bg: "public/img/masterlist/profile_sweet.png";
   background-image: var(--card_card-border);
   box-shadow: 5px 5px 5px rgba(4, 4, 48, 0.4705882353);
 }
@@ -1177,13 +1125,14 @@ fieldset.masterlist-search-grid .searchbutton {
   filter: drop-shadow(3px 3px 3px rgba(16, 4, 92, 0.4078431373));
   transition: 1.5s var(--elastic_linear);
   transform: scale(1);
+  perspective: 50px;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   filter: drop-shadow(4px 10px 5px rgba(16, 4, 92, 0.3882352941));
 }
 #ml-gridView .masterlist-character .thumbnail .tn-background {
-  background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913), var(--card_profile-bg_color);
+  background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913), var(--card_profile_bg_color);
   z-index: 1;
   filter: brightness(1);
 }

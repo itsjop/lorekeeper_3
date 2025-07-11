@@ -32,6 +32,9 @@
               {!! $subtype->displayName !!}
             </td>
             <td>
+              _id: {!! $subtype->id !!}
+            </td>
+            <td>
               {!! $subtype->species->displayName !!}
             </td>
             <td class="text-right">

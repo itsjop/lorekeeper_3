@@ -1,7 +1,7 @@
-<div class="masterlist-character text-center">
+<div class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id)  }}">
   {{-- Subtype Badge --}}
   <div class="ml-badge">
-    <img src="{{ asset('images/somnivores/masterlist/type_badges/bittersweeticon.png') }}"
+    <img src="{{ asset('images/subtypes/badges/'.getSubtypeInfo($character->image->subtype_id).'.png') }}"
       alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
     >
   </div>
