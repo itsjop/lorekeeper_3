@@ -7,15 +7,11 @@
         {{ ucfirst(getSubtypeInfo($character->image->subtype_id)) }} Palate
       </div>
     </div>
-    <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}"
-      alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
-    >
+    <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}" alt="{{ 'Subtype badge for ' . $character->url . '.' }}">
   </div>
   <div class="border-background"></div>
   {{-- Name --}}
-  <div
-    class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}"
-  >
+  <div class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}">
     <a href="{{ $character->url }}" class="">
       @if (!$character->is_visible)
         <i class="fas fa-eye-slash"></i>
@@ -31,9 +27,7 @@
       <img
         src="
       {{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl }}"
-        class="ml-thumbnail"
-        alt="Thumbnail for {{ $character->nameFallback }}"
-      />
+        class="ml-thumbnail" alt="Thumbnail for {{ $character->nameFallback }}" />
     </div>
   </a>
   {{-- Character Number ID --}}
