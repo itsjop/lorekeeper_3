@@ -63,6 +63,25 @@
           gap: 5px;
           margin: 0;
         }
+        &.admin {
+          border-radius: 10px;
+          padding: 5px;
+          a {
+            color: var(--purple-clr_200);
+          }
+        }
+        &.nav-notifications {
+          background-color: var(--purple-clr_300);
+          border-radius: 15px;
+          a {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            gap: 5px;
+            color: var(--purple-clr_600);
+          }
+        }
       }
       .navbar-brand .navbar-brand-image {
         max-width: 40vw;

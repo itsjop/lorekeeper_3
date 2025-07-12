@@ -536,6 +536,27 @@ body {
 
 .app {
   /* prettier-ignore */
+  --blue: #66b0ff;
+  --indigo: #7d37ed;
+  --purple: #6f42c1;
+  --pink: #e6679a;
+  --red: #dd515f;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #7dcc8f;
+  --teal: #20c997;
+  --cyan: #48c9dc;
+  --white: #fff;
+  --gray: #6c7c8b;
+  --gray-dark: #343a40;
+  --primary: #5da6f3;
+  --secondary: #6c757d;
+  --success: #46ce66;
+  --info: #4ab3c3;
+  --warning: #f5c841;
+  --danger: #d33b3b;
+  --light: #f8f9fa;
+  --dark: #343a40;
 }
 .app ul {
   padding: 0;
@@ -553,6 +574,9 @@ body {
 .app .toggle-group .btn {
   margin: 0;
 }
+.app .btn-primary {
+  background-color: var(--purple-clr_500);
+}
 .app .btn-primary, .app .btn-info, .app .btn-danger, .app .btn-success, .app .btn-secondary {
   color: var(--purple-clr_50);
 }
@@ -560,7 +584,7 @@ body {
   color: var(--purple-clr_50);
 }
 .app .btn-primary, .app .badge-primary {
-  background-color: var(--teal-clr_600);
+  background-color: var(--purple-clr_600);
 }
 .app .btn-secondary {
   background-color: var(--purple-clr_400);
@@ -571,6 +595,12 @@ body {
 }
 .app .btn-secondary:hover {
   background-color: var(--purple-clr_700);
+}
+.app .badge-danger {
+  background-color: var(--danger);
+}
+.app .badge-success {
+  background-color: var(--success);
 }
 
 /* General Styling */
@@ -1053,8 +1083,20 @@ body {
 
 fieldset.masterlist-search-grid {
   display: grid;
-  grid-template: "name  species sortby submit a-btn" max-content/1fr 1fr 1fr 1fr 1fr;
+  grid-template: "name  species sortby submit a-btn" max-content/2fr 2fr 2fr 1fr 1fr;
   gap: 10px;
+  border: 2px solid var(--clr_raw_purple-500);
+  border-radius: 15px;
+  padding: 15px;
+}
+fieldset.masterlist-search-grid legend {
+  margin: -10px 10px;
+  padding: 3px;
+  width: -moz-max-content;
+  width: max-content;
+  text-transform: lowercase;
+  font-family: "Itim", sans-serif;
+  transform: translateY(-10%);
 }
 fieldset.masterlist-search-grid .character-name {
   grid-area: name;
@@ -1169,7 +1211,7 @@ fieldset.masterlist-search-grid .searchbutton {
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail {
   z-index: 10;
   filter: drop-shadow(3px 3px 3px rgba(16, 4, 92, 0.4078431373));
-  transition: 0.5s var(--bounce_linear);
+  transition: 0.45s var(--bounce_linear);
   transform: scale(1);
   perspective: 50px;
   width: calc(100% - 10px);
@@ -1385,6 +1427,25 @@ because the nesting selector cannot represent pseudo-elements. */
   place-content: center;
   gap: 5px;
   margin: 0;
+}
+#app #site-wrapper #header-nav .nav-item.admin {
+  border-radius: 10px;
+  padding: 5px;
+}
+#app #site-wrapper #header-nav .nav-item.admin a {
+  color: var(--purple-clr_200);
+}
+#app #site-wrapper #header-nav .nav-item.nav-notifications {
+  background-color: var(--purple-clr_300);
+  border-radius: 15px;
+}
+#app #site-wrapper #header-nav .nav-item.nav-notifications a {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 5px;
+  color: var(--purple-clr_600);
 }
 #app #site-wrapper #header-nav .navbar-brand .navbar-brand-image {
   max-width: 40vw;

@@ -32,7 +32,7 @@ function getSubtypeInfo(int $id, string $info = 'label', $prop = null) {
     14 => 'charming',
     15 => 'fiery',
     16 => 'dazzling',
-    17 => 'cirrus',
+    17 => 'unknown',
     18 => 'bestial',
     19 => 'cranky',
     20 => 'grounst',

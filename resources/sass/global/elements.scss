@@ -39,16 +39,44 @@ h4, h5, h6 {
       color: var(--purple-clr_700);
     }
   }
+
+  // BOOTSTRAP OVERRRIDES
   .btn { margin: 5px; border-radius: 10px;}
   .toggle-group .btn { margin: 0; }
+  .btn-primary{ background-color: var(--purple-clr_500); }
   .btn-primary, .btn-info, .btn-danger, .btn-success, .btn-secondary {
     color: var(--purple-clr_50);
   }
   .btn-outline-primary, .btn-primary { &:hover {
     color: var(--purple-clr_50);
   }}
-  .btn-primary, .badge-primary { background-color: var(--teal-clr_600); }
+  .btn-primary, .badge-primary { background-color: var(--purple-clr_600); }
   .btn-secondary { background-color: var(--purple-clr_400);  color: var(--purple-clr_700); }
   .notifications-table .unread { background-color: var(--purple-clr_100); }
   .btn-secondary:hover { background-color: var(--purple-clr_700); }
+
+.badge-danger {background-color:  var(--danger); }
+.badge-success {background-color:  var(--success); }
+
+  --blue: #66b0ff;
+  --indigo: #7d37ed;
+  --purple: #6f42c1;
+  --pink: #e6679a;
+  --red: #dd515f;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #7dcc8f;
+  --teal: #20c997;
+  --cyan: #48c9dc;
+  --white: #fff;
+  --gray: #6c7c8b;
+  --gray-dark: #343a40;
+  --primary: #5da6f3;
+  --secondary: #6c757d;
+  --success: #46ce66;
+  --info: #4ab3c3;
+  --warning: #f5c841;
+  --danger: #d33b3b;
+  --light: #f8f9fa;
+  --dark: #343a40;
 }

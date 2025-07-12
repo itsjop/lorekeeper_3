@@ -1,7 +1,7 @@
 <div id="masterlist">
   {!! Form::open(['method' => 'GET']) !!}
-  <legend>Character Search</legend>
   <fieldset class="masterlist-search-grid form-inline flex ji-start ai-end my-2">
+    <legend>Character Search</legend>
     <div class="character-name form-group grid ji-start m-0 w-100">
       {!! Form::label('name', ucfirst(__('lorekeeper.character')) . ' Name/Code: ', ['class' => 'mr-2']) !!}
       {!! Form::text('name', Request::get('name'), ['class' => 'w-100 form-control']) !!}
