@@ -17,7 +17,7 @@ fieldset.masterlist-search-grid {
     padding: 3px;
     width: max-content;
     text-transform: lowercase;
-    font-family: "Itim", sans-serif;
+    font-family: 'Itim', sans-serif;
     transform: translateY(-10%);
   }
   .character-name {
@@ -144,17 +144,27 @@ fieldset.masterlist-search-grid {
         grid-area: 1/2;
         border-radius: 15px;
       }
+      perspective: 200px;
       .ml-thumbnail {
         z-index: 10;
         filter: drop-shadow(3px 3px 3px #10045c68);
-        transition: 0.45s var(--bounce_linear);
         transform: scale(1);
-        perspective: 50px;
         width: calc(100% - 10px);
         place-self: center;
+        transform-origin: center center;
+        transition: 0.45s var(--bounce_linear);
+        contain: paint;
+        perspective: 300px;
+        img {
+          transition: 0.05s linear;
+        }
         &:hover {
           transition: 1.5s var(--elastic_linear);
           transform: scale(1.1);
+          img {
+            transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
+          }
+
           // filter: drop-shadow(4px 10px 5px #10045c63);
         }
       }

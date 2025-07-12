@@ -1,4 +1,6 @@
-<div class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id) }}">
+<div id={{ strtolower($character->slug) }}
+  class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id) }}"
+>
   {{-- Subtype Badge --}}
   <div class="ml-badge">
     <div class="flag">
@@ -7,11 +9,15 @@
         {{ ucfirst(getSubtypeInfo($character->image->subtype_id)) }} Palate
       </div>
     </div>
-    <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}" alt="{{ 'Subtype badge for ' . $character->url . '.' }}">
+    <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}"
+      alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
+    >
   </div>
   <div class="border-background"></div>
   {{-- Name --}}
-  <div class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}">
+  <div
+    class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}"
+  >
     <a href="{{ $character->url }}" class="">
       @if (!$character->is_visible)
         <i class="fas fa-eye-slash"></i>
@@ -27,7 +33,9 @@
       <img
         src="
       {{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl }}"
-        class="ml-thumbnail" alt="Thumbnail for {{ $character->nameFallback }}" />
+        class="ml-thumbnail"
+        alt="Thumbnail for {{ $character->nameFallback }}"
+      />
     </div>
   </a>
   {{-- Character Number ID --}}
@@ -60,6 +68,11 @@
 
 <script>
   document.addEventListener('mousemove', function(event) {
-    // console.log('Mouse X:', event.clientX, 'Mouse Y:', event.clientY);
+    let card = $('#' + '{{ strtolower($character->slug) }} .thumbnail');
+    card.mousemove(function(e) {
+      let xp = ((e.pageX - card.offset().left) / card.width()).toFixed(3);
+      let yp = ((e.pageY - card.offset().top) / card.height()).toFixed(3);
+      card.attr("style",`--mpx:${xp}; --mpy:${yp}`);
+    });
   });
 </script>

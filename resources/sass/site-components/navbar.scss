@@ -19,6 +19,7 @@
             place-content: center;
             place-items: center;
             transition: 0.1s ease;
+            user-select: none;
             &::after {
               transition: 1s var(--elastic_linear);
               transform: rotate(-90deg);
