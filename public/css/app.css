@@ -1169,13 +1169,14 @@ fieldset.masterlist-search-grid .searchbutton {
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail {
   z-index: 10;
   filter: drop-shadow(3px 3px 3px rgba(16, 4, 92, 0.4078431373));
-  transition: 1.5s var(--elastic_linear);
+  transition: 0.5s var(--bounce_linear);
   transform: scale(1);
   perspective: 50px;
   width: calc(100% - 10px);
   place-self: center;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover {
+  transition: 1.5s var(--elastic_linear);
   transform: scale(1.1);
 }
 #ml-gridView .masterlist-character .thumbnail .tn-background {

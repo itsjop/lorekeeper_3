@@ -136,12 +136,13 @@ fieldset.masterlist-search-grid {
       .ml-thumbnail {
         z-index: 10;
         filter: drop-shadow(3px 3px 3px #10045c68);
-        transition: 1.5s var(--elastic_linear);
+        transition: 0.5s var(--bounce_linear);
         transform: scale(1);
         perspective: 50px;
         width: calc(100% - 10px);
         place-self: center;
         &:hover {
+          transition: 1.5s var(--elastic_linear);
           transform: scale(1.1);
           // filter: drop-shadow(4px 10px 5px #10045c63);
         }
