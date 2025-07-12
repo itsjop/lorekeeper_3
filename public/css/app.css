@@ -587,8 +587,8 @@ body {
   background-color: var(--purple-clr_600);
 }
 .app .btn-secondary {
-  background-color: var(--purple-clr_400);
-  color: var(--purple-clr_700);
+  background-color: var(--teal-clr_400);
+  color: var(--purple-clr_50);
 }
 .app .notifications-table .unread {
   background-color: var(--purple-clr_100);
@@ -1369,6 +1369,7 @@ because the nesting selector cannot represent pseudo-elements. */
   background-color: var(--purple-clr_600);
   grid-area: nav;
   border-radius: 20px;
+  z-index: 1;
 }
 #app #site-wrapper #header-nav .navbar-nav {
   display: flex;
@@ -1492,6 +1493,9 @@ because the nesting selector cannot represent pseudo-elements. */
   transform: rotate(45deg) translateY(200%);
 }
 
+.dt-nav-page {
+  z-index: 2;
+}
 .dt-nav-page .dt-nav-group .dt-nav-header {
   background-color: var(--purple-clr_200);
   color: var(--purple-clr_700);

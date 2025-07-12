@@ -5,6 +5,7 @@
       background-color: var(--purple-clr_600);
       grid-area: nav;
       border-radius: 20px;
+      z-index: 1;
       .navbar-nav {
         display: flex;
         gap: 5px;
@@ -137,6 +138,7 @@
 
 // global dropdowns styling
 .dt-nav-page {
+  z-index: 2;
   .dt-nav-group {
     .dt-nav-header {
       background-color: var(--purple-clr_200);

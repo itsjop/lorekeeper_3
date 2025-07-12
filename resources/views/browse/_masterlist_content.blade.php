@@ -49,7 +49,7 @@
     <div class="advanced-search-toggle mb-0 as-end js-center">
       <a
       href="#advancedSearch"
-      class="btn btn-sm btn-outline-info"
+      class="btn btn-sm btn-secondary"
       data-bs-toggle="collapse"
       > Advanced <i class="fas fa-caret-down"></i></a>
     </div>
