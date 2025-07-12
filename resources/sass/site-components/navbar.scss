@@ -12,7 +12,7 @@
         align-items: center;
         .dropdown {
           border-radius: 10px;
-          transition: 0.3s ease;
+          transition: 0.1s ease;
           border: 2px transparent solid;
           .dropdown-toggle {
             display: flex;
@@ -25,7 +25,8 @@
               transform: rotate(-90deg);
             }
           }
-          &.show {
+          &:has(.show){
+          // &.show {
             border-radius: 10px 10px 0 0;
             border: 2px var(--purple-clr_300) solid;
             background-color: var(--purple-clr_50);
