@@ -163,7 +163,7 @@ return [
 */
   'watermark_masterlist_images' => 0,
 
-  'masterlist_image_dimension' => 1500,
+  'masterlist_image_dimension' => 2000,
   'masterlist_image_dimension_target' => 'shorter',
 
   'masterlist_image_format' => 'png',

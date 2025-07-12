@@ -494,6 +494,65 @@ body {
   --spring_linear: linear( 0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1);
 }
 
+#app {
+  --blue: #66b0ff;
+  --indigo: #7d37ed;
+  --purple: #6f42c1;
+  --pink: #e6679a;
+  --red: #dd515f;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #7dcc8f;
+  --teal: #20c997;
+  --cyan: #48c9dc;
+  --white: #fff;
+  --gray: #6c7c8b;
+  --gray-dark: #343a40;
+  --primary: #5da6f3;
+  --secondary: #6c757d;
+  --success: #46ce66;
+  --info: #4ab3c3;
+  --warning: #f5c841;
+  --danger: #d33b3b;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
+#app .btn {
+  margin: 5px;
+  border-radius: 10px;
+}
+#app .toggle-group .btn {
+  margin: 0;
+}
+#app .btn-primary, #app .btn-info, #app .btn-danger, #app .btn-success, #app .btn-secondary {
+  color: var(--purple-clr_50);
+}
+#app .btn-outline-primary:hover, #app .btn-primary:hover {
+  color: var(--purple-clr_50);
+}
+#app .btn-primary {
+  background-color: var(--purple-clr_500);
+}
+#app .btn-primary, #app .badge-primary {
+  background-color: var(--purple-clr_600);
+}
+#app .btn-secondary {
+  background-color: var(--teal-clr_400);
+  color: var(--purple-clr_50);
+}
+#app .notifications-table .unread {
+  background-color: var(--purple-clr_100);
+}
+#app .btn-secondary:hover {
+  background-color: var(--purple-clr_700);
+}
+#app .badge-danger {
+  background-color: var(--danger);
+}
+#app .badge-success {
+  background-color: var(--success);
+}
+
 /* prettier-ignore */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -574,14 +633,14 @@ body {
 .app .toggle-group .btn {
   margin: 0;
 }
-.app .btn-primary {
-  background-color: var(--purple-clr_500);
-}
 .app .btn-primary, .app .btn-info, .app .btn-danger, .app .btn-success, .app .btn-secondary {
   color: var(--purple-clr_50);
 }
 .app .btn-outline-primary:hover, .app .btn-primary:hover {
   color: var(--purple-clr_50);
+}
+.app .btn-primary {
+  background-color: var(--purple-clr_500);
 }
 .app .btn-primary, .app .badge-primary {
   background-color: var(--purple-clr_600);
@@ -1071,7 +1130,7 @@ body {
   --card_card-border: linear-gradient(180deg, #fff, #ffe8bb);
   --card_profile-bg_color: linear-gradient(45deg, #c9f5ff, #ffe8d0);
 }
-.masterlist-character.cirrus {
+.masterlist-character.unknown {
   --card_gradient: linear-gradient(to bottom left, #feff95, #ff6ab5, #3cc1ff, #c7ec7b);
   --card_card-border: linear-gradient(180deg, #fff, #fff2ca);
   --card_profile-bg_color: linear-gradient(45deg, #ffd0e4, #c2f1ff);

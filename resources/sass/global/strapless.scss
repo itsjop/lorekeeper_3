@@ -1,46 +1,4 @@
-/* prettier-ignore */
-*, *::before, *::after {  box-sizing: border-box; }
-/* prettier-ignore */
-* {  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
-
-/* prettier-ignore */
-.app {
-h1,h2,h3 {
-  font-family: 'Fredoka', sans-serif, system-ui;
-  font-weight: 600;
-  font-size: 1.9rem;
-}
-h1 {
-  font-family: 'Baloo 2', sans-serif;
-  text-transform: uppercase;
-  color: var(--purple-clr_800);
-}
-h2, h3 {
-  font-family: 'Itim', sans-serif, system-ui;
-  text-transform: lowercase;
-  color: var(--purple-clr_600);
-}
-h2 { font-size: 1.8rem;}
-h3 { font-size: 1.5rem;}
-
-h4, h5, h6 {
-  font-family: "Itim", system-ui;  font-weight: 400;
-  text-transform: lowercase;
-  color: var(--purple-clr_700);
-  font-style: italic;
-}
-}
-.app {
-  /* prettier-ignore */
-  ul { padding: 0; }
-  a {
-    color: var(--purple-clr_500);
-    &:hover {
-      color: var(--purple-clr_700);
-    }
-  }
-
-  // BOOTSTRAP OVERRRIDES
+#app{
   .btn { margin: 5px; border-radius: 10px;}
   .toggle-group .btn { margin: 0; }
   .btn-primary, .btn-info, .btn-danger, .btn-success, .btn-secondary {
