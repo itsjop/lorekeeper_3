@@ -4,7 +4,7 @@
     <div class="flag">
       <div class="bg"></div>
       <div class="label">
-        {{ ucfirst(getSubtypeInfo($character->image->subtype_id)) }}
+        {{ ucfirst(getSubtypeInfo($character->image->subtype_id)) }} Palete
       </div>
     </div>
     <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}"

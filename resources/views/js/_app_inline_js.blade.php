@@ -31,7 +31,7 @@
       // get the event path
       const path = event.composedPath();
       // check if it has the menu element
-      if (path.some(elem => elem.id === 'site-navbar')) {
+      if (path.some((elem) => ['site-navbar', 'site-navbar-auth'].includes(elem.id))) {
         // terminate this function if it does
         return;
       }
@@ -47,28 +47,37 @@
       unShowAllDropdownsExcept();
       showDropdown(dd);
       document.documentElement.addEventListener('click', closeMenuOnBodyClick);
+      // console.log('opened and added body')
     }
 
     function closeMenu(dd = null) {
       unShowAllDropdownsExcept();
       document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
+      // console.log('closed and removed body')
     }
 
     function showDropdown(dd) {
       dd.classList.toggle('show');
       dd.querySelector(".dropdown-menu").classList.toggle('show');
+      // console.log('shown')
     }
 
     function unShowAllDropdownsExcept(dropdown) {
-      document.querySelectorAll("#site-navbar .dropdown").forEach(dd => {
+      document.querySelectorAll("#navbarSupportedContent .dropdown").forEach(dd => {
         if (dropdown === null || dropdown?.isSameNode(dd)) return;
         dd.classList.remove('show');
         dd.querySelector(".dropdown-menu").classList.remove('show');
       })
+      // console.log('closed all')
     };
-    document.querySelectorAll("#site-navbar .dropdown").forEach(dropdown => {
+
+    document.querySelectorAll("#navbarSupportedContent .dropdown").forEach(dropdown => {
+      // console.log('dropdown listener', dropdown)
       dropdown.addEventListener('click', () => openMenu(dropdown));
     });
+
+
+
 
     bsCustomFileInput.init();
     var $mobileMenuButton = $('#mobileMenuButton');

@@ -1085,7 +1085,7 @@ fieldset.masterlist-search-grid .searchbutton {
 }
 #ml-gridView .masterlist-character {
   display: grid;
-  grid-template: "name  name " 2.2em "thumb thumb" auto "code  user " 2.2em/min-content auto;
+  grid-template: "name  name " 2.5em "thumb thumb" auto "code  user " 2.2em/min-content auto;
   border-radius: 15px;
   position: relative;
   padding: 6px;
@@ -1112,12 +1112,15 @@ fieldset.masterlist-search-grid .searchbutton {
 #ml-gridView .masterlist-character .ml-badge .flag {
   opacity: 0;
   position: absolute;
-  transform: translateY(0);
+  transform: translateX(-33%) translateY(0);
   transition: 0.3s var(--smoothIn_linear);
   color: white;
-  padding: 10px;
+  padding: 5px 10px;
   z-index: 6;
   pointer-events: none;
+  word-break: keep-all;
+  width: -moz-max-content;
+  width: max-content;
 }
 #ml-gridView .masterlist-character .ml-badge .flag .bg::before, #ml-gridView .masterlist-character .ml-badge .flag .bg::after {
   content: "";
@@ -1146,7 +1149,7 @@ fieldset.masterlist-search-grid .searchbutton {
 }
 #ml-gridView .masterlist-character .ml-badge:hover .flag {
   opacity: 1;
-  transform: translateY(-80%);
+  transform: translateX(-33%) translateY(-90%);
 }
 #ml-gridView .masterlist-character .thumbnail {
   width: calc(100% - 20px);
@@ -1171,6 +1174,8 @@ fieldset.masterlist-search-grid .searchbutton {
   transition: 1.5s var(--elastic_linear);
   transform: scale(1);
   perspective: 50px;
+  width: calc(100% - 10px);
+  place-self: center;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover {
   transform: scale(1.1);
@@ -1189,6 +1194,7 @@ fieldset.masterlist-search-grid .searchbutton {
   white-space: nowrap;
   font-weight: 700;
   color: white;
+  font-size: 1.1em;
 }
 #ml-gridView .masterlist-character .name {
   grid-area: name;
@@ -1238,6 +1244,7 @@ fieldset.masterlist-search-grid .searchbutton {
   height: 100%;
   background-image: url(/images/groovepaper.png?cc3719018b12159b092a2c3bf3845ae1);
   border-radius: 15px;
+  opacity: 0.7;
 }
 
 @media (width >= 1400px) {

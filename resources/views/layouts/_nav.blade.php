@@ -29,6 +29,7 @@
         <div
           id="inventoryDropdown"
           class="nav-link dropdown-toggle"
+          href="#"
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
@@ -53,6 +54,7 @@
           <div
             id="inventoryDropdown"
             class="nav-link dropdown-toggle"
+            href="#"
             role="button"
             data-toggle="dropdown"
             aria-haspopup="true"
@@ -97,6 +99,7 @@
         <div
           id="queueDropdown"
           class="nav-link dropdown-toggle"
+          href="#"
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
@@ -130,6 +133,7 @@
         <div
           id="browseDropdown"
           class="nav-link dropdown-toggle"
+          href="#"
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
@@ -172,6 +176,7 @@
         <div
           id="loreDropdown"
           class="nav-link dropdown-toggle"
+          href="#"
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
@@ -198,6 +203,7 @@
         <div
           id="playDropdown"
           class="nav-link dropdown-toggle"
+          href="#"
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
@@ -232,6 +238,7 @@
         <div
           id="communityDropdown"
           class="nav-link dropdown-toggle"
+          href="#"
           role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
@@ -261,7 +268,7 @@
       </li>
     </ul>
     <!-- Right Side Of Navbar -->
-    <ul class="navbar-nav ml-auto">
+    <ul id="site-navbar-auth" class="navbar-nav ml-auto">
       <!-- Authentication Links -->
       @guest
         <li class="nav-item">
@@ -289,6 +296,7 @@
           <div
             id="browseDropdown"
             class="nav-link dropdown-toggle"
+            href="#"
             role="button"
             data-toggle="dropdown"
             aria-haspopup="true"
