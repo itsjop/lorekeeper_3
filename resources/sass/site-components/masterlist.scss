@@ -69,9 +69,54 @@ fieldset.masterlist-search-grid {
       right: 0px;
       z-index: 8;
       width: 20%;
+      cursor: help;
       img {
         width: 100%;
         aspect-ratio: 1/1;
+      }
+      .flag {
+        opacity: 0;
+        position: absolute;
+        transform: translateY(0);
+        transition: 0.3s var(--smoothIn_linear);
+        color: white;
+        padding: 10px;
+        z-index: 6;
+        pointer-events: none;
+        .bg {
+          &::before,
+          &::after {
+            content: '';
+            background-color: red;
+            background: var(--card_gradient);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            height: 100%;
+            width: 100%;
+            border-radius: 13px;
+          }
+          &::before {
+            width: calc(10px + 100%);
+            height: calc(10px + 100%);
+            background-image: var(--card_card-border);
+            border-radius: 15px;
+            box-shadow: 5px 5px 5px #04043078;
+          }
+        }
+        .label {
+          position: relative;
+          font-weight: 700;
+          z-index: 6;
+        }
+      }
+      &:hover {
+        .flag {
+          opacity: 1;
+          transform: translateY(-80%);
+        }
       }
     }
     .thumbnail {
@@ -132,7 +177,7 @@ fieldset.masterlist-search-grid {
         text-overflow: ellipsis;
       }
       &.name-sm {
-        font-size: 0.8em;
+        font-size: 0.85em;
       }
       &.name-lg {
         font-size: 1.2em;
@@ -154,6 +199,15 @@ fieldset.masterlist-search-grid {
       padding-right: 10px;
       grid-area: user;
       justify-self: end;
+    }
+    .paper-overlay {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      width: 100%;
+      height: 100%;
+      background-image: url('../../../public/images/groovepaper.png');
+      border-radius: 15px;
     }
     // .display-species {
     //   grid-area: type;

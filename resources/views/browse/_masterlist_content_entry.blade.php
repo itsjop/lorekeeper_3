@@ -1,6 +1,12 @@
 <div class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id) }}">
   {{-- Subtype Badge --}}
   <div class="ml-badge">
+    <div class="flag">
+      <div class="bg"></div>
+      <div class="label">
+        {{ ucfirst(getSubtypeInfo($character->image->subtype_id)) }}
+      </div>
+    </div>
     <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}"
       alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
     >
@@ -8,7 +14,7 @@
   <div class="border-background"></div>
   {{-- Name --}}
   <div
-    class="name {{ strlen($character->nameFallback) > 12 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}"
+    class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}"
   >
     <a href="{{ $character->url }}" class="">
       @if (!$character->is_visible)
@@ -40,6 +46,8 @@
     {!! $character->user->name !!}
     <div class="fas fa-user"></div>
   </div>
+  {{-- Paper Overlay --}}
+  <div class="paper-overlay"></div>
   {{-- vvv Disabled Content vvv --}}
   {{--   Somnivore Species Label --}}
   {{--     {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!} --}}
@@ -55,3 +63,9 @@
   {{--   Character Rarity --}}
   {{--     {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'No Rarity' !!} --}}
 </div>
+
+<script>
+  document.addEventListener('mousemove', function(event) {
+    // console.log('Mouse X:', event.clientX, 'Mouse Y:', event.clientY);
+  });
+</script>

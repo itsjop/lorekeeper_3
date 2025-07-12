@@ -44,14 +44,13 @@
 
     // Menu handling
     function openMenu(dd) {
-      document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
-      unShowAllDropdownsExcept(dd);
+      unShowAllDropdownsExcept();
       showDropdown(dd);
       document.documentElement.addEventListener('click', closeMenuOnBodyClick);
     }
 
     function closeMenu(dd = null) {
-      unShowAllDropdownsExcept(dd);
+      unShowAllDropdownsExcept();
       document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
     }
 
@@ -62,7 +61,7 @@
 
     function unShowAllDropdownsExcept(dropdown) {
       document.querySelectorAll("#site-navbar .dropdown").forEach(dd => {
-        if (dropdown === null || dropdown.isSameNode(dd)) return;
+        if (dropdown === null || dropdown?.isSameNode(dd)) return;
         dd.classList.remove('show');
         dd.querySelector(".dropdown-menu").classList.remove('show');
       })
