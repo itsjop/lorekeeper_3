@@ -98,11 +98,11 @@ fieldset.masterlist-search-grid {
         perspective: 50px;
         &:hover {
           transform: scale(1.1);
-          filter: drop-shadow(4px 10px 5px #10045c63);
+          // filter: drop-shadow(4px 10px 5px #10045c63);
         }
       }
       .tn-background {
-        background-image: url('../../../public/images/starring.png'), var(--card_profile_bg_color);
+        background-image: url('../../../public/images/starring.png'), var(--card_profile-bg_color);
         z-index: 1;
         filter: brightness(1);
       }
