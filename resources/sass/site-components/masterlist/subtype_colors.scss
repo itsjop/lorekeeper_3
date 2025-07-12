@@ -5,9 +5,9 @@
     --card_profile_bg_color: linear-gradient(45deg, #ffcbf3, #ded3ff);
   }
   &.energetic {
-    --card_gradient: linear-gradient(to bottom left, #fffab3, #ff8e5f, #ff5757, #ffad99);
-    --card_card_border: linear-gradient(180deg, #fff, #ffe1c3);
-    --card_profile_bg_color: linear-gradient(45deg, #ffeec5, #ffe0ca);
+    --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
+    --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
+    --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
   }
   &.dreadful {
     --card_gradient: linear-gradient(to bottom left, #6548d5, #311ca5, #782f8c, #951c37);
