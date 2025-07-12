@@ -52,7 +52,7 @@
           transform-origin: 50% 300%;
           animation: wobble-hor-bottom 10s var(--smoothIn_linear) forwards infinite;
         }
-        > a {
+        > .dropdown-toggle {
           color: var(--purple-clr_bgtext);
           padding: 5px 0;
         }

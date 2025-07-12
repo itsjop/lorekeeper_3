@@ -1,5 +1,13 @@
 <nav class="navbar navbar-expand-md" id="header-nav">
-  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+  <button
+    class="navbar-toggler collapsed"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="{{ __('Toggle navigation') }}"
+  >
     <span class="navbar-toggler-icon">
       <span class="line"></span>
       <span class="line"></span>
@@ -18,9 +26,17 @@
     <!-- Left Side Of Navbar -->
     <ul id="site-navbar" class=" navbar-nav">
       <li class="nav-item dropdown">
-        <a id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="inventoryDropdown"
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Site
-        </a>
+        </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('news') }}">
@@ -34,9 +50,17 @@
       </li>
       @if (Auth::check())
         <li class="nav-item dropdown">
-          <a id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          <div
+            id="inventoryDropdown"
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            v-pre
+          >
             Account
-          </a>
+          </div>
           <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
             <div class="dt-nav-group">
               <a class="dt-nav-item" href="{{ url('inventory') }}">
@@ -70,9 +94,17 @@
         </li>
       @endif
       <li class="nav-item dropdown">
-        <a id="queueDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="queueDropdown"
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Info
-        </a>
+        </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <h2 class="dt-nav-header _first">Species</h2>
@@ -95,9 +127,17 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="browseDropdown"
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Guides
-        </a>
+        </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <h2 class="dt-nav-header _first">Gameplay</h2>
@@ -129,9 +169,17 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a id="loreDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="loreDropdown"
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Masterlist
-        </a>
+        </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('sublist/npc') }}">
@@ -147,9 +195,17 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a id="playDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="playDropdown"
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Play
-        </a>
+        </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('prompts/prompts') }}">
@@ -173,9 +229,17 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a id="communityDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="communityDropdown"
+          class="nav-link dropdown-toggle"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Community
-        </a>
+        </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('____') }}">
@@ -222,9 +286,17 @@
           </li>
         @endif
         <li class="nav-item dropdown">
-          <a id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          <div
+            id="browseDropdown"
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            v-pre
+          >
             Submit
-          </a>
+          </div>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="browseDropdown">
             <div class="dt-nav-group" aria-labelledby="browseDropdown">
               <a class="dt-nav-item" href="{{ url('submissions/new') }}">
@@ -237,9 +309,18 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ Auth::user()->url }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          <div
+            id="navbarDropdown"
+            class="nav-link dropdown-toggle"
+            href="{{ Auth::user()->url }}"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            v-pre
+          >
             {{ Auth::user()->name }} <span class="caret"></span>
-          </a>
+          </div>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="navbarDropdown">
             <div class="dt-nav-group">
               <a class="dt-nav-item" href="{{ Auth::user()->url }}">
@@ -250,10 +331,19 @@
                 <i class="fas fa-bookmark"></i> Bookmarks </a>
               <a class="dt-nav-item" href="{{ url('account/settings') }}">
                 <i class="fas fa-cog"></i> Settings </a>
-              <a class="dt-nav-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <a
+                class="dt-nav-item"
+                href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+              >
                 <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }} </a>
               </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              <form
+                id="logout-form"
+                action="{{ route('logout') }}"
+                method="POST"
+                style="display: none;"
+              >
                 @csrf
               </form>
             </div>

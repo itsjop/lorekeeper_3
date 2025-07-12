@@ -1319,7 +1319,7 @@ because the nesting selector cannot represent pseudo-elements. */
   transform-origin: 50% 300%;
   animation: wobble-hor-bottom 10s var(--smoothIn_linear) forwards infinite;
 }
-#app #site-wrapper #header-nav .nav-item > a {
+#app #site-wrapper #header-nav .nav-item > .dropdown-toggle {
   color: var(--purple-clr_bgtext);
   padding: 5px 0;
 }
