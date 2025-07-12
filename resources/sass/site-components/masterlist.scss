@@ -7,8 +7,8 @@ fieldset.masterlist-search-grid {
   display: grid;
   grid-template:
     'name  species sortby submit a-btn' max-content
-    'a-box a-box   a-box  a-box  a-box' auto
     / 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
   .character-name {
     grid-area: name;
   }
@@ -21,9 +21,6 @@ fieldset.masterlist-search-grid {
   .advanced-search-toggle {
     grid-area: a-btn;
   }
-  #advancedSearch {
-    grid-area: a-box;
-  }
   .searchbutton {
     grid-area: submit;
   }
@@ -33,8 +30,7 @@ fieldset.masterlist-search-grid {
     grid-template:
       'name   name    submit' 1fr
       'sortby species a-btn ' 1fr
-      'a-box  a-box   a-box ' 0px
-      / 1fr 1fr 1fr;
+      / 3fr 3fr 1fr;
   }
 }
 #ml-gridView {

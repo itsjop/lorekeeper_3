@@ -1,4 +1,5 @@
 # top prio
+- [ ] the new Boostrap 5, the attributes are data-bs-toggle, data-bs-parent, and data-bs-target
 - [ ] figure out how to make dialogs launch at root
 - [ ] tiny notification box
 - [ ] subtypes (plural) still around

@@ -17,7 +17,6 @@
     "@shufo/prettier-plugin-blade": "^1.15.3",
     "axios": "^1.7.9",
     "blade-formatter": "^1.42.1",
-    "bootstrap": "^5.3.7",
     "browser-sync": "^3.0.4",
     "browser-sync-webpack-plugin": "^2.3.0",
     "cross-env": "^7.0",
@@ -34,6 +33,7 @@
     "vue-template-compiler": "^0.1.0"
   },
   "dependencies": {
+    "bootstrap": "^5.3.7",
     "colcade": "^0.2.0",
     "magic-grid": "^3.4.7",
     "masonry-layout": "^4.2.2",
