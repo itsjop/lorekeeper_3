@@ -112,7 +112,7 @@ class CharacterManager extends Service {
           throw new \Exception('Selected subtype invalid or does not match species.');
         }
       } else {
-        $data['subtype_id'] = null;
+        throw new \Exception('Subtype (Palate) must be selected.');
       }
       // Get owner info
       $url = null;
@@ -692,6 +692,8 @@ class CharacterManager extends Service {
       $cropWidth = $points['x1'] - $points['x0'];
       $cropHeight = $points['y1'] - $points['y0'];
 
+      $image->trim('transparent');
+
       if (config('lorekeeper.settings.masterlist_image_automation') == 0) {
         // Crop according to the selected area
         $image->crop($cropWidth, $cropHeight, $points['x0'], $points['y0']);
@@ -709,8 +711,8 @@ class CharacterManager extends Service {
         }
       );
 
-      if ($tn_width > $tn_height) $tn_width = null;
-      else $tn_height = null;
+      // if ($tn_width > $tn_height) $tn_width = null;
+      // else $tn_height = null;
 
       $image->resizeCanvas(
         $tn_width,

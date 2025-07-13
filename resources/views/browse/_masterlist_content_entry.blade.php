@@ -1,5 +1,6 @@
 <div id={{ strtolower($character->slug) }}
-  class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id) }}"
+  {{  ($character->image->subtype_id == null) ? dd($character) : ''; }}
+  class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id, 'label', null, $character) }}"
 >
   {{-- Subtype Badge --}}
   <div class="ml-badge">
@@ -31,13 +32,8 @@
     {{-- {{ $char_image = $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl }}" --}}
     <div class="tn-background"></div>
     <div class="ml-thumbnail">
-      <img
-        src="{{ $char_image }}"
-        alt="Thumbnail for {{ $character->nameFallback }}"
-      />
-      <div class="shine"
-        style=" {{'--card_shine_mask-image: url('. $char_image .');'}} "
-      ></div>
+      <img src="{{ $char_image }}" alt="Thumbnail for {{ $character->nameFallback }}" />
+      <div class="shine" style=" {{ '--card_shine_mask-image: url(' . $char_image . ');' }} "></div>
     </div>
   </a>
   {{-- Character Number ID --}}

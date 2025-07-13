@@ -432,8 +432,6 @@ class InventoryController extends Controller {
         flash($error)->error();
       }
     }
-
-    // dd( $tag, $service, $service->act($stacks, Auth::user(), $request->all()), $stacks->first()->item->hasTag($tag));
     return redirect()->back();
   }
 

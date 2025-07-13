@@ -1256,8 +1256,10 @@ fieldset.masterlist-search-grid .searchbutton {
   place-self: center;
   background-color: var(--clr-active-50);
   border-radius: 15px;
+  contain: paint;
   display: grid;
   overflow: hidden;
+  z-index: 2;
   perspective: 200px;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail,
@@ -1308,8 +1310,8 @@ fieldset.masterlist-search-grid .searchbutton {
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover .shine::after {
   --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
-  --tan: tan(var(--len));
-  transform: translateX(calc(20% + -40% * var(--mpx))) translateY(calc(20% + -40% * var(--mpy))) rotate(calc(-45deg + 45deg * var(--tan)));
+  --tan: sin(var(--len));
+  transform: translateX(calc(0% + -50% * var(--mpx))) translateY(calc(0% + -50% * var(--mpy))) rotate(-45deg);
 }
 #ml-gridView .masterlist-character .thumbnail .shine {
   width: calc(100% - 10px);
@@ -1333,11 +1335,12 @@ fieldset.masterlist-search-grid .searchbutton {
   mask-mode: alpha;
   mix-blend-mode: overlay;
   opacity: 0;
+  contain: paint;
 }
 #ml-gridView .masterlist-character .thumbnail .shine::after {
   content: "";
-  width: 200%;
-  height: 200%;
+  width: 300%;
+  height: 300%;
   position: absolute;
   z-index: 11;
   top: 0;
@@ -1345,7 +1348,7 @@ fieldset.masterlist-search-grid .searchbutton {
   transition: transform 0.1s ease, opacity 0.1s ease;
   left: -50%;
   top: -50%;
-  transform: translateX(25%) translateY(25%) rotate(-45deg);
+  transform: translateX(0%) translateY(0%) rotate(-45deg);
   transform-origin: center center;
   background-image: linear-gradient(0deg, transparent 0%, transparent 40%, white 45%, white 50%, transparent 55%, transparent 100%);
 }

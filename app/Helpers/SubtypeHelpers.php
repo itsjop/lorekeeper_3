@@ -9,7 +9,8 @@
  *
  * @return string
  */
-function getSubtypeInfo(int $id, string $info = 'label', $prop = null) {
+function getSubtypeInfo(int $id, string $info = 'label', $prop = null, $c = null) {
+  // if($c != null) dd('c',$c);
   // Read JSON file
   $file = __DIR__ . '/subtypeInfo.json';
   if (file_exists($file)) $subtypeContent = file_get_contents($file);
