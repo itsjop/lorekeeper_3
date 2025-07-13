@@ -7,11 +7,7 @@
       <span>Current Event</span>
     </h2>
     <div class="bubble ">
-      <img
-        src=""
-        alt=""
-        class="w-100"
-      >
+      <img src="" alt="" class="w-100">
       <div class="grid ai-center">
         <h3> LAUNCH PARTY </h3>
         <h4 class="flex">

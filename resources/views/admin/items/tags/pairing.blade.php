@@ -47,7 +47,7 @@
       <p>Choose a trait that this pairing item will always grant the offspring.</p>
       {!! Form::select('feature_id', $features, $tag->getData()['feature_id'] ?? null, [
           'class' => 'form-control mr-2
-                                                                                                                        feature-select',
+                                                                                                                              feature-select',
           'placeholder' => 'Select Offspring Trait',
       ]) !!}
     </div>
@@ -57,7 +57,7 @@
       <p>Choose a species that this pairing item will grant the offspring.</p>
       {!! Form::select('species_id', $specieses, $tag->getData()['species_id'] ?? null, [
           'class' => 'form-control mr-2
-                                                                                                                        feature-select',
+                                                                                                                              feature-select',
           'placeholder' => 'Select Offspring Species',
       ]) !!}
     </div>
@@ -68,7 +68,7 @@
         the subtype.</p>
       {!! Form::select('subtype_id', $subtypes, $tag->getData()['subtype_id'] ?? null, [
           'class' => 'form-control mr-2
-                                                                                                                        feature-select',
+                                                                                                                              feature-select',
           'placeholder' => 'Select Offspring Subtype',
       ]) !!}
     </div>
@@ -151,7 +151,7 @@
   {!! Form::label('Default Species (Optional)') !!} {!! add_help('Choose a species that should be set if both parent species are excluded.') !!}
   {!! Form::select('default_species_id', $specieses, $tag->getData()['default_species_id'] ?? null, [
       'class' => 'form-control mr-2
-                                        feature-select',
+                                          feature-select',
       'placeholder' => 'Select Default Species',
   ]) !!}
 </div>
@@ -202,7 +202,7 @@
   <p>Choose a subtype that should be set if both parent subtypes are excluded.</p>
   {!! Form::select('default_subtype_ids', $subtypes, $tag->getData()['default_subtype_ids'] ?? null, [
       'class' => 'form-control mr-2
-                                        feature-select',
+                                          feature-select',
       'placeholder' => 'Select Default Subtype',
   ]) !!}
 </div>

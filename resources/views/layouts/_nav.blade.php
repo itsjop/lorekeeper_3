@@ -1,20 +1,12 @@
 <nav class="navbar navbar-expand-md" id="header-nav">
-  <button
-    class="navbar-toggler collapsed"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="{{ __('Toggle navigation') }}"
-  >
-    <span class="navbar-toggler-icon" >
+  <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+    <span class="navbar-toggler-icon">
       <span class="line"></span>
       <span class="line"></span>
       <span class="line"></span>
     </span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
     {{-- <div class="currency">
       <div class="col-lg-10 col-md-9 col-6">
         {{ $currency->quantity }}
