@@ -180,11 +180,11 @@ fieldset.masterlist-search-grid {
           .shine {
             transition: 0.05s linear;
             transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
-            opacity: 0.6;
+            opacity: 0.4;
             &::after {
               --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
               --tan: sin(var(--len));
-              transform: translateX(calc(0% + (-50% * var(--mpx)))) translateY(calc(0% + (-50% * var(--mpy)))) rotate(-45deg);
+              transform: translateX(calc(25% + (-50% * var(--mpx)))) translateY(calc(25% + (-50% * var(--mpy)))) rotate(-45deg);
               // rotate(calc(-45deg + (45deg * var(--len))));
             }
           }
@@ -200,7 +200,7 @@ fieldset.masterlist-search-grid {
         top: 0;
         left: 0;
         transition:
-          background-position 0.1s linear,
+          transform 0.1s linear,
           opacity 0.1s ease;
         // background: red;
         // mask-image: radial-gradient(white, black 50%);
@@ -223,11 +223,8 @@ fieldset.masterlist-search-grid {
           z-index: 11;
           top: 0;
           left: 0;
-          transition:
-            transform 0.1s ease,
-            opacity 0.1s ease;
-          left: -50%;
-          top: -50%;
+          left: -100%;
+          top: -100%;
           transform: translateX(0%) translateY(0%) rotate(-45deg);
           transform-origin: center center;
           background-image: linear-gradient(
