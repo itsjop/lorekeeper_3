@@ -2,7 +2,8 @@
 #app {
   #site-wrapper {
     #header-nav {
-      background-color: var(--purple-clr_600);
+      @include body-bg;
+      background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
       grid-area: nav;
       border-radius: 20px;
       z-index: 1;

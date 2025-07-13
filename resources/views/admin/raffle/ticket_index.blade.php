@@ -113,7 +113,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <span class="modal-title h5 mb-0">Add Tickets</span>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <p>Select an on-site user or enter an off-site username, as well as the number of tickets to create for them. Any created tickets are in addition to any pre-existing tickets for the user(s).</p>

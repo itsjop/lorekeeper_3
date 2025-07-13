@@ -125,7 +125,9 @@
         </aside>
       </div>
 
-      <main id="main-content" class="main-content p-4">
+      <main id="main-content" class="main-content">
+        <div class="main-backdrop"></div>
+        <div class="content-wrapper">
         @if (Settings::get('is_maintenance_mode'))
           <div class="alert alert-secondary">
             The site is currently in maintenance mode!
@@ -153,7 +155,7 @@
         @endif
         @include('flash::message')
         @yield('content')
-
+        </div>
       </main>
 
       @include('layouts._footer')
@@ -163,7 +165,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <span class="modal-title h5 mb-0"></span>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               {{-- Add all dialogs to top-level --}}

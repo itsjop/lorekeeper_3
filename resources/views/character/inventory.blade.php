@@ -23,7 +23,7 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-target="#grantModal">
+      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-bs-target="#grantModal">
         <i class="fas fa-cog"></i> Admin</a>
     @endif
     Items
@@ -190,7 +190,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">[ADMIN] Grant Items</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <p>Note that granting items does not check against any category hold limits for characters.</p>

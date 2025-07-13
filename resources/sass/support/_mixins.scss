@@ -12,3 +12,10 @@
   background-repeat: repeat;
   background-size: 64px;
 }
+@mixin body-bg($color: var(--body-color), $opacity: .7) {
+  border-radius: 15px;
+  background-image: url('../../../public/images/overlays/otis-redding_noise.png');
+  background-color: color-mix(in srgb, $color, transparent calc(100% - (100% * $opacity)));
+  backdrop-filter: saturate(200%) blur(5px);
+
+}

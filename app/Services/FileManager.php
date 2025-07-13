@@ -98,7 +98,10 @@ class FileManager extends Service {
      * @return bool
      */
     public function uploadFile($file, $dir, $name, $isFileManager = true) {
-        $directory = public_path().($isFileManager ? '/files'.($dir ? '/'.$dir : '') : '/images');
+        $directory = public_path().(
+          $isFileManager
+            ? '/files'.($dir ? '/'.$dir : '')
+            : '/images'.($dir ? '/'.$dir : '' ));
         if (!file_exists($directory)) {
             $this->setError('error', 'Folder does not exist.');
         }

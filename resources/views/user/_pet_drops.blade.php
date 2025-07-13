@@ -6,7 +6,7 @@
   Collect {{ isset($pet->drops->dropData->name) ? $pet->drops->dropData->name . 's' : 'Drops' }} ({{ $pet->drops->parameters }})
   {!! add_help('Your pet\'s type is ' . $pet->drops->parameters . '.<br>You can view all pet drops on the ' . $pet->pet->name . ' pet page.') !!}
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-    <a href="#" class="float-right btn btn-outline-info btn-sm" id="paramsButton" data-bs-toggle="modal" data-target="#paramsModal"><i class="fas fa-cog"></i> Admin</a>
+    <a href="#" class="float-right btn btn-outline-info btn-sm" id="paramsButton" data-bs-toggle="modal" data-bs-target="#paramsModal"><i class="fas fa-cog"></i> Admin</a>
   @endif
 </h4>
 <div class="alert alert-info mt-3">
@@ -81,7 +81,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <span class="modal-title h5 mb-0">[ADMIN] Adjust Drop</span>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           {!! Form::open(['url' => 'admin/pets/pet/' . $pet->id]) !!}

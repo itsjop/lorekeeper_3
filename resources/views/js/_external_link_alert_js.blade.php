@@ -29,7 +29,7 @@
                     Continue
                 </a>
                 <p>Don't recognise this link? Click below to cancel and return to the previous page.</p>
-                <button class="btn btn-block btn-secondary" data-dismiss="modal">
+                <button class="btn btn-block btn-secondary" data-bs-dismiss="modal">
                     Cancel
                 </button>
             `;

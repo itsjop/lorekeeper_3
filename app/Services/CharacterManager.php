@@ -112,7 +112,9 @@ class CharacterManager extends Service {
           throw new \Exception('Selected subtype invalid or does not match species.');
         }
       } else {
-        throw new \Exception('Subtype (Palate) must be selected.');
+        if (!$isMyo) {
+          throw new \Exception('Subtype (Palate) must be selected.');
+        }
       }
       // Get owner info
       $url = null;
