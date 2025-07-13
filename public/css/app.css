@@ -1583,7 +1583,7 @@ because the nesting selector cannot represent pseudo-elements. */
   background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
   grid-area: nav;
   border-radius: 20px;
-  z-index: 1;
+  z-index: 3;
 }
 #app #site-wrapper #header-nav .navbar-nav {
   display: flex;
@@ -1594,6 +1594,9 @@ because the nesting selector cannot represent pseudo-elements. */
   border-radius: 10px;
   transition: 0.1s ease;
   border: 2px transparent solid;
+}
+#app #site-wrapper #header-nav .navbar-nav .dropdown > a {
+  color: var(--purple-clr_50);
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown .dropdown-toggle {
   display: flex;
