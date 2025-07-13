@@ -295,16 +295,16 @@
       <div class="col-md-10">
         {!! Form::select(
             'birthday_setting',
-
+        
             [
                 '0' => '0: No one can see your birthday.',
                 '1' => '1: Members can see your day and month.',
                 '2' => '2: Anyone can see your day and month.',
                 '3' => '3: Full date public.',
             ],
-
+        
             Auth::user()->settings->birthday_setting,
-
+        
             ['class' => 'form-control'],
         ) !!}
       </div>
