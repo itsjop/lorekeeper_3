@@ -80,7 +80,7 @@
             @endif
             <td class="col-1">
               @if (!$awardRow->isTransferrable)
-                <i class="fas fa-lock" data-toggle="tooltip" title="Account-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
+                <i class="fas fa-lock" data-bs-toggle="tooltip" title="Account-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -94,7 +94,7 @@
 
       @if ($award->is_character_owned)
         <h5 class="card-title">
-          <a class="h5 collapse-toggle collapsed" href="#characterTransferForm" data-toggle="collapse">
+          <a class="h5 collapse-toggle collapsed" href="#characterTransferForm" data-bs-toggle="collapse">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer {{ ucfirst(__('awards.award')) }} to Character
@@ -117,7 +117,7 @@
       @endif
       @if ($award->allow_transfer || ($user && $user->hasPower('edit_inventories')))
         <h5 class="card-title">
-          <a class="h5 collapse-toggle collapsed" href="#transferForm" data-toggle="collapse">
+          <a class="h5 collapse-toggle collapsed" href="#transferForm" data-bs-toggle="collapse">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer {{ ucfirst(__('awards.award')) }}
@@ -144,7 +144,7 @@
       @endif
 
       <h5 class="card-title">
-        <a class="h5 collapse-toggle collapsed" href="#deleteForm" data-toggle="collapse">
+        <a class="h5 collapse-toggle collapsed" href="#deleteForm" data-bs-toggle="collapse">
           @if ($stack->first()->user_id != $user->id)
             [ADMIN]
           @endif Delete {{ ucfirst(__('awards.award')) }}

@@ -1,7 +1,7 @@
 <div class="card-header">
   <h2 class="card-title mb-0">
     @if (!$form->is_active || ($form->is_active && $form->is_timed && isset($form->start_at) && $form->start_at > Carbon\Carbon::now()))
-      <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This form is hidden."></i>
+      <i class="fas fa-eye-slash mr-1" data-bs-toggle="tooltip" title="This form is hidden."></i>
     @endif
     {!! $form->displayName !!}
   </h2>

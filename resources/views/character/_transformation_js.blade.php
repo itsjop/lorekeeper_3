@@ -10,7 +10,7 @@
     }).done(function(res) {
       $("#main-tab").fadeOut(500, function() {
         $("#main-tab").html(res);
-        $('#main-tab').find('[data-toggle="toggle"]').bootstrapToggle();
+        $('#main-tab').find('[data-bs-toggle="toggle"]').bootstrapToggle();
         $('.reupload-image').on('click', function(e) {
           e.preventDefault();
           loadModal("{{ url('admin/character/image') }}/" + $(this).data('id') + "/reupload", 'Reupload Image');

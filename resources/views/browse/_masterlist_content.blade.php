@@ -25,10 +25,10 @@
                   'id_desc' => 'Newest First',
                   'id_asc' => 'Oldest First',
                   'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value',
+                  'sale_value_asc' => 'Lowest Sale Value'
               ],
               Request::get('sort'),
-              ['class' => 'form-control w-100'],
+              ['class' => 'form-control w-100']
           ) !!}
         @else
           {!! Form::select(
@@ -37,17 +37,21 @@
                   'id_desc' => 'Newest First',
                   'id_asc' => 'Oldest First',
                   'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value',
+                  'sale_value_asc' => 'Lowest Sale Value'
               ],
               Request::get('sort'),
-              ['class' => 'form-control w-100'],
+              ['class' => 'form-control w-100']
           ) !!}
         @endif
       </div>
     </div>
     {!! Form::submit('Search', ['class' => 'searchbutton btn btn-primary as-end js-center']) !!}
     <div class="advanced-search-toggle mb-0 as-end js-center">
-      <a href="#advancedSearch" class="btn btn-sm btn-secondary" data-bs-toggle="collapse"> Advanced <i class="fas fa-caret-down"></i></a>
+      <a
+        href="#advancedSearch"
+        class="btn btn-sm btn-secondary"
+        data-bs-toggle="collapse"
+      > Advanced <i class="fas fa-caret-down"></i></a>
     </div>
   </fieldset>
   <div class="card bg-light mb-0 collapse" id="advancedSearch">
@@ -66,7 +70,7 @@
       <div class="card-body d-flex">
         {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control feature-select selectize',
-            'placeholder' => 'Select Trait',
+            'placeholder' => 'Select Trait'
         ]) !!}
         <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
       </div>
@@ -78,14 +82,14 @@
   <button
 type="button"
 class="btn btn-secondary active grid-view-button"
-data-toggle="tooltip"
+data-bs-toggle="tooltip"
 title="Grid View"
 alt="Grid View"
   ><i class="fas fa-th"></i></button>
   <button
 type="button"
 class="btn btn-secondary list-view-button"
-data-toggle="tooltip"
+data-bs-toggle="tooltip"
 title="List View"
 alt="List View"
   ><i class="fas fa-bars"></i></button>
@@ -94,7 +98,11 @@ alt="List View"
 {!! $characters->render() !!}
 <div id="ml-gridView" class="">
   @foreach ($characters as $character)
-    @include('browse._masterlist_content_entry')
+    @include('browse._masterlist_content_entry', [
+        'char_image' =>
+            $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . ' /
+            ' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl
+    ])
   @endforeach
 </div>
 

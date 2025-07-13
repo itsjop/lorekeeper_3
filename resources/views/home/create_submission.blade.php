@@ -198,10 +198,10 @@
                 var msg = "Error: ";
                 console.error(msg + xhr.status + " " + xhr.statusText);
               } else {
-                form.find('[data-toggle=tooltip]').tooltip({
+                form.find('[data-bs-toggle=tooltip]').tooltip({
                   html: true
                 });
-                form.find('[data-toggle=toggle]').bootstrapToggle();
+                form.find('[data-bs-toggle=toggle]').bootstrapToggle();
               }
             });
           }

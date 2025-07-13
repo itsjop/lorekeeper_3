@@ -1,6 +1,6 @@
 <div>
   @if (Auth::check() && Auth::user()->hasPower('edit_data'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Encounter" href="{{ url('admin/data/encounters/edit/') . '/' . $encounter->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
+    <a data-bs-toggle="tooltip" title="[ADMIN] Edit Encounter" href="{{ url('admin/data/encounters/edit/') . '/' . $encounter->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
   @endif
   <div class="row col-12 mb-2">
     <h1>{!! $encounter->name !!} in {{ $area->name }} </h1>

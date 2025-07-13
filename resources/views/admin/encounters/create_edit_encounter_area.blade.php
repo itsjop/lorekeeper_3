@@ -89,7 +89,7 @@
   <div class="form-group">
     {!! Form::checkbox('is_active', 1, $area->id ? $area->is_active : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-bs-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Areas that are not active will be hidden from the area list. They also cannot be automatically set as the next active area.') !!}
   </div>

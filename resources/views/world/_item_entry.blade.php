@@ -95,7 +95,7 @@
 
       @if ($item->hasTag('border'))
         <div class="mb-2">
-          <a data-toggle="collapse" href="#border{{ $item->id }}" class="h5">Unlocks Borders <i class="fas fa-caret-down"></i></a>
+          <a data-bs-toggle="collapse" href="#border{{ $item->id }}" class="h5">Unlocks Borders <i class="fas fa-caret-down"></i></a>
           <div class="card collapse mt-1" id="border{{ $item->id }}">
             <div class="card-body">
               @if (isset($item->tag('border')->data['all_borders']))

@@ -47,7 +47,7 @@ class Map extends Model
     ];
 
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
@@ -55,13 +55,13 @@ class Map extends Model
     /**
      * Get the locations that belong to the map.
      */
-    public function locations() 
+    public function locations()
     {
         return $this->hasMany('App\Models\Map\MapLocation');
     }
 
     /**********************************************************************************************
-    
+
         SCOPES
 
     **********************************************************************************************/
@@ -78,7 +78,7 @@ class Map extends Model
     }
 
     /**********************************************************************************************
-    
+
         ACCESSORS
 
     **********************************************************************************************/
@@ -151,7 +151,7 @@ class Map extends Model
            $locations[] =
             '<area target="" alt="'.$location->name.'" title="'.$location->name.'"'
             . ($location->link_type == 'GET' ? ' href="'.$location->link.'"' : '') .
-            ' data-toggle="tooltip" class="tooltip-bot" href="'.$location->url.'" coords="'.$location->cords.'" shape="'.$location->shape.'" data-original-title="'.$location->name.'">';
+            ' data-bs-toggle="tooltip" class="tooltip-bot" href="'.$location->url.'" coords="'.$location->cords.'" shape="'.$location->shape.'" data-original-title="'.$location->name.'">';
         }
         return
             ('<img src="'.$this->imageUrl.'" id="Image-Maps-Com-process-map" class="img-fluid border" usemap="#'.$this->name.'">')

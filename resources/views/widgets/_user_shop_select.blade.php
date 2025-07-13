@@ -27,7 +27,7 @@
       <div class="col-6 col-md-3 order-3 order-md-2">
         {!! Form::checkbox('is_visible[' . $stock->id . ']', 1, $stock->is_visible ?? 1, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-bs-toggle' => 'toggle',
         ]) !!}
       </div>
 

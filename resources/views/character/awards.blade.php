@@ -25,7 +25,7 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
     @endif
     {{ __('awards.awardcase') }}
   </h3>
@@ -124,7 +124,7 @@
               </div>
 
               <div class="form-group">
-                {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+                {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
                 {!! Form::label('disallow_transfer', ucfirst(__('lorekeeper.character')) . '-bound', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
                     'If this is on, the ' .
                         __('lorekeeper.character') .

@@ -39,7 +39,7 @@
       <h2 class="h6">
         {!! $term->displayName !!}
         @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-          <a data-toggle="tooltip" title="[ADMIN] Edit Term" href="{{ url('admin/world/glossary/edit/') . '/' . $term->id }}" class="float-right">
+          <a data-bs-toggle="tooltip" title="[ADMIN] Edit Term" href="{{ url('admin/world/glossary/edit/') . '/' . $term->id }}" class="float-right">
             <i class="fas fa-crown"></i></a>
         @endif
       </h2>

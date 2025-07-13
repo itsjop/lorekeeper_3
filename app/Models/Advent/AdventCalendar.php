@@ -280,7 +280,7 @@ class AdventCalendar extends Model {
   public function displayItemLong($day) {
     $item = $this->item($day);
     if (!$item) return 'Deleted Asset';
-    $image = ($item->imageUrl) ? '<img style="max-height:150px;" src="' . $item->imageUrl . '" data-toggle="tooltip" title="' . $item->name . '"/>' : null;
+    $image = ($item->imageUrl) ? '<img style="max-height:150px;" src="' . $item->imageUrl . '" data-bs-toggle="tooltip" title="' . $item->name . '"/>' : null;
     return $image . (isset($image) ? '<br/>' : '') . ' ' . $item->displayName . ' ×' . $this->itemQuantity($day);
   }
 
@@ -292,7 +292,7 @@ class AdventCalendar extends Model {
   public function displayItemShort($day) {
     $item = $this->item($day);
     if (!$item) return 'Deleted Asset';
-    $image = ($item->imageUrl) ? '<img style="max-height:150px;" src="' . $item->imageUrl . '" data-toggle="tooltip" title="' . $item->name . '"/>' : null;
+    $image = ($item->imageUrl) ? '<img style="max-height:150px;" src="' . $item->imageUrl . '" data-bs-toggle="tooltip" title="' . $item->name . '"/>' : null;
     if (isset($image)) return $image;
     else return $item->displayName;
   }

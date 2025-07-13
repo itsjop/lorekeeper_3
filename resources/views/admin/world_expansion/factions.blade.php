@@ -35,7 +35,7 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $faction->url !!}
-                @if ($faction->thumb_extension) data-toggle="tooltip" title="<img src='{{ $faction->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+                @if ($faction->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $faction->thumbUrl }}' style='max-width:100px;' class='my-1'/>
 <br> {{ ucfirst($faction->style) }} " @endif />{!! $faction->name !!}</a>
             </td>
             <td class="text-right">

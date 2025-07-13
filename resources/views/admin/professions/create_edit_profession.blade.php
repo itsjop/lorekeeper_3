@@ -39,7 +39,7 @@
         <div class="text-muted">Recommended size: 100x100 or smaller</div>
         @if (isset($profession->icon_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image_icon', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Icon As-Is', 'data-on' => 'Remove Icon Image']) !!}
+            {!! Form::checkbox('remove_image_icon', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Icon As-Is', 'data-on' => 'Remove Icon Image']) !!}
           </div>
         @endif
       </div>
@@ -54,7 +54,7 @@
         <div class="text-muted">Recommended size: None (Choose a standard size for all profession images.)</div>
         @if (isset($profession->image_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Main Image As-Is', 'data-on' => 'Remove Current Main Image']) !!}
+            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Main Image As-Is', 'data-on' => 'Remove Current Main Image']) !!}
           </div>
         @endif
       </div>
@@ -84,13 +84,13 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        {!! Form::checkbox('is_active', 1, $profession->id ? $profession->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_active', 1, $profession->id ? $profession->is_active : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the profession will not be visible to regular users.') !!}
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        {!! Form::checkbox('is_choosable', 1, $profession->id ? $profession->is_choosable : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_choosable', 1, $profession->id ? $profession->is_choosable : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('is_choosable', 'Is Selectable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the profession will not be selectable on character profiles.') !!}
       </div>
 

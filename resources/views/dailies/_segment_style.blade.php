@@ -4,7 +4,7 @@ You can ignore this section if you use an image for the wheel, although text wil
   <div class="card">
     <div class="card-header ">
 
-      <a class="btn btn-link collapse-toggle collapsed mr-5" type="button" data-toggle="collapse" data-target="#segmentStyleCollapse" aria-expanded="true" aria-controls="segmentStyleCollapse">
+      <a class="btn btn-link collapse-toggle collapsed mr-5" type="button" data-bs-toggle="collapse" data-target="#segmentStyleCollapse" aria-expanded="true" aria-controls="segmentStyleCollapse">
         <h5 class="mb-0">Colors & Text</h5>
       </a>
     </div>

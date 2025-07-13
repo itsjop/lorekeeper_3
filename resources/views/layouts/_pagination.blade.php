@@ -16,7 +16,7 @@
       @foreach ($elements as $element)
         {{-- "Three Dots" Separator --}}
         @if (is_string($element))
-          <li class="page-item pageSelectPopover" data-container="body" data-toggle="popover" data-placement="top" data-title="Jump to Page" data-html="true" data-content="<div class='paginationPopoverContent'></div>">
+          <li class="page-item pageSelectPopover" data-container="body" data-bs-toggle="popover" data-placement="top" data-title="Jump to Page" data-html="true" data-content="<div class='paginationPopoverContent'></div>">
             <span class="page-link">{{ $element }}</span>
           </li>
         @endif

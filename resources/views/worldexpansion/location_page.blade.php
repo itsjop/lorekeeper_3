@@ -6,7 +6,7 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Location" href="{{ url('admin/world/locations/edit/') . '/' . $location->id }}" class="mb-2 float-right">
+    <a data-bs-toggle="tooltip" title="[ADMIN] Edit Location" href="{{ url('admin/world/locations/edit/') . '/' . $location->id }}" class="mb-2 float-right">
       <i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs([
@@ -54,7 +54,7 @@
                                       <p class="mb-0">
                                         @foreach ($location->children as $key => $child)
   @if ($child->thumb_extension)
-  <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/>
+  <a href="{{ $child->url }}" data-bs-toggle="tooltip" title="{{ $child->name }}"/>
                                       <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $child->displayName !!}

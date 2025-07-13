@@ -58,7 +58,7 @@
   @endif
 
   @if ($advent->id)
-    <h3>Prizes <a class="small inventory-collapse-toggle collapse-toggle" href="#prizes" data-toggle="collapse">Show</a></h3>
+    <h3>Prizes <a class="small inventory-collapse-toggle collapse-toggle" href="#prizes" data-bs-toggle="collapse">Show</a></h3>
     <div class="mb-3 collapse form-group" id="prizes">
       <p>These are the prizes for each day. You can specify a item and quantity, which users will be able to claim on the respective day. If you do not specify an item, no prize will be available for that day.</p>
 

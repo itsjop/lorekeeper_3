@@ -13,8 +13,8 @@
 
   <div class="text-right mb-3">
     <div class="btn-group">
-      <button type="button" class="btn btn-secondary active def-view-button" data-toggle="tooltip" title="Default View" alt="Default View"><i class="fas fa-th"></i></button>
-      <button type="button" class="btn btn-secondary sum-view-button" data-toggle="tooltip" title="Summarized View" alt="Summarized View"><i class="fas fa-bars"></i></button>
+      <button type="button" class="btn btn-secondary active def-view-button" data-bs-toggle="tooltip" title="Default View" alt="Default View"><i class="fas fa-th"></i></button>
+      <button type="button" class="btn btn-secondary sum-view-button" data-bs-toggle="tooltip" title="Summarized View" alt="Summarized View"><i class="fas fa-bars"></i></button>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
       <div class="card mb-3 inventory-category">
         <h5 class="card-header inventory-header">
           {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
+          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-bs-toggle="collapse">
             Show
           </a>
         </h5>
@@ -82,7 +82,7 @@
       <div class="card mb-2">
         <h5 class="card-header">
           {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
+          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-bs-toggle="collapse">
             Show
           </a>
         </h5>

@@ -29,7 +29,7 @@
   <div class="card mb-3">
     <div class="card-body">
       <div class="form-check mb-2">
-        {!! Form::checkbox('allow_attach', 1, $category->allow_attach, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('allow_attach', 1, $category->allow_attach, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('allow_attach', 'Allow Character Attachment', ['class' => 'form-check-label ml-2']) !!}
       </div>
       <div class="form-group row no-gutters align-items-center">
@@ -59,7 +59,7 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
     {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, this gear category will not be visible on world pages.') !!}
   </div>
 

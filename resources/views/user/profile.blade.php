@@ -30,10 +30,10 @@
 
     {!! $user->displayName !!}
     <a href="{{ url('reports/new?url=') . $user->url }}">
-      <i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
+      <i class="fas fa-exclamation-triangle fa-xs" data-bs-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
 
     @if ($user->settings->is_fto)
-      <span class="badge badge-success float-right" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
+      <span class="badge badge-success float-right" data-bs-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
     @endif
   </h1>
 
@@ -131,7 +131,7 @@
                   @foreach ($items as $item)
                     <div class="col-md-3 col-6 profile-inventory-item">
                       @if ($item->imageUrl)
-                        <img src="{{ $item->imageUrl }}" data-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
+                        <img src="{{ $item->imageUrl }}" data-bs-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
                       @else
                         <p>{{ $item->name }}</p>
                       @endif
@@ -159,7 +159,7 @@
               @foreach ($awards as $award)
                 <div class="col-md-3 col-6 profile-inventory-item">
                   @if ($award->imageUrl)
-                    <img src="{{ $award->imageUrl }}" data-toggle="tooltip" title="{{ $award->name }}" />
+                    <img src="{{ $award->imageUrl }}" data-bs-toggle="tooltip" title="{{ $award->name }}" />
                   @else
                     <p>{{ $award->name }}</p>
                   @endif

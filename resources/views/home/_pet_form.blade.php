@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <a class="card-title h5 collapse-title" data-toggle="collapse" href="#nameForm">
+  <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#nameForm">
     @if ($pet->user_id != Auth::user()->id)
       [ADMIN]
     @endif Name Pet
@@ -17,7 +17,7 @@
 </li>
 
 <li class="list-group-item">
-  <a class="card-title h5 collapse-title" data-toggle="collapse" href="#descForm">
+  <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#descForm">
     @if ($pet->user_id != Auth::user()->id)
       [ADMIN]
     @endif Edit Profile
@@ -41,7 +41,7 @@
       $diff = $now->addDays(Settings::get('claymore_cooldown'));
     @endphp
     @if ($pet->character_id != null && $diff < Carbon\Carbon::now())
-      <a class="card-title h5 collapse-title" data-toggle="collapse" href="#attachForm">
+      <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#attachForm">
         @if ($pet->user_id != $user->id)
           [ADMIN]
         @endif Detach Pet from Character
@@ -53,7 +53,7 @@
       </div>
       {!! Form::close() !!}
     @elseif($pet->character_id == null || $diff < Carbon\Carbon::now())
-      <a class="card-title h5 collapse-title" data-toggle="collapse" href="#attachForm">
+      <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#attachForm">
         @if ($pet->user_id != $user->id)
           [ADMIN]
         @endif Attach Pet to Character
@@ -77,7 +77,7 @@
 
 @if ($user && isset($splices) && count($splices) && $user->id == $pet->user_id)
   <li class="list-group-item">
-    <a class="card-title h5 collapse-title" data-toggle="collapse" href="#userVariantForm">Change Pet Variant</a>
+    <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#userVariantForm">Change Pet Variant</a>
     {!! Form::open(['url' => 'pets/variant/' . $pet->id, 'id' => 'userVariantForm', 'class' => 'collapse']) !!}
     <p>
       This will use a splice item!
@@ -104,7 +104,7 @@
 @if ($user->hasPower('edit_inventories'))
   {{-- variant --}}
   <li class="list-group-item">
-    <a class="card-title h5 collapse-title" data-toggle="collapse" href="#variantForm">[ADMIN] Change Pet Variant</a>
+    <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#variantForm">[ADMIN] Change Pet Variant</a>
     {!! Form::open(['url' => 'pets/variant/' . $pet->id, 'id' => 'variantForm', 'class' => 'collapse']) !!}
     {!! Form::hidden('is_staff', 1) !!}
     <div class="form-group">
@@ -121,7 +121,7 @@
 
   {{-- evolution --}}
   <li class="list-group-item">
-    <a class="card-title h5 collapse-title" data-toggle="collapse" href="#evolutionForm">[ADMIN] Change Pet Evolution</a>
+    <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#evolutionForm">[ADMIN] Change Pet Evolution</a>
     {!! Form::open(['url' => 'pets/evolution/' . $pet->id, 'id' => 'evolutionForm', 'class' => 'collapse']) !!}
     {!! Form::hidden('is_staff', 1) !!}
     <div class="form-group">
@@ -138,7 +138,7 @@
 
   {{-- custom image --}}
   <li class="list-group-item">
-    <a class="card-title h5 collapse-title" data-toggle="collapse" href="#imageForm">[ADMIN] Change Image</a>
+    <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#imageForm">[ADMIN] Change Image</a>
     {!! Form::open(['url' => 'pets/image/' . $pet->id, 'id' => 'imageForm', 'class' => 'collapse', 'files' => true]) !!}
     <div class="form-group mt-2">
       {!! Form::label('Image') !!}

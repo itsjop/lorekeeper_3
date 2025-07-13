@@ -45,7 +45,7 @@
         @elseif($step->type === 'boolean')
           {!! Form::checkbox('criterion[' . (isset($id) ? $id : $criterion->id) . '][' . $step->id . ']', 1, $finalValues[$step->id] ?? 0, [
               'class' => 'form-check-input',
-              'data-toggle' => 'toggle',
+              'data-bs-toggle' => 'toggle',
               'disabled' => isset($limitByMinReq) && isset($minRequirements[$step->id]) ? 'disabled' : null,
           ]) !!}
         @endif

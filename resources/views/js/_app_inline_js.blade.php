@@ -8,7 +8,7 @@
   $(function() {
 
     $('.cp').colorpicker();
-    $('[data-toggle="tooltip"]').tooltip({
+    $('[data-bs-toggle="tooltip"]').tooltip({
       html: true
     });
 

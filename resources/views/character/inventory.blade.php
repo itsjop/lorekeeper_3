@@ -23,7 +23,7 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-toggle="modal" data-target="#grantModal">
+      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-target="#grantModal">
         <i class="fas fa-cog"></i> Admin</a>
     @endif
     Items
@@ -31,9 +31,9 @@
 
   <div class="text-right mb-3">
     <div class="btn-group">
-      <button type="button" class="btn btn-secondary active def-view-button" data-toggle="tooltip" title="Default View" alt="Default View">
+      <button type="button" class="btn btn-secondary active def-view-button" data-bs-toggle="tooltip" title="Default View" alt="Default View">
         <i class="fas fa-th"></i></button>
-      <button type="button" class="btn btn-secondary sum-view-button" data-toggle="tooltip" title="Summarized View" alt="Summarized View">
+      <button type="button" class="btn btn-secondary sum-view-button" data-bs-toggle="tooltip" title="Summarized View" alt="Summarized View">
         <i class="fas fa-bars"></i></button>
     </div>
   </div>
@@ -67,7 +67,7 @@
       <div class="card mb-3 inventory-category">
         <h5 class="card-header inventory-header">
           {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
+          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-bs-toggle="collapse">
             Show
           </a>
         </h5>
@@ -111,7 +111,7 @@
       <div class="card mb-2">
         <h5 class="card-header">
           {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-toggle="collapse">
+          <a class="small inventory-collapse-toggle collapse-toggle" href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}" data-bs-toggle="collapse">
             Show
           </a>
         </h5>
@@ -135,7 +135,7 @@
                       <a class="inventory-stack" href="#">
                         Stack of x{{ $item->pivot->count }}.
                         @if ($canName && $stackName)
-                          <span class="text-info m-0" style="font-size:95%; margin:5px;" data-toggle="tooltip" data-placement="top" title='Named stack:<br />"{{ $stackName }}"'>
+                          <span class="text-info m-0" style="font-size:95%; margin:5px;" data-bs-toggle="tooltip" data-placement="top" title='Named stack:<br />"{{ $stackName }}"'>
                             &nbsp;<i class="fas fa-tag"></i>
                           </span>
                         @endif
@@ -230,7 +230,7 @@
               </div>
 
               <div class="form-group">
-                {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+                {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
                 {!! Form::label('disallow_transfer', 'Character-bound', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is on, the character\'s owner will not be able to transfer this item to their inventory. Items that disallow transfers by default will still not be transferrable.') !!}
               </div>
 

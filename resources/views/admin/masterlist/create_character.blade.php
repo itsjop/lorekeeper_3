@@ -72,7 +72,7 @@
             {!! Form::label('Number') !!} {!! add_help('This number helps to identify the character and should preferably be unique either within the category, or among all characters.') !!}
             <div class="d-flex">
               {!! Form::text('number', old('number'), ['class' => 'form-control mr-2', 'id' => 'number']) !!}
-              <a href="#" id="pull-number" class="btn btn-primary" data-toggle="tooltip"
+              <a href="#" id="pull-number" class="btn btn-primary" data-bs-toggle="tooltip"
                 title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code.">Pull Next Number</a>
             </div>
           </div>
@@ -122,7 +122,7 @@
     </div>
     @if (config('lorekeeper.settings.masterlist_image_automation') === 1)
       <div class="form-group">
-        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
         {!! Form::label('use_cropper', 'Use Thumbnail Automation', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the Thumbnail Automation, or upload a custom thumbnail.') !!}
       </div>
       <div class="card mb-3" id="thumbnailCrop">
@@ -136,7 +136,7 @@
       </div>
     @else
       <div class="form-group">
-        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
         {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the image cropper (crop dimensions can be adjusted in the site code), or upload a custom thumbnail.') !!}
       </div>
       <div class="card mb-3" id="thumbnailCrop">
@@ -174,7 +174,7 @@
               'placeholder' => 'Select a Designer',
           ]) !!}
           {!! Form::text('designer_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Designer URL']) !!}
-          <a href="#" class="add-designer btn btn-link" data-toggle="tooltip" title="Add another designer">+</a>
+          <a href="#" class="add-designer btn btn-link" data-bs-toggle="tooltip" title="Add another designer">+</a>
         </div>
       </div>
       <div class="designer-row hide mb-2">
@@ -183,7 +183,7 @@
             'placeholder' => 'Select a Designer',
         ]) !!}
         {!! Form::text('designer_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Designer URL']) !!}
-        <a href="#" class="add-designer btn btn-link" data-toggle="tooltip" title="Add another designer">+</a>
+        <a href="#" class="add-designer btn btn-link" data-bs-toggle="tooltip" title="Add another designer">+</a>
       </div>
     </div>
     <div class="form-group">
@@ -195,7 +195,7 @@
               'placeholder' => 'Select an Artist',
           ]) !!}
           {!! Form::text('artist_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
-          <a href="#" class="add-artist btn btn-link" data-toggle="tooltip" title="Add another artist">+</a>
+          <a href="#" class="add-artist btn btn-link" data-bs-toggle="tooltip" title="Add another artist">+</a>
         </div>
       </div>
       <div class="artist-row hide mb-2">
@@ -204,7 +204,7 @@
             'placeholder' => 'Select an Artist',
         ]) !!}
         {!! Form::text('artist_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
-        <a href="#" class="add-artist btn btn-link mb-2" data-toggle="tooltip" title="Add another artist">+</a>
+        <a href="#" class="add-artist btn btn-link mb-2" data-bs-toggle="tooltip" title="Add another artist">+</a>
       </div>
     </div>
     @if (!$isMyo)
@@ -333,17 +333,17 @@
       </ul>
     </div>
     <div class="form-group">
-      {!! Form::checkbox('is_giftable', 1, old('is_giftable'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_giftable', 1, old('is_giftable'), ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       {!! Form::label('is_giftable', 'Is Giftable', ['class' => 'form-check-label ml-3']) !!}
     </div>
     <div class="form-group">
-      {!! Form::checkbox('is_tradeable', 1, old('is_tradeable'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_tradeable', 1, old('is_tradeable'), ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
     </div>
     <div class="form-group">
       {!! Form::checkbox('is_sellable', 1, old('is_sellable'), [
           'class' => 'form-check-input',
-          'data-toggle' => 'toggle',
+          'data-bs-toggle' => 'toggle',
           'id' => 'resellable',
       ]) !!}
       {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}
@@ -360,7 +360,7 @@
     </div>
 
     <div class="form-group">
-      {!! Form::checkbox('is_visible', 1, old('is_visible'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_visible', 1, old('is_visible'), ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
           'Turn this off to hide the ' . ($isMyo ? 'MYO slot' : 'character') . '. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the ' . ($isMyo ? 'MYO slot' : 'character') . '\'s page.',
       ) !!}

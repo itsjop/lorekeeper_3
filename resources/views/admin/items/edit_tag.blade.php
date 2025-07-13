@@ -25,7 +25,7 @@
     @include('admin.items.tags.' . $tag->tag, ['item' => $item, 'tag' => $tag])
   @endif
 
-  {!! Form::checkbox('is_active', 1, $tag->is_active, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_active', 1, $tag->is_active, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('is_active', 'Active', ['class' => 'form-check-label ml-3']) !!}
 
   <div class="text-right">

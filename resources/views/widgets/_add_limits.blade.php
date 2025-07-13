@@ -93,7 +93,7 @@
     </div>
     <div class="btn btn-secondary" id="add-limit">Add Limit</div>
     @if ($limits)
-      <i class="fas fa-trash text-danger float-right mt-2 mx-2 fa-2x" data-toggle="tooltip" title="To delete limits, simply remove all existing limits and click 'Edit Limits'"></i>
+      <i class="fas fa-trash text-danger float-right mt-2 mx-2 fa-2x" data-bs-toggle="tooltip" title="To delete limits, simply remove all existing limits and click 'Edit Limits'"></i>
     @endif
     {!! Form::submit(($limits ? 'Edit' : 'Create') . ' Limits', ['class' => 'btn btn-primary float-right']) !!}
   </div>

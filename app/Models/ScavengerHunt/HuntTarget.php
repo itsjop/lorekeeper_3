@@ -23,7 +23,7 @@ class HuntTarget extends Model
      * @var string
      */
     protected $table = 'scavenger_targets';
-    
+
     /**
      * Validation rules for creation.
      *
@@ -34,7 +34,7 @@ class HuntTarget extends Model
         'quantity' => 'required|integer|min:1',
         'description' => 'nullable',
     ];
-    
+
     /**
      * Validation rules for updating.
      *
@@ -47,15 +47,15 @@ class HuntTarget extends Model
     ];
 
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
-    
+
     /**
      * Get the item attached to the hunt target.
      */
-    public function item() 
+    public function item()
     {
         return $this->belongsTo('App\Models\Item\Item', 'item_id');
     }
@@ -63,17 +63,17 @@ class HuntTarget extends Model
     /**
      * Get the target's parent hunt.
      */
-    public function hunt() 
+    public function hunt()
     {
         return $this->belongsTo('App\Models\ScavengerHunt\ScavengerHunt', 'hunt_id');
     }
 
     /**********************************************************************************************
-    
+
         ACCESSORS
 
     **********************************************************************************************/
-    
+
     /**
      * Gets the target's number within the hunt.
      *
@@ -162,7 +162,7 @@ class HuntTarget extends Model
     public function getDisplayItemLongAttribute()
     {
 		if (!$this->item) return 'Deleted Asset';
-        $image = ($this->item->imageUrl) ? '<img style="max-height:150px;" src="'.$this->item->imageUrl.'" data-toggle="tooltip" title="'.$this->item->name.'"/>' : null;
+        $image = ($this->item->imageUrl) ? '<img style="max-height:150px;" src="'.$this->item->imageUrl.'" data-bs-toggle="tooltip" title="'.$this->item->name.'"/>' : null;
         return $image.(isset($image) ? '<br/>' : '').' '.$this->item->displayName.' ×'.$this->attributes['quantity'];
     }
 
@@ -174,7 +174,7 @@ class HuntTarget extends Model
     public function getDisplayItemShortAttribute()
     {
 		if (!$this->item) return 'Deleted Asset';
-        $image = ($this->item->imageUrl) ? '<img style="max-height:150px;" src="'.$this->item->imageUrl.'" data-toggle="tooltip" title="'.$this->item->name.'"/>' : null;
+        $image = ($this->item->imageUrl) ? '<img style="max-height:150px;" src="'.$this->item->imageUrl.'" data-bs-toggle="tooltip" title="'.$this->item->name.'"/>' : null;
         if(isset($image)) return $image;
         else return $this->item->displayName;
     }

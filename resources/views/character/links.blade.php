@@ -18,7 +18,7 @@
   <h2>
     {{ $character->fullName }}'s Links
     <a class="float-right mr-2" href="{{ url('reports/new?url=') . $character->url . '/links' }}">
-      <i class="fas fa-exclamation-triangle text-danger" data-toggle="tooltip" title="Click here to report this character's links." style="opacity: 50%;"></i>
+      <i class="fas fa-exclamation-triangle text-danger" data-bs-toggle="tooltip" title="Click here to report this character's links." style="opacity: 50%;"></i>
     </a>
   </h2>
   @if (count($character->links))
@@ -36,7 +36,7 @@
             <div class="row">
               <ul class="col-5 nav nav-tabs card-header-tabs">
                 <li class="nav-item ml-4">
-                  <a class="nav-link active" data-toggle="tab" role="tab">Info</a>
+                  <a class="nav-link active" data-bs-toggle="tab" role="tab">Info</a>
                 </li>
               </ul>
               <h6 class="text-center text-uppercase"><b>Relationship Status: {!! $link->type !!}</b></h6>

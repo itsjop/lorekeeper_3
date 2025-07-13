@@ -95,7 +95,7 @@
         <div class="form-group">
           {!! Form::checkbox('can_group_use_coupon[' . $group . ']', 1, $stock->canGroupUseCoupons($group), [
               'class' => 'form-check-input stock-field',
-              'data-toggle' => 'checkbox',
+              'data-bs-toggle' => 'checkbox',
           ]) !!}
           {!! Form::label('can_group_use_coupon[' . $group . ']', 'Allow group #' . $group . ' to use coupons', [
               'class' => 'form-check-label ml-3',
@@ -133,7 +133,7 @@
     <div class="col-md-6 form-group">
       {!! Form::checkbox('use_user_bank', 1, $stock->use_user_bank ?? 1, [
           'class' => 'form-check-input stock-toggle stock-field',
-          'data-toggle' => 'checkbox',
+          'data-bs-toggle' => 'checkbox',
           'data-name' => 'use_user_bank',
       ]) !!}
       {!! Form::label('use_user_bank', 'Use User Bank', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to purchase the item using the currency in their accounts, provided that users can own that currency.') !!}
@@ -141,7 +141,7 @@
     <div class="col-md-6 form-group">
       {!! Form::checkbox('use_character_bank', 1, $stock->use_character_bank ?? 1, [
           'class' => 'form-check-input stock-toggle stock-field',
-          'data-toggle' => 'checkbox',
+          'data-bs-toggle' => 'checkbox',
           'data-name' => 'use_character_bank',
       ]) !!}
       {!! Form::label('use_character_bank', 'Use Character Bank', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to purchase the item using the currency belonging to characters they own, provided that characters can own that currency.') !!}
@@ -149,7 +149,7 @@
     <div class="col-md-6 form-group">
       {!! Form::checkbox('is_fto', 1, $stock->is_fto ?? 0, [
           'class' => 'form-check-input stock-toggle stock-field',
-          'data-toggle' => 'checkbox',
+          'data-bs-toggle' => 'checkbox',
           'data-name' => 'is_fto',
       ]) !!}
       {!! Form::label('is_fto', 'FTO Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, only FTO will be able to purchase the item.') !!}
@@ -166,14 +166,14 @@
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $stock->is_visible ?? 1, [
         'class' => 'form-check-input stock-limited stock-toggle stock-field',
-        'data-toggle' => 'checkbox',
+        'data-bs-toggle' => 'checkbox',
     ]) !!}
     {!! Form::label('is_visible', 'Set Visibility', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off it will not appear in the store.') !!}
   </div>
   <div class="form-group">
     {!! Form::checkbox('is_limited_stock', 1, $stock->is_limited_stock ?? 0, [
         'class' => 'form-check-input stock-limited stock-toggle stock-field',
-        'data-toggle' => 'checkbox',
+        'data-bs-toggle' => 'checkbox',
         'id' => 'is_limited_stock',
     ]) !!}
     {!! Form::label('is_limited_stock', 'Set Limited Stock', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, will limit the amount purchaseable to the quantity set below.') !!}
@@ -186,7 +186,7 @@
         {!! Form::text('quantity', $stock->quantity ?? 0, ['class' => 'form-control stock-field']) !!}
       </div>
       <div class="my-2">
-        {!! Form::checkbox('restock', 1, $stock->restock ?? 0, ['class' => 'form-check-input', 'data-toggle' => 'checkbox']) !!}
+        {!! Form::checkbox('restock', 1, $stock->restock ?? 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'checkbox']) !!}
         {!! Form::label('restock', 'Auto Restock?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If ticked to yes it will auto restock at the interval defined below.') !!}
       </div>
       <div>
@@ -196,7 +196,7 @@
         ]) !!}
       </div>
       <div class="my-2">
-        {!! Form::checkbox('range', 1, $stock->range ?? 0, ['class' => 'form-check-input', 'data-toggle' => 'checkbox']) !!}
+        {!! Form::checkbox('range', 1, $stock->range ?? 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'checkbox']) !!}
         {!! Form::label('range', 'Restock in Range?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If ticked to yes it will restock a random quantity between 1 and the quantity set above.') !!}
       </div>
     </div>
@@ -205,7 +205,7 @@
   <div class="form-group">
     {!! Form::checkbox('is_timed_stock', 1, $stock->is_timed_stock ?? 0, [
         'class' => 'form-check-input stock-timed stock-toggle stock-field',
-        'data-toggle' => 'checkbox',
+        'data-bs-toggle' => 'checkbox',
         'id' => 'is_timed_stock',
     ]) !!}
     {!! Form::label('is_timed_stock', 'Set Timed Stock', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Sets the stock as timed between the chosen dates.') !!}
@@ -317,7 +317,7 @@
 
     // foreach .form-check-input
     $('.form-check-input').each(function() {
-      $(this).attr('data-toggle', 'toggle').bootstrapToggle();
+      $(this).attr('data-bs-toggle', 'toggle').bootstrapToggle();
     });
 
     // add remove cost listener to all removeCost buttons

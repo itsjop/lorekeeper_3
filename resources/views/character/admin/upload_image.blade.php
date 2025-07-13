@@ -17,7 +17,7 @@
   <h3>Validity</h3>
 
   <div class="form-group">
-    {!! Form::checkbox('is_valid', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_valid', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
     {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.') !!}
   </div>
 
@@ -32,7 +32,7 @@
   </div>
   @if (config('lorekeeper.settings.masterlist_image_automation') === 1)
     <div class="form-group">
-      {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+      {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
       {!! Form::label('use_cropper', 'Use Thumbnail Automation', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the Thumbnail Automation, or upload a custom thumbnail.') !!}
     </div>
     <div class="card mb-3" id="thumbnailCrop">
@@ -46,7 +46,7 @@
     </div>
   @else
     <div class="form-group">
-      {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+      {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
       {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the image cropper (crop dimensions can be adjusted in the site code), or upload a custom thumbnail.') !!}
     </div>
     <div class="card mb-3" id="thumbnailCrop">
@@ -84,7 +84,7 @@
             'placeholder' => 'Select a Designer',
         ]) !!}
         {!! Form::text('designer_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Designer URL']) !!}
-        <a href="#" class="add-designer btn btn-link" data-toggle="tooltip" title="Add another designer">+</a>
+        <a href="#" class="add-designer btn btn-link" data-bs-toggle="tooltip" title="Add another designer">+</a>
       </div>
     </div>
     <div class="designer-row hide mb-2">
@@ -93,7 +93,7 @@
           'placeholder' => 'Select a Designer',
       ]) !!}
       {!! Form::text('designer_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Designer URL']) !!}
-      <a href="#" class="add-designer btn btn-link" data-toggle="tooltip" title="Add another designer">+</a>
+      <a href="#" class="add-designer btn btn-link" data-bs-toggle="tooltip" title="Add another designer">+</a>
     </div>
   </div>
   <div class="form-group">
@@ -105,7 +105,7 @@
             'placeholder' => 'Select an Artist',
         ]) !!}
         {!! Form::text('artist_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
-        <a href="#" class="add-artist btn btn-link" data-toggle="tooltip" title="Add another artist">+</a>
+        <a href="#" class="add-artist btn btn-link" data-bs-toggle="tooltip" title="Add another artist">+</a>
       </div>
     </div>
     <div class="artist-row hide mb-2">
@@ -114,7 +114,7 @@
           'placeholder' => 'Select an Artist',
       ]) !!}
       {!! Form::text('artist_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
-      <a href="#" class="add-artist btn btn-link mb-2" data-toggle="tooltip" title="Add another artist">+</a>
+      <a href="#" class="add-artist btn btn-link mb-2" data-bs-toggle="tooltip" title="Add another artist">+</a>
     </div>
   </div>
 
@@ -125,7 +125,7 @@
 
   <h3>
     {{-- <div class="float-right">
-<a href="#" class="btn btn-info btn-sm" data-toggle="tooltip" title="This will fill the below fields with the same data as the character's current image. Note that this will overwrite any changes made below.">Fill Data</a>
+<a href="#" class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="This will fill the below fields with the same data as the character's current image. Note that this will overwrite any changes made below.">Fill Data</a>
 </div> --}}
     Traits
   </h3>

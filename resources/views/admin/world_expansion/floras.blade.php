@@ -27,7 +27,7 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $flora->url !!}
-                @if ($flora->thumb_extension) data-toggle="tooltip" title="<img src='{{ $flora->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+                @if ($flora->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $flora->thumbUrl }}' style='max-width:100px;' class='my-1'/>
 <br> {{ ucfirst($flora->name) }} " @endif />{!! $flora->name !!}</a>
               {{ $flora->summary ? '(' . $flora->summary . ')' : '' }}
             </td>

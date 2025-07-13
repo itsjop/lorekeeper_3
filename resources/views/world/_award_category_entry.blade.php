@@ -8,7 +8,7 @@
     <h3>
       {!! $name !!}
       @if (Auth::check() && Auth::user()->hasPower('edit_data'))
-        <a data-toggle="tooltip" title="[ADMIN] Edit Category" href="{{ url('admin/data/award-categories/edit/') . '/' . $category->id }}" class="float-right small ml-2"><i class="fas fa-crown"></i></a>
+        <a data-bs-toggle="tooltip" title="[ADMIN] Edit Category" href="{{ url('admin/data/award-categories/edit/') . '/' . $category->id }}" class="float-right small ml-2"><i class="fas fa-crown"></i></a>
       @endif
       @if (isset($searchUrl) && $searchUrl)
         <a href="{{ $searchUrl }}" class="world-entry-search text-muted float-right small"><i class="fas fa-search"></i></a>

@@ -73,7 +73,7 @@
   <div class="form-group">
     {!! Form::checkbox('is_active', 1, $encounter->id ? $encounter->is_active : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-bs-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('encounters that are not active will be hidden from the encounter list. They also cannot be automatically set as the next active encounter.') !!}
   </div>
@@ -103,19 +103,19 @@
       <div class="d-flex row flex-wrap col-12 mt-1 pt-2 px-0 ubt-top">
         <div class="col-5 text-truncate">
           {{ $prompt->name }}
-          <i class="fas fa-bell mr-2 {{ $prompt->extras['result_type'] == 'success' ? 'text-success' : ($prompt->extras['result_type'] == 'failure' ? 'text-danger' : '') }}" data-toggle="tooltip"
+          <i class="fas fa-bell mr-2 {{ $prompt->extras['result_type'] == 'success' ? 'text-success' : ($prompt->extras['result_type'] == 'failure' ? 'text-danger' : '') }}" data-bs-toggle="tooltip"
             title="{{ $prompt->extras['result_type'] == 'success' ? 'Success Alert' : ($prompt->extras['result_type'] == 'failure' ? 'Fail Alert' : 'Neutral Alert') }}"></i>
           @if ($prompt->limits->count())
-            <i class="fas fa-lock mr-2" data-toggle="tooltip" title="Has limits"></i>
+            <i class="fas fa-lock mr-2" data-bs-toggle="tooltip" title="Has limits"></i>
           @endif
           @if ($prompt->rewards)
-            <i class="fas fa-gift mr-2" data-toggle="tooltip" title="Has reward"></i>
+            <i class="fas fa-gift mr-2" data-bs-toggle="tooltip" title="Has reward"></i>
           @endif
           @if ($prompt->extras != null && $prompt->extras['math_type'] != null && $prompt->extras['energy_value'] != null)
             @if ($prompt->extras['math_type'] == 'subtract')
-              <i class="fas fa-bolt text-warning mr-2" data-toggle="tooltip" title="Removes {{ $prompt->extras['energy_value'] }} Energy"></i>
+              <i class="fas fa-bolt text-warning mr-2" data-bs-toggle="tooltip" title="Removes {{ $prompt->extras['energy_value'] }} Energy"></i>
             @else
-              <i class="fas fa-heart text-success mr-2" data-toggle="tooltip" title="Restores {{ $prompt->extras['energy_value'] }} Energy"></i>
+              <i class="fas fa-heart text-success mr-2" data-bs-toggle="tooltip" title="Restores {{ $prompt->extras['energy_value'] }} Energy"></i>
             @endif
           @endif
         </div>

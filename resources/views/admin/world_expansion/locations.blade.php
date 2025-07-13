@@ -35,7 +35,7 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $location->url !!}
-                @if ($location->thumb_extension) data-toggle="tooltip" title="<img src='{{ $location->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+                @if ($location->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $location->thumbUrl }}' style='max-width:100px;' class='my-1'/>
 <br> {{ ucfirst($location->style) }} " @endif />{!! $location->name !!}</a>
             </td>
             <td class="text-right">

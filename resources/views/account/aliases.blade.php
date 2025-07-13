@@ -51,7 +51,7 @@
                   <span class="badge badge-success">Primary</span>
                 @endif
                 @if (!$alias->is_visible)
-                  <i class="fas fa-eye-slash" data-toggle="tooltip" title="This alias is hidden from public view."></i>
+                  <i class="fas fa-eye-slash" data-bs-toggle="tooltip" title="This alias is hidden from public view."></i>
                 @endif
               </div>
             </div>

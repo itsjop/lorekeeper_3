@@ -158,7 +158,7 @@ class Currency extends Model {
      * @return string
      */
     public function getDisplayIconAttribute() {
-        return '<span class="currency-icon"><img src="'.$this->currencyIconUrl.'" title="'.$this->name.($this->abbreviation ? ' ('.$this->abbreviation.')' : '').'" data-toggle="tooltip" alt="'.$this->name.'"/><span>';
+        return '<span class="currency-icon"><img src="'.$this->currencyIconUrl.'" title="'.$this->name.($this->abbreviation ? ' ('.$this->abbreviation.')' : '').'" data-bs-toggle="tooltip" alt="'.$this->name.'"/><span>';
     }
 
     /**

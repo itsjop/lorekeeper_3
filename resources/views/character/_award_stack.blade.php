@@ -74,7 +74,7 @@
             @endif
             <td class="col-1">
               @if (!$awardRow->isTransferrable)
-                <i class="fas fa-lock" data-toggle="tooltip" title="{{ ucfirst(__('lorekeeper.character')) }}-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
+                <i class="fas fa-lock" data-bs-toggle="tooltip" title="{{ ucfirst(__('lorekeeper.character')) }}-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -88,7 +88,7 @@
       <div class="card-body">
         @if ($owner_id != null && ($award->is_transferrable || $user->hasPower('edit_inventories')) && $award->is_user_owned)
           <div>
-            <a class="card-title h5 btn btn-sm btn-outline-primary" data-toggle="collapse" href="#transferForm">
+            <a class="card-title h5 btn btn-sm btn-outline-primary" data-bs-toggle="collapse" href="#transferForm">
               @if ($owner_id != $user->id)
                 [ADMIN]
               @endif Transfer {{ ucfirst(__('awards.award')) }}
@@ -110,7 +110,7 @@
           </div>
         @endif
         <div>
-          <a class="card-title h5 btn btn-sm btn-outline-primary" data-toggle="collapse" href="#deleteForm">
+          <a class="card-title h5 btn btn-sm btn-outline-primary" data-bs-toggle="collapse" href="#deleteForm">
             @if ($owner_id != $user->id)
               [ADMIN]
             @endif Delete {{ ucfirst(__('awards.award')) }}

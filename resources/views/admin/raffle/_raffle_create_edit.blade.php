@@ -26,7 +26,7 @@
 </div>
 <div class="form-group">
   <label class="control-label">
-    {!! Form::checkbox('is_active', 1, $raffle->is_active, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $raffle->is_active, ['class' => 'form-check-input mr-2', 'data-bs-toggle' => 'toggle']) !!}
     {!! Form::label('is_displayed', 'Active (visible to users)', ['class' => 'form-check-label ml-3']) !!}
   </label>
 </div>

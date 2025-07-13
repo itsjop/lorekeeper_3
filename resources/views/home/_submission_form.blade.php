@@ -84,7 +84,7 @@
               @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
               <div class="card p-3 mb-2 pl-0">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                  <a class="col-1 p-0" data-toggle="collapse" href="#collapsable-{{ $criterion->id }}" aria-expanded="true">
+                  <a class="col-1 p-0" data-bs-toggle="collapse" href="#collapsable-{{ $criterion->id }}" aria-expanded="true">
                     <i class="fas fa-angle-down" style="font-size: 24px"></i>
                   </a>
                   <div class="flex-grow-1 mr-2">

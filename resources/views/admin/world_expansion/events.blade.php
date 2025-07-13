@@ -45,7 +45,7 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $event->url !!}
-                @if ($event->thumb_extension) data-toggle="tooltip" title="<img src='{{ $event->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+                @if ($event->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $event->thumbUrl }}' style='max-width:100px;' class='my-1'/>
 <br> {{ ucfirst($event->name) }} " @endif />{!! $event->name !!}</a>
             </td>
             <td>

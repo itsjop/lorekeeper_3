@@ -5,7 +5,7 @@
   {!! Form::textarea('staff_comments', $request->staff_comment, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('preserve_queue', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('preserve_queue', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('preserve_queue', 'Preserve Queue Position', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Allows the user to avoid needing to wait for their request to return to the front of the queue. If this is turned off, the request will go into the back of the queue as per normal.') !!}
 </div>
 <div class="text-right">

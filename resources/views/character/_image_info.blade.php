@@ -19,22 +19,22 @@
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class="nav-link active" id="infoTab-{{ $image->id }}" data-toggle="tab" href="#info-{{ $image->id }}" role="tab">Info</a>
+            <a class="nav-link active" id="infoTab-{{ $image->id }}" data-bs-toggle="tab" href="#info-{{ $image->id }}" role="tab">Info</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="notesTab-{{ $image->id }}" data-toggle="tab" href="#notes-{{ $image->id }}" role="tab">Notes</a>
+            <a class="nav-link" id="notesTab-{{ $image->id }}" data-bs-toggle="tab" href="#notes-{{ $image->id }}" role="tab">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="creditsTab-{{ $image->id }}" data-toggle="tab" href="#credits-{{ $image->id }}" role="tab">Credits</a>
+            <a class="nav-link" id="creditsTab-{{ $image->id }}" data-bs-toggle="tab" href="#credits-{{ $image->id }}" role="tab">Credits</a>
           </li>
           @if (isset($showMention) && $showMention)
             <li class="nav-item">
-              <a class="nav-link" id="mentionTab-{{ $image->id }}" data-toggle="tab" href="#mention-{{ $image->id }}" role="tab">Mention</a>
+              <a class="nav-link" id="mentionTab-{{ $image->id }}" data-bs-toggle="tab" href="#mention-{{ $image->id }}" role="tab">Mention</a>
             </li>
           @endif
           @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
             <li class="nav-item">
-              <a class="nav-link" id="settingsTab-{{ $image->id }}" data-toggle="tab" href="#settings-{{ $image->id }}" role="tab"><i class="fas fa-cog"></i></a>
+              <a class="nav-link" id="settingsTab-{{ $image->id }}" data-bs-toggle="tab" href="#settings-{{ $image->id }}" role="tab"><i class="fas fa-cog"></i></a>
             </li>
           @endif
         </ul>
@@ -332,11 +332,11 @@
           <div class="tab-pane fade" id="settings-{{ $image->id }}">
             {!! Form::open(['url' => 'admin/character/image/' . $image->id . '/settings']) !!}
             <div class="form-group">
-              {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+              {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
               {!! Form::label('is_visible', 'Is Viewable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will not be visible by anyone without the Manage Masterlist power.') !!}
             </div>
             <div class="form-group">
-              {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+              {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
               {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.') !!}
             </div>
             @if (config('lorekeeper.settings.enable_character_content_warnings'))

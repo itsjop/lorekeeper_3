@@ -41,7 +41,7 @@
   <div class="row">
     <div class="col-md">
       <div class="form-group">
-        {!! Form::checkbox('submissions_open', 1, $gallery->submissions_open, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('submissions_open', 1, $gallery->submissions_open, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('submissions_open', 'Submissions Open', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
             'Whether or not users can submit to this gallery. Admins can submit regardless of this setting. Does not override global setting. Leave this on for time-limited galleries; users wll not be able to submit outside of the start and end times regardless of this setting, but will not be able to submit at all if this is off.',
         ) !!}
@@ -50,14 +50,14 @@
     @if (Settings::get('gallery_submissions_reward_currency'))
       <div class="col-md">
         <div class="form-group">
-          {!! Form::checkbox('currency_enabled', 1, $gallery->currency_enabled, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+          {!! Form::checkbox('currency_enabled', 1, $gallery->currency_enabled, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
           {!! Form::label('currency_enabled', 'Enable Currency Rewards', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not submissions to this gallery are eligible for rewards of group currency.') !!}
         </div>
       </div>
     @endif
     <div class="col-md">
       <div class="form-group">
-        {!! Form::checkbox('prompt_selection', 1, $gallery->prompt_selection, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('prompt_selection', 1, $gallery->prompt_selection, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('prompt_selection', 'Prompt Selection', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
             'Whether or not users can select a prompt to associate a gallery submission with when creating it. Gallery submissions will still auto-associate, prefix, etc. themselves with prompts if approved prompt submissions using the gallery submission exist.',
         ) !!}
@@ -67,7 +67,7 @@
 
   <div class="col-md">
     <div class="form-group">
-      {!! Form::checkbox('location_selection', 1, $gallery->location_selection, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('location_selection', 1, $gallery->location_selection, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       {!! Form::label('location_selection', 'Location Selection', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not users can select a location to associate a gallery submission with when creating it.') !!}
     </div>
   </div>
@@ -82,7 +82,7 @@
     <div class="col-md">
       <div class="form-group">
         {!! Form::label('hide_before_start', 'Hide Before Start Time', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If hidden, the gallery will not be shown on the gallery list before the starting time is reached. A starting time needs to be set. Galleries are always visible after the end time.') !!}<br />
-        {!! Form::checkbox('hide_before_start', 1, $gallery->id ? $gallery->hide_before_start : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('hide_before_start', 1, $gallery->id ? $gallery->hide_before_start : 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       </div>
     </div>
     <div class="col-md">
@@ -113,7 +113,7 @@
     @foreach ($gallery->criteria as $criterion)
       <div class="card p-3 mb-2 pl-0">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <a class="col-1 p-0" data-toggle="collapse" href="#collapsable-{{ $criterion->id }}">
+          <a class="col-1 p-0" data-bs-toggle="collapse" href="#collapsable-{{ $criterion->id }}">
             <i class="fas fa-angle-down" style="font-size: 24px"></i>
           </a>
           <div class="flex-grow-1 mr-2">
@@ -144,7 +144,7 @@
 
   <div id="copy-calc" class="card p-3 mb-2 pl-0 hide">
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <a class="col-1 p-0" data-toggle="collapse" href="#collapsable-">
+      <a class="col-1 p-0" data-bs-toggle="collapse" href="#collapsable-">
         <i class="fas fa-angle-down" style="font-size: 24px"></i>
       </a>
       <div class="flex-grow-1 mr-2">
@@ -175,8 +175,8 @@
         clone.find('.criterion-select').on('change', loadForm);
         clone.find('.delete-calc').on('click', deleteCriterion);
         clone.removeAttr('id');
-        const key = $('[data-toggle]').length;
-        clone.find('[data-toggle]').attr('href', '#collapsable-' + key);
+        const key = $('[data-bs-toggle]').length;
+        clone.find('[data-bs-toggle]').attr('href', '#collapsable-' + key);
         clone.find('.collapse').attr('id', 'collapsable-' + key);
         $('#criteria').append(clone);
       });
@@ -198,10 +198,10 @@
               var msg = "Error: ";
               console.error(msg + xhr.status + " " + xhr.statusText);
             } else {
-              form.find('[data-toggle=tooltip]').tooltip({
+              form.find('[data-bs-toggle=tooltip]').tooltip({
                 html: true
               });
-              form.find('[data-toggle=toggle]').bootstrapToggle();
+              form.find('[data-bs-toggle=toggle]').bootstrapToggle();
             }
           });
         }

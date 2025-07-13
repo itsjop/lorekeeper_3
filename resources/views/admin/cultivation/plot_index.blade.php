@@ -26,7 +26,7 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               @if (!$plot->is_active)
-                <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This plot is hidden."></i>
+                <i class="fas fa-eye-slash mr-1" data-bs-toggle="tooltip" title="This plot is hidden."></i>
               @endif
               {!! $plot->displayName !!}
             </td>

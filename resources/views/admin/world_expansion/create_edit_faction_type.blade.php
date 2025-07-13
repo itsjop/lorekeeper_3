@@ -49,7 +49,7 @@
         <div class="text-muted">Recommended size: 200x200</div>
         @if (isset($type->thumb_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image_th', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Thumbnail As-Is', 'data-on' => 'Remove Thumbnail Image']) !!}
+            {!! Form::checkbox('remove_image_th', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Thumbnail As-Is', 'data-on' => 'Remove Thumbnail Image']) !!}
           </div>
         @endif
       </div>
@@ -63,7 +63,7 @@
         <div class="text-muted">Recommended size: None (Choose a standard size for all type header images.)</div>
         @if (isset($type->image_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Header Image As-Is', 'data-on' => 'Remove Current Header Image']) !!}
+            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Header Image As-Is', 'data-on' => 'Remove Current Header Image']) !!}
           </div>
         @endif
       </div>

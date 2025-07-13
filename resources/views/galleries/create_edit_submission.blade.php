@@ -68,7 +68,7 @@
     <div class="form-group">
       {!! Form::label('text', 'Writing / Text', ['class' => 'h5']) !!} {!! add_help('If you have a text submission, you can paste it here. You can also use the WYSIWYG editor to format your text. If you have an image submission, you can leave this blank or add a text to supplement your image submission.') !!}
       @if (config('lorekeeper.settings.hide_textarea_on_gallery_submissions.enable'))
-        <a href="#writingForm" id="writingFormCollapseBtn" class="mx-2 mb-2 btn btn-sm btn-primary" data-toggle="collapse" aria-expanded="false">Hide Textarea</a>
+        <a href="#writingForm" id="writingFormCollapseBtn" class="mx-2 mb-2 btn btn-sm btn-primary" data-bs-toggle="collapse" aria-expanded="false">Hide Textarea</a>
       @endif
       <div id="writingForm" class="collapse show">
         {!! Form::textarea('text', $submission->text ?? old('text'), ['class' => 'form-control wysiwyg']) !!}
@@ -184,7 +184,7 @@
                     @if ($submission->id)
                       @foreach ($submission->collaborators as $collaborator)
                         <div class="mb-2">
-                          <div class="d-flex">{!! $collaborator->has_approved ? '<div class="btn btn-success mb-2 mr-2" data-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>' : '' !!}{!! Form::select('collaborator_id[]', $users, $collaborator->user_id, [
+                          <div class="d-flex">{!! $collaborator->has_approved ? '<div class="btn btn-success mb-2 mr-2" data-bs-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>' : '' !!}{!! Form::select('collaborator_id[]', $users, $collaborator->user_id, [
                               'class' => 'form-control mr-2 collaborator-select original',
                               'placeholder' => 'Select User',
                           ]) !!}</div>
@@ -360,7 +360,7 @@
         <div class="form-group">
           {!! Form::checkbox('alert_user', 1, true, [
               'class' => 'form-check-input',
-              'data-toggle' => 'toggle',
+              'data-bs-toggle' => 'toggle',
               'data-onstyle' => 'danger',
           ]) !!}
           {!! Form::label('alert_user', 'Notify User', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will send a notification to the user that either their submission has been edited or moved. It does not send both notifications, preferring the move notification if relevant.') !!}
@@ -578,10 +578,10 @@
                 var msg = "Error: ";
                 console.error(msg + xhr.status + " " + xhr.statusText);
               } else {
-                form.find('[data-toggle=tooltip]').tooltip({
+                form.find('[data-bs-toggle=tooltip]').tooltip({
                   html: true
                 });
-                form.find('[data-toggle=toggle]').bootstrapToggle();
+                form.find('[data-bs-toggle=toggle]').bootstrapToggle();
               }
             });
           }

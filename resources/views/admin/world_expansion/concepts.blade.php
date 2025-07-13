@@ -28,7 +28,7 @@
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
               <a href={!! $concept->url !!}
-                @if ($concept->thumb_extension) data-toggle="tooltip" title="<img src='{{ $concept->thumbUrl }}' style='max-width:100px;' class='my-1'/>
+                @if ($concept->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $concept->thumbUrl }}' style='max-width:100px;' class='my-1'/>
 <br> {{ ucfirst($concept->name) }} " @endif />{!! $concept->name !!}</a>
               {{ $concept->summary ? '(' . $concept->summary . ')' : '' }}
             </td>

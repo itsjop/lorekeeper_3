@@ -73,11 +73,11 @@
 
   <div class="row">
     <div class="col-md-6 form-group">
-      {!! Form::checkbox('is_visible', 1, $pet->id ? $pet->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_visible', 1, $pet->id ? $pet->is_visible : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the pet will not be visible on world pages.') !!}
     </div>
     <div class="col-md-6 form-group">
-      {!! Form::checkbox('allow_transfer', 1, $pet->id ? $pet->allow_transfer : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('allow_transfer', 1, $pet->id ? $pet->allow_transfer : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       {!! Form::label('allow_transfer', 'Allow User → User Transfer', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is off, users will not be able to transfer this pet to other users. Non-account-bound pets can be account-bound when granted to users directly.') !!}
     </div>
   </div>
@@ -108,7 +108,7 @@
                       <div class="card-body text-center">
                         @if ($variant->has_image)
                           <a href="{{ $variant->imageUrl }}" data-lightbox="entry" data-title="{{ $variant->name }}">
-                            <img src="{{ $variant->imageUrl }}" class="img-fluid" alt="{{ $variant->name }}" data-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
+                            <img src="{{ $variant->imageUrl }}" class="img-fluid" alt="{{ $variant->name }}" data-bs-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
                           </a>
                         @else
                           {{ $variant->name }}
@@ -150,7 +150,7 @@
                   <div class="card h-100">
                     <div class="card-body text-center">
                       <a href="{{ $evolution->imageUrl }}" data-lightbox="entry" data-title="{{ $evolution->evolution_name }}">
-                        <img src="{{ $evolution->imageUrl }}" class="img-fluid" alt="{{ $evolution->evolution_name }}" data-toggle="tooltip" data-title="{{ $evolution->evolution_name }}" style="max-height:200px" />
+                        <img src="{{ $evolution->imageUrl }}" class="img-fluid" alt="{{ $evolution->evolution_name }}" data-bs-toggle="tooltip" data-title="{{ $evolution->evolution_name }}" style="max-height:200px" />
                       </a>
                       <div class="h5 my-2">
                         {{ $evolution->evolution_name }} (Stage {{ $evolution->evolution_stage }})

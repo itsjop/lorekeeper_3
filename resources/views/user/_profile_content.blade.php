@@ -10,7 +10,7 @@
       </div>
       <div style="position: relative; margin: auto;">
         {!! $user->displayName !!}
-        <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
+        <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs" data-bs-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
       </div>
     </h1>
     <div class="row no-gutters justify-content-center mb-5" style="background-color: rgba(255, 255, 255, .60); padding: 5px; border-radius: 10px;">
@@ -29,7 +29,7 @@
         </div>
       @endif
       @if ($user->settings->is_fto)
-        <span class="badge badge-success" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
+        <span class="badge badge-success" data-bs-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
       @endif
     </div>
   </div>
@@ -68,7 +68,7 @@
             @foreach ($items as $item)
               <div class="col-md-3 col-6 profile-inventory-item">
                 @if ($item->imageUrl)
-                  <img src="{{ $item->imageUrl }}" data-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
+                  <img src="{{ $item->imageUrl }}" data-bs-toggle="tooltip" title="{{ $item->name }}" alt="{{ $item->name }}" />
                 @else
                   <p>{{ $item->name }}</p>
                 @endif
@@ -96,7 +96,7 @@
             <div class="col-md-2 profile-inventory-item">
               <a href="{{ url($user->url . '/pets') }}" class="inventory-stack">
                 @if ($pet->has_image)
-                  <img class="img-fluid" src="{{ $pet->image($pet->pivot->id) }}" data-toggle="tooltip" title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
+                  <img class="img-fluid" src="{{ $pet->image($pet->pivot->id) }}" data-bs-toggle="tooltip" title="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}"
                     alt="{{ $pet->pivot->pet_name ? $pet->pivot->pet_name . ' (' . $pet->name . ')' : $pet->name }}" />
                 @else
                   <p>
@@ -171,7 +171,7 @@
   <div class="col-md-{{ $user->settings->allow_profile_comments ? 4 : 12 }}">
 
     <div class="card mb-4">
-      <div class="card-header" data-toggle="collapse" data-target="#mentionHelp" aria-expanded="{{ $user->settings->allow_profile_comments ? 'true' : 'false' }}">
+      <div class="card-header" data-bs-toggle="collapse" data-target="#mentionHelp" aria-expanded="{{ $user->settings->allow_profile_comments ? 'true' : 'false' }}">
 
         <h5>Mention This User</h5>
       </div>

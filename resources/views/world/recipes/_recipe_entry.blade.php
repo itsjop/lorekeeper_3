@@ -8,12 +8,12 @@
     <h3>
       @if ($recipe->needs_unlocking)
         @if (Auth::check() && Auth::user()->hasRecipe($recipe->id))
-          <i class="fas fa-lock-open" data-toggle="tooltip" title="You have this recipe!"></i>
+          <i class="fas fa-lock-open" data-bs-toggle="tooltip" title="You have this recipe!"></i>
         @else
-          <i class="fas fa-lock" style="opacity:0.5" data-toggle="tooltip" title="You do not have this recipe."></i>
+          <i class="fas fa-lock" style="opacity:0.5" data-bs-toggle="tooltip" title="You do not have this recipe."></i>
         @endif
       @else
-        <i class="fas fa-lock-open" data-toggle="tooltip" title="This recipe is automatically unlocked."></i>
+        <i class="fas fa-lock-open" data-bs-toggle="tooltip" title="This recipe is automatically unlocked."></i>
       @endif
 
       {!! $name !!} @if (isset($idUrl) && $idUrl)

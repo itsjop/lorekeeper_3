@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <a class="card-title h5 collapse-title" data-toggle="collapse" href="#openEncounterPotionForm"> Use Encounter Potion</a>
+  <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#openEncounterPotionForm"> Use Encounter Potion</a>
   <div id="openEncounterPotionForm" class="collapse">
     {!! Form::hidden('tag', $tag->tag) !!}
     <div class="alert alert-info mt-2">

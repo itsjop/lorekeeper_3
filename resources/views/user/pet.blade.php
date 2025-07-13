@@ -31,7 +31,7 @@
 
   <div class="row world-entry">
     <div class="col-md-3 world-entry-image">
-      <img class="img-fluid rounded mb-2" src="{{ $pet->pet->image($pet->id) }}" data-toggle="tooltip" title="{{ $pet->pet_name ?? $pet->pet->name }}" alt="{{ $pet->pet_name ?? $pet->pet->name }}" />
+      <img class="img-fluid rounded mb-2" src="{{ $pet->pet->image($pet->id) }}" data-bs-toggle="tooltip" title="{{ $pet->pet_name ?? $pet->pet->name }}" alt="{{ $pet->pet_name ?? $pet->pet->name }}" />
     </div>
     <div class="col-md-9">
       <div class="row col-12 world-entry-text">

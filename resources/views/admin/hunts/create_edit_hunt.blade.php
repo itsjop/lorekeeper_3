@@ -38,7 +38,7 @@
   </div>
 
   @if ($hunt->id)
-    <h4>Locations <a class="small inventory-collapse-toggle collapse-toggle" href="#spoilers" data-toggle="collapse">Show</a></h3>
+    <h4>Locations <a class="small inventory-collapse-toggle collapse-toggle" href="#spoilers" data-bs-toggle="collapse">Show</a></h3>
       <div class="mb-3 collapse form-group" id="spoilers">
         {!! Form::label('locations', 'Locations (Optional)') !!} {!! add_help('The locations of hunt targets. HTML cannot be used.') !!}
         {!! Form::textarea('locations', $hunt->locations, ['class' => 'form-control']) !!}

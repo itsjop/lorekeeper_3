@@ -6,7 +6,7 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Faction" href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}" class="mb-2 float-right">
+    <a data-bs-toggle="tooltip" title="[ADMIN] Edit Faction" href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}" class="mb-2 float-right">
       <i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Factions' => 'world/factions', $faction->style => 'world/factions/' . $faction->id]) !!}
@@ -50,7 +50,7 @@
                                         <p class="mb-0">
                                       @foreach ($faction->children as $key => $child)
   @if ($child->thumb_extension)
-  <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/>
+  <a href="{{ $child->url }}" data-bs-toggle="tooltip" title="{{ $child->name }}"/>
                                       <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $child->displayName !!}
@@ -85,7 +85,7 @@
                                         <p class="mb-0">
                                       @foreach ($faction->members as $key => $member)
   @if ($member->thumb_extension)
-  <a href="{{ $member->url }}" data-toggle="tooltip" title="{{ $member->name }}"/>
+  <a href="{{ $member->url }}" data-bs-toggle="tooltip" title="{{ $member->name }}"/>
                                       <img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $member->displayName !!}

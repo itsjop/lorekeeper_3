@@ -27,7 +27,7 @@
           <tr class="sort-item" data-id="{{ $type->id }}">
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              <a href={!! $type->url !!} @if ($type->thumb_extension) data-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/>
+              <a href={!! $type->url !!} @if ($type->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/>
 <br> {{ ucfirst($type->name) }} " @endif />{!! $type->name !!}</a>
               ({!! $type->names !!})
             </td>

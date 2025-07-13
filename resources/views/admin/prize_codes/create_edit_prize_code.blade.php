@@ -41,7 +41,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::checkbox('regenerate', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+          {!! Form::checkbox('regenerate', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
           {!! Form::label('regenerate', 'Regenerate Code?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This randomizes you a new code if set.') !!}
         </div>
       </div>
@@ -75,7 +75,7 @@
       <div class="form-group">
         {!! Form::checkbox('is_active', 1, $prize->id ? $prize->is_active : 1, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-bs-toggle' => 'toggle',
         ]) !!}
         {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Codes that are not active will not be redeemable. The start/end time hide settings override this setting, i.e. if this is set to active, it will still be unredeemable outside of the start/end times.') !!}
       </div>

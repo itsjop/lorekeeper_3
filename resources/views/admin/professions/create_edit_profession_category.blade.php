@@ -32,7 +32,7 @@
     <div class="text-muted">Recommended size: None (Choose a standard size for all profession background images.)</div>
     @if (isset($category->image_extension))
       <div class="form-check">
-        {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Background Image As-Is', 'data-on' => 'Remove Current Background Image']) !!}
+        {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Background Image As-Is', 'data-on' => 'Remove Current Background Image']) !!}
       </div>
     @endif
   </div>

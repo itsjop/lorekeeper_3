@@ -36,7 +36,7 @@
         @php $subcategory = \App\Models\Profession\ProfessionSubcategory::where('id', $subcategoryId)->first(); @endphp
         @if ($professions->count() > 0)
           <li class="nav-item h4">
-            <a class="nav-link h-100 {{ $loop->index == 0 ? 'active' : '' }}" id="tab-{{ $subcategory->id ?? 'general' }}" data-toggle="tab" href="#subcat-{{ $subcategory->id ?? 'general' }}" role="tab"
+            <a class="nav-link h-100 {{ $loop->index == 0 ? 'active' : '' }}" id="tab-{{ $subcategory->id ?? 'general' }}" data-bs-toggle="tab" href="#subcat-{{ $subcategory->id ?? 'general' }}" role="tab"
               aria-controls="subcat-{{ $subcategory->id ?? 'general' }}" aria-selected="{{ $category->professions->where('subcategory_id', null)->count() <= 0 && $loop->index == 0 ? 'true' : 'false' }}">{{ $subcategory->name ?? 'General' }}</a>
           </li>
         @endif
@@ -63,7 +63,7 @@
         <ul class="nav nav-tabs mt-3" id="professionTabs" role="tablist">
           @foreach ($professions as $profession)
             <li class="nav-item h5">
-              <a class="nav-link h-100 {{ $loop->index == 0 ? 'active' : '' }}" id="id-{{ $profession->id }}" data-toggle="tab" href="#prof-{{ $profession->id }}" role="tab" aria-controls="prof-{{ $profession->id }}"
+              <a class="nav-link h-100 {{ $loop->index == 0 ? 'active' : '' }}" id="id-{{ $profession->id }}" data-bs-toggle="tab" href="#prof-{{ $profession->id }}" role="tab" aria-controls="prof-{{ $profession->id }}"
                 aria-selected="{{ $loop->index == 0 ? 'true' : 'false' }}">
                 <img class="fr-fic fr-dii" style="max-width:40px;" src="{{ $profession->iconUrl }}">
                 {{ $profession->name }}

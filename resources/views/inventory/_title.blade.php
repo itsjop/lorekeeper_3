@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <a class="card-title h5 collapse-title" data-toggle="collapse" href="#openSlotForm"> Add Title To Character</a>
+  <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#openSlotForm"> Add Title To Character</a>
   <div id="openSlotForm" class="collapse">
     {!! Form::hidden('tag', $tag->tag) !!}
 

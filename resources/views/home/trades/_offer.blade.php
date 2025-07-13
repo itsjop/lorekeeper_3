@@ -3,7 +3,7 @@
   <span class="float-right">
     @if (Auth::user()->id == $user->id && $trade->status == 'Open')
       @if ($trade->{'is_' . $type . '_confirmed'})
-        <a href="#" class="btn btn-sm btn-outline-danger" id="confirmOfferButton" data-toggle="tooltip"
+        <a href="#" class="btn btn-sm btn-outline-danger" id="confirmOfferButton" data-bs-toggle="tooltip"
           title="This will unconfirm your offer and allow you to edit it. You will need to reconfirm your offer after you have edited it to proceed.">Unconfirm</a>
       @else
         <a href="{{ url('trades/' . $trade->id . '/edit') }}" class="btn btn-sm btn-primary">Edit</a> <a href="#" class="btn btn-sm btn-outline-primary" id="confirmOfferButton">Confirm</a>

@@ -6,13 +6,13 @@
   Collect {{ isset($pet->drops->dropData->name) ? $pet->drops->dropData->name . 's' : 'Drops' }} ({{ $pet->drops->parameters }})
   {!! add_help('Your pet\'s type is ' . $pet->drops->parameters . '.<br>You can view all pet drops on the ' . $pet->pet->name . ' pet page.') !!}
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-    <a href="#" class="float-right btn btn-outline-info btn-sm" id="paramsButton" data-toggle="modal" data-target="#paramsModal"><i class="fas fa-cog"></i> Admin</a>
+    <a href="#" class="float-right btn btn-outline-info btn-sm" id="paramsButton" data-bs-toggle="modal" data-target="#paramsModal"><i class="fas fa-cog"></i> Admin</a>
   @endif
 </h4>
 <div class="alert alert-info mt-3">
   <i class="fas fa-info-circle"></i> Drops every {{ $pet->drops->dropData->interval }}.
 </div>
-<a class="btn btn-primary mb-2" data-toggle="collapse" href="#drops" role="button" aria-expanded="false" aria-controls="drops">
+<a class="btn btn-primary mb-2" data-bs-toggle="collapse" href="#drops" role="button" aria-expanded="false" aria-controls="drops">
   View Drops
 </a>
 

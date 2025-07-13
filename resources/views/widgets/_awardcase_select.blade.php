@@ -1,5 +1,5 @@
 <h3>
-  Your {{ ucfirst(__('awards.awardcase')) }} <a class="small awardcase-collapse-toggle collapse-toggle" href="#userAwardcase" data-toggle="collapse">Show</a></h3>
+  Your {{ ucfirst(__('awards.awardcase')) }} <a class="small awardcase-collapse-toggle collapse-toggle" href="#userAwardcase" data-bs-toggle="collapse">Show</a></h3>
 <div class="card mb-3 collapse show" id="userAwardCase">
   <div class="card-body">
     <div class="text-right mb-3">

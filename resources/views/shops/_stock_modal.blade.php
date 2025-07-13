@@ -29,7 +29,7 @@
 
   @if ($stock->item->parsed_description)
     <div class="mb-2">
-      <a data-toggle="collapse" href="#itemDescription" class="h5">Description <i class="fas fa-caret-down"></i></a>
+      <a data-bs-toggle="collapse" href="#itemDescription" class="h5">Description <i class="fas fa-caret-down"></i></a>
       <div class="card collapse show mt-1" id="itemDescription">
         <div class="card-body">
           {!! $stock->item->parsed_description !!}
@@ -145,7 +145,7 @@
             <p class="text-danger">Note that coupons cannot be used on limited stock items.</p>
           @endif
           <div class="form-group">
-            {!! Form::checkbox('use_coupon', 1, 0, ['class' => 'is-coupon-class form-control', 'data-toggle' => 'toggle']) !!}
+            {!! Form::checkbox('use_coupon', 1, 0, ['class' => 'is-coupon-class form-control', 'data-bs-toggle' => 'toggle']) !!}
             {!! Form::label('use_coupon', 'Do you want to use a coupon?', ['class' => 'form-check-label  ml-3 mb-2']) !!}
           </div>
           <div class="br-form-group" style="display: none">

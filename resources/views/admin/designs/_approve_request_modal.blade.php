@@ -15,7 +15,7 @@
   {!! Form::label('Number') !!} {!! add_help('This number helps to identify the character and should preferably be unique either within the category, or among all characters.') !!}
   <div class="d-flex">
     {!! Form::text('number', $request->character->number, ['class' => 'form-control mr-2', 'id' => 'number']) !!}
-    <a href="#" id="pull-number" class="btn btn-primary" data-toggle="tooltip"
+    <a href="#" id="pull-number" class="btn btn-primary" data-bs-toggle="tooltip"
       title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code.">Pull Next Number</a>
   </div>
 </div>
@@ -32,11 +32,11 @@
 
 <h3>Image Settings</h3>
 <div class="form-group">
-  {!! Form::checkbox('set_active', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('set_active', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('set_active', 'Set Active Image', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will set the new approved image as the character\'s masterlist image.') !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('invalidate_old', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('invalidate_old', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('invalidate_old', 'Invalidate Old Image', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will mark the last image attached to the character as an invalid reference.') !!}
 </div>
 @if (config('lorekeeper.extensions.remove_myo_image') && $request->character->is_myo_slot)
@@ -56,15 +56,15 @@
   </ul>
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_giftable', 1, $request->character->is_giftable, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_giftable', 1, $request->character->is_giftable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('is_giftable', 'Is Giftable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_tradeable', 1, $request->character->is_tradeable, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_tradeable', 1, $request->character->is_tradeable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_sellable', 1, $request->character->is_sellable, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'resellable']) !!}
+  {!! Form::checkbox('is_sellable', 1, $request->character->is_sellable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'resellable']) !!}
   {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="card mb-3" id="resellOptions">

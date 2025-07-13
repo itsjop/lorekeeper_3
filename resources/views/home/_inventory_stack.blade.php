@@ -87,7 +87,7 @@
             @endif
             <td class="col-1">
               @if (!$itemRow->isTransferrable)
-                <i class="fas fa-lock" data-toggle="tooltip" title="Account-bound items cannot be transferred but can be deleted."></i>
+                <i class="fas fa-lock" data-bs-toggle="tooltip" title="Account-bound items cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -109,7 +109,7 @@
 
         @if (isset($item->category) && $item->category->is_character_owned)
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#characterTransferForm">
+            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#characterTransferForm">
               @if ($stack->first()->user_id != $user->id)
                 [ADMIN]
               @endif Transfer Item to Character
@@ -135,7 +135,7 @@
         @endif
         @if (isset($item->data['resell']) && App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() && config('lorekeeper.extensions.item_entry_expansion.resale_function'))
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#resellForm">
+            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#resellForm">
               @if ($stack->first()->user_id != $user->id)
                 [ADMIN]
               @endif Sell Item
@@ -150,7 +150,7 @@
           </li>
         @endif
         <li class="list-group-item">
-          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
+          <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#transferForm">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer Item
@@ -171,7 +171,7 @@
           </div>
         </li>
         <li class="list-group-item">
-          <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
+          <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#deleteForm">
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Delete Item

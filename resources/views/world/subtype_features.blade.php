@@ -14,7 +14,7 @@
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
     <div class="form-inline justify-content-end">
       <div class="form-group ml-3 mb-3">
-        {!! Form::checkbox('add_basics', 1, Request::get('add_basics'), ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('add_basics', 1, Request::get('add_basics'), ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('add_basics', 'Add Species traits', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is on, other traits from the species that lack a subtype will be added to the page.') !!}
       </div>
       <div class="form-group ml-3 mb-3">

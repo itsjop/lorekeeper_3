@@ -100,7 +100,7 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('is_active', 1, $term->id ? $term->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $term->id ? $term->is_active : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
     {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the term will not be visible to regular users.') !!}
   </div>
 

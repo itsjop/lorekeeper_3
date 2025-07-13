@@ -27,7 +27,7 @@
 <h3>Offspring Traits (Optional)</h3>
 
 <div class="card mb-3">
-  <div class="card-header" data-toggle="collapse" data-target="#guaranteed" aria-expanded="false" aria-controls="guaranteed">
+  <div class="card-header" data-bs-toggle="collapse" data-target="#guaranteed" aria-expanded="false" aria-controls="guaranteed">
     <h2 class="h3">
       <i class="fas fa-chevron-down"></i> Guaranteed Offspring Attributes
     </h2>
@@ -76,7 +76,7 @@
 </div>
 
 <div class="card">
-  <div class="card-header" data-toggle="collapse" data-target="#required" aria-expanded="false" aria-controls="required">
+  <div class="card-header" data-bs-toggle="collapse" data-target="#required" aria-expanded="false" aria-controls="required">
     <h2 class="h3">
       <i class="fas fa-chevron-down"></i> Required Offspring Attributes
     </h2>

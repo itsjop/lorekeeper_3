@@ -52,7 +52,7 @@
         <div class="text-muted">Recommended size: 200x200</div>
         @if (isset($concept->thumb_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image_th', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Thumbnail As-Is', 'data-on' => 'Remove Thumbnail Image']) !!}
+            {!! Form::checkbox('remove_image_th', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Thumbnail As-Is', 'data-on' => 'Remove Thumbnail Image']) !!}
           </div>
         @endif
       </div>
@@ -67,7 +67,7 @@
         <div class="text-muted">Recommended size: None (Choose a standard size for all concept header images.)</div>
         @if (isset($concept->image_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Header Image As-Is', 'data-on' => 'Remove Current Header Image']) !!}
+            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Header Image As-Is', 'data-on' => 'Remove Current Header Image']) !!}
           </div>
         @endif
       </div>
@@ -122,7 +122,7 @@
   @endif
 
   <div class="form-group">
-    {!! Form::checkbox('is_active', 1, $concept->id ? $concept->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $concept->id ? $concept->is_active : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
     {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the category will not be visible to regular users.') !!}
   </div>
 

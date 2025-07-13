@@ -33,15 +33,15 @@
   </ul>
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_giftable', 1, $character->is_giftable, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_giftable', 1, $character->is_giftable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('is_giftable', 'Is Giftable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_tradeable', 1, $character->is_tradeable, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_tradeable', 1, $character->is_tradeable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
   {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_sellable', 1, $character->is_sellable, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'resellable']) !!}
+  {!! Form::checkbox('is_sellable', 1, $character->is_sellable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'resellable']) !!}
   {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="card mb-3" id="resellOptions">
@@ -67,7 +67,7 @@
       timeFormat: 'HH:mm:ss',
     });
 
-    //$('[data-toggle=toggle]').bootstrapToggle();
+    //$('[data-bs-toggle=toggle]').bootstrapToggle();
 
     // Resell options /////////////////////////////////////////////////////////////////////////////
 

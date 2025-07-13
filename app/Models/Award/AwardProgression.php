@@ -35,7 +35,7 @@ class AwardProgression extends Model
      **********************************************************************************************/
 
     /**
-     * Serve progression type the same way as loot 
+     * Serve progression type the same way as loot
      * so as to keep the loot blades being re-used as simple as possible
      */
     public function getRewardableTypeAttribute() {
@@ -43,7 +43,7 @@ class AwardProgression extends Model
     }
 
     /**
-     * Serve progression type id the same way as loot 
+     * Serve progression type id the same way as loot
      * so as to keep the loot blades being re-used as simple as possible
      */
     public function getRewardableIdAttribute() {
@@ -86,7 +86,7 @@ class AwardProgression extends Model
 
     /**********************************************************************************************
 
-        OTHER FUNCTIONS 
+        OTHER FUNCTIONS
 
     **********************************************************************************************/
     /**
@@ -116,32 +116,32 @@ class AwardProgression extends Model
     public function unlocked($user = null, $isStaff = false)
     {
         if ($user) {
-            if ($this->isUnlocked($user)) return 
+            if ($this->isUnlocked($user)) return
             ($this->progression->imageUrl ?
-                '<img src="' . $this->progression->imageUrl .'" class="img-fluid" data-toggle="tooltip" title="' . $this->progression->name . ' (Unlocked)">'
+                '<img src="' . $this->progression->imageUrl .'" class="img-fluid" data-bs-toggle="tooltip" title="' . $this->progression->name . ' (Unlocked)">'
                 :
                 '<span class="text-success">' . $this->progression->displayName . ' (Unlocked) </span>'
             );
-            else return 
+            else return
             ($this->progression->imageUrl ?
-                '<img src="' . $this->progression->imageUrl .'" class="img-fluid" style="filter: grayscale(50%);" data-toggle="tooltip" title="' .  $this->progression->name . ' (Not Unlocked)">'
+                '<img src="' . $this->progression->imageUrl .'" class="img-fluid" style="filter: grayscale(50%);" data-bs-toggle="tooltip" title="' .  $this->progression->name . ' (Not Unlocked)">'
                 :
                 '<span class="text-danger">' . $this->progression->displayName . ' (Not Unlocked) </span>'
-            );   
+            );
         }
 
-        if ($isStaff) return 
+        if ($isStaff) return
         ($this->progression->imageUrl ?
-            '<img src="' . $this->progression->imageUrl .'" class="img-fluid" data-toggle="tooltip" title="' . $this->progression->name . ' (Unlocked)">'
+            '<img src="' . $this->progression->imageUrl .'" class="img-fluid" data-bs-toggle="tooltip" title="' . $this->progression->name . ' (Unlocked)">'
             :
             '<span class="text-success">' . $this->progression->displayName . ' (Unlocked) </span>'
         );
 
-        return 
+        return
         ($this->progression->imageUrl ?
-            '<img src="' . $this->progression->imageUrl .'" class="img-fluid" style="filter: grayscale(50%);" data-toggle="tooltip" title="' .  $this->progression->name . ' (Not Unlocked)">'
+            '<img src="' . $this->progression->imageUrl .'" class="img-fluid" style="filter: grayscale(50%);" data-bs-toggle="tooltip" title="' .  $this->progression->name . ' (Not Unlocked)">'
             :
             '<span class="text-danger">' . $this->progression->displayName . ' (Not Unlocked) </span>'
-        );  
+        );
     }
 }

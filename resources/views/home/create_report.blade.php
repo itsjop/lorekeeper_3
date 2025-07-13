@@ -28,7 +28,7 @@
       {!! Form::text('url', Request::get('url'), ['class' => 'form-control', 'required']) !!}
     </div>
     <div class="form-group">
-      {!! Form::checkbox('is_br', 1, 0, ['class' => 'is-br-class form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_br', 1, 0, ['class' => 'is-br-class form-check-input', 'data-bs-toggle' => 'toggle']) !!}
       {!! Form::label('is_br', 'Is this report a bug report?', ['class' => 'is-br-label form-check-label']) !!} {!! add_help('Only check this box if it has not already been reported/you cannot find a matching bug in the bug report index.') !!}
     </div>
     <div class="br-form-group mb-2" style="display: none">

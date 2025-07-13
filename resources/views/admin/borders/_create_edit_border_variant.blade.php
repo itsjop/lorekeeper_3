@@ -17,7 +17,7 @@
   <div class="col-md-6 form-group">
     {!! Form::checkbox('is_active', 1, $variant->is_active, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-bs-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_active', 'Active?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Users can\'t see or select this border if it isn\'t visible.') !!}
   </div>
@@ -25,7 +25,7 @@
     <div class="col-md-6 form-group">
       {!! Form::checkbox('delete', 1, false, [
           'class' => 'form-check-input',
-          'data-toggle' => 'toggle',
+          'data-bs-toggle' => 'toggle',
       ]) !!}
       {!! Form::label('delete', 'Delete ' . $word, ['class' => 'form-check-label ml-3']) !!}
     </div>

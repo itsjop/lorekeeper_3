@@ -1257,29 +1257,40 @@ fieldset.masterlist-search-grid .searchbutton {
   background-color: var(--clr-active-50);
   border-radius: 15px;
   display: grid;
+  overflow: hidden;
   perspective: 200px;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail,
-#ml-gridView .masterlist-character .thumbnail .tn-background {
+#ml-gridView .masterlist-character .thumbnail .ml-thumbnail img,
+#ml-gridView .masterlist-character .thumbnail .tn-background,
+#ml-gridView .masterlist-character .thumbnail .shine {
   -o-object-fit: contain;
      object-fit: contain;
   width: 100%;
   aspect-ratio: 1/1;
-  grid-area: 1/2;
+  grid-area: 1/1/2/2;
   border-radius: 15px;
+  place-self: center center;
+  transform-origin: center center;
+  transform: scale(1) translateZ(1);
+  position: relative;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail {
   z-index: 10;
+  width: 100%;
+  height: 100%;
   filter: drop-shadow(3px 3px 3px rgba(16, 4, 92, 0.4078431373));
-  transform: scale(1);
-  width: calc(100% - 10px);
-  place-self: center;
-  transform-origin: center center;
   transition: 0.45s var(--bounce_linear);
   contain: paint;
   perspective: 300px;
+  position: relative;
+  display: grid;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail img {
+  top: 0;
+  left: 0;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
   transition: 0.05s linear;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover {
@@ -1287,7 +1298,56 @@ fieldset.masterlist-search-grid .searchbutton {
   transform: scale(1.1);
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover img {
+  transition: 0.05s linear;
   transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
+}
+#ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover .shine {
+  transition: 0.05s linear;
+  transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
+  opacity: 0.6;
+}
+#ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover .shine::after {
+  --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
+  --tan: tan(var(--len));
+  transform: translateX(calc(20% + -40% * var(--mpx))) translateY(calc(20% + -40% * var(--mpy))) rotate(calc(-45deg + 45deg * var(--tan)));
+}
+#ml-gridView .masterlist-character .thumbnail .shine {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  z-index: 11;
+  top: 0;
+  left: 0;
+  transition: background-position 0.1s linear, opacity 0.1s ease;
+  -webkit-mask-image: var(--card_shine_mask-image);
+          mask-image: var(--card_shine_mask-image);
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  -webkit-mask-size: 100% calc(100% - 4px);
+          mask-size: 100% calc(100% - 4px);
+  -webkit-mask-repeat: none;
+          mask-repeat: none;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-position: 50% calc(50% + 0px);
+          mask-position: 50% calc(50% + 0px);
+  mask-mode: alpha;
+  mix-blend-mode: overlay;
+  opacity: 0;
+}
+#ml-gridView .masterlist-character .thumbnail .shine::after {
+  content: "";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  left: -50%;
+  top: -50%;
+  transform: translateX(25%) translateY(25%) rotate(-45deg);
+  transform-origin: center center;
+  background-image: linear-gradient(0deg, transparent 0%, transparent 40%, white 45%, white 50%, transparent 55%, transparent 100%);
 }
 #ml-gridView .masterlist-character .thumbnail .tn-background {
   background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913), var(--card_profile-bg_color);
@@ -1364,6 +1424,17 @@ fieldset.masterlist-search-grid .searchbutton {
 @media (width < 1400px) {
   #ml-gridView {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  #ml-gridView .masterlist-character .thumbnail:hover .shine {
+    opacity: 0.5;
+  }
+  #ml-gridView .masterlist-character .thumbnail .shine {
+    mix-blend-mode: normal;
+  }
+}
+@media (width < 768px) {
+  #ml-gridView .masterlist-character .thumbnail .shine {
+    display: none;
   }
 }
 .modal-backdrop {

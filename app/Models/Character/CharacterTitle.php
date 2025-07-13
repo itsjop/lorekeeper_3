@@ -228,7 +228,7 @@ class CharacterTitle extends Model {
    */
   public function displayTitle($data, $padding = true) {
     return '<a href="' . $this->idUrl . '"><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background: ' . $this->backgroundColour . ';"' .
-      (isset($data['full']) ? ' data-toggle="tooltip" title="' . $this->title . '">' . $data['full'] : '>' . $this->title)
+      (isset($data['full']) ? ' data-bs-toggle="tooltip" title="' . $this->title . '">' . $data['full'] : '>' . $this->title)
       . '</span></a>';
   }
 }

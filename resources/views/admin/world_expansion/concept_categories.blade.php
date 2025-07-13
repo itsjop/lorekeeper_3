@@ -26,7 +26,7 @@
           <tr class="sort-item" data-id="{{ $category->id }}">
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              <a href={!! $category->url !!} @if ($category->thumb_extension) data-toggle="tooltip" title="<img src='{{ $category->thumbUrl }}' style='max-width:100px;'/>
+              <a href={!! $category->url !!} @if ($category->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $category->thumbUrl }}' style='max-width:100px;'/>
 <br> {{ ucfirst($category->name) }} " @endif />{!! $category->name !!}</a>
               {{ $category->summary ? '(' . $category->summary . ')' : '' }}
             </td>

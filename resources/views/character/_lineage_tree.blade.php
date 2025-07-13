@@ -11,7 +11,7 @@
         {!! $character ? $character->fullName : 'Unknown' !!}
       </a>
     @else
-      <a href="{{ $character ? $character->url : '#' }}" data-toggle="tooltip" data-placement="top"
+      <a href="{{ $character ? $character->url : '#' }}" data-bs-toggle="tooltip" data-placement="top"
         title="{{ $character ? '<img src="' . $character->image->thumbnailUrl . '" class=\'img-thumbnail\' alt=\'Thumbnail for ' . $character->fullName . '\' />' : '' }}">
         {!! $character ? $character->fullName : 'Unknown' !!}
       </a>

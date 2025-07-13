@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <a class="card-title h5 collapse-title" data-toggle="collapse" href="#redeemRecipe"> Redeem Recipe</a>
+  <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#redeemRecipe"> Redeem Recipe</a>
   <div id="redeemRecipe" class="collapse">
     {!! Form::hidden('tag', $tag->tag) !!}
 

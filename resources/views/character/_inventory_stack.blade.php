@@ -59,7 +59,7 @@
             @endif
             <td class="col-1">
               @if (!$itemRow->isTransferrable)
-                <i class="fas fa-lock" data-toggle="tooltip" title="Character-bound items cannot be transferred but can be deleted."></i>
+                <i class="fas fa-lock" data-bs-toggle="tooltip" title="Character-bound items cannot be transferred but can be deleted."></i>
               @endif
             </td>
           </tr>
@@ -73,7 +73,7 @@
       <ul class="list-group list-group-flush">
         @if ($item->category->can_name)
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#nameForm">
+            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#nameForm">
               @if ($owner_id != $user->id)
                 [ADMIN]
               @endif Name Item
@@ -93,7 +93,7 @@
         @endif
         @if ($owner_id != null)
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#transferForm">
+            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#transferForm">
               @if ($owner_id != $user->id)
                 [ADMIN]
               @endif Transfer Item
@@ -112,7 +112,7 @@
         @endif
         @if ($item->is_deletable || $user->hasPower('edit_inventories'))
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-toggle="collapse" href="#deleteForm">
+            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#deleteForm">
               @if ($owner_id != $user->id || !$item->is_deletable)
                 [ADMIN]
               @endif Delete Item

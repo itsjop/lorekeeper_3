@@ -7,7 +7,7 @@
 @section('content')
 
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit Flora" href="{{ url('admin/world/floras/edit/') . '/' . $flora->id }}" class="mb-2 float-right">
+    <a data-bs-toggle="tooltip" title="[ADMIN] Edit Flora" href="{{ url('admin/world/floras/edit/') . '/' . $flora->id }}" class="mb-2 float-right">
       <i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Flora' => 'world/floras', $flora->name => 'world/floras/' . $flora->id]) !!}

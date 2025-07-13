@@ -150,7 +150,7 @@
             {!! Form::label('border_flip', 'Flip Border (Horizontally)', ['class' => 'form-check-label ml-3']) !!}
             {!! Form::checkbox('border_flip', 1, Auth::user()->settings->border_settings['border_flip'] ?? 0, [
                 'class' => 'form-check-input',
-                'data-toggle' => 'toggle',
+                'data-bs-toggle' => 'toggle',
             ]) !!}
           </div>
         </div>
@@ -295,16 +295,16 @@
       <div class="col-md-10">
         {!! Form::select(
             'birthday_setting',
-        
+
             [
                 '0' => '0: No one can see your birthday.',
                 '1' => '1: Members can see your day and month.',
                 '2' => '2: Anyone can see your day and month.',
                 '3' => '3: Full date public.',
             ],
-        
+
             Auth::user()->settings->birthday_setting,
-        
+
             ['class' => 'form-control'],
         ) !!}
       </div>
@@ -408,7 +408,7 @@
       <div class="col form-group">
         {!! Form::checkbox('show_image_blocks', 1, Auth::user()->settings->show_image_blocks ? 1 : 0, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-bs-toggle' => 'toggle',
         ]) !!}
         {!! Form::label('show_image_blocks', 'Show widgets?', ['class' => 'form-check-label ml-3']) !!}
       </div>

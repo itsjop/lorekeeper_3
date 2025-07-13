@@ -43,7 +43,7 @@
   {{-- collapse for descendants --}}
   @if ($character->getLineageBlacklistLevel() < 1)
     <div class="card mb-3">
-      <div class="card-header" data-toggle="collapse" data-target="#descendants" aria-expanded="false" aria-controls="descendants">
+      <div class="card-header" data-bs-toggle="collapse" data-target="#descendants" aria-expanded="false" aria-controls="descendants">
         <h2 class="h3">
           <i class="fas fa-chevron-down"></i> Show Descendants
         </h2>
@@ -65,7 +65,7 @@
   {{-- collapse for ancestors --}}
   {{-- ancestors always exist if this page is accessible --}}
   <div class="card mb-3">
-    <div class="card-header" data-toggle="collapse" data-target="#ancestors" aria-expanded="false" aria-controls="ancestors">
+    <div class="card-header" data-bs-toggle="collapse" data-target="#ancestors" aria-expanded="false" aria-controls="ancestors">
       <h2 class="h3">
         <i class="fas fa-chevron-down"></i> Show Ancestors
       </h2>

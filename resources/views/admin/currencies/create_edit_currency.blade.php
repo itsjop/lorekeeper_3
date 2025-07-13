@@ -88,13 +88,13 @@
   <div class="card mb-3" id="userOptions">
     <div class="card-body">
       <div class="mb-2">
-        {!! Form::checkbox('is_displayed', 1, $currency->is_displayed, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_displayed', 1, $currency->is_displayed, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('is_displayed', 'Profile Display', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
             'If this is on, it will be displayed on users\' main profile pages. Additionally, if the user does not own the currency, it will be displayed as 0 currency. (If this is off, currencies not owned will not be displayed at all.) All owned currencies will still be visible from the user\'s bank page.',
         ) !!}
       </div>
       <div>
-        {!! Form::checkbox('allow_user_to_user', 1, $currency->allow_user_to_user, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+        {!! Form::checkbox('allow_user_to_user', 1, $currency->allow_user_to_user, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
         {!! Form::label('allow_user_to_user', 'User → User Transfers', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to transfer this currency to other users from their bank.') !!}
       </div>
     </div>
@@ -110,11 +110,11 @@
   <div class="card mb-3" id="characterOptions">
     <div class="card-body">
       <div class="mb-2">
-        {!! Form::checkbox('allow_user_to_character', 1, $currency->allow_user_to_character, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+        {!! Form::checkbox('allow_user_to_character', 1, $currency->allow_user_to_character, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
         {!! Form::label('allow_user_to_character', 'User → Character Transfers', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow a user to transfer this currency to their own characters unidirectionally.') !!}
       </div>
       <div>
-        {!! Form::checkbox('allow_character_to_user', 1, $currency->allow_character_to_user, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+        {!! Form::checkbox('allow_character_to_user', 1, $currency->allow_character_to_user, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
         {!! Form::label('allow_character_to_user', 'Character → User Transfers', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow a user to transfer this currency from their own characters to their bank unidirectionally.') !!}
       </div>
     </div>
@@ -152,7 +152,7 @@
   @endif
 
   <div class="form-group">
-    {!! Form::checkbox('is_visible', 1, $currency->id ? $currency->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_visible', 1, $currency->id ? $currency->is_visible : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
     {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the currency will not be visible in the currencies list or available for selection in search. Permissioned staff will still be able to see them, however.') !!}
   </div>
 

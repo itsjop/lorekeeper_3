@@ -1,9 +1,9 @@
 <h3>Borders</h3>
 
-<a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+<a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
   {!! Form::checkbox('all_borders', 1, !is_array($tag->getData()), [
       'class' => 'form-check-input',
-      'data-toggle' => 'toggle',
+      'data-bs-toggle' => 'toggle',
       'data-on' => 'Take from all unlockable Borders',
       'data-off' => 'Use specific Borders',
   ]) !!}

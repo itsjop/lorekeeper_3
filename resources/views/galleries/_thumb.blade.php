@@ -32,7 +32,7 @@
       {{ $submission->favorites_count }} {!! Form::button('<i class="fas fa-star"></i> ', [
           'style' => 'border:0; border-radius:.5em;',
           'class' => $submission->favorites->where('user_id', Auth::user()->id)->first() != null ? 'btn-success' : '',
-          'data-toggle' => 'tooltip',
+          'data-bs-toggle' => 'tooltip',
           'title' => ($submission->favorites->where('user_id', Auth::user()->id)->first() == null ? 'Add to' : 'Remove from') . ' your Favorites',
           'type' => 'submit',
       ]) !!} ・
@@ -49,8 +49,8 @@
       @else
         ・
       @endif
-      {{ $submission->favorites_count }} <i class="fas fa-star" data-toggle="tooltip" title="Favorites"></i> ・
-      {{ $submission->comments->where('type', 'User-User')->count() }} <i class="fas fa-comment" data-toggle="tooltip" title="Comments"></i>
+      {{ $submission->favorites_count }} <i class="fas fa-star" data-bs-toggle="tooltip" title="Favorites"></i> ・
+      {{ $submission->comments->where('type', 'User-User')->count() }} <i class="fas fa-comment" data-bs-toggle="tooltip" title="Comments"></i>
     @endif
   </div>
 </div>

@@ -41,9 +41,9 @@
                 <div class="logs-table-cell">
                   @if (!$sales->is_visible)
                     @if ($sales->post_at)
-                      <i class="fas fa-clock mr-1" data-toggle="tooltip" title="This post is scheduled to be posted in the future."></i>
+                      <i class="fas fa-clock mr-1" data-bs-toggle="tooltip" title="This post is scheduled to be posted in the future."></i>
                     @else
-                      <i class="fas fa-eye-slash mr-1" data-toggle="tooltip" title="This post is hidden."></i>
+                      <i class="fas fa-eye-slash mr-1" data-bs-toggle="tooltip" title="This post is hidden."></i>
                     @endif
                   @endif
                   <a href="{{ $sales->url }}">{{ $sales->title }}</a>

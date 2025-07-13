@@ -12,7 +12,7 @@
   </div>
 
   <script>
-    $('.form-check-input').attr('data-toggle', 'toggle').bootstrapToggle();
-    $('[data-toggle="tooltip"]').tooltip();
+    $('.form-check-input').attr('data-bs-toggle', 'toggle').bootstrapToggle();
+    $('[data-bs-toggle="tooltip"]').tooltip();
   </script>
 @endif

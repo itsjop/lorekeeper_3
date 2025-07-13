@@ -15,7 +15,7 @@
   <div class="form-group col">
     {!! Form::checkbox('is_active', 1, $daily->id ? $daily->is_active : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-bs-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
         'If turned
@@ -84,7 +84,7 @@
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-bs-toggle' => 'toggle',
             'data-off' => 'Leave Daily Image As-Is',
             'data-on' => 'Remove Daily Image',
         ]) !!}
@@ -104,7 +104,7 @@
       <div class="form-check">
         {!! Form::checkbox('remove_wheel', 1, false, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-bs-toggle' => 'toggle',
             'data-off' => 'Leave Wheel As-Is',
             'data-on' => 'Remove Wheel Image',
         ]) !!}
@@ -124,7 +124,7 @@
       <div class="form-check">
         {!! Form::checkbox('remove_stopper', 1, false, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-bs-toggle' => 'toggle',
             'data-off' => 'Leave Stopper As-Is',
             'data-on' => 'Remove Stopper Image',
         ]) !!}
@@ -144,7 +144,7 @@
       <div class="form-check">
         {!! Form::checkbox('remove_background', 1, false, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-bs-toggle' => 'toggle',
             'data-off' => 'Leave Background As-Is',
             'data-on' => 'Remove Background Image',
         ]) !!}

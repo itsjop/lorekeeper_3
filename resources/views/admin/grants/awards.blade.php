@@ -102,7 +102,7 @@
             {!! Form::text('notes', null, ['class' => 'col-md-10 form-control px-2', 'maxlength' => 400]) !!}
           </div>
           <div class="form-group">
-            {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+            {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
             {!! Form::label('disallow_transfer', 'Account-bound', ['class' => 'form-check-label ml-3']) !!}
             {!! add_help('If this is on, the recipient(s) will not be able to transfer this ' . __('awards.award') . ' to other users. ' . ucfirst(__('awards.awards')) . ' that disallow transfers by default will still not be transferrable.') !!}
           </div>

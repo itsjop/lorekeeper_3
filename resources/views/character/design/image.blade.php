@@ -93,14 +93,14 @@
       </div>
     @else
       <div class="form-group">
-        {!! Form::checkbox('modify_thumbnail', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('modify_thumbnail', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('modify_thumbnail', 'Modify Thumbnail', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Toggle this option to modify the thumbnail, otherwise only the credits will be saved.') !!}
       </div>
     @endif
     @if (config('lorekeeper.settings.masterlist_image_automation') === 1)
       @if (config('lorekeeper.settings.masterlist_image_automation_hide_manual_thumbnail') === 0 || Auth::user()->hasPower('manage_characters'))
         <div class="form-group">
-          {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+          {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
           {!! Form::label('use_cropper', 'Use Thumbnail Automation', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the Thumbnail Automation, or upload a custom thumbnail.') !!}
         </div>
       @else
@@ -117,7 +117,7 @@
       </div>
     @else
       <div class="form-group">
-        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
         {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the image cropper (crop dimensions can be adjusted in the site code), or upload a custom thumbnail.') !!}
       </div>
       <div class="card mb-3" id="thumbnailCrop">
@@ -165,7 +165,7 @@
                 'placeholder' => 'Designer URL',
             ]) !!}
 
-            <a href="#" class="add-designer btn btn-link" data-toggle="tooltip" title="Add another designer" @if ($count != $designerCount - 1) style="visibility: hidden;" @endif>+</a>
+            <a href="#" class="add-designer btn btn-link" data-bs-toggle="tooltip" title="Add another designer" @if ($count != $designerCount - 1) style="visibility: hidden;" @endif>+</a>
           </div>
         @endforeach
         @if (!count($request->designers))
@@ -175,7 +175,7 @@
                 'placeholder' => 'Select a Designer',
             ]) !!}
             {!! Form::text('designer_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Designer URL']) !!}
-            <a href="#" class="add-designer btn btn-link" data-toggle="tooltip" title="Add another designer">+</a>
+            <a href="#" class="add-designer btn btn-link" data-bs-toggle="tooltip" title="Add another designer">+</a>
           </div>
         @endif
       </div>
@@ -194,7 +194,7 @@
                 'class' => 'form-control mr-2',
                 'placeholder' => 'Artist URL',
             ]) !!}
-            <a href="#" class="add-artist btn btn-link" data-toggle="tooltip" title="Add another artist" @if ($count != $artistCount - 1) style="visibility: hidden;" @endif>+</a>
+            <a href="#" class="add-artist btn btn-link" data-bs-toggle="tooltip" title="Add another artist" @if ($count != $artistCount - 1) style="visibility: hidden;" @endif>+</a>
           </div>
         @endforeach
         @if (!count($request->artists))
@@ -204,7 +204,7 @@
                 'placeholder' => 'Select an Artist',
             ]) !!}
             {!! Form::text('artist_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
-            <a href="#" class="add-artist btn btn-link" data-toggle="tooltip" title="Add another artist">+</a>
+            <a href="#" class="add-artist btn btn-link" data-bs-toggle="tooltip" title="Add another artist">+</a>
           </div>
         @endif
       </div>
@@ -222,7 +222,7 @@
         'placeholder' => 'Select a Designer',
     ]) !!}
     {!! Form::text('designer_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Designer URL']) !!}
-    <a href="#" class="add-designer btn btn-link" data-toggle="tooltip" title="Add another designer">+</a>
+    <a href="#" class="add-designer btn btn-link" data-bs-toggle="tooltip" title="Add another designer">+</a>
   </div>
   <div class="artist-row hide mb-2">
     {!! Form::select('artist_id[]', $users, null, [
@@ -230,7 +230,7 @@
         'placeholder' => 'Select an Artist',
     ]) !!}
     {!! Form::text('artist_url[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
-    <a href="#" class="add-artist btn btn-link mb-2" data-toggle="tooltip" title="Add another artist">+</a>
+    <a href="#" class="add-artist btn btn-link mb-2" data-bs-toggle="tooltip" title="Add another artist">+</a>
   </div>
 
 @endsection

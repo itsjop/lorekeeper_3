@@ -4,7 +4,7 @@
   }
 @endphp
 @if (!isset($hideCollapse))
-  <h3>Your Inventory <a class="small inventory-collapse-toggle collapse-toggle collapsed" href="#userInventory" data-toggle="collapse">Show</a></h3>
+  <h3>Your Inventory <a class="small inventory-collapse-toggle collapse-toggle collapsed" href="#userInventory" data-bs-toggle="collapse">Show</a></h3>
   <hr>
 @endif
 <div @if (!isset($hideCollapse)) class="{{ isset($selected) && count($selected) ? '' : 'collapse' }}" @endif id="userInventory">

@@ -10,10 +10,10 @@
         <h1 class="col-12">{!! $name !!}
           <div class="float-md-right small">
             @if ($award->is_character_owned)
-              <i class="fas fa-paw mx-2 small" data-toggle="tooltip" title="This {{ __('awards.award') }} can be held by characters."></i>
+              <i class="fas fa-paw mx-2 small" data-bs-toggle="tooltip" title="This {{ __('awards.award') }} can be held by characters."></i>
             @endif
             @if ($award->is_user_owned)
-              <i class="fas fa-user mx-2 small" data-toggle="tooltip" title="This {{ __('awards.award') }} can be held by users."></i>
+              <i class="fas fa-user mx-2 small" data-bs-toggle="tooltip" title="This {{ __('awards.award') }} can be held by users."></i>
             @endif
           </div>
         </h1>

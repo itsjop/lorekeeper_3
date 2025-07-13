@@ -89,7 +89,7 @@
 
           @if ($sales->characters->count() > 1)
             <div class="form-group text-right">
-              {!! Form::checkbox('character_is_open[' . $character->character->slug . ']', 1, $character->is_open, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+              {!! Form::checkbox('character_is_open[' . $character->character->slug . ']', 1, $character->is_open, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
               {!! Form::label('character_is_open', 'Is Open', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not this particular character is open or available. If the sale post itself is closed, all character sales attached will also be displayed as closed.') !!}
             </div>
           @else

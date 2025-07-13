@@ -20,7 +20,7 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('edit_data'))
-    <a data-toggle="tooltip" title="[ADMIN] Edit {{ ucfirst(__('awards.award')) }}" href="{{ url('admin/data/awards/edit/') . '/' . $award->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
+    <a data-bs-toggle="tooltip" title="[ADMIN] Edit {{ ucfirst(__('awards.award')) }}" href="{{ url('admin/data/awards/edit/') . '/' . $award->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
   @endif
   {!! breadcrumbs([
       'World' => 'world',
@@ -40,10 +40,10 @@
           <h1 class="col-12">{!! $name !!}
             <div class="float-md-right small">
               @if ($award->is_character_owned)
-                <i class="fas fa-paw mx-2 small" data-toggle="tooltip" title="This {{ __('awards.award') }} can be held by {{ __('lorekeeper.characters') }}."></i>
+                <i class="fas fa-paw mx-2 small" data-bs-toggle="tooltip" title="This {{ __('awards.award') }} can be held by {{ __('lorekeeper.characters') }}."></i>
               @endif
               @if ($award->is_user_owned)
-                <i class="fas fa-user mx-2 small" data-toggle="tooltip" title="This {{ __('awards.award') }} can be held by users."></i>
+                <i class="fas fa-user mx-2 small" data-bs-toggle="tooltip" title="This {{ __('awards.award') }} can be held by users."></i>
               @endif
             </div>
           </h1>
@@ -138,7 +138,7 @@
                       @endphp
 
                       <div class="col-sm-1">
-                        <img src="{{ $info->imageUrl }}" class="img-fluid" data-toggle="tooltip" title="{{ $info->name }} x{{ $quantity }}" />
+                        <img src="{{ $info->imageUrl }}" class="img-fluid" data-bs-toggle="tooltip" title="{{ $info->name }} x{{ $quantity }}" />
                       </div>
                     @endforeach
                   @endforeach

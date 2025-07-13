@@ -24,19 +24,19 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link active" id="statsTab" data-toggle="tab" href="#stats" role="tab"> Stats </a>
+          <a class="nav-link active" id="statsTab" data-bs-toggle="tab" href="#stats" role="tab"> Stats </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="notesTab" data-toggle="tab" href="#notes" role="tab"> Description </a>
+          <a class="nav-link" id="notesTab" data-bs-toggle="tab" href="#notes" role="tab"> Description </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="lineageTab" data-toggle="tab" href="#lineage" role="tab">
+          <a class="nav-link" id="lineageTab" data-bs-toggle="tab" href="#lineage" role="tab">
             Lineage
           </a>
         </li>
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
-            <a class="nav-link" id="settingsTab" data-toggle="tab" href="#settings-all" role="tab">
+            <a class="nav-link" id="settingsTab" data-bs-toggle="tab" href="#settings-all" role="tab">
               <i class="fas fa-cog"></i></a>
           </li>
         @endif
@@ -58,7 +58,7 @@
               'url' => $character->is_myo_slot ? 'admin/myo/' . $character->id . '/settings' : 'admin/character/' . $character->slug . '/settings',
           ]) !!}
           <div class="form-group">
-            {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+            {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
             {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.') !!}
           </div>
           <div class="text-right">

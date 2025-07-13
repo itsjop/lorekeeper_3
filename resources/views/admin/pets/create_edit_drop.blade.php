@@ -85,7 +85,7 @@
   <div class="form-group">
     {!! Form::checkbox('is_active', 1, $drop->id ? $drop->isActive : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-bs-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not drops for this pet are active. Impacts variants as well.') !!}
   </div>

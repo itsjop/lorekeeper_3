@@ -35,13 +35,13 @@
             @if ($comment->created_at != $comment->updated_at)
               <span class="text-muted border-left mx-1 px-1">(Edited {!! $comment->updated_at !!})
                 @if (Auth::check() && Auth::user()->isStaff)
-                  <a href="#" data-toggle="modal" data-target="#show-edits-{{ $comment->id }}">Edit History</a>
+                  <a href="#" data-bs-toggle="modal" data-target="#show-edits-{{ $comment->id }}">Edit History</a>
                 @endif
               </span>
             @endif
           </small>
           <a href="{{ url('comment/') . '/' . $comment->id }}"><i class="fas fa-link ml-1" style="opacity: 50%;"></i></a>
-          <a href="{{ url('reports/new?url=') . $comment->url }}"><i class="fas fa-exclamation-triangle" data-toggle="tooltip" title="Click here to report this comment." style="opacity: 50%;"></i></a>
+          <a href="{{ url('reports/new?url=') . $comment->url }}"><i class="fas fa-exclamation-triangle" data-bs-toggle="tooltip" title="Click here to report this comment." style="opacity: 50%;"></i></a>
         </p>
       </div>
 

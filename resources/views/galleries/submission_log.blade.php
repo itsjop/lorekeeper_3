@@ -19,7 +19,7 @@
       @if (Settings::get('gallery_submissions_reward_currency') && $submission->gallery->currency_enabled)
         <div class="card mb-4">
           <div class="card-header">
-            <h5>{!! $currency->displayName !!} Award Info <a class="small inventory-collapse-toggle collapse-toggle {{ $submission->status == 'Accepted' ? '' : 'collapsed' }}" href="#currencyForm" data-toggle="collapse">Show</a></h5>
+            <h5>{!! $currency->displayName !!} Award Info <a class="small inventory-collapse-toggle collapse-toggle {{ $submission->status == 'Accepted' ? '' : 'collapsed' }}" href="#currencyForm" data-bs-toggle="collapse">Show</a></h5>
           </div>
           <div class="card-body collapse {{ $submission->status == 'Accepted' ? 'show' : '' }}" id="currencyForm">
             @if ($submission->status == 'Accepted')
@@ -79,7 +79,7 @@
                     <p>This submission didn't have any criteria specified for rewards. Hitting submit will confirm this and clear it from the queue.</p>
                   @endif
                   <div class="form-group">
-                    {!! Form::checkbox('ineligible', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-onstyle' => 'danger']) !!}
+                    {!! Form::checkbox('ineligible', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-onstyle' => 'danger']) !!}
                     {!! Form::label('ineligible', 'Inelegible/Award No Currency', ['class' => 'form-check-label ml-3']) !!} {!! add_help('When on, this will mark the submission as valued, but will not award currency to any of the users listed.') !!}
                   </div>
                   <div class="text-right">

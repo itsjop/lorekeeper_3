@@ -44,7 +44,7 @@
 @if (false)
   {{-- collapse for custom ancestry --}}
   <div class="card my-3">
-    <div class="card-header" data-toggle="collapse" data-target="#customAncestry" aria-expanded="false" aria-controls="customAncestry">
+    <div class="card-header" data-bs-toggle="collapse" data-target="#customAncestry" aria-expanded="false" aria-controls="customAncestry">
       <h2 class="h3">
         <i class="fas fa-chevron-down"></i> Custom Ancestry
       </h2>

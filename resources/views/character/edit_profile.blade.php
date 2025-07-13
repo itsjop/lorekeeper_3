@@ -109,7 +109,7 @@
     @endif
     @if ($character->is_tradeable || $character->is_sellable)
       <div class="form-group disabled">
-        {!! Form::checkbox('is_trading', 1, $character->is_trading, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_trading', 1, $character->is_trading, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
         {!! Form::label('is_trading', 'Up For Trade', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will place the character on the list of characters that are currently up for trade. This does not have any other functionality, but allow users looking for trades to find your character easily.') !!}
       </div>
     @else
@@ -120,7 +120,7 @@
     <div class="form-group">
       {!! Form::checkbox('alert_user', 1, true, [
           'class' => 'form-check-input',
-          'data-toggle' => 'toggle',
+          'data-bs-toggle' => 'toggle',
           'data-onstyle' => 'danger',
       ]) !!}
       {!! Form::label('alert_user', 'Notify User', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will send a notification to the user that their character profile has been edited. A notification will not be sent if the character is not visible.') !!}
