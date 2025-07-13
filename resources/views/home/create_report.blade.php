@@ -51,7 +51,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm Report</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <p>This will submit the form and put it into the report review queue. You will not be able to edit the contents after the report has been made. Click the Confirm button to complete the report.</p>

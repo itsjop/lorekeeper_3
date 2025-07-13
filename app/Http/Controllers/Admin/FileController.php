@@ -237,9 +237,8 @@ class FileController extends Controller {
         $request->validate(['file' => 'required|file']);
         $file = $request->file('file');
         $key = $request->get('key');
-        $filename = config('lorekeeper.image_files.'.$key)['filename'];
-
-        if ($service->uploadFile($file, null, $filename, false)) {
+        $filename = config('lorekeeper.image_files.'.$key)['filename'];;
+        if ($service->uploadFile($file, '/lorekeeper', $filename, false)) {
             flash('Image uploaded successfully.')->success();
         } else {
             foreach ($service->errors()->getMessages()['error'] as $error) {

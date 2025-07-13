@@ -1,101 +1,98 @@
-<div id="dashboard">
-  <h1>Welcome, {!! Auth::user()->displayName !!}!</h1>
-  <div class="card mb-4 timestamp">
-    <div class="card-body">
-      <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!}
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body text-center">
-          <img class="dashboard-img" src="{{ asset('images/lorekeeper/account.png') }}" alt="Account" />
-          <h5 class="card-title">Account</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="{{ Auth::user()->url }}">Profile</a>
-          </li>
-          <li class="list-group-item">
-            <a href="{{ url('account/settings') }}">User Settings</a>
-          </li>
-          <li class="list-group-item">
-            <a href="{{ url('trades/open') }}">Trades</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body text-center">
-          <img class="dashboard-img" src="{{ asset('images/lorekeeper/characters.png') }}" alt="Characters" />
-          <h5 class="card-title">Characters</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="{{ url('characters') }}">My Characters</a>
-          </li>
-          <li class="list-group-item">
-            <a href="{{ url('characters/myos') }}">My MYO Slots</a>
-          </li>
-          <li class="list-group-item">
-            <a href="{{ url('characters/transfers/incoming') }}">Character Transfers</a>
-          </li>
-        </ul>
+<div id="home-dashboard">
+  <h1 class="welcome-banner">Welcome, {!! Auth::user()->displayName !!}!</h1>
+  {{-- <div class="card mb-4 timestamp">
+    <div class="card-body"> <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!} </div> </div> --}}
+  <div class="bubblebox current-event">
+    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+      <span>Current Event</span>
+    </h2>
+    <div class="bubble ">
+      <img
+        src=""
+        alt=""
+        class="w-100"
+      >
+      <div class="grid ai-center">
+        <h3> LAUNCH PARTY </h3>
+        <h4 class="flex">
+          <a href=""> event daily </a>
+          <i class="fas fa-heart"></i>
+          <a href=""> event shop </a>
+        </h4>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body text-center">
-          <img class="dashboard-img" src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Inventory" />
-          <h5 class="card-title">Inventory</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="{{ url('inventory') }}">My Inventory</a>
-          </li>
-          <li class="list-group-item">
-            <a href="{{ Auth::user()->url . '/item-logs' }}">Item Logs</a>
-          </li>
-        </ul>
+  <div class="bubblebox dailies">
+    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+      <span>Dailies</span>
+    </h2>
+    <div class="bubble jobs">
+      <div class="wishing-well">
+        <a href="/dailies/1">
+          <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="">
+          <h3>Wishing Well</h3>
+        </a>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body text-center">
-          <img class="dashboard-img" src="{{ asset('images/lorekeeper/currency.png') }}" alt="Bank" />
-          <h5 class="card-title">Bank</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="{{ url('bank') }}">Bank</a>
-          </li>
-          <li class="list-group-item">
-            <a href="{{ Auth::user()->url . '/currency-logs' }}">Currency Logs</a>
-          </li>
-        </ul>
+      <div class="starlit-acres">
+        <a href="/dailies/2">
+          <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="">
+          <h3>Starlit Acres</h3>
+        </a>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card mb-12">
-        <div class="card-body text-center">
-          <img src="{{ asset('images/awards.png') }}" />
-          <h5 class="card-title">{{ ucfirst(__('awards.awards')) }}</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="{{ url(__('awards.awardcase')) }}">My {{ ucfirst(__('awards.awards')) }}</a>
-          </li>
-          <li class="list-group-item">
-            <a href="{{ Auth::user()->url . '/' . __('awards.award') . '-logs' }}">{{ ucfirst(__('awards.award')) }} Logs</a>
-          </li>
-        </ul>
+      <div class="foraging">
+        <a href="/dailies/3">
+          <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="">
+          <h3>Foraging (coming soon)</h3>
+        </a>
       </div>
     </div>
   </div>
+  <div class="bubblebox newsfeed">
+    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+      <span>Newsfeed</span>
+    </h2>
+    <div class="bubble">
+      <div class="news-item">
+        <h3>FAKE NEWS HEADLINE</h3>
+        <p>this is the news this is the news this is the news this is the news this is the news...</p>
+      </div>
+      <div class="news-item">
+        <h3>FAKE NEWS HEADLINE</h3>
+        <p>this is the news this is the news this is the news this is the news this is the news...</p>
+      </div>
+    </div>
+  </div>
+  <div class="bubblebox sales">
+    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+      <span>Sales</span>
+    </h2>
+    {{-- INSERT LIVE SALE VALUES HERE --}}
+    <div class="bubble sale-info grid-2-col">
+      <div class="character-picture">
+        <img src="{{ asset('/images/somnivores/jax2.png') }}" alt="">
+      </div>
+      <div class="character-info">
+        <div class="sale-type h3"> sale_type </div>
+        <div class="sale-price h3"> $ sale_price </div>
+        <div class="sale-title"> <a href="">
+            design_title
+          </a>
+        </div>
+        <div class="sale-artist"> by
+          <a href=""> artist_name </a>
+        </div>
+        <a class="sale-details" href="sale_link"> View More > </a>
+      </div>
+    </div>
+  </div>
+  {{-- SUBMISSION GALLERY --}}
+  <div class="bubblebox recent-submissions">
+    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+      <span>Recent Gallery Submissions</span>
+    </h2>
+    <div class="bubble">
+      <div class="gallery"></div>
+    </div>
+  </div>
+  @include('widgets._recent_gallery_submissions', ['gallerySubmissions' => $gallerySubmissions])
 </div>
-
-@include('widgets._recent_gallery_submissions', ['gallerySubmissions' => $gallerySubmissions])

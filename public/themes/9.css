@@ -7,7 +7,7 @@
 
 /* Use http://scg.ar-ch.org/ for generating colour variations! */
 @charset "UTF-8";
-:root {
+/* :root {
   --blue: #5476b3;
   --blue-100: #e1e7f2;
   --blue-200: #becbe2;
@@ -118,7 +118,6 @@
   --cyan-800: #0c4851;
   --cyan-900: #052025;
 
-  --white: #fff;
   --gray-100: #f8f9fa;
   --gray-200: #e9ecef;
   --gray-300: #dee2e6;
@@ -143,7 +142,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-}
+} */
 
 html {
   -webkit-text-size-adjust: 100%;

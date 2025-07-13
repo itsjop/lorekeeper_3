@@ -68,7 +68,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <span class="modal-title h5 mb-0">Clear All Notifications</span>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <p>This will clear <strong>all</strong> of your notifications. Are you certain you wish to do so?</p>
