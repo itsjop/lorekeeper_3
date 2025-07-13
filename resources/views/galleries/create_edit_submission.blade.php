@@ -360,7 +360,7 @@
         <div class="form-group">
           {!! Form::checkbox('alert_user', 1, true, [
               'class' => 'form-check-input',
-              'data-bs-toggle' => 'toggle',
+              'data-toggle' => 'toggle',
               'data-onstyle' => 'danger',
           ]) !!}
           {!! Form::label('alert_user', 'Notify User', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will send a notification to the user that either their submission has been edited or moved. It does not send both notifications, preferring the move notification if relevant.') !!}

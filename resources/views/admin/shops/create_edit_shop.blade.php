@@ -63,7 +63,7 @@
   </div>
 
   {{-- <div class="form-group">
-    {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, ['class' => 'form-check-label', 'data-bs-toggle' => 'toggle', 'id' => 'use_coupons']) !!}
+    {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle', 'id' => 'use_coupons']) !!}
     {!! Form::label('use_coupons', 'Allow Coupons?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Note that ALL coupons will be allowed to be used, unless specified otherwise.') !!}
   </div>
   <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
@@ -73,7 +73,7 @@
   </div> --}}
 
   <div class="form-group">
-    {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, ['class' => 'form-check-input shop-timed shop-toggle shop-field', 'data-bs-toggle' => 'toggle', 'id' => 'is_timed_shop']) !!}
+    {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, ['class' => 'form-check-input shop-timed shop-toggle shop-field', 'data-toggle' => 'toggle', 'id' => 'is_timed_shop']) !!}
     {!! Form::label('is_timed_shop', 'Set Timed Shop', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Sets the shop as timed between the chosen dates.') !!}
   </div>
   <div class="card mb-3 shop-timed-quantity {{ $shop->is_timed_shop ? '' : 'hide' }}">

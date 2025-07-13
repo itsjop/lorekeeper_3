@@ -55,7 +55,7 @@
     <div class="card-body">
       <div class="mb-2">
         <div class="form-group">
-          {!! Form::checkbox('is_character_owned', 1, $category->is_character_owned, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+          {!! Form::checkbox('is_character_owned', 1, $category->is_character_owned, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
           {!! Form::label('is_character_owned', 'Can Be Owned by Characters', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow items in this category to be owned by characters.') !!}
         </div>
         <div class="form-group">
@@ -63,7 +63,7 @@
           {!! Form::text('character_limit', $category ? $category->character_limit : 0, ['class' => 'form-control stock-field', 'data-name' => 'character_limit']) !!}
         </div>
         <div class="form-group">
-          {!! Form::checkbox('can_name', 1, $category->can_name, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+          {!! Form::checkbox('can_name', 1, $category->can_name, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
           {!! Form::label('can_name', 'Can be Named', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will set items in this category to be able to be named when in character inventories-- for instance, for pets. Works best in conjunction with a hold limit on the category.') !!}
         </div>
       </div>
@@ -72,9 +72,9 @@
 
   @if (Config::get('lorekeeper.settings.donation_shop.item_donations') == 1 || Config::get('lorekeeper.settings.donation_shop.item_donations') == 3)
     <div class="form-group">
-      {!! Form::checkbox('can_donate', 1, $category->can_donate, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+      {!! Form::checkbox('can_donate', 1, $category->can_donate, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
       {!! Form::label('is_character_owned', 'Can Be Donated', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to donate items in this category to the Donation Shop.') !!}
-      {!! Form::checkbox('can_user_sell', 1, $category->can_user_sell, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+      {!! Form::checkbox('can_user_sell', 1, $category->can_user_sell, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
       {!! Form::label('can_user_sell', 'Can Be Sold In User Shops', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow or disallow users to sell items in their user shops..') !!}
     </div>
   @endif

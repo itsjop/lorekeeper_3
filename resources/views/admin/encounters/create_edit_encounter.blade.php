@@ -73,7 +73,7 @@
   <div class="form-group">
     {!! Form::checkbox('is_active', 1, $encounter->id ? $encounter->is_active : 1, [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('encounters that are not active will be hidden from the encounter list. They also cannot be automatically set as the next active encounter.') !!}
   </div>

@@ -33,7 +33,7 @@
     <div class="tn-background"></div>
     <div class="ml-thumbnail">
       <img src="{{ $char_image }}" alt="Thumbnail for {{ $character->nameFallback }}" />
-      <div class="shine" style=" {{ '--card_shine_mask-image: url(' . $char_image . ');' }} "></div>
+      {{-- <div class="shine" style=" {{ '--card_shine_mask-image: url(' . $char_image . ');' }} "></div> --}}
     </div>
   </a>
   {{-- Character Number ID --}}

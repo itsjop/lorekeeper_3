@@ -122,7 +122,7 @@
     </div>
     @if (config('lorekeeper.settings.masterlist_image_automation') === 1)
       <div class="form-group">
-        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
         {!! Form::label('use_cropper', 'Use Thumbnail Automation', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the Thumbnail Automation, or upload a custom thumbnail.') !!}
       </div>
       <div class="card mb-3" id="thumbnailCrop">
@@ -136,7 +136,7 @@
       </div>
     @else
       <div class="form-group">
-        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'useCropper']) !!}
+        {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
         {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the image cropper (crop dimensions can be adjusted in the site code), or upload a custom thumbnail.') !!}
       </div>
       <div class="card mb-3" id="thumbnailCrop">
@@ -343,7 +343,7 @@
     <div class="form-group">
       {!! Form::checkbox('is_sellable', 1, old('is_sellable'), [
           'class' => 'form-check-input',
-          'data-bs-toggle' => 'toggle',
+          'data-toggle' => 'toggle',
           'id' => 'resellable',
       ]) !!}
       {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}

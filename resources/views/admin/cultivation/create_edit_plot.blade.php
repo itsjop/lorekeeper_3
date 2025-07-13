@@ -46,7 +46,7 @@
         <div>{!! Form::file('stage_1_image') !!}</div>
         @if (isset($plot->stage_1_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_stage_1', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
+            {!! Form::checkbox('remove_stage_1', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
           </div>
         @endif
       </div>
@@ -60,7 +60,7 @@
         <div>{!! Form::file('stage_2_image') !!}</div>
         @if (isset($plot->stage_2_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_stage_2', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
+            {!! Form::checkbox('remove_stage_2', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
           </div>
         @endif
       </div>
@@ -74,7 +74,7 @@
         <div>{!! Form::file('stage_3_image') !!}</div>
         @if (isset($plot->stage_3_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_stage_3', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
+            {!! Form::checkbox('remove_stage_3', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
           </div>
         @endif
       </div>
@@ -88,7 +88,7 @@
         <div>{!! Form::file('stage_4_image') !!}</div>
         @if (isset($plot->stage_4_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_stage_4', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
+            {!! Form::checkbox('remove_stage_4', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
           </div>
         @endif
       </div>
@@ -102,7 +102,7 @@
         <div>{!! Form::file('stage_5_image') !!}</div>
         @if (isset($plot->stage_5_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_stage_5', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
+            {!! Form::checkbox('remove_stage_5', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Image As-Is', 'data-on' => 'Remove Image']) !!}
           </div>
         @endif
       </div>

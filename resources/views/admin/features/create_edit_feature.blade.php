@@ -73,7 +73,7 @@
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $feature->id ? $feature->is_visible : 1, [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the trait will not be visible in the trait list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.') !!}
   </div>

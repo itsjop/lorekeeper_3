@@ -52,7 +52,7 @@
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the category will not be visible in the category list or available for selection in search. Permissioned staff will still be able to add traits to them, however.') !!}
   </div>

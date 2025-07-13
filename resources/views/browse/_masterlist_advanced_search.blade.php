@@ -115,7 +115,7 @@
   <div class="masterlist-search-field">
     {!! Form::checkbox('is_trading', 1, Request::get('is_trading'), [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
         'data-on' => 'Open For Trade',
         'data-off' => 'Any Trading Status',
         'data-width' => '200',
@@ -125,7 +125,7 @@
   <div class="masterlist-search-field">
     {!! Form::checkbox('is_sellable', 1, Request::get('is_sellable'), [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
         'data-on' => 'Can Be Sold',
         'data-off' => 'Any Sellable Status',
         'data-width' => '204',
@@ -135,7 +135,7 @@
   <div class="masterlist-search-field">
     {!! Form::checkbox('is_tradeable', 1, Request::get('is_tradeable'), [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
         'data-on' => 'Can Be Traded',
         'data-off' => 'Any Tradeable Status',
         'data-width' => '220',
@@ -145,7 +145,7 @@
   <div class="masterlist-search-field">
     {!! Form::checkbox('is_giftable', 1, Request::get('is_giftable'), [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
         'data-on' => 'Can Be Gifted',
         'data-off' => 'Any Giftable Status',
         'data-width' => '202',
@@ -167,7 +167,7 @@
   <div class="masterlist-search-field">
     {!! Form::checkbox('search_images', 1, Request::get('search_images'), [
         'class' => 'form-check-input mr-3',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
     ]) !!}
     <span class="ml-2">Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
         'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.',

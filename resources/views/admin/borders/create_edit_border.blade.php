@@ -89,21 +89,21 @@
       <div class="form-group">
         {!! Form::checkbox('is_default', 1, $border->is_default, [
             'class' => 'form-check-input',
-            'data-bs-toggle' => 'toggle',
+            'data-toggle' => 'toggle',
         ]) !!}
         {!! Form::label('is_default', 'Default Border', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If enabled, this border will be automatically available for any users.') !!}
       </div>
       <div class="form-group">
         {!! Form::checkbox('is_active', 1, $border->is_active, [
             'class' => 'form-check-input',
-            'data-bs-toggle' => 'toggle',
+            'data-toggle' => 'toggle',
         ]) !!}
         {!! Form::label('is_active', 'Active?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Users can\'t see or select this border if it isn\'t visible.') !!}
       </div>
       <div class="form-group">
         {!! Form::checkbox('admin_only', 1, $border->admin_only, [
             'class' => 'form-check-input',
-            'data-bs-toggle' => 'toggle',
+            'data-toggle' => 'toggle',
         ]) !!}
         {!! Form::label('admin_only', 'Staff Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Only users who are staff can select this border if turned on.') !!}
       </div>

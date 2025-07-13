@@ -69,7 +69,7 @@
         <div class="col-md-4 form-group pl-md-3">
           {!! Form::checkbox('is_released', 1, $award->id ? $award->is_released : 1, [
               'class' => 'form-check-input',
-              'data-bs-toggle' => 'toggle',
+              'data-toggle' => 'toggle',
           ]) !!}
           {!! Form::label('is_released', 'Is Released', ['class' => 'form-check-label font-weight-bold ml-3']) !!}
           {!! add_help('If this is off, users will not be able to view information for the ' . __('awards.award') . '/it will be hidden from view. This is overridden by the ' . __('awards.award') . ' being owned at any point by anyone on the site.') !!}
@@ -77,7 +77,7 @@
         <div class="col-md-4 form-group pl-md-3">
           {!! Form::checkbox('is_featured', 1, $award->id ? $award->is_featured : 0, [
               'class' => 'form-check-input',
-              'data-bs-toggle' => 'toggle',
+              'data-toggle' => 'toggle',
           ]) !!}
           {!! Form::label('is_featured', 'Is Featured', ['class' => 'form-check-label font-weight-bold ml-3']) !!}
           {!! add_help('This ' . __('awards.award') . ' is featured on the holder\'s profile. <br>Limited to the number set in extension configuration per character/user.') !!}
@@ -85,14 +85,14 @@
         <div class="col-md-4 form-group pl-md-3">
           {!! Form::checkbox('allow_transfer', 1, $award->id ? $award->allow_transfer : 0, [
               'class' => 'form-check-input',
-              'data-bs-toggle' => 'toggle',
+              'data-toggle' => 'toggle',
           ]) !!}
           {!! Form::label('allow_transfer', 'Allow User → User Transfer', ['class' => 'form-check-label font-weight-bold ml-3']) !!} {!! add_help('If this is off, users will not be able to transfer this ' . __('awards.award') . ' to other users. Non-account-bound ' . __('awards.awards') . ' can be account-bound when granted to users directly.') !!}
         </div>
         <div class="col-md-6 form-group pl-md-3">
           {!! Form::checkbox('is_character_owned', 1, $award->id ? $award->is_character_owned : 0, [
               'class' => 'form-check-input hold-toggle',
-              'data-bs-toggle' => 'toggle',
+              'data-toggle' => 'toggle',
           ]) !!}
           {!! Form::label('is_character_owned', 'Character Held', ['class' => 'form-check-label font-weight-bold ml-3']) !!}
           {!! add_help('If this is enabled, characters will be able to hold this ' . __('awards.award') . '. The limit is how many can be held at a time. 0 means no limit, if set to 1 then quantity will be treated as a boolean.') !!}
@@ -104,7 +104,7 @@
         <div class="col-md-6 form-group pl-md-3">
           {!! Form::checkbox('is_user_owned', 1, $award->id ? $award->is_user_owned : 1, [
               'class' => 'form-check-input hold-toggle',
-              'data-bs-toggle' => 'toggle',
+              'data-toggle' => 'toggle',
           ]) !!}
           {!! Form::label('is_user_owned', 'User Held', ['class' => 'form-check-label font-weight-bold ml-3']) !!}
           {!! add_help('If this is enabled, users will be able to hold this' . __('awards.award') . '. The limit is how many can be held at a time. 0 means no limit, if set to 1 then quantity will be treated as a boolean.') !!}
@@ -225,7 +225,7 @@
         <p>
           {!! Form::checkbox('allow_reclaim', 1, $award->id ? $award->allow_reclaim : 0, [
               'class' => 'form-check-input',
-              'data-bs-toggle' => 'toggle',
+              'data-toggle' => 'toggle',
           ]) !!}
           {!! Form::label('allow_reclaim', 'Allow Reclaim?', ['class' => 'form-check-label font-weight-bold ml-3']) !!}
           {!! add_help('Do you want the user to be able to claim the reward from this badge multiple times? They will only receive the badge once.') !!}

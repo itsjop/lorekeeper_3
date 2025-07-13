@@ -1256,9 +1256,7 @@ fieldset.masterlist-search-grid .searchbutton {
   place-self: center;
   background-color: var(--clr-active-50);
   border-radius: 15px;
-  contain: paint;
   display: grid;
-  overflow: hidden;
   z-index: 2;
   perspective: 200px;
 }
@@ -1283,7 +1281,6 @@ fieldset.masterlist-search-grid .searchbutton {
   height: 100%;
   filter: drop-shadow(3px 3px 3px rgba(16, 4, 92, 0.4078431373));
   transition: 0.45s var(--bounce_linear);
-  contain: paint;
   perspective: 300px;
   position: relative;
   display: grid;
@@ -1301,11 +1298,10 @@ fieldset.masterlist-search-grid .searchbutton {
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover img {
   transition: 0.05s linear;
-  transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover .shine {
   transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
-  opacity: 0.2;
+  opacity: 0.35;
 }
 #ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover .shine::after {
   --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));

@@ -589,19 +589,19 @@ class User extends Authenticatable implements MustVerifyEmail {
    */
 
   public function getAvatarUrlAttribute() {
-    if ($this->avatar == 'default.jpg' && config('lorekeeper.extensions.use_gravatar')) {
+    if ($this->avatar == 'default.jpg') $this->avatar = 'default.png';
+    if ($this->avatar == 'default.png' && config('lorekeeper.extensions.use_gravatar')) {
       // check if a gravatar exists
       $hash = md5(strtolower(trim($this->email)));
       $url = 'https://www.gravatar.com/avatar/' . $hash . '??d=mm&s=200';
       $headers = @get_headers($url);
 
       if (!preg_match('|200|', $headers[0])) {
-        return url('images/avatars/default.jpg');
+        return url('images/avatars/default.png');
       } else {
         return 'https://www.gravatar.com/avatar/' . $hash . '?d=mm&s=200';
       }
     }
-
     return url('images/avatars/' . $this->avatar . '?v=' . filemtime(public_path('images/avatars/' . $this->avatar)));
   }
 

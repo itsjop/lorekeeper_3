@@ -170,7 +170,7 @@
                     {!! Form::label('remove_user', 'Remove Me', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If toggled on, this will remove the record of your collaboration from this submission.') !!}
                     {!! Form::checkbox('remove_user', 1, false, [
                         'class' => 'form-check-input',
-                        'data-bs-toggle' => 'toggle',
+                        'data-toggle' => 'toggle',
                         'data-onstyle' => 'danger',
                     ]) !!}
                   </div>

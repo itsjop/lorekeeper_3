@@ -433,7 +433,7 @@ class UserService extends Service {
       if (!$avatar) throw new \Exception("Please upload a file.");
       $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
 
-      if ($user->avatar !== 'default.jpg') {
+      if ($user->avatar !== 'default.png') {
         $file = 'images/avatars/' . $user->avatar;
         //$destinationPath = 'uploads/' . $id . '/';
 
@@ -605,7 +605,7 @@ class UserService extends Service {
       }
       $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
 
-      if ($user->avatar != 'default.jpg') {
+      if ($user->avatar != 'default.png') {
         $file = 'images/avatars/' . $user->avatar;
         //$destinationPath = 'uploads/' . $id . '/';
 

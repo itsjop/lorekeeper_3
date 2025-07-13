@@ -41,7 +41,7 @@
   {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_sellable', 1, $character->is_sellable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'id' => 'resellable']) !!}
+  {!! Form::checkbox('is_sellable', 1, $character->is_sellable, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'resellable']) !!}
   {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="card mb-3" id="resellOptions">

@@ -15,7 +15,7 @@
   <div class="form-group col">
     {!! Form::checkbox('is_loop', 1, $daily->id ? $daily->is_loop : 1, [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_loop', 'Set Loop', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
         'If turned off, each of
@@ -27,14 +27,14 @@
   <div class="form-group col">
     {!! Form::checkbox('is_streak', 1, $daily->id ? $daily->is_streak : 0, [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_streak', 'Is Streak', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, should the user miss a day of claiming, the rewards start over from day 1.') !!}
   </div>
   <div class="form-group col">
     {!! Form::checkbox('is_active', 1, $daily->id ? $daily->is_active : 1, [
         'class' => 'form-check-input',
-        'data-bs-toggle' => 'toggle',
+        'data-toggle' => 'toggle',
     ]) !!}
     {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
         'If turned off,

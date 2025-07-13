@@ -310,7 +310,7 @@ class Border extends Model
             $name = 'Avatar of ' . Auth::user()->name;
             //finally if not either of these, return default avatar
         } else {
-            $user = url('images/avatars/default.jpg');
+            $user = url('images/avatars/default.png');
             $name = 'Default Avatar';
         }
         //basically just an ugly ass string of html for copypasting use
@@ -350,7 +350,7 @@ class Border extends Model
             $name = 'Avatar of ' . Auth::user()->name;
             //finally if not either of these, return default avatar
         } else {
-            $user = url('images/avatars/default.jpg');
+            $user = url('images/avatars/default.png');
             $name = 'Default Avatar';
         }
         //basically just an ugly ass string of html for copypasting use

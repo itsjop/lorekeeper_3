@@ -94,7 +94,7 @@
         ) !!}
       </div>
       <div>
-        {!! Form::checkbox('allow_user_to_user', 1, $currency->allow_user_to_user, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+        {!! Form::checkbox('allow_user_to_user', 1, $currency->allow_user_to_user, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
         {!! Form::label('allow_user_to_user', 'User → User Transfers', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow users to transfer this currency to other users from their bank.') !!}
       </div>
     </div>
@@ -110,11 +110,11 @@
   <div class="card mb-3" id="characterOptions">
     <div class="card-body">
       <div class="mb-2">
-        {!! Form::checkbox('allow_user_to_character', 1, $currency->allow_user_to_character, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+        {!! Form::checkbox('allow_user_to_character', 1, $currency->allow_user_to_character, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
         {!! Form::label('allow_user_to_character', 'User → Character Transfers', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow a user to transfer this currency to their own characters unidirectionally.') !!}
       </div>
       <div>
-        {!! Form::checkbox('allow_character_to_user', 1, $currency->allow_character_to_user, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
+        {!! Form::checkbox('allow_character_to_user', 1, $currency->allow_character_to_user, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Allow', 'data-off' => 'Disallow']) !!}
         {!! Form::label('allow_character_to_user', 'Character → User Transfers', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will allow a user to transfer this currency from their own characters to their bank unidirectionally.') !!}
       </div>
     </div>

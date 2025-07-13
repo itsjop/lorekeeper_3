@@ -47,7 +47,7 @@
         <div class="text-muted">Recommended size: any, but might need some fiddling to look good.</div>
         @if (isset($area->background_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_background', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Background Image As-Is', 'data-on' => 'Remove Background Image']) !!}
+            {!! Form::checkbox('remove_background', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Background Image As-Is', 'data-on' => 'Remove Background Image']) !!}
           </div>
         @endif
       </div>
@@ -62,7 +62,7 @@
         <div class="text-muted">Recommended size: 250px wide, as that is what images will be sized to.</div>
         @if (isset($area->plot_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_plot', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Plot Image As-Is', 'data-on' => 'Remove Plot Image']) !!}
+            {!! Form::checkbox('remove_plot', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Plot Image As-Is', 'data-on' => 'Remove Plot Image']) !!}
           </div>
         @endif
       </div>

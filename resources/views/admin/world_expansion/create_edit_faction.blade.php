@@ -48,10 +48,10 @@
       @if ($user_enabled || $ch_enabled)
         <div class=" mx-0 px-0 text-center">
           @if ($user_enabled)
-            {!! Form::checkbox('user_faction', 1, $faction->id ? $faction->is_user_faction : 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Users Can Join', 'data-off' => 'Users Cannot Join']) !!}
+            {!! Form::checkbox('user_faction', 1, $faction->id ? $faction->is_user_faction : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Users Can Join', 'data-off' => 'Users Cannot Join']) !!}
           @endif
           @if ($ch_enabled)
-            {!! Form::checkbox('character_faction', 1, $faction->id ? $faction->is_character_faction : 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-on' => 'Characters Can Join', 'data-off' => 'Characters Cannot Join']) !!}
+            {!! Form::checkbox('character_faction', 1, $faction->id ? $faction->is_character_faction : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Characters Can Join', 'data-off' => 'Characters Cannot Join']) !!}
           @endif
         </div>
       @endif
@@ -76,7 +76,7 @@
         <div class="text-muted">Recommended size: 200x200</div>
         @if (isset($faction->thumb_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image_th', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Thumbnail As-Is', 'data-on' => 'Remove Thumbnail Image']) !!}
+            {!! Form::checkbox('remove_image_th', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Thumbnail As-Is', 'data-on' => 'Remove Thumbnail Image']) !!}
           </div>
         @endif
       </div>
@@ -91,7 +91,7 @@
         <div class="text-muted">Recommended size: None (Choose a standard size for all faction header images.)</div>
         @if (isset($faction->image_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle', 'data-off' => 'Leave Header Image As-Is', 'data-on' => 'Remove Current Header Image']) !!}
+            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Header Image As-Is', 'data-on' => 'Remove Current Header Image']) !!}
           </div>
         @endif
       </div>

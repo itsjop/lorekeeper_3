@@ -11,7 +11,7 @@ class UserIconExpansion extends Migration {
     public function up() {
         // Add columns for avatar / references your default icon. If you prefer a png etc make sure to change the extension
         Schema::table('users', function (Blueprint $table) {
-            $table->string('avatar')->default('default.jpg');
+            $table->string('avatar')->default('default.png');
         });
     }
 
