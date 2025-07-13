@@ -1,7 +1,4 @@
-<div id={{ strtolower($character->slug) }}
-  {{  ($character->image->subtype_id == null) ? dd($character) : ''; }}
-  class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id, 'label', null, $character) }}"
->
+<div id={{ strtolower($character->slug) }} {{ $character->image->subtype_id == null ? dd($character) : '' }} class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id, 'label', null, $character) }}">
   {{-- Subtype Badge --}}
   <div class="ml-badge">
     <div class="flag">
@@ -10,15 +7,11 @@
         {{ ucfirst(getSubtypeInfo($character->image->subtype_id)) }} Palate
       </div>
     </div>
-    <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}"
-      alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
-    >
+    <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}" alt="{{ 'Subtype badge for ' . $character->url . '.' }}">
   </div>
   <div class="border-background"></div>
   {{-- Name --}}
-  <div
-    class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}"
-  >
+  <div class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}">
     <a href="{{ $character->url }}" class="">
       @if (!$character->is_visible)
         <i class="fas fa-eye-slash"></i>
