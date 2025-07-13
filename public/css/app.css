@@ -55,43 +55,43 @@ body {
   --body-color: var(--purple-clr_50);
 }
 body .app {
-  --clr-active-50: var(--purple-clr_50);
-  --clr-active-100: var(--purple-clr_100);
-  --clr-active-200: var(--purple-clr_200);
-  --clr-active-300: var(--purple-clr_300);
-  --clr-active-400: var(--purple-clr_400);
-  --clr-active-500: var(--purple-clr_500);
-  --clr-active-600: var(--purple-clr_600);
-  --clr-active-700: var(--purple-clr_700);
-  --clr-active-800: var(--purple-clr_800);
-  --clr-active-900: var(--purple-clr_900);
-  --clr-active-950: var(--purple-clr_950);
+  --active-clr_50: var(--purple-clr_50);
+  --active-clr_100: var(--purple-clr_100);
+  --active-clr_200: var(--purple-clr_200);
+  --active-clr_300: var(--purple-clr_300);
+  --active-clr_400: var(--purple-clr_400);
+  --active-clr_500: var(--purple-clr_500);
+  --active-clr_600: var(--purple-clr_600);
+  --active-clr_700: var(--purple-clr_700);
+  --active-clr_800: var(--purple-clr_800);
+  --active-clr_900: var(--purple-clr_900);
+  --active-clr_950: var(--purple-clr_950);
 }
 body .app.purple {
-  --clr-active-50: var(--purple-clr_50);
-  --clr-active-100: var(--purple-clr_100);
-  --clr-active-200: var(--purple-clr_200);
-  --clr-active-300: var(--purple-clr_300);
-  --clr-active-400: var(--purple-clr_400);
-  --clr-active-500: var(--purple-clr_500);
-  --clr-active-600: var(--purple-clr_600);
-  --clr-active-700: var(--purple-clr_700);
-  --clr-active-800: var(--purple-clr_800);
-  --clr-active-900: var(--purple-clr_900);
-  --clr-active-950: var(--purple-clr_950);
+  --active-clr_50: var(--purple-clr_50);
+  --active-clr_100: var(--purple-clr_100);
+  --active-clr_200: var(--purple-clr_200);
+  --active-clr_300: var(--purple-clr_300);
+  --active-clr_400: var(--purple-clr_400);
+  --active-clr_500: var(--purple-clr_500);
+  --active-clr_600: var(--purple-clr_600);
+  --active-clr_700: var(--purple-clr_700);
+  --active-clr_800: var(--purple-clr_800);
+  --active-clr_900: var(--purple-clr_900);
+  --active-clr_950: var(--purple-clr_950);
 }
 body .app.teal {
-  --clr-active-50: var(--teal-clr_50);
-  --clr-active-100: var(--teal-clr_100);
-  --clr-active-200: var(--teal-clr_200);
-  --clr-active-300: var(--teal-clr_300);
-  --clr-active-400: var(--teal-clr_400);
-  --clr-active-500: var(--teal-clr_500);
-  --clr-active-600: var(--teal-clr_600);
-  --clr-active-700: var(--teal-clr_700);
-  --clr-active-800: var(--teal-clr_800);
-  --clr-active-900: var(--teal-clr_900);
-  --clr-active-950: var(--teal-clr_950);
+  --active-clr_50: var(--teal-clr_50);
+  --active-clr_100: var(--teal-clr_100);
+  --active-clr_200: var(--teal-clr_200);
+  --active-clr_300: var(--teal-clr_300);
+  --active-clr_400: var(--teal-clr_400);
+  --active-clr_500: var(--teal-clr_500);
+  --active-clr_600: var(--teal-clr_600);
+  --active-clr_700: var(--teal-clr_700);
+  --active-clr_800: var(--teal-clr_800);
+  --active-clr_900: var(--teal-clr_900);
+  --active-clr_950: var(--teal-clr_950);
 }
 
 /* Sizing */
@@ -662,6 +662,7 @@ body {
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -833,14 +834,14 @@ body {
 /* Header Glint */
 #app #site-logo-header picture::after {
   --glare-width: 5%;
-  -webkit-mask-image: linear-gradient(70deg, black 0%, black calc(50% - var(--glare-width)), white 50%, black calc(50% + var(--glare-width)), black 100%);
-          mask-image: linear-gradient(70deg, black 0%, black calc(50% - var(--glare-width)), white 50%, black calc(50% + var(--glare-width)), black 100%);
+  -webkit-mask-image: linear-gradient(70deg, transparent 0%, transparent calc(50% - var(--glare-width)), white 50%, transparent calc(50% + var(--glare-width)), transparent 100%);
+          mask-image: linear-gradient(70deg, transparent 0%, transparent calc(50% - var(--glare-width)), white 50%, transparent calc(50% + var(--glare-width)), transparent 100%);
   -webkit-mask-size: 200%;
           mask-size: 200%;
   -webkit-mask-position: 50% 50%;
           mask-position: 50% 50%;
-  mask-mode: luminance;
-  mix-blend-mode: color-dodge;
+  mask-mode: alpha;
+  filter: brightness(300%) opacity(0.8);
   position: relative;
   animation: glare 10s ease-in-out forwards infinite;
 }
@@ -850,13 +851,13 @@ body {
     -webkit-mask-position: 0% 50%;
             mask-position: 0% 50%;
   }
-  40% {
+  00% {
     -webkit-mask-position: 0% 50%;
             mask-position: 0% 50%;
   }
   100% {
-    -webkit-mask-position: -200% 50%;
-            mask-position: -200% 50%;
+    -webkit-mask-position: -250% 50%;
+            mask-position: -250% 50%;
   }
 }
 @keyframes cloud-scroll {
@@ -900,11 +901,14 @@ body {
 }
 
 #app #site-wrapper #footer {
+  border-radius: 15px;
+  background-image: url(/images/otis-redding_noise.png?2b85ae8ffa43b57da681a8c963875464);
+  background-color: color-mix(in srgb, var(--body-color), transparent 30%);
+  -webkit-backdrop-filter: saturate(200%) blur(5px);
+          backdrop-filter: saturate(200%) blur(5px);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
   grid-area: footer;
   border-radius: 15px;
-  background-color: var(--body-color);
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
   width: 100%;
   display: grid;
   grid-template: ". links top" ". credit top"/10% 75% 10%;
@@ -1327,7 +1331,7 @@ fieldset.masterlist-search-grid .searchbutton {
   width: calc(100% - 20px);
   grid-area: thumb;
   place-self: center;
-  background-color: var(--clr-active-50);
+  background-color: var(--active-clr_50);
   border-radius: 15px;
   display: grid;
   z-index: 2;
@@ -1580,6 +1584,7 @@ because the nesting selector cannot represent pseudo-elements. */
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
   background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
   grid-area: nav;
   border-radius: 20px;
@@ -1631,7 +1636,7 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 #app #site-wrapper #header-nav .nav-item:hover {
   transition: 0.1s ease;
-  background-color: var(--clr-active-700);
+  background-color: var(--active-clr_700);
 }
 #app #site-wrapper #header-nav .nav-item.nav-notifications {
   width: 2.5em;
@@ -2052,6 +2057,7 @@ body {
   background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
   border-radius: 15px 15px 0 0;
   padding: 5px;
   font-weight: 500;
@@ -2302,6 +2308,7 @@ body {
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
   border-radius: 0 0 15px 15px;
 }
 .featured-character .sidebar-section .thumb {

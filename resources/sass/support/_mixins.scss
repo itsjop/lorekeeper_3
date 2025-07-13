@@ -17,5 +17,5 @@
   background-image: url('../../../public/images/overlays/otis-redding_noise.png');
   background-color: color-mix(in srgb, $color, transparent calc(100% - (100% * $opacity)));
   backdrop-filter: saturate(200%) blur(5px);
-
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
 }

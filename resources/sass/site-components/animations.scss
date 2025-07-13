@@ -3,17 +3,16 @@
   --glare-width: 5%;
   mask-image: linear-gradient(
     70deg,
-    black 0%,
-    black calc(50% - var(--glare-width)),
+    transparent 0%,
+    transparent calc(50% - var(--glare-width)),
     white 50%,
-    black calc(50% + var(--glare-width)),
-    black 100%
+    transparent calc(50% + var(--glare-width)),
+    transparent 100%
   );
   mask-size: 200%;
   mask-position: 50% 50%;
-  mask-mode: luminance;
-  // filter: brightness(2);
-  mix-blend-mode: color-dodge;
+  mask-mode: alpha;
+  filter: brightness(300%) opacity(.8);
   position: relative;
   animation: glare 10s ease-in-out forwards infinite;
 }
@@ -21,11 +20,11 @@
   0% {
     mask-position: 0% 50%;
   }
-  40% {
+  00% {
     mask-position: 0% 50%;
   }
   100% {
-    mask-position: -200% 50%;
+    mask-position: -250% 50%;
   }
 }
 
