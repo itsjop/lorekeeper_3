@@ -1,5 +1,6 @@
 # top prio
 - [ ] the new Boostrap 5, the attributes are data-bs-toggle, data-bs-parent, and data-bs-target
+- [ ] basic level rarities
 - [ ] contains: paint; on the ML top level image
 - [ ] figure out how to make dialogs launch at root
 - [ ] tiny notification box

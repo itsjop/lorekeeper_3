@@ -25,7 +25,7 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-bs-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
     @endif
     {{ __('awards.awardcase') }}
   </h3>

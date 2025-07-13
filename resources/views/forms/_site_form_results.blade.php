@@ -5,12 +5,12 @@
         <div class="row p-2">
           <h5>{{ $question->question }}</h5>
           @if (!$form->is_anonymous && $question->has_options && $user && $user->isStaff)
-            <a href="#" class="ml-2 collapsed collapse-toggle" type="button" data-bs-toggle="collapse" data-target="#question-{{ $question->id }}" aria-expanded="false" aria-controls="question-{{ $question->id }}">
+            <a href="#" class="ml-2 collapsed collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#question-{{ $question->id }}" aria-expanded="false" aria-controls="question-{{ $question->id }}">
               (View Details)
             </a>
           @endif
           @if (!$question->has_options)
-            <a href="#" class="ml-2 collapsed collapse-toggle" type="button" data-bs-toggle="collapse" data-target="#question-{{ $question->id }}" aria-expanded="false" aria-controls="question-{{ $question->id }}">
+            <a href="#" class="ml-2 collapsed collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#question-{{ $question->id }}" aria-expanded="false" aria-controls="question-{{ $question->id }}">
               (View Answers)
             </a>
           @endif

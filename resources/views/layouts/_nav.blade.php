@@ -3,18 +3,18 @@
     class="navbar-toggler collapsed"
     type="button"
     data-bs-toggle="collapse"
-    data-target="#navbarSupportedContent"
+    data-bs-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent"
     aria-expanded="false"
     aria-label="{{ __('Toggle navigation') }}"
   >
-    <span class="navbar-toggler-icon">
+    <span class="navbar-toggler-icon" >
       <span class="line"></span>
       <span class="line"></span>
       <span class="line"></span>
     </span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
     {{-- <div class="currency">
       <div class="col-lg-10 col-md-9 col-6">
         {{ $currency->quantity }}

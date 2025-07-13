@@ -171,7 +171,7 @@
   <div class="col-md-{{ $user->settings->allow_profile_comments ? 4 : 12 }}">
 
     <div class="card mb-4">
-      <div class="card-header" data-bs-toggle="collapse" data-target="#mentionHelp" aria-expanded="{{ $user->settings->allow_profile_comments ? 'true' : 'false' }}">
+      <div class="card-header" data-bs-toggle="collapse" data-bs-target="#mentionHelp" aria-expanded="{{ $user->settings->allow_profile_comments ? 'true' : 'false' }}">
 
         <h5>Mention This User</h5>
       </div>

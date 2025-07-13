@@ -125,7 +125,9 @@
         </aside>
       </div>
 
-      <main id="main-content" class="main-content p-4">
+      <main id="main-content" class="main-content">
+        <div class="main-backdrop"></div>
+        <div class="content-wrapper">
         @if (Settings::get('is_maintenance_mode'))
           <div class="alert alert-secondary">
             The site is currently in maintenance mode!
@@ -153,7 +155,7 @@
         @endif
         @include('flash::message')
         @yield('content')
-
+        </div>
       </main>
 
       @include('layouts._footer')

@@ -13,8 +13,8 @@
   }
   #sidebar {
     .sidebar-header {
+      @include body-bg(var(--purple-clr_700));
       border-radius: 15px 15px 0 0;
-      background-color: var(--purple-clr_600);
       padding: 5px;
       font-weight: 500;
       font-size: 1.2em;
@@ -283,7 +283,7 @@
       'species ' auto
       'rarity ' auto
       / max-content;
-    background-color: var(--body-color);
+    @include body-bg;
     border-radius: 0 0 15px 15px;
     .thumb {
       grid-area: thumb;
@@ -356,7 +356,7 @@
             width: calc(0.8 * var(--sidebar-width));
             height: calc(0.8 * var(--sidebar-width));
             animation: stars 10s linear forwards infinite;
-            background-image: url('../../../public/images/starring.png'); // TODO: fragile path
+            background-image: url('../../../public/images/overlays/starring.png'); // TODO: fragile path
             background-repeat: repeat;
             background-size: 50%;
             transform: translateX(0%);
