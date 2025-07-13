@@ -4,7 +4,7 @@
     @if ((isset($image->content_warnings) && !Auth::check()) || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($image->content_warnings)))
       <div class="alert alert-danger text-center">
         <span class="float-right">
-          <a href="#" data-dismiss="alert" class="close">
+          <a href="#" data-bs-dismiss="alert" class="close">
             <i class="fas fa-times" aria-hidden="true"></i>
           </a>
         </span>

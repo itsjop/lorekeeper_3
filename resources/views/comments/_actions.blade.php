@@ -67,7 +67,7 @@
         {{ Form::model($comment, ['route' => ['comments.update', $comment->getKey()]]) }}
         <div class="modal-header">
           <h5 class="modal-title">Edit Comment</h5>
-          <button type="button" class="close" data-dismiss="modal">
+          <button type="button" class="close" data-bs-dismiss="modal">
             <span>&times;</span>
           </button>
         </div>
@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase" data-bs-dismiss="modal">Cancel</button>
           {!! Form::submit('Update', ['class' => 'btn btn-sm btn-outline-success text-uppercase']) !!}
         </div>
         </form>
@@ -101,7 +101,7 @@
         {{ Form::open(['route' => ['comments.reply', $comment->getKey()]]) }}
         <div class="modal-header">
           <h5 class="modal-title">Reply to Comment</h5>
-          <button type="button" class="close" data-dismiss="modal">
+          <button type="button" class="close" data-bs-dismiss="modal">
             <span>&times;</span>
           </button>
         </div>
@@ -119,7 +119,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase" data-bs-dismiss="modal">Cancel</button>
           {!! Form::submit('Reply', ['class' => 'btn btn-sm btn-outline-success text-uppercase']) !!}
         </div>
         </form>
@@ -134,7 +134,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Delete Comment</h5>
-          <button type="button" class="close" data-dismiss="modal">
+          <button type="button" class="close" data-bs-dismiss="modal">
             <span>&times;</span>
           </button>
         </div>
@@ -162,7 +162,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{ $comment->is_featured ? 'Unf' : 'F' }}eature Comment</h5>
-        <button type="button" class="close" data-dismiss="modal">
+        <button type="button" class="close" data-bs-dismiss="modal">
           <span>&times;</span>
         </button>
       </div>
@@ -186,7 +186,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Likes</h5>
-        <button type="button" class="close" data-dismiss="modal">
+        <button type="button" class="close" data-bs-dismiss="modal">
           <span>&times;</span>
         </button>
       </div>
@@ -242,7 +242,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Edit History</h5>
-          <button type="button" class="close" data-dismiss="modal">
+          <button type="button" class="close" data-bs-dismiss="modal">
             <span>&times;</span>
           </button>
         </div>

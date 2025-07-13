@@ -323,7 +323,7 @@
         <div class="modal-content hide" id="approvalContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm Approval</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <p>This will approve the {{ $submission->prompt_id ? 'submission' : 'claim' }} and distribute the above rewards to the
@@ -336,7 +336,7 @@
         <div class="modal-content hide" id="cancelContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm Cancellation</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <p>This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} and send it back to drafts. Make sure to
@@ -349,7 +349,7 @@
         <div class="modal-content hide" id="rejectionContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm Rejection</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <p>This will reject the {{ $submission->prompt_id ? 'submission' : 'claim' }}.</p>

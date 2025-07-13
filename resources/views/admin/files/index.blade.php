@@ -79,7 +79,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0" id="editFolderModalTitle"></span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             {!! Form::open(['url' => 'admin/files/folder/rename', 'id' => 'renameFolderForm', 'class' => 'folder-form']) !!}
@@ -110,7 +110,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Create Folder</span>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             {!! Form::open(['url' => 'admin/files/folder/create']) !!}
@@ -134,7 +134,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <span class="modal-title h5 mb-0" id="editModalTitle"></span>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           {{-- Move a file --}}
