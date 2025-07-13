@@ -178,9 +178,9 @@ fieldset.masterlist-search-grid {
             transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
           }
           .shine {
-            transition: 0.05s linear;
+            // transition: 0.05s linear;
             transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
-            opacity: 0.4;
+            opacity: 0.2;
             &::after {
               --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
               --tan: sin(var(--len));
@@ -225,7 +225,7 @@ fieldset.masterlist-search-grid {
           left: 0;
           left: -100%;
           top: -100%;
-          transform: translateX(0%) translateY(0%) rotate(-45deg);
+          transform: translateX(calc(25% + (-50% * var(--mpx)))) translateY(calc(25% + (-50% * var(--mpy)))) rotate(-45deg);
           transform-origin: center center;
           background-image: linear-gradient(
             0deg,
