@@ -1,4 +1,11 @@
 #home-dashboard {
+  h2 {
+    background: linear-gradient(to bottom left, #51297c, #4559bd, #5ca0d4);
+    width: max-content;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+  }
   display: grid;
   grid-template:
     'welc  welc  welc  welc' auto
@@ -40,10 +47,14 @@
       text-align: center;
       padding: 10px;
       img {
-        width: 100%;
+        max-width: 100%;
       }
       &.jobs {
         grid-template-columns: 1fr 1fr 1fr;
+        img {
+          width: 100%;
+          max-width: 250px;
+        }
         .foraging img {
           filter: grayscale(1) opacity(0.5);
         }
@@ -51,12 +62,27 @@
       .news-item {
         justify-self: start;
         text-align: start;
+        padding: 10px;
+      }
+      &.sale-info {
+        .character-info {
+          .sale-details {
+            grid-area: more;
+            font-weight: 700;
+            border-radius: 10px;
+            border: 3px solid var(--white);
+            margin: 5px;
+          }
+        }
       }
       .gallery {
         width: 100%;
         height: min(400px, 30vh);
-        background: url('/images/overlays/starring.png') #add4e3;
+        background:
+          repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, transparent 2px, transparent 15px),
+          linear-gradient(to bottom left, #bfeeff, #e6d9ff, #ffdde9, #fff1d5);
         border-radius: 15px;
+        border: 2px white solid;
       }
     }
   }
@@ -84,7 +110,6 @@
         min-width: 70%;
         color: white;
         backdrop-filter: blur(5px);
-
         grid-area: 2/1/4/4;
         justify-self: end;
         align-self: end;

@@ -553,6 +553,9 @@ body {
 #app .badge-success {
   background-color: var(--success);
 }
+#app .badge-dark {
+  background-color: var(--active-clr_800);
+}
 
 /* prettier-ignore */
 *, *::before, *::after {
@@ -565,31 +568,34 @@ body {
 }
 
 /* prettier-ignore */
-.app h1, .app h2, .app h3 {
+.app h1, .app h2, .app h3 .h1,
+.app .h2, .app .h3 {
   font-family: "Fredoka", sans-serif, system-ui;
   font-weight: 600;
-  font-size: 1.9rem;
+  font-size: 1.7rem;
 }
-.app h1 {
+.app h1, .app .h1 {
   font-family: "Baloo 2", sans-serif;
   font-weight: 700;
   color: var(--purple-clr_800);
 }
-.app h2, .app h3 {
+.app h2, .app h3 .h2,
+.app .h3 {
   font-family: "Itim", sans-serif, system-ui;
   text-transform: lowercase;
   color: var(--purple-clr_700);
 }
-.app h2 {
+.app h2, .app .h2 {
   font-size: 1.5rem;
 }
-.app h3 {
+.app h3, .app .h3 {
   font-size: 1.3rem;
 }
-.app h4 {
+.app h4, .app .h4 {
   font-size: 1.2rem;
 }
-.app h4, .app h5, .app h6 {
+.app h4, .app h5, .app h6 .h4,
+.app .h5, .app .h6 {
   font-family: "Itim", system-ui;
   font-weight: 400;
   text-transform: lowercase;
@@ -726,6 +732,15 @@ body {
   grid-template: "welc  welc  welc  welc" auto "event daily daily daily" auto "news  news  sale  sale" auto "subm  subm  subm  subm" auto/4fr 2fr 2fr 3fr;
   gap: 15px 30px;
 }
+#home-dashboard h2 {
+  background: linear-gradient(to bottom left, #51297c, #4559bd, #5ca0d4);
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
 #home-dashboard .welcome-banner {
   grid-area: welc;
 }
@@ -761,10 +776,14 @@ body {
   padding: 10px;
 }
 #home-dashboard .bubblebox .bubble img {
-  width: 100%;
+  max-width: 100%;
 }
 #home-dashboard .bubblebox .bubble.jobs {
   grid-template-columns: 1fr 1fr 1fr;
+}
+#home-dashboard .bubblebox .bubble.jobs img {
+  width: 100%;
+  max-width: 250px;
 }
 #home-dashboard .bubblebox .bubble.jobs .foraging img {
   filter: grayscale(1) opacity(0.5);
@@ -772,12 +791,21 @@ body {
 #home-dashboard .bubblebox .bubble .news-item {
   justify-self: start;
   text-align: start;
+  padding: 10px;
+}
+#home-dashboard .bubblebox .bubble.sale-info .character-info .sale-details {
+  grid-area: more;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 3px solid var(--white);
+  margin: 5px;
 }
 #home-dashboard .bubblebox .bubble .gallery {
   width: 100%;
   height: min(400px, 30vh);
-  background: url("/images/overlays/starring.png") #add4e3;
+  background: repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, transparent 2px, transparent 15px), linear-gradient(to bottom left, #bfeeff, #e6d9ff, #ffdde9, #fff1d5);
   border-radius: 15px;
+  border: 2px white solid;
 }
 
 @media (width < 768px) {
@@ -2065,10 +2093,10 @@ body {
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
   border-radius: 15px 15px 0 0;
   padding: 5px;
-  font-weight: 500;
-  font-size: 1.2em;
 }
 #app #site-wrapper #sidebar .sidebar-header a {
+  font-weight: 600;
+  font-size: 1.1em;
   color: var(--purple-clr_100);
 }
 #app #site-wrapper #sidebar #sidebar-ul {

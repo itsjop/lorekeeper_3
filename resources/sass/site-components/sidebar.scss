@@ -16,9 +16,9 @@
       @include body-bg(var(--purple-clr_700));
       border-radius: 15px 15px 0 0;
       padding: 5px;
-      font-weight: 500;
-      font-size: 1.2em;
       a {
+        font-weight: 600;
+        font-size: 1.1em;
         color: var(--purple-clr_100);
       }
     }

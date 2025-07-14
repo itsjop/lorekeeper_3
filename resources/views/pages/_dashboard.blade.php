@@ -7,10 +7,10 @@
       <span>Current Event</span>
     </h2>
     <div class="bubble ">
-      <img src="" alt="" class="w-100">
+      <img src="images/lore_pages/homepage/characters.png" alt="" class="w-66">
       <div class="grid ai-center">
         <h3> (Coming Soon!) </h3>
-        <h4 class="flex">
+        <h4 class="flex jc-center">
           <a href="">daily</a>
           <i class="fas fa-star px-2"></i>
           <a href="">shop</a>
@@ -68,14 +68,14 @@
         <img src="{{ asset('/images/somnivores/jax2.png') }}" alt="">
       </div>
       <div class="character-info">
-        <div class="sale-type h3"> sale_type </div>
-        <div class="sale-price h3"> $ sale_price </div>
+        <div class="sale-type h4"> Flat Sale Raffle </div>
+        <div class="sale-price h3"> $80 </div>
         <div class="sale-title"> <a href="">
-            design_title
+            The Real Jax
           </a>
         </div>
         <div class="sale-artist"> by
-          <a href=""> artist_name </a>
+          <a href=""> notwyspic </a>
         </div>
         <a class="sale-details" href="sale_link"> View More > </a>
       </div>
