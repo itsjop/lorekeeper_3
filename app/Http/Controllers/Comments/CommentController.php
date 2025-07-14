@@ -337,7 +337,7 @@ class CommentController extends Controller {
       }
     }
 
-    return view('comments._comments', [
+    return view('comments._comment', [
       'comments'       => $comments,
       'sort'           => $sort,
       'perPage'        => $perPage,
