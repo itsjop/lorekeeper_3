@@ -7,7 +7,11 @@
       <span>Current Event</span>
     </h2>
     <div class="bubble ">
-      <img src="images/lore_pages/homepage/characters.png" alt="" class="w-66">
+      <img
+        src="images/lore_pages/homepage/characters.png"
+        alt=""
+        class="w-66"
+      >
       <div class="grid ai-center">
         <h3> (Coming Soon!) </h3>
         <h4 class="flex jc-center">
@@ -25,19 +29,19 @@
     <div class="bubble jobs">
       <div class="wishing-well">
         <a href="/dailies/1">
-          <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="">
-          <h3><a href="">Wishing Well</h3></a>
+          <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well">
+          <h3>Wishing Well</h3>
         </a>
       </div>
       <div class="starlit-acres">
         <a href="/dailies/2">
-          <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="">
-          <h3><a href="">Starlit Acres</a></h3>
+          <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily">
+          <h3>Starlit Acres</h3>
         </a>
       </div>
       <div class="foraging">
         <a href="/dailies/3">
-          <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="">
+          <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone">
           <h3>Foraging (coming soon)</h3>
         </a>
       </div>

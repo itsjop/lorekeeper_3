@@ -777,6 +777,7 @@ body {
 }
 #home-dashboard .bubblebox .bubble img {
   max-width: 100%;
+  max-width: 250px;
 }
 #home-dashboard .bubblebox .bubble.jobs {
   grid-template-columns: 1fr 1fr 1fr;
