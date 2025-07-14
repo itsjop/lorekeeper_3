@@ -1,38 +1,38 @@
 <div id="home-dashboard">
-  <h1 class="welcome-banner">Welcome, {!! Auth::user()->displayName !!}!</h1>
+  <h1 class="welcome-banner">Welcome back to Reverie, {!! Auth::user()->displayName !!}! ✨</h1>
   {{-- <div class="card mb-4 timestamp">
     <div class="card-body"> <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!} </div> </div> --}}
   <div class="bubblebox current-event">
-    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-heart"></i>
       <span>Current Event</span>
     </h2>
     <div class="bubble ">
       <img src="" alt="" class="w-100">
       <div class="grid ai-center">
-        <h3> LAUNCH PARTY </h3>
+        <h3> (Coming Soon!) </h3>
         <h4 class="flex">
-          <a href=""> event daily </a>
-          <i class="fas fa-heart"></i>
-          <a href=""> event shop </a>
+          <a href="">daily</a>
+          <i class="fas fa-star px-2"></i>
+          <a href="">shop</a>
         </h4>
       </div>
     </div>
   </div>
   <div class="bubblebox dailies">
-    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-gifts"></i>
       <span>Dailies</span>
     </h2>
     <div class="bubble jobs">
       <div class="wishing-well">
         <a href="/dailies/1">
           <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="">
-          <h3>Wishing Well</h3>
+          <h3><a href="">Wishing Well</h3></a>
         </a>
       </div>
       <div class="starlit-acres">
         <a href="/dailies/2">
           <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="">
-          <h3>Starlit Acres</h3>
+          <h3><a href="">Starlit Acres</a></h3>
         </a>
       </div>
       <div class="foraging">
@@ -44,7 +44,7 @@
     </div>
   </div>
   <div class="bubblebox newsfeed">
-    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-newspaper"></i>
       <span>Newsfeed</span>
     </h2>
     <div class="bubble">
@@ -59,7 +59,7 @@
     </div>
   </div>
   <div class="bubblebox sales">
-    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-store"></i>
       <span>Sales</span>
     </h2>
     {{-- INSERT LIVE SALE VALUES HERE --}}
@@ -83,10 +83,10 @@
   </div>
   {{-- SUBMISSION GALLERY --}}
   <div class="bubblebox recent-submissions">
-    <h2 class="flex gap-1 ai-center"> <i class="fas fa-heart"></i>
+    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-palette"></i>
       <span>Recent Gallery Submissions</span>
     </h2>
-    <div class="bubble">
+    <div class="bubble p-0">
       <div class="gallery"></div>
     </div>
   </div>

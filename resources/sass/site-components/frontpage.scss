@@ -31,7 +31,9 @@
     .bubble {
       display: grid;
       background: var(--white);
+      background-color: #ffffffbb;
       border-radius: 15px;
+      box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_400), transparent 20%);
       width: 100%;
       justify-items: center;
       align-items: center;
