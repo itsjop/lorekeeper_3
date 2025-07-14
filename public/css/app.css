@@ -1161,6 +1161,11 @@ body {
   }
 }
 
+.masterlist-character.unset {
+  --card_gradient: linear-gradient(to bottom left, #ffb3e5, #ff75dd, #8e60d3, #bdafff);
+  --card_card-border: linear-gradient(180deg, #fff, #ffc3fd);
+  --card_profile-bg_color: linear-gradient(45deg, #ffcbf3, #ded3ff);
+}
 .masterlist-character.sweet {
   --card_gradient: linear-gradient(to bottom left, #ffb3e5, #ff75dd, #8e60d3, #bdafff);
   --card_card-border: linear-gradient(180deg, #fff, #ffc3fd);
