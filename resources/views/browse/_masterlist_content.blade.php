@@ -93,7 +93,6 @@ alt="List View"
   </div> --}}
 {!! $characters->render() !!}
 <div id="ml-gridView" class="">
-  {{-- {{ dd($characters) }} --}}
   @foreach ($characters as $character)
     @include('browse._masterlist_content_entry', [
         'char_image' =>

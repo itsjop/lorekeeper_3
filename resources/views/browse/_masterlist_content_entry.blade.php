@@ -1,4 +1,4 @@
-<div id={{ strtolower($character->slug) }} {{ $character->image->subtype_id == null ? dd($character) : '' }} class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id, 'label', null, $character) }}">
+<div id={{ strtolower($character->slug) }}" class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id, 'label', null, $character) }}">
   {{-- Subtype Badge --}}
   <div class="ml-badge">
     <div class="flag">
