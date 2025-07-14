@@ -1289,4 +1289,16 @@ class User extends Authenticatable implements MustVerifyEmail {
     //else you can :)
     return true;
   }
+
+  /**
+   * Checks if the user has bookmarked a character.
+   * Returns the bookmark if one exists.
+   *
+   * @param mixed $character
+   *
+   * @return \App\Models\Character\CharacterBookmark
+   */
+  public function hasBookmarked($character) {
+    return CharacterBookmark::where('user_id', $this->id)->where('character_id', $character->id)->first();
+  }
 }
