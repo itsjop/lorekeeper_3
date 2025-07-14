@@ -89,6 +89,8 @@
       @endif
     </div>
 
+    <br></br>
+
     @if (isset($user->profile->parsed_text))
       <div class="card mb-3" style="clear:both;">
         @if ($user->profile->pronouns)
@@ -102,7 +104,7 @@
       </div>
     @endif
 
-    <div class="row">
+    <div class="row mb-4">
       <div class="col-md-6">
         @include('widgets._selected_character', [
             'character' => $user->settings->selectedCharacter,
@@ -110,7 +112,7 @@
             'fullImage' => true,
         ])
       </div>
-      <div class="col-md-6 mb-4 profile-assets" style="clear:both;">
+      <div class="col-md-6 profile-assets" style="clear:both;">
         <div class="card profile-currencies profile-assets-card mb-4">
           <div class="card-body text-center">
             <h5 class="card-title">Bank</h5>
@@ -148,12 +150,10 @@
       </div>
     </div>
 
-    <div class="text-right"><a href="{{ $user->url . '/characters' }}">View all...</a></div>
-
     <div class="card mb-3">
       <div class="card-body text-center">
         <h5 class="card-title">{{ ucfirst(__('awards.awards')) }}</h5>
-        <div class="card-body">
+        <div class="">
           @if (count($awards ?: 0))
             <div class="row">
               @foreach ($awards as $award)

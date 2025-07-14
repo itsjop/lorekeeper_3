@@ -61,10 +61,12 @@
 
 // DETAILS COLLAPSERS
 #sidebar {
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  border-radius: 15px;
   details {
     width: 100%;
     font-size: 1em;
-    background-color: var(--purple-clr_50);
+    // background-color: var(--purple-clr_50);
     transition: 0.4s var(--spring_linear);
     overflow: clip;
     border-width: 0 2px;
@@ -75,7 +77,8 @@
       position: relative;
       text-align: center;
       padding: 5px 0;
-      background-color: var(--purple-clr_100);
+      background: color-mix(in srgb, var(--active-clr_100), transparent 30%);
+      backdrop-filter: blur(5px);
       &::marker {
         content: '';
       }
@@ -134,7 +137,7 @@
     }
     + details {
       &:last-of-type {
-        border-radius: 15px;
+        border-radius: 0 0 15px 15px;
       }
     }
   }

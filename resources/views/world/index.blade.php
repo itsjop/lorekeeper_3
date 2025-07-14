@@ -11,11 +11,11 @@
   <div class="row">
     <div class="col-md-6">
       <div class="card mb-4">
-        <div class="card-body text-center">
+        <div class="card-body text-center br-top-15">
           <img src="{{ asset('images/lorekeeper/characters.png') }}" alt="Characters" />
           <h5 class="card-title">Characters</h5>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush br-bot-15">
           <li class="list-group-item">
             <a href="{{ url('world/' . __('lorekeeper.specieses')) }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a>
           </li>
@@ -47,11 +47,11 @@
     </div>
     <div class="col-md-6">
       <div class="card mb-4">
-        <div class="card-body text-center">
+        <div class="card-body text-center br-top-15">
           <img src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Items and {{ ucfirst(__('awards.awards')) }}" />
           <h5 class="card-title">Items & Companions & {{ ucfirst(__('awards.awards')) }}</h5>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush br-bot-15">
           <li class="list-group-item">
             <a href="{{ url('world/item-categories') }}">Item Categories</a>
           </li>

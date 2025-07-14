@@ -30,19 +30,19 @@
       <div class="wishing-well">
         <a href="/dailies/1">
           <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well">
-          <h3>Wishing Well</h3>
+          <h3 class="a">Wishing Well</h3>
         </a>
       </div>
       <div class="starlit-acres">
         <a href="/dailies/2">
           <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily">
-          <h3>Starlit Acres</h3>
+          <h3 class="a">Starlit Acres</h3>
         </a>
       </div>
       <div class="foraging">
         <a href="/dailies/3">
           <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone">
-          <h3>Foraging (coming soon)</h3>
+          <h3 class="a">Foraging (coming soon)</h3>
         </a>
       </div>
     </div>

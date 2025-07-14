@@ -13,14 +13,16 @@
 @import './global/site-frame';
 
 // Component-specific
-@import './site-components/frontpage';
+@import './site-components/masterlist/ml_profile.scss';
+@import './site-components/masterlist/ml_cards.scss';
+@import './site-components/site-header';
 @import './site-components/animations';
 @import './site-components/background';
-@import './site-components/footer';
-@import './site-components/lore';
-@import './site-components/masterlist';
-@import './site-components/modal';
-@import './site-components/navbar';
+@import './site-components/frontpage';
 @import './site-components/sidebar';
-@import './site-components/site-header';
+@import './site-components/navbar';
+@import './site-components/footer';
+@import './site-components/modal';
+@import './site-components/card';
+@import './site-components/lore';
 @import './site-components/misc';

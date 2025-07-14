@@ -1,0 +1,11 @@
+.card {
+  .card-header {
+    background: transparent;
+  }
+
+  .card-body {
+    @include card-bg;
+    background: #ffffffa4;
+    border-radius: 15px;
+  }
+}
