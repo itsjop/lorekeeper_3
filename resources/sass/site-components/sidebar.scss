@@ -320,6 +320,7 @@
         height: calc(0.8 * var(--sidebar-width));
         border-radius: 100vh;
         overflow: hidden;
+        contain: paint;
         .rainbow,
         .stars {
           position: absolute;

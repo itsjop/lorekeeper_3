@@ -579,8 +579,8 @@ body {
   font-weight: 700;
   color: var(--purple-clr_800);
 }
-.app h2, .app h3 .h2,
-.app .h3 {
+.app h2, .app h3,
+.app .h2, .app .h3 {
   font-family: "Itim", sans-serif, system-ui;
   text-transform: lowercase;
   color: var(--purple-clr_700);
@@ -652,7 +652,7 @@ body {
   left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
 }
 #app #site-wrapper.has-sidebar {
-  grid-template: "   .     logo " 20vh "   .     nav  " min-content "sidebar  main " auto "sidebar footer" auto/var(--sidebar-width) var(--content-width);
+  grid-template: "   .     logo " 12vh "   .     nav  " min-content "sidebar  main " auto "sidebar footer" auto/var(--sidebar-width) var(--content-width);
 }
 #app #site-wrapper {
   padding-bottom: 55px;
@@ -877,7 +877,7 @@ body {
   mask-mode: alpha;
   filter: brightness(300%) opacity(0.8);
   position: relative;
-  animation: glare 10s ease-in-out forwards infinite;
+  animation: glare 15s ease-in-out forwards infinite;
 }
 
 @keyframes glare {
@@ -2378,6 +2378,7 @@ body {
   height: calc(0.8 * var(--sidebar-width));
   border-radius: 100vh;
   overflow: hidden;
+  contain: paint;
 }
 .featured-character .sidebar-section .thumb .character-border .rainbow,
 .featured-character .sidebar-section .thumb .character-border .stars {
@@ -2534,6 +2535,7 @@ body {
   justify-items: center;
   align-content: center;
   transition: transform 0.5s var(--elastic_linear);
+  contain: paint;
 }
 #app #site-wrapper #site-logo-header picture img,
 #app #site-wrapper #site-logo-header picture source, #app #site-wrapper #site-logo-header picture::after {
@@ -2555,8 +2557,8 @@ body {
   content: "";
   max-width: unset;
   background-image: url(/images/logo.webp?339e76dd7b97f7db4b642ba977e50a53);
-  background-size: contain;
-  background-position: center;
+  background-size: 100% 100%;
+  background-position: 50% min(50% - 0.11vw, 2.5px);
   z-index: 5;
 }
 

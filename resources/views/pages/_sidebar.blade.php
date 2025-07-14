@@ -12,7 +12,7 @@
         <div class="character-border">
           <div class="rainbow"></div>
           <div class="stars"></div>
-          <div class="char-filter"></div>
+          {{-- <div class="char-filter"></div> --}}
         </div>
         <img src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
           class="img-char-thumbnail" />

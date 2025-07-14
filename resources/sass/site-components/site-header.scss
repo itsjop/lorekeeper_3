@@ -9,18 +9,18 @@
       transform-origin: 50% 50%;
       &:hover {
         animation:
-          mirage 15s .5s ease-in-out forwards infinite,
+          mirage 15s 0.5s ease-in-out forwards infinite,
           mirage-shift 15s 0s ease-in-out forwards infinite;
         animation-composition: add;
-
       }
       picture {
         display: grid;
-        grid-template: "logo";
+        grid-template: 'logo';
         justify-content: center;
         justify-items: center;
         align-content: center;
-        transition: transform .5s var(--elastic_linear);
+        transition: transform 0.5s var(--elastic_linear);
+        contain: paint;
         img,
         source,
         &::after {
@@ -34,14 +34,14 @@
           object-position: center;
           /* filter: drop-shadow(5px 10px 2px rgba(29, 1, 36, 0.3)); */
           position: relative;
-          opacity: .9;
+          opacity: 0.9;
         }
         &::after {
-          content: "";
+          content: '';
           max-width: unset;
-          background-image: url("../../../public/images/somnivores/logo.webp");
-          background-size: contain;
-          background-position: center;
+          background-image: url('../../../public/images/somnivores/logo.webp');
+          background-size: 100% 100%;
+          background-position: 50% min((50% - 0.11vw), 2.5px);
           z-index: 5;
         }
       }
