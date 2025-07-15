@@ -8,6 +8,8 @@
 
   @include('character.design._header', ['request' => $request])
 
+  <div class="card">
+  <div class="card-body br-ntl-15">
   @if ($request->status == 'Draft')
     <p>
       This request has not been submitted to the approval queue yet.
@@ -71,7 +73,8 @@
   @elseif($request->status == 'Approved')
     <p>This request has been approved. The data is preserved as a record of this submission.</p>
   @endif
-
+  </div>
+  </div>
 @endsection
 
 @section('scripts')

@@ -6,7 +6,7 @@
 @if (isset($request->staff_id))
   @if ($request->staff_comments && ($request->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
     <h5 class="text-danger">Staff Comments ({!! $request->staff->displayName !!})</h5>
-    <div class="card border-danger mb-3">
+    <div class="card border-danger">
       <div class="card-body">{!! nl2br(htmlentities($request->staff_comments)) !!}</div>
     </div>
   @else
@@ -27,7 +27,7 @@
       }
   }
   ?>
-  <div class="card mb-3">
+  <div class="card">
     <div class="card-body">
       <h5 class="text-left">{{ $request->status == 'Pending' ? 'Vote' : 'Past Votes' }} on this {{ $request->update_type == 'MYO' ? 'MYO Submission' : 'Design Update' }}
         @if ($request->status == 'Pending')
@@ -91,7 +91,7 @@
   </div>
 @endif
 
-<ul class="nav nav-tabs mb-3">
+<ul class="nav nav-tabs flex gap-_5 ">
   <li class="nav-item">
     <a class="nav-link {{ set_active('designs/' . $request->id) }}" href="{{ url('designs/' . $request->id) }}">
       @if ($request->is_complete)

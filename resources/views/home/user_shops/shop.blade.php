@@ -34,7 +34,7 @@
     <div class="card mb-3 inventory-category collapse show" id="itemstockcollapsible">
       <div class="card-body inventory-body">
         <div class="mb-3">
-          <ul class="nav nav-tabs card-header-tabs">
+          <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
             @foreach ($items as $categoryId => $categoryItems)
               <li class="nav-item">
                 <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="categoryTab-{{ isset($categories[$categoryId]) ? $categoryId : 'misc' }}" data-bs-toggle="tab" href="#category-{{ isset($categories[$categoryId]) ? $categoryId : 'misc' }}"

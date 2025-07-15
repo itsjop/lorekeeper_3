@@ -54,14 +54,14 @@ class CharacterController extends Controller {
    */
   public function getCreateCharacter() {
     return view('admin.masterlist.create_character', [
-      'isMyo'       => false,
+      'isMyo'            => false,
       'categories'       => CharacterCategory::orderBy('sort')->get(),
       'userOptions'      => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
       'rarities'         => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'specieses'        => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
       'subtypes'         => ['0' => 'Pick a Species First'],
       'features'         => Feature::getDropdownItems(1),
-      'transformations' => ['0' => 'Pick a Species First'],
+      'transformations'  => ['0' => 'Pick a Species First'],
       'characterOptions' => CharacterLineageBlacklist::getAncestorOptions(),
       'titles'           => ['custom' => 'Custom Title'] + CharacterTitle::orderBy('sort', 'DESC')->pluck('title', 'id')->toArray(),
     ]);
@@ -74,13 +74,13 @@ class CharacterController extends Controller {
    */
   public function getCreateMyo() {
     return view('admin.masterlist.create_character', [
-      'isMyo'       => true,
-      'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
-      'rarities'    => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'specieses'   => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'subtypes'    => ['0' => 'Pick a Species First'],
-      'features'    => Feature::getDropdownItems(1),
-      'transformations' => ['0' => 'Pick a Species First'],
+      'isMyo'            => true,
+      'userOptions'      => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+      'rarities'         => ['0' => 'Select Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'specieses'        => ['0' => 'Select Species'] + Species::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'subtypes'         => ['0' => 'Pick a Species First'],
+      'features'         => Feature::getDropdownItems(1),
+      'transformations'  => ['0' => 'Pick a Species First'],
       'characterOptions' => CharacterLineageBlacklist::getAncestorOptions(),
     ]);
   }

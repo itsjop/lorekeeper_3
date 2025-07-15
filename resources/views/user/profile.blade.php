@@ -95,7 +95,7 @@
       <div class="card mb-3" style="clear:both;">
         @if ($user->profile->pronouns)
           <h5 class="card-header">
-            {{ $user->profile->pronouns }}
+            {!! $user->profile->pronouns !!}
           </h5>
         @endif
         <div class="card-body">

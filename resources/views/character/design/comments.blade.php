@@ -8,6 +8,8 @@
 
   @include('character.design._header', ['request' => $request])
 
+  <div class="card">
+  <div class="card-body tab-content br-ntl-15">
   <h2>Comments</h2>
 
   @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id)
@@ -26,6 +28,8 @@
       <div class="card-body">
         {!! nl2br(htmlentities($request->comments)) !!}
       </div>
+    </div>
+    </div>
     </div>
   @endif
 @endsection

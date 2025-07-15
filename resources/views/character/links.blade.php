@@ -34,7 +34,7 @@
         <div class="card mb-2">
           <div class="card-header">
             <div class="row">
-              <ul class="col-5 nav nav-tabs card-header-tabs">
+              <ul class="col-5 nav nav-tabs flex gap-_5 card-header-tabs">
                 <li class="nav-item ml-4">
                   <a class="nav-link active" data-bs-toggle="tab" role="tab">Info</a>
                 </li>

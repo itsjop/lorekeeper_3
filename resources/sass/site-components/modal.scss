@@ -2,6 +2,14 @@
   display: none;
 }
 #confirmationModal {
+  &.show {
+    opacity: 1;
+  }
+  &.fade:not(.show) {
+    display: none;
+    pointer-events: none;
+    user-select: none;
+  }
 }
 dialog,
 .modal {
@@ -48,6 +56,7 @@ dialog,
       border-radius: 15px;
     }
   }
+
 }
 
 /* Before open state  */

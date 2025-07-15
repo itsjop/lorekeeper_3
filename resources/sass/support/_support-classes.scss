@@ -109,6 +109,18 @@
 .br-bot-15 { border-radius: 0 0 15px 15px; }
 .br-bot-10 { border-radius: 0 0 10px 10px; }
 .br-bot-5  { border-radius: 0 0 5px  5px ; }
+.br-tl-15 { border-radius: 15px 0 0 0; }
+.br-tl-10 { border-radius: 10px 0 0 0; }
+.br-tl-5  { border-radius: 5px  0 0 0; }
+.br-tr-15 { border-radius: 0 15px 0 0; }
+.br-tr-10 { border-radius: 0 10px 0 0; }
+.br-tr-5  { border-radius: 0 5px  0 0; }
+.br-ntl-15 { border-radius: 0 15px 15px 15px; }
+.br-ntl-10 { border-radius: 0 10px 10px 10px; }
+.br-ntl-5  { border-radius: 0 5px  5px  5px ; }
+.br-ntr-15 { border-radius: 15px 0 15px 15px; }
+.br-ntr-10 { border-radius: 10px 0 10px 10px; }
+.br-ntr-5  { border-radius: 5px  0 5px  5px ; }
 
 /* Text-align */
 .ta-left   { text-align: left;   }

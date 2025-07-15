@@ -29,7 +29,6 @@
   .btn-outline-secondary,
   .btn-outline-primary,
   .btn-outline-success,
-  .btn-outline-info,
   .badge-primary,
   .btn-secondary,
   .btn-primary,
@@ -38,9 +37,7 @@
   .btn-toolbar,
   .btn-warning,
   .btn-danger,
-  .btn-light,
   .btn-block,
-  .btn-info,
   .btn-dark,
   .btn-link
   {
@@ -51,8 +48,37 @@
     &:hover {
       background: (#a496ff);
     }
-
   }
+
+  .btn-light{
+   background: (#6eb4e0);
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+    transition: 0.2s ease;
+    &:hover {
+      background: (#429bd3);
+
+    }
+  }
+
+  .toggle-handle.btn.btn-light{
+    background: #8bcbf3;
+  }
+
+  .btn-outline-info,
+  .btn-info{
+    background: (#8bcbf3);
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+    transition: 0.2s ease;
+    &:hover {
+      background: (#46b3f2);
+
+    }
+  }
+
   .btn-outline-danger{
     background: #d0335d;
     color: white;

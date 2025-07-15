@@ -464,13 +464,10 @@ class CharacterController extends Controller {
         break;
       case 'name':
         return $this->postName($request, $service);
-        break;
       case 'delete':
         return $this->postDelete($request, $service);
-        break;
       case 'take':
         return $this->postItemTransfer($request, $service);
-        break;
     }
 
     return redirect()->back();

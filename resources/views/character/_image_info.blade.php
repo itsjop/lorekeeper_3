@@ -17,21 +17,21 @@
     @endif
     <div class="card character-bio w-100">
       <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
+        <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
           <li class="nav-item">
             <a class="nav-link active" id="infoTab-{{ $image->id }}" data-bs-toggle="tab" href="#info-{{ $image->id }}" role="tab">Info</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" id="notesTab-{{ $image->id }}" data-bs-toggle="tab" href="#notes-{{ $image->id }}" role="tab">Notes</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" id="creditsTab-{{ $image->id }}" data-bs-toggle="tab" href="#credits-{{ $image->id }}" role="tab">Credits</a>
           </li>
-          @if (isset($showMention) && $showMention)
+          {{-- @if (isset($showMention) && $showMention)
             <li class="nav-item">
               <a class="nav-link" id="mentionTab-{{ $image->id }}" data-bs-toggle="tab" href="#mention-{{ $image->id }}" role="tab">Mention</a>
             </li>
-          @endif
+          @endif --}}
           @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
             <li class="nav-item">
               <a class="nav-link" id="settingsTab-{{ $image->id }}" data-bs-toggle="tab" href="#settings-{{ $image->id }}" role="tab"><i class="fas fa-cog"></i></a>
@@ -225,32 +225,9 @@
             </div>
           @endif
 
-          <div class="mb-1">
-            <div>
-              <h5>Pets</h5>
-            </div>
-            <div class="row justify-content-center text-center">
-              {{-- get one random pet --}}
-              @php
-                $pets = $image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get();
-              @endphp
-              @foreach ($pets as $pet)
-                @if (config('lorekeeper.pets.pet_bonding_enabled'))
-                  @include('character._pet_bonding_info', ['pet' => $pet])
-                @else
-                  <div class="ml-2 mr-3">
-                    <img src="{{ $pet->pet->image($pet->id) }}" style="max-width: 75px;" />
-                    <br>
-                    <span class="text-light badge badge-dark" style="font-size:95%;">{!! $pet->pet_name !!}</span>
-                  </div>
-                @endif
-              @endforeach
-              <div class="ml-auto float-right mr-3">
-                <a href="{{ $character->url . '/pets' }}" class="btn btn-outline-info btn-sm">View All</a>
-              </div>
-            </div>
-          </div>
+
         </div>
+
 
         {{-- Image notes --}}
         <div class="tab-pane fade" id="notes-{{ $image->id }}">

@@ -11,7 +11,7 @@
     Character Transfers
   </h1>
 
-  <ul class="nav nav-tabs mb-3">
+  <ul class="nav nav-tabs flex gap-_5 mb-3">
     <li class="nav-item">
       <a class="nav-link {{ set_active('characters/transfers/incoming*') }}" href="{{ url('characters/transfers/incoming') }}">Incoming</a>
     </li>

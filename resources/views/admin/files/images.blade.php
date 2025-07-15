@@ -19,7 +19,8 @@
             <img src="{{ asset('images/lorekeeper/' . $image['filename']) }}" class="mw-100" alt="Site image: {{ $image['name'] }}" />
           </div>
           <div style="width: 100%;">
-            <h3 class="card-heading">{{ $image['name'] }} <a href="{{ asset('images/' . $image['filename']) }}" class="btn btn-info btn-sm float-right">View Current</a></h3>
+            <p class="card-heading">{{ $image['name'] }}
+              <a href="{{ asset('images/' . $image['filename']) }}" class="btn btn-info btn-sm float-right">View Current</a>
             <p>{{ $image['description'] }}</p>
             {!! Form::open(['url' => 'admin/images/upload', 'files' => true]) !!}
             <div class="d-flex">

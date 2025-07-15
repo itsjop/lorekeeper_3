@@ -65,6 +65,9 @@
         position: relative;
         z-index: 1;
         padding: 1.5rem;
+        border-radius: 15px;
+        // background-image: radial-gradient(transparent 0%, transparent calc(100% - 60px), white 100%);
+        box-shadow: 0 0 5px inset white;
       }
     }
     .site-background {
@@ -73,7 +76,7 @@
       height: 100dvh;
       top: 0;
       left: 0;
-      background-image: url('../../../public/images/somnivores/reveriefullres.webp');
+      background-image: light-dark(url('../../../public/images/somnivores/reveriefullres.webp'), url('../../../public/images/somnivores/reveriefullres_dark.png'));
       background-size: cover;
     }
     .modal-dialog .modal-body .inventory-main-img img {
