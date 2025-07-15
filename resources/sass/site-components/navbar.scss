@@ -14,7 +14,7 @@
         .dropdown {
           border-radius: 10px;
           transition: 0.1s ease;
-          border: 2px transparent solid;
+          box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
           > a {
             color: var(--purple-clr_50);
           }
@@ -32,7 +32,7 @@
           &:has(.show) {
             // &.show {
             border-radius: 10px 10px 0 0;
-            border: 2px var(--purple-clr_300) solid;
+            box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
             background-color: var(--purple-clr_50);
             z-index: 1;
             &:hover {
@@ -183,7 +183,9 @@
     top: 100%;
     opacity: 0;
     transform: scale(0.5);
-    border: 2px var(--purple-clr_300) solid;
+    border: 2px transparent solid;
+    box-shadow: 0 0 5px color-mix(in srgb, var(--active-clr_600), transparent 30%);
+
     border-top: 0;
     margin: -2px 0 0 -7px;
     transition:
