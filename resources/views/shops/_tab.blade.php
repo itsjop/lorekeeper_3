@@ -1,6 +1,6 @@
 <div class="card character-bio {{ $loop->last ? '' : 'mb-3' }}">
   <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
+    <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
       @foreach ($stock as $categoryId => $categoryItems)
         <li class="nav-item">
           <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="categoryTab-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}" data-bs-toggle="tab"

@@ -405,6 +405,42 @@ body .app.teal {
 #app .br-bot-5 {
   border-radius: 0 0 5px 5px;
 }
+#app .br-tl-15 {
+  border-radius: 15px 0 0 0;
+}
+#app .br-tl-10 {
+  border-radius: 10px 0 0 0;
+}
+#app .br-tl-5 {
+  border-radius: 5px 0 0 0;
+}
+#app .br-tr-15 {
+  border-radius: 0 15px 0 0;
+}
+#app .br-tr-10 {
+  border-radius: 0 10px 0 0;
+}
+#app .br-tr-5 {
+  border-radius: 0 5px 0 0;
+}
+#app .br-ntl-15 {
+  border-radius: 0 15px 15px 15px;
+}
+#app .br-ntl-10 {
+  border-radius: 0 10px 10px 10px;
+}
+#app .br-ntl-5 {
+  border-radius: 0 5px 5px 5px;
+}
+#app .br-ntr-15 {
+  border-radius: 15px 0 15px 15px;
+}
+#app .br-ntr-10 {
+  border-radius: 10px 0 10px 10px;
+}
+#app .br-ntr-5 {
+  border-radius: 5px 0 5px 5px;
+}
 #app .ta-left {
   text-align: left;
 }
@@ -476,7 +512,6 @@ body {
 #app .btn-outline-secondary,
 #app .btn-outline-primary,
 #app .btn-outline-success,
-#app .btn-outline-info,
 #app .badge-primary,
 #app .btn-secondary,
 #app .btn-primary,
@@ -487,7 +522,6 @@ body {
 #app .btn-danger,
 #app .btn-light,
 #app .btn-block,
-#app .btn-info,
 #app .btn-dark,
 #app .btn-link {
   background: #7f63da;
@@ -498,7 +532,6 @@ body {
 #app .btn-outline-secondary:hover,
 #app .btn-outline-primary:hover,
 #app .btn-outline-success:hover,
-#app .btn-outline-info:hover,
 #app .badge-primary:hover,
 #app .btn-secondary:hover,
 #app .btn-primary:hover,
@@ -509,10 +542,21 @@ body {
 #app .btn-danger:hover,
 #app .btn-light:hover,
 #app .btn-block:hover,
-#app .btn-info:hover,
 #app .btn-dark:hover,
 #app .btn-link:hover {
   background: #a496ff;
+}
+#app .btn-outline-info,
+#app .btn-info {
+  background: #8bcbf3;
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+#app .btn-outline-info:hover,
+#app .btn-info:hover {
+  background: #46b3f2;
 }
 #app .btn-outline-danger {
   background: #d0335d;
@@ -1280,6 +1324,11 @@ fieldset.masterlist-search-grid .searchbutton {
 #home-dashboard .bubblebox .bubble img {
   max-width: 100%;
   max-width: 250px;
+  transition: 0.3s var(--bounce_linear);
+  transform: scale(1);
+}
+#home-dashboard .bubblebox .bubble img:hover {
+  transform: scale(1.2);
 }
 #home-dashboard .bubblebox .bubble.jobs {
   grid-template-columns: 1fr 1fr 1fr;
@@ -1322,6 +1371,7 @@ fieldset.masterlist-search-grid .searchbutton {
     grid-area: 1/1/3/4;
     justify-self: end;
     align-self: start;
+    max-width: 250px;
   }
   #home-dashboard .sale-info .character-info {
     background-color: color-mix(in srgb, var(--purple-clr_500), transparent 30%);
@@ -2362,6 +2412,17 @@ body {
 }
 .modal-backdrop {
   display: none;
+}
+
+#confirmationModal.show {
+  opacity: 1;
+}
+#confirmationModal.fade:not(.show) {
+  display: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 dialog,

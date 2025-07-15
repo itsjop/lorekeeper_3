@@ -8,7 +8,7 @@
   {!! breadcrumbs(['Admin Panel' => 'admin', 'User Index' => 'admin/users', $user->name => 'admin/users/' . $user->name . '/edit']) !!}
 
   <h1>User: {!! $user->displayName !!}</h1>
-  <ul class="nav nav-tabs mb-3">
+  <ul class="nav nav-tabs flex gap-_5 mb-3">
     <li class="nav-item">
       <a class="nav-link active" href="{{ $user->adminUrl }}">Account</a>
     </li>

@@ -22,7 +22,7 @@
   {{-- Info --}}
   <div class="card character-bio">
     <div class="card-header">
-      <ul class="nav nav-tabs card-header-tabs">
+      <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
         <li class="nav-item">
           <a class="nav-link active" id="statsTab" data-bs-toggle="tab" href="#stats" role="tab"> Stats </a>
         </li>

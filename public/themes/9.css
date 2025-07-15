@@ -639,7 +639,7 @@ select.form-control:focus::-ms-value {
   color: var(--gray-500);
 }
 
-.btn-primary {
+/* .btn-primary {
   color: var(--white);
   background-color: var(--blue);
   border-color: var(--blue);
@@ -1248,7 +1248,7 @@ select.form-control:focus::-ms-value {
 .btn-link:disabled,
 .btn-link.disabled {
   color: var(--gray-600);
-}
+} */
 
 .dropdown-menu {
   color: var(--gray-400);

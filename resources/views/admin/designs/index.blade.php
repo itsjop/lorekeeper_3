@@ -11,7 +11,7 @@
     {{ $isMyo ? 'MYO Approval' : 'Design Update' }} Queue
   </h1>
 
-  <ul class="nav nav-tabs mb-3">
+  <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending') }}">Pending</a>
     </li>
