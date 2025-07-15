@@ -19,7 +19,7 @@
     <ul id="site-navbar" class=" navbar-nav">
       <li class="nav-item dropdown">
         <div id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-          Site
+          Updates
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
@@ -45,6 +45,8 @@
                 <i class="fas fa-cat"></i> Pets </a>
               <a class="dt-nav-item" href="{{ url('bank') }}">
                 <i class="fas fa-piggy-bank"></i> Bank </a>
+              <a class="dt-nav-item" href="{{ url('badge%20collection') }}">
+                <i class="fas fa-award"></i> My Badges </a>
               @if (Auth::user()->shops()->count() && Settings::get('user_shop_limit') == 1)
                 <a class="dt-nav-item" href="{{ url(Auth::user()->shops()->first()->editUrl) }}">
                   <i class="fas fa-shop"></i> My Shop </a>
@@ -80,17 +82,23 @@
               <i class="fas fa-star"></i> Somnivores </a>
             <a class="dt-nav-item" href="{{ url('⁉️dreams') }}">
               <i class="fas fa-cloud"></i> Dreams & Palates </a>
+            <a class="dt-nav-item" href="{{ url('world/species/1/traits') }}">
+              <i class="fas fa-scroll"></i> Somnivore Traits </a>
           </div>
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">World & Lore</h2>
             <a class="dt-nav-item" href="{{ url('lore') }}">
-              <i class="fas fa-book"></i> Somnivore Lore Index </a>
+              <i class="fas fa-book"></i> Lore Index </a>
             <a class="dt-nav-item" href="{{ url('world/locations') }}">
               <i class="fas fa-map-location-dot"></i> Reverie Locations </a>
-            <a class="dt-nav-item" href="{{ url('world/pets') }}">
-              <i class="fas fa-cat"></i> Companions & Trinkets </a>
+          </div>
+
+            <div class="dt-nav-group">
+            <h2 class="dt-nav-header">Databases</h2>
+            {{-- <a class="dt-nav-item" href="{{ url('world/pets') }}">
+              <i class="fas fa-cat"></i> Companions & Trinkets </a> --}}
             <a class="dt-nav-item" href="{{ url('world') }}">
-              <i class="fas fa-circle-info"></i> Encyclopedia </a>
+              <i class="fas fa-search"></i> Encyclopedia </a>
           </div>
         </div>
       </li>
@@ -113,7 +121,7 @@
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">How to Draw:</h2>
             <a class="dt-nav-item" href="{{ url('guide/anatomy') }}">
-              <i class="fas fa-star"></i> Somnivores </a>
+              <i class="fas fa-star"></i> Somnivore Anatomy </a>
             <a class="dt-nav-item" href="{{ url('guide/essence') }}">
               <i class="fas fa-cloud"></i> Dream Essence </a>
             <a class="dt-nav-item" href="{{ url('guide/scenery') }}">
@@ -123,8 +131,6 @@
             <h2 class="dt-nav-header">Character Design</h2>
             <a class="dt-nav-item" href="{{ url('guide/design') }}">
               <i class="fas fa-brush"></i> Somnivore Design Guide </a>
-            <a class="dt-nav-item" href="{{ url('world/traits') }}">
-              <i class="fas fa-scroll"></i> Somnivore Traits </a>
           </div>
         </div>
       </li>
@@ -136,13 +142,10 @@
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('sublist/npc') }}">
               <i class="fas fa-star"></i> NPCs </a>
-            {{-- <a class="dt-nav-item" href="{{ url('masterlist') }}">
+             <a class="dt-nav-item" href="{{ url('masterlist') }}">
               <i class="fas fa-star"></i> Official Somnivores </a>
             <a class="dt-nav-item" href="{{ url('sublist/MYO') }}">
               <i class="fas fa-star"></i> MYO Somnivores </a>
-            <hr>
-            <a class="dt-nav-item" href="{{ url('characters/myos') }}">
-              <i class="far fa-star"></i> MYO Slots </a> --}}
           </div>
         </div>
       </li>

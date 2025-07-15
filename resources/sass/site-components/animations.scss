@@ -10,21 +10,18 @@
     transparent 100%
   );
   mask-size: 200%;
-  mask-position: 50% 50%;
+  mask-position: 50% calc(50% - 0.03vh);
   mask-mode: alpha;
-  filter: brightness(300%) opacity(.8);
+  filter: brightness(300%) opacity(0.8);
   position: relative;
-  animation: glare 15s ease-in-out forwards infinite;
+  animation: glare 11s ease-in-out forwards infinite;
 }
 @keyframes glare {
   0% {
-    mask-position: 0% 50%;
-  }
-  00% {
-    mask-position: 0% 50%;
+    mask-position: -50% 50%;
   }
   100% {
-    mask-position: -250% 50%;
+    mask-position: -200% 50%;
   }
 }
 

@@ -37,7 +37,6 @@
   .btn-toolbar,
   .btn-warning,
   .btn-danger,
-  .btn-light,
   .btn-block,
   .btn-dark,
   .btn-link
@@ -49,6 +48,22 @@
     &:hover {
       background: (#a496ff);
     }
+  }
+
+  .btn-light{
+   background: (#6eb4e0);
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+    transition: 0.2s ease;
+    &:hover {
+      background: (#429bd3);
+
+    }
+  }
+
+  .toggle-handle.btn.btn-light{
+    background: #8bcbf3;
   }
 
   .btn-outline-info,
