@@ -722,7 +722,7 @@ body {
   height: 100dvh;
   top: 0;
   left: 0;
-  background-image: light-dark(url(/images/reveriefullres.webp?4d4f4c85265de40668608b5e4e2468cf), url(/images/reveriefullres_dark.png?78e55184c650a602add86a81ddbddccc));
+  background-image: url(/images/reveriefullres.webp?4d4f4c85265de40668608b5e4e2468cf);
   background-size: cover;
 }
 #app #site-wrapper .modal-dialog .modal-body .inventory-main-img img {

@@ -76,7 +76,8 @@
       height: 100dvh;
       top: 0;
       left: 0;
-      background-image: light-dark(url('../../../public/images/somnivores/reveriefullres.webp'), url('../../../public/images/somnivores/reveriefullres_dark.png'));
+      background-image: url('../../../public/images/somnivores/reveriefullres.webp');
+      // background-image: light-dark(url('../../../public/images/somnivores/reveriefullres.webp'), url('../../../public/images/somnivores/reveriefullres_dark.png'));
       background-size: cover;
     }
     .modal-dialog .modal-body .inventory-main-img img {
