@@ -122,12 +122,9 @@ class GalleryManager extends Service {
       $withCriteriaSelected = isset($currencyFormData) && $currencyFormData && isset($currencyFormData['criterion']) ? array_filter($currencyFormData['criterion'], function ($obj) {
         return isset($obj['id']);
       }) : [];
-      if (count($withCriteriaSelected) > 0) {
-        $currencyFormData['criterion'] = $withCriteriaSelected;
-      } else {
-        $currencyFormData['criterion'] = null;
-      }
-
+      if (count($withCriteriaSelected) > 0) $currencyFormData['criterion'] = $withCriteriaSelected;
+      else $currencyFormData['criterion'] = null;
+      
       if (isset($currencyFormData) && $currencyFormData && isset($currencyFormData['criterion'])) {
         $data['data']['criterion'] = $currencyFormData['criterion'];
         $total = 0;

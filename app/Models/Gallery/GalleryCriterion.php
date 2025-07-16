@@ -2,16 +2,18 @@
 
 namespace App\Models\Gallery;
 
+use Config;
 use App\Models\Model;
 
-class GalleryCriterion extends Model {
+class GalleryCriterion extends Model
+{
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'gallery_id', 'criterion_id', 'min_requirements', 'criterion_currency_id',
+        'gallery_id', 'criterion_id', 'min_requirements','criterion_currency_id'
     ];
 
     /**
@@ -46,31 +48,35 @@ class GalleryCriterion extends Model {
     **********************************************************************************************/
 
     /**
-     * Get the gallery attached to this criterion.
+     * Get the gallery attached to this criterion
      */
-    public function gallery() {
-        return $this->belongsTo('App\Models\Gallery\Gallery', 'gallery_id');
+    public function gallery()
+    {
+       return $this->belongsTo('App\Models\Gallery\Gallery', 'gallery_id');
     }
 
     /**
-     * Get the criterion attached to this prompt.
+     * Get the criterion attached to this prompt
      */
-    public function criterion() {
-        return $this->belongsTo('App\Models\Criteria\Criterion', 'criterion_id');
+    public function criterion()
+    {
+       return $this->belongsTo('App\Models\Criteria\Criterion', 'criterion_id');
     }
 
-    /**********************************************************************************************
 
-         ACCESSORS
+   /**********************************************************************************************
 
-     **********************************************************************************************/
+        ACCESSORS
+
+    **********************************************************************************************/
 
     /**
      * Get the data attribute as an associative array.
      *
      * @return array
      */
-    public function getMinRequirementsAttribute() {
+    public function getMinRequirementsAttribute()
+    {
         return json_decode($this->attributes['min_requirements'], true);
     }
 }

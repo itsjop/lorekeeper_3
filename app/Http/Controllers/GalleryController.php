@@ -334,9 +334,7 @@ class GalleryController extends Controller {
     }
     $gallery = Gallery::find($id);
     $closed = !Settings::get('gallery_submissions_open');
-
     $galleryCriteria = GalleryCriterion::where('gallery_id', $id)->pluck('criterion_id')->toArray();
-
     return view('galleries.create_edit_submission', [
       'closed' => $closed,
     ] + ($closed ? [] : [
@@ -348,7 +346,7 @@ class GalleryController extends Controller {
       'currency'    => Currency::find(Settings::get('group_currency')),
       'galleryPage' => true,
       'sideGallery' => $gallery,
-      'criteria'    => Criterion::active()->whereIn('id', $galleryCriteria)->orderBy('name')->pluck('name', 'id'),
+      'criteria' => Criterion::active()->whereIn('id', $galleryCriteria)->orderBy('name')->pluck('name', 'id'),
     ]));
   }
 
@@ -388,7 +386,7 @@ class GalleryController extends Controller {
       'currency'       => Currency::find(Settings::get('group_currency')),
       'galleryPage'    => true,
       'sideGallery'    => $submission->gallery,
-      'criteria'       => Criterion::active()->whereIn('id', $galleryCriteria)->orderBy('name')->pluck('name', 'id'),
+      'criteria' => Criterion::active()->whereIn('id', $galleryCriteria)->orderBy('name')->pluck('name', 'id'),
     ]);
   }
 
@@ -451,11 +449,11 @@ class GalleryController extends Controller {
     ]);
     // Trim Null Entries
     // TODO: ugly af, if someone knows PHP better please condense this
-    if($data["slug"][array_key_last($data["slug"])] == null)                           array_pop($data['slug']);
-    if($data["collaborator_id"][array_key_last($data["collaborator_id"])] == null)     array_pop($data['collaborator_id']);
-    if($data["collaborator_data"][array_key_last($data["collaborator_data"])] == null) array_pop($data['collaborator_data']);
-    if($data["participant_id"][array_key_last($data["participant_id"])] == null)       array_pop($data['participant_id']);
-    if($data["participant_type"][array_key_last($data["participant_type"])] == null)   array_pop($data['participant_type']);
+    if ($data["slug"][array_key_last($data["slug"])] == null)                           array_pop($data['slug']);
+    if ($data["collaborator_id"][array_key_last($data["collaborator_id"])] == null)     array_pop($data['collaborator_id']);
+    if ($data["collaborator_data"][array_key_last($data["collaborator_data"])] == null) array_pop($data['collaborator_data']);
+    if ($data["participant_id"][array_key_last($data["participant_id"])] == null)       array_pop($data['participant_id']);
+    if ($data["participant_type"][array_key_last($data["participant_type"])] == null)   array_pop($data['participant_type']);
 
     if (!$id && Settings::get('gallery_submissions_reward_currency')) {
       $currencyFormData = $request->only(collect(config('lorekeeper.group_currency_form'))->keys()->toArray());

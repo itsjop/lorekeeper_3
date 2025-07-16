@@ -1,8 +1,9 @@
-@if ($default)
-  {!! Form::open(['url' => 'admin/data/criteria-defaults/' . (isset($path) ? $path : '') . 'delete/' . $default->id]) !!}
+@if ($criterion)
+  {!! Form::open(['url' => 'admin/data/criteria/' . (isset($path) ? $path : '') . 'delete/' . $criterion->id]) !!}
 
-  <p>You are about to delete the {{ $name }} <strong>"{{ $default->name }}"</strong>. This is not reversible.</p>
-  <p>Are you sure you want to delete <strong>"{{ $default->name }}"</strong>?</p>
+  <p>You are about to delete the {{ $name }} <strong>"{{ $criterion->name }}"</strong>. This is not reversible. Any nested
+    structures will also be deleted.</p>
+  <p>Are you sure you want to delete <strong>"{{ $criterion->name }}"</strong>?</p>
 
   <div class="text-right">
     {!! Form::submit('Delete ' . $name, ['class' => 'btn btn-danger']) !!}

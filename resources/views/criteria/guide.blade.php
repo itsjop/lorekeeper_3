@@ -12,10 +12,9 @@
       4 => 'thousandth',
       5 => 'ten thousandth',
       6 => 'hundred thousandth',
-      7 => 'millionth',
+      7 => 'millionth'
   ];
 @endphp
-
 
 @section('world-content')
   {!! breadcrumbs(['World' => url('world'), $criterion->name . ' Criterion' => 'criteria/guide/' . $criterion->id]) !!}
@@ -24,25 +23,36 @@
   <div class="text-secondary">{!! isset($criterion->summary) ? $criterion->summary : '' !!}</div>
   <div class="text-secondary mb-4">
     Rewards {!! $criterion->currency->displayName !!}
-    {!! isset($criterion->base_value) ? '<span class="mx-1"> · </span>Base Reward: ' . $criterion->currency->display($criterion->base_value) : '' !!}
-    {!! $criterion->rounding !== 'No Rounding' ? '<span class="mx-1"> · </span>' . $criterion->rounding . ' to the nearest ' . $placeValue[$criterion->round_precision] . ' value.' : '' !!}
+    {!! isset($criterion->base_value)
+        ? '<span class="mx-1"> · </span>Base Reward: ' . $criterion->currency->display($criterion->base_value)
+        : '' !!}
+    {!! $criterion->rounding !== 'No Rounding'
+        ? '<span class="mx-1"> · </span>' .
+            $criterion->rounding .
+            ' to the nearest ' .
+            $placeValue[$criterion->round_precision] .
+            ' value.'
+        : '' !!}
   </div>
 
-  <p>When using this guide to calculate amounts, keep in mind that all Criterion apply onto a running total from the step before. If the criterion does not have a base reward listed above, then it starts from zero.</p>
+  <p>When using this guide to calculate amounts, keep in mind that all Criterion apply onto a running total from the step before. If
+    the criterion does not have a base reward listed above, then it starts from zero.</p>
   @foreach ($criterion->steps->where('is_active', 1) as $step)
     @php $firstOption = $step->options->first(); @endphp
     <div class="d-flex mt-3">
       <div style="flex: 2;">
         <h2 class="mb-0">{{ $step->name }}</h2>
         <div class="text-secondary">
-          {{ $step->type === 'input' ? 'Number Input' : ucfirst($step->type) }}<span class="mx-1"> · </span>{{ ucfirst($step->calc_type) }}
+          {{ $step->type === 'input' ? 'Number Input' : ucfirst($step->type) }}<span class="mx-1"> ·
+          </span>{{ ucfirst($step->calc_type) }}
           @if ($step->type === 'boolean')
             <span class="mx-1"> · </span>{!! $criterion->currency->display($firstOption->amount) !!}
           @endif
         </div>
         {{-- Extra info about the input is only needed if it's not multiplying by one --}}
         @if ($step->type === 'input' && !($firstOption->amount == 1 && $step->input_calc_type === 'multiplicative'))
-          <div class="text-secondary">Input value is {{ $step->input_calc_type === 'additive' ? 'added to ' : 'multiplied by ' }}{!! $criterion->currency->display($firstOption->amount) !!}</div>
+          <div class="text-secondary">Input value is
+            {{ $step->input_calc_type === 'additive' ? 'added to ' : 'multiplied by ' }}{!! $criterion->currency->display($firstOption->amount) !!}</div>
         @endif
         {{-- Only display the summary if we don't have a full description --}}
         @if ($step->parsed_description)
@@ -56,7 +66,9 @@
         @endif
       </div>
       @if ($step->has_image)
-        <div class="mt-2" style="background-image: url({{ $step->imageUrl }}); background-repeat: no-repeat; background-size: contain; flex: 1;background-position-x: right;"></div>
+        <div class="mt-2"
+          style="background-image: url({{ $step->imageUrl }}); background-repeat: no-repeat; background-size: contain; flex: 1;background-position-x: right;"
+        ></div>
       @endif
     </div>
 

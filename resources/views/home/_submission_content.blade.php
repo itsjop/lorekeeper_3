@@ -1,12 +1,15 @@
 <h1>
   {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
   @if (Auth::check() && $submission->user_id == Auth::user()->id && $submission->status == 'Draft')
-    <a href="{{ url(($isClaim ? 'claims' : 'submissions') . '/draft/' . $submission->id) }}" class="btn btn-sm btn-outline-secondary ml-3">Edit Draft <i class="fas fa-pen ml-2"></i></a>
+    <a href="{{ url(($isClaim ? 'claims' : 'submissions') . '/draft/' . $submission->id) }}"
+      class="btn btn-sm btn-outline-secondary ml-3"
+    >Edit Draft <i class="fas fa-pen ml-2"></i></a>
   @endif
-  <span class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}">{{ $submission->status }}</span>
+  <span
+    class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}"
+  >{{ $submission->status }}</span>
 
 </h1>
-
 
 <div class="card mb-3" style="clear:both;">
   <div class="card-body">
@@ -69,7 +72,10 @@
     {!! nl2br(htmlentities($submission->comments)) !!}
   </div>
 
-  @if (Auth::check() && $submission->staff_comments && ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions')))
+  @if (Auth::check() &&
+          $submission->staff_comments &&
+          ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
+  )
     <div class="card-header h2">Staff Comments</div>
     <div class="card-body">
       @if (isset($submission->parsed_staff_comments))
@@ -85,27 +91,29 @@
   <div class="card mb-3">
     <div class="card-header h2">Criteria Rewards</div>
     <div class="card-body">
-      @foreach ($submission->data['criterion'] as $criterionData)
-        <div class="card p-3 mb-2">
-          @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
-          <h3>{!! $criterion->displayName !!} <span class="text-secondary"> - {!! isset($criterionData['criterion_currency_id'])
-              ? \App\Models\Currency\Currency::find($criterionData['criterion_currency_id'])->display($criterion->calculateReward($criterionData))
-              : $criterion->currency->display($criterion->calculateReward($criterionData)) !!}</span></h3>
-          @foreach ($criterion->steps->where('is_active', 1) as $step)
-            <div class="d-flex">
-              <span class="mr-1 text-secondary">{{ $step->name }}:</span>
-              @if ($step->type === 'options')
-                @php $stepOption = $step->options->where('id', $criterionData[$step->id])->first() @endphp
-                <span>{{ isset($stepOption) ? $stepOption->name : 'Not Selected' }}</span>
-              @elseif($step->type === 'boolean')
-                <span>{{ isset($criterionData[$step->id]) ? 'On' : 'Off' }}
-                @elseif($step->type === 'input')
-                  <span> {{ $criterionData[$step->id] ?? 0 }}</span>
-              @endif
-            </div>
-          @endforeach
+  @foreach ($submission->data['criterion'] as $criterionData)
+    <div class="card p-3 mb-2">
+      @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
+      <h3>{!! $criterion->displayName !!} <span class="text-secondary"> - {!! isset($criterionData['criterion_currency_id'])
+          ? \App\Models\Currency\Currency::find($criterionData['criterion_currency_id'])->display(
+              $criterion->calculateReward($criterionData)
+          )
+          : $criterion->currency->display($criterion->calculateReward($criterionData)) !!}</span></h3>
+      @foreach ($criterion->steps->where('is_active', 1) as $step)
+        <div class="d-flex">
+          <span class="mr-1 text-secondary">{{ $step->name }}:</span>
+          @if ($step->type === 'options')
+            @php $stepOption = $step->options->where('id', $criterionData[$step->id])->first() @endphp
+            <span>{{ isset($stepOption) ? $stepOption->name : 'Not Selected' }}</span>
+          @elseif($step->type === 'boolean')
+            <span>{{ isset($criterionData[$step->id]) ? 'On' : 'Off' }}
+            @elseif($step->type === 'input')
+              <span> {{ $criterionData[$step->id] ?? 0 }}</span>
+          @endif
         </div>
       @endforeach
+    </div>
+  @endforeach
     </div>
   </div>
 @endif
@@ -139,7 +147,9 @@
 <div class="card mb-3">
   <div class="card-header h2">Characters</div>
   <div class="card-body">
-    @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($submission->characters()->get()))
+    @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) !=
+            count($submission->characters()->get())
+    )
       <div class="alert alert-warning">
         Some characters have been deleted since this submission was created.
       </div>
@@ -148,7 +158,11 @@
       <div class="submission-character-row mb-2">
         <div class="submission-character-thumbnail">
           <a href="{{ $character->character->url }}">
-            <img src="{{ $character->character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->character->fullName }}" /></a>
+            <img
+              src="{{ $character->character->image->thumbnailUrl }}"
+              class="img-thumbnail"
+              alt="Thumbnail for {{ $character->character->fullName }}"
+            /></a>
         </div>
         <div class="submission-character-info card ml-2">
           <div class="card-body">
@@ -212,7 +226,8 @@
   <div class="card mb-3">
     <div class="card-header h2">Add-Ons</div>
     <div class="card-body">
-      <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be refunded if the request is rejected or consumed if it is approved.</p>
+      <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be
+        refunded if the request is rejected or consumed if it is approved.</p>
       <table class="table table-sm">
         <thead class="thead-light">
           <tr class="d-flex">
@@ -227,10 +242,22 @@
             <tr class="d-flex">
               <td class="col-2">
                 @if (isset($itemsrow[$itemRow['asset']->item_id]->image_url))
-                  <img class="small-icon" src="{{ $itemsrow[$itemRow['asset']->item_id]->image_url }}" alt="{{ $itemsrow[$itemRow['asset']->item_id]->name }}">
+                  <img
+                    class="small-icon"
+                    src="{{ $itemsrow[$itemRow['asset']->item_id]->image_url }}"
+                    alt="{{ $itemsrow[$itemRow['asset']->item_id]->name }}"
+                  >
                 @endif {!! $itemsrow[$itemRow['asset']->item_id]->name !!}
-              <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data) ? ($itemRow['asset']->data['data'] ? $itemRow['asset']->data['data'] : 'N/A') : 'N/A' !!}</td>
-              <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data) ? ($itemRow['asset']->data['notes'] ? $itemRow['asset']->data['notes'] : 'N/A') : 'N/A' !!}</td>
+              <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data)
+                  ? ($itemRow['asset']->data['data']
+                      ? $itemRow['asset']->data['data']
+                      : 'N/A')
+                  : 'N/A' !!}</td>
+              <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data)
+                  ? ($itemRow['asset']->data['notes']
+                      ? $itemRow['asset']->data['notes']
+                      : 'N/A')
+                  : 'N/A' !!}</td>
               <td class="col-2">{!! $itemRow['quantity'] !!}
             </tr>
           @endforeach

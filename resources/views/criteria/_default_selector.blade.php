@@ -6,7 +6,10 @@
 <div class="row">
   @foreach ($defaults as $default)
     <div class="col-md form-group">
-      {!! Form::checkbox('default_criteria[' . $default->id . ']', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('default_criteria[' . $default->id . ']', 1, 0, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
       {!! Form::label('default_criteria[' . $default->id . ']', $default->name, ['class' => 'form-check-label ml-3']) !!} {!! add_help('Toggle on to populate this criterion set.') !!}
     </div>
   @endforeach

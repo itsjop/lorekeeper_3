@@ -11,12 +11,14 @@
     <a class="btn btn-secondary" href="{{ url('admin/data/criteria-defaults') }}"><i class="fas fa-folder"></i> Default Criteria</a>
   </div>
   <p>
-    These are currency criteria rewards that can be used with prompts, claims, and gallery submissions in-place of static reward amounts.
+    These are currency criteria rewards that can be used with prompts, claims, and gallery submissions in-place of static reward
+    amounts.
   </p>
   <h2 class="mt-5">Criteria Rewards
   </h2>
 
-  <p>Drag and Drop the cards to re-order your steps. Steps that are inactive will not be shown or included in the final calculation.</p>
+  <p>Drag and Drop the cards to re-order your steps. Steps that are inactive will not be shown or included in the final calculation.
+  </p>
   <div>
     @foreach ($criteria as $criterion)
       <div class="card p-3 mb-2 pl-0">
@@ -33,7 +35,9 @@
             <span class="text-secondary">{{ $criterion->summary }}</span>
           </div>
           <div>
-            <a href="{{ url('admin/data/criteria/edit/' . $criterion->id) }}" class="btn btn-info text-white mr-2"><i class="fas fa-pencil-alt"></i></a>
+            <a href="{{ url('admin/data/criteria/edit/' . $criterion->id) }}" class="btn btn-info text-white mr-2"><i
+                class="fas fa-pencil-alt"
+              ></i></a>
             <button class="btn btn-danger delete-button" data-id="{{ $criterion->id }}"><i class="fas fa-trash"></i></button>
           </div>
         </div>
@@ -41,8 +45,6 @@
     @endforeach
   </div>
 @endsection
-
-
 
 @section('scripts')
   @parent

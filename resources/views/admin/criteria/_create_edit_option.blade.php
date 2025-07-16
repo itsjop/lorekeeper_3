@@ -1,4 +1,9 @@
-{!! Form::open(['url' => $option->id ? 'admin/data/criteria/step/' . $stepId . '/option/' . $option->id : 'admin/data/criteria/step/' . $stepId . '/option', 'files' => true]) !!}
+{!! Form::open([
+    'url' => $option->id
+        ? 'admin/data/criteria/step/' . $stepId . '/option/' . $option->id
+        : 'admin/data/criteria/step/' . $stepId . '/option',
+    'files' => true
+]) !!}
 
 <div class="row">
   <div class="form-group col-6">
@@ -14,12 +19,18 @@
 <div class="form-group">
   {!! Form::label('description') !!} {!! add_help('This is used for the criterion\'s guide.') !!}
   {{-- uniqid helps keep tinymce from being upset that we keep adding the same id'd textarea to it --}}
-  {!! Form::textarea('description', $option->description, ['class' => 'form-control wysiwyg', 'id' => uniqid('description-', true)]) !!}
+  {!! Form::textarea('description', $option->description, [
+      'class' => 'form-control wysiwyg',
+      'id' => uniqid('description-', true)
+  ]) !!}
 </div>
 
 <div class="row align-items-end">
   <div class="form-group col-6">
-    {!! Form::checkbox('is_active', 1, $option->is_active === 1 ?? 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $option->is_active === 1 ?? 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Steps that are not active will be hidden from view.') !!}
   </div>
   <div class="form-group col-6">
@@ -29,7 +40,7 @@
 </div>
 
 <div class="form-group hide">
-  {!! Form::text('criterion_step_id', $stepId, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+  {!! Form::text('criterion_step_id', $stepId, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
 </div>
 
 <div class="text-right mt-4">
