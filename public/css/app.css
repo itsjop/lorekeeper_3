@@ -664,7 +664,7 @@ body {
   justify-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding-top: 40px;
+  padding-top: 3vh;
   max-width: 100dvw;
   max-height: 100dvh;
   --app-gap-x: 20px;
@@ -689,7 +689,7 @@ body {
   left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
 }
 #app #site-wrapper.has-sidebar {
-  grid-template: "   .     logo " 12vh "   .     nav  " min-content "sidebar  main " auto "sidebar footer" auto/var(--sidebar-width) var(--content-width);
+  grid-template: "   .     logo " clamp(150px, 15vh, 300px) "   .     nav  " min-content "sidebar  main " auto "sidebar footer" auto/var(--sidebar-width) var(--content-width);
 }
 #app #site-wrapper {
   padding-bottom: 55px;
@@ -2800,7 +2800,7 @@ because the nesting selector cannot represent pseudo-elements. */
   text-align: center;
 }
 .inventory-category .inventory-item:has(.rarity) {
-  grid-template: "thumb " calc(100% - 4.5em) "name  " 2em "rarity" min-content/1fr;
+  grid-template: "thumb " calc(100% - 4.5em) "name  " 2em "meta" min-content/1fr;
 }
 .inventory-category .inventory-item:has(.rarity) .title {
   border-bottom: 2px solid var(--purple-clr_400);
@@ -2826,7 +2826,7 @@ because the nesting selector cannot represent pseudo-elements. */
   z-index: 5;
   max-height: 200px;
 }
-.inventory-category .inventory-item .badge .feature-image {
+.inventory-category .inventory-item .badge img {
   -o-object-fit: contain;
      object-fit: contain;
   width: 100%;
@@ -2834,7 +2834,7 @@ because the nesting selector cannot represent pseudo-elements. */
   aspect-ratio: 1/1;
 }
 .inventory-category .inventory-item .rarity {
-  grid-area: rarity;
+  grid-area: meta;
   font-family: "Itim", system-ui;
   width: 100%;
   height: 100%;

@@ -9,7 +9,7 @@
   justify-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding-top: 40px;
+  padding-top: 3vh;
   max-width: 100dvw;
   max-height: 100dvh;
   --app-gap-x: 20px;
@@ -36,7 +36,7 @@
     height: min-content;
     &.has-sidebar {
       grid-template:
-        '   .     logo ' 12vh
+        '   .     logo ' clamp(150px, 15vh, 300px)
         '   .     nav  ' min-content
         'sidebar  main ' auto
         'sidebar footer' auto
