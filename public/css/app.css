@@ -704,7 +704,7 @@ body {
 #app #site-wrapper #main-content .main-backdrop {
   z-index: 0;
   border-radius: 15px;
-  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
+  background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -1190,7 +1190,7 @@ fieldset.masterlist-search-grid .searchbutton {
 #app #site-wrapper #site-logo-header picture::after {
   content: "";
   max-width: unset;
-  background-image: url("../../../public/images/somnivores/logo.webp");
+  background-image: url("images/somnivores/logo.webp");
   background-size: 100% 100%;
   background-position: 50% min(50% - 0.11vw, 2.5px);
   z-index: 5;
@@ -1452,7 +1452,7 @@ body {
 }
 #app #site-wrapper #sidebar .sidebar-header {
   border-radius: 15px;
-  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
+  background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -1708,7 +1708,7 @@ body {
   place-items: center;
   grid-template: "thumb" auto "name " auto "owner" auto "species " auto "rarity " auto/max-content;
   border-radius: 15px;
-  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
+  background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -1786,7 +1786,7 @@ body {
   width: calc(0.8 * var(--sidebar-width));
   height: calc(0.8 * var(--sidebar-width));
   animation: stars 10s linear forwards infinite;
-  background-image: url("../../../public/images/overlays/starring.png");
+  background-image: url("images/overlays/starring.png");
   background-repeat: repeat;
   background-size: 50%;
   transform: translateX(0%);
@@ -1888,7 +1888,7 @@ body {
 }
 #app #site-wrapper #header-nav {
   border-radius: 15px;
-  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
+  background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -2336,7 +2336,7 @@ body {
 }
 #app #site-wrapper #footer {
   border-radius: 15px;
-  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
+  background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);

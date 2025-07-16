@@ -38,7 +38,7 @@
     &::after {
       content: '';
       max-width: unset;
-      background-image: url('../../../public/images/somnivores/logo.webp');
+      background-image: url('images/somnivores/logo.webp');
       background-size: 100% 100%;
       background-position: 50% min((50% - 0.11vw), 2.5px);
       z-index: 5;

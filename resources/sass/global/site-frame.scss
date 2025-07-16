@@ -78,8 +78,8 @@
       left: 0;
       background-image: url('images/somnivores/reveriefullres.png');
       // background-image: url('/images/somnivores/reveriefullres.webp');
-      // --site-bg-dark: url('../../../public/images/somnivores/reveriefullres_dark.png');
-      // --site-bg-lite: url('../../../public/images/somnivores/reveriefullres.webp');
+      // --site-bg-dark: url('images/somnivores/reveriefullres_dark.png');
+      // --site-bg-lite: url('images/somnivores/reveriefullres.webp');
       // background-image: light-dark(var(--site-bg-lite), var(--site-bg-dark));
       background-size: cover;
     }
@@ -96,7 +96,7 @@
 @media (width <= 992px) {
   /* @media screen and (max-width: var(--ss-medium)) { */
   #app {
-    // background-image: url('../../../public/images/somnivores/reveriehalfres.webp');
+    // background-image: url('images/somnivores/reveriehalfres.webp');
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
     --sidebar-width: 0;
@@ -128,6 +128,6 @@
 
 // @media (prefers-color-scheme: dark) {
 //   #app #site-wrapper .site-background {
-//     background-image: url('../../../public/images/somnivores/reveriefullres_dark.png');
+//     background-image: url('images/somnivores/reveriefullres_dark.png');
 //   }
 // }
