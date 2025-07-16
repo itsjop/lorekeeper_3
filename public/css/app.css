@@ -704,7 +704,7 @@ body {
 #app #site-wrapper #main-content .main-backdrop {
   z-index: 0;
   border-radius: 15px;
-  background-image: url(/images/otis-redding_noise.png?2b85ae8ffa43b57da681a8c963875464);
+  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -726,7 +726,7 @@ body {
   height: 100dvh;
   top: 0;
   left: 0;
-  background-image: url(/images/reveriefullres.webp?4d4f4c85265de40668608b5e4e2468cf);
+  background-image: url("../../../public/images/somnivores/reveriefullres.webp");
   background-size: cover;
 }
 #app #site-wrapper .modal-dialog .modal-body .inventory-main-img img {
@@ -1063,7 +1063,7 @@ fieldset.masterlist-search-grid .searchbutton {
   background-image: linear-gradient(0deg, transparent 0%, transparent 40%, white 45%, white 50%, transparent 55%, transparent 100%);
 }
 #ml-gridView .masterlist-character .thumbnail .tn-background {
-  background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913), var(--card_profile-bg_color);
+  background-image: url("../../../../public/images/overlays/starring.png"), var(--card_profile-bg_color);
   z-index: 1;
   filter: brightness(1);
 }
@@ -1124,7 +1124,7 @@ fieldset.masterlist-search-grid .searchbutton {
           user-select: none;
   width: 100%;
   height: 100%;
-  background-image: url(/images/groovepaper.png?cc3719018b12159b092a2c3bf3845ae1);
+  background-image: url("../../../../public/images/overlays/groovepaper.png");
   border-radius: 15px;
   opacity: 0.7;
 }
@@ -1190,7 +1190,7 @@ fieldset.masterlist-search-grid .searchbutton {
 #app #site-wrapper #site-logo-header picture::after {
   content: "";
   max-width: unset;
-  background-image: url(/images/logo.webp?339e76dd7b97f7db4b642ba977e50a53);
+  background-image: url("../../../public/images/somnivores/logo.webp");
   background-size: 100% 100%;
   background-position: 50% min(50% - 0.11vw, 2.5px);
   z-index: 5;
@@ -1452,7 +1452,7 @@ body {
 }
 #app #site-wrapper #sidebar .sidebar-header {
   border-radius: 15px;
-  background-image: url(/images/otis-redding_noise.png?2b85ae8ffa43b57da681a8c963875464);
+  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -1708,7 +1708,7 @@ body {
   place-items: center;
   grid-template: "thumb" auto "name " auto "owner" auto "species " auto "rarity " auto/max-content;
   border-radius: 15px;
-  background-image: url(/images/otis-redding_noise.png?2b85ae8ffa43b57da681a8c963875464);
+  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -1786,7 +1786,7 @@ body {
   width: calc(0.8 * var(--sidebar-width));
   height: calc(0.8 * var(--sidebar-width));
   animation: stars 10s linear forwards infinite;
-  background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913);
+  background-image: url("../../../public/images/overlays/starring.png");
   background-repeat: repeat;
   background-size: 50%;
   transform: translateX(0%);
@@ -1888,7 +1888,7 @@ body {
 }
 #app #site-wrapper #header-nav {
   border-radius: 15px;
-  background-image: url(/images/otis-redding_noise.png?2b85ae8ffa43b57da681a8c963875464);
+  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -2336,7 +2336,7 @@ body {
 }
 #app #site-wrapper #footer {
   border-radius: 15px;
-  background-image: url(/images/otis-redding_noise.png?2b85ae8ffa43b57da681a8c963875464);
+  background-image: url("../../../public/images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color), transparent 30%);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
@@ -2876,7 +2876,7 @@ because the nesting selector cannot represent pseudo-elements. */
   height: 100%;
   animation: stars 20s linear forwards infinite;
   animation-duration: var(--card_star_animation-duration);
-  background-image: url(/images/starring.png?0fd8beb4a662f3ed74fc8c57f76e7913);
+  background-image: url("../../../public/images/overlays/starring.png");
   background-repeat: repeat;
   background-size: 20%;
   transform: translateX(0%);

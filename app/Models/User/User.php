@@ -589,7 +589,6 @@ class User extends Authenticatable implements MustVerifyEmail {
    */
 
   public function getAvatarUrlAttribute() {
-    if ($this->avatar == 'default.jpg') $this->avatar = 'default.png';
     if ($this->avatar == 'default.png' && config('lorekeeper.extensions.use_gravatar')) {
       // check if a gravatar exists
       $hash = md5(strtolower(trim($this->email)));
@@ -602,6 +601,8 @@ class User extends Authenticatable implements MustVerifyEmail {
         return 'https://www.gravatar.com/avatar/' . $hash . '?d=mm&s=200';
       }
     }
+    if ($this->avatar == 'default.png' || $this->avatar == 'default.jpg')
+      return url('images/somnivores/default.png');
     return url('images/avatars/' . $this->avatar . '?v=' . filemtime(public_path('images/avatars/' . $this->avatar)));
   }
 
