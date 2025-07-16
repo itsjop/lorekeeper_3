@@ -173,7 +173,7 @@
       height: 100%;
       animation: stars 20s linear forwards infinite;
       animation-duration: var(--card_star_animation-duration);
-      background-image: url('../../../public/images/overlays/starring.png'); // TODO: fragile path
+      background-image: url('images/overlays/starring.png'); // TODO: fragile path
       background-repeat: repeat;
       background-size: 20%;
       transform: translateX(0%);
