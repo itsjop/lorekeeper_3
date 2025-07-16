@@ -726,7 +726,7 @@ body {
   height: 100dvh;
   top: 0;
   left: 0;
-  background-image: url("../../../public/images/somnivores/reveriefullres.webp");
+  background-image: url("images/somnivores/reveriefullres.png");
   background-size: cover;
 }
 #app #site-wrapper .modal-dialog .modal-body .inventory-main-img img {
