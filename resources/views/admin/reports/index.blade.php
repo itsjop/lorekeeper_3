@@ -11,7 +11,7 @@
     Report Queue
   </h1>
 
-  <ul class="nav nav-tabs flex gap-_5 mb-3">
+  <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a class="nav-link {{ set_active('admin/reports/pending*') }} {{ set_active('admin/reports') }}" href="{{ url('admin/reports/pending') }}">Pending</a>
     </li>

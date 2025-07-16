@@ -14,7 +14,7 @@
   <p>This is the log of your gallery submissions. You can submit a piece to a particular gallery by navigating to it and clicking the "submit" button.</p>
   <p>Pending submissions require approval from any collaborators{{ Settings::get('gallery_submissions_require_approval') ? ', as well as staff,' : '' }} before appearing in the gallery.</p>
 
-  <ul class="nav nav-tabs flex gap-_5 mb-3">
+  <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a class="nav-link {{ set_active('gallery/submissions/pending') }}" href="{{ url('gallery/submissions/pending') }}">Pending</a>
     </li>

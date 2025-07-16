@@ -15,7 +15,7 @@
     <a href="{{ url('trades/create') }}" class="btn btn-primary">New Trade</a>
   </div>
 
-  <ul class="nav nav-tabs flex gap-_5 mb-3">
+  <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a class="nav-link {{ set_active('trades/open*') }}" href="{{ url('trades/open') }}">Open</a>
     </li>

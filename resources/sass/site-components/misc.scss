@@ -90,8 +90,17 @@
       'thumb ' calc(100% - 4.5em)
       'name  ' 2em
       / 1fr;
-    // border-radius: 15px 15px 5px 5px;
-    // border: 2px solid var(--purple-clr_600);
+      text-align: center;
+    &:has(.rarity) {
+      grid-template:
+        'thumb ' calc(100% - 4.5em)
+        'name  ' 2em
+        'rarity' min-content
+        / 1fr;
+      .title {
+        border-bottom: 2px solid var(--purple-clr_400);
+      }
+    }
     .title {
       grid-area: name;
       width: 100%;
@@ -101,8 +110,7 @@
       place-content: center;
       font-weight: 700;
       font-size: 1.3em;
-      border-bottom: 2px solid var(--purple-clr_400);
-      margin-top: 10px;
+      // margin-top: 10px;
       a {
         color: var(--purple-clr_700);
       }

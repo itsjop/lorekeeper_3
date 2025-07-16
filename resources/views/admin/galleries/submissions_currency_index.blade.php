@@ -11,7 +11,7 @@
     {!! $currency ? $currency->name : 'Gallery Currency' !!} Queue
   </h1>
 
-  <ul class="nav nav-tabs flex gap-_5 mb-3">
+  <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a class="nav-link {{ set_active('admin/gallery/currency/pending*') }} {{ set_active('admin/gallery/currency') }}" href="{{ url('admin/gallery/currency/pending') }}">Pending</a>
     </li>

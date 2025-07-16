@@ -14,7 +14,7 @@
     <a href="{{ url('reports/new') }}" class="btn btn-success">New Report</a>
   </div>
 
-  <ul class="nav nav-tabs flex gap-_5 mb-3">
+  <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'pending' ? 'active' : '' }}" href="{{ url('reports') }}">Pending</a>
     </li>

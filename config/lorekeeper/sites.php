@@ -106,14 +106,14 @@ return [
         'primary_alias' => 0,
     ],
 
-    'discord'    => [
-        'full_name'     => 'Discord',
-        'display_name'  => 'discord',
-        'regex'         => '/([A-Za-z0-9_-]+)#([0-9]+)/m',
-        'icon'          => 'fab fa-discord',
-        'auth'          => 1,
-        'primary_alias' => 0,
-    ],
+    // 'discord'    => [
+    //     'full_name'     => 'Discord',
+    //     'display_name'  => 'discord',
+    //     'regex'         => '/([A-Za-z0-9_-]+)#([0-9]+)/m',
+    //     'icon'          => 'fab fa-discord',
+    //     'auth'          => 1,
+    //     'primary_alias' => 0,
+    // ],
 
     /**********************************************************************************************
 

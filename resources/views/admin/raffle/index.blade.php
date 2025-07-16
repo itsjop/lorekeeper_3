@@ -12,7 +12,7 @@
     <a class="btn btn-success edit-group" href="#" data-id="">Create Raffle Group</a>
     <a class="btn btn-success edit-raffle" href="#" data-id="">Create Raffle</a>
   </div>
-  <ul class="nav nav-tabs flex gap-_5 mb-3">
+  <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a href="{{ url()->current() }}" class="nav-link {{ Request::get('is_active') ? '' : 'active' }}">Current
         Raffles</a>

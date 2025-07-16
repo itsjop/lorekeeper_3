@@ -18,7 +18,7 @@
 
     <p>This is a list of design approval requests you have submitted. These will be reviewed by staff, and approved if the design meets the requirements and guidelines. </p>
 
-    <ul class="nav nav-tabs flex gap-_5 mb-3">
+    <ul class="nav nav-tabs flex gap-_5">
       <li class="nav-item">
         <a class="nav-link {{ $status == 'pending' ? 'active' : '' }}" href="{{ url('designs/pending') }}">Pending</a>
       </li>

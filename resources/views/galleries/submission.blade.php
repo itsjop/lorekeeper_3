@@ -83,7 +83,7 @@
       <div class="row mb-4 no-gutters">
         <div class="col-md-2 mb-4 mobile-hide text-center">
           <a href="/user/{{ $submission->user->name }}">
-            {!! $comment->commenter->userBorder() !!}
+            {{-- {!! $comment->commenter->userBorder() !!} --}}
 
             <img src="{{ $submission->user->avatarUrl }}" style="border-radius:50%; margin-right:25px; max-width:100%;" data-bs-toggle="tooltip" title="{{ $submission->user->name }}" alt="{{ $submission->user->name }}'s Avatar" />
           </a>

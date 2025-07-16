@@ -1,5 +1,5 @@
-<div class="card mb-4">
-  <div class="card-body">
+<div class="card mb-4 br-ntl-15 ">
+  <div class="card-body br-ntl-15">
     <div class="row">
       <div class="col-md mb-4 text-center">
         <a href="{{ $submission->url }}">@include('widgets._gallery_thumb', ['submission' => $submission])</a>
