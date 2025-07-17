@@ -4432,9 +4432,9 @@ input[type="submit"].btn-block {
     width: 100%;
   }
 }
-.accordion {
+/* .accordion {
   overflow-anchor: none;
-}
+} */
 .accordion > .card {
   overflow: hidden;
 }

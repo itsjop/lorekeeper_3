@@ -126,10 +126,14 @@
 
   {{-- Pets --}}
   <div class="card">
-    <div>
+    <div class="flex jc-between ai-end">
       <h5>Pets</h5>
+      <a href="{{ $character->url . '/pets' }}" class="btn btn-outline-info p-0 px-2 btn-sm">
+        View all Pets
+        <i class="fas fa-caret-right"></i>
+      </a>
     </div>
-    <div class="card-body row justify-content-center text-center">
+    <div class="grid grid-4-col card-body gap-_5">
       {{-- get one random pet --}}
       @php
         $pets = $character->image->character
@@ -149,9 +153,6 @@
           </div>
         @endif
       @endforeach
-      <div class="ml-auto float-right mr-3">
-        <a href="{{ $character->url . '/pets' }}" class="btn btn-outline-info btn-sm">View All</a>
-      </div>
     </div>
   </div>
   <br />

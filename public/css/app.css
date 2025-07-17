@@ -120,26 +120,56 @@ body #app.teal {
 #app .w-100 {
   width: 100%;
 }
+#app .h-100 {
+  height: 100%;
+}
+#app .w-90 {
+  width: 90%;
+}
+#app .h-90 {
+  height: 90%;
+}
 #app .w-80 {
   width: 80%;
+}
+#app .h-80 {
+  height: 80%;
 }
 #app .w-75 {
   width: 75%;
 }
+#app .h-75 {
+  height: 75%;
+}
 #app .w-66 {
   width: 66%;
+}
+#app .h-66 {
+  height: 66%;
 }
 #app .w-50 {
   width: 50%;
 }
+#app .h-50 {
+  height: 50%;
+}
 #app .w-40 {
   width: 40%;
+}
+#app .h-40 {
+  height: 40%;
 }
 #app .w-33 {
   width: 33%;
 }
+#app .h-33 {
+  height: 33%;
+}
 #app .w-25 {
   width: 25%;
+}
+#app .h-25 {
+  height: 25%;
 }
 #app .flex {
   display: flex;
@@ -2805,19 +2835,18 @@ because the nesting selector cannot represent pseudo-elements. */
   width: 1.6em;
   height: 1.6em;
 }
-
-.inventory-category .inventory-item {
+.app .inventory-category .inventory-item {
   display: grid;
   grid-template: "thumb " calc(100% - 4.5em) "name  " 2em/1fr;
   text-align: center;
 }
-.inventory-category .inventory-item:has(.rarity) {
+.app .inventory-category .inventory-item:has(.rarity) {
   grid-template: "thumb " calc(100% - 4.5em) "name  " 2em "meta" min-content/1fr;
 }
-.inventory-category .inventory-item:has(.rarity) .title {
+.app .inventory-category .inventory-item:has(.rarity) .title {
   border-bottom: 2px solid var(--purple-clr_400);
 }
-.inventory-category .inventory-item .title {
+.app .inventory-category .inventory-item .title {
   grid-area: name;
   width: 100%;
   height: 100%;
@@ -2827,10 +2856,10 @@ because the nesting selector cannot represent pseudo-elements. */
   font-weight: 700;
   font-size: 1.3em;
 }
-.inventory-category .inventory-item .title a {
+.app .inventory-category .inventory-item .title a {
   color: var(--purple-clr_700);
 }
-.inventory-category .inventory-item .badge {
+.app .inventory-category .inventory-item .badge {
   width: 100%;
   height: 100%;
   grid-area: thumb;
@@ -2838,14 +2867,14 @@ because the nesting selector cannot represent pseudo-elements. */
   z-index: 5;
   max-height: 200px;
 }
-.inventory-category .inventory-item .badge img {
+.app .inventory-category .inventory-item .badge img {
   -o-object-fit: contain;
      object-fit: contain;
   width: 100%;
   height: 95%;
   aspect-ratio: 1/1;
 }
-.inventory-category .inventory-item .rarity {
+.app .inventory-category .inventory-item .rarity {
   grid-area: meta;
   font-family: "Itim", system-ui;
   width: 100%;
@@ -2855,12 +2884,11 @@ because the nesting selector cannot represent pseudo-elements. */
   text-transform: lowercase;
   font-style: italic;
 }
-.inventory-category .inventory-item .card-bg_animated {
+.app .inventory-category .inventory-item .card-bg_animated {
   grid-area: thumb;
   border-radius: 20px;
 }
-
-.card-bg_animated {
+.app .card-bg_animated {
   width: 100%;
   height: 100%;
   position: relative;
@@ -2871,7 +2899,7 @@ because the nesting selector cannot represent pseudo-elements. */
   --card_star_blend-mode: normal;
   background: var(--card_background);
 }
-.card-bg_animated .stars {
+.app .card-bg_animated .stars {
   position: relative;
   width: 120%;
   height: 200%;
@@ -2881,7 +2909,7 @@ because the nesting selector cannot represent pseudo-elements. */
   mix-blend-mode: var(--card_star_blend-mode);
   opacity: var(--card_star_opacity);
 }
-.card-bg_animated .stars::before, .card-bg_animated .stars::after {
+.app .card-bg_animated .stars::before, .app .card-bg_animated .stars::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -2893,51 +2921,84 @@ because the nesting selector cannot represent pseudo-elements. */
   background-size: 20%;
   transform: translateX(0%);
 }
-.card-bg_animated .stars::before {
+.app .card-bg_animated .stars::before {
   left: -100%;
 }
-.card-bg_animated .stars::after {
+.app .card-bg_animated .stars::after {
   left: 0%;
 }
-.card-bg_animated.common {
+.app .card-bg_animated.common {
   --card_background: #b4e6ff;
   --card_star_opacity: 0.3;
   --card_star_animation-duration: 30s;
   --card_star_blend-mode: normal;
 }
-.card-bg_animated.uncommon {
+.app .card-bg_animated.uncommon {
   --card_background: #edc4ff;
   --card_star_opacity: 0.5;
   --card_star_animation-duration: 25s;
   --card_star_blend-mode: normal;
 }
-.card-bg_animated.rare {
+.app .card-bg_animated.rare {
   --card_background: #ffe4af;
   --card_star_opacity: 0.5;
   --card_star_animation-duration: 20s;
   --card_star_blend-mode: normal;
 }
-.card-bg_animated.mystic {
+.app .card-bg_animated.mystic {
   --card_background: linear-gradient(to top right, #a5dbff, #d198ff);
   --card_star_opacity: 0.9;
   --card_star_animation-duration: 20s;
   --card_star_blend-mode: overlay;
 }
-
-.gallery-recents .submission {
+.app .gallery-recents .submission {
   display: grid;
   grid-template: "img" auto "title" auto "details" auto/1fr;
 }
-.gallery-recents .submission .img {
+.app .gallery-recents .submission .img {
   grid-area: img;
   width: 100%;
 }
-.gallery-recents .submission .img img {
+.app .gallery-recents .submission .img img {
   max-width: 100%;
 }
-.gallery-recents .submission .title {
+.app .gallery-recents .submission .title {
   grid-area: title;
 }
-.gallery-recents .submission .details {
+.app .gallery-recents .submission .details {
   grid-area: details;
+}
+.app .pet-card {
+  display: grid;
+  grid-template: "name" 2em "pet" max-content "title" 2em "progress" 1.5em "level" min-content/1fr;
+}
+.app .pet-card img {
+  grid-area: pet;
+}
+.app .pet-card .progress {
+  grid-area: progress;
+  border: 2px var(--purple-clr_600) solid;
+}
+.app .pet-card .progress-bar {
+  background-color: var(--active-clr_500);
+}
+.app .pet-card .level {
+  grid-area: level;
+}
+.app .pet-card .title {
+  grid-area: title;
+}
+.app .pet-card .name {
+  grid-area: name;
+  line-height: 0.9em;
+}
+.app .pet-card .progress {
+  grid-area: progress;
+}
+.app .pet-card .level {
+  grid-area: level;
+}
+.app .pet-card .petname {
+  background: var(--active-clr_200);
+  color: var(--black);
 }

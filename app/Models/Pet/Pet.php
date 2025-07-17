@@ -171,7 +171,7 @@ class Pet extends Model {
      */
     public function getDisplayNameAttribute() {
         if ($this->parent_id) {
-            return '<a href="'.$this->idUrl.'" class="display-item">'.$this->name.' - Variant of '.$this->parent->name.'</a>';
+            return '<a href="'.$this->idUrl.'" class="display-item grid"><span class="small text-secondary">('.$this->parent->name.' Variant)</span><span>'.$this->name.'</span></a>';
         }
         return '<a href="'.$this->idUrl.'" class="display-item">'.$this->name.'</a>';
     }
