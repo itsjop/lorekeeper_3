@@ -64,15 +64,10 @@
             <div class="alert alert-secondary">{!! $request->character->image->transformation->displayName !!}</div>
           @else
             <div id="transformations">
-              {!! Form::select('transformation_id', $transformations, null, [
+              {!! Form::select('transformation_id', $transformations, safe($request->transformation_id), [
                   'class' => 'form-control',
                   'id' => 'transformation'
               ]) !!}
-              {{-- <div id="transformations">
-              {!! Form::select('transformation_id', $transformations, $request->transformation_id, [
-                  'class' => 'form-control',
-                  'id' => 'transformation'
-              ]) !!} --}}
             </div>
           @endif
           {{-- </div>
