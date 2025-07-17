@@ -14,3 +14,4 @@ yarn-error.log
 /composer.phar
 /.github
 /public/js
+resources/sass/app.scss

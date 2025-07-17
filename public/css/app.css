@@ -1,6 +1,18 @@
 @import url(https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Itim&display=swap);
 @charset "UTF-8";
-body {
+* {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: light-dark(#eee, #222);
+}
+
+body #app {
   /* TODO: Update to more usable color-mix:
     (https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/)
   */
@@ -51,10 +63,22 @@ body {
   --teal-clr_950: light-dark(var(--clr_raw_teal-950), var(--clr_raw_teal-50));
   --purple-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
   --teal-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
-  --white: light-dark(#fbf9ff, #222222);
-  --body-color: var(--purple-clr_50);
+  --active-clr_50: var(--purple-clr_50);
+  --active-clr_100: var(--purple-clr_100);
+  --active-clr_200: var(--purple-clr_200);
+  --active-clr_300: var(--purple-clr_300);
+  --active-clr_400: var(--purple-clr_400);
+  --active-clr_500: var(--purple-clr_500);
+  --active-clr_600: var(--purple-clr_600);
+  --active-clr_700: var(--purple-clr_700);
+  --active-clr_800: var(--purple-clr_800);
+  --active-clr_900: var(--purple-clr_900);
+  --active-clr_950: var(--purple-clr_950);
+  --white: var(--active-clr_50);
+  --black: var(--active-clr_900);
+  --body-color: var(--active-clr_50);
 }
-body .app {
+body #app.purple {
   --active-clr_50: var(--purple-clr_50);
   --active-clr_100: var(--purple-clr_100);
   --active-clr_200: var(--purple-clr_200);
@@ -67,20 +91,7 @@ body .app {
   --active-clr_900: var(--purple-clr_900);
   --active-clr_950: var(--purple-clr_950);
 }
-body .app.purple {
-  --active-clr_50: var(--purple-clr_50);
-  --active-clr_100: var(--purple-clr_100);
-  --active-clr_200: var(--purple-clr_200);
-  --active-clr_300: var(--purple-clr_300);
-  --active-clr_400: var(--purple-clr_400);
-  --active-clr_500: var(--purple-clr_500);
-  --active-clr_600: var(--purple-clr_600);
-  --active-clr_700: var(--purple-clr_700);
-  --active-clr_800: var(--purple-clr_800);
-  --active-clr_900: var(--purple-clr_900);
-  --active-clr_950: var(--purple-clr_950);
-}
-body .app.teal {
+body #app.teal {
   --active-clr_50: var(--teal-clr_50);
   --active-clr_100: var(--teal-clr_100);
   --active-clr_200: var(--teal-clr_200);
@@ -450,6 +461,15 @@ body .app.teal {
 #app .ta-right {
   text-align: right;
 }
+#app .italic {
+  font-style: italic;
+}
+#app .no-break {
+  word-break: keep-all;
+}
+#app .color-unset {
+  color: unset;
+}
 
 body {
   /* Breakpoints */
@@ -480,7 +500,6 @@ body {
   --green: #7dcc8f;
   --teal: #20c997;
   --cyan: #48c9dc;
-  --white: #fff;
   --gray: #6c7c8b;
   --gray-dark: #343a40;
   --primary: #5da6f3;
@@ -506,7 +525,7 @@ body {
 #app .btn .text-left,
 #app .btn .text-light,
 #app .btn .text-muted {
-  color: white;
+  color: var(--white);
   font-weight: 500;
 }
 #app .btn-outline-secondary,
@@ -523,8 +542,8 @@ body {
 #app .btn-block,
 #app .btn-dark,
 #app .btn-link {
-  background: #7f63da;
-  color: white;
+  background: var(--purple-clr_400);
+  color: var(--white);
   font-weight: 500;
   transition: 0.2s ease;
 }
@@ -545,8 +564,8 @@ body {
   background: #a496ff;
 }
 #app .btn-light {
-  background: #6eb4e0;
-  color: white;
+  background: var(--teal-clr_300);
+  color: var(--white);
   font-style: normal;
   font-weight: 500;
   transition: 0.2s ease;
@@ -555,23 +574,23 @@ body {
   background: #429bd3;
 }
 #app .toggle-handle.btn.btn-light {
-  background: #8bcbf3;
+  background: var(--teal-clr_100);
 }
 #app .btn-outline-info,
 #app .btn-info {
-  background: #8bcbf3;
-  color: white;
+  background: var(--teal-clr_100);
+  color: var(--white);
   font-style: normal;
   font-weight: 500;
   transition: 0.2s ease;
 }
 #app .btn-outline-info:hover,
 #app .btn-info:hover {
-  background: #46b3f2;
+  background: var(--teal-clr_100);
 }
 #app .btn-outline-danger {
   background: #d0335d;
-  color: white;
+  color: var(--white);
   font-weight: 500;
   transition: 0.2s ease;
 }
@@ -589,20 +608,6 @@ body {
 }
 #app .badge-dark {
   background-color: var(--active-clr_800);
-}
-
-/* prettier-ignore */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-/* prettier-ignore */
-* {
-  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
-}
-
-:root {
-  color-scheme: only light;
 }
 
 /* prettier-ignore */
@@ -636,7 +641,15 @@ body {
   color: var(--purple-clr_700);
 }
 .app .alert {
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600), transparent 60%);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
+  color: var(--white);
+}
+.app .alert.alert-secondary {
+  background: var(--purple-clr_50);
+}
+.app .table .thead-light th {
+  background: var(--purple-clr_100);
+  border: none;
 }
 
 .app {
@@ -645,10 +658,12 @@ body {
 .app ul {
   padding: 0;
 }
-.app a, .app .a {
+.app a,
+.app .a {
   color: var(--purple-clr_500);
 }
-.app a:hover, .app .a:hover {
+.app a:hover,
+.app .a:hover {
   color: var(--teal-clr_500);
   text-decoration: none;
 }
@@ -705,10 +720,10 @@ body {
   z-index: 0;
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--body-color), transparent 30%);
+  background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -718,7 +733,7 @@ body {
   z-index: 1;
   padding: 1.5rem;
   border-radius: 15px;
-  box-shadow: 0 0 5px inset white;
+  box-shadow: 0 0 5px inset var(--white);
 }
 #app #site-wrapper .site-background {
   position: fixed;
@@ -726,7 +741,7 @@ body {
   height: 100dvh;
   top: 0;
   left: 0;
-  background-image: url("images/somnivores/reveriefullres.png");
+  background-image: url("images/somnivores/reveriefullres.webp");
   background-size: cover;
 }
 #app #site-wrapper .modal-dialog .modal-body .inventory-main-img img {
@@ -891,7 +906,8 @@ fieldset.masterlist-search-grid .searchbutton {
 
 @container mlsearch (width < 800px) {
   fieldset.masterlist-search-grid {
-    grid-template: "name   name    submit" 1fr "sortby species a-btn " 1fr/3fr 3fr 1fr;
+    display: grid;
+    grid-template: "name   name    submit" 1fr "sortby species a-btn " 1fr/3fr 3fr 1.5fr;
   }
 }
 #ml-gridView {
@@ -929,7 +945,7 @@ fieldset.masterlist-search-grid .searchbutton {
   position: absolute;
   transform: translateX(-33%) translateY(0);
   transition: 0.3s var(--smoothIn_linear);
-  color: white;
+  color: var(--white);
   padding: 5px 10px;
   z-index: 6;
   pointer-events: none;
@@ -939,7 +955,6 @@ fieldset.masterlist-search-grid .searchbutton {
 }
 #ml-gridView .masterlist-character .ml-badge .flag .bg::before, #ml-gridView .masterlist-character .ml-badge .flag .bg::after {
   content: "";
-  background-color: red;
   background: var(--card_gradient);
   position: absolute;
   left: 50%;
@@ -1063,7 +1078,7 @@ fieldset.masterlist-search-grid .searchbutton {
   background-image: linear-gradient(0deg, transparent 0%, transparent 40%, white 45%, white 50%, transparent 55%, transparent 100%);
 }
 #ml-gridView .masterlist-character .thumbnail .tn-background {
-  background-image: url("../../../../public/images/overlays/starring.png"), var(--card_profile-bg_color);
+  background-image: url("images/overlays/starring.png"), var(--card_profile-bg_color);
   z-index: 1;
   filter: brightness(1);
 }
@@ -1075,7 +1090,7 @@ fieldset.masterlist-search-grid .searchbutton {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 700;
-  color: white;
+  color: var(--white);
   font-size: 1.1em;
 }
 #ml-gridView .masterlist-character .name {
@@ -1089,7 +1104,7 @@ fieldset.masterlist-search-grid .searchbutton {
 }
 #ml-gridView .masterlist-character .name a {
   max-width: 80%;
-  color: white;
+  color: var(--white);
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -1280,13 +1295,13 @@ fieldset.masterlist-search-grid .searchbutton {
   left: calc(90vw - var(--cloud-width) * 3);
 }
 
-#home-dashboard {
+.home-dashboard {
   display: grid;
   grid-template: "welc  welc  welc  welc" auto "event daily daily daily" auto "news  news  sale  sale" auto "subm  subm  subm  subm" auto/4fr 2fr 2fr 3fr;
   gap: 15px 30px;
 }
-#home-dashboard h2 {
-  background: linear-gradient(to bottom left, #51297c, #4559bd, #5ca0d4);
+.home-dashboard h2 {
+  background: linear-gradient(to bottom left, light-dark(#51297c, #c99ff7), light-dark(#4559bd, #889cff), light-dark(#5ca0d4, #72bcf5));
   width: -moz-max-content;
   width: max-content;
   -webkit-background-clip: text;
@@ -1294,72 +1309,73 @@ fieldset.masterlist-search-grid .searchbutton {
   color: transparent;
   text-shadow: none;
 }
-#home-dashboard .welcome-banner {
+.home-dashboard .welcome-banner {
   grid-area: welc;
 }
-#home-dashboard .current-event {
+.home-dashboard .current-event {
   grid-area: event;
 }
-#home-dashboard .dailies {
+.home-dashboard .dailies {
   grid-area: daily;
 }
-#home-dashboard .newsfeed {
+.home-dashboard .newsfeed {
   grid-area: news;
 }
-#home-dashboard .sales {
+.home-dashboard .sales {
   grid-area: sale;
 }
-#home-dashboard .recent-submissions {
+.home-dashboard .recent-submissions {
   grid-area: subm;
 }
-#home-dashboard .bubblebox {
+.home-dashboard .bubblebox {
   display: grid;
   grid-template-rows: max-content auto;
 }
-#home-dashboard .bubblebox .bubble {
+.home-dashboard .bubblebox .bubble {
   display: grid;
   background: var(--white);
-  background-color: hsla(0, 0%, 100%, 0.7);
+  background-color: color-mix(in srgb, var(--white) 80%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600) 40%, transparent);
   border-radius: 15px;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600), transparent 60%);
   width: 100%;
   justify-items: center;
   align-items: center;
   text-align: center;
   padding: 10px;
 }
-#home-dashboard .bubblebox .bubble img {
+.home-dashboard .bubblebox .bubble img {
   max-width: 100%;
   max-width: 250px;
-  transition: 0.3s var(--bounce_linear);
+  transition: 0.5s var(--bounce_linear);
   transform: scale(1);
 }
-#home-dashboard .bubblebox .bubble img:hover {
+.home-dashboard .bubblebox .bubble img:hover {
+  transition: 0.7s var(--elastic_linear);
   transform: scale(1.2);
 }
-#home-dashboard .bubblebox .bubble.jobs {
+.home-dashboard .bubblebox .bubble.jobs {
   grid-template-columns: 1fr 1fr 1fr;
 }
-#home-dashboard .bubblebox .bubble.jobs img {
+.home-dashboard .bubblebox .bubble.jobs img {
   width: 100%;
   max-width: 250px;
 }
-#home-dashboard .bubblebox .bubble.jobs .foraging img {
+.home-dashboard .bubblebox .bubble.jobs .foraging img {
   filter: grayscale(1) opacity(0.5);
 }
-#home-dashboard .bubblebox .bubble .news-item {
+.home-dashboard .bubblebox .bubble .news-item {
   justify-self: start;
   text-align: start;
   padding: 10px;
 }
-#home-dashboard .bubblebox .bubble.sale-info .character-info .sale-details {
+.home-dashboard .bubblebox .bubble.sale-info .character-info .sale-details {
   grid-area: more;
   font-weight: 700;
   border-radius: 10px;
   border: 3px solid var(--white);
   margin: 5px;
 }
-#home-dashboard .bubblebox .bubble .gallery {
+.home-dashboard .bubblebox .bubble .gallery {
   width: 100%;
   height: min(400px, 30vh);
   background: repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, transparent 2px, transparent 15px), linear-gradient(to bottom left, #bfeeff, #e6d9ff, #ffdde9, #fff1d5);
@@ -1368,24 +1384,24 @@ fieldset.masterlist-search-grid .searchbutton {
 }
 
 @media (width < 768px) {
-  #home-dashboard {
+  .home-dashboard {
     grid-template: "welc  welc " auto "event event" auto "daily daily" auto "news  sale " auto "subm  subm " auto/1fr 1fr;
   }
-  #home-dashboard .sale-info {
+  .home-dashboard .sale-info {
     grid-template: 3fr 1fr 1fr/3fr 2fr 3fr;
   }
-  #home-dashboard .sale-info .character-picture {
+  .home-dashboard .sale-info .character-picture {
     grid-area: 1/1/3/4;
     justify-self: end;
     align-self: start;
     max-width: 250px;
   }
-  #home-dashboard .sale-info .character-info {
-    background-color: color-mix(in srgb, var(--purple-clr_500), transparent 30%);
+  .home-dashboard .sale-info .character-info {
+    background-color: color-mix(in srgb, var(--active-clr_500) 70%, transparent);
     display: grid;
     border-radius: 15px;
     min-width: 70%;
-    color: white;
+    color: var(--white);
     -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
     grid-area: 2/1/4/4;
@@ -1393,34 +1409,34 @@ fieldset.masterlist-search-grid .searchbutton {
     align-self: end;
     grid-template: "type  price" auto "title artist" auto "more  more" auto;
   }
-  #home-dashboard .sale-info .character-info .sale-type {
+  .home-dashboard .sale-info .character-info .sale-type {
     grid-area: type;
   }
-  #home-dashboard .sale-info .character-info .sale-title {
+  .home-dashboard .sale-info .character-info .sale-title {
     grid-area: title;
   }
-  #home-dashboard .sale-info .character-info .sale-artist {
+  .home-dashboard .sale-info .character-info .sale-artist {
     grid-area: artist;
   }
-  #home-dashboard .sale-info .character-info .sale-price {
+  .home-dashboard .sale-info .character-info .sale-price {
     grid-area: price;
   }
-  #home-dashboard .sale-info .character-info .sale-details {
+  .home-dashboard .sale-info .character-info .sale-details {
     grid-area: more;
     font-weight: 700;
     border-radius: 10px;
     border: 3px solid var(--white);
     margin: 5px;
   }
-  #home-dashboard .sale-info .character-info a {
+  .home-dashboard .sale-info .character-info a {
     color: var(--white);
   }
 }
 @media (width < 576px) {
-  #home-dashboard {
+  .home-dashboard {
     grid-template: "welc " auto "event" auto "daily" auto "news " auto "sale " auto "subm " auto/1fr;
   }
-  #home-dashboard .sale-info {
+  .home-dashboard .sale-info {
     grid-template: 1fr 1fr/3fr 2fr 3fr;
   }
 }
@@ -1453,10 +1469,10 @@ body {
 #app #site-wrapper #sidebar .sidebar-header {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
+  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 15px 15px 0 0;
   padding: 5px;
 }
@@ -1484,7 +1500,7 @@ body {
 }
 #app #site-wrapper #sidebar #sidebar-ul .sidebar-section .sidebar-item a.active {
   font-weight: 700;
-  color: white;
+  color: var(--white);
 }
 #app #site-wrapper #sidebar #sidebar-ul .sidebar-section .sidebar-item a:hover {
   transition: 0.1s linear;
@@ -1497,7 +1513,7 @@ body {
 }
 
 #sidebar {
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 15px;
 }
 #sidebar details {
@@ -1514,7 +1530,7 @@ body {
   position: relative;
   text-align: center;
   padding: 5px 0;
-  background: color-mix(in srgb, var(--active-clr_100), transparent 30%);
+  background: color-mix(in srgb, var(--active-clr_100) 70%, transparent);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
 }
@@ -1604,7 +1620,7 @@ body {
   /* .sidebar-section {  } */
 }
 .sidebar a {
-  color: rgba(0, 0, 0, 0.4);
+  color: color-mix(in srgb, var(--black) 70%, transparent);
 }
 .sidebar a:hover {
   color: var(--purple-clr_900);
@@ -1709,10 +1725,10 @@ body {
   grid-template: "thumb" auto "name " auto "owner" auto "species " auto "rarity " auto/max-content;
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--body-color), transparent 30%);
+  background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 0 0 15px 15px;
 }
 .featured-character .sidebar-section .thumb {
@@ -1801,7 +1817,7 @@ body {
   position: absolute;
   width: calc(0.8 * var(--sidebar-width));
   height: calc(0.8 * var(--sidebar-width));
-  background-color: --purple-clr_300;
+  background-color: var(--purple-clr_300);
   mix-blend-mode: soft-light;
 }
 .featured-character .sidebar-section .name {
@@ -1889,11 +1905,11 @@ body {
 #app #site-wrapper #header-nav {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--body-color), transparent 30%);
+  background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
-  background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
   grid-area: nav;
   border-radius: 20px;
   z-index: 3;
@@ -1906,7 +1922,8 @@ body {
 #app #site-wrapper #header-nav .navbar-nav .dropdown {
   border-radius: 10px;
   transition: 0.1s ease;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  border: 2px transparent solid;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown > a {
   color: var(--purple-clr_50);
@@ -1926,7 +1943,8 @@ body {
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown:has(.show) {
   border-radius: 10px 10px 0 0;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  border: 2px var(--purple-clr_300) solid;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--active-clr_800) 50%, transparent));
   background-color: var(--purple-clr_50);
   z-index: 1;
 }
@@ -1993,7 +2011,7 @@ body {
   width: 30px;
   height: 6px;
   border-radius: 10px;
-  background: white;
+  background-color: var(--white);
   position: absolute;
   transform-origin: center center;
   transition: 0.3s ease;
@@ -2061,8 +2079,7 @@ body {
     top: 100%;
     opacity: 0;
     transform: scale(0.5);
-    border: 2px transparent solid;
-    box-shadow: 0 0 5px color-mix(in srgb, var(--active-clr_600), transparent 30%);
+    border: 2px var(--purple-clr_300) solid;
     border-top: 0;
     margin: -2px 0 0 -7px;
     transition: all 0.3s var(--spring_linear) allow-discrete, display 0.3s var(--spring_linear) allow-discrete;
@@ -2231,7 +2248,6 @@ body {
     height: 0;
     padding: 0;
     margin-bottom: 0;
-    overflow: hidden;
     border: 0;
     z-index: 3;
     gap: 10px;
@@ -2273,7 +2289,7 @@ body {
     flex-grow: 10;
     border-radius: 15px;
     background-color: var(--body-color);
-    contain: paint;
+    contain: layout;
   }
   #header-nav .navbar-nav .nav-item .dt-nav-group .dt-nav-header,
   #header-nav .navbar-nav .nav-item .dt-nav-group .dt-nav-item {
@@ -2337,10 +2353,10 @@ body {
 #app #site-wrapper #footer {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--body-color), transparent 30%);
+  background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   grid-area: footer;
   border-radius: 15px;
   width: 100%;
@@ -2500,11 +2516,11 @@ because the nesting selector cannot represent pseudo-elements. */
   background: transparent;
 }
 .card .card-body {
-  border: 1px white solid;
+  border: 1px var(--white) solid;
   border-radius: 15px;
-  background-color: hsla(0, 0%, 100%, 0.7);
+  background-color: color-mix(in srgb, var(--white) 20%, transparent);
   border-radius: 15px;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   width: 100%;
   background: rgba(255, 255, 255, 0.6431372549);
   border-radius: 15px;
@@ -2562,7 +2578,7 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 .app .lore .card {
   margin: 15px 250px 25px;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800), transparent 80%);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   background: rgba(255, 255, 255, 0.266);
   border-radius: 15px;
 }
@@ -2910,4 +2926,22 @@ because the nesting selector cannot represent pseudo-elements. */
   --card_star_opacity: 0.9;
   --card_star_animation-duration: 20s;
   --card_star_blend-mode: overlay;
+}
+
+.gallery-recents .submission {
+  display: grid;
+  grid-template: "img" auto "title" auto "details" auto/1fr;
+}
+.gallery-recents .submission .img {
+  grid-area: img;
+  width: 100%;
+}
+.gallery-recents .submission .img img {
+  max-width: 100%;
+}
+.gallery-recents .submission .title {
+  grid-area: title;
+}
+.gallery-recents .submission .details {
+  grid-area: details;
 }

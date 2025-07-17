@@ -132,7 +132,11 @@
     <div class="card-body row justify-content-center text-center">
       {{-- get one random pet --}}
       @php
-        $pets = $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get();
+        $pets = $character->image->character
+            ->pets()
+            ->orderBy('sort', 'DESC')
+            ->limit(config('lorekeeper.pets.display_pet_count'))
+            ->get();
       @endphp
       @foreach ($pets as $pet)
         @if (config('lorekeeper.pets.pet_bonding_enabled'))
@@ -160,6 +164,12 @@
       <div class="card mb-3">
         <div class="card-body parsed-text">
           {!! $character->profile->parsed_text !!}
+        </div>
+      </div>
+    @else
+      <div class="card mb-3">
+        <div class="small italic text-secondary card-body parsed-text">
+          This character doesn't have a bio yet!
         </div>
       </div>
     @endif

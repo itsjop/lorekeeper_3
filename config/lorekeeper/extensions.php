@@ -48,7 +48,7 @@ return [
     // Item Entry Expansion - Mercury
     'item_entry_expansion' => [
         'extra_fields'    => 1,
-        'resale_function' => 0,
+        'resale_function' => 1,
         'loot_tables'     => [
             // Adds the ability to use either rarity criteria for items or item categories with rarity criteria in loot tables. Note that disabling this does not apply retroactively.
             'enable'              => 0,
@@ -93,7 +93,7 @@ return [
     // Previous & Next buttons on Character pages - Speedy
     // Adds buttons linking to the previous character as well as the next character on all character pages.
     'previous_and_next_characters' => [
-        'display' => 1,
+        'display' => 0,
         'reverse' => 0, // By default, 0 has the lower number on the 'Next' side and the higher number on the 'Previous' side, reflecting the default masterlist order. Setting this to 1 reverses this.
     ],
 
@@ -107,7 +107,7 @@ return [
             'sidebar'      => 1, // By default, ON, and will display in the sidebar.
             'indexbutton'  => 1, // By default, ON, and will display a button on the index.
         ],
-        'section_on_front' => 0, // By default, does not display on the front page. Enable to add a block above the footer.
+        'section_on_front' => 1, // By default, does not display on the front page. Enable to add a block above the footer.
     ],
 
     // collapsible admin sidebar - Newt

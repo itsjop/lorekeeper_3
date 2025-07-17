@@ -20,8 +20,8 @@ return [
     'myos' => 'MYOs', // Incomplete
     'myos_' => 'MYO|MYOs', // Incomplete
 
-    'subtype' => 'subtype',
-    'subtypes' => 'subtypes',
+    'subtype' => 'palate',
+    'subtypes' => 'palates',
     'subtypes_' => 'subtype|subtypes',
 
     'species' => 'species',

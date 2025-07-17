@@ -17,14 +17,15 @@
       <h2>Add-ons</h2>
 
       @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id && $request->character)
-        <p>Select items and/or currency to add onto your request. These items will be removed from your
+        <p>Select any items needed to add <b>traits</b> or <b>modifications</b> to your character.</p>
+        <p>These items will be removed from your
           inventory{{ $request->character->is_myo_slot ? '' : ' and/or character' }} but refunded if removed from the request, the
           request is rejected, or the
-          request is deleted. If you don't intend to attach any items/currency, click the Save button once to mark this section
-          complete regardless.
-          If you are attaching trait items, make sure that the traits it grants are valid for the species/subtype of the design.
-          Otherwise, the item will be lost without granting a trait.
-        </p>
+          request is deleted.</p>
+        <p>If you don't need to attach any items for your request, simply click the <b>Save</b> button once to mark this section
+          as complete! </p>
+        <hr>
+
         {!! Form::open(['url' => 'designs/' . $request->id . '/addons']) !!}
         @include('widgets._inventory_select', [
             'user' => Auth::user(),
@@ -32,11 +33,11 @@
             'categories' => $categories,
             'selected' => $request->inventory
         ])
-        @include('widgets._bank_select', ['owner' => Auth::user(), 'selected' => $request->userBank])
+        {{-- @include('widgets._bank_select', ['owner' => Auth::user(), 'selected' => $request->userBank])
 
         @if (!$request->character->is_myo_slot)
           @include('widgets._bank_select', ['owner' => $request->character, 'selected' => $request->characterBank])
-        @endif
+        @endif --}}
 
         <div class="text-right">
           {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

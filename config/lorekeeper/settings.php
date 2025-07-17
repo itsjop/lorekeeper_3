@@ -130,11 +130,11 @@ return [
 */
   'character_codes' => '{category}-{number}',
   'character_number_digits' => 3,
-  'character_pull_number' => 'all',
+  'character_pull_number' => 'category',
 
-  'reset_character_status_on_transfer' => 0,
-  'reset_character_profile_on_transfer' => 0,
-  'clear_myo_slot_name_on_approval' => 0,
+  'reset_character_status_on_transfer' => 1,
+  'reset_character_profile_on_transfer' => 1,
+  'clear_myo_slot_name_on_approval' => 1,
 
   /*
 |--------------------------------------------------------------------------
@@ -348,7 +348,7 @@ return [
 |
 */
   'donation_shop' => [
-    'item_donations' => 0,
+    'item_donations' => 2,
     'cooldown' => 5,
     'expiry' => 0,
   ],
@@ -416,7 +416,7 @@ return [
     */
   'hide_textarea_on_gallery_submissions'    => [
     'enable'   => 1,
-    'on_image' => 0,
+    'on_image' => 1,
   ],
 
   /*

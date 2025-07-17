@@ -1,29 +1,15 @@
-@mixin neuo($color: #c2c0cf55, $offset: 20px) {
-  border-radius: 50px;
-  background: $color;
-  @include noise-background;
-  box-shadow:
-    $offset $offset ($offset * 2) $color,
-    (-1 * $offset) (-1 * $offset) ($offset * 2) #ffffff44;
-}
-@mixin noise-background() {
-  background-image: url(../../public/images/noise.png);
-  background-blend-mode: color-burn;
-  background-repeat: repeat;
-  background-size: 64px;
-}
 @mixin body-bg($color: var(--body-color), $opacity: .7) {
   border-radius: 15px;
   background-image: url('images/overlays/otis-redding_noise.png');
-  background-color: color-mix(in srgb, $color, transparent calc(100% - (100% * $opacity)));
+  background-color: color-mix(in srgb, $color calc(100% * $opacity), transparent);
   backdrop-filter: saturate(200%) blur(5px);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
 }
 @mixin card-bg($color: var(--body-color), $opacity: .7) {
-  border: 1px white solid;
+  border: 1px var(--white) solid;
   border-radius: 15px;
-  background-color: hwb(0 100% 0% / 0.7);
+  background-color: color-mix(in srgb, var(--white) 20%, transparent);
   border-radius: 15px;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   width: 100%;
 }

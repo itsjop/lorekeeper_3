@@ -12,10 +12,9 @@
 
   @include('character.design._header', ['request' => $request])
 
-
   @if ($request->has_image)
-  <div class="card mb-3">
-    <div class="card-body bg-secondary text-white">
+    <div class="card mb-3">
+      <div class="card-body bg-secondary text-white">
         <h2>Masterlist Image</h2>
         <div class="row mb-3">
           <div class="col-md-6">
@@ -81,17 +80,22 @@
 
   <div class="card mb-3">
     <div class="card-body br-ntl-15">
-        <h2>Masterlist Image</h2>
+      <h2>Masterlist Image</h2>
 
       @if (
           ($request->status == 'Draft' && $request->user_id == Auth::user()->id) ||
               ($request->status == 'Pending' && Auth::user()->hasPower('manage_characters'))
       )
         @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id)
-          <p>Select the image you would like to use on the masterlist and an optional thumbnail. Please only upload images that you
-            are
-            allowed to use AND are able to credit to the artist! Note that while staff members cannot edit your uploaded image,
-            they may choose to recrop or upload a different thumbnail.</p>
+          <p>Each Masterlist image requires its own design request.</p>
+          <p>There is an area in the <b>Traits Tab</b> where you will specify what type of ML image you are uploading. (Bat, Demon,
+            Reference, etc.)</p>
+          <hr>
+          <p>
+            {{ $request->character->is_myo_slot
+                ? 'This is a new MYO, so you will need to upload a Bat form first! If you have a Demon Form ready to go, you will have to submit a design update after your MYO has been approved.'
+                : 'This is a character update, so feel free to upload any type of Masterlist image to replace or add to your character’s profile!' }}
+          </p>
         @else
           <p>As a staff member, you may modify the thumbnail of the uploaded image and/or the credits, but not the image itself. If
             you
@@ -111,13 +115,12 @@
         {!! Form::open(['url' => 'designs/' . $request->id . '/image', 'files' => true]) !!}
         @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id)
           <div class="form-group">
-            {!! Form::label('Image') !!} {!! add_help(
-                'This is the image that will be used on the masterlist. Note that the image is not protected in any way, so take precautions to avoid art/design theft.'
-            ) !!}
+            <h3> {!! Form::label('Image Upload') !!}</h3>
             <div class="custom-file">
               {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
               {!! Form::file('image', ['class' => 'custom-file-input', 'id' => 'mainImage']) !!}
             </div>
+            <p class="text-secondary">Max file size: 2000px x 2000px</p>
           </div>
         @else
           <div class="form-group">
@@ -188,8 +191,14 @@
             </div>
           </div>
         @endif
+
+        <hr>
+
+        <h3> {!! Form::label('Artist Credits') !!}</h3>
+
         <p>
-          This section is for crediting the image creators. The first box is for the designer or artist's on-site username (if any).
+          This section is for crediting the character's artist and/or designer. The first box is for the designer or artist's
+          on-site username (if any).
           The
           second is for a link to the designer or artist if they don't have an account on the site.
         </p>

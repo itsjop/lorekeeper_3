@@ -41,10 +41,10 @@
     {{ Illuminate\Support\Str::limit($character->slug, 20, $end = '...') }}
   </div>
   {{-- Owner --}}
-  <div class="display-user flex  gap-_5 ">
+  <a class="display-user" href="{{ $character->user->url }}">
     {!! $character->user->name !!}
     <div class="fas fa-user"></div>
-  </div>
+  </a>
   {{-- Paper Overlay --}}
   <div class="paper-overlay"></div>
   {{-- vvv Disabled Content vvv --}}

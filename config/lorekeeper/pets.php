@@ -9,7 +9,7 @@ return [
     'max_pets' => 0,
 
     // if variants are included on the world pet page
-    'include_variants' => true,
+    'include_variants' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -21,5 +21,5 @@ return [
     |
     */
     'pet_bonding_enabled' => true,
-    'initial_level_name' => 'Wary',
+    'initial_level_name' => 'Curious',
 ];

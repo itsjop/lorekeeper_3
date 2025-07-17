@@ -120,13 +120,6 @@ main > .row {
   flex-grow: 1;
 }
 
-.main-content {
-  background-color: white;
-  box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-}
-
 /* Header */
 
 .site-header-image {
@@ -160,15 +153,6 @@ main > .row {
   padding-top: 30px;
 }
 
-.sidebar ul li {
-  background-color: white;
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-  margin-bottom: 1em;
-  padding: 0.4em 0;
-
-  box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.1);
-}
 
 .sidebar .sidebar-header,
 .sidebar .sidebar-section .sidebar-section-header {
@@ -179,44 +163,6 @@ main > .row {
   font-weight: bold;
 }
 
-.sidebar .sidebar-header {
-  background-color: #343a40;
-}
-.sidebar .sidebar-header a {
-  color: white;
-}
-
-.sidebar a,
-.sidebar-section-header {
-  display: block;
-  padding: 0.1em 1em;
-}
-
-.sidebar a {
-  text-transform: uppercase;
-  font-family:
-    Roboto Condensed,
-    serif;
-  color: rgba(0, 0, 0, 0.4);
-}
-.sidebar a:hover {
-  color: #16181b;
-  background-color: #f8f9fa;
-}
-.sidebar a:hover,
-.sidebar a:active,
-.sidebar a:focus,
-.sidebar a:link {
-  text-decoration: none;
-}
-.sidebar a:hover {
-  text-decoration: none;
-}
-.sidebar a.active,
-.sidebar a.active:hover {
-  color: white;
-  background-color: #343a40;
-}
 
 .site-mobile-header {
   display: none;
@@ -286,15 +232,6 @@ main > .row {
     display: block;
     padding-top: 30px;
     padding-left: 0px;
-  }
-
-  .sidebar ul li {
-    background-color: white;
-    border-radius: 0;
-    margin-bottom: 1em;
-    padding: 0.4em 0;
-
-    box-shadow: none;
   }
 
   /*fix for screen being over-wide on mobile*/

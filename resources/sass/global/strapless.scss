@@ -13,15 +13,14 @@
     &.text-center,
     &.text-left,
     &.text-light,
-    &.text-muted
-    .text-success,
+    &.text-muted .text-success,
     .text-primary,
     .text-danger,
     .text-center,
     .text-left,
     .text-light,
     .text-muted {
-      color: white;
+      color: var(--white);
       font-weight: 500;
     }
   }
@@ -39,54 +38,52 @@
   .btn-danger,
   .btn-block,
   .btn-dark,
-  .btn-link
-  {
-    background: (#7f63da);
-    color: white;
+  .btn-link {
+    background: var(--purple-clr_400);
+    color: var(--white);
     font-weight: 500;
     transition: 0.2s ease;
     &:hover {
-      background: (#a496ff);
+      background: #a496ff;
     }
   }
 
-  .btn-light{
-   background: (#6eb4e0);
-    color: white;
+  .btn-light {
+    background: var(--teal-clr_300);
+    color: var(--white);
     font-style: normal;
     font-weight: 500;
     transition: 0.2s ease;
     &:hover {
-      background: (#429bd3);
-
+      background: #429bd3;
     }
   }
 
-  .toggle-handle.btn.btn-light{
-    background: #8bcbf3;
+  .toggle-handle.btn.btn-light {
+    background: var(--teal-clr_100);
   }
 
   .btn-outline-info,
-  .btn-info{
-    background: (#8bcbf3);
-    color: white;
+  .btn-info {
+    // background: #8bcbf3;
+    background: var(--teal-clr_100);
+    color: var(--white);
     font-style: normal;
     font-weight: 500;
     transition: 0.2s ease;
     &:hover {
-      background: (#46b3f2);
-
+      background: var(--teal-clr_100);
     }
   }
 
-  .btn-outline-danger{
+  .btn-outline-danger {
     background: #d0335d;
-    color: white;
+    color: var(--white);
     font-weight: 500;
     transition: 0.2s ease;
     &:hover {
-      background: (#a51752);
-  }
+      background: #a51752;
+    }
   }
   .notifications-table .unread {
     background-color: var(--purple-clr_100);
@@ -113,7 +110,6 @@
   --green: #7dcc8f;
   --teal: #20c997;
   --cyan: #48c9dc;
-  --white: #fff;
   --gray: #6c7c8b;
   --gray-dark: #343a40;
   --primary: #5da6f3;

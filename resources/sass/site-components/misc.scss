@@ -211,3 +211,27 @@
     --card_star_blend-mode: overlay;
   }
 }
+
+.gallery-recents {
+  .submission {
+    display: grid;
+    grid-template:
+      'img' auto
+      'title' auto
+      'details' auto
+      / 1fr;
+    .img {
+      grid-area: img;
+      width: 100%;
+      img {
+        max-width: 100%;
+      }
+    }
+    .title {
+      grid-area: title;
+    }
+    .details {
+      grid-area: details;
+    }
+  }
+}

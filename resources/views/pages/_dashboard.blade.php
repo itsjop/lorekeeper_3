@@ -1,4 +1,4 @@
-<div id="home-dashboard">
+<div class="home-dashboard">
   <h1 class="welcome-banner">Welcome back to Reverie, {!! Auth::user()->displayName !!}! ✨</h1>
   {{-- <div class="card mb-4 timestamp">
     <div class="card-body"> <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!} </div> </div> --}}
@@ -52,14 +52,15 @@
       <span>Newsfeed</span>
     </h2>
     <div class="bubble">
-      <div class="news-item">
+      {{-- <div class="news-item">
         <h3>FAKE NEWS HEADLINE</h3>
         <p>this is the news this is the news this is the news this is the news this is the news...</p>
       </div>
       <div class="news-item">
         <h3>FAKE NEWS HEADLINE</h3>
         <p>this is the news this is the news this is the news this is the news this is the news...</p>
-      </div>
+       </div> --}}
+      <h3 class="h2 js-center as-center"> Coming soon!</h3>
     </div>
   </div>
   <div class="bubblebox sales">
@@ -67,8 +68,9 @@
       <span>Sales</span>
     </h2>
     {{-- INSERT LIVE SALE VALUES HERE --}}
-    <div class="bubble sale-info grid-2-col">
-      <div class="character-picture">
+    <div class="bubble sale-info">
+      {{-- <div class="bubble sale-info grid-2-col"> --}}
+      {{-- <div class="character-picture">
         <img src="{{ asset('/images/somnivores/jax2.png') }}" alt="">
       </div>
       <div class="character-info">
@@ -82,17 +84,21 @@
           <a href=""> notwyspic </a>
         </div>
         <a class="sale-details" href="sale_link"> View More > </a>
-      </div>
+      </div> --}}
+      <h3 class="h2 js-center as-center"> Coming soon!</h3>
     </div>
   </div>
   {{-- SUBMISSION GALLERY --}}
   <div class="bubblebox recent-submissions">
-    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-palette"></i>
-      <span>Recent Gallery Submissions</span>
+    <h2 class="flex gap-_5 ai-center">
+      <a href="gallery/all" class="color-unset ai-center">
+        <i class="fas fa-palette"></i>
+        Recent Gallery Submissions
+        <i class="fa-solid fa-caret-right"></i>
+      </a>
     </h2>
     <div class="bubble p-0">
-      <div class="gallery"></div>
+      @include('widgets._recent_gallery_submissions', ['gallerySubmissions' => $gallerySubmissions])
     </div>
   </div>
-  @include('widgets._recent_gallery_submissions', ['gallerySubmissions' => $gallerySubmissions])
 </div>

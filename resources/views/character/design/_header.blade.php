@@ -1,6 +1,8 @@
 <h1>
   Request (#{{ $request->id }}): {!! $request->character ? $request->character->displayName : 'Deleted Character [#' . $request->character_id . ']' !!}
-  <span class="float-right badge badge-{{ $request->status == 'Draft' || $request->status == 'Pending' ? 'secondary' : ($request->status == 'Approved' ? 'success' : 'danger') }}">{{ $request->status }}
+  <span
+    class="float-right badge badge-{{ $request->status == 'Draft' || $request->status == 'Pending' ? 'secondary' : ($request->status == 'Approved' ? 'success' : 'danger') }}"
+  >{{ $request->status }}
 </h1>
 
 @if (isset($request->staff_id))
@@ -14,7 +16,11 @@
   @endif
 @endif
 
-@if ($request->status != 'Draft' && Auth::user()->hasPower('manage_characters') && config('lorekeeper.extensions.design_update_voting'))
+@if (
+    $request->status != 'Draft' &&
+        Auth::user()->hasPower('manage_characters') &&
+        config('lorekeeper.extensions.design_update_voting')
+)
   <?php
   $rejectSum = 0;
   $approveSum = 0;
@@ -29,21 +35,30 @@
   ?>
   <div class="card">
     <div class="card-body">
-      <h5 class="text-left">{{ $request->status == 'Pending' ? 'Vote' : 'Past Votes' }} on this {{ $request->update_type == 'MYO' ? 'MYO Submission' : 'Design Update' }}
+      <h5 class="text-left">{{ $request->status == 'Pending' ? 'Vote' : 'Past Votes' }} on this
+        {{ $request->update_type == 'MYO' ? 'MYO Submission' : 'Design Update' }}
         @if ($request->status == 'Pending')
           <span class="text-right float-right">
             <div class="row">
               <div class="col-sm-6 text-center text-danger">
                 {{ $rejectSum }}/{{ Settings::get('design_votes_needed') }}
                 {!! Form::open(['url' => 'admin/designs/vote/' . $request->id . '/reject', 'id' => 'voteRejectForm']) !!}
-                <button class="btn {{ $request->voteData->get(Auth::user()->id) == 1 ? 'btn-danger' : 'btn-outline-danger' }}" style="min-width:40px;" data-action="reject">
+                <button
+                  class="btn {{ $request->voteData->get(Auth::user()->id) == 1 ? 'btn-danger' : 'btn-outline-danger' }}"
+                  style="min-width:40px;"
+                  data-action="reject"
+                >
                   <i class="fas fa-times"></i></button>
                 {!! Form::close() !!}
               </div>
               <div class="col-sm-6 text-center text-success">
                 {{ $approveSum }}/{{ Settings::get('design_votes_needed') }}
                 {!! Form::open(['url' => 'admin/designs/vote/' . $request->id . '/approve', 'id' => 'voteApproveForm']) !!}
-                <button class="btn {{ $request->voteData->get(Auth::user()->id) == 2 ? 'btn-success' : 'btn-outline-success' }}" style="min-width:40px;" data-action="approve">
+                <button
+                  class="btn {{ $request->voteData->get(Auth::user()->id) == 2 ? 'btn-success' : 'btn-outline-success' }}"
+                  style="min-width:40px;"
+                  data-action="approve"
+                >
                   <i class="fas fa-check"></i></button>
                 {!! Form::close() !!}
               </div>
@@ -52,7 +67,9 @@
         @endif
       </h5>
       <p>
-        {{ $request->update_type == 'MYO' ? 'MYO Submissions' : 'Design updates' }} need {{ Settings::get('design_votes_needed') }} votes before they are considered approved. Note that this does not automatically process the submission
+        {{ $request->update_type == 'MYO' ? 'MYO Submissions' : 'Design updates' }} need
+        {{ Settings::get('design_votes_needed') }} votes before they are considered approved. Note that this does not
+        automatically process the submission
         in any case, only indicate a consensus.
       </p>
       <hr />
@@ -100,22 +117,31 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/comments') }}" href="{{ url('designs/' . $request->id . '/comments') }}">
-      <i class="text-{{ $request->has_comments ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i> Comments</a>
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/comments') }}"
+      href="{{ url('designs/' . $request->id . '/comments') }}"
+    >
+      <i class="text-{{ $request->has_comments ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
+      Comments</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/image') }}" href="{{ url('designs/' . $request->id . '/image') }}">
-      <i class="text-{{ $request->has_image ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/image') }}"
+      href="{{ url('designs/' . $request->id . '/image') }}"
+    >
+      <i class="text-{{ $request->has_image ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
       Masterlist Image</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/addons') }}" href="{{ url('designs/' . $request->id . '/addons') }}">
-      <i class="text-{{ $request->has_addons ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/addons') }}"
+      href="{{ url('designs/' . $request->id . '/addons') }}"
+    >
+      <i class="text-{{ $request->has_addons ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
       Add-ons</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ set_active('designs/' . $request->id . '/traits') }}" href="{{ url('designs/' . $request->id . '/traits') }}">
-      <i class="text-{{ $request->has_features ? 'success far fa-circle' : 'danger fas fa-times' }} fa-fw mr-2"></i>
+    <a class="nav-link {{ set_active('designs/' . $request->id . '/traits') }}"
+      href="{{ url('designs/' . $request->id . '/traits') }}"
+    >
+      <i class="text-{{ $request->has_features ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
       Traits</a>
   </li>
 </ul>

@@ -126,4 +126,10 @@
 .ta-left   { text-align: left;   }
 .ta-center { text-align: center; }
 .ta-right  { text-align: right;  }
+
+// Text
+.italic { font-style: italic; }
+.no-break {word-break: keep-all;}
+.color-unset { color: unset; }
+
 }

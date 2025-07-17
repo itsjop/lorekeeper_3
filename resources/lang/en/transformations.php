@@ -17,9 +17,9 @@ return [
     /
     */
 
-    'transformation' => 'transformation',                         // use __
-    'transformations' => 'transformations',                       // use __
-    'transformations_' => 'transformation|transformations',                // Use trans_choice instead of __
+    'transformation' => 'Masterlist Image Type',              // use __
+    'transformations' => 'Masterlist Image Types',            // use __
+    'transformations_' => 'transformation|transformations',   // Use trans_choice instead of __
 
 
     'form' => 'form',                         // use __

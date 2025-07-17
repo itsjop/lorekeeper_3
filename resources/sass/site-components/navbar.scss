@@ -3,7 +3,7 @@
   #site-wrapper {
     #header-nav {
       @include body-bg;
-      background-color: color-mix(in srgb, var(--purple-clr_700), transparent 30%);
+      background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
       grid-area: nav;
       border-radius: 20px;
       z-index: 3;
@@ -14,7 +14,8 @@
         .dropdown {
           border-radius: 10px;
           transition: 0.1s ease;
-          box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+          border: 2px transparent solid;
+          box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
           > a {
             color: var(--purple-clr_50);
           }
@@ -32,7 +33,8 @@
           &:has(.show) {
             // &.show {
             border-radius: 10px 10px 0 0;
-            box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600), transparent 80%);
+            border: 2px var(--purple-clr_300) solid;
+            filter: drop-shadow(0 0 10px color-mix(in srgb, var(--active-clr_800) 50%, transparent));
             background-color: var(--purple-clr_50);
             z-index: 1;
             &:hover {
@@ -102,7 +104,7 @@
             width: 30px;
             height: 6px;
             border-radius: 10px;
-            background: white;
+            background-color: var(--white);
             position: absolute;
             transform-origin: center center;
             transition: 0.3s ease;
@@ -183,9 +185,7 @@
     top: 100%;
     opacity: 0;
     transform: scale(0.5);
-    border: 2px transparent solid;
-    box-shadow: 0 0 5px color-mix(in srgb, var(--active-clr_600), transparent 30%);
-
+    border: 2px var(--purple-clr_300) solid;
     border-top: 0;
     margin: -2px 0 0 -7px;
     transition:
@@ -360,7 +360,6 @@
           height: 0;
           padding: 0;
           margin-bottom: 0;
-          overflow: hidden;
           border: 0;
           z-index: 3;
           gap: 10px;
@@ -396,7 +395,7 @@
           flex-grow: 10;
           border-radius: 15px;
           background-color: var(--body-color);
-          contain: paint;
+          contain: layout;
           .dt-nav-header,
           .dt-nav-item {
             padding: 0 10px;

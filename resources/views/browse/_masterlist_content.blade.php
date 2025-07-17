@@ -1,6 +1,6 @@
 <div id="masterlist">
   {!! Form::open(['method' => 'GET']) !!}
-  <fieldset class="masterlist-search-grid form-inline flex ji-start ai-end my-2">
+  <fieldset class="masterlist-search-grid form-inline ji-start ai-end my-2">
     <legend>Character Search</legend>
     <div class="character-name form-group grid ji-start m-0 w-100">
       {!! Form::label('name', ucfirst(__('lorekeeper.character')) . ' Name/Code: ', ['class' => 'mr-2']) !!}
@@ -25,10 +25,10 @@
                   'id_desc' => 'Newest First',
                   'id_asc' => 'Oldest First',
                   'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value',
+                  'sale_value_asc' => 'Lowest Sale Value'
               ],
               Request::get('sort'),
-              ['class' => 'form-control w-100'],
+              ['class' => 'form-control w-100']
           ) !!}
         @else
           {!! Form::select(
@@ -37,17 +37,27 @@
                   'id_desc' => 'Newest First',
                   'id_asc' => 'Oldest First',
                   'sale_value_desc' => 'Highest Sale Value',
-                  'sale_value_asc' => 'Lowest Sale Value',
+                  'sale_value_asc' => 'Lowest Sale Value'
               ],
               Request::get('sort'),
-              ['class' => 'form-control w-100'],
+              ['class' => 'form-control w-100']
           ) !!}
         @endif
       </div>
     </div>
-    {!! Form::submit('Search', ['class' => 'searchbutton btn btn-primary as-end js-center']) !!}
+    {!! Form::button('<i class="fa fa-magnifying-glass"></i> Search', [
+        'type' => 'submit',
+        'class' => 'searchbutton btn btn-primary as-end flex gap-_5 ai-center js-center'
+    ]) !!}
+
     <div class="advanced-search-toggle mb-0 as-end js-center">
-      <a href="#advancedSearch" class="btn btn-sm btn-secondary" data-bs-toggle="collapse"> Advanced <i class="fas fa-caret-down"></i></a>
+      <a
+        href="#advancedSearch"
+        class="btn btn-sm btn-secondary flex gap-_5 ai-center"
+        data-bs-toggle="collapse"
+      >
+        More
+        <i class="fas fa-caret-down"></i></a>
     </div>
   </fieldset>
   <div class="card bg-light mb-0 collapse" id="advancedSearch">
@@ -66,7 +76,7 @@
       <div class="card-body d-flex">
         {!! Form::select('feature_id[]', $features, null, [
             'class' => 'form-control feature-select selectize',
-            'placeholder' => 'Select Trait',
+            'placeholder' => 'Select Trait'
         ]) !!}
         <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
       </div>
@@ -100,10 +110,12 @@ alt="List View"
             file_exists(public_path(
                     $character->image->imageDirectory .
                         ' /
-                    ' .
-                        $character->image->fullsizeFileName))
+                                    ' .
+                        $character->image->fullsizeFileName
+                )
+            )
                 ? $character->image->thumbnailUrl
-                : $character->image->thumbnailUrl,
+                : $character->image->thumbnailUrl
     ])
   @endforeach
 </div>

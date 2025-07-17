@@ -38,10 +38,11 @@ fieldset.masterlist-search-grid {
 }
 @container mlsearch (width < 800px) {
   fieldset.masterlist-search-grid {
+    display: grid;
     grid-template:
       'name   name    submit' 1fr
       'sortby species a-btn ' 1fr
-      / 3fr 3fr 1fr;
+      / 3fr 3fr 1.5fr;
   }
 }
 #ml-gridView {
@@ -86,7 +87,7 @@ fieldset.masterlist-search-grid {
         position: absolute;
         transform: translateX(-33%) translateY(0);
         transition: 0.3s var(--smoothIn_linear);
-        color: white;
+        color: var(--white);
         padding: 5px 10px;
         z-index: 6;
         pointer-events: none;
@@ -96,7 +97,6 @@ fieldset.masterlist-search-grid {
           &::before,
           &::after {
             content: '';
-            background-color: red;
             background: var(--card_gradient);
             position: absolute;
             left: 50%;
@@ -237,7 +237,7 @@ fieldset.masterlist-search-grid {
         }
       }
       .tn-background {
-        background-image: url('../../../../public/images/overlays/starring.png'), var(--card_profile-bg_color);
+        background-image: url('images/overlays/starring.png'), var(--card_profile-bg_color);
         z-index: 1;
         filter: brightness(1);
       }
@@ -250,7 +250,7 @@ fieldset.masterlist-search-grid {
       text-overflow: ellipsis;
       white-space: nowrap;
       font-weight: 700;
-      color: white;
+      color: var(--white);
       font-size: 1.1em;
     }
     .name {
@@ -263,7 +263,7 @@ fieldset.masterlist-search-grid {
       padding: 0 0 0 10px;
       a {
         max-width: 80%;
-        color: white;
+        color: var(--white);
         overflow: hidden;
         text-overflow: ellipsis;
       }

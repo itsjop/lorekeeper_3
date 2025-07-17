@@ -142,7 +142,7 @@
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('sublist/npc') }}">
               <i class="fas fa-star"></i> NPCs </a>
-             <a class="dt-nav-item" href="{{ url('masterlist') }}">
+             <a class="dt-nav-item" href="{{ url('sublist/BAT') }}">
               <i class="fas fa-star"></i> Official Somnivores </a>
             <a class="dt-nav-item" href="{{ url('sublist/MYO') }}">
               <i class="fas fa-star"></i> MYO Somnivores </a>

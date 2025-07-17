@@ -1,12 +1,4 @@
 /* prettier-ignore */
-*, *::before, *::after {  box-sizing: border-box; }
-/* prettier-ignore */
-* {  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
-:root {
-  color-scheme: only light;
-}
-
-/* prettier-ignore */
 .app {
 h1, .h1 {
   font-family: 'Baloo 2', sans-serif, system-ui;
@@ -34,14 +26,25 @@ h4, h5, h6
 }
 
 .alert{
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600), transparent 60%);;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
+  color: var(--white);
+}
+
+.alert.alert-secondary{
+  background: var(--purple-clr_50);
+}
+
+.table .thead-light th{
+ background: var(--purple-clr_100);
+ border: none;
 }
 
 }
 .app {
   /* prettier-ignore */
   ul { padding: 0; }
-  a, .a {
+  a,
+  .a {
     color: var(--purple-clr_500);
     &:hover {
       color: var(--teal-clr_500);
