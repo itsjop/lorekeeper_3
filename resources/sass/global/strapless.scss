@@ -13,7 +13,8 @@
     &.text-center,
     &.text-left,
     &.text-light,
-    &.text-muted .text-success,
+    &.text-muted,
+    .text-success,
     .text-primary,
     .text-danger,
     .text-center,
@@ -114,7 +115,7 @@
   --gray-dark: #343a40;
   --primary: #5da6f3;
   --secondary: #6c757d;
-  --success: #46ce66;
+  --success: #a4e0b2;
   --info: #4ab3c3;
   --warning: #f5c841;
   --danger: #d33b3b;

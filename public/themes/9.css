@@ -1719,16 +1719,6 @@ a.badge-dark.focus {
   color: var(--gray-600);
 }
 
-.alert-success {
-  color: var(--green-800);
-  background-color: var(--green-200);
-  border-color: var(--green-400);
-}
-
-.alert-success hr {
-  border-top-color: var(--green-400);
-}
-
 .alert-success .alert-link {
   color: var(--blue-900);
 }
