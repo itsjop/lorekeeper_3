@@ -276,13 +276,15 @@ class DesignController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postFeatures(Request $request, DesignUpdateManager $service, $id) {
+    // $request->parameters->transformation_info = "";
+    $request->merge([
+      'transformation_info'        => safe($request['transformation_info']),
+      'transformation_description' => safe($request['transformation_description']),
+      'rarity_id'                  => safe($request['rarity_id']),
+    ]);
     $r = CharacterDesignUpdate::find($id);
-    if (!$r) {
-      abort(404);
-    }
-    if ($r->user_id != Auth::user()->id) {
-      abort(404);
-    }
+    if (!$r) abort(404);
+    if ($r->user_id != Auth::user()->id) abort(404);
     if ($service->saveRequestFeatures($request->all(), $r)) {
       flash('Request edited successfully.')->success();
     } else {
@@ -290,7 +292,6 @@ class DesignController extends Controller {
         flash($error)->error();
       }
     }
-
     return redirect()->back();
   }
 

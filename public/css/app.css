@@ -105,6 +105,7 @@ body #app.teal {
   --active-clr_950: var(--teal-clr_950);
 }
 
+/* prettier-ignore */
 #app {
   /* Sizing */
   /* Display */
@@ -311,19 +312,19 @@ body #app.teal {
 #app .gap-10 {
   gap: 10rem;
 }
-#app .grid-2-col {
+#app .grid-2-col, #app .grid-2-col-fixed {
   grid-template-columns: repeat(2, 1fr);
 }
-#app .grid-3-col {
+#app .grid-3-col, #app .grid-3-col-fixed {
   grid-template-columns: repeat(3, 1fr);
 }
-#app .grid-4-col {
+#app .grid-4-col, #app .grid-4-col-fixed {
   grid-template-columns: repeat(4, 1fr);
 }
-#app .grid-5-col {
+#app .grid-5-col, #app .grid-5-col-fixed {
   grid-template-columns: repeat(5, 1fr);
 }
-#app .grid-6-col {
+#app .grid-6-col, #app .grid-6-col-fixed {
   grid-template-columns: repeat(6, 1fr);
 }
 #app .grid-1-2-col {
@@ -383,11 +384,11 @@ body #app.teal {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-#app .br-5 {
-  border-radius: 5px;
-}
 #app .br-10 {
   border-radius: 10px;
+}
+#app .br-5 {
+  border-radius: 5px;
 }
 #app .br-15 {
   border-radius: 15px;
@@ -578,7 +579,8 @@ body {
 }
 #app .btn-outline-info,
 #app .btn-info {
-  background: var(--teal-clr_100);
+  background: #b1d9f1;
+  background: var(--teal-clr_400);
   color: var(--white);
   font-style: normal;
   font-weight: 500;
@@ -586,7 +588,7 @@ body {
 }
 #app .btn-outline-info:hover,
 #app .btn-info:hover {
-  background: var(--teal-clr_100);
+  background: var(--purple-clr_500);
 }
 #app .btn-outline-danger {
   background: #d0335d;
@@ -617,32 +619,38 @@ body {
   font-weight: 700;
   color: var(--purple-clr_900);
 }
-.app h2, .app h3,
-.app .h2, .app .h3 {
+.app h2, .app h3, .app .h2, .app .h3 {
   font-family: "Itim", sans-serif, system-ui;
   font-weight: 600;
   text-transform: lowercase;
   color: var(--purple-clr_800);
-}
-.app h2, .app .h2 {
-  font-size: 1.5rem;
-}
-.app h3, .app .h3 {
   font-size: 1.3rem;
 }
 .app h4, .app .h4 {
   font-size: 1.2rem;
 }
-.app h4, .app h5, .app h6 .h4,
-.app .h5, .app .h6 {
+.app h4, .app h5, .app h6, .app .h4, .app .h5, .app .h6 {
   font-family: "Itim", system-ui;
   font-weight: 600;
   text-transform: lowercase;
   color: var(--purple-clr_700);
 }
+.app ul {
+  padding: 0;
+}
+.app a, .app .a {
+  color: var(--purple-clr_500);
+  text-decoration: none;
+}
+.app a:hover, .app .a:hover {
+  color: var(--teal-clr_500);
+}
 .app .alert {
   box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
-  color: var(--white);
+  color: var(--black);
+}
+.app .alert.alert-primary {
+  background: var(--purple-clr_100);
 }
 .app .alert.alert-secondary {
   background: var(--purple-clr_50);
@@ -650,22 +658,6 @@ body {
 .app .table .thead-light th {
   background: var(--purple-clr_100);
   border: none;
-}
-
-.app {
-  /* prettier-ignore */
-}
-.app ul {
-  padding: 0;
-}
-.app a,
-.app .a {
-  color: var(--purple-clr_500);
-}
-.app a:hover,
-.app .a:hover {
-  color: var(--teal-clr_500);
-  text-decoration: none;
 }
 
 /* General Styling */

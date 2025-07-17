@@ -102,9 +102,9 @@
           <source srcset="{{ asset('css/images/somnivores/raw/logo_raw.webp')  }}" media="(prefers-color-scheme: light) and (min-width: 1200px)" />
           <source srcset="{{ asset('css/images/somnivores/logo.webp')          }}" media="(prefers-color-scheme: light) and (min-width: 768px)"  />
           <img    src="   {{ asset('css/images/somnivores/logo.webp')          }}" alt="Somnivores Logo" media="(prefers-color-scheme: light)"   />
-          <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 1200px)"  />
+          {{-- <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 1200px)"  />
           <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 768px)"   />
-          <img    src="   {{ asset('css/images/somnivores/logo_raw_dark.webp') }}" alt="Somnivores Logo"  media="(prefers-color-scheme: dark)"   />
+          <img    src="   {{ asset('css/images/somnivores/logo_raw_dark.webp') }}" alt="Somnivores Logo"  media="(prefers-color-scheme: dark)"   /> --}}
         </picture>
       </a>
 

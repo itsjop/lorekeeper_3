@@ -65,14 +65,14 @@
 
   .btn-outline-info,
   .btn-info {
-    // background: #8bcbf3;
-    background: var(--teal-clr_100);
+    background: #b1d9f1;
+    background: var(--teal-clr_400);
     color: var(--white);
     font-style: normal;
     font-weight: 500;
     transition: 0.2s ease;
     &:hover {
-      background: var(--teal-clr_100);
+      background: var(--purple-clr_500);
     }
   }
 

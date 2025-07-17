@@ -13,6 +13,11 @@ use Illuminate\Database\Schema\Blueprint;
 |
 */
 
+// Used for the redundant isset() calls for optional information
+function safe($val, $fallback = '') {
+   return isset($val) ? $val : $fallback;
+}
+
 function sanitizeUserString(string $name): string {
   return htmlspecialchars($name, ENT_QUOTES);
 }

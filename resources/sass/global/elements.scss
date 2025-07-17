@@ -1,54 +1,57 @@
 /* prettier-ignore */
 .app {
+// -- HEADINGS -- //
 h1, .h1 {
   font-family: 'Baloo 2', sans-serif, system-ui;
   font-size: 1.7rem;
   font-weight: 700;
   color: var(--purple-clr_900);
 }
-h2, h3,
-.h2, .h3 {
+h2, h3, .h2, .h3 {
   font-family: 'Itim', sans-serif, system-ui;
   font-weight: 600;
   text-transform: lowercase;
   color: var(--purple-clr_800);
+  font-size: 1.3rem;
 }
-h2, .h2 { font-size: 1.5rem;}
-h3, .h3 { font-size: 1.3rem;}
 h4, .h4 {font-size: 1.2rem}
-
-h4, h5, h6
-.h4, .h5, .h6 {
+h4, h5, h6, .h4, .h5, .h6 {
   font-family: "Itim", system-ui;
   font-weight: 600;
   text-transform: lowercase;
   color: var(--purple-clr_700);
 }
-
-.alert{
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
-  color: var(--white);
-}
-
-.alert.alert-secondary{
-  background: var(--purple-clr_50);
-}
-
-.table .thead-light th{
- background: var(--purple-clr_100);
- border: none;
-}
-
-}
-.app {
-  /* prettier-ignore */
-  ul { padding: 0; }
-  a,
-  .a {
-    color: var(--purple-clr_500);
-    &:hover {
-      color: var(--teal-clr_500);
-      text-decoration: none;
-    }
+// -- ELEMENTS -- //
+ul { padding: 0; }
+a, .a {
+  color: var(--purple-clr_500);
+  text-decoration: none;
+  &:hover {
+    color: var(--teal-clr_500);
   }
+}
+// -- MISC -- //
+.alert {
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
+  color: var(--black);
+  &.alert-primary{ background: var(--purple-clr_100); }
+  &.alert-secondary{ background: var(--purple-clr_50); }
+}
+.table .thead-light th {
+  background: var(--purple-clr_100);
+  border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
