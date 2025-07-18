@@ -2486,6 +2486,9 @@ dialog,
   border: 0;
   opacity: 0;
   border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, overlay 0.7s ease-out allow-discrete, display 0.7s ease-out allow-discrete;
   /* Equivalent to
   transition: all 0.7s allow-discrete; */
@@ -2498,9 +2501,13 @@ dialog::backdrop,
   /* Equivalent to
   transition: all 0.7s allow-discrete; */
 }
-dialog .fade:not(.show),
-.modal .fade:not(.show) {
+dialog.fade:not(.show),
+.modal.fade:not(.show) {
   pointer-events: none;
+}
+dialog[style="display: block;"],
+.modal[style="display: block;"] {
+  display: flex !important;
 }
 dialog:open,
 .modal:open {
@@ -2525,7 +2532,7 @@ dialog .modal-dialog .modal-content,
 }
 dialog .modal-dialog .modal-body .inventory-main-img img,
 .modal .modal-dialog .modal-body .inventory-main-img img {
-  width: 50%;
+  max-width: 300px;
 }
 dialog .modal-dialog .modal-body .list-group,
 .modal .modal-dialog .modal-body .list-group {
