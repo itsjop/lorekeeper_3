@@ -3,6 +3,7 @@
   #site-wrapper {
     #header-nav {
       @include body-bg;
+      @include scalloped;
       background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
       grid-area: nav;
       border-radius: 20px;

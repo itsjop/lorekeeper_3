@@ -693,6 +693,10 @@ body {
   background: var(--purple-clr_100);
   border: none;
 }
+.app .small, .app small {
+  font-weight: 600;
+  color: #40258b;
+}
 
 /* General Styling */
 #app {
@@ -894,7 +898,7 @@ body {
   container: mlsearch/inline-size;
 }
 
-fieldset.masterlist-search-grid {
+.masterlist-search-grid {
   display: grid;
   grid-template: "name  species sortby submit a-btn" max-content/2fr 2fr 2fr 1fr 1fr;
   gap: 10px;
@@ -902,7 +906,7 @@ fieldset.masterlist-search-grid {
   border-radius: 15px;
   padding: 15px;
 }
-fieldset.masterlist-search-grid legend {
+.masterlist-search-grid legend {
   margin: -10px 10px;
   padding: 3px;
   width: -moz-max-content;
@@ -911,24 +915,24 @@ fieldset.masterlist-search-grid legend {
   font-family: "Itim", sans-serif;
   transform: translateY(-10%);
 }
-fieldset.masterlist-search-grid .character-name {
+.masterlist-search-grid .character-name {
   grid-area: name;
 }
-fieldset.masterlist-search-grid #species {
+.masterlist-search-grid #species {
   grid-area: species;
 }
-fieldset.masterlist-search-grid .sortby {
+.masterlist-search-grid .sortby {
   grid-area: sortby;
 }
-fieldset.masterlist-search-grid .advanced-search-toggle {
+.masterlist-search-grid .advanced-search-toggle {
   grid-area: a-btn;
 }
-fieldset.masterlist-search-grid .searchbutton {
+.masterlist-search-grid .searchbutton {
   grid-area: submit;
 }
 
 @container mlsearch (width < 800px) {
-  fieldset.masterlist-search-grid {
+  .masterlist-search-grid {
     display: grid;
     grid-template: "name   name    submit" 1fr "sortby species a-btn " 1fr/3fr 3fr 1.5fr;
   }
@@ -937,7 +941,8 @@ fieldset.masterlist-search-grid .searchbutton {
   display: grid;
   gap: 20px;
 }
-#ml-gridView .masterlist-character {
+
+.masterlist-character {
   display: grid;
   grid-template: "name  name " 2.5em "thumb thumb" auto "code  user " 2.2em/min-content auto;
   border-radius: 15px;
@@ -946,12 +951,12 @@ fieldset.masterlist-search-grid .searchbutton {
   background-image: var(--card_card-border);
   box-shadow: 5px 5px 5px rgba(4, 4, 48, 0.4705882353);
 }
-#ml-gridView .masterlist-character .border-background {
+.masterlist-character .border-background {
   grid-area: 1/1/4/3;
   border-radius: 14px;
   background-image: var(--card_gradient);
 }
-#ml-gridView .masterlist-character .ml-badge {
+.masterlist-character .ml-badge {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -959,11 +964,11 @@ fieldset.masterlist-search-grid .searchbutton {
   width: 20%;
   cursor: help;
 }
-#ml-gridView .masterlist-character .ml-badge img {
+.masterlist-character .ml-badge img {
   width: 100%;
   aspect-ratio: 1/1;
 }
-#ml-gridView .masterlist-character .ml-badge .flag {
+.masterlist-character .ml-badge .flag {
   opacity: 0;
   position: absolute;
   transform: translateX(-33%) translateY(0);
@@ -976,7 +981,7 @@ fieldset.masterlist-search-grid .searchbutton {
   width: -moz-max-content;
   width: max-content;
 }
-#ml-gridView .masterlist-character .ml-badge .flag .bg::before, #ml-gridView .masterlist-character .ml-badge .flag .bg::after {
+.masterlist-character .ml-badge .flag .bg::before, .masterlist-character .ml-badge .flag .bg::after {
   content: "";
   background: var(--card_gradient);
   position: absolute;
@@ -988,23 +993,23 @@ fieldset.masterlist-search-grid .searchbutton {
   width: 100%;
   border-radius: 13px;
 }
-#ml-gridView .masterlist-character .ml-badge .flag .bg::before {
+.masterlist-character .ml-badge .flag .bg::before {
   width: calc(10px + 100%);
   height: calc(10px + 100%);
   background-image: var(--card_card-border);
   border-radius: 15px;
   box-shadow: 5px 5px 5px rgba(4, 4, 48, 0.4705882353);
 }
-#ml-gridView .masterlist-character .ml-badge .flag .label {
+.masterlist-character .ml-badge .flag .label {
   position: relative;
   font-weight: 700;
   z-index: 6;
 }
-#ml-gridView .masterlist-character .ml-badge:hover .flag {
+.masterlist-character .ml-badge:hover .flag {
   opacity: 1;
   transform: translateX(-33%) translateY(-90%);
 }
-#ml-gridView .masterlist-character .thumbnail {
+.masterlist-character .thumbnail {
   width: calc(100% - 20px);
   grid-area: thumb;
   place-self: center;
@@ -1014,10 +1019,10 @@ fieldset.masterlist-search-grid .searchbutton {
   z-index: 2;
   perspective: 200px;
 }
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail,
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail img,
-#ml-gridView .masterlist-character .thumbnail .tn-background,
-#ml-gridView .masterlist-character .thumbnail .shine {
+.masterlist-character .thumbnail .ml-thumbnail,
+.masterlist-character .thumbnail .ml-thumbnail img,
+.masterlist-character .thumbnail .tn-background,
+.masterlist-character .thumbnail .shine {
   -o-object-fit: contain;
      object-fit: contain;
   width: 100%;
@@ -1029,40 +1034,39 @@ fieldset.masterlist-search-grid .searchbutton {
   transform: scale(1) translateZ(1);
   position: relative;
 }
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail {
+.masterlist-character .thumbnail .ml-thumbnail {
   z-index: 10;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(3px 3px 3px rgba(16, 4, 92, 0.4078431373));
   transition: 0.45s var(--bounce_linear);
   perspective: 300px;
   position: relative;
   display: grid;
 }
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail img {
+.masterlist-character .thumbnail .ml-thumbnail img {
   top: 0;
   left: 0;
   width: calc(100% - 10px);
   height: calc(100% - 10px);
   transition: 0.05s linear;
 }
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover {
+.masterlist-character .thumbnail .ml-thumbnail:hover {
   transition: 1.5s var(--elastic_linear);
   transform: scale(1.1);
 }
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover img {
+.masterlist-character .thumbnail .ml-thumbnail:hover img {
   transition: 0.05s linear;
 }
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover .shine {
+.masterlist-character .thumbnail .ml-thumbnail:hover .shine {
   transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
   opacity: 0.35;
 }
-#ml-gridView .masterlist-character .thumbnail .ml-thumbnail:hover .shine::after {
+.masterlist-character .thumbnail .ml-thumbnail:hover .shine::after {
   --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
   --tan: sin(var(--len));
   transform: translateX(calc(25% + -50% * var(--mpx))) translateY(calc(25% + -50% * var(--mpy))) rotate(-45deg);
 }
-#ml-gridView .masterlist-character .thumbnail .shine {
+.masterlist-character .thumbnail .shine {
   width: calc(100% - 10px);
   height: calc(100% - 10px);
   z-index: 11;
@@ -1086,7 +1090,7 @@ fieldset.masterlist-search-grid .searchbutton {
   opacity: 0;
   contain: paint;
 }
-#ml-gridView .masterlist-character .thumbnail .shine::after {
+.masterlist-character .thumbnail .shine::after {
   content: "";
   width: 300%;
   height: 300%;
@@ -1100,14 +1104,14 @@ fieldset.masterlist-search-grid .searchbutton {
   transform-origin: center center;
   background-image: linear-gradient(0deg, transparent 0%, transparent 40%, white 45%, white 50%, transparent 55%, transparent 100%);
 }
-#ml-gridView .masterlist-character .thumbnail .tn-background {
+.masterlist-character .thumbnail .tn-background {
   background-image: url("images/overlays/starring.png"), var(--card_profile-bg_color);
   z-index: 1;
   filter: brightness(1);
 }
-#ml-gridView .masterlist-character .name,
-#ml-gridView .masterlist-character .slug,
-#ml-gridView .masterlist-character .display-user {
+.masterlist-character .name,
+.masterlist-character .slug,
+.masterlist-character .display-user {
   text-shadow: 0 0 5px rgba(216, 216, 252, 0.4);
   font-size: clamp(1em, 1.2vw, 1.3em);
   text-overflow: ellipsis;
@@ -1116,7 +1120,7 @@ fieldset.masterlist-search-grid .searchbutton {
   color: var(--white);
   font-size: 1.1em;
 }
-#ml-gridView .masterlist-character .name {
+.masterlist-character .name {
   grid-area: name;
   display: flex;
   place-items: center;
@@ -1125,36 +1129,36 @@ fieldset.masterlist-search-grid .searchbutton {
   text-transform: uppercase;
   padding: 0 0 0 10px;
 }
-#ml-gridView .masterlist-character .name a {
+.masterlist-character .name a {
   max-width: 80%;
   color: var(--white);
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#ml-gridView .masterlist-character .name.name-sm {
+.masterlist-character .name.name-sm {
   font-size: 0.85em;
 }
-#ml-gridView .masterlist-character .name.name-lg {
+.masterlist-character .name.name-lg {
   font-size: 1.2em;
 }
-#ml-gridView .masterlist-character .slug,
-#ml-gridView .masterlist-character .display-user {
+.masterlist-character .slug,
+.masterlist-character .display-user {
   align-self: center;
   justify-self: start;
   align-items: center;
   font-family: "Itim", sans-serif;
   font-size: 0.8em;
 }
-#ml-gridView .masterlist-character .slug {
+.masterlist-character .slug {
   padding-left: 10px;
   grid-area: code;
 }
-#ml-gridView .masterlist-character .display-user {
+.masterlist-character .display-user {
   padding-right: 10px;
   grid-area: user;
   justify-self: end;
 }
-#ml-gridView .masterlist-character .paper-overlay {
+.masterlist-character .paper-overlay {
   position: absolute;
   pointer-events: none;
   -webkit-user-select: none;
@@ -1367,12 +1371,14 @@ fieldset.masterlist-search-grid .searchbutton {
   padding: 10px;
 }
 .home-dashboard .bubblebox .bubble img {
-  max-width: 100%;
-  max-width: 250px;
   transition: 0.5s var(--bounce_linear);
   transform: scale(1);
+  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
+  max-width: 100%;
+  max-width: 250px;
 }
 .home-dashboard .bubblebox .bubble img:hover {
+  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
   transition: 0.7s var(--elastic_linear);
   transform: scale(1.2);
 }
@@ -1861,7 +1867,7 @@ body {
     --sidebar-width: min(50vw, 300px);
   }
   .featured-character {
-    font-size: 2rem;
+    font-size: 1rem;
   }
   .featured-character .sidebar-section {
     grid-template: "thumb name" auto "thumb owner " auto "thumb species" auto "thumb rarity" auto/40vw max-content;
@@ -2871,9 +2877,17 @@ because the nesting selector cannot represent pseudo-elements. */
   flex-direction: column;
   text-align: center;
 }
-.app .inventory-category .inventory-item img {
+.app .inventory-category .inventory-item .inventory-stack img {
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
   max-width: 100%;
   aspect-ratio: 1/1;
+}
+.app .inventory-category .inventory-item .inventory-stack img:hover {
+  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
+  transition: 0.7s var(--elastic_linear);
+  transform: scale(1.2);
 }
 .app .inventory-category .inventory-item .title {
   grid-area: name;

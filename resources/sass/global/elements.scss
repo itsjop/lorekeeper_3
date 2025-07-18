@@ -30,6 +30,7 @@ a, .a {
     color: var(--teal-clr_500);
   }
 }
+
 // -- MISC -- //
 .alert {
   box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
@@ -42,12 +43,10 @@ a, .a {
   background: var(--purple-clr_100);
   border: none;
 }
-
-
-
-
-
-
+.small, small {
+  font-weight: 600;
+  color: #40258b;
+}
 
 
 
