@@ -119,7 +119,7 @@
               data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}"
             >
               <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
-            {{-- </a>
+              {{-- </a>
             <a
               href="#"
               class="{{ $canName ? 'text-muted' : '' }}"
@@ -241,8 +241,10 @@
       id="grantModal"
       tabindex="-1"
       role="dialog"
+      tabindex="-1"
+      role="dialog"
     >
-      <div class="modal-dialog Inventory" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">[ADMIN] Grant Items</span>

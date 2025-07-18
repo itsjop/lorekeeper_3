@@ -25,6 +25,7 @@ dialog,
   border: 0;
   opacity: 0;
   border-radius: 15px;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -44,8 +45,9 @@ dialog,
     /* Equivalent to
     transition: all 0.7s allow-discrete; */
   }
-  &.fade:not(.show) { pointer-events: none; }
+  &.fade:not(.show) { pointer-events: none; *{ pointer-events: none;}}
   &[style="display: block;"] { display: flex !important; }
+  &.show { opacity: 1;}
   /* Open state of the dialog  */
   &:open {
     opacity: 1;
@@ -53,6 +55,7 @@ dialog,
   }
   .modal-dialog {
     max-height: 100%;
+    width: 100%;
     border: 2px solid var(--purple-clr_500);
     margin: 0;
     overflow-y: scroll;

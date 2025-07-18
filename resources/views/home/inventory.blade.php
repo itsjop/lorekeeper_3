@@ -87,7 +87,9 @@
             data-bs-toggle="collapse"
           >Show</a>
         </h5>
-        <div class="card-body inventory-body collapse show grid grid-4-col" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
+        <div
+        class="card-body inventory-body collapse show grid grid-4-col"
+        id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
           @foreach ($categoryItems as $itemId => $stack)
             <div
               class="pi-center pc-center text-center inventory-item"
