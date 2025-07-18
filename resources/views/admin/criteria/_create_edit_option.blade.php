@@ -19,7 +19,7 @@
 
 <div class="row align-items-end">
   <div class="form-group col-6">
-    {!! Form::checkbox('is_active', 1, $option->is_active === 1 ?? 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $option->is_active === 1 ?? 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Steps that are not active will be hidden from view.') !!}
   </div>
   <div class="form-group col-6">
@@ -29,7 +29,7 @@
 </div>
 
 <div class="form-group hide">
-  {!! Form::text('criterion_step_id', $stepId, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+  {!! Form::text('criterion_step_id', $stepId, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
 </div>
 
 <div class="text-right mt-4">

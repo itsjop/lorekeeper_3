@@ -45,7 +45,7 @@
 
   <h3>Restrict Recipe</h3>
   <div class="form-group">
-    {!! Form::checkbox('is_limited', 1, $recipe->is_limited, ['class' => 'is-limited-class form-check-label', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_limited', 1, $recipe->is_limited, ['class' => 'is-limited-class form-check-label', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('is_limited', 'Should this recipe have a requirement?', ['class' => 'is-limited-label form-check-label ml-3']) !!} {!! add_help('If turned on, the recipe cannot be used/crafted unless the user currently owns all required items.') !!}
   </div>
 

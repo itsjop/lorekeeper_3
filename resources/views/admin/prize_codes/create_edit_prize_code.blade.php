@@ -41,7 +41,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          {!! Form::checkbox('regenerate', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+          {!! Form::checkbox('regenerate', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
           {!! Form::label('regenerate', 'Regenerate Code?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This randomizes you a new code if set.') !!}
         </div>
       </div>

@@ -39,7 +39,7 @@
   </div>
 
   <div class="col-md form-group">
-    {!! Form::checkbox('is_active', 1, $map->id ? $map->is_active : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $map->id ? $map->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!}
   </div>
 

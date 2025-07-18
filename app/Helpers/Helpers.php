@@ -157,7 +157,7 @@ function parse($text, &$pings = null) {
   $config->set('HTML.DefinitionRev', 2);
   if ($def = $config->maybeGetRawHTMLDefinition()) {
     $def->addElement('include', 'Block', 'Empty', 'Common', ['file*' => 'URI', 'height' => 'Text', 'width' => 'Text']);
-    $def->addAttribute('a', 'data-bs-toggle', 'Enum#collapse,tab');
+    $def->addAttribute('a', 'data-toggle', 'Enum#collapse,tab');
     $def->addAttribute('a', 'aria-expanded', 'Enum#true,false');
     $def->addAttribute('a', 'data-bs-target', 'Text');
     $def->addAttribute('div', 'data-parent', 'Text');

@@ -145,7 +145,7 @@
             <p class="text-danger">Note that coupons cannot be used on limited stock items.</p>
           @endif
           <div class="form-group">
-            {!! Form::checkbox('use_coupon', 1, 0, ['class' => 'is-coupon-class form-control', 'data-bs-toggle' => 'toggle']) !!}
+            {!! Form::checkbox('use_coupon', 1, 0, ['class' => 'is-coupon-class form-control', 'data-toggle' => 'toggle']) !!}
             {!! Form::label('use_coupon', 'Do you want to use a coupon?', ['class' => 'form-check-label  ml-3 mb-2']) !!}
           </div>
           <div class="br-form-group" style="display: none">
