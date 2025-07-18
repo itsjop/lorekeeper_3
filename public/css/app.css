@@ -2836,15 +2836,13 @@ because the nesting selector cannot represent pseudo-elements. */
   height: 1.6em;
 }
 .app .inventory-category .inventory-item {
-  display: grid;
-  grid-template: "thumb " calc(100% - 4.5em) "name  " 2em/1fr;
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
-.app .inventory-category .inventory-item:has(.rarity) {
-  grid-template: "thumb " calc(100% - 4.5em) "name  " 2em "meta" min-content/1fr;
-}
-.app .inventory-category .inventory-item:has(.rarity) .title {
-  border-bottom: 2px solid var(--purple-clr_400);
+.app .inventory-category .inventory-item img {
+  max-width: 100%;
+  aspect-ratio: 1/1;
 }
 .app .inventory-category .inventory-item .title {
   grid-area: name;
@@ -3001,4 +2999,34 @@ because the nesting selector cannot represent pseudo-elements. */
 .app .pet-card .petname {
   background: var(--active-clr_200);
   color: var(--black);
+}
+.app .inventory-search-pane {
+  display: grid;
+  grid-template: "category rarity artist sort  " 1fr "name     name   name   search" 1fr/2fr 2fr 2fr 1fr;
+  place-content: start;
+  place-items: start;
+  gap: 0.6em;
+}
+.app .inventory-search-pane .sort, .app .inventory-search-pane .name, .app .inventory-search-pane .category, .app .inventory-search-pane .rarity, .app .inventory-search-pane .artist, .app .inventory-search-pane .search, .app .inventory-search-pane input, .app .inventory-search-pane select {
+  width: 100%;
+}
+.app .inventory-search-pane .name {
+  grid-area: name;
+}
+.app .inventory-search-pane .category {
+  grid-area: category;
+}
+.app .inventory-search-pane .rarity {
+  grid-area: rarity;
+}
+.app .inventory-search-pane .artist {
+  grid-area: artist;
+}
+.app .inventory-search-pane .search {
+  grid-area: search;
+}
+@media (width < 762px) {
+  .app .inventory-search-pane {
+    grid-template: "rarity rarity category category" 1fr "artist artist artist sort" 1fr "name name name search" 1fr/1fr 1fr 1fr 1fr;
+  }
 }

@@ -30,7 +30,11 @@
 
   <div class="text-center">
     @if ($shop->has_image)
-      <img src="{{ $shop->shopImageUrl }}" style="max-width:100%" alt="{{ $shop->name }}" />
+      <img
+        src="{{ $shop->shopImageUrl }}"
+        style="max-width:100%"
+        alt="{{ $shop->name }}"
+      />
     @endif
     <p>{!! $shop->parsed_description !!}</p>
   </div>
@@ -47,47 +51,56 @@
       @foreach ($stock as $categoryId => $categoryItems)
         @php
           $visible = '';
-          if (isset($categoryItems->first()->category) && method_exists($categoryItems->first()->category, 'is_visible') && !$categoryItems->first()->category->is_visible) {
+          if (
+              isset($categoryItems->first()->category) &&
+              method_exists($categoryItems->first()->category, 'is_visible') &&
+              !$categoryItems->first()->category->is_visible
+          ) {
               $visible = '<i class="fas fa-eye-slash mr-1"></i>';
           }
         @endphp
         <div class="card mb-3 inventory-category">
           <h5 class="card-header inventory-header">
-            {!! isset($categoryItems->first()->category) ? '<a href="' . $categoryItems->first()->category->searchUrl . '">' . $visible . $categoryItems->first()->category->name . '</a>' : 'Miscellaneous' !!}
+            {!! isset($categoryItems->first()->category)
+                ? '<a href="' .
+                    $categoryItems->first()->category->searchUrl .
+                    '">' .
+                    $visible .
+                    $categoryItems->first()->category->name .
+                    '</a>'
+                : 'Miscellaneous' !!}
           </h5>
-          <div class="card-body inventory-body">
-            @foreach ($categoryItems->chunk(4) as $chunk)
-              <div class="row mb-3">
-                @foreach ($chunk as $item)
-                  <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $item->pivot->id }}">
-                    @if ($item->has_image)
-                      <div class="mb-1">
-                        <a href="#" class="inventory-stack"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
-                      </div>
-                    @endif
-                    <div>
-                      <a href="#" class="inventory-stack inventory-stack-name"><strong>{{ $item->name }}</strong></a>
-                      <div><strong>Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}</div>
-                      @if ($item->pivot->is_limited_stock)
-                        <div>Stock: {{ $item->pivot->quantity }}</div>
-                      @endif
-                      @if ($item->pivot->purchase_limit)
-                        <div class="text-danger">
-                          Max {{ $item->pivot->purchase_limit }}
-                          @if ($item->pivot->purchase_limit_timeframe !== 'lifetime')
-                            {{ $item->pivot->purchase_limit_timeframe }}
-                          @endif per user
-                        </div>
-                      @endif
-                      @if ($item->pivot->disallow_transfer)
-                        <div class="text-danger">Cannot be transferred after purchase</div>
-                      @endif
-                      @if ($item->pivot->is_timed_stock)
-                        <div class="text-info">Available for a limited time!</div>
-                      @endif
-                    </div>
+          <div class="card-body inventory-body grid grid-4-col">
+            @foreach ($categoryItems as $item)
+              <div class="inventory-item text-center" data-id="{{ $item->pivot->id }}">
+                @if ($item->has_image)
+                  <a href="#" class="img inventory-stack">
+                    <img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" />
+                  </a>
+                @endif
+                <a href="#" class="inventory-stack inventory-stack-name">
+                  <strong>{{ $item->name }}</strong>
+                </a>
+                <div class="cost">
+                  <strong>Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}
+                </div>
+                @if ($item->pivot->is_limited_stock)
+                  <div class="stock">Stock: {{ $item->pivot->quantity }}</div>
+                @endif
+                @if ($item->pivot->purchase_limit)
+                  <div class="max-stock text-danger">
+                    Max {{ $item->pivot->purchase_limit }}
+                    @if ($item->pivot->purchase_limit_timeframe !== 'lifetime')
+                      {{ $item->pivot->purchase_limit_timeframe }}
+                    @endif per user
                   </div>
-                @endforeach
+                @endif
+                @if ($item->pivot->disallow_transfer)
+                  <div class="transfer-note text-danger">Cannot be transferred after purchase</div>
+                @endif
+                @if ($item->pivot->is_timed_stock)
+                  <div class="limited-time text-info">Available for a limited time!</div>
+                @endif
               </div>
             @endforeach
           </div>
