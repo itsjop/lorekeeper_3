@@ -127,6 +127,12 @@
           @yield('sidebar')
         </aside>
       </div>
+      {{-- Featured Character --}}
+      {{-- <div id="sidebar-container featured-character-sidebar">
+        <aside id="featured-character" class="sidebar ">
+          @yield('sidebar')
+        </aside>
+      </div> --}}
 
       <main id="main-content" class="main-content">
         <div class="main-backdrop"></div>

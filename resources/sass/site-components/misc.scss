@@ -85,22 +85,23 @@
 
   .inventory-category {
     .inventory-item {
-      display: grid;
-      grid-template:
-        'thumb ' calc(100% - 4.5em)
-        'name  ' 2em
-        / 1fr;
-      text-align: center;
-      &:has(.rarity) {
-        grid-template:
-          'thumb ' calc(100% - 4.5em)
-          'name  ' 2em
-          'meta' min-content
-          / 1fr;
-        .title {
-          border-bottom: 2px solid var(--purple-clr_400);
-        }
+      display: flex;
+      flex-direction: column;
+      img {
+        max-width: 100%;
+        aspect-ratio: 1/1;
       }
+      text-align: center;
+      // &:has(.rarity) {
+      //   grid-template:
+      //     'thumb ' calc(100% - 4.5em)
+      //     'name  ' 2em
+      //     'meta' min-content
+      //     / 1fr;
+      //   .title {
+      //     border-bottom: 2px solid var(--purple-clr_400);
+      //   }
+      // }
       .title {
         grid-area: name;
         width: 100%;
@@ -239,24 +240,42 @@
   .pet-card {
     display: grid;
     grid-template:
-    'name' 2em
-    'pet' max-content
-    'title' 2em
-    'progress' 1.5em
-    'level' min-content
-    / 1fr;
-    img { grid-area: pet; }
+      'name' 2em
+      'pet' max-content
+      'title' 2em
+      'progress' 1.5em
+      'level' min-content
+      / 1fr;
+    img {
+      grid-area: pet;
+    }
     .progress {
       grid-area: progress;
       border: 2px var(--purple-clr_600) solid;
-     }
-    .progress-bar { background-color: var(--active-clr_500);}
-    .level    { grid-area: level;     }
-    .title    { grid-area: title;    }
-    .name     { grid-area: name;  line-height: .9em;    }
-    .progress { grid-area: progress;  }
-    .level    { grid-area: level;     }
-    .petname {background: var(--active-clr_200); color: var(--black) }
+    }
+    .progress-bar {
+      background-color: var(--active-clr_500);
+    }
+    .level {
+      grid-area: level;
+    }
+    .title {
+      grid-area: title;
+    }
+    .name {
+      grid-area: name;
+      line-height: 0.9em;
+    }
+    .progress {
+      grid-area: progress;
+    }
+    .level {
+      grid-area: level;
+    }
+    .petname {
+      background: var(--active-clr_200);
+      color: var(--black);
+    }
     // &:not(:has(.title)) {
     // grid-template:
     // 'name' 4em
@@ -264,5 +283,29 @@
     // 'progress' max-content
     // 'level' max-content
     // }
+  }
+
+  .inventory-search-pane {
+    display: grid;
+    grid-template:
+      'category rarity artist sort  ' 1fr
+      'name     name   name   search' 1fr
+      / 2fr 2fr 2fr 1fr;
+    place-content: start;
+    place-items: start;
+    gap: 0.6em;
+    .sort,.name,.category,.rarity,.artist,.search,input,select { width: 100%; }
+    .name { grid-area: name; }
+    .category { grid-area: category; }
+    .rarity { grid-area: rarity; }
+    .artist { grid-area: artist; }
+    .search { grid-area: search; }
+    @media (width < 762px) {
+      grid-template:
+      'rarity rarity category category' 1fr
+      'artist artist artist sort' 1fr
+      'name name name search' 1fr
+      / 1fr 1fr 1fr 1fr;
+    }
   }
 }
