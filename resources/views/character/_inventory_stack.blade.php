@@ -6,7 +6,7 @@
       <a href="{{ $item->url }}">
         <img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
     </div>
-    <div @if (count($item->tags)) class="mb-1 inventory-main-img" @endif>
+    <div @if (count($item->tags)) class="mb-1 inventory-main-name" @endif>
       <a href="{{ $item->url }}">{{ $item->name }}</a>
     </div>
   </div>
@@ -18,68 +18,92 @@
 
   {!! Form::open(['url' => 'character/' . $character->slug . '/inventory/edit']) !!}
   <div class="card" style="border: 0px">
-    <table class="table table-sm">
-      <thead class="thead">
-        <tr class="d-flex">
-          @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
-            <th class="col-1">
-              <input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)">
-            </th>
-          @endif
-          @if ($item->category->can_name)
-            <th class="col-2">Name</th>
-          @endif
-          <th class="col">Source</th>
-          <th class="col">Notes</th>
-          <th class="col-2">Quantity</th>
-          <th class="col-1">
-            <i class="fas fa-lock invisible"></i>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($stack as $itemRow)
-          <tr id="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable ? '' : 'accountbound' }}">
+    <div class="card-body">
+      <table class="table table-sm">
+        <thead class="thead">
+          <tr class="d-flex">
             @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
-              <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, false, ['class' => 'item-check', 'onclick' => 'updateQuantities(this)']) !!}</td>
+              <th class="col-1">
+                <input
+                  id="toggle-checks"
+                  type="checkbox"
+                  onclick="toggleChecks(this)"
+                >
+              </th>
             @endif
             @if ($item->category->can_name)
-              <td class="col-2">{!! htmlentities($itemRow->stack_name) ?: 'N/A' !!}</td>
+              <th class="col-2">Name</th>
             @endif
-            <td class="col">{!! array_key_exists('data', $itemRow->data) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
-            <td class="col">{!! array_key_exists('notes', $itemRow->data) ? ($itemRow->data['notes'] ? $itemRow->data['notes'] : 'N/A') : 'N/A' !!}</td>
-            @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
-              @if ($itemRow->availableQuantity)
-                <td class="col-2">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;']) !!} /{{ $itemRow->availableQuantity }}</td>
-              @else
-                <td class="col-2">{!! Form::selectRange('', 0, 0, 0, ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;', 'disabled']) !!} /{{ $itemRow->availableQuantity }}</td>
-              @endif
-            @else
-              <td class="col-3">{!! $itemRow->count !!}</td>
-            @endif
-            <td class="col-1">
-              @if (!$itemRow->isTransferrable)
-                <i class="fas fa-lock" data-bs-toggle="tooltip" title="Character-bound items cannot be transferred but can be deleted."></i>
-              @endif
-            </td>
+            <th class="col">Source</th>
+            <th class="col">Notes</th>
+            <th class="col-2">Quantity</th>
+            <th class="col-1">
+              <i class="fas fa-lock invisible"></i>
+            </th>
           </tr>
-        @endforeach
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @foreach ($stack as $itemRow)
+            <tr id="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable ? '' : 'accountbound' }}">
+              @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
+                <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, false, ['class' => 'item-check', 'onclick' => 'updateQuantities(this)']) !!}</td>
+              @endif
+              @if ($item->category->can_name)
+                <td class="col-2">{!! htmlentities($itemRow->stack_name) ?: 'N/A' !!}</td>
+              @endif
+              <td class="col">{!! array_key_exists('data', $itemRow->data) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
+              <td class="col">{!! array_key_exists('notes', $itemRow->data) ? ($itemRow->data['notes'] ? $itemRow->data['notes'] : 'N/A') : 'N/A' !!}</td>
+              @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
+                @if ($itemRow->availableQuantity)
+                  <td class="col-2">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, [
+                      'class' => 'quantity-select',
+                      'type' => 'number',
+                      'style' => 'min-width:40px;'
+                  ]) !!} /{{ $itemRow->availableQuantity }}</td>
+                @else
+                  <td class="col-2">{!! Form::selectRange('', 0, 0, 0, [
+                      'class' => 'quantity-select',
+                      'type' => 'number',
+                      'style' => 'min-width:40px;',
+                      'disabled'
+                  ]) !!} /{{ $itemRow->availableQuantity }}</td>
+                @endif
+              @else
+                <td class="col-3">{!! $itemRow->count !!}</td>
+              @endif
+              <td class="col-1">
+                @if (!$itemRow->isTransferrable)
+                  <i
+                    class="fas fa-lock"
+                    data-bs-toggle="tooltip"
+                    title="Character-bound items cannot be transferred but can be deleted."
+                  ></i>
+                @endif
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
 
   @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
     <div class="card mt-3">
-      <ul class="list-group list-group-flush">
+      <ul class="list-group list-group-flush card-body">
         @if ($item->category->can_name)
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#nameForm">
+            <a
+              class="card-title h5 collapse-title"
+              data-bs-toggle="collapse"
+              href="#nameForm"
+            >
               @if ($owner_id != $user->id)
                 [ADMIN]
               @endif Name Item
             </a>
             <div id="nameForm" class="collapse">
-              <p>Enter a name to display for the selected stack(s)! Note that only one of the stacks' names will display on the inventory page and title of this panel, while other stacks' names will appear in the list above.</p>
+              <p>Enter a name to display for the selected stack(s)! Note that only one of the stacks' names will display on the
+                inventory page and title of this panel, while other stacks' names will appear in the list above.</p>
               {!! Form::open() !!}
               <div class="form-group">
                 {!! Form::text('stack_name', null, ['class' => 'form-control stock-field', 'data-name' => 'stack_name']) !!}
@@ -93,7 +117,11 @@
         @endif
         @if ($owner_id != null)
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#transferForm">
+            <a
+              class="card-title h5 collapse-title"
+              data-bs-toggle="collapse"
+              href="#transferForm"
+            >
               @if ($owner_id != $user->id)
                 [ADMIN]
               @endif Transfer Item
@@ -112,7 +140,11 @@
         @endif
         @if ($item->is_deletable || $user->hasPower('edit_inventories'))
           <li class="list-group-item">
-            <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#deleteForm">
+            <a
+              class="card-title h5 collapse-title"
+              data-bs-toggle="collapse"
+              href="#deleteForm"
+            >
               @if ($owner_id != $user->id || !$item->is_deletable)
                 [ADMIN]
               @endif Delete Item

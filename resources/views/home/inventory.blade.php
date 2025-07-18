@@ -9,15 +9,15 @@
 
   <h1> Inventory </h1>
 
-    <p>This is your inventory. Click on an item to view more details and actions you can perform on it.</p>
-    <div class="grid grid-4-col mb-3">
-      <a class="btn btn-secondary consolidate-inventory" href="#">Consolidate</a>
-      <a class="btn btn-primary" href="{{ url('inventory/account-search') }}">
-        <i class="fas fa-search"></i> Account Search</a>
-      <a class="btn btn-primary" href="{{ url('inventory/full-inventory') }}">
-        <i class="fas fa-warehouse"></i> Full Inventory</a>
-      <a class="btn btn-primary" href="{{ url('inventory/quickstock') }}">
-        <i class="fas fa-truck"></i> Quickstock</a>
+  <p>This is your inventory. Click on an item to view more details and actions you can perform on it.</p>
+  <div class="grid grid-4-col mb-3">
+    <a class="btn btn-secondary consolidate-inventory" href="#">Consolidate</a>
+    <a class="btn btn-primary" href="{{ url('inventory/account-search') }}">
+      <i class="fas fa-search"></i> Account Search</a>
+    <a class="btn btn-primary" href="{{ url('inventory/full-inventory') }}">
+      <i class="fas fa-warehouse"></i> Full Inventory</a>
+    <a class="btn btn-primary" href="{{ url('inventory/quickstock') }}">
+      <i class="fas fa-truck"></i> Quickstock</a>
 
   </div>
 
@@ -99,10 +99,11 @@
                   <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
                 </a>
               @endif
-              <div>
-                <a href="#" class="meta inventory-stack inventory-stack-name">{{ $stack->first()->name }}
-                  x{{ $stack->sum('pivot.count') }}</a>
-              </div>
+
+              <a href="#" class="meta inventory-stack inventory-stack-name">
+                {{ $stack->first()->name }}
+                x{{ $stack->sum('pivot.count') }}
+              </a>
             </div>
           @endforeach
         </div>

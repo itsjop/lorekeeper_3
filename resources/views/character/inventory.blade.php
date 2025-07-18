@@ -87,7 +87,7 @@
       </div>
     </div>
     {!! Form::close() !!}
-</div>
+  </div>
 
   <div id="defView" class="hide">
     @foreach ($items as $categoryId => $categoryItems)
@@ -119,12 +119,12 @@
               data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}"
             >
               <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
-            </a>
+            {{-- </a>
             <a
               href="#"
               class="{{ $canName ? 'text-muted' : '' }}"
               class="inventory-stack inventory-stack-name"
-            >
+            > --}}
               {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }}
             </a>
             @if ($canName && $stackName)
@@ -323,7 +323,7 @@
     $(document).ready(function() {
       $('.inventory-stack').on('click', function(e) {
         e.preventDefault();
-        var $parent = $(this).parent().parent();
+        var $parent = $(this);
         loadModal("{{ url('items') }}/character/" + $parent.data('id'), $parent.data('name'));
       });
 

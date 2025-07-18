@@ -20,13 +20,14 @@ dialog,
   width: auto;
   height: auto;
   transform: translate(-50%, -50%);
-  max-height: 70vh;
+  max-height: 80vh;
   background: transparent;
   border: 0;
   opacity: 0;
-  background-color: var(--purple-clr_400);
-  box-shadow: 5px 5px 5px #cccccc88;
   border-radius: 15px;
+  // display: flex;
+  // justify-content: center;
+  // align-content: center;
   transition:
     opacity 0.7s ease-out,
     transform 0.7s ease-out,
@@ -43,20 +44,37 @@ dialog,
     /* Equivalent to
     transition: all 0.7s allow-discrete; */
   }
+  .fade:not(.show) { pointer-events: none; }
   /* Open state of the dialog  */
   &:open {
     opacity: 1;
     // transform: translate(-50%, -50%) scale(1);
   }
   .modal-dialog {
-    max-height: calc(70vh - 40px);
+    max-height: 100%;
+    border: 2px solid var(--purple-clr_500);
     margin: 0;
     overflow-y: scroll;
+    box-shadow: 5px 5px 5px #cccccc88;
+    border-radius: 15px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    // backdrop-filter: brightness(200%) blur(5px);
+    // background: color-mix(in srgb, var(--white) 40%, transparent);
+    background: var(--white);
     .modal-content {
       border-radius: 15px;
+      position: relative;
+    }
+    .modal-body {
+      .inventory-main-img img {
+        width: 50%;
+      }
+      .list-group {
+        border-radius: 15px;
+      }
     }
   }
-
 }
 
 /* Before open state  */
