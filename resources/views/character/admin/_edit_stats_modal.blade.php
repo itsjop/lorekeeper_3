@@ -33,11 +33,11 @@
   </ul>
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_giftable', 1, $character->is_giftable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_giftable', 1, $character->is_giftable, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
   {!! Form::label('is_giftable', 'Is Giftable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_tradeable', 1, $character->is_tradeable, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_tradeable', 1, $character->is_tradeable, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
   {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">

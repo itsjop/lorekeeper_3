@@ -10,6 +10,29 @@
       </li>
     </ul>
   </details>
+  @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
+    <details class="sidebar-section">
+      <summary class="sidebar-section-header">Settings</summary>
+      <ul>
+        <li class="sidebar-item">
+          <a href="{{ $character->url . '/profile/edit' }}" class="{{ set_active('myo/' . $character->id . '/profile/edit') }}">
+            Edit Profile
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="{{ $character->url . '/transfer' }}"
+            class="{{ set_active('myo/' . $character->id . '/transfer') }}">Transfer</a>
+        </li>
+        @if (Auth::user()->id == $character->user_id)
+          <li class="sidebar-item">
+            <a href="{{ $character->url . '/approval' }}" class="{{ set_active('myo/' . $character->id . '/approval') }}">
+              Submit MYO Design
+            </a>
+          </li>
+        @endif
+      </ul>
+    </details>
+  @endif
   <details class="sidebar-section">
     <summary class="sidebar-section-header">History
       <ul>
@@ -25,26 +48,4 @@
         </li>
       </ul>
   </details>
-  @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
-    <details class="sidebar-section">
-      <summary class="sidebar-section-header">Settings</summary>
-      <ul>
-        <li class="sidebar-item">
-          <a href="{{ $character->url . '/profile/edit' }}" class="{{ set_active('myo/' . $character->id . '/profile/edit') }}">
-            Edit Profile
-          </a>
-        </li>
-        <li class="sidebar-item">
-          <a href="{{ $character->url . '/transfer' }}" class="{{ set_active('myo/' . $character->id . '/transfer') }}">Transfer</a>
-        </li>
-        @if (Auth::user()->id == $character->user_id)
-          <li class="sidebar-item">
-            <a href="{{ $character->url . '/approval' }}" class="{{ set_active('myo/' . $character->id . '/approval') }}">
-              Submit MYO Design
-            </a>
-          </li>
-        @endif
-      </ul>
-    </details>
-  @endif
 </div>

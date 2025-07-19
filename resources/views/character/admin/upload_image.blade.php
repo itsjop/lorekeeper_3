@@ -17,7 +17,7 @@
   <h3>Validity</h3>
 
   <div class="form-group">
-    {!! Form::checkbox('is_valid', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_valid', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.') !!}
   </div>
 

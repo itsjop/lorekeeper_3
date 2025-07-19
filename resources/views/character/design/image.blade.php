@@ -124,7 +124,7 @@
           </div>
         @else
           <div class="form-group">
-            {!! Form::checkbox('modify_thumbnail', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+            {!! Form::checkbox('modify_thumbnail', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
             {!! Form::label('modify_thumbnail', 'Modify Thumbnail', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Toggle this option to modify the thumbnail, otherwise only the credits will be saved.') !!}
           </div>
         @endif

@@ -38,7 +38,7 @@
       {{ $submission->favorites_count }} {!! Form::button('<i class="fas fa-star"></i> ', [
           'style' => 'border:0; border-radius:.5em;',
           'class' => $submission->favorites->where('user_id', Auth::user()->id)->first() != null ? 'btn-success' : '',
-          'data-bs-toggle' => 'tooltip',
+          'data-toggle' => 'tooltip',
           'title' =>
               ($submission->favorites->where('user_id', Auth::user()->id)->first() == null ? 'Add to' : 'Remove from') .
               ' your Favorites',

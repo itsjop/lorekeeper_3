@@ -52,14 +52,9 @@
       text-align: center;
       padding: 10px;
       img {
+        @include hover-preview;
         max-width: 100%;
         max-width: 250px;
-        transition: 0.5s var(--bounce_linear);
-        transform: scale(1);
-        &:hover {
-          transition: 0.7s var(--elastic_linear);
-          transform: scale(1.2);
-        }
       }
       &.jobs {
         grid-template-columns: 1fr 1fr 1fr;

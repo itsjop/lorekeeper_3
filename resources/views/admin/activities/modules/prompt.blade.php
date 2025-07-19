@@ -13,12 +13,12 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    {!! Form::checkbox('show_rewards', 1, $activity->data->show_rewards ?? 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('show_rewards', 1, $activity->data->show_rewards ?? 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('show_rewards', 'Show Rewards', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Show a fillable rewards section on the activity, similar to standard prompt rewards.') !!}
   </div>
 
   <div class="col-md-4">
-    {!! Form::checkbox('choose_reward', 1, $activity->data->choose_reward ?? 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('choose_reward', 1, $activity->data->choose_reward ?? 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('choose_reward', 'User Chooses Reward', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Makes it so the user has to choose between any individual reward specified on the prompt. Want to let them choose between multiple sets? Use a box item!') !!}
   </div>
 </div>

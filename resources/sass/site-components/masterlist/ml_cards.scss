@@ -3,7 +3,7 @@
 #masterlist {
   container: mlsearch / inline-size;
 }
-fieldset.masterlist-search-grid {
+.masterlist-search-grid {
   display: grid;
   grid-template:
     'name  species sortby submit a-btn' max-content
@@ -37,7 +37,7 @@ fieldset.masterlist-search-grid {
   }
 }
 @container mlsearch (width < 800px) {
-  fieldset.masterlist-search-grid {
+  .masterlist-search-grid {
     display: grid;
     grid-template:
       'name   name    submit' 1fr
@@ -48,263 +48,263 @@ fieldset.masterlist-search-grid {
 #ml-gridView {
   display: grid;
   gap: 20px;
-  .masterlist-character {
-    display: grid;
-    grid-template:
-      'name  name ' 2.5em
-      'thumb thumb' auto
-      'code  user ' 2.2em
-      / min-content auto;
-    border-radius: 15px;
-    position: relative;
-    padding: 6px;
-    // // aspect-ratio: 3/4;
-    // --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
-    // --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
-    // --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
-    // --card_badge-img: 'public/img/masterlist/badge_sweet.png';
-    // --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
-    background-image: var(--card_card-border);
-    box-shadow: 5px 5px 5px #04043078;
-    .border-background {
-      grid-area: 1 / 1 / 4 / 3;
-      border-radius: 14px;
-      background-image: var(--card_gradient);
+}
+
+.masterlist-character {
+  display: grid;
+  grid-template:
+    'name  name ' 2.5em
+    'thumb thumb' auto
+    'code  user ' 2.2em
+    / min-content auto;
+  border-radius: 15px;
+  position: relative;
+  padding: 6px;
+  // // aspect-ratio: 3/4;
+  // --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
+  // --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
+  // --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
+  // --card_badge-img: 'public/img/masterlist/badge_sweet.png';
+  // --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
+  background-image: var(--card_card-border);
+  box-shadow: 5px 5px 5px #04043078;
+  .border-background {
+    grid-area: 1 / 1 / 4 / 3;
+    border-radius: 14px;
+    background-image: var(--card_gradient);
+  }
+  .ml-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 8;
+    width: 20%;
+    cursor: help;
+    img {
+      width: 100%;
+      aspect-ratio: 1/1;
     }
-    .ml-badge {
+    .flag {
+      opacity: 0;
       position: absolute;
-      top: 0px;
-      right: 0px;
-      z-index: 8;
-      width: 20%;
-      cursor: help;
-      img {
-        width: 100%;
-        aspect-ratio: 1/1;
+      transform: translateX(-33%) translateY(0);
+      transition: 0.3s var(--smoothIn_linear);
+      color: var(--white);
+      padding: 5px 10px;
+      z-index: 6;
+      pointer-events: none;
+      word-break: keep-all;
+      width: max-content;
+      .bg {
+        &::before,
+        &::after {
+          content: '';
+          background: var(--card_gradient);
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 5;
+          height: 100%;
+          width: 100%;
+          border-radius: 13px;
+        }
+        &::before {
+          width: calc(10px + 100%);
+          height: calc(10px + 100%);
+          background-image: var(--card_card-border);
+          border-radius: 15px;
+          box-shadow: 5px 5px 5px #04043078;
+        }
       }
-      .flag {
-        opacity: 0;
-        position: absolute;
-        transform: translateX(-33%) translateY(0);
-        transition: 0.3s var(--smoothIn_linear);
-        color: var(--white);
-        padding: 5px 10px;
+      .label {
+        position: relative;
+        font-weight: 700;
         z-index: 6;
-        pointer-events: none;
-        word-break: keep-all;
-        width: max-content;
-        .bg {
-          &::before,
-          &::after {
-            content: '';
-            background: var(--card_gradient);
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 5;
-            height: 100%;
-            width: 100%;
-            border-radius: 13px;
-          }
-          &::before {
-            width: calc(10px + 100%);
-            height: calc(10px + 100%);
-            background-image: var(--card_card-border);
-            border-radius: 15px;
-            box-shadow: 5px 5px 5px #04043078;
-          }
-        }
-        .label {
-          position: relative;
-          font-weight: 700;
-          z-index: 6;
-        }
-      }
-      &:hover {
-        .flag {
-          opacity: 1;
-          transform: translateX(-33%) translateY(-90%);
-        }
       }
     }
-    .thumbnail {
-      width: calc(100% - 20px);
-      grid-area: thumb;
-      place-self: center;
-      background-color: var(--active-clr_50);
+    &:hover {
+      .flag {
+        opacity: 1;
+        transform: translateX(-33%) translateY(-90%);
+      }
+    }
+  }
+  .thumbnail {
+    width: calc(100% - 20px);
+    grid-area: thumb;
+    place-self: center;
+    background-color: var(--active-clr_50);
+    border-radius: 15px;
+    //-> contain: paint;
+    display: grid;
+    z-index: 2;
+    .ml-thumbnail,
+    .ml-thumbnail img,
+    .tn-background,
+    .shine {
+      object-fit: contain;
+      width: 100%;
+      aspect-ratio: 1/1;
+      grid-area: 1/1/2/2;
       border-radius: 15px;
+      place-self: center center;
+      transform-origin: center center;
+      transform: scale(1) translateZ(1);
+      position: relative;
+    }
+    perspective: 200px;
+    .ml-thumbnail {
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      transition: 0.45s var(--bounce_linear);
       //-> contain: paint;
+      perspective: 300px;
+      position: relative;
       display: grid;
-      z-index: 2;
-      .ml-thumbnail,
-      .ml-thumbnail img,
-      .tn-background,
-      .shine {
-        object-fit: contain;
-        width: 100%;
-        aspect-ratio: 1/1;
-        grid-area: 1/1/2/2;
-        border-radius: 15px;
-        place-self: center center;
-        transform-origin: center center;
-        transform: scale(1) translateZ(1);
-        position: relative;
-      }
-      perspective: 200px;
-      .ml-thumbnail {
-        z-index: 10;
-        width: 100%;
-        height: 100%;
-        filter: drop-shadow(3px 3px 3px #10045c68);
-        transition: 0.45s var(--bounce_linear);
-        //-> contain: paint;
-        perspective: 300px;
-        position: relative;
-        display: grid;
-        img {
-          top: 0;
-          left: 0;
-          width: calc(100% - 10px);
-          height: calc(100% - 10px);
-          transition: 0.05s linear;
-        }
-        &:hover {
-          transition: 1.5s var(--elastic_linear);
-          transform: scale(1.1);
-          img {
-            transition: 0.05s linear;
-            //-> transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
-          }
-          .shine {
-            transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
-            opacity: 0.35;
-            &::after {
-              --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
-              --tan: sin(var(--len));
-              // rotate(calc(-45deg + (45deg * var(--len))));
-              transform: translateX(calc(25% + (-50% * var(--mpx)))) translateY(calc(25% + (-50% * var(--mpy)))) rotate(-45deg);
-            }
-          }
-        }
-      }
-      .shine {
+      img {
+        top: 0;
+        left: 0;
         width: calc(100% - 10px);
         height: calc(100% - 10px);
-        // width: 100%;
-        // height: 100%;
-        // position: relative;
+        transition: 0.05s linear;
+      }
+      &:hover {
+        transition: 1.5s var(--elastic_linear);
+        transform: scale(1.1);
+        img {
+          transition: 0.05s linear;
+          //-> transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
+        }
+        .shine {
+          transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
+          opacity: 0.35;
+          &::after {
+            --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
+            --tan: sin(var(--len));
+            // rotate(calc(-45deg + (45deg * var(--len))));
+            transform: translateX(calc(25% + (-50% * var(--mpx)))) translateY(calc(25% + (-50% * var(--mpy)))) rotate(-45deg);
+          }
+        }
+      }
+    }
+    .shine {
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      // width: 100%;
+      // height: 100%;
+      // position: relative;
+      z-index: 11;
+      top: 0;
+      left: 0;
+      transition:
+        transform 0.1s linear,
+        opacity 0.1s ease;
+      // background: red;
+      // mask-image: radial-gradient(white, black 50%);
+      mask-image: var(--card_shine_mask-image);
+      mask-size: 100% 100%;
+      // mask-size: 98% 98%;
+      mask-size: 100% calc(100% - 4px);
+      mask-repeat: none;
+      mask-position: center;
+      mask-position: 50% calc(50% + 0px);
+      mask-mode: alpha;
+      mix-blend-mode: overlay;
+      opacity: 0;
+      contain: paint;
+      &::after {
+        content: '';
+        width: 300%;
+        height: 300%;
+        position: absolute;
         z-index: 11;
         top: 0;
         left: 0;
-        transition:
-          transform 0.1s linear,
-          opacity 0.1s ease;
-        // background: red;
-        // mask-image: radial-gradient(white, black 50%);
-        mask-image: var(--card_shine_mask-image);
-        mask-size: 100% 100%;
-        // mask-size: 98% 98%;
-        mask-size: 100% calc(100% - 4px);
-        mask-repeat: none;
-        mask-position: center;
-        mask-position: 50% calc(50% + 0px);
-        mask-mode: alpha;
-        mix-blend-mode: overlay;
-        opacity: 0;
-        contain: paint;
-        &::after {
-          content: '';
-          width: 300%;
-          height: 300%;
-          position: absolute;
-          z-index: 11;
-          top: 0;
-          left: 0;
-          left: -100%;
-          top: -100%;
-          transform: translateX(calc(25% + (-50% * var(--mpx)))) translateY(calc(25% + (-50% * var(--mpy)))) rotate(-45deg);
-          transform-origin: center center;
-          background-image: linear-gradient(
-            0deg,
-            transparent 0%,
-            transparent 40%,
-            white 45%,
-            white 50%,
-            transparent 55%,
-            transparent 100%
-          );
-        }
-      }
-      .tn-background {
-        background-image: url('images/overlays/starring.png'), var(--card_profile-bg_color);
-        z-index: 1;
-        filter: brightness(1);
+        left: -100%;
+        top: -100%;
+        transform: translateX(calc(25% + (-50% * var(--mpx)))) translateY(calc(25% + (-50% * var(--mpy)))) rotate(-45deg);
+        transform-origin: center center;
+        background-image: linear-gradient(
+          0deg,
+          transparent 0%,
+          transparent 40%,
+          white 45%,
+          white 50%,
+          transparent 55%,
+          transparent 100%
+        );
       }
     }
-    .name,
-    .slug,
-    .display-user {
-      text-shadow: 0 0 5px #d8d8fc66;
-      font-size: clamp(1em, 1.2vw, 1.3em);
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-weight: 700;
-      color: var(--white);
-      font-size: 1.1em;
+    .tn-background {
+      background-image: url('images/overlays/starring.png'), var(--card_profile-bg_color);
+      z-index: 1;
+      filter: brightness(1);
     }
-    .name {
-      grid-area: name;
-      display: flex;
-      place-items: center;
-      place-content: start;
-      font-family: 'Baloo 2', sans-serif;
-      text-transform: uppercase;
-      padding: 0 0 0 10px;
-      a {
-        max-width: 80%;
-        color: var(--white);
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      &.name-sm {
-        font-size: 0.85em;
-      }
-      &.name-lg {
-        font-size: 1.2em;
-      }
-    }
-    .slug,
-    .display-user {
-      align-self: center;
-      justify-self: start;
-      align-items: center;
-      font-family: 'Itim', sans-serif;
-      font-size: 0.8em;
-    }
-    .slug {
-      padding-left: 10px;
-      grid-area: code;
-    }
-    .display-user {
-      padding-right: 10px;
-      grid-area: user;
-      justify-self: end;
-    }
-    .paper-overlay {
-      position: absolute;
-      pointer-events: none;
-      user-select: none;
-      width: 100%;
-      height: 100%;
-      background-image: url('../../../../public/images/overlays/groovepaper.png');
-      border-radius: 15px;
-      opacity: 0.7;
-    }
-    // .display-species {
-    //   grid-area: type;
-    // }
   }
+  .name,
+  .slug,
+  .display-user {
+    text-shadow: 0 0 5px #d8d8fc66;
+    font-size: clamp(1em, 1.2vw, 1.3em);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 1.1em;
+  }
+  .name {
+    grid-area: name;
+    display: flex;
+    place-items: center;
+    place-content: start;
+    font-family: 'Baloo 2', sans-serif;
+    text-transform: uppercase;
+    padding: 0 0 0 10px;
+    a {
+      max-width: 80%;
+      color: var(--white);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &.name-sm {
+      font-size: 0.85em;
+    }
+    &.name-lg {
+      font-size: 1.2em;
+    }
+  }
+  .slug,
+  .display-user {
+    align-self: center;
+    justify-self: start;
+    align-items: center;
+    font-family: 'Itim', sans-serif;
+    font-size: 0.8em;
+  }
+  .slug {
+    padding-left: 10px;
+    grid-area: code;
+  }
+  .display-user {
+    padding-right: 10px;
+    grid-area: user;
+    justify-self: end;
+  }
+  .paper-overlay {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../public/images/overlays/groovepaper.png');
+    border-radius: 15px;
+    opacity: 0.7;
+  }
+  // .display-species {
+  //   grid-area: type;
+  // }
 }
 
 @media (width >= 1400px) {

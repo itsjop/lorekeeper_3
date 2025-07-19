@@ -16,9 +16,9 @@
   ]) !!}
 
   <h2>
-    {{ $character->fullName }}'s Links
+    {{ $character->fullName }}'s Connections
     <a class="float-right mr-2" href="{{ url('reports/new?url=') . $character->url . '/links' }}">
-      <i class="fas fa-exclamation-triangle text-danger" data-bs-toggle="tooltip" title="Click here to report this character's links." style="opacity: 50%;"></i>
+      <i class="fas fa-exclamation-triangle text-danger" data-bs-toggle="tooltip" title="Click here to report this character's connections." style="opacity: 50%;"></i>
     </a>
   </h2>
   @if (count($character->links))
@@ -88,14 +88,14 @@
     </div>
   @else
     <div class="alert alert-info">
-      <i class="fas fa-info-circle"></i> This character has no links.
+      <i class="fas fa-info-circle"></i> This character currently has no connections.
     </div>
   @endif
 
   @if (Auth::check() && ($character->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
     <div class="text-right m-2 mr-5 mt-3">
       <a href="{{ $character->url . '/links/edit' }}" class="btn btn-outline-info btn-sm">
-        <i class="fas fa-envelope"></i> Create Links For {!! $character->fullName !!}
+        <i class="fas fa-envelope"></i> Create Connections For {!! $character->fullName !!}
       </a>
     </div>
   @endif

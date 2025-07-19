@@ -26,7 +26,7 @@
     <h2 class="flex gap-_5 ai-center"> <i class="fas fa-gifts"></i>
       <span>Dailies</span>
     </h2>
-    <div class="bubble jobs">
+    <div class="bubble jobs gap-_5">
       <div class="wishing-well">
         <a href="/dailies/1">
           <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well">

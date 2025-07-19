@@ -38,39 +38,39 @@
   <div class="row">
     <div class="col-md-2">
       <div class="form-group">
-        {!! Form::checkbox('is_active', 1, $form->id ? $form->is_active : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_active', 1, $form->id ? $form->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
         {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the form will not be visible to regular users.') !!}
       </div>
     </div>
     @if ($form->id && $form->is_active)
       <div class="col-md">
         <div class="form-group">
-          {!! Form::checkbox('bump', 1, null, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+          {!! Form::checkbox('bump', 1, null, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
           {!! Form::label('bump', 'Bump form', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If toggled on, this will alert users that there is a new form. Best in conjunction with a clear notification of changes!') !!}
         </div>
       </div>
     @endif
     <div class="col-md-2">
       <div class="form-group">
-        {!! Form::checkbox('is_anonymous', 1, $form->id ? $form->is_anonymous : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_anonymous', 1, $form->id ? $form->is_anonymous : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
         {!! Form::label('is_anonymous', 'Set Anonymous', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the form will not be anonymous and admins can see who gave what response.') !!}
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        {!! Form::checkbox('is_public', 1, $form->id ? $form->is_public : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_public', 1, $form->id ? $form->is_public : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
         {!! Form::label('is_public', 'Set Public', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, users cannot see the form results. If turned on, users can see anonymous results.') !!}
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        {!! Form::checkbox('is_editable', 1, $form->id ? $form->is_editable : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_editable', 1, $form->id ? $form->is_editable : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
         {!! Form::label('is_editable', 'Set Editable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, users cannot edit their latest submission.') !!}
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        {!! Form::checkbox('allow_likes', 1, $form->id ? $form->allow_likes : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('allow_likes', 1, $form->id ? $form->allow_likes : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
         {!! Form::label('allow_likes', 'Allow Likes', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, users cannot like answers of other people.') !!}
       </div>
     </div>

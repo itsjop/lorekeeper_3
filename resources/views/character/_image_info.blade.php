@@ -309,11 +309,11 @@
           <div class="tab-pane fade" id="settings-{{ $image->id }}">
             {!! Form::open(['url' => 'admin/character/image/' . $image->id . '/settings']) !!}
             <div class="form-group">
-              {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+              {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
               {!! Form::label('is_visible', 'Is Viewable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will not be visible by anyone without the Manage Masterlist power.') !!}
             </div>
             <div class="form-group">
-              {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+              {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
               {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.') !!}
             </div>
             @if (config('lorekeeper.settings.enable_character_content_warnings'))

@@ -50,7 +50,7 @@
 
   <div class="row align-items-end">
     <div class="form-group col-6">
-      {!! Form::checkbox('is_active', 1, $step->is_active === 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_active', 1, $step->is_active === 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
       {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Steps that are not active will be hidden from view.') !!}
     </div>
   </div>
@@ -112,8 +112,8 @@
       </div>
 
       <div class="form-group hide">
-        {!! Form::checkbox('options[is_active]', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
-        {!! Form::text('options[id]', $step->options->first()->id ?? -1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('options[is_active]', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::text('options[id]', $step->options->first()->id ?? -1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
       </div>
     @else
       <div class="row align-items-end">
@@ -124,8 +124,8 @@
       </div>
 
       <div class="form-group hide">
-        {!! Form::checkbox('options[is_active]', 1, 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
-        {!! Form::text('options[id]', $step->options->first()->id ?? -1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('options[is_active]', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::text('options[id]', $step->options->first()->id ?? -1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
       </div>
     @endif
   @else

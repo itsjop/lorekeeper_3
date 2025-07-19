@@ -124,7 +124,7 @@
               </div>
 
               <div class="form-group">
-                {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+                {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
                 {!! Form::label('disallow_transfer', ucfirst(__('lorekeeper.character')) . '-bound', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
                     'If this is on, the ' .
                         __('lorekeeper.character') .

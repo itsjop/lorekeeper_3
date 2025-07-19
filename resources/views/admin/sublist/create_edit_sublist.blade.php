@@ -43,7 +43,7 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('show_main', 1, $sublist->id ? $sublist->show_main : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('show_main', 1, $sublist->id ? $sublist->show_main : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('show_main', 'Show on Main', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Turn on to include these characters in the main masterlist as well. Turn off to entirely seperate them into the sub masterlist.') !!}
   </div>
 

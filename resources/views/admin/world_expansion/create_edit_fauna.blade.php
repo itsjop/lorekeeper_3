@@ -126,7 +126,7 @@
   @endif
 
   <div class="form-group">
-    {!! Form::checkbox('is_active', 1, $fauna->id ? $fauna->is_active : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $fauna->id ? $fauna->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the category will not be visible to regular users.') !!}
   </div>
 

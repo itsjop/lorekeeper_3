@@ -84,13 +84,13 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        {!! Form::checkbox('is_active', 1, $profession->id ? $profession->is_active : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_active', 1, $profession->id ? $profession->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
         {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the profession will not be visible to regular users.') !!}
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        {!! Form::checkbox('is_choosable', 1, $profession->id ? $profession->is_choosable : 1, ['class' => 'form-check-input', 'data-bs-toggle' => 'toggle']) !!}
+        {!! Form::checkbox('is_choosable', 1, $profession->id ? $profession->is_choosable : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
         {!! Form::label('is_choosable', 'Is Selectable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the profession will not be selectable on character profiles.') !!}
       </div>
 

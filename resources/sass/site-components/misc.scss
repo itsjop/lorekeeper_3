@@ -87,9 +87,12 @@
     .inventory-item {
       display: flex;
       flex-direction: column;
-      img {
-        max-width: 100%;
-        aspect-ratio: 1/1;
+      .inventory-stack {
+        img {
+          @include hover-preview;
+          max-width: 100%;
+          aspect-ratio: 1/1;
+        }
       }
       text-align: center;
       // &:has(.rarity) {
