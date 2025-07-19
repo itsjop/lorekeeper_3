@@ -1,16 +1,16 @@
 @extends('layouts.app', ['pageName' => '/pages'])
 
-
 @section('title')
   {{ $page->title }}
 @endsection
 
 @section('content')
- <x-admin-edit title="Page" :object="$page" />
-  {{-- {!! breadcrumbs([$page->title => $page->url]) !!}
+  <div id="custom-page">
+    <x-admin-edit title="Page" :object="$page" />
+    {{-- {!! breadcrumbs([$page->title => $page->url]) !!}
   <h1>
     @if (!$page->is_visible)
-      <i class="fas fa-eye-slash mr-1"></i>
+    <i class="fas fa-eye-slash mr-1"></i>
     @endif
     {{ $page->title }}
   </h1>
@@ -19,17 +19,18 @@
     <div> Last updated {!! format_date($page->updated_at) !!}</div>
   </div> --}}
 
-  <div class="site-page-content parsed-text">
-    {!! $page->parsed_text !!}
-  </div>
-
-  @if ($page->can_comment)
-    <div class="container">
-      @comments([
-          'model' => $page,
-          'perPage' => 5,
-          'allow_dislikes' => $page->allow_dislikes,
-      ])
+    <div class="site-page-content parsed-text">
+      {!! $page->parsed_text !!}
     </div>
-  @endif
+
+    @if ($page->can_comment)
+      <div class="container">
+        @comments([
+            'model' => $page,
+            'perPage' => 5,
+            'allow_dislikes' => $page->allow_dislikes
+        ])
+      </div>
+    @endif
+  </div>
 @endsection
