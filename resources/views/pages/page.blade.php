@@ -6,8 +6,8 @@
 @endsection
 
 @section('content')
-  <x-admin-edit title="Page" :object="$page" />
-  {!! breadcrumbs([$page->title => $page->url]) !!}
+ <x-admin-edit title="Page" :object="$page" />
+  {{-- {!! breadcrumbs([$page->title => $page->url]) !!}
   <h1>
     @if (!$page->is_visible)
       <i class="fas fa-eye-slash mr-1"></i>
@@ -17,7 +17,7 @@
   <div class="mb-4">
     <div> Created {!! format_date($page->created_at) !!}</div>
     <div> Last updated {!! format_date($page->updated_at) !!}</div>
-  </div>
+  </div> --}}
 
   <div class="site-page-content parsed-text">
     {!! $page->parsed_text !!}

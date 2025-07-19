@@ -74,6 +74,8 @@
       border-radius: 0 0 15px 15px;
     }
     summary {
+      font-weight: 500;
+      color: var(--purple-clr_900);
       position: relative;
       text-align: center;
       padding: 5px 0;
@@ -90,7 +92,7 @@
         display: inline-block;
         width: 0.7em;
         height: 0.7em;
-        background-color: var(--purple-clr_600);
+        background-color: var(--purple-clr_400);
         transform: rotate(0deg);
         clip-path: polygon(0 0, 0% 100%, 100% 50%);
         transform-origin: 50%;
@@ -130,7 +132,8 @@
       }
     }
     summary {
-      background-color: var(--purple-clr_200);
+      background-color: var(--purple-clr_300);
+      font-weight: 500;
       &::after {
         transform: rotate(90deg);
       }

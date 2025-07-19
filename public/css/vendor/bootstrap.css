@@ -147,13 +147,13 @@ sup {
   top: -0.5em;
 }
 a {
-  color: #007bff;
+  color: #5620b4;
   text-decoration: none;
   background-color: transparent;
 }
 a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  color: #0162ca;
+  text-decoration: none;
 }
 a:not([href]):not([class]) {
   color: inherit;
@@ -379,7 +379,7 @@ hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid rgba(51, 21, 140, 0.251);
 }
 .small,
 small {

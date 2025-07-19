@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Itim&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Fredoka:wght@300..900&family=Itim&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Playpen+Sans+Hebrew:wght@100..800&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap);
 @charset "UTF-8";
 * {
   transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
@@ -535,10 +537,12 @@ body {
   --gray-dark: #343a40;
   --primary: #5da6f3;
   --secondary: #6c757d;
-  --success: #a4e0b2;
+  --success: #58cdb2;
+  --success_hover: #0aae93;
   --info: #4ab3c3;
   --warning: #f5c841;
-  --danger: #d33b3b;
+  --danger: #e675b3;
+  --danger_hover: #e83598;
   --light: #f8f9fa;
   --dark: #343a40;
 }
@@ -570,7 +574,6 @@ body {
 #app .btn-success,
 #app .btn-toolbar,
 #app .btn-warning,
-#app .btn-danger,
 #app .btn-block,
 #app .btn-dark,
 #app .btn-link {
@@ -589,11 +592,10 @@ body {
 #app .btn-success:hover,
 #app .btn-toolbar:hover,
 #app .btn-warning:hover,
-#app .btn-danger:hover,
 #app .btn-block:hover,
 #app .btn-dark:hover,
 #app .btn-link:hover {
-  background: #a496ff;
+  background: var(--teal-clr_400);
 }
 #app .btn-light {
   background: var(--teal-clr_300);
@@ -610,7 +612,8 @@ body {
 }
 #app .btn-outline-info,
 #app .btn-info {
-  background: #b1d9f1;
+  font-family: "Baloo 2", sans-serif;
+  background: #6ebff2;
   background: var(--teal-clr_400);
   color: var(--white);
   font-style: normal;
@@ -621,12 +624,14 @@ body {
 #app .btn-info:hover {
   background: var(--purple-clr_500);
 }
+#app .btn-danger,
 #app .btn-outline-danger {
   background: #d0335d;
   color: var(--white);
   font-weight: 500;
   transition: 0.2s ease;
 }
+#app .btn-danger:hover,
 #app .btn-outline-danger:hover {
   background: #a51752;
 }
@@ -636,8 +641,14 @@ body {
 #app .badge-danger {
   background-color: var(--danger);
 }
+#app .badge-danger:hover {
+  background-color: var(--danger_hover);
+}
 #app .badge-success {
   background-color: var(--success);
+}
+#app .badge-success:hover {
+  background-color: var(--success_hover);
 }
 #app .badge-dark {
   background-color: var(--active-clr_800);
@@ -645,26 +656,44 @@ body {
 
 /* prettier-ignore */
 .app h1, .app .h1 {
-  font-family: "Baloo 2", sans-serif, system-ui;
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--purple-clr_900);
-}
-.app h2, .app h3, .app .h2, .app .h3 {
-  font-family: "Itim", sans-serif, system-ui;
+  font-family: "Sour Gummy", sans-serif, system-ui;
+  font-size: 2rem;
   font-weight: 600;
+  color: var(--purple-clr_800);
+}
+.app h2, .app .h2 {
+  font-family: "Itim", sans-serif, system-ui;
+  font-weight: 800;
+  text-transform: lowercase;
+  color: var(--purple-clr_800);
+  font-size: 1.6rem;
+  font-style: strong;
+}
+.app h3, .app .h3 {
+  font-family: "Itim", sans-serif, system-ui;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--purple-clr_800);
+  font-size: 1.5rem;
+}
+.app h4, .app .h4 {
+  font-family: "Sour Gummy", sans-serif, system-ui;
+  font-weight: 700;
+  color: var(--purple-clr_800);
+  font-size: 1.4rem;
+}
+.app h5, .app .h5 {
+  font-family: "Itim", sans-serif, system-ui;
+  font-weight: 700;
   text-transform: lowercase;
   color: var(--purple-clr_800);
   font-size: 1.3rem;
 }
-.app h4, .app .h4 {
+.app h6, .app .h6 {
+  font-family: "Baloo 2", sans-serif, system-ui;
+  font-weight: 700;
+  color: var(--purple-clr_800);
   font-size: 1.2rem;
-}
-.app h4, .app h5, .app h6, .app .h4, .app .h5, .app .h6 {
-  font-family: "Itim", system-ui;
-  font-weight: 600;
-  text-transform: lowercase;
-  color: var(--purple-clr_700);
 }
 .app ul {
   padding: 0;
@@ -675,6 +704,10 @@ body {
 }
 .app a:hover, .app .a:hover {
   color: var(--teal-clr_500);
+  text-decoration: none;
+}
+.app p, .app span {
+  color: var(--purple-clr_900);
 }
 .app .alert {
   box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
@@ -695,6 +728,42 @@ body {
 }
 .app .small, .app small {
   font-weight: 600;
+  color: #40258b;
+}
+.app .help-icon {
+  color: var(--purple-clr_400);
+}
+.app .help-icon:hover {
+  color: var(--teal-clr_400);
+}
+.app .badge-success, .app .badge-danger {
+  color: rgba(255, 255, 255, 0.724);
+}
+.app .badge-success:hover, .app .badge-danger:hover {
+  color: white;
+}
+.app legend {
+  color: var(--clr_raw_purple-800);
+}
+.app .card-basic {
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+  background: rgba(250, 246, 255, 0.514);
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  max-width: 750px;
+}
+.app .card-basic ul {
+  padding-left: 40px;
+}
+.app .card-basic ul li {
+  margin-bottom: 0.5rem;
+}
+.app .card-basic ul li::marker {
+  content: "✦  ";
+  font-size: 1rem;
   color: #40258b;
 }
 
@@ -1556,6 +1625,8 @@ body {
   border-radius: 0 0 15px 15px;
 }
 #sidebar details summary {
+  font-weight: 500;
+  color: var(--purple-clr_900);
   position: relative;
   text-align: center;
   padding: 5px 0;
@@ -1574,7 +1645,7 @@ body {
   display: inline-block;
   width: 0.7em;
   height: 0.7em;
-  background-color: var(--purple-clr_600);
+  background-color: var(--purple-clr_400);
   transform: rotate(0deg);
   clip-path: polygon(0 0, 0% 100%, 100% 50%);
   transform-origin: 50%;
@@ -1614,7 +1685,8 @@ body {
   transition: 0.3s ease-out;
 }
 #sidebar details[open] summary {
-  background-color: var(--purple-clr_200);
+  background-color: var(--purple-clr_300);
+  font-weight: 500;
 }
 #sidebar details[open] summary::after {
   transform: rotate(90deg);
