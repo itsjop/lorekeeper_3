@@ -58,8 +58,9 @@
     }
   }
 
-  p, span {
+  p, span, li {
     color: var(--purple-clr_900);
+    font-weight: 500;
   }
 
   // -- MISC -- //
@@ -102,12 +103,12 @@
  .card-basic {
     box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
     background: rgba(250, 246, 255, 0.514);
-    padding: 15px;
+    padding: 30px;
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 20px;
     border-radius: 15px;
-    max-width: 750px;
+    max-width: 800px;
     & ul {
       padding-left: 40px;
     li {
