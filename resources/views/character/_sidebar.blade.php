@@ -19,7 +19,7 @@
       </li>
       <li class="sidebar-item">
         <a href="{{ $character->url . '/links' }}" class="{{ set_active('character/' . $character->slug . '/links') }}">
-          Links
+          Connections
         </a>
       </li>
       <li class="sidebar-item">

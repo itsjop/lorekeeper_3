@@ -165,6 +165,9 @@
             <a class="dt-nav-item" href="{{ url('shops') }}">
               <i class="fas fa-gifts"></i> Shops </a>
             <hr>
+            <a class="dt-nav-item bold" style="font-size: 1.3em; font-weight: 700" href="{{ url('crafting') }}">
+              <i class="fas fa-warning"></i> FREE SHIT!!! </a>
+            <hr>
             <a class="dt-nav-item" href="{{ url('crafting') }}">
               <i class="fas fa-tools"></i> Crafting </a>
             {{-- <a class="dt-nav-item" href="{{ url('____') }}">

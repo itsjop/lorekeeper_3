@@ -24,7 +24,7 @@
         <p class="text-secondary">In the event that your design gets rejected, I (wyspic) find providing a redline/drawover to be the
           most efficient and clear way to communicate what changes or corrections may need to be made.</p>
         <p class="text-secondary">However, I know not everyone is comfortable with having their art drawn over! If you would like to
-          <b>opt out</b> of receiving a drawover for assistance with any rejection notes, include a 🚫 in the comment field. </p>
+          <b>opt out</b> of receiving a drawover for assistance with any rejection notes, add "No Redlining" to your comment. </p>
         <hr>
         {!! Form::open(['url' => 'designs/' . $request->id . '/comments']) !!}
         <div class="form-group">

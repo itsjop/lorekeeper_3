@@ -41,6 +41,7 @@
       <p>There is no featured featured.</p>
     @endif
   </div>
+  </div>
 <!--
   <div class="flex">
     <div id="{{ strtolower($featured->slug) }}"
