@@ -1559,7 +1559,7 @@ body {
     grid-template: 1fr 1fr/3fr 2fr 3fr;
   }
 }
-.dailies {
+.all-dailies {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2em;

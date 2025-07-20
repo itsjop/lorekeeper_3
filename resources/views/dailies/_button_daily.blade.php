@@ -73,7 +73,7 @@
       ) !!}</h4>
     </div>
 
-    <div class="dailies card-body w-100">
+    <div class="all-dailies card-body w-100">
       @foreach ($daily->rewards()->get()->groupBy('step') as $step => $rewards)
         @if ($step > 0)
           <div class="daily {{ $step > ($timer->step ?? 0) ? 'inactive' : '' }}">
