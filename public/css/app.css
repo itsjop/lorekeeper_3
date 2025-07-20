@@ -1559,6 +1559,91 @@ body {
     grid-template: 1fr 1fr/3fr 2fr 3fr;
   }
 }
+.dailies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2em;
+}
+
+.daily {
+  display: grid;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 4em auto;
+  border: 3px solid var(--purple-clr_500);
+  border-radius: 15px;
+}
+.daily header {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px #333 solid;
+}
+.daily header .fa {
+  color: var(--success);
+}
+.daily .prizes {
+  place-items: center;
+  place-content: center;
+  display: grid;
+  padding: 15px;
+  width: 100%;
+  gap: 10px;
+  height: 100%;
+}
+.daily .prizes .prize {
+  display: grid;
+  place-items: center;
+  place-content: center;
+}
+.daily .prizes .prize .prize-box {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  border: 4px solid var(--clr_raw_purple-500);
+  background-color: var(--purple-clr_200);
+  width: calc(100% - 20px);
+  border-radius: 100vw;
+  aspect-ratio: 1/1;
+  z-index: 3;
+}
+.daily .prizes .prize .prize-box img {
+  z-index: 4;
+  width: 100%;
+  scale: 1;
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
+}
+.daily .prizes .prize .prize-box img:hover {
+  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
+  transition: 0.7s var(--elastic_linear);
+  transform: scale(1.2);
+}
+.daily.many {
+  grid-template-columns: 1fr 1fr;
+}
+.daily.inactive {
+  border-left: 2px solid var(--black);
+  background-color: #988aa8;
+}
+.daily.inactive header h5 {
+  color: var(--white);
+}
+.daily.inactive header .fa {
+  color: var(--danger);
+}
+.daily.inactive .prize .prize-box {
+  filter: grayscale(1);
+  transition: linear 0.1s;
+}
+.daily.inactive .prize .prize-box:hover {
+  filter: grayscale(0);
+}
+.daily.inactive .prize .prize-label {
+  color: var(--white);
+}
+
 body {
   /* Breakpoints */
   --ss-xsmall: 400px;

@@ -73,32 +73,34 @@
       ) !!}</h4>
     </div>
 
-    <div class="card-body row p-0 m-auto w-100">
+    <div class="dailies card-body w-100">
       @foreach ($daily->rewards()->get()->groupBy('step') as $step => $rewards)
         @if ($step > 0)
-          <div class="{{ $step > ($timer->step ?? 0) ? 'bg-dark text-light' : '' }}">
-            <h5 class="p-1 m-0">{{ $step }}</h5>
-            <h5 class="p-1 m-0">
-              @if ($step > ($timer->step ?? 0))
-                <i class="fa fa-lock"></i> Locked
-              @else
-                <i class="fa fa-unlock"></i> Unlocked
-              @endif
-            </h5>
-            @if ($daily->progress_display == 'all' || $step <= ($timer->step ?? 0))
-              @foreach ($rewards as $reward)
-                @if ($reward->rewardImage)
-                  <div class="row justify-content-center">
-                    <img
-                      src="{{ $reward->rewardImage }}"
-                      alt="{{ $reward->reward()->first()->name }}"
-                      style="max-width:75px;width:100%;"
-                    />
-                  </div>
+          <div class="daily {{ $step > ($timer->step ?? 0) ? 'inactive' : '' }}">
+            <header>
+              <h5 class="">
+                @if ($step > ($timer->step ?? 0))
+                  <i class="fa fa-x"></i>
+                @else
+                  <i class="fa fa-check"></i>
                 @endif
-                <div class="row justify-content-center">{{ $reward->quantity }} {{ $reward->reward()->first()->name }}</div>
-              @endforeach
-            @endif
+                Day {{ $step }}
+              </h5>
+            </header>
+            <div class="prizes {{ count($rewards) > 3 ? 'many' : 'few' }}">
+              @if ($daily->progress_display == 'all' || $step <= ($timer->step ?? 0))
+                @foreach ($rewards as $reward)
+                  <div class="prize">
+                    @if ($reward->rewardImage)
+                      <div class="prize-box">
+                        <img src="{{ $reward->rewardImage }}" alt="{{ $reward->reward()->first()->name }}" />
+                      </div>
+                    @endif
+                    <div class="prize-label row justify-content-center">{{ $reward->quantity }} {{ $reward->reward()->first()->name }}</div>
+                  </div>
+                @endforeach
+              @endif
+            </div>
           </div>
         @endif
       @endforeach
