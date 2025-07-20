@@ -775,14 +775,14 @@ body {
 }
 .app .card-basic .card-left-image {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3.5fr;
   gap: 1rem 15px;
 }
 .app .mini-card {
   border: 1px solid white;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.5098039216);
-  width: 450px;
+  max-width: 450px;
   padding-top: 10px;
   margin: 0px auto 20px;
   box-shadow: 0 3px 8px rgba(111, 74, 139, 0.2901960784);
@@ -804,14 +804,15 @@ body {
   max-height: 100dvh;
   --app-gap-x: 20px;
   --app-gap-y: 10px;
-  --sidebar-width: min(20vw, 300px);
-  --gutter-width: 5vw;
+  --sidebar-width: min(20vw, 230px);
+  --sidebars-width: calc(var(--sidebar-width) * 2);
+  --gutter-width: 3vw;
   --gutters-width: (2 * var(--gutter-width));
   --content-min-width: 600px;
   --content-max-width: 1600px;
-  --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sidebar-width));
+  --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sidebars-width));
   --content-width: clamp(var(--content-min-width), var(--ideal-content-width), var(--content-max-width));
-  --app-width: calc(var(--content-width) + var(--app-gap-x) + var(--sidebar-width));
+  --app-width: calc(var(--content-width) + var(--app-gap-x) + var(--sidebars-width));
 }
 #app #site-wrapper {
   display: grid;
@@ -821,10 +822,9 @@ body {
   max-width: calc(100dvw - var(--gutters-width));
   height: -moz-min-content;
   height: min-content;
-  left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
 }
 #app #site-wrapper.has-sidebar {
-  grid-template: "   .     logo " clamp(150px, 15vh, 300px) "   .     nav  " min-content "sidebar  main " auto "sidebar footer" auto/var(--sidebar-width) var(--content-width);
+  grid-template: "   .     logo    . " clamp(150px, 15vh, 300px) "   .     nav     . " min-content "sidebar  main  char" auto "sidebar footer char" auto/var(--sidebar-width) var(--content-width) var(--sidebar-width);
 }
 #app #site-wrapper {
   padding-bottom: 55px;
@@ -2024,6 +2024,12 @@ body {
     transform: rotate(-1.5deg);
   }
 }
+#selected-character {
+  grid-area: char;
+  position: relative;
+  z-index: 2;
+}
+
 #app #site-wrapper #header-nav {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
