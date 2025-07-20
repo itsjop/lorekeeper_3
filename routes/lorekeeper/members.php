@@ -270,7 +270,7 @@ Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
 
   Route::post('{id}/approval', 'MyoController@postCharacterApproval');
   Route::get('{id}/approval', 'MyoController@getCharacterApproval');
-  //this is useless but im not sure if we dont include it things will get weird or not
+  //this is  useless but im not sure if we dont include it things will get weird or not
   Route::post('{slug}/approval/{id}', 'CharacterController@postCharacterApprovalSpecificImage');
 });
 

@@ -116,7 +116,7 @@
     }
     .card-left-image{
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 3.5fr;
       gap: 1rem 15px;
     }
   }
@@ -124,7 +124,7 @@
     border: 1px solid white;
     border-radius: 20px;
     background: #ffffff82;
-    width: 450px;
+    max-width: 450px;
     padding-top: 10px;
     margin: 0px auto 20px;
     box-shadow: 0 3px 8px #6f4a8b4a;

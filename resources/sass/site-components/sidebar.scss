@@ -274,7 +274,10 @@
 }
 
 // FEATURED CHARACTER
-.featured-character {
+#featured-character {
+  grid-area: char;
+  position: relative;
+  z-index: 2;
   .sidebar-header {
     background-color: var(--purple-clr_600);
   }
