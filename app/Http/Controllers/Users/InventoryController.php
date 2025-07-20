@@ -97,23 +97,16 @@ class InventoryController extends Controller {
     $readOnly = $request->get('read_only') ?: ((Auth::check() && $first_instance && ($first_instance->user_id == Auth::user()->id || Auth::user()->hasPower('edit_inventories'))) ? 0 : 1);
     $stack = UserItem::where([['user_id', $first_instance->user_id], ['item_id', $first_instance->item_id], ['count', '>', 0]])->get();
     $item = Item::where('id', $first_instance->item_id)->first();
-    $shops = UserShop::where('user_id', '=', Auth::user()->id)->pluck('name', 'id');
+    // $shops = UserShop::where('user_id', '=', Auth::user()->id)->pluck('name', 'id');
     return view('home._inventory_stack', [
-      'stack'            => $stack,
-      'item'             => $item,
-      'user'             => Auth::user(),
-      'userOptions'      =>
-      ['' => 'Select User'] + User::visible()->where(
-        'id',
-        '!=',
-        $first_instance
-          ? $first_instance->user_id
-          : 0
-      )->orderBy('name')->get()->pluck('verified_name', 'id')->toArray(),
-      'readOnly'         => $readOnly,
+      'stack' => $stack,
+      'item' => $item,
+      'user' => Auth::user(),
+      'userOptions' => ['' => 'Select User'] + User::visible()->where('id', '!=', $first_instance ? $first_instance->user_id : 0)->orderBy('name')->get()->pluck('verified_name', 'id')->toArray(),
+      'readOnly' => $readOnly,
       'characterOptions' => Character::visible()->myo(0)->where('user_id', optional(Auth::user())->id)->orderBy('sort', 'DESC')->get()->pluck('fullName', 'id')->toArray(),
       'canTransfer'      => Settings::get('can_transfer_items_directly'),
-      'shopOptions'      => $shops,
+      // 'shopOptions'      => $shops,
     ]);
   }
 
