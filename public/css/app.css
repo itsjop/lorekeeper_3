@@ -638,6 +638,12 @@ body {
 #app .notifications-table .unread {
   background-color: var(--purple-clr_100);
 }
+#app .badge-secondary {
+  background-color: var(--purple-clr_300);
+}
+#app .badge-secondary:hover {
+  background-color: var(--purple-clr_400);
+}
 #app .badge-danger {
   background-color: var(--danger);
 }
@@ -771,6 +777,15 @@ body {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 1rem 15px;
+}
+.app .mini-card {
+  border: 1px solid white;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5098039216);
+  width: 450px;
+  padding-top: 10px;
+  margin: 0px auto 20px;
+  box-shadow: 0 3px 8px rgba(111, 74, 139, 0.2901960784);
 }
 
 /* General Styling */

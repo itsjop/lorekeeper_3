@@ -280,7 +280,7 @@ class DesignController extends Controller {
     $request->merge([
       'transformation_info'        => safe($request['transformation_info']),
       'transformation_description' => safe($request['transformation_description']),
-      'rarity_id'                  => safe($request['rarity_id']),
+      'rarity_id'                  => safe($request['rarity_id'], 1),
     ]);
     $r = CharacterDesignUpdate::find($id);
     if (!$r) abort(404);

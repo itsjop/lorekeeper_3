@@ -90,6 +90,12 @@
     background-color: var(--purple-clr_100);
   }
 
+  .badge-secondary {
+    background-color: var(--purple-clr_300);
+    &:hover {
+      background-color: var(--purple-clr_400);
+    }
+  }
   .badge-danger {
     background-color: var(--danger);
     &:hover {

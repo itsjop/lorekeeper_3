@@ -391,8 +391,7 @@ class DesignUpdateManager extends Service {
    * @return bool
    */
   public function saveRequestFeatures($data, $request) {
-
-    DB::beginTransaction();
+   DB::beginTransaction();
 
     try {
       if (!($request->character->is_myo_slot && $request->character->image->species_id) && !isset($data['species_id'])) {
@@ -402,7 +401,10 @@ class DesignUpdateManager extends Service {
         throw new \Exception('Please select a rarity.');
       }
 
-      $rarity = ($request->character->is_myo_slot && $request->character->image->rarity_id) ? $request->character->image->rarity : Rarity::find($data['rarity_id']);
+      $rarity =
+        ($request->character->is_myo_slot && $request->character->image->rarity_id)
+          ? $request->character->image->rarity
+          : Rarity::find($data['rarity_id']);
       $species = ($request->character->is_myo_slot && $request->character->image->species_id) ? $request->character->image->species : Species::find($data['species_id']);
       if (isset($data['subtype_id']) && $data['subtype_id']) {
         $subtype = ($request->character->is_myo_slot && $request->character->image->subtype_id) ? $request->character->image->subtype : Subtype::find($data['subtype_id']);
