@@ -56,14 +56,14 @@
     grid-template-columns: 1fr 1fr;
   }
   &.inactive {
-    border-left: 2px solid var(--black);
+    border: 2px solid var(--purple-clr_700);
     background-color: #988aa8;
     header {
       h5 {
         color: var(--white);
       }
       .fa {
-        color: var(--danger);
+        color: rgb(183, 51, 86);
       }
     }
     .prize {

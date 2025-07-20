@@ -21,19 +21,18 @@
           class="img-char-thumbnail"
         />
       </a>
-      <a
-        class="name"
-        href="{{ $featured->url }}"
-        class="h5 mb-0"
-      >
+      <a class="name h5 mb-0" href="{{ $featured->url }}">
         @if (!$featured->is_visible)
           <i class="fas fa-eye-slash"></i>
-        @endif {{ $featured->fullName }}
+        @endif {{ $featured->name }}
       </a>
-      {!! $featured->displayOwner !!}
-      <div class="species" class="small">
-        {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!}
-      </div>
+      <a class="slug mb-0" href="{{ $featured->url }}">
+        {!! $featured->slug !!}
+      </a>
+      <div>{!! $featured->displayOwner !!}</div>
+      {{-- <div class="species" class="small"> --}}
+      {{-- {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!} --}}
+      {{-- </div> --}}
       {{-- <div class="rarity" class="small">
         {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
       </div> --}}
@@ -41,7 +40,7 @@
       <p>There is no featured featured.</p>
     @endif
   </div>
-  </div>
+</div>
 <!--
   <div class="flex">
     <div id="{{ strtolower($featured->slug) }}"
@@ -66,8 +65,8 @@
       >
         <a href="{{ $featured->url }}" class="">
           @if (!$featured->is_visible)
-            <i class="fas fa-eye-slash"></i>
-          @endif
+<i class="fas fa-eye-slash"></i>
+@endif
           {!! $featured->warnings !!}
           {{ Illuminate\Support\Str::limit($featured->nameFallback, 20, $end = '...') }}
         </a>

@@ -705,7 +705,7 @@ body {
   padding: 0;
 }
 .app a, .app .a {
-  color: var(--purple-clr_500);
+  color: var(--purple-clr_600);
   text-decoration: none;
 }
 .app a:hover, .app .a:hover {
@@ -1624,14 +1624,14 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 .daily.inactive {
-  border-left: 2px solid var(--black);
+  border: 2px solid var(--purple-clr_700);
   background-color: #988aa8;
 }
 .daily.inactive header h5 {
   color: var(--white);
 }
 .daily.inactive header .fa {
-  color: var(--danger);
+  color: rgb(183, 51, 86);
 }
 .daily.inactive .prize .prize-box {
   filter: grayscale(1);
@@ -1929,7 +1929,7 @@ body {
   display: grid;
   place-content: center;
   place-items: center;
-  grid-template: "thumb" auto "name " auto "owner" auto "species " auto "rarity " auto/max-content;
+  grid-template: "thumb" auto "name " auto "slug " auto "owner" auto "species " auto "rarity " auto/max-content;
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
@@ -1937,6 +1937,9 @@ body {
           backdrop-filter: saturate(200%) blur(5px);
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 0 0 15px 15px;
+}
+.featured-character .sidebar-section .slug {
+  grid-area: slug;
 }
 .featured-character .sidebar-section .thumb {
   grid-area: thumb;
@@ -2029,6 +2032,13 @@ body {
 }
 .featured-character .sidebar-section .name {
   grid-area: name;
+  font-weight: 600;
+  font-family: "Sour Gummy", sans-serif;
+  font-size: 1.7em;
+  text-transform: none;
+}
+.featured-character .sidebar-section .name:hover {
+  color: var(--teal-clr_500);
 }
 .featured-character .sidebar-section .display-user {
   grid-area: owner;

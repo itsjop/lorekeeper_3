@@ -127,7 +127,10 @@
   {{-- Pets --}}
   <div class="card">
     <div class="flex jc-between ai-end">
-      <h5>Pets</h5>
+      <h3 style="margin: 0 0 10px 10px;">
+        <i class="fas fa-dog"></i>
+        Pets
+      </h3>
       <a href="{{ $character->url . '/pets' }}" class="btn btn-outline-info p-0 px-2 btn-sm">
         View all Pets
         <i class="fas fa-caret-right"></i>
@@ -159,7 +162,10 @@
   {{-- Info --}}
   <div class="card character-bio">
     <div>
-      <h5>Profile</h5>
+      <h3 style="margin: 0 0 10px 10px;">
+        <i class="fas fa-star"></i>
+        Profile
+      </h3>
     </div>
     @if ($character->profile->parsed_text)
       <div class="card mb-3">

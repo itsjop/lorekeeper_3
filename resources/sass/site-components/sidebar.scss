@@ -285,12 +285,14 @@
     grid-template:
       'thumb' auto
       'name ' auto
+      'slug ' auto
       'owner' auto
       'species ' auto
       'rarity ' auto
       / max-content;
     @include body-bg;
     border-radius: 0 0 15px 15px;
+    .slug {grid-area: slug;}
     .thumb {
       grid-area: thumb;
       display: grid;
@@ -387,6 +389,13 @@
 
     .name {
       grid-area: name;
+      font-weight: 600;
+      font-family: 'Sour Gummy', sans-serif;
+      font-size: 1.7em;
+      text-transform: none;
+      &:hover{
+        color:var(--teal-clr_500);
+      }
     }
     .display-user {
       grid-area: owner;
