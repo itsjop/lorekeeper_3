@@ -370,12 +370,6 @@ class ItemController extends Controller {
    */
   public function getAddItemTag(ItemService $service, $id) {
     $item = Item::find($id);
-    // dd(
-    //   $item,
-    //   $service->getItemTags(),
-    //   $item->tags()->pluck('tag')->toArray(),
-    //   array_diff($service->getItemTags(), $item->tags()->pluck('tag')->toArray())
-    // );
     return view('admin.items.add_tag', [
       'item' => $item,
       'tags' => array_diff($service->getItemTags(), $item->tags()->pluck('tag')->toArray()),

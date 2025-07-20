@@ -80,21 +80,6 @@ class GalleryManager extends Service {
       if (isset($data['slug'])) {
         $characters = Character::myo(0)->visible()->whereIn('slug', $data['slug'])->get();
         if (count($characters) != count($data['slug'])) {
-          // dd(
-          //   $data,
-          //   'collaborators',
-          //   $data['collaborator_id'],
-          //   $collaborators,
-          //   'participants',
-          //   $data['participant_id'],
-          //   $participants,
-          //   'characters',
-          //   $data['slug'],
-          //   $characters,
-          //   'char count',
-          //   count($characters),
-          //   count($data['slug'])
-          // );
           throw new \Exception('One or more of the selected characters does not exist, or you have entered a duplicate.');
         }
       } else {

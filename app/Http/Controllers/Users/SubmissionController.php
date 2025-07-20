@@ -69,11 +69,11 @@ class SubmissionController extends Controller {
    */
   public function getSubmission($id) {
     $submission = Submission::viewable(Auth::user())->where('id', $id)->whereNotNull('prompt_id')->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     $inventory = isset($submission->data['user']) ? parseAssetData($submission->data['user']) : null;
     if (!$submission) {
       abort(404);
     }
-
     return view('home.submission', [
       'submission' => $submission,
       'user'       => $submission->user,
@@ -143,6 +143,7 @@ class SubmissionController extends Controller {
     $closed = !Settings::get('is_prompts_open');
     $inventory = UserItem::with('item')->whereNull('deleted_at')->where('count', '>', '0')->where('user_id', Auth::user()->id)->get();
     $submission = Submission::where('id', $id)->where('status', 'Draft')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }
@@ -313,6 +314,7 @@ class SubmissionController extends Controller {
    */
   public function postEditSubmission(Request $request, SubmissionManager $service, $id, $submit = false) {
     $submission = Submission::where('id', $id)->where('status', 'Draft')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }
@@ -381,6 +383,7 @@ class SubmissionController extends Controller {
    */
   public function postDeleteSubmission(Request $request, SubmissionManager $service, $id) {
     $submission = Submission::where('id', $id)->where('status', 'Draft')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }
@@ -408,6 +411,7 @@ class SubmissionController extends Controller {
    */
   public function postCancelSubmission(Request $request, SubmissionManager $service, $id) {
     $submission = Submission::where('id', $id)->where('status', 'Pending')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }
@@ -460,11 +464,12 @@ class SubmissionController extends Controller {
    */
   public function getClaim($id) {
     $submission = Submission::viewable(Auth::user())->where('id', $id)->whereNull('prompt_id')->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     $inventory = isset($submission->data['user']) ? parseAssetData($submission->data['user']) : null;
     if (!$submission) {
       abort(404);
     }
-
+    $submission->data = json_decode($submission->data);
     return view('home.submission', [
       'submission' => $submission,
       'user'       => $submission->user,
@@ -516,6 +521,7 @@ class SubmissionController extends Controller {
     $closed = !Settings::get('is_claims_open');
     $inventory = UserItem::with('item')->whereNull('deleted_at')->where('count', '>', '0')->where('user_id', Auth::user()->id)->get();
     $submission = Submission::where('id', $id)->where('status', 'Draft')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }
@@ -583,6 +589,7 @@ class SubmissionController extends Controller {
    */
   public function postEditClaim(Request $request, SubmissionManager $service, $id, $submit = false) {
     $submission = Submission::where('id', $id)->where('status', 'Draft')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }
@@ -615,6 +622,7 @@ class SubmissionController extends Controller {
    */
   public function postDeleteClaim(Request $request, SubmissionManager $service, $id) {
     $submission = Submission::where('id', $id)->where('status', 'Draft')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }
@@ -642,6 +650,7 @@ class SubmissionController extends Controller {
    */
   public function postCancelClaim(Request $request, SubmissionManager $service, $id) {
     $submission = Submission::where('id', $id)->where('status', 'Pending')->where('user_id', Auth::user()->id)->first();
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) {
       abort(404);
     }

@@ -198,7 +198,6 @@ class GalleryController extends Controller {
         abort(404);
       }
     }
-
     return view('galleries.submission', [
       'submission'   => $submission,
       'galleryPage'  => true,

@@ -767,6 +767,11 @@ body {
   font-size: 1rem;
   color: #40258b;
 }
+.app .card-basic .card-left-image {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem 15px;
+}
 
 /* General Styling */
 #app {
