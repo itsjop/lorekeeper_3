@@ -28,6 +28,7 @@
     grid-template:
       'logo' 20vh
       'nav' max-content
+      'char' max-content
       'main' auto
       'footer' max-content
       / auto;
@@ -120,6 +121,9 @@
           'footer' max-content
           / 100%;
       }
+    }
+    #selected-character {
+      display: none;
     }
   }
 }

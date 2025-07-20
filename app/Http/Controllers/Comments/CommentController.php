@@ -344,6 +344,7 @@ class CommentController extends Controller {
       'allow_dislikes' => $request->input('allow_dislikes'),
       'url'            => $request->input('url'),
       'page'           => $request->input('page'),
+      'model'           => $model,
     ]);
   }
 }

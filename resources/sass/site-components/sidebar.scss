@@ -469,4 +469,10 @@
   grid-area: char;
   position: relative;
   z-index: 2;
+  .profile-assets-content {
+    display: grid;
+    img {
+      max-width: 100%;
+    }
+  }
 }

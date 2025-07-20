@@ -31,10 +31,10 @@
               'sort',
               [
                   'newest' => 'Newest First',
-                  'oldest' => 'Oldest First',
+                  'oldest' => 'Oldest First'
               ],
               Request::get($commentType . '-sort') ?: 'newest',
-              ['class' => 'form-control', 'id' => $commentType . '-sort'],
+              ['class' => 'form-control', 'id' => $commentType . '-sort']
           ) !!}
         </div>
         <div class="form-group ml-3 mb-3">
@@ -45,10 +45,10 @@
                   10 => '10 Per Page',
                   25 => '25 Per Page',
                   50 => '50 Per Page',
-                  100 => '100 Per Page',
+                  100 => '100 Per Page'
               ],
               Request::get($commentType . '-perPage') ?: 5,
-              ['class' => 'form-control', 'id' => $commentType . '-perPage'],
+              ['class' => 'form-control', 'id' => $commentType . '-perPage']
           ) !!}
         </div>
       </div>
@@ -78,7 +78,11 @@
       // Remove parent Comments from comments.
       $comments = $comments->where('child_id', '!=', '');
 
-      $grouped_comments = new \Illuminate\Pagination\LengthAwarePaginator($slicedParentComments->merge($comments)->groupBy('child_id'), $parentComments->count(), $perPage);
+      $grouped_comments = new \Illuminate\Pagination\LengthAwarePaginator(
+          $slicedParentComments->merge($comments)->groupBy('child_id'),
+          $parentComments->count(),
+          $perPage
+      );
 
       $grouped_comments->withPath(request()->url());
   } else {
@@ -94,7 +98,7 @@
           'grouped_comments' => $grouped_comments,
           'limit' => 0,
           'compact' => $comment->type == 'Staff-Staff' ? true : false,
-          'allow_dislikes' => isset($allow_dislikes) ? $allow_dislikes : false,
+          'allow_dislikes' => isset($allow_dislikes) ? $allow_dislikes : false
       ])
     @endforeach
   @endif
@@ -111,7 +115,7 @@
 
 @auth
   @include('comments._form', [
-      'compact' => isset($type) && $type == 'Staff-Staff' && config('lorekeeper.settings.wysiwyg_comments') ? true : false,
+      'compact' => isset($type) && $type == 'Staff-Staff' && config('lorekeeper.settings.wysiwyg_comments') ? true : false
   ])
 @else
   <div class="card mt-3">

@@ -23,16 +23,16 @@ class InventoryManager extends Service {
     |
     */
 
-    /**
-     * Grants an item to multiple users.
-     *
-     * @param array                 $data
-     * @param \App\Models\User\User $staff
-     *
-     * @return bool
-     */
-    public function grantItems($data, $staff) {
-        DB::beginTransaction();
+  /**
+   * Grants an item to multiple users.
+   *
+   * @param array                 $data
+   * @param \App\Models\User\User $staff
+   *
+   * @return bool
+   */
+  public function grantItems($data, $staff) {
+    DB::beginTransaction();
 
     try {
       foreach ($data['quantities'] as $q) {
@@ -106,17 +106,17 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Grants an item to a character.
-     *
-     * @param array                           $data
-     * @param \App\Models\Character\Character $character
-     * @param \App\Models\User\User           $staff
-     *
-     * @return bool
-     */
-    public function grantCharacterItems($data, $character, $staff) {
-        DB::beginTransaction();
+  /**
+   * Grants an item to a character.
+   *
+   * @param array                           $data
+   * @param \App\Models\Character\Character $character
+   * @param \App\Models\User\User           $staff
+   *
+   * @return bool
+   */
+  public function grantCharacterItems($data, $character, $staff) {
+    DB::beginTransaction();
 
     try {
       if (!$character) {
@@ -176,19 +176,19 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Transfers items between a user and character.
-     *
-     * @param \App\Models\Character\Character|\App\Models\User\User         $sender
-     * @param \App\Models\Character\Character|\App\Models\User\User         $recipient
-     * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
-     * @param int                                                           $quantities
-     * @param mixed                                                         $user
-     *
-     * @return bool
-     */
-    public function transferCharacterStack($sender, $recipient, $stacks, $quantities, $user) {
-        DB::beginTransaction();
+  /**
+   * Transfers items between a user and character.
+   *
+   * @param \App\Models\Character\Character|\App\Models\User\User         $sender
+   * @param \App\Models\Character\Character|\App\Models\User\User         $recipient
+   * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
+   * @param int                                                           $quantities
+   * @param mixed                                                         $user
+   *
+   * @return bool
+   */
+  public function transferCharacterStack($sender, $recipient, $stacks, $quantities, $user) {
+    DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {
@@ -294,18 +294,18 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Transfers items between user stacks.
-     *
-     * @param \App\Models\User\User     $sender
-     * @param \App\Models\User\User     $recipient
-     * @param \App\Models\User\UserItem $stacks
-     * @param int                       $quantities
-     *
-     * @return bool
-     */
-    public function transferStack($sender, $recipient, $stacks, $quantities) {
-        DB::beginTransaction();
+  /**
+   * Transfers items between user stacks.
+   *
+   * @param \App\Models\User\User     $sender
+   * @param \App\Models\User\User     $recipient
+   * @param \App\Models\User\UserItem $stacks
+   * @param int                       $quantities
+   *
+   * @return bool
+   */
+  public function transferStack($sender, $recipient, $stacks, $quantities) {
+    DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {
@@ -351,7 +351,7 @@ class InventoryManager extends Service {
             $stack->user_id == $sender->id ? 'User Transfer' : 'Staff Transfer',
             [
               'data' =>
-                $stack->user_id != $sender->id ? 'Transferred by ' . $sender->displayName : ''
+              $stack->user_id != $sender->id ? 'Transferred by ' . $sender->displayName : ''
             ],
             $stack,
             $quantity
@@ -383,18 +383,18 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Deletes items from stack.
-     *
-     * @param \App\Models\Character\Character|\App\Models\User\User         $owner
-     * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
-     * @param int                                                           $quantities
-     * @param mixed                                                         $user
-     *
-     * @return bool
-     */
-    public function deleteStack($owner, $stacks, $quantities, $user) {
-        DB::beginTransaction();
+  /**
+   * Deletes items from stack.
+   *
+   * @param \App\Models\Character\Character|\App\Models\User\User         $owner
+   * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
+   * @param int                                                           $quantities
+   * @param mixed                                                         $user
+   *
+   * @return bool
+   */
+  public function deleteStack($owner, $stacks, $quantities, $user) {
+    DB::beginTransaction();
 
     try {
       if ($owner->logType == 'User') {
@@ -460,7 +460,7 @@ class InventoryManager extends Service {
               $stack->character->user_id == $user->id ? 'User Deleted' : 'Staff Deleted',
               [
                 'data' =>
-                  $stack->character->user_id != $user->id ? 'Deleted by ' . $user->displayName : ''
+                $stack->character->user_id != $user->id ? 'Deleted by ' . $user->displayName : ''
               ],
               $stack,
               $quantity
@@ -492,17 +492,17 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Sells items from stack.
-     *
-     * @param \App\Models\User\User     $user
-     * @param \App\Models\User\UserItem $stacks
-     * @param int                       $quantities
-     *
-     * @return bool
-     */
-    public function resellStack($user, $stacks, $quantities) {
-        DB::beginTransaction();
+  /**
+   * Sells items from stack.
+   *
+   * @param \App\Models\User\User     $user
+   * @param \App\Models\User\UserItem $stacks
+   * @param int                       $quantities
+   *
+   * @return bool
+   */
+  public function resellStack($user, $stacks, $quantities) {
+    DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {
@@ -654,20 +654,20 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Credits an item to a user or character.
-     *
-     * @param \App\Models\Character\Character|\App\Models\User\User $sender
-     * @param \App\Models\Character\Character|\App\Models\User\User $recipient
-     * @param string                                                $type
-     * @param array                                                 $data
-     * @param \App\Models\Item\Item                                 $item
-     * @param int                                                   $quantity
-     *
-     * @return bool
-     */
-    public function creditItem($sender, $recipient, $type, $data, $item, $quantity) {
-        DB::beginTransaction();
+  /**
+   * Credits an item to a user or character.
+   *
+   * @param \App\Models\Character\Character|\App\Models\User\User $sender
+   * @param \App\Models\Character\Character|\App\Models\User\User $recipient
+   * @param string                                                $type
+   * @param array                                                 $data
+   * @param \App\Models\Item\Item                                 $item
+   * @param int                                                   $quantity
+   *
+   * @return bool
+   */
+  public function creditItem($sender, $recipient, $type, $data, $item, $quantity) {
+    DB::beginTransaction();
 
     try {
       $encoded_data = \json_encode($data);
@@ -679,24 +679,24 @@ class InventoryManager extends Service {
           ['data', '=', $encoded_data]
         ])->first();
 
-                if (!$recipient_stack) {
-                    $recipient_stack = UserItem::create(['user_id' => $recipient->id, 'item_id' => $item->id, 'data' => $data]);
-                }
-                $recipient_stack->count += $quantity;
-                $recipient_stack->save();
-            } else {
-                $recipient_stack = CharacterItem::where([
-                    ['character_id', '=', $recipient->id],
-                    ['item_id', '=', $item->id],
-                    ['data', '=', $data],
-                ])->first();
+        if (!$recipient_stack) {
+          $recipient_stack = UserItem::create(['user_id' => $recipient->id, 'item_id' => $item->id, 'data' => $data]);
+        }
+        $recipient_stack->count += $quantity;
+        $recipient_stack->save();
+      } else {
+        $recipient_stack = CharacterItem::where([
+          ['character_id', '=', $recipient->id],
+          ['item_id', '=', $item->id],
+          ['data', '=', $data],
+        ])->first();
 
-                if (!$recipient_stack) {
-                    $recipient_stack = CharacterItem::create(['character_id' => $recipient->id, 'item_id' => $item->id, 'data' => $data]);
-                }
-                $recipient_stack->count += $quantity;
-                $recipient_stack->save();
-            }
+        if (!$recipient_stack) {
+          $recipient_stack = CharacterItem::create(['character_id' => $recipient->id, 'item_id' => $item->id, 'data' => $data]);
+        }
+        $recipient_stack->count += $quantity;
+        $recipient_stack->save();
+      }
 
       if (!$item->is_released) {
         $item->update([
@@ -729,20 +729,20 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Moves items from one user or character stack to another.
-     *
-     * @param \App\Models\Character\Character|\App\Models\User\User $sender
-     * @param \App\Models\Character\Character|\App\Models\User\User $recipient
-     * @param string                                                $type
-     * @param array                                                 $data
-     * @param mixed                                                 $stack
-     * @param mixed                                                 $quantity
-     *
-     * @return bool
-     */
-    public function moveStack($sender, $recipient, $type, $data, $stack, $quantity) {
-        DB::beginTransaction();
+  /**
+   * Moves items from one user or character stack to another.
+   *
+   * @param \App\Models\Character\Character|\App\Models\User\User $sender
+   * @param \App\Models\Character\Character|\App\Models\User\User $recipient
+   * @param string                                                $type
+   * @param array                                                 $data
+   * @param mixed                                                 $stack
+   * @param mixed                                                 $quantity
+   *
+   * @return bool
+   */
+  public function moveStack($sender, $recipient, $type, $data, $stack, $quantity) {
+    DB::beginTransaction();
 
     try {
       $recipient_stack = UserItem::where([
@@ -789,19 +789,19 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Debits an item from a user or character.
-     *
-     * @param \App\Models\Character\Character|\App\Models\User\User $owner
-     * @param string                                                $type
-     * @param array                                                 $data
-     * @param \App\Models\Item\UserItem                             $stack
-     * @param mixed                                                 $quantity
-     *
-     * @return bool
-     */
-    public function debitStack($owner, $type, $data, $stack, $quantity) {
-        DB::beginTransaction();
+  /**
+   * Debits an item from a user or character.
+   *
+   * @param \App\Models\Character\Character|\App\Models\User\User $owner
+   * @param string                                                $type
+   * @param array                                                 $data
+   * @param \App\Models\Item\UserItem                             $stack
+   * @param mixed                                                 $quantity
+   *
+   * @return bool
+   */
+  public function debitStack($owner, $type, $data, $stack, $quantity) {
+    DB::beginTransaction();
 
     try {
       $stack->count -= $quantity;
@@ -832,18 +832,18 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Names an item stack.
-     *
-     * @param \App\Models\Character\Character|\App\Models\User\User         $owner
-     * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
-     * @param mixed                                                         $name
-     * @param mixed                                                         $user
-     *
-     * @return bool
-     */
-    public function nameStack($owner, $stacks, $name, $user) {
-        DB::beginTransaction();
+  /**
+   * Names an item stack.
+   *
+   * @param \App\Models\Character\Character|\App\Models\User\User         $owner
+   * @param \App\Models\Character\CharacterItem|\App\Models\User\UserItem $stacks
+   * @param mixed                                                         $name
+   * @param mixed                                                         $user
+   *
+   * @return bool
+   */
+  public function nameStack($owner, $stacks, $name, $user) {
+    DB::beginTransaction();
 
     try {
       foreach ($stacks as $key => $stack) {
@@ -871,107 +871,106 @@ class InventoryManager extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
-     * Creates an inventory log.
-     *
-     * @param  int     $senderId
-     * @param  string  $senderType
-     * @param  int     $recipientId
-     * @param  string  $recipientType
-     * @param  int     $stackId
-     * @param  string  $type
-     * @param  string  $data
-     * @param  int     $quantity
-     * @return  int
-     */
-    public function createLog($senderId, $senderType, $recipientId, $recipientType, $stackId, $type, $data, $itemId, $quantity)
-    {
+  /**
+   * Creates an inventory log.
+   *
+   * @param  int     $senderId
+   * @param  string  $senderType
+   * @param  int     $recipientId
+   * @param  string  $recipientType
+   * @param  int     $stackId
+   * @param  string  $type
+   * @param  string  $data
+   * @param  int     $quantity
+   * @return  int
+   */
+  public function createLog($senderId, $senderType, $recipientId, $recipientType, $stackId, $type, $data, $itemId, $quantity) {
 
-        return DB::table('items_log')->insert(
-            [
-                'sender_id' => $senderId,
-                'sender_type' => $senderType,
-                'recipient_id' => $recipientId,
-                'recipient_type' => $recipientType,
-                'stack_id' => $stackId,
-                'log' => $type . ($data ? ' (' . $data . ')' : ''),
-                'log_type' => $type,
-                'data' => $data, // this should be just a string
-                'item_id' => $itemId,
-                'quantity' => $quantity,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]
-        );
-    }
+    return DB::table('items_log')->insert(
+      [
+        'sender_id' => $senderId,
+        'sender_type' => $senderType,
+        'recipient_id' => $recipientId,
+        'recipient_type' => $recipientType,
+        'stack_id' => $stackId,
+        'log' => $type . ($data ? ' (' . $data . ')' : ''),
+        'log_type' => $type,
+        'data' => $data, // this should be just a string
+        'item_id' => $itemId,
+        'quantity' => $quantity,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+      ]
+    );
+  }
 
-    /**
-     * Consolidates a user's item stacks.
-     *
-     * @param User $user
-     *
-     * @return bool
-     */
-    public function consolidateInventory($user) {
-        DB::beginTransaction();
+  /**
+   * Consolidates a user's item stacks.
+   *
+   * @param User $user
+   *
+   * @return bool
+   */
+  public function consolidateInventory($user) {
+    DB::beginTransaction();
 
-        try {
-            if (!$user->hasAlias) {
-                throw new \Exception('You need to have a linked social media account before you can perform this action.');
+    try {
+      if (!$user->hasAlias) {
+        throw new \Exception('You need to have a linked social media account before you can perform this action.');
+      }
+
+      // Making a very large assumption here that there aren't going to be a huge number
+      // of items to process, due to the nature of ARPGs.
+
+      // Group owned items by ID.
+      // We'll exclude stacks that are partially contained in trades, updates and submissions.
+      $items = UserItem::where('user_id', $user->id)->whereNull('deleted_at')
+        ->where(function ($query) {
+          $query->where('trade_count', 0)->orWhereNull('trade_count');
+        })->where(function ($query) {
+          $query->where('update_count', 0)->orWhereNull('update_count');
+        })->where(function ($query) {
+          $query->where('submission_count', 0)->orWhereNull('submission_count');
+        })->get()->groupBy('item_id');
+
+      foreach ($items as $itemId => $itemVariations) {
+        $variations = [];
+
+        // We'll loop over the user items to obtain the first of each variant of item, to update with the final count.
+        // Variations are distinguished by having the same data field.
+        foreach ($itemVariations as $typeVariation) {
+          $isNew = true;
+          foreach ($variations as $foundVariation) {
+            // Found an existing match.
+            // The count can be added to the existing variation, and this row can be deleted.
+            // Just for the sake of reducing confusion when looking in the DB,
+            // We'll also reduce its count to 0 before deletion.
+            if ($foundVariation->data == $typeVariation->data) {
+              $isNew = false;
+              $foundVariation->count += $typeVariation->count;
+              $typeVariation->count = 0;
+              $typeVariation->save();
+              $typeVariation->delete();
+              break;
             }
-
-            // Making a very large assumption here that there aren't going to be a huge number
-            // of items to process, due to the nature of ARPGs.
-
-            // Group owned items by ID.
-            // We'll exclude stacks that are partially contained in trades, updates and submissions.
-            $items = UserItem::where('user_id', $user->id)->whereNull('deleted_at')
-                ->where(function ($query) {
-                    $query->where('trade_count', 0)->orWhereNull('trade_count');
-                })->where(function ($query) {
-                    $query->where('update_count', 0)->orWhereNull('update_count');
-                })->where(function ($query) {
-                    $query->where('submission_count', 0)->orWhereNull('submission_count');
-                })->get()->groupBy('item_id');
-
-            foreach ($items as $itemId => $itemVariations) {
-                $variations = [];
-
-                // We'll loop over the user items to obtain the first of each variant of item, to update with the final count.
-                // Variations are distinguished by having the same data field.
-                foreach ($itemVariations as $typeVariation) {
-                    $isNew = true;
-                    foreach ($variations as $foundVariation) {
-                        // Found an existing match.
-                        // The count can be added to the existing variation, and this row can be deleted.
-                        // Just for the sake of reducing confusion when looking in the DB,
-                        // We'll also reduce its count to 0 before deletion.
-                        if ($foundVariation->data == $typeVariation->data) {
-                            $isNew = false;
-                            $foundVariation->count += $typeVariation->count;
-                            $typeVariation->count = 0;
-                            $typeVariation->save();
-                            $typeVariation->delete();
-                            break;
-                        }
-                    }
-                    // No match, add a new variation
-                    if ($isNew) {
-                        $variations[] = $typeVariation;
-                    }
-                }
-
-                // At the end, save the rows in the variations array
-                foreach ($variations as $variation) {
-                    $variation->save();
-                }
-            }
-
-            return $this->commitReturn(true);
-        } catch (\Exception $e) {
-            $this->setError('error', $e->getMessage());
+          }
+          // No match, add a new variation
+          if ($isNew) {
+            $variations[] = $typeVariation;
+          }
         }
 
-        return $this->rollbackReturn(false);
+        // At the end, save the rows in the variations array
+        foreach ($variations as $variation) {
+          $variation->save();
+        }
+      }
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
+
+    return $this->rollbackReturn(false);
+  }
 }

@@ -167,7 +167,6 @@
       $('.inventory-stack').on('click', function(e) {
         e.preventDefault();
         var $parent = $(this).parent();
-        // console.log('parent', $parent.data('id'), $parent.data('name'))
         loadModal("{{ url('items') }}/" + $parent.data('id') + '/', $parent.data('name'));
       });
     });

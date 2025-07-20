@@ -98,12 +98,18 @@ class InventoryController extends Controller {
     $stack = UserItem::where([['user_id', $first_instance->user_id], ['item_id', $first_instance->item_id], ['count', '>', 0]])->get();
     $item = Item::where('id', $first_instance->item_id)->first();
     $shops = UserShop::where('user_id', '=', Auth::user()->id)->pluck('name', 'id');
-
     return view('home._inventory_stack', [
       'stack'            => $stack,
       'item'             => $item,
       'user'             => Auth::user(),
-      'userOptions'      => ['' => 'Select User'] + User::visible()->where('id', '!=', $first_instance ? $first_instance->user_id : 0)->orderBy('name')->get()->pluck('verified_name', 'id')->toArray(),
+      'userOptions'      =>
+      ['' => 'Select User'] + User::visible()->where(
+        'id',
+        '!=',
+        $first_instance
+          ? $first_instance->user_id
+          : 0
+      )->orderBy('name')->get()->pluck('verified_name', 'id')->toArray(),
       'readOnly'         => $readOnly,
       'characterOptions' => Character::visible()->myo(0)->where('user_id', optional(Auth::user())->id)->orderBy('sort', 'DESC')->get()->pluck('fullName', 'id')->toArray(),
       'canTransfer'      => Settings::get('can_transfer_items_directly'),
@@ -122,7 +128,7 @@ class InventoryController extends Controller {
     $first_instance = CharacterItem::withTrashed()->where('id', $id)->first();
     $stack = CharacterItem::where([['character_id', $first_instance->character_id], ['item_id', $first_instance->item_id], ['count', '>', 0]])->get();
     $item = Item::where('id', $first_instance->item_id)->first();
-
+    dd('$first_instance', $first_instance);
     $character = $first_instance->character;
     isset($stack->first()->character->user_id) ?
       $ownerId = $stack->first()->character->user_id : null;
@@ -155,6 +161,7 @@ class InventoryController extends Controller {
     if (!$request->quantities) {
       flash('Quantities not set.')->error();
     }
+    dd('$request->action', $request->action);
     if ($request->ids && $request->quantities) {
       switch ($request->action) {
         case 'transfer':

@@ -1,13 +1,11 @@
-<div class="card">
-  <div class="card-body">
-
-    <h3 class="text-center">[your selected character coming soon!]</h3>
+@if (Auth::user())
+  <div class="card">
+    <div class="card-body">
+      @include('widgets._selected_character', [
+          'character' => Auth::user()->settings->selectedCharacter,
+          'user' => Auth::user(),
+          'fullImage' => true
+      ])
+    </div>
   </div>
-  {{--
-  @include('widgets._selected_character', [
-    'character' => $user->settings->selectedCharacter,
-    'user' => $user,
-    'fullImage' => true
-    ]) --}}
-
-</div>
+@endif
