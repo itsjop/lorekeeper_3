@@ -94,7 +94,6 @@ class InventoryController extends Controller {
    */
   public function getStack(Request $request, $id) {
     $first_instance = UserItem::withTrashed()->where('id', $id)->first();
-    // dd($id, '$first_instance', $first_instance, UserItem::withTrashed(), UserItem::withTrashed()->where('id', $id));
     $readOnly = $request->get('read_only') ?: ((Auth::check() && $first_instance && ($first_instance->user_id == Auth::user()->id || Auth::user()->hasPower('edit_inventories'))) ? 0 : 1);
     $stack = UserItem::where([['user_id', $first_instance->user_id], ['item_id', $first_instance->item_id], ['count', '>', 0]])->get();
     $item = Item::where('id', $first_instance->item_id)->first();
