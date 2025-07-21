@@ -57,6 +57,19 @@
     color: var(--purple-clr_900);
     font-weight: 500;
   }
+  fieldset {
+    border: 2px solid var(--clr_raw_purple-500);
+    border-radius: 15px;
+    padding: 15px;
+    legend {
+      margin: -10px 10px;
+      padding: 3px;
+      width: max-content;
+      text-transform: lowercase;
+      font-family: 'Itim', sans-serif;
+      transform: translateY(-10%);
+    }
+  }
   // -- MISC -- //
   .alert {
     box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
