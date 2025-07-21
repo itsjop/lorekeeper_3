@@ -1517,7 +1517,7 @@ body {
 }
 .home-dashboard .bubblebox .bubble .gallery {
   width: 100%;
-  height: min(400px, 30vh);
+  height: 100%;
   background: repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, transparent 2px, transparent 15px), linear-gradient(to bottom left, #bfeeff, #e6d9ff, #ffdde9, #fff1d5);
   border-radius: 15px;
   border: 2px white solid;
