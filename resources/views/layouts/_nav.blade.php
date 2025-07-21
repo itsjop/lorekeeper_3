@@ -173,7 +173,7 @@
           </div>
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">Character Design</h2>
-            <a class="dt-nav-item" href="{{ url('info/design') }}">
+            <a class="dt-nav-item strike" href="{{ url('info/design') }}">
               <i class="fas fa-brush"></i>Somnivore Design Guide</a>
           </div>
         </div>
