@@ -229,10 +229,12 @@
         grid-area: img;
         width: 100%;
         display: flex;
+        place-content: center;
         img {
           max-width: 100%;
           align-self: start;
           aspect-ratio: 1/1;
+          padding: 10px;
         }
       }
       .title {
