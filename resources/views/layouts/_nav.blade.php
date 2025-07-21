@@ -1,5 +1,13 @@
 <nav class="navbar navbar-expand-md" id="header-nav">
-  <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+  <button
+    class="navbar-toggler collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="{{ __('Toggle navigation') }}"
+  >
     <span class="navbar-toggler-icon">
       <span class="line"></span>
       <span class="line"></span>
@@ -18,7 +26,16 @@
     <!-- Left Side Of Navbar -->
     <ul id="site-navbar" class=" navbar-nav">
       <li class="nav-item dropdown">
-        <div id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="inventoryDropdown"
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Updates
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -34,7 +51,16 @@
       </li>
       @if (Auth::check())
         <li class="nav-item dropdown">
-          <div id="inventoryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          <div
+            id="inventoryDropdown"
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            v-pre
+          >
             Account
           </div>
           <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -72,28 +98,37 @@
         </li>
       @endif
       <li class="nav-item dropdown">
-        <div id="queueDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="queueDropdown"
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Info
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <h2 class="dt-nav-header _first">Species</h2>
-            <a class="dt-nav-item" href="{{ url('info/about') }}">
+            <a class="dt-nav-item strike" href="{{ url('info/about') }}">
               <i class="fas fa-star"></i> Somnivores </a>
-            <a class="dt-nav-item" href="{{ url('⁉️dreams') }}">
+            <a class="dt-nav-item strike" href="{{ url('⁉️dreams') }}">
               <i class="fas fa-cloud"></i> Dreams & Palates </a>
             <a class="dt-nav-item" href="{{ url('world/species/1/traits') }}">
               <i class="fas fa-scroll"></i> Somnivore Traits </a>
           </div>
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">World & Lore</h2>
-            <a class="dt-nav-item" href="{{ url('lore') }}">
+            <a class="dt-nav-item strike" href="{{ url('lore') }}">
               <i class="fas fa-book"></i> Lore Index </a>
-            <a class="dt-nav-item" href="{{ url('world/locations') }}">
+            <a class="dt-nav-item strike" href="{{ url('world/locations') }}">
               <i class="fas fa-map-location-dot"></i> Reverie Locations </a>
           </div>
 
-            <div class="dt-nav-group">
+          <div class="dt-nav-group">
             <h2 class="dt-nav-header">Databases</h2>
             {{-- <a class="dt-nav-item" href="{{ url('world/pets') }}">
               <i class="fas fa-cat"></i> Companions & Trinkets </a> --}}
@@ -103,46 +138,64 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <div id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="browseDropdown"
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Guides
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <h2 class="dt-nav-header _first">Gameplay</h2>
-            <a class="dt-nav-item" href="{{ url('/guide/beginner') }}">
+            <a class="dt-nav-item strike" href="{{ url('/guide/beginner') }}">
               <i class="fas fa-book"></i> Beginners Guide </a>
-            <a class="dt-nav-item" href="{{ url('guide/myo') }}">
+            <a class="dt-nav-item" href="{{ url('info/myo-submission') }}">
               <i class="fas fa-envelope"></i> MYO Submission </a>
-            <a class="dt-nav-item" href="{{ url('guide/prompts') }}">
-              <i class="fas fa-palette"></i> Prompt Submission </a>
-            <a class="dt-nav-item" href="{{ url('guide/currency') }}">
-              <i class="fas fa-coins"></i> Currency Guide </a>
+            <a class="dt-nav-item" href="{{ url('info/prompt-submission') }}">
+              <i class="fas fa-palette"></i>Gallery & Prompt Submission </a>
+            <a class="dt-nav-item" href="{{ url('info/art-rewards') }}">
+              <i class="fas fa-coins"></i> Currency & Art Rewards </a>
           </div>
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">How to Draw:</h2>
-            <a class="dt-nav-item" href="{{ url('guide/anatomy') }}">
-              <i class="fas fa-star"></i> Somnivore Anatomy </a>
-            <a class="dt-nav-item" href="{{ url('guide/essence') }}">
-              <i class="fas fa-cloud"></i> Dream Essence </a>
-            <a class="dt-nav-item" href="{{ url('guide/scenery') }}">
-              <i class="fas fa-cloud-moon"></i> Reverie Scenery </a>
+            <a class="dt-nav-item strike" href="{{ url('info/anatomy') }}">
+              <i class="fas fa-star"></i> Somnivore Anatomy</a>
+            <a class="dt-nav-item strike" href="{{ url('info/essence') }}">
+              <i class="fas fa-cloud"></i> Dream Essence</a>
+            <a class="dt-nav-item strike" href="{{ url('info/scenery') }}">
+              <i class="fas fa-cloud-moon"></i> Reverie Scenery</a>
           </div>
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">Character Design</h2>
-            <a class="dt-nav-item" href="{{ url('guide/design') }}">
-              <i class="fas fa-brush"></i> Somnivore Design Guide </a>
+            <a class="dt-nav-item" href="{{ url('info/design') }}">
+              <i class="fas fa-brush"></i>Somnivore Design Guide</a>
           </div>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <div id="loreDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="loreDropdown"
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Masterlist
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
             <a class="dt-nav-item" href="{{ url('sublist/npc') }}">
               <i class="fas fa-star"></i> NPCs </a>
-             <a class="dt-nav-item" href="{{ url('sublist/BAT') }}">
+            <a class="dt-nav-item" href="{{ url('sublist/BAT') }}">
               <i class="fas fa-star"></i> Official Somnivores </a>
             <a class="dt-nav-item" href="{{ url('sublist/MYO') }}">
               <i class="fas fa-star"></i> MYO Somnivores </a>
@@ -150,7 +203,16 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <div id="playDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="playDropdown"
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Play
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
@@ -179,24 +241,31 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <div id="communityDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <div
+          id="communityDropdown"
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
           Community
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="inventoryDropdown">
           <div class="dt-nav-group">
-            <a class="dt-nav-item" href="{{ url('____') }}">
-              <i class="fas fa-comments" style="cursor: alias;"></i>Discord</a>
+            <a class="dt-nav-item strike" href="{{ url('____') }}">
+              <i class="fas fa-comments strike" style="cursor: alias;"></i> Discord </a>
             <a class="dt-nav-item" href="{{ url('info/terms') }}">
               <i class="fas fa-circle-exclamation"></i>Rules & ToS</a>
             <hr>
-            <a class="dt-nav-item" href="{{ url('staff') }}">
-              <i class="fas fa-clipboard-user"></i>Staff</a>
             <a class="dt-nav-item" href="{{ url('users') }}">
               <i class="fas fa-user-group"></i>User List</a>
             <hr>
-            <a class="dt-nav-item" href="{{ url('forms/') }}">
-              <i class="fas fa-list-check"></i>Feedback</a>
-            <a class="dt-nav-item" href="{{ url('forms/') }}">
+            <a class="dt-nav-item strike" href="{{ url('forms/') }}">
+              <i class="fas fa-list-check strike"></i> Feedback </a>
+            <a class="dt-nav-item strike" href="{{ url('forms/') }}">
               <i class="fas fa-bug"></i>Bug Reports</a>
           </div>
         </div>
@@ -228,7 +297,16 @@
           </li>
         @endif
         <li class="nav-item dropdown">
-          <div id="browseDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          <div
+            id="browseDropdown"
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            v-pre
+          >
             Submit
           </div>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="browseDropdown">
@@ -243,7 +321,16 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <div id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ Auth::user()->url }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          <div
+            id="navbarDropdown"
+            class="nav-link dropdown-toggle"
+            href="{{ Auth::user()->url }}"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            v-pre
+          >
             {{ Auth::user()->name }} <span class="caret"></span>
           </div>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page" aria-labelledby="navbarDropdown">
@@ -256,10 +343,19 @@
                 <i class="fas fa-bookmark"></i> Bookmarks </a>
               <a class="dt-nav-item" href="{{ url('account/settings') }}">
                 <i class="fas fa-cog"></i> Settings </a>
-              <a class="dt-nav-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <a
+                class="dt-nav-item"
+                href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+              >
                 <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }} </a>
               </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              <form
+                id="logout-form"
+                action="{{ route('logout') }}"
+                method="POST"
+                style="display: none;"
+              >
                 @csrf
               </form>
             </div>

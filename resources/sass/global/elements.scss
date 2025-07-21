@@ -142,4 +142,12 @@
     margin: 0px auto 20px;
     box-shadow: 0 3px 8px #6f4a8b4a;
   }
+
+ .dt-nav-page .dt-nav-group .dt-nav-item.strike {
+    font-style: italic;
+    text-decoration: line-through;
+    color:rgb(70, 62, 74);
+    pointer-events: none;
+    background-color: #e2dee8;
+  }
 }
