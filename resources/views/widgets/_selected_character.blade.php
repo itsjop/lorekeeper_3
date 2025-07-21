@@ -1,12 +1,12 @@
 <div class="card h-100">
-  <div class="text-center">
+  <div class="card-body text-center">
     <h5 class="card-title">Selected Character</h5>
     <div class="profile-assets-content">
       @if ($character)
         <a href="{{ $character->url }}">
           <img
             src="{{ isset($fullImage) && $fullImage ? $character->image->thumbnailUrl : $character->image->imageUrl }}"
-            class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }}"
+            class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }} w-100"
             alt="{{ $character->fullName }}"
           />
         </a>

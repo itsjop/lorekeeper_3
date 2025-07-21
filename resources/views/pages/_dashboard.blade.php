@@ -3,8 +3,9 @@
   {{-- <div class="card mb-4 timestamp">
     <div class="card-body"> <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!} </div> </div> --}}
   <div class="bubblebox current-event">
-    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-heart"></i>
-      <span>Current Event</span>
+    <h2 class="flex gap-_5 ai-center">
+      <i class="fas fa-heart"></i>
+      Current Event
     </h2>
     <div class="bubble ">
       <img
@@ -23,8 +24,9 @@
     </div>
   </div>
   <div class="bubblebox dailies">
-    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-gifts"></i>
-      <span>Dailies</span>
+    <h2 class="flex gap-_5 ai-center">
+      <i class="fas fa-gifts"></i>
+      Dailies
     </h2>
     <div class="bubble jobs gap-_5">
       <div class="wishing-well">
@@ -48,8 +50,9 @@
     </div>
   </div>
   <div class="bubblebox newsfeed">
-    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-newspaper"></i>
-      <span>Newsfeed</span>
+    <h2 class="flex gap-_5 ai-center">
+      <i class="fas fa-newspaper"></i>
+      Newsfeed
     </h2>
     <div class="bubble">
       {{-- <div class="news-item">
@@ -64,8 +67,8 @@
     </div>
   </div>
   <div class="bubblebox sales">
-    <h2 class="flex gap-_5 ai-center"> <i class="fas fa-store"></i>
-      <span>Sales</span>
+    <h2 class="flex gap-_5 ai-center">
+      <i class="fas fa-store"></i> Sales
     </h2>
     {{-- INSERT LIVE SALE VALUES HERE --}}
     <div class="bubble sale-info">
