@@ -18,13 +18,18 @@
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a class="nav-link {{ set_active('admin/' . ($isClaims ? 'claims' : 'submissions') . '/pending*') }} {{ set_active('admin/' . ($isClaims ? 'claims' : 'submissions')) }}"
-        href="{{ url('admin/' . ($isClaims ? 'claims' : 'submissions') . '/pending') }}">Pending</a>
+        href="{{ url('admin/' . ($isClaims ? 'claims' : 'submissions') . '/pending') }}"
+      >Pending</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/' . ($isClaims ? 'claims' : 'submissions') . '/approved*') }}" href="{{ url('admin/' . ($isClaims ? 'claims' : 'submissions') . '/approved') }}">Approved</a>
+      <a class="nav-link {{ set_active('admin/' . ($isClaims ? 'claims' : 'submissions') . '/approved*') }}"
+        href="{{ url('admin/' . ($isClaims ? 'claims' : 'submissions') . '/approved') }}"
+      >Approved</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/' . ($isClaims ? 'claims' : 'submissions') . '/rejected*') }}" href="{{ url('admin/' . ($isClaims ? 'claims' : 'submissions') . '/rejected') }}">Rejected</a>
+      <a class="nav-link {{ set_active('admin/' . ($isClaims ? 'claims' : 'submissions') . '/rejected*') }}"
+        href="{{ url('admin/' . ($isClaims ? 'claims' : 'submissions') . '/rejected') }}"
+      >Rejected</a>
     </li>
   </ul>
 
@@ -42,10 +47,10 @@
           'sort',
           [
               'newest' => 'Newest First',
-              'oldest' => 'Oldest First',
+              'oldest' => 'Oldest First'
           ],
           Request::get('sort') ?: 'oldest',
-          ['class' => 'form-control'],
+          ['class' => 'form-control']
       ) !!}
     </div>
     <div class="form-group ml-3 mb-3">
@@ -100,7 +105,9 @@
             </div>
             <div class="col-3 col-md-1">
               <div class="logs-table-cell">
-                <span class="btn btn-{{ $submission->status == 'Pending' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1">{{ $submission->status }}</span>
+                <span
+                  class="btn btn-{{ $submission->status == 'Pending' ? 'info' : ($submission->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1"
+                >{{ $submission->status }}</span>
               </div>
             </div>
             <div class="col-3 col-md-1">
@@ -114,5 +121,6 @@
     </div>
   </div>
   {!! $submissions->render() !!}
-  <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }}
+    found.</div>
 @endsection

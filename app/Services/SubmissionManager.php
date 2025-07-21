@@ -176,6 +176,7 @@ class SubmissionManager extends Service {
 
       // First, return all items and currency applied.
       // Also, as this is an edit, delete all attached characters to be re-applied later.
+
       $this->removeAttachments($submission);
       SubmissionCharacter::where('submission_id', $submission->id)->delete();
 
@@ -314,7 +315,8 @@ class SubmissionManager extends Service {
       if (!$submission) {
         throw new \Exception('Invalid submission.');
       }
-
+      // un-string the submission data
+      isset($submission?->data) ? (gettype($submission->data) == 'string'  ? $submission->data = json_decode($submission->data, true)  : '') : '';
       // Return all items and currency applied.
       $this->removeAttachments($submission);
 
@@ -920,7 +922,6 @@ class SubmissionManager extends Service {
    */
   private function removeAttachments($submission) {
     // This occurs when a draft is edited or rejected.
-
     // Return all added items
     $addonData = $submission->data['user'];
     if (isset($addonData['user_items'])) {

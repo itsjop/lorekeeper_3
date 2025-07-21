@@ -31,6 +31,7 @@
 - [ ] Get a recursive Image Optimization CLI script
       - (tinypng equivalent for the many local assets we'll have)
 - [?] change sidebar routes to array for better `active` matching
+- [ ] new! announcement labels that automatically mark themselves in localstorage
 
 # low-prio
 - [ ] fix no ::backdrop on modals
