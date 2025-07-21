@@ -21,8 +21,8 @@ return [
     'awards' => 'badges',                       // use __
     'awards_' => 'award|awards',                // Use trans_choice instead of __
 
-    'awardcase' => 'badge collection',                 // use __
-    'awardcases' => 'badge collections',               // use __
+    'awardcase' => 'badge-collection',                 // use __
+    'awardcases' => 'badge-collections',               // use __
     'awardcases_' => 'awardcase|awardcases',    // Use trans_choice instead of __
 
 ];

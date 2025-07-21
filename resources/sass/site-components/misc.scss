@@ -217,6 +217,7 @@
   }
 
   .gallery-recents {
+    height: 100%;
     .submission {
       display: grid;
       grid-template:
@@ -227,8 +228,11 @@
       .img {
         grid-area: img;
         width: 100%;
+        display: flex;
         img {
           max-width: 100%;
+          align-self: start;
+          aspect-ratio: 1/1;
         }
       }
       .title {
@@ -297,18 +301,37 @@
     place-content: start;
     place-items: start;
     gap: 0.6em;
-    .sort,.name,.category,.rarity,.artist,.search,input,select { width: 100%; }
-    .name { grid-area: name; }
-    .category { grid-area: category; }
-    .rarity { grid-area: rarity; }
-    .artist { grid-area: artist; }
-    .search { grid-area: search; }
+    .sort,
+    .name,
+    .category,
+    .rarity,
+    .artist,
+    .search,
+    input,
+    select {
+      width: 100%;
+    }
+    .name {
+      grid-area: name;
+    }
+    .category {
+      grid-area: category;
+    }
+    .rarity {
+      grid-area: rarity;
+    }
+    .artist {
+      grid-area: artist;
+    }
+    .search {
+      grid-area: search;
+    }
     @media (width < 762px) {
       grid-template:
-      'rarity rarity category category' 1fr
-      'artist artist artist sort' 1fr
-      'name name name search' 1fr
-      / 1fr 1fr 1fr 1fr;
+        'rarity rarity category category' 1fr
+        'artist artist artist sort' 1fr
+        'name name name search' 1fr
+        / 1fr 1fr 1fr 1fr;
     }
   }
 }

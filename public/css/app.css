@@ -3218,6 +3218,9 @@ because the nesting selector cannot represent pseudo-elements. */
   --card_star_animation-duration: 20s;
   --card_star_blend-mode: overlay;
 }
+.app .gallery-recents {
+  height: 100%;
+}
 .app .gallery-recents .submission {
   display: grid;
   grid-template: "img" auto "title" auto "details" auto/1fr;
@@ -3225,9 +3228,12 @@ because the nesting selector cannot represent pseudo-elements. */
 .app .gallery-recents .submission .img {
   grid-area: img;
   width: 100%;
+  display: flex;
 }
 .app .gallery-recents .submission .img img {
   max-width: 100%;
+  align-self: start;
+  aspect-ratio: 1/1;
 }
 .app .gallery-recents .submission .title {
   grid-area: title;
@@ -3276,7 +3282,14 @@ because the nesting selector cannot represent pseudo-elements. */
   place-items: start;
   gap: 0.6em;
 }
-.app .inventory-search-pane .sort, .app .inventory-search-pane .name, .app .inventory-search-pane .category, .app .inventory-search-pane .rarity, .app .inventory-search-pane .artist, .app .inventory-search-pane .search, .app .inventory-search-pane input, .app .inventory-search-pane select {
+.app .inventory-search-pane .sort,
+.app .inventory-search-pane .name,
+.app .inventory-search-pane .category,
+.app .inventory-search-pane .rarity,
+.app .inventory-search-pane .artist,
+.app .inventory-search-pane .search,
+.app .inventory-search-pane input,
+.app .inventory-search-pane select {
   width: 100%;
 }
 .app .inventory-search-pane .name {
