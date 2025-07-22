@@ -4,12 +4,21 @@
 @endphp
 
 @if ($comment->deleted_at == null)
-  <div id="comment-{{ $comment->getKey() }}" class="{{ isset($reply) && $reply === true ? 'comment_replies border-left col-12 column mw-100 pr-0' : '' }} pt-4" style="flex-basis: 100%;">
-    <div class="media-body row mw-100 mx-0" style="flex:1;flex-wrap:wrap;">
+  <div
+    id="comment-{{ $comment->getKey() }}"
+    class="{{ isset($reply) && $reply === true ? 'comment_replies border-left col-12 column mw-100 pr-0' : '' }} pt-4"
+    style="flex-basis: 100%;"
+  >
+    <div class="media-body card-basic row mw-100 mx-0" style="flex:1;flex-wrap:wrap;">
       {{-- Show avatar if not compact --}}
       @if (isset($compact) && !$compact)
         <div class="d-none d-md-block">
-          <img class="mr-3 mt-2" src="{{ $comment->commenter->avatarUrl }}" style="width:70px; height:70px; border-radius:50%;" alt="{{ $comment->commenter->name }} Avatar">
+          <img
+            class="mr-3 mt-2"
+            src="{{ $comment->commenter->avatarUrl }}"
+            style="width:70px; height:70px; border-radius:50%;"
+            alt="{{ $comment->commenter->name }} Avatar"
+          >
         </div>
       @endif
 
@@ -29,14 +38,22 @@
         </div>
 
         {{-- Comment --}}
-        <div class="comment border p-3 rounded {{ $comment->is_featured ? 'border-success bg-light' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}">
-          {!! config('lorekeeper.settings.wysiwyg_comments') ? $comment->comment : '<p>' . nl2br($markdown->line(strip_tags($comment->comment))) . '</p>' !!}
+        <div
+          class="comment border p-3 rounded {{ $comment->is_featured ? 'border-success bg-light' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}"
+        >
+          {!! config('lorekeeper.settings.wysiwyg_comments')
+              ? $comment->comment
+              : '<p>' . nl2br($markdown->line(strip_tags($comment->comment))) . '</p>' !!}
           <p class="border-top pt-1 text-right mb-0">
             <small class="text-muted">{!! $comment->created_at !!}
               @if ($comment->created_at != $comment->updated_at)
                 <span class="text-muted border-left mx-1 px-1">(Edited {!! $comment->updated_at !!})
                   @if (Auth::check() && Auth::user()->isStaff)
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#show-edits-{{ $comment->id }}">Edit History</a>
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#show-edits-{{ $comment->id }}"
+                    >Edit History</a>
                   @endif
                 </span>
               @endif
@@ -44,7 +61,12 @@
             @if ($comment->type == 'User-User')
               <a href="{{ url('comment/') . '/' . $comment->id }}"><i class="fas fa-link ml-1" style="opacity: 50%;"></i></a>
             @endif
-            <a href="{{ url('reports/new?url=') . $comment->url }}"><i class="fas fa-exclamation-triangle" data-bs-toggle="tooltip" title="Click here to report this comment." style="opacity: 50%;"></i></a>
+            <a href="{{ url('reports/new?url=') . $comment->url }}"><i
+                class="fas fa-exclamation-triangle"
+                data-toggle="tooltip"
+                title="Click here to report this comment."
+                style="opacity: 50%;"
+              ></i></a>
           </p>
         </div>
 
@@ -67,7 +89,7 @@
             @include('comments::_comment', [
                 'comment' => $child,
                 'reply' => true,
-                'grouped_comments' => $grouped_comments,
+                'grouped_comments' => $grouped_comments
             ])
           @endforeach
         @endif
@@ -75,11 +97,20 @@
     </div>
   </div>
 @else
-  <div id="comment-{{ $comment->getKey() }}" class="{{ isset($reply) && $reply === true ? 'comment_replies border-left col-12 column mw-100 pr-0' : '' }} pt-4" style="flex-basis: 100%;">
+  <div
+    id="comment-{{ $comment->getKey() }}"
+    class="{{ isset($reply) && $reply === true ? 'comment_replies border-left col-12 column mw-100 pr-0' : '' }} pt-4"
+    style="flex-basis: 100%;"
+  >
     <div class="media-body row mw-100 mx-0 mb-3" style="flex:1;flex-wrap:wrap;">
       @if (isset($compact) && !$compact)
         <div class="d-none d-md-block">
-          <img class="mr-3 mt-2" src="{{ asset('images/avatars/default.png') }}" style="width:70px; height:70px; border-radius:50%;" alt="Default Avatar">
+          <img
+            class="mr-3 mt-2"
+            src="/images/avatars/default.jpg"
+            style="width:70px; height:70px; border-radius:50%;"
+            alt="Default Avatar"
+          >
         </div>
       @endif
       <div class="d-block bg-light" style="flex:1">
@@ -113,7 +144,7 @@
             @include('comments::_comment', [
                 'comment' => $child,
                 'reply' => true,
-                'grouped_comments' => $grouped_comments,
+                'grouped_comments' => $grouped_comments
             ])
           @endforeach
         @endif
