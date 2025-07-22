@@ -52,10 +52,13 @@
       align-items: center;
       text-align: center;
       padding: 10px;
-      img {
-        @include hover-preview;
-        max-width: 100%;
-        max-width: 250px;
+      .event,
+      .jobs {
+        img {
+          @include hover-preview;
+          max-width: 100%;
+          max-width: 250px;
+        }
       }
       &.jobs {
         grid-template-columns: 1fr 1fr 1fr;

@@ -7,7 +7,7 @@
       <i class="fas fa-heart"></i>
       Current Event
     </h2>
-    <div class="bubble ">
+    <div class="bubble event">
       <img
         src="images/lore_pages/homepage/characters.png"
         alt=""

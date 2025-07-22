@@ -239,12 +239,13 @@
         border: white 2px solid;
         border-radius: 15px;
         backdrop-filter: blur(3px);
+        @include hover-preview;
+        padding: 10px;
         img {
           max-width: min(100%, 250px);
           place-self: center;
           max-height: 250px;
           border-radius: 15px;
-          overflow: hidden;
         }
       }
       .title {
