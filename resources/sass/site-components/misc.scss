@@ -241,6 +241,8 @@
         backdrop-filter: blur(3px);
         @include hover-preview;
         padding: 10px;
+        height: min-content;
+        align-self: center;
         img {
           max-width: min(100%, 250px);
           place-self: center;

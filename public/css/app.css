@@ -3249,6 +3249,9 @@ because the nesting selector cannot represent pseudo-elements. */
   transform: scale(1);
   filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
   padding: 10px;
+  height: -moz-min-content;
+  height: min-content;
+  align-self: center;
 }
 .app .gallery-recents .submission .img:hover {
   filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
