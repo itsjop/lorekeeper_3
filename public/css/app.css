@@ -3236,12 +3236,13 @@ because the nesting selector cannot represent pseudo-elements. */
   grid-area: img;
   width: 100%;
   display: flex;
+  border-radius: 15px;
+  overflow: hidden;
   place-content: center;
 }
 .app .gallery-recents .submission .img img {
   max-width: min(100%, 250px);
   place-self: center;
-  padding: 10px 2vmin 4px;
   max-height: 250px;
   background-color: color-mix(in srgb, var(--white) 30%, transparent);
   border: white 2px solid;
