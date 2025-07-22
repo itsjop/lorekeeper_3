@@ -1436,7 +1436,7 @@ body {
 .home-dashboard {
   display: grid;
   grid-template: "welc  welc  welc  welc" auto "event daily daily daily" auto "news  news  sale  sale" auto "subm  subm  subm  subm" auto/4fr 2fr 2fr 3fr;
-  gap: 15px 30px;
+  gap: 30px;
 }
 .home-dashboard h2 {
   background: linear-gradient(to bottom left, light-dark(#51297c, #c99ff7), light-dark(#4559bd, #889cff), light-dark(#5ca0d4, #72bcf5));

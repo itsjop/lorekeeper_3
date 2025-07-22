@@ -1,4 +1,13 @@
 .home-dashboard {
+  display: grid;
+  grid-template:
+    'welc  welc  welc  welc' auto
+    'event daily daily daily' auto
+    'news  news  sale  sale' auto
+    'subm  subm  subm  subm' auto
+    / 4fr 2fr 2fr 3fr;
+  gap: 30px;
+
   h2 {
     background: linear-gradient(
       to bottom left,
@@ -11,14 +20,6 @@
     color: transparent;
     text-shadow: none;
   }
-  display: grid;
-  grid-template:
-    'welc  welc  welc  welc' auto
-    'event daily daily daily' auto
-    'news  news  sale  sale' auto
-    'subm  subm  subm  subm' auto
-    / 4fr 2fr 2fr 3fr;
-  gap: 15px 30px;
   .welcome-banner {
     grid-area: welc;
   }
