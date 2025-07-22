@@ -21,7 +21,7 @@
 
   @include('character._header', ['character' => $character])
 
-  <h1>Pets</h1>
+  <h1>Companions</h1>
 
   @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
     <p>
