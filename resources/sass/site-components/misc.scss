@@ -217,28 +217,36 @@
   }
 
   .gallery-recents {
+    display: grid;
     height: 100%;
+    // grid-auto-rows: 200px;
+    grid-template-rows: repeat(8, [img] auto [title] min-content [details] max-content );
+    gap: 0 2vmin;
+    padding: 20px;
     .submission {
       display: grid;
-      grid-template:
-        'img' auto
-        'title' auto
-        'details' auto
-        / 1fr;
+      grid-row: span 3;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+      padding-bottom: 10px;
       .img {
         grid-area: img;
         width: 100%;
         display: flex;
         place-content: center;
         img {
-          max-width: 100%;
-          align-self: start;
-          aspect-ratio: 1/1;
-          padding: 10px;
+          max-width: min(100%, 250px);
+          place-self: center;
+          padding: 10px 2vmin 4px;
+          max-height: 250px;
         }
       }
       .title {
         grid-area: title;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 90%;
       }
       .details {
         grid-area: details;

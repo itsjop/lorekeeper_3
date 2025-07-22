@@ -16,7 +16,8 @@
     <a href="{{ $submission->url }}" class="h5 mb-0">
       @if (!$submission->isVisible)
         <i class="fas fa-eye-slash"></i>
-      @endif {{ $submission->displayTitle }}
+      @endif
+      {{ $submission->displayTitle }}
     </a>
   </div>
   <div class="details small">

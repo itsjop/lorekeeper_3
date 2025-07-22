@@ -140,11 +140,11 @@
                       </div>
                     @endif
                   </div>
-                @else
+
                   <p>This submission didn't have any criteria specified for rewards</p>
                 @endif
           </div>
-      @endif
+        @endif
       @endif
     @else
       <p>This submission is not eligible for currency
@@ -244,7 +244,7 @@
           @endif
         </div>
       </div>
-      <div class="card mb-4">
+      {{-- <div class="card mb-4">
         <div class="card-header">
           <h5>[Admin] Staff Comments</h5> (Only visible to staff)
         </div>
@@ -254,7 +254,7 @@
             @comments(['model' => $submission, 'type' => 'Staff-Staff', 'perPage' => 5, 'commentType' => 'staff'])
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   @endif
   </div>

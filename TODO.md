@@ -1,5 +1,8 @@
 # Styling Issues:
 - [~] masterlist redo
+- [ ] set up username parking
+  - [ ] 'jop', 'wysp', 'reverie', 'somnivores', 'somnivores_staff', all of the NPC names
+- [ ] gallery preview pass real blurred image instead of of lorekeeper book
 - [ ] No 18+ popup banner
 - [ ] system clock
 - [ ] currency counter? [root-level](app/Models/Currency/Currency.php#310)
