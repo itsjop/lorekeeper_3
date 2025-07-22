@@ -3237,19 +3237,19 @@ because the nesting selector cannot represent pseudo-elements. */
   width: 100%;
   display: flex;
   border-radius: 15px;
-  overflow: hidden;
   place-content: center;
+  background-color: color-mix(in srgb, var(--white) 30%, transparent);
+  border: white 2px solid;
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
 }
 .app .gallery-recents .submission .img img {
   max-width: min(100%, 250px);
   place-self: center;
   max-height: 250px;
-  background-color: color-mix(in srgb, var(--white) 30%, transparent);
-  border: white 2px solid;
   border-radius: 15px;
   overflow: hidden;
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
 }
 .app .gallery-recents .submission .title {
   grid-area: title;

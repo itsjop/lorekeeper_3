@@ -234,17 +234,17 @@
         width: 100%;
         display: flex;
         border-radius: 15px;
-        overflow: hidden;
         place-content: center;
+        background-color: color-mix(in srgb, var(--white) 30%, transparent);
+        border: white 2px solid;
+        border-radius: 15px;
+        backdrop-filter: blur(3px);
         img {
           max-width: min(100%, 250px);
           place-self: center;
           max-height: 250px;
-          background-color: color-mix(in srgb, var(--white) 30%, transparent);
-          border: white 2px solid;
           border-radius: 15px;
           overflow: hidden;
-          backdrop-filter: blur(3px);
         }
       }
       .title {
