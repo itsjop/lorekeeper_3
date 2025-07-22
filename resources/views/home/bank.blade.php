@@ -60,7 +60,7 @@
           {!! Form::select('currency_id', $convertOptions, null, [
               'class' => 'form-control',
               'placeholder' => 'Select Currency',
-              'id' => 'convert-currency',
+              'id' => 'convert-currency'
           ]) !!}
         </div>
       </div>
@@ -77,7 +77,7 @@
     <hr />
   @endif
 
-  @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
+  @if (Auth::check() && $canTransfer)
     <h3>{!! '[ADMIN]' !!} Transfer Currency</h3>
     <p>
       If you are transferring currency as part of a trade for on-site resources (items, currency, characters), using the

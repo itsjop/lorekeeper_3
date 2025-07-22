@@ -35,6 +35,7 @@
           <div class="form-group gift-notifs">
             <h4>Notify Owner?</h4>
             <div class="row">
+              {{-- TODO: find root issue why character ID is unset occasionally --}}
               @if (isset($character->character->id) && isset($character->notify_owner))
                 {!! Form::select(
                     'character_notify_owner[' . $character->character->id . ']',
