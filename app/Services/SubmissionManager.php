@@ -232,6 +232,7 @@ class SubmissionManager extends Service {
       if (!$submission) {
         throw new \Exception('Invalid submission.');
       }
+      isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
 
       // Set staff comments
       if (isset($data['staff_comments']) && $data['staff_comments']) {
@@ -830,6 +831,7 @@ class SubmissionManager extends Service {
    * @param mixed $submission the submission object
    */
   private function removePromptAttachments($submission) {
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     $assets = $submission->data;
     // Get a list of rewards, then create the submission itself
     $promptRewards = createAssetsArray();
@@ -923,6 +925,7 @@ class SubmissionManager extends Service {
   private function removeAttachments($submission) {
     // This occurs when a draft is edited or rejected.
     // Return all added items
+    isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     $addonData = $submission->data['user'];
     if (isset($addonData['user_items'])) {
       foreach ($addonData['user_items'] as $userItemId => $quantity) {
