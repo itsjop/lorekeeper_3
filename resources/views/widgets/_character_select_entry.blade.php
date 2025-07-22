@@ -46,20 +46,23 @@
               @endif
               <!-- character gift status badges -->
               <div class="col">
-                <span
-                  class="btn {{ $character->character->is_gift_writing_allowed == 1 ? 'badge-success' : ($character->character->is_gift_writing_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }}"
-                  data-bs-toggle="tooltip"
-                  data-placement="top"
-                  title="{{ $character->character->is_gift_writing_allowed == 1 ? 'OPEN for gift writing.' : ($character->character->is_gift_writing_allowed == 2 ? 'PLEASE ASK before gift writing.' : 'CLOSED for gift writing.') }}"
-                >
-                  <i class="fas fa-file-alt"></i></span>
-                <span
-                  class="btn {{ $character->character->is_gift_art_allowed == 1 ? 'badge-success' : ($character->character->is_gift_art_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }} ml-2"
-                  data-bs-toggle="tooltip"
-                  data-placement="top"
-                  title="{{ $character->character->is_gift_art_allowed == 1 ? 'OPEN for gift art.' : ($character->character->is_gift_art_allowed == 2 ? 'PLEASE ASK before gift art.' : 'CLOSED for gift art.') }}"
-                >
-                  <i class="fas fa-pencil-ruler"></i></span>
+                @if (isset($character->character))
+                  <span
+                    class="btn
+                    {{ safe($character->character->is_gift_writing_allowed) == 1 ? 'badge-success' : (safe($character->character->is_gift_writing_allowed) == 2 ? 'badge-warning text-light' : 'badge-danger') }}"
+                    data-bs-toggle="tooltip"
+                    data-placement="top"
+                    title="{{ safe($character->character->is_gift_writing_allowed) == 1 ? 'OPEN for gift writing.' : (safe($character->character->is_gift_writing_allowed == 2) ? 'PLEASE ASK before gift writing.' : 'CLOSED for gift writing.') }}"
+                  >
+                    <i class="fas fa-file-alt"></i></span>
+                  <span
+                    class="btn {{ safe($character->character->is_gift_art_allowed) == 1 ? 'badge-success' : (safe($character->character->is_gift_art_allowed) == 2 ? 'badge-warning text-light' : 'badge-danger') }} ml-2"
+                    data-bs-toggle="tooltip"
+                    data-placement="top"
+                    title="{{ safe($character->character->is_gift_art_allowed) == 1 ? 'OPEN for gift art.' : (safe($character->character->is_gift_art_allowed) == 2 ? 'PLEASE ASK before gift art.' : 'CLOSED for gift art.') }}"
+                  >
+                    <i class="fas fa-pencil-ruler"></i></span>
+                @endif
               </div>
             </div>
           </div>
