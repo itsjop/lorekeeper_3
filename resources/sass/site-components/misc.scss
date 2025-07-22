@@ -239,6 +239,11 @@
           place-self: center;
           padding: 10px 2vmin 4px;
           max-height: 250px;
+          background-color: color-mix(in srgb, var(--white) 30%, transparent);;
+          border: white 2px solid;
+          border-radius: 15px;
+          overflow: hidden;
+          backdrop-filter: blur(3px);
         }
       }
       .title {
