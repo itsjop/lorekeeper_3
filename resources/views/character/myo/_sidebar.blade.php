@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ $character->url }}" class="card-link">{{ $character->fullName }}</a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">{{ ucfirst(__('lorekeeper.character')) }} </summary>
     <ul>
       <li class="sidebar-item">
@@ -11,7 +11,7 @@
     </ul>
   </details>
   @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Settings</summary>
       <ul>
         <li class="sidebar-item">
@@ -33,7 +33,7 @@
       </ul>
     </details>
   @endif
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">History
       <ul>
         <li class="sidebar-item">

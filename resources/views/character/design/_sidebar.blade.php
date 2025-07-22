@@ -3,7 +3,7 @@
     <a href="{{ url(__('cultivation.cultivation')) }}" class="card-link">Request</a>
   </div>
   @if (isset($request))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Current Request</summary>
       <ul>
         <li class="sidebar-item">
@@ -24,7 +24,7 @@
       </ul>
     </details>
   @endif
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Design Approvals</summary>
     <ul>
       <li class="sidebar-item">

@@ -3,7 +3,7 @@
     <a href="{{ url(__('cultivation.cultivation')) }}" class="card-link">{{ ucfirst(__('cultivation.cultivation')) }}</a>
   </div>
 
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Cultivation</summary>
     <ul>
       <li class="sidebar-item">
@@ -13,7 +13,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">{{ ucfirst(__('cultivation.cultivation')) }} Areas </summary>
     <ul>
       @foreach ($areas as $area)

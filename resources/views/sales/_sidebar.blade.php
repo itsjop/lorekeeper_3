@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ url('sales') }}" class="card-link">Sales</a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">For Sale</summary>
     <ul>
       @foreach ($forsale as $sales)
@@ -14,7 +14,7 @@
     </ul>
   </details>
   @if (isset($saleses))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">On This Page</summary>
       <ul>
         @foreach ($saleses as $sales)
@@ -27,7 +27,7 @@
       </ul>
     </details>
   @else
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Recent Sales</summary>
       <ul>
         @foreach ($recentsales as $sales)

@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ url('world') }}" class="card-link">Encyclopedia</a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> World </summary>
     <ul>
       <li class="sidebar-item">
@@ -10,7 +10,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> Characters </summary>
     <ul>
       <li class="sidebar-item">
@@ -50,7 +50,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> Items </summary>
     <ul>
       <li class="sidebar-item">
@@ -95,7 +95,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> {{ ucfirst(__('awards.awards')) }} </summary>
     <ul>
       </li>
@@ -111,7 +111,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> Recipes
     </summary>
     <ul>

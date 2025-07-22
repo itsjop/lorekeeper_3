@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ url(__('dailies.dailies')) }}" class="card-link">{{ __('dailies.dailies') }}</a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Dailies</summary>
     <ul>
       @foreach ($dailies as $daily)

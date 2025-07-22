@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ url('masterlist') }}" class="card-link">Masterlist</a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Masterlist</summary>
     <ul>
       <li class="sidebar-item">
@@ -14,7 +14,7 @@
     </ul>
   </details>
   @if (Settings::get('character_likes_leaderboard_enable') && Auth::check())
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Character {{ ucfirst(__('character_likes.likes')) }}</summary>
       <li class="sidebar-item">
         <a href="{{ url(__('character_likes.likes') . '-leaderboard') }}" class="{{ set_active(__('character_likes.likes') . '-leaderboard*') }}">
@@ -24,7 +24,7 @@
     </details>
   @endif
   @if (isset($sublists) && $sublists->count() > 0)
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Sub Masterlists</summary>
       <ul>
         @foreach ($sublists as $sublist)

@@ -4,7 +4,7 @@
   </div>
 
   @if (Auth::check())
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">History</summary>
       <ul>
         <li class="sidebar-item">
@@ -14,7 +14,7 @@
         </li>
       </ul>
     </details>
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">My Currencies</summary>
       <ul>
         @foreach (Auth::user()->getCurrencies(true) as $currency)
@@ -25,7 +25,7 @@
       </ul>
     </details>
   @endif
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Shops</summary>
     <ul>
       @foreach ($shops as $shop)

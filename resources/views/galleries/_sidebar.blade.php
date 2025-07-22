@@ -4,7 +4,7 @@
   </div>
 
   @auth
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">My Submissions</summary>
       <ul>
         <li class="sidebar-item">
@@ -20,7 +20,7 @@
     </details>
   @endauth
   @if (config('lorekeeper.extensions.show_all_recent_submissions.enable') && config('lorekeeper.extensions.show_all_recent_submissions.links.sidebar'))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Submissions</summary>
       <ul>
         <li class="sidebar-item">
@@ -31,7 +31,7 @@
   @endif
 
   @if ($galleryPage && $sideGallery->children->count())
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">{{ $sideGallery->name }}: Sub-Galleries</summary>
       <ul>
         @foreach ($sideGallery->children()->visible()->get() as $child)
@@ -44,7 +44,7 @@
   @endif
 
   @if ($galleryPage && $sideGallery->siblings() && $sideGallery->siblings->count())
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">{{ $sideGallery->parent->name }}: Sub-Galleries</summary>
       <ul>
         @foreach ($sideGallery->siblings()->visible()->get() as $sibling)
@@ -59,7 +59,7 @@
   @endif
 
   @if ($galleryPage && $sideGallery->avunculi() && $sideGallery->avunculi->count())
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">{{ $sideGallery->parent->parent->name }}: Sub-Galleries</summary>
       <ul>
         @foreach ($sideGallery->avunculi()->visible()->get() as $avunculus)
@@ -71,7 +71,7 @@
     </details>
   @endif
 
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Galleries</summary>
     <ul>
       @foreach ($sidebarGalleries as $gallery)

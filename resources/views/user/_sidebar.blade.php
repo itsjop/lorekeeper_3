@@ -4,7 +4,7 @@
       {{ Illuminate\Support\Str::limit($user->name, 10, $end = '...') }}
     </a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">
       Gallery
     </summary>
@@ -46,7 +46,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">
       User
     </summary>
@@ -107,7 +107,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">
       History
     </summary>
@@ -150,7 +150,7 @@
     </ul>
   </details>
   @if (Auth::check() && Auth::user()->hasPower('edit_user_info'))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header"> Admin </summary>
       <li class="sidebar-item">
         <a href="{{ $user->adminUrl }}">

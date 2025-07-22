@@ -3,7 +3,7 @@
     <a href="{{ url('/') }}" class="card-link">User Shops</a>
   </div>
   @if (Auth::check())
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">History</summary>
       <ul>
         <li class="sidebar-item">
@@ -11,7 +11,7 @@
         </li>
       </ul>
     </details>
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">My Currencies</summary>
       <ul>
         @foreach (Auth::user()->getCurrencies(true) as $currency)
@@ -22,7 +22,7 @@
     </details>
   @endif
 
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">User Shops</summary>
     <ul>
       @auth

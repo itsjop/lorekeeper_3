@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ url('world/info') }}" class="card-link">World Expanded</a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Encyclopedia</summary>
     <ul>
       <li class="sidebar-item">
@@ -11,7 +11,7 @@
     </ul>
   </details>
   @if (Settings::get('WE_glossary'))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Encyclopedia</summary>
       <ul>
         <li class="sidebar-item">
@@ -20,7 +20,7 @@
       </ul>
     </details>
   @endif
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Geography</summary>
     <ul>
       <li class="sidebar-item">
@@ -31,7 +31,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">History and Society</summary>
     <ul>
       <li class="sidebar-item">
@@ -55,7 +55,7 @@
       </li>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Nature</summary>
     <ul>
       <li class="sidebar-item">

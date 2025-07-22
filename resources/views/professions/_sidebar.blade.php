@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ url('professions') }}" class="card-link"></a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Professions</summary>
     <ul>
       @foreach ($categories as $category)
@@ -15,7 +15,7 @@
       </div>
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Categories</summary>
     <ul>
       <li class="sidebar-item">

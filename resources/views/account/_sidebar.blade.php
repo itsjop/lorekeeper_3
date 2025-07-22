@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="{{ url('/') }}" class="card-link">Home</a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Account</summary>
     <ul>
       <li class="sidebar-item">

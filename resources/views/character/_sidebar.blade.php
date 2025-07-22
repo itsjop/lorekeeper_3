@@ -64,7 +64,7 @@
       @endif
     </ul>
   </details>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">History</summary>
     <ul>
       <li class="sidebar-item">
@@ -111,7 +111,7 @@
     </ul>
   </details>
   @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Settings</summary>
       <ul>
         <li class="sidebar-item">

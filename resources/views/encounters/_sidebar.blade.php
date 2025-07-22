@@ -3,7 +3,7 @@
     <a href="{{ url('encounter-areas') }}" class="card-link">Encounter Stats</a>
   </div>
 
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> Encounter </summary>
     <ul>
       <li class="sidebar-item">

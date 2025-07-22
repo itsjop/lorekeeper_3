@@ -4,7 +4,7 @@
       <a href="{{ url('prompts') }}">Prompts</a>
     </a>
   </div>
-  <details class="sidebar-section">
+  <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Prompts</summary>
     <ul>
       <li class="sidebar-item">

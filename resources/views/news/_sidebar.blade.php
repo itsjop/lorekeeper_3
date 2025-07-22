@@ -3,7 +3,7 @@
     <a href="{{ url('news') }}" class="card-link">News</a>
   </div>
   @if (isset($newses))
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">On This Page</summary>
       <ul>
         @foreach ($newses as $news)
@@ -15,7 +15,7 @@
       </ul>
     </details>
   @else
-    <details class="sidebar-section">
+    <details class="sidebar-section" open>
       <summary class="sidebar-section-header">Recent News</summary>
       <ul>
         @foreach ($recentnews as $news)
