@@ -52,8 +52,8 @@
       align-items: center;
       text-align: center;
       padding: 10px;
-      .event,
-      .jobs {
+      &.event,
+      &.jobs {
         img {
           @include hover-preview;
           max-width: 100%;
