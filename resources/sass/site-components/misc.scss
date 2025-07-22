@@ -240,11 +240,11 @@
         border-radius: 15px;
         backdrop-filter: blur(3px);
         @include hover-preview;
-        padding: 10px;
+        padding: 5px;
         height: min-content;
-        align-self: center;
+        place-self: center;
+        max-width: min(100%, 250px);
         img {
-          max-width: min(100%, 250px);
           place-self: center;
           max-height: 250px;
           border-radius: 15px;
