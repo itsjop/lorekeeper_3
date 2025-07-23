@@ -353,4 +353,15 @@
         / 1fr 1fr 1fr 1fr;
     }
   }
+
+  .daily-button {
+    @include hover-preview;
+    &:active {
+      transition-duration: 0.8s;
+      transform: scale(1.2) rotate(20deg);
+    }
+    &.disabled {
+      filter: grayscale(0.8);
+    }
+  }
 }

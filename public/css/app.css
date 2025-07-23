@@ -3343,3 +3343,20 @@ because the nesting selector cannot represent pseudo-elements. */
     grid-template: "rarity rarity category category" 1fr "artist artist artist sort" 1fr "name name name search" 1fr/1fr 1fr 1fr 1fr;
   }
 }
+.app .daily-button {
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
+}
+.app .daily-button:hover {
+  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
+  transition: 0.7s var(--elastic_linear);
+  transform: scale(1.2);
+}
+.app .daily-button:active {
+  transition-duration: 0.8s;
+  transform: scale(1.2) rotate(20deg);
+}
+.app .daily-button.disabled {
+  filter: grayscale(0.8);
+}

@@ -23,7 +23,7 @@
         >
           <img
             src="{{ $daily->buttonImageUrl }}"
-            class="w-100"
+            class="w-100 daily-button {{ Auth::check() && isset($cooldown) ? 'disabled' : ''}}"
             style="max-width:200px;"
           />
         </button>
