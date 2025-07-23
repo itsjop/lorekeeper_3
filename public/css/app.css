@@ -731,7 +731,7 @@ body {
   transform: translateY(-10%);
 }
 .app i {
-  display: flex;
+  display: inline-flex;
   align-items: center;
 }
 .app .alert {

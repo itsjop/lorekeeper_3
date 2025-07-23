@@ -70,7 +70,7 @@
       transform: translateY(-10%);
     }
   }
-  i { display: flex; align-items: center;}
+  i { display: inline-flex; align-items: center;}
   // -- MISC -- //
   .alert {
     box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
