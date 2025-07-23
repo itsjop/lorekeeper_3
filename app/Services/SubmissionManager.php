@@ -50,26 +50,38 @@ class SubmissionManager extends Service {
       // 1. check that the prompt can be submitted at this time
       // 2. check that the characters selected exist (are visible too)
       // 3. check that the currencies selected can be attached to characters
-      if (!$isClaim && !Settings::get('is_prompts_open')) {
-        throw new \Exception('The prompt queue is closed for submissions.');
-      } elseif ($isClaim && !Settings::get('is_claims_open')) {
-        throw new \Exception('The claim queue is closed for submissions.');
-      }
-      if (!$isClaim && !isset($data['prompt_id'])) {
-        throw new \Exception('Please select a prompt.');
-      }
+      if (!$isClaim && !Settings::get('is_prompts_open')) throw new \Exception("The prompt queue is closed for submissions.");
+      else if ($isClaim && !Settings::get('is_claims_open')) throw new \Exception("The claim queue is closed for submissions.");
+      if (!$isClaim && !isset($data['prompt_id'])) throw new \Exception("Please select a prompt.");
       if (!$isClaim) {
         $prompt = Prompt::active()->where('id', $data['prompt_id'])->with('rewards')->first();
-        if (!$prompt) {
-          throw new \Exception('Invalid prompt selected.');
-        }
-
+        if (!$prompt) throw new \Exception("Invalid prompt selected.");
         if ($prompt->staff_only && !$user->isStaff) {
           throw new \Exception('This prompt may only be submitted to by staff members.');
         }
-      } else {
-        $prompt = null;
-      }
+        //check that the prompt limit hasn't been hit
+        if ($prompt->limit) {
+          //check that the user hasn't hit the prompt submission limit
+          //filter the submissions by hour/day/week/etc and count
+          $count['all'] = Submission::submitted($prompt->id, $user->id)->count();
+          $count['Hour'] = Submission::submitted($prompt->id, $user->id)->where('created_at', '>=', now()->startOfHour())->count();
+          $count['Day'] = Submission::submitted($prompt->id, $user->id)->where('created_at', '>=', now()->startOfDay())->count();
+          $count['Week'] = Submission::submitted($prompt->id, $user->id)->where('created_at', '>=', now()->startOfWeek())->count();
+          $count['Month'] = Submission::submitted($prompt->id, $user->id)->where('created_at', '>=', now()->startOfMonth())->count();
+          $count['Year'] = Submission::submitted($prompt->id, $user->id)->where('created_at', '>=', now()->startOfYear())->count();
+
+          //if limit by character is on... multiply by # of chars. otherwise, don't
+          if ($prompt->limit_character) {
+            $limit = $prompt->limit * Character::visible()->where('is_myo_slot', 0)->where('user_id', $user->id)->count();
+          } else {
+            $limit = $prompt->limit;
+          }
+          //if limit by time period is on
+          if ($prompt->limit_period) {
+            if ($count[$prompt->limit_period] >= $limit) throw new \Exception("You have already submitted to this prompt the maximum number of times.");
+          } else if ($count['all'] >= $limit) throw new \Exception("You have already submitted to this prompt the maximum number of times.");
+        }
+      } else $prompt = null;
 
       $withCriteriaSelected = isset($data['criterion']) ? array_filter($data['criterion'], function ($obj) {
         return isset($obj['id']);
@@ -79,6 +91,23 @@ class SubmissionManager extends Service {
       } else {
         $data['criterion'] = null;
       }
+      // The character identification comes in both the slug field and as character IDs
+      // that key the reward ID/quantity arrays.
+      // We'll need to match characters to the rewards for them.
+      // First, check if the characters are accessible to begin with.
+      if (isset($data['slug'])) {
+        $characters = Character::myo(0)->visible()->whereIn('slug', $data['slug'])->get();
+        if (count($characters) != count($data['slug'])) throw new \Exception("One or more of the selected characters do not exist.");
+      } else $characters = [];
+
+      // Get a list of rewards, then create the submission itself
+      $promptRewards = createAssetsArray();
+      if (!$isClaim) {
+        foreach ($prompt->rewards as $reward) {
+          addAsset($promptRewards, $reward->reward, $reward->quantity);
+        }
+      }
+      $promptRewards = mergeAssetsArrays($promptRewards, $this->processRewards($data, false));
 
       // Create the submission itself.
       $submission = Submission::create([
@@ -86,7 +115,7 @@ class SubmissionManager extends Service {
         'url'       => $data['url'] ?? null,
         'status'    => $isDraft ? 'Draft' : 'Pending',
         'comments'  => $data['comments'],
-        'data'      => null,
+        'data'      => json_encode(getDataReadyAssets($promptRewards)) ?: null // list of rewards,
       ] + ($isClaim ? [] : [
         'prompt_id' => $prompt->id,
       ]));
@@ -103,6 +132,31 @@ class SubmissionManager extends Service {
           'criterion' => $data['criterion'] ?? null,
         ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : [])),
       ]);
+
+      // Retrieve all currency IDs for characters
+      $currencyIds = [];
+      if (isset($data['character_currency_id'])) {
+        foreach ($data['character_currency_id'] as $c) {
+          foreach ($c as $currencyId) $currencyIds[] = $currencyId;
+        }
+      }
+      array_unique($currencyIds);
+      $currencies = Currency::whereIn('id', $currencyIds)->where('is_character_owned', 1)->get()->keyBy('id');
+
+      // Attach characters
+      foreach ($characters as $c) {
+        // Users might not pass in clean arrays (may contain redundant data) so we need to clean that up
+        $assets = $this->processRewards($data + ['character_id' => $c->id, 'currencies' => $currencies], true);
+
+        // Now we have a clean set of assets (redundant data is gone, duplicate entries are merged)
+        // so we can attach the character to the submission
+        SubmissionCharacter::create([
+          'character_id' => $c->id,
+          'submission_id' => $submission->id,
+          'data' => json_encode(getDataReadyAssets($assets))
+        ]);
+      }
+
 
       // Set characters that have been attached.
       $this->createCharacterAttachments($submission, $data);
@@ -121,7 +175,6 @@ class SubmissionManager extends Service {
       //     flash($response['error'])->error();
       //     throw new \Exception('Failed to create webhook.');
       // }
-
       return $this->commitReturn($submission);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
