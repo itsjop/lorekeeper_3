@@ -1372,6 +1372,108 @@ body {
        object-fit: contain;
   }
 }
+.app.breadcrumb {
+  contain: paint;
+}
+.app.breadcrumb .breadcrumb-item {
+  --bc_chevron-width: 20px;
+  --bc_chevron-size: 10px;
+  position: relative;
+  --bc-bg: var(--purple-clr_500);
+  --bc-col: var(--purple-clr_100);
+  display: flex;
+  padding: 0 10px 0 20px;
+  --bc-clip: polygon(
+    calc(100% - var(--bc_chevron-size)) 0%,
+    100% 50%,
+    calc(100% - var(--bc_chevron-size)) 100%,
+    0% 100%,
+    var(--bc_chevron-size) 50%,
+    0% 0%
+  );
+}
+.app.breadcrumb .breadcrumb-item a,
+.app.breadcrumb .breadcrumb-item span {
+  color: var(--bc-col);
+  z-index: 1;
+}
+.app.breadcrumb .breadcrumb-item:nth-of-type(1) {
+  --bc-bg: var(--purple-clr_600);
+  --bc-col: var(--purple-clr_100);
+}
+.app.breadcrumb .breadcrumb-item:nth-of-type(2) {
+  --bc-bg: var(--purple-clr_500);
+  --bc-col: var(--purple-clr_100);
+}
+.app.breadcrumb .breadcrumb-item.active {
+  --bc-bg: var(--purple-clr_300);
+  --bc-col: var(--purple-clr_700);
+}
+.app.breadcrumb .breadcrumb-item:first-of-type {
+  --bc-clip: polygon(
+    0% 0%,
+    calc(100% - var(--bc_chevron-size)) 0%,
+    100% 50%,
+    calc(100% - var(--bc_chevron-size)) 100%,
+    0% 100%
+  );
+  padding: 0 15px 0 10px;
+}
+.app.breadcrumb .breadcrumb-item:first-of-type::before {
+  width: calc(100% + 0.25 * var(--bc_chevron-width));
+  transform: translateX(calc(-0.5 * var(--bc_chevron-width)));
+  overflow: hidden;
+  border-radius: 5px 0 0 5px;
+}
+.app.breadcrumb .breadcrumb-item::before {
+  content: "";
+  display: block;
+  background: var(--bc-bg);
+  clip-path: var(--bc-clip);
+  width: calc(100% + 0.25 * var(--bc_chevron-width));
+  height: 100%;
+  position: absolute;
+  transform: translateX(calc(-1 * var(--bc_chevron-width)));
+}
+
+.inventory-search-pane {
+  display: grid;
+  grid-template: "category rarity artist sort  " 1fr "name     name   name   search" 1fr/2fr 2fr 2fr 1fr;
+  place-content: start;
+  place-items: start;
+  gap: 0.6em;
+}
+.inventory-search-pane .sort,
+.inventory-search-pane .name,
+.inventory-search-pane .category,
+.inventory-search-pane .rarity,
+.inventory-search-pane .artist,
+.inventory-search-pane .search,
+.inventory-search-pane input,
+.inventory-search-pane select {
+  width: 100%;
+}
+.inventory-search-pane .name {
+  grid-area: name;
+}
+.inventory-search-pane .category {
+  grid-area: category;
+}
+.inventory-search-pane .rarity {
+  grid-area: rarity;
+}
+.inventory-search-pane .artist {
+  grid-area: artist;
+}
+.inventory-search-pane .search {
+  grid-area: search;
+}
+@media (width < 762px) {
+  .inventory-search-pane {
+    grid-template: "rarity rarity category category" 1fr "artist artist artist sort" 1fr "name name name search" 1fr/1fr 1fr 1fr 1fr;
+  }
+}
+
 /* Header Glint */
 #app #site-logo-header picture::after {
   --glare-width: 5%;
@@ -1584,6 +1686,68 @@ body {
     grid-template: 1fr 1fr/3fr 2fr 3fr;
   }
 }
+.app .gallery-recents,
+.app .gallery-all {
+  display: grid;
+  height: 100%;
+  grid-template-rows: repeat(80, [img] auto [title] min-content [details] max-content);
+  gap: 0 2vmin;
+  padding: 20px;
+}
+.app .gallery-recents .submission,
+.app .gallery-all .submission {
+  display: grid;
+  grid-row: span 3;
+  grid-template-columns: subgrid;
+  grid-template-rows: subgrid;
+  padding-bottom: 10px;
+}
+.app .gallery-recents .submission .img,
+.app .gallery-all .submission .img {
+  grid-area: img;
+  width: 100%;
+  display: flex;
+  border-radius: 15px;
+  place-content: center;
+  background-color: color-mix(in srgb, var(--white) 30%, transparent);
+  border: white 2px solid;
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
+  padding: 5px;
+  height: -moz-min-content;
+  height: min-content;
+  place-self: center;
+  max-width: min(100%, 250px);
+}
+.app .gallery-recents .submission .img:hover,
+.app .gallery-all .submission .img:hover {
+  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
+  transition: 0.7s var(--elastic_linear);
+  transform: scale(1.2);
+}
+.app .gallery-recents .submission .img img,
+.app .gallery-all .submission .img img {
+  place-self: center;
+  max-height: 250px;
+  border-radius: 15px;
+}
+.app .gallery-recents .submission .title,
+.app .gallery-all .submission .title {
+  grid-area: title;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 90%;
+}
+.app .gallery-recents .submission .details,
+.app .gallery-all .submission .details {
+  grid-area: details;
+}
+
 .all-dailies {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -3073,69 +3237,6 @@ because the nesting selector cannot represent pseudo-elements. */
   }
 }
 
-.app .breadcrumb {
-  contain: paint;
-}
-.app .breadcrumb .breadcrumb-item {
-  --bc_chevron-width: 20px;
-  --bc_chevron-size: 10px;
-  position: relative;
-  --bc-bg: var(--purple-clr_500);
-  --bc-col: var(--purple-clr_100);
-  display: flex;
-  padding: 0 10px 0 20px;
-  --bc-clip: polygon(
-    calc(100% - var(--bc_chevron-size)) 0%,
-    100% 50%,
-    calc(100% - var(--bc_chevron-size)) 100%,
-    0% 100%,
-    var(--bc_chevron-size) 50%,
-    0% 0%
-  );
-}
-.app .breadcrumb .breadcrumb-item a,
-.app .breadcrumb .breadcrumb-item span {
-  color: var(--bc-col);
-  z-index: 1;
-}
-.app .breadcrumb .breadcrumb-item:nth-of-type(1) {
-  --bc-bg: var(--purple-clr_600);
-  --bc-col: var(--purple-clr_100);
-}
-.app .breadcrumb .breadcrumb-item:nth-of-type(2) {
-  --bc-bg: var(--purple-clr_500);
-  --bc-col: var(--purple-clr_100);
-}
-.app .breadcrumb .breadcrumb-item.active {
-  --bc-bg: var(--purple-clr_300);
-  --bc-col: var(--purple-clr_700);
-}
-.app .breadcrumb .breadcrumb-item:first-of-type {
-  --bc-clip: polygon(
-    0% 0%,
-    calc(100% - var(--bc_chevron-size)) 0%,
-    100% 50%,
-    calc(100% - var(--bc_chevron-size)) 100%,
-    0% 100%
-  );
-  padding: 0 15px 0 10px;
-}
-.app .breadcrumb .breadcrumb-item:first-of-type::before {
-  width: calc(100% + 0.25 * var(--bc_chevron-width));
-  transform: translateX(calc(-0.5 * var(--bc_chevron-width)));
-  overflow: hidden;
-  border-radius: 5px 0 0 5px;
-}
-.app .breadcrumb .breadcrumb-item::before {
-  content: "";
-  display: block;
-  background: var(--bc-bg);
-  clip-path: var(--bc-clip);
-  width: calc(100% + 0.25 * var(--bc_chevron-width));
-  height: 100%;
-  position: absolute;
-  transform: translateX(calc(-1 * var(--bc_chevron-width)));
-}
 .app .rarity-icon,
 .app .currency-icon {
   align-content: center;
@@ -3145,182 +3246,6 @@ because the nesting selector cannot represent pseudo-elements. */
 .app .currency-icon img {
   width: 1.6em;
   height: 1.6em;
-}
-.app .inventory-category .inventory-item {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-.app .inventory-category .inventory-item .inventory-stack img {
-  transition: 0.5s var(--bounce_linear);
-  transform: scale(1);
-  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
-  max-width: 100%;
-  aspect-ratio: 1/1;
-}
-.app .inventory-category .inventory-item .inventory-stack img:hover {
-  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
-  transition: 0.7s var(--elastic_linear);
-  transform: scale(1.2);
-}
-.app .inventory-category .inventory-item .title {
-  grid-area: name;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  place-items: center;
-  place-content: center;
-  font-weight: 700;
-  font-size: 1.3em;
-}
-.app .inventory-category .inventory-item .title a {
-  color: var(--purple-clr_700);
-}
-.app .inventory-category .inventory-item .badge {
-  width: 100%;
-  height: 100%;
-  grid-area: thumb;
-  place-self: center;
-  z-index: 5;
-  max-height: 200px;
-}
-.app .inventory-category .inventory-item .badge img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  width: 100%;
-  height: 95%;
-  aspect-ratio: 1/1;
-}
-.app .inventory-category .inventory-item .rarity {
-  grid-area: meta;
-  font-family: "Itim", system-ui;
-  width: 100%;
-  height: 100%;
-  font-size: 1.2em;
-  font-weight: 700;
-  text-transform: lowercase;
-  font-style: italic;
-}
-.app .inventory-category .inventory-item .card-bg_animated {
-  grid-area: thumb;
-  border-radius: 20px;
-}
-.app .card-bg_animated {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  contain: paint;
-  --card_background-color: var(--purple-clr_100);
-  --card_star_opacity: 1;
-  --card_star_animation-duration: 10s;
-  --card_star_blend-mode: normal;
-  background: var(--card_background);
-}
-.app .card-bg_animated .stars {
-  position: relative;
-  width: 120%;
-  height: 200%;
-  transform-origin: 0 50%;
-  transform: rotateZ(-30deg) translateY(5%);
-  transition: all allow-discrete;
-  mix-blend-mode: var(--card_star_blend-mode);
-  opacity: var(--card_star_opacity);
-}
-.app .card-bg_animated .stars::before, .app .card-bg_animated .stars::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  animation: stars 20s linear forwards infinite;
-  animation-duration: var(--card_star_animation-duration);
-  background-image: url("images/overlays/starring.png");
-  background-repeat: repeat;
-  background-size: 20%;
-  transform: translateX(0%);
-}
-.app .card-bg_animated .stars::before {
-  left: -100%;
-}
-.app .card-bg_animated .stars::after {
-  left: 0%;
-}
-.app .card-bg_animated.common {
-  --card_background: #b4e6ff;
-  --card_star_opacity: 0.3;
-  --card_star_animation-duration: 30s;
-  --card_star_blend-mode: normal;
-}
-.app .card-bg_animated.uncommon {
-  --card_background: #edc4ff;
-  --card_star_opacity: 0.5;
-  --card_star_animation-duration: 25s;
-  --card_star_blend-mode: normal;
-}
-.app .card-bg_animated.rare {
-  --card_background: #ffe4af;
-  --card_star_opacity: 0.5;
-  --card_star_animation-duration: 20s;
-  --card_star_blend-mode: normal;
-}
-.app .card-bg_animated.mystic {
-  --card_background: linear-gradient(to top right, #a5dbff, #d198ff);
-  --card_star_opacity: 0.9;
-  --card_star_animation-duration: 20s;
-  --card_star_blend-mode: overlay;
-}
-.app .gallery-recents, .app .gallery-all {
-  display: grid;
-  height: 100%;
-  grid-template-rows: repeat(80, [img] auto [title] min-content [details] max-content);
-  gap: 0 2vmin;
-  padding: 20px;
-}
-.app .gallery-recents .submission, .app .gallery-all .submission {
-  display: grid;
-  grid-row: span 3;
-  grid-template-columns: subgrid;
-  grid-template-rows: subgrid;
-  padding-bottom: 10px;
-}
-.app .gallery-recents .submission .img, .app .gallery-all .submission .img {
-  grid-area: img;
-  width: 100%;
-  display: flex;
-  border-radius: 15px;
-  place-content: center;
-  background-color: color-mix(in srgb, var(--white) 30%, transparent);
-  border: white 2px solid;
-  border-radius: 15px;
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
-  transition: 0.5s var(--bounce_linear);
-  transform: scale(1);
-  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
-  padding: 5px;
-  height: -moz-min-content;
-  height: min-content;
-  place-self: center;
-  max-width: min(100%, 250px);
-}
-.app .gallery-recents .submission .img:hover, .app .gallery-all .submission .img:hover {
-  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
-  transition: 0.7s var(--elastic_linear);
-  transform: scale(1.2);
-}
-.app .gallery-recents .submission .img img, .app .gallery-all .submission .img img {
-  place-self: center;
-  max-height: 250px;
-  border-radius: 15px;
-}
-.app .gallery-recents .submission .title, .app .gallery-all .submission .title {
-  grid-area: title;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 90%;
-}
-.app .gallery-recents .submission .details, .app .gallery-all .submission .details {
-  grid-area: details;
 }
 .app .pet-card {
   display: grid;
@@ -3355,43 +3280,6 @@ because the nesting selector cannot represent pseudo-elements. */
 .app .pet-card .petname {
   background: var(--active-clr_200);
   color: var(--black);
-}
-.app .inventory-search-pane {
-  display: grid;
-  grid-template: "category rarity artist sort  " 1fr "name     name   name   search" 1fr/2fr 2fr 2fr 1fr;
-  place-content: start;
-  place-items: start;
-  gap: 0.6em;
-}
-.app .inventory-search-pane .sort,
-.app .inventory-search-pane .name,
-.app .inventory-search-pane .category,
-.app .inventory-search-pane .rarity,
-.app .inventory-search-pane .artist,
-.app .inventory-search-pane .search,
-.app .inventory-search-pane input,
-.app .inventory-search-pane select {
-  width: 100%;
-}
-.app .inventory-search-pane .name {
-  grid-area: name;
-}
-.app .inventory-search-pane .category {
-  grid-area: category;
-}
-.app .inventory-search-pane .rarity {
-  grid-area: rarity;
-}
-.app .inventory-search-pane .artist {
-  grid-area: artist;
-}
-.app .inventory-search-pane .search {
-  grid-area: search;
-}
-@media (width < 762px) {
-  .app .inventory-search-pane {
-    grid-template: "rarity rarity category category" 1fr "artist artist artist sort" 1fr "name name name search" 1fr/1fr 1fr 1fr 1fr;
-  }
 }
 .app .daily-button {
   transition: 0.5s var(--bounce_linear);

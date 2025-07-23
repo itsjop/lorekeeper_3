@@ -364,14 +364,14 @@
       @endguest
     </ul>
     <div class="clocktainer">
-      <div class="cash">
-        @if (Auth::user())
+      @if (Auth::user())
+        <div class="cash">
           @foreach (Auth::user()->getCurrencies(true)->where('id', 1) as $currency)
             {!! $currency->display($currency->quantity) !!}
           @break
         @endforeach
-      @endif
-    </div>
+      </div>
+    @endif
     <div class="clock">
       <i class="fa fa-clock"></i>
       <div id="clock">

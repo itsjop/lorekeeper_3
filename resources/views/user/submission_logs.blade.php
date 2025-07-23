@@ -14,13 +14,13 @@
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
     <div class="form-inline justify-content-end">
-      <div class="form-group ml-3 mb-2 col-3">
+      {{-- <div class="form-group ml-3 mb-2 col-3">
         {!! Form::select('prompt_ids[]', $prompts, Request::get('prompt_ids'), [
             'class' => 'form-control selectize col-12',
             'multiple',
             'placeholder' => 'Any Prompt',
         ]) !!}
-      </div>
+      </div> --}}
       <div class="form-group ml-1 mb-3">
         {!! Form::select(
             'sort',
