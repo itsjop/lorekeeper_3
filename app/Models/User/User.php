@@ -791,9 +791,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     } else {
       $currencies = $currencies->where('is_displayed', 1);
     }
-
     $currencies = $currencies->orderBy('sort_user', 'DESC')->get();
-
     foreach ($currencies as $currency) {
       $currency->quantity = $owned[$currency->id] ?? 0;
     }

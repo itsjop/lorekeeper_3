@@ -363,5 +363,34 @@
         </li>
       @endguest
     </ul>
+    <div class="clocktainer">
+      <div class="cash">
+        @foreach (Auth::user()->getCurrencies(true, false, Auth::user()) as $currency)
+          {!! $currency->display($currency->quantity) !!}
+        @endforeach
+      </div>
+      <div class="clock">
+        <i class="fa fa-clock"></i>
+        <div id="clock">
+          --:-- -- EST
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
+<script>
+  let timeZone = "EST"
+
+  function getdate() {
+    const date = new Date;
+    const now = date.getTime()
+    document.getElementById("clock").textContent = date.toLocaleTimeString("en-US", {
+      timeZone: "America/New_York",
+      // timeZoneName: "short",
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  }
+  setInterval(getdate, 1000);
+</script>

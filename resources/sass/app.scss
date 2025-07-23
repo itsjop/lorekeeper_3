@@ -3,9 +3,11 @@
 html { background-color: light-dark(#eee, #222)}
 
 // Google Fonts
+// TODO: combine this
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..900&family=Itim&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans+Hebrew:wght@100..800&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans+Hebrew:wght@100..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
 
 // Variables
 @import './support/_colors';

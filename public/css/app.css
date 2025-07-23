@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Fredoka:wght@300..900&family=Itim&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Playpen+Sans+Hebrew:wght@100..800&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=PT+Mono&display=swap);
 @charset "UTF-8";
 * {
   transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
@@ -729,6 +729,10 @@ body {
   text-transform: lowercase;
   font-family: "Itim", sans-serif;
   transform: translateY(-10%);
+}
+.app i {
+  display: flex;
+  align-items: center;
 }
 .app .alert {
   box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
@@ -2443,6 +2447,51 @@ body {
     margin: 5px;
     height: 1px;
     background-color: var(--purple-clr_600);
+  }
+  .clocktainer {
+    display: grid;
+    position: absolute;
+    right: 0;
+    top: -60px;
+    align-content: center;
+    justify-items: end;
+  }
+  .clocktainer .clock,
+  .clocktainer .cash {
+    color: var(--white);
+    padding: 0 10px;
+    background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
+    border-radius: 100vw;
+    display: flex;
+    transition: 0.3s;
+    width: -moz-max-content;
+    width: max-content;
+    place-content: center;
+    place-items: center;
+    gap: 0.5em;
+  }
+  .clocktainer .clock span,
+  .clocktainer .cash span {
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .clocktainer .clock span img,
+  .clocktainer .cash span img {
+    height: 1.3em;
+    width: 1.3em;
+  }
+  .clocktainer .cash {
+    border-radius: 15px 15px 0 0;
+    padding-top: 3px;
+  }
+  .clocktainer .clock {
+    font-family: "PT Mono", Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+    border-radius: 15px 0 15px 15px;
+    padding: 2px 10px 4px;
+  }
+  .clocktainer .clock #clock {
+    font-size: 0.9rem;
   }
 }
 @starting-style {

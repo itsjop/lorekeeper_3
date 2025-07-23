@@ -1,6 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Averia+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Borel&family=Cherry+Bomb+One&family=Playpen+Sans+Arabic:wght@100..800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+{{-- <link href="https://fonts.googleapis.com/css2?family=Averia+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Borel&family=Cherry+Bomb+One&family=Playpen+Sans+Arabic:wght@100..800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> --}}
 <div class="lore grid ji-center jc-center text-center">
   <div class="grid w-content-80 grid-1-8-col grid-mobile-1 pc-center pi-center text-left card gap-2 p-4">
     <i class="fa fa-tools" style="font-size: 2em;"></i>
