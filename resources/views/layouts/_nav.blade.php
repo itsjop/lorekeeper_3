@@ -365,18 +365,19 @@
     </ul>
     <div class="clocktainer">
       <div class="cash">
-        @foreach (Auth::user()->getCurrencies(true) as $currency)
+        @foreach (Auth::user()->getCurrencies(true)->where('id', 1) as $currency)
           {!! $currency->display($currency->quantity) !!}
-        @endforeach
-      </div>
-      <div class="clock">
-        <i class="fa fa-clock"></i>
-        <div id="clock">
-          --:-- -- EST
-        </div>
+        @break
+      @endforeach
+    </div>
+    <div class="clock">
+      <i class="fa fa-clock"></i>
+      <div id="clock">
+        --:-- -- EST
       </div>
     </div>
   </div>
+</div>
 </nav>
 <script>
   let timeZone = "EST"
