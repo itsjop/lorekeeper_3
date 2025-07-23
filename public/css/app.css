@@ -2150,6 +2150,7 @@ body {
 }
 #selected-character .profile-assets-content img {
   max-width: 100%;
+  max-height: 200px;
 }
 
 #app #site-wrapper #header-nav {
@@ -3218,21 +3219,21 @@ because the nesting selector cannot represent pseudo-elements. */
   --card_star_animation-duration: 20s;
   --card_star_blend-mode: overlay;
 }
-.app .gallery-recents {
+.app .gallery-recents, .app .gallery-all {
   display: grid;
   height: 100%;
-  grid-template-rows: repeat(8, [img] auto [title] min-content [details] max-content);
+  grid-template-rows: repeat(80, [img] auto [title] min-content [details] max-content);
   gap: 0 2vmin;
   padding: 20px;
 }
-.app .gallery-recents .submission {
+.app .gallery-recents .submission, .app .gallery-all .submission {
   display: grid;
   grid-row: span 3;
   grid-template-columns: subgrid;
   grid-template-rows: subgrid;
   padding-bottom: 10px;
 }
-.app .gallery-recents .submission .img {
+.app .gallery-recents .submission .img, .app .gallery-all .submission .img {
   grid-area: img;
   width: 100%;
   display: flex;
@@ -3252,24 +3253,24 @@ because the nesting selector cannot represent pseudo-elements. */
   place-self: center;
   max-width: min(100%, 250px);
 }
-.app .gallery-recents .submission .img:hover {
+.app .gallery-recents .submission .img:hover, .app .gallery-all .submission .img:hover {
   filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
   transition: 0.7s var(--elastic_linear);
   transform: scale(1.2);
 }
-.app .gallery-recents .submission .img img {
+.app .gallery-recents .submission .img img, .app .gallery-all .submission .img img {
   place-self: center;
   max-height: 250px;
   border-radius: 15px;
 }
-.app .gallery-recents .submission .title {
+.app .gallery-recents .submission .title, .app .gallery-all .submission .title {
   grid-area: title;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 90%;
 }
-.app .gallery-recents .submission .details {
+.app .gallery-recents .submission .details, .app .gallery-all .submission .details {
   grid-area: details;
 }
 .app .pet-card {

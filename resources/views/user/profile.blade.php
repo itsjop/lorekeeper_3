@@ -117,7 +117,7 @@
     @endif
 
     <div class="row mb-4">
-      <div class="col-md-6">
+      <div id="selected-character" class="col-md-6">
         @include('widgets._selected_character', [
             'character' => $user->settings->selectedCharacter,
             'user' => $user,

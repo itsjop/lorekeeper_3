@@ -216,11 +216,11 @@
     }
   }
 
-  .gallery-recents {
+  .gallery-recents, .gallery-all {
     display: grid;
     height: 100%;
     // grid-auto-rows: 200px;
-    grid-template-rows: repeat(8, [img] auto [title] min-content [details] max-content);
+    grid-template-rows: repeat(80, [img] auto [title] min-content [details] max-content);
     gap: 0 2vmin;
     padding: 20px;
     .submission {

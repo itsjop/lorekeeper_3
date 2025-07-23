@@ -6,7 +6,7 @@
         <a href="{{ $character->url }}">
           <img
             src="{{ isset($fullImage) && $fullImage ? $character->image->thumbnailUrl : $character->image->imageUrl }}"
-            class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }} w-100"
+            class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }} "
             alt="{{ $character->fullName }}"
           />
         </a>
