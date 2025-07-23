@@ -365,10 +365,12 @@
     </ul>
     <div class="clocktainer">
       <div class="cash">
-        @foreach (Auth::user()->getCurrencies(true)->where('id', 1) as $currency)
-          {!! $currency->display($currency->quantity) !!}
-        @break
-      @endforeach
+        @if (Auth::user())
+          @foreach (Auth::user()->getCurrencies(true)->where('id', 1) as $currency)
+            {!! $currency->display($currency->quantity) !!}
+          @break
+        @endforeach
+      @endif
     </div>
     <div class="clock">
       <i class="fa fa-clock"></i>

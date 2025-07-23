@@ -32,7 +32,7 @@
   @endif
 
   <div>
-    {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
+    {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end flex flex-wrap']) !!}
     <div class="form-group mr-3 mb-3">
       {!! Form::text('title', Request::get('title'), ['class' => 'form-control', 'placeholder' => 'Title']) !!}
     </div>
@@ -66,7 +66,7 @@
   @if ($gallery->submissions->count())
     {!! $submissions->render() !!}
 
-    <div class="d-flex align-content-around flex-wrap mb-2">
+    <div class="gallery-all grid-4-col">
       @foreach ($submissions as $submission)
         @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
       @endforeach
@@ -74,7 +74,7 @@
 
     {!! $submissions->render() !!}
   @elseif($childSubmissions->count())
-    <div class="d-flex align-content-around flex-wrap mb-2">
+    <div class="gallery-all grid-4-col">
       @foreach ($childSubmissions->orderBy('created_at', 'DESC')->get()->take(20) as $submission)
         @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
       @endforeach
