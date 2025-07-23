@@ -365,8 +365,10 @@
     </ul>
     <div class="clocktainer">
       <div class="cash">
-        @foreach (Auth::user()->getCurrencies(true, false, Auth::user()) as $currency)
-          {!! $currency->display($currency->quantity) !!}
+        @foreach (current((Auth::user()->getCurrencies(true, false, Auth::user()))) as $currency)
+          <span class="currency">
+            {!! $currency->display($currency->quantity) !!}
+          </span>
         @endforeach
       </div>
       <div class="clock">
