@@ -13,6 +13,11 @@
         </a>
       </li>
       <li class="sidebar-item">
+        <a href="{{ $character->url . '/images' }}" class="{{ set_active('character/' . $character->slug . '/images') }}">
+          Images
+        </a>
+      </li>
+      <li class="sidebar-item">
         <a href="{{ $character->url . '/profile' }}" class="{{ set_active('character/' . $character->slug . '/profile') }}">
           Profile
         </a>
@@ -28,8 +33,8 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ $character->url . '/pets' }}" class="{{ set_active('character/' . $character->slug . '/pets') }}"> Pets
-
+        <a href="{{ $character->url . '/pets' }}" class="{{ set_active('character/' . $character->slug . '/pets') }}">
+          Pets
         </a>
       </li>
       <li class="sidebar-item">
@@ -42,7 +47,7 @@
           Bank
         </a>
       </li>
-      @if ($character->getLineageBlacklistLevel() < 2)
+      {{-- @if ($character->getLineageBlacklistLevel() < 2)
         <li class="sidebar-item">
           <a href="{{ $character->url . '/lineage' }}" class="{{ set_active('character/' . $character->slug . '/lineage') }}">
             Lineage
@@ -54,60 +59,7 @@
           class="{{ set_active('character/' . $character->slug . '/' . __('awards.awardcase')) }}"
         >{{ ucfirst(__('awards.awards')) }}
         </a>
-      </li>
-      @if ($character->getLineageBlacklistLevel() < 2)
-        <li class="sidebar-item">
-          <a href="{{ $character->url . '/lineage' }}" class="{{ set_active('character/' . $character->slug . '/lineage') }}">
-            Lineage
-          </a>
-        </li>
-      @endif
-    </ul>
-  </details>
-  <details class="sidebar-section" open>
-    <summary class="sidebar-section-header">History</summary>
-    <ul>
-      <li class="sidebar-item">
-        <a href="{{ $character->url . '/images' }}" class="{{ set_active('character/' . $character->slug . '/images') }}">
-          Images
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ $character->url . '/change-log' }}"
-          class="{{ set_active('character/' . $character->slug . '/change-log') }}"
-        >Change Log
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ $character->url . '/ownership' }}"
-          class="{{ set_active('character/' . $character->slug . '/ownership') }}">Ownership History
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ $character->url . '/item-logs' }}"
-          class="{{ set_active('character/' . $character->slug . '/item-logs') }}">Item
-          Logs
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ $character->url . '/currency-logs' }}"
-          class="{{ set_active('character/' . $character->slug . '/currency-logs') }}"
-        >Currency Logs
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ $character->url . '/submissions' }}"
-          class="{{ set_active('character/' . $character->slug . '/submissions') }}"
-        > Submissions
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ $character->url . '/' . __('awards.award') . '-logs' }}"
-          class="{{ set_active('character/' . $character->slug . '/' . __('awards.award') . '-logs') }}"
-        >
-          {{ ucfirst(__('awards.award')) }} Logs
-        </a>
-      </li>
+      </li> --}}
     </ul>
   </details>
   @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
@@ -146,4 +98,45 @@
       </ul>
     </details>
   @endif
+  <details class="sidebar-section">
+    <summary class="sidebar-section-header">History</summary>
+    <ul>
+      <li class="sidebar-item">
+        <a href="{{ $character->url . '/change-log' }}"
+          class="{{ set_active('character/' . $character->slug . '/change-log') }}"
+        >Change Log
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="{{ $character->url . '/ownership' }}"
+          class="{{ set_active('character/' . $character->slug . '/ownership') }}">Ownership History
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="{{ $character->url . '/item-logs' }}"
+          class="{{ set_active('character/' . $character->slug . '/item-logs') }}">Item
+          Logs
+        </a>
+      </li>
+      {{-- <li class="sidebar-item">
+        <a href="{{ $character->url . '/currency-logs' }}"
+          class="{{ set_active('character/' . $character->slug . '/currency-logs') }}"
+        >Currency Logs
+        </a>
+      </li> --}}
+      <li class="sidebar-item">
+        <a href="{{ $character->url . '/submissions' }}"
+          class="{{ set_active('character/' . $character->slug . '/submissions') }}"
+        > Submissions
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="{{ $character->url . '/' . __('awards.award') . '-logs' }}"
+          class="{{ set_active('character/' . $character->slug . '/' . __('awards.award') . '-logs') }}"
+        >
+          {{ ucfirst(__('awards.award')) }} Logs
+        </a>
+      </li>
+    </ul>
+  </details>
 </div>
