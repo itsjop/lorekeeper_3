@@ -52,22 +52,37 @@
       align-items: center;
       text-align: center;
       padding: 10px;
+      border: 1px var(--white) solid;
       &.event,
       &.jobs {
-        img {
-          @include hover-preview;
-          max-width: 100%;
-          max-width: 250px;
+        background-size: cover;
+        h3 {
+          padding: 5px 8px;
+          border-radius: 10px;
+          border: 1px var(--white) solid;
         }
-      }
-      &.jobs {
-        grid-template-columns: 1fr 1fr 1fr;
         img {
           width: 100%;
+          max-width: 100%;
           max-width: 250px;
+          @include hover-preview(0);
+          filter: drop-shadow(0 0 5px var(--white));
+        }
+      }
+      &.event {
+        background-image: url('../images/somnivores/frontpage/event_bg.png');
+        h3 { backdrop-filter: brightness(140%) blur(5px); }
+      }
+      &.jobs {
+        background-image: url('../images/somnivores/frontpage/jobs_bg.png');
+        h3 { backdrop-filter: brightness(110%) blur(5px); }
+        grid-template-columns: 1fr 1fr 1fr;
+        >div{
+          display: grid;
+          grid-template-rows: subgrid;
         }
         .foraging img {
-          filter: grayscale(1) opacity(0.5);
+          filter: grayscale(1) opacity(0.5) drop-shadow(0 0 5px var(--white));
         }
       }
       .news-item {

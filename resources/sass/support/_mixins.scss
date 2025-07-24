@@ -19,23 +19,25 @@
   $offset_x: 4px;
   $offset_y: 4px;
   $blur: 3px;
-  filter:
-    drop-shadow( -$offset_x      ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
-    drop-shadow(  $offset_x      ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
-    drop-shadow((-$offset_x / 2)  $offset_y      $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
-    drop-shadow(( $offset_x / 2)  $offset_y      $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
+  @if ($opacity != 0) {
+    filter: drop-shadow(-$offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
+      drop-shadow($offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
+      drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
+      drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
+    &:hover {
+      $offset_x: 10px;
+      $offset_y: 10px;
+      $blur: 6px;
+      $opacity_hover: $opacity * 0.75;
+      filter: drop-shadow(-$offset_x (-$offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
+        drop-shadow($offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
+        drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
+        drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent));
+    }
+  }
   &:hover {
-    $offset_x: 10px;
-    $offset_y: 10px;
-    $blur: 6px;
-    $opacity_hover: $opacity * .75;
-    filter:
-      drop-shadow( -$offset_x      (-$offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
-      drop-shadow(  $offset_x      ( $offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
-      drop-shadow((-$offset_x / 2)   $offset_y      $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
-      drop-shadow(( $offset_x / 2)   $offset_y      $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent));
     transition: 0.7s var(--elastic_linear);
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 @mixin scalloped($size: 1vw, $direction: 'vertical') {

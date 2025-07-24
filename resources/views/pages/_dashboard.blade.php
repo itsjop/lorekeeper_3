@@ -14,12 +14,14 @@
         class="w-66"
       >
       <div class="grid ai-center">
-        <h3> (Coming Soon!) </h3>
-        <h4 class="flex jc-center">
-          <a href="">daily</a>
-          <i class="fas fa-star px-2"></i>
-          <a href="">shop</a>
-        </h4>
+        <h3>
+          <p class="m-0">
+            <a href="">daily</a>
+            <i class="fas fa-star px-2"></i>
+            <a href="">shop</a>
+          </p>
+          <p class="small m-0"> (coming soon!) </p>
+        </h3>
       </div>
     </div>
   </div>
@@ -44,7 +46,11 @@
       <div class="foraging">
         <a href="/dailies/3">
           <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone">
-          <h3 class="a">Foraging (coming soon)</h3>
+          <h3 class="a">Foraging
+            <p class="small m-0">
+              (coming soon!)
+            </p>
+          </h3>
         </a>
       </div>
     </div>

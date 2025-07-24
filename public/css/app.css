@@ -503,6 +503,13 @@ body #app.teal {
 #app .color-unset {
   color: unset;
 }
+#app .small {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+#app .xsmall {
+  font-size: 0.6rem;
+}
 
 body {
   /* Breakpoints */
@@ -1586,28 +1593,49 @@ body {
   align-items: center;
   text-align: center;
   padding: 10px;
+  border: 1px var(--white) solid;
+}
+.home-dashboard .bubblebox .bubble.event, .home-dashboard .bubblebox .bubble.jobs {
+  background-size: cover;
+}
+.home-dashboard .bubblebox .bubble.event h3, .home-dashboard .bubblebox .bubble.jobs h3 {
+  padding: 5px 8px;
+  border-radius: 10px;
+  border: 1px var(--white) solid;
 }
 .home-dashboard .bubblebox .bubble.event img, .home-dashboard .bubblebox .bubble.jobs img {
-  transition: 0.5s var(--bounce_linear);
-  transform: scale(1);
-  filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
+  width: 100%;
   max-width: 100%;
   max-width: 250px;
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(0 0 5px var(--white));
 }
 .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.jobs img:hover {
-  filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
   transition: 0.7s var(--elastic_linear);
-  transform: scale(1.2);
+  transform: scale(1.1);
+}
+.home-dashboard .bubblebox .bubble.event {
+  background-image: url("../images/somnivores/frontpage/event_bg.png");
+}
+.home-dashboard .bubblebox .bubble.event h3 {
+  -webkit-backdrop-filter: brightness(140%) blur(5px);
+          backdrop-filter: brightness(140%) blur(5px);
 }
 .home-dashboard .bubblebox .bubble.jobs {
+  background-image: url("../images/somnivores/frontpage/jobs_bg.png");
   grid-template-columns: 1fr 1fr 1fr;
 }
-.home-dashboard .bubblebox .bubble.jobs img {
-  width: 100%;
-  max-width: 250px;
+.home-dashboard .bubblebox .bubble.jobs h3 {
+  -webkit-backdrop-filter: brightness(110%) blur(5px);
+          backdrop-filter: brightness(110%) blur(5px);
+}
+.home-dashboard .bubblebox .bubble.jobs > div {
+  display: grid;
+  grid-template-rows: subgrid;
 }
 .home-dashboard .bubblebox .bubble.jobs .foraging img {
-  filter: grayscale(1) opacity(0.5);
+  filter: grayscale(1) opacity(0.5) drop-shadow(0 0 5px var(--white));
 }
 .home-dashboard .bubblebox .bubble .news-item {
   justify-self: start;
@@ -1726,8 +1754,11 @@ body {
 .app .gallery-recents .submission .img:hover,
 .app .gallery-all .submission .img:hover {
   filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
+}
+.app .gallery-recents .submission .img:hover,
+.app .gallery-all .submission .img:hover {
   transition: 0.7s var(--elastic_linear);
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 .app .gallery-recents .submission .img img,
 .app .gallery-all .submission .img img {
@@ -1806,8 +1837,10 @@ body {
 }
 .daily .prizes .prize .prize-box img:hover {
   filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
+}
+.daily .prizes .prize .prize-box img:hover {
   transition: 0.7s var(--elastic_linear);
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 .daily.many {
   grid-template-columns: 1fr 1fr;
@@ -3288,8 +3321,10 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 .app .daily-button:hover {
   filter: drop-shadow(-10px -5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(10px 5px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 3%, transparent));
+}
+.app .daily-button:hover {
   transition: 0.7s var(--elastic_linear);
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 .app .daily-button:active {
   transition-duration: 0.8s;
