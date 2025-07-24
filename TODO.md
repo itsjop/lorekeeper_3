@@ -9,6 +9,7 @@
 - [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
 - [ ] Bat transformation should always be listed first
 - [ ] native `<details name="">` exclusive toggle for tabs
+- [ ] live server time for clock
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)

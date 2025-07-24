@@ -375,7 +375,8 @@
     <div class="clock">
       <i class="fa fa-clock"></i>
       <div id="clock">
-        --:-- -- EST
+        {{-- TODO: live server time initial --}}
+        --:--:-- --
       </div>
     </div>
   </div>
