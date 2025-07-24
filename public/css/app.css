@@ -1379,10 +1379,10 @@ body {
        object-fit: contain;
   }
 }
-.app.breadcrumb {
+.app .breadcrumb {
   contain: paint;
 }
-.app.breadcrumb .breadcrumb-item {
+.app .breadcrumb .breadcrumb-item {
   --bc_chevron-width: 20px;
   --bc_chevron-size: 10px;
   position: relative;
@@ -1399,24 +1399,24 @@ body {
     0% 0%
   );
 }
-.app.breadcrumb .breadcrumb-item a,
-.app.breadcrumb .breadcrumb-item span {
+.app .breadcrumb .breadcrumb-item a,
+.app .breadcrumb .breadcrumb-item span {
   color: var(--bc-col);
   z-index: 1;
 }
-.app.breadcrumb .breadcrumb-item:nth-of-type(1) {
+.app .breadcrumb .breadcrumb-item:nth-of-type(1) {
   --bc-bg: var(--purple-clr_600);
   --bc-col: var(--purple-clr_100);
 }
-.app.breadcrumb .breadcrumb-item:nth-of-type(2) {
+.app .breadcrumb .breadcrumb-item:nth-of-type(2) {
   --bc-bg: var(--purple-clr_500);
   --bc-col: var(--purple-clr_100);
 }
-.app.breadcrumb .breadcrumb-item.active {
+.app .breadcrumb .breadcrumb-item.active {
   --bc-bg: var(--purple-clr_300);
   --bc-col: var(--purple-clr_700);
 }
-.app.breadcrumb .breadcrumb-item:first-of-type {
+.app .breadcrumb .breadcrumb-item:first-of-type {
   --bc-clip: polygon(
     0% 0%,
     calc(100% - var(--bc_chevron-size)) 0%,
@@ -1426,13 +1426,13 @@ body {
   );
   padding: 0 15px 0 10px;
 }
-.app.breadcrumb .breadcrumb-item:first-of-type::before {
+.app .breadcrumb .breadcrumb-item:first-of-type::before {
   width: calc(100% + 0.25 * var(--bc_chevron-width));
   transform: translateX(calc(-0.5 * var(--bc_chevron-width)));
   overflow: hidden;
   border-radius: 5px 0 0 5px;
 }
-.app.breadcrumb .breadcrumb-item::before {
+.app .breadcrumb .breadcrumb-item::before {
   content: "";
   display: block;
   background: var(--bc-bg);
@@ -1656,9 +1656,8 @@ body {
 .home-dashboard .bubblebox .bubble .gallery {
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, transparent 2px, transparent 15px), linear-gradient(to bottom left, #bfeeff, #e6d9ff, #ffdde9, #fff1d5);
   border-radius: 15px;
-  border: 2px white solid;
+  contain: paint;
 }
 
 @media (width < 768px) {
@@ -1725,6 +1724,7 @@ body {
   grid-template-rows: repeat(80, [img] auto [title] min-content [details] max-content);
   gap: 0 2vmin;
   padding: 20px;
+  contain: paint;
 }
 .app .gallery-recents .submission,
 .app .gallery-all .submission {

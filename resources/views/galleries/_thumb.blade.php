@@ -3,7 +3,7 @@
     @include('widgets._gallery_thumb', ['submission' => $submission])
   </a>
   <?php if (isset($submission->hash) && !isset($submission->content_warning)) {
-      $width = Image::make($submission->imagePath . '/' . $submission->thumbnailFileName)->width();
+      $width = 200;
   } else {
       $width = 200;
   } ?>
