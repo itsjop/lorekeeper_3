@@ -637,7 +637,7 @@ Route::group(['prefix' => 'grants', 'namespace' => 'Users', 'middleware' => 'pow
   Route::post('borders', 'GrantController@postBorders');
   Route::get('recipes', 'GrantController@getRecipes');
   Route::post('recipes', 'GrantController@postRecipes');
-  
+
   Route::get('encounter-energy', 'GrantController@getEncounterEnergyGrants');
   Route::post('encounter-energy', 'GrantController@postEncounterEnergyGrant');
 });
@@ -1038,4 +1038,12 @@ Route::group(['prefix' => 'maps', 'middleware' => 'power:manage_maps'], function
 Route::group(['prefix' => 'pairings', 'middleware' => 'power:manage_raffles'], function () {
   Route::get('roller', 'PairingController@getRoller');
   Route::post('roller', 'PairingController@postRoll');
+});
+
+// MOD MAIL
+Route::group(['prefix' => 'mail', 'middleware' => 'power:send_mod_mail'], function () {
+    Route::get('/', 'ModMailController@getIndex');
+    Route::get('view/{id}', 'ModMailController@getMail');
+    Route::get('create', 'ModMailController@getCreateMail');
+    Route::post('create', 'ModMailController@postCreateMail');
 });

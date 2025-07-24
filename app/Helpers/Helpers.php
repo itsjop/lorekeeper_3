@@ -15,7 +15,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 // Used for the redundant isset() calls for optional information
 function safe($val, $fallback = '') {
-   return isset($val) ? $val : $fallback;
+  return isset($val) ? $val : $fallback;
 }
 
 function sanitizeUserString(string $name): string {
@@ -224,7 +224,7 @@ function parseUsersAndAvatars($text, &$users) {
   if ($count) {
     $matches = array_unique($matches[1]);
     foreach ($matches as $match) {
-      $user = App\Models\User\User::where('name', $match)->first();
+      $user = \App\Models\User\User::where('name', $match)->first();
       if ($user) {
         $users[] = $user;
         $text = preg_replace('/\B%' . $match . '/', '<a href="' . $user->url . '"><img src="' . $user->avatarUrl . '" style="width:70px; height:70px; border-radius:50%; " alt="' . $user->name . '\'s Avatar"></a>' . $user->displayName, $text);
@@ -251,7 +251,7 @@ function parseUserIDs($text, &$users) {
   if ($count) {
     $matches = array_unique($matches[1]);
     foreach ($matches as $match) {
-      $user = App\Models\User\User::where('id', $match)->first();
+      $user = \App\Models\User\User::where('id', $match)->first();
       if ($user) {
         $users[] = $user;
         $text = preg_replace('/\[user=' . $match . '\]/', $user->displayName, $text);
@@ -278,7 +278,7 @@ function parseUserIDsForAvatars($text, &$users) {
   if ($count) {
     $matches = array_unique($matches[1]);
     foreach ($matches as $match) {
-      $user = App\Models\User\User::where('id', $match)->first();
+      $user = \App\Models\User\User::where('id', $match)->first();
       if ($user) {
         $users[] = $user;
         $text = preg_replace('/\[userav=' . $match . '\]/', '<a href="' . $user->url . '"><img src="' . $user->avatarUrl . '" style="width:70px; height:70px; border-radius:50%; " alt="' . $user->name . '\'s Avatar"></a>', $text);
@@ -305,7 +305,7 @@ function parseCharacters($text, &$characters) {
   if ($count) {
     $matches = array_unique($matches[1]);
     foreach ($matches as $match) {
-      $character = App\Models\Character\Character::where('slug', $match)->first();
+      $character = \App\Models\Character\Character::where('slug', $match)->first();
       if ($character) {
         $characters[] = $character;
         $text = preg_replace('/\[character=' . $match . '\]/', $character->displayName, $text);
@@ -332,10 +332,10 @@ function parseCharacterThumbs($text, &$characters) {
   if ($count) {
     $matches = array_unique($matches[1]);
     foreach ($matches as $match) {
-      $character = App\Models\Character\Character::where('slug', $match)->first();
+      $character = \App\Models\Character\Character::where('slug', $match)->first();
       if ($character) {
         $characters[] = $character;
-        $text = preg_replace('/\[charthumb=' . $match . '\]/', '<a href="' . $character->url . '"><img class="img-thumbnail" alt="Thumbnail of ' . $character->fullName . '" data-bs-toggle="tooltip" title="' . $character->fullName . '" src="' . $character->image->thumbnailUrl . '"></a>', $text);
+        $text = preg_replace('/\[charthumb=' . $match . '\]/', '<a href="' . $character->url . '"><img class="img-thumbnail" alt="Thumbnail of ' . $character->fullName . '" data-toggle="tooltip" title="' . $character->fullName . '" src="' . $character->image->thumbnailUrl . '"></a>', $text);
       }
     }
   }
@@ -359,10 +359,10 @@ function parseGalleryThumbs($text, &$submissions) {
   if ($count) {
     $matches = array_unique($matches[1]);
     foreach ($matches as $match) {
-      $submission = App\Models\Gallery\GallerySubmission::where('id', $match)->first();
+      $submission = \App\Models\Gallery\GallerySubmission::where('id', $match)->first();
       if ($submission) {
         $submissions[] = $submission;
-        $text = preg_replace('/\[thumb=' . $match . '\]/', '<a href="' . $submission->url . '" data-bs-toggle="tooltip" title="' . $submission->displayTitle . ' by ' . nl2br(htmlentities($submission->creditsPlain)) . (isset($submission->content_warning) ? '<br/><strong>Content Warning:</strong> ' . nl2br(htmlentities($submission->content_warning)) : '') . '">' . view('widgets._gallery_thumb', ['submission' => $submission]) . '</a>', $text);
+        $text = preg_replace('/\[thumb=' . $match . '\]/', '<a href="' . $submission->url . '" data-toggle="tooltip" title="' . $submission->displayTitle . ' by ' . nl2br(htmlentities($submission->creditsPlain)) . (isset($submission->content_warning) ? '<br/><strong>Content Warning:</strong> ' . nl2br(htmlentities($submission->content_warning)) : '') . '">' . view('widgets._gallery_thumb', ['submission' => $submission]) . '</a>', $text);
       }
     }
   }
@@ -411,7 +411,7 @@ function checkAlias($url, $failOnError = true) {
       }
     }
     if ((!isset($matches[0]) || $matches[0] == []) && $failOnError) {
-      throw new Exception('This URL is from an invalid site. Please provide a URL for a user profile from a site used for authentication.');
+      throw new \Exception('This URL is from an invalid site. Please provide a URL for a user profile from a site used for authentication.');
     }
 
     // and 2. if it contains an alias associated with a user on-site.

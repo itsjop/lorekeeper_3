@@ -16,13 +16,13 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     {{-- <div class="currency">
-      <div class="col-lg-10 col-md-9 col-6">
-        {{ $currency->quantity }}
-        @if ($currency->has_icon)
-          {!! $currency->displayIcon !!}
-        @endif
-      </div>
-    </div> --}}
+    <div class="col-lg-10 col-md-9 col-6">
+      {{ $currency->quantity }}
+      @if ($currency->has_icon)
+        {!! $currency->displayIcon !!}
+      @endif
+    </div>
+  </div> --}}
     <!-- Left Side Of Navbar -->
     <ul id="site-navbar" class=" navbar-nav">
       <li class="nav-item dropdown">
@@ -131,7 +131,7 @@
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">Databases</h2>
             {{-- <a class="dt-nav-item" href="{{ url('world/pets') }}">
-              <i class="fas fa-cat"></i> Companions & Trinkets </a> --}}
+            <i class="fas fa-cat"></i> Companions & Trinkets </a> --}}
             <a class="dt-nav-item" href="{{ url('world') }}">
               <i class="fas fa-search"></i> Encyclopedia </a>
           </div>
@@ -227,16 +227,16 @@
             <a class="dt-nav-item" href="{{ url('shops') }}">
               <i class="fas fa-gifts"></i> Shops </a>
             {{-- <hr>
-            <a class="dt-nav-item bold" style="font-size: 1.3em; font-weight: 700" href="{{ url('crafting') }}">
-              <i class="fas fa-warning"></i> FREE SHIT!!! </a> --}}
+          <a class="dt-nav-item bold" style="font-size: 1.3em; font-weight: 700" href="{{ url('crafting') }}">
+            <i class="fas fa-warning"></i> FREE SHIT!!! </a> --}}
             <hr>
             <a class="dt-nav-item" href="{{ url('crafting') }}">
               <i class="fas fa-tools"></i> Crafting </a>
             {{-- <a class="dt-nav-item" href="{{ url('____') }}">
-              <i class="far fa-seedling"></i> Foraging (coming soon)</a>
-            <hr>
-            <a class="dt-nav-item" href="{{ url('____') }}">
-              <i class="far fa-calendar-days"></i> Current Event (coming soon)</a> --}}
+            <i class="far fa-seedling"></i> Foraging (coming soon)</a>
+          <hr>
+          <a class="dt-nav-item" href="{{ url('____') }}">
+            <i class="far fa-calendar-days"></i> Current Event (coming soon)</a> --}}
           </div>
         </div>
       </li>

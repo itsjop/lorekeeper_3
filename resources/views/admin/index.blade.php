@@ -8,7 +8,26 @@
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Home' => 'admin']) !!}
 
   <h1>
-    Admin Dashboard</h1>
+    Admin Dashboard
+  </h1>
+
+  @if (Auth::user()->hasPower('send_mod_mail'))
+    <div class="card my-2">
+      <div class="card-body">
+        <div class="card-title">
+          <h2>Mod Mail</h2>
+        </div>
+        <div class="card-text">
+          <p>In this section you can view all sent mod mail and send new mod mail to users.</p>
+          <p>
+            <a href="{{ url('admin/mail') }}" class="btn btn-primary">View Mod Mail</a>
+            <a href="{{ url('admin/mail/create') }}" class="btn btn-primary">Send Mod Mail</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  @endif
+
   <div class="row">
     @if (Auth::user()->hasPower('manage_submissions'))
       <div class="col-sm-6">
@@ -26,7 +45,8 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/submissions/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/submissions/pending') }}" class="card-link">View Queue <span
+                  class="fas fa-caret-right ml-1"></span></a>
             </div>
           </div>
         </div>
@@ -46,7 +66,8 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/claims/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/claims/pending') }}" class="card-link">View Queue <span
+                  class="fas fa-caret-right ml-1"></span></a>
             </div>
           </div>
         </div>
@@ -68,7 +89,9 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/design-approvals/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/design-approvals/pending') }}" class="card-link">View Queue <span
+                  class="fas fa-caret-right ml-1"
+                ></span></a>
             </div>
           </div>
         </div>
@@ -88,7 +111,8 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/myo-approvals/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/myo-approvals/pending') }}" class="card-link">View Queue <span
+                  class="fas fa-caret-right ml-1"></span></a>
             </div>
           </div>
         </div>
@@ -103,13 +127,16 @@
               </h5>
               <p class="card-text">
                 @if ($transferCount + $tradeCount)
-                  {{ $transferCount + $tradeCount }} character transfer{{ $transferCount + $tradeCount == 1 ? '' : 's' }} and/or trade{{ $transferCount + $tradeCount == 1 ? '' : 's' }} awaiting processing.
+                  {{ $transferCount + $tradeCount }} character transfer{{ $transferCount + $tradeCount == 1 ? '' : 's' }} and/or
+                  trade{{ $transferCount + $tradeCount == 1 ? '' : 's' }} awaiting processing.
                 @else
                   The character transfer/trade queue is clear. Hooray!
                 @endif
               </p>
               <div class="text-right">
-                <a href="{{ url('admin/masterlist/transfers/incoming') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+                <a href="{{ url('admin/masterlist/transfers/incoming') }}" class="card-link">View Queue <span
+                    class="fas fa-caret-right ml-1"
+                  ></span></a>
               </div>
             </div>
           </div>
@@ -138,13 +165,18 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/reports/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/reports/pending') }}" class="card-link">View Queue <span
+                  class="fas fa-caret-right ml-1"></span></a>
             </div>
           </div>
         </div>
       </div>
     @endif
-    @if (!Auth::user()->hasPower('manage_submissions') && !Auth::user()->hasPower('manage_characters') && !Auth::user()->hasPower('manage_reports'))
+    @if (
+        !Auth::user()->hasPower('manage_submissions') &&
+            !Auth::user()->hasPower('manage_characters') &&
+            !Auth::user()->hasPower('manage_reports')
+    )
       <div class="card p-4 col-12">
         <h5 class="card-title">You do not have a rank that allows you to access any queues.</h5>
         <p class="mb-1">
@@ -166,13 +198,16 @@
               </h5>
               <p class="card-text">
                 @if ($gallerySubmissionCount)
-                  {{ $gallerySubmissionCount }} gallery submission{{ $gallerySubmissionCount == 1 ? '' : 's' }} awaiting processing.
+                  {{ $gallerySubmissionCount }} gallery submission{{ $gallerySubmissionCount == 1 ? '' : 's' }} awaiting
+                  processing.
                 @else
                   The gallery submission queue is clear. Hooray!
                 @endif
               </p>
               <div class="text-right">
-                <a href="{{ url('admin/gallery/submissions/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+                <a href="{{ url('admin/gallery/submissions/pending') }}" class="card-link">View Queue <span
+                    class="fas fa-caret-right ml-1"
+                  ></span></a>
               </div>
             </div>
           </div>
@@ -194,7 +229,9 @@
                 @endif
               </p>
               <div class="text-right">
-                <a href="{{ url('admin/gallery/currency/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+                <a href="{{ url('admin/gallery/currency/pending') }}" class="card-link">View Queue <span
+                    class="fas fa-caret-right ml-1"
+                  ></span></a>
               </div>
             </div>
           </div>

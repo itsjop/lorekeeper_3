@@ -91,6 +91,8 @@ class AddSiteSettings extends Command {
 
     $this->addSiteSetting('group_currency', 1, 'ID of the group currency to award from gallery submissions (if enabled).');
 
+    $this->addSiteSetting('max_strike_count', 3, 'Number of strikes a user can have before being automatically banned.');
+
     $this->addSiteSetting('character_title_display', 0, '0: Characters\' titles only display in their image info.
 1: Characters\'s titles display alongside their category, species, rarity.');
 

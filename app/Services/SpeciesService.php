@@ -10,7 +10,7 @@ use App\Models\Character\CharacterLineageBlacklist;
 use Illuminate\Support\Facades\DB;
 
 class SpeciesService extends Service {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Species Service
     |--------------------------------------------------------------------------
@@ -19,311 +19,317 @@ class SpeciesService extends Service {
     |
     */
 
-    /**
-     * Creates a new species.
-     *
-     * @param  array                  $data
-     * @param  \App\Models\User\User  $user
-     * @return bool|\App\Models\Species\Species
-     */
-    public function createSpecies($data, $user) {
-        DB::beginTransaction();
+  /**
+   * Creates a new species.
+   *
+   * @param  array                  $data
+   * @param  \App\Models\User\User  $user
+   * @return bool|\App\Models\Species\Species
+   */
+  public function createSpecies($data, $user) {
+    DB::beginTransaction();
 
-        try {
-            $data = $this->populateData($data);
+    try {
+      $data = $this->populateData($data);
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $data['hash'] = randomString(10);
-                $image = $data['image'];
-                unset($data['image']);
-            } else {
-                $data['has_image'] = 0;
-            }
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $data['hash'] = randomString(10);
+        $image = $data['image'];
+        unset($data['image']);
+      } else {
+        $data['has_image'] = 0;
+      }
 
-            $species = Species::create($data);
-            // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'species', $species->id);
+      $species = Species::create($data);
+      // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'species', $species->id);
 
-            if ($image) {
-                $this->handleImage($image, $species->speciesImagePath, $species->speciesImageFileName);
-            }
+      if ($image) {
+        $this->handleImage($image, $species->speciesImagePath, $species->speciesImageFileName);
+      }
 
-            return $this->commitReturn($species);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($species);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Updates a species.
-     *
-     * @param  \App\Models\Species\Species  $species
-     * @param  array                        $data
-     * @param  \App\Models\User\User        $user
-     * @return bool|\App\Models\Species\Species
-     */
-    public function updateSpecies($species, $data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // More specific validation
-            if (Species::where('name', $data['name'])->where('id', '!=', $species->id)->exists()) {
-                throw new \Exception('The name has already been taken.');
-            }
+  /**
+   * Updates a species.
+   *
+   * @param  \App\Models\Species\Species  $species
+   * @param  array                        $data
+   * @param  \App\Models\User\User        $user
+   * @return bool|\App\Models\Species\Species
+   */
+  public function updateSpecies($species, $data, $user) {
+    DB::beginTransaction();
 
-            $data = $this->populateData($data, $species);
+    try {
+      // More specific validation
+      if (Species::where('name', $data['name'])->where('id', '!=', $species->id)->exists()) {
+        throw new \Exception('The name has already been taken.');
+      }
 
-            $image = null;
-            if(isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $data['hash'] = randomString(10);
-                $image = $data['image'];
-                unset($data['image']);
-            }
+      $data = $this->populateData($data, $species);
 
-            $species->update($data);
-            // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'species', $species->id);
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $data['hash'] = randomString(10);
+        $image = $data['image'];
+        unset($data['image']);
+      }
 
-            if ($species) {
-                $this->handleImage($image, $species->speciesImagePath, $species->speciesImageFileName);
-            }
+      $species->update($data);
+      // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'species', $species->id);
 
-            return $this->commitReturn($species);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      if ($species) {
+        $this->handleImage($image, $species->speciesImagePath, $species->speciesImageFileName);
+      }
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($species);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Processes user input for creating/updating a species.
-     *
-     * @param  array                        $data
-     * @param  \App\Models\Species\Species  $species
-     * @return array
-     */
-    private function populateData($data, $species = null)
-    {
-        if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
+    return $this->rollbackReturn(false);
+  }
 
-        if(isset($data['remove_image']))
-        {
-            if($species && $species->has_image && $data['remove_image'])
-            {
-                $data['has_image'] = 0;
-                $this->deleteImage($species->speciesImagePath, $species->speciesImageFileName);
-            }
-            unset($data['remove_image']);
-        }
-
-        return $data;
+  /**
+   * Processes user input for creating/updating a species.
+   *
+   * @param array   $data
+   * @param Species $species
+   *
+   * @return array
+   */
+  private function populateData($data, $species = null) {
+    if (isset($data['description']) && $data['description']) {
+      $data['parsed_description'] = parse($data['description']);
     }
 
-    /**
-     * Deletes a species.
-     *
-     * @param Species $species
-     *
-     * @return bool
-     */
-    public function deleteSpecies($species) {
-        DB::beginTransaction();
-
-        try {
-            // Check first if characters with this species exists
-            if(CharacterImage::where('species_id', $species->id)->exists()) throw new \Exception("A character image with this species exists. Please change its species first.");
-
-            if($species->has_image) $this->deleteImage($species->speciesImagePath, $species->speciesImageFileName);
-            $species->delete();
-
-            // CharacterLineageBlacklist::searchAndSet(0, 'species', $species->id);
-
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+    if (!isset($data['is_visible'])) {
+      $data['is_visible'] = 0;
+    }
+    if (isset($data['remove_image'])) {
+      if ($species && $species->has_image && $data['remove_image']) {
+        $data['has_image'] = 0;
+        $this->deleteImage($species->speciesImagePath, $species->speciesImageFileName);
+      }
+      unset($data['remove_image']);
     }
 
-    /**
-     * Sorts species order.
-     *
-     * @param array $data
-     *
-     * @return bool
-     */
-    public function sortSpecies($data) {
-        DB::beginTransaction();
+    return $data;
+  }
 
-        try {
-            // explode the sort array and reverse it since the order is inverted
-            $sort = array_reverse(explode(',', $data));
+  /**
+   * Deletes a species.
+   *
+   * @param Species $species
+   *
+   * @return bool
+   */
+  public function deleteSpecies($species) {
+    DB::beginTransaction();
 
-            foreach ($sort as $key => $s) {
-                Species::where('id', $s)->update(['sort' => $key]);
-            }
+    try {
+      // Check first if characters with this species exists
+      if (CharacterImage::where('species_id', $species->id)->exists()) throw new \Exception("A character image with this species exists. Please change its species first.");
 
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      if ($species->has_image) $this->deleteImage($species->speciesImagePath, $species->speciesImageFileName);
+      $species->delete();
 
-        return $this->rollbackReturn(false);
+      // CharacterLineageBlacklist::searchAndSet(0, 'species', $species->id);
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Creates a new subtype.
-     *
-     * @param  array                  $data
-     * @param  \App\Models\User\User  $user
-     * @return bool|\App\Models\Species\Subtype
-     */
-    public function createSubtype($data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            $data = $this->populateSubtypeData($data);
+  /**
+   * Sorts species order.
+   *
+   * @param array $data
+   *
+   * @return bool
+   */
+  public function sortSpecies($data) {
+    DB::beginTransaction();
 
-            $image = null;
-            if (isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $data['hash'] = randomString(10);
-                $image = $data['image'];
-                unset($data['image']);
-            } else {
-                $data['has_image'] = 0;
-            }
+    try {
+      // explode the sort array and reverse it since the order is inverted
+      $sort = array_reverse(explode(',', $data));
 
-            $subtype = Subtype::create($data);
-            if ($image) {
-                $this->handleImage($image, $subtype->subtypeImagePath, $subtype->subtypeImageFileName);
-            }
+      foreach ($sort as $key => $s) {
+        Species::where('id', $s)->update(['sort' => $key]);
+      }
 
-            // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'subtype', $subtype->id);
-
-            return $this->commitReturn($subtype);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Updates a subtype.
-     *
-     * @param  \App\Models\Species\Subtype  $subtype
-     * @param  array                        $data
-     * @param  \App\Models\User\User        $user
-     * @return bool|\App\Models\Species\Subtype
-     */
-    public function updateSubtype($subtype, $data, $user) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            $data = $this->populateSubtypeData($data, $subtype);
+  /**
+   * Creates a new subtype.
+   *
+   * @param  array                  $data
+   * @param  \App\Models\User\User  $user
+   * @return bool|\App\Models\Species\Subtype
+   */
+  public function createSubtype($data, $user) {
+    DB::beginTransaction();
 
-            $image = null;
-            if(isset($data['image']) && $data['image']) {
-                $data['has_image'] = 1;
-                $data['hash'] = randomString(10);
-                $image = $data['image'];
-                unset($data['image']);
-            }
-            $subtype->update($data);
+    try {
+      $data = $this->populateSubtypeData($data);
 
-            if ($subtype) {
-                $this->handleImage($image, $subtype->subtypeImagePath, $subtype->subtypeImageFileName);
-            }
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $data['hash'] = randomString(10);
+        $image = $data['image'];
+        unset($data['image']);
+      } else {
+        $data['has_image'] = 0;
+      }
 
-            // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'subtype', $subtype->id);
+      $subtype = Subtype::create($data);
+      if ($image) {
+        $this->handleImage($image, $subtype->subtypeImagePath, $subtype->subtypeImageFileName);
+      }
 
-            return $this->commitReturn($subtype);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
+      // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'subtype', $subtype->id);
 
-        return $this->rollbackReturn(false);
+      return $this->commitReturn($subtype);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Processes user input for creating/updating a subtype.
-     *
-     * @param  array                        $data
-     * @param  \App\Models\Species\Subtype  $subtype
-     * @return array
-     */
-    private function populateSubtypeData($data, $subtype = null)
-    {
-        if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
+    return $this->rollbackReturn(false);
+  }
 
-        if(isset($data['remove_image']))
-        {
-            if($subtype && $subtype->has_image && $data['remove_image'])
-            {
-                $data['has_image'] = 0;
-                $this->deleteImage($subtype->subtypeImagePath, $subtype->subtypeImageFileName);
-            }
-            unset($data['remove_image']);
-        }
+  /**
+   * Updates a subtype.
+   *
+   * @param  \App\Models\Species\Subtype  $subtype
+   * @param  array                        $data
+   * @param  \App\Models\User\User        $user
+   * @return bool|\App\Models\Species\Subtype
+   */
+  public function updateSubtype($subtype, $data, $user) {
+    DB::beginTransaction();
 
-        return $data;
+    try {
+      $data = $this->populateSubtypeData($data, $subtype);
+
+      $image = null;
+      if (isset($data['image']) && $data['image']) {
+        $data['has_image'] = 1;
+        $data['hash'] = randomString(10);
+        $image = $data['image'];
+        unset($data['image']);
+      }
+      $subtype->update($data);
+
+      if ($subtype) {
+        $this->handleImage($image, $subtype->subtypeImagePath, $subtype->subtypeImageFileName);
+      }
+
+      // $blacklist = CharacterLineageBlacklist::searchAndSet($data['lineage-blacklist'], 'subtype', $subtype->id);
+
+      return $this->commitReturn($subtype);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
     }
 
-    /**
-     * Deletes a subtype.
-     *
-     * @param Subtype $subtype
-     *
-     * @return bool
-     */
-    public function deleteSubtype($subtype) {
-        DB::beginTransaction();
+    return $this->rollbackReturn(false);
+  }
 
-        try {
-            // Check first if characters with this subtype exists
-            if(CharacterImage::where('subtype_id', $subtype->id)->exists()) throw new \Exception("A character image with this subtype exists. Please change or remove its subtype first.");
-            if($subtype->has_image) $this->deleteImage($subtype->subtypeImagePath, $subtype->subtypeImageFileName);
-            $subtype->delete();
-
-            // CharacterLineageBlacklist::searchAndSet(0, 'subtype', $subtype->id);
-
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+  /**
+   * Processes user input for creating/updating a subtype.
+   *
+   * @param array   $data
+   * @param Subtype $subtype
+   *
+   * @return array
+   */
+  private function populateSubtypeData($data, $subtype = null) {
+    if (isset($data['description']) && $data['description']) {
+      $data['parsed_description'] = parse($data['description']);
     }
 
-    /**
-     * Sorts subtype order.
-     *
-     * @param array $data
-     *
-     * @return bool
-     */
-    public function sortSubtypes($data) {
-        DB::beginTransaction();
-
-        try {
-            // explode the sort array and reverse it since the order is inverted
-            $sort = array_reverse(explode(',', $data));
-
-            foreach ($sort as $key => $s) {
-                Subtype::where('id', $s)->update(['sort' => $key]);
-            }
-
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-
-        return $this->rollbackReturn(false);
+    if (!isset($data['is_visible'])) {
+      $data['is_visible'] = 0;
     }
+    if (isset($data['remove_image'])) {
+      if ($subtype && $subtype->has_image && $data['remove_image']) {
+        $data['has_image'] = 0;
+        $this->deleteImage($subtype->subtypeImagePath, $subtype->subtypeImageFileName);
+      }
+      unset($data['remove_image']);
+    }
+
+    return $data;
+  }
+
+  /**
+   * Deletes a subtype.
+   *
+   * @param Subtype $subtype
+   *
+   * @return bool
+   */
+  public function deleteSubtype($subtype) {
+    DB::beginTransaction();
+
+    try {
+      // Check first if characters with this subtype exists
+      if (CharacterImage::where('subtype_id', $subtype->id)->exists()) throw new \Exception("A character image with this subtype exists. Please change or remove its subtype first.");
+      if ($subtype->has_image) $this->deleteImage($subtype->subtypeImagePath, $subtype->subtypeImageFileName);
+      $subtype->delete();
+
+      // CharacterLineageBlacklist::searchAndSet(0, 'subtype', $subtype->id);
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Sorts subtype order.
+   *
+   * @param array $data
+   *
+   * @return bool
+   */
+  public function sortSubtypes($data) {
+    DB::beginTransaction();
+
+    try {
+      // explode the sort array and reverse it since the order is inverted
+      $sort = array_reverse(explode(',', $data));
+
+      foreach ($sort as $key => $s) {
+        Subtype::where('id', $s)->update(['sort' => $key]);
+      }
+
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+
+    return $this->rollbackReturn(false);
+  }
 }

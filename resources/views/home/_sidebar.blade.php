@@ -18,7 +18,8 @@
         <a href="{{ url('inventory') }}" class="{{ set_active('inventory*') }}">Inventory</a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ url(__('awards.awardcase')) }}" class="{{ set_active(__('awards.awardcase') . '*') }}">{{ __('awards.awardcase') }}</a>
+        <a href="{{ url(__('awards.awardcase')) }}"
+          class="{{ set_active(__('awards.awardcase') . '*') }}">{{ __('awards.awardcase') }}</a>
       </li>
       <li class="sidebar-item">
         <a href="{{ url('bank') }}" class="{{ set_active('bank*') }}">Bank</a>
@@ -59,6 +60,10 @@
     <li class="sidebar-item">
       <a href="{{ url('world/recipes') }}" class="{{ set_active('world/recipes') }}">All
         Recipes</a>
+    </li>
+    <li class="sidebar-section">
+      <div class="sidebar-section-header">Mail</div>
+      <div class="sidebar-item"><a href="{{ url('mail') }}" class="{{ set_active('mail*') }}">All Mail</a></div>
     </li>
     </ul>
   </details>

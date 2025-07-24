@@ -16,6 +16,7 @@ class UserSettings extends Model {
     'banned_at',
     'ban_reason',
     'birthday_setting',
+    'strike_count',
     'selected_character_id',
     'allow_character_likes',
     'show_image_blocks',
@@ -53,29 +54,28 @@ class UserSettings extends Model {
    */
   public $primaryKey = 'user_id';
 
-    /**********************************************************************************************
+  /**********************************************************************************************
 
         RELATIONS
 
-    **********************************************************************************************/
-
-    /**
-     * Get the user this set of settings belongs to.
-     */
-    public function user() {
-        return $this->belongsTo('App\Models\User\User');
-    }
-    /**
-     * Get the character the user has selected if appropriate.
-     */
-    public function selectedCharacter()
-    {
-        return $this->belongsTo('App\Models\Character\Character', 'selected_character_id')->visible();
-    }
+   **********************************************************************************************/
 
   /**
-     * Get the character the user selected for encounters
-     */
+   * Get the user this set of settings belongs to.
+   */
+  public function user() {
+    return $this->belongsTo('App\Models\User\User');
+  }
+  /**
+   * Get the character the user has selected if appropriate.
+   */
+  public function selectedCharacter() {
+    return $this->belongsTo('App\Models\Character\Character', 'selected_character_id')->visible();
+  }
+
+  /**
+   * Get the character the user selected for encounters
+   */
   public function encounterCharacter() {
     return $this->belongsTo('App\Models\Character\Character');
   }

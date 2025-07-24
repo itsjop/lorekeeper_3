@@ -200,7 +200,7 @@
         </div>
         {{-- Featured Character --}}
         <aside id="selected-character" class="featured-character-sidebar">
-            @include('pages._selected_char')
+          @include('pages._selected_char')
         </aside>
       @endif
 
@@ -213,6 +213,12 @@
               @if (!Auth::check() || !Auth::user()->hasPower('maintenance_access'))
                 You can browse public content, but cannot make any submissions.
               @endif
+            </div>
+          @endif
+          @if (Auth::check() && Auth::user()->hasUnseenMail && !Auth::user()->is_banned)
+            <div class="alert alert-danger">
+              <h5 class="mb-0"><i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages
+                from staff. <a href="{{ url('mail#modMail') }}">View here.</a></h5>
             </div>
           @endif
           @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))

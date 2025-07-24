@@ -462,8 +462,10 @@ class UserService extends Service {
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }
+
     return $this->rollbackReturn(false);
   }
+
 
   /**
    * Bans a user.
@@ -562,6 +564,16 @@ class UserService extends Service {
     DB::beginTransaction();
 
     try {
+      if (!$staff) {
+        $staff = $user;
+        if (!$this->logAdminAction($staff, 'Unbanned User', 'Unbanned ' . $user->displayname . ' after strike expiry.')) {
+          throw new \Exception('Failed to log admin action.');
+        }
+      } else {
+        if (!$this->logAdminAction($staff, 'Unbanned User', 'Unbanned ' . $user->displayname)) {
+          throw new \Exception('Failed to log admin action.');
+        }
+      }
       if ($user->is_banned) {
         $user->is_banned = 0;
         $user->save();
@@ -836,7 +848,7 @@ class UserService extends Service {
     return $this->rollbackReturn(false);
   }
 
-    /**
+  /**
    * Updates user's image block setting.
    *
    * @param mixed $data

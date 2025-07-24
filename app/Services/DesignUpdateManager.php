@@ -41,12 +41,12 @@ class DesignUpdateManager extends Service {
   /**
    * Creates a character design update request (or a MYO design approval request).
    *
-   * @param \App\Models\Character\Character $character
-   * @param \App\Models\User\User           $user
+   * @param Character $character
+   * @param User      $user
    *
-   * @return \App\Models\Character\CharacterDesignUpdate|bool
+   * @return bool|CharacterDesignUpdate
    */
-  public function createDesignUpdateRequest($character, $user, $image = null, $isImage = false) {
+  public function createDesignUpdateRequest($character, $user) {
     DB::beginTransaction();
 
     try {
@@ -111,8 +111,8 @@ class DesignUpdateManager extends Service {
   /**
    * Saves the comment section of a character design update request.
    *
-   * @param array                                       $data
-   * @param \App\Models\Character\CharacterDesignUpdate $request
+   * @param array                 $data
+   * @param CharacterDesignUpdate $request
    *
    * @return bool
    */
@@ -136,9 +136,9 @@ class DesignUpdateManager extends Service {
   /**
    * Saves the image upload section of a character design update request.
    *
-   * @param array                                       $data
-   * @param \App\Models\Character\CharacterDesignUpdate $request
-   * @param bool                                        $isAdmin
+   * @param array                 $data
+   * @param CharacterDesignUpdate $request
+   * @param bool                  $isAdmin
    *
    * @return bool
    */
@@ -264,8 +264,8 @@ class DesignUpdateManager extends Service {
   /**
    * Saves the addons section of a character design update request.
    *
-   * @param array                                       $data
-   * @param \App\Models\Character\CharacterDesignUpdate $request
+   * @param array                 $data
+   * @param CharacterDesignUpdate $request
    *
    * @return bool
    */
@@ -371,7 +371,7 @@ class DesignUpdateManager extends Service {
 
       //clear features that the character does not originally have or has been added via item.
       $currentFeatureIds = array_merge($request->character->image->features->pluck("id")->toArray() ?? [], $request->getAttachedTraitIds());
-      if(count($currentFeatureIds) > 0) $request->features()->whereNotIn('feature_id', array_merge($currentFeatureIds, $request->getAttachedTraitIds()))->delete();
+      if (count($currentFeatureIds) > 0) $request->features()->whereNotIn('feature_id', array_merge($currentFeatureIds, $request->getAttachedTraitIds()))->delete();
       else $request->features()->delete();
 
       return $this->commitReturn(true);
@@ -385,13 +385,13 @@ class DesignUpdateManager extends Service {
   /**
    * Saves the character features (traits) section of a character design update request.
    *
-   * @param array                                       $data
-   * @param \App\Models\Character\CharacterDesignUpdate $request
+   * @param array                 $data
+   * @param CharacterDesignUpdate $request
    *
    * @return bool
    */
   public function saveRequestFeatures($data, $request) {
-   DB::beginTransaction();
+    DB::beginTransaction();
 
     try {
       if (!($request->character->is_myo_slot && $request->character->image->species_id) && !isset($data['species_id'])) {
@@ -403,13 +403,13 @@ class DesignUpdateManager extends Service {
 
       $rarity =
         ($request->character->is_myo_slot && $request->character->image->rarity_id)
-          ? $request->character->image->rarity
-          : Rarity::find($data['rarity_id']);
+        ? $request->character->image->rarity
+        : Rarity::find($data['rarity_id']);
       $species = ($request->character->is_myo_slot && $request->character->image->species_id) ? $request->character->image->species : Species::find($data['species_id']);
       if (isset($data['subtype_id']) && $data['subtype_id']) {
         $subtype = ($request->character->is_myo_slot && $request->character->image->subtype_id) ? $request->character->image->subtype : Subtype::find($data['subtype_id']);
       } else {
-          $subtype = null;
+        $subtype = null;
       }
       if (isset($data['transformation_id']) && $data['transformation_id']) {
         $transformation = ($request->character->is_myo_slot && $request->character->image->transformation_id) ? $request->character->image->transformation : Transformation::find($data['transformation_id']);
@@ -479,7 +479,7 @@ class DesignUpdateManager extends Service {
   /**
    * Submit a character design update request to the approval queue.
    *
-   * @param \App\Models\Character\CharacterDesignUpdate $request
+   * @param CharacterDesignUpdate $request
    *
    * @return bool
    */
@@ -512,12 +512,13 @@ class DesignUpdateManager extends Service {
 
     return $this->rollbackReturn(false);
   }
+
   /**
    * Approves a character design update request and processes it.
    *
-   * @param array                                       $data
-   * @param \App\Models\Character\CharacterDesignUpdate $request
-   * @param \App\Models\User\User                       $user
+   * @param array                 $data
+   * @param CharacterDesignUpdate $request
+   * @param User                  $user
    *
    * @return bool
    */
@@ -793,11 +794,11 @@ class DesignUpdateManager extends Service {
    * Rejection can be a soft rejection (reopens the request so the user can edit it and resubmit)
    * or a hard rejection (takes the request out of the queue completely).
    *
-   * @param array                                       $data
-   * @param \App\Models\Character\CharacterDesignUpdate $request
-   * @param \App\Models\User\User                       $user
-   * @param bool                                        $forceReject
-   * @param mixed                                       $notification
+   * @param array                 $data
+   * @param CharacterDesignUpdate $request
+   * @param User                  $user
+   * @param bool                  $forceReject
+   * @param mixed                 $notification
    *
    * @return bool
    */
@@ -883,13 +884,13 @@ class DesignUpdateManager extends Service {
   /**
    * Cancels a character design update request.
    *
-   * @param array                                       $data
-   * @param \App\Models\Character\CharacterDesignUpdate $request
-   * @param \App\Models\User\User                       $user
+   * @param array                 $data
+   * @param CharacterDesignUpdate $request
+   * @param User                  $user
    *
    * @return bool
    */
-  public function cancelRequest($data, $request, $user, $self = 0) {
+  public function cancelRequest($data, $request, $user) {
     DB::beginTransaction();
 
     try {
@@ -943,7 +944,7 @@ class DesignUpdateManager extends Service {
   /**
    * Deletes a character design update request.
    *
-   * @param \App\Models\Character\CharacterDesignUpdate $request
+   * @param CharacterDesignUpdate $request
    *
    * @return bool
    */
@@ -1014,9 +1015,9 @@ class DesignUpdateManager extends Service {
   /**
    * Votes on a character design update request.
    *
-   * @param string                                      $action
-   * @param \App\Models\Character\CharacterDesignUpdate $request
-   * @param \App\Models\User\User                       $user
+   * @param string                $action
+   * @param CharacterDesignUpdate $request
+   * @param User                  $user
    *
    * @return bool
    */
