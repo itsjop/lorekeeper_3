@@ -71,15 +71,21 @@
       }
       &.event {
         background-image: url('../images/somnivores/frontpage/event_bg.png');
-        h3 { backdrop-filter: brightness(110%) blur(5px); }
-        background-color: color-mix(in srgb, var(--white) 40%, transparent);
-        a { font-weight: 700;}
+        h3 {
+          backdrop-filter: brightness(110%) blur(5px);
+          background-color: color-mix(in srgb, var(--white) 40%, transparent);
+        }
+        a {
+          font-weight: 700;
+        }
       }
       &.jobs {
         background-image: url('../images/somnivores/frontpage/jobs_bg.png');
-        h3 { backdrop-filter: brightness(110%) blur(5px); }
+        h3 {
+          backdrop-filter: brightness(110%) blur(5px);
+        }
         grid-template-columns: 1fr 1fr 1fr;
-        >div{
+        > div {
           display: grid;
           grid-template-rows: subgrid;
         }
