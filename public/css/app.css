@@ -1619,8 +1619,11 @@ body {
   background-image: url("../images/somnivores/frontpage/event_bg.png");
 }
 .home-dashboard .bubblebox .bubble.event h3 {
-  -webkit-backdrop-filter: brightness(140%) blur(5px);
-          backdrop-filter: brightness(140%) blur(5px);
+  -webkit-backdrop-filter: brightness(110%) blur(5px);
+          backdrop-filter: brightness(110%) blur(5px);
+}
+.home-dashboard .bubblebox .bubble.event a {
+  font-weight: 700;
 }
 .home-dashboard .bubblebox .bubble.jobs {
   background-image: url("../images/somnivores/frontpage/jobs_bg.png");

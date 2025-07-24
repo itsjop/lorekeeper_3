@@ -71,7 +71,8 @@
       }
       &.event {
         background-image: url('../images/somnivores/frontpage/event_bg.png');
-        h3 { backdrop-filter: brightness(140%) blur(5px); }
+        h3 { backdrop-filter: brightness(110%) blur(5px); }
+        a { font-weight: 700;}
       }
       &.jobs {
         background-image: url('../images/somnivores/frontpage/jobs_bg.png');
