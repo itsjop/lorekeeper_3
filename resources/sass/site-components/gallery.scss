@@ -23,7 +23,7 @@
         background-color: color-mix(in srgb, var(--white) 30%, transparent);
         border: white 2px solid;
         border-radius: 15px;
-        backdrop-filter: blur(3px);
+        // backdrop-filter: blur(3px);
         @include hover-preview;
         padding: 5px;
         height: min-content;

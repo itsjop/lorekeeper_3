@@ -1744,8 +1744,6 @@ body {
   background-color: color-mix(in srgb, var(--white) 30%, transparent);
   border: white 2px solid;
   border-radius: 15px;
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
   transition: 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(4px 2px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 4%, transparent));
