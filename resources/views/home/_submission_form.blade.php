@@ -100,17 +100,74 @@
   </div>
 @endif
 
+
+
+@if ($isClaim)
+<div class="card mb-3">
+  <div class="card-header h2">
+    Rewards
+  </div>
+  <div class="card-body">
+      <p>Select the rewards you would like to claim.</p>
+    {{-- @else --}}
+     {{-- <div class="card-header h2">
+    PROMPT
+  </div>
+    <div class="card-body">
+      <p>Note that any rewards added here are <u>in addition</u> to the default prompt rewards. If you do not require any
+        additional rewards, you can leave this blank.</p> --}}
+    @endif
+    {{-- previous input --}}
+    @if (old('rewardable_type'))
+      @php
+        $loots = [];
+        foreach (old('rewardable_type') as $key => $type) {
+            if (!isset(old('rewardable_id')[$key])) {
+                continue;
+            }
+            $loots[] = (object) [
+                'rewardable_type' => $type,
+                'rewardable_id' => old('rewardable_id')[$key],
+                'quantity' => old('quantity')[$key] ?? 1
+            ];
+        }
+      @endphp
+    @endif
+
+
+    @if ($isClaim)
+      @include('widgets._loot_select', [
+          'loots' => $submission->id ? $submission->rewards : $loots ?? null,
+          'showLootTables' => false,
+          'showRaffles' => true,
+          'showRecipes' => true
+      ])
+    {{-- @else
+      @include('widgets._loot_select', [
+          'loots' => $submission->id ? $submission->rewards : $loots ?? null,
+          'showLootTables' => false,
+          'showRaffles' => false,
+          'showRecipes' => false --}}
+      {{-- ]) --}}
+      </div>
+      @endif
+
+    @if (!$isClaim)
+      <div id="rewards" class="mb-3"></div>
+    @endif
+
+
+
 @if (!$isClaim)
   <div class="card mb-3">
     <div id="criterion-section" class="{{ Request::get('prompt_id') || $submission->prompt_id ? '' : 'hide' }}">
-      <div class="card-header h2 flex ai-center jc-between p-0 py-2 ">
-        Criteria Rewards
-        <button class="btn  btn-outline-info float-right add-calc" type="button">Add Criterion</a>
+      <div class="card-header h2">
+        Reward Calculator
+        <button class="btn  btn-outline-info float-right add-calc" type="button">Add Calculator</a>
       </div>
       <div class="card-body">
-        <p>Criteria can be used in addition to or in replacment of rewards. They take input on what you are turning in for the
-          prompt in order to calculate your final reward.</p>
-        <p>Criteria may populate in with pre-selected minimum requirements for this prompt. </p>
+        <p>Select the calculator for your submission's media type to calculate your rewards!</p>
+        <p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they aren't accurate to the piece you're submitting. </p>
         <div id="criteria">
           @if ($submission->id && $submission->data['criterion'])
             @foreach ($submission->data['criterion'] as $i => $criterionData)
@@ -154,56 +211,6 @@
 
 <div class="card mb-3">
   <div class="card-header h2">
-    Rewards
-  </div>
-  <div class="card-body">
-    @if ($isClaim)
-      <p>Select the rewards you would like to claim.</p>
-    @else
-      <p>Note that any rewards added here are <u>in addition</u> to the default prompt rewards. If you do not require any
-        additional rewards, you can leave this blank.</p>
-    @endif
-
-    {{-- previous input --}}
-    @if (old('rewardable_type'))
-      @php
-        $loots = [];
-        foreach (old('rewardable_type') as $key => $type) {
-            if (!isset(old('rewardable_id')[$key])) {
-                continue;
-            }
-            $loots[] = (object) [
-                'rewardable_type' => $type,
-                'rewardable_id' => old('rewardable_id')[$key],
-                'quantity' => old('quantity')[$key] ?? 1
-            ];
-        }
-      @endphp
-    @endif
-    @if ($isClaim)
-      @include('widgets._loot_select', [
-          'loots' => $submission->id ? $submission->rewards : $loots ?? null,
-          'showLootTables' => false,
-          'showRaffles' => true,
-          'showRecipes' => true
-      ])
-    @else
-      @include('widgets._loot_select', [
-          'loots' => $submission->id ? $submission->rewards : $loots ?? null,
-          'showLootTables' => false,
-          'showRaffles' => false,
-          'showRecipes' => false
-      ])
-    @endif
-
-    @if (!$isClaim)
-      <div id="rewards" class="mb-3"></div>
-    @endif
-  </div>
-</div>
-
-<div class="card mb-3">
-  <div class="card-header h2">
     <a
       href="#"
       class="btn btn-outline-info float-right"
@@ -242,6 +249,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <div class="card mb-3">
   <div class="card-header h2">

@@ -1,13 +1,14 @@
 <div class="card">
-  <div class="card-body">
-    <h4>Default Prompt Rewards</h4>
+    <h2 class="card-header">Prompt Rewards</h2>
+      <div class="card-body">
+
     @if (isset($staffView) && $staffView)
       <p>For reference, these are the default rewards for this prompt. The editable section above is <u>inclusive</u> of these rewards.</p>
       @if ($count)
         <p>This user has completed this prompt <strong>{{ $count }}</strong> time{{ $count == 1 ? '' : 's' }}.</p>
       @endif
     @else
-      <p>These are the default rewards for this prompt. The actual rewards you receive may be edited by a staff member during the approval process.</p>
+      <p>These are the rewards given for completeing this prompt.</p>
       @if ($count)
         <p>You have completed this prompt <strong>{{ $count }}</strong> time{{ $count == 1 ? '' : 's' }}.</p>
       @endif
