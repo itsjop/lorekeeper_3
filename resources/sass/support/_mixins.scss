@@ -13,7 +13,7 @@
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   width: 100%;
 }
-@mixin hover-preview($opacity: 4%) {
+@mixin hover-preview($opacity: 10%) {
   transition: 0.5s var(--bounce_linear);
   transform: scale(1);
   $offset_x: 4px;
