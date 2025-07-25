@@ -11,44 +11,47 @@
 
   {{-- AVATAR  --}}
   <div class="row">
-    <div class="col-12">
-      <div class="card p-3 mb-2">
-        <h3>Avatar</h3>
-        @if (Auth::user()->isStaff)
-          <div class="text-left">
-            <div class="alert alert-warning">Please note a hard refresh may be required to see your updated avatar. Also please note
-              that uploading a .gif will display a 500 error after; the upload should still work, however.</div>
-          </div>
-        @endif
-        {!! Form::open(['url' => 'account/avatar', 'files' => true]) !!}
-        <div class="card mb-3 hide" id="avatarCrop">
-          <div class="card-body">
-            <img src="#" id="cropper" class="hide" alt="" />
-            {!! Form::hidden('x0', null, ['id' => 'cropX0']) !!}
-            {!! Form::hidden('x1', null, ['id' => 'cropX1']) !!}
-            {!! Form::hidden('y0', null, ['id' => 'cropY0']) !!}
-            {!! Form::hidden('y1', null, ['id' => 'cropY1']) !!}
-          </div>
-          <div class="alert alert-info mx-3">
-            <b>Note:</b> Cropping does not work on gifs.
-          </div>
+    <div class="card-full p-3 mb-2">
+      <h3>Avatar</h3>
+      @if (Auth::user()->isStaff)
+        <div class="text-left">
+          <div class="alert alert-warning">Please note a hard refresh may be required to see your updated avatar. Also please note
+            that uploading a .gif will display a 500 error after; the upload should still work, however.</div>
         </div>
-        <div class="form-group row">
-          {!! Form::label('avatar', 'Update', ['class' => 'col-md-2 col-form-label']) !!}
-          <div class="col-md-10">
-            {!! Form::file('avatar', ['class' => 'form-control']) !!}
-          </div>
+      @endif
+      {!! Form::open(['url' => 'account/avatar', 'files' => true]) !!}
+      <div class="card-full mb-3 hide" id="avatarCrop">
+        <div class="card-body">
+          <img
+            src="#"
+            id="cropper"
+            class="hide"
+            alt=""
+          />
+          {!! Form::hidden('x0', null, ['id' => 'cropX0']) !!}
+          {!! Form::hidden('x1', null, ['id' => 'cropX1']) !!}
+          {!! Form::hidden('y0', null, ['id' => 'cropY0']) !!}
+          {!! Form::hidden('y1', null, ['id' => 'cropY1']) !!}
         </div>
-        <div class="text-right">
-          {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+        <div class="alert alert-info mx-3">
+          <b>Note:</b> Cropping does not work on gifs.
         </div>
-        {!! Form::close() !!}
       </div>
+      <div class="form-group row">
+        {!! Form::label('avatar', 'Update', ['class' => 'col-md-2 col-form-label']) !!}
+        <div class="col-md-10">
+          {!! Form::file('avatar', ['class' => 'form-control']) !!}
+        </div>
+      </div>
+      <div class="text-right">
+        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+      </div>
+      {!! Form::close() !!}
     </div>
 
     {{-- PROFILE HEADER --}}
     {{-- <div class="col-12">
-      <div class="card p-3 mb-2">
+      <div class="card-full p-3 mb-2">
         <h3>Profile Header Image</h3>
         {!! Form::open(['url' => 'account/profile_img', 'files' => true]) !!}
         <div class="form-group row">
@@ -66,11 +69,13 @@
   </div>
 
   {{-- YOUR PROFILE --}}
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Profile</h3>
     {!! Form::open(['url' => 'account/profile']) !!}
     <div class="form-group">
-      {!! Form::label('pronouns', 'Preferred Pronouns') !!} {!! add_help('Your preferred pronouns will be displayed in various places across the site. This field can be changed or removed at anytime.') !!}
+      {!! Form::label('pronouns', 'Preferred Pronouns') !!} {!! add_help(
+          'Your preferred pronouns will be displayed in various places across the site. This field can be changed or removed at anytime.'
+      ) !!}
       {!! Form::textarea('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
@@ -84,7 +89,7 @@
   </div>
 
   @if ($user_enabled == 1 || (Auth::user()->isStaff && $user_enabled == 2))
-    <div class="card p-3 mb-2">
+    <div class="card-full p-3 mb-2">
       <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
       @if (Auth::user()->isStaff && $user_enabled == 2)
         <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their own
@@ -98,7 +103,12 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Location</label>
           <div class="col-md-9">
-            {!! Form::select('location', [0 => 'Choose a Location'] + $locations, isset(Auth::user()->home_id) ? Auth::user()->home_id : 0, ['class' => 'form-control selectize']) !!}
+            {!! Form::select(
+                'location',
+                [0 => 'Choose a Location'] + $locations,
+                isset(Auth::user()->home_id) ? Auth::user()->home_id : 0,
+                ['class' => 'form-control selectize']
+            ) !!}
           </div>
           <div class="col-md text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -116,7 +126,7 @@
   @endif
 
   {{-- BORDER CUSTOMIZATION --}}
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Update Border</h3>
     <p>Change your onsite border.</p>
     <p>Standard borders behave as normal. Variants may be different colors or even border styles than the main border. If your
@@ -132,7 +142,7 @@
         {!! Form::label('Border Variant') !!}
         {!! Form::select('border_variant_id', $border_variants, Auth::user()->border_variant_id, [
             'class' => 'form-control',
-            'id' => 'bordervariant',
+            'id' => 'bordervariant'
         ]) !!}
       </div>
     </div>
@@ -150,14 +160,14 @@
             {!! Form::label('border_flip', 'Flip Border (Horizontally)', ['class' => 'form-check-label ml-3']) !!}
             {!! Form::checkbox('border_flip', 1, Auth::user()->settings->border_settings['border_flip'] ?? 0, [
                 'class' => 'form-check-input',
-                'data-toggle' => 'toggle',
+                'data-toggle' => 'toggle'
             ]) !!}
           </div>
         </div>
       </div>
       <div class="col-md-7">
         <h4 class="text-center">Your Borders</h4>
-        <div class="card p-3 mb-2 image-info-box">
+        <div class="card-full p-3 mb-2 image-info-box">
           @if ($default->count())
             <h4 class="mb-0">Default</h4>
             <hr class="mt-0">
@@ -222,7 +232,7 @@
   </div>
   {{-- CHANGE USERNAME --}}
   @if (config('lorekeeper.settings.allow_username_changes'))
-    <div class="card p-3 mb-2">
+    <div class="card-full p-3 mb-2">
       <h3>Change Username</h3>
       @if (config('lorekeeper.settings.username_change_cooldown'))
         <div class="alert alert-info">
@@ -255,7 +265,7 @@
   @endif
   {{-- YOUR FACTION --}}
   @if ($user_faction_enabled == 1 || (Auth::user()->isStaff && $user_faction_enabled == 2))
-    <div class="card p-3 mb-2">
+    <div class="card-full p-3 mb-2">
       <h3>Faction <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
       @if (Auth::user()->isStaff && $user_faction_enabled == 2)
         <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their own
@@ -270,7 +280,12 @@
         <div class="form-group row">
           <label class="col-md-2 col-form-label">Faction</label>
           <div class="col-md-9">
-            {!! Form::select('faction', [0 => 'Choose a Faction'] + $factions, isset(Auth::user()->faction_id) ? Auth::user()->faction_id : 0, ['class' => 'form-control selectize']) !!}
+            {!! Form::select(
+                'faction',
+                [0 => 'Choose a Faction'] + $factions,
+                isset(Auth::user()->faction_id) ? Auth::user()->faction_id : 0,
+                ['class' => 'form-control selectize']
+            ) !!}
           </div>
           <div class="col-md text-right">
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -287,7 +302,7 @@
     </div>
   @endif
   {{-- YOUR BIRTHDAY --}}
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Birthday Publicity</h3>
     {!! Form::open(['url' => 'account/dob']) !!}
     <div class="form-group row">
@@ -295,17 +310,17 @@
       <div class="col-md-10">
         {!! Form::select(
             'birthday_setting',
-        
+
             [
                 '0' => '0: No one can see your birthday.',
                 '1' => '1: Members can see your day and month.',
                 '2' => '2: Anyone can see your day and month.',
-                '3' => '3: Full date public.',
+                '3' => '3: Full date public.'
             ],
-        
+
             Auth::user()->settings->birthday_setting,
-        
-            ['class' => 'form-control'],
+
+            ['class' => 'form-control']
         ) !!}
       </div>
     </div>
@@ -315,14 +330,19 @@
     {!! Form::close() !!}
   </div>
   {{-- EMAIL ADDRESS --}}
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Allow Profile Comments</h3>
     {!! Form::open(['url' => 'account/comments']) !!}
     <p>If turned off, all comments on your profile will be hidden.</p>
     <div class="form-group row">
       <label class="col-md-2 col-form-label">Setting</label>
       <div class="col-md-10">
-        {!! Form::select('allow_profile_comments', ['0' => '0: No one can comment on your profile.', '1' => '1: Users can comment on your profile.'], Auth::user()->settings->allow_profile_comments, ['class' => 'form-control']) !!}
+        {!! Form::select(
+            'allow_profile_comments',
+            ['0' => '0: No one can comment on your profile.', '1' => '1: Users can comment on your profile.'],
+            Auth::user()->settings->allow_profile_comments,
+            ['class' => 'form-control']
+        ) !!}
       </div>
     </div>
     <div class="text-right">
@@ -331,7 +351,7 @@
     {!! Form::close() !!}
   </div>
 
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Character Warning Visibility</h3>
     <p>This setting will change how characters with content warnings are displayed to you.</p>
     {!! Form::open(['url' => 'account/warning']) !!}
@@ -343,10 +363,10 @@
             [
                 '0' => '0: Character has pop-up warning and censored icons.',
                 '1' => '1: Character has pop-up warnings only.',
-                '2' => '2: No warnings will appear on characters.',
+                '2' => '2: No warnings will appear on characters.'
             ],
             Auth::user()->settings->content_warning_visibility,
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
     </div>
@@ -356,7 +376,7 @@
     {!! Form::close() !!}
   </div>
 
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Email Address</h3>
     <p>Changing your email address will require you to re-verify your email address.</p>
     {!! Form::open(['url' => 'account/email']) !!}
@@ -372,7 +392,7 @@
     {!! Form::close() !!}
   </div>
   {{-- PASSWORD UPDATE --}}
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Change Password</h3>
     {!! Form::open(['url' => 'account/password']) !!}
     <div class="form-group row">
@@ -399,7 +419,7 @@
     {!! Form::close() !!}
   </div>
 
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Image Block Settings</h3>
     <p>This will disable or enable the image block widgets from showing.</p>
     <p>Note that this won't delete or unblock your existing image blocks, they will remain blurred for you.</p>
@@ -408,7 +428,7 @@
       <div class="col form-group">
         {!! Form::checkbox('show_image_blocks', 1, Auth::user()->settings->show_image_blocks ? 1 : 0, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-toggle' => 'toggle'
         ]) !!}
         {!! Form::label('show_image_blocks', 'Show widgets?', ['class' => 'form-check-label ml-3']) !!}
       </div>
@@ -419,7 +439,7 @@
     {!! Form::close() !!}
   </div>
   {{-- TWO FACTOR AUTH --}}
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
     <h3>Two-Factor Authentication</h3>
 
     <p>Two-factor authentication acts as a second layer of protection for your account. It uses an app on your phone-- such as
@@ -435,6 +455,12 @@
       <p>In order to enable two-factor authentication, you will need to scan a QR code with an authenticator app on your phone.
         Two-factor authentication will not be enabled until you do so and confirm by entering one of the codes provided by your
         authentication app.</p>
+      <hr>
+      <strong>
+        Hi. This is joz, the Somnivores site developer. I haven't yet been able to confirm if the 2FA setup process completely
+        functional end to end. It should be fine, but if you get locked out, we may be unable to grant you access to your account
+        again without a lot of effort. Use at your own risk!
+      </strong>
       {!! Form::open(['url' => 'account/two-factor/enable']) !!}
       <div class="text-right">
         {!! Form::submit('Enable', ['class' => 'btn btn-primary']) !!}
@@ -463,7 +489,7 @@
     $(document).ready(() => $('.selectize').selectize());
   </script>
 
-  <div class="card p-3 mb-2">
+  <div class="card-full p-3 mb-2">
 
     <h3>Character {{ ucfirst(__('character_likes.likes')) }} Setting</h3>
     {!! Form::open(['url' => 'account/character-likes']) !!}
@@ -474,10 +500,10 @@
             'allow_character_likes',
             [
                 '0' => 'Do not allow other users to ' . __('character_likes.like') . ' your characters.',
-                '1' => 'Other users can ' . __('character_likes.like') . ' your characters.',
+                '1' => 'Other users can ' . __('character_likes.like') . ' your characters.'
             ],
             Auth::user()->settings->allow_character_likes,
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
     </div>

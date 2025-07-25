@@ -4,7 +4,10 @@
   {!! Form::open(['url' => $isClaim ? 'claims/new' : 'submissions/new', 'id' => 'submissionForm']) !!}
 @endif
 
-@if (Auth::check() && $submission->staff_comments && ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions')))
+@if (Auth::check() &&
+        $submission->staff_comments &&
+        ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
+)
   <h2>Staff Comments ({!! $submission->staff->displayName !!})</h2>
   <div class="card mb-3">
     <div class="card-body">
@@ -20,25 +23,39 @@
 @if (!$isClaim)
   <div class="form-group">
     {!! Form::label('prompt_id', 'Prompt') !!}
-    {!! Form::select('prompt_id', $prompts, isset($submission->prompt_id) ? $submission->prompt_id : old('prompt_id') ?? Request::get('prompt_id'), ['class' => 'form-control selectize', 'id' => 'prompt', 'placeholder' => '']) !!}
+    {!! Form::select(
+        'prompt_id',
+        $prompts,
+        isset($submission->prompt_id) ? $submission->prompt_id : old('prompt_id') ?? Request::get('prompt_id'),
+        ['class' => 'form-control selectize', 'id' => 'prompt', 'placeholder' => '']
+    ) !!}
   </div>
 @endif
 
 <div class="row">
   <div class="col-md-{{ config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && !$isClaim ? '6' : '12' }}">
     <div class="form-group">
-      {!! Form::label('url', $isClaim ? 'URL (Optional)' : 'Submission URL ' . (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ' / Title' : '') . '(Optional)') !!}
+      {!! Form::label(
+          'url',
+          $isClaim
+              ? 'URL (Optional)'
+              : 'Submission URL ' .
+                  (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ' / Title' : '') .
+                  '(Optional)'
+      ) !!}
       @if ($isClaim)
         {!! add_help('Enter a URL relevant to your claim (for example, a comment proving you may make this claim).') !!}
       @else
         {!! add_help(
             'Enter the URL of your submission (whether uploaded to dA or some other hosting service).' .
-                (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ' Alternatively, if you are submitting a gallery link, you can enter the title of your submission here.' : ''),
+                (config('lorekeeper.settings.allow_gallery_submissions_on_prompts')
+                    ? ' Alternatively, if you are submitting a gallery link, you can enter the title of your submission here.'
+                    : '')
         ) !!}
       @endif
       {!! Form::text('url', isset($submission->url) ? $submission->url : old('url') ?? Request::get('url'), [
           'class' => 'form-control',
-          'required',
+          'required'
       ]) !!}
     </div>
   </div>
@@ -47,19 +64,34 @@
       <div class="form-group">
         {!! Form::label('gallery_submission_id', 'Gallery URL (Optional)') !!}
         {!! add_help('Select the gallery submission this prompt is for.') !!}
-        {!! Form::select('gallery_submission_id', $userGallerySubmissions, $submission->data['gallery_submission_id'] ?? (old('gallery_submission_id') ?? Request::get('gallery_submission_id')), [
-            'class' => 'form-control selectize',
-            'id' => 'gallery_submission_id',
-            'placeholder' => 'Select Your Gallery Submission',
-        ]) !!}
+        {!! Form::select(
+            'gallery_submission_id',
+            $userGallerySubmissions,
+            $submission->data['gallery_submission_id'] ?? (old('gallery_submission_id') ?? Request::get('gallery_submission_id')),
+            [
+                'class' => 'form-control selectize',
+                'id' => 'gallery_submission_id',
+                'placeholder' => 'Select Your Gallery Submission'
+            ]
+        ) !!}
       </div>
     </div>
   @endif
 </div>
 
 <div class="form-group">
-  {!! Form::label('comments', 'Comments (Optional)') !!} {!! add_help('Enter a comment for your ' . ($isClaim ? 'claim' : 'submission') . ' (no HTML). This will be viewed by the mods when reviewing your ' . ($isClaim ? 'claim' : 'submission') . '.') !!}
-  {!! Form::textarea('comments', isset($submission->comments) ? $submission->comments : old('comments') ?? Request::get('comments'), ['class' => 'form-control']) !!}
+  {!! Form::label('comments', 'Comments (Optional)') !!} {!! add_help(
+      'Enter a comment for your ' .
+          ($isClaim ? 'claim' : 'submission') .
+          ' (no HTML). This will be viewed by the mods when reviewing your ' .
+          ($isClaim ? 'claim' : 'submission') .
+          '.'
+  ) !!}
+  {!! Form::textarea(
+      'comments',
+      isset($submission->comments) ? $submission->comments : old('comments') ?? Request::get('comments'),
+      ['class' => 'form-control']
+  ) !!}
 </div>
 
 @if ($submission->prompt_id)
@@ -71,8 +103,9 @@
 @if (!$isClaim)
   <div class="card mb-3">
     <div id="criterion-section" class="{{ Request::get('prompt_id') || $submission->prompt_id ? '' : 'hide' }}">
-      <div class="card-header h2">Criteria Rewards <button class="btn  btn-outline-info float-right add-calc" type="button">Add
-          Criterion</a>
+      <div class="card-header h2 flex ai-center jc-between p-0 py-2 ">
+        Criteria Rewards
+        <button class="btn  btn-outline-info float-right add-calc" type="button">Add Criterion</a>
       </div>
       <div class="card-body">
         <p>Criteria can be used in addition to or in replacment of rewards. They take input on what you are turning in for the
@@ -84,13 +117,18 @@
               @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
               <div class="card p-3 mb-2 pl-0">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                  <a class="col-1 p-0" data-bs-toggle="collapse" href="#collapsable-{{ $criterion->id }}" aria-expanded="true">
+                  <a
+                    class="col-1 p-0"
+                    data-bs-toggle="collapse"
+                    href="#collapsable-{{ $criterion->id }}"
+                    aria-expanded="true"
+                  >
                     <i class="fas fa-angle-down" style="font-size: 24px"></i>
                   </a>
                   <div class="flex-grow-1 mr-2">
                     {!! Form::select('criterion[' . $i . '][id]', $criteria, $criterion->id, [
                         'class' => 'form-control criterion-select',
-                        'placeholder' => 'Select a Criterion to set Minimum Requirements',
+                        'placeholder' => 'Select a Criterion to set Minimum Requirements'
                     ]) !!}
                   </div>
                   <div>
@@ -101,7 +139,7 @@
                   @include('criteria._minimum_requirements', [
                       'criterion' => $criterion,
                       'values' => $criterionData,
-                      'id' => $i,
+                      'id' => $i
                   ])
                 </div>
               </div>
@@ -137,7 +175,7 @@
             $loots[] = (object) [
                 'rewardable_type' => $type,
                 'rewardable_id' => old('rewardable_id')[$key],
-                'quantity' => old('quantity')[$key] ?? 1,
+                'quantity' => old('quantity')[$key] ?? 1
             ];
         }
       @endphp
@@ -147,14 +185,14 @@
           'loots' => $submission->id ? $submission->rewards : $loots ?? null,
           'showLootTables' => false,
           'showRaffles' => true,
-          'showRecipes' => true,
+          'showRecipes' => true
       ])
     @else
       @include('widgets._loot_select', [
           'loots' => $submission->id ? $submission->rewards : $loots ?? null,
           'showLootTables' => false,
           'showRaffles' => false,
-          'showRecipes' => false,
+          'showRecipes' => false
       ])
     @endif
 
@@ -166,7 +204,11 @@
 
 <div class="card mb-3">
   <div class="card-header h2">
-    <a href="#" class="btn btn-outline-info float-right" id="addCharacter">Add Character</a>
+    <a
+      href="#"
+      class="btn btn-outline-info float-right"
+      id="addCharacter"
+    >Add Character</a>
     Characters
   </div>
   <div class="card-body" style="clear:both;">
@@ -182,7 +224,7 @@
             'tables' => [],
             'showTables' => false,
             'character' => $character,
-            'expanded_rewards' => $expanded_rewards,
+            'expanded_rewards' => $expanded_rewards
         ])
       @endforeach
       @if (old('slug') && !$submission->id)
@@ -193,7 +235,7 @@
         @endphp
         @foreach (array_unique(old('slug')) as $slug)
           @include('widgets._character_select_entry', [
-              'character' => \App\Models\Character\Character::where('slug', $slug)->first(),
+              'character' => \App\Models\Character\Character::where('slug', $slug)->first()
           ])
         @endforeach
       @endif
@@ -214,12 +256,22 @@
           'user' => Auth::user(),
           'inventory' => $inventory,
           'categories' => $categories,
-          'selected' => $submission->id ? $submission->getInventory($submission->user) : (old('stack_id') ? array_combine(old('stack_id'), old('stack_quantity')) : []),
-          'page' => $page,
+          'selected' => $submission->id
+              ? $submission->getInventory($submission->user)
+              : (old('stack_id')
+                  ? array_combine(old('stack_id'), old('stack_quantity'))
+                  : []),
+          'page' => $page
       ])
       @include('widgets._bank_select', [
           'owner' => Auth::user(),
-          'selected' => $submission->id ? $submission->getCurrencies($submission->user) : (old('currency_id') ? array_combine(old('currency_id')['user-' . Auth::user()->id], old('currency_quantity')['user-' . Auth::user()->id]) : []),
+          'selected' => $submission->id
+              ? $submission->getCurrencies($submission->user)
+              : (old('currency_id')
+                  ? array_combine(old('currency_id')['user-' . Auth::user()->id],
+                      old('currency_quantity')['user-' . Auth::user()->id]
+                  )
+                  : [])
       ])
     </div>
   </div>
@@ -227,14 +279,34 @@
 
 @if ($submission->status == 'Draft')
   <div class="text-right">
-    <a href="#" class="btn btn-danger mr-2" id="cancelButton">Delete Draft</a>
-    <a href="#" class="btn btn-secondary mr-2" id="draftButton">Save Draft</a>
-    <a href="#" class="btn btn-primary" id="confirmButton">Submit</a>
+    <a
+      href="#"
+      class="btn btn-danger mr-2"
+      id="cancelButton"
+    >Delete Draft</a>
+    <a
+      href="#"
+      class="btn btn-secondary mr-2"
+      id="draftButton"
+    >Save Draft</a>
+    <a
+      href="#"
+      class="btn btn-primary"
+      id="confirmButton"
+    >Submit</a>
   </div>
 @else
   <div class="text-right">
-    <a href="#" class="btn btn-secondary mr-2" id="draftButton">Save Draft</a>
-    <a href="#" class="btn btn-primary" id="confirmButton">Submit</a>
+    <a
+      href="#"
+      class="btn btn-secondary mr-2"
+      id="draftButton"
+    >Save Draft</a>
+    <a
+      href="#"
+      class="btn btn-primary"
+      id="confirmButton"
+    >Submit</a>
   </div>
 @endif
 
@@ -253,7 +325,7 @@
       'currencies' => $currencies,
       'showLootTables' => false,
       'showRaffles' => true,
-      'showRecipes' => true,
+      'showRecipes' => true
   ])
 @else
   @include('widgets._loot_select_row', [
@@ -261,6 +333,6 @@
       'currencies' => $currencies,
       'showLootTables' => false,
       'showRaffles' => false,
-      'showRecipes' => false,
+      'showRecipes' => false
   ])
 @endif

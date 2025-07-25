@@ -49,7 +49,7 @@
       <div class="card mb-4">
         <div class="card-body text-center br-top-15">
           <img src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Items and {{ ucfirst(__('awards.awards')) }}" />
-          <h5 class="card-title">Items & Companions & {{ ucfirst(__('awards.awards')) }}</h5>
+          <h5 class="card-title">Items & Pets & {{ ucfirst(__('awards.awards')) }}</h5>
         </div>
         <ul class="list-group list-group-flush br-bot-15">
           <li class="list-group-item">

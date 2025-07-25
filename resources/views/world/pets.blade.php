@@ -1,12 +1,12 @@
 @extends('world.layout')
 
 @section('title')
-  Companions
+  Pets
 @endsection
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Pets' => 'world/pets']) !!}
-  <h1>Companions</h1>
+  <h1>Pets</h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}

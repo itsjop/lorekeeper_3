@@ -5,7 +5,7 @@
     .inventory-stack {
       img {
         @include hover-preview;
-        max-width: 100%;
+        max-width: min(250px, 100%);
         aspect-ratio: 1/1;
       }
     }

@@ -110,7 +110,7 @@
 
 <div class="card mb-3">
   <div class="card-body text-center">
-    <h5 class="card-title">Companions</h5>
+    <h5 class="card-title">Pets</h5>
     <div class="card-body">
       @if (count($pets))
         <div class="row justify-content-center">

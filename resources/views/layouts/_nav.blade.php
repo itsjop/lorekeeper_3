@@ -131,7 +131,7 @@
           <div class="dt-nav-group">
             <h2 class="dt-nav-header">Databases</h2>
             {{-- <a class="dt-nav-item" href="{{ url('world/pets') }}">
-              <i class="fas fa-cat"></i> Companions & Trinkets </a> --}}
+              <i class="fas fa-cat"></i> Pets & Trinkets </a> --}}
             <a class="dt-nav-item" href="{{ url('world') }}">
               <i class="fas fa-search"></i> Encyclopedia </a>
           </div>
