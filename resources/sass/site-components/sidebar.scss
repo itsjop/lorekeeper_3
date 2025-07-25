@@ -469,6 +469,8 @@
   grid-area: char;
   position: relative;
   z-index: 2;
+  @include body-bg;
+  height: min-content;
   .profile-assets-content {
     display: grid;
     img {
