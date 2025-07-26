@@ -34,3 +34,8 @@
     @endif
   </div>
 @endsection
+
+
+@section('sidebar')
+  @include('pages._sidebar_page')
+@endsection

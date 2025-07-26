@@ -4,6 +4,7 @@
     #header-nav {
       @include body-bg;
       @include scalloped;
+      container: main-nav / inline-size;
       background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
       grid-area: nav;
       border-radius: 20px;
@@ -169,6 +170,23 @@
         display: flex;
         place-content: center;
         place-items: center;
+      }
+    }
+  }
+}
+@container main-nav (width < 700px) {
+  #app #site-wrapper #navbarSupportedContent {
+    #site-navbar,
+    #site-navbar-auth {
+      gap: 3px;
+      .nav-item {
+        padding: 0;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        // &::after {
+        //   content: '✦'
+        // }
       }
     }
   }
