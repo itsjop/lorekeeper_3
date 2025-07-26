@@ -103,7 +103,7 @@
 
   <h3 class="mt-5">
     Criteria Rewards
-    <button class="btn btn-primary float-right add-calc" type="button">+ Criterion</a>
+    <button class="btn btn-primary float-right add-calc m-0" type="button">+ Criterion</a>
   </h3>
   <p>
     Criteria can be used to reward users with currency for the art they submit. They can be created under the "criterion" section of the admin panel,

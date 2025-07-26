@@ -117,7 +117,7 @@
     @endif
 
     <div class="grid grid-2-col gap-1 mb-4 ">
-      <div id="selected-character" class=" h-max card-body grid-area-unset w-100 bg-white">
+      <div id="selected-character" class="profile h-max card-body grid-area-unset w-100 bg-white">
         @include('widgets._selected_character', [
             'character' => $user->settings->selectedCharacter,
             'user' => $user,

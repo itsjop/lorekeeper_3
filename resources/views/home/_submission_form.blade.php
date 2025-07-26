@@ -156,57 +156,58 @@
 @if (!$isClaim)
   <div class="card mb-3">
     <div id="criterion-section" class="{{ Request::get('prompt_id') || $submission->prompt_id ? '' : 'hide' }}">
-      <h2 class="card-header flex jc-between ai-end">
-        Reward Calculator
-        <button class="btn  btn-outline-info add-calc" type="button">Add Calculator</a>
-    </div>
-    <div class="card-body">
-      <p>Select the calculator for your submission's media type to calculate your rewards!</p>
-      <p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they
-        aren't accurate to the piece you're submitting. </p>
-      <div id="criteria">
-        @if ($submission->id && $submission->data['criterion'])
-          @foreach ($submission->data['criterion'] as $i => $criterionData)
-            @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
-            <div class="card p-3 mb-2 pl-0">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <a
-                  class="col-1 p-0"
-                  data-bs-toggle="collapse"
-                  href="#collapsable-{{ $criterion->id }}"
-                  aria-expanded="true"
-                >
-                  <i class="fas fa-angle-down" style="font-size: 24px"></i>
-                </a>
-                <div class="flex-grow-1 mr-2">
-                  {!! Form::select('criterion[' . $i . '][id]', $criteria, $criterion->id, [
-                      'class' => 'form-control criterion-select',
-                      'placeholder' => 'Select a Criterion to set Minimum Requirements'
-                  ]) !!}
-                </div>
-                <div>
-                  <button class="btn btn-danger delete-calc" type="button"><i class="fas fa-trash"></i></button>
-                </div>
-              </div>
-              <div id="collapsable-{{ $criterion->id }}" class="form collapse show">
-                @include('criteria._minimum_requirements', [
-                    'criterion' => $criterion,
-                    'values' => $criterionData,
-                    'id' => $i
-                ])
-              </div>
-            </div>
-          @endforeach
-        @endif
+      <div class="card-header flex jc-between ai-end">
+        <h2>Reward Calculator </h2>
+        <button class="btn btn-outline-info add-calc m-0" type="button">Add Calculator</button>
       </div>
-      <div class="mb-4"></div>
+      <div class="card-body">
+        <p>Select the calculator for your submission's media type to calculate your rewards!</p>
+        <p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they
+          aren't accurate to the piece you're submitting. </p>
+        <div id="criteria">
+          @if ($submission->id && $submission->data['criterion'])
+            @foreach ($submission->data['criterion'] as $i => $criterionData)
+              @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
+              <div class="card p-3 mb-2 pl-0">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <a
+                    class="col-1 p-0"
+                    data-bs-toggle="collapse"
+                    href="#collapsable-{{ $criterion->id }}"
+                    aria-expanded="true"
+                  >
+                    <i class="fas fa-angle-down" style="font-size: 24px"></i>
+                  </a>
+                  <div class="flex-grow-1 mr-2">
+                    {!! Form::select('criterion[' . $i . '][id]', $criteria, $criterion->id, [
+                        'class' => 'form-control criterion-select',
+                        'placeholder' => 'Select a Criterion to set Minimum Requirements'
+                    ]) !!}
+                  </div>
+                  <div>
+                    <button class="btn btn-danger delete-calc" type="button"><i class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+                <div id="collapsable-{{ $criterion->id }}" class="form collapse show">
+                  @include('criteria._minimum_requirements', [
+                      'criterion' => $criterion,
+                      'values' => $criterionData,
+                      'id' => $i
+                  ])
+                </div>
+              </div>
+            @endforeach
+          @endif
+        </div>
+        <div class="mb-4"></div>
+      </div>
     </div>
   </div>
 @endif
 
 <div class="card mb-3">
-  <div class="card-header flex jc-between ai-end h2">
-    Characters
+  <div class="card-header flex jc-between ai-end ">
+    <h2>Characters</h2>
     <a
       href="#"
       class="btn btn-outline-info m-0"

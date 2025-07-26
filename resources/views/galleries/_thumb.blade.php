@@ -37,7 +37,7 @@
         ・
       @endif
       {{ $submission->favorites_count }} {!! Form::button('<i class="fas fa-star"></i> ', [
-          'style' => 'border:0; border-radius:.5em;',
+          'style' => 'border:0; border-radius:.5em; color: var(--purple-clr_600);',
           'class' => $submission->favorites->where('user_id', Auth::user()->id)->first() != null ? 'btn-success' : '',
           'data-toggle' => 'tooltip',
           'title' =>
@@ -46,7 +46,7 @@
           'type' => 'submit'
       ]) !!} ・
       {{ $submission->comments->where('type', 'User-User')->count() }}
-      <i class="fas fa-comment"></i>
+      <i class="fas fa-comment" style=" color: var(--purple-clr_600);"></i>
       {!! Form::close() !!}
     @else
       @if (isset($gallery) && !$gallery)

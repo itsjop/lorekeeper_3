@@ -292,7 +292,9 @@
       / max-content;
     @include body-bg;
     border-radius: 0 0 15px 15px;
-    .slug {grid-area: slug;}
+    .slug {
+      grid-area: slug;
+    }
     .thumb {
       grid-area: thumb;
       display: grid;
@@ -393,8 +395,8 @@
       font-family: 'Sour Gummy', sans-serif;
       font-size: 1.7em;
       text-transform: none;
-      &:hover{
-        color:var(--teal-clr_500);
+      &:hover {
+        color: var(--teal-clr_500);
       }
     }
     .display-user {
@@ -471,6 +473,16 @@
   z-index: 2;
   @include body-bg;
   height: min-content;
+  &.profile {
+    .selected-header {
+      background-color: transparent;
+      color: var(--purple-clr_800);
+    }
+  }
+  .selected-header {
+    background-color: var(--purple-clr_600);
+    color: var(--white);
+  }
   .profile-assets-content {
     display: grid;
     img {

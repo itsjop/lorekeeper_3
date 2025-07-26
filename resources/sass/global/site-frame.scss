@@ -124,6 +124,9 @@
     }
     #selected-character {
       display: none;
+      &.profile {
+        display: initial;
+      }
     }
   }
 }
