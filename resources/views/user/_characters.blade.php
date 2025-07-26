@@ -1,5 +1,5 @@
 @if ($characters->count())
-  <div class="grid grid-4-2-col gap-1">
+  <div class="grid grid-5-2-col gap-1">
     @foreach ($characters as $character)
       @include('browse._masterlist_content_entry', [
           'char_image' =>

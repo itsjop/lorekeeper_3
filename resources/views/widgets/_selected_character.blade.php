@@ -1,5 +1,5 @@
 <div class="profile-assets-content grid pi-center w-100 pb-2">
-  <h5 class="selected-header card-title w-100 text-center br-top-10 p-1">Selected Character</h5>
+  <div class="selected-header card-title w-100 text-center br-top-10 p-1">Selected Character</div>
   @if ($character)
     <a class="grid pi-center" href="{{ $character->url }}">
       <img

@@ -391,10 +391,6 @@
 
     .name {
       grid-area: name;
-      font-weight: 600;
-      font-family: 'Sour Gummy', sans-serif;
-      font-size: 1.7em;
-      text-transform: none;
       &:hover {
         color: var(--teal-clr_500);
       }
@@ -480,8 +476,18 @@
     }
   }
   .selected-header {
-    background-color: var(--purple-clr_600);
-    color: var(--white);
+    background-image: url('images/overlays/otis-redding_noise.png');
+    background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
+    backdrop-filter: saturate(200%) blur(5px);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+    border-radius: 15px 15px 0 0;
+    padding: 5px;
+    font-size: 1.15em;
+    color: var(--purple-clr_50);
+    &:hover {
+      background-color: transparent;
+      color: var(--purple-clr_50);
+    }
   }
   .profile-assets-content {
     display: grid;
