@@ -129,10 +129,8 @@ class SubmissionController extends Controller {
     $submission = Submission::whereNull('prompt_id')->where('id', $id)->where('status', '!=', 'Draft')->first();
     isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     $inventory = isset($submission->data['user']) ? parseAssetData($submission->data['user']) : null;
-    if (!$submission) {
-      abort(404);
-    }
-    $submission->data = json_decode($submission->data, true);
+    if (!$submission)   abort(404);
+
     return view('admin.submissions.submission', [
       'submission'       => $submission,
       'awardsrow' => Award::all()->keyBy('id'),
