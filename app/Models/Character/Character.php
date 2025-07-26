@@ -417,7 +417,7 @@ class Character extends Model {
     if ($this->is_myo_slot) {
       return $this->name;
     } else {
-      $name = '<a class="name h5 mb-0" href="' . $this->url . '">' . ($this->is_visible ? '<i class="fas fa-eye-slash"></i>' : '') . ' ' . $this->name . ' </a>';
+      $name = '<a class="name h5 mb-0" href="' . $this->url . '">' . (!$this->is_visible ? '<i class="fas fa-eye-slash"></i>' : '') . ' ' . $this->name . ' </a>';
       $slug = '<a class="slug mb-0" href="' . $this->url . '">' . $this->slug . '</a>';
       // $owner = '<a href="' . $this->url . '">' . $this->displayOwner . '</a>';
       return '<div class="grid pc-center pi-center">' . $name . ' ' . $slug . '' . '</div>';

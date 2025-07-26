@@ -9,9 +9,11 @@
       />
     </a>
     <a href="{{ $character->url }}" class="h5 ta-center mb-0">
+
       @if (!$character->is_visible)
         <i class="fas fa-eye-slash"></i>
-      @endif {!! $character->formattedName !!}
+      @endif
+      {!! $character->formattedName !!}
     </a>
   @else
     <p>{{ Auth::check() && Auth::user()->id == $user->id ? 'You have' : 'This user has' }} no selected character...</p>
