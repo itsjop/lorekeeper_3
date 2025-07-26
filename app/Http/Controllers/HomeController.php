@@ -28,58 +28,57 @@ class HomeController extends Controller {
     |
     */
 
-    /**
-     * Shows the homepage.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getIndex() {
-        if (config('lorekeeper.extensions.show_all_recent_submissions.enable')) {
-            $query = GallerySubmission::visible(Auth::user() ?? null)->accepted()->orderBy('created_at', 'DESC');
-            $gallerySubmissions = $query->get()->take(8);
-        } else {
-            $gallerySubmissions = [];
-        }
-
-        if(Settings::get('featured_character')) {
-          $character = Character::find(Settings::get('featured_character'));
-        } else {
-          $character = null;
-        }
-
-        return view('welcome', [
-            'about'               => SitePage::where('key', 'about')->first(),
-            'gallerySubmissions'  => $gallerySubmissions,
-            'featured' => $character,
-        ]);
+  /**
+   * Shows the homepage.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getIndex() {
+    if (config('lorekeeper.extensions.show_all_recent_submissions.enable')) {
+      $query = GallerySubmission::visible(Auth::user() ?? null)->accepted()->orderBy('created_at', 'DESC');
+      $gallerySubmissions = $query->get()->take(8);
+    } else {
+      $gallerySubmissions = [];
     }
 
-    /**
-     * Gets random character from specified species.
-     *
-     * @param int (species_id) $species
-     */
-    public function randomCharacter(int $species) {
-        $query = Character::with('user.rank')->with('image.features')->with('rarity')->with('image.species')->myo(0)->where(function ($query) {
-            $query->where('is_gift_art_allowed', '>=', 1)
-                ->orWhere('is_gift_writing_allowed', '>=', 1);
-        });
-        $imageQuery = CharacterImage::images(Auth::user() ?? null)->with('features')->with('rarity')->with('species')->where('species_id', $species)->whereIn('id', $query->pluck('character_image_id')->toArray());
-
-        $query->whereIn('id', $imageQuery->pluck('character_id')->toArray());
-
-        if (!Auth::check() || !Auth::user()->hasPower('manage_characters')) {
-            $query->visible();
-        }
-
-        $allCharacters = $query->get();
-
-        if (!count($allCharacters)) {
-            return false;
-        }
-
-        return $allCharacters->random();
+    if (Settings::get('featured_character')) {
+      $character = Character::find(Settings::get('featured_character'));
+    } else {
+      $character = null;
     }
+    return view('welcome', [
+      'about'               => SitePage::where('key', 'about')->first(),
+      'gallerySubmissions'  => $gallerySubmissions,
+      'featured'            => $character,
+    ]);
+  }
+
+  /**
+   * Gets random character from specified species.
+   *
+   * @param int (species_id) $species
+   */
+  public function randomCharacter(int $species) {
+    $query = Character::with('user.rank')->with('image.features')->with('rarity')->with('image.species')->myo(0)->where(function ($query) {
+      $query->where('is_gift_art_allowed', '>=', 1)
+        ->orWhere('is_gift_writing_allowed', '>=', 1);
+    });
+    $imageQuery = CharacterImage::images(Auth::user() ?? null)->with('features')->with('rarity')->with('species')->where('species_id', $species)->whereIn('id', $query->pluck('character_image_id')->toArray());
+
+    $query->whereIn('id', $imageQuery->pluck('character_id')->toArray());
+
+    if (!Auth::check() || !Auth::user()->hasPower('manage_characters')) {
+      $query->visible();
+    }
+
+    $allCharacters = $query->get();
+
+    if (!count($allCharacters)) {
+      return false;
+    }
+
+    return $allCharacters->random();
+  }
 
   /**
    * Shows the account linking page.
@@ -128,8 +127,8 @@ class HomeController extends Controller {
     // admin suggested the easy fix (to use stateless)
     $result =
       $provider == 'toyhouse'
-        ? Socialite::driver($provider)->stateless()->user()
-        : Socialite::driver($provider)->user();
+      ? Socialite::driver($provider)->stateless()->user()
+      : Socialite::driver($provider)->user();
     if ($service->saveProvider($provider, $result, Auth::user())) {
       flash('Account has been linked successfully.')->success();
       Auth::user()->updateCharacters();
@@ -144,43 +143,43 @@ class HomeController extends Controller {
       return redirect()->to(Auth::user()->has_alias ? 'account/aliases' : 'link');
     }
 
-        return redirect()->to('/');
+    return redirect()->to('/');
+  }
+
+  /**
+   * Shows the email page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getEmail(Request $request) {
+    // If the user already has an email associated with their account, redirect them
+    if (Auth::check() && Auth::user()->hasEmail) {
+      return redirect()->to('home');
     }
 
-    /**
-     * Shows the email page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getEmail(Request $request) {
-        // If the user already has an email associated with their account, redirect them
-        if (Auth::check() && Auth::user()->hasEmail) {
-            return redirect()->to('home');
-        }
+    // Step 1: display a login email
+    return view('auth.email');
+  }
 
-        // Step 1: display a login email
-        return view('auth.email');
+  /**
+   * Posts the email page.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function postEmail(UserService $service, Request $request) {
+    $data = $request->input('email');
+    if ($service->updateEmail(['email' => $data], Auth::user())) {
+      flash('Email added successfully!');
+
+      return redirect()->to('home');
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+
+      return redirect()->back();
     }
-
-    /**
-     * Posts the email page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function postEmail(UserService $service, Request $request) {
-        $data = $request->input('email');
-        if ($service->updateEmail(['email' => $data], Auth::user())) {
-            flash('Email added successfully!');
-
-            return redirect()->to('home');
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-
-            return redirect()->back();
-        }
-    }
+  }
 
   /**
    * Shows the birthdaying page.
@@ -266,13 +265,13 @@ class HomeController extends Controller {
       return false;
     }
 
-        // I think there's no harm in linking multiple of the same site as people may want their activity separated into an ARPG account.
-        // Uncomment the following to restrict to one account per site, however.
-        // Check if the user already has a username associated with their account
-        // if(DB::table('user_aliases')->where('site', $provider)->where('user_id', $user->id)->exists()) {
-        //    $this->error = 'You already have a username associated with this website linked to your account.';
-        //    return false;
-        // }
+    // I think there's no harm in linking multiple of the same site as people may want their activity separated into an ARPG account.
+    // Uncomment the following to restrict to one account per site, however.
+    // Check if the user already has a username associated with their account
+    // if(DB::table('user_aliases')->where('site', $provider)->where('user_id', $user->id)->exists()) {
+    //    $this->error = 'You already have a username associated with this website linked to your account.';
+    //    return false;
+    // }
 
     return true;
   }
