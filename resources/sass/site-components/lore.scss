@@ -8,7 +8,7 @@
   // Lore page overrides
   .lore, #custom-page {
     padding: 10px;
-    width: var(--content-width);
+    max-width: var(--content-width);
     title {
       font-family: 'Fredoka';
       font-size: 2.5em;

@@ -3254,7 +3254,7 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 .app .lore, .app #custom-page {
   padding: 10px;
-  width: var(--content-width);
+  max-width: var(--content-width);
 }
 .app .lore title, .app #custom-page title {
   font-family: "Fredoka";
