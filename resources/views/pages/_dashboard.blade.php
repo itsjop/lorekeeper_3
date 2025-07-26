@@ -17,7 +17,7 @@
         <h3>
           <p class="m-0">
             <a href="">daily</a>
-            <i class="fas fa-star px-2"></i>
+            <i class="fas fa-star px-2" style="color: var(--purple-clr_600);"></i>
             <a href="">shop</a>
           </p>
           <p class="small m-0"> (coming soon!) </p>
