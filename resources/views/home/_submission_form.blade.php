@@ -33,7 +33,7 @@
 @endif
 
 <div class="row">
-  <div class="col-md-{{ config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && !$isClaim ? '6' : '12' }}">
+  <div class="p-0 col-md-{{ config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && !$isClaim ? '6' : '12' }}">
     <div class="form-group">
       {!! Form::label(
           'url',
@@ -60,7 +60,7 @@
     </div>
   </div>
   @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && !$isClaim)
-    <div class="col-md-6">
+    <div class="col-md-6 p-0 pl-2">
       <div class="form-group">
         {!! Form::label('gallery_submission_id', 'Gallery URL (Optional)') !!}
         {!! add_help('Select the gallery submission this prompt is for.') !!}
@@ -100,123 +100,118 @@
   </div>
 @endif
 
-
-
 @if ($isClaim)
-<div class="card mb-3">
-  <div class="card-header h2">
-    Rewards
-  </div>
-  <div class="card-body">
+  <div class="card mb-3">
+    <div class="card-header h2">
+      Rewards
+    </div>
+    <div class="card-body">
       <p>Select the rewards you would like to claim.</p>
-    {{-- @else --}}
-     {{-- <div class="card-header h2">
+      {{-- @else --}}
+      {{-- <div class="card-header h2">
     PROMPT
   </div>
     <div class="card-body">
       <p>Note that any rewards added here are <u>in addition</u> to the default prompt rewards. If you do not require any
         additional rewards, you can leave this blank.</p> --}}
-    @endif
-    {{-- previous input --}}
-    @if (old('rewardable_type'))
-      @php
-        $loots = [];
-        foreach (old('rewardable_type') as $key => $type) {
-            if (!isset(old('rewardable_id')[$key])) {
-                continue;
-            }
-            $loots[] = (object) [
-                'rewardable_type' => $type,
-                'rewardable_id' => old('rewardable_id')[$key],
-                'quantity' => old('quantity')[$key] ?? 1
-            ];
+@endif
+{{-- previous input --}}
+@if (old('rewardable_type'))
+  @php
+    $loots = [];
+    foreach (old('rewardable_type') as $key => $type) {
+        if (!isset(old('rewardable_id')[$key])) {
+            continue;
         }
-      @endphp
-    @endif
+        $loots[] = (object) [
+            'rewardable_type' => $type,
+            'rewardable_id' => old('rewardable_id')[$key],
+            'quantity' => old('quantity')[$key] ?? 1
+        ];
+    }
+  @endphp
+@endif
 
-
-    @if ($isClaim)
-      @include('widgets._loot_select', [
-          'loots' => $submission->id ? $submission->rewards : $loots ?? null,
-          'showLootTables' => false,
-          'showRaffles' => true,
-          'showRecipes' => true
-      ])
-    {{-- @else
+@if ($isClaim)
+  @include('widgets._loot_select', [
+      'loots' => $submission->id ? $submission->rewards : $loots ?? null,
+      'showLootTables' => false,
+      'showRaffles' => true,
+      'showRecipes' => true
+  ])
+  {{-- @else
       @include('widgets._loot_select', [
           'loots' => $submission->id ? $submission->rewards : $loots ?? null,
           'showLootTables' => false,
           'showRaffles' => false,
           'showRecipes' => false --}}
-      {{-- ]) --}}
-      </div>
-      @endif
+  {{-- ]) --}}
+  </div>
+@endif
 
-    @if (!$isClaim)
-      <div id="rewards" class="mb-3"></div>
-    @endif
-
-
+@if (!$isClaim)
+  <div id="rewards" class="mb-3"></div>
+@endif
 
 @if (!$isClaim)
   <div class="card mb-3">
     <div id="criterion-section" class="{{ Request::get('prompt_id') || $submission->prompt_id ? '' : 'hide' }}">
-      <div class="card-header h2">
+      <h2 class="card-header flex jc-between ai-center">
         Reward Calculator
-        <button class="btn  btn-outline-info float-right add-calc" type="button">Add Calculator</a>
-      </div>
-      <div class="card-body">
-        <p>Select the calculator for your submission's media type to calculate your rewards!</p>
-        <p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they aren't accurate to the piece you're submitting. </p>
-        <div id="criteria">
-          @if ($submission->id && $submission->data['criterion'])
-            @foreach ($submission->data['criterion'] as $i => $criterionData)
-              @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
-              <div class="card p-3 mb-2 pl-0">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <a
-                    class="col-1 p-0"
-                    data-bs-toggle="collapse"
-                    href="#collapsable-{{ $criterion->id }}"
-                    aria-expanded="true"
-                  >
-                    <i class="fas fa-angle-down" style="font-size: 24px"></i>
-                  </a>
-                  <div class="flex-grow-1 mr-2">
-                    {!! Form::select('criterion[' . $i . '][id]', $criteria, $criterion->id, [
-                        'class' => 'form-control criterion-select',
-                        'placeholder' => 'Select a Criterion to set Minimum Requirements'
-                    ]) !!}
-                  </div>
-                  <div>
-                    <button class="btn btn-danger delete-calc" type="button"><i class="fas fa-trash"></i></button>
-                  </div>
+        <button class="btn  btn-outline-info add-calc" type="button">Add Calculator</a>
+    </div>
+    <div class="card-body">
+      <p>Select the calculator for your submission's media type to calculate your rewards!</p>
+      <p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they
+        aren't accurate to the piece you're submitting. </p>
+      <div id="criteria">
+        @if ($submission->id && $submission->data['criterion'])
+          @foreach ($submission->data['criterion'] as $i => $criterionData)
+            @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
+            <div class="card p-3 mb-2 pl-0">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <a
+                  class="col-1 p-0"
+                  data-bs-toggle="collapse"
+                  href="#collapsable-{{ $criterion->id }}"
+                  aria-expanded="true"
+                >
+                  <i class="fas fa-angle-down" style="font-size: 24px"></i>
+                </a>
+                <div class="flex-grow-1 mr-2">
+                  {!! Form::select('criterion[' . $i . '][id]', $criteria, $criterion->id, [
+                      'class' => 'form-control criterion-select',
+                      'placeholder' => 'Select a Criterion to set Minimum Requirements'
+                  ]) !!}
                 </div>
-                <div id="collapsable-{{ $criterion->id }}" class="form collapse show">
-                  @include('criteria._minimum_requirements', [
-                      'criterion' => $criterion,
-                      'values' => $criterionData,
-                      'id' => $i
-                  ])
+                <div>
+                  <button class="btn btn-danger delete-calc" type="button"><i class="fas fa-trash"></i></button>
                 </div>
               </div>
-            @endforeach
-          @endif
-        </div>
-        <div class="mb-4"></div>
+              <div id="collapsable-{{ $criterion->id }}" class="form collapse show">
+                @include('criteria._minimum_requirements', [
+                    'criterion' => $criterion,
+                    'values' => $criterionData,
+                    'id' => $i
+                ])
+              </div>
+            </div>
+          @endforeach
+        @endif
       </div>
+      <div class="mb-4"></div>
     </div>
   </div>
 @endif
 
 <div class="card mb-3">
-  <div class="card-header h2">
+  <div class="card-header flex jc-between ai-center h2">
+    Characters
     <a
       href="#"
-      class="btn btn-outline-info float-right"
+      class="btn btn-outline-info m-0"
       id="addCharacter"
     >Add Character</a>
-    Characters
   </div>
   <div class="card-body" style="clear:both;">
     @if ($isClaim)
@@ -250,9 +245,6 @@
   </div>
 </div>
 
-
-
-
 <div class="card mb-3">
   <div class="card-header h2">
     Add-Ons
@@ -273,6 +265,7 @@
                   : []),
           'page' => $page
       ])
+      <hr>
       @include('widgets._bank_select', [
           'owner' => Auth::user(),
           'selected' => $submission->id

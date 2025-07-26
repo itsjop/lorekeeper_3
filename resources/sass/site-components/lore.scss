@@ -25,8 +25,7 @@
       color: transparent;
       text-shadow: none;
     }
-    h2,
-    h3 {
+    h2, h3 {
       font-family: 'Itim', system-ui;
       font-weight: 700;
       text-transform: lowercase;
@@ -35,17 +34,11 @@
       color: transparent;
       text-shadow: none;
     }
-
-    h2 {
-      font-size: 1.3em;
-    }
-    h3 {
-      font-size: 1.3em;
-    }
-
+    h2 { font-size: 1.3em; }
+    h3 { font-size: 1.3em }
     p {
       font-family: 'Baloo 2';
-      font-size: 0.9em;
+      font-size: 1em;
       font-weight: 600;
       color: var(--purple-clr_800);
       text-transform: none;

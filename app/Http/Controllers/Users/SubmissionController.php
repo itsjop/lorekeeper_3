@@ -144,9 +144,8 @@ class SubmissionController extends Controller {
     $inventory = UserItem::with('item')->whereNull('deleted_at')->where('count', '>', '0')->where('user_id', Auth::user()->id)->get();
     $submission = Submission::where('id', $id)->where('status', 'Draft')->where('user_id', Auth::user()->id)->first();
     isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
-    if (!$submission) {
-      abort(404);
-    }
+
+    if (!$submission) abort(404);
 
     $promptCriteria = PromptCriterion::where('prompt_id', $submission->prompt_id)->pluck('criterion_id')->toArray();
 
@@ -466,10 +465,9 @@ class SubmissionController extends Controller {
     $submission = Submission::viewable(Auth::user())->where('id', $id)->whereNull('prompt_id')->first();
     isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     $inventory = isset($submission->data['user']) ? parseAssetData($submission->data['user']) : null;
-    if (!$submission) {
-      abort(404);
-    }
-    $submission->data = json_decode($submission->data);
+
+    if (!$submission) abort(404);
+
     return view('home.submission', [
       'submission' => $submission,
       'user'       => $submission->user,
@@ -557,7 +555,24 @@ class SubmissionController extends Controller {
   public function postNewClaim(Request $request, SubmissionManager $service, $draft = false) {
     $request->validate(Submission::$createRules);
 
-    if ($submission = $service->createSubmission($request->only(['url', 'comments', 'stack_id', 'stack_quantity', 'slug', 'character_rewardable_type', 'character_rewardable_id', 'character_rewardable_quantity', 'rewardable_type', 'rewardable_id', 'quantity', 'currency_id', 'currency_quantity', 'character_notify_owner']), Auth::user(), true, $draft)) {
+    if ($submission = $service->createSubmission($request->only(
+      [
+        'url',
+        'comments',
+        'stack_id',
+        'stack_quantity',
+        'slug',
+        'character_rewardable_type',
+        'character_rewardable_id',
+        'character_rewardable_quantity',
+        'rewardable_type',
+        'rewardable_id',
+        'quantity',
+        'currency_id',
+        'currency_quantity',
+        'character_notify_owner'
+      ]
+    ), Auth::user(), true, $draft)) {
       if ($submission->status == 'Draft') {
         flash('Draft created successfully.')->success();
 

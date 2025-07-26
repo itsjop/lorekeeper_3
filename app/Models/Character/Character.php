@@ -413,6 +413,16 @@ class Character extends Model {
    *
    * @return string
    */
+  public function getFormattedNameAttribute() {
+    if ($this->is_myo_slot) {
+      return $this->name;
+    } else {
+      $name = '<a class="name h5 mb-0" href="' . $this->url . '">' . ($this->is_visible ? '<i class="fas fa-eye-slash"></i>' : '') . ' ' . $this->name . ' </a>';
+      $slug = '<a class="slug mb-0" href="' . $this->url . '">' . $this->slug . '</a>';
+      // $owner = '<a href="' . $this->url . '">' . $this->displayOwner . '</a>';
+      return '<div class="grid pc-center pi-center">' . $name . ' ' . $slug . '' . '</div>';
+    }
+  }
   public function getFullNameAttribute() {
     if ($this->is_myo_slot) {
       return $this->name;

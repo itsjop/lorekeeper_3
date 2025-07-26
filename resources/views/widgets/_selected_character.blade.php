@@ -1,7 +1,7 @@
-<h5 class="card-title">Selected Character</h5>
-<div class="profile-assets-content">
+<h5 class="card-title w-100">Selected Character</h5>
+<div class="profile-assets-content grid pi-center">
   @if ($character)
-    <a href="{{ $character->url }}">
+    <a class="grid pi-center" href="{{ $character->url }}">
       <img
         src="{{ isset($fullImage) && $fullImage ? $character->image->thumbnailUrl : $character->image->imageUrl }}"
         class="{{ isset($fullImage) && $fullImage ? '' : 'img-thumbnail' }} "
@@ -11,7 +11,7 @@
     <a href="{{ $character->url }}" class="h5 ta-center mb-0">
       @if (!$character->is_visible)
         <i class="fas fa-eye-slash"></i>
-      @endif {{ $character->fullName }}
+      @endif {!! $character->formattedName !!}
     </a>
   @else
     <p>{{ Auth::check() && Auth::user()->id == $user->id ? 'You have' : 'This user has' }} no selected character...</p>

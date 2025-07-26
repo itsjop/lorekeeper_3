@@ -110,7 +110,7 @@ alt="List View"
             file_exists(public_path(
                     $character->image->imageDirectory .
                         ' /
-                                    ' .
+                                        ' .
                         $character->image->fullsizeFileName
                 )
             )
