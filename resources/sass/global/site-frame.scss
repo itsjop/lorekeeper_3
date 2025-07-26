@@ -43,7 +43,7 @@
         'sidebar  main  char' auto
         'sidebar footer char' auto
         / var(--sidebar-width) var(--content-width) var(--sidebar-width);
-    }
+    // }
     // left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
   }
   #site-wrapper {
