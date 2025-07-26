@@ -13,10 +13,10 @@
   max-width: 100dvw;
   max-height: 100dvh;
   --app-gap-x: 20px;
-  --app-gap-y: 10px;
-  --sidebar-width: min(20vw, 230px);
+  --app-gap-y: 20px;
+  --sidebar-width: min(20vw, 260px);
   --sidebars-width: calc(var(--sidebar-width) * 2);
-  --gutter-width: 3vw;
+  --gutter-width: 1.5vw;
   --gutters-width: (2 * var(--gutter-width));
   --content-min-width: 600px;
   --content-max-width: 1600px;
