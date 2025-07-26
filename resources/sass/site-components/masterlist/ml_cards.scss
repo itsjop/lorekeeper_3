@@ -312,7 +312,7 @@
   // }
 }
 
-@container main-container (width < 1200px) {
+@container main-container (width > 1200px) {
   #ml-gridView {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
