@@ -199,7 +199,7 @@
           </aside>
         </div>
         {{-- Featured Character --}}
-        <aside id="selected-character" class="featured-character-sidebar">
+        <aside id="selected-character" class="selected-character-sidebar">
             @include('pages._selected_char')
         </aside>
       @endif

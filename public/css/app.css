@@ -2536,8 +2536,14 @@ body {
   height: min-content;
 }
 #selected-character.profile .selected-header {
+  background: unset;
+  box-shadow: unset;
   background-color: transparent;
   color: var(--purple-clr_800);
+  -webkit-backdrop-filter: unset;
+          backdrop-filter: unset;
+  font-family: "Itim";
+  font-weight: 600;
 }
 #selected-character .selected-header {
   background-image: url("images/overlays/otis-redding_noise.png");

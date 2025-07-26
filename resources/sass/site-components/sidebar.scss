@@ -471,8 +471,13 @@
   height: min-content;
   &.profile {
     .selected-header {
+      background: unset;
+      box-shadow: unset;
       background-color: transparent;
       color: var(--purple-clr_800);
+      backdrop-filter: unset;
+      font-family: 'Itim';
+      font-weight: 600;
     }
   }
   .selected-header {
