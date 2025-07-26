@@ -489,10 +489,6 @@
     padding: 5px;
     font-size: 1.15em;
     color: var(--purple-clr_50);
-    &:hover {
-      background-color: transparent;
-      color: var(--purple-clr_50);
-    }
   }
   .profile-assets-content {
     display: grid;
