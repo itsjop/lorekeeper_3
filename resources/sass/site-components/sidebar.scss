@@ -470,14 +470,21 @@
   @include body-bg;
   height: min-content;
   &.profile {
-    .selected-header {
-      background: unset;
-      box-shadow: unset;
-      background-color: transparent;
-      color: var(--purple-clr_800);
-      backdrop-filter: unset;
-      font-family: 'Itim';
-      font-weight: 600;
+    .profile-assets-content {
+      height: 100%;
+      .selected-header {
+        background: unset;
+        box-shadow: unset;
+        background-color: transparent;
+        color: var(--purple-clr_800);
+        backdrop-filter: unset;
+        font-family: 'Itim';
+        font-weight: 600;
+      }
+      img{
+          max-width: 100%;
+  max-height: 300px;
+      }
     }
   }
   .selected-header {
