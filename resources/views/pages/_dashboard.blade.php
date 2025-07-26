@@ -13,15 +13,10 @@
         alt=""
         class="w-66"
       >
-      <div class="grid ai-center">
-        <h3>
-          <p class="m-0">
-            <a href="">daily</a>
-            <i class="fas fa-star px-2" style="color: var(--purple-clr_600);"></i>
-            <a href="">shop</a>
-          </p>
-          <p class="small m-0"> (coming soon!) </p>
-        </h3>
+      <div class="grid ai-center event-buttons">
+        <p class="event-title m-0"> Coming Soon! </p>
+        <a class="frontpage-button" href=""> daily </a>
+        <a class="frontpage-button" href=""> shop </a>
       </div>
     </div>
   </div>
@@ -31,28 +26,19 @@
       Dailies
     </h2>
     <div class="bubble jobs gap-_5">
-      <div class="wishing-well">
-        <a href="/dailies/1">
-          <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well">
-          <h3 class="a">Wishing Well</h3>
-        </a>
-      </div>
-      <div class="starlit-acres">
-        <a href="/dailies/2">
-          <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily">
-          <h3 class="a">Starlit Acres</h3>
-        </a>
-      </div>
-      <div class="foraging">
-        <a href="/dailies/3">
-          <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone">
-          <h3 class="a">Foraging
-            <p class="small m-0">
-              (coming soon!)
-            </p>
-          </h3>
-        </a>
-      </div>
+      <a class="wishing-well" href="/dailies/1">
+        <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well" />
+        <p class="frontpage-button m-0"> Wishing Well</p>
+      </a>
+      <a class="starlit-acres" href="/dailies/2">
+        <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily" />
+        <p class="frontpage-button m-0"> Starlit Acres</p>
+      </a>
+      <a class="foraging" href="/dailies/3">
+        <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone" />
+        <p class="frontpage-button m-0 bw-disabled"> Foraging
+        </p>
+      </a>
     </div>
   </div>
   <div class="bubblebox newsfeed">

@@ -6,8 +6,10 @@
   <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> Somnivores </summary>
     <ul>
-      <li class="sidebar-item"> <a href="/info/somnivores"> Species Overview </a> </li>
-      <li class="sidebar-item"> <a href="/info/palate"    > Dreams & Palates </a> </li>
+      <li class="sidebar-item"> <a href="/info/somnivores"       > Species Overview  </a> </li>
+      <li class="sidebar-item"> <a href="/info/palate"           > Dreams & Palates  </a> </li>
+      <li class="sidebar-item"> <a href="/info/lore-index"       > Lore Index        </a> </li>
+      <li class="sidebar-item"> <a href="/info/reverie-locations"> Reverie Locations </a> </li>
     </ul>
   </details>
 

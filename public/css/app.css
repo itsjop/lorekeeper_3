@@ -546,6 +546,11 @@ body #app.teal {
 #app .bg-white {
   background-color: var(--white);
 }
+#app .bw-disabled {
+  filter: grayscale(1);
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.6666666667);
+}
 
 body {
   /* Breakpoints */
@@ -1652,6 +1657,30 @@ body {
 .home-dashboard .recent-submissions {
   grid-area: subm;
 }
+.home-dashboard .frontpage-button {
+  border: 2px solid var(--white);
+  color: var(--white);
+  border-radius: 50vw;
+  background-image: linear-gradient(to top, #859cf7, #6e6cea);
+  padding: 5px 15px;
+  max-width: 90%;
+  justify-self: center;
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  display: flex;
+  justify-content: center;
+}
+.home-dashboard .frontpage-button:hover {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+}
+.home-dashboard .frontpage-button:hover {
+  transition: 0.7s var(--elastic_linear);
+  transform: scale(1.1);
+}
+.home-dashboard .frontpage-button:hover {
+  color: var(--white);
+}
 .home-dashboard .bubblebox {
   display: grid;
   grid-template-rows: max-content auto;
@@ -1672,11 +1701,6 @@ body {
 .home-dashboard .bubblebox .bubble.event, .home-dashboard .bubblebox .bubble.jobs {
   background-size: cover;
 }
-.home-dashboard .bubblebox .bubble.event h3, .home-dashboard .bubblebox .bubble.jobs h3 {
-  padding: 5px 8px;
-  border-radius: 10px;
-  border: 1px var(--white) solid;
-}
 .home-dashboard .bubblebox .bubble.event img, .home-dashboard .bubblebox .bubble.jobs img {
   width: 100%;
   max-width: 100%;
@@ -1692,25 +1716,38 @@ body {
 .home-dashboard .bubblebox .bubble.event {
   background-image: url("../images/somnivores/frontpage/event_bg.png");
 }
-.home-dashboard .bubblebox .bubble.event h3 {
-  -webkit-backdrop-filter: brightness(110%) blur(5px);
-          backdrop-filter: brightness(110%) blur(5px);
-  background-color: color-mix(in srgb, var(--white) 40%, transparent);
-}
 .home-dashboard .bubblebox .bubble.event a {
   font-weight: 700;
+}
+.home-dashboard .bubblebox .bubble.event .event-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  gap: 5px;
+}
+.home-dashboard .bubblebox .bubble.event .event-buttons .event-title {
+  background-color: var(--white);
+  color: var(--purple-clr_600);
+  border-radius: 100vw;
+  font-weight: 600;
+  padding: 5px 10px;
+  grid-column: 1/3;
+}
+.home-dashboard .bubblebox .bubble.event .event-buttons .frontpage-button {
+  min-width: 100%;
 }
 .home-dashboard .bubblebox .bubble.jobs {
   background-image: url("../images/somnivores/frontpage/jobs_bg.png");
   grid-template-columns: 1fr 1fr 1fr;
 }
-.home-dashboard .bubblebox .bubble.jobs h3 {
-  -webkit-backdrop-filter: brightness(110%) blur(5px);
-          backdrop-filter: brightness(110%) blur(5px);
-}
-.home-dashboard .bubblebox .bubble.jobs > div {
+.home-dashboard .bubblebox .bubble.jobs > a {
   display: grid;
-  grid-template-rows: subgrid;
+  height: 100%;
+  justify-content: space-around;
+}
+.home-dashboard .bubblebox .bubble.jobs .frontpage-button {
+  height: -moz-max-content;
+  height: max-content;
 }
 .home-dashboard .bubblebox .bubble.jobs .foraging img {
   filter: grayscale(1) opacity(0.5) drop-shadow(0 0 5px var(--white));
