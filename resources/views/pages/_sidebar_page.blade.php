@@ -31,7 +31,7 @@
   <details class="sidebar-section" open>
     <summary class="sidebar-section-header">Site Guides</summary>
     <ul>
-      <li class="sidebar-item"> <a href="/info/beginer-guide"     > Beginner's Guide            </a> </li>
+      <li class="sidebar-item"> <a href="/info/beginner-guide"     > Beginner's Guide            </a> </li>
       <hr class="m-0">
       <li class="sidebar-item"> <a href="/info/image-guidelines"  > Masterlist Image Guidelines </a> </li>
       <li class="sidebar-item"> <a href="/info/myo-submission"    > MYO Submission              </a> </li>
