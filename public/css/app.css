@@ -897,7 +897,7 @@ body {
 }
 #app #site-wrapper {
   display: grid;
-  grid-template: "logo" 20vh "nav" max-content "char" max-content "main" auto "footer" max-content/auto;
+  grid-template: "logo  " 20vh "nav   " max-content "char  " max-content "main  " auto "footer" max-content/auto;
   gap: var(--app-gap-x) var(--app-gap-y);
   position: relative;
   max-width: calc(100dvw - var(--gutters-width));
