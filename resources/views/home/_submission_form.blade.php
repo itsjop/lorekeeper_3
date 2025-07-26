@@ -156,7 +156,7 @@
 @if (!$isClaim)
   <div class="card mb-3">
     <div id="criterion-section" class="{{ Request::get('prompt_id') || $submission->prompt_id ? '' : 'hide' }}">
-      <h2 class="card-header flex jc-between ai-center">
+      <h2 class="card-header flex jc-between ai-end">
         Reward Calculator
         <button class="btn  btn-outline-info add-calc" type="button">Add Calculator</a>
     </div>
@@ -205,7 +205,7 @@
 @endif
 
 <div class="card mb-3">
-  <div class="card-header flex jc-between ai-center h2">
+  <div class="card-header flex jc-between ai-end h2">
     Characters
     <a
       href="#"
