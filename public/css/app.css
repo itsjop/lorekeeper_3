@@ -858,6 +858,9 @@ body {
   border-radius: 15px;
   max-width: 800px;
 }
+.app .card-basic:has(h1:first-child, h2:first-child, h3:first-child), .app .card-full:has(h1:first-child, h2:first-child, h3:first-child) {
+  padding-top: 15px;
+}
 .app .card-basic ul, .app .card-full ul {
   padding-left: 40px;
 }
@@ -879,9 +882,12 @@ body {
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.5098039216);
   max-width: 450px;
-  padding: 15px 20px 20px 20px;
+  padding: 20px;
   margin: 0px auto 20px;
   box-shadow: 0 3px 8px rgba(111, 74, 139, 0.2901960784);
+}
+.app .mini-card:has(h1:first-child, h2:first-child, h3:first-child) {
+  padding-top: 15px;
 }
 .app .dt-nav-page .dt-nav-group .dt-nav-item.strike {
   font-style: italic;

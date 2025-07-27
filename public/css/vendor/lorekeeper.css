@@ -68,7 +68,7 @@
   flex-wrap: wrap;
 }
 
-.spoiler {
+/* .spoiler {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-bottom: 1rem;
@@ -90,7 +90,7 @@
 .text-break {
   overflow-wrap: break-word;
   word-break: break-word;
-}
+} */
 .small-icon {
   height: 2rem;
   padding-right: 0.5rem;

@@ -1,3 +1,21 @@
 {
-  "workbench.colorTheme": "Monokai Pro (Filter Machine)"
+  "workbench.colorTheme": "Monokai Pro (Filter Machine)",
+  "search.exclude": {
+    "*/app.css": true,
+    "*app.css": true,
+    "*public/css/app.css": true,
+    "public/css/app.css": true,
+    "*/css/*.css": true,
+    "public/css/": true,
+    "public/css/*": true
+  },
+  "files.exclude": {
+    "*public/css/app.css": true,
+    "public/css/app.css": true,
+    "public/css/*": true,
+    "*/css/*.css": true,
+    "*/app.css": true,
+    "app.css": true
+  },
+  "stop showing me app.css!!": {}
 }
