@@ -1,42 +1,57 @@
+// prettier-ignore
+.masterlist-search-grid,
 .inventory-search-pane {
   display: grid;
+  gap: 10px;
+  place-content: start;
+  place-items: start;
+  legend {
+    margin: -10px 10px;
+    padding: 3px;
+    width: max-content;
+    text-transform: lowercase;
+    font-family: 'Itim', sans-serif;
+    transform: translateY(-10%);
+  }
+  .sort, .name, .category, .rarity, .artist, .search,
+  input, select {    width: 100%;  }
+
+  .name            { grid-area: name;     }
+  .category        { grid-area: category; }
+  .rarity          { grid-area: rarity;   }
+  .artist          { grid-area: artist;   }
+  .search          { grid-area: search;   }
+  .character-name  { grid-area: name;     }
+  #species         { grid-area: species;  }
+  .sortby          { grid-area: sortby;   }
+  .advanced-toggle { grid-area: a-btn;    }
+  .searchbutton    { grid-area: submit;   }
+}
+.masterlist-search-grid {
+  grid-template:
+    'name  species rarity sortby submit a-btn' max-content
+    / 2fr 2fr 2fr 1fr 1fr;
+}
+.inventory-search-pane {
   grid-template:
     'category rarity artist sort  ' 1fr
     'name     name   name   search' 1fr
     / 2fr 2fr 2fr 1fr;
-  place-content: start;
-  place-items: start;
-  gap: 0.6em;
-  .sort,
-  .name,
-  .category,
-  .rarity,
-  .artist,
-  .search,
-  input,
-  select {
-    width: 100%;
-  }
-  .name {
-    grid-area: name;
-  }
-  .category {
-    grid-area: category;
-  }
-  .rarity {
-    grid-area: rarity;
-  }
-  .artist {
-    grid-area: artist;
-  }
-  .search {
-    grid-area: search;
-  }
-  @container main-container (width < 992px) {
+}
+
+@container main-container (width < 992px) {
+  .inventory-search-pane {
     grid-template:
       'rarity rarity category category' 1fr
-      'artist artist artist sort' 1fr
-      'name name name search' 1fr
+      'artist artist artist   sort    ' 1fr
+      'name   name   name     search  ' 1fr
       / 1fr 1fr 1fr 1fr;
+  }
+  .masterlist-search-grid {
+    grid-template:
+      'name   species' max-content
+      'sortby species' max-content
+      'a-btn  submit' max-content
+      / 1fr 1fr;
   }
 }

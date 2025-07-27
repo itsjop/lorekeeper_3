@@ -3,45 +3,7 @@
 #masterlist {
   container: mlsearch / inline-size;
 }
-.masterlist-search-grid {
-  display: grid;
-  grid-template:
-    'name  species sortby submit a-btn' max-content
-    / 2fr 2fr 2fr 1fr 1fr;
-  gap: 10px;
-  legend {
-    margin: -10px 10px;
-    padding: 3px;
-    width: max-content;
-    text-transform: lowercase;
-    font-family: 'Itim', sans-serif;
-    transform: translateY(-10%);
-  }
-  .character-name {
-    grid-area: name;
-  }
-  #species {
-    grid-area: species;
-  }
-  .sortby {
-    grid-area: sortby;
-  }
-  .advanced-search-toggle {
-    grid-area: a-btn;
-  }
-  .searchbutton {
-    grid-area: submit;
-  }
-}
-@container mlsearch (width < 800px) {
-  .masterlist-search-grid {
-    display: grid;
-    grid-template:
-      'name   name    submit' 1fr
-      'sortby species a-btn ' 1fr
-      / 3fr 3fr 1.5fr;
-  }
-}
+
 #ml-gridView {
   display: grid;
   gap: 20px;
@@ -283,6 +245,7 @@
   .slug {
     padding-left: 10px;
     grid-area: code;
+    width: max-content;
   }
   .display-user {
     padding-right: 10px;

@@ -1,17 +1,17 @@
 <div id="masterlist">
   {!! Form::open(['method' => 'GET']) !!}
-  <fieldset class="masterlist-search-grid form-inline ji-start ai-end my-2">
+  <fieldset class="masterlist-search-grid ji-start ai-end my-2">
     <legend>Character Search</legend>
     <div class="character-name form-group grid ji-start m-0 w-100">
       {!! Form::label('name', ucfirst(__('lorekeeper.character')) . ' Name/Code: ', ['class' => 'mr-2']) !!}
       {!! Form::text('name', Request::get('name'), ['class' => 'w-100 form-control']) !!}
     </div>
-    {{-- <div class="species form-group  m-0">
-      {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control mr-2']) !!}
-    </div> --}}
     <div class="species form-group w-100 m-0">
       {!! Form::label('species_id', 'Species: ') !!}
       {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control w-100']) !!}
+    </div>
+    <div class="rarity form-group  m-0">
+      {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control mr-2']) !!}
     </div>
     <div class="sortby form-inline ji-start mb-0 w-100">
       <div class="form-group mb-0 w-100">
@@ -50,7 +50,7 @@
         'class' => 'searchbutton btn btn-primary as-end flex gap-_5 ai-center js-center'
     ]) !!}
 
-    <div class="advanced-search-toggle mb-0 as-end js-center">
+    <div class="advanced-toggle mb-0 as-end js-center">
       <a
         href="#advancedSearch"
         class="btn btn-sm btn-secondary flex gap-_5 ai-center"
