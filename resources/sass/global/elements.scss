@@ -55,7 +55,7 @@
     color: var(--purple-clr_900);
     font-weight: 500;
   }
-  span{ color: var(--purple-clr_900); }
+  span{ color: currentcolor; }
   fieldset {
     border: 2px solid var(--clr_raw_purple-500);
     border-radius: 15px;
