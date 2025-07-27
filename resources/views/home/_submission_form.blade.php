@@ -161,9 +161,11 @@
         <button class="btn btn-outline-info add-calc m-0" type="button">Add Calculator</button>
       </div>
       <div class="card-body">
-        <p>Select the calculator for your submission's media type to calculate your rewards!</p>
-        <p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they
-          aren't accurate to the piece you're submitting. </p>
+        <p>Select the calculator(s) for your submission's media type to calculate your rewards. Be sure to review the <strong><a href="/info/submission-rewards">Submission Rewards Guide</a></strong> for accurate grading!</p>
+
+<p><strong>If you are submitting artwork with a background, you will need to add both "Art - Focal Elements" AND "Art - Background Elements" as seperate calculators.</strong></p>
+
+<p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they aren't accurate to the piece you're submitting.</p>
         <div id="criteria">
           @if ($submission->id && $submission->data['criterion'])
             @foreach ($submission->data['criterion'] as $i => $criterionData)
