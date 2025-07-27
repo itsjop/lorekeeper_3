@@ -37,12 +37,12 @@
     max-width: calc(100dvw - var(--gutters-width));
     height: min-content;
     // &.has-sidebar {
-      grid-template:
-        '   .     logo    . ' clamp(150px, 15vh, 300px)
-        '   .     nav     . ' min-content
-        'sidebar  main  char' auto
-        'sidebar footer char' auto
-        / var(--sidebar-width) var(--content-width) var(--sidebar-width);
+    grid-template:
+      '   .     logo    . ' clamp(150px, 15vh, 300px)
+      '   .     nav     . ' min-content
+      'sidebar  main  char' auto
+      'sidebar footer char' auto
+      / var(--sidebar-width) var(--content-width) var(--sidebar-width);
     // }
     // left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
   }
@@ -65,7 +65,7 @@
       .content-wrapper {
         position: relative;
         z-index: 1;
-        padding: 1.5rem;
+        padding: 20px 4vw;
         border-radius: 15px;
         // background-image: radial-gradient(transparent 0%, transparent calc(100% - 60px), white 100%);
         box-shadow: 0 0 5px inset var(--white);
@@ -111,8 +111,8 @@
       &.has-sidebar {
         gap: 10px;
         left: 0;
+        padding: 0;
         margin-bottom: 15px;
-        padding: 10px;
         grid-template:
           'logo' 25vmin
           'nav' max-content

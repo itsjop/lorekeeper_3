@@ -107,13 +107,7 @@ alt="List View"
     @include('browse._masterlist_content_entry', [
         'char_image' =>
             $character->image->canViewFull(Auth::user() ?? null) &&
-            file_exists(public_path(
-                    $character->image->imageDirectory .
-                        ' /
-                                        ' .
-                        $character->image->fullsizeFileName
-                )
-            )
+            file_exists(public_path($character->image->imageDirectory . ' /  ' . $character->image->fullsizeFileName))
                 ? $character->image->thumbnailUrl
                 : $character->image->thumbnailUrl
     ])

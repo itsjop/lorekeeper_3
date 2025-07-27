@@ -199,33 +199,42 @@
       {{-- @if (isset($sublists) && $sublists->count() > 0)
         @foreach ($sublists as $sublist)
           / <a href="{{ $user->url . '/sublist/' . $sublist->key }}">{{ $sublist->name }}</a>
-        @endforeach
+        @endforidach
       @endif --}}
     </h2>
 
     @foreach ($characters->take(4)->get()->chunk(4) as $chunk)
-      <div class="row mb-4">
+      <div class="grid grid-4-col gap-1">
         @foreach ($chunk as $character)
-          <div class="col-md-3 col-6 text-center">
-            <div>
-              <a href="{{ $character->url }}">
-                <img
-                  src="{{ $character?->image?->thumbnailUrl }}"
-                  class="img-thumbnail"
-                  alt="{{ $character->fullName }}"
-                /></a>
-            </div>
-            <div class="mt-1">
-              <a href="{{ $character->url }}" class="h5 mb-0">
-                @if (!$character->is_visible)
-                  <i class="fas fa-eye-slash"></i>
-                @endif
-                {!! $character->formattedName !!}
-              </a>
-            </div>
-          </div>
+          @include('browse._masterlist_content_entry', [
+              'char_image' =>
+                  $character->image->canViewFull(Auth::user() ?? null) &&
+                  file_exists(public_path($character->image->imageDirectory . ' /  ' . $character->image->fullsizeFileName))
+                      ? $character->image->thumbnailUrl
+                      : $character->image->thumbnailUrl
+          ])
+
+          {{-- <div class="col-md-3 col-6 text-center">
+  <div>
+    <a href="{{ $character->url }}">
+      <img
+      src="{{ $character?->image?->thumbnailUrl }}"
+      class="img-thumbnail"
+      alt="{{ $character->fullName }}"
+      /></a>
+    </div>
+    <div class="mt-1">
+      <a href="{{ $character->url }}" class="h5 mb-0">
+        @if (!$character->is_visible)
+        <i class="fas fa-eye-slash"></i>
+        @endif
+        {!! $character->formattedName !!}
+      </a>
+    </div>
+  </div> --}}
         @endforeach
       </div>
+      <br>
     @endforeach
 
     <div class="text-right">

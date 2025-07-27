@@ -159,12 +159,17 @@
 @foreach ($characters->take(4)->get()->chunk(4) as $chunk)
   <div class="row mb-4">
     @foreach ($chunk as $character)
-      <div class="col-md-3 col-6 text-center">
+      @include('browse._masterlist_content_entry', [
+          'char_image' =>
+              $character->image->canViewFull(Auth::user() ?? null) &&
+              file_exists(public_path($character->image->imageDirectory . ' /  ' . $character->image->fullsizeFileName))
+                  ? $character->image->thumbnailUrl
+                  : $character->image->thumbnailUrl
+      ])
+
+      {{-- <div class="col-md-3 col-6 text-center">
         <div>
-          @if (
-              (Auth::check() && Auth::user()->settings->content_warning_visibility == 0 && isset($character->character_warning)) ||
-                  (isset($character->character_warning) && !Auth::check())
-          )
+          @if ((Auth::check() && Auth::user()->settings->content_warning_visibility == 0 && isset($character->character_warning)) || (isset($character->character_warning) && !Auth::check()))
             <a href="{{ $character->url }}"><img
                 src="{{ asset('images/lorekeeper/content-warning.png') }}"
                 class="img-thumbnail"
@@ -185,15 +190,12 @@
             @endif {{ Illuminate\Support\Str::limit($character->fullName, 20, $end = '...') }}
           </a>
         </div>
-        @if (
-            (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->character_warning)) ||
-                (isset($character->character_warning) && !Auth::check())
-        )
+        @if ((Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->character_warning)) || (isset($character->character_warning) && !Auth::check()))
           <div class="small">
             <p><span class="text-danger"><strong>Character Warning:</strong></span> {!! nl2br(htmlentities($character->character_warning)) !!}</p>
           </div>
         @endif
-      </div>
+      </div> --}}
     @endforeach
   </div>
 @endforeach

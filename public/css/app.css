@@ -412,7 +412,7 @@ body #app.teal {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@container main-container (width < 576px) {
+@container main-container (width < 600px) {
   #app .grid-6-col {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -432,7 +432,7 @@ body #app.teal {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@container main-container (width < 430px) {
+@container main-container (width < 400px) {
   #app .grid-6-col {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -942,7 +942,7 @@ body {
 #app #site-wrapper #main-content .content-wrapper {
   position: relative;
   z-index: 1;
-  padding: 1.5rem;
+  padding: 20px 4vw;
   border-radius: 15px;
   box-shadow: 0 0 5px inset var(--white);
 }
@@ -979,8 +979,8 @@ body {
   #app #site-wrapper.has-sidebar {
     gap: 10px;
     left: 0;
+    padding: 0;
     margin-bottom: 15px;
-    padding: 10px;
     grid-template: "logo" 25vmin "nav" max-content "sidebar" max-content "main" auto "footer" max-content/100%;
   }
   #app #selected-character {
@@ -3114,7 +3114,7 @@ body {
   }
   #header-nav .clocktainer {
     display: grid;
-    grid-template-columns: 1.11fr 1fr;
+    grid-template-columns: 1.09fr 1fr;
     justify-content: center;
     gap: 10px;
     align-content: center;
