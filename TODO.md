@@ -9,6 +9,7 @@
 - [ ] native `<details name="">` exclusive toggle for tabs
 - [ ] live server time for clock
 - [ ] Add to User Shop needs to be diagnosed / re-enabled at some point
+- [ ] test SubmissionController with safeJSON() replacement
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)
