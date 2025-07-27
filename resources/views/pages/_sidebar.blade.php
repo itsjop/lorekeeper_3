@@ -29,7 +29,7 @@
       <a class="slug mb-0" href="{{ $featured->url }}">
         {!! $featured->slug !!}
       </a>
-      <div>{!! $featured->displayOwner !!}</div>
+      {!! $featured->displayOwner !!}
       {{-- <div class="species" class="small"> --}}
       {{-- {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!} --}}
       {{-- </div> --}}
