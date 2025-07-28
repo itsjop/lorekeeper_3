@@ -4,10 +4,11 @@
   width: clamp(200px, $scale * var(--content-width), $max * var(--content-max-width));
 }
 
-.app {
+#app {
   // Lore page overrides
   .lore,
-  #custom-page .site-page-content {
+  .site-page-content,
+  .world-entry-text {
     padding: 10px;
     max-width: var(--content-width);
     title {

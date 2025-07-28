@@ -3473,24 +3473,27 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 
 /* prettier-ignore */
-.app {
+#app {
   /* Breakpoints */
 }
-.app .lore,
-.app #custom-page .site-page-content {
+#app .lore,
+#app .site-page-content,
+#app .world-entry-text {
   padding: 10px;
   max-width: var(--content-width);
 }
-.app .lore title,
-.app #custom-page .site-page-content title {
+#app .lore title,
+#app .site-page-content title,
+#app .world-entry-text title {
   font-family: "Fredoka";
   font-size: 2.5em;
   font-weight: 700;
   color: var(--purple-clr_800);
   text-transform: none;
 }
-.app .lore h1,
-.app #custom-page .site-page-content h1 {
+#app .lore h1,
+#app .site-page-content h1,
+#app .world-entry-text h1 {
   font-family: "Sour Gummy", system-ui;
   font-size: 1.8em;
   font-weight: 700;
@@ -3500,8 +3503,9 @@ because the nesting selector cannot represent pseudo-elements. */
   color: transparent;
   text-shadow: none;
 }
-.app .lore h1.header,
-.app #custom-page .site-page-content h1.header {
+#app .lore h1.header,
+#app .site-page-content h1.header,
+#app .world-entry-text h1.header {
   background: linear-gradient(to top, #5d61ff, #360d6a);
   -webkit-background-clip: text;
           background-clip: text;
@@ -3512,10 +3516,12 @@ because the nesting selector cannot represent pseudo-elements. */
   font-weight: 700;
   text-shadow: none;
 }
-.app .lore h2,
-.app .lore h3,
-.app #custom-page .site-page-content h2,
-.app #custom-page .site-page-content h3 {
+#app .lore h2,
+#app .lore h3,
+#app .site-page-content h2,
+#app .site-page-content h3,
+#app .world-entry-text h2,
+#app .world-entry-text h3 {
   font-family: "Itim", system-ui;
   font-weight: 700;
   text-transform: lowercase;
@@ -3525,40 +3531,47 @@ because the nesting selector cannot represent pseudo-elements. */
   color: transparent;
   text-shadow: none;
 }
-.app .lore h2,
-.app #custom-page .site-page-content h2 {
+#app .lore h2,
+#app .site-page-content h2,
+#app .world-entry-text h2 {
   font-size: 1.3em;
 }
-.app .lore h3,
-.app #custom-page .site-page-content h3 {
+#app .lore h3,
+#app .site-page-content h3,
+#app .world-entry-text h3 {
   font-size: 1.3em;
 }
-.app .lore p,
-.app #custom-page .site-page-content p {
+#app .lore p,
+#app .site-page-content p,
+#app .world-entry-text p {
   font-family: "Baloo 2";
   font-size: 1em;
   font-weight: 600;
   color: var(--purple-clr_800);
   text-transform: none;
 }
-.app .lore > p,
-.app #custom-page .site-page-content > p {
+#app .lore > p,
+#app .site-page-content > p,
+#app .world-entry-text > p {
   width: clamp(200px, 0.7 * var(--content-width), 0.7 * var(--content-max-width));
 }
-.app .lore .card,
-.app #custom-page .site-page-content .card {
+#app .lore .card,
+#app .site-page-content .card,
+#app .world-entry-text .card {
   margin: 15px 250px 25px;
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   background: rgba(255, 255, 255, 0.266);
   border-radius: 15px;
 }
-.app .lore .card:not(:has(.card-header)),
-.app #custom-page .site-page-content .card:not(:has(.card-header)) {
+#app .lore .card:not(:has(.card-header)),
+#app .site-page-content .card:not(:has(.card-header)),
+#app .world-entry-text .card:not(:has(.card-header)) {
   background: rgba(255, 255, 255, 0.6784313725);
   padding: 15px 40px;
 }
-.app .lore .card .card-header,
-.app #custom-page .site-page-content .card .card-header {
+#app .lore .card .card-header,
+#app .site-page-content .card .card-header,
+#app .world-entry-text .card .card-header {
   background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(255, 255, 255, 0.6784313725) 100%);
   border-radius: 15px 15px 0 0;
   border: 1px white solid;
@@ -3566,16 +3579,18 @@ because the nesting selector cannot represent pseudo-elements. */
   padding: 20px 10px 20px;
   margin: 0;
 }
-.app .lore .card .card-header::after,
-.app #custom-page .site-page-content .card .card-header::after {
+#app .lore .card .card-header::after,
+#app .site-page-content .card .card-header::after,
+#app .world-entry-text .card .card-header::after {
   content: "";
   display: block;
   width: 100%;
   height: 2px;
   background: linear-gradient(to left, transparent 0%, rgba(117, 197, 255, 0.5843137255) 20%, rgba(32, 49, 134, 0.7215686275) 50%, rgba(117, 197, 255, 0.5843137255) 80%, transparent 100%);
 }
-.app .lore .card .card-text,
-.app #custom-page .site-page-content .card .card-text {
+#app .lore .card .card-text,
+#app .site-page-content .card .card-text,
+#app .world-entry-text .card .card-text {
   background: rgba(255, 255, 255, 0.6784313725);
   border-radius: 0;
   padding: 0 50px;
@@ -3584,8 +3599,9 @@ because the nesting selector cannot represent pseudo-elements. */
   border: none;
   box-shadow: none;
 }
-.app .lore .card .card-img,
-.app #custom-page .site-page-content .card .card-img {
+#app .lore .card .card-img,
+#app .site-page-content .card .card-img,
+#app .world-entry-text .card .card-img {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6784313725) 0%, transparent 40%, transparent 60%, rgba(255, 255, 255, 0.6784313725) 100%);
   border-radius: 0;
   border: 0 1px white solid;
@@ -3594,8 +3610,9 @@ because the nesting selector cannot represent pseudo-elements. */
   margin-bottom: none;
   box-shadow: none;
 }
-.app .lore .card .card-footer,
-.app #custom-page .site-page-content .card .card-footer {
+#app .lore .card .card-footer,
+#app .site-page-content .card .card-footer,
+#app .world-entry-text .card .card-footer {
   background: rgba(255, 255, 255, 0.6784313725);
   border-radius: 0 0 15px 15px;
   padding: 0 0 25px;
@@ -3604,20 +3621,24 @@ because the nesting selector cannot represent pseudo-elements. */
   border: none;
   box-shadow: none;
 }
-.app .lore .card p,
-.app #custom-page .site-page-content .card p {
+#app .lore .card p,
+#app .site-page-content .card p,
+#app .world-entry-text .card p {
   margin: 0;
 }
-.app .lore .card br,
-.app #custom-page .site-page-content .card br {
+#app .lore .card br,
+#app .site-page-content .card br,
+#app .world-entry-text .card br {
   margin-bottom: 15px;
 }
-.app .lore .spoiler,
-.app #custom-page .site-page-content .spoiler {
+#app .lore .spoiler,
+#app .site-page-content .spoiler,
+#app .world-entry-text .spoiler {
   border: none;
 }
-.app .lore .spoiler .spoiler-toggle,
-.app #custom-page .site-page-content .spoiler .spoiler-toggle {
+#app .lore .spoiler .spoiler-toggle,
+#app .site-page-content .spoiler .spoiler-toggle,
+#app .world-entry-text .spoiler .spoiler-toggle {
   color: white;
   font-weight: 500;
   background-image: linear-gradient(to left, rgba(101, 199, 255, 0.647) 0%, rgba(90, 37, 197, 0.621) 50%, rgba(101, 199, 255, 0.647) 100%);
@@ -3627,115 +3648,117 @@ because the nesting selector cannot represent pseudo-elements. */
   border-radius: 10px;
   transition: 0.3s;
 }
-.app .lore .spoiler .spoiler-toggle:hover,
-.app #custom-page .site-page-content .spoiler .spoiler-toggle:hover {
+#app .lore .spoiler .spoiler-toggle:hover,
+#app .site-page-content .spoiler .spoiler-toggle:hover,
+#app .world-entry-text .spoiler .spoiler-toggle:hover {
   background-color: rgba(90, 37, 197, 0.459);
 }
-.app .lore .spoiler .spoiler-text,
-.app #custom-page .site-page-content .spoiler .spoiler-text {
+#app .lore .spoiler .spoiler-text,
+#app .site-page-content .spoiler .spoiler-text,
+#app .world-entry-text .spoiler .spoiler-text {
   border-radius: 10px;
   margin-top: 5px;
   background-color: rgba(255, 255, 255, 0.625);
   border: 1px white solid;
 }
-.app .w-100 {
+#app .w-100 {
   width: 100%;
 }
-.app .w-90 {
+#app .w-90 {
   width: 90%;
 }
-.app .w-80 {
+#app .w-80 {
   width: 80%;
 }
-.app .w-75 {
+#app .w-75 {
   width: 75%;
 }
-.app .w-66 {
+#app .w-66 {
   width: 66%;
 }
-.app .w-60 {
+#app .w-60 {
   width: 60%;
 }
-.app .w-50 {
+#app .w-50 {
   width: 50%;
 }
-.app .w-40 {
+#app .w-40 {
   width: 40%;
 }
-.app .w-33 {
+#app .w-33 {
   width: 33%;
 }
-.app .w-25 {
+#app .w-25 {
   width: 25%;
 }
-.app .w-10 {
+#app .w-10 {
   width: 10%;
 }
-.app .w-content-100 {
+#app .w-content-100 {
   width: clamp(200px, 1 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-90 {
+#app .w-content-90 {
   width: clamp(200px, 0.9 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-80 {
+#app .w-content-80 {
   width: clamp(200px, 0.8 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-75 {
+#app .w-content-75 {
   width: clamp(200px, 0.75 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-66 {
+#app .w-content-66 {
   width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-60 {
+#app .w-content-60 {
   width: clamp(200px, 0.66 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-50 {
+#app .w-content-50 {
   width: clamp(200px, 0.5 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-40 {
+#app .w-content-40 {
   width: clamp(200px, 0.4 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-33 {
+#app .w-content-33 {
   width: clamp(200px, 0.33 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-25 {
+#app .w-content-25 {
   width: clamp(200px, 0.25 * var(--content-width), 0.56 * var(--content-max-width));
 }
-.app .w-content-10 {
+#app .w-content-10 {
   width: clamp(200px, 0.1 * var(--content-width), 0.56 * var(--content-max-width));
 }
 @media (width <= 992px) {
-  .app .w-content-100 {
+  #app .w-content-100 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-90 {
+  #app .w-content-90 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-80 {
+  #app .w-content-80 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-75 {
+  #app .w-content-75 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-66 {
+  #app .w-content-66 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-60 {
+  #app .w-content-60 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-50 {
+  #app .w-content-50 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-40 {
+  #app .w-content-40 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-33 {
+  #app .w-content-33 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-25 {
+  #app .w-content-25 {
     width: calc(var(--content-width) - 80px);
   }
-  .app .w-content-10 {
+  #app .w-content-10 {
     width: calc(var(--content-width) - 80px);
   }
 }
