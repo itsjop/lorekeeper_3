@@ -8,16 +8,17 @@
       $width = 200;
   } ?>
   <div class="title mt-1 mx-auto" style="max-width:{{ max(200, $width) }}px; overflow: hidden; text-overflow: ellipsis;">
+    {{ $submission->displayTitle }}
     @if (isset($submission->content_warning))
-      <p>
-        <span class="text-danger"><strong>Content Warning:</strong></span> {!! nl2br(htmlentities($submission->content_warning)) !!}
+      <p class="m-0">
+        <strong class="text-danger">CW:</strong>
+        {!! nl2br(htmlentities($submission->content_warning)) !!}
       </p>
     @endif
     <a href="{{ $submission->url }}" class="h5 mb-0">
       @if (!$submission->isVisible)
         <i class="fas fa-eye-slash"></i>
       @endif
-      {{ $submission->displayTitle }}
     </a>
   </div>
   <div class="details small">

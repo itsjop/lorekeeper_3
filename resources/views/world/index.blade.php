@@ -12,7 +12,7 @@
     <div class="col-md-6">
       <div class="card mb-4">
         <div class="card-body text-center br-top-15">
-          <img src="{{ asset('images/lorekeeper/characters.png') }}" alt="Characters" />
+          <img class="w-80" src="{{ asset('images/somnivores/site/characters.png') }}" alt="Characters" />
           <h5 class="card-title">Characters</h5>
         </div>
         <ul class="list-group list-group-flush br-bot-15">
@@ -48,7 +48,7 @@
     <div class="col-md-6">
       <div class="card mb-4">
         <div class="card-body text-center br-top-15">
-          <img src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Items and {{ ucfirst(__('awards.awards')) }}" />
+          <img class="w-80" src="{{ asset('images/somnivores/site/inventory.png') }}" alt="Items and {{ ucfirst(__('awards.awards')) }}" />
           <h5 class="card-title">Items & Pets & {{ ucfirst(__('awards.awards')) }}</h5>
         </div>
         <ul class="list-group list-group-flush br-bot-15">

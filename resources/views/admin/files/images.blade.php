@@ -16,7 +16,7 @@
       <div class="card-body">
         <div class="d-flex flex-column flex-sm-row">
           <div class="mr-2" style="width: 200px;">
-            <img src="{{ asset('images/lorekeeper/' . $image['filename']) }}" class="mw-100" alt="Site image: {{ $image['name'] }}" />
+            <img src="{{ asset('images/somnivores/site/' . $image['filename']) }}" class="mw-100" alt="Site image: {{ $image['name'] }}" />
           </div>
           <div style="width: 100%;">
             <p class="card-heading">{{ $image['name'] }}

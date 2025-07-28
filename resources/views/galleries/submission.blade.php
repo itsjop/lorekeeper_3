@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ isset($submission->hash) ? $submission->thumbnailUrl : asset('images/lorekeeper/meta-image.png') }}
+  {{ isset($submission->hash) ? $submission->thumbnailUrl : asset('images/somnivores/site/meta-image.png') }}
 @endsection
 
 @section('gallery-content')

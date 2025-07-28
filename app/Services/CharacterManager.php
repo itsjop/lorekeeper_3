@@ -270,8 +270,8 @@ class CharacterManager extends Service {
           ? $data['transformation_description']
           : null; // Use default images for MYO slots without an image provided
         if (!isset($data['image'])) {
-          $data['image'] = public_path('images/lorekeeper/myo.png');
-          $data['thumbnail'] = public_path('images/lorekeeper/myo-th.png');
+          $data['image'] = public_path('images/somnivores/site/myo.png');
+          $data['thumbnail'] = public_path('images/somnivores/site/myo-th.png');
           $data['extension'] = config('lorekeeper.settings.masterlist_image_format') ?? 'png';
           $data['fullsize_extension'] = config('lorekeeper.settings.masterlist_fullsizes_format') ?? $data['extension'];
           $data['default_image'] = true;

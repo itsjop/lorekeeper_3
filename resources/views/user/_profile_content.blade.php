@@ -171,7 +171,7 @@
         <div>
           @if ((Auth::check() && Auth::user()->settings->content_warning_visibility == 0 && isset($character->character_warning)) || (isset($character->character_warning) && !Auth::check()))
             <a href="{{ $character->url }}"><img
-                src="{{ asset('images/lorekeeper/content-warning.png') }}"
+                src="{{ asset('images/somnivores/site/content-warning.png') }}"
                 class="img-thumbnail"
                 alt="Content Warning - {{ $character->fullName }}"
               /></a>

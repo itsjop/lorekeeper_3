@@ -1,5 +1,5 @@
 @if (isset($submission->content_warning))
-  <img class="img-thumbnail" src="{{ asset('images/lorekeeper/content-warning.png') }}" alt="Content Warning" />
+  <img class="img-thumbnail" src="{{ asset('images/somnivores/site/content-warning.png') }}" alt="Content Warning" />
 @elseif(isset($submission->hash))
   <img class="img-thumbnail" src="{{ $submission->thumbnailUrl }}" alt="Submission thumbnail" />
 @else
