@@ -39,9 +39,9 @@
           <li class="list-group-item">
             <a href="{{ url('world/character-categories') }}">Character Categories</a>
           </li>
-          <li class="list-group-item">
+          {{-- <li class="list-group-item">
             <a href="{{ url('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>
@@ -58,9 +58,9 @@
           <li class="list-group-item">
             <a href="{{ url('world/items') }}">All Items</a>
           </li>
-          <li class="list-group-item">
+          {{-- <li class="list-group-item">
             <a href="{{ url('world/' . __('awards.award') . '-categories') }}">{{ ucfirst(__('awards.award')) }} Categories</a>
-          </li>
+          </li> --}}
           <li class="list-group-item">
             <a href="{{ url('world/' . __('awards.awards')) }}">All
               {{ ucfirst(__('awards.awards')) }}</a>
@@ -74,9 +74,9 @@
           <li class="list-group-item">
             <a href="{{ url('world/pets') }}">All Pets</a>
           </li>
-          <li class="list-group-item">
+          {{-- <li class="list-group-item">
             <a href="{{ url('world/maps') }}">Maps</a>
-          </li>
+          </li> --}}
           <li class="list-group-item">
             <a href="{{ url('world/recipes') }}">All Recipes</a>
           </li>
