@@ -167,7 +167,7 @@
             media="(prefers-color-scheme: light) and (min-width: 1200px)"
           />
           <source srcset="{{ asset('css/images/somnivores/logo.webp') }}"
-            media="(prefers-color-scheme: light) and (min-width: 768px)"
+            media="(prefers-color-scheme: light) and (min-width: 800px)"
           />
           <img
             src="   {{ asset('css/images/somnivores/logo.webp') }}"
@@ -175,7 +175,7 @@
             media="(prefers-color-scheme: light)"
           />
           {{-- <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 1200px)"  />
-          <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 768px)"   />
+          <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 800px)"   />
           <img    src="   {{ asset('css/images/somnivores/logo_raw_dark.webp') }}" alt="Somnivores Logo"  media="(prefers-color-scheme: dark)"   /> --}}
         </picture>
       </a>

@@ -78,29 +78,42 @@
 .grid-1_4-col { grid-template-columns: 1fr 4fr; }
 .grid-1_6-col { grid-template-columns: 1fr 6fr; }
 .grid-1_8-col { grid-template-columns: 1fr 8fr; }
-// @media (width < 992px) {
-@container main-container (width < 992px) {
+
+.grid-area-unset { grid-area: unset; };
+.grid-table {
+  grid-template-rows: repeat(30, auto);
+  gap: 0;
+  >* {
+    margin: 0 .5em; display:grid; grid-template-rows: subgrid; grid-row: 1/-1;
+    >*{ margin: .5em 0; }
+  }
+}
+.grid-span-full { grid-column: 1/-1; }
+
+@container main-container (width < 1000px) {
   .grid-6-col { grid-template-columns: repeat(4, 1fr); } .grid-5-col { grid-template-columns: repeat(3, 1fr); }
   .grid-4-col { grid-template-columns: repeat(3, 1fr); } .grid-3-col { grid-template-columns: repeat(2, 1fr); }
 }
-@container main-container (width < 768px) {
-// @media (width < 768px) {
+@container main-container (width < 800px) {
   .grid-6-col { grid-template-columns: repeat(3, 1fr); } .grid-5-col { grid-template-columns: repeat(3, 1fr); }
   .grid-4-col { grid-template-columns: repeat(2, 1fr); } .grid-3-col { grid-template-columns: repeat(1, 1fr); }
   .grid-5-2-col { grid-template-columns: repeat(4, 1fr); } .grid-4-2-col { grid-template-columns: repeat(3, 1fr); }
+  .grid-table {
+    grid-template-rows: unset;
+    >* { display:grid; grid-template-rows: unset; grid-row: unset; }
+  }
 }
 @container main-container (width < 600px) {
-  // @media (width < 576px) {
   .grid-6-col { grid-template-columns: repeat(3, 1fr); } .grid-5-col { grid-template-columns: repeat(2, 1fr); }
   .grid-4-col { grid-template-columns: repeat(1, 1fr); } .grid-2-col { grid-template-columns: repeat(1, 1fr); }
   .grid-5-2-col { grid-template-columns: repeat(2, 1fr); } .grid-4-2-col { grid-template-columns: repeat(2, 1fr); }
+
+
 }
 @container main-container (width < 400px) {
   .grid-6-col { grid-template-columns: repeat(2, 1fr); } .grid-5-col { grid-template-columns: repeat(1, 1fr); }
   .grid-5-2-col { grid-template-columns: repeat(1, 1fr); } .grid-4-2-col { grid-template-columns: repeat(1, 1fr); }
 }
-.grid-area-unset { grid-area: unset; }
-
 
 /* Border-radius */
 .br-10     { border-radius: 10px               ; }

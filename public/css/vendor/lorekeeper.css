@@ -281,7 +281,7 @@ tr.outflow {
   width: 100px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .fb-md-50 {
     flex-basis: 50%;
   }

@@ -39,7 +39,7 @@
     / 2fr 2fr 2fr 1fr;
 }
 
-@container main-container (width < 992px) {
+@container main-container (width < 1000px) {
   .inventory-search-pane {
     grid-template:
       'rarity rarity category category' 1fr

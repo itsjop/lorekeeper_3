@@ -153,13 +153,13 @@
     }
   }
   .mini-card{
-    border: 1px solid white;
+    border: 3px solid var(--purple-clr_200);
     border-radius: 20px;
-    background: #ffffff82;
+    background: #ffffff32;
     max-width: 450px;
     padding: 20px;
     margin: 0px auto 20px;
-    box-shadow: 0 3px 8px #6f4a8b4a;
+    // box-shadow: 0 3px 8px #6f4a8b4a;
     &:not(:has(* + h1:first-of-type), :has(* + h2:first-of-type), :has(* + h3:first-of-type)) {
       padding-top: 15px;
     }
