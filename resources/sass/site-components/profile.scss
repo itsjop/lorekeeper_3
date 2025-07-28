@@ -1,7 +1,16 @@
 .badje {
-  background: var(--purple-clr_100);
+  background: var(--purple-clr_300);
   border-radius: 400px;
-  border: 3px dashed var(--active-clr_600);
+  border: 5px dashed var(--active-clr_600);
+  background-image: url('images/overlays/clean-textile.png');
   aspect-ratio: 1/1;
   max-width: 200px;
+  img {
+    @include hover-preview;
+  }
+}
+.profile-inventory {
+  img {
+    @include hover-preview;
+  }
 }
