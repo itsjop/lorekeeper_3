@@ -3555,6 +3555,11 @@ because the nesting selector cannot represent pseudo-elements. */
 #app .world-entry-text > p {
   width: clamp(200px, 0.7 * var(--content-width), 0.7 * var(--content-max-width));
 }
+#app .lore img,
+#app .site-page-content img,
+#app .world-entry-text img {
+  border-radius: 15px;
+}
 #app .lore .card,
 #app .site-page-content .card,
 #app .world-entry-text .card {
