@@ -7,9 +7,11 @@
 .app {
   // Lore page overrides
   .lore,
-  #custom-page {
+  #custom-page .site-page-content {
     padding: 10px;
     max-width: var(--content-width);
+    display: grid;
+    justify-content: center;
     title {
       font-family: 'Fredoka';
       font-size: 2.5em;

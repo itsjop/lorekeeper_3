@@ -3429,12 +3429,14 @@ because the nesting selector cannot represent pseudo-elements. */
   /* Breakpoints */
 }
 .app .lore,
-.app #custom-page {
+.app #custom-page .site-page-content {
   padding: 10px;
   max-width: var(--content-width);
+  display: grid;
+  justify-content: center;
 }
 .app .lore title,
-.app #custom-page title {
+.app #custom-page .site-page-content title {
   font-family: "Fredoka";
   font-size: 2.5em;
   font-weight: 700;
@@ -3442,7 +3444,7 @@ because the nesting selector cannot represent pseudo-elements. */
   text-transform: none;
 }
 .app .lore h1,
-.app #custom-page h1 {
+.app #custom-page .site-page-content h1 {
   font-family: "Sour Gummy", system-ui;
   font-size: 1.8em;
   font-weight: 700;
@@ -3454,8 +3456,8 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 .app .lore h2,
 .app .lore h3,
-.app #custom-page h2,
-.app #custom-page h3 {
+.app #custom-page .site-page-content h2,
+.app #custom-page .site-page-content h3 {
   font-family: "Itim", system-ui;
   font-weight: 700;
   text-transform: lowercase;
@@ -3466,15 +3468,15 @@ because the nesting selector cannot represent pseudo-elements. */
   text-shadow: none;
 }
 .app .lore h2,
-.app #custom-page h2 {
+.app #custom-page .site-page-content h2 {
   font-size: 1.3em;
 }
 .app .lore h3,
-.app #custom-page h3 {
+.app #custom-page .site-page-content h3 {
   font-size: 1.3em;
 }
 .app .lore p,
-.app #custom-page p {
+.app #custom-page .site-page-content p {
   font-family: "Baloo 2";
   font-size: 1em;
   font-weight: 600;
@@ -3482,23 +3484,23 @@ because the nesting selector cannot represent pseudo-elements. */
   text-transform: none;
 }
 .app .lore > p,
-.app #custom-page > p {
+.app #custom-page .site-page-content > p {
   width: clamp(200px, 0.7 * var(--content-width), 0.7 * var(--content-max-width));
 }
 .app .lore .card,
-.app #custom-page .card {
+.app #custom-page .site-page-content .card {
   margin: 15px 250px 25px;
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   background: rgba(255, 255, 255, 0.266);
   border-radius: 15px;
 }
 .app .lore .card:not(:has(.card-header)),
-.app #custom-page .card:not(:has(.card-header)) {
+.app #custom-page .site-page-content .card:not(:has(.card-header)) {
   background: rgba(255, 255, 255, 0.6784313725);
   padding: 15px 40px;
 }
 .app .lore .card .card-header,
-.app #custom-page .card .card-header {
+.app #custom-page .site-page-content .card .card-header {
   background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(255, 255, 255, 0.6784313725) 100%);
   border-radius: 15px 15px 0 0;
   border: 1px white solid;
@@ -3507,7 +3509,7 @@ because the nesting selector cannot represent pseudo-elements. */
   margin: 0;
 }
 .app .lore .card .card-header::after,
-.app #custom-page .card .card-header::after {
+.app #custom-page .site-page-content .card .card-header::after {
   content: "";
   display: block;
   width: 100%;
@@ -3515,7 +3517,7 @@ because the nesting selector cannot represent pseudo-elements. */
   background: linear-gradient(to left, transparent 0%, rgba(117, 197, 255, 0.5843137255) 20%, rgba(32, 49, 134, 0.7215686275) 50%, rgba(117, 197, 255, 0.5843137255) 80%, transparent 100%);
 }
 .app .lore .card .card-text,
-.app #custom-page .card .card-text {
+.app #custom-page .site-page-content .card .card-text {
   background: rgba(255, 255, 255, 0.6784313725);
   border-radius: 0;
   padding: 0 50px;
@@ -3525,7 +3527,7 @@ because the nesting selector cannot represent pseudo-elements. */
   box-shadow: none;
 }
 .app .lore .card .card-img,
-.app #custom-page .card .card-img {
+.app #custom-page .site-page-content .card .card-img {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6784313725) 0%, transparent 40%, transparent 60%, rgba(255, 255, 255, 0.6784313725) 100%);
   border-radius: 0;
   border: 0 1px white solid;
@@ -3535,7 +3537,7 @@ because the nesting selector cannot represent pseudo-elements. */
   box-shadow: none;
 }
 .app .lore .card .card-footer,
-.app #custom-page .card .card-footer {
+.app #custom-page .site-page-content .card .card-footer {
   background: rgba(255, 255, 255, 0.6784313725);
   border-radius: 0 0 15px 15px;
   padding: 0 0 25px;
@@ -3545,19 +3547,19 @@ because the nesting selector cannot represent pseudo-elements. */
   box-shadow: none;
 }
 .app .lore .card p,
-.app #custom-page .card p {
+.app #custom-page .site-page-content .card p {
   margin: 0;
 }
 .app .lore .card br,
-.app #custom-page .card br {
+.app #custom-page .site-page-content .card br {
   margin-bottom: 15px;
 }
 .app .lore .spoiler,
-.app #custom-page .spoiler {
+.app #custom-page .site-page-content .spoiler {
   border: none;
 }
 .app .lore .spoiler .spoiler-toggle,
-.app #custom-page .spoiler .spoiler-toggle {
+.app #custom-page .site-page-content .spoiler .spoiler-toggle {
   color: white;
   font-weight: 500;
   background-image: linear-gradient(to left, rgba(101, 199, 255, 0.647) 0%, rgba(90, 37, 197, 0.621) 50%, rgba(101, 199, 255, 0.647) 100%);
@@ -3568,11 +3570,11 @@ because the nesting selector cannot represent pseudo-elements. */
   transition: 0.3s;
 }
 .app .lore .spoiler .spoiler-toggle:hover,
-.app #custom-page .spoiler .spoiler-toggle:hover {
+.app #custom-page .site-page-content .spoiler .spoiler-toggle:hover {
   background-color: rgba(90, 37, 197, 0.459);
 }
 .app .lore .spoiler .spoiler-text,
-.app #custom-page .spoiler .spoiler-text {
+.app #custom-page .site-page-content .spoiler .spoiler-text {
   border-radius: 10px;
   margin-top: 5px;
   background-color: rgba(255, 255, 255, 0.625);
