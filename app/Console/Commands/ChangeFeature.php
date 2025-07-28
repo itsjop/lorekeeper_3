@@ -44,6 +44,7 @@ class ChangeFeature extends Command {
       $id == $setting
       || Character::find($id)['is_gift_art_allowed'] != 1
       || str_contains(Character::find($id)['slug'], 'NPC-')
+      || str_contains(Character::find($id)['slug'], '-003')
     ) {
       $id = Character::myo()?->get()->random()->id;
     }
