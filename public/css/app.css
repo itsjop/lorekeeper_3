@@ -901,7 +901,6 @@ body {
   box-shadow: 0 3px 8px rgba(111, 74, 139, 0.2901960784);
 }
 .app .mini-card:not(:has(* + h1:first-of-type), :has(* + h2:first-of-type), :has(* + h3:first-of-type)) {
-  background-color: red;
   padding-top: 15px;
 }
 .app .dt-nav-page .dt-nav-group .dt-nav-item.strike {

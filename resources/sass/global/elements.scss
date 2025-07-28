@@ -171,7 +171,6 @@
     margin: 0px auto 20px;
     box-shadow: 0 3px 8px #6f4a8b4a;
     &:not(:has(* + h1:first-of-type), :has(* + h2:first-of-type), :has(* + h3:first-of-type)) {
-      background-color: red;
       padding-top: 15px;
     }
   }
