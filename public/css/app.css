@@ -1752,7 +1752,6 @@ body {
   align-items: center;
   text-align: center;
   padding: 10px;
-  border: 1px var(--white) solid;
 }
 .home-dashboard .bubblebox .bubble.event, .home-dashboard .bubblebox .bubble.jobs {
   background-size: cover;
