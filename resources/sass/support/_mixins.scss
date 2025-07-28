@@ -42,16 +42,13 @@
     transform: scale(1.1);
   }
 }
-@mixin scalloped($size: 1vw, $direction: 'vertical') {
-  $size2: $size * 2;
-  // @if $direction == 'vertical' {
-  //   mask:
-  //   linear-gradient(0, #0000 $size2, #000 0) 0 $size,
-  //   radial-gradient($size, #000 calc(100% - 1px), #0000) 50% / calc(.8 * $size2) $size2 repeat space;
-  // }
-  // @else{
-  // mask:
-  //   linear-gradient(-90deg, #0000 6vw, #000 0) $size,
-  //   radial-gradient($size, #000 calc(100% - 1px), #0000) 50% / $size2 calc(.8 * $size2) space space;
-  // }
+@mixin header-top {
+  background-image: url("images/overlays/otis-redding_noise.png");
+  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  border-radius: 15px 15px 0 0;
+  padding: 5px;
+  font-size: 1.15em;
+  text-align: center;
+  color: var(--purple-clr_50);
 }

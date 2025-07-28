@@ -14,6 +14,7 @@
   #sidebar {
     .sidebar-header {
       @include body-bg(var(--purple-clr_700));
+      @include header-top;
       border-radius: 15px 15px 0 0;
       padding: 5px;
       a {

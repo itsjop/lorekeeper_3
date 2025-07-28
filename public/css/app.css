@@ -714,9 +714,10 @@ body {
   background: linear-gradient(to top, #5d61ff, #360d6a);
   -webkit-background-clip: text;
           background-clip: text;
+  margin-bottom: 20px;
   color: transparent;
   font-family: "Sour Gummy", system-ui;
-  font-size: 2em;
+  font-size: 2.3em;
   font-weight: 700;
   text-shadow: none;
 }
@@ -871,6 +872,19 @@ body {
   content: "✦  ";
   font-size: 1rem;
   color: #40258b;
+}
+.app .card-basic .card-header, .app .card-full .card-header {
+  background-image: url("images/overlays/otis-redding_noise.png");
+  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  border-radius: 15px 15px 0 0;
+  padding: 5px;
+  font-size: 1.15em;
+  text-align: center;
+  color: var(--purple-clr_50);
+  margin: -30px -30px 0 -30px;
+  font-family: "Sour Gummy", sans-serif, system-ui;
+  font-size: 1.8rem;
 }
 .app .card-basic .card-left-image, .app .card-full .card-left-image {
   display: grid;
@@ -2169,6 +2183,14 @@ body {
   -webkit-backdrop-filter: saturate(200%) blur(5px);
           backdrop-filter: saturate(200%) blur(5px);
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  background-image: url("images/overlays/otis-redding_noise.png");
+  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  border-radius: 15px 15px 0 0;
+  padding: 5px;
+  font-size: 1.15em;
+  text-align: center;
+  color: var(--purple-clr_50);
   border-radius: 15px 15px 0 0;
   padding: 5px;
 }
