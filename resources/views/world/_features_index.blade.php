@@ -21,6 +21,7 @@
               <div class="{{ 'card-bg_animated ' . lcfirst(__($feature->first()->rarity->name)) }}">
                 <div class="stars"></div>
               </div>
+
               @if ($feature->first()->has_image)
                 <a class="badge">
                   <img
@@ -42,6 +43,7 @@
                 <br />({!! $feature->first()->subtype->twolineDisplayName !!} Subtype)
               @endif
             </div>
+
           @endforeach
         </div>
       </div>
