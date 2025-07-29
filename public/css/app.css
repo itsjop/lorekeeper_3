@@ -3742,47 +3742,47 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 #app .lore .pink,
 #app #custom-page-parsed .pink {
-  color: #111111;
+  color: #f178bd;
 }
 #app .lore .purple,
 #app #custom-page-parsed .purple {
-  color: #111111;
+  color: #7f55e0;
 }
 #app .lore .blue,
 #app #custom-page-parsed .blue {
-  color: #111111;
+  color: #3c7dde;
 }
 #app .lore .green,
 #app #custom-page-parsed .green {
-  color: #111111;
+  color: #34a838;
 }
 #app .lore .darkred,
 #app #custom-page-parsed .darkred {
-  color: #111111;
+  color: #61000d;
 }
 #app .lore .darkpurple,
 #app #custom-page-parsed .darkpurple {
-  color: #111111;
+  color: #25005c;
 }
 #app .lore .darkmagenta,
 #app #custom-page-parsed .darkmagenta {
-  color: #111111;
+  color: #480033;
 }
 #app .lore .pastel,
 #app #custom-page-parsed .pastel {
-  color: #111111;
+  color: #be9bff;
 }
 #app .lore .dark,
 #app #custom-page-parsed .dark {
-  color: #111111;
+  color: #1a003f;
 }
 #app .lore .orange,
 #app #custom-page-parsed .orange {
-  color: #111111;
+  color: #f4782a;
 }
 #app .lore .yellow,
 #app #custom-page-parsed .yellow {
-  color: #111111;
+  color: #ffc72f;
 }
 #app .w-100 {
   width: 100%;
