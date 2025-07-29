@@ -394,7 +394,7 @@ body #app.teal {
 #app .grid-table > * > * {
   margin: 0.5em 0;
 }
-#app .grid-span-full {
+#app .grid-span-full, #app .grid-span {
   grid-column: 1/-1;
 }
 @container main-container (width < 1000px) {

@@ -11,6 +11,7 @@
 - [ ] Add to User Shop needs to be diagnosed / re-enabled at some point
 - [ ] test SubmissionController with safeJSON() replacement
 - [ ] @supports for navbar container query? not even sure how to test this one
+- [ ] sitewide image alt tags
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)
