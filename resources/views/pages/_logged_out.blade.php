@@ -20,7 +20,6 @@
   >
  <div class=card>
     <div class="card-header">
-
       <h1> What is a Somnivore? </h1>
   </hr>
 </div>

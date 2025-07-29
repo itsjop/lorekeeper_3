@@ -92,14 +92,14 @@
         border-bottom: none;
         padding: 20px 10px 20px;
         margin: 0;
-        &::after {
-          content: '';
-          display: block;
-          width: 100%;
-          height: 2px;
-          // background: radial-gradient(at top, #4559bd 00%, #75c6ff 30%, transparent 100%);
-          background: linear-gradient(to left, transparent 0%, #75c5ff95 20%, #203186b8 50%, #75c5ff95 80%, transparent 100%);
-        }
+        // &::after {
+        //   content: '';
+        //   display: block;
+        //   width: 100%;
+        //   height: 2px;
+        //   // background: radial-gradient(at top, #4559bd 00%, #75c6ff 30%, transparent 100%);
+        //   background: linear-gradient(to left, transparent 0%, #75c5ff95 20%, #203186b8 50%, #75c5ff95 80%, transparent 100%);
+        // }
       }
       .card-text {
         background: #ffffffad;

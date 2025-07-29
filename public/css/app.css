@@ -1531,14 +1531,16 @@ body {
 }
 
 .masterlist-search-grid,
-.inventory-search-pane {
+.inventory-search-pane,
+.trait-search-pane {
   display: grid;
   gap: 10px;
   place-content: start;
   place-items: start;
 }
 .masterlist-search-grid legend,
-.inventory-search-pane legend {
+.inventory-search-pane legend,
+.trait-search-pane legend {
   margin: -10px 10px;
   padding: 3px;
   width: -moz-max-content;
@@ -1547,8 +1549,22 @@ body {
   font-family: "Itim", sans-serif;
   transform: translateY(-10%);
 }
+.masterlist-search-grid .name, .masterlist-search-grid .category, .masterlist-search-grid .rarity, .masterlist-search-grid .artist, .masterlist-search-grid .search, .masterlist-search-grid .character-name,
+.masterlist-search-grid #species, .masterlist-search-grid .species, .masterlist-search-grid .sortby, .masterlist-search-grid .advanced-toggle, .masterlist-search-grid .searchbutton, .masterlist-search-grid .palate,
 .masterlist-search-grid .sort, .masterlist-search-grid .name, .masterlist-search-grid .category, .masterlist-search-grid .rarity, .masterlist-search-grid .artist, .masterlist-search-grid .search,
 .masterlist-search-grid input, .masterlist-search-grid select,
+.inventory-search-pane .name,
+.inventory-search-pane .category,
+.inventory-search-pane .rarity,
+.inventory-search-pane .artist,
+.inventory-search-pane .search,
+.inventory-search-pane .character-name,
+.inventory-search-pane #species,
+.inventory-search-pane .species,
+.inventory-search-pane .sortby,
+.inventory-search-pane .advanced-toggle,
+.inventory-search-pane .searchbutton,
+.inventory-search-pane .palate,
 .inventory-search-pane .sort,
 .inventory-search-pane .name,
 .inventory-search-pane .category,
@@ -1556,48 +1572,89 @@ body {
 .inventory-search-pane .artist,
 .inventory-search-pane .search,
 .inventory-search-pane input,
-.inventory-search-pane select {
+.inventory-search-pane select,
+.trait-search-pane .name,
+.trait-search-pane .category,
+.trait-search-pane .rarity,
+.trait-search-pane .artist,
+.trait-search-pane .search,
+.trait-search-pane .character-name,
+.trait-search-pane #species,
+.trait-search-pane .species,
+.trait-search-pane .sortby,
+.trait-search-pane .advanced-toggle,
+.trait-search-pane .searchbutton,
+.trait-search-pane .palate,
+.trait-search-pane .sort,
+.trait-search-pane .name,
+.trait-search-pane .category,
+.trait-search-pane .rarity,
+.trait-search-pane .artist,
+.trait-search-pane .search,
+.trait-search-pane input,
+.trait-search-pane select {
   width: 100%;
+  margin: 0;
 }
 .masterlist-search-grid .name,
-.inventory-search-pane .name {
+.inventory-search-pane .name,
+.trait-search-pane .name {
   grid-area: name;
 }
 .masterlist-search-grid .category,
-.inventory-search-pane .category {
+.inventory-search-pane .category,
+.trait-search-pane .category {
   grid-area: category;
 }
 .masterlist-search-grid .rarity,
-.inventory-search-pane .rarity {
+.inventory-search-pane .rarity,
+.trait-search-pane .rarity {
   grid-area: rarity;
 }
 .masterlist-search-grid .artist,
-.inventory-search-pane .artist {
+.inventory-search-pane .artist,
+.trait-search-pane .artist {
   grid-area: artist;
 }
 .masterlist-search-grid .search,
-.inventory-search-pane .search {
+.inventory-search-pane .search,
+.trait-search-pane .search {
   grid-area: search;
 }
 .masterlist-search-grid .character-name,
-.inventory-search-pane .character-name {
+.inventory-search-pane .character-name,
+.trait-search-pane .character-name {
   grid-area: name;
 }
 .masterlist-search-grid #species,
-.inventory-search-pane #species {
+.inventory-search-pane #species,
+.trait-search-pane #species {
+  grid-area: species;
+}
+.masterlist-search-grid .species,
+.inventory-search-pane .species,
+.trait-search-pane .species {
   grid-area: species;
 }
 .masterlist-search-grid .sortby,
-.inventory-search-pane .sortby {
+.inventory-search-pane .sortby,
+.trait-search-pane .sortby {
   grid-area: sortby;
 }
 .masterlist-search-grid .advanced-toggle,
-.inventory-search-pane .advanced-toggle {
+.inventory-search-pane .advanced-toggle,
+.trait-search-pane .advanced-toggle {
   grid-area: a-btn;
 }
 .masterlist-search-grid .searchbutton,
-.inventory-search-pane .searchbutton {
+.inventory-search-pane .searchbutton,
+.trait-search-pane .searchbutton {
   grid-area: submit;
+}
+.masterlist-search-grid .palate,
+.inventory-search-pane .palate,
+.trait-search-pane .palate {
+  grid-area: palate;
 }
 
 .masterlist-search-grid {
@@ -1608,12 +1665,19 @@ body {
   grid-template: "category rarity artist sort  " 1fr "name     name   name   search" 1fr/2fr 2fr 2fr 1fr;
 }
 
+.trait-search-pane {
+  grid-template: "name    name   category rarity " 1fr "species palate sortby   submit" 1fr/2fr 2fr 2fr 2fr;
+}
+
 @container main-container (width < 1000px) {
   .inventory-search-pane {
     grid-template: "rarity rarity category category" 1fr "artist artist artist   sort    " 1fr "name   name   name     search  " 1fr/1fr 1fr 1fr 1fr;
   }
   .masterlist-search-grid {
     grid-template: "name   species" max-content "sortby species" max-content "a-btn  submit" max-content/1fr 1fr;
+  }
+  .trait-search-pane {
+    grid-template: "name name category category" 1fr "rarity rarity species species" 1fr "palate palate sortby sortby" 1fr ".  . . submit" 1fr/2fr 2fr 2fr 2fr;
   }
 }
 /* Header Glint */
@@ -3608,14 +3672,6 @@ because the nesting selector cannot represent pseudo-elements. */
   border-bottom: none;
   padding: 20px 10px 20px;
   margin: 0;
-}
-#app .lore .card .card-header::after,
-#app #custom-page-parsed .card .card-header::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to left, transparent 0%, rgba(117, 197, 255, 0.5843137255) 20%, rgba(32, 49, 134, 0.7215686275) 50%, rgba(117, 197, 255, 0.5843137255) 80%, transparent 100%);
 }
 #app .lore .card .card-text,
 #app #custom-page-parsed .card .card-text {

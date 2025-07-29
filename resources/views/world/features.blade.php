@@ -10,25 +10,23 @@
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
-    <div class="form-inline justify-content-end">
-      <div class="form-group ml-3 mb-3">
+    <div class="trait-search-pane grid ji-end">
+      <div class="name form-group ml-3 mb-3">
         {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
       </div>
-      <div class="form-group ml-3 mb-3">
+      <div class="species form-group ml-3 mb-3">
         {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control']) !!}
       </div>
-      <div class="form-group ml-3 mb-3">
+      <div class="palate form-group ml-3 mb-3">
         {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), ['class' => 'form-control']) !!}
       </div>
-      <div class="form-group ml-3 mb-3">
+      <div class="rarity form-group ml-3 mb-3">
         {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control']) !!}
       </div>
-      <div class="form-group ml-3 mb-3">
+      <div class="category form-group ml-3 mb-3">
         {!! Form::select('feature_category_id', $categories, Request::get('name'), ['class' => 'form-control']) !!}
       </div>
-    </div>
-    <div class="form-inline justify-content-end">
-      <div class="form-group ml-3 mb-3">
+      <div class=" sortby form-inline justify-content-end">
         {!! Form::select(
             'sort',
             [
@@ -40,13 +38,13 @@
                 'species' => 'Sort by Species',
                 'subtypes' => 'Sort by Subtype',
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'category',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
-      <div class="form-group ml-3 mb-3">
+      <div class="searchbutton form-group ml-3 mb-3">
         {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
       </div>
     </div>
@@ -63,5 +61,6 @@
   @endforeach
   {!! $features->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $features->total() }} result{{ $features->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted">{{ $features->total() }} result{{ $features->total() == 1 ? '' : 's' }} found.
+  </div>
 @endsection

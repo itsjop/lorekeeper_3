@@ -2320,7 +2320,6 @@ textarea.form-control.is-invalid {
   }
   .form-inline .form-control {
     display: inline-block;
-    width: auto;
     vertical-align: middle;
   }
   .form-inline .form-control-plaintext {
@@ -2989,9 +2988,6 @@ input[type="submit"].btn-block {
   color: #adb5bd;
   pointer-events: none;
   background-color: transparent;
-}
-.dropdown-menu.show {
-  display: block;
 }
 .dropdown-header {
   display: block;
