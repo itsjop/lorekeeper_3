@@ -177,6 +177,9 @@ body #app.teal {
 #app .h-25 {
   height: 25%;
 }
+#app .mw-unset {
+  max-width: unset;
+}
 #app .flex {
   display: flex;
 }
@@ -3736,6 +3739,50 @@ because the nesting selector cannot represent pseudo-elements. */
   margin-top: 5px;
   background-color: rgba(255, 255, 255, 0.625);
   border: 1px white solid;
+}
+#app .lore .pink,
+#app #custom-page-parsed .pink {
+  color: #111111;
+}
+#app .lore .purple,
+#app #custom-page-parsed .purple {
+  color: #111111;
+}
+#app .lore .blue,
+#app #custom-page-parsed .blue {
+  color: #111111;
+}
+#app .lore .green,
+#app #custom-page-parsed .green {
+  color: #111111;
+}
+#app .lore .darkred,
+#app #custom-page-parsed .darkred {
+  color: #111111;
+}
+#app .lore .darkpurple,
+#app #custom-page-parsed .darkpurple {
+  color: #111111;
+}
+#app .lore .darkmagenta,
+#app #custom-page-parsed .darkmagenta {
+  color: #111111;
+}
+#app .lore .pastel,
+#app #custom-page-parsed .pastel {
+  color: #111111;
+}
+#app .lore .dark,
+#app #custom-page-parsed .dark {
+  color: #111111;
+}
+#app .lore .orange,
+#app #custom-page-parsed .orange {
+  color: #111111;
+}
+#app .lore .yellow,
+#app #custom-page-parsed .yellow {
+  color: #111111;
 }
 #app .w-100 {
   width: 100%;
