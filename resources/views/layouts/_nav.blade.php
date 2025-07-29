@@ -105,61 +105,24 @@
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="infoDropdown">
           <div class="dt-nav-group">
-            <a class="dt-nav-item" href="{{ url('/world') }}">
-              <i class="fas fa-search"></i> Encyclopedia </a>
-
             <h2 class="dt-nav-header _first">Site Guides</h2>
             <a class="dt-nav-item" href="{{ url('/info/beginner-guide') }}">
               <i class="fas fa-seedling"></i> Beginner’s Guide </a>
+            <hr>
             <a class="dt-nav-item" href="{{ url('/info/image-guidelines') }}">
               <i class="fas fa-images"></i> Masterlist Images </a>
             <a class="dt-nav-item" href="{{ url('/info/myo-submission') }}">
               <i class="fas fa-envelope"></i> MYO Submission </a>
+            <a class="dt-nav-item" href="{{ url('/info/design-updates') }}">
+              <i class="fas fa-paint-roller"></i> Design Updates </a>
+            <hr>
             <a class="dt-nav-item" href="{{ url('/info/prompt-submission') }}">
-              <i class="fas fa-envelope"></i> Gallery & Prompt Submission </a>
+              <i class="fas fa-paper-plane"></i> Gallery & Prompt Submission </a>
             <a class="dt-nav-item" href="{{ url('/info/submission-rewards') }}">
               <i class="fas fa-coins"></i> Art / Submission Rewards </a>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <div
-          id="guidesDropdown"
-          class="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          v-pre
-        >
-          Guides
-        </div>
-        <div class="dropdown-menu dt-nav-page" aria-labelledby="guidesDropdown">
-          <div class="dt-nav-group">
-            <h2 class="dt-nav-header _first">Gameplay</h2>
-            <a class="dt-nav-item" href="{{ url('/guide/beginner') }}">
-              <i class="fas fa-book"></i> Beginners Guide </a>
-            <a class="dt-nav-item" href="{{ url('info/myo-submission') }}">
-              <i class="fas fa-envelope"></i> MYO Submission </a>
-            <a class="dt-nav-item" href="{{ url('info/prompt-submission') }}">
-              <i class="fas fa-paint-roller"></i>Gallery & Prompt Submission </a>
-            <a class="dt-nav-item" href="{{ url('info/art-rewards') }}">
-              <i class="fas fa-coins"></i> Currency & Art Rewards </a>
-          </div>
-          <div class="dt-nav-group">
-            <h2 class="dt-nav-header">How to Draw:</h2>
-            <a class="dt-nav-item" href="{{ url('info/anatomy') }}">
-              <i class="fas fa-star"></i> Somnivore Anatomy</a>
-            <a class="dt-nav-item" href="{{ url('info/essence') }}">
-              <i class="fas fa-cloud"></i> Dream Essence</a>
-            <a class="dt-nav-item" href="{{ url('info/scenery') }}">
-              <i class="fas fa-cloud-moon"></i> Reverie Scenery</a>
-          </div>
-          <div class="dt-nav-group">
-            <h2 class="dt-nav-header">Character Design</h2>
-            <a class="dt-nav-item" href="{{ url('info/design') }}">
-              <i class="fas fa-brush"></i>Somnivore Design Guide</a>
+            <h2 class="dt-nav-header"> Database </h2>
+            <a class="dt-nav-item" href="{{ url('/world') }}">
+              <i class="fas fa-search"></i> Encyclopedia </a>
           </div>
         </div>
       </li>
