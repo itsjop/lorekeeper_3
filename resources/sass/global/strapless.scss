@@ -43,7 +43,7 @@
     font-weight: 500;
     transition: 0.2s ease;
     margin: 5px;
-    &:hover {
+    &:hover, &:active {
       background: var(--teal-clr_400);
     }
   }
@@ -54,7 +54,7 @@
     font-style: normal;
     font-weight: 500;
     transition: 0.2s ease;
-    &:hover {
+    &:hover, &:active {
       background: #429bd3;
     }
   }
@@ -72,7 +72,7 @@
     font-style: normal;
     font-weight: 500;
     transition: 0.2s ease;
-    &:hover {
+    &:hover, &:active {
       background: var(--purple-clr_500);
     }
   }
@@ -83,7 +83,7 @@
     color: var(--white);
     font-weight: 500;
     transition: 0.2s ease;
-    &:hover {
+    &:hover, &:active {
       background: #a51752;
     }
   }
@@ -93,19 +93,19 @@
 
   .badge-secondary {
     background-color: var(--purple-clr_300);
-    &:hover {
+    &:hover, &:active {
       background-color: var(--purple-clr_400);
     }
   }
   .badge-danger {
     background-color: var(--danger);
-    &:hover {
+    &:hover, &:active {
       background-color: var(--danger_hover);
     }
   }
   .badge-success {
     background-color: var(--success);
-    &:hover {
+    &:hover, &:active {
       background-color: var(--success_hover);
     }
   }

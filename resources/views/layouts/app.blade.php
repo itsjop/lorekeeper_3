@@ -158,7 +158,8 @@
     {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
     {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
   >
-    <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
+  {{-- <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}"> --}}
+    <div id="site-wrapper" class="has-sidebar">
       <div class="site-background"></div>
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">

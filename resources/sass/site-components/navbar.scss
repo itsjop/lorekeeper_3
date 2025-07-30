@@ -38,7 +38,7 @@
             box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
             background-color: var(--purple-clr_50);
             z-index: 1;
-            &:hover {
+            &:hover, &:active {
               border-radius: 10px 10px 0 0;
             }
             .dropdown-toggle {
@@ -53,7 +53,7 @@
       }
       .nav-item {
         padding: 0 5px;
-        &:hover {
+        &:hover, &:active {
           transition: 0.1s ease;
           background-color: var(--active-clr_700);
         }
@@ -252,7 +252,7 @@
         &._first {
           border-radius: 15px 15px 0 0;
         }
-        &:hover {
+        &:hover, &:active {
           border-radius: 10px;
           transform: scale(1.1);
           z-index: 2;
@@ -265,7 +265,7 @@
         &:first-child {
           border-radius: 15px 15px 0 0;
         }
-        &:hover {
+        &:hover, &:active {
           background-color: var(--purple-clr_300);
           border-color: var(--purple-clr_400);
           transform: scale(1.15);
@@ -403,7 +403,7 @@
         justify-content: center;
         width: 100%;
         transition: 1.3s var(--smoothIn_linear);
-        &:hover {
+        &:hover, &:active {
           transition: 0.3s var(--smoothIn_linear);
           background: var(--purple-clr_900);
         }
@@ -447,7 +447,7 @@
 
             .dropdown-item {
               transition: 0.5s ease-in;
-              &:hover {
+              &:hover, &:active {
                 transition: 0.1s linear;
                 background: var(--purple-clr_100);
               }
@@ -487,7 +487,7 @@
             &:last-of-type {
               border: 0;
             }
-            &:hover {
+            &:hover, &:active {
               background-color: var(--purple-clr_100);
             }
           }

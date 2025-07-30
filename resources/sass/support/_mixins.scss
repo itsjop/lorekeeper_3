@@ -1,4 +1,4 @@
-@mixin body-bg($color: var(--body-color), $opacity: 0.7) {
+@mixin body-bg($opacity: 0.7, $color: var(--body-color)) {
   border-radius: 15px;
   background-image: url('images/overlays/otis-redding_noise.png');
   background-color: color-mix(in srgb, $color calc(100% * $opacity), transparent);
@@ -25,7 +25,7 @@
       // drop-shadow($offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
       drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
       drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
-    &:hover {
+    &:hover, &:active {
       $offset_x: 10px;
       $offset_y: 10px;
       $blur: 6px;
@@ -37,13 +37,13 @@
         drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent));
     }
   }
-  &:hover {
+  &:hover, &:active {
     transition: 0.7s var(--elastic_linear);
     transform: scale(1.1);
   }
 }
 @mixin header-top {
-  background-image: url("images/overlays/otis-redding_noise.png");
+  background-image: url('images/overlays/otis-redding_noise.png');
   background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 15px 15px 0 0;

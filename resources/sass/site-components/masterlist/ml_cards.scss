@@ -32,63 +32,6 @@
     border-radius: 14px;
     background-image: var(--card_gradient);
   }
-  .ml-badge {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 8;
-    width: 20%;
-    cursor: help;
-    img {
-      width: 100%;
-      aspect-ratio: 1/1;
-    }
-    .flag {
-      opacity: 0;
-      position: absolute;
-      transform: translateX(-33%) translateY(0);
-      transition: 0.3s var(--smoothIn_linear);
-      color: var(--white);
-      padding: 5px 10px;
-      z-index: 6;
-      pointer-events: none;
-      word-break: keep-all;
-      width: max-content;
-      .bg {
-        &::before,
-        &::after {
-          content: '';
-          background: var(--card_gradient);
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 5;
-          height: 100%;
-          width: 100%;
-          border-radius: 13px;
-        }
-        &::before {
-          width: calc(10px + 100%);
-          height: calc(10px + 100%);
-          background-image: var(--card_card-border);
-          border-radius: 15px;
-          box-shadow: 5px 5px 5px #04043078;
-        }
-      }
-      .label {
-        position: relative;
-        font-weight: 700;
-        z-index: 6;
-      }
-    }
-    &:hover {
-      .flag {
-        opacity: 1;
-        transform: translateX(-33%) translateY(-90%);
-      }
-    }
-  }
   .thumbnail {
     width: calc(100% - 20px);
     grid-area: thumb;
@@ -130,7 +73,7 @@
         transition: 0.05s linear;
         @include hover-preview;
       }
-      &:hover {
+      &:hover, &:active {
         transition: 1.5s var(--elastic_linear);
         transform: scale(1.1);
         img {
@@ -255,7 +198,7 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: 90%;
-    &:hover {
+    &:hover, &:active {
       scale: 1.3;
       color: white;
     }
@@ -272,6 +215,64 @@
   }
 }
 
+  .ml-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 8;
+    width: 20%;
+    cursor: help;
+    img {
+      width: 100%;
+      aspect-ratio: 1/1;
+    }
+    .flag {
+      opacity: 0;
+      position: absolute;
+      transform: translateX(-33%) translateY(0);
+      transition: 0.3s var(--smoothIn_linear);
+      color: var(--white);
+      padding: 5px 10px;
+      z-index: 6;
+      pointer-events: none;
+      word-break: keep-all;
+      width: max-content;
+      .bg {
+        &::before,
+        &::after {
+          content: '';
+          background: var(--card_gradient);
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 5;
+          height: 100%;
+          width: 100%;
+          border-radius: 13px;
+        }
+        &::before {
+          width: calc(10px + 100%);
+          height: calc(10px + 100%);
+          background-image: var(--card_card-border);
+          border-radius: 15px;
+          box-shadow: 5px 5px 5px #04043078;
+        }
+      }
+      .label {
+        position: relative;
+        font-weight: 700;
+        z-index: 6;
+      }
+    }
+    &:hover, &:active {
+      .flag {
+        opacity: 1;
+        transform: translateX(-33%) translateY(-90%);
+      }
+    }
+  }
+
 @container main-container (width >= 1200px) {
   #ml-gridView {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -281,7 +282,7 @@
   #ml-gridView {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     .masterlist-character .thumbnail {
-      &:hover {
+      &:hover, &:active, &:active {
         .shine {
           opacity: 0.5;
         }

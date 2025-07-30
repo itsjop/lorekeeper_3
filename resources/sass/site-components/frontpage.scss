@@ -49,7 +49,7 @@
     @include hover-preview;
     display: flex;
     justify-content: center;
-    &:hover {
+    &:hover, &:active {
       color: var(--white);
     }
   }

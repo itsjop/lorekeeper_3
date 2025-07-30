@@ -13,7 +13,7 @@
   }
   #sidebar {
     .sidebar-header {
-      @include body-bg(var(--purple-clr_700));
+      @include body-bg(0.7, var(--purple-clr_700));
       @include header-top;
       border-radius: 15px 15px 0 0;
       padding: 5px;
@@ -44,7 +44,7 @@
               font-weight: 700;
               color: var(--white);
             }
-            &:hover {
+            &:hover, &:active {
               transition: 0.1s linear;
               background-color: var(--purple-clr_300);
               color: var(--purple-clr_800);
@@ -173,10 +173,10 @@
   padding-right: 0px;
   a {
     color: color-mix(in srgb, var(--black) 70%, transparent);
-    &:hover {
+    &:hover, &:active {
       color: var(--purple-clr_900);
     }
-    &:hover,
+    &:hover, &:active,
     &:active,
     &:focus,
     &:link {
@@ -201,7 +201,7 @@
     a {
       font-size: 0.8em;
       color: var(--purple-clr_50);
-      &:hover {
+      &:hover, &:active {
         background-color: transparent;
         color: var(--purple-clr_50);
       }
@@ -215,60 +215,63 @@
 }
 
 @media (width <= 1000px) {
-  #app #site-wrapper #sidebar #sidebar-ul {
-    padding-left: 0px;
-    text-align: left;
-    z-index: 3;
-    right: 0px;
-    bottom: 0px;
-    top: 0px;
-    // overflow-y: scroll;
-    left: -100%;
-    transition: left 0.2s;
-    &.active {
-      left: 0%;
-    }
-    .sidebar-ul {
-      border: 2px solid var(--purple-clr_500);
-    }
-    > ul {
-      padding-top: 0px;
-    }
-    .sidebar-section.nonlinear ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 10px;
-      justify-content: space-between;
-      li {
-        a {
-          padding: 3px 6px;
-          &:hover {
-            background-color: transparent;
+  #app #site-wrapper #sidebar {
+    box-shadow: unset;
+    #sidebar-ul {
+      padding-left: 0px;
+      text-align: left;
+      z-index: 3;
+      right: 0px;
+      bottom: 0px;
+      top: 0px;
+      // overflow-y: scroll;
+      left: -100%;
+      transition: left 0.2s;
+      &.active {
+        left: 0%;
+      }
+      .sidebar-ul {
+        border: 2px solid var(--purple-clr_500);
+      }
+      > ul {
+        padding-top: 0px;
+      }
+      .sidebar-section.nonlinear ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+        justify-content: space-between;
+        li {
+          a {
+            padding: 3px 6px;
+            &:hover, &:active {
+              background-color: transparent;
+            }
+          }
+          padding: 0;
+          border-radius: 10px;
+          border: solid 2px transparent;
+          &:hover, &:active {
+            border: solid 2px var(--purple-clr_900);
           }
         }
-        padding: 0;
-        border-radius: 10px;
-        border: solid 2px transparent;
-        &:hover {
-          border: solid 2px var(--purple-clr_900);
-        }
       }
-    }
-    ul {
-      list-style-type: none;
-      display: block;
-      padding-top: 30px;
-      padding-left: 0px;
-      li {
-        background-color: var(--purple-clr_bgtext);
-        border-radius: 0;
-        border: 0px solid var(--purple-clr_100);
-        border-bottom-width: 1px;
-        padding: 0em 0;
-        box-shadow: none;
-        &:last-of-type {
-          border-bottom-width: 0px;
+      ul {
+        list-style-type: none;
+        display: block;
+        padding-top: 30px;
+        padding-left: 0px;
+        li {
+          background-color: var(--purple-clr_bgtext);
+          border-radius: 0;
+          border: 0px solid var(--purple-clr_100);
+          border-bottom-width: 1px;
+          padding: 0em 0;
+          box-shadow: none;
+          &:last-of-type {
+            border-bottom-width: 0px;
+          }
         }
       }
     }
@@ -393,7 +396,7 @@
 
     .name {
       grid-area: name;
-      &:hover {
+      &:hover, &:active {
         color: var(--teal-clr_500);
       }
     }
@@ -509,5 +512,80 @@
       max-width: 100%;
       max-height: 200px;
     }
+  }
+}
+
+#app #site-wrapper #sidebar .sb-featured-mobile {
+  border-radius: 15px;
+  gap: 10px;
+  .featured-character {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    box-shadow: none;
+    .character {
+      background-color: transparent;
+      backdrop-filter: unset;
+      box-shadow: unset;
+      .thumb {
+        .character-border {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .img-char-thumbnail {
+      }
+    }
+    .info {
+      display: grid;
+      grid-template-rows: max-content auto;
+      @include body-bg(0.5);
+      border-radius: 15px;
+      text-align: center;
+      position: relative;
+      height: max-content;
+      > * {
+        width: 100%;
+      }
+      .meta {
+        display: grid;
+        align-self: center;
+        padding-bottom: 20px;
+      }
+      .sidebar-header {
+        display: block;
+        height: max-content;
+      }
+      .name {
+        display: block;
+        &.name-lg { font-size: 3em; }
+        font-size: 2.5em;
+        &.name-sm { font-size: 2em; }
+      }
+      .baddge {
+        position: absolute;
+        top: calc(100% - 8vw);
+        left: -4vw;
+        width: 10vw;
+        height: 10vw;
+        @include hover-preview;
+      }
+    }
+  }
+}
+@media (width >= 1000px) {
+  .sb-featured-desktop {
+    display: block;
+  }
+  .sb-featured-mobile {
+    display: none;
+  }
+}
+@media (width < 1000px) {
+  .sb-featured-desktop {
+    display: none;
+  }
+  .sb-featured-mobile {
+    display: block;
   }
 }

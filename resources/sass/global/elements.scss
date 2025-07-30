@@ -46,7 +46,7 @@
   a, .a {
     color: var(--purple-clr_600);
     text-decoration: none;
-    &:hover {
+    &:hover, &:active {
       color: var(--teal-clr_500);
       text-decoration: none;
     }
@@ -104,13 +104,13 @@
   }
  .help-icon {
     color: var(--purple-clr_400);
-    &:hover {
+    &:hover, &:active {
       color: var(--teal-clr_400);
     }
   }
   .badge-success, .badge-danger {
     color: rgba(255, 255, 255, 0.724);
-    &:hover {
+    &:hover, &:active {
       color: white;
     }
   }
