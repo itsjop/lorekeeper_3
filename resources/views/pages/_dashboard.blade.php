@@ -20,7 +20,9 @@
       </div>
     </div>
   </div>
-  <div class="bubblebox dailies">
+
+
+<div class="bubblebox dailies">
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-gifts"></i>
       Dailies
@@ -55,7 +57,9 @@
         <h3>FAKE NEWS HEADLINE</h3>
         <p>this is the news this is the news this is the news this is the news this is the news...</p>
        </div> --}}
-      <h3 class="h2 js-center as-center"> Coming soon!</h3>
+      <h3 class="h2 js-center as-center">
+@include('widgets._sales')
+         Coming soon!</h3>
     </div>
   </div>
   <div class="bubblebox sales">
