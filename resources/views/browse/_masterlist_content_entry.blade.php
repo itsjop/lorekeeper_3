@@ -1,5 +1,5 @@
 <div id="{{ strtolower($character->slug) }}"
-  class="masterlist-character text-center {{ getSubtypeInfo($character->image->subtype_id, 'label', null, $character) }}"
+  class="masterlist-character text-center palate-colors {{ getSubtypeInfo($character->image->subtype_id, 'label', null, $character) }}"
 >
   {{-- Subtype Badge --}}
   <div class="ml-badge">
