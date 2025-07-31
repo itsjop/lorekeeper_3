@@ -53,6 +53,8 @@
   <script src="{{ mix('js/app.js') }}"></script>
   <!-- Styles -->
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+{{-- <link href="{{ asset('css/app.css') . '?v=' . filemtime(public_path('css/app.css')) }}" rel="stylesheet"> --}}
+
 
   <!------------------------------ EXTERNAL RESOURCES ----------------------------->
   <!-- Scripts -->

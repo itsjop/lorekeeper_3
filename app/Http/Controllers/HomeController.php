@@ -8,6 +8,8 @@ use Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Character\Character;
+use App\Models\Sales\Sales;
+use App\Models\News;
 use App\Models\SitePage;
 use App\Models\Species\Species;
 use App\Models\Character\CharacterImage;
@@ -49,7 +51,9 @@ class HomeController extends Controller {
     return view('welcome', [
       'about'               => SitePage::where('key', 'about')->first(),
       'gallerySubmissions'  => $gallerySubmissions,
+      'saleses'             => Sales::visible()->orderBy('id', 'DESC')->take(2)->get(),
       'featured'            => $character,
+      'newses'              => News::visible()->orderBy('updated_at', 'DESC')->take(2)->get(),
     ]);
   }
 
