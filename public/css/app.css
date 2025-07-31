@@ -2667,6 +2667,7 @@ body {
 }
 .featured-character .sidebar-section .rarity {
   grid-area: rarity;
+  background-color: inherit;
 }
 
 @media (width <= 1000px) {

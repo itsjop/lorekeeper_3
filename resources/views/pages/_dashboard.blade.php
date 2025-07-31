@@ -46,7 +46,6 @@
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-newspaper"></i>
       Newsfeed
-
     </h2>
     <div class="bubble px-4">
       @include('widgets._news', ['textPreview' => true])

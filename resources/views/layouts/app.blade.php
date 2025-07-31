@@ -52,9 +52,8 @@
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}"></script>
   <!-- Styles -->
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-{{-- <link href="{{ asset('css/app.css') . '?v=' . filemtime(public_path('css/app.css')) }}" rel="stylesheet"> --}}
-
+  {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}
+  <link href="{{ asset('css/app.css') . '?v=' . filemtime(public_path('css/app.css')) }}" rel="stylesheet">
 
   <!------------------------------ EXTERNAL RESOURCES ----------------------------->
   <!-- Scripts -->
@@ -160,7 +159,7 @@
     {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
     {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
   >
-  {{-- <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}"> --}}
+    {{-- <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}"> --}}
     <div id="site-wrapper" class="has-sidebar">
       <div class="site-background"></div>
       {{-- Header Logo --}}
@@ -203,7 +202,7 @@
         </div>
         {{-- Featured Character --}}
         <aside id="selected-character" class="selected-character-sidebar">
-            @include('pages._selected_char')
+          @include('pages._selected_char')
         </aside>
       @endif
 
