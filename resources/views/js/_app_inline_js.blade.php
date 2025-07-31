@@ -19,11 +19,11 @@
       menubar: false,
       convert_urls: false,
       plugins: [
-        'advlist textcolor fontselect fontsizeselect  autolink lists link image charmap print preview anchor',
+        'advlist forecolor fontselect fontsizeselect autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen spoiler',
         'insertdatetime media table paste code help wordcount'
       ],
-      toolbar: 'undo redo | formatselect fontselect fontsizeselect | bold italic textcolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
+      toolbar: 'undo redo | formatselect fontselect fontsizeselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
       content_css: [
         '{{ asset('css/vendor/lorekeeper.css') }}'
       ],
