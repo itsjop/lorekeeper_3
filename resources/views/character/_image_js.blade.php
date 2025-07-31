@@ -23,6 +23,11 @@
               '{{ asset('css/app.css') }}',
               '{{ asset('css/vendor/lorekeeper.css') }}'
             ],
+            indent_before: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
+              'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',
+            indent_after: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
+              'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',
+            whitespace_elements: 'p pre script noscript style textarea video audio iframe object code',
             spoiler_caption: 'Toggle Spoiler',
             target_list: false
           });
@@ -80,7 +85,12 @@
               '{{ asset('css/vendor/lorekeeper.css') }}'
             ],
             spoiler_caption: 'Toggle Spoiler',
-            target_list: false
+            target_list: false,
+            indent_before: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
+              'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',
+            indent_after: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
+              'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',
+            whitespace_elements: 'p pre script noscript style textarea video audio iframe object code',
           });
         });
       $(".edit-description").remove();
