@@ -3,11 +3,12 @@ selector: '#modal .wysiwyg',
 height: 500,
 menubar: false,
 plugins: [
-'advlist autolink lists link image charmap print preview anchor',
-'searchreplace visualblocks fullscreen',
-'insertdatetime media table paste codeeditor help wordcount'
+'advlist textcolor fontselect fontsizeselect autolink lists link image charmap print preview anchor',
+'searchreplace visualblocks code fullscreen spoiler',
+'insertdatetime media table paste code help wordcount'
 ],
-toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | codeeditor',
+toolbar: 'undo redo | formatselect fontselect fontsizeselect | bold italic textcolor backcolor | alignleft aligncenter alignright
+alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
 content_css: [ '//www.tiny.cloud/css/codepen.min.css', '{{ asset('css/app.css') }}', '{{ asset('css/vendor/lorekeeper.css') }}'],
 indent_before: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
 'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',

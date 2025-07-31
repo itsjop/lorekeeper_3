@@ -141,17 +141,23 @@
         menubar: false,
         convert_urls: false,
         plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
+          'advlist textcolor fontselect fontsizeselect  autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen spoiler',
           'insertdatetime media table paste code help wordcount'
         ],
-        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
+        toolbar: 'undo redo | formatselect fontselect fontsizeselect | bold italic textcolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
         content_css: [
           '{{ asset('css/app.css') }}',
           '{{ asset('css/lorekeeper.css') }}'
         ],
         spoiler_caption: 'Toggle Spoiler',
-        target_list: false
+        target_list: false,
+        indent_before: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
+          'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',
+        indent_after: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
+          'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',
+        whitespace_elements: 'p pre script noscript style textarea video audio iframe object code',
+
       });
 
       // function sortComments() {
