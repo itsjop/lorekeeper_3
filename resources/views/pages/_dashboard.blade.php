@@ -21,8 +21,7 @@
     </div>
   </div>
 
-
-<div class="bubblebox dailies">
+  <div class="bubblebox dailies">
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-gifts"></i>
       Dailies
@@ -47,46 +46,18 @@
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-newspaper"></i>
       Newsfeed
-@include('widgets._news', ['textPreview' => true])
 
     </h2>
-    <div class="bubble">
-      {{-- <div class="news-item">
-        <h3>FAKE NEWS HEADLINE</h3>
-        <p>this is the news this is the news this is the news this is the news this is the news...</p>
-      </div>
-      <div class="news-item">
-        <h3>FAKE NEWS HEADLINE</h3>
-        <p>this is the news this is the news this is the news this is the news this is the news...</p>
-       </div> --}}
-      <h3 class="h2 js-center as-center">
-@include('widgets._sales')
-         Coming soon!</h3>
+    <div class="bubble px-4">
+      @include('widgets._news', ['textPreview' => true])
     </div>
   </div>
   <div class="bubblebox sales">
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-store"></i> Sales
     </h2>
-    {{-- INSERT LIVE SALE VALUES HERE --}}
     <div class="bubble sale-info">
-      {{-- <div class="bubble sale-info grid-2-col"> --}}
-      {{-- <div class="character-picture">
-        <img src="{{ asset('/images/somnivores/jax2.png') }}" alt="">
-      </div>
-      <div class="character-info">
-        <div class="sale-type h4"> Flat Sale Raffle </div>
-        <div class="sale-price h3"> $80 </div>
-        <div class="sale-title"> <a href="">
-            The Real Jax
-          </a>
-        </div>
-        <div class="sale-artist"> by
-          <a href=""> notwyspic </a>
-        </div>
-        <a class="sale-details" href="sale_link"> View More > </a>
-      </div> --}}
-      <h3 class="h2 js-center as-center"> Coming soon!</h3>
+      @include('widgets._sales')
     </div>
   </div>
   {{-- SUBMISSION GALLERY --}}
