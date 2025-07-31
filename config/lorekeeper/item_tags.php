@@ -27,5 +27,6 @@ return [
   'boost'           => ['name' => 'Boost',            'text_color' => '#ffffff', 'background_color' => '#cc33ff'],
   'encounterpotion' => ['name' => 'Encounter Potion', 'text_color' => '#ffffff', 'background_color' => '#1fd1a7'],
   'splice'          => ['name' => 'Paintbrush',       'text_color' => '#ffffff', 'background_color' => '#a69bc6'],
+  'coupon'          => ['name' => 'Coupon',           'text_color' => '#ffffff', 'background_color' => '#a69bc6'],
   // 'rare_candy'      => ['name' => 'Rare Candy',       'text_color' => '#ffffff', 'background_color' => '#96afdb'],
 ];

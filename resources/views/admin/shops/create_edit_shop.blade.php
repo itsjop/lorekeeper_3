@@ -62,15 +62,15 @@
     </div>
   </div>
 
-  {{-- <div class="form-group">
+  <div class="form-group">
     {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle', 'id' => 'use_coupons']) !!}
     {!! Form::label('use_coupons', 'Allow Coupons?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Note that ALL coupons will be allowed to be used, unless specified otherwise.') !!}
   </div>
   <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
     {!! Form::label('allowed_coupons', 'Allowed Coupon(s)', ['class' => 'form-check-label']) !!}
     <p>Leave blank to allow ALL coupons.</p>
-    {!! Form::select('allowed_coupons[]', $coupons, json_decode($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!}
-  </div> --}}
+    {!! Form::select('allowed_coupons[]', $coupons, safeJSON($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!}
+  </div>
 
   <div class="form-group">
     {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, ['class' => 'form-check-input shop-timed shop-toggle shop-field', 'data-toggle' => 'toggle', 'id' => 'is_timed_shop']) !!}
