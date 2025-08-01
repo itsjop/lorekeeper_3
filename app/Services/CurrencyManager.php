@@ -267,11 +267,12 @@ class CurrencyManager extends Service {
    */
   public function creditCurrency($sender, $recipient, $type, $data, $currency, $quantity) {
     DB::beginTransaction();
+
     try {
       if (is_numeric($currency)) {
         $currency = Currency::find($currency);
       }
-      if (safe($recipient?->logType) == 'User') {
+      if ($recipient->logType == 'User') {
         $record = UserCurrency::where('user_id', $recipient->id)->where('currency_id', $currency->id)->first();
         if ($record) {
           // Laravel doesn't support composite primary keys, so directly updating the DB row here
@@ -323,6 +324,7 @@ class CurrencyManager extends Service {
    */
   public function debitCurrency($sender, $recipient, $type, $data, $currency, $quantity) {
     DB::beginTransaction();
+
     try {
       if ($sender->logType == 'User') {
         $record = UserCurrency::where('user_id', $sender->id)->where('currency_id', $currency->id)->first();
@@ -337,6 +339,7 @@ class CurrencyManager extends Service {
         if (!$record || $record->quantity < $quantity) {
           throw new \Exception('Not enough ' . $currency->name . ' to carry out this action.');
         }
+
         // Laravel doesn't support composite primary keys, so directly updating the DB row here
         DB::table('character_currencies')->where('character_id', $sender->id)->where('currency_id', $currency->id)->update(['quantity' => $record->quantity - $quantity]);
       }

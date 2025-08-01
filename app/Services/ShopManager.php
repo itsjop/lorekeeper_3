@@ -34,6 +34,7 @@ class ShopManager extends Service {
    */
   public function buyStock($data, $user) {
     DB::beginTransaction();
+
     try {
       $quantity = ceil($data['quantity']);
       if (!$quantity || $quantity == 0) {
@@ -85,7 +86,7 @@ class ShopManager extends Service {
         // finding the users tag
         $couponUserItem = UserItem::find($data['coupon']);
         // check if the item id is inside allowed_coupons
-        if ($shop->allowed_coupons && count(($shop->allowed_coupons)) > 0 && !in_array($couponUserItem->item_id, ($shop->allowed_coupons))) {
+        if ($shop->allowed_coupons && count(json_decode($shop->allowed_coupons, 1)) > 0 && !in_array($couponUserItem->item_id, json_decode($shop->allowed_coupons, 1))) {
           throw new \Exception('Sorry! You can\'t use this coupon.');
         }
         // finding bought item
@@ -160,6 +161,7 @@ class ShopManager extends Service {
             if (!$cost->item->is_user_owned) {
               throw new \Exception('You cannot use your user bank to pay for this item.');
             }
+
             addAsset($userCostAssets, $cost->item, -$costQuantity);
           } else {
             if (!$cost->item->is_character_owned) {
@@ -213,7 +215,7 @@ class ShopManager extends Service {
           addAsset($userCostAssets, $cost->item, -$costQuantity);
         }
 
-        addAsset($baseStockCost, $cost->item, abs($cost->quantity));
+        addAsset($baseStockCost, $cost->item, $cost->quantity);
       }
 
       if ($character) {
@@ -224,17 +226,10 @@ class ShopManager extends Service {
           throw new \Exception('Failed to purchase item.');
         }
       }
-      if (!fillUserAssets(
-        $userCostAssets,
-        $user,
-        null,
-        'Shop Purchase',
-        [
-          'data' => 'Purchased ' . $shopStock->item->name . ' x' . $quantity . ' from ' . $shop->name .
-            ($coupon ? '. Coupon used: ' . $couponUserItem->item->name : ''),
-        ],
-        $selected
-      )) {
+      if (!fillUserAssets($userCostAssets, $user, null, 'Shop Purchase', [
+        'data' => 'Purchased ' . $shopStock->item->name . ' x' . $quantity . ' from ' . $shop->name .
+          ($coupon ? '. Coupon used: ' . $couponUserItem->item->name : ''),
+      ], $selected)) {
         throw new \Exception('Failed to purchase item - could not debit costs.');
       }
 
@@ -263,16 +258,10 @@ class ShopManager extends Service {
       // Give the user the item, noting down 1. whose currency was used (user or character) 2. who purchased it 3. which shop it was purchased from
       $assets = createAssetsArray();
       addAsset($assets, $shopStock->item, $quantity);
-      if (!fillUserAssets(
-        $assets,
-        null,
-        $user,
-        'Shop Purchase',
-        [
-          'data'  => $shopLog->itemData,
-          'notes' => 'Purchased ' . format_date($shopLog->created_at),
-        ] + ($shopStock->disallow_transfer ? ['disallow_transfer' => true] : [])
-      )) {
+      if (!fillUserAssets($assets, null, $user, 'Shop Purchase', [
+        'data'  => $shopLog->itemData,
+        'notes' => 'Purchased ' . format_date($shopLog->created_at),
+      ] + ($shopStock->disallow_transfer ? ['disallow_transfer' => true] : []))) {
         throw new \Exception('Failed to purchase item - could not credit item.');
       }
 

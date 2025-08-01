@@ -167,9 +167,9 @@ class ShopController extends Controller {
       $couponId = ItemTag::where('tag', 'coupon')->where('is_active', 1); // Removed get()
       $itemIds = $couponId->pluck('item_id'); // Could be combined with above
       // get rid of any itemIds that are not in allowed_coupons
-      if ($shop->allowed_coupons && count(safeJSON($shop->allowed_coupons, 1))) {
+      if ($shop->allowed_coupons && count(json_decode($shop->allowed_coupons, 1))) {
         $itemIds = $itemIds->filter(function ($itemId) use ($shop) {
-          return in_array($itemId, safeJSON($shop->allowed_coupons, 1));
+          return in_array($itemId, json_decode($shop->allowed_coupons, 1));
         });
       }
       $check = UserItem::with('item')->whereIn('item_id', $itemIds)->where('user_id', Auth::user()->id)->where('count', '>', 0)->get()->pluck('item.name', 'id');

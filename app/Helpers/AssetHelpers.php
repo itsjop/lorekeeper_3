@@ -409,6 +409,7 @@ function compareAssetArrays($first, $second, $isCharacter = false, $absQuantitie
  * @return array
  */
 function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
+
   // Roll on any loot tables
   if (isset($assets['loot_tables'])) {
     foreach ($assets['loot_tables'] as $table) {
@@ -416,6 +417,7 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
     }
     unset($assets['loot_tables']);
   }
+
   foreach ($assets as $key => $contents) {
     if ($key == 'items' && count($contents)) {
       $service = new App\Services\InventoryManager;
@@ -424,6 +426,7 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
           foreach ($service->errors()->getMessages()['error'] as $error) {
             flash($error)->error();
           }
+
           return false;
         }
       }
@@ -435,6 +438,7 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
             foreach ($service->errors()->getMessages()['error'] as $error) {
               flash($error)->error();
             }
+
             return false;
           }
         } else {
@@ -442,6 +446,7 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
             foreach ($service->errors()->getMessages()['error'] as $error) {
               flash($error)->error();
             }
+
             return false;
           }
         }
