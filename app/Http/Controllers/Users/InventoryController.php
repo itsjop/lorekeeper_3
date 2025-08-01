@@ -121,7 +121,6 @@ class InventoryController extends Controller {
     $first_instance = CharacterItem::withTrashed()->where('id', $id)->first();
     $stack = CharacterItem::where([['character_id', $first_instance->character_id], ['item_id', $first_instance->item_id], ['count', '>', 0]])->get();
     $item = Item::where('id', $first_instance->item_id)->first();
-    // dd('$first_instance', $first_instance);
     $character = $first_instance->character;
     isset($stack->first()->character->user_id) ?
       $ownerId = $stack->first()->character->user_id : null;

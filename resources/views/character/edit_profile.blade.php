@@ -89,7 +89,6 @@
     {!! Form::label('text', 'Profile Content') !!}
     {!! Form::textarea('text', $character->profile->text, ['class' => 'wysiwyg form-control']) !!}
   </div>
-  {{-- {{ dd('$character->user_id', $character->user_id, Auth::user()->id, !$character->is_myo_slot) }} --}}
   @if ($character->user_id == Auth::user()->id)
     @if (!$character->is_myo_slot)
       <div class="row">

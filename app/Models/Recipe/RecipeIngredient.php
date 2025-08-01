@@ -71,7 +71,7 @@ class RecipeIngredient extends Model {
      * @return string
      */
     public function getDataAttribute() {
-        return json_decode($this->ingredient_data);
+        return safeJSON($this->ingredient_data);
     }
 
     /**
