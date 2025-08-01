@@ -430,7 +430,7 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
     } elseif ($key == 'currencies' && count($contents)) {
       $service = new App\Services\CurrencyManager;
       foreach ($contents as $asset) {
-        if (abs($asset['quantity']) < 0) {
+        if ($asset['quantity'] < 0) {
           if (!$service->debitCurrency($sender, $recipient, $logType, $data['data'], $asset['asset'], abs($asset['quantity']))) {
             foreach ($service->errors()->getMessages()['error'] as $error) {
               flash($error)->error();
