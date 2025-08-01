@@ -157,7 +157,7 @@ class Recipe extends Model {
      * @return array
      */
     public function getRewardItemsAttribute() {
-        return parseAssetData(json_decode($this->output, true));
+        return parseAssetData(safeJSON($this->output));
     }
 
     /**

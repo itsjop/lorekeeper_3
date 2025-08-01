@@ -806,7 +806,6 @@ class InventoryManager extends Service {
     try {
       $stack->count -= $quantity;
       $stack->save();
-
       if (
         $type &&
         !$this->createLog(
