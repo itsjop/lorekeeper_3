@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Award\Award;
+use Carbon\Carbon;
 use App\Models\Award\AwardCategory;
 use App\Models\Character\Character;
 use App\Models\Currency\Currency;
@@ -12,6 +13,7 @@ use App\Models\Loot\LootTable;
 use App\Models\Prompt\PromptCategory;
 use App\Models\Raffle\Raffle;
 use App\Models\Submission\Submission;
+use App\Models\Prompt\Prompt;
 use App\Services\SubmissionManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,18 +22,16 @@ class SubmissionController extends Controller {
   /**
    * Shows the submission index page.
    *
-   * @param string $status
-   *
+   * @param  string  $status
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getSubmissionIndex(Request $request, $status = null) {
     $submissions = Submission::with('prompt')->where('status', $status ? ucfirst($status) : 'Pending')->whereNotNull('prompt_id');
     $data = $request->only(['prompt_category_id', 'sort']);
-    if (isset($data['prompt_category_id']) && $data['prompt_category_id'] != 'none') {
+    if (isset($data['prompt_category_id']) && $data['prompt_category_id'] != 'none')
       $submissions->whereHas('prompt', function ($query) use ($data) {
         $query->where('prompt_category_id', $data['prompt_category_id']);
       });
-    }
     if (isset($data['sort'])) {
       switch ($data['sort']) {
         case 'newest':
@@ -41,59 +41,54 @@ class SubmissionController extends Controller {
           $submissions->sortOldest();
           break;
       }
-    } else {
-      $submissions->sortOldest();
-    }
-
+    } else $submissions->sortOldest();
     return view('admin.submissions.index', [
       'submissions' => $submissions->paginate(30)->appends($request->query()),
-      'categories'  => ['none' => 'Any Category'] + PromptCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-      'isClaims'    => false,
+      'categories' => ['none' => 'Any Category'] + PromptCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+      'isClaims' => false
     ]);
   }
 
   /**
    * Shows the submission detail page.
    *
-   * @param int $id
-   *
+   * @param  int  $id
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getSubmission($id) {
+    // $submission = Submission::whereNotNull('prompt_id')->where('id', $id)->first();
     $submission = Submission::whereNotNull('prompt_id')->where('id', $id)->where('status', '!=', 'Draft')->first();
     isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
+    if (!$submission) abort(404);
     $inventory = isset($submission->data['user']) ? parseAssetData($submission->data['user']) : null;
-    if (!$submission) {
-      abort(404);
-    }
+
     return view('admin.submissions.submission', [
-      'submission'       => $submission,
+      'submission' => $submission,
       'awardsrow' => Award::all()->keyBy('id'),
-      'inventory'        => $inventory,
-      'rewardsData'      => isset($submission->data['rewards'])
+      'inventory' => $inventory,
+      'rewardsData'  => isset($submission->data['rewards'])
         ? parseAssetData($submission->data['rewards'])
         : null,
-      'itemsrow'         => Item::all()->keyBy('id'),
-      'page'             => 'submission',
+      'itemsrow' => Item::all()->keyBy('id'),
+      'page' => 'submission',
       'expanded_rewards' => config('lorekeeper.extensions.character_reward_expansion.expanded'),
-      'characters'       => Character::visible(Auth::user() ?? null)->myo(0)->orderBy('slug', 'DESC')->get()->pluck('fullName', 'slug')->toArray(),
+      'characters'   => Character::visible(Auth::user() ?? null)->myo(0)->orderBy('slug', 'DESC')->get()->pluck('fullName', 'slug')->toArray(),
     ] + ($submission->status == 'Pending' ? [
       'characterCurrencies' => Currency::where('is_character_owned', 1)->orderBy('sort_character', 'DESC')->pluck('name', 'id'),
-      'items'               => Item::orderBy('name')->pluck('name', 'id'),
+      'items' => Item::orderBy('name')->pluck('name', 'id'),
       'awards' => Award::orderBy('name')->released()->where('is_user_owned', 1)->pluck('name', 'id'),
       'characterAwards' => Award::orderBy('name')->released()->where('is_character_owned', 1)->pluck('name', 'id'),
-      'currencies'          => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
-      'tables'              => LootTable::orderBy('name')->pluck('name', 'id'),
-      'raffles'             => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
-      'count'               => Submission::where('prompt_id', $submission->prompt_id)->where('status', 'Approved')->where('user_id', $submission->user_id)->count(),
+      'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+      'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+      'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
+      'count' => Submission::where('prompt_id', $submission->prompt_id)->where('status', 'Approved')->where('user_id', $submission->user_id)->count(),
     ] : []));
   }
 
   /**
    * Shows the claim index page.
    *
-   * @param string $status
-   *
+   * @param  string  $status
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getClaimIndex(Request $request, $status = null) {
@@ -108,46 +103,45 @@ class SubmissionController extends Controller {
           $submissions->sortOldest();
           break;
       }
-    } else {
-      $submissions->sortOldest();
-    }
-
+    } else $submissions->sortOldest();
     return view('admin.submissions.index', [
       'submissions' => $submissions->paginate(30),
-      'isClaims'    => true,
+      'isClaims' => true
     ]);
   }
 
   /**
    * Shows the claim detail page.
    *
-   * @param int $id
-   *
+   * @param  int  $id
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getClaim($id) {
+    // $submission = Submission::whereNull('prompt_id')->where('id', $id)->first();
     $submission = Submission::whereNull('prompt_id')->where('id', $id)->where('status', '!=', 'Draft')->first();
     isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
+    if (!$submission) abort(404);
     $inventory = isset($submission->data['user']) ? parseAssetData($submission->data['user']) : null;
     if (!$submission)   abort(404);
 
     return view('admin.submissions.submission', [
-      'submission'       => $submission,
+      'submission' => $submission,
       'awardsrow' => Award::all()->keyBy('id'),
-      'inventory'        => $inventory,
-      'itemsrow'         => Item::all()->keyBy('id'),
+      'inventory' => $inventory,
+      'itemsrow' => Item::all()->keyBy('id'),
       'expanded_rewards' => config('lorekeeper.extensions.character_reward_expansion.expanded'),
-      'characters'       => Character::visible(Auth::user() ?? null)->myo(0)->orderBy('slug', 'DESC')->get()->pluck('fullName', 'slug')->toArray(),
+      'characters'   => Character::visible(Auth::user() ?? null)->myo(0)->orderBy('slug', 'DESC')->get()->pluck('fullName', 'slug')->toArray(),
+
     ] + ($submission->status == 'Pending' ? [
       'characterCurrencies' => Currency::where('is_character_owned', 1)->orderBy('sort_character', 'DESC')->pluck('name', 'id'),
-      'items'               => Item::orderBy('name')->pluck('name', 'id'),
+      'items' => Item::orderBy('name')->pluck('name', 'id'),
       'awards' => Award::orderBy('name')->released()->where('is_user_owned', 1)->pluck('name', 'id'),
       'characterAwards' => Award::orderBy('name')->released()->where('is_character_owned', 1)->pluck('name', 'id'),
-      'currencies'          => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
-      'tables'              => LootTable::orderBy('name')->pluck('name', 'id'),
-      'raffles'             => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
-      'count'               => Submission::where('prompt_id', $id)->where('status', 'Approved')->where('user_id', $submission->user_id)->count(),
-      'rewardsData'         => isset($submission->data['rewards']) ? parseAssetData($submission->data['rewards']) : null,
+      'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+      'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+      'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
+      'count'   => Submission::where('prompt_id', $id)->where('status', 'Approved')->where('user_id', $submission->user_id)->count(),
+      'rewardsData' => isset($submission->data['rewards']) ? parseAssetData($submission->data['rewards']) : null,
     ] : []));
   }
 
@@ -155,8 +149,8 @@ class SubmissionController extends Controller {
    * Creates a new submission.
    *
    * @param App\Services\SubmissionManager $service
-   * @param int                            $id
-   * @param string                         $action
+   * @param int$id
+   * @param string $action
    *
    * @return \Illuminate\Http\RedirectResponse
    */

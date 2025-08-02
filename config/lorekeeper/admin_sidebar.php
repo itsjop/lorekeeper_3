@@ -45,11 +45,11 @@ return [
     ],
   ],
   'Cultivation' => [
-        'power' => 'edit_data',
-        'links' => [
-            ['name' => 'Areas','url' => 'admin/cultivation/areas',],
-            ['name' => 'Plots','url' => 'admin/cultivation/plots',],
-        ]
+    'power' => 'edit_data',
+    'links' => [
+      ['name' => 'Areas', 'url' => 'admin/cultivation/areas',],
+      ['name' => 'Plots', 'url' => 'admin/cultivation/plots',],
+    ]
   ],
   'Admin' => [
     'power' => 'mixed',
@@ -74,6 +74,7 @@ return [
     'links' => [
       ['name' => 'User Index', 'url' => 'admin/users',],
       ['name' => 'Invitation Keys', 'url' => 'admin/invitations',],
+      ['name' => 'Mod Mail', 'url'  => 'admin/mail',],
     ],
   ],
   'Queues' => [

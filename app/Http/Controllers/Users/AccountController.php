@@ -9,11 +9,12 @@ use File;
 use Image;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
+use App\Models\Mail\ModMail;
 use App\Models\User\User;
 use App\Models\User\UserAlias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Notification;
 use App\Services\UserService;
 use App\Services\LinkService;
 use App\Models\Border\Border;
@@ -46,12 +47,14 @@ class AccountController extends Controller {
    * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Http\RedirectResponse
    */
   public function getBanned() {
-    if (Auth::user()->is_banned)
-      return view('account.banned');
-    else
+    if (Auth::user()->is_banned) {
+      return view('account.banned', [
+        'unreadModMail' => ModMail::select(['subject', 'message'])->where('user_id', Auth::id())->where('seen', 0)->get(),
+      ]);
+    } else {
       return redirect()->to('/');
+    }
   }
-
 
 
   /**

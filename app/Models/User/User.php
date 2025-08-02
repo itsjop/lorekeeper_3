@@ -39,6 +39,7 @@ use App\Models\Item\Item;
 use App\Models\Pet\Pet;
 use App\Models\Pet\PetLog;
 use App\Models\Limit\UserUnlockedLimit;
+use App\Models\Mail\ModMail;
 use App\Models\Notification;
 use App\Models\Rank\Rank;
 use App\Models\Submission\Submission;
@@ -546,7 +547,7 @@ class User extends Authenticatable implements MustVerifyEmail {
       return '(Unverified)';
     }
 
-    return $this->primaryAlias->displayAlias;
+    return $this->primaryAlias?->displayAlias ?? '(No Alias)';
   }
 
   /**
@@ -715,12 +716,26 @@ class User extends Authenticatable implements MustVerifyEmail {
   }
 
   /**
-   * Check if user is of age
+   * Check if user is of age.
    */
   public function getcheckBirthdayAttribute() {
     $bday = $this->birthday;
-    if (!$bday || $bday->diffInYears(carbon::now()) < 13) return false;
-    else return true;
+    if (!$bday || $bday->diffInYears(Carbon::now()) < 13) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * Check if user has any unseen mod mail.
+   */
+  public function gethasUnseenMailAttribute() {
+    if (ModMail::where('user_id', $this->id)->where('seen', 0)->exists()) {
+      return true;
+    } else {
+      return false;
+    }
   }
   /**********************************************************************************************
 

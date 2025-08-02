@@ -407,7 +407,7 @@ class CharacterManager extends Service {
   /**
    * Trims and optionally resizes and watermarks an image.
    *
-   * @param \App\Models\Character\CharacterImage $characterImage
+   * @param CharacterImage $characterImage
    */
   public function processImage($characterImage) {
     $imageProperties = getimagesize($characterImage->imagePath . '/' . $characterImage->imageFileName);
@@ -546,9 +546,9 @@ class CharacterManager extends Service {
   /**
    * Crops a thumbnail for the given image.
    *
-   * @param array                                $points
-   * @param \App\Models\Character\CharacterImage $characterImage
-   * @param mixed                                $isMyo
+   * @param array          $points
+   * @param CharacterImage $characterImage
+   * @param mixed          $isMyo
    */
   public function cropThumbnail($points, $characterImage, $isMyo = false) {
     $imageProperties = getimagesize($characterImage->imagePath . '/' . $characterImage->imageFileName);
@@ -2105,7 +2105,6 @@ class CharacterManager extends Service {
       'user'
     );
   }
-
   /**
    * Handles character data.
    *

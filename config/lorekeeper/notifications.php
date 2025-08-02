@@ -608,4 +608,11 @@ return [
     'url'     => '',
   ],
 
+
+  // DIRECT_MESSAGE_RECEIVED
+  1005 => [
+    'name'    => 'Direct Message Received',
+    'message' => '<a href="{sender_url}">{sender_name}</a> has sent you a direct message with the subject line: "{subject}". <a href="{url}">See Context</a>.',
+    'url'     => 'mail/view/{mail_id}',
+  ],
 ];

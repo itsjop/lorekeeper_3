@@ -1,8 +1,13 @@
 <div class="row world-entry">
   @if ($prompt->has_image)
     <div class="col-md-3 world-entry-image">
-      <a href="{{ $prompt->imageUrl }}" data-lightbox="entry" data-title="{{ $prompt->name }}">
-        <img src="{{ $prompt->imageUrl }}" class="world-entry-image" /></a>
+      <a
+        href="{{ $prompt->imageUrl }}"
+        data-lightbox="entry"
+        data-title="{{ $prompt->name }}"
+      >
+        <img src="{{ $prompt->imageUrl }}" class="world-entry-image" />
+      </a>
     </div>
   @endif
   <div class="{{ $prompt->has_image ? 'col-md-9' : 'col-12' }}">
@@ -21,7 +26,11 @@
     <div class="world-entry-text">
       <p>{{ $prompt->summary }}</p>
       <div class="text-right">
-        <a data-bs-toggle="collapse" href="#prompt-{{ $prompt->id }}" class="text-primary"><strong>Show details...</strong></a>
+        <a
+          data-toggle="collapse"
+          href="#prompt-{{ $prompt->id }}"
+          class="text-primary"
+        ><strong>Show details...</strong></a>
       </div>
       <div class="collapse" id="prompt-{{ $prompt->id }}">
         <h4>Details</h4>
@@ -57,6 +66,13 @@
           </tbody>
         </table>
       @endif
+    </div>
+
+    <div class="text-right {{ $prompt->limit ? 'text-danger' : '' }}">
+      <p>
+        {{ $prompt->limit ? 'You can submit this prompt ' . $prompt->limit . ' time(s)' : 'You can submit this prompt an unlimited number of times' }}
+        {{ $prompt->limit_period ? ' per ' . strtolower($prompt->limit_period) : '' }}
+        {{ $prompt->limit_character ? ' per character' : '' }}.</p>
     </div>
     <div class="text-right">
       @if ($prompt->end_at && $prompt->end_at->isPast())
