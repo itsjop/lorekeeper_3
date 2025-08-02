@@ -164,6 +164,19 @@
       padding-top: 15px;
     }
   }
+  .postit {
+    position: relative;
+    width: 100%;
+    display: grid;
+    >* { grid-area: 1 / 1 / 2 / 2; }
+    &::before {
+      grid-area: 1 / 1 / 2 / 2;
+      background-color: #d7d71e;
+      clip-path:
+        polygon(0 0,calc(100% - 109.28px) 0,
+        calc(100% - 40px) 40px,100% 109.28px,100% 100%,0 100%);
+    }
+  }
 
  .dt-nav-page .dt-nav-group .dt-nav-item.strike {
     font-style: italic;

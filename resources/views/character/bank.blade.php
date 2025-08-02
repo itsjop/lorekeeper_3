@@ -27,7 +27,6 @@
   @if (count($currencies))
     <div class="card mb-4">
       <ul class="list-group list-group-flush">
-
         @foreach ($currencies as $currency)
           <li class="list-group-item">
             <div class="row">
