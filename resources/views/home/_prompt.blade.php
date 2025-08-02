@@ -5,11 +5,11 @@
     @if (isset($staffView) && $staffView)
       <p>For reference, these are the default rewards for this prompt. The editable section above is <u>inclusive</u> of these
         rewards.</p>
-      @if ($count['all'])
-        <p>The user has completed this prompt <strong>{{ $count['all'] }}</strong> time{{ $count['all'] == 1 ? '' : 's' }}
+      @if ($count)
+        <p>The user has completed this prompt <strong>{{ $count }}</strong> time{{ $count == 1 ? '' : 's' }}
           overall.</p>
         @if ($prompt->limit)
-          <p>They have now submitted this prompt {{ $prompt->limit_period ? $count[$prompt->limit_period] : $count['all'] }} out
+          <p>They have now submitted this prompt {{ $prompt->limit_period ? $count[$prompt->limit_period] : $count }} out
             of {{ $limit }} times
             {{ $prompt->limit_period ? 'for this ' . strtolower($prompt->limit_period) : '' }}.
         @endif
@@ -23,11 +23,11 @@
     @else
       <p>These are the default rewards for this prompt. The actual rewards you receive may be edited by a staff member during the
         approval process.</p>
-      @if ($count['all'])
-        <p>You have completed this prompt <strong>{{ $count['all'] }}</strong> time{{ $count['all'] == 1 ? '' : 's' }} overall.
+      @if ($count)
+        <p>You have completed this prompt <strong>{{ $count }}</strong> time{{ $count == 1 ? '' : 's' }} overall.
         </p>
         @if ($prompt->limit)
-          <p>You have already submitted this prompt {{ $prompt->limit_period ? $count[$prompt->limit_period] : $count['all'] }}
+          <p>You have already submitted this prompt {{ $prompt->limit_period ? $count[$prompt->limit_period] : $count }}
             out of {{ $limit }} times
             {{ $prompt->limit_period ? 'for this ' . strtolower($prompt->limit_period) : '' }}.
         @endif

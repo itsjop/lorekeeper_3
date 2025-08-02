@@ -58,14 +58,14 @@
             <div class="col"><strong>Past Month</strong></div>
             <div class="col"><strong>Past Year</strong></div>
           </div>
-          <div class="row text-center">
+          {{-- <div class="row text-center">
             <div class="col">{{ $count['all'] }}</div>
             <div class="col">{{ $count['Hour'] }}</div>
             <div class="col">{{ $count['Day'] }}</div>
             <div class="col">{{ $count['Week'] }}</div>
             <div class="col">{{ $count['Month'] }}</div>
             <div class="col">{{ $count['Year'] }}</div>
-          </div>
+          </div> --}}
         </div>
         {{-- <div class="col-md-10 col-8">{{ $count }} {!! add_help('This is the number of times the user has submitted this prompt before and had their submission approved.') !!}</div> --}}
       </div>
