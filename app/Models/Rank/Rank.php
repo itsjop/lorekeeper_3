@@ -60,8 +60,8 @@ class Rank extends Model {
      * @return string
      */
     public function getDisplayNameAttribute() {
-        if ($this->color) {
-            return '<strong style="color: #'.$this->color.'">'.$this->name.'</strong>';
+        if ($this?->color) {
+            return '<strong style="color: #'.safe($this?->color).'">'.$this->name.'</strong>';
         }
 
         return $this->name;
