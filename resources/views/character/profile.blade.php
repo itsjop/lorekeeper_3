@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ $character->image->content_warnings ? asset('images/lorekeeper/content-warning.png') : $character->image->thumbnailUrl }}
+  {{ $character->image->content_warnings ? asset('images/somnivores/site/content-warning.png') : $character->image->thumbnailUrl }}
 @endsection
 
 @section('profile-content')
@@ -31,11 +31,11 @@
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
           @if (isset($character->profile->professionObj))
             <h5 class="p-0 m-0">
-              <img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/lorekeeper/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}
+              <img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/somnivores/site/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}
             </h5>
           @else
             <h5 class="p-0 m-0">
-              <img class="fr-fic fr-dii mr-2" src="/images/lorekeeper/profession.png" style="max-width:50px;">{{ $character->profile->profession }}
+              <img class="fr-fic fr-dii mr-2" src="/images/somnivores/site/profession.png" style="max-width:50px;">{{ $character->profile->profession }}
             </h5>
           @endif
         </a>

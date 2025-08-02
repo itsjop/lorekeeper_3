@@ -4,11 +4,16 @@
   - [ ] 'jop', 'wysp', 'reverie', 'somnivores', 'somnivores_staff', all of the NPC names
 - [ ] gallery preview pass real blurred image instead of of lorekeeper book
 - [ ] No 18+ popup banner
-- [ ] system clock
-- [ ] currency counter? [root-level](app/Models/Currency/Currency.php#310)
 - [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
 - [ ] Bat transformation should always be listed first
 - [ ] native `<details name="">` exclusive toggle for tabs
+- [ ] live server time for clock
+- [ ] Add to User Shop needs to be diagnosed / re-enabled at some point
+- [ ] test SubmissionController with safeJSON() replacement
+- [ ] @supports for navbar container query? not even sure how to test this one
+- [ ] sitewide image alt tags
+- [ ] redo mobile sidebar
+- [ ] app.css `filemtime()` https://github.com/lk-arpg/lorekeeper/blob/release/v3.0.0/resources/views/layouts/app.blade.php#L63
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)
@@ -49,7 +54,9 @@
 
 
 # FIXED!!!
-- [x] remove sex selectors
+- [x] remove sex
+- [x] system clock
+- [x] currency counter? [root-level](app/Models/Currency/Currency.php#310)
 - [x] fuckign... backdrop-filter breaks positioning 😮‍💨
 - [x] finalize navbar links
 - [x] item category search no results

@@ -114,6 +114,19 @@ return [
       ['name' => 'Raffles', 'url' => 'admin/raffles'],
     ]
   ],
+  'World' => [
+    'power' => 'manage_world',
+    'links' => [
+      ['name' => 'Locations', 'url' => 'admin/world/locations'],
+      ['name' => 'Faunas', 'url' => 'admin/world/faunas'],
+      ['name' => 'Floras', 'url' => 'admin/world/floras'],
+      ['name' => 'Events', 'url' => 'admin/world/events'],
+      ['name' => 'Figures', 'url' => 'admin/world/figures'],
+      ['name' => 'Factions', 'url' => 'admin/world/factions'],
+      ['name' => 'Concepts', 'url' => 'admin/world/concepts'],
+      ['name' => 'Glossary', 'url' => 'admin/world/glossary'],
+    ]
+  ],
   'Site Settings' => [
     'power' => 'edit_site_settings',
     'links' => [

@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ $character->image->content_warnings ? asset('images/lorekeeper/content-warning.png') : $character->image->thumbnailUrl }}
+  {{ $character->image->content_warnings ? asset('images/somnivores/site/content-warning.png') : $character->image->thumbnailUrl }}
 @endsection
 
 @section('profile-content')
@@ -74,7 +74,7 @@
             <h5 class="p-0 m-0">
               <img
                 class="fr-fic fr-dii mr-2"
-                src="{{ $character->profile->professionObj->iconUrl ?? '/images/lorekeeper/profession.png' }}"
+                src="{{ $character->profile->professionObj->iconUrl ?? '/images/somnivores/site/profession.png' }}"
                 style="max-width:50px;"
               >{{ $character->profile->professionObj->name }}
             </h5>
@@ -82,7 +82,7 @@
             <h5 class="p-0 m-0">
               <img
                 class="fr-fic fr-dii mr-2"
-                src="/images/lorekeeper/profession.png"
+                src="/images/somnivores/site/profession.png"
                 style="max-width:50px;"
               >{{ $character->profile->profession }}
             </h5>

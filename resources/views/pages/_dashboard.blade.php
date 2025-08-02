@@ -13,40 +13,33 @@
         alt=""
         class="w-66"
       >
-      <div class="grid ai-center">
-        <h3> (Coming Soon!) </h3>
-        <h4 class="flex jc-center">
-          <a href="">daily</a>
-          <i class="fas fa-star px-2"></i>
-          <a href="">shop</a>
-        </h4>
+      <div class="grid ai-center event-buttons">
+        <p class="event-title m-0"> Coming Soon! </p>
+        <a class="frontpage-button" href=""> daily </a>
+        <a class="frontpage-button" href=""> shop </a>
       </div>
     </div>
   </div>
+
   <div class="bubblebox dailies">
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-gifts"></i>
       Dailies
     </h2>
     <div class="bubble jobs gap-_5">
-      <div class="wishing-well">
-        <a href="/dailies/1">
-          <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well">
-          <h3 class="a">Wishing Well</h3>
-        </a>
-      </div>
-      <div class="starlit-acres">
-        <a href="/dailies/2">
-          <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily">
-          <h3 class="a">Starlit Acres</h3>
-        </a>
-      </div>
-      <div class="foraging">
-        <a href="/dailies/3">
-          <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone">
-          <h3 class="a">Foraging (coming soon)</h3>
-        </a>
-      </div>
+      <a class="wishing-well" href="/dailies/1">
+        <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well" />
+        <p class="frontpage-button m-0"> Wishing Well</p>
+      </a>
+      <a class="starlit-acres" href="/dailies/2">
+        <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily" />
+        <p class="frontpage-button m-0"> Starlit Acres</p>
+      </a>
+      <a class="foraging" href="/dailies/3">
+        <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone" />
+        <p class="frontpage-button m-0 bw-disabled"> Foraging
+        </p>
+      </a>
     </div>
   </div>
   <div class="bubblebox newsfeed">
@@ -54,41 +47,16 @@
       <i class="fas fa-newspaper"></i>
       Newsfeed
     </h2>
-    <div class="bubble">
-      {{-- <div class="news-item">
-        <h3>FAKE NEWS HEADLINE</h3>
-        <p>this is the news this is the news this is the news this is the news this is the news...</p>
-      </div>
-      <div class="news-item">
-        <h3>FAKE NEWS HEADLINE</h3>
-        <p>this is the news this is the news this is the news this is the news this is the news...</p>
-       </div> --}}
-      <h3 class="h2 js-center as-center"> Coming soon!</h3>
+    <div class="bubble px-4">
+      @include('widgets._news', ['textPreview' => true])
     </div>
   </div>
   <div class="bubblebox sales">
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-store"></i> Sales
     </h2>
-    {{-- INSERT LIVE SALE VALUES HERE --}}
     <div class="bubble sale-info">
-      {{-- <div class="bubble sale-info grid-2-col"> --}}
-      {{-- <div class="character-picture">
-        <img src="{{ asset('/images/somnivores/jax2.png') }}" alt="">
-      </div>
-      <div class="character-info">
-        <div class="sale-type h4"> Flat Sale Raffle </div>
-        <div class="sale-price h3"> $80 </div>
-        <div class="sale-title"> <a href="">
-            The Real Jax
-          </a>
-        </div>
-        <div class="sale-artist"> by
-          <a href=""> notwyspic </a>
-        </div>
-        <a class="sale-details" href="sale_link"> View More > </a>
-      </div> --}}
-      <h3 class="h2 js-center as-center"> Coming soon!</h3>
+      @include('widgets._sales')
     </div>
   </div>
   {{-- SUBMISSION GALLERY --}}

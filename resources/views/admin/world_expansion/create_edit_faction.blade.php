@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group col-12 col-md-6 px-0 px-md-1">
-          {!! Form::label('Parent (Optional)') !!} {!! add_help('For instance, the parent of Paris is France. <br><strong>If left blank, this will be \'top level.\'</strong>""') !!}
+          {!! Form::label('Parent (Optional)') !!} {!! add_help('For instance, the parent of Paris is France. If left blank, this will be top level.') !!}
           {!! Form::select('parent_id', [0 => 'Choose a Parent'] + $factions, isset($faction->parent_id) ? $faction->parent_id : null, ['class' => 'form-control selectize']) !!}
         </div>
       </div>

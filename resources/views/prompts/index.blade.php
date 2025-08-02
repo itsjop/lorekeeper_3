@@ -12,7 +12,7 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-body text-center">
-          <img src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Prompts" />
+          <img src="{{ asset('images/somnivores/site/inventory.png') }}" alt="Prompts" />
           <h5 class="card-title">Prompts</h5>
         </div>
         <ul class="list-group list-group-flush">

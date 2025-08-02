@@ -138,16 +138,16 @@
       </div>
     @endif
 
-    <div class="row mb-4">
-      <div id="selected-character" class="col-md-6">
+    <div class="grid grid-2-col gap-1 mb-4 ">
+      <div id="selected-character" class="profile h-max card-body grid-area-unset w-100 h-100 bg-white">
         @include('widgets._selected_character', [
             'character' => $user->settings->selectedCharacter,
             'user' => $user,
             'fullImage' => true
         ])
       </div>
-      <div class="col-md-6 profile-assets" style="clear:both;">
-        <div class="card profile-currencies profile-assets-card mb-4">
+      <div class="profile-assets grid gap-1" style="clear:both;">
+        <div class="card profile-currencies profile-assets-card">
           <div class="card-body text-center">
             <h5 class="card-title">Bank</h5>
             <div class="profile-assets-content">
@@ -161,24 +161,22 @@
         <div class="card profile-inventory profile-assets-card">
           <div class="card-body text-center">
             <h5 class="card-title">Inventory</h5>
-            <div class="profile-assets-content">
+            <div class="profile-assets-content grid grid-4-col">
               @if (count($items))
-                <div class="row">
-                  @foreach ($items as $item)
-                    <div class="col-md-3 col-6 profile-inventory-item">
-                      @if ($item->imageUrl)
-                        <img
-                          src="{{ $item->imageUrl }}"
-                          data-bs-toggle="tooltip"
-                          title="{{ $item->name }}"
-                          alt="{{ $item->name }}"
-                        />
-                      @else
-                        <p>{{ $item->name }}</p>
-                      @endif
-                    </div>
-                  @endforeach
-                </div>
+                @foreach ($items as $item)
+                  <div class="profile-inventory-item">
+                    @if ($item->imageUrl)
+                      <img
+                        src="{{ $item->imageUrl }}"
+                        data-bs-toggle="tooltip"
+                        title="{{ $item->name }}"
+                        alt="{{ $item->name }}"
+                      />
+                    @else
+                      <p>{{ $item->name }}</p>
+                    @endif
+                  </div>
+                @endforeach
               @else
                 <div>No items owned.</div>
               @endif
@@ -188,27 +186,27 @@
         </div>
       </div>
     </div>
+    
 
     <div class="card mb-3">
       <div class="card-body text-center">
         <h5 class="card-title">{{ ucfirst(__('awards.awards')) }}</h5>
-        <div class="">
+        <div class="grid grid-4-col pi-center">
           @if (count($awards ?: 0))
-            <div class="row">
-              @foreach ($awards as $award)
-                <div class="col-md-3 col-6 profile-inventory-item">
-                  @if ($award->imageUrl)
-                    <img
-                      src="{{ $award->imageUrl }}"
-                      data-bs-toggle="tooltip"
-                      title="{{ $award->name }}"
-                    />
-                  @else
-                    <p>{{ $award->name }}</p>
-                  @endif
-                </div>
-              @endforeach
-            </div>
+            @foreach ($awards as $award)
+              <div class="profile-inventory-item badje">
+                @if ($award->imageUrl)
+                  <img
+                    class="w-100"
+                    src="{{ $award->imageUrl }}"
+                    data-bs-toggle="tooltip"
+                    title="{{ $award->name }}"
+                  />
+                @else
+                  <p>{{ $award->name }}</p>
+                @endif
+              </div>
+            @endforeach
           @else
             <div>No {{ __('awards.awards') }} earned.</div>
           @endif
@@ -221,35 +219,45 @@
 
     <h2>
       <a href="{{ $user->url . '/characters' }}">Characters</a>
-      @if (isset($sublists) && $sublists->count() > 0)
+      {{-- @if (isset($sublists) && $sublists->count() > 0)
         @foreach ($sublists as $sublist)
           / <a href="{{ $user->url . '/sublist/' . $sublist->key }}">{{ $sublist->name }}</a>
-        @endforeach
-      @endif
+        @endforidach
+      @endif --}}
     </h2>
 
     @foreach ($characters->take(4)->get()->chunk(4) as $chunk)
-      <div class="row mb-4">
+      <div class="grid grid-4-col gap-1">
         @foreach ($chunk as $character)
-          <div class="col-md-3 col-6 text-center">
-            <div>
-              <a href="{{ $character->url }}">
-                <img
-                  src="{{ $character?->image?->thumbnailUrl }}"
-                  class="img-thumbnail"
-                  alt="{{ $character->fullName }}"
-                /></a>
-            </div>
-            <div class="mt-1">
-              <a href="{{ $character->url }}" class="h5 mb-0">
-                @if (!$character->is_visible)
-                  <i class="fas fa-eye-slash"></i>
-                @endif {{ $character->fullName }}
-              </a>
-            </div>
-          </div>
+          @include('browse._masterlist_content_entry', [
+              'char_image' =>
+                  $character->image->canViewFull(Auth::user() ?? null) &&
+                  file_exists(public_path($character->image->imageDirectory . ' /  ' . $character->image->fullsizeFileName))
+                      ? $character->image->thumbnailUrl
+                      : $character->image->thumbnailUrl
+          ])
+
+          {{-- <div class="col-md-3 col-6 text-center">
+  <div>
+    <a href="{{ $character->url }}">
+      <img
+      src="{{ $character?->image?->thumbnailUrl }}"
+      class="img-thumbnail"
+      alt="{{ $character->fullName }}"
+      /></a>
+    </div>
+    <div class="mt-1">
+      <a href="{{ $character->url }}" class="h5 mb-0">
+        @if (!$character->is_visible)
+        <i class="fas fa-eye-slash"></i>
+        @endif
+        {!! $character->formattedName !!}
+      </a>
+    </div>
+  </div> --}}
         @endforeach
       </div>
+      <br>
     @endforeach
 
     <div class="text-right">

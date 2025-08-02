@@ -52,7 +52,7 @@
                 </div>
                 @if ($stackName)
                   <div>
-                    <span class="text-light badge badge-dark" style="font-size:95%;">
+                    <span class="" style="font-size:95%;">
                       {{ $stackName }}
                     </span>
                   </div>

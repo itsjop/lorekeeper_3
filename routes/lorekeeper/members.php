@@ -389,7 +389,7 @@ Route::group(['prefix' => 'shops'], function () {
 
 Route::group(['prefix' => __('dailies.dailies')], function () {
   // throttle requests to 1 per ~10 seconds
-  Route::middleware('throttle:1,0.16')->group(function () {
+  Route::middleware('throttle:1,0.02')->group(function () {
     Route::post('{id}', 'DailyController@postRoll');
   });
 });

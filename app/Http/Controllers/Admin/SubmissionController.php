@@ -122,6 +122,7 @@ class SubmissionController extends Controller {
     isset($submission?->data) ? (gettype($submission->data) == 'string' ? $submission->data = json_decode($submission->data, true) : '') : '';
     if (!$submission) abort(404);
     $inventory = isset($submission->data['user']) ? parseAssetData($submission->data['user']) : null;
+    if (!$submission)   abort(404);
 
     return view('admin.submissions.submission', [
       'submission' => $submission,

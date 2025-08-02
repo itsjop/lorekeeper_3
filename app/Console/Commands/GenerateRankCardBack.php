@@ -41,7 +41,7 @@ class GenerateRankCardBack extends Command {
 
         // Assemble rank card
         $card = Image::canvas(600, 200, $config['bg'])
-            ->insert(public_path('images/lorekeeper/rank_card_background.png'));
+            ->insert(public_path('images/somnivores/site/rank_card_background.png'));
 
         if ($config['logo']) {
             $card

@@ -14,10 +14,10 @@
     <summary class="sidebar-section-header"> Characters </summary>
     <ul>
       <li class="sidebar-item">
-        <a href="{{ url('world/species') }}" class="{{ set_active('world/species*') }}">{{ __('lorekeeper.specieses') }}</a>
+        <a href="{{ url('world/'.__('lorekeeper.specieses')) }}" class="{{ set_active('world/species*') }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ url('world/subtypes') }}" class="{{ set_active('world/subtypes*') }}">{{ __('lorekeeper.subtypes') }}</a>
+        <a href="{{ url('world/'.__('lorekeeper.subtypes')) }}" class="{{ set_active('world/subtypes*') }}">{{ ucfirst(__('lorekeeper.subtypes')) }}</a>
       </li>
       <li class="sidebar-item">
         <a href="{{ url('world/rarities') }}" class="{{ set_active('world/rarities*') }}">Rarities</a>

@@ -45,9 +45,18 @@ dialog,
     /* Equivalent to
     transition: all 0.7s allow-discrete; */
   }
-  &.fade:not(.show) { pointer-events: none; *{ pointer-events: none;}}
-  &[style="display: block;"] { display: flex !important; }
-  &.show { opacity: 1;}
+  &.fade:not(.show) {
+    pointer-events: none;
+    * {
+      pointer-events: none;
+    }
+  }
+  &[style='display: block;'] {
+    display: flex !important;
+  }
+  &.show {
+    opacity: 1;
+  }
   /* Open state of the dialog  */
   &:open {
     opacity: 1;
@@ -102,5 +111,15 @@ because the nesting selector cannot represent pseudo-elements. */
 @starting-style {
   dialog:open::backdrop {
     background-color: rgb(0 0 0 / 100%);
+  }
+}
+
+dialog,
+.modal {
+  @media (width<1000px) {
+    width: 80vw;
+  }
+  @media (width<600px) {
+    width: 90vw;
   }
 }

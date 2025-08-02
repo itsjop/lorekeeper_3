@@ -39,17 +39,17 @@ class NewsService extends Service {
             if ($news->is_visible) {
                 $this->alertUsers();
 
-                $response = (new DiscordManager)->handleWebhook(
-                    'A new news post has been made!',
-                    $news->title,
-                    $user,
-                    $news->url
-                );
+                // $response = (new DiscordManager)->handleWebhook(
+                //     'A new news post has been made!',
+                //     $news->title,
+                //     $user,
+                //     $news->url
+                // );
 
-                if (is_array($response)) {
-                    flash($response['error'])->error();
-                    throw new \Exception('Failed to create webhook.');
-                }
+                // if (is_array($response)) {
+                //     flash($response['error'])->error();
+                //     throw new \Exception('Failed to create webhook.');
+                // }
             }
 
             return $this->commitReturn($news);
@@ -153,18 +153,18 @@ class NewsService extends Service {
                 $this->alertUsers();
 
                 foreach ($newses as $news) {
-                    $response = (new DiscordManager)->handleWebhook(
-                        'A new news post has been made!',
-                        $news->title,
-                        $news->parsed_text,
-                        $news->user,
-                        $news->url
-                    );
+                    // $response = (new DiscordManager)->handleWebhook(
+                    //     'A new news post has been made!',
+                    //     $news->title,
+                    //     $news->parsed_text,
+                    //     $news->user,
+                    //     $news->url
+                    // );
 
-                    if (is_array($response)) {
-                        flash($response['error'])->error();
-                        throw new \Exception('Failed to create webhook.');
-                    }
+                    // if (is_array($response)) {
+                    //     flash($response['error'])->error();
+                    //     throw new \Exception('Failed to create webhook.');
+                    // }
                 }
 
                 return $this->commitReturn(true);

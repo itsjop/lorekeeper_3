@@ -4,10 +4,11 @@ body #app {
   */
 
   /* Colors */
+  --clr_raw_purple-25: #fbf8ff;
   --clr_raw_purple-50: #f4eefc;
-  --clr_raw_purple-100: #eee5fa;
-  --clr_raw_purple-200: #d9c5fe;
-  --clr_raw_purple-300: #cfbdff;
+  --clr_raw_purple-100: #e8ddf7;
+  --clr_raw_purple-200: #e3d5fc;
+  --clr_raw_purple-300: #c7b4fb;
   --clr_raw_purple-400: #b29bff;
   --clr_raw_purple-500: #8e76ed;
   --clr_raw_purple-600: #6e4dd0;
@@ -16,6 +17,7 @@ body #app {
   --clr_raw_purple-900: #250955;
   --clr_raw_purple-950: #0f0539;
 
+  --clr_raw_teal-25: #f0f5f9;
   --clr_raw_teal-50: #f1f8fe;
   --clr_raw_teal-100: #e2f4fc;
   --clr_raw_teal-200: #bfdcf8;
@@ -29,6 +31,7 @@ body #app {
   --clr_raw_teal-950: #0d3244;
 
   // Calculated Values
+  --purple-clr_25: light-dark(var(--clr_raw_purple-25), var(--clr_raw_purple-950));
   --purple-clr_50: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
   --purple-clr_100: light-dark(var(--clr_raw_purple-100), var(--clr_raw_purple-900));
   --purple-clr_200: light-dark(var(--clr_raw_purple-200), var(--clr_raw_purple-800));
@@ -56,6 +59,7 @@ body #app {
   --purple-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
   --teal-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
 
+  --active-clr_25: var(--purple-clr_25);
   --active-clr_50: var(--purple-clr_50);
   --active-clr_100: var(--purple-clr_100);
   --active-clr_200: var(--purple-clr_200);

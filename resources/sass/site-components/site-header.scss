@@ -6,7 +6,7 @@
   contain: layout;
   // padding-top: 5vh;
   transform-origin: 50% 50%;
-  &:hover {
+  &:hover, &:active {
     animation:
       mirage 15s 0.5s ease-in-out forwards infinite,
       mirage-shift 15s 0s ease-in-out forwards infinite;
@@ -47,7 +47,7 @@
 }
 
 /* Tablet Down */
-@media (width <= 992px) {
+@media (width <= 1000px) {
   #app {
     #site-wrapper {
       #site-logo-header {

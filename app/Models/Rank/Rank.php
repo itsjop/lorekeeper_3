@@ -59,15 +59,15 @@ class Rank extends Model {
 
    **********************************************************************************************/
 
-  /**
-   * Display the rank with its associated colour.
-   *
-   * @return string
-   */
-  public function getDisplayNameAttribute() {
-    if ($this->color) {
-      return '<strong style="color: #' . $this->color . '">' . $this->name . '</strong>';
-    }
+    /**
+     * Display the rank with its associated colour.
+     *
+     * @return string
+     */
+    public function getDisplayNameAttribute() {
+        if ($this?->color) {
+            return '<strong style="color: #'.safe($this?->color).'">'.$this->name.'</strong>';
+        }
 
     return $this->name;
   }

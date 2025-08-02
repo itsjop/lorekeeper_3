@@ -38,6 +38,21 @@
   .recent-submissions {
     grid-area: subm;
   }
+  .frontpage-button {
+    border: 2px solid var(--white);
+    color: var(--white);
+    border-radius: 50vw;
+    background-image: linear-gradient(to top, #859cf7, #6e6cea);
+    padding: 5px 15px;
+    max-width: 90%;
+    justify-self: center;
+    @include hover-preview;
+    display: flex;
+    justify-content: center;
+    &:hover, &:active {
+      color: var(--white);
+    }
+  }
   .bubblebox {
     display: grid;
     grid-template-rows: max-content auto;
@@ -52,22 +67,54 @@
       align-items: center;
       text-align: center;
       padding: 10px;
+      // border: 1px var(--white) solid;
       &.event,
       &.jobs {
+        background-size: cover;
         img {
-          @include hover-preview;
+          width: 100%;
           max-width: 100%;
           max-width: 250px;
+          @include hover-preview(0);
+          filter: drop-shadow(0 0 5px var(--white));
+        }
+      }
+      &.event {
+        background-image: url('../images/somnivores/frontpage/event_bg.png');
+        a {
+          font-weight: 700;
+        }
+        .event-buttons {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          justify-content: space-between;
+          gap: 5px;
+          .event-title {
+            background-color: var(--white);
+            color: var(--purple-clr_600);
+            border-radius: 100vw;
+            font-weight: 600;
+            padding: 5px 10px;
+            grid-column: 1/3;
+          }
+          .frontpage-button {
+            min-width: 100%;
+          }
         }
       }
       &.jobs {
+        background-image: url('../images/somnivores/frontpage/jobs_bg.png');
         grid-template-columns: 1fr 1fr 1fr;
-        img {
-          width: 100%;
-          max-width: 250px;
+        >a{
+          display: grid;
+          height: 100%;
+          justify-content: space-around;
+        }
+        .frontpage-button {
+          height: max-content;
         }
         .foraging img {
-          filter: grayscale(1) opacity(0.5);
+          filter: grayscale(1) opacity(0.5) drop-shadow(0 0 5px var(--white));
         }
       }
       .news-item {
@@ -89,16 +136,14 @@
       .gallery {
         width: 100%;
         height: 100%;
-        background:
-          repeating-linear-gradient(-45deg, #ffffff 0, #ffffff 2px, transparent 2px, transparent 15px),
-          linear-gradient(to bottom left, #bfeeff, #e6d9ff, #ffdde9, #fff1d5);
+        // background-color: var(--white);
         border-radius: 15px;
-        border: 2px white solid;
+        contain: paint;
       }
     }
   }
 }
-@media (width < 768px) {
+@media (width < 800px) {
   .home-dashboard {
     grid-template:
       'welc  welc ' auto
@@ -155,7 +200,7 @@
     }
   }
 }
-@media (width < 576px) {
+@media (width < 600px) {
   .home-dashboard {
     grid-template:
       'welc ' auto

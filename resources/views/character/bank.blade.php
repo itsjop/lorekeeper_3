@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta-img')
-  {{ $character->image->content_warnings ? asset('images/lorekeeper/content-warning.png') : $character->image->thumbnailUrl }}
+  {{ $character->image->content_warnings ? asset('images/somnivores/site/content-warning.png') : $character->image->thumbnailUrl }}
 @endsection
 
 @section('profile-content')
@@ -27,7 +27,6 @@
   @if (count($currencies))
     <div class="card mb-4">
       <ul class="list-group list-group-flush">
-
         @foreach ($currencies as $currency)
           <li class="list-group-item">
             <div class="row">

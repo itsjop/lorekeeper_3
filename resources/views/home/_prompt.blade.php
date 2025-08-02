@@ -1,6 +1,7 @@
 <div class="card">
-  <div class="card-body">
-    <h4>Default Prompt Rewards</h4>
+    <h2 class="card-header">Prompt Rewards</h2>
+      <div class="card-body">
+
     @if (isset($staffView) && $staffView)
       <p>For reference, these are the default rewards for this prompt. The editable section above is <u>inclusive</u> of these
         rewards.</p>

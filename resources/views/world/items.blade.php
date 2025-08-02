@@ -9,8 +9,7 @@
   <h1>Items</h1>
 
   <div>
-    {!! Form::open(['method' => 'GET', 'class' => '']) !!}
-    <div class="form-inline justify-content-end">
+    {!! Form::open(['method' => 'GET', 'class' => 'flex flex-wrap ji-end']) !!}
       <div class="form-group ml-3 mb-3">
         {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
       </div>
@@ -25,8 +24,6 @@
           {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control', 'placeholder' => 'Any Artist']) !!}
         </div>
       @endif
-    </div>
-    <div class="form-inline justify-content-end">
       <div class="form-group ml-3 mb-3">
         {!! Form::select(
             'sort',
@@ -44,7 +41,6 @@
       <div class="form-group ml-3 mb-3">
         {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
       </div>
-    </div>
     {!! Form::close() !!}
   </div>
 

@@ -12,7 +12,7 @@
     <div class="col-md-6">
       <div class="card mb-4">
         <div class="card-body text-center br-top-15">
-          <img src="{{ asset('images/lorekeeper/characters.png') }}" alt="Characters" />
+          <img class="w-80" src="{{ asset('images/somnivores/site/characters.png') }}" alt="Characters" />
           <h5 class="card-title">Characters</h5>
         </div>
         <ul class="list-group list-group-flush br-bot-15">
@@ -39,17 +39,17 @@
           <li class="list-group-item">
             <a href="{{ url('world/character-categories') }}">Character Categories</a>
           </li>
-          <li class="list-group-item">
+          {{-- <li class="list-group-item">
             <a href="{{ url('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>
     <div class="col-md-6">
       <div class="card mb-4">
         <div class="card-body text-center br-top-15">
-          <img src="{{ asset('images/lorekeeper/inventory.png') }}" alt="Items and {{ ucfirst(__('awards.awards')) }}" />
-          <h5 class="card-title">Items & Companions & {{ ucfirst(__('awards.awards')) }}</h5>
+          <img class="w-80" src="{{ asset('images/somnivores/site/inventory.png') }}" alt="Items and {{ ucfirst(__('awards.awards')) }}" />
+          <h5 class="card-title">Items & Pets & {{ ucfirst(__('awards.awards')) }}</h5>
         </div>
         <ul class="list-group list-group-flush br-bot-15">
           <li class="list-group-item">
@@ -58,9 +58,9 @@
           <li class="list-group-item">
             <a href="{{ url('world/items') }}">All Items</a>
           </li>
-          <li class="list-group-item">
+          {{-- <li class="list-group-item">
             <a href="{{ url('world/' . __('awards.award') . '-categories') }}">{{ ucfirst(__('awards.award')) }} Categories</a>
-          </li>
+          </li> --}}
           <li class="list-group-item">
             <a href="{{ url('world/' . __('awards.awards')) }}">All
               {{ ucfirst(__('awards.awards')) }}</a>
@@ -74,9 +74,9 @@
           <li class="list-group-item">
             <a href="{{ url('world/pets') }}">All Pets</a>
           </li>
-          <li class="list-group-item">
+          {{-- <li class="list-group-item">
             <a href="{{ url('world/maps') }}">Maps</a>
-          </li>
+          </li> --}}
           <li class="list-group-item">
             <a href="{{ url('world/recipes') }}">All Recipes</a>
           </li>

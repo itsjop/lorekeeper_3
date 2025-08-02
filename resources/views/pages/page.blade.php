@@ -19,7 +19,7 @@
     <div> Last updated {!! format_date($page->updated_at) !!}</div>
   </div> --}}
 
-    <div class="site-page-content parsed-text">
+    <div id="custom-page-parsed" class="site-page-content parsed-text">
       {!! $page->parsed_text !!}
     </div>
 
@@ -33,4 +33,9 @@
       </div>
     @endif
   </div>
+@endsection
+
+
+@section('sidebar')
+  @include('pages._sidebar_page')
 @endsection

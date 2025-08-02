@@ -13,10 +13,10 @@
   max-width: 100dvw;
   max-height: 100dvh;
   --app-gap-x: 20px;
-  --app-gap-y: 10px;
-  --sidebar-width: min(20vw, 230px);
+  --app-gap-y: 20px;
+  --sidebar-width: min(20vw, 260px);
   --sidebars-width: calc(var(--sidebar-width) * 2);
-  --gutter-width: 3vw;
+  --gutter-width: 1.5vw;
   --gutters-width: (2 * var(--gutter-width));
   --content-min-width: 600px;
   --content-max-width: 1600px;
@@ -25,25 +25,25 @@
   --app-width: calc(var(--content-width) + var(--app-gap-x) + var(--sidebars-width));
   #site-wrapper {
     display: grid;
-    grid-template:
-      'logo' 20vh
-      'nav' max-content
-      'char' max-content
-      'main' auto
-      'footer' max-content
-      / auto;
+    // grid-template:
+    //   'logo  ' 20vh
+    //   'nav   ' max-content
+    //   'char  ' max-content
+    //   'main  ' auto
+    //   'footer' max-content
+    //   / auto;
     gap: var(--app-gap-x) var(--app-gap-y);
     position: relative;
     max-width: calc(100dvw - var(--gutters-width));
     height: min-content;
-    &.has-sidebar {
-      grid-template:
-        '   .     logo    . ' clamp(150px, 15vh, 300px)
-        '   .     nav     . ' min-content
-        'sidebar  main  char' auto
-        'sidebar footer char' auto
-        / var(--sidebar-width) var(--content-width) var(--sidebar-width) ;
-    }
+    // &.has-sidebar {
+    grid-template:
+      '   .     logo    . ' clamp(150px, 15vh, 300px)
+      '   .     nav     . ' min-content
+      'sidebar  main  char' auto
+      'sidebar footer char' auto
+      / var(--sidebar-width) var(--content-width) var(--sidebar-width);
+    // }
     // left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
   }
   #site-wrapper {
@@ -53,7 +53,7 @@
       max-width: 100%;
       position: relative;
       border-radius: 15px;
-      // contain: layout;
+      container: main-container / inline-size;
       z-index: 1;
       .main-backdrop {
         z-index: 0;
@@ -65,7 +65,7 @@
       .content-wrapper {
         position: relative;
         z-index: 1;
-        padding: 1.5rem;
+        padding: 20px min(40px, 4vmin);
         border-radius: 15px;
         // background-image: radial-gradient(transparent 0%, transparent calc(100% - 60px), white 100%);
         box-shadow: 0 0 5px inset var(--white);
@@ -89,19 +89,19 @@
 }
 
 /* Desktop Only */
-/* @media (width >= 992px) {} */
+/* @media (width >= 1000px) {} */
 
 /* Tablet Down */
-@media (width <= 992px) {
+@media (width <= 1000px) {
   /* @media screen and (max-width: var(--ss-medium)) { */
   #app {
     // background-image: url('images/somnivores/reveriehalfres.webp');
     --m-app-padding: 10px;
     --m-app-width: calc(100vw - (var(--m-app-padding) * 2));
     --sidebar-width: 0;
-    --gutter-width: 1vw;
+    --gutter-width: 3vw;
     --content-min-width: 200px;
-    --content-max-width: calc(992px - var(--gutters-width));
+    --content-max-width: calc(1000px - var(--gutters-width));
     --ideal-content-width: calc(100dvw - 40px - var(--gutters-width));
     --app-gap-x: 00px;
     --app-gap-y: 10px;
@@ -111,8 +111,8 @@
       &.has-sidebar {
         gap: 10px;
         left: 0;
+        padding: 0;
         margin-bottom: 15px;
-        padding: 10px;
         grid-template:
           'logo' 25vmin
           'nav' max-content
@@ -124,6 +124,9 @@
     }
     #selected-character {
       display: none;
+      &.profile {
+        display: initial;
+      }
     }
   }
 }

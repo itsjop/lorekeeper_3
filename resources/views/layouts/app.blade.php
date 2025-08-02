@@ -26,7 +26,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
   <meta property="og:image"
-    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif"
+    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/somnivores/site/meta-image.png') }} @endif"
   >
   <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="og:description"
@@ -37,7 +37,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
   <meta property="twitter:image"
-    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/lorekeeper/meta-image.png') }} @endif"
+    content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/somnivores/site/meta-image.png') }} @endif"
   >
   <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="twitter:description"
@@ -52,7 +52,8 @@
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}"></script>
   <!-- Styles -->
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}
+  <link href="{{ asset('css/app.css') . '?v=' . filemtime(public_path('css/app.css')) }}" rel="stylesheet">
 
   <!------------------------------ EXTERNAL RESOURCES ----------------------------->
   <!-- Scripts -->
@@ -158,7 +159,8 @@
     {{ isset($componentName) ? 'data-component-path=' . $componentName : '' }}
     {{ isset($pageName) ? 'data-page=' . $pageName : '' }}
   >
-    <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}">
+    {{-- <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}"> --}}
+    <div id="site-wrapper" class="has-sidebar">
       <div class="site-background"></div>
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">
@@ -167,7 +169,7 @@
             media="(prefers-color-scheme: light) and (min-width: 1200px)"
           />
           <source srcset="{{ asset('css/images/somnivores/logo.webp') }}"
-            media="(prefers-color-scheme: light) and (min-width: 768px)"
+            media="(prefers-color-scheme: light) and (min-width: 800px)"
           />
           <img
             src="   {{ asset('css/images/somnivores/logo.webp') }}"
@@ -175,7 +177,7 @@
             media="(prefers-color-scheme: light)"
           />
           {{-- <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 1200px)"  />
-          <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 768px)"   />
+          <source srcset="{{ asset('css/images/somnivores/logo_raw_dark.webp') }}" media="(prefers-color-scheme: dark) and (min-width: 800px)"   />
           <img    src="   {{ asset('css/images/somnivores/logo_raw_dark.webp') }}" alt="Somnivores Logo"  media="(prefers-color-scheme: dark)"   /> --}}
         </picture>
       </a>
@@ -199,7 +201,7 @@
           </aside>
         </div>
         {{-- Featured Character --}}
-        <aside id="selected-character" class="featured-character-sidebar">
+        <aside id="selected-character" class="selected-character-sidebar">
           @include('pages._selected_char')
         </aside>
       @endif

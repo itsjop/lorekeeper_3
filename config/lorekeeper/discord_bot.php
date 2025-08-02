@@ -135,9 +135,9 @@ return [
         'font_file' => 'webfonts/RobotoCondensed-Regular.ttf',
 
         // Image file to insert as a "logo" into the corner of the rank card
-        // Should be relative to the site's public directory (e.g. 'images/lorekeeper/meta-image.png')
+        // Should be relative to the site's public directory (e.g. 'images/somnivores/site/meta-image.png')
         // Set to null to disable
-        'logo_insert' => 'images/lorekeeper/meta-image.png',
+        'logo_insert' => 'images/somnivores/site/meta-image.png',
     ],
 
     // these are roles for labels like FTO, Non-Owner, Owner, etc.

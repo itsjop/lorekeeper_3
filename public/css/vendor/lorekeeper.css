@@ -71,7 +71,6 @@
 .spoiler {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-bottom: 1rem;
   background: transparent;
   margin-top: 0px;
 }
@@ -164,24 +163,7 @@ tr.outflow {
   background-color: white;
 }
 
-/* INVENTORY *************************************************************************************/
 
-.inventory-category .inventory-body .inventory-item img {
-  max-width: 100%;
-}
-.inventory-stack-name,
-.inventory-character-name {
-  color: rgba(0, 0, 0, 0.7);
-}
-.inventory-stack-name:hover,
-.inventory-character-name:hover {
-  color: inherit;
-  text-decoration: none;
-}
-tr.accountbound {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 0.25rem;
-}
 
 /* CHARACTERS ************************************************************************************/
 
@@ -246,10 +228,6 @@ tr.accountbound {
 .user-characters .character-stack {
   cursor: pointer;
 }
-.user-items .inventory-item img,
-.user-characters .character-item img {
-  max-width: 100%;
-}
 .user-characters .character-item.disabled,
 .user-characters .character-item.disabled .character-stack {
   opacity: 0.5;
@@ -303,7 +281,7 @@ tr.accountbound {
   width: 100px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .fb-md-50 {
     flex-basis: 50%;
   }

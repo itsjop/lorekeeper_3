@@ -9,7 +9,7 @@
 
   <h1>Inventory </h1>
   {!! Form::open(['method' => 'GET', 'class' => '']) !!}
-  <fieldset class="form-inline justify-content-end inventory-search-pane">
+  <fieldset class="inventory-search-pane justify-content-end">
     <legend> Search </legend>
     <div class="sort btn-group">
       <button

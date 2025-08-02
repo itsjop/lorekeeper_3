@@ -50,14 +50,14 @@ class ReportManager extends Service {
             ]);
 
             // send webhook alert to staff
-            $response = (new DiscordManager)->handleWebhook(
-                'A '.($data['is_br'] ? 'Bug Report' : 'Report').' has been created by ['.$user->name.']('.$user->url.')',
-                'Report ID: #'.$report->id."\nError Type: ".$data['error'],
-                $user,
-                $report->url,
-                null,
-                true
-            );
+            // $response = (new DiscordManager)->handleWebhook(
+            //     'A '.($data['is_br'] ? 'Bug Report' : 'Report').' has been created by ['.$user->name.']('.$user->url.')',
+            //     'Report ID: #'.$report->id."\nError Type: ".$data['error'],
+            //     $user,
+            //     $report->url,
+            //     null,
+            //     true
+            // );
 
             if (is_array($response)) {
                 flash($response['error'])->error();

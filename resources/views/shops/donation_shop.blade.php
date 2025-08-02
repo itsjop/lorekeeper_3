@@ -12,7 +12,7 @@
   </h1>
 
   <div class="text-center">
-    <img src="{{ asset('images/lorekeeper/donation_shop.png') }}" style="max-width:100%" />
+    <img src="{{ asset('images/somnivores/site/donation_shop.png') }}" style="max-width:100%" />
     <p>{!! $text->parsed_text !!}</p>
 
     @if (Auth::check() && Auth::user()->donationShopCooldown)

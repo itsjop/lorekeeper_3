@@ -603,10 +603,6 @@ tr.accountbound {
 .user-characters .character-stack {
   cursor: pointer;
 }
-.user-items .inventory-item img,
-.user-characters .character-item img {
-  max-width: 100%;
-}
 .user-characters .character-item.disabled,
 .user-characters .character-item.disabled .character-stack {
   opacity: 0.5;

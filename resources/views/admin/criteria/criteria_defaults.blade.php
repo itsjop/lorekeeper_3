@@ -34,7 +34,7 @@
               Criteria Within:</h4>
             <ul>
               @foreach ($default->criteria as $criterion)
-                <li>{{ $criterion->criterion->name }}</li>
+                <li>{{ safe($criterion?->criterion?->name) }}</li>
               @endforeach
             </ul>
           </div>
