@@ -39,7 +39,7 @@
                   <a class="nav-link active" data-bs-toggle="tab" role="tab">Info</a>
                 </li>
               </ul>
-              <h6 class="text-center text-uppercase"><b>Relationship Status: {!! $link->type !!}</b></h6>
+              <h6 class="text-center text-uppercase m-0"><b>Relationship Status: {!! $link->type !!}</b></h6>
             </div>
           </div>
 

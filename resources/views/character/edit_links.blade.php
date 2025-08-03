@@ -36,7 +36,7 @@
   </div>
 
   <div class="text-right mb-3">
-    {!! Form::submit('Request Links', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('Request Connections', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

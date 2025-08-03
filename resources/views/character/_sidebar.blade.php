@@ -77,7 +77,7 @@
           <a href="{{ $character->url . '/links/edit' }}"
             class="{{ set_active('character/' . $character->slug . '/links/edit') }}"
           >
-            Request Link
+            Request Connection
           </a>
         </li>
 
