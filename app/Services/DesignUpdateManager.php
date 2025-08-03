@@ -50,12 +50,7 @@ class DesignUpdateManager extends Service {
     DB::beginTransaction();
 
     try {
-      if ($isImage) {
-        $image = $image;
-      } else {
-        $image = $character->image;
-      }
-
+      $image = $character->image;
       if ($character->user_id != $user->id) {
         throw new \Exception('You do not own this character.');
       }

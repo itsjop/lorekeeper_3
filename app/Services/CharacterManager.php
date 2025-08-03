@@ -2115,7 +2115,7 @@ class CharacterManager extends Service {
   public function createDesignUpdateRequest($character, $user, $image = null, $isImage = false) {
     DB::beginTransaction();
     try {
-      if ($isImage) {
+      if (isset($isImage) && $isImage) {
         $image = $image;
       } else {
         $image = $character->image;
