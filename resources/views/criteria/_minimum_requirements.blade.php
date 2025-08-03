@@ -2,8 +2,8 @@
   <p>{{ $criterion->summary }}{!! $criterion->is_guide_active ? ' - <a href="' . url('/criteria/guide/' . $criterion->id) . '">Go To Guide</a>' : '' !!}</p>
 
   @php $finalValues = $values ?? $minRequirements @endphp
-  <div id="calc-{{ isset($id) ? $id : $criterion->id }}" class="ml-2 steps">
-    <h5>
+  <div id="calc-{{ isset($id) ? $id : $criterion->id }}" class="ml-2 grid gap-2 grid-3-col steps">
+    <h5 class="grid-span">
       {{ isset($title) ? $title : 'Minimum Requirements' }}
       <span class="mr-2 text-secondary"> - will reward <span class="reward">{!! isset($criterion_currency)
           ? \App\Models\Currency\Currency::find($criterion_currency)->display($criterion->calculateReward($finalValues)) ?? 0
@@ -37,8 +37,11 @@
     @endif
 
     @foreach ($criterion->steps->where('is_active', 1) as $step)
-      <div class="form-group flex ai-center gap-1">
-        <span>{!! Form::label($step->name, $step->name, ['class' => 'm-0']) !!} {!! $step->summary ? add_help($step->summary) : '' !!}</span>
+      <div class="form-group flex gap-1 ai-center jc-between m-0">
+        <div class="flex jc-start">
+          {!! $step->summary ? add_help($step->summary) : '' !!}
+          {!! Form::label($step->name, $step->name, ['class' => 'm-0']) !!}
+        </div>
         @if ($step->type === 'input')
           {!! Form::number(
               'criterion[' . (isset($id) ? $id : $criterion->id) . '][' . $step->id . ']',

@@ -205,11 +205,6 @@ class Submission extends Model {
   //  * @return array
   //  */
   // public function getDataAttribute() {
-  //   // dd(
-  //   //   gettype($this->attributes['data']),
-  //   //   $this->attributes['data'],
-  //   //   json_decode($this->attributes['data'])
-  //   // );
   //   return
   //     count($this->attributes)
   //     ? (gettype($this->attributes['data']) == 'string'

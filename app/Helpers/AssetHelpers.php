@@ -260,14 +260,16 @@ function getDataReadyAssets($array, $isCharacter = false) {
  */
 function parseAssetData($array) {
   $assets = createAssetsArray();
-  foreach ($array as $key => $contents) {
-    $model = getAssetModelString($key);
-    if ($model) {
-      foreach ($contents as $id => $quantity) {
-        $assets[$key][$id] = [
-          'asset'    => $model::find($id),
-          'quantity' => $quantity,
-        ];
+  if (is_array($array) ? count($array) : 0) {
+    foreach ($array as $key => $contents) {
+      $model = getAssetModelString($key);
+      if ($model) {
+        foreach ($contents as $id => $quantity) {
+          $assets[$key][$id] = [
+            'asset'    => $model::find($id),
+            'quantity' => $quantity,
+          ];
+        }
       }
     }
   }

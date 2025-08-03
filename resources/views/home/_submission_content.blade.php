@@ -189,7 +189,7 @@
                         @endforeach
                       @endforeach
 
-                  {{--
+                      {{--
                     If you want to "Categorize" the rewards by type, uncomment this and comment or remove the above @foreach.
 
                     @foreach (parseAssetData($character->data) as $key => $type)
