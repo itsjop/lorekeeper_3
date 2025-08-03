@@ -753,14 +753,15 @@ body {
   background-color: var(--active-clr_800);
 }
 
-/* prettier-ignore */
-.app h1, .app .h1 {
+.app h1,
+.app .h1 {
   font-family: "Sour Gummy", sans-serif, system-ui;
   font-size: 2rem;
   font-weight: 600;
   color: var(--purple-clr_800);
 }
-.app h2, .app .h2 {
+.app h2,
+.app .h2 {
   font-family: "Itim", sans-serif, system-ui;
   font-weight: 800;
   text-transform: lowercase;
@@ -768,25 +769,29 @@ body {
   font-size: 1.6rem;
   font-style: strong;
 }
-.app h3, .app .h3 {
+.app h3,
+.app .h3 {
   font-family: "Itim", sans-serif, system-ui;
   font-weight: 700;
   color: var(--purple-clr_800);
   font-size: 1.5rem;
 }
-.app h4, .app .h4 {
+.app h4,
+.app .h4 {
   font-family: "Sour Gummy", sans-serif, system-ui;
   font-weight: 700;
   color: var(--purple-clr_800);
   font-size: 1.4rem;
 }
-.app h5, .app .h5 {
+.app h5,
+.app .h5 {
   font-family: "Itim", sans-serif, system-ui;
   font-weight: 700;
   color: var(--purple-clr_800);
   font-size: 1.3rem;
 }
-.app h6, .app .h6 {
+.app h6,
+.app .h6 {
   font-family: "Baloo 2", sans-serif, system-ui;
   font-weight: 700;
   color: var(--purple-clr_800);
@@ -795,15 +800,19 @@ body {
 .app ul {
   padding: 0;
 }
-.app a, .app .a {
+.app a,
+.app .a {
   color: var(--purple-clr_600);
   text-decoration: none;
 }
-.app a:hover, .app a:active, .app .a:hover, .app .a:active {
+.app a:hover, .app a:active,
+.app .a:hover,
+.app .a:active {
   color: var(--teal-clr_500);
   text-decoration: none;
 }
-.app p, .app li {
+.app p,
+.app li {
   color: var(--purple-clr_900);
   font-weight: 500;
 }
@@ -824,7 +833,11 @@ body {
   font-family: "Itim", sans-serif;
   transform: translateY(-10%);
 }
-.app textarea, .app select, .app input, .app .selectize-control, .app .selectize-input {
+.app textarea,
+.app select,
+.app input,
+.app .selectize-control,
+.app .selectize-input {
   border: 1px solid var(--white);
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   background-color: var(--active-clr_25);
@@ -843,7 +856,8 @@ body {
 .app input {
   border-radius: 10px;
 }
-.app .selectize-control, .app .selectize-input {
+.app .selectize-control,
+.app .selectize-input {
   border-radius: 10px;
 }
 .app .alert {
@@ -863,7 +877,8 @@ body {
   background: var(--purple-clr_100);
   border: none;
 }
-.app .small, .app small {
+.app .small,
+.app small {
   font-weight: 600;
   color: #40258b;
 }
@@ -873,16 +888,20 @@ body {
 .app .help-icon:hover, .app .help-icon:active {
   color: var(--teal-clr_400);
 }
-.app .badge-success, .app .badge-danger {
+.app .badge-success,
+.app .badge-danger {
   color: rgba(255, 255, 255, 0.724);
 }
-.app .badge-success:hover, .app .badge-success:active, .app .badge-danger:hover, .app .badge-danger:active {
+.app .badge-success:hover, .app .badge-success:active,
+.app .badge-danger:hover,
+.app .badge-danger:active {
   color: white;
 }
 .app legend {
   color: var(--clr_raw_purple-800);
 }
-.app .card-basic, .app .card-full {
+.app .card-basic,
+.app .card-full {
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   background: rgba(250, 246, 255, 0.514);
   margin: 0 auto;
@@ -892,21 +911,22 @@ body {
   max-width: 800px;
   padding: 30px;
 }
-.app .card-basic:not(:has(* + h1:first-of-type)), .app .card-full:not(:has(* + h1:first-of-type)) {
-  padding-top: 15px;
-}
-.app .card-basic ul, .app .card-full ul {
+.app .card-basic ul,
+.app .card-full ul {
   padding-left: 40px;
 }
-.app .card-basic ul li, .app .card-full ul li {
+.app .card-basic ul li,
+.app .card-full ul li {
   margin-bottom: 0.5rem;
 }
-.app .card-basic ul li::marker, .app .card-full ul li::marker {
+.app .card-basic ul li::marker,
+.app .card-full ul li::marker {
   content: "✦  ";
   font-size: 1rem;
   color: #40258b;
 }
-.app .card-basic .card-header, .app .card-full .card-header {
+.app .card-basic .card-header,
+.app .card-full .card-header {
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
@@ -919,7 +939,8 @@ body {
   font-family: "Sour Gummy", sans-serif, system-ui;
   font-size: 1.8rem;
 }
-.app .card-basic .card-left-image, .app .card-full .card-left-image {
+.app .card-basic .card-left-image,
+.app .card-full .card-left-image {
   display: grid;
   grid-template-columns: 1fr 3.5fr;
   gap: 1rem 15px;
@@ -3808,15 +3829,126 @@ because the nesting selector cannot represent pseudo-elements. */
 #app .lore img,
 #app #custom-page-parsed img {
   border-radius: 15px;
+  margin-bottom: 1em;
 }
 #app .lore ul,
 #app #custom-page-parsed ul {
   margin-bottom: 0;
   text-align: start;
 }
+#app .lore h1.top,
+#app #custom-page-parsed h1.top {
+  margin-top: -13px;
+}
+#app .lore .card-float,
+#app #custom-page-parsed .card-float {
+  background: none;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  border-radius: 15px;
+  max-width: 800px;
+}
+#app .lore .card-float ul,
+#app #custom-page-parsed .card-float ul {
+  padding-left: 40px;
+}
+#app .lore .card-float ul li,
+#app #custom-page-parsed .card-float ul li {
+  margin-bottom: 0.5rem;
+}
+#app .lore .card-float ul li::marker,
+#app #custom-page-parsed .card-float ul li::marker {
+  content: "✦  ";
+  font-size: 1rem;
+  color: #40258b;
+}
+#app .lore .speech-bubble,
+#app #custom-page-parsed .speech-bubble {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 1rem 15px;
+}
+#app .lore .speech-avatar,
+#app #custom-page-parsed .speech-avatar {
+  margin-top: 10px;
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+}
+#app .lore .speech-name,
+#app #custom-page-parsed .speech-name {
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+  border-radius: 10px;
+  padding: 5px 8px;
+  width: -moz-max-content;
+  width: max-content;
+  transition: 0.2s ease;
+  margin: 5px;
+}
+#app .lore .speech-name.gala,
+#app #custom-page-parsed .speech-name.gala {
+  background-image: linear-gradient(45deg, rgb(74, 183, 255), rgb(44, 98, 234));
+}
+#app .lore .speech-name.millie,
+#app #custom-page-parsed .speech-name.millie {
+  background-image: linear-gradient(45deg, rgb(120, 199, 51), rgb(21, 135, 38));
+}
+#app .lore .speech-name.bunny,
+#app #custom-page-parsed .speech-name.bunny {
+  background-image: linear-gradient(45deg, rgb(98, 219, 68), rgb(32, 94, 252));
+}
+#app .lore .speech-name.wysp,
+#app #custom-page-parsed .speech-name.wysp {
+  background-image: linear-gradient(45deg, rgb(150, 161, 255), rgb(128, 57, 235));
+}
+#app .lore .speech-name.caspian,
+#app #custom-page-parsed .speech-name.caspian {
+  background-image: linear-gradient(45deg, rgb(199, 51, 98), rgb(13, 51, 147));
+}
+#app .lore .speech-name.leo,
+#app #custom-page-parsed .speech-name.leo {
+  background-image: linear-gradient(45deg, rgb(221, 160, 75), rgb(220, 48, 74));
+}
+#app .lore .speech-name.cirrus,
+#app #custom-page-parsed .speech-name.cirrus {
+  background-image: linear-gradient(45deg, rgb(205, 130, 236), rgb(20, 55, 228));
+}
+#app .lore .speech-name.esmerelda,
+#app #custom-page-parsed .speech-name.esmerelda {
+  background-image: linear-gradient(45deg, rgb(159, 182, 172), rgb(104, 108, 151));
+}
+#app .lore .speech-name a,
+#app #custom-page-parsed .speech-name a {
+  margin-bottom: 0;
+  color: rgb(255, 255, 255);
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: "Itim";
+}
+#app .lore .speech-name:hover,
+#app #custom-page-parsed .speech-name:hover {
+  scale: 1.1;
+}
+#app .lore .speech-text,
+#app #custom-page-parsed .speech-text {
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+  background: rgba(250, 246, 255, 0.514);
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 15px;
+  padding: 20px;
+}
+#app .lore .speech-text p,
+#app #custom-page-parsed .speech-text p {
+  text-align: left;
+}
+#app .lore .last,
+#app #custom-page-parsed .last {
+  margin-bottom: 0;
+}
 #app .lore .card,
 #app #custom-page-parsed .card {
-  margin: 15px 250px 25px;
+  margin: 15px 250px 10px 25px;
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   background: rgba(255, 255, 255, 0.266);
   border-radius: 15px;
@@ -3865,6 +3997,10 @@ because the nesting selector cannot represent pseudo-elements. */
   border: none;
   box-shadow: none;
 }
+#app .lore .card img,
+#app #custom-page-parsed .card img {
+  margin-bottom: 1em;
+}
 #app .lore .card p,
 #app #custom-page-parsed .card p {
   margin: 0;
@@ -3872,6 +4008,11 @@ because the nesting selector cannot represent pseudo-elements. */
 #app .lore .card br,
 #app #custom-page-parsed .card br {
   margin-bottom: 15px;
+}
+#app .lore .card-basic, #app .lore .mini-card,
+#app #custom-page-parsed .card-basic,
+#app #custom-page-parsed .mini-card {
+  padding-bottom: 1em;
 }
 #app .lore .spoiler,
 #app #custom-page-parsed .spoiler {
@@ -3883,7 +4024,7 @@ because the nesting selector cannot represent pseudo-elements. */
   font-weight: 500;
   background-image: linear-gradient(to left, rgba(101, 199, 255, 0.647) 0%, rgba(90, 37, 197, 0.621) 50%, rgba(101, 199, 255, 0.647) 100%);
   text-align: center;
-  padding: 8px;
+  padding: 7px;
   font-size: 1.05rem;
   border-radius: 10px;
   transition: 0.3s;
