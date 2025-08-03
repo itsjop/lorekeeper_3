@@ -1449,7 +1449,6 @@ body {
   }
 }
 .steps input[type=number] {
-  max-width: 80px;
   text-align: center;
 }
 

@@ -37,7 +37,7 @@
     @endif
 
     @foreach ($criterion->steps->where('is_active', 1) as $step)
-      <div class="form-group flex gap-1 ai-center jc-between m-0">
+      <div class="form-group grid ai-center m-0">
         <div class="flex jc-start">
           {!! $step->summary ? add_help($step->summary) : '' !!}
           {!! Form::label($step->name, $step->name, ['class' => 'm-0']) !!}
@@ -71,7 +71,7 @@
               $finalValues[$step->id] ?? 0,
               [
                   'class' => 'form-check-input',
-                  'data-bs-toggle' => 'toggle',
+                  'data-toggle' => 'toggle',
                   'disabled' => isset($limitByMinReq) && isset($minRequirements[$step->id]) ? 'disabled' : null
               ]
           ) !!}

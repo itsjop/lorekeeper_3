@@ -1,5 +1,6 @@
 # Styling Issues:
 - [~] masterlist redo
+- [ ] duplicated characters on prompt submission
 - [ ] set up username parking
   - [ ] 'jop', 'wysp', 'reverie', 'somnivores', 'somnivores_staff', all of the NPC names
 - [ ] gallery preview pass real blurred image instead of of lorekeeper book
@@ -13,7 +14,7 @@
 - [ ] @supports for navbar container query? not even sure how to test this one
 - [ ] sitewide image alt tags
 - [ ] redo mobile sidebar
-- [ ] app.css `filemtime()` https://github.com/lk-arpg/lorekeeper/blob/release/v3.0.0/resources/views/layouts/app.blade.php#L63
+- [?] app.css `filemtime()` https://github.com/lk-arpg/lorekeeper/blob/release/v3.0.0/resources/views/layouts/app.blade.php#L63
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)
