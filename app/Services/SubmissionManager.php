@@ -132,33 +132,8 @@ class SubmissionManager extends Service {
         ] + (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ['gallery_submission_id' => $data['gallery_submission_id'] ?? null] : [])),
       ]);
 
-      // Retrieve all currency IDs for characters
-      $currencyIds = [];
-      if (isset($data['character_currency_id'])) {
-        foreach ($data['character_currency_id'] as $c) {
-          foreach ($c as $currencyId) $currencyIds[] = $currencyId;
-        }
-      }
-      array_unique($currencyIds);
-      $currencies = Currency::whereIn('id', $currencyIds)->where('is_character_owned', 1)->get()->keyBy('id');
-
-      // Attach characters
-      foreach ($characters as $c) {
-        // Users might not pass in clean arrays (may contain redundant data) so we need to clean that up
-        $assets = $this->processRewards($data + ['character_id' => $c->id, 'currencies' => $currencies], true);
-
-        // Now we have a clean set of assets (redundant data is gone, duplicate entries are merged)
-        // so we can attach the character to the submission
-        SubmissionCharacter::create([
-          'character_id' => $c->id,
-          'submission_id' => $submission->id,
-          'data' => json_encode(getDataReadyAssets($assets))
-        ]);
-      }
       // Set characters that have been attached.
       $this->createCharacterAttachments($submission, $data);
-
-
       return $this->commitReturn($submission);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
@@ -894,6 +869,7 @@ class SubmissionManager extends Service {
     // First, check if the characters are accessible to begin with.
     if (isset($data['slug'])) {
       $characters = Character::myo(0)->visible()->whereIn('slug', $data['slug'])->get();
+      // Pops off null characters in the event there's an extra
       if ($data["slug"][array_key_last($data["slug"])] == null) array_pop($data['slug']);
       if (count($characters) != count($data['slug'])) {
         throw new \Exception('One or more of the selected characters do not exist.');
@@ -947,7 +923,7 @@ class SubmissionManager extends Service {
       SubmissionCharacter::create([
         'character_id'  => $c->id,
         'submission_id' => $submission->id,
-        'data'          => getDataReadyAssets($assets),
+        'data'          => json_encode(getDataReadyAssets($assets)),
       ]);
     }
 

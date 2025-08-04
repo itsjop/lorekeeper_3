@@ -154,42 +154,43 @@
         Some characters have been deleted since this submission was created.
       </div>
     @endif
-    @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
-      <div class="submission-character-row mb-2">
-        <div class="submission-character-thumbnail">
-          <a href="{{ $character->character->url }}">
-            <img
-              src="{{ $character->character->image->thumbnailUrl }}"
-              class="img-thumbnail"
-              alt="Thumbnail for {{ $character->character->fullName }}"
-            /></a>
-        </div>
-        <div class="submission-character-info card ml-2">
-          <div class="card-body">
-            <div class="submission-character-info-content">
-              <h3 class="mb-2 submission-character-info-header">
-                <a href="{{ $character->character->url }}">{{ $character->character->fullName }}</a>
-              </h3>
-              <div class="submission-character-info-body">
-                @if (array_filter(parseAssetData($character->data)))
-                  <table class="table table-sm mb-0">
-                    <thead class="thead-light">
-                      <tr>
-                        <th width="70%">Reward</th>
-                        <th width="30%">Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach (parseAssetData($character->data) as $key => $type)
-                        @foreach ($type as $asset)
-                          <tr>
-                            <td>{!! $asset['asset']->displayName !!} ({!! ucfirst($key) !!})</td>
-                            <td>{{ $asset['quantity'] }}</td>
-                          </tr>
+    @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()))
+      @foreach ($submission->characters()->whereRelation('character', 'deleted_at', null)->get() as $character)
+        <div class="submission-character-row mb-2">
+          <div class="submission-character-thumbnail">
+            <a href="{{ $character->character->url }}">
+              <img
+                src="{{ $character->character->image->thumbnailUrl }}"
+                class="img-thumbnail"
+                alt="Thumbnail for {{ $character->character->fullName }}"
+              /></a>
+          </div>
+          <div class="submission-character-info card ml-2">
+            <div class="card-body">
+              <div class="submission-character-info-content">
+                <h3 class="mb-2 submission-character-info-header">
+                  <a href="{{ $character->character->url }}">{{ $character->character->fullName }}</a>
+                </h3>
+                <div class="submission-character-info-body">
+                  @if (array_filter(parseAssetData($character->data)))
+                    <table class="table table-sm mb-0">
+                      <thead class="thead-light">
+                        <tr>
+                          <th width="70%">Reward</th>
+                          <th width="30%">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach (parseAssetData($character->data) as $key => $type)
+                          @foreach ($type as $asset)
+                            <tr>
+                              <td>{!! $asset['asset']->displayName !!} ({!! ucfirst($key) !!})</td>
+                              <td>{{ $asset['quantity'] }}</td>
+                            </tr>
+                          @endforeach
                         @endforeach
-                      @endforeach
 
-                      {{--
+                        {{--
                     If you want to "Categorize" the rewards by type, uncomment this and comment or remove the above @foreach.
 
                     @foreach (parseAssetData($character->data) as $key => $type)
@@ -204,19 +205,22 @@
                         @endif
                     @endforeach
                     --}}
-                    </tbody>
-                  </table>
-                @else
-                  <p>
-                    No rewards set.
-                  </p>
-                @endif
+                      </tbody>
+                    </table>
+                  @else
+                    <p>
+                      No rewards set.
+                    </p>
+                  @endif
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    @endforeach
+      @endforeach
+    @else
+      <div class="">No characters were included with this submission.</div>
+    @endif
   </div>
 </div>
 
