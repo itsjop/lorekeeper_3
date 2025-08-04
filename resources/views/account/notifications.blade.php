@@ -11,7 +11,11 @@
 
   <div class="text-right mb-3">
     {!! Form::open(['url' => 'notifications/clear', 'id' => 'clearForm']) !!}
-    <a href="#" class="btn btn-primary" id="clearButton">Clear All</a>
+    <a
+      href="#"
+      class="btn btn-primary"
+      id="clearButton"
+    > Clear All </a>
     {!! Form::close() !!}
   </div>
   {!! $notifications->render() !!}
@@ -28,9 +32,15 @@
             {!! Form::submit('x clear', ['class' => 'badge btn-primary', 'style' => 'display:inline; border: 0;']) !!}
             {!! Form::close() !!}
           </span>
-          <a class="card-title h5 collapse-title mb-2" href="#{{ str_replace(' ', '_', config('lorekeeper.notifications.' . $type . '.name')) }}" data-bs-toggle="collapse">{{ config('lorekeeper.notifications.' . $type . '.name') }}
+          <a
+            class="card-title h5 collapse-title mb-2"
+            href="#{{ str_replace(' ', '_', config('lorekeeper.notifications.' . $type . '.name')) }}"
+            data-bs-toggle="collapse"
+          >{{ config('lorekeeper.notifications.' . $type . '.name') }}
           </a>
-          <div id="{{ str_replace(' ', '_', config('lorekeeper.notifications.' . $type . '.name')) }}" class="collapse {{ $notifications->where('notification_type_id', $type)->count() < 5 ? 'show' : '' }} mt-2">
+          <div id="{{ str_replace(' ', '_', config('lorekeeper.notifications.' . $type . '.name')) }}"
+            class="collapse {{ $notifications->where('notification_type_id', $type)->count() < 5 ? 'show' : '' }} mt-2"
+          >
             <table class="table notifications-table">
               <thead>
                 <tr>
@@ -45,7 +55,11 @@
                     <td>{!! $notification->message !!}</td>
                     <td>{!! format_date($notification->created_at) !!}</td>
                     <td class="text-right">
-                      <a href="#" data-id="{{ $notification->id }}" class="clear-notification">
+                      <a
+                        href="#"
+                        data-id="{{ $notification->id }}"
+                        class="clear-notification"
+                      >
                         <i class="fas fa-times" aria-hidden="true"></i></a>
                     </td>
                   </tr>
@@ -63,24 +77,44 @@
 
   {!! $notifications->render() !!}
 
-  <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+  <dialog
+    class="modal fade"
+    id="confirmationModal"
+    tabindex="-1"
+    role="dialog"
+  >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <span class="modal-title h5 mb-0">Clear All Notifications</span>
-          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          <button
+            type="button"
+            class="close"
+            data-bs-dismiss="modal"
+          >&times;</button>
         </div>
         <div class="modal-body">
           <p>This will clear <strong>all</strong> of your notifications. Are you certain you wish to do so?</p>
           <div class="text-right">
-            <a href="#" id="clearSubmit" class="btn btn-primary">Clear All</a>
+            <a
+              href="#"
+              id="clearSubmit"
+              class="btn btn-primary"
+            >Clear All</a>
           </div>
         </div>
       </div>
     </div>
   </dialog>
 @endsection
+
 @section('scripts')
+  @foreach ($notifications->pluck('notification_type_id')->unique() as $type)
+    @if (config('lorekeeper.notifications.' . $type . '.view'))
+      @include('account.notifications._' . config('lorekeeper.notifications.' . $type . '.view'))
+    @endif
+  @endforeach
+
   @parent
   <script>
     $(document).ready(function() {

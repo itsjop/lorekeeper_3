@@ -102,7 +102,8 @@ class SubmissionController extends Controller {
     $promptCriteria = $prompt ? PromptCriterion::where('prompt_id', $prompt)->pluck('criterion_id')->toArray() : null;
 
     if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts')) {
-      $collaboratorIds = GalleryCollaborator::where('user_id', Auth::user()->id)->where('has_approved', 1)->pluck('gallery_submission_id')->toArray();
+      // $collaboratorIds = GalleryCollaborator::where('user_id', Auth::user()->id)->where('has_approved', 1)->pluck('gallery_submission_id')->toArray();
+      $collaboratorIds = GalleryCollaborator::where('user_id', Auth::user()->id)->where('has_approved', 1)->where('type', 'Collab')->pluck('gallery_submission_id')->toArray();
 
       $gallerySubmissions = GallerySubmission::where('is_visible', true)->where('user_id', Auth::user()->id)->orWhereIn('id', $collaboratorIds)->orderBy('id', 'DESC')->get()->pluck('title', 'id');
 
