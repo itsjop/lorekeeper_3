@@ -261,6 +261,9 @@
             <div class="dt-nav-group" aria-labelledby="submitDropdown">
               <a class="dt-nav-item" href="{{ url('submissions/new') }}">
                 <i class="fas fa-paintbrush"></i> Submit Prompt </a>
+              <a class="dt-nav-item" href="{{ url('/submissions') }}">
+                <i class="fas fa-file"></i> My Submissions </a>
+              <hr>
               <a class="dt-nav-item" href="{{ url('claims/new') }}">
                 <i class="fas fa-envelope"></i> Submit Claim </a>
               <a class="dt-nav-item" href="{{ url('reports/new') }}">
@@ -350,7 +353,7 @@
             {!! $currency->display($currency->quantity) !!}
           @break
         @endforeach
-        @else
+      @else
         - - - -
       @endif
     </div>

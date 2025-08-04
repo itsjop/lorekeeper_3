@@ -167,6 +167,14 @@ class SubmissionController extends Controller {
     $count['Week'] = Submission::submitted($id, Auth::user()->id)->where('created_at', '>=', now()->startOfWeek())->count();
     $count['Month'] = Submission::submitted($id, Auth::user()->id)->where('created_at', '>=', now()->startOfMonth())->count();
     $count['Year'] = Submission::submitted($id, Auth::user()->id)->where('created_at', '>=', now()->startOfYear())->count();
+    // In the event it needs $submission->id instead
+    // $count['all'] = Submission::submitted($submission->id, Auth::user()->id)->count();
+    // $count['Hour'] = Submission::submitted($submission->id, Auth::user()->id)->where('created_at', '>=', now()->startOfHour())->count();
+    // $count['Day'] = Submission::submitted($submission->id, Auth::user()->id)->where('created_at', '>=', now()->startOfDay())->count();
+    // $count['Week'] = Submission::submitted($submission->id, Auth::user()->id)->where('created_at', '>=', now()->startOfWeek())->count();
+    // $count['Month'] = Submission::submitted($submission->id, Auth::user()->id)->where('created_at', '>=', now()->startOfMonth())->count();
+    // $count['Year'] = Submission::submitted($submission->id, Auth::user()->id)->where('created_at', '>=', now()->startOfYear())->count();
+
 
     return view('home.edit_submission', [
       'closed'              => $closed,
