@@ -25,18 +25,34 @@
 
   @if ($closed)
     <div class="alert alert-danger">
-      The {{ $isClaim ? 'claim' : 'submission' }} queue is currently closed. You cannot edit {{ $isClaim ? 'claim' : 'submission' }} drafts at this time.
+      The {{ $isClaim ? 'claim' : 'submission' }} queue is currently closed. You cannot edit {{ $isClaim ? 'claim' : 'submission' }}
+      drafts at this time.
     </div>
   @else
-    @include('home._submission_form', ['submission' => $submission, 'criteria' => $isClaim ? null : $criteria, 'isClaim' => $isClaim, 'userGallerySubmissions' => $userGallerySubmissions])
+    @include('home._submission_form', [
+        'submission' => $submission,
+        'criteria' => $isClaim ? null : $criteria,
+        'isClaim' => $isClaim,
+        'userGallerySubmissions' => $userGallerySubmissions,
+        'count' => safe($count)
+    ])
 
-    <dialog class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
+    <dialog
+      class="modal fade"
+      id="confirmationModal"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
 
         <div class="modal-content hide" id="confirmContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Confirm {{ $isClaim ? 'Claim' : 'Submission' }}</span>
-            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
             <p>
@@ -53,7 +69,11 @@
               </div>
             @endif
             <div class="text-right">
-              <a href="#" id="confirmSubmit" class="btn btn-primary">Confirm</a>
+              <a
+                href="#"
+                id="confirmSubmit"
+                class="btn btn-primary"
+              >Confirm</a>
             </div>
           </div>
         </div>
@@ -61,7 +81,11 @@
         <div class="modal-content hide" id="draftContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Save Draft</span>
-            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
             <p>
@@ -69,7 +93,11 @@
               Items and other attachments will be held, similar to in design update drafts.
             </p>
             <div class="text-right">
-              <a href="#" id="draftSubmit" class="btn btn-success">Save Draft</a>
+              <a
+                href="#"
+                id="draftSubmit"
+                class="btn btn-success"
+              >Save Draft</a>
             </div>
           </div>
         </div>
@@ -77,14 +105,23 @@
         <div class="modal-content hide" id="cancelContent">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">Delete Draft</span>
-            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
             <p>
-              This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} draft and return any attachments to your inventories.
+              This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} draft and return any attachments to your
+              inventories.
             </p>
             <div class="text-right">
-              <a href="#" id="cancelSubmit" class="btn btn-danger">Delete Draft</a>
+              <a
+                href="#"
+                id="cancelSubmit"
+                class="btn btn-danger"
+              >Delete Draft</a>
             </div>
           </div>
         </div>
@@ -148,9 +185,12 @@
 
         $confirmSubmit.on('click', function(e) {
           e.preventDefault();
-          let $confirm = $('#requirementsWarning').find('#confirm').length ? $('#requirementsWarning').find('#confirm').is(':checked') : true;
+          let $confirm = $('#requirementsWarning').find('#confirm').length ? $('#requirementsWarning').find('#confirm').is(
+            ':checked') : true;
           if ("{{ !$isClaim }}" && !$confirm) {
-            alert('You must confirm that you understand that you will not be able to edit this submission after it has been made.');
+            alert(
+              'You must confirm that you understand that you will not be able to edit this submission after it has been made.'
+            );
             return;
           }
           $submissionForm.attr('action', '{{ url()->current() }}/submit');

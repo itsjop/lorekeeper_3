@@ -96,7 +96,7 @@
 
 @if ($submission->prompt_id)
   <div class="mb-3">
-    @include('home._prompt', ['prompt' => $submission->prompt, 'staffView' => false])
+    @include('home._prompt', ['prompt' => $submission->prompt, 'staffView' => false, 'count', safe($count)])
   </div>
 @endif
 
