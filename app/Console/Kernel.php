@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel {
     $schedule->command('check-sales')->everyMinute();
     $schedule->command('update-extension-tracker')->daily();
     $schedule->command('update-staff-reward-actions')->daily();
-    $schedule->command('change-feature')->weeklyOn(1, '00:00');
+    // $schedule->command('change-feature')->weeklyOn(1, '00:00');
     $schedule->command('clean-donations')->everyMinute();
     $schedule->command('update-timed-daily')->everyMinute();
     $schedule->command('generate-rank-card-back')->daily();
