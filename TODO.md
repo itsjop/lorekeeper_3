@@ -2,7 +2,7 @@
 - [~] masterlist redo
 - [ ] duplicated characters on prompt submission
 - [ ] set up username parking
-  - [ ] 'jop', 'wysp', 'reverie', 'somnivores', 'somnivores_staff', all of the NPC names
+      - [ ] 'jop', 'wysp', 'reverie', 'somnivores', 'somnivores_staff', all of the NPC names
 - [ ] gallery preview pass real blurred image instead of of lorekeeper book
 - [ ] No 18+ popup banner
 - [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
@@ -20,6 +20,8 @@
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)
 - [ ] wheels on the wheel-dailies don't show up properly even after adding the necessary js files
 - [ ] featured character should only pull from active participants
+- [ ] secondary testing domain (https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-nginx-on-ubuntu-14-04)
+      - also `php artisan down` for maintenance mode
 
 # To Re-enable
 - [ ] Custom Profile Header Image

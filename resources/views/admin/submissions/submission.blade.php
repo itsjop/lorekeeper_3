@@ -20,13 +20,12 @@
   @endif
 
   @if ($submission->status == 'Pending')
+
     <h1>
       {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
       <span
-        class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}"
-      >
-        {{ $submission->status }}
-      </span>
+        class="float-right badge badge-{{ $submission->status == 'Pending' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}"
+      >{{ $submission->status }}</span>
     </h1>
 
     <div class="mb-1">
@@ -58,16 +57,15 @@
             <div class="col"><strong>Past Month</strong></div>
             <div class="col"><strong>Past Year</strong></div>
           </div>
-          {{-- <div class="row text-center">
+          <div class="row text-center">
             <div class="col">{{ $count['all'] }}</div>
             <div class="col">{{ $count['Hour'] }}</div>
             <div class="col">{{ $count['Day'] }}</div>
             <div class="col">{{ $count['Week'] }}</div>
             <div class="col">{{ $count['Month'] }}</div>
             <div class="col">{{ $count['Year'] }}</div>
-          </div> --}}
+          </div>
         </div>
-        {{-- <div class="col-md-10 col-8">{{ $count }} {!! add_help('This is the number of times the user has submitted this prompt before and had their submission approved.') !!}</div> --}}
       </div>
     @endif
     <div class="row">
@@ -249,7 +247,6 @@
       {!! Form::label('staff_comments', 'Staff Comments (Optional)') !!}
       {!! Form::textarea('staff_comments', $submission->staffComments, ['class' => 'form-control wysiwyg']) !!}
     </div>
-
     <div class="text-right">
       <a
         href="#"
@@ -282,6 +279,7 @@
               </div>
             </div>
             <div class="col-md-10">
+              <a href="#" class="float-right fas fa-close"></a>
               <div class="form-group">
                 {!! Form::label('slug', 'Character Code') !!}
                 {!! Form::select('slug[]', $characters, null, [
@@ -370,9 +368,14 @@
         </tr>
       </table>
     </div>
-    @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true])
+    @include('widgets._loot_select_row', [
+        'items' => $items,
+        'currencies' => $currencies,
+        'showLootTables' => true,
+        'showRaffles' => true
+    ])
 
-    <dialog
+    <div
       class="modal fade"
       id="confirmationModal"
       tabindex="-1"
@@ -442,10 +445,10 @@
           </div>
         </div>
       </div>
-      </div>
-    @else
-      <div class="alert alert-info">This {{ $submission->prompt_id ? 'submission' : 'claim' }} has already been processed.</div>
-      @include('home._submission_content', ['submission' => $submission])
+    </div>
+  @else
+    <div class="alert alert-danger">This {{ $submission->prompt_id ? 'submission' : 'claim' }} has already been processed.</div>
+    @include('home._submission_content', ['submission' => $submission])
   @endif
 
 @endsection
