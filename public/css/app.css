@@ -573,6 +573,9 @@ body #app.teal {
 #app .xsmall {
   font-size: 0.6rem;
 }
+#app .color-white {
+  color: var(--white);
+}
 #app .bg-white {
   background-color: var(--white);
 }

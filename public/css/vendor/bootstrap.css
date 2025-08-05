@@ -6000,7 +6000,7 @@ button.bg-secondary:hover {
   background-color: #545b62;
 }
 .bg-success {
-  background-color: #28a745;
+  background-color: var(--success);
 }
 a.bg-success:focus,
 a.bg-success:hover,
@@ -6027,7 +6027,7 @@ button.bg-warning:hover {
   background-color: #d39e00;
 }
 .bg-danger {
-  background-color: #dc3545;
+  background-color: var(--danger);
 }
 a.bg-danger:focus,
 a.bg-danger:hover,

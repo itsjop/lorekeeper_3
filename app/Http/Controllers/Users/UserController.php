@@ -412,10 +412,19 @@ class UserController extends Controller {
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
-  public function getUserSubmissions($name) {
+  public function getUserSubmissions(Request $request, $name) {
+    $logs = $this->user->getSubmissions(Auth::user() ?? null);
+    if ($request->get('prompt_ids')) {
+      $logs->whereIn('prompt_id', $request->get('prompt_ids'));
+    }
+    if ($request->get('sort')) {
+      $logs->orderBy('created_at', $request->get('sort') == 'newest' ? 'DESC' : 'ASC');
+    }
+
     return view('user.submission_logs', [
-      'user' => $this->user,
-      'logs' => $this->user->getSubmissions(Auth::user() ?? null),
+      'user'    => $this->user,
+      'logs'    => $logs->paginate(30)->appends($request->query()),
+      'prompts' => Prompt::active()->pluck('name', 'id'),
     ]);
   }
 
@@ -447,6 +456,36 @@ class UserController extends Controller {
     return view('user.gallery', [
       'user'        => $this->user,
       'submissions' => $this->user->gallerySubmissions()->visible(Auth::user() ?? null)->paginate(20)->appends($request->query()),
+    ]);
+  }
+
+  /**
+   * Shows a user's award logs.
+   *
+   * @param  string  $name
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserAwardLogs($name) {
+    $user = $this->user;
+    return view('user.award_logs', [
+      'user' => $this->user,
+      'logs' => $this->user->getAwardLogs(0)
+    ]);
+  }
+
+  /**
+   * Shows a user's pet logs.
+   *
+   * @param string $name
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function getUserPetLogs($name) {
+    $user = $this->user;
+
+    return view('user.pet_logs', [
+      'user' => $this->user,
+      'logs' => $this->user->getPetLogs(0),
     ]);
   }
 

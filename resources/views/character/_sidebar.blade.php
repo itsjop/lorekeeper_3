@@ -130,13 +130,13 @@
         > Submissions
         </a>
       </li>
-      <li class="sidebar-item">
+      {{-- <li class="sidebar-item">
         <a href="{{ $character->url . '/' . __('awards.award') . '-logs' }}"
           class="{{ set_active('character/' . $character->slug . '/' . __('awards.award') . '-logs') }}"
         >
           {{ ucfirst(__('awards.award')) }} Logs
         </a>
-      </li>
+      </li> --}}
     </ul>
   </details>
 </div>
