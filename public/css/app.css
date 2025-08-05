@@ -4202,7 +4202,7 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 .app .pet-card {
   display: grid;
-  grid-template: "name" 2em "pet" max-content "title" 2em "progress" 1.5em "level" min-content/1fr;
+  grid-template: "pet" max-content "title" 2em "name" 2em "progress" 1.5em "level" min-content/1fr;
 }
 .app .pet-card img {
   grid-area: pet;
