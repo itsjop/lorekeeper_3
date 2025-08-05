@@ -136,7 +136,7 @@
         <i class="fas fa-caret-right"></i>
       </a>
     </div>
-    <div class="grid grid-4-col card-body gap-_5">
+    <div class="grid grid-4-col card-body gap-1">
       {{-- get one random pet --}}
       @php
         $pets = $character->image->character
