@@ -259,6 +259,7 @@ class PromptController extends Controller {
       'criterion_currency_id',
       'default_criteria',
     ]);
+    !isset($data['staff_only']) ? $data['staff_only'] = 0 : '';
     if ($id && $service->updatePrompt(Prompt::find($id), $data, Auth::user())) {
       flash('Prompt updated successfully.')->success();
     } elseif (!$id && $prompt = $service->createPrompt($data, Auth::user())) {
