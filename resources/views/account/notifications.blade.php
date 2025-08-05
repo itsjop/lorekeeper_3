@@ -114,7 +114,6 @@
       @include('account.notifications._' . config('lorekeeper.notifications.' . $type . '.view'))
     @endif
   @endforeach
-
   @parent
   <script>
     $(document).ready(function() {
@@ -138,13 +137,11 @@
         e.preventDefault();
         var $row = $(this).parent().parent();
         $.get("{{ url('notifications/delete') }}/" + $(this).data('id'), function(data) {
-          console.log($(this));
           $row.fadeOut(300, function() {
             $(this).remove();
           });
         });
       });
-
     });
   </script>
 @endsection

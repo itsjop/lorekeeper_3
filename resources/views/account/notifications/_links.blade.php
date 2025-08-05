@@ -6,8 +6,6 @@
       let id = $(this).data('link-id');
       let notificationId = $row.find('.clear-notification').data('id');
 
-      console.log(notificationId);
-
       $.ajax({
         url: '{{ url('links/accept') }}/' + id,
         data: {
@@ -15,16 +13,14 @@
         },
         method: 'POST',
         success: function(data) {
-          $.ajax({
-            url: "{{ url('notifications/delete') }}/" + notificationId,
-            method: 'GET',
-            success: function(data) {
-              location.reload();
-            }
+          $.get("{{ url('notifications/delete') }}/" + notificationId, function(data) {
+            $row.fadeOut(300, function() {
+              $(this).remove();
+            });
           });
         },
         error: function(data) {
-          location.reload();
+          // location.reload();
         }
       });
     });
@@ -42,16 +38,14 @@
         },
         method: 'POST',
         success: function(data) {
-          $.ajax({
-            url: "{{ url('notifications/delete') }}/" + notificationId,
-            method: 'GET',
-            success: function(data) {
-              location.reload();
-            }
+          $.get("{{ url('notifications/delete') }}/" + notificationId, function(data) {
+            $row.fadeOut(300, function() {
+              $(this).remove();
+            });
           });
         },
         error: function(data) {
-          location.reload();
+          // location.reload();
         }
       });
     });
