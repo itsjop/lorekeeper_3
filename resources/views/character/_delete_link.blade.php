@@ -3,5 +3,8 @@
 <b>Are you sure you want to delete this link?</b>
 
 <br>
-{!! Form::button('<i class="fas fa-trash"></i> Delete', ['class' => 'btn btn-danger btn-sm m-1 float-right', 'type' => 'submit']) !!}
+{!! Form::button('<i class="fas fa-trash"></i> Delete', [
+    'class' => 'btn btn-danger btn-sm m-1 float-right',
+    'type' => 'submit'
+]) !!}
 {!! Form::close() !!}

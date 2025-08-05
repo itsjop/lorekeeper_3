@@ -106,7 +106,8 @@ class CharacterLinkService extends Service {
           'character' => $otherUserCharacter->url,
         ]);
       } else {
-        $link->delete();
+        $this->deleteCharacterRelationLink($id);
+        // $link->delete();
       }
 
       return $this->commitReturn(true);

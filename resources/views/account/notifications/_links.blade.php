@@ -20,12 +20,13 @@
           });
         },
         error: function(data) {
+          console.log("data", data)
           // location.reload();
         }
       });
     });
 
-    $('.reject-link').on('click', function(e) {
+    $('.delete-link').on('click', function(e) {
       e.preventDefault();
       let $row = $(this).parent().parent().parent();
       let id = $(this).data('link-id');
@@ -45,6 +46,7 @@
           });
         },
         error: function(data) {
+          console.log("data", data)
           // location.reload();
         }
       });

@@ -258,7 +258,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
 });
 
 // CHARACTER RELATIONSHIPS
-Route::post('links/{action}/{id}', 'LinkController@postHandleLink')->where('action', 'accept|reject');
+Route::post('links/{action}/{id}', 'LinkController@postHandleLink')->where('action', 'accept|delete');
 
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
   Route::get('{id}/profile/edit', 'MyoController@getEditCharacterProfile');
