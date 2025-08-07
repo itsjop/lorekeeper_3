@@ -491,13 +491,16 @@ Route::group(['prefix' => 'redeem-code', 'namespace' => 'Users'], function () {
 
 /**************************************************************************************************
     Mail
-**************************************************************************************************/
+ **************************************************************************************************/
 Route::group(['prefix' => 'mail', 'namespace' => 'Users'], function () {
-    Route::get('/', 'MailController@getIndex');
-    Route::get('staff-sent/view/{id}', 'MailController@getModMail');
-    Route::get('view/{id}', 'MailController@getUserMail');
-    Route::post('view/{id}', 'MailController@postCreateUserMail');
+  Route::get('/', 'MailController@getIndex');
+  Route::get('staff-sent/view/{id}', 'MailController@getModMail');
+  Route::get('view/{id}', 'MailController@getUserMail');
+  Route::post('view/{id}', 'MailController@postCreateUserMail');
 
-    Route::get('new', 'MailController@getCreateUserMail');
-    Route::post('new/{id?}', 'MailController@postCreateUserMail');
+  Route::get('new', 'MailController@getCreateUserMail');
+  Route::post('new/{id?}', 'MailController@postCreateUserMail');
 });
+
+// RAFFLE SELF ENTRY - NEWT
+Route::post('/raffles/enter/{id}', 'RaffleController@selfEnter');

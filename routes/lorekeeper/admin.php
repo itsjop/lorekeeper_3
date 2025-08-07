@@ -761,6 +761,8 @@ Route::group(['prefix' => 'raffles', 'middleware' => 'power:manage_raffles'], fu
   Route::post('edit/group/{id?}', 'RaffleController@postCreateEditRaffleGroup');
   Route::get('edit/raffle/{id?}', 'RaffleController@getCreateEditRaffle');
   Route::post('edit/raffle/{id?}', 'RaffleController@postCreateEditRaffle');
+  Route::get('edit/reroll/{id}', 'RaffleController@getRerollTicket');
+  Route::post('edit/reroll/{id}', 'RaffleController@rerollTicket');
 
   Route::get('view/{id}', 'RaffleController@getRaffleTickets');
   Route::post('view/ticket/{id}', 'RaffleController@postCreateRaffleTickets');
@@ -1042,8 +1044,8 @@ Route::group(['prefix' => 'pairings', 'middleware' => 'power:manage_raffles'], f
 
 // MOD MAIL
 Route::group(['prefix' => 'mail', 'middleware' => 'power:send_mod_mail'], function () {
-    Route::get('/', 'ModMailController@getIndex');
-    Route::get('view/{id}', 'ModMailController@getMail');
-    Route::get('create', 'ModMailController@getCreateMail');
-    Route::post('create', 'ModMailController@postCreateMail');
+  Route::get('/', 'ModMailController@getIndex');
+  Route::get('view/{id}', 'ModMailController@getMail');
+  Route::get('create', 'ModMailController@getCreateMail');
+  Route::post('create', 'ModMailController@postCreateMail');
 });
