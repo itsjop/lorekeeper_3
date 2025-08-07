@@ -13,6 +13,16 @@ use Illuminate\Database\Schema\Blueprint;
 |
 */
 
+function trimArrayNulls($val, $key) {
+  if (gettype($key) == 'string') {
+    if ($val[$key][array_key_last($val[$key])] == null) array_pop($val[$key]);
+  } else {
+    foreach ($key as $k) {
+      if ($val[$k][array_key_last($val[$k])] == null) array_pop($val[$k]);
+    }
+  }
+  return $val;
+}
 
 function safeJSON($val) {
   isset($val) ? (gettype($val) == 'string' ? $val = json_decode($val, true) : '') : '';

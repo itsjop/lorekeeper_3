@@ -344,6 +344,7 @@ class InventoryManager extends Service {
         }
 
         $oldUser = $stack->user;
+        // dd('ts', $oldUser, $sender, $recipient, $stacks, $quantities);
         if (
           $this->moveStack(
             $stack->user,
@@ -748,14 +749,14 @@ class InventoryManager extends Service {
       $recipient_stack = UserItem::where([
         ['user_id', '=', $recipient->id],
         ['item_id', '=', $stack->item_id],
-        ['data', '=', json_encode($stack->data)]
+        ['data', '=', $stack->data]
       ])->first();
 
       if (!$recipient_stack) {
         $recipient_stack = UserItem::create([
           'user_id' => $recipient->id,
           'item_id' => $stack->item_id,
-          'data' => json_encode($stack->data)
+          'data' => $stack->data
         ]);
       }
 

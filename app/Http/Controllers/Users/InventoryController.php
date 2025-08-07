@@ -344,7 +344,12 @@ class InventoryController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   private function postTransfer(Request $request, InventoryManager $service) {
-    if ($service->transferStack(Auth::user(), User::visible()->where('id', $request->get('user_id'))->first(), UserItem::find($request->get('ids')), $request->get('quantities'))) {
+    if ($service->transferStack(
+      Auth::user(),
+      User::visible()->where('id', $request->get('user_id'))->first(),
+      UserItem::find($request->get('ids')),
+      $request->get('quantities')
+    )) {
       flash('Item transferred successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {

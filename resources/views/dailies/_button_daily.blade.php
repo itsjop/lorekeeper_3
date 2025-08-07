@@ -23,7 +23,7 @@
         >
           <img
             src="{{ $daily->buttonImageUrl }}"
-            class="w-100 daily-button {{ Auth::check() && isset($cooldown) ? 'disabled' : ''}}"
+            class="w-100 daily-button {{ Auth::check() && isset($cooldown) ? 'disabled' : '' }}"
             style="max-width:200px;"
           />
         </button>
@@ -89,19 +89,21 @@
             </header>
             <div class="prizes {{ count($rewards) > 3 ? 'many' : 'few' }}">
               @if ($daily->progress_display == 'all' || $step <= ($timer->step ?? 0))
-              @foreach ($rewards as $reward)
-              <div class="prize">
-                @if ($reward->rewardImage)
+                @foreach ($rewards as $reward)
+                  <div class="prize">
+                    @if ($reward->rewardImage)
                       <div class="prize-box">
                         <img
-                        src="{{ $reward->rewardImage }}"
-                        data-img="{{ $reward->rewardImage }}"
-                         alt="{{ $reward->reward()->first()->name }}" />
+                          src="{{ $reward->rewardImage }}"
+                          data-img="{{ $reward->rewardImage }}"
+                          alt="{{ $reward->reward()->first()->name }}"
+                        />
                         {{-- <img src="{{ asset('images/pages/bucket.png') }}" --}}
 
                       </div>
                     @endif
-                    <div class="prize-label row justify-content-center">{{ $reward->quantity }} {{ $reward->reward()->first()->name }}</div>
+                    <div class="prize-label row justify-content-center">{{ $reward->quantity }}
+                      {{ $reward->reward()->first()->name }}</div>
                   </div>
                 @endforeach
               @endif

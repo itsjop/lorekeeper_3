@@ -80,6 +80,7 @@ class GrantController extends Controller {
    */
   public function postItems(Request $request, InventoryManager $service) {
     $data = $request->only(['names', 'item_ids', 'quantities', 'data', 'disallow_transfer', 'notes']);
+    $data = trimArrayNulls($data, ['item_ids', 'quantities']);
     if ($service->grantItems($data, Auth::user())) {
       flash('Items granted successfully.')->success();
     } else {
