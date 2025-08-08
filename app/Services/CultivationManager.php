@@ -25,7 +25,7 @@ class CultivationManager extends Service
     |
     */
 
-   
+
 
     /**
      * Credits area to a user.
@@ -44,7 +44,7 @@ class CultivationManager extends Service
             }
 
             UserArea::create(['user_id' => $recipient->id, 'area_id' => $area->id]);
-            
+
             return $this->commitReturn(true);
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
@@ -167,7 +167,7 @@ class CultivationManager extends Service
                 if(Settings::get('cultivation_care_cooldown') > 0 && $caredPlots->count() >= Settings::get('cultivation_care_cooldown')) throw new \Exception("You already tended to ". $caredPlots->count()." plot(s) today.");
                 $newStage = ($userPlot->counter + 1 >= $userPlot->getStageProgress() && $userPlot->stage < 5) ? $userPlot->stage + 1 : $userPlot->stage;
                 $newCount = ($newStage > $userPlot->stage) ? 0 : $userPlot->counter + 1;
-    
+
                 $userPlot->update([
                         'counter' => $newCount,
                         'stage' => $newStage,
@@ -205,7 +205,6 @@ class CultivationManager extends Service
             if(!isset($userPlot)) throw new \Exception("Plot could not be found.");
 
             if($userPlot->stage == 5){
-                //dd($userPlot->counter, $userPlot->getStageProgress());
                 $seedTag = $userPlot->item->tag('seed');
                 if(!isset($seedTag)) throw new \Exception("Seed tag data could not be found.");
                 // Distribute user rewards
@@ -229,7 +228,7 @@ class CultivationManager extends Service
                 return $rewards;
             } else {
                 throw new \Exception("This plot is not ready for harvest yet.");
-            } 
+            }
 
         } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
@@ -254,7 +253,7 @@ class CultivationManager extends Service
             $area->plots()->delete();
             $area->delete();
             return $this->commitReturn(true);
-        } catch(\Exception $e) { 
+        } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
         return $this->rollbackReturn(false);

@@ -344,7 +344,6 @@ class InventoryManager extends Service {
         }
 
         $oldUser = $stack->user;
-        // dd('ts', $oldUser, $sender, $recipient, $stacks, $quantities);
         if (
           $this->moveStack(
             $stack->user,

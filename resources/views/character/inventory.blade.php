@@ -132,11 +132,10 @@
                 style="font-size:95%; margin:5px;">"{{ $stackName }}"
               </span>
             @endif
+          @endforeach
         </div>
+      </div>
     @endforeach
-  </div>
-  </div>
-  @endforeach
   </div>
 
   <div id="sumView" class="hide">

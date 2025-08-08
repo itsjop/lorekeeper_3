@@ -5,16 +5,23 @@
 
 @if ($comment->deleted_at == null)
   @if (isset($reply) && $reply === true)
-    <div id="comment-{{ $comment->getKey() }}" class="comment_replies border-left col-12 column mw-100 pr-0 pt-4" style="flex-basis: 100%;">
+    <div
+      id="comment-{{ $comment->getKey() }}"
+      class="comment_replies border-left col-12 column mw-100 pr-0 pt-4"
+      style="flex-basis: 100%;"
+    >
     @else
-      <div id="comment-{{ $comment->getKey() }}" class="pt-4" style="flex-basis: 100%;">
+      <div
+        id="comment-{{ $comment->getKey() }}"
+        class="pt-4"
+        style="flex-basis: 100%;"
+      >
   @endif
-  <div class="media-body row mw-100 mx-0" style="flex:1;flex-wrap:wrap;">
-    <div class="d-none d-md-block">
-      <img class="mr-3 mt-2" src="{{ $comment->commenter->avatarUrl }}" style="width:70px; height:70px; border-radius:50%;" alt="{{ $comment->commenter->name }}'s Avatar">
+  <div class="grid" style="grid-template-columns: 1fr 3fr">
+    <div class="">
       {!! $comment->commenter->userBorder() !!}
     </div>
-    <div class="d-block" style="flex:1">
+    <div class="" style="">
       <div class="row mx-0 px-0 align-items-md-end">
         <h5 class="mt-0 mb-1 col mx-0 px-0">
           {!! $comment->commenter->commentDisplayName !!} @if ($comment->commenter->isStaff == true)
@@ -26,26 +33,41 @@
         @endif
       </div>
       <div
-        class="comment border p-3 rounded {{ $limit == 0 ? 'shadow-sm border-info' : '' }} {{ $comment->is_featured && $limit != 0 ? 'border-success' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}">
-        <p>
-          {!! config('lorekeeper.settings.wysiwyg_comments') ? $comment->comment : '<p>' . nl2br($markdown->line(strip_tags($comment->comment))) . '</p>' !!}
-        </p>
+        class="comment border p-3 m-0 rounded mw-100 card-basic {{ $limit == 0 ? 'shadow-sm border-info' : '' }} {{ $comment->is_featured && $limit != 0 ? 'border-success' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}"
+      >
+
+        {!! config('lorekeeper.settings.wysiwyg_comments')
+            ? $comment->comment
+            : nl2br($markdown->line(strip_tags($comment->comment))) !!}
         <p class="border-top pt-1 text-right mb-0">
-          <small class="text-muted">{!! $comment->created_at !!}
+          <small class="grid text-muted">
+            <span>
+              {!! $comment->created_at !!}
+            </span>
             @if ($comment->created_at != $comment->updated_at)
-              <span class="text-muted border-left mx-1 px-1">(Edited {!! $comment->updated_at !!})
-                @if (Auth::check() && Auth::user()->isStaff)
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#show-edits-{{ $comment->id }}">Edit History</a>
-                @endif
+              <span class="text-muted border-left">
+                (Edited {!! $comment->updated_at !!})
               </span>
+              @if (Auth::check() && Auth::user()->isStaff)
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#show-edits-{{ $comment->id }}"
+                >Edit History</a>
+              @endif
             @endif
           </small>
           <a href="{{ url('comment/') . '/' . $comment->id }}"><i class="fas fa-link ml-1" style="opacity: 50%;"></i></a>
-          <a href="{{ url('reports/new?url=') . $comment->url }}"><i class="fas fa-exclamation-triangle" data-bs-toggle="tooltip" title="Click here to report this comment." style="opacity: 50%;"></i></a>
+          <a href="{{ url('reports/new?url=') . $comment->url }}"><i
+              class="fas fa-exclamation-triangle"
+              data-bs-toggle="tooltip"
+              title="Click here to report this comment."
+              style="opacity: 50%;"
+            ></i></a>
         </p>
       </div>
 
-      @include('comments._actions', ['comment' => $comment, 'compact' => isset($compact) ? $compact : false])
+      @include('comments._actions', ['comment' => $comment, 'compact' => isset($compact) ? $compact : false, 'class' => 'text-right'] )
 
     </div>
 
@@ -53,9 +75,8 @@
 use child function
 url should be equal to the last replies permalink (e.g reply 5) --}}
 
-
     {{-- Recursion for children --}}
-    <div class="w-100 mw-100">
+    <div class="ml-5 grid-span">
       @php $children = $depth == 0 ? $comment->children->sortByDesc('created_at')->paginate(5) : $comment->children->sortByDesc('created_at') @endphp
       @foreach ($children as $reply)
         @php $limit++; @endphp
@@ -69,7 +90,7 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
             'comment' => $reply,
             'reply' => true,
             'limit' => $limit,
-            'depth' => $depth + 1,
+            'depth' => $depth + 1
         ])
       @endforeach
       @if ($depth == 0)
@@ -80,13 +101,26 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
   </div>
 @else
   @if (isset($reply) && $reply === true)
-    <div id="comment-{{ $comment->getKey() }}" class="comment_replies border-left col-12 column mw-100 pr-0 pt-4" style="flex-basis: 100%;">
+    <div
+      id="comment-{{ $comment->getKey() }}"
+      class="comment_replies border-left col-12 column mw-100 pr-0 pt-4"
+      style="flex-basis: 100%;"
+    >
     @else
-      <div id="comment-{{ $comment->getKey() }}" class="pt-4" style="flex-basis: 100%;">
+      <div
+        id="comment-{{ $comment->getKey() }}"
+        class="pt-4"
+        style="flex-basis: 100%;"
+      >
   @endif
   <div class="media-body row mw-100 mx-0" style="flex:1;flex-wrap:wrap;">
     <div class="d-none d-md-block">
-      <img class="mr-3 mt-2" src="{{ asset('images/avatars/default.png') }}" style="width:70px; height:70px; border-radius:50%;" alt="Default Avatar">
+      <img
+        class="mr-3 mt-2"
+        src="{{ asset('images/avatars/default.png') }}"
+        style="width:70px; height:70px; border-radius:50%;"
+        alt="Default Avatar"
+      >
     </div>
     <div class="d-block bg-light" style="flex:1">
       <div class="border p-3 rounded {{ $limit == 0 ? 'shadow-sm border-info' : '' }}">
@@ -117,7 +151,7 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
             'comment' => $reply,
             'reply' => true,
             'limit' => $limit,
-            'depth' => $depth + 1,
+            'depth' => $depth + 1
         ])
       @endforeach
       @if ($depth == 0)

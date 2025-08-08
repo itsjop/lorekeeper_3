@@ -531,7 +531,7 @@ class User extends Authenticatable implements MustVerifyEmail {
    * @return string
    */
   public function getCommentDisplayNameAttribute() {
-    return ($this->is_banned ? '<strike>' : '') . '<small> <a href="' . $this->url . '" class="btn btn-primary btn-sm ' . (safe($this->rank?->color) ? 'style="background-color: #' . safe($this->rank?->color) . '!important;color:#000!important;' : '') . ($this->is_deactivated ? 'opacity: 0.5;' : '') . '"><i class="' . ($this->rank->icon ? $this->rank->icon : 'fas fa-user') . ' mr-1" style="opacity: 50%;"></i>' . $this->name . '</a></small>' . ($this->is_banned ? '</strike>' : '');
+    return ($this->is_banned ? '<strike>' : '') . '<small> <a href="' . $this->url . '" class="m-0 btn btn-primary btn-sm ' . (safe($this->rank?->color) ? 'style="background-color: #' . safe($this->rank?->color) . '!important;color:#000!important;' : '') . ($this->is_deactivated ? 'opacity: 0.5;' : '') . '"><i class="' . ($this->rank->icon ? $this->rank->icon : 'fas fa-user') . ' mr-1" style="opacity: 50%;"></i>' . $this->name . '</a></small>' . ($this->is_banned ? '</strike>' : '');
   }
 
   /**

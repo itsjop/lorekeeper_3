@@ -42,54 +42,52 @@
           </a>
       </li>
 
-      @if (Auth::check())
-        <li class="nav-item dropdown">
-          <div
-            id="somnivoresDropdown"
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            v-pre
-          >
-            Somnivores
+      <li class="nav-item dropdown">
+        <div
+          id="somnivoresDropdown"
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          v-pre
+        >
+          Somnivores
+        </div>
+        <div class="dropdown-menu dt-nav-page grid-2-col" aria-labelledby="somnivoresDropdown">
+          <div class="dt-nav-group">
+            <h2 class="dt-nav-header">Species</h2>
+            <a class="dt-nav-item" href="{{ url('info/somnivores') }}">
+              <i class="fas fa-star"></i> Overview </a>
+            <a class="dt-nav-item" href="{{ url('info/palate') }}">
+              <i class="fas fa-moon"></i> Dreams & Palates </a>
+            <a class="dt-nav-item" href="{{ url('world/species/1/traits') }}">
+              <i class="fas fa-scroll"></i> Trait Index </a>
+
+            <h2 class="dt-nav-header">World</h2>
+            <a class="dt-nav-item" href="{{ url('world/locations') }}">
+              <i class="fas fa-map"></i> Reverie Locations </a>
+            <a class="dt-nav-item" href="{{ url('info/lore-index') }}">
+              <i class="fas fa-book"></i> Lore Library </a>
           </div>
-          <div class="dropdown-menu dt-nav-page grid-2-col" aria-labelledby="somnivoresDropdown">
-            <div class="dt-nav-group">
-              <h2 class="dt-nav-header">Species</h2>
-              <a class="dt-nav-item" href="{{ url('info/somnivores') }}">
-                <i class="fas fa-star"></i> Overview </a>
-              <a class="dt-nav-item" href="{{ url('info/palate') }}">
-                <i class="fas fa-moon"></i> Dreams & Palates </a>
-              <a class="dt-nav-item" href="{{ url('world/species/1/traits') }}">
-                <i class="fas fa-scroll"></i> Trait Index </a>
+          <div class="dt-nav-group">
+            <h2 class="dt-nav-header br-tr-15">How to Draw</h2>
+            <a class="dt-nav-item" href="{{ url('info/somnivore-anatomy') }}">
+              <i class="fas fa-paw"></i> Somnivore Anatomy </a>
+            <a class="dt-nav-item" href="{{ url('info/dream-essence') }}">
+              <i class="fas fa-cloud"></i> Dream Essence </a>
+            <a class="dt-nav-item" href="{{ url('info/reverie-scenery') }}">
+              <i class="fas fa-seedling"></i> Reverie Scenery </a>
 
-              <h2 class="dt-nav-header">World</h2>
-              <a class="dt-nav-item" href="{{ url('world/locations') }}">
-                <i class="fas fa-map"></i> Reverie Locations </a>
-              <a class="dt-nav-item" href="{{ url('info/lore-index') }}">
-                <i class="fas fa-book"></i> Lore Library </a>
-            </div>
-            <div class="dt-nav-group">
-              <h2 class="dt-nav-header br-tr-15">How to Draw</h2>
-              <a class="dt-nav-item" href="{{ url('info/somnivore-anatomy') }}">
-                <i class="fas fa-paw"></i> Somnivore Anatomy </a>
-              <a class="dt-nav-item" href="{{ url('info/dream-essence') }}">
-                <i class="fas fa-cloud"></i> Dream Essence </a>
-              <a class="dt-nav-item" href="{{ url('info/reverie-scenery') }}">
-                <i class="fas fa-seedling"></i> Reverie Scenery </a>
-
-              <h2 class="dt-nav-header">Design Guides</h2>
-              <a class="dt-nav-item" href="{{ url('info/bat-form') }}">
-                <i class="fas fa-brush"></i> Design Guide : Bats </a>
-              <a class="dt-nav-item" href="{{ url('info/demon-form') }}">
-                <i class="fas fa-brush"></i> Design Guide : Demons </a>
-            </div>
-            </a>
-        </li>
-      @endif
+            <h2 class="dt-nav-header">Design Guides</h2>
+            <a class="dt-nav-item" href="{{ url('info/bat-form') }}">
+              <i class="fas fa-brush"></i> Design Guide : Bats </a>
+            <a class="dt-nav-item" href="{{ url('info/demon-form') }}">
+              <i class="fas fa-brush"></i> Design Guide : Demons </a>
+          </div>
+          </a>
+      </li>
       <li class="nav-item dropdown">
         <div
           id="infoDropdown"

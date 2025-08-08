@@ -39,7 +39,7 @@
 
         {{-- Comment --}}
         <div
-          class="comment border p-3 rounded {{ $comment->is_featured ? 'border-success bg-light' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}"
+          class="comment border card-basic mw-100 {{ $comment->is_featured ? 'border-success bg-light' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}"
         >
           {!! config('lorekeeper.settings.wysiwyg_comments')
               ? $comment->comment
