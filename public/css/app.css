@@ -1200,6 +1200,7 @@ body {
 #ml-gridView {
   display: grid;
   gap: 20px;
+  margin: 0 10cqw 40px;
 }
 
 .masterlist-character {
@@ -1459,6 +1460,7 @@ body {
 @container main-container (width < 1200px) {
   #ml-gridView {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    margin: 0 1cqw 40px;
   }
   #ml-gridView .masterlist-character .thumbnail:hover .shine, #ml-gridView .masterlist-character .thumbnail:active .shine, #ml-gridView .masterlist-character .thumbnail:active .shine {
     opacity: 0.5;
@@ -1749,7 +1751,8 @@ body {
     grid-template: "rarity rarity category category" 1fr "artist artist artist   sort    " 1fr "name   name   name     search  " 1fr/1fr 1fr 1fr 1fr;
   }
   .masterlist-search-grid {
-    grid-template: "name   species" max-content "sortby species" max-content "a-btn  submit" max-content/1fr 1fr;
+    grid-template: "name   species" max-content "sortby rarity" max-content "a-btn  submit" max-content/1fr 1fr;
+    justify-items: center !important;
   }
   .trait-search-pane {
     grid-template: "name name category category" 1fr "rarity rarity species species" 1fr "palate palate sortby sortby" 1fr ".  . . submit" 1fr/2fr 2fr 2fr 2fr;
@@ -4199,6 +4202,49 @@ because the nesting selector cannot represent pseudo-elements. */
 .app .currency-icon img {
   width: 1.6em;
   height: 1.6em;
+}
+.app nav:has(.pagination) {
+  display: flex;
+  justify-content: center;
+}
+.app nav:has(.pagination) .pagination {
+  width: -moz-max-content;
+  width: max-content;
+  background: var(--purple-clr_300);
+  border-radius: 10px;
+}
+.app nav:has(.pagination) .pagination .page-item .page-link {
+  background: var(--purple-clr_400);
+  color: var(--purple-clr_100);
+  transition: var(--smoothIn_linear) 0.7s;
+  border: 1px solid transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  margin: 0;
+  z-index: 0;
+}
+.app nav:has(.pagination) .pagination .page-item .page-link:hover {
+  z-index: 1;
+  transition: var(--smoothIn_linear) 0.1s;
+  transform: translateY(-3px) scale(1.1);
+  background: var(--purple-clr_500);
+  color: var(--purple-clr_100);
+  border-radius: 10px;
+  border: 1px solid var(--white);
+  box-shadow: 0 5px 3px color-mix(in srgb, var(--purple-clr_800) 30%, transparent);
+}
+.app nav:has(.pagination) .pagination .page-item.active .page-link {
+  background: var(--purple-clr_600);
+  color: var(--purple-clr_100);
+}
+.app nav:has(.pagination) .pagination .page-item.active .page-link:hover {
+  background: var(--purple-clr_700);
+}
+.app nav:has(.pagination) .pagination .page-item:first-of-type .page-link, .app nav:has(.pagination) .pagination .page-item:last-of-type .page-link {
+  background: var(--purple-clr_300);
+  color: var(--purple-clr_100);
+  border-radius: 10px;
 }
 .app .pet-card {
   display: grid;

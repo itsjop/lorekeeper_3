@@ -11,6 +11,7 @@
       {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control w-100']) !!}
     </div>
     <div class="rarity form-group  m-0">
+      {!! Form::label('rarity_id', 'Rarity: ') !!}
       {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control mr-2']) !!}
     </div>
     <div class="sortby form-inline ji-start mb-0 w-100">
@@ -47,13 +48,13 @@
     </div>
     {!! Form::button('<i class="fa fa-magnifying-glass"></i> Search', [
         'type' => 'submit',
-        'class' => 'searchbutton btn btn-primary as-end flex gap-_5 ai-center js-center'
+        'class' => 'searchbutton btn btn-primary as-end flex gap-_5 ai-center jc-center js-center'
     ]) !!}
 
     <div class="advanced-toggle mb-0 as-end js-center">
       <a
         href="#advancedSearch"
-        class="btn btn-sm btn-secondary flex gap-_5 ai-center"
+        class="btn btn-sm btn-secondary flex gap-_5 jc-center ai-center"
         data-bs-toggle="collapse"
       >
         More

@@ -61,9 +61,10 @@
   .masterlist-search-grid {
     grid-template:
       'name   species' max-content
-      'sortby species' max-content
+      'sortby rarity' max-content
       'a-btn  submit' max-content
       / 1fr 1fr;
+    justify-items: center !important;
   }
   .trait-search-pane {
     grid-template:
