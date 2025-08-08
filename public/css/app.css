@@ -4023,6 +4023,7 @@ because the nesting selector cannot represent pseudo-elements. */
 #app .lore .spoiler,
 #app #custom-page-parsed .spoiler {
   border: none;
+  margin-bottom: 1em;
 }
 #app .lore .spoiler .spoiler-toggle,
 #app #custom-page-parsed .spoiler .spoiler-toggle {
