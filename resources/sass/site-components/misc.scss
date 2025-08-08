@@ -37,6 +37,9 @@
             border: 1px solid var(--white);
             box-shadow: 0 5px 3px color-mix(in srgb, var(--purple-clr_800) 30%, transparent);
           }
+          &:active {
+            transform: translateY(-3px) scale(0.9);
+          }
         }
         &.active .page-link {
           background: var(--purple-clr_600);

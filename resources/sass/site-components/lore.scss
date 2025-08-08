@@ -82,10 +82,10 @@
     }
 
     h1 {
-      &.top{
-        margin-top:-13px;
+      &.top {
+        margin-top: -13px;
+      }
     }
-  }
 
     .card-float {
       background: none;
@@ -115,7 +115,8 @@
 
     .speech-avatar {
       margin-top: 10px;
-      filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+      filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent))
+        drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
     }
 
     .speech-name {
@@ -126,28 +127,28 @@
       transition: 0.2s ease;
       margin: 5px;
 
-      &.gala{
+      &.gala {
         background-image: linear-gradient(45deg, rgb(74, 183, 255), rgb(44, 98, 234));
       }
-        &.millie{
+      &.millie {
         background-image: linear-gradient(45deg, rgb(120, 199, 51), rgb(21, 135, 38));
       }
-      &.bunny{
+      &.bunny {
         background-image: linear-gradient(45deg, rgb(98, 219, 68), rgb(32, 94, 252));
       }
-        &.wysp{
+      &.wysp {
         background-image: linear-gradient(45deg, rgb(150, 161, 255), rgb(128, 57, 235));
       }
-        &.caspian{
+      &.caspian {
         background-image: linear-gradient(45deg, rgb(199, 51, 98), rgb(13, 51, 147));
       }
-        &.leo{
+      &.leo {
         background-image: linear-gradient(45deg, rgb(221, 160, 75), rgb(220, 48, 74));
       }
-        &.cirrus{
+      &.cirrus {
         background-image: linear-gradient(45deg, rgb(205, 130, 236), rgb(20, 55, 228));
       }
-        &.esmerelda{
+      &.esmerelda {
         background-image: linear-gradient(45deg, rgb(159, 182, 172), rgb(104, 108, 151));
       }
       & a {
@@ -158,7 +159,7 @@
         font-family: 'Itim';
       }
       &:hover {
-        scale:1.1;
+        scale: 1.1;
       }
     }
 
@@ -225,19 +226,18 @@
         border: none;
         box-shadow: none;
       }
-      img{
-        margin-bottom:1em;
+      img {
+        margin-bottom: 1em;
       }
-
       p {
         margin: 0;
       }
-
       br {
         margin-bottom: 15px;
       }
     }
-    .card-basic, .mini-card {
+    .card-basic,
+    .mini-card {
       padding-bottom: 1em;
     }
     .spoiler {

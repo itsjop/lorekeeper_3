@@ -4015,7 +4015,8 @@ because the nesting selector cannot represent pseudo-elements. */
 #app #custom-page-parsed .card br {
   margin-bottom: 15px;
 }
-#app .lore .card-basic, #app .lore .mini-card,
+#app .lore .card-basic,
+#app .lore .mini-card,
 #app #custom-page-parsed .card-basic,
 #app #custom-page-parsed .mini-card {
   padding-bottom: 1em;
@@ -4234,6 +4235,9 @@ because the nesting selector cannot represent pseudo-elements. */
   border-radius: 10px;
   border: 1px solid var(--white);
   box-shadow: 0 5px 3px color-mix(in srgb, var(--purple-clr_800) 30%, transparent);
+}
+.app nav:has(.pagination) .pagination .page-item .page-link:active {
+  transform: translateY(-3px) scale(0.9);
 }
 .app nav:has(.pagination) .pagination .page-item.active .page-link {
   background: var(--purple-clr_600);
