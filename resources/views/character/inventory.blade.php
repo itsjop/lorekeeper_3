@@ -114,7 +114,7 @@
             ?>
             <a
               href="#"
-              class=" inventory-stack text-center img"
+              class="grid ji-center inventory-stack text-center img"
               data-id="{{ $stack->first()->pivot->id }}"
               data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}"
             >
