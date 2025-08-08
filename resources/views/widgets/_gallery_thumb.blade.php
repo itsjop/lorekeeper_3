@@ -1,7 +1,7 @@
 @if (isset($submission->content_warning))
-  <img class="img-thumbnail" src="{{ asset('images/somnivores/site/content-warning.png') }}" alt="Content Warning" />
+  <img loading="lazy" class="img-thumbnail" src="{{ asset('images/somnivores/site/content-warning.png') }}" alt="Content Warning" />
 @elseif(isset($submission->hash))
-  <img class="img-thumbnail" src="{{ $submission->thumbnailUrl }}" alt="Submission thumbnail" />
+  <img loading="lazy" class="img-thumbnail" src="{{ $submission->thumbnailUrl }}" alt="Submission thumbnail" />
 @else
   <div class="mx-auto img-thumbnail text-left" style="height:{{ config('lorekeeper.settings.masterlist_thumbnails.height') + 8 }}px; width:{{ config('lorekeeper.settings.masterlist_thumbnails.width') + 4 }}px;">
     <span class="badge-primary px-2 py-1" style="border-radius:0 0 .5em 0; position:absolute; z-index:5;">Literature</span>
