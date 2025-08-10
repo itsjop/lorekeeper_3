@@ -13,7 +13,7 @@
     @else
       <div
         id="comment-{{ $comment->getKey() }}"
-        class="pt-4"
+        class="comment_replies pt-4"
         style="flex-basis: 100%;"
       >
   @endif

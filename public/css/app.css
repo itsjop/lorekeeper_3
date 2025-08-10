@@ -993,6 +993,15 @@ body {
   background-color: #e2dee8;
 }
 
+@container main-container (width < 600px) {
+  .card-basic {
+    padding: 3cqw;
+  }
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
 /* General Styling */
 #app {
   font-family: "Baloo 2", sans-serif;
@@ -4307,4 +4316,12 @@ because the nesting selector cannot represent pseudo-elements. */
 
 .grecaptcha-badge {
   display: none;
+}
+
+.comment_replies {
+  max-width: 100;
+}
+.comment_replies h1, .comment_replies h2, .comment_replies h3, .comment_replies h4, .comment_replies h5, .comment_replies h6, .comment_replies p, .comment_replies span {
+  text-transform: unset;
+  word-break: break-word;
 }

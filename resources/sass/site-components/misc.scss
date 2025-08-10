@@ -115,3 +115,7 @@
 .grecaptcha-badge {
   display: none;
 }
+.comment_replies {
+  max-width: 100;
+  h1, h2, h3, h4, h5, h6, p, span { text-transform: unset; word-break: break-word; }
+}

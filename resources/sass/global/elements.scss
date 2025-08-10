@@ -233,3 +233,12 @@
     background-color: #e2dee8;
   }
 }
+@container main-container (width < 600px) {
+  .card-basic {
+    padding: 3cqw;
+  }
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
