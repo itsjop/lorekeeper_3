@@ -88,13 +88,15 @@
   @parent
   <script>
     $(document).ready(function() {
+
       tinymce.init({
         selector: '.comment-wysiwyg',
-        height: 250,
+        license_key: 'gpl',
+        height: 500,
         menubar: false,
         convert_urls: false,
         plugins: [
-          'advlist forecolor fontselect fontsizeselect  autolink lists link image charmap print preview anchor',
+          'advlist forecolor fontselect fontsizeselect autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen spoiler',
           'insertdatetime media table paste code help wordcount'
         ],
@@ -110,7 +112,6 @@
         indent_after: 'h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,th,ul,ol,li,dl,dt,dd,area,table,thead,' +
           'tfoot,tbody,tr,section,article,hgroup,aside,figure,figcaption,option,optgroup,datalist',
         whitespace_elements: 'p pre script noscript style textarea video audio iframe object code',
-
       });
 
       // function sortComments() {

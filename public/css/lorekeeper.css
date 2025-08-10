@@ -20,22 +20,7 @@
 **************************************************************************************************/
 
 
-h1,
-h2,
-h3,
-h4,
-h5,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5 {
-  text-transform: uppercase;
-  font-family:
-    Roboto Condensed,
-    serif;
-  font-weight: bold;
-}
+
 
 h1 a,
 h2 a,
@@ -131,10 +116,6 @@ main > .row {
 
 .navbar .navbar-brand,
 .navbar .nav-item {
-  text-transform: uppercase;
-  font-family:
-    Roboto Condensed,
-    serif;
 }
 
 .navbar .row {
@@ -157,10 +138,6 @@ main > .row {
 
 .sidebar .sidebar-header,
 .sidebar .sidebar-section .sidebar-section-header {
-  text-transform: uppercase;
-  font-family:
-    Roboto Condensed,
-    serif;
   font-weight: bold;
 }
 
@@ -339,9 +316,6 @@ main > .row {
   cursor: pointer;
   padding: 0.3rem 1.25rem;
   font-size: 0.9rem;
-  font-family:
-    Roboto Condensed,
-    serif;
   color: inherit;
   text-transform: uppercase;
 }
