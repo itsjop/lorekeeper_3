@@ -319,7 +319,9 @@
               <a class="dt-nav-item" href="{{ Auth::user()->url }}">
                 <i class="fas fa-user"></i> Profile </a>
               <a class="dt-nav-item" href="{{ url('notifications') }}">
-                <i class="fas fa-envelope"></i> Notifications </a>
+                <i class="fas fa-bell"></i> Notifications </a>
+              <a class="dt-nav-item" href="{{ url('mail') }}">
+                <i class="fas fa-envelope"></i> Mail </a>
               <a class="dt-nav-item" href="{{ url('account/bookmarks') }}">
                 <i class="fas fa-bookmark"></i> Bookmarks </a>
               <a class="dt-nav-item" href="{{ url('account/settings') }}">
