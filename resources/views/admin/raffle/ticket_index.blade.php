@@ -26,7 +26,7 @@
       @endif
     </p>
     <div class="alert alert-warning mb-2">
-      This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.
+      This raffle will close {{ isset($raffle->end_at) ? $raffle->end_at->format('F j, Y g:i A') : '' }}.
     </div>
     @if ($raffle->ticket_cap)
       This raffle has a cap of {{ $raffle->ticket_cap }} tickets per individual.
@@ -46,7 +46,8 @@
           <div class="alert alert-warning mb-2">This raffle has closed.</div>
         @else
           This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})
-          <div class="alert alert-warning mb-2">This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.</div>
+          <div class="alert alert-warning mb-2">This raffle will close
+            {{ isset($raffle->end_at) ? $raffle->end_at->format('F j, Y g:i A') : '' }}.</div>
         @endif
       @endif
       @if ($raffle->ticket_cap)
