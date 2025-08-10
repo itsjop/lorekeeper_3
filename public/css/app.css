@@ -4382,7 +4382,8 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 
 .commentbox {
-  max-width: 100;
+  width: 100%;
+  max-width: 100%;
 }
 .commentbox h1, .commentbox h2, .commentbox h3, .commentbox h4, .commentbox h5, .commentbox h6, .commentbox p, .commentbox span {
   text-transform: unset;
