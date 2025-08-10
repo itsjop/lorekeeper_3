@@ -7,13 +7,13 @@
   @if (isset($reply) && $reply === true)
     <div
       id="comment-{{ $comment->getKey() }}"
-      class="comment_replies border-left col-12 column mw-100 pr-0 pt-4"
+      class="comment_replies commentbox border-left col-12 column mw-100 pr-0 pt-4"
       style="flex-basis: 100%;"
     >
     @else
       <div
         id="comment-{{ $comment->getKey() }}"
-        class="comment_replies pt-4"
+        class="comment_replies commentbox pt-4"
         style="flex-basis: 100%;"
       >
   @endif
@@ -103,7 +103,7 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
   @if (isset($reply) && $reply === true)
     <div
       id="comment-{{ $comment->getKey() }}"
-      class="comment_replies border-left col-12 column mw-100 pr-0 pt-4"
+      class="comment_replies commentbox border-left col-12 column mw-100 pr-0 pt-4"
       style="flex-basis: 100%;"
     >
     @else

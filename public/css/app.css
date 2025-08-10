@@ -4318,10 +4318,10 @@ because the nesting selector cannot represent pseudo-elements. */
   display: none;
 }
 
-.comment_replies {
+.commentbox {
   max-width: 100;
 }
-.comment_replies h1, .comment_replies h2, .comment_replies h3, .comment_replies h4, .comment_replies h5, .comment_replies h6, .comment_replies p, .comment_replies span {
+.commentbox h1, .commentbox h2, .commentbox h3, .commentbox h4, .commentbox h5, .commentbox h6, .commentbox p, .commentbox span {
   text-transform: unset;
   word-break: break-word;
 }
