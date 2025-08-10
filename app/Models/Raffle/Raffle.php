@@ -38,7 +38,7 @@ class Raffle extends Model {
    */
   protected $casts = [
     'rolled_at' => 'datetime',
-    'end_at'
+    'end_at'  => 'datetime',
   ];
 
   /**
