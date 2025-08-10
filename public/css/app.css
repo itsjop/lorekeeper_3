@@ -3761,12 +3761,14 @@ because the nesting selector cannot represent pseudo-elements. */
   /* Breakpoints */
 }
 #app .lore,
+#app .world-entry-text,
 #app #custom-page-parsed {
   padding: 10px;
   max-width: var(--content-width);
   text-align: center;
 }
 #app .lore title,
+#app .world-entry-text title,
 #app #custom-page-parsed title {
   font-family: "Fredoka";
   font-size: 2.5em;
@@ -3775,6 +3777,7 @@ because the nesting selector cannot represent pseudo-elements. */
   text-transform: none;
 }
 #app .lore h1,
+#app .world-entry-text h1,
 #app #custom-page-parsed h1 {
   font-family: "Sour Gummy", system-ui;
   font-size: 1.8em;
@@ -3786,6 +3789,7 @@ because the nesting selector cannot represent pseudo-elements. */
   text-shadow: none;
 }
 #app .lore h1.header,
+#app .world-entry-text h1.header,
 #app #custom-page-parsed h1.header {
   background: linear-gradient(to top, #5d61ff, #360d6a);
   -webkit-background-clip: text;
@@ -3799,6 +3803,8 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 #app .lore h2,
 #app .lore h3,
+#app .world-entry-text h2,
+#app .world-entry-text h3,
 #app #custom-page-parsed h2,
 #app #custom-page-parsed h3 {
   font-family: "Itim", system-ui;
@@ -3811,14 +3817,17 @@ because the nesting selector cannot represent pseudo-elements. */
   text-shadow: none;
 }
 #app .lore h2,
+#app .world-entry-text h2,
 #app #custom-page-parsed h2 {
   font-size: 1.5em;
 }
 #app .lore h3,
+#app .world-entry-text h3,
 #app #custom-page-parsed h3 {
   font-size: 1.3em;
 }
 #app .lore p,
+#app .world-entry-text p,
 #app #custom-page-parsed p {
   font-family: "Baloo 2";
   font-size: 1em;
@@ -3827,35 +3836,42 @@ because the nesting selector cannot represent pseudo-elements. */
   text-transform: none;
 }
 #app .lore p.caption,
+#app .world-entry-text p.caption,
 #app #custom-page-parsed p.caption {
   font-size: 0.8em;
   font-style: italic;
   margin: 0 auto;
 }
 #app .lore p.tip,
+#app .world-entry-text p.tip,
 #app #custom-page-parsed p.tip {
   border: 2px solid black;
   padding: 10px;
 }
 #app .lore > p,
+#app .world-entry-text > p,
 #app #custom-page-parsed > p {
   width: clamp(200px, 0.7 * var(--content-width), 0.7 * var(--content-max-width));
 }
 #app .lore img,
+#app .world-entry-text img,
 #app #custom-page-parsed img {
   border-radius: 15px;
   margin-bottom: 1em;
 }
 #app .lore ul,
+#app .world-entry-text ul,
 #app #custom-page-parsed ul {
   margin-bottom: 0;
   text-align: start;
 }
 #app .lore h1.top,
+#app .world-entry-text h1.top,
 #app #custom-page-parsed h1.top {
   margin-top: -13px;
 }
 #app .lore .card-float,
+#app .world-entry-text .card-float,
 #app #custom-page-parsed .card-float {
   background: none;
   margin: 0 auto;
@@ -3865,31 +3881,37 @@ because the nesting selector cannot represent pseudo-elements. */
   max-width: 800px;
 }
 #app .lore .card-float ul,
+#app .world-entry-text .card-float ul,
 #app #custom-page-parsed .card-float ul {
   padding-left: 40px;
 }
 #app .lore .card-float ul li,
+#app .world-entry-text .card-float ul li,
 #app #custom-page-parsed .card-float ul li {
   margin-bottom: 0.5rem;
 }
 #app .lore .card-float ul li::marker,
+#app .world-entry-text .card-float ul li::marker,
 #app #custom-page-parsed .card-float ul li::marker {
   content: "✦  ";
   font-size: 1rem;
   color: #40258b;
 }
 #app .lore .speech-bubble,
+#app .world-entry-text .speech-bubble,
 #app #custom-page-parsed .speech-bubble {
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 1rem 15px;
 }
 #app .lore .speech-avatar,
+#app .world-entry-text .speech-avatar,
 #app #custom-page-parsed .speech-avatar {
   margin-top: 10px;
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
 #app .lore .speech-name,
+#app .world-entry-text .speech-name,
 #app #custom-page-parsed .speech-name {
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   border-radius: 10px;
@@ -3900,38 +3922,47 @@ because the nesting selector cannot represent pseudo-elements. */
   margin: 5px;
 }
 #app .lore .speech-name.gala,
+#app .world-entry-text .speech-name.gala,
 #app #custom-page-parsed .speech-name.gala {
   background-image: linear-gradient(45deg, rgb(74, 183, 255), rgb(44, 98, 234));
 }
 #app .lore .speech-name.millie,
+#app .world-entry-text .speech-name.millie,
 #app #custom-page-parsed .speech-name.millie {
   background-image: linear-gradient(45deg, rgb(120, 199, 51), rgb(21, 135, 38));
 }
 #app .lore .speech-name.bunny,
+#app .world-entry-text .speech-name.bunny,
 #app #custom-page-parsed .speech-name.bunny {
   background-image: linear-gradient(45deg, rgb(98, 219, 68), rgb(32, 94, 252));
 }
 #app .lore .speech-name.wysp,
+#app .world-entry-text .speech-name.wysp,
 #app #custom-page-parsed .speech-name.wysp {
   background-image: linear-gradient(45deg, rgb(150, 161, 255), rgb(128, 57, 235));
 }
 #app .lore .speech-name.caspian,
+#app .world-entry-text .speech-name.caspian,
 #app #custom-page-parsed .speech-name.caspian {
   background-image: linear-gradient(45deg, rgb(199, 51, 98), rgb(13, 51, 147));
 }
 #app .lore .speech-name.leo,
+#app .world-entry-text .speech-name.leo,
 #app #custom-page-parsed .speech-name.leo {
   background-image: linear-gradient(45deg, rgb(221, 160, 75), rgb(220, 48, 74));
 }
 #app .lore .speech-name.cirrus,
+#app .world-entry-text .speech-name.cirrus,
 #app #custom-page-parsed .speech-name.cirrus {
   background-image: linear-gradient(45deg, rgb(205, 130, 236), rgb(20, 55, 228));
 }
 #app .lore .speech-name.esmerelda,
+#app .world-entry-text .speech-name.esmerelda,
 #app #custom-page-parsed .speech-name.esmerelda {
   background-image: linear-gradient(45deg, rgb(159, 182, 172), rgb(104, 108, 151));
 }
 #app .lore .speech-name a,
+#app .world-entry-text .speech-name a,
 #app #custom-page-parsed .speech-name a {
   margin-bottom: 0;
   color: rgb(255, 255, 255);
@@ -3940,10 +3971,12 @@ because the nesting selector cannot represent pseudo-elements. */
   font-family: "Itim";
 }
 #app .lore .speech-name:hover,
+#app .world-entry-text .speech-name:hover,
 #app #custom-page-parsed .speech-name:hover {
   scale: 1.1;
 }
 #app .lore .speech-text,
+#app .world-entry-text .speech-text,
 #app #custom-page-parsed .speech-text {
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
   background: rgba(250, 246, 255, 0.514);
@@ -3954,14 +3987,17 @@ because the nesting selector cannot represent pseudo-elements. */
   padding: 20px;
 }
 #app .lore .speech-text p,
+#app .world-entry-text .speech-text p,
 #app #custom-page-parsed .speech-text p {
   text-align: left;
 }
 #app .lore .last,
+#app .world-entry-text .last,
 #app #custom-page-parsed .last {
   margin-bottom: 0;
 }
 #app .lore .card,
+#app .world-entry-text .card,
 #app #custom-page-parsed .card {
   margin: 15px 25px 10px 25px;
   box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
@@ -3969,11 +4005,13 @@ because the nesting selector cannot represent pseudo-elements. */
   border-radius: 15px;
 }
 #app .lore .card:not(:has(.card-header)),
+#app .world-entry-text .card:not(:has(.card-header)),
 #app #custom-page-parsed .card:not(:has(.card-header)) {
   background: rgba(255, 255, 255, 0.6784313725);
   padding: 15px 40px;
 }
 #app .lore .card .card-header,
+#app .world-entry-text .card .card-header,
 #app #custom-page-parsed .card .card-header {
   background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(255, 255, 255, 0.6784313725) 100%);
   border-radius: 15px 15px 0 0;
@@ -3983,6 +4021,7 @@ because the nesting selector cannot represent pseudo-elements. */
   margin: 0;
 }
 #app .lore .card .card-text,
+#app .world-entry-text .card .card-text,
 #app #custom-page-parsed .card .card-text {
   background: rgba(255, 255, 255, 0.6784313725);
   border-radius: 0;
@@ -3993,6 +4032,7 @@ because the nesting selector cannot represent pseudo-elements. */
   box-shadow: none;
 }
 #app .lore .card .card-img,
+#app .world-entry-text .card .card-img,
 #app #custom-page-parsed .card .card-img {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6784313725) 0%, transparent 40%, transparent 60%, rgba(255, 255, 255, 0.6784313725) 100%);
   border-radius: 0;
@@ -4003,6 +4043,7 @@ because the nesting selector cannot represent pseudo-elements. */
   box-shadow: none;
 }
 #app .lore .card .card-footer,
+#app .world-entry-text .card .card-footer,
 #app #custom-page-parsed .card .card-footer {
   background: rgba(255, 255, 255, 0.6784313725);
   border-radius: 0 0 15px 15px;
@@ -4013,29 +4054,36 @@ because the nesting selector cannot represent pseudo-elements. */
   box-shadow: none;
 }
 #app .lore .card img,
+#app .world-entry-text .card img,
 #app #custom-page-parsed .card img {
   margin-bottom: 1em;
 }
 #app .lore .card p,
+#app .world-entry-text .card p,
 #app #custom-page-parsed .card p {
   margin: 0;
 }
 #app .lore .card br,
+#app .world-entry-text .card br,
 #app #custom-page-parsed .card br {
   margin-bottom: 15px;
 }
 #app .lore .card-basic,
 #app .lore .mini-card,
+#app .world-entry-text .card-basic,
+#app .world-entry-text .mini-card,
 #app #custom-page-parsed .card-basic,
 #app #custom-page-parsed .mini-card {
   padding-bottom: 1em;
 }
 #app .lore .spoiler,
+#app .world-entry-text .spoiler,
 #app #custom-page-parsed .spoiler {
   border: none;
   margin-bottom: 1em;
 }
 #app .lore .spoiler .spoiler-toggle,
+#app .world-entry-text .spoiler .spoiler-toggle,
 #app #custom-page-parsed .spoiler .spoiler-toggle {
   color: white;
   font-weight: 500;
@@ -4047,11 +4095,14 @@ because the nesting selector cannot represent pseudo-elements. */
   transition: 0.3s;
 }
 #app .lore .spoiler .spoiler-toggle:hover, #app .lore .spoiler .spoiler-toggle:active,
+#app .world-entry-text .spoiler .spoiler-toggle:hover,
+#app .world-entry-text .spoiler .spoiler-toggle:active,
 #app #custom-page-parsed .spoiler .spoiler-toggle:hover,
 #app #custom-page-parsed .spoiler .spoiler-toggle:active {
   background-color: rgba(90, 37, 197, 0.459);
 }
 #app .lore .spoiler .spoiler-text,
+#app .world-entry-text .spoiler .spoiler-text,
 #app #custom-page-parsed .spoiler .spoiler-text {
   border-radius: 10px;
   margin-top: 5px;
@@ -4059,46 +4110,57 @@ because the nesting selector cannot represent pseudo-elements. */
   border: 1px white solid;
 }
 #app .lore .pink,
+#app .world-entry-text .pink,
 #app #custom-page-parsed .pink {
   color: #f178bd;
 }
 #app .lore .purple,
+#app .world-entry-text .purple,
 #app #custom-page-parsed .purple {
   color: #7f55e0;
 }
 #app .lore .blue,
+#app .world-entry-text .blue,
 #app #custom-page-parsed .blue {
   color: #3c7dde;
 }
 #app .lore .green,
+#app .world-entry-text .green,
 #app #custom-page-parsed .green {
   color: #34a838;
 }
 #app .lore .darkred,
+#app .world-entry-text .darkred,
 #app #custom-page-parsed .darkred {
   color: #61000d;
 }
 #app .lore .darkpurple,
+#app .world-entry-text .darkpurple,
 #app #custom-page-parsed .darkpurple {
   color: #25005c;
 }
 #app .lore .darkmagenta,
+#app .world-entry-text .darkmagenta,
 #app #custom-page-parsed .darkmagenta {
   color: #480033;
 }
 #app .lore .pastel,
+#app .world-entry-text .pastel,
 #app #custom-page-parsed .pastel {
   color: #be9bff;
 }
 #app .lore .dark,
+#app .world-entry-text .dark,
 #app #custom-page-parsed .dark {
   color: #1a003f;
 }
 #app .lore .orange,
+#app .world-entry-text .orange,
 #app #custom-page-parsed .orange {
   color: #f4782a;
 }
 #app .lore .yellow,
+#app .world-entry-text .yellow,
 #app #custom-page-parsed .yellow {
   color: #ffc72f;
 }
