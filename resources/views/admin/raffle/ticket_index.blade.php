@@ -190,13 +190,13 @@
       var id = $(this).attr('value');
       loadModal("{{ url('/admin/raffles/edit/reroll') }}/" + id, 'Reroll Ticket');
     });
-    $('.edit-tickets').on('click', function(e) {
-      e.preventDefault();
-      $('#raffle-modal').modal('show');
-    });
 
     $(document).ready(function() {
       $('#add-ticket').on('click', function(e) {
+        e.preventDefault();
+        $('#raffle-modal').modal('show');
+      });
+      $('.edit-tickets').on('click', function(e) {
         e.preventDefault();
         $('#raffle-modal').modal('show');
       });

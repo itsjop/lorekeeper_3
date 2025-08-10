@@ -20,6 +20,21 @@
       data-id=""
     >Create Raffle</a>
   </div>
+  
+  @if (Request::get('is_active') == 1)
+    <p>
+      This is the list of raffles that are visible to users and have not been rolled.
+    </p>
+  @elseif(Request::get('is_active') == 2)
+    <p>
+      This is the list of raffles that are complete (have been rolled). These will always be visible to users.
+    </p>
+  @elseif(!Request::get('is_active'))
+    <p>
+      This is the list of raffles that have not been rolled, including hidden raffles.
+    </p>
+  @endif
+
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
       <a href="{{ url()->current() }}" class="nav-link {{ Request::get('is_active') ? '' : 'active' }}">Current
@@ -34,19 +49,6 @@
         Raffles</a>
     </li>
   </ul>
-  @if (Request::get('is_active') == 1)
-    <p>
-      This is the list of raffles that are visible to users and have not been rolled.
-    </p>
-  @elseif(Request::get('is_active') == 2)
-    <p>
-      This is the list of raffles that are complete (have been rolled). These will always be visible to users.
-    </p>
-  @elseif(!Request::get('is_active'))
-    <p>
-      This is the list of raffles that have not been rolled, including hidden raffles.
-    </p>
-  @endif
 
   <?php $prevGroup = null; ?>
   <ul class="list-group mb-3">
