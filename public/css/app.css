@@ -913,6 +913,7 @@ body {
   border-radius: 15px;
   max-width: 800px;
   padding: 30px;
+  padding-bottom: 1em;
 }
 .app .card-basic ul,
 .app .card-full ul {
