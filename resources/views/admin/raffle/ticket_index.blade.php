@@ -23,6 +23,7 @@
         @else
           This raffle is currently hidden. (Number of winners to be drawn: {{ $raffle->winner_count }})
         @endif
+      @endif
     </p>
     <div class="alert alert-warning mb-2">
       This raffle will close {{ $raffle->end_at->format('F j, Y g:i A') }}.
@@ -83,43 +84,6 @@
                 <td class="text-right">
                   <div class="btn btn-primary btn-sm reroll" value="{{ $winner->id }}">Reroll?</div>
                 </td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    </div>
-  @elseif($raffle->is_active == 1)
-    <p>
-      This raffle is currently open. (Number of winners to be drawn: {{ $raffle->winner_count }})<br />
-      @if ($raffle->ticket_cap)
-        This raffle has a cap of {{ $raffle->ticket_cap }} tickets per individual.
-      @endif
-    </p>
-    <div class="text-right form-group">
-      <a
-        class="btn btn-success edit-tickets"
-        href="#"
-        data-id=""
-      >Add Tickets</a>
-    </div>
-  @elseif($raffle->is_active == 2)
-    <p>
-      This raffle is closed. Rolled: {!! format_date($raffle->rolled_at) !!}
-    </p>
-    <div class="card mb-3">
-      <div class="card-header h3">Winner(s)</div>
-      <div class="table-responsive">
-        <table class="table table-sm mb-0">
-          <thead>
-            <th class="col-xs-1 text-center" style="width:100px;">#</th>
-            <th>User</th>
-          </thead>
-          <tbody>
-            @foreach ($raffle->tickets()->winners()->get() as $winner)
-              <tr>
-                <td class="text-center">{{ $winner->position }}</td>
-                <td class="text-left">{!! $winner->displayHolderName !!}</td>
               </tr>
             @endforeach
           </tbody>
