@@ -3859,7 +3859,6 @@ because the nesting selector cannot represent pseudo-elements. */
 #app #custom-page-parsed img {
   border-radius: 15px;
   margin-bottom: 1em;
-  width: 100%;
 }
 #app .lore ul,
 #app .world-entry-text ul,
@@ -4077,6 +4076,14 @@ because the nesting selector cannot represent pseudo-elements. */
 #app #custom-page-parsed .card-basic,
 #app #custom-page-parsed .mini-card {
   padding-bottom: 1em;
+}
+#app .lore .card-basic img,
+#app .lore .mini-card img,
+#app .world-entry-text .card-basic img,
+#app .world-entry-text .mini-card img,
+#app #custom-page-parsed .card-basic img,
+#app #custom-page-parsed .mini-card img {
+  max-width: 100%;
 }
 #app .lore .spoiler,
 #app .world-entry-text .spoiler,
