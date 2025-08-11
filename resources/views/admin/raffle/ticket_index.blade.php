@@ -184,13 +184,6 @@
 @section('scripts')
   @parent
   <script>
-    $('.reroll').on('click', function(e) {
-      e.preventDefault();
-      // get value
-      var id = $(this).attr('value');
-      loadModal("{{ url('/admin/raffles/edit/reroll') }}/" + id, 'Reroll Ticket');
-    });
-
     $(document).ready(function() {
       $('#add-ticket').on('click', function(e) {
         e.preventDefault();
@@ -200,6 +193,14 @@
         e.preventDefault();
         $('#raffle-modal').modal('show');
       });
+      
+      $('.reroll').on('click', function(e) {
+        e.preventDefault();
+        // get value
+        var id = $(this).attr('value');
+        loadModal("{{ url('/admin/raffles/edit/reroll') }}/" + id, 'Reroll Ticket');
+      });
+
 
       $(document).ready(function() {
         $('#add-ticket').on('click', function(e) {
