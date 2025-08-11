@@ -118,5 +118,50 @@
 .commentbox {
   width: 100%;
   max-width: 100%;
-  h1, h2, h3, h4, h5, h6, p, span { text-transform: unset; word-break: break-word; }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span {
+    text-transform: unset;
+    word-break: break-word;
+  }
+}
+
+.cw-img {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  img,
+  .warning {
+    grid-area: 1 / 1 / 2 / 2;
+    width: 100%;
+    max-width: 100%;
+  }
+  .warning {
+    backdrop-filter: blur(2cqw) grayscale(60%);
+    transition: linear 0.2s;
+    background-color: color-mix(in srgb, var(--white) 50%, transparent);
+    display: grid;
+    place-content: center;
+    place-items: center;
+    z-index: 10;
+    opacity: 1;
+    border: 2px var(--purple-clr_500) solid;
+    border-radius: 15px;
+    button {
+      cursor: pointer;
+    }
+  }
+  &.hidden {
+    .warning {
+      opacity: 0;
+      backdrop-filter: blur(0) grayscale(0%);
+      user-select: none;
+      pointer-events: none;
+    }
+  }
 }
