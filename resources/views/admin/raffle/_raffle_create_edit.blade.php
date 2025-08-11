@@ -53,17 +53,15 @@
     {!! Form::label('unordered', 'Unordered Results?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If there are less entrants than winners, the numbers will be random instead of 1 - X.') !!}
   </label>
 </div>
+<div class="form-group">
+  {!! Form::checkbox('roll_on_end', 1, $raffle->roll_on_end, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
+  {!! Form::label('roll_on_end', 'Roll On End?') !!} {!! add_help('When the end time comes about, do you wish the raffle to roll itself?') !!}
+</div>
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
       {!! Form::label('end_at', 'End Time (Optional)') !!} {!! add_help('Prompts cannot be submitted to the queue after the ending time.') !!}
       {!! Form::text('end_at', $raffle->end_at, ['class' => 'form-control datepicker']) !!}
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="form-group">
-      {!! Form::label('roll_on_end', 'Roll On End?') !!} {!! add_help('When the end time comes about, do you wish the raffle to roll itself?') !!}
-      {!! Form::checkbox('roll_on_end', 1, $raffle->is_fto, ['class' => 'form-check-input mr-2', 'data-toggle' => 'toggle']) !!}
     </div>
   </div>
 </div>
