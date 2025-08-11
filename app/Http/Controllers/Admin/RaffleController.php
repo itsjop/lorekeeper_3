@@ -9,6 +9,7 @@ use App\Models\Raffle\Raffle;
 use App\Models\Raffle\RaffleGroup;
 use App\Models\Raffle\RaffleTicket;
 use App\Models\User\User;
+use Illuminate\Support\Facades\Auth;
 use App\Services\RaffleManager;
 use App\Services\RaffleService;
 use Illuminate\Http\Request;
