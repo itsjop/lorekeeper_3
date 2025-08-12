@@ -1,7 +1,7 @@
 {{-- Image Data --}}
 <div class="col-md-5 d-flex">
   <div class="w-100">
-    @if ((isset($image->content_warnings) && !Auth::check()) || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($image->content_warnings)))
+    {{-- @if ((isset($image->content_warnings) && !Auth::check()) || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($image->content_warnings)))
       <div class="alert alert-danger text-center">
         <span class="float-right">
           <a href="#" data-bs-dismiss="alert" class="close">
@@ -14,7 +14,7 @@
         </h5>
         <div>{!! implode(', ', $image->content_warnings) !!}</div>
       </div>
-    @endif
+    @endif --}}
     <div class="card character-bio w-100">
       <div class="card-header">
         <ul class="nav nav-tabs flex gap-_5 card-header-tabs">

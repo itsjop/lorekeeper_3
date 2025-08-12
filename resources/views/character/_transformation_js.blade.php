@@ -8,7 +8,7 @@
       url: "{{ url('character/' . $character->slug . '/image') }}/" + id,
       dataType: "text"
     }).done(function(res) {
-      $("#main-tab").fadeOut(500, function() {
+      $("#main-tab").fadeOut(200, function() {
         $("#main-tab").html(res);
         $('#main-tab').find('[data-bs-toggle="toggle"]').bootstrapToggle();
         $('.reupload-image').on('click', function(e) {
@@ -64,7 +64,7 @@
           loadModal("{{ url('admin/character/image') }}/" + $(this).data('id') + "/credits",
             'Edit Image Credits');
         });
-        $("#main-tab").fadeIn(500);
+        $("#main-tab").fadeIn(200);
       });
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert("AJAX call failed: " + textStatus + ", " + errorThrown);

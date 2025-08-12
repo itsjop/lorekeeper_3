@@ -939,11 +939,13 @@ class CharacterController extends Controller {
    */
   public function getCharacterImage($slug, $id) {
     $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
-
+    $warnings = isset($image->content_warnings) ? implode(', ', $image->content_warnings) : null;
+    
     return view('character.image', [
       'user'      => Auth::check() ? Auth::user() : null,
       'character' => $this->character,
       'image'     => $image,
+      'warnings'  => $warnings,
       'ajax'      => true,
     ]);
   }

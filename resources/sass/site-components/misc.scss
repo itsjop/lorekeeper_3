@@ -135,29 +135,40 @@
   display: grid;
   width: 100%;
   max-width: 100%;
+  overflow: hidden;
   img,
   .warning {
     grid-area: 1 / 1 / 2 / 2;
     width: 100%;
     max-width: 100%;
   }
+  img {
+    filter: blur(5px);
+    scale: 0.95;
+  }
   .warning {
-    backdrop-filter: blur(2cqw) grayscale(60%);
-    transition: linear 0.2s;
+    backdrop-filter: blur(2cqw) saturate(60%);
+    transition: linear 0s;
     background-color: color-mix(in srgb, var(--white) 50%, transparent);
     display: grid;
     place-content: center;
     place-items: center;
     z-index: 10;
-    opacity: 1;
     border: 2px var(--purple-clr_500) solid;
-    border-radius: 15px;
+    border-radius: 0 15px 15px 15px;
+    opacity: 1;
     button {
       cursor: pointer;
     }
   }
   &.hidden {
+    img {
+      scale: 1;
+      filter: blur(0px);
+      transition: ease 0.2s;
+    }
     .warning {
+      transition: linear 0.2s;
       opacity: 0;
       backdrop-filter: blur(0) grayscale(0%);
       user-select: none;

@@ -38,7 +38,7 @@
   @include('character._header', ['character' => $character])
 
   @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
-    <div class="card-header mb-2">
+    <div class="card-header">
       <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
         @foreach ($character->images()->where('is_valid', 1)->get() as $image)
           <li class="nav-item">
@@ -105,11 +105,32 @@
           data-lightbox="entry"
           data-title="{{ $character->fullName }}"
         >
-          <img
-            src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
-            alt="{{ $character->fullName }}"
-          />
+          <pre>
+            auth setting - {{ Auth::user()->settings->content_warning_visibility }}
+            character warn - "{{ $character->image->content_warnings }}"
+          </pre>
+          @if (
+              (isset($character->image->content_warnings) && !Auth::check()) ||
+                  (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
+          )
+            @include('widgets._cw_img', [
+                'src' =>
+                    $character->image->canViewFull(Auth::user() ?? null) &&
+                    file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
+                        ? $character->image->fullsizeUrl
+                        : $character->image->imageUrl,
+                'class' => 'image',
+                'alt' => $character->fullName,
+                'warning' => implode(', ', $character->image->content_warnings),
+                'id' => uniqid()
+            ])
+          @else
+            <img
+              src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+              class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+              alt="{{ $character->fullName }}"
+            />
+          @endif
         </a>
         <div class="mt-2 text-center">@include('widgets._object_block', ['object' => $character])</div>
       </div>
