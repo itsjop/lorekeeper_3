@@ -3,7 +3,8 @@
 
 // ACTUAL SIDEBAR
 #app #site-wrapper {
-  &.has-sidebar #sidebar-container {
+  #sidebar-container {
+    // &.has-sidebar #sidebar-container {
     grid-area: sidebar;
     max-width: 100%;
     position: relative;
@@ -44,7 +45,8 @@
               font-weight: 700;
               color: var(--white);
             }
-            &:hover, &:active {
+            &:hover,
+            &:active {
               transition: 0.1s linear;
               background-color: var(--purple-clr_300);
               color: var(--purple-clr_800);
@@ -173,10 +175,11 @@
   padding-right: 0px;
   a {
     color: color-mix(in srgb, var(--black) 70%, transparent);
-    &:hover, &:active {
+    &:hover,
+    &:active {
       color: var(--purple-clr_900);
     }
-    &:hover, &:active,
+    &:hover,
     &:active,
     &:focus,
     &:link {
@@ -201,7 +204,8 @@
     a {
       font-size: 0.8em;
       color: var(--purple-clr_50);
-      &:hover, &:active {
+      &:hover,
+      &:active {
         background-color: transparent;
         color: var(--purple-clr_50);
       }
@@ -245,14 +249,16 @@
         li {
           a {
             padding: 3px 6px;
-            &:hover, &:active {
+            &:hover,
+            &:active {
               background-color: transparent;
             }
           }
           padding: 0;
           border-radius: 10px;
           border: solid 2px transparent;
-          &:hover, &:active {
+          &:hover,
+          &:active {
             border: solid 2px var(--purple-clr_900);
           }
         }
@@ -396,7 +402,8 @@
 
     .name {
       grid-area: name;
-      &:hover, &:active {
+      &:hover,
+      &:active {
         color: var(--teal-clr_500);
       }
     }
@@ -559,9 +566,13 @@
       }
       .name {
         display: block;
-        &.name-lg { font-size: 3em; }
+        &.name-lg {
+          font-size: 3em;
+        }
         font-size: 2.5em;
-        &.name-sm { font-size: 2em; }
+        &.name-sm {
+          font-size: 2em;
+        }
       }
       .baddge {
         position: absolute;
@@ -575,18 +586,63 @@
   }
 }
 @media (width >= 1000px) {
-  .sb-featured-desktop {
+  .sb-featured-desktop,
+  .sidebar.sidebar-desktop {
     display: block;
   }
-  .sb-featured-mobile {
+  .sb-featured-mobile,
+  .sidebar.sidebar-mobile {
     display: none;
   }
 }
 @media (width < 1000px) {
-  .sb-featured-desktop {
+  .sb-featured-desktop,
+  .sidebar.sidebar-desktop {
     display: none;
   }
-  .sb-featured-mobile {
+  .sb-featured-mobile,
+  .sidebar.sidebar-mobile {
     display: block;
+  }
+}
+@media (width < 800px) {
+  #sidebar-container:has(.sidebar-mobile) {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows ease-out 0.25s;
+    overflow: hidden;
+    border-radius: 15px--gutter-width;
+    perspective: 50px;
+    &.show {
+      transition: grid-template-rows var(--smoothIn_linear) 0.5s;
+      grid-template-rows: 1fr;
+      .sidebar.sidebar-mobile {
+        // outward animation
+        transition: var(--smoothIn_linear) 0.4s;
+        transform: scaleY(1) rotateX(0deg);
+      }
+    }
+    // Mobile Content Slider
+    .sidebar.sidebar-mobile {
+      transform-origin: 0 0;
+      min-height: 0;
+      // inward animation
+      transition: var(--smoothIn_linear) 0.5s;
+      transform: scaleY(0.6) rotateX(-2deg);
+    }
+  }
+}
+
+// hack to remove the front-page toggle button since featured character should always show
+#site-wrapper:has(#sidebar-container .sidebar-mobile .sb-featured-mobile) {
+  #header-nav #mobile-sidebar-toggle {
+    display: none !important;
+  }
+  #sidebar-container {
+    grid-template-rows: 1fr;
+    .sidebar.sidebar-mobile {
+      transform: scaleY(1) rotateX(0deg);
+    }
   }
 }

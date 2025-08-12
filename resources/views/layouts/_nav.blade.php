@@ -1,19 +1,23 @@
 <nav class="navbar navbar-expand-md" id="header-nav">
-  <button
-    class="navbar-toggler collapsed"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="{{ __('Toggle navigation') }}"
-  >
-    <span class="navbar-toggler-icon">
-      <span class="line"></span>
-      <span class="line"></span>
-      <span class="line"></span>
-    </span>
-  </button>
+  <div class="mobile-topnav w-100 jc-between ai-center">
+    <button
+      class="navbar-toggler collapsed"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="{{ __('Toggle navigation') }}"
+    >
+
+      <span class="navbar-toggler-icon">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </span>
+    </button>
+    <button id="mobile-sidebar-toggle" class="mobile-menu-button">menu</button>
+  </div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <!-- Left Side Of Navbar -->
     <ul id="site-navbar" class=" navbar-nav">
@@ -60,20 +64,20 @@
             <h2 class="dt-nav-header">Species</h2>
             <a class="dt-nav-item" href="{{ url('info/somnivores') }}">
               <i class="fas fa-star"></i> Overview </a>
-            <a class="dt-nav-item" href="{{ url('info/palate') }}">
+            <a class="dt-nav-item m-small" href="{{ url('info/palate') }}">
               <i class="fas fa-moon"></i> Dreams & Palates </a>
             <a class="dt-nav-item" href="{{ url('world/species/1/traits') }}">
               <i class="fas fa-scroll"></i> Trait Index </a>
 
             <h2 class="dt-nav-header">World</h2>
-            <a class="dt-nav-item" href="{{ url('world/locations') }}">
-              <i class="fas fa-map"></i> Reverie Locations </a>
+            <a class="dt-nav-item m-small" href="{{ url('world/locations') }}">
+              <i class="fas fa-map "></i> Reverie Locations </a>
             <a class="dt-nav-item" href="{{ url('info/lore-index') }}">
               <i class="fas fa-book"></i> Lore Library </a>
           </div>
           <div class="dt-nav-group">
             <h2 class="dt-nav-header br-tr-15">How to Draw</h2>
-            <a class="dt-nav-item" href="{{ url('info/somnivore-anatomy') }}">
+            <a class="dt-nav-item m-small" href="{{ url('info/somnivore-anatomy') }}">
               <i class="fas fa-paw"></i> Somnivore Anatomy </a>
             <a class="dt-nav-item" href="{{ url('info/dream-essence') }}">
               <i class="fas fa-cloud"></i> Dream Essence </a>
@@ -81,9 +85,9 @@
               <i class="fas fa-seedling"></i> Reverie Scenery </a>
 
             <h2 class="dt-nav-header">Design Guides</h2>
-            <a class="dt-nav-item" href="{{ url('info/bat-form') }}">
+            <a class="dt-nav-item m-small" href="{{ url('info/bat-form') }}">
               <i class="fas fa-brush"></i> Design Guide : Bats </a>
-            <a class="dt-nav-item" href="{{ url('info/demon-form') }}">
+            <a class="dt-nav-item m-small" href="{{ url('info/demon-form') }}">
               <i class="fas fa-brush"></i> Design Guide : Demons </a>
           </div>
           </a>
@@ -139,12 +143,12 @@
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="masterlistDropdown">
           <div class="dt-nav-group">
-            <a class="dt-nav-item" href="{{ url('sublist/npc') }}">
-              <i class="fas fa-star"></i> NPCs </a>
-            <a class="dt-nav-item" href="{{ url('sublist/BAT') }}">
-              <i class="fas fa-star"></i> Official Somnivores </a>
             <a class="dt-nav-item" href="{{ url('sublist/MYO') }}">
               <i class="fas fa-star"></i> MYO Somnivores </a>
+            <a class="dt-nav-item" href="{{ url('sublist/BAT') }}">
+              <i class="fas fa-star"></i> Official Somnivores </a>
+            <a class="dt-nav-item" href="{{ url('sublist/npc') }}">
+              <i class="fas fa-star"></i> NPCs </a>
           </div>
         </div>
       </li>

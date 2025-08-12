@@ -86,6 +86,10 @@
     // });
 
 
+    $('#mobile-sidebar-toggle').on('click', (e) => {
+      e.preventDefault();
+      $('#sidebar-container').toggleClass('show')
+    })
 
 
     bsCustomFileInput.init();

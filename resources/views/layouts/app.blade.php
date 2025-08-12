@@ -195,8 +195,12 @@
               <i class="fas fa-caret-right ml-1"> </i>
             </button>
           </div>
+          {{-- Actual Desktop Sidebar --}}
+          <aside id="sidebar" class="sidebar sidebar-desktop">
+            @yield('sidebar')
+          </aside>
           {{-- Actual Sidebar --}}
-          <aside id="sidebar" class="sidebar ">
+          <aside id="sidebar" class="sidebar sidebar-mobile">
             @yield('sidebar')
           </aside>
         </div>
