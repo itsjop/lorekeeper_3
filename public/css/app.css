@@ -1120,6 +1120,11 @@ body {
   #app #site-wrapper {
     width: 100%;
   }
+  #app #site-wrapper #main-content .main-backdrop {
+    background-color: color-mix(in srgb, var(--body-color) 80%, transparent);
+    -webkit-backdrop-filter: unset;
+            backdrop-filter: unset;
+  }
   #app #site-wrapper #header-nav {
     margin: -3vw 3vw 0;
   }

@@ -136,6 +136,12 @@
     padding: 0px;
     #site-wrapper {
       width: 100%;
+      #main-content {
+        .main-backdrop {
+          background-color: color-mix(in srgb, var(--body-color) 80%, transparent);
+          backdrop-filter: unset;
+        }
+      }
       #header-nav {
         margin: -3vw 3vw 0;
       }

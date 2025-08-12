@@ -25,7 +25,8 @@
       // drop-shadow($offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
       drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
       drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
-    &:hover, &:active {
+    &:hover,
+    &:active {
       $offset_x: 10px;
       $offset_y: 10px;
       $blur: 6px;
@@ -37,7 +38,8 @@
         drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent));
     }
   }
-  &:hover, &:active {
+  &:hover,
+  &:active {
     transition: 0.7s var(--elastic_linear);
     transform: scale(1.1);
   }
