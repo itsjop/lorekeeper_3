@@ -287,7 +287,7 @@
             {{ Auth::user()->name }} <span class="caret"></span>
           </div>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page grid-3-col" aria-labelledby="accountDropdown">
-            <div class="dt-nav-group ">
+            <div class="dt-nav-group character">
               <h2 class="dt-nav-header br-tl-15">My Characters</h2>
               <a class="dt-nav-item" href="{{ url('characters') }}">
                 <i class="fas fa-heart"></i> Character List </a>
@@ -298,7 +298,7 @@
               <a class="dt-nav-item" href="{{ url('characters/transfers/incoming') }}">
                 <i class="fas fa-people-arrows"></i> Character Transfers </a>
             </div>
-            <div class="dt-nav-group">
+            <div class="dt-nav-group stuff">
               <h2 class="dt-nav-header">My Stuff</h2>
               <a class="dt-nav-item" href="{{ url('inventory') }}">
                 <i class="fas fa-gifts"></i> Inventory </a>
@@ -318,7 +318,7 @@
                   <i class="fas fa-shop"></i> My Shops </a>
               @endif
             </div>
-            <div class="dt-nav-group  ">
+            <div class="dt-nav-group account ">
               <h2 class="dt-nav-header ">My Account</h2>
               <a class="dt-nav-item" href="{{ Auth::user()->url }}">
                 <i class="fas fa-user"></i> Profile </a>
