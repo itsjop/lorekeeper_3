@@ -22,7 +22,7 @@
     <div class="text-right mb-3">
       <div
         class="btn btn-outline-info btn-sm"
-        data-toggle="collapse"
+        data-bs-toggle="collapse"
         href="#unreadMail"
         role="button"
         aria-expanded="false"
