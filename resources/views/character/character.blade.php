@@ -105,37 +105,45 @@
           data-lightbox="entry"
           data-title="{{ $character->fullName }}"
         >
-          @if (
-              (isset($character->image->content_warnings) && !Auth::check()) ||
-                  (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
-          )
-            @include('widgets._cw_img', [
-                'src' =>
-                    $character->image->canViewFull(Auth::user() ?? null) &&
-                    file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
-                        ? $character->image->fullsizeUrl
-                        : $character->image->imageUrl,
-                'class' => 'image',
-                'alt' => $character->fullName,
-                'warning' => implode(', ', $character->image->content_warnings),
-                'id' => uniqid()
-            ])
-          @else
-            <img
-              src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-              class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
-              alt="{{ $character->fullName }}"
-            />
-          @endif
+            @if (
+                (isset($character->image->content_warnings) && !Auth::check()) ||
+                    (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
+            )
+              @include('widgets._cw_img', [
+                  'src' =>
+                      $character->image->canViewFull(Auth::user() ?? null) &&
+                      file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
+                          ? $character->image->fullsizeUrl
+                          : $character->image->imageUrl,
+                  'class' => 'image',
+                  'alt' => $character->fullName,
+                  'warnings' => isset($character->image->content_warnings)
+                      ? implode(', ', $character->image->content_warnings)
+                      : '',
+              ])
+            @else
+              <img
+                src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+                class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+                alt="{{ $character->fullName }}"
+              />
+            @endif
         </a>
-        <div class="mt-2 text-center">@include('widgets._object_block', ['object' => $character])</div>
+        <div class="mt-2 text-center">
+          @include('widgets._object_block', ['object' => $character])
+        </div>
       </div>
       @if (
           $character->image->canViewFull(Auth::check() ? Auth::user() : null) &&
               file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
       )
-        <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked
-            image</a>?</div>
+        <div class="text-right">
+          You are viewing the full-size image.
+          <a href="{{ $character->image->imageUrl }}">
+            View watermarked image
+          </a>
+          ?
+        </div>
       @endif
     </div>
     @include('character._image_info', ['image' => $character->image])

@@ -23,8 +23,8 @@
           alt="{{ $character->fullName }}"
         />
       </a>
+    @endif
   </div>
-  @endif
   @if (
       $image->canViewFull(Auth::check() ? Auth::user() : null) &&
           file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName))

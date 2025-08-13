@@ -7,7 +7,7 @@
   />
   <div class="warning">
     <h2>Content Warning:</h2>
-    <p> {{ $warnings }}</p>
+    <p> {{ $warnings }} </p>
     <button
       id="btn-{{ $id }}"
       class="btn btn-primary"
@@ -19,6 +19,7 @@
     </button>
   </div>
 </div>
+
 <script>
   $(document).ready(function() {
     var id = {!! json_encode($id) !!};
