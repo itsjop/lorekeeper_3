@@ -105,10 +105,6 @@
           data-lightbox="entry"
           data-title="{{ $character->fullName }}"
         >
-          <pre>
-            auth setting - {{ Auth::user()->settings->content_warning_visibility }}
-            character warn - "{{ $character->image->content_warnings }}"
-          </pre>
           @if (
               (isset($character->image->content_warnings) && !Auth::check()) ||
                   (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
