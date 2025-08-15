@@ -7,7 +7,7 @@
         >Toyhouse Thread</a></strong> for updates!</p>
   </div>
   <h1 class="header"><img
-      class="w-content-100"
+      class="w-100"
       src="/images/lore_pages/homepage/splashart.png"
       alt="Somnivores splash art"
     /></h1>
