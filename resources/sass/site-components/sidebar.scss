@@ -64,7 +64,7 @@
 
 // DETAILS COLLAPSERS
 #sidebar {
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  // box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 15px;
   details {
     width: 100%;
@@ -331,6 +331,9 @@
         animation: char-fly 3.5s cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
         // animation: char-fly 3s var(--spring_linear) forwards infinite;
         transform-origin: 50% 200%;
+        &.kofi-gift {
+          animation: wobble-kofi 6s var(--smoothIn_linear) forwards infinite;
+        }
       }
       .character-border {
         mask-mode: luminance;
@@ -364,6 +367,17 @@
             oklch(var(--r-value) var(--r-sat) 360deg) 100%
           );
           background-image: var(--r-gradient);
+          &.kofi {
+            --r-gradient: conic-gradient(
+              oklch(var(--r-value) var(--r-sat) calc(100deg + 120deg)) 00%,
+              oklch(var(--r-value) var(--r-sat) calc(140deg + 120deg)) 18%,
+              oklch(var(--r-value) var(--r-sat) calc(160deg + 120deg)) 35%,
+              oklch(var(--r-value) var(--r-sat) calc(180deg + 120deg)) 50%,
+              oklch(var(--r-value) var(--r-sat) calc(200deg + 120deg)) 68%,
+              oklch(var(--r-value) var(--r-sat) calc(140deg + 120deg)) 80%,
+              oklch(var(--r-value) var(--r-sat) calc(100deg + 120deg)) 100%
+            );
+          }
         }
         .stars {
           mix-blend-mode: overlay;
@@ -523,7 +537,7 @@
   }
 }
 
-#app #site-wrapper #sidebar .sb-featured-mobile {
+#app #site-wrapper #sidebar #sb-featured-mobile {
   border-radius: 15px;
   gap: 10px;
   .featured-character {
@@ -586,21 +600,25 @@
   }
 }
 @media (width >= 1000px) {
-  .sb-featured-desktop,
+  #sb-featured-desktop,
+  #kofi-banner-dt,
   .sidebar.sidebar-desktop {
     display: block;
   }
-  .sb-featured-mobile,
+  #sb-featured-mobile,
+  #kofi-banner-mb,
   .sidebar.sidebar-mobile {
     display: none;
   }
 }
 @media (width < 1000px) {
-  .sb-featured-desktop,
+  #sb-featured-desktop,
+  #kofi-banner-dt,
   .sidebar.sidebar-desktop {
     display: none;
   }
-  .sb-featured-mobile,
+  #sb-featured-mobile,
+  #kofi-banner-mb,
   .sidebar.sidebar-mobile {
     display: block;
   }
@@ -635,7 +653,7 @@
 }
 
 // hack to remove the front-page toggle button since featured character should always show
-#site-wrapper:has(#sidebar-container .sidebar-mobile .sb-featured-mobile) {
+#site-wrapper:has(#sidebar-container .sidebar-mobile #sb-featured-mobile) {
   #header-nav #mobile-sidebar-toggle {
     display: none !important;
   }
@@ -645,4 +663,15 @@
       transform: scaleY(1) rotateX(0deg);
     }
   }
+}
+// prettier-ignore
+@keyframes wobble-kofi {
+  0%   { transform: rotate(0deg); }
+  90%  { transform: rotate(0deg); }
+  92%  { transform: rotate(2deg); }
+  94%  { transform: rotate(-2deg); }
+  96%  { transform: rotate(1deg); }
+  98%  { transform: rotate(-.5deg); }
+  99%  { transform: rotate(.5deg); }
+  100% { transform: rotate(0deg); }
 }

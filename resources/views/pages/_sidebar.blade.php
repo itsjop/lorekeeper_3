@@ -1,4 +1,4 @@
-<div class="sb-featured-desktop">
+<div id="sb-featured-desktop">
   <div class="featured-character">
     <?php $char_image = $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . ' /' . $featured->image->fullsizeFileName)) ? $featured->image->thumbnailUrl : $featured->image->thumbnailUrl; ?>
     <div class="sidebar-header">
@@ -35,13 +35,13 @@
         {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
       </div> --}}
       @else
-        <p>There is no featured featured.</p>
+        <p>There is no featured character.</p>
       @endif
     </div>
   </div>
 </div>
 
-<div class="sb-featured-mobile">
+<div id="sb-featured-mobile">
   <div class="featured-character palate-colors {{ getSubtypeInfo($featured->image->subtype_id, 'label', null, $featured) }}">
     <?php $char_image = $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . ' /' . $featured->image->fullsizeFileName)) ? $featured->image->thumbnailUrl : $featured->image->thumbnailUrl; ?>
     <div class="character sidebar-section">
@@ -100,3 +100,32 @@
     </div>
   </div>
 </div>
+
+<div id="kofi-banner-dt" class="mt-4">
+  <div class="featured-character">
+    <div class="sidebar-header">
+      <a href="#" class="card-link">
+        <i class="fas fa-star mr-2"></i>
+        Support Somnivores!
+      </a>
+    </div>
+    <div class="sidebar-section p-2">
+      <a class="thumb" href="/world/items/55">
+        <div class="character-border">
+          <div class="rainbow kofi"></div>
+          <div class="stars paused"></div>
+        </div>
+        <img src="{{ asset('images/somnivores/site/kofi-gift.png') }}" class="img-char-thumbnail kofi-gift" />
+      </a>
+      <a class="name flex gap-_5 h5 mb-4" href="https://ko-fi.com/somnivores/tiers">
+        Somnivores' Ko-fi
+        <span class="small flex ai-center">
+          <i class="fa-solid fa-arrow-up-right-from-square "></i>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div id="kofi-banner-mb">
+
+  </div>

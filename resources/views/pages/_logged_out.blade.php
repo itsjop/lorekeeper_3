@@ -1,4 +1,4 @@
-<div class="lore">
+<div class="lore site-page-content parsed-text">
   <div class="card-basic">
     <p style="font-size: 1.2rem;"><strong> Somnivores.com is in early access! <br /></strong>Registration is currently closed,
       please

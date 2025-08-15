@@ -156,4 +156,6 @@
 .color-white { color: var(--white); }
 .bg-white { background-color: var(--white); }
 .bw-disabled { filter: grayscale(1); pointer-events: none; color: #ffffffaa; }
+
+.paused, .paused::before, .paused::after {animation-play-state: paused;}
 }
