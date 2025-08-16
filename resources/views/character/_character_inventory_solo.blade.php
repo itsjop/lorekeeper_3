@@ -27,7 +27,7 @@
           <img
             src="{{ $stack->first()->imageUrl }}"
             alt="{{ $stack->first()->name }}"
-            class="w-80"
+            class="w-66"
           />
           {{-- </a>
             <a
@@ -35,7 +35,7 @@
               class="{{ $canName ? 'text-muted' : '' }}"
               class="inventory-stack inventory-stack-name"
             > --}}
-          {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }}
+          {{-- {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }} --}}
         </a>
         @if ($canName && $stackName)
           <span class="inventory-stack inventory-stack-name badge badge-info"
