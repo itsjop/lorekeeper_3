@@ -71,7 +71,7 @@
               $finalValues[$step->id] ?? 0,
               [
                   'class' => 'form-check-input',
-                  'data-toggle' => 'toggle',
+                  'data-bs-toggle' => 'toggle',
                   'disabled' => isset($limitByMinReq) && isset($minRequirements[$step->id]) ? 'disabled' : null
               ]
           ) !!}

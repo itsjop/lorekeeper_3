@@ -133,11 +133,39 @@ class CharacterController extends Controller {
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
-  public function getCharacter($slug) {
+  public function getCharacter(Request $request, $slug) {
+    $categories = ItemCategory::visible(Auth::user() ?? null)->where('is_character_owned', '1')->orderBy('sort', 'DESC')->get();
+    $query = Item::query();
+    $data = $request->only(['item_category_id', 'name', 'artist', 'rarity_id']);
+    if (isset($data['item_category_id'])) $query->where('item_category_id', $data['item_category_id']);
+    if (isset($data['name'])) $query->where('name', 'LIKE', '%' . $data['name'] . '%');
+    if (isset($data['artist'])) $query->where('artist_id', $data['artist']);
+    if (isset($data['rarity_id']))
+      if ($data['rarity_id'] == 'withoutOption') $query->whereNull('data->rarity_id');
+      else $query->where('data->rarity_id', $data['rarity_id']);
+
+
+    $items = count($categories) ?
+      $this->character->items()
+      ->whereIn('items.id', $query->pluck('id')->toArray())
+      ->where('count', '>', 0)
+      ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['item_category_id', 'id']) :
+      $this->character->items()
+      ->whereIn('items.id', $query->pluck('id')->toArray())
+      ->where('count', '>', 0)
+      ->orderBy('name')
+      ->orderBy('updated_at')
+      ->get()
+      ->groupBy(['item_category_id', 'id']);
     return view('character.character', [
       'character'             => $this->character,
       'showMention'           => true,
       'extPrevAndNextBtnsUrl' => '',
+      'items' => $items,
     ]);
   }
 
@@ -940,7 +968,7 @@ class CharacterController extends Controller {
   public function getCharacterImage($slug, $id) {
     $image = CharacterImage::where('character_id', $this->character->id)->where('id', $id)->first();
     $warnings = isset($image->content_warnings) ? implode(', ', $image->content_warnings) : null;
-    
+
     return view('character.image', [
       'user'      => Auth::check() ? Auth::user() : null,
       'character' => $this->character,

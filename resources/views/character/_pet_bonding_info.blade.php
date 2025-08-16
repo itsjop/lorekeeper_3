@@ -1,18 +1,20 @@
-<div class="pet-card card ji-center ai-center gap-_5">
-  <img src="{{ $pet->pet->image($pet->id) }}" class="rounded img-fluid" />
+<div class="pet-card card ji-center ai-center ">
+  <a href="{{ '/user/' . $character->owner . '/pets/' . $pet->id }}" class="flex jc-center ai-center">
+    <img src="{{ $pet->pet->image($pet->id) }}" class="rounded img-fluid w-75" />
+  </a>
   @if ($pet->pet_name)
     <div class="title grid br-15 jc-center ji-center ">
       <div class="petname w-min br-15 py-1 px-2" style="font-size:95%;">
         {!! $pet->pet_name !!}
       </div>
     </div>
-    @else
+  @else
     <div class="title grid br-15 jc-center ji-center ">
       <div class=" small text-secondary w-min br-15 py-1 px-2" style="font-size:95%;">
         ---
       </div>
     </div>
-    @endif
+  @endif
   <div class="name flex gap-_5 h-100 jc-center ai-end text-center">
     {!! $pet->pet->displayName !!}
   </div>

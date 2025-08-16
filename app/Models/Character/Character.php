@@ -380,6 +380,9 @@ class Character extends Model {
    *
    * @return string
    */
+  public function getOwnerAttribute() {
+    return $this->user->name;
+  }
   public function getDisplayOwnerAttribute() {
     if ($this->user_id) {
       return $this->user->displayName;

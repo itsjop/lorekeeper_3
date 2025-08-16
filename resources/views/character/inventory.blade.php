@@ -42,26 +42,6 @@
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
     <div class="form-inline justify-content-end inventory-search-pane">
-
-      <div class="sort btn-group">
-        <button
-          type="button"
-          class="btn btn-secondary active def-view-button m-0"
-          data-bs-toggle="tooltip"
-          title="Default View"
-          alt="Default View"
-        >
-          <i class="fas fa-th"></i></button>
-        <button
-          type="button"
-          class="btn btn-secondary sum-view-button m-0 ml-2"
-          data-bs-toggle="tooltip"
-          title="Summarized View"
-          alt="Summarized View"
-        >
-          <i class="fas fa-bars"></i></button>
-      </div>
-
       <div class="name form-group m-0 w-100">
         {!! Form::text('name', Request::get('name'), ['class' => 'form-control w-100', 'placeholder' => 'Name']) !!}
       </div>
@@ -89,117 +69,7 @@
     {!! Form::close() !!}
   </div>
 
-  <div id="defView" class="hide">
-    @foreach ($items as $categoryId => $categoryItems)
-      <div class="card mb-3 inventory-category">
-        <h5 class="card-header inventory-header">
-          {!! isset($categories[$categoryId])
-              ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
-              : 'Miscellaneous' !!}
-          <a
-            class="small inventory-collapse-toggle collapse-toggle"
-            href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}"
-            data-bs-toggle="collapse"
-          >
-            Show
-          </a>
-        </h5>
-
-        <div class="card-body inventory-item collapse show grid grid-4-col" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
-          @foreach ($categoryItems as $itemId => $stack)
-            <?php
-            $canName = $stack->first()->category->can_name;
-            $stackName = $stack->first()->pivot->pluck('stack_name', 'id')->toArray()[$stack->first()->pivot->id];
-            $stackNameClean = htmlentities($stackName);
-            ?>
-            <a
-              href="#"
-              class="grid ji-center inventory-stack text-center img"
-              data-id="{{ $stack->first()->pivot->id }}"
-              data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}{!! $canName && $stackName ? ']' : null !!}"
-            >
-              <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
-              {{-- </a>
-            <a
-              href="#"
-              class="{{ $canName ? 'text-muted' : '' }}"
-              class="inventory-stack inventory-stack-name"
-            > --}}
-              {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }}
-            </a>
-            @if ($canName && $stackName)
-              <span class="inventory-stack inventory-stack-name badge badge-info"
-                style="font-size:95%; margin:5px;">"{{ $stackName }}"
-              </span>
-            @endif
-          @endforeach
-        </div>
-      </div>
-    @endforeach
-  </div>
-
-  <div id="sumView" class="hide">
-    @foreach ($items as $categoryId => $categoryItems)
-      <div class="card mb-2">
-        <h5 class="card-header">
-          {!! isset($categories[$categoryId])
-              ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
-              : 'Miscellaneous' !!}
-          <a
-            class="small inventory-collapse-toggle collapse-toggle"
-            href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}"
-            data-bs-toggle="collapse"
-          >
-            Show
-          </a>
-        </h5>
-        <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
-          @foreach ($categoryItems as $itemtype)
-            <div class="col-lg-3 col-sm-4 col-12">
-              @if ($itemtype->first()->has_image)
-                <img
-                  src="{{ $itemtype->first()->imageUrl }}"
-                  style="height: 25px;"
-                  alt="{{ $itemtype->first()->name }}"
-                />
-              @endif
-              <a href="{{ $itemtype->first()->idUrl }}">{{ $itemtype->first()->name }}</a>
-              <ul class="mb-0">
-                @foreach ($itemtype as $item)
-                  <?php
-                  $canName = $item->category->can_name;
-                  $itemNames = $item->pivot->pluck('stack_name', 'id');
-                  $stackName = $itemNames[$item->pivot->id];
-                  $stackNameClean = htmlentities($stackName);
-                  ?>
-                  <div data-id="{{ $item->pivot->id }}"
-                    data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $item->name }}{!! $canName && $stackName ? ']' : null !!}"
-                  >
-                    <li>
-                      <a class="inventory-stack" href="#">
-                        Stack of x{{ $item->pivot->count }}.
-                        @if ($canName && $stackName)
-                          <span
-                            class="text-info m-0"
-                            style="font-size:95%; margin:5px;"
-                            data-bs-toggle="tooltip"
-                            data-placement="top"
-                            title='Named stack:<br />"{{ $stackName }}"'
-                          >
-                            &nbsp;<i class="fas fa-tag"></i>
-                          </span>
-                        @endif
-                      </a>
-                    </li>
-                  </div>
-                @endforeach
-              </ul>
-            </div>
-          @endforeach
-        </div>
-      </div>
-    @endforeach
-  </div>
+  @include('character._character_inventory', ['items' => $items])
 
   <h3>Latest Activity</h3>
   <div class="mb-4 logs-table">

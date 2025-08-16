@@ -123,6 +123,9 @@
           <i class="fa-solid fa-arrow-up-right-from-square "></i>
         </span>
       </a>
+      <p class="text-center" style="width: var(--sidebar-width);">
+        We offer monthly goodies! <br>
+        Click to see what's included ❤</p>
     </div>
   </div>
 

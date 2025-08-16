@@ -105,29 +105,29 @@
           data-lightbox="entry"
           data-title="{{ $character->fullName }}"
         >
-            @if (
-                (isset($character->image->content_warnings) && !Auth::check()) ||
-                    (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
-            )
-              @include('widgets._cw_img', [
-                  'src' =>
-                      $character->image->canViewFull(Auth::user() ?? null) &&
-                      file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
-                          ? $character->image->fullsizeUrl
-                          : $character->image->imageUrl,
-                  'class' => 'image',
-                  'alt' => $character->fullName,
-                  'warnings' => isset($character->image->content_warnings)
-                      ? implode(', ', $character->image->content_warnings)
-                      : '',
-              ])
-            @else
-              <img
-                src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
-                alt="{{ $character->fullName }}"
-              />
-            @endif
+          @if (
+              (isset($character->image->content_warnings) && !Auth::check()) ||
+                  (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
+          )
+            @include('widgets._cw_img', [
+                'src' =>
+                    $character->image->canViewFull(Auth::user() ?? null) &&
+                    file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
+                        ? $character->image->fullsizeUrl
+                        : $character->image->imageUrl,
+                'class' => 'image',
+                'alt' => $character->fullName,
+                'warnings' => isset($character->image->content_warnings)
+                    ? implode(', ', $character->image->content_warnings)
+                    : ''
+            ])
+          @else
+            <img
+              src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+              class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+              alt="{{ $character->fullName }}"
+            />
+          @endif
         </a>
         <div class="mt-2 text-center">
           @include('widgets._object_block', ['object' => $character])
@@ -149,39 +149,73 @@
     @include('character._image_info', ['image' => $character->image])
   </div>
 
+  <div class="card-header">
+    <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          id="petsTab"
+          data-bs-toggle="tab"
+          href="#pets"
+          role="tab"
+        >
+          <h5 style="margin: 0 0 10px 10px;">
+            <i class="fas fa-dog"></i>
+            Pets
+          </h5>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="inventoryTab"
+          data-bs-toggle="tab"
+          href="#inventory"
+          role="tab"
+        >
+          <h5 style="margin: 0 0 10px 10px;">
+            <i class="fas fa-dog"></i>
+            Inventory
+          </h5>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="connectionsTab"
+          data-bs-toggle="tab"
+          href="#connections"
+          role="tab"
+        >
+          <h5 style="margin: 0 0 10px 10px;">
+            <i class="fas fa-dog"></i>
+            Connections
+          </h5>
+        </a>
+      </li>
+
+    </ul>
+  </div>
   {{-- Pets --}}
   <div class="card">
-    <div class="flex jc-between ai-end">
-      <h3 style="margin: 0 0 10px 10px;">
-        <i class="fas fa-dog"></i>
-        Pets
-      </h3>
-      <a href="{{ $character->url . '/pets' }}" class="btn btn-outline-info p-0 px-2 btn-sm">
-        View all Pets
-        <i class="fas fa-caret-right"></i>
-      </a>
+    <div class="card-body tab-content">
+      <div class="tab-pane fade show active" id="pets">
+        @include('character._tab_pets', [
+            'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
+            'character' => $character
+        ])
+      </div>
+      <div class="tab-pane fade" id="inventory">
+        @include('character._character_inventory_solo', ['items' => $items])
+      </div>
+      <div class="tab-pane fade" id="connections">
+        @include('character._character_links_solo', [
+            'character' => $character,
+            'types' => config('lorekeeper.character_relationships')
+        ])
+      </div>
     </div>
-    <div class="grid grid-4-col card-body gap-_5">
-      {{-- get one random pet --}}
-      @php
-        $pets = $character->image->character
-            ->pets()
-            ->orderBy('sort', 'DESC')
-            ->limit(config('lorekeeper.pets.display_pet_count'))
-            ->get();
-      @endphp
-      @foreach ($pets as $pet)
-        @if (config('lorekeeper.pets.pet_bonding_enabled'))
-          @include('character._pet_bonding_info', ['pet' => $pet])
-        @else
-          <div class="ml-2 mr-3">
-            <img src="{{ $pet->pet->image($pet->id) }}" style="max-width: 75px;" />
-            <br>
-            <span class="text-light badge badge-dark" style="font-size:95%;">{!! $pet->pet_name !!}</span>
-          </div>
-        @endif
-      @endforeach
-    </div>
+
   </div>
   <br />
   {{-- Info --}}
@@ -258,38 +292,9 @@
       <div class="tab-pane fade" id="notes">
         @include('character._tab_notes', ['character' => $character])
       </div>
-      @if ($character->getLineageBlacklistLevel() < 2)
-        <div class="tab-pane fade" id="lineage">
-          @include('character._tab_lineage', ['character' => $character])
-        </div>
-      @endif
-      @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
-        <div class="tab-pane fade" id="settings-{{ $character->slug }}">
-          {!! Form::open([
-              'url' => $character->is_myo_slot
-                  ? 'admin/myo/' . $character->id . '/settings'
-                  : 'admin/character/' . $character->slug . '/settings'
-          ]) !!}
-          <div class="form-group">
-            {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-            {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
-                'Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.'
-            ) !!}
-          </div>
-          <div class="text-right">
-            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-          </div>
-          {!! Form::close() !!}
-          <hr />
-          <div class="text-right">
-            <a
-              href="#"
-              class="btn btn-outline-danger btn-sm delete-character"
-              data-slug="{{ $character->slug }}"
-            >Delete</a>
-          </div>
-        </div>
-      @endif
+      <div class="tab-pane fade" id="lineage">
+        @include('character._tab_lineage', ['character' => $character])
+      </div>
     </div>
   </div>
 @endsection
