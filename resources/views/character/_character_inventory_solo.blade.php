@@ -35,7 +35,7 @@
               class="{{ $canName ? 'text-muted' : '' }}"
               class="inventory-stack inventory-stack-name"
             > --}}
-          {{-- {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }} --}}
+          {{ $stack->first()->name }}
         </a>
         @if ($canName && $stackName)
           <span class="inventory-stack inventory-stack-name badge badge-info"
