@@ -160,7 +160,7 @@
         @if (count($pets))
           <li class="nav-item">
             <a
-              class="nav-link {{$firstTab == 1 ? 'active' :'' }}"
+              class="nav-link {{ $firstTab == 1 ? 'active' : '' }}"
               id="petsTab"
               data-bs-toggle="tab"
               href="#pets"
@@ -176,7 +176,7 @@
         @if (count($items))
           <li class="nav-item">
             <a
-              class="nav-link {{$firstTab == 2 ? 'active' :'' }}"
+              class="nav-link {{ $firstTab == 2 ? 'active' : '' }}"
               id="inventoryTab"
               data-bs-toggle="tab"
               href="#inventory"
@@ -192,7 +192,7 @@
         @if (count($character->links))
           <li class="nav-item">
             <a
-              class="nav-link {{$firstTab == 3 ? 'active' :'' }}"
+              class="nav-link {{ $firstTab == 3 ? 'active' : '' }}"
               id="connectionsTab"
               data-bs-toggle="tab"
               href="#connections"
@@ -209,27 +209,27 @@
     </div>
   @endif
 
-  {{-- Pets --}}
-  <div class="card">
-    <div class="card-body tab-content">
-      <div class="tab-pane fade {{ $firstTab == 1 ? 'show active' : '' }}" id="pets">
-        @include('character._tab_pets', [
-            'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
-            'character' => $character
-        ])
-      </div>
-      <div class="tab-pane fade {{ $firstTab == 2 ? 'show active' : '' }}" id="inventory">
-        @include('character._character_inventory_solo', ['items' => $items])
-      </div>
-      <div class="tab-pane fade {{ $firstTab == 3 ? 'show active' : '' }}" id="connections">
-        @include('character._character_links_solo', [
-            'character' => $character,
-            'types' => config('lorekeeper.character_relationships')
-        ])
+  @if ($firstTab !== 0)
+    <div class="card">
+      <div class="card-body tab-content">
+        <div class="tab-pane fade {{ $firstTab == 1 ? 'show active' : '' }}" id="pets">
+          @include('character._tab_pets', [
+              'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
+              'character' => $character
+          ])
+        </div>
+        <div class="tab-pane fade {{ $firstTab == 2 ? 'show active' : '' }}" id="inventory">
+          @include('character._character_inventory_solo', ['items' => $items])
+        </div>
+        <div class="tab-pane fade {{ $firstTab == 3 ? 'show active' : '' }}" id="connections">
+          @include('character._character_links_solo', [
+              'character' => $character,
+              'types' => config('lorekeeper.character_relationships')
+          ])
+        </div>
       </div>
     </div>
-
-  </div>
+  @endif
   <br />
   {{-- Info --}}
   <div class="card character-bio">
