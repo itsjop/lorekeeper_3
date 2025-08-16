@@ -1,14 +1,6 @@
 <header class="flex jc-between ai-center">
   <h2>
     {{ $character->name }}'s Connections
-    <a class=" mr-2" href="{{ url('reports/new?url=') . $character->url . '/links' }}">
-      <i
-        class="fas fa-exclamation-triangle text-danger"
-        data-bs-toggle="tooltip"
-        title="Click here to report this character's connections."
-        style="opacity: 50%;"
-      ></i>
-    </a>
   </h2>
   <a href="{{ $character->url . '/links' }}" class="btn btn-outline-info btn-sm">
     View all Connections

@@ -149,66 +149,79 @@
     @include('character._image_info', ['image' => $character->image])
   </div>
 
-  <div class="card-header">
-    <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
-      <li class="nav-item">
-        <a
-          class="nav-link active"
-          id="petsTab"
-          data-bs-toggle="tab"
-          href="#pets"
-          role="tab"
-        >
-          <h5 style="margin: 0 0 10px 10px;">
-            <i class="fas fa-dog"></i>
-            Pets
-          </h5>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="inventoryTab"
-          data-bs-toggle="tab"
-          href="#inventory"
-          role="tab"
-        >
-          <h5 style="margin: 0 0 10px 10px;">
-            <i class="fas fa-gifts"></i>
-            Inventory
-          </h5>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="connectionsTab"
-          data-bs-toggle="tab"
-          href="#connections"
-          role="tab"
-        >
-          <h5 style="margin: 0 0 10px 10px;">
-            <i class="fas fa-link"></i>
-            Connections
-          </h5>
-        </a>
-      </li>
+  <?php
+  $pets = $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get();
+  $firstTab = count($pets) ? 1 : (count($items) ? 2 : (count($character->links) ? 3 : 0));
+  ?>
 
-    </ul>
-  </div>
+  @if ($firstTab !== 0)
+    <div class="card-header">
+      <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
+        @if (count($pets))
+          <li class="nav-item">
+            <a
+              class="nav-link {{$firstTab == 1 ? 'active' :'' }}"
+              id="petsTab"
+              data-bs-toggle="tab"
+              href="#pets"
+              role="tab"
+            >
+              <h5>
+                <i class="fas fa-dog"></i>
+                Pets
+              </h5>
+            </a>
+          </li>
+        @endif
+        @if (count($items))
+          <li class="nav-item">
+            <a
+              class="nav-link {{$firstTab == 2 ? 'active' :'' }}"
+              id="inventoryTab"
+              data-bs-toggle="tab"
+              href="#inventory"
+              role="tab"
+            >
+              <h5>
+                <i class="fas fa-gifts"></i>
+                Inventory
+              </h5>
+            </a>
+          </li>
+        @endif
+        @if (count($character->links))
+          <li class="nav-item">
+            <a
+              class="nav-link {{$firstTab == 3 ? 'active' :'' }}"
+              id="connectionsTab"
+              data-bs-toggle="tab"
+              href="#connections"
+              role="tab"
+            >
+              <h5>
+                <i class="fas fa-link"></i>
+                Connections
+              </h5>
+            </a>
+          </li>
+        @endif
+      </ul>
+    </div>
+  @endif
+
   {{-- Pets --}}
   <div class="card">
     <div class="card-body tab-content">
-      <div class="tab-pane fade show active" id="pets">
+      <div class="tab-pane fade {{ $firstTab == 1 ? 'show active' : '' }}" id="pets">
         @include('character._tab_pets', [
             'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
             'character' => $character
         ])
       </div>
-      <div class="tab-pane fade" id="inventory">
+      <div class="tab-pane fade {{ $firstTab == 2 ? 'show active' : '' }}" id="inventory">
         @include('character._character_inventory_solo', ['items' => $items])
       </div>
-      <div class="tab-pane fade" id="connections">
+      <div class="tab-pane fade {{ $firstTab == 3 ? 'show active' : '' }}" id="connections">
         @include('character._character_links_solo', [
             'character' => $character,
             'types' => config('lorekeeper.character_relationships')
@@ -228,7 +241,7 @@
     </div>
     @if ($character->profile->parsed_text)
       <div class="card mb-3">
-        <div class="card-body parsed-text">
+        <div id="profile" class="card-body parsed-text">
           {!! $character->profile->parsed_text !!}
         </div>
       </div>

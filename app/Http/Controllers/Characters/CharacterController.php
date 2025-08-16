@@ -676,10 +676,12 @@ class CharacterController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   private function postItemTransfer(Request $request, InventoryManager $service) {
-    if ($service->transferCharacterStack($this->character, $this->character->user, CharacterItem::find($request->get('ids')), $request->get('quantities'))) {
+    if ($service->transferCharacterStack($this->character, $this->character->user, CharacterItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
       flash('Item transferred successfully.')->success();
     } else {
-      foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
     return redirect()->back();
   }

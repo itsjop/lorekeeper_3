@@ -225,12 +225,13 @@ class InventoryManager extends Service {
         }
 
         if (
-          ($recipient->logType == 'Character' &&
-            !$sender->hasPower('edit_inventories') &&
-            !Auth::user() == $recipient->user) ||
-          ($recipient->logType == 'User' &&
-            !Auth::user()->hasPower('edit_inventories') &&
-            !Auth::user() == $sender->user)
+          ($recipient->logType == 'Character'
+            && !$sender->hasPower('edit_inventories')
+            && !$user == $recipient->user
+          ) || (
+            $recipient->logType == 'User'
+            && !$user->hasPower('edit_inventories')
+            && !$user == $sender->user)
         ) {
           throw new \Exception("Cannot transfer items to/from a character you don't own.");
         }
@@ -240,7 +241,7 @@ class InventoryManager extends Service {
         }
         if (
           (!$stack->item->allow_transfer || isset($stack->data['disallow_transfer'])) &&
-          !Auth::user()->hasPower('edit_inventories')
+          !$user->hasPower('edit_inventories')
         ) {
           throw new \Exception('One of the selected items cannot be transferred.');
         }
