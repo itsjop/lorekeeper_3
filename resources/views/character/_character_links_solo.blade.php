@@ -17,7 +17,7 @@
 </header>
 <br>
 @if (count($character->links))
-  <div class="container grid grid-4-col gap-1">
+  <div class="grid grid-4-col gap-1">
     @foreach ($character->links as $key => $link)
       @if ($key < 4)
         <div class="w-100 text-center">
