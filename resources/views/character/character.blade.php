@@ -174,7 +174,7 @@
           role="tab"
         >
           <h5 style="margin: 0 0 10px 10px;">
-            <i class="fas fa-dog"></i>
+            <i class="fas fa-gifts"></i>
             Inventory
           </h5>
         </a>
@@ -188,7 +188,7 @@
           role="tab"
         >
           <h5 style="margin: 0 0 10px 10px;">
-            <i class="fas fa-dog"></i>
+            <i class="fas fa-link"></i>
             Connections
           </h5>
         </a>
