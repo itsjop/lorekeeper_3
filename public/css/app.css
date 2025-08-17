@@ -4551,6 +4551,7 @@ because the nesting selector cannot represent pseudo-elements. */
   display: flex;
   gap: 13px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .char_title-list .char-title {
   display: flex;
