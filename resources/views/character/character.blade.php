@@ -146,7 +146,7 @@
         </div>
       @endif
     </div>
-    @include('character._image_info', ['image' => $character->image])
+    @include('character._image_info', ['image' => $character->image, 'character' => $character])
   </div>
 
   <?php

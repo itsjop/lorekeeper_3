@@ -587,6 +587,33 @@ body #app.teal {
 #app .paused, #app .paused::before, #app .paused::after {
   animation-play-state: paused;
 }
+#app .text-100 {
+  color: var(--active-clr_100);
+}
+#app .text-200 {
+  color: var(--active-clr_200);
+}
+#app .text-300 {
+  color: var(--active-clr_300);
+}
+#app .text-400 {
+  color: var(--active-clr_400);
+}
+#app .text-500 {
+  color: var(--active-clr_500);
+}
+#app .text-600 {
+  color: var(--active-clr_600);
+}
+#app .text-700 {
+  color: var(--active-clr_700);
+}
+#app .text-800 {
+  color: var(--active-clr_800);
+}
+#app .text-900 {
+  color: var(--active-clr_900);
+}
 
 body {
   /* Breakpoints */
@@ -4518,4 +4545,80 @@ because the nesting selector cannot represent pseudo-elements. */
      -moz-user-select: none;
           user-select: none;
   pointer-events: none;
+}
+
+.char_title-list {
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+}
+.char_title-list .char-title {
+  display: flex;
+  padding: 5px 10px;
+  z-index: 2;
+  position: relative;
+}
+.char_title-list .char-title::before {
+  content: "";
+  width: calc(100% - 0.5em);
+  height: calc(100% - 0px);
+  background: var(--title_bg-color);
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 15px;
+}
+.char_title-list .char-title img {
+  height: 1em;
+  scale: 2;
+  transform-origin: center right;
+}
+.char_title-list .char-title .badge {
+  padding: 0 5px 0 6px;
+  z-index: 2;
+  font-size: 1.1em;
+  margin-top: 2px;
+  color: white;
+}
+
+h1.ruled-left, h1.ruled-center, h1.ruled-right, h2.ruled-left, h2.ruled-center, h2.ruled-right, h3.ruled-left, h3.ruled-center, h3.ruled-right, h4.ruled-left, h4.ruled-center, h4.ruled-right, h5.ruled-left, h5.ruled-center, h5.ruled-right, h6.ruled-left, h6.ruled-center, h6.ruled-right, p.ruled-left, p.ruled-center, p.ruled-right, header.ruled-left, header.ruled-center, header.ruled-right, div.ruled-left, div.ruled-center, div.ruled-right,
+.h1.ruled-left,
+.h1.ruled-center,
+.h1.ruled-right, .h2.ruled-left, .h2.ruled-center, .h2.ruled-right, .h3.ruled-left, .h3.ruled-center, .h3.ruled-right, .h4.ruled-left, .h4.ruled-center, .h4.ruled-right, .h5.ruled-left, .h5.ruled-center, .h5.ruled-right, .h6.ruled-left, .h6.ruled-center, .h6.ruled-right {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 5px;
+}
+h1.ruled-left::after, h1.ruled-left::before, h1.ruled-center::after, h1.ruled-center::before, h1.ruled-right::after, h1.ruled-right::before, h2.ruled-left::after, h2.ruled-left::before, h2.ruled-center::after, h2.ruled-center::before, h2.ruled-right::after, h2.ruled-right::before, h3.ruled-left::after, h3.ruled-left::before, h3.ruled-center::after, h3.ruled-center::before, h3.ruled-right::after, h3.ruled-right::before, h4.ruled-left::after, h4.ruled-left::before, h4.ruled-center::after, h4.ruled-center::before, h4.ruled-right::after, h4.ruled-right::before, h5.ruled-left::after, h5.ruled-left::before, h5.ruled-center::after, h5.ruled-center::before, h5.ruled-right::after, h5.ruled-right::before, h6.ruled-left::after, h6.ruled-left::before, h6.ruled-center::after, h6.ruled-center::before, h6.ruled-right::after, h6.ruled-right::before, p.ruled-left::after, p.ruled-left::before, p.ruled-center::after, p.ruled-center::before, p.ruled-right::after, p.ruled-right::before, header.ruled-left::after, header.ruled-left::before, header.ruled-center::after, header.ruled-center::before, header.ruled-right::after, header.ruled-right::before, div.ruled-left::after, div.ruled-left::before, div.ruled-center::after, div.ruled-center::before, div.ruled-right::after, div.ruled-right::before,
+.h1.ruled-left::after,
+.h1.ruled-left::before,
+.h1.ruled-center::after,
+.h1.ruled-center::before,
+.h1.ruled-right::after,
+.h1.ruled-right::before, .h2.ruled-left::after, .h2.ruled-left::before, .h2.ruled-center::after, .h2.ruled-center::before, .h2.ruled-right::after, .h2.ruled-right::before, .h3.ruled-left::after, .h3.ruled-left::before, .h3.ruled-center::after, .h3.ruled-center::before, .h3.ruled-right::after, .h3.ruled-right::before, .h4.ruled-left::after, .h4.ruled-left::before, .h4.ruled-center::after, .h4.ruled-center::before, .h4.ruled-right::after, .h4.ruled-right::before, .h5.ruled-left::after, .h5.ruled-left::before, .h5.ruled-center::after, .h5.ruled-center::before, .h5.ruled-right::after, .h5.ruled-right::before, .h6.ruled-left::after, .h6.ruled-left::before, .h6.ruled-center::after, .h6.ruled-center::before, .h6.ruled-right::after, .h6.ruled-right::before {
+  width: 100%;
+  height: 2px;
+  flex-grow: 2;
+  margin-top: 4px;
+  background-color: currentColor;
+}
+h1.ruled-left::after, h2.ruled-left::after, h3.ruled-left::after, h4.ruled-left::after, h5.ruled-left::after, h6.ruled-left::after, p.ruled-left::after, header.ruled-left::after, div.ruled-left::after,
+.h1.ruled-left::after, .h2.ruled-left::after, .h3.ruled-left::after, .h4.ruled-left::after, .h5.ruled-left::after, .h6.ruled-left::after {
+  content: "";
+}
+h1.ruled-center, h2.ruled-center, h3.ruled-center, h4.ruled-center, h5.ruled-center, h6.ruled-center, p.ruled-center, header.ruled-center, div.ruled-center,
+.h1.ruled-center, .h2.ruled-center, .h3.ruled-center, .h4.ruled-center, .h5.ruled-center, .h6.ruled-center {
+  text-align: center;
+}
+h1.ruled-center::before, h1.ruled-center::after, h2.ruled-center::before, h2.ruled-center::after, h3.ruled-center::before, h3.ruled-center::after, h4.ruled-center::before, h4.ruled-center::after, h5.ruled-center::before, h5.ruled-center::after, h6.ruled-center::before, h6.ruled-center::after, p.ruled-center::before, p.ruled-center::after, header.ruled-center::before, header.ruled-center::after, div.ruled-center::before, div.ruled-center::after,
+.h1.ruled-center::before,
+.h1.ruled-center::after, .h2.ruled-center::before, .h2.ruled-center::after, .h3.ruled-center::before, .h3.ruled-center::after, .h4.ruled-center::before, .h4.ruled-center::after, .h5.ruled-center::before, .h5.ruled-center::after, .h6.ruled-center::before, .h6.ruled-center::after {
+  content: "";
+}
+h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled-right::before, h5.ruled-right::before, h6.ruled-right::before, p.ruled-right::before, header.ruled-right::before, div.ruled-right::before,
+.h1.ruled-right::before, .h2.ruled-right::before, .h3.ruled-right::before, .h4.ruled-right::before, .h5.ruled-right::before, .h6.ruled-right::before {
+  content: "";
 }

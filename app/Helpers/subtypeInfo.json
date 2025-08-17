@@ -78,5 +78,30 @@
     "gradient": ["#98f8ff", "#2168ec", "#ff452a", "#ff9a15"],
     "card_border": ["#fff", "#ffe8bb"],
     "profile_bg_color": ["#c9f5ff", "#ffe8d0"]
+  },
+
+
+
+
+
+  "unknown": {
+    "gradient": ["#98f8ff", "#2168ec", "#ff452a", "#ff9a15"],
+    "card_border": ["#fff", "#ffe8bb"],
+    "profile_bg_color": ["#c9f5ff", "#ffe8d0"]
+  },
+  "bestial": {
+    "gradient": ["#98f8ff", "#2168ec", "#ff452a", "#ff9a15"],
+    "card_border": ["#fff", "#ffe8bb"],
+    "profile_bg_color": ["#c9f5ff", "#ffe8d0"]
+  },
+  "cranky": {
+    "gradient": ["#98f8ff", "#2168ec", "#ff452a", "#ff9a15"],
+    "card_border": ["#fff", "#ffe8bb"],
+    "profile_bg_color": ["#c9f5ff", "#ffe8d0"]
+  },
+  "grounst": {
+    "gradient": ["#98f8ff", "#2168ec", "#ff452a", "#ff9a15"],
+    "card_border": ["#fff", "#ffe8bb"],
+    "profile_bg_color": ["#c9f5ff", "#ffe8d0"]
   }
 }

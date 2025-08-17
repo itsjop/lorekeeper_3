@@ -361,11 +361,15 @@
         - - - -
       @endif
     </div>
+    <?php
+    // set default timezone
+    date_default_timezone_set('America/New_York'); // EDT
+    $current_date = date('h:i:s A');
+    ?>
     <div class="clock">
       <i class="fa fa-clock"></i>
       <div id="clock">
-        {{-- TODO: live server time initial --}}
-        --:--:-- --
+        {{ $current_date }}
       </div>
     </div>
   </div>

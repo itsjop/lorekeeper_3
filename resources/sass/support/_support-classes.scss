@@ -158,4 +158,9 @@
 .bw-disabled { filter: grayscale(1); pointer-events: none; color: #ffffffaa; }
 
 .paused, .paused::before, .paused::after { animation-play-state: paused; }
+
+.text-100 { color: var(--active-clr_100); } .text-200 { color: var(--active-clr_200); } .text-300 { color: var(--active-clr_300); }
+.text-400 { color: var(--active-clr_400); } .text-500 { color: var(--active-clr_500); } .text-600 { color: var(--active-clr_600); }
+.text-700 { color: var(--active-clr_700); } .text-800 { color: var(--active-clr_800); } .text-900 { color: var(--active-clr_900); }
+
 }

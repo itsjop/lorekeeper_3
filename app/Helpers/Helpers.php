@@ -130,6 +130,9 @@ function breadcrumbs($links) {
  *
  * @return string
  */
+function format_onlyDate($timestamp, $showTime = true) {
+  return $timestamp->format('j F Y') . ($showTime ? ' <abbr data-bs-toggle="tooltip" title="UTC' . $timestamp->timezone->toOffsetName() . '">' . strtoupper($timestamp->timezone->getAbbreviatedName($timestamp->isDST())) . '</abbr>' : '');
+}
 function format_date($timestamp, $showTime = true) {
   return $timestamp->format('j F Y' . ($showTime ? ', H:i:s' : '')) . ($showTime ? ' <abbr data-bs-toggle="tooltip" title="UTC' . $timestamp->timezone->toOffsetName() . '">' . strtoupper($timestamp->timezone->getAbbreviatedName($timestamp->isDST())) . '</abbr>' : '');
 }

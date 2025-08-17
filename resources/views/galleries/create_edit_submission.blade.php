@@ -472,7 +472,7 @@
               <button
                 type="button"
                 class="close"
-                data-bs-dismiss="modal"
+                data-dismiss="modal"
               >&times;</button>
             </div>
             <div class="modal-body">

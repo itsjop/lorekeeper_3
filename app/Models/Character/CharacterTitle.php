@@ -91,6 +91,15 @@ class CharacterTitle extends Model {
   }
 
   /**
+   * Displays the model's name, linked to its encyclopedia page, with the icon.
+   *
+   * @return string
+   */
+  public function getDisplayIconNameAttribute() {
+    return '<a href="' . $this->url . '" class="display-rarity"><img src="' . $this->titleImageUrl . '">' . $this->title . '</a>';
+  }
+
+  /**
    * Displays the model's name, linked to its encyclopedia page.
    *
    * @return string
@@ -227,8 +236,10 @@ class CharacterTitle extends Model {
    * @param mixed $padding
    */
   public function displayTitle($data, $padding = true) {
-    return '<a href="' . $this->idUrl . '"><span class="badge ' . ($padding ? 'ml-1' : '') . '" style="color: white; background: ' . $this->backgroundColour . ';"' .
-      (isset($data['full']) ? ' data-bs-toggle="tooltip" title="' . $this->title . '">' . $data['full'] : '>' . $this->title)
-      . '</span></a>';
+    return '<a class="char-title" href="' . $this->idUrl . '" style="--title_bg-color:' . $this->backgroundColour . ';">' .
+      '<img src="' . $this->titleImageUrl . '" alt="">' .
+      '<span class="badge"' .
+      (isset($data['full']) ? ' data-bs-toggle="tooltip" title="' . $this->title . '">' . $data['full'] : '>' . $this->title) .
+      '</span></a>';
   }
 }

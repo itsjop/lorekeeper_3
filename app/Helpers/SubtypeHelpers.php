@@ -1,6 +1,13 @@
 <?php
 
 
+function getCharacterSubtypeInfo($character, $info = 'all') {
+  return getSubtypeInfo($character->subtype_id, $info);
+}
+function getImageSubtypeInfo($image, $info = 'all') {
+  return getSubtypeInfo($image->subtype_id, $info);
+}
+
 /**
  * Returns Subtype name of passed Subtype Id.
  *
@@ -9,7 +16,7 @@
  *
  * @return string
  */
-function getSubtypeInfo(int | null $id, string $info = 'label', $prop = null, $c = null) {
+function getSubtypeInfo(int | null $id, string $info = 'label', $prop = null, $c = null): string | array {
   if ($id == null) $id = 0; // fallback
   // Read JSON file
   $file = __DIR__ . '/subtypeInfo.json';
@@ -41,7 +48,12 @@ function getSubtypeInfo(int | null $id, string $info = 'label', $prop = null, $c
   ];
 
   $label = $subtypeLabels[$id];
-  if ($info == 'color' && isset($prop)) return implode(', ', $subtypeColors->$label->$prop);
-  if ($info == 'colors') return $subtypeColors->$label;
+  $subtypeInfo = $subtypeColors->$label;
+
+  if ($info == 'info') return $subtypeInfo;
+  if ($info == 'all') return [
+    'label' => $label,
+    'info' => $subtypeInfo,
+  ];
   return $label;
 }

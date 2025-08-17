@@ -89,13 +89,6 @@
         <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($featured->image->subtype_id) . '.png') }}"
           alt="{{ 'Subtype badge for ' . $featured->url . '.' }}"
         >
-
-        {{-- <div class="species" class="small"> --}}
-        {{-- {!! $featured->image->species_id ? $featured->image->species->displayName : 'No Species' !!} --}}
-        {{-- </div> --}}
-        {{-- <div class="rarity" class="small">
-            {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
-          </div> --}}
       </div>
     </div>
   </div>

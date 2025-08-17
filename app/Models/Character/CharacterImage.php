@@ -375,8 +375,7 @@ class CharacterImage extends Model {
         return $title->displayTitle(!$isFirst);
       })->all();
     }
-
-    return '<div class="d-flex flex-wrap">' . implode('', $titles) . '</div>';
+    return '<div class="char_title-list">' . implode('', $titles) . '</div>';
   }
 
   /**
