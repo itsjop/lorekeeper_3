@@ -225,6 +225,9 @@
       }
     }
   }
+  .nav-tabs .nav-link.active {
+    background: var(--white);
+  }
 
   .dt-nav-page .dt-nav-group .dt-nav-item.strike {
     font-style: italic;

@@ -37,35 +37,6 @@
 
   @include('character._header', ['character' => $character])
 
-  @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
-    <div class="card-header">
-      <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
-        @foreach ($character->images()->where('is_valid', 1)->get() as $image)
-          <li class="nav-item">
-            <a
-              class="nav-link form-data-button {{ $image->id == $character->image->id ? 'active' : '' }}"
-              data-bs-toggle="tab"
-              role="tab"
-              data-id="{{ $image->id }}"
-            >
-              {{ $image->transformation_id ? $image->transformation->name : 'Main' }}
-              {{ $image->transformation_info ? ' (' . $image->transformation_info . ')' : '' }}
-            </a>
-          </li>
-        @endforeach
-        <li>
-          <h3>{!! add_help(
-              'Click on a ' .
-                  __('transformations.transformation') .
-                  ' to view the image. If you don\'t see the ' .
-                  __('transformations.transformation') .
-                  ' you\'re looking for, it may not have been uploaded yet.'
-          ) !!}</h3>
-        </li>
-      </ul>
-    </div>
-  @endif
-
   {{-- @if (isset($character->profile->professionObj) || isset($character->profile->profession))
     <div class="card-header mb-2 p-0 text-right">
       <div class="col-lg-2 ml-auto">
@@ -84,7 +55,7 @@
                 class="fr-fic fr-dii mr-2"
                 src="/images/somnivores/site/profession.png"
                 style="max-width:50px;"
-              >{{ $character->profile->profession }}
+           >{{ $character->profile->profession }}
             </h5>
           @endif
         </a>
@@ -98,7 +69,28 @@
     id="main-tab"
     style="clear:both;"
   >
-    <div class="col-md-7">
+    <div class="col-md-7 p-0">
+      @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
+        <div class="card-header p-0 mb-3">
+          <ul class="nav nav-tabs flex gap-_5 card-header-tab ai-center">
+            <h5 class="m-0">Forms:</h5>
+            @foreach ($character->images()->where('is_valid', 1)->get() as $image)
+              <li class="nav-item">
+                <a
+                  class="nav-link br-15 form-data-button {{ $image->id == $character->image->id ? 'active' : '' }}"
+                  data-bs-toggle="tab"
+                  role="tab"
+                  style="border: 2px solid white;"
+                  data-id="{{ $image->id }}"
+                >
+                  {{ $image->transformation_id ? $image->transformation->name : 'Main' }}
+                  {{ $image->transformation_info ? ' (' . $image->transformation_info . ')' : '' }}
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
       <div class="text-center">
         <a
           href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
@@ -155,7 +147,7 @@
   ?>
 
   @if ($firstTab !== 0)
-    <div class="card-header">
+    <div class="card-header" style="position: relative; z-index: 5;">
       <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
         @if (count($pets))
           <li class="nav-item">
@@ -166,7 +158,7 @@
               href="#pets"
               role="tab"
             >
-              <h5>
+              <h5 class="m-0">
                 <i class="fas fa-dog"></i>
                 Pets
               </h5>
@@ -182,7 +174,7 @@
               href="#inventory"
               role="tab"
             >
-              <h5>
+              <h5 class="m-0">
                 <i class="fas fa-gifts"></i>
                 Inventory
               </h5>
@@ -210,34 +202,44 @@
   @endif
 
   @if ($firstTab !== 0)
-    <div class="card">
-      <div class="card-body tab-content">
-        <div class="tab-pane fade {{ $firstTab == 1 ? 'show active' : '' }}" id="pets">
-          @include('character._tab_pets', [
-              'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
-              'character' => $character
-          ])
-        </div>
-        <div class="tab-pane fade {{ $firstTab == 2 ? 'show active' : '' }}" id="inventory">
-          @include('character._character_inventory_solo', ['items' => $items])
-        </div>
-        <div class="tab-pane fade {{ $firstTab == 3 ? 'show active' : '' }}" id="connections">
-          @include('character._character_links_solo', [
-              'character' => $character,
-              'types' => config('lorekeeper.character_relationships')
-          ])
-        </div>
+    <div class="card-body tab-content">
+      <div class="tab-pane fade {{ $firstTab == 1 ? 'show active' : '' }}" id="pets">
+        @include('character._tab_pets', [
+            'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
+            'character' => $character
+        ])
+      </div>
+      <div class="tab-pane fade {{ $firstTab == 2 ? 'show active' : '' }}" id="inventory">
+        @include('character._character_inventory_solo', ['items' => $items])
+      </div>
+      <div class="tab-pane fade {{ $firstTab == 3 ? 'show active' : '' }}" id="connections">
+        @include('character._character_links_solo', [
+            'character' => $character,
+            'types' => config('lorekeeper.character_relationships')
+        ])
       </div>
     </div>
   @endif
   <br />
   {{-- Info --}}
   <div class="card character-bio">
-    <div>
-      <h3 style="margin: 0 0 10px 10px;">
-        <i class="fas fa-star"></i>
-        Profile
-      </h3>
+
+    <div class="card-header" style="position: relative; z-index: 5;">
+      <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            data-bs-toggle="tab"
+            href="#pets"
+            role="tab"
+          >
+            <h5 class="m-0">
+              <i class="fas fa-star"></i>
+              Profile
+            </h5>
+          </a>
+        </li>
+      </ul>
     </div>
     @if ($character->profile->parsed_text)
       <div class="card mb-3">

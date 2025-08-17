@@ -89,8 +89,6 @@
         ><i class="fas fa-pencil-ruler"></i></span>
       @endif
     @endif
-  </div>
-  <h1>
     @if ($character->is_visible && Auth::check() && $character->user_id != Auth::user()->id)
       <?php $bookmark = Auth::user()->hasBookmarked($character); ?>
       <a
@@ -99,7 +97,8 @@
         data-id="{{ $bookmark ? $bookmark->id : 0 }}"
         data-character-id="{{ $character->id }}"
       ><i class="fas fa-bookmark"></i>
-        {{ $bookmark ? 'Edit Bookmark' : 'Bookmark' }}</a>
+        {{-- {{ $bookmark ? 'Edit Bookmark' : 'Bookmark' }} --}}
+      </a>
     @endif
     @if (config('lorekeeper.extensions.character_TH_profile_link') && $character->profile->link)
       <a
@@ -108,7 +107,7 @@
         href="{{ $character->profile->link }}"
       ><i class="fas fa-home"></i> Profile</a>
     @endif
-  </h1>
+  </div>
   @if (!$character->is_visible)
     <i class="fas fa-eye-slash"></i>
   @endif

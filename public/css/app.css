@@ -81,6 +81,7 @@ body #app {
   --active-clr_900: var(--purple-clr_900);
   --active-clr_950: var(--purple-clr_950);
   --white: var(--active-clr_50);
+  --purewhite: light-dark(#fff, #000);
   --black: var(--active-clr_900);
   --body-color: var(--active-clr_50);
 }
@@ -1015,6 +1016,9 @@ body {
 }
 .app .speechbubble .info .speech {
   background-color: color-mix(in srgb, var(--white) 80%, transparent);
+}
+.app .nav-tabs .nav-link.active {
+  background: var(--white);
 }
 .app .dt-nav-page .dt-nav-group .dt-nav-item.strike {
   font-style: italic;
@@ -3901,11 +3905,12 @@ because the nesting selector cannot represent pseudo-elements. */
   }
 }
 
-.card .card-header {
+.card-header {
   background: transparent;
 }
-.card .card-body {
-  border: 1px var(--white) solid;
+
+.card-body {
+  border: 1px var(--purewhite) solid;
   border-radius: 15px;
   background-color: color-mix(in srgb, var(--white) 20%, transparent);
   border-radius: 15px;
@@ -4554,10 +4559,10 @@ because the nesting selector cannot represent pseudo-elements. */
   justify-content: center;
 }
 .char_title-list .char-title {
+  position: relative;
   display: flex;
   padding: 5px 10px;
   z-index: 2;
-  position: relative;
 }
 .char_title-list .char-title::before {
   content: "";
@@ -4573,7 +4578,7 @@ because the nesting selector cannot represent pseudo-elements. */
 }
 .char_title-list .char-title img {
   height: 1em;
-  scale: 2;
+  scale: 2.4;
   transform-origin: center right;
 }
 .char_title-list .char-title .badge {

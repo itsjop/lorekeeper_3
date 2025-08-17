@@ -1,11 +1,9 @@
-.card {
-  .card-header {
-    background: transparent;
-  }
+.card-header {
+  background: transparent;
+}
 
-  .card-body {
-    @include card-bg;
-    background: var(--white);
-    border-radius: 15px;
-  }
+.card-body {
+  @include card-bg;
+  background: var(--white);
+  border-radius: 15px;
 }

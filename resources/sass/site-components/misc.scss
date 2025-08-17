@@ -183,10 +183,10 @@
   flex-wrap: wrap;
   justify-content: center;
   .char-title {
+    position: relative;
     display: flex;
     padding: 5px 10px;
     z-index: 2;
-    position: relative;
     &::before {
       content: '';
       width: calc(100% - 0.5em);
@@ -201,7 +201,7 @@
     }
     img {
       height: 1em;
-      scale: 2;
+      scale: 2.4;
       transform-origin: center right;
     }
     .badge {

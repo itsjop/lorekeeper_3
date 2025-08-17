@@ -98,6 +98,7 @@ body #app {
     --active-clr_950: var(--teal-clr_950);
   }
   --white: var(--active-clr_50);
+  --purewhite: light-dark(#fff, #000);
   --black: var(--active-clr_900);
   --body-color: var(--active-clr_50);
 }
