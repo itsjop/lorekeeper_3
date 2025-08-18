@@ -58,7 +58,8 @@
         data-bs-toggle="collapse"
       >
         More
-        <i class="fas fa-caret-down"></i></a>
+        <i class="fas fa-caret-down"></i>
+      </a>
     </div>
   </fieldset>
   <div class="card bg-light mb-0 collapse" id="advancedSearch">

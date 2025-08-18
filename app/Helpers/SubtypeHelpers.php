@@ -46,7 +46,7 @@ function getSubtypeInfo(int | null $id, string $info = 'label', $prop = null, $c
     19 => 'cranky',
     20 => 'grounst',
   ];
-
+  
   $label = $subtypeLabels[$id];
   $subtypeInfo = $subtypeColors->$label;
 

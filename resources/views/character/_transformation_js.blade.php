@@ -8,12 +8,23 @@
       url: "{{ url('character/' . $character->slug . '/image') }}/" + id,
       dataType: "text"
     }).done(function(res) {
-      $("#main-tab").fadeOut(200, function() {
+      var chartab1 = $("#char-col");
+      var infotab1 = $("#info-col")
+      var duration = 200;
+      $('#main-tab').fadeOut(duration);
+      chartab1.fadeOut(duration);
+      // infotab1.fadeOut(duration);
+      setTimeout(async () => {
+        // $("#info-col").add("#char-col").fadeOut(2000, function() {
+        chartab1.remove();
+        infotab1.remove();
         $("#main-tab").html(res);
+        // $("#main-tab").insertBefore(res).insertBefore("div");
         $('#main-tab').find('[data-bs-toggle="toggle"]').bootstrapToggle();
         $('.reupload-image').on('click', function(e) {
           e.preventDefault();
-          loadModal("{{ url('admin/character/image') }}/" + $(this).data('id') + "/reupload", 'Reupload Image');
+          loadModal("{{ url('admin/character/image') }}/" + $(this).data('id') + "/reupload",
+            'Reupload Image');
         });
         $('.active-image').on('click', function(e) {
           e.preventDefault();
@@ -64,8 +75,15 @@
           loadModal("{{ url('admin/character/image') }}/" + $(this).data('id') + "/credits",
             'Edit Image Credits');
         });
-        $("#main-tab").fadeIn(200);
-      });
+        $($("#main-tab").html()).insertBefore("#main-tab");
+        $("#main-tab").empty();
+        var chartab2 = $("#char-col");
+        var infotab2 = $("#info-col");
+        chartab2.fadeOut(0);
+        // infotab2.fadeOut(0);
+        chartab2.fadeIn(duration);
+        // infotab2.fadeIn(duration);
+      }, duration);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert("AJAX call failed: " + textStatus + ", " + errorThrown);
     });
