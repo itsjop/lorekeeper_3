@@ -4633,14 +4633,7 @@ because the nesting selector cannot represent pseudo-elements. */
   width: 100%;
   max-width: 100%;
 }
-.commentbox h1,
-.commentbox h2,
-.commentbox h3,
-.commentbox h4,
-.commentbox h5,
-.commentbox h6,
-.commentbox p,
-.commentbox span {
+.commentbox h1, .commentbox h2, .commentbox h3, .commentbox h4, .commentbox h5, .commentbox h6, .commentbox p, .commentbox span {
   text-transform: unset;
   word-break: break-word;
 }
@@ -4731,4 +4724,20 @@ h1.ruled-center::before, h1.ruled-center::after, h2.ruled-center::before, h2.rul
 h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled-right::before, h5.ruled-right::before, h6.ruled-right::before, p.ruled-right::before, header.ruled-right::before, div.ruled-right::before, summary.ruled-right::before,
 .h1.ruled-right::before, .h2.ruled-right::before, .h3.ruled-right::before, .h4.ruled-right::before, .h5.ruled-right::before, .h6.ruled-right::before {
   content: "";
+}
+
+.tooltip.bs-tooltip-auto {
+  border-radius: 15px;
+  overflow: hidden;
+}
+.tooltip.bs-tooltip-auto.show {
+  opacity: 1;
+}
+.tooltip.bs-tooltip-auto .tooltip-inner {
+  background-color: #bb88ed;
+  border: 2px solid #875cb3;
+  border-radius: 15px;
+  opacity: 1;
+  color: white;
+  transition: background-color 0.2s cubic-bezier(0.79, 0.265, 0.265, 1.55), opacity 0.2s cubic-bezier(0.79, 0.265, 0.265, 1.55);
 }
