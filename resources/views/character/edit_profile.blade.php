@@ -144,8 +144,7 @@
           <tr class="sort-item" data-id="{{ $title->id }}">
             <td>
               <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              {{-- TODO: re-enable title --}}
-              {{-- {!! $title->title ? $title->title->displayName : $title->data['full'] !!} --}}
+              {!! $title->title ? $title->title->displayName : $title->data['full'] !!}
             </td>
           </tr>
         @endforeach

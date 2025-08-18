@@ -37,7 +37,7 @@
 
   @include('character._header_custom', ['character' => $character])
   @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
-    <div class="form-selectors card-header">
+    <div class="form-selectors card-header p-0">
       <ul class="nav nav-tabs flex gap-_5 card-header-tab ai-center">
         <h5 class="m-0">Forms:</h5>
         @foreach ($character->images()->where('is_valid', 1)->get() as $image)

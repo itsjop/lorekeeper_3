@@ -1173,7 +1173,8 @@ body {
 }
 #character-main-profile {
   display: grid;
-  grid-template: "charname perms   " auto "ownedby  perms   " auto "forms    info-col" 4em "char-col info-col" max-content "maintab  maintab " 0 "attchmts attchmts" auto "bio      bio     " auto/1fr 1fr;
+  grid-template: "charname charname" auto "perms    perms   " auto "forms    info-col" 4em "char-col info-col" max-content "maintab  maintab " 0 "attchmts attchmts" auto "bio      bio     " auto/3fr 2fr;
+  gap: 0.5em 1em;
 }
 #character-main-profile .form-selectors {
   grid-area: forms;
@@ -1185,7 +1186,7 @@ body {
   grid-area: charname;
 }
 #character-main-profile .ownedby {
-  grid-area: ownedby;
+  flex-grow: 1000;
 }
 #character-main-profile .char-col {
   grid-area: char-col;
@@ -1241,6 +1242,76 @@ body {
   color: white;
 }
 
+#copy.btn {
+  border-radius: 25px;
+}
+
+.permission-badges {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-content: end;
+  align-self: end;
+  gap: 0.5em;
+}
+.permission-badges > * {
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.permission-box {
+  display: grid;
+  border-radius: 15px;
+  grid-template-columns: 2em max-content;
+  border: 2px var(--permcolor) solid;
+  background-color: var(--white);
+  overflow: hidden;
+  height: 2em;
+}
+.permission-box .status {
+  background-color: var(--permcolor);
+  display: flex;
+  place-content: center;
+  place-items: center;
+  color: var(--white);
+}
+.permission-box .perms {
+  display: flex;
+  padding: 0 8px;
+  place-content: center;
+  place-items: center;
+  gap: 12px;
+}
+.permission-box .perms i {
+  color: color-mix(in srgb, var(--permcolor) 80%, black);
+}
+.permission-box.no-details {
+  grid-template-columns: 2em;
+}
+.permission-box.allowed {
+  --permcolor: var(--success);
+}
+.permission-box.ask {
+  --permcolor: var(--warning);
+}
+.permission-box.closed {
+  --permcolor: var(--danger);
+}
+.permission-box.likes {
+  --permcolor: var(--info);
+}
+
+@container main-container (width < 600px) {
+  #character-main-profile {
+    display: grid;
+    grid-template: "charname" auto "perms" auto "ownedby" auto "forms" auto "char-col" auto "info-col" auto "maintab" 0 "attchmts" auto "bio" auto/1fr;
+  }
+  .permission-badges {
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+    place-content: start;
+  }
+}
 .palate-colors.unset {
   --card_gradient: linear-gradient(to bottom left, #d3d3d3, #cfc4d2, #b09bd0, #bdafff);
   --card_card-border: linear-gradient(180deg, #fff, #ecc3ff);
@@ -4622,7 +4693,7 @@ because the nesting selector cannot represent pseudo-elements. */
   pointer-events: none;
 }
 
-h1.ruled-left, h1.ruled-center, h1.ruled-right, h2.ruled-left, h2.ruled-center, h2.ruled-right, h3.ruled-left, h3.ruled-center, h3.ruled-right, h4.ruled-left, h4.ruled-center, h4.ruled-right, h5.ruled-left, h5.ruled-center, h5.ruled-right, h6.ruled-left, h6.ruled-center, h6.ruled-right, p.ruled-left, p.ruled-center, p.ruled-right, header.ruled-left, header.ruled-center, header.ruled-right, div.ruled-left, div.ruled-center, div.ruled-right,
+h1.ruled-left, h1.ruled-center, h1.ruled-right, h2.ruled-left, h2.ruled-center, h2.ruled-right, h3.ruled-left, h3.ruled-center, h3.ruled-right, h4.ruled-left, h4.ruled-center, h4.ruled-right, h5.ruled-left, h5.ruled-center, h5.ruled-right, h6.ruled-left, h6.ruled-center, h6.ruled-right, p.ruled-left, p.ruled-center, p.ruled-right, header.ruled-left, header.ruled-center, header.ruled-right, div.ruled-left, div.ruled-center, div.ruled-right, summary.ruled-left, summary.ruled-center, summary.ruled-right,
 .h1.ruled-left,
 .h1.ruled-center,
 .h1.ruled-right, .h2.ruled-left, .h2.ruled-center, .h2.ruled-right, .h3.ruled-left, .h3.ruled-center, .h3.ruled-right, .h4.ruled-left, .h4.ruled-center, .h4.ruled-right, .h5.ruled-left, .h5.ruled-center, .h5.ruled-right, .h6.ruled-left, .h6.ruled-center, .h6.ruled-right {
@@ -4631,7 +4702,7 @@ h1.ruled-left, h1.ruled-center, h1.ruled-right, h2.ruled-left, h2.ruled-center, 
   align-items: center;
   gap: 5px;
 }
-h1.ruled-left::after, h1.ruled-left::before, h1.ruled-center::after, h1.ruled-center::before, h1.ruled-right::after, h1.ruled-right::before, h2.ruled-left::after, h2.ruled-left::before, h2.ruled-center::after, h2.ruled-center::before, h2.ruled-right::after, h2.ruled-right::before, h3.ruled-left::after, h3.ruled-left::before, h3.ruled-center::after, h3.ruled-center::before, h3.ruled-right::after, h3.ruled-right::before, h4.ruled-left::after, h4.ruled-left::before, h4.ruled-center::after, h4.ruled-center::before, h4.ruled-right::after, h4.ruled-right::before, h5.ruled-left::after, h5.ruled-left::before, h5.ruled-center::after, h5.ruled-center::before, h5.ruled-right::after, h5.ruled-right::before, h6.ruled-left::after, h6.ruled-left::before, h6.ruled-center::after, h6.ruled-center::before, h6.ruled-right::after, h6.ruled-right::before, p.ruled-left::after, p.ruled-left::before, p.ruled-center::after, p.ruled-center::before, p.ruled-right::after, p.ruled-right::before, header.ruled-left::after, header.ruled-left::before, header.ruled-center::after, header.ruled-center::before, header.ruled-right::after, header.ruled-right::before, div.ruled-left::after, div.ruled-left::before, div.ruled-center::after, div.ruled-center::before, div.ruled-right::after, div.ruled-right::before,
+h1.ruled-left::after, h1.ruled-left::before, h1.ruled-center::after, h1.ruled-center::before, h1.ruled-right::after, h1.ruled-right::before, h2.ruled-left::after, h2.ruled-left::before, h2.ruled-center::after, h2.ruled-center::before, h2.ruled-right::after, h2.ruled-right::before, h3.ruled-left::after, h3.ruled-left::before, h3.ruled-center::after, h3.ruled-center::before, h3.ruled-right::after, h3.ruled-right::before, h4.ruled-left::after, h4.ruled-left::before, h4.ruled-center::after, h4.ruled-center::before, h4.ruled-right::after, h4.ruled-right::before, h5.ruled-left::after, h5.ruled-left::before, h5.ruled-center::after, h5.ruled-center::before, h5.ruled-right::after, h5.ruled-right::before, h6.ruled-left::after, h6.ruled-left::before, h6.ruled-center::after, h6.ruled-center::before, h6.ruled-right::after, h6.ruled-right::before, p.ruled-left::after, p.ruled-left::before, p.ruled-center::after, p.ruled-center::before, p.ruled-right::after, p.ruled-right::before, header.ruled-left::after, header.ruled-left::before, header.ruled-center::after, header.ruled-center::before, header.ruled-right::after, header.ruled-right::before, div.ruled-left::after, div.ruled-left::before, div.ruled-center::after, div.ruled-center::before, div.ruled-right::after, div.ruled-right::before, summary.ruled-left::after, summary.ruled-left::before, summary.ruled-center::after, summary.ruled-center::before, summary.ruled-right::after, summary.ruled-right::before,
 .h1.ruled-left::after,
 .h1.ruled-left::before,
 .h1.ruled-center::after,
@@ -4644,20 +4715,20 @@ h1.ruled-left::after, h1.ruled-left::before, h1.ruled-center::after, h1.ruled-ce
   margin-top: 4px;
   background-color: currentColor;
 }
-h1.ruled-left::after, h2.ruled-left::after, h3.ruled-left::after, h4.ruled-left::after, h5.ruled-left::after, h6.ruled-left::after, p.ruled-left::after, header.ruled-left::after, div.ruled-left::after,
+h1.ruled-left::after, h2.ruled-left::after, h3.ruled-left::after, h4.ruled-left::after, h5.ruled-left::after, h6.ruled-left::after, p.ruled-left::after, header.ruled-left::after, div.ruled-left::after, summary.ruled-left::after,
 .h1.ruled-left::after, .h2.ruled-left::after, .h3.ruled-left::after, .h4.ruled-left::after, .h5.ruled-left::after, .h6.ruled-left::after {
   content: "";
 }
-h1.ruled-center, h2.ruled-center, h3.ruled-center, h4.ruled-center, h5.ruled-center, h6.ruled-center, p.ruled-center, header.ruled-center, div.ruled-center,
+h1.ruled-center, h2.ruled-center, h3.ruled-center, h4.ruled-center, h5.ruled-center, h6.ruled-center, p.ruled-center, header.ruled-center, div.ruled-center, summary.ruled-center,
 .h1.ruled-center, .h2.ruled-center, .h3.ruled-center, .h4.ruled-center, .h5.ruled-center, .h6.ruled-center {
   text-align: center;
 }
-h1.ruled-center::before, h1.ruled-center::after, h2.ruled-center::before, h2.ruled-center::after, h3.ruled-center::before, h3.ruled-center::after, h4.ruled-center::before, h4.ruled-center::after, h5.ruled-center::before, h5.ruled-center::after, h6.ruled-center::before, h6.ruled-center::after, p.ruled-center::before, p.ruled-center::after, header.ruled-center::before, header.ruled-center::after, div.ruled-center::before, div.ruled-center::after,
+h1.ruled-center::before, h1.ruled-center::after, h2.ruled-center::before, h2.ruled-center::after, h3.ruled-center::before, h3.ruled-center::after, h4.ruled-center::before, h4.ruled-center::after, h5.ruled-center::before, h5.ruled-center::after, h6.ruled-center::before, h6.ruled-center::after, p.ruled-center::before, p.ruled-center::after, header.ruled-center::before, header.ruled-center::after, div.ruled-center::before, div.ruled-center::after, summary.ruled-center::before, summary.ruled-center::after,
 .h1.ruled-center::before,
 .h1.ruled-center::after, .h2.ruled-center::before, .h2.ruled-center::after, .h3.ruled-center::before, .h3.ruled-center::after, .h4.ruled-center::before, .h4.ruled-center::after, .h5.ruled-center::before, .h5.ruled-center::after, .h6.ruled-center::before, .h6.ruled-center::after {
   content: "";
 }
-h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled-right::before, h5.ruled-right::before, h6.ruled-right::before, p.ruled-right::before, header.ruled-right::before, div.ruled-right::before,
+h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled-right::before, h5.ruled-right::before, h6.ruled-right::before, p.ruled-right::before, header.ruled-right::before, div.ruled-right::before, summary.ruled-right::before,
 .h1.ruled-right::before, .h2.ruled-right::before, .h3.ruled-right::before, .h4.ruled-right::before, .h5.ruled-right::before, .h6.ruled-right::before {
   content: "";
 }

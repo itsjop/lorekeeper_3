@@ -67,10 +67,10 @@
     @endif
   </div>
 
-  @if ($image->titles->count() > 0)
+  @if ($character->image->titles->count() > 0)
     <div class="titles">
       <h5 class="ruled-left text-700">Titles</h5>
-      {!! $image->displayTitles !!}
+      {!! $character->image->displayTitles !!}
     </div>
   @endif
 
@@ -122,7 +122,10 @@
   @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
     <div class="admin">
       <details>
-        <summary>Admin Actions</summary>
+        <summary class="h5 ruled-left text-700">
+          <i class="fas fa-caret-down"></i>
+          Administrative
+        </summary>
         <a
           href="#"
           class="btn btn-outline-info btn-sm edit-features"
@@ -138,11 +141,11 @@
         ><i class="fas fa-cog"></i> Edit Artists</a>
         {!! Form::open(['url' => 'admin/character/image/' . $image->id . '/settings']) !!}
         <div class="form-group">
-          {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+          {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => '']) !!}
           {!! Form::label('is_visible', 'Is Viewable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will not be visible by anyone without the Manage Masterlist power.') !!}
         </div>
         <div class="form-group">
-          {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+          {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => '']) !!}
           {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
               'If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.'
           ) !!}
