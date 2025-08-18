@@ -84,6 +84,11 @@
 
 
 
+  "unset": {
+    "gradient": ["#ffb3e5", "#ff75dd", "#8e60d3", "#bdafff"],
+    "card_border": ["#fff", "#ffc3fd"],
+    "profile_bg_color": ["#ffcbf3", "#ded3ff"]
+  },
   "unknown": {
     "gradient": ["#98f8ff", "#2168ec", "#ff452a", "#ff9a15"],
     "card_border": ["#fff", "#ffe8bb"],
