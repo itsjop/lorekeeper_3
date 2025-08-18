@@ -8,8 +8,16 @@
       url: "{{ url('character/' . $character->slug . '/image') }}/" + id,
       dataType: "text"
     }).done(function(res) {
-      $("#main-tab").fadeOut(200, function() {
+      var chartab = $("#char-col");
+      var infotab = $("#info-col");
+      [chartab, infotab].reduce(function(el, next) {
+        return el.add(next);
+      }).fadeOut(2000, function() {
+        // $("#info-col").add("#char-col").fadeOut(2000, function() {
+        chartab.remove()
+        infotab.remove()
         $("#main-tab").html(res);
+        // $("#main-tab").insertBefore(res).insertBefore("div");
         $('#main-tab').find('[data-bs-toggle="toggle"]').bootstrapToggle();
         $('.reupload-image').on('click', function(e) {
           e.preventDefault();
@@ -64,7 +72,9 @@
           loadModal("{{ url('admin/character/image') }}/" + $(this).data('id') + "/credits",
             'Edit Image Credits');
         });
-        $("#main-tab").fadeIn(200);
+        $($("#main-tab").html()).insertBefore( "#main-tab" );
+
+        $("#main-tab").fadeIn(2000);
       });
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert("AJAX call failed: " + textStatus + ", " + errorThrown);

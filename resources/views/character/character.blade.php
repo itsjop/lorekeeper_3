@@ -35,191 +35,168 @@
       /> --}}
   </div>
 
-  @include('character._header', ['character' => $character])
-
-  {{-- @if (isset($character->profile->professionObj) || isset($character->profile->profession))
-    <div class="card-header mb-2 p-0 text-right">
-      <div class="col-lg-2 ml-auto">
-        <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
-          @if (isset($character->profile->professionObj))
-            <h5 class="p-0 m-0">
-              <img
-                class="fr-fic fr-dii mr-2"
-                src="{{ $character->profile->professionObj->iconUrl ?? '/images/somnivores/site/profession.png' }}"
-                style="max-width:50px;"
-              >{{ $character->profile->professionObj->name }}
-            </h5>
-          @else
-            <h5 class="p-0 m-0">
-              <img
-                class="fr-fic fr-dii mr-2"
-                src="/images/somnivores/site/profession.png"
-                style="max-width:50px;"
-           >{{ $character->profile->profession }}
-            </h5>
-          @endif
-        </a>
-      </div>
+  @include('character._header_custom', ['character' => $character])
+  @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
+    <div class="form-selectors card-header">
+      <ul class="nav nav-tabs flex gap-_5 card-header-tab ai-center">
+        <h5 class="m-0">Forms:</h5>
+        @foreach ($character->images()->where('is_valid', 1)->get() as $image)
+          <li class="nav-item">
+            <a
+              class="nav-link br-15 form-data-button {{ $image->id == $character->image->id ? 'active' : '' }}"
+              data-bs-toggle="tab"
+              role="tab"
+              style="border: 2px solid white;"
+              data-id="{{ $image->id }}"
+            >
+              {{ $image->transformation_id ? $image->transformation->name : 'Main' }}
+              {{ $image->transformation_info ? ' (' . $image->transformation_info . ')' : '' }}
+            </a>
+          </li>
+        @endforeach
+      </ul>
     </div>
-  @endif --}}
+  @endif
 
   {{-- Main Image --}}
+  <div id="char-col" class="char-col">
+    <div class="text-center">
+      <a
+        href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+        data-lightbox="entry"
+        data-title="{{ $character->fullName }}"
+      >
+        @if (
+            (isset($character->image->content_warnings) && !Auth::check()) ||
+                (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
+        )
+          @include('widgets._cw_img', [
+              'src' =>
+                  $character->image->canViewFull(Auth::user() ?? null) &&
+                  file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
+                      ? $character->image->fullsizeUrl
+                      : $character->image->imageUrl,
+              'class' => 'image',
+              'alt' => $character->fullName,
+              'warnings' => isset($character->image->content_warnings)
+                  ? implode(', ', $character->image->content_warnings)
+                  : ''
+          ])
+        @else
+          <img
+            src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
+            class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+            alt="{{ $character->fullName }}"
+          />
+        @endif
+      </a>
+      <div class="mt-2 text-center">
+        @include('widgets._object_block', ['object' => $character])
+      </div>
+    </div>
+    @if (
+        $character->image->canViewFull(Auth::check() ? Auth::user() : null) &&
+            file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
+    )
+      <div class="text-right">
+        You are viewing the full-size image.
+        <a href="{{ $character->image->imageUrl }}">
+          View watermarked image
+        </a>
+        ?
+      </div>
+    @endif
+  </div>
+  @include('character._image_info', ['image' => $character->image, 'character' => $character])
+
   <div
     class="row mb-3"
     id="main-tab"
     style="clear:both;"
-  >
-    <div class="col-md-7 p-0">
-        @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
-          <div class="card-header p-0 mb-3">
-            <ul class="nav nav-tabs flex gap-_5 card-header-tab ai-center">
-              <h5 class="m-0">Forms:</h5>
-              @foreach ($character->images()->where('is_valid', 1)->get() as $image)
-                <li class="nav-item">
-                  <a
-                    class="nav-link br-15 form-data-button {{ $image->id == $character->image->id ? 'active' : '' }}"
-                    data-bs-toggle="tab"
-                    role="tab"
-                    style="border: 2px solid white;"
-                    data-id="{{ $image->id }}"
-                  >
-                    {{ $image->transformation_id ? $image->transformation->name : 'Main' }}
-                    {{ $image->transformation_info ? ' (' . $image->transformation_info . ')' : '' }}
-                  </a>
-                </li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
-        <div class="text-center">
-          <a
-            href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-            data-lightbox="entry"
-            data-title="{{ $character->fullName }}"
-          >
-            @if (
-                (isset($character->image->content_warnings) && !Auth::check()) ||
-                    (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
-            )
-              @include('widgets._cw_img', [
-                  'src' =>
-                      $character->image->canViewFull(Auth::user() ?? null) &&
-                      file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
-                          ? $character->image->fullsizeUrl
-                          : $character->image->imageUrl,
-                  'class' => 'image',
-                  'alt' => $character->fullName,
-                  'warnings' => isset($character->image->content_warnings)
-                      ? implode(', ', $character->image->content_warnings)
-                      : ''
-              ])
-            @else
-              <img
-                src="{{ $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                class="image {{ Auth::check() && checkImageBlock($character, Auth::user()) ? 'image-blur' : '' }} {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
-                alt="{{ $character->fullName }}"
-              />
-            @endif
-          </a>
-          <div class="mt-2 text-center">
-            @include('widgets._object_block', ['object' => $character])
-          </div>
-        </div>
-        @if (
-            $character->image->canViewFull(Auth::check() ? Auth::user() : null) &&
-                file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
-        )
-          <div class="text-right">
-            You are viewing the full-size image.
-            <a href="{{ $character->image->imageUrl }}">
-              View watermarked image
-            </a>
-            ?
-          </div>
-        @endif
-      </div>
-    @include('character._image_info', ['image' => $character->image, 'character' => $character])
-  </div>
+  > </div>
 
   <?php
   $pets = $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get();
   $firstTab = count($pets) ? 1 : (count($items) ? 2 : (count($character->links) ? 3 : 0));
   ?>
 
-  @if ($firstTab !== 0)
-    <div class="card-header" style="position: relative; z-index: 5;">
-      <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
-        @if (count($pets))
-          <li class="nav-item">
-            <a
-              class="nav-link {{ $firstTab == 1 ? 'active' : '' }}"
-              id="petsTab"
-              data-bs-toggle="tab"
-              href="#pets"
-              role="tab"
-            >
-              <h5 class="m-0">
-                <i class="fas fa-dog"></i>
-                Pets
-              </h5>
-            </a>
-          </li>
-        @endif
-        @if (count($items))
-          <li class="nav-item">
-            <a
-              class="nav-link {{ $firstTab == 2 ? 'active' : '' }}"
-              id="inventoryTab"
-              data-bs-toggle="tab"
-              href="#inventory"
-              role="tab"
-            >
-              <h5 class="m-0">
-                <i class="fas fa-gifts"></i>
-                Inventory
-              </h5>
-            </a>
-          </li>
-        @endif
-        @if (count($character->links))
-          <li class="nav-item">
-            <a
-              class="nav-link {{ $firstTab == 3 ? 'active' : '' }}"
-              id="connectionsTab"
-              data-bs-toggle="tab"
-              href="#connections"
-              role="tab"
-            >
-              <h5 class="m-0">
-                <i class="fas fa-link"></i>
-                Connections
-              </h5>
-            </a>
-          </li>
-        @endif
-      </ul>
-    </div>
-  @endif
+  <div class="char-attachments">
 
-  @if ($firstTab !== 0)
-    <div class="card-body tab-content">
-      <div class="tab-pane fade {{ $firstTab == 1 ? 'show active' : '' }}" id="pets">
-        @include('character._tab_pets', [
-            'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
-            'character' => $character
-        ])
+    @if ($firstTab !== 0)
+      <div class="character-attch-tabs card-header" style="position: relative; z-index: 5;">
+        <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
+          @if (count($pets))
+            <li class="nav-item">
+              <a
+                class="nav-link {{ $firstTab == 1 ? 'active' : '' }}"
+                id="petsTab"
+                data-bs-toggle="tab"
+                href="#pets"
+                role="tab"
+              >
+                <h5 class="m-0">
+                  <i class="fas fa-dog"></i>
+                  Pets
+                </h5>
+              </a>
+            </li>
+          @endif
+          @if (count($items))
+            <li class="nav-item">
+              <a
+                class="nav-link {{ $firstTab == 2 ? 'active' : '' }}"
+                id="inventoryTab"
+                data-bs-toggle="tab"
+                href="#inventory"
+                role="tab"
+              >
+                <h5 class="m-0">
+                  <i class="fas fa-gifts"></i>
+                  Inventory
+                </h5>
+              </a>
+            </li>
+          @endif
+          @if (count($character->links))
+            <li class="nav-item">
+              <a
+                class="nav-link {{ $firstTab == 3 ? 'active' : '' }}"
+                id="connectionsTab"
+                data-bs-toggle="tab"
+                href="#connections"
+                role="tab"
+              >
+                <h5 class="m-0">
+                  <i class="fas fa-link"></i>
+                  Connections
+                </h5>
+              </a>
+            </li>
+          @endif
+        </ul>
       </div>
-      <div class="tab-pane fade {{ $firstTab == 2 ? 'show active' : '' }}" id="inventory">
-        @include('character._character_inventory_solo', ['items' => $items])
+    @endif
+
+    @if ($firstTab !== 0)
+      <div class="card-attch-body card-body tab-content">
+        <div class="tab-pane fade {{ $firstTab == 1 ? 'show active' : '' }}" id="pets">
+          @include('character._tab_pets', [
+              'pets' => $character->image->character->pets()->orderBy('sort', 'DESC')->limit(config('lorekeeper.pets.display_pet_count'))->get(),
+              'character' => $character
+          ])
+        </div>
+        <div class="tab-pane fade {{ $firstTab == 2 ? 'show active' : '' }}" id="inventory">
+          @include('character._character_inventory_solo', ['items' => $items])
+        </div>
+        <div class="tab-pane fade {{ $firstTab == 3 ? 'show active' : '' }}" id="connections">
+          @include('character._character_links_solo', [
+              'character' => $character,
+              'types' => config('lorekeeper.character_relationships')
+          ])
+        </div>
       </div>
-      <div class="tab-pane fade {{ $firstTab == 3 ? 'show active' : '' }}" id="connections">
-        @include('character._character_links_solo', [
-            'character' => $character,
-            'types' => config('lorekeeper.character_relationships')
-        ])
-      </div>
-    </div>
-  @endif
+    @endif
+  </div>
   <br />
   {{-- Info --}}
   <div class="card character-bio">

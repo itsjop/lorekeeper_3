@@ -1171,6 +1171,76 @@ body {
     max-width: 100%;
   }
 }
+#character-main-profile {
+  display: grid;
+  grid-template: "charname perms   " auto "ownedby  perms   " auto "forms    info-col" 4em "char-col info-col" max-content "maintab  maintab " 0 "attchmts attchmts" auto "bio      bio     " auto/1fr 1fr;
+}
+#character-main-profile .form-selectors {
+  grid-area: forms;
+}
+#character-main-profile .permission-badges {
+  grid-area: perms;
+}
+#character-main-profile .character-name-title {
+  grid-area: charname;
+}
+#character-main-profile .ownedby {
+  grid-area: ownedby;
+}
+#character-main-profile .char-col {
+  grid-area: char-col;
+}
+#character-main-profile .info-col {
+  grid-area: info-col;
+}
+#character-main-profile #main-tab {
+  grid-area: maintab;
+  display: grid;
+}
+#character-main-profile .char-attachments {
+  grid-area: attchmts;
+}
+#character-main-profile .character-bio {
+  grid-area: bio;
+}
+
+.char_title-list {
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.char_title-list .char-title {
+  position: relative;
+  display: flex;
+  padding: 5px 10px;
+  z-index: 2;
+}
+.char_title-list .char-title::before {
+  content: "";
+  width: calc(100% - 0.5em);
+  height: calc(100% - 0px);
+  background: var(--title_bg-color);
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 15px;
+}
+.char_title-list .char-title img {
+  height: 1em;
+  scale: 2.4;
+  transform-origin: center right;
+}
+.char_title-list .char-title .badge {
+  padding: 0 5px 0 6px;
+  z-index: 2;
+  font-size: 1.1em;
+  margin-top: 2px;
+  color: white;
+}
+
 .palate-colors.unset {
   --card_gradient: linear-gradient(to bottom left, #d3d3d3, #cfc4d2, #b09bd0, #bdafff);
   --card_card-border: linear-gradient(180deg, #fff, #ecc3ff);
@@ -4550,43 +4620,6 @@ because the nesting selector cannot represent pseudo-elements. */
      -moz-user-select: none;
           user-select: none;
   pointer-events: none;
-}
-
-.char_title-list {
-  display: flex;
-  gap: 13px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.char_title-list .char-title {
-  position: relative;
-  display: flex;
-  padding: 5px 10px;
-  z-index: 2;
-}
-.char_title-list .char-title::before {
-  content: "";
-  width: calc(100% - 0.5em);
-  height: calc(100% - 0px);
-  background: var(--title_bg-color);
-  position: absolute;
-  right: 0;
-  z-index: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 15px;
-}
-.char_title-list .char-title img {
-  height: 1em;
-  scale: 2.4;
-  transform-origin: center right;
-}
-.char_title-list .char-title .badge {
-  padding: 0 5px 0 6px;
-  z-index: 2;
-  font-size: 1.1em;
-  margin-top: 2px;
-  color: white;
 }
 
 h1.ruled-left, h1.ruled-center, h1.ruled-right, h2.ruled-left, h2.ruled-center, h2.ruled-right, h3.ruled-left, h3.ruled-center, h3.ruled-right, h4.ruled-left, h4.ruled-center, h4.ruled-right, h5.ruled-left, h5.ruled-center, h5.ruled-right, h6.ruled-left, h6.ruled-center, h6.ruled-right, p.ruled-left, p.ruled-center, p.ruled-right, header.ruled-left, header.ruled-center, header.ruled-right, div.ruled-left, div.ruled-center, div.ruled-right,

@@ -177,42 +177,6 @@
   }
 }
 
-.char_title-list {
-  display: flex;
-  gap: 13px;
-  flex-wrap: wrap;
-  justify-content: center;
-  .char-title {
-    position: relative;
-    display: flex;
-    padding: 5px 10px;
-    z-index: 2;
-    &::before {
-      content: '';
-      width: calc(100% - 0.5em);
-      height: calc(100% - 0px);
-      background: var(--title_bg-color);
-      position: absolute;
-      right: 0;
-      z-index: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      border-radius: 15px;
-    }
-    img {
-      height: 1em;
-      scale: 2.4;
-      transform-origin: center right;
-    }
-    .badge {
-      padding: 0 5px 0 6px;
-      z-index: 2;
-      font-size: 1.1em;
-      margin-top: 2px;
-      color: white;
-    }
-  }
-}
 // prettier-ignore
 h1,h2,h3,h4,h5,h6,p,header,div,
 .h1,.h2,.h3,.h4,.h5,.h6 {
