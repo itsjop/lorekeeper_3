@@ -1,7 +1,3 @@
-@if (!$character->is_myo_slot)
-  {{-- total likes --}}
-@endif
-
 <?php
 $trading = $character->is_trading;
 $writing = $character->is_gift_writing_allowed;

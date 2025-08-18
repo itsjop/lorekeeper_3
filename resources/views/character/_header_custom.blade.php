@@ -36,8 +36,6 @@
   @endif
 </div>
 
-<hr>
-
 <div id="character-main-profile" class=" mb-0">
   <div class="permission-badges">
     <div class="ownedby grid-span">

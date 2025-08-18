@@ -42,10 +42,7 @@
   }
   .info-col {
     grid-area: info-col;
-    #info-1 {
-      .info {
-      }
-    }
+    height: max-content;
   }
   #main-tab {
     grid-area: maintab;
@@ -125,7 +122,6 @@
   height: 2em;
   .status {
     background-color: var(--permcolor);
-
     display: flex;
     place-content: center;
     place-items: center;
@@ -174,7 +170,7 @@
   }
   .permission-badges {
     display: grid;
-    grid-template-columns: repeat(10, auto);
-    place-content: start;
+    grid-template-columns: repeat(7, auto);
+    place-content: space-between;
   }
 }

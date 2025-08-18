@@ -1193,6 +1193,8 @@ body {
 }
 #character-main-profile .info-col {
   grid-area: info-col;
+  height: -moz-max-content;
+  height: max-content;
 }
 #character-main-profile #main-tab {
   grid-area: maintab;
@@ -1308,8 +1310,8 @@ body {
   }
   .permission-badges {
     display: grid;
-    grid-template-columns: repeat(10, auto);
-    place-content: start;
+    grid-template-columns: repeat(7, auto);
+    place-content: space-between;
   }
 }
 .palate-colors.unset {
