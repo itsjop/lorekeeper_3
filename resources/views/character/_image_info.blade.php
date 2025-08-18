@@ -13,7 +13,7 @@
                   style="height: 1.5em; margin-right: 0.1em;"
                 >
                 <div class="palate h6 flex">
-                  <a href="{{ $image->subtype->url }}">
+                  <a href="{{ isset($image->subtype->url) ? $image->subtype->url : '' }}">
                     {!! ucfirst(getImageSubtypeInfo($image)['label']) !!}
                   </a>
                 </div>
