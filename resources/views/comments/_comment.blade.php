@@ -4,11 +4,10 @@
 @endphp
 
 @if ($comment->deleted_at == null)
-  <div
-    id="comment-{{ $comment->getKey() }}"
-    class="{{ isset($reply) && $reply === true ? 'comment_replies commentbox border-left col-12 column mw-100 pr-0' : '' }} commentbox pt-4 mw-100"
+  <div id="comment-{{ $comment->getKey() }}"
+    class="{{ isset($reply) && $reply === true ? 'comment_replies' : '' }} commentbox pt-4 mw-100"
   >
-    <div class="media-body card-basic row mw-100 mx-0" style="flex:1;flex-wrap:wrap;">
+    <div class="media-body row mw-100 mx-0" style="flex:1;flex-wrap:wrap;">
       {{-- Show avatar if not compact --}}
       @if (isset($compact) && !$compact)
         <div class="d-none d-md-block">
@@ -38,7 +37,7 @@
 
         {{-- Comment --}}
         <div
-          class="comment border card-basic mw-100 {{ $comment->is_featured ? 'border-success bg-light' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}"
+          class="comment border mw-100 card-basic {{ $comment->is_featured ? 'border-success bg-light' : '' }} {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() < 0 ? 'bg-light bg-gradient' : '' }}"
         >
           {!! config('lorekeeper.settings.wysiwyg_comments')
               ? $comment->comment

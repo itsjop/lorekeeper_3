@@ -25,7 +25,7 @@
 
 
   @if (count($submissions))
-    <div class="d-flex align-content-around flex-wrap mb-2">
+    <div class="grid grid-4-col">
       @foreach ($submissions->sortByDesc('created_at') as $submission)
         @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
       @endforeach

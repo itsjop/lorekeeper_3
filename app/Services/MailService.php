@@ -92,7 +92,7 @@ class MailService extends Service {
         'subject'      => $data['subject'],
         'message'      => $data['message'],
         'seen'         => false,
-        'parent_id'    => $data['parent_id'],
+        'parent_id'    => isset($data['parent_id']) ? $data['parent_id'] : null,
       ]);
 
       // send a notification

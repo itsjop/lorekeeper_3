@@ -441,8 +441,15 @@
   {{-- TWO FACTOR AUTH --}}
   <div class="card-full p-3 mb-2">
     <h3>Two-Factor Authentication</h3>
-
-    <p>Two-factor authentication acts as a second layer of protection for your account. It uses an app on your phone-- such as
+    <hr>
+    <h6>Coming soon!</h6>
+    <span>
+      Hi. This is <strong>pim</strong>, the Somnivores site developer. While 2FA comes with lorekeeper, lots of bugs have appeared
+      over the course of the site's development. As such, I haven't yet had the opportunity to re-confirm that the 2FA setup process
+      is completely functional end to end yet. Since something going wrong in that proccess can result in account lockouts, we've
+      disabled it until we have the devtime to make sure everything is working fully, at which point we'll re-enable it!
+    </span>
+    {{-- <p>Two-factor authentication acts as a second layer of protection for your account. It uses an app on your phone-- such as
       Google Authenticator-- and information provided by the site to generate a random code that changes frequently.</p>
 
     <div class="alert alert-info">
@@ -456,11 +463,6 @@
         Two-factor authentication will not be enabled until you do so and confirm by entering one of the codes provided by your
         authentication app.</p>
       <hr>
-      <strong>
-        Hi. This is joz, the Somnivores site developer. I haven't yet been able to confirm if the 2FA setup process completely
-        functional end to end. It should be fine, but if you get locked out, we may be unable to grant you access to your account
-        again without a lot of effort. Use at your own risk!
-      </strong>
       {!! Form::open(['url' => 'account/two-factor/enable']) !!}
       <div class="text-right">
         {!! Form::submit('Enable', ['class' => 'btn btn-primary']) !!}
@@ -482,7 +484,7 @@
         {!! Form::submit('Disable', ['class' => 'btn btn-primary']) !!}
       </div>
       {!! Form::close() !!}
-    @endif
+    @endif --}}
   </div>
 
   <script>

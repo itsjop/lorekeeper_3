@@ -113,6 +113,8 @@ class MailController extends Controller {
       $request->validate(UserMail::$createRules);
     }
 
+    // dd('$data, $mail, $main_id, $service', $data, $mail, $mail_id, $service, $request);
+
     if (!$mail = $service->createUserMail($data, Auth::user())) {
       foreach ($service->errors()->getMessages()['error'] as $error) {
         flash($error)->error();

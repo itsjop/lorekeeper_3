@@ -329,7 +329,7 @@
               <a class="dt-nav-item" href="{{ url('account/bookmarks') }}">
                 <i class="fas fa-bookmark"></i> Bookmarks </a>
               <a class="dt-nav-item" href="{{ url('account/settings') }}">
-                <i class="fas fa-cog"></i> Settings </a>
+                <i class="fas fa-cog"></i> Account Settings </a>
               <a
                 class="dt-nav-item text-danger"
                 href="{{ route('logout') }}"

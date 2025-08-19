@@ -417,9 +417,8 @@ class UserService extends Service {
 
     return $this->rollbackReturn(false);
   }
-
   /**
-   * Updates the user's avatar.
+   * Updates user's profile comment setting.
    *
    * @param mixed $data
    * @param mixed $user
@@ -430,35 +429,10 @@ class UserService extends Service {
     DB::beginTransaction();
 
     try {
-      if (!$avatar) throw new \Exception("Please upload a file.");
-      $filename = $user->id . '.' . $avatar->getClientOriginalExtension();
+      $user->settings->allow_profile_comments = $data ?? 0;
+      $user->settings->save();
 
-      if ($user->avatar !== 'default.png') {
-        $file = 'images/avatars/' . $user->avatar;
-        //$destinationPath = 'uploads/' . $id . '/';
-
-        if (File::exists($file)) {
-          if (!unlink($file)) {
-            throw new \Exception('Failed to unlink old avatar.');
-          }
-        }
-      }
-
-      // Checks if uploaded file is a GIF
-      if ($avatar->getClientOriginalExtension() == 'gif') {
-
-        if (!copy($avatar, $file)) throw new \Exception("Failed to copy file.");
-        if (!$file->move(public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
-        if (!$avatar->move(public_path('images/avatars', $filename))) throw new \Exception("Failed to move file.");
-      } else {
-        if (!Image::make($avatar)->resize(150, 150)->save(public_path('images/avatars/' . $filename)))
-          throw new \Exception("Failed to process avatar.");
-      }
-
-      $user->avatar = $filename;
-      $user->save();
-
-      return $this->commitReturn($avatar);
+      return $this->commitReturn(true);
     } catch (\Exception $e) {
       $this->setError('error', $e->getMessage());
     }

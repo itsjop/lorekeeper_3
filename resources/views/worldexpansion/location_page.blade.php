@@ -108,7 +108,7 @@
         <h5 class="mb-0">Associated Gallery Submission{{ count($location->gallerysubmissions) == 1 ? '' : 's' }}</h5>
         <hr>
 
-        <div class="d-flex align-content-around flex-wrap mb-2">
+        <div class="grid grid-4-col">
           @foreach ($location->gallerysubmissions->sortByDesc('created_at')->take(3) as $submission)
             @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
           @endforeach
