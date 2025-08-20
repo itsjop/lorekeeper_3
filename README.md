@@ -25,6 +25,12 @@ Lorekeeper is a framework for managing deviantART-based ARPGs/closed species mas
 
 Important: For those who are not familiar with web dev, please refer to the [Wiki](http://wiki.lorekeeper.me/index.php?title=Tutorial:_Setting_Up) for a much more detailed set of instructions!!
 
+## Docker Setup (Recommended)
+
+For the easiest setup experience, you can use Docker and Docker Compose to run Lorekeeper without manual installation steps. See [DOCKER.md](DOCKER.md) for instructions.
+
+## Manual Setup
+
 ## Obtain a copy of the code
 
 ```
