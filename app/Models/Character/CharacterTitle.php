@@ -114,7 +114,7 @@ class CharacterTitle extends Model {
    * @return string
    */
   public function getDisplayNameFullAttribute() {
-    return '<a class="gradient-text display-rarity" href="' . $this->url . '" style="background-image: ' . $this->backgroundColour . ' !important;" >' . $this->title . '</a>' . ($this->short_title ? ' (' . $this->short_title . ')' : '') . ($this->rarity ? ' (' . $this->rarity->displayName . ')' : '');
+    return '<a class="display-rarity char-title" href="' . $this->url . '" style="background-image: ' . $this->backgroundColour . ' !important;" >' . $this->title . '</a>' . ($this->short_title ? ' (' . $this->short_title . ')' : '') . ($this->rarity ? ' (' . $this->rarity->displayName . ')' : '');
   }
 
   /**

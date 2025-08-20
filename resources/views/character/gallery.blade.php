@@ -26,7 +26,7 @@
   @if ($character->gallerySubmissions->count())
     {!! $submissions->render() !!}
 
-    <div class="grid grid-4-col">
+    <div class="gallery grid grid-4-col">
       @foreach ($submissions as $submission)
         @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
       @endforeach

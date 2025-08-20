@@ -66,9 +66,8 @@
         data-lightbox="entry"
         data-title="{{ $character->fullName }}"
       >
-        @if (
-            (isset($character->image->content_warnings) && !Auth::check()) ||
-                (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->image->content_warnings))
+        @if (isset($character->image->content_warnings) &&
+                Auth::check() &&permission-badgeswarnings)
         )
           @include('widgets._cw_img', [
               'src' =>

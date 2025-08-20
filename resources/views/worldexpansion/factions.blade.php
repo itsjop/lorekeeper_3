@@ -49,7 +49,7 @@
             <div class="world-entry-image">
               @isset($faction->thumb_extension)
                 <a href="{{ $faction->thumbUrl }}" data-lightbox="entry" data-title="{{ $faction->name }}">
-                  <img src="{{ $faction->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
+                  <img src="{{ $faction->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" /></a>
               @endisset
             </div>
             <h3 class="mb-0 text-center">{!! $faction->fullDisplayName !!}</h3>

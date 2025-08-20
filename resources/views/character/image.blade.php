@@ -1,6 +1,6 @@
   <div id="char-col" class="char-col">
     <div class="text-center">
-      @if ($warnings)
+      @if ($warnings && Auth::check() && Auth::user()->settings->content_warning_visibility < 2 )
         @include('widgets._cw_img', [
             'src' =>
                 $image->canViewFull(Auth::check() ? Auth::user() : null) &&

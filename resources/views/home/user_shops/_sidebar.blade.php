@@ -15,9 +15,10 @@
       <summary class="sidebar-section-header">My Currencies</summary>
       <ul>
         @foreach (Auth::user()->getCurrencies(true) as $currency)
-          <div class="sidebar-item pr-3">{!! $currency->display($currency->quantity) !!}</div>
+          <li class="sidebar-item pr-3">
+            {!! $currency->display($currency->quantity) !!}
+          </li>
         @endforeach
-        </li>
       </ul>
     </details>
   @endif
@@ -28,7 +29,9 @@
       @auth
         @if (Auth::user()->shops()->count() && Settings::get('user_shop_limit') == 1)
           <li class="sidebar-item">
-            <a href="{{ url(Auth::user()->shops()->first()->editUrl) }}" class="{{ set_active(Auth::user()->shops()->first()->editUrl) }}">My Shop</a>
+            <a href="{{ url(Auth::user()->shops()->first()->editUrl) }}"
+              class="{{ set_active(Auth::user()->shops()->first()->editUrl) }}"
+            >My Shop</a>
           </li>
         @else
           <li class="sidebar-item">

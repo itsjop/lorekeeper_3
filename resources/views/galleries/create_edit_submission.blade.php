@@ -224,8 +224,7 @@
                             {!! $collaborator->has_approved
                                 ? '<div class="btn btn-success mb-2 mr-2" data-bs-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>'
                                 : '' !!}
-                            {!! Form::select(
-                              'collaborator_id[]', $users, $collaborator->user_id, [
+                            {!! Form::select('collaborator_id[]', $users, $collaborator->user_id, [
                                 'class' => 'form-control mr-2 collaborator-select original',
                                 'placeholder' => 'Select User'
                             ]) !!}
@@ -274,7 +273,7 @@
                 <h5>Other Participants</h5>
               </div>
               <div class="card-body">
-                <p>If this piece is gift, part of a trade, or was commissioned, specify the related user(s) here and select their
+                <p>If this piece is gift, part of a trade, or was commissioned By, specify the related user(s) here and select their
                   role. <strong>Otherwise, leave this blank</strong>. You <strong>will not</strong> be able to edit this once the
                   submission has been accepted, but will while it is still pending.</p>
                 @if (!$submission->id || $submission->status == 'Pending')
@@ -298,9 +297,9 @@
                                 'participant_type[]',
                                 [
                                     'Gift' => 'Gift For',
-                                    'Trade' => 'Traded For',
-                                    'Comm' => 'Commissioned'
-                                    // 'Comm (Currency)' => 'Commissioned (' . $currency->name . ')'
+                                    'Trade' => 'Trade With',
+                                    'Comm' => 'Commissioned By'
+                                    // 'Comm (Currency)' => 'Commissioned By (' . $currency->name . ')'
                                 ],
                                 $participant->type,
                                 [
@@ -325,9 +324,9 @@
                                 'participant_type[]',
                                 [
                                     'Gift' => 'Gift For',
-                                    'Trade' => 'Traded For',
-                                    'Comm' => 'Commissioned'
-                                    // 'Comm (Currency)' => 'Commissioned (' . $currency->name . ')'
+                                    'Trade' => 'Trade With',
+                                    'Comm' => 'Commissioned By'
+                                    // 'Comm (Currency)' => 'Commissioned By (' . $currency->name . ')'
                                 ],
                                 old('participant_type')[$key],
                                 [
@@ -443,10 +442,15 @@
             'placeholder' => 'Select User'
         ]) !!}
         <div class="d-flex">
-          {!! Form::select('participant_type[]', ['Gift' => 'Gift For', 'Trade' => 'Traded For', 'Comm' => 'Commissioned'], null, [
-              'class' => 'form-control mr-2',
-              'placeholder' => 'Select Role'
-          ]) !!}
+          {!! Form::select(
+              'participant_type[]',
+              ['Gift' => 'Gift For', 'Trade' => 'Trade With', 'Comm' => 'Commissioned By'],
+              null,
+              [
+                  'class' => 'form-control mr-2',
+                  'placeholder' => 'Select Role'
+              ]
+          ) !!}
           <a href="#" class="remove-participant btn btn-danger mb-2">×</a>
         </div>
       </div>

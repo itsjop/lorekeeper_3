@@ -11,7 +11,7 @@
     Shops
   </h1>
 
-  <div class="row shops-row">
+  <div class="shops-row grid grid-4-col ai-center">
     @foreach ($shops as $shop)
       @if ($shop->is_staff)
         @if (Auth::check() && Auth::user()->isstaff)

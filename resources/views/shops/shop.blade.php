@@ -58,7 +58,12 @@
           ) {
               $visible = '<i class="fas fa-eye-slash mr-1"></i>';
           }
+          if (isset($categoryItems->first()->category)) {
+              $sorted = $flatActivities->sortBy('order', SORT_REGULAR, true)->values();
+          }
+
         @endphp
+        {{-- {{ dd($categoryItems) }} --}}
         <div class="card mb-3 inventory-category">
           <h5 class="card-header inventory-header">
             {!! isset($categoryItems->first()->category)
@@ -71,7 +76,7 @@
                 : 'Miscellaneous' !!}
           </h5>
           <div class="card-body inventory-body grid grid-4-col">
-            @foreach ($categoryItems as $item)
+            @foreach ($sorted as $item)
               <div class="inventory-item text-center" data-id="{{ $item->pivot->id }}">
                 @if ($item->has_image)
                   <a href="#" class="img inventory-stack">

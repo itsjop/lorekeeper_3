@@ -27,7 +27,7 @@
           <div class="world-entry-image">
             @isset($category->thumb_extension)
               <a href="{{ $category->thumbUrl }}" data-lightbox="entry" data-title="{{ $category->name }}">
-                <img src="{{ $category->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
+                <img src="{{ $category->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" /></a>
             @endisset
           </div>
           <h3>

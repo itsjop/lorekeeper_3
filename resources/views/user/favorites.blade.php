@@ -23,7 +23,7 @@
   @if (isset($favorites) && $favorites->count())
     {!! $favorites->render() !!}
 
-    <div class="grid grid-4-col">
+    <div class="gallery grid grid-4-col">
       @foreach ($favorites as $submission)
         @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
       @endforeach

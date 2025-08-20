@@ -54,11 +54,9 @@
         </div>
         <div class="card-body">
           @if ($gallery->submissions_count)
-            <div class="row">
+            <div class="gallery grid-4-col card text-center">
               @foreach ($gallery->submissions->take(4) as $submission)
-                <div class="col-md-3 text-center align-self-center">
-                  @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
-                </div>
+                @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
               @endforeach
             </div>
             @if ($gallery->submissions_count > 4)
@@ -71,11 +69,9 @@
                   $gallery->through('children')->has('submissions')->where('is_visible', 1)->where('status', 'Accepted')->count()
           )
             {{-- @elseif($gallery->children->count() && App\Models\Gallery\GallerySubmission::whereIn('gallery_id', $gallery->children->pluck('id')->toArray())->where('is_visible', 1)->where('status', 'Accepted')->count()) --}}
-            <div class="row">
+            <div class="gallery grid-4-col card text-center">
               @foreach ($gallery->through('children')->has('submissions')->where('is_visible', 1)->where('status', 'Accepted')->orderBy('created_at', 'DESC')->get()->take(4) as $submission)
-                <div class="col-md-3 text-center align-self-center">
-                  @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
-                </div>
+                @include('galleries._thumb', ['submission' => $submission, 'gallery' => false])
               @endforeach
             </div>
           @else

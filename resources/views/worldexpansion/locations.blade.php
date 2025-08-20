@@ -48,12 +48,9 @@
           <div class="card-header">
             <div class="world-entry-image">
               @isset($location->thumb_extension)
-                <a
-                  href="{{ $location->thumbUrl }}"
-                  data-lightbox="entry"
-                  data-title="{{ $location->name }}"
-                >
-                  <img src="{{ $location->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
+                <a href="{{ $location->url }}" data-title="{{ $location->name }}">
+                  <img src="{{ $location->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" />
+                </a>
               @endisset
             </div>
             <h3 class="mb-0 text-center">{!! $location->fullDisplayName !!}</h3>

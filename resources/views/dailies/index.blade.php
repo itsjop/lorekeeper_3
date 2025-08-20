@@ -11,11 +11,11 @@
     {{ ucfirst(__('dailies.dailies')) }}
   </h1>
 
-  <div class="row shops-row">
+  <div class="shops-row grid grid-4-col ai-center">
     @foreach ($dailies as $daily)
-      <div class="col-md-3 col-6 mb-3 text-center">
+      <div class="text-center">
         @if ($daily->has_image)
-          <div class="daily-image">
+          <div class="daily-image hover-preview">
             <a href="{{ $daily->url }}">
               <img src="{{ $daily->dailyImageUrl }}" alt="{{ $daily->name }}" /></a>
           </div>

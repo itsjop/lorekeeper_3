@@ -634,6 +634,19 @@ body {
   --spring_linear: linear( 0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1);
 }
 
+.hover-preview {
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  transition: 0.7s var(--elastic_linear);
+  transform: scale(1.1);
+}
+
 #app {
   --blue: #66b0ff;
   --indigo: #7d37ed;
@@ -1213,13 +1226,14 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
-.char_title-list .char-title {
+
+.char-title {
   position: relative;
   display: flex;
   padding: 5px 10px;
   z-index: 2;
 }
-.char_title-list .char-title::before {
+.char-title::before {
   content: "";
   width: calc(100% - 0.5em);
   height: calc(100% - 0px);
@@ -1231,12 +1245,12 @@ body {
   transform: translateY(-50%);
   border-radius: 15px;
 }
-.char_title-list .char-title img {
+.char-title img {
   height: 1em;
   scale: 2.4;
   transform-origin: center right;
 }
-.char_title-list .char-title .badge {
+.char-title .badge {
   padding: 0 5px 0 6px;
   z-index: 2;
   font-size: 1.1em;
@@ -1311,7 +1325,8 @@ body {
   .permission-badges {
     display: grid;
     grid-template-columns: repeat(7, auto);
-    place-content: space-between;
+    place-content: end;
+    text-align: end;
   }
 }
 .palate-colors.unset {
@@ -1947,7 +1962,7 @@ body {
 }
 
 .masterlist-search-grid {
-  grid-template: "name  species rarity sortby submit a-btn" max-content/2fr 2fr 2fr 1fr 1fr;
+  grid-template: "name  species rarity sortby submit a-btn" max-content/2fr 2fr 2fr 2fr 1fr 1fr;
 }
 
 .inventory-search-pane {
@@ -2189,16 +2204,13 @@ body {
   }
 }
 @container main-container (width < 800px) {
-  .home-dashboard {
-    grid-template: "welc  welc " auto "event event" auto "daily daily" auto "news  sale " auto "subm  subm " auto/1fr 1fr;
-  }
-  .home-dashboard .sale-info .character-picture {
+  .sale-info .character-picture {
     grid-area: 1/1/3/4;
     justify-self: end;
     align-self: start;
     max-width: 250px;
   }
-  .home-dashboard .sale-info .character-info {
+  .sale-info .character-info {
     background-color: color-mix(in srgb, var(--active-clr_500) 70%, transparent);
     display: grid;
     border-radius: 15px;
@@ -2211,35 +2223,46 @@ body {
     align-self: end;
     grid-template: "type  price" auto "title artist" auto "more  more" auto;
   }
-  .home-dashboard .sale-info .character-info .sale-type {
+  .sale-info .character-info .sale-type {
     grid-area: type;
   }
-  .home-dashboard .sale-info .character-info .sale-title {
+  .sale-info .character-info .sale-title {
     grid-area: title;
   }
-  .home-dashboard .sale-info .character-info .sale-artist {
+  .sale-info .character-info .sale-artist {
     grid-area: artist;
   }
-  .home-dashboard .sale-info .character-info .sale-price {
+  .sale-info .character-info .sale-price {
     grid-area: price;
   }
-  .home-dashboard .sale-info .character-info .sale-details {
+  .sale-info .character-info .sale-details {
     grid-area: more;
     font-weight: 700;
     border-radius: 10px;
     border: 3px solid var(--white);
     margin: 5px;
   }
-  .home-dashboard .sale-info .character-info a {
+  .sale-info .character-info a {
     color: var(--white);
   }
 }
 @container main-container (width < 700px) {
   .home-dashboard {
-    grid-template: "welc " auto "event" auto "daily" auto "news " auto "sale " auto "subm " auto/1fr;
+    grid-template: "welc  welc " auto "event event" auto "daily daily" auto "news  sale " auto "subm  subm " auto/1fr 1fr;
   }
   .home-dashboard .sale-info {
     grid-template: 3fr 2fr;
+  }
+  .home-dashboard .event {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@container main-container (width < 600px) {
+  .home-dashboard {
+    grid-template: "welc " auto "event" auto "daily" auto "news " auto "sale " auto "subm " auto/1fr;
+  }
+  .event {
+    grid-template-columns: 1fr;
   }
 }
 .inventory-category .inventory-item {
@@ -2380,6 +2403,7 @@ body {
   --card_star_blend-mode: overlay;
 }
 
+.app .gallery,
 .app .gallery-recents,
 .app .gallery-all {
   display: grid;
@@ -2389,6 +2413,7 @@ body {
   padding: 20px;
   contain: paint;
 }
+.app .gallery .submission,
 .app .gallery-recents .submission,
 .app .gallery-all .submission {
   display: grid;
@@ -2397,6 +2422,7 @@ body {
   grid-template-rows: subgrid;
   padding-bottom: 10px;
 }
+.app .gallery .submission .img,
 .app .gallery-recents .submission .img,
 .app .gallery-all .submission .img {
   grid-area: img;
@@ -2415,23 +2441,35 @@ body {
   place-self: center;
   max-width: min(100%, 250px);
 }
-.app .gallery-recents .submission .img:hover, .app .gallery-recents .submission .img:active,
+.app .gallery .submission .img:hover, .app .gallery .submission .img:active,
+.app .gallery-recents .submission .img:hover,
+.app .gallery-recents .submission .img:active,
 .app .gallery-all .submission .img:hover,
 .app .gallery-all .submission .img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
-.app .gallery-recents .submission .img:hover, .app .gallery-recents .submission .img:active,
+.app .gallery .submission .img:hover, .app .gallery .submission .img:active,
+.app .gallery-recents .submission .img:hover,
+.app .gallery-recents .submission .img:active,
 .app .gallery-all .submission .img:hover,
 .app .gallery-all .submission .img:active {
   transition: 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
+.app .gallery .submission .img img,
 .app .gallery-recents .submission .img img,
 .app .gallery-all .submission .img img {
   place-self: center;
   max-height: 250px;
   border-radius: 15px;
 }
+.app .gallery .submission .img.noborder,
+.app .gallery-recents .submission .img.noborder,
+.app .gallery-all .submission .img.noborder {
+  background-color: transparent;
+  border: white 0px solid;
+}
+.app .gallery .submission .title,
 .app .gallery-recents .submission .title,
 .app .gallery-all .submission .title {
   grid-area: title;
@@ -2440,6 +2478,7 @@ body {
   text-overflow: ellipsis;
   width: 90%;
 }
+.app .gallery .submission .details,
 .app .gallery-recents .submission .details,
 .app .gallery-all .submission .details {
   grid-area: details;
@@ -2532,6 +2571,19 @@ body {
   color: var(--white);
 }
 
+.hover-preview {
+  transition: 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  transition: 0.7s var(--elastic_linear);
+  transform: scale(1.1);
+}
+
 body {
   /* Breakpoints */
   --ss-xsmall: 400px;
@@ -2608,7 +2660,7 @@ body {
   color: var(--purple-clr_800);
 }
 #app #site-wrapper #sidebar #sidebar-ul .sidebar-section .sidebar-item:has(a.active) {
-  height: 2rem;
+  min-height: 2rem;
   background-color: var(--purple-clr_400);
 }
 

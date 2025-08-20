@@ -102,7 +102,7 @@
 
                       </div>
                     @endif
-                    <div class="prize-label row justify-content-center">{{ $reward->quantity }}
+                    <div class="prize-label row justify-content-center text-center mt-2">{{ $reward->quantity }}
                       {{ $reward->reward()->first()->name }}</div>
                   </div>
                 @endforeach

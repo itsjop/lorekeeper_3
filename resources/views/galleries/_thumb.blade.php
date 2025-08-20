@@ -1,5 +1,5 @@
 <div class="card submission flex-fill text-center mb-1">
-  <a href="{{ $submission->url }}" class="img">
+  <a href="{{ $submission->url }}" class="img {{ isset($submission->hash) ? '' : 'noborder' }}">
     @include('widgets._gallery_thumb', ['submission' => $submission])
   </a>
   <?php if (isset($submission->hash) && !isset($submission->content_warning)) {
@@ -7,8 +7,10 @@
   } else {
       $width = 200;
   } ?>
-  <div class="title mt-1 mx-auto" style="max-width:{{ max(200, $width) }}px; overflow: hidden; text-overflow: ellipsis;">
-    {{ $submission->displayTitle }}
+  <div class="title mt-1 mx-auto"
+    style="max-width:{{ max(200, $width) }}px; overflow: hidden; text-overflow: ellipsis;   line-height: 1em;"
+  >
+    {{ substr($submission->displayTitle, 0, 40) . '' . (strlen($submission->displayTitle) > 40 ? '...' : '') }}
     @if (isset($submission->content_warning))
       <p class="m-0">
         <strong class="text-danger">CW:</strong>

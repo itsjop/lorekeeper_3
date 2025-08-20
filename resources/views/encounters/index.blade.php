@@ -19,7 +19,7 @@
   @if (!count($areas))
     <div class="alert alert-info">No areas found. Check back later!</div>
   @else
-    <div class="row shops-row">
+    <div class="shops-row grid grid-4-col ai-center">
 
       @foreach ($areas as $area)
         @include('encounters._area_entry')

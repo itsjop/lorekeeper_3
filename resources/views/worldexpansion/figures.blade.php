@@ -49,7 +49,7 @@
             <div class="world-entry-image">
               @isset($figure->thumb_extension)
                 <a href="{{ $figure->thumbUrl }}" data-lightbox="entry" data-title="{{ $figure->name }}">
-                  <img src="{{ $figure->thumbUrl }}" class="world-entry-image mb-3 mw-100" /></a>
+                  <img src="{{ $figure->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" /></a>
               @endisset
             </div>
             <h3 class="mb-0">{!! $figure->displayName !!}</h3>

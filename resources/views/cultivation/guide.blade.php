@@ -14,7 +14,7 @@
   </div>
 
 
-  <div class="row shops-row">
+  <div class="shops-row grid grid-4-col ai-center">
     @foreach ($areas as $area)
       @if ($area->allowedPlots->where('is_active', 1)->count() > 0)
         <div class="col-12 mb-3 text-center">

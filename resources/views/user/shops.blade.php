@@ -13,9 +13,9 @@
 
 
   @if ($shops->count())
-    <div class="row shops-row">
+    <div class="shops-row grid grid-4-col ai-center">
       @foreach ($shops as $shop)
-        <div class="col-md-3 col-6 mb-3 text-center">
+        <div class="text-center">
           @if ($shop->has_image)
             <div class="shop-image">
               <a href="{{ $shop->url }}">

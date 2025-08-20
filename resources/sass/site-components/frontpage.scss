@@ -152,6 +152,53 @@
   }
 }
 @container main-container (width < 800px) {
+  .sale-info {
+    .character-picture {
+      grid-area: 1/1/3/4;
+      justify-self: end;
+      align-self: start;
+      max-width: 250px;
+    }
+    .character-info {
+      background-color: color-mix(in srgb, var(--active-clr_500) 70%, transparent);
+      display: grid;
+      border-radius: 15px;
+      min-width: 70%;
+      color: var(--white);
+      backdrop-filter: blur(5px);
+      grid-area: 2/1/4/4;
+      justify-self: end;
+      align-self: end;
+      grid-template:
+        'type  price' auto
+        'title artist' auto
+        'more  more' auto;
+      .sale-type {
+        grid-area: type;
+      }
+      .sale-title {
+        grid-area: title;
+      }
+      .sale-artist {
+        grid-area: artist;
+      }
+      .sale-price {
+        grid-area: price;
+      }
+      .sale-details {
+        grid-area: more;
+        font-weight: 700;
+        border-radius: 10px;
+        border: 3px solid var(--white);
+        margin: 5px;
+      }
+      a {
+        color: var(--white);
+      }
+    }
+  }
+}
+@container main-container (width < 700px) {
   .home-dashboard {
     grid-template:
       'welc  welc ' auto
@@ -161,53 +208,14 @@
       'subm  subm ' auto
       / 1fr 1fr;
     .sale-info {
-      .character-picture {
-        grid-area: 1/1/3/4;
-        justify-self: end;
-        align-self: start;
-        max-width: 250px;
-      }
-      .character-info {
-        background-color: color-mix(in srgb, var(--active-clr_500) 70%, transparent);
-        display: grid;
-        border-radius: 15px;
-        min-width: 70%;
-        color: var(--white);
-        backdrop-filter: blur(5px);
-        grid-area: 2/1/4/4;
-        justify-self: end;
-        align-self: end;
-        grid-template:
-          'type  price' auto
-          'title artist' auto
-          'more  more' auto;
-        .sale-type {
-          grid-area: type;
-        }
-        .sale-title {
-          grid-area: title;
-        }
-        .sale-artist {
-          grid-area: artist;
-        }
-        .sale-price {
-          grid-area: price;
-        }
-        .sale-details {
-          grid-area: more;
-          font-weight: 700;
-          border-radius: 10px;
-          border: 3px solid var(--white);
-          margin: 5px;
-        }
-        a {
-          color: var(--white);
-        }
-      }
+      grid-template: 3fr 2fr;
+    }
+    .event {
+      grid-template-columns: 1fr 1fr;
     }
   }
 }
-@container main-container (width < 700px) {
+@container main-container (width < 600px) {
   .home-dashboard {
     grid-template:
       'welc ' auto
@@ -217,8 +225,8 @@
       'sale ' auto
       'subm ' auto
       / 1fr;
-    .sale-info {
-      grid-template: 3fr 2fr;
-    }
+  }
+  .event {
+    grid-template-columns: 1fr;
   }
 }

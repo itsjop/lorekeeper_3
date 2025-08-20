@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="row shops-row">
+  <div class="shops-row grid grid-4-col ai-center">
     @foreach ($areas as $area)
       <div class="col-md-6 col-12 mb-3 text-center">
         <div class="card h-100">

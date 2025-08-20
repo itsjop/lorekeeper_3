@@ -1,6 +1,6 @@
 <div class="row">
   @foreach ($activities as $activity)
-    <div class="col-md-3 col-6 mb-3 text-center">
+    <div class="text-center">
       @if ($activity->has_image)
         <div class="activity-image">
           <a href="{{ $activity->url }}">

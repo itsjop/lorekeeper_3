@@ -1,4 +1,5 @@
 .app {
+  .gallery,
   .gallery-recents,
   .gallery-all {
     display: grid;
@@ -32,6 +33,10 @@
           place-self: center;
           max-height: 250px;
           border-radius: 15px;
+        }
+        &.noborder {
+          background-color: transparent;
+          border: white 0px solid;
         }
       }
       .title {

@@ -53,7 +53,7 @@
             }
           }
           &:has(a.active) {
-            height: 2rem;
+            min-height: 2rem;
             background-color: var(--purple-clr_400);
           }
         }
