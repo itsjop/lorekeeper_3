@@ -58,9 +58,7 @@
           ) {
               $visible = '<i class="fas fa-eye-slash mr-1"></i>';
           }
-
         @endphp
-        {{-- {{ dd($categoryItems) }} --}}
         <div class="card mb-3 inventory-category">
           <h5 class="card-header inventory-header">
             {!! isset($categoryItems->first()->category)
@@ -73,7 +71,7 @@
                 : 'Miscellaneous' !!}
           </h5>
           <div class="card-body inventory-body grid grid-4-col">
-            @foreach ($sorted as $item)
+            @foreach ($categoryItems as $item)
               <div class="inventory-item text-center" data-id="{{ $item->pivot->id }}">
                 @if ($item->has_image)
                   <a href="#" class="img inventory-stack">
