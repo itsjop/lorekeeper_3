@@ -58,9 +58,6 @@
           ) {
               $visible = '<i class="fas fa-eye-slash mr-1"></i>';
           }
-          if (isset($categoryItems->first()->category)) {
-              $sorted = $flatActivities->sortBy('order', SORT_REGULAR, true)->values();
-          }
 
         @endphp
         {{-- {{ dd($categoryItems) }} --}}
