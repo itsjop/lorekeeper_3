@@ -1,6 +1,8 @@
 <div id="sb-featured-desktop">
   <div class="featured-character">
-    <?php $char_image = $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . ' /' . $featured->image->fullsizeFileName)) ? $featured->image->thumbnailUrl : $featured->image->thumbnailUrl; ?>
+    <?php if (isset($featured)) {
+    $char_image = $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . ' /' . $featured->image->fullsizeFileName)) ? $featured->image->thumbnailUrl : $featured->image->thumbnailUrl;
+} ?>
     <div class="sidebar-header">
       <a href="#" class="card-link">
         <i class="fas fa-star mr-2"></i>
@@ -40,7 +42,7 @@
     </div>
   </div>
 </div>
-
+@if (isset($featured) && $featured)
 <div id="sb-featured-mobile">
   <div class="featured-character palate-colors {{ getSubtypeInfo($featured->image->subtype_id, 'label', null, $featured) }}">
     <?php $char_image = $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . ' /' . $featured->image->fullsizeFileName)) ? $featured->image->thumbnailUrl : $featured->image->thumbnailUrl; ?>
@@ -93,6 +95,7 @@
     </div>
   </div>
 </div>
+@endif
 
 <div id="kofi-banner-dt" class="mt-4">
   <div class="featured-character">
