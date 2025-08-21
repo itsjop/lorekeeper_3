@@ -171,6 +171,8 @@
       color: var(--white);
       overflow: hidden;
       text-overflow: ellipsis;
+      line-height: 1em;
+      text-align: left;
     }
     &.name-sm {
       font-size: 0.85em;
@@ -284,8 +286,9 @@
 }
 @container main-container (width < 1200px) {
   #ml-gridView {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     margin: 0 1cqw 40px;
+    gap: 4cqw 2cqw;
     .masterlist-character .thumbnail {
       &:hover,
       &:active,

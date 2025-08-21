@@ -471,6 +471,9 @@ body #app.teal {
     #app .grid-5-col {
       grid-template-columns: repeat(1, 1fr);
     }
+    #app .grid-4-col {
+      grid-template-columns: repeat(1, 1fr);
+    }
     #app .grid-5-2-col {
       grid-template-columns: repeat(1, 1fr);
     }
@@ -505,6 +508,9 @@ body #app.teal {
       grid-template-columns: repeat(2, 1fr);
     }
     #app .grid-5-col {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    #app .grid-4-col {
       grid-template-columns: repeat(1, 1fr);
     }
     #app .grid-5-2-col {
@@ -1613,6 +1619,8 @@ body {
   color: var(--white);
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1em;
+  text-align: left;
 }
 .masterlist-character .name.name-sm {
   font-size: 0.85em;
@@ -1721,8 +1729,9 @@ body {
 }
 @container main-container (width < 1200px) {
   #ml-gridView {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     margin: 0 1cqw 40px;
+    gap: 4cqw 2cqw;
   }
   #ml-gridView .masterlist-character .thumbnail:hover .shine, #ml-gridView .masterlist-character .thumbnail:active .shine, #ml-gridView .masterlist-character .thumbnail:active .shine {
     opacity: 0.5;

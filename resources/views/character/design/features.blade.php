@@ -59,7 +59,6 @@
           <p>Specify the type of image you have uploaded for your Request here.
             <br>For more information about Masterlist Image Types, visit the MYO Submission Guide!
           </p>
-          </p>
           @if ($request->character->is_myo_slot && $request->character->image->transformation_id)
             <div class="alert alert-secondary">{!! $request->character->image->transformation->displayName !!}</div>
           @else
