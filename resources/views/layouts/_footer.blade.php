@@ -16,12 +16,17 @@
       <a href="{{ url('credits') }}" class="nav-link">Credits</a>
     </li>
   </ul>
-  <div class="copyright">
+  {{-- <div class="copyright">
     &copy; {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}
     v{{ config('lorekeeper.settings.version') }} {{ Carbon\Carbon::now()->year }}
-  </div>
-  <div class="small">
-    <div id="wid"></div>
+  </div> --}}
+  <div
+    id="debug"
+    class="copyright"
+    style="opacity: 0.4; font-size: .5rem;"
+  >
+    temp debugging info pls ignore:
+    <pre id="wid"></pre>
   </div>
   @if (config('lorekeeper.extensions.scroll_to_top'))
     @include('widgets/_scroll_to_top')
@@ -29,6 +34,18 @@
 </footer>
 <script>
   $(document).ready(function() {
-    $('#wid').text(window.innerWidth);
+    $('#wid').text(`
+      availWidth: ${window.screen.availWidth}, ratio: ${window.devicePixelRatio}, ratio: ${window.screen.width}, jq: ${$(window).width()}
+    `);
   })
 </script>
+<style>
+  #debug {
+    text-align: end;
+  }
+  @container main-container (width > 600px) {
+    #debug {
+      display: none;
+    }
+  }
+</style>
