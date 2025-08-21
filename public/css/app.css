@@ -443,15 +443,12 @@ body #app.teal {
     grid-row: unset;
   }
 }
-@container main-container (width < 500px) {
+@container main-container (width < 600px) {
   #app .grid-6-col {
     grid-template-columns: repeat(3, 1fr);
   }
   #app .grid-5-col {
     grid-template-columns: repeat(2, 1fr);
-  }
-  #app .grid-4-col {
-    grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-3-col {
     grid-template-columns: repeat(1, 1fr);
@@ -466,11 +463,14 @@ body #app.teal {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@container main-container (width < 400px) {
+@container main-container (width < 450px) {
   #app .grid-6-col {
     grid-template-columns: repeat(2, 1fr);
   }
   #app .grid-5-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #app .grid-4-col {
     grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-5-2-col {
