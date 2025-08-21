@@ -25,8 +25,10 @@
     class="copyright"
     style="opacity: 0.4; font-size: .5rem;"
   >
-    temp debugging info pls ignore:
-    <pre id="wid"></pre>
+    <pre id="" class="m-0">
+      temp debugging info pls ignore:
+    </pre>
+    <pre id="wid" class="m-0"></pre>
   </div>
   @if (config('lorekeeper.extensions.scroll_to_top'))
     @include('widgets/_scroll_to_top')
@@ -35,7 +37,7 @@
 <script>
   $(document).ready(function() {
     $('#wid').text(`
-      availWidth: ${window.screen.availWidth}, ratio: ${window.devicePixelRatio}, ratio: ${window.screen.width}, jq: ${$(window).width()}
+      availWidth: ${window.screen.availWidth}, ratio: ${window.devicePixelRatio}
     `);
   })
 </script>
@@ -43,6 +45,7 @@
   #debug {
     text-align: end;
   }
+
   @container main-container (width > 600px) {
     #debug {
       display: none;
