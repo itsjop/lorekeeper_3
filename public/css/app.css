@@ -471,9 +471,6 @@ body #app.teal {
     #app .grid-5-col {
       grid-template-columns: repeat(1, 1fr);
     }
-    #app .grid-4-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
     #app .grid-5-2-col {
       grid-template-columns: repeat(1, 1fr);
     }
@@ -508,9 +505,6 @@ body #app.teal {
       grid-template-columns: repeat(2, 1fr);
     }
     #app .grid-5-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-4-col {
       grid-template-columns: repeat(1, 1fr);
     }
     #app .grid-5-2-col {
