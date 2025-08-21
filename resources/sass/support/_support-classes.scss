@@ -104,7 +104,7 @@
     >* { display:grid; grid-template-rows: unset; grid-row: unset; }
   }
 }
-@container main-container (width < 600px) {
+@container main-container (width < 500px) {
   .grid-6-col { grid-template-columns: repeat(3, 1fr); } .grid-5-col { grid-template-columns: repeat(2, 1fr); }
   .grid-4-col { grid-template-columns: repeat(1, 1fr); } .grid-3-col { grid-template-columns: repeat(1, 1fr); } .grid-2-col { grid-template-columns: repeat(1, 1fr); }
   .grid-5-2-col { grid-template-columns: repeat(2, 1fr); } .grid-4-2-col { grid-template-columns: repeat(2, 1fr); }

@@ -443,7 +443,7 @@ body #app.teal {
     grid-row: unset;
   }
 }
-@container main-container (width < 600px) {
+@container main-container (width < 500px) {
   #app .grid-6-col {
     grid-template-columns: repeat(3, 1fr);
   }

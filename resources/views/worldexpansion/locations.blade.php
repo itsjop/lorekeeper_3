@@ -41,62 +41,64 @@
   </div>
 
   {!! $locations->render() !!}
-  <div class="row mx-0">
+  <div class="grid grid-4-col">
     @foreach ($locations as $location)
-      <div class="col-12 col-md-4 mb-3">
-        <div class="card h-100">
-          <div class="card-header">
-            <div class="world-entry-image">
-              @isset($location->thumb_extension)
-                <a href="{{ $location->url }}" data-title="{{ $location->name }}">
-                  <img src="{{ $location->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" />
-                </a>
-              @endisset
-            </div>
-            <h3 class="mb-0 text-center">{!! $location->fullDisplayName !!}</h3>
-            <p class="mb-0 text-center">{!! $location->category ? $location->category->displayName : '' !!}</p>
-
-            <p class="text-center mb-0"><strong>
-                {!! $location->type ? ucfirst($location->type->displayName) : '' !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!}
-              </strong></p>
+      <div class="card h-100">
+        <div class="card-header">
+          <div class="world-entry-image">
+            @isset($location->thumb_extension)
+              <a href="{{ $location->url }}" data-title="{{ $location->name }}">
+                <img src="{{ $location->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" />
+              </a>
+            @endisset
           </div>
-          @if (count($location->children))
-            <div class="card-basic p-3">
-              <strong class="mt-3 mb-0">Contains the following:</strong>
-              @foreach ($location->children->groupBy('type_id') as $group => $children)
-                <p class="mb-0">
-                  <strong>
-                    @if (count($children) == 1)
-                      {{ $loctypes->find($group)->name }}@else{{ $loctypes->find($group)->names }}
-                    @endif:
-                  </strong>
+          <h3 class="mb-0 text-center">{!! $location->fullDisplayName !!}</h3>
+          <p class="mb-0 text-center">{!! $location->category ? $location->category->displayName : '' !!}</p>
 
-                  @foreach ($children as $key => $child)
-                    {!! $child->fullDisplayName !!}@if ($key != count($children) - 1)
-                      ,
-                    @endif
-                  @endforeach
-              @endforeach
-              </p>
-            </div>
-          @endif
-
-          @isset($location->summary)
-            <div class="card-body pt-3">
-              <p class="mb-0"> {!! $location->summary !!}</p>
-            </div>
-          @endisset
-
-          @if (count(allAttachments($location)))
-            <div class="card-footer mt-auto">
-              @foreach (allAttachments($location) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }}
-                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
-              @endforeach
-            </div>
-          @endif
-
+          <p class="text-center mb-0"><strong>
+              {!! $location->type ? ucfirst($location->type->displayName) : '' !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!}
+            </strong></p>
         </div>
+        @if (count($location->children))
+          <div class="card-basic p-3">
+            <strong class="mt-3 mb-0">Contains the following:</strong>
+            @foreach ($location->children->groupBy('type_id') as $group => $children)
+              <p class="mb-0">
+                {{-- <strong>
+                    @if (count($children) == 1)
+                      {{ $loctypes->find($group)->name }}
+                    @else
+                      {{ $loctypes->find($group)->names }}
+                    @endif
+                    :
+                  </strong> --}}
+
+                @foreach ($children as $key => $child)
+                  {!! $child->fullDisplayName !!}
+                  @if ($key != count($children) - 1)
+                    ,
+                  @endif
+                @endforeach
+            @endforeach
+            </p>
+          </div>
+        @endif
+
+        @isset($location->summary)
+          <div class="card-body pt-3">
+            <p class="mb-0"> {!! $location->summary !!}</p>
+          </div>
+        @endisset
+
+        @if (count(allAttachments($location)))
+          <div class="card-footer mt-auto">
+            @foreach (allAttachments($location) as $type => $attachments)
+              <p class="text-center mb-0">Associated with {{ count($attachments) }}
+                {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+            @endforeach
+          </div>
+        @endif
+
       </div>
     @endforeach
   </div>
