@@ -1104,7 +1104,7 @@ body {
   min-height: 100vh;
   padding-top: 3vh;
   max-width: 100dvw;
-  max-height: 100dvh;
+  overflow-x: hidden;
   --app-gap-x: 20px;
   --app-gap-y: 20px;
   --sidebar-width: min(20vw, 260px);
@@ -1191,7 +1191,7 @@ body {
     left: 0;
     padding: 0;
     margin-bottom: 15px;
-    grid-template: "logo" 25vmin "nav" max-content "sidebar" max-content "main" auto "footer" max-content/100%;
+    grid-template: "logo" 25vmin "nav" max-content "sidebar" max-content "main" auto "footer" max-content/calc(100vw - var(--gutters-width));
   }
   #app #selected-character {
     display: none;
