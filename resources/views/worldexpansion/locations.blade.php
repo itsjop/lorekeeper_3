@@ -8,37 +8,45 @@
   {!! breadcrumbs(['World' => 'world', 'Locations' => 'world/locations']) !!}
   <h1>Locations</h1>
 
-  <div>
-    {!! Form::open(['method' => 'GET', 'class' => '']) !!}
-    <div class="form-inline justify-content-end">
-      <div class="form-group ml-3 mb-3">
-        {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
-      </div>
-      <div class="form-group ml-3 mb-3">
-        {!! Form::select('type_id', $types, Request::get('name'), ['class' => 'form-control']) !!}
-      </div>
-    </div>
-    <div class="form-inline justify-content-end">
-      <div class="form-group ml-3 mb-3">
-        {!! Form::select(
-            'sort',
-            [
-                'alpha' => 'Sort Alphabetically (A-Z)',
-                'alpha-reverse' => 'Sort Alphabetically (Z-A)',
-                'type' => 'Sort by Type',
-                'newest' => 'Newest First',
-                'oldest' => 'Oldest First'
-            ],
-            Request::get('sort') ?: 'type',
-            ['class' => 'form-control']
-        ) !!}
-      </div>
-      <div class="form-group ml-3 mb-3">
-        {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
-      </div>
-    </div>
-    {!! Form::close() !!}
+  <div class="flex jc-center">
+
+    <img
+      src="{{ asset('images/somnivores/site/newreveriemap-small.png') }}"
+      alt="Map of Reverie"
+      class="w-100 br-15 mb-4"
+      style="max-width: 1000px"
+    />
   </div>
+
+  {{-- {!! Form::open(['method' => 'GET', 'class' => '']) !!}
+  <div class="form-inline justify-content-end">
+    <div class="form-group ml-3 mb-3">
+      {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+    </div>
+    <div class="form-group ml-3 mb-3">
+      {!! Form::select('type_id', $types, Request::get('name'), ['class' => 'form-control']) !!}
+    </div>
+  </div>
+  <div class="form-inline justify-content-end">
+    <div class="form-group ml-3 mb-3">
+      {!! Form::select(
+          'sort',
+          [
+              'alpha' => 'Sort Alphabetically (A-Z)',
+              'alpha-reverse' => 'Sort Alphabetically (Z-A)',
+              'type' => 'Sort by Type',
+              'newest' => 'Newest First',
+              'oldest' => 'Oldest First'
+          ],
+          Request::get('sort') ?: 'type',
+          ['class' => 'form-control']
+      ) !!}
+    </div>
+    <div class="form-group ml-3 mb-3">
+      {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
+    </div>
+  </div>
+  {!! Form::close() !!} --}}
 
   {!! $locations->render() !!}
   <div class="grid grid-4-col">

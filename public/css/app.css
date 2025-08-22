@@ -443,82 +443,41 @@ body.teal {
     grid-row: unset;
   }
 }
-@media (min-resolution: 2dppx) and (max-resolution: 2.5dppx) {
-  @container main-container (width < 500px) {
-    #app .grid-6-col {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    #app .grid-5-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    #app .grid-3-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-2-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-5-2-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    #app .grid-4-2-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
+@container main-container (width < 600px) {
+  #app .grid-6-col {
+    grid-template-columns: repeat(3, 1fr);
   }
-  @container main-container (width < 300px) {
-    #app .grid-6-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    #app .grid-5-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-4-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-5-2-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-4-2-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
+  #app .grid-5-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #app .grid-3-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #app .grid-2-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #app .grid-5-2-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #app .grid-4-2-col {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
-@media (min-resolution: 1dppx) and (max-resolution: 2dppx) {
-  @container main-container (width < 600px) {
-    #app .grid-6-col {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    #app .grid-5-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    #app .grid-3-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-2-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-5-2-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    #app .grid-4-2-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
+@container main-container (width < 400px) {
+  #app .grid-6-col {
+    grid-template-columns: repeat(2, 1fr);
   }
-  @container main-container (width < 400px) {
-    #app .grid-6-col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    #app .grid-5-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-4-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-5-2-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #app .grid-4-2-col {
-      grid-template-columns: repeat(1, 1fr);
-    }
+  #app .grid-5-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #app .grid-4-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #app .grid-5-2-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #app .grid-4-2-col {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 #app .br-10 {
@@ -2528,6 +2487,11 @@ body {
   grid-area: details;
 }
 
+@container main-container (width < 600px) {
+  .app .gallery-all {
+    padding: 0;
+  }
+}
 .all-dailies {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

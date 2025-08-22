@@ -213,6 +213,7 @@
       <main id="main-content" class="main-content">
         <div class="main-backdrop"></div>
         <div class="content-wrapper">
+
           @if (Settings::get('is_maintenance_mode'))
             <div class="alert alert-secondary">
               The site is currently in maintenance mode!
@@ -221,12 +222,14 @@
               @endif
             </div>
           @endif
+
           @if (Auth::check() && Auth::user()->hasUnseenMail && !Auth::user()->is_banned)
             <div class="alert alert-danger">
               <h5 class="mb-0"><i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages
                 from staff. <a href="{{ url('mail#modMail') }}">View here.</a></h5>
             </div>
           @endif
+
           @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
             @if (Auth::user()->is_news_unread)
               <div class="alert alert-info">
@@ -244,6 +247,7 @@
               <a href="{{ url('forms') }}">There is a new site poll!</a>
             </div>
           @endif
+          
           @include('flash::message')
           @yield('content')
         </div>

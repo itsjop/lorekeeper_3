@@ -105,30 +105,18 @@
   }
 }
 
-@media (min-resolution: 2dppx) and (max-resolution: 2.5dppx) {
-  @container main-container (width < 500px) {
-    .grid-6-col { grid-template-columns: repeat(3, 1fr); } .grid-5-col { grid-template-columns: repeat(2, 1fr); }
-    .grid-3-col { grid-template-columns: repeat(1, 1fr); } .grid-2-col { grid-template-columns: repeat(1, 1fr); }
-    .grid-5-2-col { grid-template-columns: repeat(2, 1fr); } .grid-4-2-col { grid-template-columns: repeat(2, 1fr); }
-  }
 
-  @container main-container (width < 300px) {
-    .grid-6-col { grid-template-columns: repeat(2, 1fr); } .grid-5-col { grid-template-columns: repeat(1, 1fr); } .grid-4-col { grid-template-columns: repeat(1, 1fr);}
-    .grid-5-2-col { grid-template-columns: repeat(1, 1fr); } .grid-4-2-col { grid-template-columns: repeat(1, 1fr); }
-  }
+@container main-container (width < 600px) {
+  .grid-6-col { grid-template-columns: repeat(3, 1fr); } .grid-5-col { grid-template-columns: repeat(2, 1fr); }
+  .grid-3-col { grid-template-columns: repeat(1, 1fr); } .grid-2-col { grid-template-columns: repeat(1, 1fr); }
+  .grid-5-2-col { grid-template-columns: repeat(2, 1fr); } .grid-4-2-col { grid-template-columns: repeat(2, 1fr); }
 }
-@media (min-resolution: 1dppx) and (max-resolution: 2dppx) {
-  @container main-container (width < 600px) {
-    .grid-6-col { grid-template-columns: repeat(3, 1fr); }   .grid-5-col { grid-template-columns: repeat(2, 1fr); }
-    .grid-3-col { grid-template-columns: repeat(1, 1fr); }   .grid-2-col { grid-template-columns: repeat(1, 1fr); }
-    .grid-5-2-col { grid-template-columns: repeat(2, 1fr); } .grid-4-2-col { grid-template-columns: repeat(2, 1fr); }
-  }
-  @container main-container (width < 400px) {
-    .grid-6-col { grid-template-columns: repeat(2, 1fr); } .grid-5-col { grid-template-columns: repeat(1, 1fr); }
-    .grid-4-col { grid-template-columns: repeat(1, 1fr); }
-    .grid-5-2-col { grid-template-columns: repeat(1, 1fr); } .grid-4-2-col { grid-template-columns: repeat(1, 1fr); }
-  }
+
+@container main-container (width < 400px) {
+  .grid-6-col { grid-template-columns: repeat(2, 1fr); } .grid-5-col { grid-template-columns: repeat(1, 1fr); } .grid-4-col { grid-template-columns: repeat(1, 1fr);}
+  .grid-5-2-col { grid-template-columns: repeat(1, 1fr); } .grid-4-2-col { grid-template-columns: repeat(1, 1fr); }
 }
+
 
 /* Border-radius */
 .br-10     { border-radius: 10px               ; }
