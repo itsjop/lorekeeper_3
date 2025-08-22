@@ -1,4 +1,23 @@
 <nav class="navbar navbar-expand-md" id="header-nav">
+  @if (Auth::check() && (Auth::user()->is_news_unread || Auth::user()->is_sales_unread))
+    <div class="news-sales-container">
+      @if (Auth::user()->is_news_unread)
+        <a href="{{ url('news') }}" class="newbadge">
+          <i class="fa-solid fa-newspaper"></i> new news!
+        </a>
+      @endif
+      @if (Auth::user()->is_sales_unread)
+        <a href="{{ url('sales') }}" class="newbadge">
+          <i class="fa-solid fa-coins"></i> new sales!
+        </a>
+      @endif
+      @if (Auth::user()->is_polls_unread)
+        <a href="{{ url('sales') }}" class="newbadge">
+          <i class="fa-solid fa-square-poll-horizontal"></i> new poll!
+        </a>
+      @endif
+    </div>
+  @endif
   <div class="mobile-topnav w-100 jc-between ai-center">
     <button
       class="navbar-toggler collapsed"
@@ -9,7 +28,6 @@
       aria-expanded="false"
       aria-label="{{ __('Toggle navigation') }}"
     >
-
       <span class="navbar-toggler-icon">
         <span class="line"></span>
         <span class="line"></span>

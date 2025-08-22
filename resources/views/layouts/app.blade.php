@@ -230,24 +230,6 @@
             </div>
           @endif
 
-          @if (Auth::check() && !config('lorekeeper.extensions.navbar_news_notif'))
-            @if (Auth::user()->is_news_unread)
-              <div class="alert alert-info">
-                <a href="{{ url('news') }}">There is a new news post!</a>
-              </div>
-            @endif
-            @if (Auth::user()->is_sales_unread)
-              <div class="alert alert-info">
-                <a href="{{ url('sales') }}">There is a new sales post!</a>
-              </div>
-            @endif
-          @endif
-          @if (Auth::check() && Auth::user()->is_polls_unread)
-            <div class="alert alert-info">
-              <a href="{{ url('forms') }}">There is a new site poll!</a>
-            </div>
-          @endif
-          
           @include('flash::message')
           @yield('content')
         </div>

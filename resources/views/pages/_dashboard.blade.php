@@ -42,20 +42,28 @@
       </a>
     </div>
   </div>
+
   <div class="bubblebox newsfeed">
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-newspaper"></i>
       Newsfeed
     </h2>
     <div class="bubble px-4">
+      @if (Auth::user()->is_news_unread)
+        <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;">New!</div>
+      @endif
       @include('widgets._news', ['textPreview' => true])
     </div>
   </div>
+
   <div class="bubblebox sales">
     <h2 class="flex gap-_5 ai-center">
       <i class="fas fa-store"></i> Sales
     </h2>
     <div class="bubble sale-info">
+      @if (Auth::user()->is_news_unread)
+        <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;">New!</div>
+      @endif
       @include('widgets._sales')
     </div>
   </div>

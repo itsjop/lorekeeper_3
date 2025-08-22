@@ -3,7 +3,7 @@
     </div> --}}
 @if ($newses->count())
   @foreach ($newses as $news)
-    <div class="grid ji-start js-start my-2 {{ !$loop->last ? 'border-bottom' : ' mt-2' }}">
+    <div class="grid ji-start js-start my-2 w-100 {{ !$loop->last ? 'border-bottom' : ' mt-2' }}">
       <h5 class="mb-0">
         {!! $news->displayName !!}
       </h5>

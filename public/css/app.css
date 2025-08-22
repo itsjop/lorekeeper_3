@@ -635,7 +635,7 @@ body {
 }
 
 .hover-preview {
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -643,7 +643,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .hover-preview:hover, .hover-preview:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 
@@ -1484,7 +1484,7 @@ body {
   width: calc(100% - 10px);
   height: calc(100% - 10px);
   transition: 0.05s linear;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -1492,7 +1492,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .masterlist-character .thumbnail .ml-thumbnail img:hover, .masterlist-character .thumbnail .ml-thumbnail img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .masterlist-character .thumbnail .ml-thumbnail:hover, .masterlist-character .thumbnail .ml-thumbnail:active {
@@ -2089,11 +2089,11 @@ body {
   border: 2px solid var(--white);
   color: var(--white);
   border-radius: 50vw;
-  background-image: linear-gradient(to top, #859cf7, #6e6cea);
+  background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
   padding: 5px 15px;
   max-width: 90%;
   justify-self: center;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
   display: flex;
@@ -2103,7 +2103,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
@@ -2124,6 +2124,7 @@ body {
   align-items: center;
   text-align: center;
   padding: 10px;
+  position: relative;
 }
 .home-dashboard .bubblebox .bubble.event, .home-dashboard .bubblebox .bubble.jobs {
   background-size: cover;
@@ -2132,19 +2133,19 @@ body {
   width: 100%;
   max-width: 100%;
   max-width: 250px;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(0 0 5px var(--white));
 }
 .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .home-dashboard .bubblebox .bubble.event {
   background-image: url("../images/somnivores/frontpage/event_bg.png");
 }
 .home-dashboard .bubblebox .bubble.event a {
-  font-weight: 700;
+  font-weight: 500;
 }
 .home-dashboard .bubblebox .bubble.event .event-buttons {
   display: grid;
@@ -2199,6 +2200,16 @@ body {
   height: 100%;
   border-radius: 15px;
   contain: paint;
+}
+.home-dashboard .bubblebox .bubble .newbadge {
+  position: absolute;
+  top: -1rem;
+  right: 1rem;
+  transform-origin: 50% 300%;
+  animation: new-wobble 10s var(--smoothIn_linear) forwards infinite;
+  --starting-angle: 10deg;
+  transform: rotate(calc(var(--starting-angle) + 0deg));
+  background-image: linear-gradient(to top, #85bef7, #a76cea);
 }
 
 @container main-container (width < 1000px) {
@@ -2264,8 +2275,38 @@ body {
   .home-dashboard {
     grid-template: "welc " auto "event" auto "daily" auto "news " auto "sale " auto "subm " auto/1fr;
   }
+  .home-dashboard .frontpage-button {
+    padding: 8px 10px;
+    line-height: 1;
+  }
   .event {
     grid-template-columns: 1fr;
+  }
+}
+@keyframes new-wobble {
+  0% {
+    transform: rotate(calc(var(--starting-angle) + 0deg));
+  }
+  90% {
+    transform: rotate(calc(var(--starting-angle) + 0deg));
+  }
+  92% {
+    transform: rotate(calc(var(--starting-angle) + 3deg));
+  }
+  94% {
+    transform: rotate(calc(var(--starting-angle) - 3deg));
+  }
+  96% {
+    transform: rotate(calc(var(--starting-angle) + 2deg));
+  }
+  98% {
+    transform: rotate(calc(var(--starting-angle) - 1deg));
+  }
+  99% {
+    transform: rotate(calc(var(--starting-angle) + 1deg));
+  }
+  100% {
+    transform: rotate(calc(var(--starting-angle) + 0deg));
   }
 }
 .inventory-category .inventory-item {
@@ -2275,7 +2316,7 @@ body {
   text-align: center;
 }
 .inventory-category .inventory-item .inventory-stack img {
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
   max-width: min(200px, 100%);
@@ -2285,7 +2326,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .inventory-category .inventory-item .inventory-stack img:hover, .inventory-category .inventory-item .inventory-stack img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .inventory-category .inventory-item .title {
@@ -2315,7 +2356,7 @@ body {
   width: 100%;
   height: 95%;
   aspect-ratio: 1/1;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
   cursor: pointer;
@@ -2324,7 +2365,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .inventory-category .inventory-item .badge img:hover, .inventory-category .inventory-item .badge img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .inventory-category .inventory-item .rarity {
@@ -2435,7 +2476,7 @@ body {
   background-color: color-mix(in srgb, var(--white) 30%, transparent);
   border: white 2px solid;
   border-radius: 15px;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
   padding: 5px;
@@ -2456,7 +2497,7 @@ body {
 .app .gallery-recents .submission .img:active,
 .app .gallery-all .submission .img:hover,
 .app .gallery-all .submission .img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .app .gallery .submission .img img,
@@ -2544,7 +2585,7 @@ body {
   z-index: 4;
   width: 100%;
   scale: 1;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -2552,7 +2593,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .daily .prizes .prize .prize-box img:hover, .daily .prizes .prize .prize-box img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .daily.many {
@@ -2580,7 +2621,7 @@ body {
 }
 
 .hover-preview {
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -2588,7 +2629,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .hover-preview:hover, .hover-preview:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 
@@ -3102,7 +3143,7 @@ body {
   height: min-content;
 }
 #selected-character img {
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -3110,7 +3151,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 #selected-character img:hover, #selected-character img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 #selected-character.profile .profile-assets-content {
@@ -3129,7 +3170,7 @@ body {
 #selected-character.profile .profile-assets-content img {
   max-width: 100%;
   max-height: 300px;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -3137,7 +3178,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 #selected-character.profile .profile-assets-content img:hover, #selected-character.profile .profile-assets-content img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 #selected-character .selected-header {
@@ -3223,7 +3264,7 @@ body {
   left: -4vw;
   width: 10vw;
   height: 10vw;
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -3231,7 +3272,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:hover, #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 
@@ -3329,7 +3370,7 @@ body {
   max-width: 200px;
 }
 .badje img {
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -3337,12 +3378,12 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .badje img:hover, .badje img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 
 .profile-inventory img {
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -3350,7 +3391,7 @@ body {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .profile-inventory img:hover, .profile-inventory img:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 
@@ -3903,6 +3944,42 @@ body {
   border-radius: 10px;
 }
 
+.navbar .news-sales-container {
+  position: absolute;
+  top: -1.5em;
+  left: 0;
+  display: flex;
+  transform: rotate(-3deg);
+  transform-origin: 0% 100%;
+}
+.navbar .news-sales-container .newbadge {
+  border-radius: 15px;
+  background-image: url("images/overlays/otis-redding_noise.png");
+  background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
+  -webkit-backdrop-filter: saturate(200%) blur(5px);
+          backdrop-filter: saturate(200%) blur(5px);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
+  padding: 3px 10px;
+  border: 2px var(--white) solid;
+  border-radius: 15px;
+  color: var(--white);
+  height: -moz-max-content;
+  height: max-content;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 80%, transparent);
+}
+.navbar .news-sales-container .newbadge:nth-child(2) {
+  margin-top: 5px;
+}
+
+@media (width < 800px) {
+  .navbar .news-sales-container .newbadge {
+    font-size: 0.8em;
+  }
+  .navbar .news-sales-container .newbadge i {
+    font-size: inherit;
+  }
+}
 #app #site-wrapper #footer {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
@@ -4683,7 +4760,7 @@ body .modal-backdrop.show {
   color: var(--black);
 }
 .app .daily-button {
-  transition: 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
@@ -4691,7 +4768,7 @@ body .modal-backdrop.show {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
 .app .daily-button:hover, .app .daily-button:active {
-  transition: 0.7s var(--elastic_linear);
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
 .app .daily-button:active {

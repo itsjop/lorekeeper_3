@@ -352,41 +352,59 @@
               </div>
             </div>
             {{-- @if (Settings::get('gallery_submissions_reward_currency') && $gallery->currency_enabled && !$submission->id)
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h5>{!! $currency->name !!} Awards</h5>
-                            </div>
-                            <div class="card-body">
-                                <p>Please select options as appropriate for this piece. This will help the staff processing your submission award {!! $currency->displayName !!} for it. You <strong>will not</strong> be able to edit this after creating the
-                                    submission.</p>
+              <div class="card mb-4">
+                <div class="card-header">
+                  <h5>{!! $currency->name !!} Awards</h5>
+                </div>
+                <div class="card-body">
+                  <p>Please select options as appropriate for this piece. This will help the staff processing your submission award
+                    {!! $currency->displayName !!} for it. You <strong>will not</strong> be able to edit this after creating the
+                    submission.</p>
 
-                                @foreach (config('lorekeeper.group_currency_form') as $key => $field)
-                                    <div class="form-group">
-                                        @if ($field['type'] == 'checkbox')
-                                            <input class="form-check-input ml-0 pr-4" name="{{ $key }}" type="checkbox" value="{{ isset($field['value']) ? $field['value'] : 1 }}">
-                                        @endif
-                                        @if (isset($field['label']))
-                                            {!! Form::label(isset($field['multiple']) && $field['multiple'] ? $key . '[]' : $key, $field['label'], [
-                                                'class' => 'label-class' . ($field['type'] == 'checkbox' ? ' ml-3' : '') . (isset($field['rules']) && $field['rules'] ? ' ' . $field['rules'] : ''),
-                                            ]) !!}
-                                        @endif
-                                        @if ($field['type'] == 'choice' && isset($field['choices']))
-                                            @foreach ($field['choices'] as $value => $choice)
-                                                <div class="choice-wrapper">
-                                                    <input class="form-check-input ml-0 pr-4" name="{{ isset($field['multiple']) && $field['multiple'] ? $key . '[]' : $key }}"
-                                                        id="{{ isset($field['multiple']) && $field['multiple'] ? $key . '[]' : $key . '_' . $value }}" type="{{ isset($field['multiple']) && $field['multiple'] ? 'checkbox' : 'radio' }}"
-                                                        value="{{ $value }}">
-                                                    <label for="{{ $key }}[]" class="label-class ml-3">{{ $choice }}</label>
-                                                </div>
-                                            @endforeach
-                                        @elseif($field['type'] != 'checkbox')
-                                            <input class="form-control" name="{{ $key }}" type="{{ $field['type'] }}" id="{{ $key }}">
-                                        @endif
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-          @endif --}}
+                  @foreach (config('lorekeeper.group_currency_form') as $key => $field)
+                    <div class="form-group">
+                      @if ($field['type'] == 'checkbox')
+                        <input
+                          class="form-check-input ml-0 pr-4"
+                          name="{{ $key }}"
+                          type="checkbox"
+                          value="{{ isset($field['value']) ? $field['value'] : 1 }}"
+                        >
+                      @endif
+                      @if (isset($field['label']))
+                        {!! Form::label(isset($field['multiple']) && $field['multiple'] ? $key . '[]' : $key, $field['label'], [
+                            'class' =>
+                                'label-class' .
+                                ($field['type'] == 'checkbox' ? ' ml-3' : '') .
+                                (isset($field['rules']) && $field['rules'] ? ' ' . $field['rules'] : '')
+                        ]) !!}
+                      @endif
+                      @if ($field['type'] == 'choice' && isset($field['choices']))
+                        @foreach ($field['choices'] as $value => $choice)
+                          <div class="choice-wrapper">
+                            <input
+                              class="form-check-input ml-0 pr-4"
+                              name="{{ isset($field['multiple']) && $field['multiple'] ? $key . '[]' : $key }}"
+                              id="{{ isset($field['multiple']) && $field['multiple'] ? $key . '[]' : $key . '_' . $value }}"
+                              type="{{ isset($field['multiple']) && $field['multiple'] ? 'checkbox' : 'radio' }}"
+                              value="{{ $value }}"
+                            >
+                            <label for="{{ $key }}[]" class="label-class ml-3">{{ $choice }}</label>
+                          </div>
+                        @endforeach
+                      @elseif($field['type'] != 'checkbox')
+                        <input
+                          class="form-control"
+                          name="{{ $key }}"
+                          type="{{ $field['type'] }}"
+                          id="{{ $key }}"
+                        >
+                      @endif
+                    </div>
+                  @endforeach
+                </div>
+              </div>
+            @endif --}}
           </div>
         @endif
       </div>
@@ -463,6 +481,7 @@
         >Submit</a>
       </div>
       {!! Form::close() !!}
+      
       <div
         class="modal fade"
         id="confirmationModal"
@@ -476,8 +495,10 @@
               <button
                 type="button"
                 class="close"
-                data-dismiss="modal"
-              >&times;</button>
+                data-bs-dismiss="modal"
+              >
+                &times;
+              </button>
             </div>
             <div class="modal-body">
               <p>

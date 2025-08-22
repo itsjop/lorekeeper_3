@@ -42,7 +42,7 @@
     border: 2px solid var(--white);
     color: var(--white);
     border-radius: 50vw;
-    background-image: linear-gradient(to top, #859cf7, #6e6cea);
+    background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
     padding: 5px 15px;
     max-width: 90%;
     justify-self: center;
@@ -68,6 +68,7 @@
       align-items: center;
       text-align: center;
       padding: 10px;
+      position: relative;
       // border: 1px var(--white) solid;
       &.event,
       &.jobs {
@@ -83,7 +84,7 @@
       &.event {
         background-image: url('../images/somnivores/frontpage/event_bg.png');
         a {
-          font-weight: 700;
+          font-weight: 500;
         }
         .event-buttons {
           display: grid;
@@ -142,6 +143,16 @@
         // background-color: var(--white);
         border-radius: 15px;
         contain: paint;
+      }
+      .newbadge {
+        position: absolute;
+        top: -1rem;
+        right: 1rem;
+        transform-origin: 50% 300%;
+        animation: new-wobble 10s var(--smoothIn_linear) forwards infinite;
+        --starting-angle: 10deg;
+        transform: rotate(calc(var(--starting-angle) + 0deg));
+        background-image: linear-gradient(to top, #85bef7, #a76cea);
       }
     }
   }
@@ -225,8 +236,24 @@
       'sale ' auto
       'subm ' auto
       / 1fr;
+    .frontpage-button {
+      padding: 8px 10px;
+      line-height: 1;
+    }
   }
   .event {
     grid-template-columns: 1fr;
   }
+}
+
+// prettier-ignore
+@keyframes new-wobble {
+  0%   { transform: rotate(calc(var(--starting-angle) + 0deg)); }
+  90%  { transform: rotate(calc(var(--starting-angle) + 0deg)); }
+  92%  { transform: rotate(calc(var(--starting-angle) + 3deg)); }
+  94%  { transform: rotate(calc(var(--starting-angle) - 3deg)); }
+  96%  { transform: rotate(calc(var(--starting-angle) + 2deg)); }
+  98%  { transform: rotate(calc(var(--starting-angle) - 1deg)); }
+  99%  { transform: rotate(calc(var(--starting-angle) + 1deg)); }
+  100% { transform: rotate(calc(var(--starting-angle) + 0deg)); }
 }
