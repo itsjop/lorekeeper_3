@@ -2204,12 +2204,11 @@ body {
 .home-dashboard .bubblebox .bubble .newbadge {
   position: absolute;
   top: -1rem;
-  right: 1rem;
+  right: 0rem;
   transform-origin: 50% 300%;
-  animation: new-wobble 10s var(--smoothIn_linear) forwards infinite;
   --starting-angle: 10deg;
   transform: rotate(calc(var(--starting-angle) + 0deg));
-  background-image: linear-gradient(to top, #85bef7, #a76cea);
+  background-image: linear-gradient(to top, #859cf7, #6e6cea);
 }
 
 @container main-container (width < 1000px) {
