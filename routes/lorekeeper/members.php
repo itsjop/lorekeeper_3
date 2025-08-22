@@ -230,6 +230,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
 
   Route::post('{slug}/' . __('awards.awardcase') . '/edit', 'CharacterController@postAwardEdit');
   Route::post('{slug}/inventory/edit', 'CharacterController@postInventoryEdit');
+  Route::post('{slug}/inventory/sort', 'CharacterController@postInventorySort');
 
   Route::post('{slug}/bank/transfer', 'CharacterController@postCurrencyTransfer');
   Route::get('{slug}/transfer', 'CharacterController@getTransfer');

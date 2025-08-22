@@ -150,6 +150,7 @@ class CharacterController extends Controller {
       ->whereIn('items.id', $query->pluck('id')->toArray())
       ->where('count', '>', 0)
       ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('sort')
       ->orderBy('name')
       ->orderBy('updated_at')
       ->get()
@@ -157,6 +158,7 @@ class CharacterController extends Controller {
       $this->character->items()
       ->whereIn('items.id', $query->pluck('id')->toArray())
       ->where('count', '>', 0)
+      ->orderBy('sort')
       ->orderBy('name')
       ->orderBy('updated_at')
       ->get()
@@ -341,22 +343,16 @@ class CharacterController extends Controller {
       }
     }
 
-    $items = count($categories) ?
-      $this->character->items()
+    $items = $this->character->items()
+      ->select('items.*', 'item_categories.can_name')
+      ->leftJoin('item_categories', 'items.item_category_id', '=', 'item_categories.id')
       ->whereIn('items.id', $query->pluck('id')->toArray())
       ->where('count', '>', 0)
-      ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('character_items.sort')
       ->orderBy('name')
       ->orderBy('updated_at')
       ->get()
-      ->groupBy(['item_category_id', 'id']) :
-      $this->character->items()
-      ->whereIn('items.id', $query->pluck('id')->toArray())
-      ->where('count', '>', 0)
-      ->orderBy('name')
-      ->orderBy('updated_at')
-      ->get()
-      ->groupBy(['item_category_id', 'id']);
+      ->groupBy(['id']);
 
     return view('character.inventory', [
       'character'             => $this->character,
@@ -497,6 +493,29 @@ class CharacterController extends Controller {
         return $this->postDelete($request, $service);
       case 'take':
         return $this->postItemTransfer($request, $service);
+    }
+
+    return redirect()->back();
+  }
+
+  /**
+   * Sorts the user's inventory.
+   *
+   * @param App\Services\InventoryManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postInventorySort(Request $request, InventoryManager $service) {
+    if (!Auth::user()->id == $this->character->user_id) {
+      abort(404);
+    }
+    if ($service->sortInventory($request->get('sort'), $this->character)) {
+      flash('Inventory sorted successfully.')->success();
+      return redirect()->back();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
     }
 
     return redirect()->back();

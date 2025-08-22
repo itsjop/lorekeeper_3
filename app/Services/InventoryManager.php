@@ -579,7 +579,7 @@ class InventoryManager extends Service {
   /**
    * Donates items from stack.
    *
-   * @param  \App\Models\User\User      $user
+   * @param User $user
    * @param  \App\Models\User\UserItem  $stacks
    * @param  int                        $quantities
    * @return bool
@@ -972,6 +972,46 @@ class InventoryManager extends Service {
       $this->setError('error', $e->getMessage());
     }
 
+    return $this->rollbackReturn(false);
+  }
+
+  /**
+   * Sorts a character's items.
+   *
+   * @param string  $sorted_items
+   * @param \App\Models\Character\Character $character
+ *
+   * @return bool
+   */
+  public function sortInventory($sorted_items, $character) {
+    DB::beginTransaction();
+    try {
+      $ids = explode(',', $sorted_items);
+      // Check input is valid set of item ids
+      foreach ($ids as $number) {
+        $number = trim($number);
+        if (!is_numeric($number) || !ctype_digit($number)) {
+          throw new \Exception('Invalid items included in sorting order.');
+        }
+      }
+
+      $items = CharacterItem::query()->where('character_id', $character->id)->whereNull('deleted_at')->orderByRaw('FIELD(id, ?)', implode($ids))->get();
+
+      // Make sure we have the right number of items for this character
+      if (count($items) != count($ids)) {
+        throw new \Exception('Invalid items included in sorting order.');
+      }
+
+      foreach ($ids as $index => $id)
+      {
+        $item = $items->where('id', $id)->first();
+        $item->sort = $index;
+        $item->save();
+      }
+      return $this->commitReturn(true);
+    } catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
     return $this->rollbackReturn(false);
   }
 }
