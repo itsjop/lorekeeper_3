@@ -73,7 +73,7 @@
           {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
           {!! Form::file('image', ['class' => 'custom-file-input', 'id' => 'mainImage']) !!}
         </div>
-        <small>Images may be PNG, GIF, JPG, or WebP and up to 3MB in size.</small>
+        <small>Images may be PNG, GIF, JPG, or WebP and up to 2MB in size.</small>
       </div>
     </div>
 
@@ -481,7 +481,7 @@
         >Submit</a>
       </div>
       {!! Form::close() !!}
-      
+
       <div
         class="modal fade"
         id="confirmationModal"
