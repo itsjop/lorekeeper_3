@@ -251,6 +251,8 @@
 
       @include('layouts._footer')
 
+      @include('layouts._terms_modal')
+
       <dialog
         class="modal fade"
         id="modal"

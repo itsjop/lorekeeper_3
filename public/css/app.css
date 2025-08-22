@@ -14,7 +14,7 @@ html {
   background-color: light-dark(#eee, #222);
 }
 
-body #app {
+body {
   /* TODO: Update to more usable color-mix:
     (https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/)
   */
@@ -85,7 +85,7 @@ body #app {
   --black: var(--active-clr_900);
   --body-color: var(--active-clr_50);
 }
-body #app.purple {
+body.purple {
   --active-clr_50: var(--purple-clr_50);
   --active-clr_100: var(--purple-clr_100);
   --active-clr_200: var(--purple-clr_200);
@@ -98,7 +98,7 @@ body #app.purple {
   --active-clr_900: var(--purple-clr_900);
   --active-clr_950: var(--purple-clr_950);
 }
-body #app.teal {
+body.teal {
   --active-clr_50: var(--teal-clr_50);
   --active-clr_100: var(--teal-clr_100);
   --active-clr_200: var(--teal-clr_200);
@@ -4024,7 +4024,7 @@ body {
   }
 }
 .modal-backdrop {
-  display: none;
+  z-index: 11;
 }
 
 #confirmationModal.show {
@@ -4046,6 +4046,7 @@ dialog,
   top: 50%;
   width: auto;
   height: auto;
+  z-index: 12;
   transform: translate(-50%, -50%);
   max-height: 80vh;
   background: transparent;
@@ -4095,7 +4096,7 @@ dialog .modal-dialog,
   border: 2px solid var(--purple-clr_500);
   margin: 0;
   overflow-y: scroll;
-  box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.5333333333);
+  box-shadow: 0px 0px 5px var(--purple-clr_300);
   border-radius: 15px;
   max-height: 80vh;
   overflow-y: scroll;
@@ -4146,6 +4147,14 @@ because the nesting selector cannot represent pseudo-elements. */
   .modal {
     width: 90vw;
   }
+}
+
+body .modal-backdrop {
+  transition: 0.2s ease;
+  background-color: color-mix(in srgb, var(--purple-clr_950) 0%, transparent);
+}
+body .modal-backdrop.show {
+  background-color: color-mix(in srgb, var(--purple-clr_950) 40%, transparent);
 }
 
 .card-header {

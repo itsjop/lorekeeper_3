@@ -363,6 +363,25 @@ return [
 */
   'currency_symbol' => '$',
 
+/*
+  |--------------------------------------------------------------------------
+  | Terms Popup
+  |--------------------------------------------------------------------------
+  |
+  | Defines the content of the terms popup that appears on your site.
+  | For the text field, some html is fine.
+  |
+  | 0: do not show terms popup ever.
+  | 1: Show terms popup until the visitor or user agreed.
+  */
+
+  'show_terms_popup' => 1,
+  'terms_popup' => [
+    "title" => "Wait a second!",
+    "text" => "",
+    "button" => "Accept Terms"
+  ],
+
   /*
 |--------------------------------------------------------------------------
 | User Username Changes

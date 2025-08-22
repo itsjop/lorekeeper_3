@@ -1,5 +1,5 @@
 .modal-backdrop {
-  display: none;
+  z-index: 11;
 }
 #confirmationModal {
   &.show {
@@ -19,6 +19,7 @@ dialog,
   top: 50%;
   width: auto;
   height: auto;
+  z-index: 12;
   transform: translate(-50%, -50%);
   max-height: 80vh;
   background: transparent;
@@ -68,7 +69,7 @@ dialog,
     border: 2px solid var(--purple-clr_500);
     margin: 0;
     overflow-y: scroll;
-    box-shadow: 5px 5px 5px #cccccc88;
+    box-shadow: 0px 0px 5px var(--purple-clr_300);
     border-radius: 15px;
     max-height: 80vh;
     overflow-y: scroll;
@@ -121,5 +122,23 @@ dialog,
   }
   @media (width<600px) {
     width: 90vw;
+  }
+}
+body {
+  .modal-backdrop {
+    transition: 0.2s ease;
+    background-color: color-mix(in srgb, var(--purple-clr_950) 00%, transparent);
+
+    // backdrop-filter: blur(0px) brightness(1);
+    &.show {
+      background-color: color-mix(in srgb, var(--purple-clr_950) 40%, transparent);
+      // backdrop-filter: blur(2px) brightness(0.5);
+    }
+  }
+}
+
+@media (width < 800px) {
+  body .modal-backdrop.show {
+    // backdrop-filter: brightness(0.5);
   }
 }

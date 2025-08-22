@@ -80,7 +80,8 @@ class User extends Authenticatable implements MustVerifyEmail {
     'home_changed',
     'faction_id',
     'faction_changed',
-    'profile_img'
+    'profile_img',
+    'has_accepted_terms'
   ];
 
   /**

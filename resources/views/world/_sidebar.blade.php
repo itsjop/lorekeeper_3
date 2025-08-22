@@ -14,10 +14,12 @@
     <summary class="sidebar-section-header"> Characters </summary>
     <ul>
       <li class="sidebar-item">
-        <a href="{{ url('world/'.__('lorekeeper.specieses')) }}" class="{{ set_active('world/species*') }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a>
+        <a href="{{ url('world/' . __('lorekeeper.specieses')) }}"
+          class="{{ set_active('world/species*') }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ url('world/'.__('lorekeeper.subtypes')) }}" class="{{ set_active('world/subtypes*') }}">{{ ucfirst(__('lorekeeper.subtypes')) }}</a>
+        <a href="{{ url('world/' . __('lorekeeper.subtypes')) }}"
+          class="{{ set_active('world/subtypes*') }}">{{ ucfirst(__('lorekeeper.subtypes')) }}</a>
       </li>
       <li class="sidebar-item">
         <a href="{{ url('world/rarities') }}" class="{{ set_active('world/rarities*') }}">Rarities</a>
@@ -41,7 +43,9 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a href="{{ url('world/' . __('transformations.transformations')) }}" class="{{ set_active('world/' . __('transformations.transformations')) }}">{{ ucfirst(__('transformations.transformations')) }}</a>
+        <a href="{{ url('world/' . __('transformations.transformations')) }}"
+          class="{{ set_active('world/' . __('transformations.transformations')) }}"
+        >{{ ucfirst(__('transformations.transformations')) }}</a>
       </li>
       <li class="sidebar-item">
         <a href="{{ url('world/character-titles') }}" class="{{ set_active('world/character-titles*') }}">
@@ -63,7 +67,7 @@
           All Items
         </a>
       </li>
-      <li class="sidebar-item">
+      {{-- <li class="sidebar-item">
         <a href="{{ url('world/currency-categories') }}" class="{{ set_active('world/currency-categories*') }}">
           Currency Categories
         </a>
@@ -77,7 +81,7 @@
         <a href="{{ url('world/borders') }}" class="{{ set_active('world/borders*') }}">
           User Borders
         </a>
-      </li>
+      </li> --}}
       <li class="sidebar-item">
         <a href="{{ url('world/currencies') }}" class="{{ set_active('world/currencies*') }}">
           All Currencies
@@ -93,20 +97,26 @@
           All Pets
         </a>
       </li>
+
+      <li class="sidebar-item">
+        <a href="{{ url('world/' . __('awards.awards')) }}" class="{{ set_active('world/' . __('awards.awards') . '*') }}">
+          All {{ ucfirst(__('awards.awards')) }}
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a href="{{ url('world/recipes') }}" class="{{ set_active('world/recipes*') }}"> All Recipes </a>
+      </li>
     </ul>
   </details>
-  <details class="sidebar-section" open>
+  {{-- <details class="sidebar-section" open>
     <summary class="sidebar-section-header"> {{ ucfirst(__('awards.awards')) }} </summary>
     <ul>
       </li>
       <li class="sidebar-item">
-        <a href="{{ url('world/' . __('awards.award') . '-categories') }}" class="{{ set_active('world/' . __('awards.award') . '-categories*') }}">
+        <a href="{{ url('world/' . __('awards.award') . '-categories') }}"
+          class="{{ set_active('world/' . __('awards.award') . '-categories*') }}"
+        >
           {{ ucfirst(__('awards.award')) }} Categories
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ url('world/' . __('awards.awards')) }}" class="{{ set_active('world/' . __('awards.awards') . '*') }}">
-          All {{ ucfirst(__('awards.awards')) }}
         </a>
       </li>
     </ul>
@@ -116,9 +126,6 @@
     </summary>
     <ul>
       </li>
-      <li class="sidebar-item">
-        <a href="{{ url('world/recipes') }}" class="{{ set_active('world/recipes*') }}"> All Recipes </a>
-      </li>
     </ul>
-  </details>
+  </details> --}}
 </div>

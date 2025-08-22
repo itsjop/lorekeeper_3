@@ -71,7 +71,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Users'], function () {
   Route::get('{name}/redeem-logs', 'UserController@getUserRedeemLogs');
   Route::get('{name}/currency-logs', 'UserController@getUserCurrencyLogs');
   Route::get('{name}/item-logs', 'UserController@getUserItemLogs');
-  Route::get('{name}/'.__('awards.awardcase'), 'UserController@getUserAwardCase');
+  Route::get('{name}/' . __('awards.awardcase'), 'UserController@getUserAwardCase');
   Route::get('{name}/' . __('awards.award') . '-logs', 'UserController@getUserAwardLogs');
   Route::get('{name}/ownership', 'UserController@getUserOwnershipLogs');
   Route::get('{name}/submissions', 'UserController@getUserSubmissions');
@@ -292,4 +292,10 @@ Route::group(['prefix' => 'forms'], function () {
   Route::get('/', 'SiteFormController@getIndex');
   Route::get('{id}.{slug?}', 'SiteFormController@getSiteForm');
   Route::get('{id}.', 'SiteFormController@getSiteForm');
+});
+/**************************************************************************************************
+    Terms accept
+ **************************************************************************************************/
+Route::group(['prefix' => 'terms'], function () {
+  Route::get('/accept', 'TermsController@acceptTerms');
 });

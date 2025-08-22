@@ -46,6 +46,7 @@
                 id="toggle-checks"
                 type="checkbox"
                 onclick="toggleChecks(this)"
+                style="scale: 1.3"
               >
             </th>
             <th class="col-4">Source</th>
@@ -63,7 +64,11 @@
         @foreach ($stack as $itemRow)
           <tr id="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable ? '' : 'accountbound' }}">
             @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
-              <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, false, ['class' => 'item-check', 'onclick' => 'updateQuantities(this)']) !!}</td>
+              <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, true, [
+                  'class' => 'item-check',
+                  'onclick' => 'updateQuantities(this)',
+                  'style' => 'scale: 1.3;'
+              ]) !!}</td>
               <td class="col-4">{!! array_key_exists('data', safeJSON($itemRow->data)) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
             @else
               <td class="col-5">{!! array_key_exists('data', safeJSON($itemRow->data)) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
@@ -78,7 +83,7 @@
                 <td class="col-3">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, [
                     'class' => 'quantity-select',
                     'type' => 'number',
-                    'style' => 'min-width:40px;'
+                    'style' => 'min-width:40px; text-align: center;'
                 ]) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
                     {{ $itemRow->getOthers() }}
                   @endif
@@ -87,7 +92,7 @@
                 <td class="col-3">{!! Form::selectRange('', 0, 0, 0, [
                     'class' => 'quantity-select',
                     'type' => 'number',
-                    'style' => 'min-width:40px;',
+                    'style' => 'min-width:40px; text-align: center;',
                     'disabled'
                 ]) !!} /{{ $itemRow->availableQuantity }} @if ($itemRow->getOthers())
                     {{ $itemRow->getOthers() }}
