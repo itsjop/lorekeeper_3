@@ -61,7 +61,7 @@
       <i class="fas fa-store"></i> Sales
     </h2>
     <div class="bubble sale-info">
-      @if (Auth::user()->is_news_unread)
+      @if (Auth::user()->is_sales_unread)
         <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;">New!</div>
       @endif
       @include('widgets._sales')
