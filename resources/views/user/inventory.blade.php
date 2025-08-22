@@ -84,7 +84,10 @@
                 </a>
               @endif
               <a href="#" class="inventory-stack inventory-stack-name">
-                {{ $stack->first()->name }} x{{ $stack->sum('pivot.count') }}
+                {{ $stack->first()->name }}
+                <span class="badge badge-primary">
+                  x{{ $stack->sum('pivot.count') }}
+                </span>
               </a>
             </div>
           @endforeach
