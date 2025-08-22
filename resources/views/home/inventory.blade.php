@@ -87,24 +87,24 @@
             data-bs-toggle="collapse"
           >Show</a>
         </h5>
-        <div
-        class="card-body inventory-body collapse show grid grid-4-col"
-        id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
+        <div class="card-body inventory-body collapse show grid grid-4-col" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
           @foreach ($categoryItems as $itemId => $stack)
             <div
-              class="pi-center pc-center text-center inventory-item"
+              class="pi-center pc-center text-center inventory-item  mb-3"
               data-id="{{ $stack->first()->pivot->id }}"
               data-name="{{ $user->name }}'s {{ $stack->first()->name }}"
             >
               @if ($stack->first()->has_image)
-                <a href="#" class="badge inventory-stack">
+                <a href="#" class="inventory-stack">
                   <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
                 </a>
               @endif
 
               <a href="#" class="meta inventory-stack inventory-stack-name">
                 {{ $stack->first()->name }}
-                x{{ $stack->sum('pivot.count') }}
+                <span class="badge badge-primary">
+                  x{{ $stack->sum('pivot.count') }}
+                </span>
               </a>
             </div>
           @endforeach

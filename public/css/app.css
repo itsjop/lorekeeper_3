@@ -2314,6 +2314,15 @@ body {
   grid-template: "name" min-content "thumb" min-content "meta" min-content/1fr;
   text-align: center;
 }
+.inventory-category .inventory-item .inventory-stack-name {
+  display: flex;
+  align-items: center;
+}
+.inventory-category .inventory-item .inventory-stack-name .badge {
+  font-size: 1em;
+  width: -moz-max-content;
+  width: max-content;
+}
 .inventory-category .inventory-item .inventory-stack img {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);

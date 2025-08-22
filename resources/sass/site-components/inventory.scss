@@ -7,6 +7,14 @@
       'thumb' min-content
       'meta' min-content
       / 1fr;
+    .inventory-stack-name {
+      display: flex;
+      align-items: center;
+      .badge {
+        font-size: 1em;
+        width: max-content;
+      }
+    }
     .inventory-stack {
       img {
         @include hover-preview;
