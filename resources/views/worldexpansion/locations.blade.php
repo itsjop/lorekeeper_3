@@ -9,15 +9,16 @@
   <h1>Locations</h1>
 
   <div class="flex jc-center">
-
     <img
       src="{{ asset('images/somnivores/site/newreveriemap-small.png') }}"
       alt="Map of Reverie"
       class="w-100 br-15 mb-4"
-      style="max-width: 1000px"
+      style="max-width: 1000px;
+        filter: drop-shadow(0 10px 10px color-mix(in srgb, var(--purple-clr_700) 30%, transparent));
+      "
     />
   </div>
-
+  <hr>
   {{-- {!! Form::open(['method' => 'GET', 'class' => '']) !!}
   <div class="form-inline justify-content-end">
     <div class="form-group ml-3 mb-3">
