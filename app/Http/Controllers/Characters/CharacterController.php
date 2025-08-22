@@ -650,6 +650,28 @@ class CharacterController extends Controller {
   }
 
   /**
+   * Sorts character links.
+   *
+   * @param App\Services\SpeciesService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postSortLinks(Request $request, CharacterLinkService $service) {
+    if (!Auth::check() || $this->character->user_id != Auth::user()->id) {
+      abort(404);
+    }
+    if ($service->sortCharacterRelationshipLinks($request->get('sort'), $this->character)) {
+      flash('Relationship order updated successfully.')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+
+    return redirect()->back();
+  }
+
+  /**
    * Gets the delete character relationship modal.
    *
    * @param mixed $slug

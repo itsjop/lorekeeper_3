@@ -274,7 +274,8 @@ class Character extends Model {
   */
   public function links() {
     // character id can be in either column
-    return $this->hasMany(CharacterRelation::class, 'character_1_id')->orWhere('character_2_id', $this->id);
+    return $this->hasMany(CharacterRelation::class, 'character_1_id')->orWhere('character_2_id', $this->id)
+      ->orderByRaw('CASE WHEN character_1_id = ? THEN sort_1 ELSE sort_2 END ASC', $this->id);
   }
 
   /* Get the links for this character */

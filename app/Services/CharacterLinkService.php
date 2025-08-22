@@ -184,4 +184,53 @@ class CharacterLinkService extends Service {
 
     return $this->rollbackReturn(false);
   }
+
+  /**
+   * Sorts relationship links order.
+   *
+   * @param string $sortedLinks
+   * @param Character $character
+   * @return bool
+   */
+  public function sortCharacterRelationshipLinks($sortedLinks, $character) {
+    DB::beginTransaction();
+
+    try {
+      $links = $character->links;
+
+      $ids = explode(',', $sortedLinks);
+      // Check input is valid set of link ids
+      foreach ($ids as $number) {
+        $number = trim($number);
+        if (!is_numeric($number) || !ctype_digit($number)) {
+          throw new \Exception('Invalid items included in sorting order.');
+        }
+      }
+
+      // Make sure we have the right number of links for this character
+      if (count($links) != count($ids)) {
+        throw new \Exception('Invalid items included in sorting order.');
+      }
+
+      foreach ($ids as $index => $id)
+      {
+        $link = $links->where('id', $id)->first();
+        if ($link->character_1_id == $character->id)
+        {
+          $link->sort_1 = $index;
+        }
+        elseif($link->character_2_id == $character->id)
+        {
+          $link->sort_2 = $index;
+        }
+        $link->save();
+      }
+      return $this->commitReturn(true);
+    }
+    catch (\Exception $e) {
+      $this->setError('error', $e->getMessage());
+    }
+
+    return $this->rollbackReturn(false);
+  }
 }

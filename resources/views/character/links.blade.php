@@ -25,7 +25,11 @@
   ])
 
   @if (Auth::check() && ($character->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
-    <div class="text-right m-2 mr-5 mt-3">
+    <div class="text-right m-2 mr-5 mt-3 justify-content-end d-flex">
+      {!! Form::open(['url' => $character->url .'/links/sort']) !!}
+      {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
+      {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
+      {!! Form::close() !!}
       <a href="{{ $character->url . '/links/edit' }}" class="btn btn-outline-info btn-sm">
         <i class="fas fa-envelope"></i> Create Connections For {!! $character->fullName !!}
       </a>
