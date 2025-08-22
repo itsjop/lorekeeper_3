@@ -21,14 +21,14 @@
           <h1 style="text-align:center">Somnivores is an 18+ Community!</h1>
           <ul style="margin-left: 2em;">
             <li>Any users under 18 will be banned.</li>
-            <li>You must review of our **ARPG Content Warnings & Terms** of Service before engaging with the site!</li>
+            <li>You must review of our <strong>ARPG Content Warnings & Terms</strong> of Service before engaging with the site!
+            </li>
           </ul>
           <hr>
           <p>
             While Reverie is generally colorful and cheerful, our world and lore does (or will) contain the following
             topics:
           </p>
-
           <h2 style="text-align:center">Content Warnings</h2>
           <ul style="margin-left: 2em;">
             <li>Insects (Foods, Trait items & an insect tail trait which includes centipedes)</li>
@@ -70,7 +70,7 @@
       </div>
     </div>
   </div>
-  <div class="fade modal-backdrop d-none" id="termsBackdrop"></div>
+  {{-- <div class="fade modal-backdrop d-none" id="termsBackdrop"></div> --}}
 
   <script>
     $(document).ready(function() {

@@ -4025,6 +4025,7 @@ body {
 }
 .modal-backdrop {
   z-index: 11;
+  display: none;
 }
 
 #confirmationModal.show {
