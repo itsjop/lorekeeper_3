@@ -144,25 +144,24 @@ class CharacterController extends Controller {
       if ($data['rarity_id'] == 'withoutOption') $query->whereNull('data->rarity_id');
       else $query->where('data->rarity_id', $data['rarity_id']);
 
-
     $items = count($categories) ?
       $this->character->items()
       ->whereIn('items.id', $query->pluck('id')->toArray())
       ->where('count', '>', 0)
       ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
-      ->orderBy('sort')
+      ->orderBy('pivot_sort')
       ->orderBy('name')
       ->orderBy('updated_at')
       ->get()
-      ->groupBy(['item_category_id', 'id']) :
+      ->groupBy(['id']) :
       $this->character->items()
       ->whereIn('items.id', $query->pluck('id')->toArray())
       ->where('count', '>', 0)
-      ->orderBy('sort')
+      ->orderBy('pivot_sort')
       ->orderBy('name')
       ->orderBy('updated_at')
       ->get()
-      ->groupBy(['item_category_id', 'id']);
+      ->groupBy(['id']);
     return view('character.character', [
       'character'             => $this->character,
       'showMention'           => true,

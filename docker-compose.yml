@@ -39,7 +39,7 @@ services:
   # MySQL Service
   db:
     image: mysql:5.7
-    platform: linux/amd64  # Specify platform for compatibility
+    platform: ${TARGETPLATFORM:-linux/amd64} # Specify platform for compatibility
     container_name: lorekeeper-db
     restart: unless-stopped
     tty: true

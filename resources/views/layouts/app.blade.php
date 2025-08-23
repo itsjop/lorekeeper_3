@@ -237,7 +237,9 @@
 
       @include('layouts._footer')
 
-      @include('layouts._terms_modal')
+      @if (!Route::is('info/terms'))
+        @include('layouts._terms_modal')
+      @endif
 
       <dialog
         class="modal fade"
