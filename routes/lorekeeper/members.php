@@ -230,6 +230,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
 
   Route::post('{slug}/' . __('awards.awardcase') . '/edit', 'CharacterController@postAwardEdit');
   Route::post('{slug}/inventory/edit', 'CharacterController@postInventoryEdit');
+  Route::post('{slug}/inventory/sort', 'CharacterController@postInventorySort');
 
   Route::post('{slug}/bank/transfer', 'CharacterController@postCurrencyTransfer');
   Route::get('{slug}/transfer', 'CharacterController@getTransfer');
@@ -252,6 +253,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
   // LINKS
   Route::get('{slug}/links/edit', 'CharacterController@getCreateEditCharacterLinks');
   Route::post('{slug}/links/edit', 'CharacterController@postCreateEditCharacterLinks');
+  Route::post('{slug}/links/sort', 'CharacterController@postSortLinks');
   Route::post('{slug}/links/info/{id}', 'CharacterController@postEditCharacterLinkInfo');
   Route::get('{slug}/links/delete/{id}', 'CharacterController@getDeleteCharacterLink');
   Route::post('{slug}/links/delete/{id}', 'CharacterController@postDeleteCharacterLink');

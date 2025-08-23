@@ -1,0 +1,70 @@
+services:
+  # PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}  # Default to amd64 but use host platform if specified
+    image: lorekeeper-app:local
+    container_name: lorekeeper-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - lorekeeper-network
+
+  # Nginx Service
+  webserver:
+    image: nginx:alpine
+    platform: ${TARGETPLATFORM:-linux/amd64}  # Use the same platform as the app service
+    container_name: lorekeeper-webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - lorekeeper-network
+
+  # MySQL Service
+  db:
+    image: mysql:5.7
+    platform: ${TARGETPLATFORM:-linux/amd64} # Specify platform for compatibility
+    container_name: lorekeeper-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: lorekeeper
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: lorekeeper
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    tmpfs:
+      - /var/lib/mysql:rw,noexec,nosuid,size=500m
+    networks:
+      - lorekeeper-network
+
+# Networks
+networks:
+  lorekeeper-network:
+    driver: bridge
+
+# Volumes
+volumes:
+  dbdata:
+    driver: local

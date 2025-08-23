@@ -144,23 +144,14 @@ class CharacterController extends Controller {
       if ($data['rarity_id'] == 'withoutOption') $query->whereNull('data->rarity_id');
       else $query->where('data->rarity_id', $data['rarity_id']);
 
-
-    $items = count($categories) ?
-      $this->character->items()
+    $items = $this->character->items()
       ->whereIn('items.id', $query->pluck('id')->toArray())
       ->where('count', '>', 0)
-      ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('pivot_sort')
       ->orderBy('name')
       ->orderBy('updated_at')
       ->get()
-      ->groupBy(['item_category_id', 'id']) :
-      $this->character->items()
-      ->whereIn('items.id', $query->pluck('id')->toArray())
-      ->where('count', '>', 0)
-      ->orderBy('name')
-      ->orderBy('updated_at')
-      ->get()
-      ->groupBy(['item_category_id', 'id']);
+      ->groupBy(['id']);
     return view('character.character', [
       'character'             => $this->character,
       'showMention'           => true,
@@ -341,22 +332,16 @@ class CharacterController extends Controller {
       }
     }
 
-    $items = count($categories) ?
-      $this->character->items()
+    $items = $this->character->items()
+      ->select('items.*', 'item_categories.can_name')
+      ->leftJoin('item_categories', 'items.item_category_id', '=', 'item_categories.id')
       ->whereIn('items.id', $query->pluck('id')->toArray())
       ->where('count', '>', 0)
-      ->orderByRaw('FIELD(item_category_id,' . implode(',', $categories->pluck('id')->toArray()) . ')')
+      ->orderBy('character_items.sort')
       ->orderBy('name')
       ->orderBy('updated_at')
       ->get()
-      ->groupBy(['item_category_id', 'id']) :
-      $this->character->items()
-      ->whereIn('items.id', $query->pluck('id')->toArray())
-      ->where('count', '>', 0)
-      ->orderBy('name')
-      ->orderBy('updated_at')
-      ->get()
-      ->groupBy(['item_category_id', 'id']);
+      ->groupBy(['id']);
 
     return view('character.inventory', [
       'character'             => $this->character,
@@ -503,6 +488,29 @@ class CharacterController extends Controller {
   }
 
   /**
+   * Sorts the user's inventory.
+   *
+   * @param App\Services\InventoryManager $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postInventorySort(Request $request, InventoryManager $service) {
+    if (!Auth::user()->id == $this->character->user_id) {
+      abort(404);
+    }
+    if ($service->sortInventory($request->get('sort'), $this->character)) {
+      flash('Inventory sorted successfully.')->success();
+      return redirect()->back();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+
+    return redirect()->back();
+  }
+
+  /**
    * Handles inventory award processing, including transferring awards between the user and character.
    *
    * @param  \Illuminate\Http\Request       $request
@@ -621,6 +629,28 @@ class CharacterController extends Controller {
     $data = $request->only(['info', 'type']);
     if ($service->updateCharacterRelationLinkInfo($data + ['slug' => $slug], $id, Auth::user())) {
       flash('Info updated successfully!')->success();
+    } else {
+      foreach ($service->errors()->getMessages()['error'] as $error) {
+        flash($error)->error();
+      }
+    }
+
+    return redirect()->back();
+  }
+
+  /**
+   * Sorts character links.
+   *
+   * @param App\Services\SpeciesService $service
+   *
+   * @return \Illuminate\Http\RedirectResponse
+   */
+  public function postSortLinks(Request $request, CharacterLinkService $service) {
+    if (!Auth::check() || $this->character->user_id != Auth::user()->id) {
+      abort(404);
+    }
+    if ($service->sortCharacterRelationshipLinks($request->get('sort'), $this->character)) {
+      flash('Relationship order updated successfully.')->success();
     } else {
       foreach ($service->errors()->getMessages()['error'] as $error) {
         flash($error)->error();
