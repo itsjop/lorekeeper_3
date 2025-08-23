@@ -11,7 +11,7 @@ class CharacterRelation extends Model {
      * @var array
      */
     protected $fillable = [
-        'character_1_id', 'character_2_id', 'info', 'type', 'status',
+        'character_1_id', 'character_2_id', 'info', 'type', 'status', "sort_1", "sort_2",
     ];
 
     /**

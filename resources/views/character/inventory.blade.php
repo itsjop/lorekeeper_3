@@ -39,36 +39,6 @@
     Items
   </h3>
 
-  <div>
-    {!! Form::open(['method' => 'GET', 'class' => '']) !!}
-    <div class="form-inline justify-content-end inventory-search-pane">
-      <div class="name form-group m-0 w-100">
-        {!! Form::text('name', Request::get('name'), ['class' => 'form-control w-100', 'placeholder' => 'Name']) !!}
-      </div>
-      <div class="category form-group m-0">
-        {!! Form::select('item_category_id', $categories->pluck('name', 'id'), Request::get('item_category_id'), [
-            'class' => 'form-control w-100',
-            'placeholder' => 'Any Category'
-        ]) !!}
-      </div>
-      @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
-        <div class="rarity form-group m-0">
-          {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control w-100']) !!}
-        </div>
-        <div class="artist form-group m-0">
-          {!! Form::select('artist', $artists, Request::get('artist'), [
-              'class' => 'form-control w-100',
-              'placeholder' => 'Any Artist'
-          ]) !!}
-        </div>
-      @endif
-      <div class="search form-group m-0">
-        {!! Form::submit('Search', ['class' => 'btn btn-primary m-0']) !!}
-      </div>
-    </div>
-    {!! Form::close() !!}
-  </div>
-
   @include('character._character_inventory', ['items' => $items])
 
   <h3>Latest Activity</h3>
