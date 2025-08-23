@@ -78,7 +78,7 @@
                     <img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" />
                   </a>
                 @endif
-                <a href="#" class="inventory-stack inventory-stack-name">
+                <a href="#" class="inventory-stack inventory-stack-name jc-center">
                   <strong>{{ $item->name }}</strong>
                 </a>
                 <div class="cost">
