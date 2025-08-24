@@ -2,38 +2,35 @@
   <div class="sidebar-header">
     <a href="{{ url('masterlist') }}" class="card-link">Masterlist</a>
   </div>
-  <details class="sidebar-section" open>
+  <div class="details-sb" data-open>
     <summary class="sidebar-section-header">Masterlist</summary>
-    <ul>
-      <li class="sidebar-item">
-        <a href="{{ url('masterlist') }}" class="{{ set_active('masterlist*') }}">Characters</a>
-      </li>
-      <li class="sidebar-item">
-        <a href="{{ url('myos') }}" class="{{ set_active('myos*') }}">MYO Slots</a>
-      </li>
-    </ul>
-  </details>
+    <div class="sb-item">
+      <a href="{{ url('masterlist') }}" class="{{ set_active('masterlist*') }}">Characters</a>
+    </div>
+    <div class="sb-item">
+      <a href="{{ url('myos') }}" class="{{ set_active('myos*') }}">MYO Slots</a>
+    </div>
+  </div>
   @if (Settings::get('character_likes_leaderboard_enable') && Auth::check())
-    <details class="sidebar-section" open>
+    <div class="details-sb" data-open>
       <summary class="sidebar-section-header">Character {{ ucfirst(__('character_likes.likes')) }}</summary>
-      <li class="sidebar-item">
-        <a href="{{ url(__('character_likes.likes') . '-leaderboard') }}" class="{{ set_active(__('character_likes.likes') . '-leaderboard*') }}">
+      <div class="sb-item">
+        <a href="{{ url(__('character_likes.likes') . '-leaderboard') }}"
+          class="{{ set_active(__('character_likes.likes') . '-leaderboard*') }}"
+        >
           {{ ucfirst(__('character_likes.likes')) }} Leaderboard</a>
-      </li>
-      </ul>
-    </details>
+      </div>
+    </div>
   @endif
   @if (isset($sublists) && $sublists->count() > 0)
-    <details class="sidebar-section" open>
+    <div class="details-sb" data-open>
       <summary class="sidebar-section-header">Sub Masterlists</summary>
-      <ul>
-        @foreach ($sublists as $sublist)
-          <li class="sidebar-item">
-            <a href="{{ url('sublist/' . $sublist->key) }}" class="{{ set_active('sublist/' . $sublist->key) }}">{{ $sublist->name }}</a>
-          </li>
-        @endforeach
-        </li>
-      </ul>
-    </details>
+      @foreach ($sublists as $sublist)
+        <div class="sb-item">
+          <a href="{{ url('sublist/' . $sublist->key) }}"
+            class="{{ set_active('sublist/' . $sublist->key) }}">{{ $sublist->name }}</a>
+        </div>
+      @endforeach
+    </div>
   @endif
 </div>

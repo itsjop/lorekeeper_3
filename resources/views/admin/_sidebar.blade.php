@@ -5,25 +5,27 @@
 
   @foreach (config('lorekeeper.admin_sidebar') as $key => $section)
     @if (Auth::user()->isAdmin || $section['power'] === 'mixed' || Auth::user()->hasPower($section['power']))
-      <details class="{{ 'sidebar-section' . (array_key_exists('meta', $section) ? ' ' . $section['meta'] : '') }}">
+      <div class="{{ 'details-sb' . (array_key_exists('meta', $section) ? ' ' . $section['meta'] : '') }}" data-open>
         <summary class="sidebar-section-header">{{ str_replace(' ', '', $key) }} </summary>
-        <ul>
-          {{-- order by name --}}
-          @php
-            usort($section['links'], function ($a, $b) {
-                return strcmp($a['name'], $b['name']);
-            });
-          @endphp
-          @foreach ($section['links'] as $item)
-            @if ($section['power'] !== 'mixed' || ($section['power'] === 'mixed' && array_key_exists('power', $item) && Auth::user()->hasPower($item['power'])))
-              <li class="sidebar-item">
-                <a href="{{ url($item['url']) }}" class="collapse-link {{ set_active($item['url'] . '*') }}">{{ $item['name'] }}
-                </a>
-              </li>
-            @endif
-          @endforeach
-        </ul>
-      </details>
+        {{-- order by name --}}
+        @php
+          usort($section['links'], function ($a, $b) {
+              return strcmp($a['name'], $b['name']);
+          });
+        @endphp
+        @foreach ($section['links'] as $item)
+          @if (
+              $section['power'] !== 'mixed' ||
+                  ($section['power'] === 'mixed' && array_key_exists('power', $item) && Auth::user()->hasPower($item['power']))
+          )
+            <div class="sb-item">
+              <a href="{{ url($item['url']) }}" class="collapse-link {{ set_active($item['url'] . '*') }}">
+                {{ $item['name'] }}
+              </a>
+            </div>
+          @endif
+        @endforeach
+      </div>
     @endif
   @endforeach
 
@@ -33,7 +35,7 @@
   @section('scripts')
     <script>
       $(document).ready(function() {
-        let currentCollapse = $(".sidebar-section").find('.collapse');
+        let currentCollapse = $(".details-sb").find('.collapse');
         [...currentCollapse].forEach(element => {
           let links = $(element).find('.collapse-link');
           [...links].forEach(link => {

@@ -104,5 +104,6 @@
       e.preventDefault();
       $('#colour-collapse-' + $(this).data('id')).collapse('toggle');
     });
+
   });
 </script>

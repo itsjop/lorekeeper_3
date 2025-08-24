@@ -123,13 +123,38 @@
       // resize image map
       $map.imageMapResize();
     });
+
+    function setRows(el) {
+      let size = '0fr ';
+      let open = el.hasAttribute("data-open");
+      if (open) {
+        size = '1fr ';
+      }
+      let styl = 'auto ';
+      for (let i = 1; i < el.childElementCount - 1; i++) { // shows 0, then 1, then 2
+        if (open) {
+          if (el.children[i].tagName === 'HR') {
+            console.log('open', open, size)
+            styl += '3px ';
+          } else {
+            console.log('open', open, size)
+            styl += size;
+          }
+        }
+      }
+      el.style.gridTemplateRows = styl;
+    }
+    document.querySelectorAll('[data-open]').forEach(detail => {
+      // setRows(detail);
+      let summary = detail.querySelector(":scope > summary");
+      summary.addEventListener('click', () => {
+        detail.toggleAttribute("data-open");
+        // setRows(detail);
+      });
+    });
+
   });
 
-  // if ($('.tooltip-bot, .tooltip-bot a, .nav-social-links a')) {
-  //   $('.tooltip-bot, .tooltip-bot a, .nav-social-links a').tooltip({
-  //     placement: "top"
-  //   });
-  // }
   $(document).mousemove(function(e) {
     // check if $('#Image-Maps-Com-process-map') exists
     if ($('#Image-Maps-Com-process-map').length == 0) {
