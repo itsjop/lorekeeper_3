@@ -124,27 +124,27 @@
       $map.imageMapResize();
     });
 
-    function setRows(el) {
-      let size = '0fr ';
-      let open = el.hasAttribute("data-open");
-      if (open) {
-        size = '1fr ';
-      }
-      let styl = 'auto ';
-      for (let i = 1; i < el.childElementCount - 1; i++) { // shows 0, then 1, then 2
-        if (open) {
-          if (el.children[i].tagName === 'HR') {
-            console.log('open', open, size)
-            styl += '3px ';
-          } else {
-            console.log('open', open, size)
-            styl += size;
-          }
-        }
-      }
-      el.style.gridTemplateRows = styl;
-    }
-    document.querySelectorAll('[data-open]').forEach(detail => {
+    // function setRows(el) {
+    //   let size = '0fr ';
+    //   let open = el.hasAttribute("data-open");
+    //   if (open) {
+    //     size = '1fr ';
+    //   }
+    //   let styl = 'auto ';
+    //   for (let i = 1; i < el.childElementCount - 1; i++) { // shows 0, then 1, then 2
+    //     if (open) {
+    //       if (el.children[i].tagName === 'HR') {
+    //         console.log('open', open, size)
+    //         styl += '3px ';
+    //       } else {
+    //         console.log('open', open, size)
+    //         styl += size;
+    //       }
+    //     }
+    //   }
+    //   el.style.gridTemplateRows = styl;
+    // }
+    document.querySelectorAll('.details-sb').forEach(detail => {
       // setRows(detail);
       let summary = detail.querySelector(":scope > summary");
       summary.addEventListener('click', () => {
