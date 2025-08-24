@@ -2690,6 +2690,10 @@ body {
   font-size: 1.1em;
   color: var(--purple-clr_100);
 }
+#app #site-wrapper #sidebar .sidebar-header a:hover {
+  background-color: transparent !important;
+  color: inherit !important;
+}
 #app #site-wrapper #sidebar #sidebar-ul {
   border-radius: 20px;
 }

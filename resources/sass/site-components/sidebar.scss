@@ -22,6 +22,10 @@
         font-weight: 600;
         font-size: 1.1em;
         color: var(--purple-clr_100);
+        &:hover {
+          background-color: transparent !important;
+          color: inherit !important;
+        }
       }
     }
     #sidebar-ul {
