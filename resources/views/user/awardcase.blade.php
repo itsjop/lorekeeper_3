@@ -19,9 +19,9 @@
       </h5>
       <div class="card-body awardcase-body collapse show" id="{!! isset($categories[$categoryId]) ? str_replace(' ', '', $categories[$categoryId]->name) : 'miscellaneous' !!}">
         @foreach ($categoryAwards->chunk(4) as $chunk)
-          <div class="row mb-3">
+          <div class="grid grid-4-col">
             @foreach ($chunk as $awardId => $stack)
-              <div class="col-sm-3 col-6 text-center case-award" data-id="{{ $stack->first()->pivot->id }}" data-name="{{ $user->name }}'s {{ $stack->first()->name }}">
+              <div class="text-center case-award" data-id="{{ $stack->first()->pivot->id }}" data-name="{{ $user->name }}'s {{ $stack->first()->name }}">
                 <div class="mb-1">
                   <a href="#" class="awardcase-stack {{ $stack->first()->is_featured ? 'alert alert-success' : '' }}"><img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" /></a>
                 </div>

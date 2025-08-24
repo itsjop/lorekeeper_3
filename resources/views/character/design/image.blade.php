@@ -16,8 +16,8 @@
     <div class="card mb-3">
       <div class="card-body bg-secondary text-white">
         <h2>Masterlist Image</h2>
-        <div class="row mb-3">
-          <div class="col-md-6">
+        <div class="grid grid-2-col">
+          <div class="">
             <h3 class="text-center">Main Image</h3>
             <div class="text-center">
               <a
@@ -32,7 +32,7 @@
                 /></a>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="">
             <h3 class="text-center">Thumbnail Image</h3>
             <div class="text-center">
               <a

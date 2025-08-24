@@ -20,10 +20,10 @@
       </div>
     </div>
     <div class="user-characters">
-      <div class="row">
+      <div class="grid grid-4-col">
         @foreach ($characters as $character)
           <div
-            class="col-lg-2 col-sm-3 col-6 mb-3 user-character category-all category-{{ $character->character_category_id ?: 0 }} {{ isset($selected) && in_array($character->id, $selected) ? 'category-selected' : '' }} {{ (isset($selected) && in_array($character->id, $selected)) || $character->isAvailable ? '' : 'select-disabled' }}"
+            class="mb-3 user-character category-all category-{{ $character->character_category_id ?: 0 }} {{ isset($selected) && in_array($character->id, $selected) ? 'category-selected' : '' }} {{ (isset($selected) && in_array($character->id, $selected)) || $character->isAvailable ? '' : 'select-disabled' }}"
             data-id="{{ $character->id }}">
             <div class="text-center character-item {{ (isset($selected) && in_array($character->id, $selected)) || $character->isAvailable ? '' : 'disabled' }}"
               @if (!(isset($selected) && in_array($character->id, $selected)) && !$character->isAvailable) data-bs-toggle="tooltip" title="{{ $character->trade_id ? 'This character is in a trade.' : 'This character has an active design update.' }}" @endif>

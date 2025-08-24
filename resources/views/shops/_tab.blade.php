@@ -15,9 +15,9 @@
     @foreach ($stock as $categoryId => $categoryItems)
       <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}">
         @foreach ($categoryItems->chunk(4) as $chunk)
-          <div class="row mb-3">
+          <div class="grid grid-4-col">
             @foreach ($chunk as $item)
-              <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $item->pivot->id }}">
+              <div class="text-center inventory-item" data-id="{{ $item->pivot->id }}">
                 @if ($item->has_image)
                   <div class="mb-1">
                     <a href="#" class="inventory-stack"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>

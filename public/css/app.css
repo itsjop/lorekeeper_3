@@ -1186,7 +1186,7 @@ body {
 }
 #character-main-profile {
   display: grid;
-  grid-template: "charname charname" auto "perms    perms   " auto "forms    info-col" 4em "char-col info-col" max-content "maintab  maintab " 0 "attchmts attchmts" auto "bio      bio     " auto/3fr 2fr;
+  grid-template: "charname charname" auto "perms    perms   " auto "forms    info-col" auto "char-col info-col" max-content "maintab  maintab " 0 "attchmts attchmts" auto "bio      bio     " auto/3fr 2fr;
   gap: 0.5em 1em;
 }
 #character-main-profile .form-selectors {
@@ -1325,8 +1325,11 @@ body {
   .permission-badges {
     display: grid;
     grid-template-columns: repeat(7, auto);
-    place-content: end;
+    place-content: space-between;
     text-align: end;
+  }
+  .permission-badges .ownedby {
+    text-align: start;
   }
 }
 .palate-colors.unset {
@@ -2055,7 +2058,7 @@ body {
 
 .home-dashboard {
   display: grid;
-  grid-template: "welc  welc  welc  welc" auto "event daily daily daily" auto "news  news  sale  sale" auto "subm  subm  subm  subm" auto/4fr 2fr 2fr 3fr;
+  grid-template: "welc  welc  welc  welc" auto "event daily daily daily" auto "news  news  sale  sale" auto "myos  myos  myos  myos" auto "subm  subm  subm  subm" auto/4fr 2fr 2fr 3fr;
   gap: 30px;
 }
 .home-dashboard h2 {
@@ -2084,6 +2087,9 @@ body {
 }
 .home-dashboard .recent-submissions {
   grid-area: subm;
+}
+.home-dashboard .recent-myos {
+  grid-area: myos;
 }
 .home-dashboard .frontpage-button {
   border: 2px solid var(--white);
@@ -2261,7 +2267,7 @@ body {
 }
 @container main-container (width < 700px) {
   .home-dashboard {
-    grid-template: "welc  welc " auto "event event" auto "daily daily" auto "news  sale " auto "subm  subm " auto/1fr 1fr;
+    grid-template: "welc  welc " auto "event event" auto "daily daily" auto "news  sale " auto "myos  myos " auto "subm  subm " auto/1fr 1fr;
   }
   .home-dashboard .sale-info {
     grid-template: 3fr 2fr;
@@ -2272,7 +2278,7 @@ body {
 }
 @container main-container (width < 600px) {
   .home-dashboard {
-    grid-template: "welc " auto "event" auto "daily" auto "news " auto "sale " auto "subm " auto/1fr;
+    grid-template: "welc " auto "event" auto "daily" auto "news " auto "sale " auto "myos " auto "subm " auto/1fr;
   }
   .home-dashboard .frontpage-button {
     padding: 8px 10px;
@@ -2317,6 +2323,7 @@ body {
 .inventory-category .inventory-item .inventory-stack-name {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .inventory-category .inventory-item .inventory-stack-name .badge {
   font-size: 1em;

@@ -80,4 +80,16 @@
       @include('widgets._recent_gallery_submissions', ['gallerySubmissions' => $gallerySubmissions])
     </div>
   </div>
+  <div class="bubblebox recent-myos">
+    <h2 class="flex gap-_5 ai-center">
+      <a href="sublist/MYO" class="color-unset ai-center">
+        <i class="fas fa-star"></i>
+        Recent MYO Submissions
+        <i class="fa-solid fa-caret-right"></i>
+      </a>
+    </h2>
+    <div class="bubble p-0">
+      @include('widgets._recent_MYO_submissions', ['myos' => $myos])
+    </div>
+  </div>
 </div>

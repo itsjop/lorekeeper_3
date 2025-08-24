@@ -4,6 +4,7 @@
     'welc  welc  welc  welc' auto
     'event daily daily daily' auto
     'news  news  sale  sale' auto
+    'myos  myos  myos  myos' auto
     'subm  subm  subm  subm' auto
     / 4fr 2fr 2fr 3fr;
   gap: 30px;
@@ -37,6 +38,9 @@
   }
   .recent-submissions {
     grid-area: subm;
+  }
+  .recent-myos {
+    grid-area: myos;
   }
   .frontpage-button {
     border: 2px solid var(--white);
@@ -215,6 +219,7 @@
       'event event' auto
       'daily daily' auto
       'news  sale ' auto
+      'myos  myos ' auto
       'subm  subm ' auto
       / 1fr 1fr;
     .sale-info {
@@ -233,6 +238,7 @@
       'daily' auto
       'news ' auto
       'sale ' auto
+      'myos ' auto
       'subm ' auto
       / 1fr;
     .frontpage-button {

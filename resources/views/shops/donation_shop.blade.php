@@ -27,9 +27,9 @@
       </h5>
       <div class="card-body inventory-body">
         @foreach ($categoryItems->chunk(4) as $chunk)
-          <div class="row mb-3">
+          <div class="grid grid-4-col">
             @foreach ($chunk as $item)
-              <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $item->id }}">
+              <div class="text-center inventory-item" data-id="{{ $item->id }}">
                 <div class="mb-1">
                   <a href="#" class="inventory-stack">
                     <img src="{{ $item->item->imageUrl }}" /></a>

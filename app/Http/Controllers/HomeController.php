@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery\GallerySubmission;
+use App\Models\Character\Sublist;
 
 use Settings;
 use Illuminate\Http\Request;
@@ -36,24 +37,27 @@ class HomeController extends Controller {
    * @return \Illuminate\Contracts\Support\Renderable
    */
   public function getIndex() {
-    if (config('lorekeeper.extensions.show_all_recent_submissions.enable')) {
-      $query = GallerySubmission::visible(Auth::user() ?? null)->accepted()->orderBy('created_at', 'DESC');
-      $gallerySubmissions = $query->get()->take(8);
-    } else {
-      $gallerySubmissions = [];
-    }
-
     if (Settings::get('featured_character')) {
       $character = Character::find(Settings::get('featured_character'));
     } else {
       $character = null;
     }
+
+    // Fetch the 8 most recent Submissions
+    $query = GallerySubmission::visible(Auth::user() ?? null)->accepted()->orderBy('created_at', 'DESC');
+    $gallerySubmissions = $query->get()->take(8);
+
+    // Fetch the 8 most recent MYOs
+    // (not currently working)
+    $myos = Character::visible()->where('character_category_id', 3)->orderBy('created_at', 'DESC')->get()->take(4);
+
     return view('welcome', [
       'about'               => SitePage::where('key', 'about')->first(),
       'gallerySubmissions'  => $gallerySubmissions,
       'saleses'             => Sales::visible()->orderBy('id', 'DESC')->take(2)->get(),
       'featured'            => $character,
       'newses'              => News::visible()->orderBy('updated_at', 'DESC')->take(2)->get(),
+      'myos'                => $myos,
     ]);
   }
 

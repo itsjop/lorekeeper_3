@@ -14,17 +14,23 @@
   @foreach ($pets as $categoryId => $categoryPets)
     <div class="card mb-3 inventory-category">
       <h5 class="card-header inventory-header">
-        {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
+        {!! isset($categories[$categoryId])
+            ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
+            : 'Miscellaneous' !!}
       </h5>
       <div class="card-body inventory-body">
         @foreach ($categoryPets->chunk(4) as $chunk)
-          <div class="row mb-3">
+          <div class="grid grid-4-col">
             @foreach ($chunk as $pet)
               <?php
               $pet->pivot->pluck('pet_name', 'id');
               $stackName = $pet->pivot->pluck('pet_name', 'id')->toArray()[$pet->pivot->id];
               ?>
-              <div class="col-sm-3 col-6 text-center inventory-item" data-id="{{ $pet->pivot->id }}" data-name="{{ $user->name }}'s {{ $pet->pivot->pet_name ?? $pet->name }}">
+              <div
+                class="text-center inventory-item"
+                data-id="{{ $pet->pivot->id }}"
+                data-name="{{ $user->name }}'s {{ $pet->pivot->pet_name ?? $pet->name }}"
+              >
                 <div class="mb-1">
                   <a href="#" class="inventory-stack">
                     <img class="img-fluid rounded" src="{{ $pet->image($pet->pivot->id) }}" />
@@ -37,15 +43,22 @@
                     @endif
                     {{ $pet->pivot->evolution_id ? $pet->evolutions->where('id', $pet->pivot->evolution_id)->first()->evolution_name : $pet->name }}
                     @if ($pet->pivot->has_image)
-                      <i class="fas fa-brush ml-1" data-bs-toggle="tooltip" title="This pet has custom art."></i>
+                      <i
+                        class="fas fa-brush ml-1"
+                        data-bs-toggle="tooltip"
+                        title="This pet has custom art."
+                      ></i>
                     @endif
                     @if ($pet->pivot->character_id)
-                      <span data-bs-toggle="tooltip" title="Attached to {!! strip_tags(getDisplayName(\App\Models\Character\Character::class, $pet->pivot->character_id)) !!}"><i class="fas fa-link ml-1"></i></span>
+                      <span data-bs-toggle="tooltip"
+                        title="Attached to {{ strip_tags(getDisplayName(\App\Models\Character\Character::class, $pet->pivot->character_id)) }}"
+                      ><i class="fas fa-link ml-1"></i></span>
                     @endif
                     @if ($pet->pivot->evolution_id)
-                      <span data-bs-toggle="tooltip" title="This pet has evolved. Stage
-                                            {{ $pet->evolutions->where('id', $pet->pivot->evolution_id)->first()->evolution_stage }}."><i
-                          class="fas fa-angle-double-up ml-1"></i>
+                      <span data-bs-toggle="tooltip"
+                        title="This pet has evolved. Stage
+                                            {{ $pet->evolutions->where('id', $pet->pivot->evolution_id)->first()->evolution_stage }}."
+                      ><i class="fas fa-angle-double-up ml-1"></i>
                       </span>
                     @endif
                   </a>

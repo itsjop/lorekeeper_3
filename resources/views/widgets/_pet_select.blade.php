@@ -1,4 +1,13 @@
-<h3>Your Pets <a class="small pet-collapse-toggle collapse-toggle" href="#userPet" data-bs-toggle="collapse">Show</a></h3>
+<h3>
+  Your Pets
+  <a
+    class="small pet-collapse-toggle collapse-toggle"
+    href="#userPet"
+    data-bs-toggle="collapse"
+  >
+    Show
+  </a>
+</h3>
 <div class="card mb-3 collapse show" id="userPet">
   <div class="card-body">
     <div class="text-right mb-3">
@@ -21,17 +30,26 @@
       </div>
     </div>
     <div id="userItems" class="user-items">
-      <div class="row">
+      <div class="grid grid-4-col">
         @foreach ($pet as $item)
-          <div class="col-lg-2 col-sm-3 col-6 mb-3 user-item category-all category-{{ $item->item->item_category_id ?: 0 }} {{ isset($selected) && in_array($item->id, $selected) ? 'category-selected' : '' }}" data-id="{{ $item->id }}"
-            data-name="{{ $user->name }}'s {{ $item->item->name }}">
+          <div
+            class="mb-3 user-item category-all category-{{ $item->item->item_category_id ?: 0 }}
+            {{ isset($selected) && in_array($item->id, $selected) ? 'category-selected' : '' }}"
+            data-id="{{ $item->id }}"
+            data-name="{{ $user->name }}'s {{ $item->item->name }}"
+          >
             <div class="text-center pet-item">
               <div class="mb-1">
                 <a class="pet-stack"><img src="{{ $item->item->imageUrl }}" /></a>
               </div>
               <div>
                 <a class="pet-stack pet-stack-name">{{ $item->item->name }}</a>
-                {!! Form::checkbox(isset($fieldName) && $fieldName ? $fieldName : 'stack_id[]', $item->id, isset($selected) && in_array($item->id, $selected) ? true : false, ['class' => 'pet-checkbox hide']) !!}
+                {!! Form::checkbox(
+                    isset($fieldName) && $fieldName ? $fieldName : 'stack_id[]',
+                    $item->id,
+                    isset($selected) && in_array($item->id, $selected) ? true : false,
+                    ['class' => 'pet-checkbox hide']
+                ) !!}
               </div>
               <div>
                 <a href="#" class="btn btn-xs btn-outline-info pet-info">Info</a>
