@@ -2,8 +2,11 @@
   // This file represents a common source and definition for assets used in loot_select
   // While it is not per se as tidy as defining these in the controller(s),
   // doing so this way enables better compatibility across disparate extensions
-  $characterCurrencies = \App\Models\Currency\Currency::where('is_character_owned', 1)->orderBy('sort_character', 'DESC')->pluck('name', 'id');
+  $characterCurrencies = \App\Models\Currency\Currency::where('is_character_owned', 1)
+      ->orderBy('sort_character', 'DESC')
+      ->pluck('name', 'id');
   $items = \App\Models\Item\Item::orderBy('name')->pluck('name', 'id');
+  $awards = \App\Models\Award\Award::orderBy('name')->pluck('name', 'id');
   $pets = \App\Models\Pet\Pet::orderBy('name')->get()->pluck('fullName', 'id');
   $currencies = \App\Models\Currency\Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id');
   if (isset($showLootTables) && $showLootTables) {
@@ -28,8 +31,8 @@
             null,
             [
                 'class' => 'form-control reward-type',
-                'placeholder' => isset($progression) && $progression ? 'Select Progression Type' : 'Select Reward Type',
-            ],
+                'placeholder' => isset($progression) && $progression ? 'Select Progression Type' : 'Select Reward Type'
+            ]
         ) !!}</td>
         <td class="loot-row-select"></td>
         <td>{!! Form::text('quantity[]', 1, ['class' => 'form-control']) !!}</td>
@@ -40,24 +43,26 @@
     </tbody>
   </table>
   {!! Form::select('rewardable_id[]', $items, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
+  {!! Form::select('rewardable_id[]', $awards, null, ['class' => 'form-control award-select', 'placeholder' => 'Select Badge']) !!}
   {!! Form::select('rewardable_id[]', $currencies, null, [
       'class' => 'form-control currency-select',
-      'placeholder' => 'Select Currency',
+      'placeholder' => 'Select Currency'
   ]) !!}
   @if ($showLootTables)
     {!! Form::select('rewardable_id[]', $tables, null, [
         'class' => 'form-control table-select',
-        'placeholder' => 'Select Loot Table',
+        'placeholder' => 'Select Loot Table'
     ]) !!}
   @endif
   {{-- TODO: 'recipies' is undefined, not sure where its coming from --}}
   {{-- @if ($showRecipes)
-      {!! Form::select('rewardable_id[]', $recipes, null, ['class' => 'form-control recipe-select', 'placeholder' => 'Select Recipe']) !!}
+      {!! Form::select('rewardable_id[]', $recipes, null, ['class' => 'form-control recipe-select',
+       'placeholder' => 'Select Recipe']) !!}
   @endif --}}
   @if ($showRaffles)
     {!! Form::select('rewardable_id[]', $raffles, null, [
         'class' => 'form-control raffle-select',
-        'placeholder' => 'Select Raffle',
+        'placeholder' => 'Select Raffle'
     ]) !!}
   @endif
 </div>

@@ -72,7 +72,7 @@ class SubmissionController extends Controller {
     $count['Month'] = Submission::submitted($prompt->id, $submission->user_id)->where('created_at', '>=', now()->startOfMonth())->count();
     $count['Year'] = Submission::submitted($prompt->id, $submission->user_id)->where('created_at', '>=', now()->startOfYear())->count();
 
-    if($prompt->limit_character) {
+    if ($prompt->limit_character) {
       $limit = $prompt->limit * Character::visible()->where('is_myo_slot', 0)->where('user_id', $submission->user_id)->count();
     } else {
       $limit = $prompt->limit;
@@ -175,12 +175,25 @@ class SubmissionController extends Controller {
    * @return \Illuminate\Http\RedirectResponse
    */
   public function postSubmission(Request $request, SubmissionManager $service, $id, $action) {
-    $data = $request->only(['slug',  'character_rewardable_quantity', 'character_rewardable_id',  'character_rewardable_type', 'character_currency_id', 'rewardable_type', 'rewardable_id', 'quantity', 'staff_comments', 'character_notify_owner', 'criterion']);
+    $data = $request->only(
+      [
+        'slug',
+        'character_rewardable_quantity',
+        'character_rewardable_id',
+        'character_rewardable_type',
+        'character_currency_id',
+        'rewardable_type',
+        'rewardable_id',
+        'quantity',
+        'staff_comments',
+        'character_notify_owner',
+        'criterion'
+      ]
+    );
     if ($action == 'reject' && $service->rejectSubmission($request->only(['staff_comments']) + ['id' => $id], Auth::user())) {
       flash('Submission rejected successfully.')->success();
     } elseif ($action == 'cancel' && $service->cancelSubmission($request->only(['staff_comments']) + ['id' => $id], Auth::user())) {
       flash('Submission canceled successfully.')->success();
-
       return redirect()->to('admin/submissions');
     } elseif ($action == 'approve' && $service->approveSubmission($data + ['id' => $id], Auth::user())) {
       flash('Submission approved successfully.')->success();

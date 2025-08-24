@@ -94,7 +94,6 @@ function getAssetModelString($type, $namespaced = true) {
       if ($namespaced) return '\App\Models\Item\Item';
       else return 'Item';
 
-
     case 'awards':
       if ($namespaced) return '\App\Models\Award\Award';
       else return 'Award';
@@ -147,7 +146,6 @@ function getAssetModelString($type, $namespaced = true) {
       if ($namespaced) return '\App\Models\Cultivation\CultivationArea';
       else return 'Area';
   }
-
   return null;
 }
 
@@ -432,6 +430,17 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
           return false;
         }
       }
+    } elseif ($key == 'awards' && count($contents)) {
+      $service = new \App\Services\AwardCaseManager;
+      foreach ($contents as $asset) {
+        if (!$service->creditAward($sender, $recipient, $logType, $data, $asset['asset'], $asset['quantity'])) {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+            flash($error)->error();
+          }
+
+          return false;
+        }
+      }
     } elseif ($key == 'currencies' && count($contents)) {
       $service = new App\Services\CurrencyManager;
       foreach ($contents as $asset) {
@@ -468,6 +477,16 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
             flash($error)->error();
           }
 
+          return false;
+        }
+      }
+    } elseif ($key == 'user_awards' && count($contents)) {
+      $service = new \App\Services\AwardCaseManager;
+      foreach ($contents as $asset) {
+        if (!$service->moveStack($sender, $recipient, $logType, $data, $asset['asset'])) {
+          foreach ($service->errors()->getMessages()['error'] as $error) {
+            flash($error)->error();
+          }
           return false;
         }
       }
@@ -536,13 +555,11 @@ function countAssets($array) {
  * Distributes the assets in an assets array to the given recipient (character).
  * Loot tables will be rolled before distribution.
  *
- * @param array                          $assets
- * @param App\Models\User\User           $sender
- * @param App\Models\Character\Character $recipient
- * @param string                         $logType
- * @param string                         $data
- * @param mixed|null                     $submitter
- *
+ * @param  array                            $assets
+ * @param  \App\Models\User\User            $sender
+ * @param  \App\Models\Character\Character  $recipient
+ * @param  string                           $logType
+ * @param  string                           $data
  * @return array
  */
 function fillCharacterAssets($assets, $sender, $recipient, $logType, $data, $submitter = null) {
@@ -569,6 +586,10 @@ function fillCharacterAssets($assets, $sender, $recipient, $logType, $data, $sub
       $service = new \App\Services\InventoryManager;
       foreach ($contents as $asset)
         if (!$service->creditItem($sender, (($asset['asset']->category && $asset['asset']->category->is_character_owned) ? $recipient : $item_recipient), $logType, $data, $asset['asset'], $asset['quantity'])) return false;
+    } elseif ($key == 'awards' && count($contents)) {
+      $service = new \App\Services\AwardCaseManager;
+      foreach ($contents as $asset)
+        if (!$service->creditAward($sender, ($asset['asset']->is_character_owned ? $recipient : $item_recipient), $logType, $data, $asset['asset'], $asset['quantity'])) return false;
     }
   }
   return $assets;

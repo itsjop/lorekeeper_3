@@ -27,7 +27,7 @@ if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
   fi
 fi
 
-cd /var/www
+cd ~/Documents/code/lorekeeper/lorekeeper_3
 
 # Copy .env.example to .env if .env doesn't exist
 if [ ! -f .env ]; then

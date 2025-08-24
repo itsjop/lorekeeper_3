@@ -13,9 +13,9 @@ services:
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
-    working_dir: /var/www
+    working_dir: ~/Documents/code/lorekeeper/lorekeeper_3
     volumes:
-      - ./:/var/www
+      - ~/Documents/code/lorekeeper/lorekeeper_3
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - lorekeeper-network
@@ -54,6 +54,7 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ../lorekeeper_data:/var/lib/mysql
     tmpfs:
       - /var/lib/mysql:rw,noexec,nosuid,size=500m
     networks:

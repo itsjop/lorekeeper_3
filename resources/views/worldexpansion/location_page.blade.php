@@ -54,20 +54,27 @@
       <div class="text-center col-md mb-3 fb-md-50">
         <div class="card h-100 py-3">
           <h5 class="mb-0">Contains the following</h5>
-
-          <!-- <hr>
-                                            <p class="mb-0">
-                                              @foreach ($location->children as $key => $child)
-  @if ($child->thumb_extension)
-  <a href="{{ $child->url }}" data-bs-toggle="tooltip" title="{{ $child->name }}"/>
-                                            <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
-@else
-  {!! $child->displayName !!}
-  @endif
-  @endforeach
-                                            </p>
-
-                                            <hr> -->
+          {{--
+          <hr>
+          <p class="mb-0">
+            @foreach ($location->children as $key => $child)
+              @if ($child->thumb_extension)
+                <a
+                  href="{{ $child->url }}"
+                  data-bs-toggle="tooltip"
+                  title="{{ $child->name }}"
+                />
+                <img
+                  src="{{ $child->thumbUrl }}"
+                  class="m-1"
+                  style="max-width:100px"
+                /> </a>
+              @else
+                {!! $child->displayName !!}
+              @endif
+            @endforeach
+          </p>
+          <hr> --}}
           @foreach ($location->children->groupBy('type_id') as $group => $children)
             <p class="mb-0">
               <strong>
@@ -76,7 +83,8 @@
                 @endif:
               </strong>
               @foreach ($children as $key => $child)
-                {!! $child->fullDisplayName !!}@if ($key != count($children) - 1)
+                {!! $child->fullDisplayName !!}
+                @if ($key != count($children) - 1)
                   ,
                 @endif
               @endforeach
@@ -114,7 +122,7 @@
         <hr>
 
         <div class="gallery grid grid-4-col">
-          @foreach ($location->gallerysubmissions->sortByDesc('created_at')->take(3) as $submission)
+          @foreach ($location->gallerysubmissions->sortByDesc('created_at')->take(8) as $submission)
             @include('galleries._thumb', ['submission' => $submission, 'gallery' => true])
           @endforeach
         </div>
