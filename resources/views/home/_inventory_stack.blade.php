@@ -64,7 +64,7 @@
         @foreach ($stack as $itemRow)
           <tr id="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable ? '' : 'accountbound' }}">
             @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
-              <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, true, [
+              <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, false, [
                   'class' => 'item-check',
                   'onclick' => 'updateQuantities(this)',
                   'style' => 'scale: 1.3;'

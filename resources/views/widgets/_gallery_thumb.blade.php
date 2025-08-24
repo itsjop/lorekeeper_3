@@ -20,7 +20,7 @@
     <img
       loading="lazy"
       class="img-thumbnail"
-      src="{{ asset('images/somnivores/site/donation-shop.png') }}"
+      src="{{ asset('images/somnivores/site/literature.png') }}"
       alt="Submission thumbnail"
     />
 
