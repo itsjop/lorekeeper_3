@@ -145,7 +145,7 @@
       {!! RecaptchaV3::field('register') !!}
 
       <div class="form-group row mb-0">
-        <div class="col-md-6 offset-md-4">
+        <div class="col-md-6 offset-md-4 flex jc-center">
           <button
             type="submit"
             value="register"
@@ -155,19 +155,32 @@
           </button>
         </div>
       </div>
-      <small>This site is protected by reCAPTCHA and the Google
-        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
-        <a href="https://policies.google.com/terms">Terms of Service</a> apply.</small>
       @if ($altRegistrations)
+        <hr>
         <h3 class="text-center">Alternate Registrations</h3>
-        @foreach ($altRegistrations as $provider => $site)
+        <blockquote class="ta-center">
+          Sorry! We are currently experiencing issues with DeviantArt and Toyhouse direct logins, so we've had to disable them
+          temporarily. They
+          will return <strong>soon</strong> once we have time to diagnose the issues.
+          <br>
+          In the meantime, <strong>please register with an email and password</strong> and then additionally confirm your account
+          with Toyhouse
+          afterwards. Thank you!
+        </blockquote>
+        <hr>
+
+        {{-- @foreach ($altRegistrations as $provider => $site)
           @if (isset($site['login']) && $site['login'])
             <div class="text-center w-75 m-auto pt-2 pb-2">
               <a href="{{ url('/login/redirect/' . $provider) }}" class="btn btn-primary text-white w-100">
                 <i class="{{ $site['icon'] }} mr-2"></i> Register With {{ ucfirst($provider) }}</a>
             </div>
           @endif
-        @endforeach
+        @endforeach --}}
+
+        <small class="ta-center">This site is protected by reCAPTCHA and the Google
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.</small>
       @endif
     </form>
   @else
