@@ -34,7 +34,7 @@
   >
 
   <!-- Twitter -->
-  {{-- <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
   <meta property="twitter:image"
     content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/somnivores/site/meta-image.png') }} @endif"
@@ -43,7 +43,6 @@
   <meta property="twitter:description"
     content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
   >
-  --}}
 
   <script
     defer
