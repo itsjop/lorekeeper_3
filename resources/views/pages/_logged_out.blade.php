@@ -1,11 +1,4 @@
 <div class="lore site-page-content parsed-text">
-  <div class="card-basic">
-    <p style="font-size: 1.2rem;"><strong> Somnivores.com is in early access! <br /></strong>Registration is currently closed,
-      please
-      stay tuned for our full launch. Follow our <strong><a
-          href="https://toyhou.se/~forums/5868.species-discussion/563827.somnivores-18-cs-lk-beta-closed"
-        >Toyhouse Thread</a></strong> for updates!</p>
-  </div>
   <h1 class="header"><img
       class="w-100"
       src="/images/lore_pages/homepage/splashart.png"
@@ -66,7 +59,7 @@
     <hr />
     <div class="card-img"><img
         class="w-100 br-15"
-        src="/images/lore_pages/homepage/reveriesmall.png"
+        src="/images/somnivores/site/newreveriemap-small.png"
         alt="World Map of Reverie"
       /></div>
     <div class="card-text"><br />
