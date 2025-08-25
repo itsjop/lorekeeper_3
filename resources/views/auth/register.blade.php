@@ -155,17 +155,16 @@
           </button>
         </div>
       </div>
+
       @if ($altRegistrations)
         <hr>
         <h3 class="text-center">Alternate Registrations</h3>
         <blockquote class="ta-center">
           Sorry! We are currently experiencing issues with DeviantArt and Toyhouse direct logins, so we've had to disable them
-          temporarily. They
-          will return <strong>soon</strong> once we have time to diagnose the issues.
+          temporarily. They will return <strong>soon</strong> once we have time to diagnose the issues.
           <br>
           In the meantime, <strong>please register with an email and password</strong> and then additionally confirm your account
-          with Toyhouse
-          afterwards. Thank you!
+          with Toyhouse afterwards. Thank you!
         </blockquote>
         <hr>
 
