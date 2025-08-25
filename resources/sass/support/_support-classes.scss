@@ -153,9 +153,9 @@
 .br-ntr-5  { border-radius: 5px  0    5px  5px ; }
 
 /* Text-align */
-.ta-left   { text-align: left;   }
+.ta-left, .ta-start   { text-align: left;   }
 .ta-center { text-align: center; }
-.ta-right  { text-align: right;  }
+.ta-right, .ta-end  { text-align: right;  }
 
 // Text
 .italic { font-style: italic; }
