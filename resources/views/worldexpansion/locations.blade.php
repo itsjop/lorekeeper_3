@@ -18,6 +18,7 @@
       "
     />
   </div>
+  <figcaption class="ta-center h5">Reverie's World Map</figcaption>
   <hr>
   {{-- {!! Form::open(['method' => 'GET', 'class' => '']) !!}
   <div class="form-inline justify-content-end">

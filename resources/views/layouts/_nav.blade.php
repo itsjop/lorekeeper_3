@@ -223,7 +223,7 @@
         </div>
         <div class="dropdown-menu dt-nav-page" aria-labelledby="communityDropdown">
           <div class="dt-nav-group">
-            <a class="dt-nav-item" href="{{ url('____') }}">
+            <a class="dt-nav-item" href="{{ url('https://discord.gg/VPVv7MKZZA') }}">
               <i class="fas fa-comments" style="cursor: alias;"></i> Discord </a>
             <a class="dt-nav-item" href="{{ url('info/terms') }}">
               <i class="fas fa-circle-exclamation"></i>Rules & ToS</a>
@@ -231,10 +231,10 @@
             <a class="dt-nav-item" href="{{ url('users') }}">
               <i class="fas fa-user-group"></i>User List</a>
             <hr>
-            <a class="dt-nav-item" href="{{ url('forms/') }}">
+            {{-- <a class="dt-nav-item" href="{{ url('forms/') }}">
               <i class="fas fa-list-check"></i> Feedback </a>
             <a class="dt-nav-item" href="{{ url('forms/') }}">
-              <i class="fas fa-bug"></i>Bug Reports</a>
+              <i class="fas fa-bug"></i>Bug Reports</a> --}}
           </div>
         </div>
       </li>

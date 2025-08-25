@@ -7,8 +7,6 @@
     <summary class="sidebar-section-header"> Somnivores </summary>
     <div class="sb-item"> <a href="/info/somnivores"> Species Overview </a> </div>
     <div class="sb-item"> <a href="/info/palate"> Dreams & Palates </a> </div>
-    <div class="sb-item"> <a href="/info/lore-index"> Lore Index </a> </div>
-    <div class="sb-item"> <a href="/info/reverie-locations"> Reverie Locations </a> </div>
   </div>
 
   <div class="details-sb" data-open>
@@ -34,5 +32,18 @@
     <hr class="m-0">
     <div class="sb-item"> <a href="/info/prompt-submission"> Gallery & Prompt Submission </a> </div>
     <div class="sb-item"> <a href="/info/submission-rewards"> Art / Submission Rewards </a> </div>
+  </div>
+
+  <div class="details-sb" data-open>
+    <summary class="sidebar-section-header">Lore</summary>
+    <div class="sb-item"> <a href="/info/lore-index"> Lore Library </a> </div>
+    <hr class="m-0">
+    <div class="sb-item"> <a href="/info/origins"> Origins </a> </div>
+    <div class="sb-item"> <a href="/info/culture"> Somnivore Culture </a> </div>
+    <div class="sb-item"> <a href="/info/aesthetics"> Tech &amp; Aesthetics </a> </div>
+    <div class="sb-item"> <a href="/info/environment"> Reverie's Enviroment </a> </div>
+    <div class="sb-item"> <a href="/info/magic"> Somnivore Physiology &amp; Magic </a> </div>
+    <div class="sb-item"> <a href="/info/cuisine"> Dream Cuisine </a> </div>
+    <div class="sb-item"> <a href="/info/lifecycle"> Lifecycle &amp; Education </a> </div>
   </div>
 </div>

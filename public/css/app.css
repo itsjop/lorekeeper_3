@@ -1764,12 +1764,12 @@ body {
 
 @container main-container (width >= 1200px) {
   #ml-gridView {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
 @container main-container (width < 1200px) {
   #ml-gridView {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     margin: 0 1cqw 40px;
     gap: 4cqw 2cqw;
   }
@@ -2219,7 +2219,10 @@ body {
   max-width: 250px;
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(0 0 5px var(--white));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 50%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 50%, transparent));
+}
+.home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 37.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 37.5%, transparent));
 }
 .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);

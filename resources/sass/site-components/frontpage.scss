@@ -81,8 +81,7 @@
           width: 100%;
           max-width: 100%;
           max-width: 250px;
-          @include hover-preview(0);
-          filter: drop-shadow(0 0 5px var(--white));
+          @include hover-preview(50%);
         }
       }
       &.event {

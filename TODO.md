@@ -1,21 +1,15 @@
 # Styling Issues:
 - [~] masterlist redo
+- [ ] Character visibility toggle
 - [ ] duplicated characters on prompt submission
-- [ ] set up username parking
-      - [ ] 'jop', 'wysp', 'reverie', 'somnivores', 'somnivores_staff', all of the NPC names
 - [ ] gallery preview pass real blurred image instead of of lorekeeper book
-- [ ] No 18+ popup banner
-- [ ] add a [ > menu ] button to expand out the sidebar menu for mobile
 - [ ] Bat transformation should always be listed first
 - [ ] native `<details name="">` exclusive toggle for tabs
-- [ ] live server time for clock
 - [ ] Add to User Shop needs to be diagnosed / re-enabled at some point
 - [ ] test SubmissionController with safeJSON() replacement
 - [ ] @supports for navbar container query? not even sure how to test this one
-- [ ] sitewide image alt tags
 - [ ] character links strip newlines
-- [x] redo mobile sidebar
-- [?] app.css `filemtime()` https://github.com/lk-arpg/lorekeeper/blob/release/v3.0.0/resources/views/layouts/app.blade.php#L63
+- [ ] sitewide image alt tags
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)
@@ -58,6 +52,14 @@
 
 
 # FIXED!!!
+- [x] No 18+ popup banner
+- [x] add a [ > menu ] button to expand out the sidebar menu for mobile
+- [x] set up username parking
+      - [x] 'jop', 'wysp', 'reverie', 'somnivores', 'somnivores_staff', all of the NPC names
+- [x] live server time for clock
+- [x] redo mobile sidebar
+- [?] app.css `filemtime()` https://github.com/lk-arpg/lorekeeper/blob/release/v3.0.0/resources/views/layouts/app.blade.php#L63
+
 - [x] remove sex
 - [x] system clock
 - [x] currency counter? [root-level](app/Models/Currency/Currency.php#310)

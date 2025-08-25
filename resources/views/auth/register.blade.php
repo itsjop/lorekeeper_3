@@ -164,7 +164,7 @@
           temporarily. They will return <strong>soon</strong> once we have time to diagnose the issues.
           <br>
           In the meantime, <strong>please register with an email and password</strong> and then additionally confirm your account
-          with Toyhouse afterwards. Thank you!
+          with Toyhouse or DeviantArt afterwards. Thank you!
         </blockquote>
         <hr>
 
