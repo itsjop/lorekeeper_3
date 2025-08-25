@@ -2825,7 +2825,7 @@ body {
   padding: 3px 10px 3px 20px;
   width: 100%;
   text-align: left;
-  transition: transform 0.5s var(--smoothIn_linear), border-radius 0.5s var(--smoothIn_linear), background-color 0.1s linear;
+  transition: transform 0.5s var(--smoothIn_linear), border-radius 0.5s var(--smoothIn_linear), background-color 0.1s linear, color 0.1s linear;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item a.active {
   font-weight: 700;

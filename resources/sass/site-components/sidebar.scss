@@ -78,7 +78,8 @@
             transition:
               transform 0.5s var(--smoothIn_linear),
               border-radius 0.5s var(--smoothIn_linear),
-              background-color 0.1s linear;
+              background-color 0.1s linear,
+              color 0.1s linear;
             &.active {
               font-weight: 700;
               color: var(--white);
