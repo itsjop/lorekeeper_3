@@ -687,6 +687,12 @@ body.teal {
 #app .text-900 {
   color: var(--active-clr_900);
 }
+#app .grid-clip-2x > *:nth-child(n+4) {
+  background-color: red;
+}
+#app .grid-clip-2x > *:nth-child(-n+4) {
+  background-color: green;
+}
 
 body {
   /* Breakpoints */

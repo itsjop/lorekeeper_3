@@ -22,7 +22,7 @@
     content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
   >
 
-  {{-- <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
   <meta property="og:image"
@@ -31,7 +31,7 @@
   <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="og:description"
     content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  > --}}
+  >
 
   <!-- Twitter -->
   {{-- <meta property="twitter:card" content="summary_large_image">
@@ -42,10 +42,15 @@
   <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
   <meta property="twitter:description"
     content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif"
-  > --}}
+  >
+  --}}
 
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="4a92a141-bd64-4fcf-87e1-d350ac7adf82"></script>
-  
+  <script
+    defer
+    src="https://cloud.umami.is/script.js"
+    data-website-id="4a92a141-bd64-4fcf-87e1-d350ac7adf82"
+  ></script>
+
   <!-- No AI scraping directives -->
   <meta name="robots" content="noai">
   <meta name="robots" content="noimageai">
