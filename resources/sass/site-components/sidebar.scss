@@ -76,8 +76,8 @@
             width: calc(100%);
             text-align: left;
             transition:
-              transform 0.4s var(--bounce_linear),
-              border-radius 0.4s var(--bounce_linear),
+              transform 0.5s var(--smoothIn_linear),
+              border-radius 0.5s var(--smoothIn_linear),
               background-color 0.1s linear;
             &.active {
               font-weight: 700;
@@ -87,14 +87,21 @@
             &:hover,
             &:active {
               background-color: var(--purple-clr_300);
-              transform: translateX(20px);
+              transform: translateX(15px);
               color: var(--purple-clr_800);
-              border-radius: 15px 0 0 15px;
+              border-radius: 7px 0 0 7px;
             }
           }
           &:has(a.active) {
             min-height: 2rem;
             background-color: var(--purple-clr_400);
+            a {
+              &:hover,
+              &:active {
+                background-color: var(--purple-clr_400);
+                color: var(--white);
+              }
+            }
           }
         }
         summary {
