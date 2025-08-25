@@ -1,11 +1,11 @@
 <div class="card h-100">
   <div class="m-1">
-    <div class="row">
-      <div class="col-md-6 text-center align-self-center">
+    <div class="grid grid-2-col pi-center pc-center">
+      <div class="">
         <a href="{{ $character->character->url }}">
           <img src="{{ $loop->count == 1 ? $character->image->imageUrl : $character->image->thumbnailUrl }}" class="mw-100 img-thumbnail" alt="{{ $character->fullName }}" /></a>
       </div>
-      <div class="col-md text-center">
+      <div class="card-basic p-3 m-0 ta-center">
         <div class="mt-2">
           <h5>
             {{ $character->displayType }}: <a href="{{ $character->character->url }}">{!! $character->character->slug !!}</a> ・ <span
