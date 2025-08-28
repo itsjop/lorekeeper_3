@@ -104,7 +104,7 @@ alt="List View"
 </div>
   </div> --}}
 {!! $characters->render() !!}
-<div id="ml-gridView" class="">
+<div id="ml-gridView" class="grid-4-col">
   @foreach ($characters as $character)
     @include('browse._masterlist_content_entry', [
         'char_image' =>

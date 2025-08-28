@@ -480,11 +480,8 @@ body.teal {
   #app .grid-5-col {
     grid-template-columns: repeat(3, 1fr);
   }
-  #app .grid-4-col {
-    grid-template-columns: repeat(3, 1fr);
-  }
   #app .grid-3-col {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 @container main-container (width < 800px) {
@@ -495,7 +492,7 @@ body.teal {
     grid-template-columns: repeat(3, 1fr);
   }
   #app .grid-4-col {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   #app .grid-3-col {
     grid-template-columns: repeat(2, 1fr);
@@ -520,6 +517,9 @@ body.teal {
     grid-template-columns: repeat(3, 1fr);
   }
   #app .grid-5-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #app .grid-4-col {
     grid-template-columns: repeat(2, 1fr);
   }
   #app .grid-3-col {
@@ -1533,7 +1533,6 @@ body {
   border-radius: 15px;
   display: grid;
   z-index: 2;
-  perspective: 200px;
 }
 .masterlist-character .thumbnail .ml-thumbnail,
 .masterlist-character .thumbnail .ml-thumbnail img,
@@ -1555,7 +1554,7 @@ body {
   width: 100%;
   height: 100%;
   transition: 0.45s var(--bounce_linear);
-  perspective: 300px;
+  perspective: 400px;
   position: relative;
   display: grid;
 }
@@ -1582,12 +1581,19 @@ body {
 }
 .masterlist-character .thumbnail .ml-thumbnail:hover img, .masterlist-character .thumbnail .ml-thumbnail:active img {
   transition: 0.05s linear;
+  transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
 }
 .masterlist-character .thumbnail .ml-thumbnail:hover .shine, .masterlist-character .thumbnail .ml-thumbnail:active .shine {
+  transition: transform 0.1s linear, opacity 1s ease;
   transform: rotateY(calc(20deg * var(--mpx) - 10deg)) rotateX(calc(-20deg * var(--mpy) + 10deg));
-  opacity: 0.35;
+  opacity: 1;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 .masterlist-character .thumbnail .ml-thumbnail:hover .shine::after, .masterlist-character .thumbnail .ml-thumbnail:active .shine::after {
+  opacity: 1;
   --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
   --tan: sin(var(--len));
   transform: translateX(calc(25% + -50% * var(--mpx))) translateY(calc(25% + -50% * var(--mpy))) rotate(-45deg);
@@ -1598,7 +1604,7 @@ body {
   z-index: 11;
   top: 0;
   left: 0;
-  transition: transform 0.1s linear, opacity 0.1s ease;
+  transition: transform 0.1s linear, opacity 1s ease;
   -webkit-mask-image: var(--card_shine_mask-image);
           mask-image: var(--card_shine_mask-image);
   -webkit-mask-size: 100% 100%;
@@ -1611,21 +1617,26 @@ body {
           mask-position: center;
   -webkit-mask-position: 50% calc(50% + 0px);
           mask-position: 50% calc(50% + 0px);
-  mask-mode: alpha;
+  mask-mode: luminance;
   mix-blend-mode: overlay;
   opacity: 0;
+  background-image: url("images/overlays/holo.png");
+  background-size: cover;
   contain: paint;
 }
 .masterlist-character .thumbnail .shine::after {
   content: "";
   width: 300%;
   height: 300%;
+  mix-blend-mode: overlay;
   position: absolute;
+  opacity: 0;
   z-index: 11;
   top: 0;
   left: 0;
   left: -100%;
   top: -100%;
+  transition: opacity 0.3s ease;
   transform: translateX(calc(25% + -50% * var(--mpx))) translateY(calc(25% + -50% * var(--mpy))) rotate(-45deg);
   transform-origin: center center;
   background-image: linear-gradient(0deg, transparent 0%, transparent 40%, white 45%, white 50%, transparent 55%, transparent 100%);
@@ -1762,25 +1773,22 @@ body {
   transform: translateX(-33%) translateY(-90%);
 }
 
-@container main-container (width >= 1200px) {
-  #ml-gridView {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-}
+@container main-container (width >= 1200px) {}
 @container main-container (width < 1200px) {
   #ml-gridView {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     margin: 0 1cqw 40px;
     gap: 4cqw 2cqw;
   }
   #ml-gridView .masterlist-character .thumbnail:hover .shine, #ml-gridView .masterlist-character .thumbnail:active .shine, #ml-gridView .masterlist-character .thumbnail:active .shine {
     opacity: 0.5;
   }
+}
+@media (width < 800px) {
   #ml-gridView .masterlist-character .thumbnail .shine {
     mix-blend-mode: normal;
   }
 }
-@media (width < 800px) {
+@media (width < 600px) {
   #ml-gridView .masterlist-character .thumbnail .shine {
     display: none;
   }
