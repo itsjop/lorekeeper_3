@@ -2587,7 +2587,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  animation: stars 20s linear forwards infinite;
+  animation: stars 40s linear forwards infinite;
   animation-duration: var(--card_star_animation-duration);
   background-image: url("images/overlays/starring.png");
   background-repeat: repeat;
@@ -2603,19 +2603,19 @@ body {
 .card-bg_animated.common {
   --card_background: #c6e1ff;
   --card_star_opacity: 0.3;
-  --card_star_animation-duration: 30s;
+  --card_star_animation-duration: 40s;
   --card_star_blend-mode: normal;
 }
 .card-bg_animated.uncommon {
   --card_background: #f4dcff;
   --card_star_opacity: 0.5;
-  --card_star_animation-duration: 25s;
+  --card_star_animation-duration: 35s;
   --card_star_blend-mode: normal;
 }
 .card-bg_animated.rare {
   --card_background: #ffebc4;
   --card_star_opacity: 0.5;
-  --card_star_animation-duration: 20s;
+  --card_star_animation-duration: 25s;
   --card_star_blend-mode: normal;
 }
 .card-bg_animated.mystic {
