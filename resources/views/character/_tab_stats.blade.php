@@ -44,7 +44,7 @@
 @if ($character->transferrable_at && $character->transferrable_at->isFuture())
   <div class="row no-gutters">
     <div class="col-lg-3 col-5">
-      divh5>Cooldown</h5>
+      <h5>Cooldown</h5>
     </div>
     <div class="col-lg-9 col-7 pl-1">Cannot be transferred until {!! format_date($character->transferrable_at) !!}</div>
   </div>

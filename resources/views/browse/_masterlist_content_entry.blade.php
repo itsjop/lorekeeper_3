@@ -49,10 +49,17 @@
     {{ Illuminate\Support\Str::limit($character->slug, 20, $end = '...') }}
   </div>
   {{-- Owner --}}
-  <a class="display-user" href="{{ $character->user->url }}">
-    {!! $character->user->name !!}
-    <div class="fas fa-user"></div>
-  </a>
+  @if (isset($character->user->url))
+    <a class="display-user" href="{{ $character->user->url }}">
+      {!! $character->user->name !!}
+      <div class="fas fa-user"></div>
+    </a>
+  @else
+    <a class="display-user">
+      {!! $character->user->name !!}
+      <div class="fas fa-user"></div>
+    </a>
+  @endif
   {{-- Paper Overlay --}}
   <div class="paper-overlay"></div>
   {{-- vvv Disabled Content vvv --}}

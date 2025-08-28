@@ -2,6 +2,8 @@
   @foreach ($saleses as $sales)
     @if ($sales->characters->count())
       <a class="img" href="{{ $sales->url }}">
+        <div class="starburst border"></div>
+        <div class="starburst"></div>
         <img
           src="{{ $sales->characters->first()->character->image->thumbnailUrl }}"
           alt="{!! $sales->characters->first()->character->fullName !!}"

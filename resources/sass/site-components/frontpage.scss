@@ -130,6 +130,41 @@
       // prettier-ignore
       &.sale-info {
         grid-template-columns: 2fr 3fr;
+        .img {
+          display: grid;
+          >* { grid-area: 1/1/2/2 }
+          img {
+            z-index: 1;
+            @include hover-preview;
+          }
+          .starburst {
+            aspect-ratio: 1;
+            clip-path: polygon(100% 50%,93.55% 56.26%,97.97% 64.09%,90.02% 68.28%,92.06% 77.03%,83.25% 78.81%,82.74% 87.79%,73.79% 87.02%,70.77% 95.48%,62.4% 92.22%,57.12% 99.49%,50% 94%,42.88% 99.49%,37.6% 92.22%,29.23% 95.48%,26.21% 87.02%,17.26% 87.79%,16.75% 78.81%,7.94% 77.03%,9.98% 68.28%,2.03% 64.09%,6.45% 56.26%,0% 50%,6.45% 43.74%,2.03% 35.91%,9.98% 31.72%,7.94% 22.97%,16.75% 21.19%,17.26% 12.21%,26.21% 12.98%,29.23% 4.52%,37.6% 7.78%,42.88% 0.51%,50% 6%,57.12% 0.51%,62.4% 7.78%,70.77% 4.52%,73.79% 12.98%,82.74% 12.21%,83.25% 21.19%,92.06% 22.97%,90.02% 31.72%,97.97% 35.91%,93.55% 43.74%);
+            // background-image: radial-gradient(#ffe47e 0%, #ff9122 80%, #fff57f 100%);
+            animation: spin 120s linear forwards infinite;
+            transform-origin: center center;
+            place-self: center;
+            width: calc(100% - 14px);
+            display: grid;
+            --starting-deg: 0deg;
+            --deg: 1;
+            &::after {
+              --deg: -1;
+              --starting-deg: -35deg;
+              content: '';
+              grid-area: 1/1/2/2;
+              animation: spin 120s linear forwards infinite;
+               background-image: linear-gradient(#ffe47e 0%, #ff9122 30%, #fff57f 40%, #ff9122 70%, #fff57f 100%)
+            }
+            &.border {
+              width: 100%;
+              background: var(--purewhite);
+              &::after {
+               background-image: unset;
+              }
+            }
+          }
+        }
         .character-info {
           .sale-details {
             grid-area: more;
@@ -162,6 +197,8 @@
 @container main-container (width < 1000px) {
   .home-dashboard .bubblebox .bubble.sale-info {
     grid-template-columns: 1fr;
+    grid-template-rows: max-content auto;
+    align-content: center;
   }
 }
 @container main-container (width < 800px) {
@@ -260,4 +297,13 @@
   98%  { transform: rotate(calc(var(--starting-angle) - 1deg)); }
   99%  { transform: rotate(calc(var(--starting-angle) + 1deg)); }
   100% { transform: rotate(calc(var(--starting-angle) + 0deg)); }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(calc(var(--deg) * 0deg + var(--starting-deg)));
+  }
+  to {
+    transform: rotate(calc(var(--deg) * 360deg + var(--starting-deg)));
+  }
 }

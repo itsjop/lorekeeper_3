@@ -65,7 +65,6 @@ php artisan migrate --force
 echo "Adding basic site data..."
 php artisan add-site-settings
 php artisan add-text-pages
-php artisan copy-default-images
 
 # Set permissions
 echo "Setting permissions..."
