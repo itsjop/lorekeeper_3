@@ -54,7 +54,7 @@ class HomeController extends Controller {
     return view('welcome', [
       'about'               => SitePage::where('key', 'about')->first(),
       'gallerySubmissions'  => $gallerySubmissions,
-      'saleses'             => Sales::visible()->orderBy('id', 'DESC')->take(2)->get(),
+      'saleses'             => Sales::visible()->orderBy('id', 'DESC')->take(1)->get(),
       'featured'            => $character,
       'newses'              => News::visible()->orderBy('updated_at', 'DESC')->take(2)->get(),
       'myos'                => $myos,
