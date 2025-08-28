@@ -16,7 +16,10 @@
 }
 
 @mixin hover-preview($opacity: 10%) {
-  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear);
+  transition:
+    filter 0.5s var(--bounce_linear),
+    transform 0.5s var(--bounce_linear),
+    backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
   $offset_x: 4px;
   $offset_y: 4px;
@@ -42,7 +45,9 @@
   }
   &:hover,
   &:active {
-    transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
+    transition:
+      filter 0.7s var(--elastic_linear),
+      transform 0.7s var(--elastic_linear);
     transform: scale(1.1);
   }
 }
@@ -59,4 +64,9 @@
   font-size: 1.15em;
   text-align: center;
   color: var(--purple-clr_50);
+}
+
+@mixin star-bg($color: transparent) {
+  background-color: $color;
+  background-image: url('images/overlays/starring.png'), linear-gradient(to bottom right, #f2e8fd 25%, #e4faf9 55%, #f9fbeb 100%);
 }

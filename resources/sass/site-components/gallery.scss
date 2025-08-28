@@ -23,12 +23,23 @@
         background-color: color-mix(in srgb, var(--white) 30%, transparent);
         border: white 2px solid;
         border-radius: 15px;
-        // backdrop-filter: blur(3px);
-        @include hover-preview;
+        transition:
+          box-shadow 0.5s var(--bounce_linear),
+          transform 0.5s var(--bounce_linear),
+          backdrop-filter 0.5s var(--bounce_linear);
+        transform: scale(1);
+        box-shadow: 0 .5cqw 1.5cqw 0px color-mix(in srgb, var(--active-clr_800) 30%, transparent);
         padding: 5px;
         height: min-content;
         place-self: center;
         max-width: min(100%, 250px);
+        backdrop-filter: blur(1px);
+        contain: paint;
+        &:hover {
+          transform: scale(1.1);
+          box-shadow: 0 5px 10px color-mix(in srgb, var(--active-clr_800) 40%, transparent);
+          backdrop-filter: saturate(2) blur(3px);
+        }
         img {
           place-self: center;
           max-height: 250px;

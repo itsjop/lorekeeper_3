@@ -534,43 +534,43 @@ return [
     */
   // AWARD_GRANT
   341 => [
-    'name' => 'Award Grant',
-    'message' => 'You have earned the following award(s): {award_name} (×{award_quantity}). Congratulations! (<a href="{url}">View Awards</a>)',
-    'url' => 'awardcase'
+    'name' => 'Badge Grant',
+    'message' => 'You have earned the following badges(s): {award_name} (×{award_quantity}). Congratulations! (<a href="{url}">View Badges</a>)',
+    'url' => 'badge-collection'
   ],
 
   // AWARD_REMOVAL
   342 => [
-    'name' => 'Award Removal',
-    'message' => '{award_name} (×{award_quantity}) was removed from your Awards by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-    'url' => 'awardcase'
+    'name' => 'Badge Removal',
+    'message' => '{award_name} (×{award_quantity}) was removed from your Badges by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Badges</a>)',
+    'url' => 'badge-collection'
   ],
 
   // AWARD_TRANSFER
   343 => [
-    'name' => 'Award Transfer',
-    'message' => 'You have received {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-    'url' => 'awardcase'
+    'name' => 'Badge Transfer',
+    'message' => 'You have received {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Badges</a>)',
+    'url' => 'badge-collection'
   ],
 
   // FORCED_AWARD_TRANSFER
   344 => [
-    'name' => 'Forced Award Transfer',
+    'name' => 'Forced Badge Transfer',
     'message' => '{item_name} (×{item_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
     'url' => 'character/{character_slug}/inventory'
   ],
 
   // CHARACTER_AWARD_GRANT
   345 => [
-    'name' => 'Character Award Grant',
-    'message' => '{character_name} has received a staff grant of {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
+    'name' => 'Character Badge Grant',
+    'message' => '{character_name} has received a staff grant of {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Badges</a>)',
     'url' => 'character/{character_slug}/awards'
   ],
 
   // CHARACTER_AWARD_REMOVAL
   346 => [
-    'name' => 'Character Award Removal',
-    'message' => '{award_name} (×{award_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
+    'name' => 'Character Badge Removal',
+    'message' => '{award_name} (×{award_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Badges</a>)',
     'url' => 'character/{character_slug}/awards'
   ],
 

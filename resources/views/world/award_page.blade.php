@@ -102,7 +102,8 @@
 
             @if ($award->progressionProgress(Auth::user()) == count($award->progressions) && $award->canClaim(Auth::user()))
               <div class="mt-2">
-                {!! Form::open(['url' => 'awardcase/claim/' . $award->id]) !!}
+                {!! Form::open(['url' => 'badge-collection/claim/' . $award->id]) !!}
+                {{-- {!! Form::open(['url' => 'awardcase/claim/' . $award->id]) !!} --}}
                 {!! Form::submit('Claim Reward', ['class' => 'btn btn-primary']) !!}
                 {!! Form::close() !!}
               </div>

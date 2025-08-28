@@ -35,7 +35,8 @@
         <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily" />
         <p class="frontpage-button m-0"> Starlit Acres</p>
       </a>
-      <a class="foraging" href="/dailies/3">
+      <a class="foraging">
+      {{-- <a class="foraging" href="/dailies/3"> --}}
         <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone" />
         <p class="frontpage-button m-0 bw-disabled"> Foraging
         </p>
