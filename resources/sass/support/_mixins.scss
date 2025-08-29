@@ -65,8 +65,3 @@
   text-align: center;
   color: var(--purple-clr_50);
 }
-
-@mixin star-bg($color: transparent) {
-  background-color: $color;
-  background-image: url('images/overlays/starring.png'), linear-gradient(to bottom right, #f2e8fd 25%, #e4faf9 55%, #f9fbeb 100%);
-}

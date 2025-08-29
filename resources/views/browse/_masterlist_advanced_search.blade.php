@@ -4,30 +4,40 @@
       {!! Form::label('character_category_id', 'Category: ') !!}
       {!! Form::select('character_category_id', $categories, Request::get('character_category_id'), [
           'class' => 'form-control mr-2',
-          'style' => 'width: 250px',
+          'style' => 'width: 250px'
       ]) !!}
     </div>
+
     <div class="masterlist-search-field">
+      {!! Form::label('species_id', 'Species: ') !!}
+      {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control w-100']) !!}
+    </div>
+    {{-- <div class="masterlist-search-field">
       {!! Form::label('subtype_id', ucfirst(__('lorekeeper.species')) . ' ' . ucfirst(__('lorekeeper.subtype')) . ':') !!}
       {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), [
           'class' => 'form-control mr-2',
-          'style' => 'width: 250px',
+          'style' => 'width: 250px'
       ]) !!}
-    </div>
+    </div> --}}
     <div class="masterlist-search-field">
       {!! Form::label('transformation_id', ucfirst(__('transformations.transformation')) . ': ') !!}
       {!! Form::select('transformation_id', $transformations, Request::get('transformation_id'), ['class' => 'form-control']) !!}
     </div>
     <div class="masterlist-search-field">
       {!! Form::label('has_transformation', 'Has a ' . ucfirst(__('transformations.transformation')) . ': ') !!}
-      {!! Form::select('has_transformation', ['1' => 'Has a ' . __('transformations.transformation') . '.'], Request::get('has_transformation'), ['class' => 'form-control', 'placeholder' => 'Any']) !!}
+      {!! Form::select(
+          'has_transformation',
+          ['1' => 'Has a ' . __('transformations.transformation') . '.'],
+          Request::get('has_transformation'),
+          ['class' => 'form-control', 'placeholder' => 'Any']
+      ) !!}
     </div>
     <div class="masterlist-search-field">
       {!! Form::label('title_id', 'Title: ') !!}
       {!! Form::select('title_id', $titles, Request::get('title_id'), [
           'class' => 'form-control',
           'id' => 'customTitle',
-          'style' => 'width: 250px',
+          'style' => 'width: 250px'
       ]) !!}
     </div>
     <div class="masterlist-search-field" id="customTitleOptions">
@@ -41,7 +51,7 @@
     {!! Form::select('owner', $userOptions, Request::get('owner'), [
         'class' => 'form-control mr-2 userselectize',
         'style' => 'width: 250px',
-        'placeholder' => 'Select a User',
+        'placeholder' => 'Select a User'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
@@ -49,7 +59,7 @@
     {!! Form::select('artist', $userOptions, Request::get('artist'), [
         'class' => 'form-control mr-2 userselectize',
         'style' => 'width: 250px',
-        'placeholder' => 'Select a User',
+        'placeholder' => 'Select a User'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
@@ -57,7 +67,7 @@
     {!! Form::select('designer', $userOptions, Request::get('designer'), [
         'class' => 'form-control mr-2 userselectize',
         'style' => 'width: 250px',
-        'placeholder' => 'Select a User',
+        'placeholder' => 'Select a User'
     ]) !!}
   </div>
   <hr />
@@ -66,7 +76,7 @@
     {!! Form::text('owner_url', Request::get('owner_url'), [
         'class' => 'form-control mr-2',
         'style' => 'width: 250px',
-        'placeholder' => 'Type a Username',
+        'placeholder' => 'Type a Username'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
@@ -74,7 +84,7 @@
     {!! Form::text('artist_url', Request::get('artist_url'), [
         'class' => 'form-control mr-2',
         'style' => 'width: 250px',
-        'placeholder' => 'Type a Username',
+        'placeholder' => 'Type a Username'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
@@ -82,7 +92,7 @@
     {!! Form::text('designer_url', Request::get('designer_url'), [
         'class' => 'form-control mr-2',
         'style' => 'width: 250px',
-        'placeholder' => 'Type a Username',
+        'placeholder' => 'Type a Username'
     ]) !!}
   </div>
   <hr />
@@ -90,24 +100,34 @@
     {!! Form::label('sale_value_min', 'Resale Minimum ($): ') !!}
     {!! Form::text('sale_value_min', Request::get('sale_value_min'), [
         'class' => 'form-control mr-2',
-        'style' => 'width: 250px',
+        'style' => 'width: 250px'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
     {!! Form::label('sale_value_max', 'Resale Maximum ($): ') !!}
     {!! Form::text('sale_value_max', Request::get('sale_value_max'), [
         'class' => 'form-control mr-2',
-        'style' => 'width: 250px',
+        'style' => 'width: 250px'
     ]) !!}
   </div>
   @if (!$isMyo)
     <div class="masterlist-search-field">
       {!! Form::label('is_gift_art_allowed', 'Gift Art Status: ') !!}
-      {!! Form::select('is_gift_art_allowed', [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'], Request::get('is_gift_art_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
+      {!! Form::select(
+          'is_gift_art_allowed',
+          [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'],
+          Request::get('is_gift_art_allowed'),
+          ['class' => 'form-control', 'style' => 'width: 250px']
+      ) !!}
     </div>
     <div class="masterlist-search-field">
       {!! Form::label('is_gift_writing_allowed', 'Gift Writing Status: ') !!}
-      {!! Form::select('is_gift_writing_allowed', [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'], Request::get('is_gift_writing_allowed'), ['class' => 'form-control', 'style' => 'width: 250px']) !!}
+      {!! Form::select(
+          'is_gift_writing_allowed',
+          [0 => 'Any', 2 => 'Ask First', 1 => 'Yes', 3 => 'Yes OR Ask First'],
+          Request::get('is_gift_writing_allowed'),
+          ['class' => 'form-control', 'style' => 'width: 250px']
+      ) !!}
     </div>
   @endif
   <br />
@@ -119,7 +139,7 @@
         'data-on' => 'Open For Trade',
         'data-off' => 'Any Trading Status',
         'data-width' => '200',
-        'data-height' => '46',
+        'data-height' => '46'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
@@ -129,7 +149,7 @@
         'data-on' => 'Can Be Sold',
         'data-off' => 'Any Sellable Status',
         'data-width' => '204',
-        'data-height' => '46',
+        'data-height' => '46'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
@@ -139,7 +159,7 @@
         'data-on' => 'Can Be Traded',
         'data-off' => 'Any Tradeable Status',
         'data-width' => '220',
-        'data-height' => '46',
+        'data-height' => '46'
     ]) !!}
   </div>
   <div class="masterlist-search-field">
@@ -149,7 +169,7 @@
         'data-on' => 'Can Be Gifted',
         'data-off' => 'Any Giftable Status',
         'data-width' => '202',
-        'data-height' => '46',
+        'data-height' => '46'
     ]) !!}
   </div>
   <hr />
@@ -160,17 +180,17 @@
     {!! Form::select('feature_ids[]', $features, Request::get('feature_ids'), [
         'class' => 'form-control feature-select userselectize',
         'placeholder' => 'Select Traits',
-        'multiple',
+        'multiple'
     ]) !!}
   </div>
   <hr />
   <div class="masterlist-search-field">
     {!! Form::checkbox('search_images', 1, Request::get('search_images'), [
         'class' => 'form-check-input mr-3',
-        'data-toggle' => 'toggle',
+        'data-toggle' => 'toggle'
     ]) !!}
     <span class="ml-2">Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
-        'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.',
+        'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.'
     ) !!}</span>
   </div>
 

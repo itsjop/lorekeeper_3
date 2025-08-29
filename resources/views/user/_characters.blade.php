@@ -1,5 +1,5 @@
 @if ($characters->count())
-  <div id="ml-gridView" class="grid-4-col">
+  <div id="ml-gridView" class="grid grid-4-col">
     @foreach ($characters as $character)
       @include('browse._masterlist_content_entry', [
           'char_image' =>

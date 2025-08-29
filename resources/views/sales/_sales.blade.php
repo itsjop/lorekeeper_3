@@ -15,7 +15,7 @@
   @if ($sales->characters()->count())
 </div>
 
-<div class="grid-4-col">
+<div class="grid grid-2-col gap-1 p-4">
   @foreach ($sales->characters as $character)
     @if ($character->character->deleted_at)
       <div class="alert alert-warning my-auto mx-2">
@@ -24,7 +24,7 @@
     @else
       @include('sales._character', ['character' => $character, 'loop' => $loop])
     @endif
-    {!! $loop->even ? '<div class="w-100"></div>' : '' !!}
+    {{-- {!! $loop->even ? '<div class="w-100"></div>' : '' !!} --}}
   @endforeach
 </div>
 

@@ -34,7 +34,7 @@
             <li>Insects (Foods, Trait items & an insect tail trait which includes centipedes)</li>
             <li>Hunger & Starvation</li>
             <li>Loss of Self / Derealization / Mental Decline</li>
-            <li>Humans as Food / Prey</li>
+            <li>Humans as a Food Source (Dream Eating, Vampirism)</li>
             <li>Violence & Large-Scale Conflicts</li>
             <li>Bodily Experimentation</li>
             <li>Nightmare-Related Horror</li>

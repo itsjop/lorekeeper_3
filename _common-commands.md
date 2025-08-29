@@ -14,3 +14,5 @@ mysql --port=3306 --host=127.0.0.1 -u root -proot lorekeeper < /Users/work-me/Do
 <!-- scp -r joz@somnivores.com:~/somnivores.com/www/public /Users/work-me/Documents/somni_assets/remote_imgs/ -->
 rsync -av --ignore-existing joz@somnivores.com:~/somnivores.com/www/public /Users/work-me/Documents/somni_assets/remote_imgs/
 cp -R /Users/work-me/Documents/somni_assets/remote_imgs/public/ /Users/work-me/Documents/code/lorekeeper/lorekeeper_3/public
+
+

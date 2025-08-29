@@ -7,8 +7,11 @@
       {!! Form::text('name', Request::get('name'), ['class' => 'w-100 form-control']) !!}
     </div>
     <div class="species form-group w-100 m-0">
-      {!! Form::label('species_id', 'Species: ') !!}
-      {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control w-100']) !!}
+      {!! Form::label('subtype_id', ucfirst(__('lorekeeper.species')) . ' ' . ucfirst(__('lorekeeper.subtype')) . ':') !!}
+      {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), [
+          'class' => 'form-control mr-2',
+          'style' => 'width: 250px'
+      ]) !!}
     </div>
     <div class="rarity form-group  m-0">
       {!! Form::label('rarity_id', 'Rarity: ') !!}
@@ -104,7 +107,7 @@ alt="List View"
 </div>
   </div> --}}
 {!! $characters->render() !!}
-<div id="ml-gridView" class="grid-4-col">
+<div id="ml-gridView" class="grid grid-4-col">
   @foreach ($characters as $character)
     @include('browse._masterlist_content_entry', [
         'char_image' =>

@@ -49,7 +49,7 @@ class HomeController extends Controller {
 
     // Fetch the 8 most recent MYOs
     // (not currently working)
-    $myos = Character::visible()->where('character_category_id', 3)->orderBy('created_at', 'DESC')->get()->take(4);
+    $myos = Character::visible()->where('character_category_id', 3)->orderBy('number', 'DESC')->get()->take(4);
 
     return view('welcome', [
       'about'               => SitePage::where('key', 'about')->first(),
