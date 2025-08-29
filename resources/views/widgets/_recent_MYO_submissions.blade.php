@@ -1,4 +1,4 @@
-<div class="gallery-recents grid-4-col  text-center">
+<div class="gallery-recents grid-4-col singlerow gap-4 ji-between text-center w-100">
   @foreach ($myos as $character)
     @include('browse._masterlist_content_entry', [
         'char_image' =>

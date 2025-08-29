@@ -2651,6 +2651,11 @@ body {
   padding: 20px;
   contain: paint;
 }
+.app .gallery.singlerow,
+.app .gallery-recents.singlerow,
+.app .gallery-all.singlerow {
+  grid-template-rows: 1fr;
+}
 .app .gallery .submission,
 .app .gallery-recents .submission,
 .app .gallery-all .submission {
