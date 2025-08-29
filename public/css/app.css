@@ -924,9 +924,6 @@ body {
   color: var(--purple-clr_800);
   font-size: 1.2rem;
 }
-.app ul {
-  padding: 0;
-}
 .app a,
 .app .a {
   color: var(--purple-clr_600);
