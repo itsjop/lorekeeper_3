@@ -73,7 +73,6 @@
             padding: 3px 0;
             text-align: start;
             padding: 3px 10px 3px 20px;
-            width: calc(100%);
             text-align: left;
             transition:
               transform 0.5s var(--smoothIn_linear),
@@ -84,6 +83,8 @@
               font-weight: 700;
               color: var(--white);
               transform: translateX(20px);
+              width: calc(100% - 40px);
+              padding: 3px 0;
             }
             &:hover,
             &:active {
