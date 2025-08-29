@@ -2952,7 +2952,7 @@ body {
   font-weight: 700;
   color: var(--white);
   transform: translateX(20px);
-  width: calc(100% - 40px);
+  max-width: calc(100% - 40px);
   padding: 3px 0;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item a:hover, #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item a:active {
