@@ -230,7 +230,6 @@
             <hr>
             <a class="dt-nav-item" href="{{ url('users') }}">
               <i class="fas fa-user-group"></i>User List</a>
-            <hr>
             {{-- <a class="dt-nav-item" href="{{ url('forms/') }}">
               <i class="fas fa-list-check"></i> Feedback </a>
             <a class="dt-nav-item" href="{{ url('forms/') }}">
