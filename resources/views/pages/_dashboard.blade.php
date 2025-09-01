@@ -3,7 +3,7 @@
   {{-- <div class="card mb-4 timestamp">
     <div class="card-body"> <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!} </div> </div> --}}
   <div class="bubblebox current-event">
-    <h2 class="flex gap-_5 ai-center">
+    <h2 class="h2 flex gap-_5 ai-center">
       <i class="fas fa-heart"></i>
       Current Event
     </h2>
@@ -14,7 +14,7 @@
         class="w-66"
       >
       <div class="grid ai-center event-buttons">
-        <p class="event-title m-0"> Somnivores Launch Party! </p> 
+        <p class="event-title m-0"> Somnivores Launch Party! </p>
         <a class="frontpage-button" href="/dailies/4"> daily </a>
         <a class="frontpage-button" href="/shops/8"> shop </a>
       </div>
@@ -22,10 +22,10 @@
   </div>
 
   <div class="bubblebox dailies">
-    <h2 class="flex gap-_5 ai-center">
+    <a href="/dailies" class="h2 flex gap-_5 ai-center">
       <i class="fas fa-gifts"></i>
       Dailies
-    </h2>
+    </a>
     <div class="bubble jobs gap-_5">
       <a class="wishing-well" href="/dailies/1">
         <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well" />
@@ -36,19 +36,20 @@
         <p class="frontpage-button m-0"> Starlit Acres</p>
       </a>
       <a class="foraging">
-      {{-- <a class="foraging" href="/dailies/3"> --}}
+        {{-- <a class="foraging" href="/dailies/3"> --}}
         <img src="{{ asset('images/pages/nav-inventory.png') }}" alt="Go to the Foraging zone" />
         <p class="frontpage-button m-0 bw-disabled"> Foraging
         </p>
       </a>
     </div>
   </div>
-
+  {{-- NEWSFEED --}}
   <div class="bubblebox newsfeed">
-    <h2 class="flex gap-_5 ai-center">
+    <a href="/news" class="h2 flex gap-_5 ai-center ac-center">
       <i class="fas fa-newspaper"></i>
       Newsfeed
-    </h2>
+      {{-- <i class="fas fa-caret-right"></i> --}}
+    </a>
     <div class="bubble px-4">
       @if (Auth::user()->is_news_unread)
         <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;">New!</div>
@@ -56,11 +57,13 @@
       @include('widgets._news', ['textPreview' => true])
     </div>
   </div>
-
+  {{-- SALES --}}
   <div class="bubblebox sales">
-    <h2 class="flex gap-_5 ai-center">
-      <i class="fas fa-store"></i> Sales
-    </h2>
+    <a href="/sales" class="h2 flex gap-_5 ai-center ac-center">
+      <i class="fas fa-store"></i>
+      Sales
+      {{-- <i class="fas fa-caret-right"></i> --}}
+    </a>
     <div class="bubble sale-info">
       @if (Auth::user()->is_sales_unread)
         <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;">New!</div>
@@ -68,29 +71,26 @@
       @include('widgets._sales')
     </div>
   </div>
-  {{-- SUBMISSION GALLERY --}}
-  <div class="bubblebox recent-submissions">
-    <h2 class="flex gap-_5 ai-center">
-      <a href="gallery/all" class="color-unset ai-center">
-        <i class="fas fa-palette"></i>
-        Recent Gallery Submissions
-        <i class="fa-solid fa-caret-right"></i>
-      </a>
-    </h2>
-    <div class="bubble p-0">
-      @include('widgets._recent_gallery_submissions', ['gallerySubmissions' => $gallerySubmissions])
-    </div>
-  </div>
+  {{-- RECENT MYOS --}}
   <div class="bubblebox recent-myos">
-    <h2 class="flex gap-_5 ai-center">
-      <a href="sublist/MYO" class="color-unset ai-center">
-        <i class="fas fa-star"></i>
-        Recent MYO Submissions
-        <i class="fa-solid fa-caret-right"></i>
-      </a>
-    </h2>
+    <a href="sublist/MYO" class="h2 flex gap-_5 ai-center ac-center">
+      <i class="fas fa-star"></i>
+      Recent MYO Submissions
+      {{-- <i class="fa-solid fa-caret-right"></i> --}}
+    </a>
     <div class="bubble p-0">
       @include('widgets._recent_MYO_submissions', ['myos' => $myos])
+    </div>
+  </div>
+  {{-- SUBMISSION GALLERY --}}
+  <div class="bubblebox recent-submissions">
+    <a href="gallery/all" class="h2 flex gap-_5 ai-center ac-center">
+      <i class="fas fa-palette"></i>
+      Recent Gallery Submissions
+      {{-- <i class="fa-solid fa-caret-right"></i> --}}
+    </a>
+    <div class="bubble p-0">
+      @include('widgets._recent_gallery_submissions', ['gallerySubmissions' => $gallerySubmissions])
     </div>
   </div>
 </div>
