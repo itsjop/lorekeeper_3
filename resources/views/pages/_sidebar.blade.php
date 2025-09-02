@@ -107,7 +107,7 @@
       </a>
     </div>
     <div class="details-sb p-2">
-      <a class="thumb" href="/world/items/55">
+      <a class="thumb" href="/world/items/78">
         <div class="character-border">
           <div class="rainbow kofi"></div>
           <div class="stars paused"></div>
