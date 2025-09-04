@@ -5138,15 +5138,15 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
 }
 
 #app .comment {
-  padding: 26px;
+  padding: 2cqw;
   padding-bottom: 12px;
   margin: 0;
 }
 #app .comment_replies {
   border-left: 4px var(--purple-clr_500) dotted;
-  margin-left: 3rem;
-  padding-left: 2rem;
-  width: calc(100% - 3rem);
+  margin-left: 3cqw;
+  padding-left: 2cqw;
+  width: calc(100% - 3cqw);
 }
 #app .border-top {
   border-top: 2px dashed color-mix(in srgb, var(--purple-clr_400) 80%, transparent);

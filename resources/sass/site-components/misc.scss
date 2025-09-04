@@ -254,15 +254,15 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
 }
 #app {
   .comment {
-    padding: 26px;
+    padding: 2cqw;
     padding-bottom: 12px;
     margin: 0;
   }
   .comment_replies {
     border-left: 4px var(--purple-clr_500) dotted;
-    margin-left: 3rem;
-    padding-left: 2rem;
-    width: calc(100% - 3rem);
+    margin-left: 3cqw;
+    padding-left: 2cqw;
+    width: calc(100% - 3cqw);
   }
   .border-top {
     border-top: 2px dashed color-mix(in srgb, var(--purple-clr_400) 80%, transparent);

@@ -117,7 +117,7 @@
               <p>Staff is not able to modify traits during the submission process, so be sure to open a design check in our Discord
                 help channel
                 if you have any questions regarding which traits your design may need!</p>
-              <p>Common/Default traits do not need to be added. Staff with update your character with them after the submission has
+              <p>Common/Default traits do not need to be added. Staff will update your character with them after the submission has
                 been approved.</p>
               <p><b><i>You must attach a trait item in order to choose new traits for your character.</i></b></p>
             @endif

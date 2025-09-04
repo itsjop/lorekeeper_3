@@ -1,24 +1,26 @@
 {{-- Action buttons --}}
 @if (Auth::check())
-  <div class="flex flex-wrap">
-  {{-- <div class="grid grid-4-col"> --}}
+  <div class="flex flex-wrap jc-end">
+    {{-- <div class="grid grid-4-col"> --}}
     @can('reply-to-comment', $comment)
       <button
         data-bs-toggle="modal"
         data-bs-target="#reply-modal-{{ $comment->getKey() }}"
-        class="btn btn-sm p-2 btn-outline text-uppercase flex gap-_5 jc-center"
+        class="btn btn-sm p-2 btn-outline small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-comment"></i>
-        <span class="">Reply</span></button>
+        <span class="d-none d-lg-block">Reply</span>
+      </button>
     @endcan
     @can('edit-comment', $comment)
       <button
         data-bs-toggle="modal"
         data-bs-target="#comment-modal-{{ $comment->getKey() }}"
-        class="btn btn-sm p-2 btn-outline text-uppercase flex gap-_5 jc-center"
+        class="btn btn-sm p-2 btn-outline small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-edit"></i>
-        <span class="">Edit</span></button>
+        <span class="d-none d-lg-block">Edit</span>
+      </button>
     @endcan
     @if (
         ((Auth::user()->id == $comment->commentable_id && $comment->commentable_type == 'App\Models\User\UserProfile') ||
@@ -28,19 +30,21 @@
       <button
         data-bs-toggle="modal"
         data-bs-target="#feature-modal-{{ $comment->getKey() }}"
-        class="btn btn-sm p-2 btn-outline text-uppercase flex gap-_5 jc-center"
+        class="btn btn-sm p-2 btn-outline small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-star"></i>
-        <span class="">{{ $comment->is_featured ? 'Unf' : 'F' }}eature Comment</span></button>
+        <span class="d-none d-lg-block">{{ $comment->is_featured ? 'Unf' : 'F' }}eature</span>
+      </button>
     @endif
     @can('delete-comment', $comment)
       <button
         data-bs-toggle="modal"
         data-bs-target="#delete-modal-{{ $comment->getKey() }}"
-        class="btn btn-sm p-2 btn-outline-danger text-uppercase flex gap-_5 jc-center"
+        class="btn btn-sm p-2 btn-outline-danger small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-minus-circle"></i>
-        <span class="">Delete</span></button>
+        <span class="d-none d-lg-block">Delete</span>
+      </button>
     @endcan
 
     <div class="flex jc-center gap-_5 ai-center btn btn-outline">
@@ -54,10 +58,10 @@
           href="#"
           data-bs-toggle="tooltip"
           title="Click to View"
-          class="btn btn-sm p-0 m-0 color-white btn-faded"
+          class="btn btn-sm p-0 m-0 color-white btn-faded small"
         >
-          {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() }}
-          {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() != 1 ? 'Likes' : 'Like' }}
+          <span>{{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() }}</span>
+          <span class="d-none d-lg-inline pl-1">{{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() != 1 ? 'Likes' : 'Like' }}</span>
         </button>
       </a>
       {!! Form::open(['url' => 'comments/' . $comment->id . '/like/1', 'class' => 'd-inline-block']) !!}
@@ -68,7 +72,7 @@
               ($comment->likes()->where('user_id', Auth::user()->id)->where('is_like', 1)->exists()
                   ? 'btn-success'
                   : 'btn-outline-success') .
-              ' text-uppercase'
+              ' small ai-center'
       ]) !!}
       {!! Form::close() !!}
       @if (Settings::get('comment_dislikes_enabled') || (isset($allow_dislikes) && $allow_dislikes))
@@ -80,7 +84,7 @@
                 ($comment->likes()->where('user_id', Auth::user()->id)->where('is_like', 0)->exists()
                     ? 'btn-danger'
                     : 'btn-outline-danger') .
-                ' text-uppercase'
+                ' small ai-center'
         ]) !!}
         {!! Form::close() !!}
       @endif
@@ -125,10 +129,10 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-sm p-0 m-0 btn-outline-secondary text-uppercase"
+            class="btn btn-sm p-0 m-0 btn-outline-secondary small ai-center"
             data-bs-dismiss="modal"
           >Cancel</button>
-          {!! Form::submit('Update', ['class' => 'btn btn-sm p-0 m-0 btn-outline-success text-uppercase']) !!}
+          {!! Form::submit('Update', ['class' => 'btn btn-sm p-0 m-0 btn-outline-success small ai-center']) !!}
         </div>
         </form>
       </div>
@@ -172,10 +176,12 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-sm p-0 m-0 fas fa-thumbs-upbtn-outline-secondary text-uppercase"
+            class="btn btn-sm btn-danger"
             data-bs-dismiss="modal"
-          >Cancel</button>
-          {!! Form::submit('Reply', ['class' => 'btn btn-sm p-0 m-0 btn-outline-success text-uppercase']) !!}
+          >
+            Cancel
+          </button>
+          {!! Form::submit('Reply', ['class' => 'btn btn-sm btn-outline-success ']) !!}
         </div>
         </form>
       </div>
@@ -212,7 +218,7 @@
             <a
               href="{{ route('comments.destroy', $comment->getKey()) }}"
               onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->getKey() }}').submit();"
-              class="btn btn-danger text-uppercase"
+              class="btn btn-danger small ai-center"
             >Delete</a>
             <form
               id="comment-delete-form-{{ $comment->getKey() }}"
