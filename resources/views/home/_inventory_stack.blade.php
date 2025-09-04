@@ -69,15 +69,11 @@
                   'onclick' => 'updateQuantities(this)',
                   'style' => 'scale: 1.3;'
               ]) !!}</td>
-              <td class="col-4">{!! array_key_exists('data', safeJSON($itemRow->data)) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
+              <td class="col-4">{!! isset($itemRow->data['data']) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
             @else
-              <td class="col-5">{!! array_key_exists('data', safeJSON($itemRow->data)) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
+              <td class="col-5">{!! isset($itemRow->data['data']) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
             @endif
-            <td class="col-3">{!! array_key_exists('notes', safeJSON($itemRow->data))
-                ? ($itemRow->data['notes']
-                    ? $itemRow->data['notes']
-                    : 'N/A')
-                : 'N/A' !!}</td>
+            <td class="col-3">{!! isset($itemRow->data['notes']) ? ($itemRow->data['notes'] ? $itemRow->data['notes'] : 'N/A') : 'N/A' !!}</td>
             @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
               @if ($itemRow->availableQuantity)
                 <td class="col-3">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, [
