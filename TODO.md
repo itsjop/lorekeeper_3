@@ -10,6 +10,8 @@
 - [ ] @supports for navbar container query? not even sure how to test this one
 - [ ] character links strip newlines
 - [ ] sitewide image alt tags
+- [ ] move the ML card wiggle to a standalone component
+
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)

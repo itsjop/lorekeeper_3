@@ -1,5 +1,8 @@
 @extends('character.layout', ['componentName' => 'character/character', 'isMyo' => $character->is_myo_slot])
 
+<link href="{{ asset('css/vendor/bootstrap_profile.css') }}" rel="stylesheet">
+<link href="{{ asset('css/vendor/lorekeeper_profile.css') }}" rel="stylesheet">
+
 @section('profile-title')
   {{ $character->fullName }}
 @endsection

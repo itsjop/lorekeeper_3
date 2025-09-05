@@ -481,10 +481,10 @@ body.teal {
     grid-template-columns: repeat(3, 1fr);
   }
   #app .grid-3-col {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
-@container main-container (width < 800px) {
+@container main-container (width < 700px) {
   #app .grid-6-col {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -496,6 +496,9 @@ body.teal {
   }
   #app .grid-3-col {
     grid-template-columns: repeat(2, 1fr);
+  }
+  #app .grid-2-col {
+    grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-5-2-col {
     grid-template-columns: repeat(4, 1fr);
@@ -523,9 +526,6 @@ body.teal {
     grid-template-columns: repeat(2, 1fr);
   }
   #app .grid-3-col {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  #app .grid-2-col {
     grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-5-2-col {

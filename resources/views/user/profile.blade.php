@@ -3,6 +3,9 @@
     'user' => isset($user) ? $user : null
 ])
 
+<link href="{{ asset('css/vendor/bootstrap_profile.css') }}" rel="stylesheet">
+<link href="{{ asset('css/vendor/lorekeeper_profile.css') }}" rel="stylesheet">
+
 @section('profile-title')
   {{ $user->name }}'s Profile
 @endsection
@@ -129,13 +132,12 @@
       <div class="card mb-3" style="clear:both;">
         @if ($user->profile->pronouns)
           <h5 class="pronouns card-header">
-            {!! $user->profile->pronouns !!}
+            {{ $user->profile->pronouns }}
           </h5>
         @endif
 
-        <div id="profile-content" class="card-body">
+        <div id="profile" class="card-body">
           {!! $user->profile->parsed_text !!}
-
           @if ($user->name == 'pim' || $user->name == 'joz' || $user->name == 'jop')
             <div class="pims-content">
               <iframe

@@ -1,20 +1,18 @@
-<div class="card grid grid-2-col pi-center pc-center">
-  <div class="">
-    <a href="{{ $character->character->url }}">
-      <img
-        src="{{ $loop->count == 1 ? $character->image->imageUrl : $character->image->thumbnailUrl }}"
-        class="mw-100 img-thumbnail"
-        alt="{{ $character->fullName }}"
-      />
-      {{-- @include('browse._masterlist_content_entry', [
+<div class="card grid pi-center pc-center">
+  <a href="{{ $character->character->url }}">
+    <img
+      src="{{ $loop->count == 1 ? $character->image->imageUrl : $character->image->thumbnailUrl }}"
+      class="mw-100 img-thumbnail hover-preview"
+      alt="{{ $character->fullName }}"
+    />
+    {{-- @include('browse._masterlist_content_entry', [
           'char_image' =>
               $character->image->canViewFull(Auth::user() ?? null) &&
               file_exists(public_path($character->image->imageDirectory . ' /  ' . $character->image->fullsizeFileName))
                   ? $character->image->thumbnailUrl
                   : $character->image->thumbnailUrl
       ]) --}}
-    </a>
-  </div>
+  </a>
   <div class="card-basic p-3 m-0 ta-center">
     <div class="mt-2">
       <h5>

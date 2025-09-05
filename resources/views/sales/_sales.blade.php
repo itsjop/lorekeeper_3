@@ -15,7 +15,7 @@
   @if ($sales->characters()->count())
 </div>
 
-<div class="grid grid-2-col gap-1 p-4">
+<div class="grid grid-3-col gap-1 p-4">
   @foreach ($sales->characters as $character)
     @if ($character->character->deleted_at)
       <div class="alert alert-warning my-auto mx-2">

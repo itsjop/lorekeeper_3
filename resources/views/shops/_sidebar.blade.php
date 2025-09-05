@@ -37,10 +37,10 @@
         </div>
       @endif
     @endforeach
-    <div class="sb-item">
+    {{-- <div class="sb-item">
       <a href="{{ url('shops/donation-shop') }}" class="{{ set_active('shops/donation-shop') }}">
         Donation Shop
       </a>
-    </div>
+    </div> --}}
   </div>
 </div>
