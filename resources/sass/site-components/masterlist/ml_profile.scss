@@ -14,7 +14,7 @@
   grid-template:
     'charname charname' auto
     'perms    perms   ' auto
-    'forms    info-col' auto
+    'forms    info-col' max-content
     'char-col info-col' max-content
     'maintab  maintab ' 0
     'attchmts attchmts' auto

@@ -1263,7 +1263,7 @@ body {
 }
 #character-main-profile {
   display: grid;
-  grid-template: "charname charname" auto "perms    perms   " auto "forms    info-col" auto "char-col info-col" max-content "maintab  maintab " 0 "attchmts attchmts" auto "bio      bio     " auto/3fr 2fr;
+  grid-template: "charname charname" auto "perms    perms   " auto "forms    info-col" max-content "char-col info-col" max-content "maintab  maintab " 0 "attchmts attchmts" auto "bio      bio     " auto/3fr 2fr;
   gap: 0.5em 1em;
 }
 #character-main-profile .form-selectors {
