@@ -1,8 +1,5 @@
 @extends('account.layout', ['componentName' => 'account/settings'])
 
-<link href="{{ asset('css/vendor/bootstrap_profile.css') }}" rel="stylesheet">
-<link href="{{ asset('css/vendor/lorekeeper_profile.css') }}" rel="stylesheet">
-
 @section('account-title')
   Settings
 @endsection
@@ -80,7 +77,7 @@
       ) !!}
       {!! Form::text('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
     </div>
-    <div id="profile" class="form-group">
+    <div class="form-group">
       {!! Form::label('text', 'Profile Content') !!}
       {!! Form::textarea('text', Auth::user()->profile->text, ['class' => 'form-control wysiwyg']) !!}
     </div>
