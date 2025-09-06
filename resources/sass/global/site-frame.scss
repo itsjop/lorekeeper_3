@@ -14,11 +14,11 @@
   overflow-x: hidden;
   --app-gap-x: 20px;
   --app-gap-y: 20px;
-  --sidebar-width: min(20vw, 260px);
+  --sidebar-width: min(15vw, 260px);
   --sidebars-width: calc(var(--sidebar-width) * 2);
   --gutter-width: 1.5vw;
   --gutters-width: (2 * var(--gutter-width));
-  --content-min-width: 600px;
+  --content-min-width: 500px;
   --content-max-width: 1600px;
   --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sidebars-width));
   --content-width: clamp(var(--content-min-width), var(--ideal-content-width), var(--content-max-width));

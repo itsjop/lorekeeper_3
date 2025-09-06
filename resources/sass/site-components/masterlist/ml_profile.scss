@@ -14,8 +14,8 @@
   grid-template:
     'charname charname' auto
     'perms    perms   ' auto
-    'forms    info-col' max-content
-    'char-col info-col' max-content
+    'forms    info-col' 2em
+    'char-col info-col' auto
     'maintab  maintab ' 0
     'attchmts attchmts' auto
     'bio      bio     ' auto
@@ -35,6 +35,9 @@
   }
   .char-col {
     grid-area: char-col;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
     .form-selector {
     }
     .main-img {
