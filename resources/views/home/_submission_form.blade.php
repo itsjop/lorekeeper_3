@@ -40,8 +40,8 @@
           $isClaim
               ? 'URL (Optional)'
               : 'Submission URL ' .
-                  (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? ' / Title' : '') .
-                  '(Optional)'
+                  // (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') ? '' : '') .
+                  ' (Optional)'
       ) !!}
       @if ($isClaim)
         {!! add_help('Enter a URL relevant to your claim (for example, a comment proving you may make this claim).') !!}
@@ -62,7 +62,7 @@
   @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && !$isClaim)
     <div class="col-md-6 p-0 pl-2">
       <div class="form-group">
-        {!! Form::label('gallery_submission_id', 'Gallery URL (Optional)') !!}
+        {!! Form::label('gallery_submission_id', 'Gallery Submission (Optional)') !!}
         {!! add_help('Select the gallery submission this prompt is for.') !!}
         {!! Form::select(
             'gallery_submission_id',
