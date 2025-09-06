@@ -1,11 +1,4 @@
-@font-face {
-  font-family: Roboto Condensed;
-  src: url(../webfonts/RobotoCondensed-Regular.ttf);
-}
-@font-face {
-  font-family: Lato;
-  src: url(../webfonts/Lato-Regular.ttf);
-}
+
 #profile {
   /**************************************************************************************************
 
@@ -59,13 +52,7 @@
     min-height: 200px;
   }
 
-  .navbar .navbar-brand,
-  .navbar .nav-item {
-    text-transform: uppercase;
-    font-family:
-      Roboto Condensed,
-      serif;
-  }
+
 
   .navbar .row {
     width: 100%;
@@ -94,14 +81,7 @@
     box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.1);
   }
 
-  .sidebar .sidebar-header,
-  .sidebar .sidebar-section .sidebar-section-header {
-    text-transform: uppercase;
-    font-family:
-      Roboto Condensed,
-      serif;
-    font-weight: bold;
-  }
+
 
   .sidebar .sidebar-header {
     background-color: #343a40;
@@ -121,10 +101,6 @@
   }
 
   .sidebar a {
-    text-transform: uppercase;
-    font-family:
-      Roboto Condensed,
-      serif;
     color: rgba(0, 0, 0, 0.4);
   }
   .sidebar a:hover {
@@ -286,17 +262,6 @@
   .nav-tabs .nav-link.active {
     background-color: transparent;
   }
-  .nav-tabs .nav-link {
-    text-transform: uppercase;
-    font-family:
-      Roboto Condensed,
-      serif;
-  }
-
-  .display-user,
-  .display-character {
-    font-weight: bold;
-  }
 
   .help-icon {
     /*vertical-align: middle;*/
@@ -308,10 +273,6 @@
   .breadcrumb {
     background-color: transparent;
     padding: 0;
-    font-family:
-      Roboto Condensed,
-      serif;
-    text-transform: uppercase;
     align-items: center;
   }
   .breadcrumb a {
@@ -359,16 +320,10 @@
     margin-top: 0px;
   }
   .spoiler-toggle {
-    font-weight: bold;
     background-color: #f5f5f5;
     cursor: pointer;
     padding: 0.3rem 1.25rem;
-    font-size: 0.9rem;
-    font-family:
-      Roboto Condensed,
-      serif;
     color: inherit;
-    text-transform: uppercase;
   }
   .spoiler-text {
     padding: 0.75rem 1.25rem;
@@ -560,9 +515,6 @@
   /* SHOPS *****************************************************************************************/
   .shops-row img {
     max-width: 100%;
-  }
-  .shops-row .shop-name a {
-    font-weight: bold;
   }
 
   /* TRADES ****************************************************************************************/
