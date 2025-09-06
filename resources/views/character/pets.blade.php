@@ -10,12 +10,20 @@
 
 @section('profile-content')
   @if ($character->is_myo_slot)
-    {!! breadcrumbs(['MYO Slot Masterlist' => 'myos', $character->fullName => $character->url, 'Pets' => $character->url . '/pets']) !!}
+    {!! breadcrumbs([
+        'MYO Slot Masterlist' => 'myos',
+        $character->fullName => $character->url,
+        'Pets' => $character->url . '/pets'
+    ]) !!}
   @else
     {!! breadcrumbs([
-        $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character Masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+        $character->category->masterlist_sub_id
+            ? $character->category->sublist->name . ' Masterlist'
+            : 'Character Masterlist' => $character->category->masterlist_sub_id
+            ? 'sublist/' . $character->category->sublist->key
+            : 'masterlist',
         $character->fullName => $character->url,
-        'Pets' => $character->url . '/pets',
+        'Pets' => $character->url . '/pets'
     ]) !!}
   @endif
 
@@ -25,9 +33,11 @@
 
   @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
     <p>
-      Currently {{ config('lorekeeper.pets.display_pet_count') }} pet{{ config('lorekeeper.pets.display_pet_count') != 1 ? 's' : '' }} are displayed on the character's page.
+      Currently {{ config('lorekeeper.pets.display_pet_count') }}
+      pet{{ config('lorekeeper.pets.display_pet_count') != 1 ? 's' : '' }} are displayed on the character's page.
       @if (config('lorekeeper.pets.max_pets') && config('lorekeeper.pets.max_pets') > 0)
-        A maximum of {{ config('lorekeeper.pets.max_pets') }} pet{{ config('lorekeeper.pets.max_pets') != 1 ? 's' : '' }} can be attached.
+        A maximum of {{ config('lorekeeper.pets.max_pets') }} pet{{ config('lorekeeper.pets.max_pets') != 1 ? 's' : '' }} can be
+        attached.
       @endif
       <br />You can determine which pets are displayed by dragging and dropping them in the order you want.
     </p>
@@ -38,9 +48,10 @@
     {!! Form::close() !!}
   @endif
 
-  <div id="sortable" class="row sortable justify-content-center">
+  <div id="sortable" class="grid grid-4-col sortable justify-content-center">
     @foreach ($character->pets()->orderBy('sort', 'DESC')->get() as $pet)
-      <div class="col-md-3 col-6 mb-3" data-id="{{ $pet->id }}">
+      <div class="sortable-item" data-id="{{ $pet->id }}">
+        <i class="sort-handle hover-preview fa-solid fa-grip-horizontal"></i>
         <div class="card inventory-category h-100" data-id="{{ $pet->id }}">
           <div class="card-body inventory-body text-center">
             <div class="mb-1">
@@ -58,9 +69,14 @@
             </div>
             @if (config('lorekeeper.pets.pet_bonding_enabled'))
               <div class="progress mb-2">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                  style="width: {{ ($pet->level?->nextLevel?->bonding_required ? ($pet->level?->bonding / $pet->level?->nextLevel?->bonding_required) * 100 : 1 * 100) . '%' }}" aria-valuenow="{{ $pet->level?->bonding }}" aria-valuemin="0"
-                  aria-valuemax="{{ $pet->level?->nextLevel?->bonding_required ?? 100 }}">
+                <div
+                  class="progress-bar progress-bar-striped progress-bar-animated"
+                  role="progressbar"
+                  style="width: {{ ($pet->level?->nextLevel?->bonding_required ? ($pet->level?->bonding / $pet->level?->nextLevel?->bonding_required) * 100 : 1 * 100) . '%' }}"
+                  aria-valuenow="{{ $pet->level?->bonding }}"
+                  aria-valuemin="0"
+                  aria-valuemax="{{ $pet->level?->nextLevel?->bonding_required ?? 100 }}"
+                >
                   {{ $pet->level?->nextLevel?->bonding_required ? $pet->level?->bonding . '/' . $pet->level?->nextLevel?->bonding_required : $pet->level?->levelName }}
                 </div>
               </div>
@@ -93,10 +109,13 @@
         // submit form
         e.target.submit();
       });
-
       $("#sortable").sortable({
         characters: '.sort-item',
-        placeholder: "sortable-placeholder col-md-3 col-6",
+        placeholder: "sortable-placeholder",
+        revert: 100,
+        handle: ".sort-handle",
+        cursor: "grabbing",
+        distance: 5,
         stop: function(event, ui) {
           $('#sortableOrder').val($(this).sortable("toArray", {
             attribute: "data-id"

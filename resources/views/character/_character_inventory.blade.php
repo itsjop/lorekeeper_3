@@ -1,21 +1,34 @@
-<div id="sortable" class="row sortable">
+<div id="sortable" class="grid grid-4-col gap-1 sortable">
   @foreach ($items as $stackItem)
-      <?php
-      $item = $stackItem->first();
-      $canName = $item->can_name;
-      $stackName = $item->pivot->pluck('stack_name', 'id')->toArray()[$item->pivot->id];
-      $stackNameClean = htmlentities($stackName);
-      ?>
-    <div class="col-md-3 col-6 text-center mb-2" data-id="{{ $item->pivot->id }}">
-      <a href="#" class="grid ji-center inventory-stack text-center img" data-id="{{ $item->pivot->id }}"
-         data-name="{!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}{{ $character->name ? $character->name : $character->slug }}'s {{ $item->name }}{!! $canName && $stackName ? ']' : null !!}">
-        <img class="img-thumbnail" style="display: block" src="{{ $item->imageUrl }}"
-             alt="{{ $item->name }}" />
+    <?php
+    $item = $stackItem->first();
+    $canName = $item->can_name;
+    $stackName = $item->pivot->pluck('stack_name', 'id')->toArray()[$item->pivot->id];
+    $stackNameClean = htmlentities($stackName);
+    ?>
+    <div class="card-body sortable-item text-center mb-2" data-id="{{ $item->pivot->id }}">
+      <i class="sort-handle hover-preview fa-solid fa-grip-horizontal"></i>
+      <a
+        href="#"
+        class="grid ji-center inventory-stack text-center img"
+        data-id="{{ $item->pivot->id }}"
+        data-name="
+          {!! $canName && $stackName ? htmlentities($stackNameClean) . ' [' : null !!}
+          {{ $character->name ? $character->name : $character->slug }}'s {{ $item->name }}
+          {!! $canName && $stackName ? ']' : null !!}"
+      >
+        <img
+          class="img-thumbnail"
+          style="display: block"
+          src="{{ $item->imageUrl }}"
+          alt="{{ $item->name }}"
+        />
         {{ $item->name }} x{{ $stackItem->sum('pivot.count') }}
       </a>
     </div>
   @endforeach
 </div>
+
 {!! Form::open(['url' => 'character/' . $character->slug . '/inventory/sort']) !!}
 {!! Form::hidden('sort', null, ['id' => 'sortableOrder']) !!}
 {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
@@ -27,7 +40,12 @@
     $(document).ready(function() {
       $("#sortable").sortable({
         characters: '.sort-item',
-        placeholder: "sortable-placeholder col-md-3 col-6",
+        placeholder: "sortable-placeholder",
+        revert: 100,
+        handle: ".sort-handle",
+        cursor: "grabbing",
+        tolerance: "intersect",
+        distance: 5,
         stop: function(event, ui) {
           $('#sortableOrder').val($(this).sortable("toArray", {
             attribute: "data-id"

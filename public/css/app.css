@@ -5161,3 +5161,16 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
   aspect-ratio: 16/10;
   max-width: 800px;
 }
+
+.sortable-item {
+  position: relative;
+}
+.sortable-item .sort-handle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  font-size: 2em;
+  color: var(--purple-clr_700);
+  cursor: grab;
+}
