@@ -156,7 +156,7 @@
     --permcolor: var(--info);
   }
 }
-@container main-container (width < 600px) {
+@container main-container (width < 700px) {
   #character-main-profile {
     display: grid;
     grid-template:
