@@ -87,5 +87,5 @@
   </div>
   {!! $users->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $users->total() }} result{{ $users->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted">{{ $users->total() }} user{{ $users->total() == 1 ? '' : 's' }} found.</div>
 @endsection
