@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/account'])
 
-
 @section('title')
   Account ::
   @yield('account-title')
