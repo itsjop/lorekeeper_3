@@ -1,6 +1,11 @@
 # Styling Issues:
 - [~] masterlist redo
-- [ ] Character visibility toggle
+- [ ] Character visibility toggle doesnt work
+- [ ] Investigate why resale doesn't work
+  - [ ] Resale information isn't saving when editing an item
+- [ ] mod mail show outgoing user name
+- [ ] completed raffles sorted by time instead of whatever it is now
+- [ ] new news post - saved as a draft, reposted, - does not give NEW notification (or scheduled)
 - [ ] duplicated characters on prompt submission
 - [ ] gallery preview pass real blurred image instead of of lorekeeper book
 - [ ] Bat transformation should always be listed first
@@ -11,7 +16,7 @@
 - [ ] character links strip newlines
 - [ ] sitewide image alt tags
 - [ ] move the ML card wiggle to a standalone component
-
+- [ ] the change TH link button is not working (account settings?)
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)

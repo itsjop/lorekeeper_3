@@ -16,7 +16,7 @@
       {!! $character->formattedName !!}
     </a>
   @else
-    <p>{{ Auth::check() && Auth::user()->id == $user->id ? 'You have' : 'This user has' }} no selected character...</p>
+    <p class="ta-center">{{ Auth::check() && Auth::user()->id == $user->id ? 'You have' : 'This user has' }} no selected character.</p>
   @endif
   <div class="text-center"><a href="{{ $user->url . '/characters' }}" class="btn btn-primary">View All Characters</a></div>
 </div>

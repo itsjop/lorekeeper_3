@@ -80,9 +80,9 @@ body {
   --active-clr_800: var(--purple-clr_800);
   --active-clr_900: var(--purple-clr_900);
   --active-clr_950: var(--purple-clr_950);
+  --black: var(--active-clr_900);
   --white: var(--active-clr_50);
   --purewhite: light-dark(#fff, #000);
-  --black: var(--active-clr_900);
   --body-color: var(--active-clr_50);
 }
 body.purple {

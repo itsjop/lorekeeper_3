@@ -68,7 +68,8 @@
       data-lightbox="entry"
       data-title="{{ $character->fullName }}"
     >
-      @if (isset($character->image->content_warnings) && Auth::check() && permission - badgeswarnings)
+      @if (isset($character->image->content_warnings) && Auth::check())
+      {{-- @if (isset($character->image->content_warnings) && Auth::check() && permission - badgeswarnings) --}}
         @include('widgets._cw_img', [
             'src' =>
                 $character->image->canViewFull(Auth::user() ?? null) &&
@@ -263,10 +264,10 @@
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
             <a
-              class="nav-link"
+              class="nav-link h-100 grid ac-center"
               id="settingsTab"
               data-bs-toggle="tab"
-              href="#settings-{{ $character->slug }}"
+              href="#settings-all"
               role="tab"
             >
               <i class="fas fa-cog"></i></a>
@@ -285,6 +286,37 @@
       <div class="tab-pane fade" id="lineage">
         @include('character._tab_lineage', ['character' => $character])
       </div>
+      @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
+        <div class="tab-pane fade" id="settings-all">
+          {{-- is MYO --}}
+          {!! Form::open([
+              'url' => $character->is_myo_slot
+                  ? 'admin/myo/' . $character->id . '/settings'
+                  : 'admin/character/' . $character->slug . '/settings'
+          ]) !!}
+          {{-- is Visible --}}
+          <div class="form-group">
+            <h3>Character-wide settings</h3>
+            {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+            {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!}
+            {!! add_help(
+                'Turn this off to hide the character. Only mods with the Manage Masterlist power (that\'s you!) can view it - the owner will also not be able to see the character\'s page.'
+            ) !!}
+          </div>
+          <div class="text-right">
+            {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+          </div>
+          {!! Form::close() !!}
+          <hr />
+          <div class="text-right">
+            <a
+              href="#"
+              class="btn btn-outline-danger btn-sm delete-character"
+              data-id="{{ $character->id }}"
+            >Delete</a>
+          </div>
+        </div>
+      @endif
     </div>
   </div>
 @endsection

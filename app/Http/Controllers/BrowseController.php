@@ -357,7 +357,7 @@ class BrowseController extends Controller {
 
     return view('browse.masterlist', [
       'isMyo'       => false,
-      'characters'  => $query->paginate(24)->appends($request->query()),
+      'characters'  => $query->paginate(48)->appends($request->query()),
       'categories'  => [0 => 'Any Category'] + CharacterCategory::whereNotIn('id', $subCategories)->visible(Auth::check() ? Auth::user() : null)->orderBy('character_categories.sort', 'DESC')->pluck('name', 'id')->toArray(),
       'specieses'   => [0 => 'Any Species'] + Species::whereNotIn('id', $subSpecies)->visible(Auth::check() ? Auth::user() : null)->orderBy('specieses.sort', 'DESC')->pluck('name', 'id')->toArray(),
       'subtypes'    => [0 => 'Any Subtype'] + Subtype::visible(Auth::check() ? Auth::user() : null)->orderBy('subtypes.sort', 'DESC')->pluck('name', 'id')->toArray(),
@@ -772,7 +772,7 @@ class BrowseController extends Controller {
 
     return view('browse.sub_masterlist', [
       'isMyo'       => false,
-      'characters'  => $query->paginate(24)->appends($request->query()),
+      'characters'  => $query->paginate(48)->appends($request->query()),
       'categories'  => [0 => 'Any Category'] + $subCategory,
       'specieses'   => [0 => 'Any Species'] + $subSpecies,
       'subtypes'    => [0 => 'Any Subtype'] + Subtype::visible(Auth::check() ? Auth::user() : null)->orderBy('subtypes.sort', 'DESC')->pluck('name', 'id')->toArray(),
@@ -843,7 +843,7 @@ class BrowseController extends Controller {
 
     return view('browse.character_likes_leaderboard', [
       'isMyo' => false,
-      'characters' => $query->get()->$sort('likeTotal')->paginate(24)->appends($request->query()),
+      'characters' => $query->get()->$sort('likeTotal')->paginate(48)->appends($request->query()),
       'sublists' => Sublist::orderBy('sort', 'DESC')->get(),
       'userOptions' => User::query()->orderBy('name')->pluck('name', 'id')->toArray(),
       'randomcharacter' => $randomcharacter,

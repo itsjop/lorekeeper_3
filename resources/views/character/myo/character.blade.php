@@ -36,7 +36,7 @@
         </li>
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
           <li class="nav-item">
-            <a class="nav-link" id="settingsTab" data-bs-toggle="tab" href="#settings-all" role="tab">
+            <a class="nav-link h-100 grid ac-center" id="settingsTab" data-bs-toggle="tab" href="#settings-all" role="tab">
               <i class="fas fa-cog"></i></a>
           </li>
         @endif

@@ -97,12 +97,14 @@
     {{-- <h5 class="ruled-left text-700"> Misc. </h5> --}}
 
     <div class="flex small jc-center gap-_5">
-      <p style="text-align: end;"><strong>Uploaded: </strong>
+      <p style="text-align: end;">
+        <strong>Uploaded: </strong>
         <br>
         {!! format_onlyDate($image->created_at, false) !!}
       </p>
       •
-      <p><strong>Last Edited: </strong>
+      <p>
+        <strong>Last Edited: </strong>
         <br>
         {!! pretty_date($image->updated_at) !!}
       </p>
@@ -126,33 +128,46 @@
           <i class="fas fa-caret-down"></i>
           Administrative
         </summary>
+
         <a
           href="#"
           class="btn btn-outline-info btn-sm edit-features"
           data-id="{{ $image->id }}"
         >
           <i class="fas fa-cog"></i>
-          Edit Character
+          Edit Character Settings
         </a>
+
         <a
           href="#"
           class="btn btn-outline-info btn-sm edit-credits"
           data-id="{{ $image->id }}"
-        ><i class="fas fa-cog"></i> Edit Artists</a>
+        >
+          <i class="fas fa-cog"></i>
+          Edit Artists
+        </a>
+
+        {{-- {!! Form::open([
+            'url' => $character->is_myo_slot
+                ? 'admin/myo/' . $character->id . '/settings'
+                : 'admin/character/' . $character->slug . '/settings'
+        ]) !!} --}}
         {!! Form::open(['url' => 'admin/character/image/' . $image->id . '/settings']) !!}
+        <h5>Image-specific settings</h5>
         <div class="form-group">
-          {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => '']) !!}
+          {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
           {!! Form::label('is_visible', 'Is Viewable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will not be visible by anyone without the Manage Masterlist power.') !!}
         </div>
         <div class="form-group">
-          {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => '']) !!}
+          {!! Form::checkbox('is_valid', 1, $image->is_valid, ['class' => '', 'data-toggle' => 'toggle']) !!}
           {!! Form::label('is_valid', 'Is Valid', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
               'If this is turned off, the image will still be visible, but displayed with a note that the image is not a valid reference.'
           ) !!}
         </div>
         @if (config('lorekeeper.settings.enable_character_content_warnings'))
           <div class="form-group">
-            {!! Form::label('Content Warnings') !!} {!! add_help(
+            {!! Form::label('Content Warnings') !!}
+            {!! add_help(
                 'These warnings will be displayed on the character\'s page. They are not required, but are recommended if the character contains sensitive content.'
             ) !!}
             {!! Form::text('content_warnings', null, [
@@ -163,7 +178,7 @@
           </div>
         @endif
         <div class="text-right">
-          {!! Form::submit('Edit', ['class' => 'btn btn-primary mb-3']) !!}
+          {!! Form::submit('Save', ['class' => 'btn btn-primary mb-3']) !!}
         </div>
         {!! Form::close() !!}
 
