@@ -29,7 +29,8 @@
                   src="{{ $request->imageUrl }}?v={{ $request->updated_at->timestamp }}"
                   class="mw-100"
                   alt="Request {{ $request->id }}"
-                /></a>
+                />
+              </a>
             </div>
           </div>
           <div class="">
@@ -44,7 +45,8 @@
                   src="{{ $request->thumbnailUrl }}?v={{ $request->updated_at->timestamp }}"
                   class="mw-100"
                   alt="Thumbnail for request {{ $request->id }}"
-                /></a>
+                />
+              </a>
             </div>
           </div>
         </div>

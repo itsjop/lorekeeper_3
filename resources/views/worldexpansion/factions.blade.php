@@ -27,10 +27,10 @@
                 'alpha-reverse' => 'Sort Alphabetically (Z-A)',
                 'type' => 'Sort by Type',
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'type',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -48,26 +48,35 @@
           <div class="card-header">
             <div class="world-entry-image">
               @isset($faction->thumb_extension)
-                <a href="{{ $faction->thumbUrl }}" data-lightbox="entry" data-title="{{ $faction->name }}">
-                  <img src="{{ $faction->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" /></a>
+                <a
+                  href="{{ $faction->thumbUrl }}"
+                  data-lightbox="entry"
+                  data-title="{{ $faction->name }}"
+                >
+                  <img src="{{ $faction->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" />
+                </a>
               @endisset
             </div>
             <h3 class="mb-0 text-center">{!! $faction->fullDisplayName !!}</h3>
             <p class="mb-0 text-center">{!! $faction->category ? $faction->category->displayName : '' !!}</p>
 
-            <p class="text-center mb-0"><strong>
+            <p class="text-center mb-0">
+              <strong>
                 {!! $faction->type ? ucfirst($faction->type->displayName) : '' !!} {!! $faction->parent ? 'inside ' . $faction->parent->displayName : '' !!}
-              </strong></p>
+              </strong>
+            </p>
           </div>
           <div class="card-body py-0">
             @if (($user_enabled && $faction->is_user_faction) || ($ch_enabled && $faction->is_character_faction))
               <div class="pt-3">
-                <p class="text-center mb-0"><strong>
+                <p class="text-center mb-0">
+                  <strong>
                     Can be joined by
                     {!! $faction->is_character_faction && $faction->is_user_faction ? 'both' : '' !!}
                     {!! $user_enabled && $faction->is_user_faction ? 'users' : '' !!}{!! $faction->is_character_faction && $faction->is_user_faction ? ' and' : '' !!}{!! !$faction->is_character_faction && $faction->is_user_faction ? '.' : '' !!}
                     {!! $ch_enabled && $faction->is_character_faction ? 'characters.' : '' !!}
-                  </strong></p>
+                  </strong>
+                </p>
               </div>
             @endif
 
@@ -102,7 +111,8 @@
           @if (count(allAttachments($faction)))
             <div class="card-footer mt-auto">
               @foreach (allAttachments($faction) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }} {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+                <p class="text-center mb-0">Associated with {{ count($attachments) }}
+                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
               @endforeach
             </div>
           @endif
@@ -113,5 +123,6 @@
   </div>
   {!! $factions->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $factions->total() }} result{{ $factions->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted">{{ $factions->total() }} result{{ $factions->total() == 1 ? '' : 's' }} found.
+  </div>
 @endsection

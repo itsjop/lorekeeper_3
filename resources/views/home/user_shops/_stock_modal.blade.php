@@ -4,7 +4,13 @@
   <div class="text-center mb-3">
     <div class="mb-1">
       <a href="{{ $stock->item->idUrl }}">
-        <img src="{{ $stock->item->imageUrl }}" alt="{{ $stock->item->name }}" /></a>
+        <img src="{{ $stock->item->imageUrl }}" alt="{{ $stock->item->name }}" />
+      </a>
+    </div>
+    <div>
+      <a href="{{ $stock->item->idUrl }}">
+        <strong>{{ $stock->item->name }}</strong>
+      </a>
     </div>
     <div>
       <a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a>
@@ -15,7 +21,12 @@
 
   @if ($stock->item->parsed_description)
     <div class="mb-2">
-      <a data-bs-toggle="collapse" href="#itemDescription" class="h5">Description <i class="fas fa-caret-down"></i></a>
+      <a
+        data-bs-toggle="collapse"
+        href="#itemDescription"
+        class="h5"
+      >Description <i class="fas fa-caret-down"></i>
+      </a>
       <div class="card collapse show mt-1" id="itemDescription">
         <div class="card-body">
           {!! $stock->item->parsed_description !!}

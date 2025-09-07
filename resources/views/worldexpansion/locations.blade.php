@@ -65,9 +65,11 @@
           <h3 class="mb-0 text-center">{!! $location->fullDisplayName !!}</h3>
           <p class="mb-0 text-center">{!! $location->category ? $location->category->displayName : '' !!}</p>
 
-          <p class="text-center mb-0"><strong>
+          <p class="text-center mb-0">
+            <strong>
               {!! $location->type ? ucfirst($location->type->displayName) : '' !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!}
-            </strong></p>
+            </strong>
+          </p>
         </div>
         @if (count($location->children))
           <div class="card-basic p-3">

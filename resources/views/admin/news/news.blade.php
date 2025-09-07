@@ -9,7 +9,8 @@
 
   <h1>News</h1>
 
-  <p>You can create new news posts here. Creating a news post alerts every user that there is a new post, unless the post is marked as not viewable (see the post creation page for details).</p>
+  <p>You can create new news posts here. Creating a news post alerts every user that there is a new post, unless the post is marked
+    as not viewable (see the post creation page for details).</p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/news/create') }}">
@@ -41,9 +42,17 @@
                 <div class="logs-table-cell">
                   @if (!$news->is_visible)
                     @if ($news->post_at)
-                      <i class="fas fa-clock mr-1" data-bs-toggle="tooltip" title="This post is scheduled to be posted in the future."></i>
+                      <i
+                        class="fas fa-clock mr-1"
+                        data-bs-toggle="tooltip"
+                        title="This post is scheduled to be posted in the future."
+                      ></i>
                     @else
-                      <i class="fas fa-eye-slash mr-1" data-bs-toggle="tooltip" title="This post is hidden."></i>
+                      <i
+                        class="fas fa-eye-slash mr-1"
+                        data-bs-toggle="tooltip"
+                        title="This post is hidden."
+                      ></i>
                     @endif
                   @endif
                   <a href="{{ $news->url }}">{{ $news->title }}</a>

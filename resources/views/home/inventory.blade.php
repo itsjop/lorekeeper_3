@@ -13,11 +13,14 @@
   <div class="grid grid-4-col mb-3">
     <a class="btn btn-secondary consolidate-inventory" href="#">Consolidate</a>
     <a class="btn btn-primary" href="{{ url('inventory/account-search') }}">
-      <i class="fas fa-search"></i> Account Search</a>
+      <i class="fas fa-search">
+      </i> Account Search</a>
     <a class="btn btn-primary" href="{{ url('inventory/full-inventory') }}">
-      <i class="fas fa-warehouse"></i> Full Inventory</a>
+      <i class="fas fa-warehouse">
+      </i> Full Inventory</a>
     <a class="btn btn-primary" href="{{ url('inventory/quickstock') }}">
-      <i class="fas fa-truck"></i> Quickstock</a>
+      <i class="fas fa-truck">
+      </i> Quickstock</a>
 
   </div>
 
@@ -36,7 +39,8 @@
           title="Default View"
           alt="Default View"
         >
-          <i class="fas fa-th"></i></button>
+          <i class="fas fa-th"></i>
+        </button>
         <button
           type="button"
           class="btn btn-secondary sum-view-button m-0 ml-2"
@@ -44,7 +48,8 @@
           title="Summarized View"
           alt="Summarized View"
         >
-          <i class="fas fa-bars"></i></button>
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
 
       <div class="name form-group m-0 w-100">

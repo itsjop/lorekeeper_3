@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Areas' => 'admin/cultivation/areas', ($area->id ? 'Edit' : 'Create') . ' Area' => $area->id ? 'admin/cultivation/areas/edit/' . $area->id : 'admin/cultivation/areas/edit']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Areas' => 'admin/cultivation/areas',
+      ($area->id ? 'Edit' : 'Create') . ' Area' => $area->id
+          ? 'admin/cultivation/areas/edit/' . $area->id
+          : 'admin/cultivation/areas/edit'
+  ]) !!}
 
   <h1>{{ $area->id ? 'Edit' : 'Create' }} Area
     @if ($area->id)
@@ -14,8 +20,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $area->id ? 'admin/cultivation/areas/edit/' . $area->id : 'admin/cultivation/areas/edit', 'files' => true]) !!}
-
+  {!! Form::open([
+      'url' => $area->id ? 'admin/cultivation/areas/edit/' . $area->id : 'admin/cultivation/areas/edit',
+      'files' => true
+  ]) !!}
 
   <div class="card mb-3">
     <div class="card-header h3">Basic Information</div>
@@ -39,30 +47,58 @@
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($area->background_extension)
-          <a href="{{ $area->backgroundImageUrl }}" data-lightbox="entry" data-title="{{ $area->name }}">
-            <img src="{{ $area->backgroundImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a
+            href="{{ $area->backgroundImageUrl }}"
+            data-lightbox="entry"
+            data-title="{{ $area->name }}"
+          >
+            <img
+              src="{{ $area->backgroundImageUrl }}"
+              class="mw-100 float-left mr-3"
+              style="max-height:125px"
+            >
+          </a>
         @endif
         {!! Form::label('Background Image (Optional)') !!} {!! add_help('This image will serve as the background to the area which plots will be rendered on to.') !!}
         <div>{!! Form::file('background_image') !!}</div>
         <div class="text-muted">Recommended size: any, but might need some fiddling to look good.</div>
         @if (isset($area->background_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_background', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Background Image As-Is', 'data-on' => 'Remove Background Image']) !!}
+            {!! Form::checkbox('remove_background', 1, false, [
+                'class' => 'form-check-input',
+                'data-toggle' => 'toggle',
+                'data-off' => 'Leave Background Image As-Is',
+                'data-on' => 'Remove Background Image'
+            ]) !!}
           </div>
         @endif
       </div>
 
       <div class="form-group col-md-6">
         @if ($area->plot_extension)
-          <a href="{{ $area->plotImageUrl }}" data-lightbox="entry" data-title="{{ $area->name }}">
-            <img src="{{ $area->plotImageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a
+            href="{{ $area->plotImageUrl }}"
+            data-lightbox="entry"
+            data-title="{{ $area->name }}"
+          >
+            <img
+              src="{{ $area->plotImageUrl }}"
+              class="mw-100 float-left mr-3"
+              style="max-height:125px"
+            >
+          </a>
         @endif
         {!! Form::label('Default Plot Image (Optional)') !!} {!! add_help('This image is for plots that are not yet ready for planting.') !!}
         <div>{!! Form::file('plot_image') !!}</div>
         <div class="text-muted">Recommended size: 250px wide, as that is what images will be sized to.</div>
         @if (isset($area->plot_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_plot', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Plot Image As-Is', 'data-on' => 'Remove Plot Image']) !!}
+            {!! Form::checkbox('remove_plot', 1, false, [
+                'class' => 'form-check-input',
+                'data-toggle' => 'toggle',
+                'data-off' => 'Leave Plot Image As-Is',
+                'data-on' => 'Remove Plot Image'
+            ]) !!}
           </div>
         @endif
       </div>
@@ -87,7 +123,11 @@
       </div>
 
       <div class="text-right mb-3">
-        <a href="#" class="btn btn-outline-info" id="addPlot">Add Plot</a>
+        <a
+          href="#"
+          class="btn btn-outline-info"
+          id="addPlot"
+        >Add Plot</a>
       </div>
 
       <table class="table table-sm" id="plotTable">
@@ -112,7 +152,10 @@
   @endif
 
   <div class="form-group">
-    {!! Form::checkbox('is_active', 1, $area->id ? $area->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $area->id ? $area->is_active : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
     {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the type will not be visible to regular users.') !!}
   </div>
 
@@ -121,7 +164,6 @@
   </div>
 
   {!! Form::close() !!}
-
 
   <div id="plotRowData" class="hide">
     <table class="table table-sm">

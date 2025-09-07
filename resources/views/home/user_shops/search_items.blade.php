@@ -9,9 +9,11 @@
 
   <h1>User Shop Item Search</h1>
 
-  <p>Select an item that you are looking to buy from other users, and you will be able to see if any shops are currently stocking it, as well as the cost of each user's items.</p>
+  <p>Select an item that you are looking to buy from other users, and you will be able to see if any shops are currently stocking
+    it, as well as the cost of each user's items.</p>
   <p>Items that are not currently stocked by any shops will not be shown.</p>
-  <p>Selecting a category will limit the search to only items in that category, unless they have been specifically added to the search.</p>
+  <p>Selecting a category will limit the search to only items in that category, unless they have been specifically added to the
+    search.</p>
 
   {!! Form::open(['method' => 'GET', 'class' => '']) !!}
   <div class="form-inline justify-content-end">
@@ -21,11 +23,14 @@
           'class' => 'form-control',
           'placeholder' => 'Select Items',
           'style' => 'width: 25em; max-width: 100%;',
-          'multiple',
+          'multiple'
       ]) !!}
     </div>
     <div class="form-group ml-3 mb-3">
-      {!! Form::select('item_category_id', $categories, Request::get('item_category_id'), ['class' => 'form-control', 'placeholder' => 'Search by Category']) !!}
+      {!! Form::select('item_category_id', $categories, Request::get('item_category_id'), [
+          'class' => 'form-control',
+          'placeholder' => 'Search by Category'
+      ]) !!}
     </div>
     <div class="form-group ml-3 mb-3">
       {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
@@ -35,11 +40,14 @@
 
   @if ($searched_items)
     <h3>Search Results</h3>
-    <p><b>Searching for: </b>{!! $searched_items->pluck('name')->implode(', ') !!}</p>
+    <p>
+      <b>Searching for: </b>{!! $searched_items->pluck('name')->implode(', ') !!}
+    </p>
     @if ($category)
       <p>
         <b>Category: </b>{!! $category->displayName !!}
-        <br><small>Note that items listed also include items from the chosen category.</small>
+        <br>
+        <small>Note that items listed also include items from the chosen category.</small>
       </p>
     @endif
     @if (count($shopItems) && $shopItems->pluck('quantity')->count() > 0)

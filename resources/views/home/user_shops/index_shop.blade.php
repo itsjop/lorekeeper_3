@@ -13,8 +13,9 @@
   <p>These are user-owned shops that sell items. Not to be confused with official, admin-made shops.</p>
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('user-shops/item-search') }}">
-      <i class="fas fa-search mr-1"></i>Search by
-      Items</a>
+      <i class="fas fa-search mr-1">
+      </i>Search by Items
+    </a>
   </div>
 
   @if (Auth::user()->isStaff)
@@ -28,7 +29,7 @@
     <div class="form-group mr-3 mb-3">
       {!! Form::text('name', Request::get('name'), [
           'class' => 'form-control',
-          'placeholder' => 'Search by Shop Name',
+          'placeholder' => 'Search by Shop Name'
       ]) !!}
     </div>
     <div class="form-group mr-3 mb-3">
@@ -40,10 +41,10 @@
               'newest' => 'Newest First',
               'oldest' => 'Oldest First',
               'update' => 'Sort Last Updated (New-Old)',
-              'update-reverse' => 'Sort Last Updated (Old-New)',
+              'update-reverse' => 'Sort Last Updated (Old-New)'
           ],
           Request::get('sort') ?: 'category',
-          ['class' => 'form-control'],
+          ['class' => 'form-control']
       ) !!}
     </div>
     <div class="form-group mb-3">
@@ -59,7 +60,11 @@
         @if ($shop->has_image)
           <div class="shop-image container">
             <a href="{{ $shop->url }}">
-              <img src="{{ $shop->shopImageUrl }}" style="max-width: 200px !important; max-height: 200px !important;" alt="{{ $shop->name }}" />
+              <img
+                src="{{ $shop->shopImageUrl }}"
+                style="max-width: 200px !important; max-height: 200px !important;"
+                alt="{{ $shop->name }}"
+              />
             </a>
           </div>
         @endif
@@ -74,7 +79,6 @@
     @endforeach
   </div>
   {!! $shops->render() !!}
-
 
   <div class="text-center mt-4 small text-muted">{{ $shops->total() }} result{{ $shops->total() == 1 ? '' : 's' }} found.
   </div>

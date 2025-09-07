@@ -45,8 +45,9 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/submissions/pending') }}" class="card-link">View Queue <span
-                  class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/submissions/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1">
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -66,8 +67,9 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/claims/pending') }}" class="card-link">View Queue <span
-                  class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/claims/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1">
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -91,7 +93,9 @@
             <div class="text-right">
               <a href="{{ url('admin/design-approvals/pending') }}" class="card-link">View Queue <span
                   class="fas fa-caret-right ml-1"
-                ></span></a>
+                >
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -112,7 +116,9 @@
             </p>
             <div class="text-right">
               <a href="{{ url('admin/myo-approvals/pending') }}" class="card-link">View Queue <span
-                  class="fas fa-caret-right ml-1"></span></a>
+                  class="fas fa-caret-right ml-1">
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -136,7 +142,9 @@
               <div class="text-right">
                 <a href="{{ url('admin/masterlist/transfers/incoming') }}" class="card-link">View Queue <span
                     class="fas fa-caret-right ml-1"
-                  ></span></a>
+                  >
+                  </span>
+                </a>
               </div>
             </div>
           </div>
@@ -165,8 +173,9 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/reports/pending') }}" class="card-link">View Queue <span
-                  class="fas fa-caret-right ml-1"></span></a>
+              <a href="{{ url('admin/reports/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1">
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -207,7 +216,9 @@
               <div class="text-right">
                 <a href="{{ url('admin/gallery/submissions/pending') }}" class="card-link">View Queue <span
                     class="fas fa-caret-right ml-1"
-                  ></span></a>
+                  >
+                  </span>
+                </a>
               </div>
             </div>
           </div>
@@ -231,7 +242,9 @@
               <div class="text-right">
                 <a href="{{ url('admin/gallery/currency/pending') }}" class="card-link">View Queue <span
                     class="fas fa-caret-right ml-1"
-                  ></span></a>
+                  >
+                  </span>
+                </a>
               </div>
             </div>
           </div>

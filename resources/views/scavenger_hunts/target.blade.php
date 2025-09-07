@@ -40,7 +40,9 @@
                 {!! Form::submit('Claim', ['class' => 'btn btn-primary']) !!}
                 {!! Form::close() !!}
               @else
-                <p><strong>You've already claimed this!</strong></p>
+                <p>
+                  <strong>You've already claimed this!</strong>
+                </p>
               @endif
             @else
               <p>This hunt isn't active. Check the <a href="{{ $hunt->url }}">hunt's page</a> for more information!</p>

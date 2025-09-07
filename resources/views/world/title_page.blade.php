@@ -21,7 +21,17 @@
           <div class="row world-entry">
             @if ($title->imageUrl)
               <div class="col-md-3 world-entry-image">
-                <a href="{{ $title->imageUrl }}" data-lightbox="entry" data-title="{{ $title->title }}"><img src="{{ $title->imageUrl }}" class="world-entry-image" alt="{{ $title->title }}" /></a>
+                <a
+                  href="{{ $title->imageUrl }}"
+                  data-lightbox="entry"
+                  data-title="{{ $title->title }}"
+                >
+                  <img
+                    src="{{ $title->imageUrl }}"
+                    class="world-entry-image"
+                    alt="{{ $title->title }}"
+                  />
+                </a>
               </div>
             @endif
             <div class="{{ $title->imageUrl ? 'col-md-9' : 'col-12' }}">
@@ -29,7 +39,8 @@
                 {!! $title->displayNameFull !!}
                 <div class="float-right small">
                   @if (isset($title->searchCharactersUrl) && $title->searchCharactersUrl)
-                    <a href="{{ $title->searchCharactersUrl }}" class="world-entry-search text-muted small ml-4"><i class="fas fa-search"></i> Characters</a>
+                    <a href="{{ $title->searchCharactersUrl }}" class="world-entry-search text-muted small ml-4">
+                      <i class="fas fa-search"></i> Characters</a>
                   @endif
                 </div>
               </h1>

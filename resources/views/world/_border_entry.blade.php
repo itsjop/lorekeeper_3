@@ -3,8 +3,17 @@
     <div class="row no-gutters">
       <div class="col-6 col-md-12">
         <div class="user-avatar">
-          <a href="{{ $border->imageUrl }}" data-lightbox="entry" data-title="{{ $border->name }}" class=>
-            <img src="{{ $border->imageUrl }}" class="world-entry-image" alt="{{ $border->name }}" />
+          <a
+            href="{{ $border->imageUrl }}"
+            data-lightbox="entry"
+            data-title="{{ $border->name }}"
+            class=
+          >
+            <img
+              src="{{ $border->imageUrl }}"
+              class="world-entry-image"
+              alt="{{ $border->name }}"
+            />
           </a>
         </div>
       </div>
@@ -20,11 +29,21 @@
       <h5>Layer Preview</h5>
       <div class="form-group">
         {!! Form::label('Top Layer') !!}
-        {!! Form::select('top_border', ['0' => 'Select Top Layer'] + $border->topLayers()->get()->pluck('settingsName', 'id')->toArray(), $border->id, ['class' => 'form-control', 'id' => 'top-' . $border->id]) !!}
+        {!! Form::select(
+            'top_border',
+            ['0' => 'Select Top Layer'] + $border->topLayers()->get()->pluck('settingsName', 'id')->toArray(),
+            $border->id,
+            ['class' => 'form-control', 'id' => 'top-' . $border->id]
+        ) !!}
       </div>
       <div class="form-group">
         {!! Form::label('Bottom Layer') !!}
-        {!! Form::select('bottom_border', ['0' => 'Select Bottom Layer'] + $border->bottomLayers()->get()->pluck('settingsName', 'id')->toArray(), $border->id, ['class' => 'form-control', 'id' => 'bottom-' . $border->id]) !!}
+        {!! Form::select(
+            'bottom_border',
+            ['0' => 'Select Bottom Layer'] + $border->bottomLayers()->get()->pluck('settingsName', 'id')->toArray(),
+            $border->id,
+            ['class' => 'form-control', 'id' => 'bottom-' . $border->id]
+        ) !!}
       </div>
     @endif
   </div>
@@ -33,19 +52,37 @@
     <h3>
       {!! $border->displayName !!}@if (isset($border->idUrl) && $border->idUrl)
         <a href="{{ $border->idUrl }}" class="world-entry-search text-muted">
-          <i class="fas fa-search"></i></a>
+          <i class="fas fa-search"></i>
+        </a>
       @endif
       @if ($border->admin_only)
-        <i class="fas fa-user-lock text-warning" data-bs-toggle="tooltip" title="This border is exclusive to staff members."></i>
+        <i
+          class="fas fa-user-lock text-warning"
+          data-bs-toggle="tooltip"
+          title="This border is exclusive to staff members."
+        ></i>
       @else
         @if (!$border->is_default)
           @if (Auth::check() && Auth::user()->hasBorder($border->id))
-            <i class="fas fa-lock-open" data-bs-toggle="tooltip" title="You have this border!"></i>
+            <i
+              class="fas fa-lock-open"
+              data-bs-toggle="tooltip"
+              title="You have this border!"
+            ></i>
           @else
-            <i class="fas fa-lock" style="opacity:0.5" data-bs-toggle="tooltip" title="You do not have this border."></i>
+            <i
+              class="fas fa-lock"
+              style="opacity:0.5"
+              data-bs-toggle="tooltip"
+              title="You do not have this border."
+            ></i>
           @endif
         @else
-          <i class="fas fa-user" data-bs-toggle="tooltip" title="This border is automatically available to all users."></i>
+          <i
+            class="fas fa-user"
+            data-bs-toggle="tooltip"
+            title="This border is automatically available to all users."
+          ></i>
         @endif
       @endif
     </h3>
@@ -53,17 +90,23 @@
       <div class="row">
         @if (isset($border->category) && $border->category)
           <div class="col-md">
-            <p><strong>Category:</strong> {!! $border->category->displayName !!}</p>
+            <p>
+              <strong>Category:</strong> {!! $border->category->displayName !!}
+            </p>
           </div>
         @endif
         @if (isset($border->borderArtist) && $border->borderArtist)
           <div class="col-md">
-            <p><strong>Artist:</strong> {!! $border->borderArtist !!}</p>
+            <p>
+              <strong>Artist:</strong> {!! $border->borderArtist !!}
+            </p>
           </div>
         @endif
         @if ($border->hasItem())
           <div class="col-md">
-            <p><strong>Obtained From:</strong> {!! $border->borderItem()->displayName !!}</p>
+            <p>
+              <strong>Obtained From:</strong> {!! $border->borderItem()->displayName !!}
+            </p>
           </div>
         @endif
       </div>
@@ -87,7 +130,9 @@
                   </h5>
                   @if (isset($variant->borderArtist) && $variant->borderArtist)
                     <div class="col-md">
-                      <p><strong>Artist:</strong> {!! $variant->borderArtist !!}</p>
+                      <p>
+                        <strong>Artist:</strong> {!! $variant->borderArtist !!}
+                      </p>
                     </div>
                   @endif
                 </div>

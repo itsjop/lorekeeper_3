@@ -27,10 +27,10 @@
                 'alpha-reverse' => 'Sort Alphabetically (Z-A)',
                 'category' => 'Sort by Category',
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'category',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -48,8 +48,13 @@
           <div class="card-header">
             <div class="world-entry-image">
               @isset($concept->thumb_extension)
-                <a href="{{ $concept->thumbUrl }}" data-lightbox="entry" data-title="{{ $concept->name }}">
-                  <img src="{{ $concept->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" /></a>
+                <a
+                  href="{{ $concept->thumbUrl }}"
+                  data-lightbox="entry"
+                  data-title="{{ $concept->name }}"
+                >
+                  <img src="{{ $concept->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" />
+                </a>
               @endisset
             </div>
             <h3 class="mb-0 text-center">{!! $concept->displayName !!}</h3>
@@ -59,7 +64,8 @@
           @if (count(allAttachments($concept)))
             <div class="card-body">
               @foreach (allAttachments($concept) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }} {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+                <p class="text-center mb-0">Associated with {{ count($attachments) }}
+                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
               @endforeach
             </div>
           @endif
@@ -76,5 +82,6 @@
   </div>
   {!! $concepts->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $concepts->total() }} result{{ $concepts->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted">{{ $concepts->total() }} result{{ $concepts->total() == 1 ? '' : 's' }} found.
+  </div>
 @endsection

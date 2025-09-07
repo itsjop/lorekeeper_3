@@ -93,7 +93,7 @@
         option_render += '<div class="d-inline mr-1"> <img class = "small-icon"alt = "' + escape(item['name']) + '"src = "' +
           escape(item['image_url']) + '" >';
       }
-      option_render += '<span>' + escape(item['name']) + '</span></div>';
+      option_render += '<span>' + escape(item['name']) + '</span> </div > ';
       return option_render;
     }
   });

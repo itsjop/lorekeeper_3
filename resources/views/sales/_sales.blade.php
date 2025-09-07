@@ -24,7 +24,8 @@
     @else
       @include('sales._character', ['character' => $character, 'loop' => $loop])
     @endif
-    {{-- {!! $loop->even ? '<div class="w-100"></div>' : '' !!} --}}
+    {{-- {!! $loop->even ? '<div class="w-100">
+</div>' : '' !!} --}}
   @endforeach
 </div>
 

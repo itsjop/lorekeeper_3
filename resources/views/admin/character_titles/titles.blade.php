@@ -13,7 +13,8 @@
     ease of use, or custom titles can be given to individual characters when editing their traits, etc.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/character-titles/create') }}"><i class="fas fa-plus"></i> Create New Title</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/character-titles/create') }}">
+      <i class="fas fa-plus"></i> Create New Title</a>
   </div>
   @if (!count($titles))
     <p>No titles found.</p>
@@ -23,7 +24,8 @@
         @foreach ($titles as $title)
           <tr class="sort-item" data-id="{{ $title->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $title->displayName !!}
             </td>
             <td class="text-right">

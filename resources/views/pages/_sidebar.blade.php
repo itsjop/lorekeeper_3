@@ -13,8 +13,10 @@
       @if (isset($featured) && $featured)
         <a class="thumb" href="{{ $featured->url }}">
           <div class="character-border">
-            <div class="rainbow"></div>
-            <div class="stars"></div>
+            <div class="rainbow">
+            </div>
+            <div class="stars">
+            </div>
           </div>
           <img
             src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
@@ -51,8 +53,10 @@
         @if (isset($featured) && $featured)
           <a class="thumb" href="{{ $featured->url }}">
             <div class="character-border">
-              <div class="rainbow"></div>
-              <div class="stars"></div>
+              <div class="rainbow">
+              </div>
+              <div class="stars">
+              </div>
             </div>
             <img
               src="{{ $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . '/' . $featured->image->fullsizeFileName)) ? $featured->image->fullsizeUrl : $featured->image->imageUrl }}"
@@ -84,7 +88,8 @@
         </div>
         <div class="ml-badge baddge">
           <div class="flag">
-            <div class="bg"></div>
+            <div class="bg">
+            </div>
             <div class="label">
               {{ ucfirst(getSubtypeInfo($featured->image->subtype_id)) }} Palate
             </div>
@@ -109,8 +114,10 @@
     <div class="details-sb p-2">
       <a class="thumb" href="/world/items/78">
         <div class="character-border">
-          <div class="rainbow kofi"></div>
-          <div class="stars paused"></div>
+          <div class="rainbow kofi">
+          </div>
+          <div class="stars paused">
+          </div>
         </div>
         <img src="{{ asset('images/somnivores/site/kofi-gift.png') }}" class="img-char-thumbnail kofi-gift" />
       </a>

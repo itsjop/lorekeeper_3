@@ -15,7 +15,9 @@
   </div>
   <h1>Location types</h1>
 
-  <p class="mb-0" style="clear:both">Location types are effectively categories for locations - but mostly for organization and display. <strong>eg. Country, Continent, Island.</strong></p>
+  <p class="mb-0" style="clear:both">Location types are effectively categories for locations - but mostly for organization and
+    display. <strong>eg. Country, Continent, Island.</strong>
+  </p>
   <p>The sorting order reflects the order in which the types will be listed on the location type index.</p>
 
   @if (!count($types))
@@ -26,9 +28,11 @@
         @foreach ($types as $type)
           <tr class="sort-item" data-id="{{ $type->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              <a href={!! $type->url !!} @if ($type->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/>
-<br> {{ ucfirst($type->name) }} " @endif />{!! $type->name !!}</a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
+              <a href={!! $type->url !!}
+                @if ($type->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($type->name) }} " @endif
+              />{!! $type->name !!}</a>
               ({!! $type->names !!})
             </td>
             <td class="text-right">

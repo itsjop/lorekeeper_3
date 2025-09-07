@@ -24,7 +24,8 @@
         @foreach ($activities as $activity)
           <tr class="sort-item" data-id="{{ $activity->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $activity->displayName !!}
             </td>
             <td class="text-right">

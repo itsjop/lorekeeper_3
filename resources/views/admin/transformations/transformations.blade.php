@@ -9,7 +9,8 @@
 
   <h1>{{ ucfirst(__('transformations.transformations')) }}</h1>
 
-  <p>{{ ucfirst(__('transformations.transformations')) }} are alternate forms that can be applied to characters. They can be quite varied. When a character has an image with a {{ __('transformations.transformation') }}, it will display as a separate
+  <p>{{ ucfirst(__('transformations.transformations')) }} are alternate forms that can be applied to characters. They can be quite
+    varied. When a character has an image with a {{ __('transformations.transformation') }}, it will display as a separate
     image tab on the character's profile.</p>
 
   <div class="text-right mb-3">
@@ -24,7 +25,8 @@
         @foreach ($transformations as $transformation)
           <tr class="sort-item" data-id="{{ $transformation->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $transformation->displayName !!}
             </td>
             <td class="text-right">

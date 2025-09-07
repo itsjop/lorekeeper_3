@@ -6,8 +6,14 @@
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-bs-toggle="tooltip" title="[ADMIN] Edit Faction" href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}" class="mb-2 float-right">
-      <i class="fas fa-crown"></i></a>
+    <a
+      data-bs-toggle="tooltip"
+      title="[ADMIN] Edit Faction"
+      href="{{ url('admin/world/factions/edit/') . '/' . $faction->id }}"
+      class="mb-2 float-right"
+    >
+      <i class="fas fa-crown"></i>
+    </a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Factions' => 'world/factions', $faction->style => 'world/factions/' . $faction->id]) !!}
   <h1 style="clear:both;">
@@ -16,12 +22,14 @@
   <h5 class="mb-0">{!! ucfirst($faction->type->displayName) !!} {!! $faction->parent ? 'inside ' . $faction->parent->displayName : '' !!}</h5>
 
   @if (($user_enabled && $faction->is_user_faction) || ($ch_enabled && $faction->is_character_faction))
-    <p class="mb-0"><strong>
+    <p class="mb-0">
+      <strong>
         Can be joined by
         {!! $faction->is_character_faction && $faction->is_user_faction ? 'both' : '' !!}
         {!! $user_enabled && $faction->is_user_faction ? 'users' : '' !!}{!! $faction->is_character_faction && $faction->is_user_faction ? ' and' : '' !!}{!! !$faction->is_character_faction && $faction->is_user_faction ? '.' : '' !!}
         {!! $ch_enabled && $faction->is_character_faction ? 'characters.' : '' !!}
-      </strong></p>
+      </strong>
+    </p>
   @endif
 
   @if ($faction->image_extension)
@@ -47,17 +55,17 @@
           <h5 class="mb-0">Contains the following</h5>
 
           <!-- <hr>
-                                            <p class="mb-0">
-                                          @foreach ($faction->children as $key => $child)
+                                              <p class="mb-0">
+                                            @foreach ($faction->children as $key => $child)
   @if ($child->thumb_extension)
   <a href="{{ $child->url }}" data-bs-toggle="tooltip" title="{{ $child->name }}"/>
-                                          <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+                                            <img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $child->displayName !!}
   @endif
   @endforeach
-                                            </p>
-                                            <hr> -->
+                                              </p>
+                                              <hr> -->
           @foreach ($faction->children->groupBy('type_id') as $group => $children)
             <p class="mb-0">
               <strong>
@@ -82,16 +90,16 @@
           <h5 class="mb-0">Member Figure{{ count($faction->members) == 1 ? '' : 's' }}</h5>
 
           <!-- <hr>
-                                            <p class="mb-0">
-                                          @foreach ($faction->members as $key => $member)
+                                              <p class="mb-0">
+                                            @foreach ($faction->members as $key => $member)
   @if ($member->thumb_extension)
   <a href="{{ $member->url }}" data-bs-toggle="tooltip" title="{{ $member->name }}"/>
-                                          <img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
+                                            <img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
   {!! $member->displayName !!}
   @endif
   @endforeach
-                                            </p> -->
+                                              </p> -->
 
           <hr>
           @foreach ($faction->members->groupBy('category_id') as $key => $members)
@@ -114,7 +122,8 @@
     @endif
 
     @if ($faction->ranks()->count())
-      <div class="w-100"></div>
+      <div class="w-100">
+      </div>
       <div class="text-center col-md-12">
         <div class="card h-100 py-3">
           <h5 class="mb-0">Faction Ranks</h5>
@@ -123,7 +132,9 @@
           <div class="row">
             @if ($faction->ranks()->where('is_open', 0)->count())
               <div class="col-md">
-                <h4><small>Leadership</small></h4>
+                <h4>
+                  <small>Leadership</small>
+                </h4>
                 @foreach ($faction->ranks()->where('is_open', 0)->orderBy('sort')->get() as $rank)
                   <h6>{{ $rank->name }}{{ $rank->description ? ': ' . $rank->description : '' }}</h6>
                   @if ($rank->members()->count())
@@ -138,7 +149,9 @@
             @endif
             @if ($faction->ranks()->where('is_open', 1)->count())
               <div class="col-md">
-                <h4><small>Member Ranks</small></h4>
+                <h4>
+                  <small>Member Ranks</small>
+                </h4>
                 @foreach ($faction->ranks()->where('is_open', 1)->orderBy('sort')->get() as $rank)
                   <h6>{{ $rank->name }}{{ $rank->description ? ': ' . $rank->description : '' }}{!! $currency ? ' (' . $currency->display($rank->breakpoint) . ')' : ' (' . $rank->breakpoint . ' Standing)' !!}</h6>
                 @endforeach
@@ -147,7 +160,9 @@
           </div>
           <hr />
           <a href="{{ url('world/factions/' . $faction->id . '/members') }}">
-            <h4><small>Members: {{ $faction->factionMembers->count() }} ・ See All</small></h4>
+            <h4>
+              <small>Members: {{ $faction->factionMembers->count() }} ・ See All</small>
+            </h4>
           </a>
         </div>
       </div>

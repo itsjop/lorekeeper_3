@@ -26,7 +26,8 @@
         @foreach ($categories as $category)
           <tr class="sort-border" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $category->displayName !!}
             </td>
             <td class="text-right">

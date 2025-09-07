@@ -17,7 +17,8 @@
         @if ($daily->has_image)
           <div class="daily-image hover-preview">
             <a href="{{ $daily->url }}">
-              <img src="{{ $daily->dailyImageUrl }}" alt="{{ $daily->name }}" /></a>
+              <img src="{{ $daily->dailyImageUrl }}" alt="{{ $daily->name }}" />
+            </a>
           </div>
         @endif
         <div class="daily-name mt-1">

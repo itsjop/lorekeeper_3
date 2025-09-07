@@ -4,7 +4,8 @@
   <div class="text-center">
     <div class="mb-1 inventory-main-img">
       <a href="{{ $item->url }}">
-        <img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
+        <img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" />
+      </a>
     </div>
     <div @if (count($item->tags)) class="mb-1 inventory-main-name" @endif>
       <a href="{{ $item->url }}">{{ $item->name }}</a>

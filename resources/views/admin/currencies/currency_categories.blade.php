@@ -9,8 +9,10 @@
 
   <h1>Currency Categories</h1>
 
-  <p>This is a list of currency categories that will be used to sort currencies. Creating currency categories is entirely optional, but recommended if you have a lot of currencies in the game.</p>
-  <p>The sorting order reflects the order in which currency categories will be displayed in the bank, as well as on the world pages.</p>
+  <p>This is a list of currency categories that will be used to sort currencies. Creating currency categories is entirely optional,
+    but recommended if you have a lot of currencies in the game.</p>
+  <p>The sorting order reflects the order in which currency categories will be displayed in the bank, as well as on the world pages.
+  </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/currency-categories/create') }}">
@@ -25,7 +27,8 @@
         @foreach ($categories as $category)
           <tr class="sort-item" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               @if (!$category->is_visible)
                 <i class="fas fa-eye-slash mr-1"></i>
               @endif

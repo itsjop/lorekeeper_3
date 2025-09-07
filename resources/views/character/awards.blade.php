@@ -9,15 +9,17 @@
     {!! breadcrumbs([
         ucfirst(__('lorekeeper.myo')) . ' Masterlist' => 'myos',
         $character->fullName => $character->url,
-        ucfirst(__('awards.awardcase')) => $character->url . '/awardcase',
+        ucfirst(__('awards.awardcase')) => $character->url . '/awardcase'
     ]) !!}
   @else
     {!! breadcrumbs([
-        $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : ucfirst(__('lorekeeper.character')) . ' masterlist' => $character->category->masterlist_sub_id
+        $character->category->masterlist_sub_id
+            ? $character->category->sublist->name . ' Masterlist'
+            : ucfirst(__('lorekeeper.character')) . ' masterlist' => $character->category->masterlist_sub_id
             ? 'sublist/' . $character->category->sublist->key
             : 'masterlist',
         $character->fullName => $character->url,
-        ucfirst(__('awards.awardcase')) => $character->url . '/' . __('awards.awardcase'),
+        ucfirst(__('awards.awardcase')) => $character->url . '/' . __('awards.awardcase')
     ]) !!}
   @endif
 
@@ -25,7 +27,14 @@
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-bs-target="#grantModal"><i class="fas fa-cog"></i> Admin</a>
+      <a
+        href="#"
+        class="float-right btn btn-outline-info btn-sm"
+        id="grantButton"
+        data-bs-toggle="modal"
+        data-bs-target="#grantModal"
+      >
+        <i class="fas fa-cog"></i> Admin</a>
     @endif
     {{ __('awards.awardcase') }}
   </h3>
@@ -33,15 +42,27 @@
   @foreach ($awards as $categoryId => $categoryAwards)
     <div class="card mb-3 awards-category">
       <h5 class="card-header awards-header">
-        {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
+        {!! isset($categories[$categoryId])
+            ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
+            : 'Miscellaneous' !!}
       </h5>
       <div class="card-body awards-body">
         @foreach ($categoryAwards->chunk(4) as $chunk)
           <div class="row mb-3">
             @foreach ($chunk as $awardId => $stack)
-              <div class="col-sm-3 col-6 text-center awards-award" data-id="{{ $stack->first()->pivot->id }}" data-name="{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}">
+              <div
+                class="col-sm-3 col-6 text-center awards-award"
+                data-id="{{ $stack->first()->pivot->id }}"
+                data-name="{{ $character->name ? $character->name : $character->slug }}'s {{ $stack->first()->name }}"
+              >
                 <div class="mb-1">
-                  <a href="#" class="awards-stack {{ $stack->first()->is_featured ? 'alert alert-success' : '' }}"><img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" class="mw-100" /></a>
+                  <a href="#" class="awards-stack {{ $stack->first()->is_featured ? 'alert alert-success' : '' }}">
+                    <img
+                      src="{{ $stack->first()->imageUrl }}"
+                      alt="{{ $stack->first()->name }}"
+                      class="mw-100"
+                    />
+                  </a>
                 </div>
                 <div>
                   <a href="#" class="awards-stack awards-stack-name">{{ $stack->first()->name }}@if ($stack->first()->user_limit != 1)
@@ -75,12 +96,21 @@
   </div>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-    <dialog class="modal fade" id="grantModal" tabindex="-1" role="dialog">
+    <dialog
+      class="modal fade"
+      id="grantModal"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">[ADMIN] Grant {{ ucfirst(__('awards.awards')) }} </span>
-            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
             <p>Note that granting {{ __('awards.awards') }} does not check against any hold limits for
@@ -93,19 +123,23 @@
                 <div class="d-flex mb-2">
                   {!! Form::select('award_ids[]', $awardOptions, null, [
                       'class' => 'form-control mr-2 default award-select',
-                      'placeholder' => 'Select ' . ucfirst(__('awards.award')),
+                      'placeholder' => 'Select ' . ucfirst(__('awards.award'))
                   ]) !!}
                   {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
                   <a href="#" class="remove-award btn btn-danger mb-2 disabled">✖</a>
                 </div>
               </div>
               <div>
-                <a href="#" class="btn btn-primary" id="add-award">Add {{ ucfirst(__('awards.award')) }}</a>
+                <a
+                  href="#"
+                  class="btn btn-primary"
+                  id="add-award"
+                >Add {{ ucfirst(__('awards.award')) }}</a>
               </div>
               <div class="award-row hide mb-2">
                 {!! Form::select('award_ids[]', $awardOptions, null, [
                     'class' => 'form-control mr-2 award-select',
-                    'placeholder' => 'Select ' . ucfirst(__('awards.award')),
+                    'placeholder' => 'Select ' . ucfirst(__('awards.award'))
                 ]) !!}
                 {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
                 <a href="#" class="remove-award btn btn-danger mb-2">✖</a>
@@ -114,12 +148,20 @@
               <h5 class="mt-2">Additional Data</h5>
 
               <div class="form-group">
-                {!! Form::label('data', 'Reason (Optional)') !!} {!! add_help('A reason for the grant. This will be noted in the logs and in the ' . __('awards.award') . '\'s description.') !!}
+                {!! Form::label('data', 'Reason (Optional)') !!} {!! add_help(
+                    'A reason for the grant. This will be noted in the logs and in the ' . __('awards.award') . '\'s description.'
+                ) !!}
                 {!! Form::text('data', null, ['class' => 'form-control', 'maxlength' => 400]) !!}
               </div>
 
               <div class="form-group">
-                {!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help('Additional notes for the ' . __('awards.award') . '. This will appear in the ' . __('awards.award') . '\'s description, but not in the logs.') !!}
+                {!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help(
+                    'Additional notes for the ' .
+                        __('awards.award') .
+                        '. This will appear in the ' .
+                        __('awards.award') .
+                        '\'s description, but not in the logs.'
+                ) !!}
                 {!! Form::text('notes', null, ['class' => 'form-control', 'maxlength' => 400]) !!}
               </div>
 
@@ -134,7 +176,7 @@
                         __('awards.awardcase') .
                         '. ' .
                         ucfirst(__('awards.awards')) .
-                        ' that disallow transfers by default will still not be transferrable.',
+                        ' that disallow transfers by default will still not be transferrable.'
                 ) !!}
               </div>
 

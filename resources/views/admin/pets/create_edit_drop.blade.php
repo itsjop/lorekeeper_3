@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Pet Drops' => 'admin/data/pets/drops',
-      ($drop->id ? 'Edit' : 'Create') . ' Drop Data' => $drop->id ? 'admin/data/pets/drops/edit/' . $drop->pet_id : 'admin/data/pets/drops/create',
+      ($drop->id ? 'Edit' : 'Create') . ' Drop Data' => $drop->id
+          ? 'admin/data/pets/drops/edit/' . $drop->pet_id
+          : 'admin/data/pets/drops/create'
   ]) !!}
 
   <h1>
@@ -42,15 +44,24 @@
     assigned after pet creation in the pet's "Collect" page, accessed via the pet sidebar on applicable pets.
   </p>
   <div class="float-right mb-3">
-    <a href="#" class="btn btn-info" id="addLoot">Add Group</a>
+    <a
+      href="#"
+      class="btn btn-info"
+      id="addLoot"
+    >Add Group</a>
   </div>
   <table class="table table-sm" id="lootTable">
     <thead>
       <tr>
         <th width="25%">Group Label {!! add_help('This label will be shown to users.') !!}</th>
-        <th width="10%">Weight {!! add_help('A higher weight means a pet is more likely to be randomly assigned to this group upon creation. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.') !!}</th>
-        <th width="20%">Chance {!! add_help('Calculated automatically based on the weights. A pet has this percentage of chance of being automatically sorted into this group.') !!}</th>
-        <th width="10%"></th>
+        <th width="10%">Weight {!! add_help(
+            'A higher weight means a pet is more likely to be randomly assigned to this group upon creation. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.'
+        ) !!}</th>
+        <th width="20%">Chance {!! add_help(
+            'Calculated automatically based on the weights. A pet has this percentage of chance of being automatically sorted into this group.'
+        ) !!}</th>
+        <th width="10%">
+        </th>
       </tr>
     </thead>
     <tbody id="lootTableBody">
@@ -59,7 +70,8 @@
           <tr class="drop-row">
             <td class="drop-row-select">{!! Form::text('label[]', $label, ['class' => 'form-control']) !!}</td>
             <td class="drop-row-weight">{!! Form::number('weight[]', $weight, ['class' => 'form-control drop-weight']) !!}</td>
-            <td class="drop-row-chance"></td>
+            <td class="drop-row-chance">
+            </td>
             <td class="text-right">
               <a href="#" class="btn btn-danger remove-drop-button">Remove</a>
             </td>
@@ -74,18 +86,25 @@
   <div class="d-flex my-2">
     {!! Form::number('drop_frequency', $drop->id ? $drop->frequency : 1, [
         'class' => 'form-control mr-2',
-        'placeholder' => 'Drop Frequency',
+        'placeholder' => 'Drop Frequency'
     ]) !!}
-    {!! Form::select('drop_interval', ['hour' => 'Hour', 'day' => 'Day', 'month' => 'Month', 'year' => 'Year'], $drop->id ? $drop->interval : null, ['class' => 'form-control mr-2 default item-select', 'placeholder' => 'Drop Interval']) !!}
+    {!! Form::select(
+        'drop_interval',
+        ['hour' => 'Hour', 'day' => 'Day', 'month' => 'Month', 'year' => 'Year'],
+        $drop->id ? $drop->interval : null,
+        ['class' => 'form-control mr-2 default item-select', 'placeholder' => 'Drop Interval']
+    ) !!}
   </div>
   <div class="form-group">
-    {!! Form::label('cap', 'Drop Cap (Optional)', ['class' => 'form-label ml-3']) !!} {!! add_help('How many batches of drops are allowed to accumulate. Either set to 0 or unset to allow unlimited accumulation.') !!}
+    {!! Form::label('cap', 'Drop Cap (Optional)', ['class' => 'form-label ml-3']) !!} {!! add_help(
+        'How many batches of drops are allowed to accumulate. Either set to 0 or unset to allow unlimited accumulation.'
+    ) !!}
     {!! Form::number('cap', $drop->id ?? null, ['class' => 'form-control mr-2', 'placeholder' => 'Drop Cap']) !!}
   </div>
   <div class="form-group">
     {!! Form::checkbox('is_active', 1, $drop->id ? $drop->isActive : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-toggle' => 'toggle'
     ]) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Whether or not drops for this pet are active. Impacts variants as well.') !!}
   </div>
@@ -115,7 +134,8 @@
               <tr>
                 <th width="25%">Variant</th>
                 <th width="65%">Rewards</th>
-                <th></th>
+                <th>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -151,7 +171,8 @@
         <tr class="drop-row">
           <td class="drop-row-select">{!! Form::text('label[]', null, ['class' => 'form-control']) !!}</td>
           <td class="drop-row-weight">{!! Form::text('weight[]', 1, ['class' => 'form-control drop-weight']) !!}</td>
-          <td class="drop-row-chance"></td>
+          <td class="drop-row-chance">
+          </td>
           <td class="text-right">
             <a href="#" class="btn btn-danger remove-drop-button">Remove</a>
           </td>

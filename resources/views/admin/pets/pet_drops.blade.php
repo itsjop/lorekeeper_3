@@ -14,8 +14,10 @@
     Drop" refers to specific pets' drops.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-secondary" href="{{ url('admin/data/pets') }}"><i class="fas fa-undo-alt mr-1"></i> Return to Pets</a>
-    <a class="btn btn-primary" href="{{ url('admin/data/pets/drops/create') }}"><i class="fas fa-plus mr-1"></i> Create New Pet
+    <a class="btn btn-secondary" href="{{ url('admin/data/pets') }}">
+      <i class="fas fa-undo-alt mr-1"></i> Return to Pets</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/pets/drops/create') }}">
+      <i class="fas fa-plus mr-1"></i> Create New Pet
       Drop</a>
   </div>
 

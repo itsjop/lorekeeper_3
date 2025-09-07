@@ -7,7 +7,6 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Factions' => 'admin/world/factions']) !!}
 
-
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/faction-types') }}">
       <i class="fas fa-folder mr-2"></i> Faction Types</a>
@@ -21,9 +20,9 @@
   <p class="mb-0" style="clear:both;">Factions are specific organizations within your world.</p>
   <p>The sorting order reflects the order in which the factions will be listed on the faction index.</p>
 
-
   @if (!count($types))
-    <div class="alert alert-warning">You will need to create a faction type before you can create any factions, as type is required.</div>
+    <div class="alert alert-warning">You will need to create a faction type before you can create any factions, as type is required.
+    </div>
   @endif
   @if (!count($factions))
     <p>No factions found.</p>
@@ -33,10 +32,11 @@
         @foreach ($factions as $faction)
           <tr class="sort-item" data-id="{{ $faction->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               <a href={!! $faction->url !!}
-                @if ($faction->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $faction->thumbUrl }}' style='max-width:100px;' class='my-1'/>
-<br> {{ ucfirst($faction->style) }} " @endif />{!! $faction->name !!}</a>
+                @if ($faction->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $faction->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($faction->style) }} " @endif
+              />{!! $faction->name !!}</a>
             </td>
             <td class="text-right">
               <a href="{{ url('admin/world/factions/edit/' . $faction->id) }}" class="btn btn-primary">Edit</a>

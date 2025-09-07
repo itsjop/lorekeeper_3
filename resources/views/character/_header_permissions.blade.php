@@ -84,13 +84,19 @@ $closed = !$trading || $writing == 0 || $art == 0;
       </div>
       <div class="perms">
         @if ($trading)
-          <span data-bs-toggle="tooltip" title="OPEN for sale and trade offers."><i class="fas fa-sack-dollar"></i></span>
+          <span data-bs-toggle="tooltip" title="OPEN for sale and trade offers.">
+            <i class="fas fa-sack-dollar"></i>
+          </span>
         @endif
         @if ($writing == 1)
-          <span data-bs-toggle="tooltip" title="OPEN for gift writing."><i class="fas fa-book"></i></span>
+          <span data-bs-toggle="tooltip" title="OPEN for gift writing.">
+            <i class="fas fa-book"></i>
+          </span>
         @endif
         @if ($art == 1)
-          <span data-bs-toggle="tooltip" title="OPEN for gift art."><i class="fas fa-paintbrush"></i></span>
+          <span data-bs-toggle="tooltip" title="OPEN for gift art.">
+            <i class="fas fa-paintbrush"></i>
+          </span>
         @endif
       </div>
     </div>
@@ -102,10 +108,14 @@ $closed = !$trading || $writing == 0 || $art == 0;
       </div>
       <div class="perms">
         @if ($writing == 2)
-          <span data-bs-toggle="tooltip" title="ASK before gifting writing."><i class="fas fa-book"></i></span>
+          <span data-bs-toggle="tooltip" title="ASK before gifting writing.">
+            <i class="fas fa-book"></i>
+          </span>
         @endif
         @if ($art == 2)
-          <span data-bs-toggle="tooltip" title="ASK before gifting art."><i class="fas fa-paintbrush"></i></span>
+          <span data-bs-toggle="tooltip" title="ASK before gifting art.">
+            <i class="fas fa-paintbrush"></i>
+          </span>
         @endif
       </div>
     </div>
@@ -117,13 +127,19 @@ $closed = !$trading || $writing == 0 || $art == 0;
       </div>
       <div class="perms">
         @if (!$trading)
-          <span data-bs-toggle="tooltip" title="CLOSED for sale and trade offers"><i class="fas fa-sack-dollar"></i></span>
+          <span data-bs-toggle="tooltip" title="CLOSED for sale and trade offers">
+            <i class="fas fa-sack-dollar"></i>
+          </span>
         @endif
         @if ($writing == 0)
-          <span data-bs-toggle="tooltip" title="CLOSED for gift writing"><i class="fas fa-book"></i></span>
+          <span data-bs-toggle="tooltip" title="CLOSED for gift writing">
+            <i class="fas fa-book"></i>
+          </span>
         @endif
         @if ($art == 0)
-          <span data-bs-toggle="tooltip" title="CLOSED for gift art"><i class="fas fa-paintbrush"></i></span>
+          <span data-bs-toggle="tooltip" title="CLOSED for gift art">
+            <i class="fas fa-paintbrush"></i>
+          </span>
         @endif
       </div>
     </div>

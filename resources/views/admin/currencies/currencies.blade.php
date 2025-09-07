@@ -10,11 +10,13 @@
   <h1>
     Currencies</h1>
 
-  <p>This is a list of currencies that can be earned by users and/or characters. While they're collectively called "currencies", they can be used to track activity counts, event-only reward points, etc. and are not necessarily transferrable and/or can
+  <p>This is a list of currencies that can be earned by users and/or characters. While they're collectively called "currencies",
+    they can be used to track activity counts, event-only reward points, etc. and are not necessarily transferrable and/or can
     be spent. More information can be found on the creating/editing pages.</p>
 
   <p>The order of currencies as displayed on user and character profiles can be edited from the <strong>
-      <a href="{{ url('admin/data/currencies/sort') }}">Sort Currencies</a></strong> page.</p>
+      <a href="{{ url('admin/data/currencies/sort') }}">Sort Currencies</a>
+    </strong> page.</p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/currency-categories') }}">
@@ -62,7 +64,9 @@
               <div class="logs-table-cell">{!! $currency->display(100) !!}</div>
             </div>
             <div class="col-3 col-md-2">
-              <div class="logs-table-cell">{{ $currency->is_user_owned ? 'User' : '' }} {{ $currency->is_character_owned && $currency->is_user_owned ? '+' : '' }} {{ $currency->is_character_owned ? 'Character' : '' }}</div>
+              <div class="logs-table-cell">{{ $currency->is_user_owned ? 'User' : '' }}
+                {{ $currency->is_character_owned && $currency->is_user_owned ? '+' : '' }}
+                {{ $currency->is_character_owned ? 'Character' : '' }}</div>
             </div>
             <div class="col-3 col-md-1">
               <div class="logs-table-cell">
@@ -75,5 +79,6 @@
     </div>
   </div>
   {!! $currencies->render() !!}
-  <div class="text-center mt-4 small text-muted">{{ $currencies->total() }} result{{ $currencies->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted">{{ $currencies->total() }} result{{ $currencies->total() == 1 ? '' : 's' }} found.
+  </div>
 @endsection

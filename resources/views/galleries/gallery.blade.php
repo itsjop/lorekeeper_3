@@ -28,7 +28,8 @@
   @endif
   <p>{!! $gallery->description !!}</p>
   @if (!$gallery->submissions_count && $gallery->children->count() && $childSubmissions->count())
-    <p>This gallery has no submissions; instead, displayed is a selection of the most recent submissions from its sub-galleries. Please navigate to one of the sub-galleries to view more.</p>
+    <p>This gallery has no submissions; instead, displayed is a selection of the most recent submissions from its sub-galleries.
+      Please navigate to one of the sub-galleries to view more.</p>
   @endif
 
   <div>
@@ -51,10 +52,10 @@
               'alpha' => 'Sort Alphabetically (A-Z)',
               'alpha-reverse' => 'Sort Alphabetically (Z-A)',
               'prompt' => 'Sort by Prompt (Newest to Oldest)',
-              'prompt-reverse' => 'Sort by Prompt (Oldest to Newest)',
+              'prompt-reverse' => 'Sort by Prompt (Oldest to Newest)'
           ],
           Request::get('sort') ?: 'category',
-          ['class' => 'form-control'],
+          ['class' => 'form-control']
       ) !!}
     </div>
     <div class="form-group mb-3">

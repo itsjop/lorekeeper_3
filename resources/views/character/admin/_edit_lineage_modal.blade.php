@@ -11,7 +11,7 @@
       {!! Form::label('parent_1_id', 'Parent') !!}
       {!! Form::select('parent_1_id', $characterOptions, $character->lineage ? $character->lineage->parent_1_id : null, [
           'class' => 'form-control character-select',
-          'placeholder' => 'Unknown',
+          'placeholder' => 'Unknown'
       ]) !!}
     </div>
   </div>
@@ -19,7 +19,7 @@
     {!! Form::label('parent_1_name', 'Parent Name') !!} {!! add_help('If the parent is known, leave this blank.') !!}
     {!! Form::text('parent_1_name', $character->lineage ? $character->lineage->parent_1_name : null, [
         'class' => 'form-control',
-        'placeholder' => 'Unknown',
+        'placeholder' => 'Unknown'
     ]) !!} </div>
 
 </div>
@@ -29,14 +29,14 @@
     {!! Form::label('parent_2_id', 'Parent') !!}
     {!! Form::select('parent_2_id', $characterOptions, $character->lineage ? $character->lineage->parent_2_id : null, [
         'class' => 'form-control character-select',
-        'placeholder' => 'Unknown',
+        'placeholder' => 'Unknown'
     ]) !!}
   </div>
   <div class="col-md-6">
     {!! Form::label('parent_2_name', 'Partner Name') !!} {!! add_help('If the parent is known, leave this blank.') !!}
     {!! Form::text('parent_2_name', $character->lineage ? $character->lineage->parent_2_name : null, [
         'class' => 'form-control',
-        'placeholder' => 'Unknown',
+        'placeholder' => 'Unknown'
     ]) !!}
   </div>
 </div>
@@ -44,7 +44,13 @@
 @if (false)
   {{-- collapse for custom ancestry --}}
   <div class="card my-3">
-    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#customAncestry" aria-expanded="false" aria-controls="customAncestry">
+    <div
+      class="card-header"
+      data-bs-toggle="collapse"
+      data-bs-target="#customAncestry"
+      aria-expanded="false"
+      aria-controls="customAncestry"
+    >
       <h2 class="h3">
         <i class="fas fa-chevron-down"></i> Custom Ancestry
       </h2>
@@ -55,7 +61,8 @@
           Custom ancestry is used to assign characters grandparents etc. when the parents should remain unknown. This is useful
           for characters who are not related to any other characters, but still need to be assigned a lineage.
           Relational ancestry will always take precedent over custom ancestry, when available.
-          <br><br>
+          <br>
+          <br>
           <strong>NOTE:</strong> You may only create custom ancestry up to the lineage_depth config option.
         </div>
         <div class="row">
@@ -63,7 +70,7 @@
             {!! Form::label('ancestor_id', 'Ancestor') !!}
             {!! Form::select('ancestor_id', $characterOptions, null, [
                 'class' => 'form-control character-select',
-                'placeholder' => 'Unknown',
+                'placeholder' => 'Unknown'
             ]) !!}
           </div>
           <div class="col-md-6">
@@ -77,7 +84,7 @@
           {!! Form::number('ancestor_depth', 1, [
               'class' => 'form-control',
               'min' => 1,
-              'max' => config('lorekeeper.lineage.lineage_depth') - 1,
+              'max' => config('lorekeeper.lineage.lineage_depth') - 1
           ]) !!}
           <p>
             Ancestry depth determines the depth of the ancestor. For example, if you want to assign a grandparent, the depth would

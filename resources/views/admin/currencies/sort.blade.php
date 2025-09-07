@@ -5,11 +5,16 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Currencies' => 'admin/data/currencies', 'Sort Currencies' => 'admin/data/currencies/sort']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Currencies' => 'admin/data/currencies',
+      'Sort Currencies' => 'admin/data/currencies/sort'
+  ]) !!}
 
   <h1>Sort Currencies</h1>
 
-  <p>This is the order in which currencies will appear on a user or character's page. Both types are saved separately, so remember to hit save before editing the other one.</p>
+  <p>This is the order in which currencies will appear on a user or character's page. Both types are saved separately, so remember
+    to hit save before editing the other one.</p>
 
   <h3>User Currencies</h3>
 
@@ -21,7 +26,8 @@
         @foreach ($userCurrencies as $currency)
           <tr class="sort-item" data-id="{{ $currency->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {{ $currency->name }} @if ($currency->abbreviation)
                 ({{ $currency->abbreviation }})
               @endif {!! $currency->displayIcon !!}
@@ -49,7 +55,8 @@
         @foreach ($characterCurrencies as $currency)
           <tr class="sort-item" data-id="{{ $currency->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {{ $currency->name }} @if ($currency->abbreviation)
                 ({{ $currency->abbreviation }})
               @endif {!! $currency->displayIcon !!}

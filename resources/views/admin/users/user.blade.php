@@ -5,7 +5,11 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'User Index' => 'admin/users', $user->name => 'admin/users/' . $user->name . '/edit']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'User Index' => 'admin/users',
+      $user->name => 'admin/users/' . $user->name . '/edit'
+  ]) !!}
 
   <h1>User: {!! $user->displayName !!}</h1>
   <ul class="nav nav-tabs flex gap-_5">
@@ -56,7 +60,8 @@
 
   @if (Settings::get('WE_user_locations') > 0)
     <div class="card p-3 mb-2">
-      <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
+      <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span>
+      </h3>
       div @if ($char_enabled == 1)
         <div class="alert alert-warning">This user's characters will have the same home as them.</div>
       @endif
@@ -64,7 +69,9 @@
       <div class="form-group row">
         <label class="col-md-2 col-form-label">Location</label>
         <div class="col-md-9">
-          {!! Form::select('location', [0 => 'Choose a Location'] + $locations, isset($user->home_id) ? $user->home_id : 0, ['class' => 'form-control selectize']) !!}
+          {!! Form::select('location', [0 => 'Choose a Location'] + $locations, isset($user->home_id) ? $user->home_id : 0, [
+              'class' => 'form-control selectize'
+          ]) !!}
         </div>
         <div class="col-md text-right">
           {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
@@ -76,7 +83,8 @@
 
   @if (Settings::get('WE_user_factions') > 0)
     <div class="card p-3 mb-2">
-      <h3>Faction <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
+      <h3>Faction <span class="text-muted">({{ ucfirst($location_interval) }})</span>
+      </h3>
       @if ($char_faction_enabled == 1)
         <div class="alert alert-warning">This user's characters will have the same faction as them.</div>
       @endif
@@ -85,7 +93,9 @@
       <div class="form-group row">
         <label class="col-md-2 col-form-label">Faction</label>
         <div class="col-md-9">
-          {!! Form::select('faction', [0 => 'Choose a Faction'] + $factions, isset($user->faction_id) ? $user->faction_id : 0, ['class' => 'form-control selectize']) !!}
+          {!! Form::select('faction', [0 => 'Choose a Faction'] + $factions, isset($user->faction_id) ? $user->faction_id : 0, [
+              'class' => 'form-control selectize'
+          ]) !!}
         </div>
         <div class="col-md text-right">
           {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
@@ -112,7 +122,7 @@
     </div>
     <div class="form-group row">
       <label class="col-md-2 col-form-label">Is an FTO {!! add_help(
-          'FTO (First Time Owner) means that they have no record of possessing a character from this world. This status is automatically updated when they earn their first character, but can be toggled manually in case off-record transfers have happened before.',
+          'FTO (First Time Owner) means that they have no record of possessing a character from this world. This status is automatically updated when they earn their first character, but can be toggled manually in case off-record transfers have happened before.'
       ) !!}</label>
       <div class="col-md-10">
         <div class="form-check form-control-plaintext">
@@ -151,8 +161,10 @@
 
   <div class="card p-3 mb-2">
     <h3>Aliases</h3>
-    <p>As users are supposed to verify that they own their account(s) themselves, aliases cannot be edited directly. If a user wants to change their alias, clear it here and ask them to go through the verification process again while logged into
-      their new account. If the alias is the user's primary alias, their remaining aliases will be checked to see if they have a valid primary alias. If they do, it will become their new primary alias.</p>
+    <p>As users are supposed to verify that they own their account(s) themselves, aliases cannot be edited directly. If a user wants
+      to change their alias, clear it here and ask them to go through the verification process again while logged into
+      their new account. If the alias is the user's primary alias, their remaining aliases will be checked to see if they have a
+      valid primary alias. If they do, it will become their new primary alias.</p>
     @if ($user->aliases->count())
       @foreach ($user->aliases as $alias)
         <div class="form-group row">
@@ -161,7 +173,10 @@
           </div>
           <div class="col-10">
             <div class="d-flex">
-              {!! Form::text('alias', $alias->alias . '@' . $alias->siteDisplayName . (!$alias->is_visible ? ' (Hidden)' : ''), ['class' => 'form-control', 'disabled']) !!}
+              {!! Form::text('alias', $alias->alias . '@' . $alias->siteDisplayName . (!$alias->is_visible ? ' (Hidden)' : ''), [
+                  'class' => 'form-control',
+                  'disabled'
+              ]) !!}
               {!! Form::open(['url' => 'admin/users/' . $user->name . '/alias/' . $alias->id]) !!}
               <div class="text-right ml-2">{!! Form::submit('Clear Alias', ['class' => 'btn btn-danger']) !!}</div>
             </div>

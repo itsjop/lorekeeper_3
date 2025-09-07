@@ -89,7 +89,8 @@
 
   @if ($user_enabled == 1 || (Auth::user()->isStaff && $user_enabled == 2))
     <div class="card-full p-3 mb-2">
-      <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
+      <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span>
+      </h3>
       @if (Auth::user()->isStaff && $user_enabled == 2)
         <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their own
           locations freely.</div>
@@ -265,7 +266,8 @@
   {{-- YOUR FACTION --}}
   @if ($user_faction_enabled == 1 || (Auth::user()->isStaff && $user_faction_enabled == 2))
     <div class="card-full p-3 mb-2">
-      <h3>Faction <span class="text-muted">({{ ucfirst($location_interval) }})</span></h3>
+      <h3>Faction <span class="text-muted">({{ ucfirst($location_interval) }})</span>
+      </h3>
       @if (Auth::user()->isStaff && $user_faction_enabled == 2)
         <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their own
           faction freely.</div>

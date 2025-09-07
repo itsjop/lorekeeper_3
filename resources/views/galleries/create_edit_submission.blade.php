@@ -131,7 +131,12 @@
               ]) !!}
             </div>
           @else
-            {!! $submission->prompt_id ? '<p><strong>Prompt:</strong> ' . $submission->prompt->displayName . '</p>' : '' !!}
+            {!! $submission->prompt_id
+                ? '<p>
+                                    <strong>Prompt:</strong> ' .
+                    $submission->prompt->displayName .
+                    '</p>'
+                : '' !!}
           @endif
 
           @if ($gallery->location_selection == 1 && (!$submission->id || Auth::user()->hasPower('manage_submissions')))
@@ -149,7 +154,12 @@
               ]) !!}
             </div>
           @else
-            {!! $submission->location_id ? '<p><strong>Location:</strong> ' . $submission->location->displayName . '</p>' : '' !!}
+            {!! $submission->location_id
+                ? '<p>
+                                    <strong>Location:</strong> ' .
+                    $submission->location->displayName .
+                    '</p>'
+                : '' !!}
           @endif
 
           @if ($submission->id && Auth::user()->hasPower('manage_submissions'))
@@ -222,7 +232,9 @@
                         <div class="mb-2">
                           <div class="d-flex">
                             {!! $collaborator->has_approved
-                                ? '<div class="btn btn-success mb-2 mr-2" data-bs-toggle="tooltip" title="Has Approved"><i class="fas fa-check"></i></div>'
+                                ? '<div class="btn btn-success mb-2 mr-2" data-bs-toggle="tooltip" title="Has Approved">
+                                                                                    <i class="fas fa-check"></i>
+                                                                                    </div>'
                                 : '' !!}
                             {!! Form::select('collaborator_id[]', $users, $collaborator->user_id, [
                                 'class' => 'form-control mr-2 collaborator-select original',
@@ -412,13 +424,16 @@
       @if ($gallery->criteria->count() > 0 && !$submission->id)
         <h2 id="criterion-section" class="mt-5">Criteria Rewards <button class="btn  btn-outline-info float-right add-calc"
             type="button"
-          >Add Reward Calculator</a></h2>
+          >Add Reward Calculator</a>
+        </h2>
         <p>Criteria can be used in addition to or in replacement of rewards. They take input on what you are turning in for the
           prompt
           in order to calculate your final reward.</p>
         <p>The calculator may populate in with pre-selected minimum requirements for this prompt. </p>
-        <div id="criteria"></div>
-        <div class="mb-4"></div>
+        <div id="criteria">
+        </div>
+        <div class="mb-4">
+        </div>
       @endif
 
       @if ($submission->id && Auth::user()->id != $submission->user->id && Auth::user()->hasPower('manage_submissions'))

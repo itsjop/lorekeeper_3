@@ -15,7 +15,8 @@
   </div>
   <h1>Figure Categories</h1>
 
-  <p style="clear:both">Figure categories are not required but may help in differentiating mythological figures versus political figures, etc.</p>
+  <p style="clear:both">Figure categories are not required but may help in differentiating mythological figures versus political
+    figures, etc.</p>
 
   @if (!count($categories))
     <p>No figure categories found.</p>
@@ -25,9 +26,11 @@
         @foreach ($categories as $category)
           <tr class="sort-item" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              <a href={!! $category->url !!} @if ($category->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $category->thumbUrl }}' style='max-width:100px;'/>
-<br> {{ ucfirst($category->name) }} " @endif />{!! $category->name !!}</a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
+              <a href={!! $category->url !!}
+                @if ($category->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $category->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($category->name) }} " @endif
+              />{!! $category->name !!}</a>
               {{ $category->summary ? '(' . $category->summary . ')' : '' }}
             </td>
             <td class="text-right">
@@ -53,7 +56,7 @@
   <script>
     $(document).ready(function() {
       $('.handle').on('click', function(e) {
-        e.prfigureDefault();
+        e.preventDefault();
       });
       $("#sortable").sortable({
         items: '.sort-item',

@@ -9,7 +9,8 @@
 
   <h1>Forms & Polls</h1>
 
-  <p>You can create forms and polls here. Forms allow for multiple questions in one, but you can also do a single, poll-like question.</p>
+  <p>You can create forms and polls here. Forms allow for multiple questions in one, but you can also do a single, poll-like
+    question.</p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/forms/create') }}">
@@ -29,7 +30,11 @@
         <div class="d-flex row flex-wrap col-12 mt-1 pt-2 px-0 ubt-top">
           <div class="col-12 col-md-5">
             @if (!$form->is_active || ($form->is_active && $form->is_timed && $form->start_at > Carbon\Carbon::now()))
-              <i class="fas fa-eye-slash mr-1" data-bs-toggle="tooltip" title="This form is hidden."></i>
+              <i
+                class="fas fa-eye-slash mr-1"
+                data-bs-toggle="tooltip"
+                title="This form is hidden."
+              ></i>
             @endif
             <a href="{{ $form->url }}">{{ $form->title }}</a>
           </div>

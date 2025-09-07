@@ -35,7 +35,9 @@
                       {!! Form::submit('Claim', ['class' => 'btn btn-primary']) !!}
                       {!! Form::close() !!}
                     @else
-                      <p><strong>You've already claimed this!</strong></p>
+                      <p>
+                        <strong>You've already claimed this!</strong>
+                      </p>
                     @endif
                   @else
                     <p>This advent calendar isn't active.</p>
@@ -53,10 +55,17 @@
             <h4>Information</h4>
           </div>
           <div class="card-body">
-            <div><strong>Start{{ $advent->start_at->isPast() ? 'ed' : 's' }}: </strong>{!! pretty_date($advent->start_at) !!}</div>
-            <div {{ $advent->isActive ? '' : 'style="mb-2"' }}><strong>End{{ $advent->end_at->isPast() ? 'ed' : 's' }}: </strong>{!! pretty_date($advent->end_at) !!}</div>
+            <div>
+              <strong>Start{{ $advent->start_at->isPast() ? 'ed' : 's' }}: </strong>{!! pretty_date($advent->start_at) !!}
+            </div>
+            <div {{ $advent->isActive ? '' : 'style="mb-2"' }}>
+              <strong>End{{ $advent->end_at->isPast() ? 'ed' : 's' }}: </strong>{!! pretty_date($advent->end_at) !!}
+            </div>
             @if ($advent->isActive)
-              <div class="mb-2">It's <strong>day {{ $advent->day }}</strong> of {{ $advent->days }}! This day started {!! $advent->day == 1 ? pretty_date($advent->start_at) : pretty_date(Carbon\Carbon::now()->startOf('day')) !!} and {{ $advent->day == $advent->days ? 'ends' : 'day ' . ($advent->day + 1) . ' is' }}
+              <div class="mb-2">It's <strong>day {{ $advent->day }}</strong> of {{ $advent->days }}! This day started
+                {!! $advent->day == 1 ? pretty_date($advent->start_at) : pretty_date(Carbon\Carbon::now()->startOf('day')) !!}
+                and
+                {{ $advent->day == $advent->days ? 'ends' : 'day ' . ($advent->day + 1) . ' is' }}
                 {!! $advent->day == $advent->days ? pretty_date($advent->end_at) : pretty_date(Carbon\Carbon::now()->endOf('day')) !!}.
               </div>
             @endif

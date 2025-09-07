@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Encounter Areas' => 'admin/data/encounters/areas/',
-      ($area->id ? 'Edit' : 'Create') . ' Area' => $area->id ? 'admin/data/encounters/areas/edit/' . $area->id : 'admin/data/encounters/areas/create',
+      ($area->id ? 'Edit' : 'Create') . ' Area' => $area->id
+          ? 'admin/data/encounters/areas/edit/' . $area->id
+          : 'admin/data/encounters/areas/create'
   ]) !!}
 
   <h1>
@@ -20,7 +22,7 @@
 
   {!! Form::open([
       'url' => $area->id ? 'admin/data/encounters/areas/edit/' . $area->id : 'admin/data/encounters/areas/create',
-      'files' => true,
+      'files' => true
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -36,7 +38,11 @@
     @if ($area->has_thumbnail)
       <div class="col-md-2">
         <div class="form-group">
-          <img src="{{ $area->thumbImageUrl }}" class="img-fluid mr-2 mb-2" style="height: 10em;" />
+          <img
+            src="{{ $area->thumbImageUrl }}"
+            class="img-fluid mr-2 mb-2"
+            style="height: 10em;"
+          />
           <br>
         </div>
       </div>
@@ -61,7 +67,11 @@
     @if ($area->has_image)
       <div class="col-md-2">
         <div class="form-group">
-          <img src="{{ $area->imageUrl }}" class="img-fluid mr-2 mb-2" style="height: 10em;" />
+          <img
+            src="{{ $area->imageUrl }}"
+            class="img-fluid mr-2 mb-2"
+            style="height: 10em;"
+          />
           <br>
         </div>
       </div>
@@ -89,9 +99,11 @@
   <div class="form-group">
     {!! Form::checkbox('is_active', 1, $area->id ? $area->is_active : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-toggle' => 'toggle'
     ]) !!}
-    {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Areas that are not active will be hidden from the area list. They also cannot be automatically set as the next active area.') !!}
+    {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'Areas that are not active will be hidden from the area list. They also cannot be automatically set as the next active area.'
+    ) !!}
   </div>
 
   <div class="row">
@@ -109,7 +121,6 @@
     </div>
   </div>
 
-
   <h3>Table</h3>
 
   <p>These are the potential encounters from rolling on this area.@if (!$area->id)
@@ -117,15 +128,22 @@
     @endif
   </p>
   <div class="text-right mb-3">
-    <a href="#" class="btn btn-info" id="addEncounter">Add Encounter</a>
+    <a
+      href="#"
+      class="btn btn-info"
+      id="addEncounter"
+    >Add Encounter</a>
   </div>
   <table class="table table-sm" id="encounterArea">
     <thead>
       <tr>
         <th width="40%">Encounter</th>
-        <th width="30%">Weight {!! add_help('A higher weight means a reward is more likely to be rolled. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.') !!}</th>
+        <th width="30%">Weight {!! add_help(
+            'A higher weight means a reward is more likely to be rolled. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.'
+        ) !!}</th>
         <th width="20%">Chance</th>
-        <th width="10%"></th>
+        <th width="10%">
+        </th>
       </tr>
     </thead>
     <tbody id="encounterAreaBody">
@@ -135,12 +153,14 @@
             <td class="encounter-row-select">
               {!! Form::select('encounter_id[]', $encounters, $encounter->encounter_id, [
                   'class' => 'form-control encounter-select selectize',
-                  'placeholder' => 'Select Encounter',
+                  'placeholder' => 'Select Encounter'
               ]) !!}
             </td>
             <td class="encounter-row-weight">{!! Form::text('weight[]', $encounter->weight, ['class' => 'form-control encounter-weight']) !!}</td>
-            <td class="encounter-row-chance"></td>
-            <td class="text-right"><a href="#" class="btn btn-danger remove-encounter-button">Remove</a>
+            <td class="encounter-row-chance">
+            </td>
+            <td class="text-right">
+              <a href="#" class="btn btn-danger remove-encounter-button">Remove</a>
             </td>
           </tr>
         @endforeach
@@ -160,11 +180,14 @@
         <tr class="encounter-row">
           <td class="encounter-row-select">{!! Form::select('encounter_id[]', $encounters, null, [
               'class' => 'form-control encounter-select',
-              'placeholder' => 'Select Encounter',
+              'placeholder' => 'Select Encounter'
           ]) !!}</td>
           <td class="encounter-row-weight">{!! Form::text('weight[]', 1, ['class' => 'form-control encounter-weight']) !!}</td>
-          <td class="encounter-row-chance"></td>
-          <td class="text-right"><a href="#" class="btn btn-danger remove-encounter-button">Remove</a></td>
+          <td class="encounter-row-chance">
+          </td>
+          <td class="text-right">
+            <a href="#" class="btn btn-danger remove-encounter-button">Remove</a>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -183,7 +206,11 @@
       {!! Form::text('quantity', 1, ['class' => 'form-control', 'id' => 'rollQuantity']) !!}
     </div>
     <div class="text-right">
-      <a href="#" class="btn btn-primary" id="testRoll">Test Roll</a>
+      <a
+        href="#"
+        class="btn btn-primary"
+        id="testRoll"
+      >Test Roll</a>
     </div>
   @endif
 
@@ -193,14 +220,19 @@
     <p>Users must obtain all these requirements to be able to enter the area.</p>
 
     <div class="text-right mb-3">
-      <a href="#" class="btn btn-outline-info" id="addLimit">Add Limit</a>
+      <a
+        href="#"
+        class="btn btn-outline-info"
+        id="addLimit"
+      >Add Limit</a>
     </div>
     <table class="table table-sm" id="limitTable">
       <thead>
         <tr>
           <th width="35%">Limit Type</th>
           <th width="35%">Limit</th>
-          <th width="10%"></th>
+          <th width="10%">
+          </th>
         </tr>
       </thead>
       <tbody id="limitTableBody">
@@ -209,22 +241,23 @@
             <tr class="limit-row">
               <td>{!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], $limit->item_type, [
                   'class' => 'form-control reward-type',
-                  'placeholder' => 'Select limit Type',
+                  'placeholder' => 'Select limit Type'
               ]) !!}</td>
               <td class="limit-row-select">
                 @if ($limit->item_type == 'Item')
                   {!! Form::select('item_id[]', $items, $limit->item_id, [
                       'class' => 'form-control item-select selectize',
-                      'placeholder' => 'Select Item',
+                      'placeholder' => 'Select Item'
                   ]) !!}
                 @elseif($limit->item_type == 'Currency')
                   {!! Form::select('item_id[]', $currencies, $limit->item_id, [
                       'class' => 'form-control currency-select selectize',
-                      'placeholder' => 'Select Currency',
+                      'placeholder' => 'Select Currency'
                   ]) !!}
                 @endif
               </td>
-              <td class="text-right"><a href="#" class="btn btn-danger remove-limit-button">Remove</a>
+              <td class="text-right">
+                <a href="#" class="btn btn-danger remove-limit-button">Remove</a>
               </td>
             </tr>
           @endforeach
@@ -244,20 +277,23 @@
           <tr class="limit-row">
             <td>{!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], null, [
                 'class' => 'form-control reward-type',
-                'placeholder' => 'Select limit Type',
+                'placeholder' => 'Select limit Type'
             ]) !!}</td>
-            <td class="limit-row-select"></td>
-            <td class="text-right"><a href="#" class="btn btn-danger remove-limit-button">Remove</a></td>
+            <td class="limit-row-select">
+            </td>
+            <td class="text-right">
+              <a href="#" class="btn btn-danger remove-limit-button">Remove</a>
+            </td>
           </tr>
         </tbody>
       </table>
       {!! Form::select('item_id[]', $items, null, [
           'class' => 'form-control item-select',
-          'placeholder' => 'Select Item',
+          'placeholder' => 'Select Item'
       ]) !!}
       {!! Form::select('item_id[]', $currencies, null, [
           'class' => 'form-control currency-select',
-          'placeholder' => 'Select Currency',
+          'placeholder' => 'Select Currency'
       ]) !!}
 
     </div>

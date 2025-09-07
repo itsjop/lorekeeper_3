@@ -5,8 +5,11 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Pets' => 'admin/data/pets', ($pet->id ? 'Edit' : 'Create') . ' Pet' => $pet->id ? 'admin/data/pets/edit/' . $pet->id : 'admin/data/pets/create']) !!}
-
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Pets' => 'admin/data/pets',
+      ($pet->id ? 'Edit' : 'Create') . ' Pet' => $pet->id ? 'admin/data/pets/edit/' . $pet->id : 'admin/data/pets/create'
+  ]) !!}
   <h1>
     {{ $pet->id ? 'Edit' : 'Create' }} Pet
     @if ($pet->id)
@@ -52,7 +55,9 @@
 
   <div class="form-group row no-gutters align-items-center">
     <div class="col-md col-form-label">
-      {!! Form::label('limit', 'Character Hold Limit (Optional)', ['class' => 'mb-0']) !!} {!! add_help('This limit is per pet and holds lower priority than category limits, if set. If there is a category set, it is only applicable if that category can be attached.') !!}
+      {!! Form::label('limit', 'Character Hold Limit (Optional)', ['class' => 'mb-0']) !!} {!! add_help(
+          'This limit is per pet and holds lower priority than category limits, if set. If there is a category set, it is only applicable if that category can be attached.'
+      ) !!}
     </div>
     {!! Form::number('limit', $pet->limit, ['class' => 'col-md-9 form-control px-2']) !!}
   </div>
@@ -62,7 +67,10 @@
       <div class="col-md col-form-label">
         {!! Form::label('parent_id', 'Variant of Pet (Optional)', ['class' => 'mb-0']) !!} {!! add_help('If this pet is a variant of another pet, select the parent pet here.') !!}
       </div>
-      {!! Form::select('parent_id', $pets, $pet->parent_id, ['class' => 'col-md-9 form-control', 'placeholder' => 'Select Main Pet']) !!}
+      {!! Form::select('parent_id', $pets, $pet->parent_id, [
+          'class' => 'col-md-9 form-control',
+          'placeholder' => 'Select Main Pet'
+      ]) !!}
     </div>
   @endif
 
@@ -73,12 +81,20 @@
 
   <div class="row">
     <div class="col-md-6 form-group">
-      {!! Form::checkbox('is_visible', 1, $pet->id ? $pet->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_visible', 1, $pet->id ? $pet->is_visible : 1, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
       {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the pet will not be visible on world pages.') !!}
     </div>
     <div class="col-md-6 form-group">
-      {!! Form::checkbox('allow_transfer', 1, $pet->id ? $pet->allow_transfer : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('allow_transfer', 'Allow User → User Transfer', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is off, users will not be able to transfer this pet to other users. Non-account-bound pets can be account-bound when granted to users directly.') !!}
+      {!! Form::checkbox('allow_transfer', 1, $pet->id ? $pet->allow_transfer : 1, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
+      {!! Form::label('allow_transfer', 'Allow User → User Transfer', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+          'If this is off, users will not be able to transfer this pet to other users. Non-account-bound pets can be account-bound when granted to users directly.'
+      ) !!}
     </div>
   </div>
 
@@ -107,17 +123,30 @@
                     <div class="card h-100">
                       <div class="card-body text-center">
                         @if ($variant->has_image)
-                          <a href="{{ $variant->imageUrl }}" data-lightbox="entry" data-title="{{ $variant->name }}">
-                            <img src="{{ $variant->imageUrl }}" class="img-fluid" alt="{{ $variant->name }}" data-bs-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
+                          <a
+                            href="{{ $variant->imageUrl }}"
+                            data-lightbox="entry"
+                            data-title="{{ $variant->name }}"
+                          >
+                            <img
+                              src="{{ $variant->imageUrl }}"
+                              class="img-fluid"
+                              alt="{{ $variant->name }}"
+                              data-bs-toggle="tooltip"
+                              data-title="{{ $variant->name }}"
+                              style="max-height:200px"
+                            />
                           </a>
                         @else
                           {{ $variant->name }}
                         @endif
                         <div class="h5 my-2">{{ $variant->name }}</div>
                         <div>
-                          <a href="{{ $variant->adminUrl }}" class="btn btn-sm btn-primary edit-variant"><i class="fas fa-cog mr-1"></i>Edit</a>
+                          <a href="{{ $variant->adminUrl }}" class="btn btn-sm btn-primary edit-variant">
+                            <i class="fas fa-cog mr-1"></i>Edit</a>
                           @if ($variant->dropData)
-                            <a href="{{ url('/admin/data/pets/drops/edit') . '/' . $variant->id }}" class="btn btn-sm btn-primary"><i class="fas fa-gift mr-1"></i>Drops</a>
+                            <a href="{{ url('/admin/data/pets/drops/edit') . '/' . $variant->id }}" class="btn btn-sm btn-primary">
+                              <i class="fas fa-gift mr-1"></i>Drops</a>
                           @endif
                         </div>
                       </div>
@@ -136,11 +165,17 @@
     <div class="card mb-3">
       <div class="card-header h2">Evolutions</div>
       <div class="card-body">
-        <p>If you would like your pet to "evolve" (similarly to Pokémon), you can set up evolutions here. Evolutions are not required, and you can have as many or as few as you like. If you do not set up any evolutions, the pet will not evolve.
+        <p>If you would like your pet to "evolve" (similarly to Pokémon), you can set up evolutions here. Evolutions are not
+          required, and you can have as many or as few as you like. If you do not set up any evolutions, the pet will not evolve.
         </p>
-        <p>Please note that variants will not be carried over to the evolved pet. If you would like to have a variant evolve into another variant, you will need to set up an evolution for each variant (after an evolution has been created).</p>
+        <p>Please note that variants will not be carried over to the evolved pet. If you would like to have a variant evolve into
+          another variant, you will need to set up an evolution for each variant (after an evolution has been created).</p>
         <div class="mb-2 text-right">
-          <a href="#" class="btn btn-primary" id="add-evolution">Add Evolution</a>
+          <a
+            href="#"
+            class="btn btn-primary"
+            id="add-evolution"
+          >Add Evolution</a>
         </div>
         @if ($pet->evolutions->count())
           @foreach ($pet->evolutions->sortBy('evolution_stage')->chunk(4) as $chunk)
@@ -149,8 +184,19 @@
                 <div class="col">
                   <div class="card h-100">
                     <div class="card-body text-center">
-                      <a href="{{ $evolution->imageUrl }}" data-lightbox="entry" data-title="{{ $evolution->evolution_name }}">
-                        <img src="{{ $evolution->imageUrl }}" class="img-fluid" alt="{{ $evolution->evolution_name }}" data-bs-toggle="tooltip" data-title="{{ $evolution->evolution_name }}" style="max-height:200px" />
+                      <a
+                        href="{{ $evolution->imageUrl }}"
+                        data-lightbox="entry"
+                        data-title="{{ $evolution->evolution_name }}"
+                      >
+                        <img
+                          src="{{ $evolution->imageUrl }}"
+                          class="img-fluid"
+                          alt="{{ $evolution->evolution_name }}"
+                          data-bs-toggle="tooltip"
+                          data-title="{{ $evolution->evolution_name }}"
+                          style="max-height:200px"
+                        />
                       </a>
                       <div class="h5 my-2">
                         {{ $evolution->evolution_name }} (Stage {{ $evolution->evolution_stage }})
@@ -159,7 +205,12 @@
                         @endif
                       </div>
                       <div>
-                        <a href="#" class="btn btn-sm btn-primary edit-evolution" data-id="{{ $evolution->id }}"><i class="fas fa-cog mr-1"></i>Edit</a>
+                        <a
+                          href="#"
+                          class="btn btn-sm btn-primary edit-evolution"
+                          data-id="{{ $evolution->id }}"
+                        >
+                          <i class="fas fa-cog mr-1"></i>Edit</a>
                       </div>
                     </div>
                   </div>
@@ -199,7 +250,8 @@
 
       $('.edit-evolution').on('click', function(e) {
         e.preventDefault();
-        loadModal("{{ url('admin/data/pets/edit/' . $pet->id . '/evolution/edit') }}/" + $(this).data('id'), 'Edit Evolution');
+        loadModal("{{ url('admin/data/pets/edit/' . $pet->id . '/evolution/edit') }}/" + $(this).data('id'),
+          'Edit Evolution');
       });
     });
   </script>

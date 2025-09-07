@@ -45,7 +45,8 @@
             data-bs-toggle="tooltip"
             title="View Log Details"
           >
-            <i class="fas fa-clipboard-list"></i></a>
+            <i class="fas fa-clipboard-list"></i>
+          </a>
           @if ($submission->status != 'Rejected')
             <a class="btn btn-outline-primary" href="/gallery/edit/{{ $submission->id }}">
               <i class="fas fa-edit"></i> Edit</a>
@@ -127,7 +128,8 @@
                     data-bs-toggle="tooltip"
                     title="Click here to report this submission."
                     style="opacity: 50%;"
-                  ></i></a>
+                  ></i>
+                </a>
               </h5>
               <div class="float-right">
                 @if (Auth::check() &&
@@ -136,15 +138,19 @@
                         $submission->isVisible
                 )
                   {!! Form::open(['url' => '/gallery/favorite/' . $submission->id]) !!}
-                  {{ $submission->favorites->count() }} {!! Form::button('<i class="fas fa-star"></i> ', [
-                      'style' => 'border:0; border-radius:.5em;',
-                      'class' => $submission->favorites->where('user_id', Auth::user()->id)->first() != null ? 'btn-success' : '',
-                      'data-toggle' => 'tooltip',
-                      'title' =>
-                          ($submission->favorites->where('user_id', Auth::user()->id)->first() == null ? 'Add to' : 'Remove from') .
-                          ' your Favorites',
-                      'type' => 'submit'
-                  ]) !!} ・
+                  {{ $submission->favorites->count() }} {!! Form::button(
+                      '<i class="fas fa-star">
+                                                      </i> ',
+                      [
+                          'style' => 'border:0; border-radius:.5em;',
+                          'class' => $submission->favorites->where('user_id', Auth::user()->id)->first() != null ? 'btn-success' : '',
+                          'data-toggle' => 'tooltip',
+                          'title' =>
+                              ($submission->favorites->where('user_id', Auth::user()->id)->first() == null ? 'Add to' : 'Remove from') .
+                              ' your Favorites',
+                          'type' => 'submit'
+                      ]
+                  ) !!} ・
                   {{ $submission->comments->where('type', 'User-User')->count() }} <i class="fas fa-comment"></i>
                   {!! Form::close() !!}
                 @else
@@ -161,7 +167,9 @@
               </div>
               In {!! $submission->gallery->displayName !!} ・ By {!! $submission->credits !!}
               @if (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($submission->content_warning))
-                ・ <span class="text-danger"><strong>Content Warning:</strong></span> {!! nl2br(htmlentities($submission->content_warning)) !!}
+                ・ <span class="text-danger">
+                  <strong>Content Warning:</strong>
+                </span> {!! nl2br(htmlentities($submission->content_warning)) !!}
               @endif
             </div>
             <div class="card-body">
@@ -209,7 +217,8 @@
                   <div class="mb-2">
                     <div class="d-flex">{!! $collaborator->has_approved
                         ? '<div class="mb-2 mr-2 text-success" data-bs-toggle="tooltip" title="Has Approved">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="fas fa-check"></i></div>'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fas fa-check"></i>
+                                                            </div>'
                         : '' !!}{!! $collaborator->user->displayName !!}:
                     </div>
                     <div class="d-flex">
@@ -229,7 +238,8 @@
                   <div class="d-flex">
                     {!! $collaborator->has_approved
                         ? '<div class="mb-2 mr-2 text-success" data-bs-toggle="tooltip" title="Has Approved">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="fas fa-check"></i></div>'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fas fa-check"></i>
+                                                            </div>'
                         : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                   </div>
                 @endif
@@ -243,7 +253,8 @@
                 <div class="d-flex">
                   {!! $submission->status == 'Pending' && $collaborator->has_approved
                       ? '<div class="mb-2 mr-2 text-success" data-bs-toggle="tooltip" title="Has Approved">
-                                                                                                                                                                                                                                                                                                                                                                                                            <i class="fas fa-check"></i></div>'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <i class="fas fa-check"></i>
+                                                      </div>'
                       : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                 </div>
               @endforeach
@@ -291,7 +302,8 @@
           <div class="card-body">
             @foreach ($submission->promptSubmissions as $promptSubmission)
               <strong>
-                <a href="{{ $promptSubmission->viewUrl }}">#{{ $promptSubmission->id }} for {!! $promptSubmission->prompt->name !!}</a></strong>
+                <a href="{{ $promptSubmission->viewUrl }}">#{{ $promptSubmission->id }} for {!! $promptSubmission->prompt->name !!}</a>
+              </strong>
               by {!! $promptSubmission->user->displayName !!}<br />
             @endforeach
           </div>

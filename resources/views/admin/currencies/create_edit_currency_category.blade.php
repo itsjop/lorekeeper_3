@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Currency Categories' => 'admin/data/currency-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/currency-categories/edit/' . $category->id : 'admin/data/currency-categories/create',
+      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id
+          ? 'admin/data/currency-categories/edit/' . $category->id
+          : 'admin/data/currency-categories/create'
   ]) !!}
 
   <h1>{{ $category->id ? 'Edit' : 'Create' }} Currency Category
@@ -17,7 +19,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $category->id ? 'admin/data/currency-categories/edit/' . $category->id : 'admin/data/currency-categories/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $category->id ? 'admin/data/currency-categories/edit/' . $category->id : 'admin/data/currency-categories/create',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -47,8 +52,13 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the category will not be visible in the category list or available for selection in search. Permissioned staff will still be able to add currencies to them, however.') !!}
+    {!! Form::checkbox('is_visible', 1, $category->id ? $category->is_visible : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'If turned off, the category will not be visible in the category list or available for selection in search. Permissioned staff will still be able to add currencies to them, however.'
+    ) !!}
   </div>
 
   <div class="text-right">
@@ -61,7 +71,13 @@
     <h3>Preview</h3>
     <div class="card mb-3">
       <div class="card-body">
-        @include('world._entry', ['imageUrl' => $category->categoryImageUrl, 'name' => $category->displayName, 'description' => $category->parsed_description, 'category' => $category, 'visible' => $category->is_visible])
+        @include('world._entry', [
+            'imageUrl' => $category->categoryImageUrl,
+            'name' => $category->displayName,
+            'description' => $category->parsed_description,
+            'category' => $category,
+            'visible' => $category->is_visible
+        ])
       </div>
     </div>
   @endif

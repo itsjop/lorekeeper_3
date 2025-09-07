@@ -41,7 +41,7 @@
             <div class="award-row hide mt-1" style="clear:both;">
               {!! Form::select('award_ids[]', $userAwardOptions, null, [
                   'class' => 'form-control mr-2 award-select',
-                  'placeholder' => 'Select ' . ucfirst(__('awards.award')),
+                  'placeholder' => 'Select ' . ucfirst(__('awards.award'))
               ]) !!}
               {!! Form::number('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
               <a href="#" class="remove-award btn btn-danger mb-2">✖</a>
@@ -61,7 +61,7 @@
             {!! Form::select('character_names[]', $characterOptions, null, [
                 'id' => 'characterList',
                 'class' => 'form-control',
-                'multiple',
+                'multiple'
             ]) !!}
           </div>
 
@@ -77,7 +77,7 @@
             <div class="award-row hide mt-1">
               {!! Form::select('character_award_ids[]', $characterAwardOptions, null, [
                   'class' => 'form-control mr-2 award-select',
-                  'placeholder' => 'Select ' . ucfirst(__('awards.award')),
+                  'placeholder' => 'Select ' . ucfirst(__('awards.award'))
               ]) !!}
               {!! Form::number('character_quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
               <a href="#" class="remove-award btn btn-danger mb-2">✖</a>
@@ -94,17 +94,31 @@
         </div>
         <div class="card-body">
           <div class="form-group d-flex align-items-center no-gutters">
-            <div class="col-md-2">{!! Form::label('data', 'Reason (Optional)') !!} {!! add_help('A reason for the grant. This will be noted in the logs and in the ' . __('awards.awardcase') . ' description.') !!}</div>
+            <div class="col-md-2">{!! Form::label('data', 'Reason (Optional)') !!} {!! add_help(
+                'A reason for the grant. This will be noted in the logs and in the ' . __('awards.awardcase') . ' description.'
+            ) !!}</div>
             {!! Form::text('data', null, ['class' => 'col-md-10 form-control px-2', 'maxlength' => 400]) !!}
           </div>
           <div class="form-group d-flex align-items-center no-gutters">
-            <div class="col-md-2">{!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help('Additional notes for the ' . __('awards.award') . '. This will appear in the ' . __('awards.award') . '\'s description, but not in the logs.') !!}</div>
+            <div class="col-md-2">{!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help(
+                'Additional notes for the ' .
+                    __('awards.award') .
+                    '. This will appear in the ' .
+                    __('awards.award') .
+                    '\'s description, but not in the logs.'
+            ) !!}</div>
             {!! Form::text('notes', null, ['class' => 'col-md-10 form-control px-2', 'maxlength' => 400]) !!}
           </div>
           <div class="form-group">
             {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
             {!! Form::label('disallow_transfer', 'Account-bound', ['class' => 'form-check-label ml-3']) !!}
-            {!! add_help('If this is on, the recipient(s) will not be able to transfer this ' . __('awards.award') . ' to other users. ' . ucfirst(__('awards.awards')) . ' that disallow transfers by default will still not be transferrable.') !!}
+            {!! add_help(
+                'If this is on, the recipient(s) will not be able to transfer this ' .
+                    __('awards.award') .
+                    ' to other users. ' .
+                    ucfirst(__('awards.awards')) .
+                    ' that disallow transfers by default will still not be transferrable.'
+            ) !!}
           </div>
         </div>
       </div>

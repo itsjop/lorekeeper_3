@@ -37,21 +37,24 @@
           <div class="col-md-4 align-items-stretch d-flex">
             <div class="d-flex text-center align-items-center">
               <div class="character-image-blank">Select character.</div>
-              <div class="character-image-loaded hide"></div>
+              <div class="character-image-loaded hide">
+              </div>
             </div>
           </div>
           <div class="col-md-8">
-            <a href="#" class="float-right fas fa-close"></a>
+            <a href="#" class="float-right fas fa-close">
+            </a>
             <div class="form-group">
               {!! Form::label('character_codes', 'First Character') !!}
               {!! Form::select('character_codes[]', $characters, $character[0] ?? null, [
                   'class' => 'form-control selectize character-code',
-                  'placeholder' => 'Select Character',
+                  'placeholder' => 'Select Character'
               ]) !!}
             </div>
           </div>
         </div>
-        <div class="character-image-colours row ml-3"></div>
+        <div class="character-image-colours row ml-3">
+        </div>
       </div>
     </div>
     <div class="submission-character m-3 card col-md" id="character_2">
@@ -60,27 +63,32 @@
           <div class="col-md-4 align-items-stretch d-flex">
             <div class="d-flex text-center align-items-center">
               <div class="character-image-blank">Enter character code.</div>
-              <div class="character-image-loaded hide"></div>
+              <div class="character-image-loaded hide">
+              </div>
             </div>
           </div>
           <div class="col-md-8">
-            <a href="#" class="float-right fas fa-close"></a>
+            <a href="#" class="float-right fas fa-close">
+            </a>
             <div class="form-group">
               {!! Form::label('character_codes', 'Second Character') !!}
               {!! Form::select('character_codes[]', $characters, $character[1] ?? null, [
                   'class' => 'form-control selectize character-code',
-                  'placeholder' => 'Select Character',
+                  'placeholder' => 'Select Character'
               ]) !!}
             </div>
           </div>
         </div>
-        <div class="character-image-colours row ml-3"></div>
+        <div class="character-image-colours row ml-3">
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="alert hide mb-3" id="compatibility-check"></div>
-  <div class="hide mb-3" id="colour-palettes"></div>
+  <div class="alert hide mb-3" id="compatibility-check">
+  </div>
+  <div class="hide mb-3" id="colour-palettes">
+  </div>
 
   <div class="row">
     <div class="col-md-6">
@@ -90,7 +98,7 @@
       </p>
       {!! Form::select('pairing_item_id[]', $pairing_items, $pairing_item_id ?? null, [
           'class' => 'form-control item-select',
-          'placeholder' => 'Select Item',
+          'placeholder' => 'Select Item'
       ]) !!}
     </div>
     <div class="col-md-6">
@@ -98,7 +106,11 @@
       <p>
         Decide which boost items to use. Boost items are optional.
       <div class="text-right mb-3">
-        <a href="#" class="btn btn-outline-info" id="addItem">Add Items</a>
+        <a
+          href="#"
+          class="btn btn-outline-info"
+          id="addItem"
+        >Add Items</a>
       </div>
       </p>
       <table class="table table-sm" id="traitTable">
@@ -107,7 +119,7 @@
             <td class="loot-row-select">
               {!! Form::select('boost_item_ids[]', $boost_items, null, [
                   'class' => 'form-control item-select',
-                  'placeholder' => 'Select Item',
+                  'placeholder' => 'Select Item'
               ]) !!}
             </td>
             <td class="text-right">
@@ -120,7 +132,7 @@
                 <td class="loot-row-select">
                   {!! Form::select('boost_item_ids[]', $boost_items, $id, [
                       'class' => 'form-control item-select',
-                      'placeholder' => 'Select Item',
+                      'placeholder' => 'Select Item'
                   ]) !!}
                 </td>
                 <td class="text-right">
@@ -135,12 +147,17 @@
   </div>
 
   <div class="text-right">
-    <a href="#" class="btn btn-success" id="pairingSubmit">Roll!</a>
+    <a
+      href="#"
+      class="btn btn-success"
+      id="pairingSubmit"
+    >Roll!</a>
   </div>
 
   {!! Form::close() !!}
 
-  <div class="mt-3" id="results"></div>
+  <div class="mt-3" id="results">
+  </div>
 
 @endsection
 @section('scripts')
@@ -161,7 +178,7 @@
         // ajax function
         e.preventDefault();
         let data = $pairingForm.serialize();
-        $results.html('<div class="text-center"><i class="fas fa-spinner fa-spin"></i></div>');
+        $results.html('<div class="text-center"> <i class = "fas fa-spinner fa-spin" > < /i> < /div > ');
         $.ajax({
           url: '{{ url('admin/pairings/roller') }}',
           method: 'POST',
@@ -214,13 +231,15 @@
                 colour_palettes.html('');
 
                 if ("{{ config('lorekeeper.character_pairing.inherit_colours') }}" == 1 && data.palettes) {
-                  let palette_html = '<h2>Possible Colour Palette(s)</h2><div class="row justify-content-center">'
+                  let palette_html =
+                    '<h2>Possible Colour Palette(s)</h2> <div class = "row justify-content-center" > '
                   for (let i = 0; i < data.palettes.length; i++) {
                     let palette = data.palettes[i];
-                    palette_html += '<div class="col text-center"><h5>Colour Palette ' + (i + 1) + '</h5>' + palette +
+                    palette_html += '<div class="col text-center"> <h5 > Colour Palette ' + (i + 1) + ' < /h5>' +
+                      palette +
                       '</div>';
                   }
-                  palette_html += '</div><hr class="my-3">';
+                  palette_html += '</div> <hr class = "my-3"> ';
                   colour_palettes.html(palette_html);
                   colour_palettes.removeClass('hide');
                 }

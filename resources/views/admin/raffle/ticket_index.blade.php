@@ -72,7 +72,8 @@
           <thead>
             <th class="col-xs-1 text-center" style="width:100px;">#</th>
             <th>User</th>
-            <th></th>
+            <th>
+            </th>
           </thead>
           <tbody>
             @foreach ($raffle->tickets()->winners()->get() as $winner)
@@ -108,7 +109,8 @@
           </div>
           @if ($raffle->is_active < 2)
             <div class="col-3">
-              <div class="logs-table-cell"></div>
+              <div class="logs-table-cell">
+              </div>
             </div>
           @endif
         </div>
@@ -193,7 +195,7 @@
         e.preventDefault();
         $('#raffle-modal').modal('show');
       });
-      
+
       $('.reroll').on('click', function(e) {
         e.preventDefault();
         // get value

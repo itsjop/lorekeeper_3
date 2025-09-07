@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Advent Calendars' => 'admin/data/advent-calendars',
-      ($advent->id ? 'Edit' : 'Create') . ' Advent Calendar' => $advent->id ? 'admin/data/advent-calendars/edit/' . $advent->id : 'admin/data/advent-calendars/create',
+      ($advent->id ? 'Edit' : 'Create') . ' Advent Calendar' => $advent->id
+          ? 'admin/data/advent-calendars/edit/' . $advent->id
+          : 'admin/data/advent-calendars/create'
   ]) !!}
 
   <h1>{{ $advent->id ? 'Edit' : 'Create' }} Advent Calendar
@@ -17,17 +19,23 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $advent->id ? 'admin/data/advent-calendars/edit/' . $advent->id : 'admin/data/advent-calendars/create']) !!}
+  {!! Form::open([
+      'url' => $advent->id ? 'admin/data/advent-calendars/edit/' . $advent->id : 'admin/data/advent-calendars/create'
+  ]) !!}
 
   <h3>Basic Information</h3>
 
   <div class="form-group">
-    {!! Form::label('Name') !!} {!! add_help('This is the name you will use to identify this advent calendar internally. This name will not be shown to users; a name that can be easily identified is recommended.') !!}
+    {!! Form::label('Name') !!} {!! add_help(
+        'This is the name you will use to identify this advent calendar internally. This name will not be shown to users; a name that can be easily identified is recommended.'
+    ) !!}
     {!! Form::text('name', $advent->name, ['class' => 'form-control']) !!}
   </div>
 
   <div class="form-group">
-    {!! Form::label('Display Name') !!} {!! add_help('This is the name that will be shown to users. This is for display purposes and can be something more vague than the above.') !!}
+    {!! Form::label('Display Name') !!} {!! add_help(
+        'This is the name that will be shown to users. This is for display purposes and can be something more vague than the above.'
+    ) !!}
     {!! Form::text('display_name', $advent->getRawOriginal('display_name'), ['class' => 'form-control']) !!}
   </div>
 
@@ -52,23 +60,38 @@
   </div>
 
   @if ($advent->id)
-    <p>With these start and end times, the advent calendar will run for {{ $advent->days }} days, with the first day on {{ $advent->start_at->toFormattedDateString() }} and last day on {{ $advent->end_at->endOf('day')->toFormattedDateString() }}. While
-      you do not need to set the start time to the beginning of the first day nor the end time to the end of the last day, you should give users enough time to claim these days' prizes, since they may not be available for the full 24 hours that the
+    <p>With these start and end times, the advent calendar will run for {{ $advent->days }} days, with the first day on
+      {{ $advent->start_at->toFormattedDateString() }} and last day on {{ $advent->end_at->endOf('day')->toFormattedDateString() }}.
+      While
+      you do not need to set the start time to the beginning of the first day nor the end time to the end of the last day, you
+      should give users enough time to claim these days' prizes, since they may not be available for the full 24 hours that the
       other days' prizes are.</p>
   @endif
 
   @if ($advent->id)
-    <h3>Prizes <a class="small inventory-collapse-toggle collapse-toggle" href="#prizes" data-bs-toggle="collapse">Show</a></h3>
+    <h3>Prizes <a
+        class="small inventory-collapse-toggle collapse-toggle"
+        href="#prizes"
+        data-bs-toggle="collapse"
+      >Show</a>
+    </h3>
     <div class="mb-3 collapse form-group" id="prizes">
-      <p>These are the prizes for each day. You can specify a item and quantity, which users will be able to claim on the respective day. If you do not specify an item, no prize will be available for that day.</p>
+      <p>These are the prizes for each day. You can specify a item and quantity, which users will be able to claim on the respective
+        day. If you do not specify an item, no prize will be available for that day.</p>
 
       @for ($day = 1; $day <= $advent->days; $day++)
         <div class="form-group">
           {!! Form::label('Day ' . $day . ' Prize') !!}
           <div id="itemList">
             <div class="d-flex mb-2">
-              {!! Form::select('item_ids[' . $day . ']', $items, isset($advent->data[$day]) ? $advent->data[$day]['item'] : null, ['class' => 'form-control mr-2 default item-select', 'placeholder' => 'Select Item']) !!}
-              {!! Form::text('quantities[' . $day . ']', isset($advent->data[$day]) ? $advent->data[$day]['quantity'] : 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
+              {!! Form::select('item_ids[' . $day . ']', $items, isset($advent->data[$day]) ? $advent->data[$day]['item'] : null, [
+                  'class' => 'form-control mr-2 default item-select',
+                  'placeholder' => 'Select Item'
+              ]) !!}
+              {!! Form::text('quantities[' . $day . ']', isset($advent->data[$day]) ? $advent->data[$day]['quantity'] : 1, [
+                  'class' => 'form-control mr-2',
+                  'placeholder' => 'Quantity'
+              ]) !!}
             </div>
           </div>
         </div>
@@ -76,10 +99,17 @@
     </div>
 
     <h5>Bonus Prize</h5>
-    <p>This prize, if an item is set, will be given to users who collect every prize from this advent. This is checked on the final day.</p>
+    <p>This prize, if an item is set, will be given to users who collect every prize from this advent. This is checked on the final
+      day.</p>
     <div class="d-flex mb-2">
-      {!! Form::select('item_ids[bonus]', $items, isset($advent->data['bonus']) ? $advent->data['bonus']['item'] : null, ['class' => 'form-control mr-2 default item-select', 'placeholder' => 'Select Item']) !!}
-      {!! Form::text('quantities[bonus]', isset($advent->data['bonus']) ? $advent->data['bonus']['quantity'] : 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
+      {!! Form::select('item_ids[bonus]', $items, isset($advent->data['bonus']) ? $advent->data['bonus']['item'] : null, [
+          'class' => 'form-control mr-2 default item-select',
+          'placeholder' => 'Select Item'
+      ]) !!}
+      {!! Form::text('quantities[bonus]', isset($advent->data['bonus']) ? $advent->data['bonus']['quantity'] : 1, [
+          'class' => 'form-control mr-2',
+          'placeholder' => 'Quantity'
+      ]) !!}
     </div>
   @endif
 
@@ -91,7 +121,8 @@
 
   @if ($advent->id)
     <h3>Display Link</h3>
-    <p>For convenience, here is the advent calendar's url as well as the full HTML to display a link to the advent calendar's user-facing page. Users claim the day's prize from this page.</p>
+    <p>For convenience, here is the advent calendar's url as well as the full HTML to display a link to the advent calendar's
+      user-facing page. Users claim the day's prize from this page.</p>
     <div class="alert alert-secondary">
       {{ $advent->url }}
     </div>
@@ -117,10 +148,10 @@
                 'day' => 'Sort by Day (Asc)',
                 'day-reverse' => 'Sort by Day (Desc)',
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'category',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group mb-3">

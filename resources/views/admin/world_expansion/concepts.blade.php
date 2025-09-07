@@ -26,10 +26,11 @@
         @foreach ($concepts as $concept)
           <tr class="sort-item" data-id="{{ $concept->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               <a href={!! $concept->url !!}
-                @if ($concept->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $concept->thumbUrl }}' style='max-width:100px;' class='my-1'/>
-<br> {{ ucfirst($concept->name) }} " @endif />{!! $concept->name !!}</a>
+                @if ($concept->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $concept->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($concept->name) }} " @endif
+              />{!! $concept->name !!}</a>
               {{ $concept->summary ? '(' . $concept->summary . ')' : '' }}
             </td>
             <td class="text-right">

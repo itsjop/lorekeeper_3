@@ -10,16 +10,26 @@
 
 @section('profile-content')
   {!! breadcrumbs([
-      $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character Masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+      $character->category->masterlist_sub_id
+          ? $character->category->sublist->name . ' Masterlist'
+          : 'Character Masterlist' => $character->category->masterlist_sub_id
+          ? 'sublist/' . $character->category->sublist->key
+          : 'masterlist',
       $character->fullName => $character->url,
-      'Bank' => $character->url . '/bank',
+      'Bank' => $character->url . '/bank'
   ]) !!}
 
   @include('character._header', ['character' => $character])
 
   <h3>
     @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-      <a href="#" class="float-right btn btn-outline-info btn-sm" id="grantButton" data-bs-toggle="modal" data-bs-target="#grantModal">
+      <a
+        href="#"
+        class="float-right btn btn-outline-info btn-sm"
+        id="grantButton"
+        data-bs-toggle="modal"
+        data-bs-target="#grantModal"
+      >
         <i class="fas fa-cog"></i> Admin</a>
     @endif
     Currencies
@@ -82,11 +92,17 @@
         </div>
         <div class="col-md-6 take">
           {!! Form::label('currency_id', 'Currency') !!}
-          {!! Form::select('take_currency_id', $takeCurrencyOptions, null, ['class' => 'form-control', 'placeholder' => 'Select Currency']) !!}
+          {!! Form::select('take_currency_id', $takeCurrencyOptions, null, [
+              'class' => 'form-control',
+              'placeholder' => 'Select Currency'
+          ]) !!}
         </div>
         <div class="col-md-6 give hide">
           {!! Form::label('currency_id', 'Currency') !!}
-          {!! Form::select('give_currency_id', $giveCurrencyOptions, null, ['class' => 'form-control', 'placeholder' => 'Select Currency']) !!}
+          {!! Form::select('give_currency_id', $giveCurrencyOptions, null, [
+              'class' => 'form-control',
+              'placeholder' => 'Select Currency'
+          ]) !!}
         </div>
       </div>
     </div>
@@ -130,12 +146,21 @@
   </div>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
-    <dialog class="modal fade" id="grantModal" tabindex="-1" role="dialog">
+    <dialog
+      class="modal fade"
+      id="grantModal"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <span class="modal-title h5 mb-0">[ADMIN] Grant/remove currency</span>
-            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+            >&times;</button>
           </div>
           <div class="modal-body">
             {!! Form::open(['url' => 'admin/character/' . $character->slug . '/grant']) !!}

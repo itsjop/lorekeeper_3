@@ -9,17 +9,21 @@
 
   <h1>Professions</h1>
 
-  <p>This is a list of professions that can be attached to characters. These professions can be freely chosen by the user on their profile.
-    You can sort within a category or with all professions visible, <b>but sorting within subcategories will lead to weird results.</b> </p>
+  <p>This is a list of professions that can be attached to characters. These professions can be freely chosen by the user on their
+    profile.
+    You can sort within a category or with all professions visible, <b>but sorting within subcategories will lead to weird
+      results.</b> </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/profession-categories') }}">
-      <i class="fas fa-folder"></i> Profession Categories</a>
+      <i class="fas fa-folder">
+      </i> Profession Categories</a>
     <a class="btn btn-primary" href="{{ url('admin/data/profession-subcategories') }}">
-      <i class="fas fa-folder"></i> Profession Subcategories</a>
-
+      <i class="fas fa-folder">
+      </i> Profession Subcategories</a>
     <a class="btn btn-primary" href="{{ url('admin/data/professions/create') }}">
-      <i class="fas fa-plus"></i> Create New Profession</a>
+      <i class="fas fa-plus">
+      </i> Create New Profession</a>
   </div>
 
   <div>
@@ -55,9 +59,9 @@
         @foreach ($professions as $profession)
           <tr class="sort-item" data-id="{{ $profession->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $profession->name !!}
-
             </td>
             <td>
               {{ $profession->category ? $profession->category->name : '---' }}
@@ -82,7 +86,8 @@
       {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
       {!! Form::close() !!}
     </div>
-    <div class="text-center mt-4 small text-muted">{{ $professions->count() }} result{{ $professions->count() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $professions->count() }} result{{ $professions->count() == 1 ? '' : 's' }}
+      found.</div>
   @endif
 
 @endsection

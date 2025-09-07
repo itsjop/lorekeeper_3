@@ -23,7 +23,8 @@
       <tr>
         <th width="70%">Currency</th>
         <th width="20%">Quantity</th>
-        <th width="10%"></th>
+        <th width="10%">
+        </th>
       </tr>
     </thead>
     <tbody id="{{ strtolower($owner->logType) }}Body-{{ $owner->id }}">

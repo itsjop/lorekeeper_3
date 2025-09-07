@@ -36,7 +36,9 @@
                 data-name="{{ $user->name }}'s {{ $pet->name }}"
               >
                 <div class="mb-1">
-                  <a href="#" class="inventory-stack"><img src="{{ $pet->image($pet->pivot->id) }}" class="img-fluid" /></a>
+                  <a href="#" class="inventory-stack">
+                    <img src="{{ $pet->image($pet->pivot->id) }}" class="img-fluid" />
+                  </a>
                 </div>
                 <div>
                   <a href="{{ url('pets/view/' . $pet->pivot->id) }}"
@@ -55,7 +57,8 @@
                       <span data-bs-toggle="tooltip"
                         title="Attached to {{ strip_tags(getDisplayName(\App\Models\Character\Character::class, $pet->pivot->character_id)) }}"
                       >
-                        <i class="fas fa-link ml-1"></i></span>
+                        <i class="fas fa-link ml-1"></i>
+                      </span>
                     @endif
                     @if ($pet->pivot->evolution_id)
                       <span data-bs-toggle="tooltip"

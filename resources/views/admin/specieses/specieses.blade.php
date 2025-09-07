@@ -10,7 +10,8 @@
   <h1>{{ ucfirst(__('lorekeeper.species')) }}</h1>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/species/create') }}"><i class="fas fa-plus"></i>
+    <a class="btn btn-primary" href="{{ url('admin/data/species/create') }}">
+      <i class="fas fa-plus"></i>
       Create New Species</a>
   </div>
   @if (!count($specieses))
@@ -21,14 +22,16 @@
         <tr>
           <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
           <th>Sub Masterlist</th>
-          <th></th>
+          <th>
+          </th>
         </tr>
       </thead>
       <tbody id="sortable" class="sortable">
         @foreach ($specieses as $species)
           <tr class="sort-item" data-id="{{ $species->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               @if (!$species->is_visible)
                 <i class="fas fa-eye-slash mr-1"></i>
               @endif

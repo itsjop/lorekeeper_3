@@ -44,10 +44,10 @@
             [
                 'none' => 'Any Visibility',
                 'visibleOnly' => 'Visible Only',
-                'hiddenOnly' => 'Hidden Only',
+                'hiddenOnly' => 'Hidden Only'
             ],
             Request::get('visibility') ?: 'none',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -62,10 +62,10 @@
                 'species' => 'Sort by Species',
                 'subtypes' => 'Sort by Subtype',
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'oldest',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -134,7 +134,9 @@
       </div>
     </div>
     {!! $features->render() !!}
-    <div class="text-center mt-4 small text-muted">{{ $features->total() }} result{{ $features->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">
+      {{ $features->total() }} result{{ $features->total() == 1 ? '' : 's' }} found.
+    </div>
   @endif
 
 @endsection

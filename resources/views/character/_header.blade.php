@@ -76,17 +76,23 @@
           class="btn badge-success"
           data-bs-toggle="tooltip"
           title="Click to Copy the Character Code"
-        ><i class="fas fa-copy"></i></span>
+        >
+          <i class="fas fa-copy"></i>
+        </span>
         <span
           class="btn {{ $character->is_gift_writing_allowed == 1 ? 'badge-success' : ($character->is_gift_writing_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }} float-right ml-2"
           data-bs-toggle="tooltip"
           title="{{ $character->is_gift_writing_allowed == 1 ? 'OPEN for gift writing.' : ($character->is_gift_writing_allowed == 2 ? 'PLEASE ASK before gift writing.' : 'CLOSED for gift writing.') }}"
-        ><i class="fas fa-file-alt"></i></span>
+        >
+          <i class="fas fa-file-alt"></i>
+        </span>
         <span
           class="btn {{ $character->is_gift_art_allowed == 1 ? 'badge-success' : ($character->is_gift_art_allowed == 2 ? 'badge-warning text-light' : 'badge-danger') }} float-right ml-2"
           data-bs-toggle="tooltip"
           title="{{ $character->is_gift_art_allowed == 1 ? 'OPEN for gift art.' : ($character->is_gift_art_allowed == 2 ? 'PLEASE ASK before gift art.' : 'CLOSED for gift art.') }}"
-        ><i class="fas fa-pencil-ruler"></i></span>
+        >
+          <i class="fas fa-pencil-ruler"></i>
+        </span>
       @endif
     @endif
     @if ($character->is_visible && Auth::check() && $character->user_id != Auth::user()->id)
@@ -96,7 +102,8 @@
         class="btn btn-outline-info float-right bookmark-button ml-2"
         data-id="{{ $bookmark ? $bookmark->id : 0 }}"
         data-character-id="{{ $character->id }}"
-      ><i class="fas fa-bookmark"></i>
+      >
+        <i class="fas fa-bookmark"></i>
         {{-- {{ $bookmark ? 'Edit Bookmark' : 'Bookmark' }} --}}
       </a>
     @endif
@@ -105,7 +112,8 @@
         class="btn btn-outline-info float-right"
         data-character-id="{{ $character->id }}"
         href="{{ $character->profile->link }}"
-      ><i class="fas fa-home"></i> Profile</a>
+      >
+        <i class="fas fa-home"></i> Profile</a>
     @endif
   </div>
   @if (!$character->is_visible)

@@ -20,8 +20,6 @@
     </div>
   </div>
 
-
-
   @foreach ($category->professionsBySubcategory as $subcategoryId => $professions)
     @php $subcategory = \App\Models\Profession\ProfessionSubcategory::where('id', $subcategoryId)->first(); @endphp
     @isset($subcategory)
@@ -34,7 +32,11 @@
             @php $characters = isset($charactersByProfession[$profession->id]) ? $charactersByProfession[$profession->id] : collect()  @endphp
             <div class="card mb-2 w-100">
               <div class="card-header">
-                <img class="fr-fic fr-dii" style="max-width:40px;" src="{{ $profession->iconUrl }}" />
+                <img
+                  class="fr-fic fr-dii"
+                  style="max-width:40px;"
+                  src="{{ $profession->iconUrl }}"
+                />
                 {{ $profession->name }}
               </div>
               <div class="card-body p-0 w-100">
@@ -42,7 +44,13 @@
                   @foreach ($characters as $character)
                     <div class="col-lg-3 col-md-4 col-12 mb-2">
                       <a href="{{ $character->url }}">
-                        <img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail ml-thumbnail" style="max-width:50px;" alt="{{ $character->fullName }}" /></a>
+                        <img
+                          src="{{ $character->image->thumbnailUrl }}"
+                          class="img-thumbnail ml-thumbnail"
+                          style="max-width:50px;"
+                          alt="{{ $character->fullName }}"
+                        />
+                      </a>
 
                       {!! $character->displayName !!}
                     </div>

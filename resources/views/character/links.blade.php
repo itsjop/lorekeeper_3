@@ -26,7 +26,7 @@
 
   @if (Auth::check() && ($character->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
     <div class="text-right m-2 mr-5 mt-3 justify-content-end d-flex">
-      {!! Form::open(['url' => $character->url .'/links/sort']) !!}
+      {!! Form::open(['url' => $character->url . '/links/sort']) !!}
       {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
       {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
       {!! Form::close() !!}

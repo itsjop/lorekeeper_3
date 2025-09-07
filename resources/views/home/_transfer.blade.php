@@ -2,7 +2,12 @@
   @if ($transfer->character)
     <div class="transfer-thumbnail">
       <a href="{{ $transfer->character->url }}">
-        <img src="{{ $transfer->character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $transfer->character->fullName }}" /></a>
+        <img
+          src="{{ $transfer->character->image->thumbnailUrl }}"
+          class="img-thumbnail"
+          alt="Thumbnail for {{ $transfer->character->fullName }}"
+        />
+      </a>
     </div>
   @endif
   <div class="transfer-info card ml-2">
@@ -29,7 +34,9 @@
               </h5>
             @else
               <h5 class="mb-0">
-                <i class="text-danger fas fa-times fa-fw mr-2"></i> Transfer awaiting approval {!! add_help('This transfer has not been approved by a mod yet. Once approved and accepted by the recipient, it will be processed.') !!}
+                <i class="text-danger fas fa-times fa-fw mr-2"></i> Transfer awaiting approval {!! add_help(
+                    'This transfer has not been approved by a mod yet. Once approved and accepted by the recipient, it will be processed.'
+                ) !!}
               </h5>
             @endif
           @elseif(!$transfer->isActive)

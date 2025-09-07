@@ -3,7 +3,8 @@
   @if (Auth::check() && $submission->user_id == Auth::user()->id && $submission->status == 'Draft')
     <a href="{{ url(($isClaim ? 'claims' : 'submissions') . '/draft/' . $submission->id) }}"
       class="btn btn-sm btn-outline-secondary ml-3"
-    >Edit Draft <i class="fas fa-pen ml-2"></i></a>
+    >Edit Draft <i class="fas fa-pen ml-2"></i>
+    </a>
   @endif
   <span
     class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}"
@@ -98,7 +99,8 @@
               ? \App\Models\Currency\Currency::find($criterionData['criterion_currency_id'])->display(
                   $criterion->calculateReward($criterionData)
               )
-              : $criterion->currency->display($criterion->calculateReward($criterionData)) !!}</span></h3>
+              : $criterion->currency->display($criterion->calculateReward($criterionData)) !!}</span>
+          </h3>
           @foreach ($criterion->steps->where('is_active', 1) as $step)
             <div class="d-flex">
               <span class="mr-1 text-secondary">{{ $step->name }}:</span>
@@ -163,7 +165,8 @@
                 src="{{ $character->character->image->thumbnailUrl }}"
                 class="img-thumbnail"
                 alt="Thumbnail for {{ $character->character->fullName }}"
-              /></a>
+              />
+            </a>
           </div>
           <div class="submission-character-info card ml-2">
             <div class="card-body">
@@ -195,7 +198,11 @@
 
                     @foreach (parseAssetData($character->data) as $key => $type)
                         @if (count($type))
-                        <tr><td colspan="2"><strong>{!! strtoupper($key) !!}</strong></td></tr>
+                        <tr>
+<td colspan="2">
+<strong>{!! strtoupper($key) !!}</strong>
+</td>
+</tr>
                             @foreach ($type as $asset)
                                 <tr>
                                     <td>{!! $asset['asset']->displayName !!}</td>

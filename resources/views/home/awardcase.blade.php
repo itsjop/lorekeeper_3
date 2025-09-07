@@ -15,15 +15,27 @@
   @foreach ($awards as $categoryId => $categoryAwards)
     <div class="card mb-3 awardcase-category">
       <h5 class="card-header awardcase-header">
-        {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
+        {!! isset($categories[$categoryId])
+            ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
+            : 'Miscellaneous' !!}
       </h5>
       <div class="card-body awardcase-body">
         @foreach ($categoryAwards->chunk(4) as $chunk)
           <div class="row mb-3">
             @foreach ($chunk as $awardId => $stack)
-              <div class="col-sm-3 col-6 text-center awardcase-award" data-id="{{ $stack->first()->pivot->id }}" data-name="{{ $user->name }}'s {{ $stack->first()->name }}">
+              <div
+                class="col-sm-3 col-6 text-center awardcase-award"
+                data-id="{{ $stack->first()->pivot->id }}"
+                data-name="{{ $user->name }}'s {{ $stack->first()->name }}"
+              >
                 <div class="mb-1">
-                  <a href="#" class="awardcase-stack {{ $stack->first()->is_featured ? 'alert alert-success' : '' }}"><img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" class="mw-100" /></a>
+                  <a href="#" class="awardcase-stack {{ $stack->first()->is_featured ? 'alert alert-success' : '' }}">
+                    <img
+                      src="{{ $stack->first()->imageUrl }}"
+                      alt="{{ $stack->first()->name }}"
+                      class="mw-100"
+                    />
+                  </a>
                 </div>
                 <div>
                   <a href="#" class="awardcase-stack awardcase-stack-name">{{ $stack->first()->name }}
@@ -78,7 +90,13 @@
             <div class="card-body row mb-3">
               @if ($award->imageUrl)
                 <div class="col-md-3 world-entry-image border-right">
-                  <a href="{{ $award->imageUrl }}" data-lightbox="entry" data-title="{{ $award->name }}"><img src="{{ $award->imageUrl }}" class="world-entry-image img-fluid" /></a>
+                  <a
+                    href="{{ $award->imageUrl }}"
+                    data-lightbox="entry"
+                    data-title="{{ $award->name }}"
+                  >
+                    <img src="{{ $award->imageUrl }}" class="world-entry-image img-fluid" />
+                  </a>
                 </div>
               @endif
               <div class="{{ $award->imageUrl ? 'col-md-9' : 'col-md-12' }}">

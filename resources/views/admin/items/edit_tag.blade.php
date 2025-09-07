@@ -5,14 +5,20 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Items' => 'admin/data/items', 'Edit Item' => 'admin/data/items/edit/' . $item->id, 'Edit Tag Settings - ' . $tag->tag => 'admin/data/items/tag/' . $item->id . '/' . $tag->tag]) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Items' => 'admin/data/items',
+      'Edit Item' => 'admin/data/items/edit/' . $item->id,
+      'Edit Tag Settings - ' . $tag->tag => 'admin/data/items/tag/' . $item->id . '/' . $tag->tag
+  ]) !!}
 
   <h1>
     Edit Tag Settings - {!! $tag->displayTag !!}
     <a href="#" class="btn btn-outline-danger float-right delete-tag-button">Delete Tag</a>
   </h1>
 
-  <p>Edit the parameters for this item tag on this item. Note that for the item tag to take effect (e.g. become a usable item), you will need to turn on the Active toggle. (Conversely, you can turn it off to prevent users from using it while preserving
+  <p>Edit the parameters for this item tag on this item. Note that for the item tag to take effect (e.g. become a usable item), you
+    will need to turn on the Active toggle. (Conversely, you can turn it off to prevent users from using it while preserving
     the old settings for future use.)</p>
 
   @if (View::exists('admin.items.tags.' . $tag->tag . '_pre'))

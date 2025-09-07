@@ -13,9 +13,13 @@
     that users can discover, each with rarity/weighting.</p>
 
   @if (!count($encounters))
-    <div class="alert alert-danger">You can't create an area without some <a href="{{ url('admin/data/encounters') }}">encounters</a> to fill it!</div>
+    <div class="alert alert-danger">You can't create an area without some <a href="{{ url('admin/data/encounters') }}">encounters</a>
+      to fill it!</div>
   @else
-    <div class="text-right mb-3"><a class="btn btn-primary" href="{{ url('admin/data/encounters/areas/create') }}"><i class="fas fa-plus"></i> Create New Encounter Area</a></div>
+    <div class="text-right mb-3">
+      <a class="btn btn-primary" href="{{ url('admin/data/encounters/areas/create') }}">
+        <i class="fas fa-plus"></i> Create New Encounter Area</a>
+    </div>
     @if (!count($areas))
       <p>No encounter areas found.</p>
     @else

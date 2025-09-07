@@ -10,9 +10,13 @@
 
 @section('profile-content')
   {!! breadcrumbs([
-      $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character Masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+      $character->category->masterlist_sub_id
+          ? $character->category->sublist->name . ' Masterlist'
+          : 'Character Masterlist' => $character->category->masterlist_sub_id
+          ? 'sublist/' . $character->category->sublist->key
+          : 'masterlist',
       $character->fullName => $character->url,
-      'Submissions' => $character->url . '/submissions',
+      'Submissions' => $character->url . '/submissions'
   ]) !!}
 
   @include('character._header', ['character' => $character])
@@ -56,7 +60,8 @@
               <div class="col-6 col-md-4">
                 <div class="logs-table-cell">
                   <span class="ubt-texthide">
-                    <a href="{{ $log->url }}">{{ $log->url }}</a></span>
+                    <a href="{{ $log->url }}">{{ $log->url }}</a>
+                  </span>
                 </div>
               </div>
               <div class="col-6 col-md-3">

@@ -20,7 +20,12 @@
                 <td>
                   @php $reward_object = $reward->rewardable_type::find($reward->rewardable_id); @endphp
                   @if ($reward_object->has_image)
-                    <img class="img-fluid" style="max-height: 10em;" src="{{ $reward_object->imageUrl }}"><br />
+                    <img
+                      class="img-fluid"
+                      style="max-height: 10em;"
+                      src="{{ $reward_object->imageUrl }}"
+                    >
+                    <br />
                   @endif
                   {!! $reward_object->displayName !!}
                 </td>

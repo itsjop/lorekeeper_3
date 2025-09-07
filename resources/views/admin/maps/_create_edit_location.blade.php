@@ -1,4 +1,8 @@
-{!! Form::open(['url' => $location->id ? 'admin/maps/locations/edit/' . $location->id . '/' . $map->id : 'admin/maps/locations/create/' . $map->id]) !!}
+{!! Form::open([
+    'url' => $location->id
+        ? 'admin/maps/locations/edit/' . $location->id . '/' . $map->id
+        : 'admin/maps/locations/create/' . $map->id
+]) !!}
 
 <h3>{{ $location->id ? 'Edit' : 'Create' }} Location</h3>
 
@@ -16,7 +20,8 @@
   <div class="col-md">
     <div class="form-group">
       <p>Coordinates should be comma seperated integers.
-        <br><b>Example:</b>
+        <br>
+        <b>Example:</b>
         <br>100, 200
         <br>or
         <br>254,334,278,390
@@ -28,12 +33,12 @@
   <div class="col-md">
     <div class="form-group">
       {!! Form::label('shape', 'Shape') !!}
-      {!! Form::select('shape', ['rect' => 'Rect', 'poly' => 'Poly', 'circle' => 'Circle'], $location->shape, ['class' => 'form-control']) !!}
+      {!! Form::select('shape', ['rect' => 'Rect', 'poly' => 'Poly', 'circle' => 'Circle'], $location->shape, [
+          'class' => 'form-control'
+      ]) !!}
     </div>
   </div>
 </div>
-
-
 
 <div class="row">
   <div class="col-md">
@@ -51,7 +56,10 @@
 </div>
 
 <div class="col-md form-group">
-  {!! Form::checkbox('is_active', 1, $location->id ? $location->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_active', 1, $location->id ? $location->is_active : 1, [
+      'class' => 'form-check-input',
+      'data-toggle' => 'toggle'
+  ]) !!}
   {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!}
 </div>
 

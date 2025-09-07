@@ -50,12 +50,24 @@
         </div>
         <div class="col-md-10 col-8">
           <div class="row text-center">
-            <div class="col"><strong>All Time</strong></div>
-            <div class="col"><strong>Past Hour</strong></div>
-            <div class="col"><strong>Past Day</strong></div>
-            <div class="col"><strong>Past Week</strong></div>
-            <div class="col"><strong>Past Month</strong></div>
-            <div class="col"><strong>Past Year</strong></div>
+            <div class="col">
+              <strong>All Time</strong>
+            </div>
+            <div class="col">
+              <strong>Past Hour</strong>
+            </div>
+            <div class="col">
+              <strong>Past Day</strong>
+            </div>
+            <div class="col">
+              <strong>Past Week</strong>
+            </div>
+            <div class="col">
+              <strong>Past Month</strong>
+            </div>
+            <div class="col">
+              <strong>Past Year</strong>
+            </div>
           </div>
           <div class="row text-center">
             <div class="col">{{ $count['all'] }}</div>
@@ -270,16 +282,22 @@
     <div id="characterComponents" class="hide">
       <div class="submission-character mb-3 card">
         <div class="card-body">
-          <div class="text-right"><a href="#" class="remove-character text-muted"><i class="fas fa-times"></i></a></div>
+          <div class="text-right">
+            <a href="#" class="remove-character text-muted">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
           <div class="row">
             <div class="col-md-2 align-items-stretch d-flex">
               <div class="d-flex text-center align-items-center">
                 <div class="character-image-blank">Enter character code.</div>
-                <div class="character-image-loaded hide"></div>
+                <div class="character-image-loaded hide">
+                </div>
               </div>
             </div>
             <div class="col-md-10">
-              <a href="#" class="float-right fas fa-close"></a>
+              <a href="#" class="float-right fas fa-close">
+              </a>
               <div class="form-group">
                 {!! Form::label('slug', 'Character Code') !!}
                 {!! Form::select('slug[]', $characters, null, [
@@ -293,7 +311,8 @@
                   {!! Form::select('character-notify-owner[]', [0 => 'No', 1 => 'Yes'], 0, [
                       'class' => 'form-control ml-lg-3 col-5 col-md-9 character-notify-owner'
                   ]) !!}
-                  <div class="col character-gift-permissions"></div>
+                  <div class="col character-gift-permissions">
+                  </div>
                 </div>
               </div>
               <div class="character-rewards hide">
@@ -363,7 +382,9 @@
 
           <td class="d-flex align-items-center">
             {!! Form::text('character_quantity[]', 0, ['class' => 'form-control mr-2  character-rewardable-quantity']) !!}
-            <a href="#" class="remove-reward d-block"><i class="fas fa-times text-muted"></i></a>
+            <a href="#" class="remove-reward d-block">
+              <i class="fas fa-times text-muted"></i>
+            </a>
           </td>
         </tr>
       </table>

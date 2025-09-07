@@ -13,7 +13,8 @@
     $('.inventory-info').on('click', function(e) {
       e.preventDefault();
       var $parent = $(this).parent().parent().parent();
-      loadModal("{{ url('pets') }}/" + $parent.data('id') + "?read_only={{ isset($readOnly) && $readOnly ? 1 : 0 }}", $parent.data('name'));
+      loadModal("{{ url('pets') }}/" + $parent.data('id') + "?read_only={{ isset($readOnly) && $readOnly ? 1 : 0 }}",
+        $parent.data('name'));
     });
     $('.inventory-select-all').on('click', function(e) {
       e.preventDefault();

@@ -9,7 +9,8 @@
 
   <h1>Profession Categories</h1>
 
-  <p>This is a list of profession categories that will be used to sort professions on the profession page. Creating profession categories is entirely optional, but recommended if you have a lot of professions in the game.</p>
+  <p>This is a list of profession categories that will be used to sort professions on the profession page. Creating profession
+    categories is entirely optional, but recommended if you have a lot of professions in the game.</p>
   <p>The sorting order reflects the order in which the profession categories will be displayed on the world pages.</p>
 
   <div class="text-right mb-3">
@@ -26,7 +27,8 @@
         @foreach ($categories as $category)
           <tr class="sort-item" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $category->displayName !!}
             </td>
             <td class="text-right">

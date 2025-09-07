@@ -4,19 +4,23 @@
 @endsection
 
 @section('design-content')
-  {!! breadcrumbs(['Design Approvals' => 'designs'] + ($status == 'draft' ? ['Drafts' => 'designs'] : ['Submissions' => 'designs/' . $status])) !!}
+  {!! breadcrumbs(
+      ['Design Approvals' => 'designs'] + ($status == 'draft' ? ['Drafts' => 'designs'] : ['Submissions' => 'designs/' . $status])
+  ) !!}
 
   @if ($status == 'draft')
     <h1>Design Approval Drafts</h1>
 
-    <p>Design approval requests allow you to submit updates to your character's design, or submit a finished design for a MYO slot. To create a new approval request, go to the character or MYO slot's page and choose "Update Design" from the sidebar.
+    <p>Design approval requests allow you to submit updates to your character's design, or submit a finished design for a MYO slot.
+      To create a new approval request, go to the character or MYO slot's page and choose "Update Design" from the sidebar.
     </p>
   @else
     <h1>
       Design Approvals
     </h1>
 
-    <p>This is a list of design approval requests you have submitted. These will be reviewed by staff, and approved if the design meets the requirements and guidelines. </p>
+    <p>This is a list of design approval requests you have submitted. These will be reviewed by staff, and approved if the design
+      meets the requirements and guidelines. </p>
 
     <ul class="nav nav-tabs flex gap-_5">
       <li class="nav-item">
@@ -41,7 +45,8 @@
           @if ($status != 'draft')
             <th width="20%">Status</th>
           @endif
-          <th></th>
+          <th>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -51,7 +56,9 @@
             <td>{!! $r->submitted_at ? format_date($r->submitted_at) : '---' !!}</td>
             @if ($status != 'draft')
               <td>
-                <span class="badge badge-{{ $r->status == 'Pending' ? 'secondary' : ($r->status == 'Approved' ? 'success' : 'danger') }}">{{ $r->status }}</span>
+                <span
+                  class="badge badge-{{ $r->status == 'Pending' ? 'secondary' : ($r->status == 'Approved' ? 'success' : 'danger') }}"
+                >{{ $r->status }}</span>
               </td>
             @endif
             <td class="text-right">

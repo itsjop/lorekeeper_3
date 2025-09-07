@@ -1,4 +1,6 @@
-{!! Form::open(['url' => $isMyo ? 'admin/myo/' . $character->id . '/stats' : 'admin/character/' . $character->slug . '/stats']) !!}
+{!! Form::open([
+    'url' => $isMyo ? 'admin/myo/' . $character->id . '/stats' : 'admin/character/' . $character->slug . '/stats'
+]) !!}
 @if ($isMyo)
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -14,13 +16,17 @@
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        {!! Form::label('Number') !!} {!! add_help('This number helps to identify the character and should preferably be unique either within the category, or among all characters.') !!}
+        {!! Form::label('Number') !!} {!! add_help(
+            'This number helps to identify the character and should preferably be unique either within the category, or among all characters.'
+        ) !!}
         {!! Form::text('number', $number, ['class' => 'form-control mr-2', 'id' => 'number']) !!}
       </div>
     </div>
   </div>
   <div class="form-group">
-    {!! Form::label(ucfirst(__('lorekeeper.character')) . ' Code') !!} {!! add_help('This code identifies the character itself. This must be unique among all characters (as it\'s used to generate the character\'s page URL).') !!}
+    {!! Form::label(ucfirst(__('lorekeeper.character')) . ' Code') !!} {!! add_help(
+        'This code identifies the character itself. This must be unique among all characters (as it\'s used to generate the character\'s page URL).'
+    ) !!}
     {!! Form::text('slug', $character->slug, ['class' => 'form-control', 'id' => 'code']) !!}
   </div>
 @endif
@@ -29,7 +35,8 @@
   These are displayed on the character's profile, but don't have any effect on site functionality except for the following:
   <ul>
     <li>If all switches are off, the character cannot be transferred by the user (directly or through trades).</li>
-    <li>If a transfer cooldown is set, the character also cannot be transferred by the user (directly or through trades) until the cooldown is up.</li>
+    <li>If a transfer cooldown is set, the character also cannot be transferred by the user (directly or through trades) until the
+      cooldown is up.</li>
   </ul>
 </div>
 <div class="form-group">
@@ -37,11 +44,18 @@
   {!! Form::label('is_giftable', 'Is Giftable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_tradeable', 1, $character->is_tradeable, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+  {!! Form::checkbox('is_tradeable', 1, $character->is_tradeable, [
+      'class' => 'form-check-input',
+      'data-toggle' => 'toggle'
+  ]) !!}
   {!! Form::label('is_tradeable', 'Is Tradeable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="form-group">
-  {!! Form::checkbox('is_sellable', 1, $character->is_sellable, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'resellable']) !!}
+  {!! Form::checkbox('is_sellable', 1, $character->is_sellable, [
+      'class' => 'form-check-input',
+      'data-toggle' => 'toggle',
+      'id' => 'resellable'
+  ]) !!}
   {!! Form::label('is_sellable', 'Is Resellable', ['class' => 'form-check-label ml-3']) !!}
 </div>
 <div class="card mb-3" id="resellOptions">

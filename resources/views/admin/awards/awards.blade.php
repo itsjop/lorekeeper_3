@@ -9,11 +9,14 @@
 
   <h1>{{ ucfirst(__('awards.awards')) }}</h1>
 
-  <p>This is a list of {{ __('awards.awards') }} in the game. {{ ucfirst(__('awards.awards')) }} can be granted via prompts, claims, or admin grants. {{ ucfirst(__('awards.awards')) }} can also be set to be held by characters, users, or both.</p>
+  <p>This is a list of {{ __('awards.awards') }} in the game. {{ ucfirst(__('awards.awards')) }} can be granted via prompts, claims,
+    or admin grants. {{ ucfirst(__('awards.awards')) }} can also be set to be held by characters, users, or both.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/award-categories') }}"><i class="fas fa-folder"></i> {{ ucfirst(__('awards.award')) }} Categories</a>
-    <a class="btn btn-primary" href="{{ url('admin/data/awards/create') }}"><i class="fas fa-plus"></i> Create New {{ ucfirst(__('awards.award')) }}</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/award-categories') }}">
+      <i class="fas fa-folder"></i> {{ ucfirst(__('awards.award')) }} Categories</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/awards/create') }}">
+      <i class="fas fa-plus"></i> Create New {{ ucfirst(__('awards.award')) }}</a>
   </div>
 
   <div>

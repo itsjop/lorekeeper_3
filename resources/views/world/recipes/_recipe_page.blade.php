@@ -21,7 +21,17 @@
         <div class="card-body">
           @if ($recipe->imageUrl)
             <div class="world-entry-image text-center mb-2">
-              <a href="{{ $recipe->imageUrl }}" data-lightbox="entry" data-title="{{ $recipe->name }}"><img src="{{ $recipe->imageUrl }}" class="world-entry-image mw-100" style="max-height:300px;" /></a>
+              <a
+                href="{{ $recipe->imageUrl }}"
+                data-lightbox="entry"
+                data-title="{{ $recipe->name }}"
+              >
+                <img
+                  src="{{ $recipe->imageUrl }}"
+                  class="world-entry-image mw-100"
+                  style="max-height:300px;"
+                />
+              </a>
             </div>
           @endif
 
@@ -29,12 +39,25 @@
             <h1>
               @if ($recipe->needs_unlocking)
                 @if (Auth::check() && Auth::user()->hasRecipe($recipe->id))
-                  <i class="fas fa-lock-open" data-bs-toggle="tooltip" title="You have this recipe!"></i>
+                  <i
+                    class="fas fa-lock-open"
+                    data-bs-toggle="tooltip"
+                    title="You have this recipe!"
+                  ></i>
                 @else
-                  <i class="fas fa-lock" style="opacity:0.5" data-bs-toggle="tooltip" title="You do not have this recipe."></i>
+                  <i
+                    class="fas fa-lock"
+                    style="opacity:0.5"
+                    data-bs-toggle="tooltip"
+                    title="You do not have this recipe."
+                  ></i>
                 @endif
               @else
-                <i class="fas fa-lock-open" data-bs-toggle="tooltip" title="This recipe is automatically unlocked."></i>
+                <i
+                  class="fas fa-lock-open"
+                  data-bs-toggle="tooltip"
+                  title="This recipe is automatically unlocked."
+                ></i>
               @endif
               {!! $recipe->name !!}
             </h1>

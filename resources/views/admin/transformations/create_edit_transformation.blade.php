@@ -8,16 +8,22 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('transformations.transformation')) => 'admin/data/transformations',
-      ($transformation->id ? 'Edit ' : 'Create ') . ucfirst(__('transformations.transformation')) => $transformation->id ? 'admin/data/transformations/edit/' . $transformation->id : 'admin/data/transformations/create',
+      ($transformation->id ? 'Edit ' : 'Create ') . ucfirst(__('transformations.transformation')) => $transformation->id
+          ? 'admin/data/transformations/edit/' . $transformation->id
+          : 'admin/data/transformations/create'
   ]) !!}
 
   <h1>{{ $transformation->id ? 'Edit' : 'Create' }} {{ ucfirst(__('transformations.transformation')) }}
     @if ($transformation->id)
-      <a href="#" class="btn btn-danger float-right delete-transformation-button">Delete {{ ucfirst(__('transformations.transformation')) }}</a>
+      <a href="#" class="btn btn-danger float-right delete-transformation-button">Delete
+        {{ ucfirst(__('transformations.transformation')) }}</a>
     @endif
   </h1>
 
-  {!! Form::open(['url' => $transformation->id ? 'admin/data/transformations/edit/' . $transformation->id : 'admin/data/transformations/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $transformation->id ? 'admin/data/transformations/edit/' . $transformation->id : 'admin/data/transformations/create',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -28,7 +34,9 @@
 
   <div class="col-md-4">
     <div class="form-group">
-      {!! Form::label('Species Restriction (Optional)') !!}{!! add_help('Users can only select a transformation that matches their character\'s species, or one that has no restriction.') !!}
+      {!! Form::label('Species Restriction (Optional)') !!}{!! add_help(
+          'Users can only select a transformation that matches their character\'s species, or one that has no restriction.'
+      ) !!}
       {!! Form::select('species_id', $specieses, $transformation->species_id, ['class' => 'form-control']) !!}
     </div>
   </div>
@@ -72,7 +80,8 @@
     $(document).ready(function() {
       $('.delete-transformation-button').on('click', function(e) {
         e.preventDefault();
-        loadModal("{{ url('admin/data/transformations/delete') }}/{{ $transformation->id }}", 'Delete {{ ucfirst(__('transformations.transformation')) }}');
+        loadModal("{{ url('admin/data/transformations/delete') }}/{{ $transformation->id }}",
+          'Delete {{ ucfirst(__('transformations.transformation')) }}');
       });
     });
   </script>

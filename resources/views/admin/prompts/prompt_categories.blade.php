@@ -9,7 +9,8 @@
 
   <h1>Prompt Categories</h1>
 
-  <p>This is a list of prompt categories that will be used to classify prompts on the prompts page. Creating prompt categories is entirely optional, but recommended if you need to sort prompts for mod work division, for example. The submission approval
+  <p>This is a list of prompt categories that will be used to classify prompts on the prompts page. Creating prompt categories is
+    entirely optional, but recommended if you need to sort prompts for mod work division, for example. The submission approval
     queue page can be sorted by prompt category.</p>
   <p>The sorting order reflects the order in which the prompt categories will be displayed on the prompts page.</p>
 
@@ -25,7 +26,8 @@
         @foreach ($categories as $category)
           <tr class="sort-prompt" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $category->displayName !!}
             </td>
             <td class="text-right">

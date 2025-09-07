@@ -19,7 +19,8 @@
             <div class="inventory-item pi-center pc-center">
               <div class="title">{!! $feature->first()->title !!}</div>
               <div class="{{ 'card-bg_animated ' . lcfirst(__($feature->first()->rarity->name)) }}">
-                <div class="stars"></div>
+                <div class="stars">
+                </div>
               </div>
 
               @if ($feature->first()->has_image)
@@ -43,7 +44,6 @@
                 <br />({!! $feature->first()->subtype->twolineDisplayName !!} Subtype)
               @endif
             </div>
-
           @endforeach
         </div>
       </div>

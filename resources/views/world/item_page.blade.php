@@ -10,14 +10,20 @@
 
 @section('meta-desc')
   @if (isset($item->category) && $item->category)
-    <p><strong>Category:</strong> {{ $item->category->name }}</p>
+    <p>
+      <strong>Category:</strong> {{ $item->category->name }}
+    </p>
   @endif
   @if (isset($item->rarity) && $item->rarity)
-    :: <p><strong>Rarity:</strong> {{ $item->rarity?->name ?? 'None' }}</p>
+    :: <p>
+      <strong>Rarity:</strong> {{ $item->rarity?->name ?? 'None' }}
+    </p>
   @endif
   :: {!! substr(str_replace('"', '&#39;', $item->description), 0, 69) !!}
   @if (isset($item->uses) && $item->uses)
-    :: <p><strong>Uses:</strong> {!! $item->uses !!}</p>
+    :: <p>
+      <strong>Uses:</strong> {!! $item->uses !!}
+    </p>
   @endif
 @endsection
 
@@ -34,7 +40,17 @@
           <div class="row world-entry">
             @if ($imageUrl)
               <div class="col-md-3 world-entry-image">
-                <a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}"><img src="{{ $imageUrl }}" class="world-entry-image" alt="{{ $name }}" /></a>
+                <a
+                  href="{{ $imageUrl }}"
+                  data-lightbox="entry"
+                  data-title="{{ $name }}"
+                >
+                  <img
+                    src="{{ $imageUrl }}"
+                    class="world-entry-image"
+                    alt="{{ $name }}"
+                  />
+                </a>
               </div>
             @endif
             <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
@@ -61,18 +77,24 @@
                 @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
                   @if (isset($item->rarity) && $item->rarity)
                     <div class="col-md">
-                      <p><strong>Rarity:</strong> {!! $item->rarity->displayName !!}</p>
+                      <p>
+                        <strong>Rarity:</strong> {!! $item->rarity->displayName !!}
+                      </p>
                     </div>
                   @endif
                   @if (isset($item->itemArtist) && $item->itemArtist)
                     <div class="col-md">
-                      <p><strong>Artist:</strong> {!! $item->itemArtist !!}</p>
+                      <p>
+                        <strong>Artist:</strong> {!! $item->itemArtist !!}
+                      </p>
                     </div>
                   @endif
                 @endif
                 @if (isset($item->data['resell']) && $item->data['resell'] && config('lorekeeper.extensions.item_entry_expansion.resale_function'))
                   <div class="col-md">
-                    <p><strong>Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</p>
+                    <p>
+                      <strong>Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}
+                    </p>
                   </div>
                 @endif
                 <div class="col-md-5 col-md">
@@ -100,19 +122,31 @@
                   </p>
                 @endif
                 {!! $description !!}
-                @if (((isset($item->uses) && $item->uses) || (isset($item->source) && $item->source) || $item->shop_stock_count || (isset($item->data['prompts']) && $item->data['prompts'])) && config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
+                @if (
+                    ((isset($item->uses) && $item->uses) ||
+                        (isset($item->source) && $item->source) ||
+                        $item->shop_stock_count ||
+                        (isset($item->data['prompts']) && $item->data['prompts'])) &&
+                        config('lorekeeper.extensions.item_entry_expansion.extra_fields')
+                )
 
                   @if (isset($item->uses) && $item->uses)
                     <p>
                       <strong>Uses:</strong> {!! $item->uses !!}
                     </p>
                   @endif
-                  @if ((isset($item->source) && $item->source) || $item->shop_stock_count || (isset($item->data['prompts']) && $item->data['prompts']))
+                  @if (
+                      (isset($item->source) && $item->source) ||
+                          $item->shop_stock_count ||
+                          (isset($item->data['prompts']) && $item->data['prompts'])
+                  )
                     <h5>Availability</h5>
                     <div class="row">
                       @if (isset($item->data['release']) && $item->data['release'])
                         <div class="col">
-                          <p><strong>Source:</strong></p>
+                          <p>
+                            <strong>Source:</strong>
+                          </p>
                           <p>{!! $item->data['release'] !!}</p>
                         </div>
                       @endif
@@ -134,7 +168,9 @@
                       @endif
                       @if (isset($item->data['prompts']) && $item->data['prompts'])
                         <div class="col">
-                          <p><strong>Drops From:</strong></p>
+                          <p>
+                            <strong>Drops From:</strong>
+                          </p>
                           <div class="row">
                             @foreach ($item->prompts as $prompt)
                               <span class="badge" style="font-size:95%; background-color: #fefcf6; margin:5px;">
@@ -151,7 +187,8 @@
                 @endif
                 @if ($item->canUserSell)
                   <div class="text-right mb-4">
-                    <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}"><i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
+                    <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}">
+                      <i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
                   </div>
                 @endif
               </div>

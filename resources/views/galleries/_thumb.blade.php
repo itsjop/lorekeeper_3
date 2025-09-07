@@ -61,11 +61,13 @@
       @else
         ・
       @endif
-      {{ $submission->favorites_count }} <i
+      {{ $submission->favorites_count }}
+      <i
         class="fas fa-star"
         data-bs-toggle="tooltip"
         title="Favorites"
-      ></i> ・
+      >
+      </i> ・
       {{ $submission->comments->where('type', 'User-User')->count() }} <i
         class="fas fa-comment"
         data-bs-toggle="tooltip"

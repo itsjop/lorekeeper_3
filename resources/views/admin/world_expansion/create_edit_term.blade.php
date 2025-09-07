@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Glossary' => 'admin/world/glossary', ($term->id ? 'Edit' : 'Create') . ' Glossary Term' => $term->id ? 'admin/world/glossary/edit/' . $term->id : 'admin/world/glossary/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Glossary' => 'admin/world/glossary',
+      ($term->id ? 'Edit' : 'Create') . ' Glossary Term' => $term->id
+          ? 'admin/world/glossary/edit/' . $term->id
+          : 'admin/world/glossary/create'
+  ]) !!}
 
   <h1>{{ $term->id ? 'Edit' : 'Create' }} Glossary Term
     @if ($term->id)
@@ -68,29 +74,53 @@
                       'Flora' => 'Flora',
                       'Faction' => 'Faction',
                       'Concept' => 'Concept',
-                      'Location' => 'Location',
+                      'Location' => 'Location'
                   ],
                   $term->link_type,
-                  ['class' => 'form-control attachment-type', 'placeholder' => 'Select Attachment Type'],
+                  ['class' => 'form-control attachment-type', 'placeholder' => 'Select Attachment Type']
               ) !!}
             </div>
             <div class="col-6 attachment-row-select">
               @if ($term->link_type == 'Item')
-                {!! Form::select('attachment_id[]', $items, $term->link_id, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
+                {!! Form::select('attachment_id[]', $items, $term->link_id, [
+                    'class' => 'form-control item-select',
+                    'placeholder' => 'Select Item'
+                ]) !!}
               @elseif($term->link_type == 'Figure')
-                {!! Form::select('attachment_id[]', $figures, $term->link_id, ['class' => 'form-control figure-select', 'placeholder' => 'Select Figure']) !!}
+                {!! Form::select('attachment_id[]', $figures, $term->link_id, [
+                    'class' => 'form-control figure-select',
+                    'placeholder' => 'Select Figure'
+                ]) !!}
               @elseif($term->link_type == 'Fauna')
-                {!! Form::select('attachment_id[]', $faunas, $term->link_id, ['class' => 'form-control fauna-select', 'placeholder' => 'Select Fauna']) !!}
+                {!! Form::select('attachment_id[]', $faunas, $term->link_id, [
+                    'class' => 'form-control fauna-select',
+                    'placeholder' => 'Select Fauna'
+                ]) !!}
               @elseif($term->link_type == 'Flora')
-                {!! Form::select('attachment_id[]', $floras, $term->link_id, ['class' => 'form-control flora-select', 'placeholder' => 'Select Flora']) !!}
+                {!! Form::select('attachment_id[]', $floras, $term->link_id, [
+                    'class' => 'form-control flora-select',
+                    'placeholder' => 'Select Flora'
+                ]) !!}
               @elseif($term->link_type == 'Faction')
-                {!! Form::select('attachment_id[]', $factions, $term->link_id, ['class' => 'form-control faction-select', 'placeholder' => 'Select Faction']) !!}
+                {!! Form::select('attachment_id[]', $factions, $term->link_id, [
+                    'class' => 'form-control faction-select',
+                    'placeholder' => 'Select Faction'
+                ]) !!}
               @elseif($term->link_type == 'Concept')
-                {!! Form::select('attachment_id[]', $concepts, $term->link_id, ['class' => 'form-control concept-select', 'placeholder' => 'Select Concept']) !!}
+                {!! Form::select('attachment_id[]', $concepts, $term->link_id, [
+                    'class' => 'form-control concept-select',
+                    'placeholder' => 'Select Concept'
+                ]) !!}
               @elseif($term->link_type == 'Location')
-                {!! Form::select('attachment_id[]', $locations, $term->link_id, ['class' => 'form-control location-select', 'placeholder' => 'Select Location']) !!}
+                {!! Form::select('attachment_id[]', $locations, $term->link_id, [
+                    'class' => 'form-control location-select',
+                    'placeholder' => 'Select Location'
+                ]) !!}
               @elseif($term->link_type == 'Event')
-                {!! Form::select('attachment_id[]', $events, $term->link_id, ['class' => 'form-control event-select', 'placeholder' => 'Select Event']) !!}
+                {!! Form::select('attachment_id[]', $events, $term->link_id, [
+                    'class' => 'form-control event-select',
+                    'placeholder' => 'Select Event'
+                ]) !!}
               @endif
             </div>
           </div>
@@ -100,7 +130,10 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('is_active', 1, $term->id ? $term->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $term->id ? $term->is_active : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
     {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the term will not be visible to regular users.') !!}
   </div>
 

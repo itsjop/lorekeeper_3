@@ -9,7 +9,8 @@
 
   <h1>Items</h1>
 
-  <p>This is a list of items in the game. Specific details about items can be added when they are granted to users (e.g. reason for grant). By default, items are merely collectibles and any additional functionality must be manually processed, or custom
+  <p>This is a list of items in the game. Specific details about items can be added when they are granted to users (e.g. reason for
+    grant). By default, items are merely collectibles and any additional functionality must be manually processed, or custom
     coded in for the specific item.</p>
 
   <div class="text-right mb-3">
@@ -33,7 +34,10 @@
         {!! Form::select('item_category_id', $categories, Request::get('item_category_id'), ['class' => 'form-control']) !!}
       </div>
       @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
-        <div class="form-group ml-3 mb-3">{!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control', 'placeholder' => 'Any Rarity']) !!}
+        <div class="form-group ml-3 mb-3">{!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), [
+            'class' => 'form-control',
+            'placeholder' => 'Any Rarity'
+        ]) !!}
         </div>
         <div class="form-group ml-3 mb-3">
           {!! Form::select('artist', $artists, Request::get('artist'), ['class' => 'form-control']) !!}
@@ -47,10 +51,10 @@
             [
                 'none' => 'Any Visibility',
                 'visibleOnly' => 'Released Only',
-                'hiddenOnly' => 'Hidden Only',
+                'hiddenOnly' => 'Hidden Only'
             ],
             Request::get('visibility') ?: 'none',
-            ['class' => 'form-control', 'placeholder' => 'Any Visibility'],
+            ['class' => 'form-control', 'placeholder' => 'Any Visibility']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -61,10 +65,10 @@
                 'alpha-reverse' => 'Sort Alphabetically (Z-A)',
                 'category' => 'Sort by Category',
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'oldest',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">

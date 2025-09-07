@@ -10,28 +10,45 @@
 
 @section('meta-desc')
   @if (isset($award->category) && $award->category)
-    <p><strong>Category:</strong> {{ $award->category->name }}</p>
+    <p>
+      <strong>Category:</strong> {{ $award->category->name }}
+    </p>
   @endif
   @if (isset($award->rarity) && $award->rarity)
-    :: <p><strong>Rarity:</strong> {{ $award->rarity }}: {{ $award->rarityName }}</p>
+    :: <p>
+      <strong>Rarity:</strong> {{ $award->rarity }}: {{ $award->rarityName }}
+    </p>
   @endif
   :: {!! substr(str_replace('"', '&#39;', $award->description), 0, 69) !!}
 @endsection
 
 @section('content')
   @if (Auth::check() && Auth::user()->hasPower('edit_data'))
-    <a data-bs-toggle="tooltip" title="[ADMIN] Edit {{ ucfirst(__('awards.award')) }}" href="{{ url('admin/data/awards/edit/') . '/' . $award->id }}" class="mb-2 float-right"><i class="fas fa-crown"></i></a>
+    <a
+      data-bs-toggle="tooltip"
+      title="[ADMIN] Edit {{ ucfirst(__('awards.award')) }}"
+      href="{{ url('admin/data/awards/edit/') . '/' . $award->id }}"
+      class="mb-2 float-right"
+    >
+      <i class="fas fa-crown"></i>
+    </a>
   @endif
   {!! breadcrumbs([
       'World' => 'world',
       ucfirst(__('awards.awards')) => 'world/' . __('awards.awards'),
-      $award->name => $award->idUrl,
+      $award->name => $award->idUrl
   ]) !!}
 
   <div class="row world-entry align-items-center">
     @if ($imageUrl)
       <div class="col-md-3 world-entry-image">
-        <a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}"><img src="{{ $imageUrl }}" class="world-entry-image img-fluid" /></a>
+        <a
+          href="{{ $imageUrl }}"
+          data-lightbox="entry"
+          data-title="{{ $name }}"
+        >
+          <img src="{{ $imageUrl }}" class="world-entry-image img-fluid" />
+        </a>
       </div>
     @endif
     <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
@@ -40,10 +57,18 @@
           <h1 class="col-12">{!! $name !!}
             <div class="float-md-right small">
               @if ($award->is_character_owned)
-                <i class="fas fa-paw mx-2 small" data-bs-toggle="tooltip" title="This {{ __('awards.award') }} can be held by {{ __('lorekeeper.characters') }}."></i>
+                <i
+                  class="fas fa-paw mx-2 small"
+                  data-bs-toggle="tooltip"
+                  title="This {{ __('awards.award') }} can be held by {{ __('lorekeeper.characters') }}."
+                ></i>
               @endif
               @if ($award->is_user_owned)
-                <i class="fas fa-user mx-2 small" data-bs-toggle="tooltip" title="This {{ __('awards.award') }} can be held by users."></i>
+                <i
+                  class="fas fa-user mx-2 small"
+                  data-bs-toggle="tooltip"
+                  title="This {{ __('awards.award') }} can be held by users."
+                ></i>
               @endif
             </div>
           </h1>
@@ -65,7 +90,9 @@
           <div class="card-header h5">Availability</div>
           <div class="card-body">
             @if (isset($award->data['release']) && $award->data['release'])
-              <div><strong>Source:</strong> {!! $award->data['release'] !!}</div>
+              <div>
+                <strong>Source:</strong> {!! $award->data['release'] !!}
+              </div>
             @endif
             @if (isset($award->data['prompts']) && $award->data['prompts'])
               <div class="no-gutters d-flex flex-wrap justify-content-center">
@@ -139,7 +166,12 @@
                       @endphp
 
                       <div class="col-sm-1">
-                        <img src="{{ $info->imageUrl }}" class="img-fluid" data-bs-toggle="tooltip" title="{{ $info->name }} x{{ $quantity }}" />
+                        <img
+                          src="{{ $info->imageUrl }}"
+                          class="img-fluid"
+                          data-bs-toggle="tooltip"
+                          title="{{ $info->name }} x{{ $quantity }}"
+                        />
                       </div>
                     @endforeach
                   @endforeach

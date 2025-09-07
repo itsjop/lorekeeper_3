@@ -157,7 +157,9 @@
             ]) !!}
           </div>
           <div>
-            <button class="btn btn-danger delete-calc" type="button"><i class="fas fa-trash"></i></button>
+            <button class="btn btn-danger delete-calc" type="button">
+              <i class="fas fa-trash"></i>
+            </button>
           </div>
         </div>
         <div id="collapsable-{{ $criterion->id }}" class="form collapse">
@@ -212,7 +214,7 @@
   <p>Rewards are credited on a per-user basis. Mods are able to modify the specific rewards granted at approval time.</p>
   <p>You can add loot tables containing any kind of currencies (both user- and character-attached), but be sure to keep track of
     which are being distributed! Character-only currencies cannot be given to users.</p>
-    
+
   @include('widgets._loot_select', [
       'loots' => $prompt->rewards,
       'showLootTables' => true,
@@ -242,7 +244,9 @@
         ]) !!}
       </div>
       <div>
-        <button class="btn btn-danger delete-calc" type="button"><i class="fas fa-trash"></i></button>
+        <button class="btn btn-danger delete-calc" type="button">
+          <i class="fas fa-trash"></i>
+        </button>
       </div>
     </div>
     <div id="collapsable-" class="form collapse">Select a criterion to populate this area.</div>

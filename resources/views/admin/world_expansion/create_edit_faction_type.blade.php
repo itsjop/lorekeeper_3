@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Faction Types' => 'admin/world/faction-types', ($type->id ? 'Edit' : 'Create') . ' Faction Type' => $type->id ? 'admin/world/faction-types/edit/' . $type->id : 'admin/world/faction-types/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Faction Types' => 'admin/world/faction-types',
+      ($type->id ? 'Edit' : 'Create') . ' Faction Type' => $type->id
+          ? 'admin/world/faction-types/edit/' . $type->id
+          : 'admin/world/faction-types/create'
+  ]) !!}
 
   <h1>{{ $type->id ? 'Edit' : 'Create' }} Faction Type
     @if ($type->id)
@@ -14,7 +20,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $type->id ? 'admin/world/faction-types/edit/' . $type->id : 'admin/world/faction-types/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $type->id ? 'admin/world/faction-types/edit/' . $type->id : 'admin/world/faction-types/create',
+      'files' => true
+  ]) !!}
 
   <div class="card mb-3">
     <h2 class="card-header h3">Basic Information</h2>
@@ -41,29 +50,57 @@
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($type->thumb_extension)
-          <a href="{{ $type->thumbUrl }}" data-lightbox="entry" data-title="{{ $type->name }}">
-            <img src="{{ $type->thumbUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a
+            href="{{ $type->thumbUrl }}"
+            data-lightbox="entry"
+            data-title="{{ $type->name }}"
+          >
+            <img
+              src="{{ $type->thumbUrl }}"
+              class="mw-100 float-left mr-3"
+              style="max-height:125px"
+            >
+          </a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the faction type index.') !!}
         <div>{!! Form::file('image_th') !!}</div>
         <div class="text-muted">Recommended size: 200x200</div>
         @if (isset($type->thumb_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image_th', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Thumbnail As-Is', 'data-on' => 'Remove Thumbnail Image']) !!}
+            {!! Form::checkbox('remove_image_th', 1, false, [
+                'class' => 'form-check-input',
+                'data-toggle' => 'toggle',
+                'data-off' => 'Leave Thumbnail As-Is',
+                'data-on' => 'Remove Thumbnail Image'
+            ]) !!}
           </div>
         @endif
       </div>
       <div class="form-group col-md-6">
         @if ($type->image_extension)
-          <a href="{{ $type->imageUrl }}" data-lightbox="entry" data-title="{{ $type->name }}">
-            <img src="{{ $type->imageUrl }}" class="mw-100 float-left mr-3" style="max-height:125px"></a>
+          <a
+            href="{{ $type->imageUrl }}"
+            data-lightbox="entry"
+            data-title="{{ $type->name }}"
+          >
+            <img
+              src="{{ $type->imageUrl }}"
+              class="mw-100 float-left mr-3"
+              style="max-height:125px"
+            >
+          </a>
         @endif
         {!! Form::label('Type Image (Optional)') !!} {!! add_help('This image is used on the faction type page as a header.') !!}
         <div>{!! Form::file('image') !!}</div>
         <div class="text-muted">Recommended size: None (Choose a standard size for all type header images.)</div>
         @if (isset($type->image_extension))
           <div class="form-check">
-            {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-off' => 'Leave Header Image As-Is', 'data-on' => 'Remove Current Header Image']) !!}
+            {!! Form::checkbox('remove_image', 1, false, [
+                'class' => 'form-check-input',
+                'data-toggle' => 'toggle',
+                'data-off' => 'Leave Header Image As-Is',
+                'data-on' => 'Remove Current Header Image'
+            ]) !!}
           </div>
         @endif
       </div>

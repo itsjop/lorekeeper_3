@@ -5,7 +5,11 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Maps' => 'admin/maps', ($map->id ? 'Edit' : 'Create') . ' Map' => $map->id ? 'admin/maps/edit/' . $map->id : 'admin/maps/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Maps' => 'admin/maps',
+      ($map->id ? 'Edit' : 'Create') . ' Map' => $map->id ? 'admin/maps/edit/' . $map->id : 'admin/maps/create'
+  ]) !!}
 
   <h1>{{ $map->id ? 'Edit' : 'Create' }} Map
     @if ($map->id)
@@ -39,7 +43,10 @@
   </div>
 
   <div class="col-md form-group">
-    {!! Form::checkbox('is_active', 1, $map->id ? $map->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::checkbox('is_active', 1, $map->id ? $map->is_active : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
     {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!}
   </div>
 
@@ -52,7 +59,8 @@
   @if ($map->id)
     <h1>Map Locations</h1>
     <p class="text-muted">These are the locations that are currently on this map.</p>
-    <p>To get image co-ordinates for locations, use a site like <a href="https://www.image-map.net/" target="_blank">Image Map</a></p>
+    <p>To get image co-ordinates for locations, use a site like <a href="https://www.image-map.net/" target="_blank">Image Map</a>
+    </p>
     <hr />
     <div class="text-right my-3">
       <a class="btn btn-primary create-location">
@@ -65,8 +73,10 @@
         <thead>
           <th>Name</th>
           <th>Image Co-ordinates</th>
-          <th></th>
-          <th></th>
+          <th>
+          </th>
+          <th>
+          </th>
         </thead>
         <tbody>
           @foreach ($map->locations as $location)
@@ -75,12 +85,22 @@
               <td>{{ $location->name }}</td>
               <td>{{ $location->cords }}</td>
               <td>
-                <a href="#" class="btn btn-primary btn-sm edit-location" data-id="{{ $location->id }}">
-                  <i class="fas fa-edit"></i></a>
+                <a
+                  href="#"
+                  class="btn btn-primary btn-sm edit-location"
+                  data-id="{{ $location->id }}"
+                >
+                  <i class="fas fa-edit"></i>
+                </a>
               </td>
               <td>
-                <a href="#" class="btn btn-danger btn-sm delete-location" data-id="{{ $location->id }}">
-                  <i class="fas fa-trash"></i></a>
+                <a
+                  href="#"
+                  class="btn btn-danger btn-sm delete-location"
+                  data-id="{{ $location->id }}"
+                >
+                  <i class="fas fa-trash"></i>
+                </a>
               </td>
             </tr>
           @endforeach

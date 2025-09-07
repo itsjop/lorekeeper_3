@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('lorekeeper.subtypes')) => 'admin/data/subtypes',
-      ($subtype->id ? 'Edit' : 'Create') . ' ' . ucfirst(__('lorekeeper.subtype')) => $subtype->id ? 'admin/data/subtypes/edit/' . $subtype->id : 'admin/data/subtypes/create',
+      ($subtype->id ? 'Edit' : 'Create') . ' ' . ucfirst(__('lorekeeper.subtype')) => $subtype->id
+          ? 'admin/data/subtypes/edit/' . $subtype->id
+          : 'admin/data/subtypes/create'
   ]) !!}
 
   <h1>{{ $subtype->id ? 'Edit' : 'Create' }} {{ ucfirst(__('lorekeeper.subtype')) }}
@@ -19,7 +21,7 @@
 
   {!! Form::open([
       'url' => $subtype->id ? 'admin/data/subtypes/edit/' . $subtype->id : 'admin/data/subtypes/create',
-      'files' => true,
+      'files' => true
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -57,14 +59,16 @@
   <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $subtype->id ? $subtype->is_visible : 1, [
         'class' => 'form-check-input',
-        'data-toggle' => 'toggle',
+        'data-toggle' => 'toggle'
     ]) !!}
-    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the subtype will not be visible in the subtypes list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.') !!}
+    {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'If turned off, the subtype will not be visible in the subtypes list or available for selection in search and design updates. Permissioned staff will still be able to add them to characters, however.'
+    ) !!}
   </div>
 
   @include('admin.lineage._edit_lineage_blacklist', [
       'lineageBlacklist' => $lineageBlacklist,
-      'type' => 'subtype',
+      'type' => 'subtype'
   ])
 
   <div class="text-right">

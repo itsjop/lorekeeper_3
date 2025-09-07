@@ -61,7 +61,8 @@
           class="btn btn-sm p-0 m-0 color-white btn-faded small"
         >
           <span>{{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() }}</span>
-          <span class="d-none d-lg-inline pl-1">{{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() != 1 ? 'Likes' : 'Like' }}</span>
+          <span
+            class="d-none d-lg-inline pl-1">{{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() != 1 ? 'Likes' : 'Like' }}</span>
         </button>
       </a>
       {!! Form::open(['url' => 'comments/' . $comment->id . '/like/1', 'class' => 'd-inline-block']) !!}
@@ -296,10 +297,12 @@
                   <div class="logs-table-cell">User</div>
                 </div>
                 <div class="col-12 col-md-4">
-                  <div class="logs-table-cell"></div>
+                  <div class="logs-table-cell">
+                  </div>
                 </div>
                 <div class="col-4 col-md-3">
-                  <div class="logs-table-cell"></div>
+                  <div class="logs-table-cell">
+                  </div>
                 </div>
               </div>
             </div>

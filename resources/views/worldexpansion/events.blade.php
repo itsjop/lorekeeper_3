@@ -27,10 +27,10 @@
                 'alpha-reverse' => 'Sort Alphabetically (Z-A)',
                 'category' => 'Sort by Category',
                 'newest' => 'Newest First',
-                'oldest' => 'Oldest First',
+                'oldest' => 'Oldest First'
             ],
             Request::get('sort') ?: 'category',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -48,8 +48,13 @@
           <div class="card-header">
             <div class="world-entry-image">
               @isset($event->thumb_extension)
-                <a href="{{ $event->thumbUrl }}" data-lightbox="entry" data-title="{{ $event->name }}">
-                  <img src="{{ $event->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" /></a>
+                <a
+                  href="{{ $event->thumbUrl }}"
+                  data-lightbox="entry"
+                  data-title="{{ $event->name }}"
+                >
+                  <img src="{{ $event->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" />
+                </a>
               @endisset
             </div>
             <h3 class="mb-0 text-center">{!! $event->displayName !!}</h3>
@@ -59,7 +64,8 @@
           @if (count(allAttachments($event)))
             <div class="card-body">
               @foreach (allAttachments($event) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }} {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+                <p class="text-center mb-0">Associated with {{ count($attachments) }}
+                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
               @endforeach
             </div>
           @endif

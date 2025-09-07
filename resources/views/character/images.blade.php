@@ -10,32 +10,49 @@
 
 @section('profile-content')
   {!! breadcrumbs([
-      $character->category->masterlist_sub_id ? $character->category->sublist->name . ' Masterlist' : 'Character Masterlist' => $character->category->masterlist_sub_id ? 'sublist/' . $character->category->sublist->key : 'masterlist',
+      $character->category->masterlist_sub_id
+          ? $character->category->sublist->name . ' Masterlist'
+          : 'Character Masterlist' => $character->category->masterlist_sub_id
+          ? 'sublist/' . $character->category->sublist->key
+          : 'masterlist',
       $character->fullName => $character->url,
-      'Images' => $character->url . '/images',
+      'Images' => $character->url . '/images'
   ]) !!}
 
   @include('character._header', ['character' => $character])
 
   <div class="tab-content">
     @foreach ($character->images($user)->with('features.feature')->with('species')->with('rarity')->get() as $image)
-      <div class="tab-pane fade {{ $image->id == $character->character_image_id ? 'show active' : '' }}" id="image-{{ $image->id }}">
+      <div class="tab-pane fade {{ $image->id == $character->character_image_id ? 'show active' : '' }}"
+        id="image-{{ $image->id }}"
+      >
         <div class="grid grid-2-col">
           <div class="">
             <div class="text-center">
-              <a href="{{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? $image->fullsizeUrl : $image->imageUrl }}" data-lightbox="entry"
-                data-title="{{ $character->fullName }} [#{{ $image->id }}] {{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? ' : Full-size Image' : '' }}">
-                <img src="{{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? $image->fullsizeUrl : $image->imageUrl }}"
-                  class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="{{ $image->character->fullName }}" />
+              <a
+                href="{{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? $image->fullsizeUrl : $image->imageUrl }}"
+                data-lightbox="entry"
+                data-title="{{ $character->fullName }} [#{{ $image->id }}] {{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? ' : Full-size Image' : '' }}"
+              >
+                <img
+                  src="{{ $image->canViewFull(Auth::user() ?? null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)) ? $image->fullsizeUrl : $image->imageUrl }}"
+                  class="image {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+                  alt="{{ $image->character->fullName }}"
+                />
               </a>
             </div>
-            @if ($image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName)))
+            @if (
+                $image->canViewFull(Auth::check() ? Auth::user() : null) &&
+                    file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName))
+            )
               <div class="text-right">You are viewing the full-size image. <a href="{{ $image->imageUrl }}">View watermarked
                   image</a>?</div>
             @endif
             @if (Auth::check() && !$image->character->is_myo_slot && $character->user_id == Auth::user()->id)
               {!! Form::open([
-                  'url' => $image->character->is_myo_slot ? 'myo/' . $image->character->id . '/approval/' . $image->id : 'character/' . $image->character->slug . '/approval/' . $image->id,
+                  'url' => $image->character->is_myo_slot
+                      ? 'myo/' . $image->character->id . '/approval/' . $image->id
+                      : 'character/' . $image->character->slug . '/approval/' . $image->id
               ]) !!}
               <div class="text-right">
                 {!! Form::submit('Update Design', ['class' => 'btn btn-primary']) !!}
@@ -52,15 +69,27 @@
   <h3>
     Images
     @if ($canManage)
-      <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm"><i class="fas fa-plus"></i> Add Image</a>
+      <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm">
+        <i class="fas fa-plus"></i> Add Image</a>
     @endif
   </h3>
 
   <ul class="row nav image-nav mb-2" @if ($canManage) id="sortable" @endif>
     @foreach ($character->images($user)->get() as $image)
       <li class="col-md-3 col-6 text-center nav-item sort-item" data-id="{{ $image->id }}">
-        <a id="thumbnail-{{ $image->id }}" data-bs-toggle="tab" href="#image-{{ $image->id }}" role="tab" class="{{ $image->id == $character->character_image_id ? 'active' : '' }}">
-          <img src="{{ $image->thumbnailUrl }}" class="img-thumbnail {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}" alt="Thumbnail for {{ $image->character->fullName }}" /></a>
+        <a
+          id="thumbnail-{{ $image->id }}"
+          data-bs-toggle="tab"
+          href="#image-{{ $image->id }}"
+          role="tab"
+          class="{{ $image->id == $character->character_image_id ? 'active' : '' }}"
+        >
+          <img
+            src="{{ $image->thumbnailUrl }}"
+            class="img-thumbnail {{ $character->image->showContentWarnings(Auth::user() ?? null) ? 'content-warning' : '' }}"
+            alt="Thumbnail for {{ $image->character->fullName }}"
+          />
+        </a>
       </li>
     @endforeach
   </ul>

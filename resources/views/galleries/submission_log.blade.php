@@ -29,7 +29,8 @@
                 class="small inventory-collapse-toggle collapse-toggle {{ $submission->status == 'Accepted' ? '' : 'collapsed' }}"
                 href="#currencyForm"
                 data-bs-toggle="collapse"
-              >Show</a></h5>
+              >Show</a>
+            </h5>
           </div>
           <div class="card-body collapse {{ $submission->status == 'Accepted' ? 'show' : '' }}" id="currencyForm">
             @if ($submission->status == 'Accepted')
@@ -119,7 +120,9 @@
                 @endif
               @else
                 @if (isset($submission->data['staff']))
-                  <p><strong>Processed By:</strong> {!! App\Models\User\User::find($submission->data['staff'])->displayName !!}</p>
+                  <p>
+                    <strong>Processed By:</strong> {!! App\Models\User\User::find($submission->data['staff'])->displayName !!}
+                  </p>
                 @endif
                 @if (isset($submission->data['ineligible']) && $submission->data['ineligible'] == 1)
                   <p>This submission has been evaluated as ineligible for {{ $currency->name }} rewards.</p>
@@ -144,7 +147,7 @@
                   <p>This submission didn't have any criteria specified for rewards</p>
                 @endif
           </div>
-        @endif
+      @endif
       @endif
     @else
       <p>This submission is not eligible for currency
@@ -158,7 +161,8 @@
             @foreach ($submission->data['currencyData'] as $key => $data)
               <div class="col-md-3 text-center">
                 @if (isset($data) && isset(config('lorekeeper.group_currency_form')[$key]))
-                  <strong>{{ config('lorekeeper.group_currency_form')[$key]['name'] }}:</strong><br />
+                  <strong>{{ config('lorekeeper.group_currency_form')[$key]['name'] }}:</strong>
+                  <br />
                   @if (config('lorekeeper.group_currency_form')[$key]['type'] == 'choice')
                     @if (isset(config('lorekeeper.group_currency_form')[$key]['multiple']) &&
                             config('lorekeeper.group_currency_form')[$key]['multiple'] == 'true'
@@ -185,7 +189,8 @@
                 {{ round($submission->data['total'] * $submission->characters->count()) }}
               @endif
               @if ($submission->collaborators->count())
-                <br /><strong>Divided by {{ $submission->collaborators->count() }} Collaborators:</strong>
+                <br />
+                <strong>Divided by {{ $submission->collaborators->count() }} Collaborators:</strong>
                 {{ round($submission->data['total'] / $submission->collaborators->count()) }}
                 @if ($submission->characters->count())
                   ・ <strong> Times {{ $submission->characters->count() }} Characters:</strong>

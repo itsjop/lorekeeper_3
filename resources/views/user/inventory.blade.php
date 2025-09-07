@@ -19,7 +19,8 @@
         title="Default View"
         alt="Default View"
       >
-        <i class="fas fa-th"></i></button>
+        <i class="fas fa-th"></i>
+      </button>
       <button
         type="button"
         class="btn btn-secondary sum-view-button m-0 ml-2"
@@ -27,7 +28,8 @@
         title="Summarized View"
         alt="Summarized View"
       >
-        <i class="fas fa-bars"></i></button>
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
 
     <div class="name form-group m-0 w-100">

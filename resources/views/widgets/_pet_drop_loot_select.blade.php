@@ -18,29 +18,35 @@
         <th width="25%">{{ ucfirst($label) }} Reward</th>
         <th width="20%">Minimum Quantity</th>
         <th width="20%">Maximum Quantity</th>
-        <th width="10%"></th>
+        <th width="10%">
+        </th>
       </tr>
     </thead>
     <tbody class="lootTableBody">
       @if ($loots)
         @foreach ($loots as $loot)
           <tr class="loot-row">
-            <td>{!! Form::select('rewardable_type[' . $group . '][]', ['Item' => 'Item', 'Currency' => 'Currency', 'LootTable' => 'Loot Table'], $loot->rewardable_type, ['class' => 'form-control reward-type', 'placeholder' => 'Select Reward Type']) !!}</td>
+            <td>{!! Form::select(
+                'rewardable_type[' . $group . '][]',
+                ['Item' => 'Item', 'Currency' => 'Currency', 'LootTable' => 'Loot Table'],
+                $loot->rewardable_type,
+                ['class' => 'form-control reward-type', 'placeholder' => 'Select Reward Type']
+            ) !!}</td>
             <td class="loot-row-select">
               @if ($loot->rewardable_type == 'Item')
                 {!! Form::select('rewardable_id[' . $group . '][]', $items, $loot->rewardable_id, [
                     'class' => 'form-control item-select selectize',
-                    'placeholder' => 'Select Item',
+                    'placeholder' => 'Select Item'
                 ]) !!}
               @elseif($loot->rewardable_type == 'Currency')
                 {!! Form::select('rewardable_id[' . $group . '][]', $currencies, $loot->rewardable_id, [
                     'class' => 'form-control currency-select selectize',
-                    'placeholder' => 'Select Currency',
+                    'placeholder' => 'Select Currency'
                 ]) !!}
               @elseif($loot->rewardable_type == 'LootTable')
                 {!! Form::select('rewardable_id[' . $group . '][]', $tables, $loot->rewardable_id, [
                     'class' => 'form-control table-select selectize',
-                    'placeholder' => 'Select Loot Table',
+                    'placeholder' => 'Select Loot Table'
                 ]) !!}
               @endif
             </td>

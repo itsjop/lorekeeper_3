@@ -9,7 +9,8 @@
 
   <h1>Character Categories</h1>
 
-  <p>This is a list of character categories that will be used to classify characters. Creating character categories is entirely optional, but recommended for organisational purposes.</p>
+  <p>This is a list of character categories that will be used to classify characters. Creating character categories is entirely
+    optional, but recommended for organisational purposes.</p>
   <p>The sorting order reflects the order in which the character categories will be displayed on the world pages.</p>
 
   <div class="text-right mb-3">
@@ -25,14 +26,16 @@
           <th>Category</th>
           <th>Code</th>
           <th>Sub Masterlist</th>
-          <th></th>
+          <th>
+          </th>
         </tr>
       </thead>
       <tbody id="sortable" class="sortable">
         @foreach ($categories as $category)
           <tr class="sort-item" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               @if (!$category->is_visible)
                 <i class="fas fa-eye-slash mr-1"></i>
               @endif

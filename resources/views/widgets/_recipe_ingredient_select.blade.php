@@ -1,5 +1,9 @@
     <div class="text-right mb-3">
-      <a href="#" class="btn btn-outline-info" id="addIngredient">Add Ingredient</a>
+      <a
+        href="#"
+        class="btn btn-outline-info"
+        id="addIngredient"
+      >Add Ingredient</a>
     </div>
     <table class="table table-sm" id="ingredientTable">
       <thead>
@@ -7,7 +11,8 @@
           <th width="35%">Ingredient Type</th>
           <th width="35%">Ingredient</th>
           <th width="20%">Quantity</th>
-          <th width="10%"></th>
+          <th width="10%">
+          </th>
         </tr>
       </thead>
       <tbody id="ingredientTableBody">
@@ -22,20 +27,20 @@
                       'MultiItem' => 'Multi Item',
                       'Category' => 'Category',
                       'MultiCategory' => 'Multi Category',
-                      'Currency' => 'Currency',
+                      'Currency' => 'Currency'
                   ],
                   $ingredient->ingredient_type,
                   [
                       'class' => 'form-control ingredient-type',
-                      'placeholder' => 'Select Ingredient Type',
-                  ],
+                      'placeholder' => 'Select Ingredient Type'
+                  ]
               ) !!}</td>
               <td class="ingredient-row-select">
                 @switch($ingredient->ingredient_type)
                   @case('Item')
                     {!! Form::select('ingredient_data[' . $row_counter . '][]', $items, $ingredient->data[0], [
                         'class' => 'form-control item-select selectize',
-                        'placeholder' => 'Select Item',
+                        'placeholder' => 'Select Item'
                     ]) !!}
                   @break
 
@@ -46,10 +51,12 @@
                           <div class="mb-2">
                             {!! Form::select('ingredient_data[' . $row_counter . '][]', $items, $entry, [
                                 'class' => 'form-control item-select selectize',
-                                'placeholder' => 'Select Item',
+                                'placeholder' => 'Select Item'
                             ]) !!}
                             <div class="text-right text-uppercase" style="margin-top: -0.5em;">
-                              <a href="#" class="remove-multi-entry-button text-danger {{ count($ingredient->data) > 1 ? '' : 'hide' }}">Remove Item</a>
+                              <a href="#"
+                                class="remove-multi-entry-button text-danger {{ count($ingredient->data) > 1 ? '' : 'hide' }}"
+                              >Remove Item</a>
                             </div>
                           </div>
                         @endforeach
@@ -61,7 +68,7 @@
                   @case('Category')
                     {!! Form::select('ingredient_data[' . $row_counter . '][]', $categories, $ingredient->data[0], [
                         'class' => 'form-control category-select selectize',
-                        'placeholder' => 'Select Category',
+                        'placeholder' => 'Select Category'
                     ]) !!}
                   @break
 
@@ -72,10 +79,12 @@
                           <div class="mb-2">
                             {!! Form::select('ingredient_data[' . $row_counter . '][]', $categories, $entry, [
                                 'class' => 'form-control multi-category-select selectize',
-                                'placeholder' => 'Select Category',
+                                'placeholder' => 'Select Category'
                             ]) !!}
                             <div class="text-right text-uppercase" style="margin-top: -0.5em;">
-                              <a href="#" class="remove-multi-entry-button text-danger {{ count($ingredient->data) > 1 ? '' : 'hide' }}">Remove Category</a>
+                              <a href="#"
+                                class="remove-multi-entry-button text-danger {{ count($ingredient->data) > 1 ? '' : 'hide' }}"
+                              >Remove Category</a>
                             </div>
                           </div>
                         @endforeach
@@ -87,13 +96,13 @@
                   @case('Currency')
                     {!! Form::select('ingredient_data[' . $row_counter . '][]', $currencies, $ingredient->data[0], [
                         'class' => 'form-control currency-select selectize',
-                        'placeholder' => 'Select Currency',
+                        'placeholder' => 'Select Currency'
                     ]) !!}
                   @break
                 @endswitch
               </td>
               <td>{!! Form::text('ingredient_quantity[' . $row_counter . ']', $ingredient->quantity, [
-                  'class' => 'form-control ingredient_quantity',
+                  'class' => 'form-control ingredient_quantity'
               ]) !!}</td>
               <td class="text-right">
                 <a href="#" class="btn btn-danger remove-ingredient-button">Remove</a>

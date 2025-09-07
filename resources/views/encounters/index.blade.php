@@ -6,7 +6,8 @@
 
 @section('content')
   {!! breadcrumbs(['Encounter Areas' => 'encounter-areas']) !!}
-  <p id="display_error"></p>
+  <p id="display_error">
+  </p>
   <div class="text-center">
     <h1>Encounter Areas</h1>
     <p>Here is a list of areas that you can venture into. You will recieve a randomized encounter and options of
@@ -26,7 +27,8 @@
       @endforeach
     </div>
 
-    <div id="encounter-area"></div>
+    <div id="encounter-area">
+    </div>
   @endif
 
 @endsection

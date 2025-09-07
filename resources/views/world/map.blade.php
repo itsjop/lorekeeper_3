@@ -25,8 +25,17 @@
         <div class="card-body">
           <div class="row world-entry">
             <div class="col-md-3 world-entry-image">
-              <a href="{{ $map->imageUrl }}" data-lightbox="entry" data-title="{{ $map->name }}">
-                <img src="{{ $map->imageUrl }}" class="world-entry-image" alt="{{ $map->name }}" /></a>
+              <a
+                href="{{ $map->imageUrl }}"
+                data-lightbox="entry"
+                data-title="{{ $map->name }}"
+              >
+                <img
+                  src="{{ $map->imageUrl }}"
+                  class="world-entry-image"
+                  alt="{{ $map->name }}"
+                />
+              </a>
             </div>
             <div class="col-md-9">
               <h1>{!! $map->name !!}</h1>

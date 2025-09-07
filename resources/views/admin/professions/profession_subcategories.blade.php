@@ -9,7 +9,8 @@
 
   <h1>Profession Subcategories</h1>
 
-  <p>This is a list of profession subcategories that will be used to sort professions on the profession page. Creating profession subcategories is entirely optional, but recommended if you want even more clustering of professions.</p>
+  <p>This is a list of profession subcategories that will be used to sort professions on the profession page. Creating profession
+    subcategories is entirely optional, but recommended if you want even more clustering of professions.</p>
   <p>The sorting order reflects the order in which the profession subcategories will be displayed on the world pages.</p>
 
   <div class="text-right mb-3">
@@ -26,7 +27,8 @@
         @foreach ($subcategories as $category)
           <tr class="sort-item" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $category->displayName !!}
             </td>
             <td class="text-right">

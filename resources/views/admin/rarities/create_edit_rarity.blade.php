@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Rarities' => 'admin/data/rarities',
-      ($rarity->id ? 'Edit' : 'Create') . ' Rarity' => $rarity->id ? 'admin/data/rarities/edit/' . $rarity->id : 'admin/data/rarities/create',
+      ($rarity->id ? 'Edit' : 'Create') . ' Rarity' => $rarity->id
+          ? 'admin/data/rarities/edit/' . $rarity->id
+          : 'admin/data/rarities/create'
   ]) !!}
 
   <h1>{{ $rarity->id ? 'Edit' : 'Create' }} Rarity
@@ -26,8 +28,8 @@
               'searchCharactersUrl' => $rarity->searchCharactersUrl,
               'edit' => [
                   'title' => 'Edit Rarity',
-                  'object' => $rarity,
-              ],
+                  'object' => $rarity
+              ]
           ])
         </div>
       </div>
@@ -36,7 +38,7 @@
 
   {!! Form::open([
       'url' => $rarity->id ? 'admin/data/rarities/edit/' . $rarity->id : 'admin/data/rarities/create',
-      'files' => true,
+      'files' => true
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -52,7 +54,8 @@
       {!! Form::text('color', $rarity->color, ['class' => 'form-control']) !!}
       <span class="input-group-append">
         <span class="input-group-text colorpicker-input-addon">
-          <i></i></span>
+          <i></i>
+        </span>
       </span>
     </div>
   </div>
@@ -95,7 +98,7 @@
 
     @include('admin.lineage._edit_lineage_blacklist', [
         'lineageBlacklist' => $lineageBlacklist,
-        'type' => 'rarity',
+        'type' => 'rarity'
     ])
 
     <div class="text-right">

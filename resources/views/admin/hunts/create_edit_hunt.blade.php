@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Scavenger Hunts' => 'admin/data/hunts', ($hunt->id ? 'Edit' : 'Create') . ' Scavenger Hunt' => $hunt->id ? 'admin/data/hunts/edit/' . $hunt->id : 'admin/data/hunts/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Scavenger Hunts' => 'admin/data/hunts',
+      ($hunt->id ? 'Edit' : 'Create') . ' Scavenger Hunt' => $hunt->id
+          ? 'admin/data/hunts/edit/' . $hunt->id
+          : 'admin/data/hunts/create'
+  ]) !!}
 
   <h1>{{ $hunt->id ? 'Edit' : 'Create' }} Scavenger Hunt
     @if ($hunt->id)
@@ -18,12 +24,16 @@
   <h3>Basic Information</h3>
 
   <div class="form-group">
-    {!! Form::label('Name') !!} {!! add_help('This is the name you will use to identify this hunt internally. This name will not be shown to users; a name that can be easily identified is recommended.') !!}
+    {!! Form::label('Name') !!} {!! add_help(
+        'This is the name you will use to identify this hunt internally. This name will not be shown to users; a name that can be easily identified is recommended.'
+    ) !!}
     {!! Form::text('name', $hunt->name, ['class' => 'form-control']) !!}
   </div>
 
   <div class="form-group">
-    {!! Form::label('Display Name') !!} {!! add_help('This is the name that will be shown to users. This is for display purposes and can be something more vague than the above.') !!}
+    {!! Form::label('Display Name') !!} {!! add_help(
+        'This is the name that will be shown to users. This is for display purposes and can be something more vague than the above.'
+    ) !!}
     {!! Form::text('display_name', $hunt->getRawOriginal('display_name'), ['class' => 'form-control']) !!}
   </div>
 
@@ -38,7 +48,12 @@
   </div>
 
   @if ($hunt->id)
-    <h4>Locations <a class="small inventory-collapse-toggle collapse-toggle" href="#spoilers" data-bs-toggle="collapse">Show</a></h3>
+    <h4>Locations <a
+        class="small inventory-collapse-toggle collapse-toggle"
+        href="#spoilers"
+        data-bs-toggle="collapse"
+      >Show</a>
+      </h3>
       <div class="mb-3 collapse form-group" id="spoilers">
         {!! Form::label('locations', 'Locations (Optional)') !!} {!! add_help('The locations of hunt targets. HTML cannot be used.') !!}
         {!! Form::textarea('locations', $hunt->locations, ['class' => 'form-control']) !!}
@@ -68,8 +83,10 @@
 
   @if ($hunt->id)
     <h3>Display Link</h3>
-    <p>For convenience, here is the hunt's url as well as the full HTML to display a link to the hunt's user-facing page. Hunt's pages inform users of how many of the hunt's targets they've found, and provide a recap of any clues attached to the found
-      targets. Targets not yet found are not displayed, aside from indicating the total number; the full lineup can thus be indicated (or not) as desired.</p>
+    <p>For convenience, here is the hunt's url as well as the full HTML to display a link to the hunt's user-facing page. Hunt's
+      pages inform users of how many of the hunt's targets they've found, and provide a recap of any clues attached to the found
+      targets. Targets not yet found are not displayed, aside from indicating the total number; the full lineup can thus be
+      indicated (or not) as desired.</p>
     <div class="alert alert-secondary">
       {{ $hunt->url }}
     </div>
@@ -80,8 +97,10 @@
 
   @if ($hunt->id)
     <h3>Hunt Targets</h3>
-    <p>Hunt targets are items with a specified quantity. They are granted to the user on being claimed, and can only be claimed once. Each target is assigned a number, 1-10, per hunt, based on the order they are added to the hunt. Targets can be
-      deleted so long as the hunt has not had any participants, as doing so after would break the logs. Users will also be shown the number of targets they have found out of the total, so make sure you have only the number of targets desired before the
+    <p>Hunt targets are items with a specified quantity. They are granted to the user on being claimed, and can only be claimed
+      once. Each target is assigned a number, 1-10, per hunt, based on the order they are added to the hunt. Targets can be
+      deleted so long as the hunt has not had any participants, as doing so after would break the logs. Users will also be shown the
+      number of targets they have found out of the total, so make sure you have only the number of targets desired before the
       hunt goes live!</p>
 
     @if (count($hunt->targets) < 10)
@@ -118,7 +137,8 @@
   @if ($hunt->id)
     <h3>Log</h3>
     <p>
-      This is the log of claimed targets. It's organized per user, and claimed targets are represented by a checkmark with the timestamp in the adjacent tooltip.
+      This is the log of claimed targets. It's organized per user, and claimed targets are represented by a checkmark with the
+      timestamp in the adjacent tooltip.
     </p>
 
     @if (count($hunt->participants))

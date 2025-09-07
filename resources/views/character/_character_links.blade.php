@@ -13,7 +13,8 @@
   <div id="sortable" class="sortable container mt-4">
     @foreach ($character->links as $link)
       <div class="sort-item" data-id="{{ $link->id }}">
-        <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+        <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+        </a>
         <div class="flex text-center mb-2 justify-content-center">
           @include('character._link_character', ['character' => $character])
           <div class="col-md-4 text-center my-auto">
@@ -33,7 +34,9 @@
                   >Info</a>
                 </li>
               </ul>
-              <h6 class="text-center text-uppercase m-0"><b>Relationship Status: {!! $link->type !!}</b></h6>
+              <h6 class="text-center text-uppercase m-0">
+                <b>Relationship Status: {!! $link->type !!}</b>
+              </h6>
             </div>
           </div>
 

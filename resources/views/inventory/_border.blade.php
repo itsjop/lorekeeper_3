@@ -1,5 +1,9 @@
 <li class="list-group-item">
-  <a class="card-title h5 collapse-title" data-bs-toggle="collapse" href="#redeemBorder">Redeem Border</a>
+  <a
+    class="card-title h5 collapse-title"
+    data-bs-toggle="collapse"
+    href="#redeemBorder"
+  >Redeem Border</a>
   <div id="redeemBorder" class="collapse">
     {!! Form::hidden('tag', $tag->tag) !!}
 
@@ -9,16 +13,22 @@
       Please be careful to not select a higher quantity to redeem than options listed below.
     </p>
 
-    <p class="mb-0"><strong>Possible Results:</strong></p>
+    <p class="mb-0">
+      <strong>Possible Results:</strong>
+    </p>
     <div class="row mb-2">
       @if (is_array($tag->getData()) && count($tag->getData()))
         @foreach ($tag->getData() as $loot)
-          <div class="col-md-3" style="{{ Auth::user()->hasBorder($loot->rewardable_id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}">
+          <div class="col-md-3"
+            style="{{ Auth::user()->hasBorder($loot->rewardable_id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}"
+          >
             {!! App\Models\Border\Border::find($loot->rewardable_id)->displayName !!}</div>
         @endforeach
       @else
         @foreach (App\Models\Border\Border::orderBy('name')->where('is_default', 0)->get() as $loot)
-          <div class="col-md-3" style="{{ Auth::user()->hasBorder($loot->id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}">
+          <div class="col-md-3"
+            style="{{ Auth::user()->hasBorder($loot->id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}"
+          >
             {!! $loot->displayName !!}</div>
         @endforeach
       @endif
@@ -35,7 +45,7 @@
           'class' => 'btn btn-primary',
           'name' => 'action',
           'value' => 'act',
-          'type' => 'submit',
+          'type' => 'submit'
       ]) !!}
     </div>
   </div>

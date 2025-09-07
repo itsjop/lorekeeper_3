@@ -5,7 +5,11 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Shops' => 'admin/data/shops', ($shop->id ? 'Edit' : 'Create') . ' Shop' => $shop->id ? 'admin/data/shops/edit/' . $shop->id : 'admin/data/shops/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Shops' => 'admin/data/shops',
+      ($shop->id ? 'Edit' : 'Create') . ' Shop' => $shop->id ? 'admin/data/shops/edit/' . $shop->id : 'admin/data/shops/create'
+  ]) !!}
 
   <h1>{{ $shop->id ? 'Edit' : 'Create' }} Shop
     @if ($shop->id)
@@ -45,15 +49,24 @@
 
   <div class="row">
     <div class="col-md form-group">
-      {!! Form::checkbox('is_active', 1, $shop->id ? $shop->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_active', 1, $shop->id ? $shop->is_active : 1, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
       {!! Form::label('is_active', 'Set Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the shop will not be visible to regular users.') !!}
     </div>
     <div class="col-md form-group">
-      {!! Form::checkbox('is_hidden', 0, $shop->id ? $shop->is_hidden : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_hidden', 0, $shop->id ? $shop->is_hidden : 1, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
       {!! Form::label('is_hidden', 'Set Hidden', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned off, the shop will not be visible on the shop index, but still accessible.') !!}
     </div>
     <div class="col-md form-group">
-      {!! Form::checkbox('is_staff', 1, $shop->id ? $shop->is_staff : 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_staff', 1, $shop->id ? $shop->is_staff : 0, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
       {!! Form::label('is_staff', 'For Staff?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, the shop will not be visible to regular users, only staff.') !!}
     </div>
     <div class="col-md form-group">
@@ -63,23 +76,37 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, ['class' => 'form-check-label', 'data-toggle' => 'toggle', 'id' => 'use_coupons']) !!}
+    {!! Form::checkbox('use_coupons', 1, $shop->id ? $shop->use_coupons : 0, [
+        'class' => 'form-check-label',
+        'data-toggle' => 'toggle',
+        'id' => 'use_coupons'
+    ]) !!}
     {!! Form::label('use_coupons', 'Allow Coupons?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Note that ALL coupons will be allowed to be used, unless specified otherwise.') !!}
   </div>
   <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
     {!! Form::label('allowed_coupons', 'Allowed Coupon(s)', ['class' => 'form-check-label']) !!}
     <p>Leave blank to allow ALL coupons.</p>
-    {!! Form::select('allowed_coupons[]', $coupons, safeJSON($shop->allowed_coupons, 1), ['multiple', 'class' => 'form-check-label', 'placeholder' => 'Select Coupons', 'id' => 'allowed_coupons']) !!}
+    {!! Form::select('allowed_coupons[]', $coupons, safeJSON($shop->allowed_coupons, 1), [
+        'multiple',
+        'class' => 'form-check-label',
+        'placeholder' => 'Select Coupons',
+        'id' => 'allowed_coupons'
+    ]) !!}
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, ['class' => 'form-check-input shop-timed shop-toggle shop-field', 'data-toggle' => 'toggle', 'id' => 'is_timed_shop']) !!}
+    {!! Form::checkbox('is_timed_shop', 1, $shop->is_timed_shop ?? 0, [
+        'class' => 'form-check-input shop-timed shop-toggle shop-field',
+        'data-toggle' => 'toggle',
+        'id' => 'is_timed_shop'
+    ]) !!}
     {!! Form::label('is_timed_shop', 'Set Timed Shop', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Sets the shop as timed between the chosen dates.') !!}
   </div>
   <div class="card mb-3 shop-timed-quantity {{ $shop->is_timed_shop ? '' : 'hide' }}">
     <div class="card-body">
       <h3>Shop Time Period</h3>
-      <p>Both of the below options can work together. If both are set, the shop will only be available during the specific time period, and on the specific days of the week and months.</p>
+      <p>Both of the below options can work together. If both are set, the shop will only be available during the specific time
+        period, and on the specific days of the week and months.</p>
 
       <h5>Specific Time Period</h5>
       <p>The time period below is between the specific dates and times, rather than an agnostic period like "every November".</p>
@@ -96,13 +123,28 @@
 
       <h5>Repeating Time Period</h5>
       <p>Select the months and days of the week that the shop will be available.</p>
-      <p><b>If months are set alongside days, the shop will only be available on those days in those months.</b></p>
+      <p>
+        <b>If months are set alongside days, the shop will only be available on those days in those months.</b>
+      </p>
       <div class="form-group">
         {!! Form::label('shop_days', 'Days of the Week') !!}
-        {!! Form::select('shop_days[]', ['Monday' => 'Monday', 'Tuesday' => 'Tuesday', 'Wednesday' => 'Wednesday', 'Thursday' => 'Thursday', 'Friday' => 'Friday', 'Saturday' => 'Saturday', 'Sunday' => 'Sunday'], $shop->days ?? null, [
-            'class' => 'form-control selectize',
-            'multiple' => 'multiple',
-        ]) !!}
+        {!! Form::select(
+            'shop_days[]',
+            [
+                'Monday' => 'Monday',
+                'Tuesday' => 'Tuesday',
+                'Wednesday' => 'Wednesday',
+                'Thursday' => 'Thursday',
+                'Friday' => 'Friday',
+                'Saturday' => 'Saturday',
+                'Sunday' => 'Sunday'
+            ],
+            $shop->days ?? null,
+            [
+                'class' => 'form-control selectize',
+                'multiple' => 'multiple'
+            ]
+        ) !!}
       </div>
       <div class="form-group">
         {!! Form::label('shop_months', 'Months of the Year') !!}
@@ -120,10 +162,10 @@
                 'September' => 'September',
                 'October' => 'October',
                 'November' => 'November',
-                'December' => 'December',
+                'December' => 'December'
             ],
             $shop->months ?? null,
-            ['class' => 'form-control selectize', 'multiple' => 'multiple'],
+            ['class' => 'form-control selectize', 'multiple' => 'multiple']
         ) !!}
       </div>
     </div>
@@ -154,7 +196,11 @@
               <div class="row">
                 @if ($stock->item?->has_image)
                   <div class="col-4">
-                    <img src="{{ $stock->item?->imageUrl }}" class="img-fluid" alt="{{ $stock->item?->name }}">
+                    <img
+                      src="{{ $stock->item?->imageUrl }}"
+                      class="img-fluid"
+                      alt="{{ $stock->item?->name }}"
+                    >
                   </div>
                 @endif
                 <div class="col-{{ $stock->item?->has_image ? '8' : '10' }}">
@@ -166,9 +212,13 @@
                       <span class="ml-1 badge badge-primary">Random</span>
                     @endif
                   </div>
-                  <div><strong>Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!}</div>
+                  <div>
+                    <strong>Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!}
+                  </div>
                   @if (!$stock->is_visible)
-                    <div><i class="fas fa-eye-slash"></i></div>
+                    <div>
+                      <i class="fas fa-eye-slash"></i>
+                    </div>
                   @endif
                   @if ($stock->is_timed_stock)
                     <i class="fas fa-clock"></i>

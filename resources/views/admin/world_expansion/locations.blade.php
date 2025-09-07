@@ -17,12 +17,13 @@
   </div>
   <h1>Locations</h1>
 
-  <p class="mb-0" style="clear:both;">Locations are specific areas of your world. <strong>eg. Canada, Europe, Las Vegas.</strong></p>
+  <p class="mb-0" style="clear:both;">Locations are specific areas of your world. <strong>eg. Canada, Europe, Las Vegas.</strong>
+  </p>
   <p>The sorting order reflects the order in which the locations will be listed on the location index.</p>
 
-
   @if (!count($types))
-    <div class="alert alert-warning">You will need to create a location type before you can create any locations, as type is required.</div>
+    <div class="alert alert-warning">You will need to create a location type before you can create any locations, as type is
+      required.</div>
   @endif
 
   @if (!count($locations))
@@ -33,10 +34,13 @@
         @foreach ($locations as $location)
           <tr class="sort-item" data-id="{{ $location->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               <a href={!! $location->url !!}
-                @if ($location->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $location->thumbUrl }}' style='max-width:100px;' class='my-1'/>
-<br> {{ ucfirst($location->style) }} " @endif />{!! $location->name !!}</a>
+                @if ($location->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $location->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($location->style) }} " @endif
+              />
+              {!! $location->name !!}
+              </a>
             </td>
             <td class="text-right">
               <a href="{{ url('admin/world/locations/edit/' . $location->id) }}" class="btn btn-primary">Edit</a>

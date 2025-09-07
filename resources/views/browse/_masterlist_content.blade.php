@@ -83,7 +83,9 @@
             'class' => 'form-control feature-select selectize',
             'placeholder' => 'Select Trait'
         ]) !!}
-        <a href="#" class="btn feature-remove ml-2"><i class="fas fa-times"></i></a>
+        <a href="#" class="btn feature-remove ml-2">
+          <i class="fas fa-times"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -96,14 +98,18 @@ class="btn btn-secondary active grid-view-button"
 data-bs-toggle="tooltip"
 title="Grid View"
 alt="Grid View"
-  ><i class="fas fa-th"></i></button>
+  >
+<i class="fas fa-th"></i>
+</button>
   <button
 type="button"
 class="btn btn-secondary list-view-button"
 data-bs-toggle="tooltip"
 title="List View"
 alt="List View"
-  ><i class="fas fa-bars"></i></button>
+  >
+<i class="fas fa-bars"></i>
+</button>
 </div>
   </div> --}}
 {!! $characters->render() !!}

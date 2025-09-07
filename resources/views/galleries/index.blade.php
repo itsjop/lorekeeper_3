@@ -28,7 +28,9 @@
           <h4>
             {!! $gallery->displayName !!}
             @if (Auth::check() && $gallery->canSubmit($submissionsOpen, Auth::user()))
-              <a href="{{ url('gallery/submit/' . $gallery->id) }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i></a>
+              <a href="{{ url('gallery/submit/' . $gallery->id) }}" class="btn btn-primary float-right">
+                <i class="fas fa-plus"></i>
+              </a>
             @endif
           </h4>
           @if ($gallery->children_count || (isset($gallery->start_at) || isset($gallery->end_at)))

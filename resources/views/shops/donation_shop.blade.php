@@ -23,7 +23,9 @@
   @foreach ($items as $categoryId => $categoryItems)
     <div class="card mb-3 inventory-category">
       <h5 class="card-header inventory-header">
-        {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
+        {!! isset($categories[$categoryId])
+            ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
+            : 'Miscellaneous' !!}
       </h5>
       <div class="card-body inventory-body">
         @foreach ($categoryItems->chunk(4) as $chunk)
@@ -32,10 +34,13 @@
               <div class="text-center inventory-item" data-id="{{ $item->id }}">
                 <div class="mb-1">
                   <a href="#" class="inventory-stack">
-                    <img src="{{ $item->item->imageUrl }}" /></a>
+                    <img src="{{ $item->item->imageUrl }}" />
+                  </a>
                 </div>
                 <div>
-                  <a href="#" class="inventory-stack inventory-stack-name"><strong>{{ $item->item->name }}</strong></a>
+                  <a href="#" class="inventory-stack inventory-stack-name">
+                    <strong>{{ $item->item->name }}</strong>
+                  </a>
                   <div>Stock: {{ $item->stock }}</div>
                 </div>
               </div>

@@ -119,7 +119,11 @@
                 if you have any questions regarding which traits your design may need!</p>
               <p>Common/Default traits do not need to be added. Staff will update your character with them after the submission has
                 been approved.</p>
-              <p><b><i>You must attach a trait item in order to choose new traits for your character.</i></b></p>
+              <p>
+                <b>
+                  <i>You must attach a trait item in order to choose new traits for your character.</i>
+                </b>
+              </p>
             @endif
             <div id="featureList">
               {{-- Add in the compulsory traits for MYO slots --}}

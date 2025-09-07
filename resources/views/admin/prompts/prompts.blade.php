@@ -96,7 +96,8 @@
 
     {!! $prompts->render() !!}
 
-    <div class="text-center mt-4 small text-muted">{{ $prompts->total() }} result{{ $prompts->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $prompts->total() }} result{{ $prompts->total() == 1 ? '' : 's' }} found.
+    </div>
   @endif
 
 @endsection

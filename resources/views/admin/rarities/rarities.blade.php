@@ -13,7 +13,8 @@
     is required to create characters and traits.</p>
   <p>The sorting order reflects the order in which rarities will be displayed on the world pages (e.g. rarity-sorted traits will
     appear in this order), as well as in select dropdown fields. <strong>Please note that the highest rarity should be at the
-      <u>top</u> of the list.</strong></p>
+      <u>top</u> of the list.</strong>
+  </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/rarities/create') }}">
@@ -27,7 +28,8 @@
         @foreach ($rarities as $rarity)
           <tr class="sort-item" data-id="{{ $rarity->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $rarity->displayName !!}
             </td>
             <td class="text-right">
@@ -38,7 +40,9 @@
       </tbody>
 
     </table>
-    @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields') && config('lorekeeper.extensions.item_entry_expansion.loot_tables.enable'))
+    @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields') &&
+            config('lorekeeper.extensions.item_entry_expansion.loot_tables.enable')
+    )
       <div class="alert alert-info mb-2">
         Note that changing the order of rarities may have unintended consequences on criteria loot tables.
       </div>

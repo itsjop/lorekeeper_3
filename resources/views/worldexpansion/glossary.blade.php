@@ -7,7 +7,8 @@
 @section('content')
   {!! breadcrumbs(['Lore' => 'info', 'Glossary' => 'info/glossary']) !!}
   <h1>Glossary</h1>
-  <p>This page contains quick definitions of commonly used terms. If a term has a longer lore page, it will be linked via the name of the term</p>
+  <p>This page contains quick definitions of commonly used terms. If a term has a longer lore page, it will be linked via the name
+    of the term</p>
 
   <div class="mb-4">
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -20,10 +21,10 @@
             'sort',
             [
                 'alpha' => 'Sort Alphabetically (A-Z)',
-                'alpha-reverse' => 'Sort Alphabetically (Z-A)',
+                'alpha-reverse' => 'Sort Alphabetically (Z-A)'
             ],
             Request::get('sort') ?: 'alpha',
-            ['class' => 'form-control'],
+            ['class' => 'form-control']
         ) !!}
       </div>
       <div class="form-group ml-3 mb-3">
@@ -39,8 +40,14 @@
       <h2 class="h6">
         {!! $term->displayName !!}
         @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-          <a data-bs-toggle="tooltip" title="[ADMIN] Edit Term" href="{{ url('admin/world/glossary/edit/') . '/' . $term->id }}" class="float-right">
-            <i class="fas fa-crown"></i></a>
+          <a
+            data-bs-toggle="tooltip"
+            title="[ADMIN] Edit Term"
+            href="{{ url('admin/world/glossary/edit/') . '/' . $term->id }}"
+            class="float-right"
+          >
+            <i class="fas fa-crown"></i>
+          </a>
         @endif
       </h2>
       <div class="parsed-text mt-2 pl-3 py-2" style="border-left: 4px solid lightgrey">{!! $term->parsed_description !!}</div>
@@ -51,7 +58,6 @@
 
   <div class="text-center mt-4 small text-muted">{{ $terms->total() }} result{{ $terms->total() == 1 ? '' : 's' }} found.</div>
 @endsection
-
 
 @section('scripts')
   <style>

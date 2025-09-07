@@ -4,7 +4,9 @@
   <div class="text-center">
     @if ($award->has_image)
       <div class="mb-1">
-        <a href="{{ $award->idUrl }}"><img src="{{ $award->imageUrl }}" alt="{{ $award->name }}" /></a>
+        <a href="{{ $award->idUrl }}">
+          <img src="{{ $award->imageUrl }}" alt="{{ $award->name }}" />
+        </a>
       </div>
     @endif
     <a href="{{ $award->idUrl }}">{{ $award->name }}</a>
@@ -24,14 +26,22 @@
       <thead class="thead">
         <tr class="d-flex">
           @if ($user && !$readOnly && ($stack->first()->user_id == $user->id || $user->hasPower('edit_inventories')))
-            <th class="col-1"><input id="toggle-checks" type="checkbox" onclick="toggleChecks(this)"></th>
+            <th class="col-1">
+              <input
+                id="toggle-checks"
+                type="checkbox"
+                onclick="toggleChecks(this)"
+              >
+            </th>
             <th class="col-4">Source</th>
           @else
             <th class="col-5">Source</th>
           @endif
           <th class="col-3">Notes</th>
           <th class="col-3">Quantity</th>
-          <th class="col-1"><i class="fas fa-lock invisible"></i></th>
+          <th class="col-1">
+            <i class="fas fa-lock invisible"></i>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -50,7 +60,7 @@
                   {!! Form::selectRange('', 1, $awardRow->availableQuantity, 1, [
                       'class' => 'quantity-select',
                       'type' => 'number',
-                      'style' => 'min-width:40px;',
+                      'style' => 'min-width:40px;'
                   ]) !!}
                   <div class="input-group-append">
                     <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
@@ -65,7 +75,7 @@
                       'class' => 'quantity-select',
                       'type' => 'number',
                       'style' => 'min-width:40px;',
-                      'disabled',
+                      'disabled'
                   ]) !!}
                   <div class="input-group-append">
                     <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
@@ -80,7 +90,11 @@
             @endif
             <td class="col-1">
               @if (!$awardRow->isTransferrable)
-                <i class="fas fa-lock" data-bs-toggle="tooltip" title="Account-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."></i>
+                <i
+                  class="fas fa-lock"
+                  data-bs-toggle="tooltip"
+                  title="Account-bound {{ __('awards.awards') }} cannot be transferred but can be deleted."
+                ></i>
               @endif
             </td>
           </tr>
@@ -94,11 +108,16 @@
 
       @if ($award->is_character_owned)
         <h5 class="card-title">
-          <a class="h5 collapse-toggle collapsed" href="#characterTransferForm" data-bs-toggle="collapse">
+          <a
+            class="h5 collapse-toggle collapsed"
+            href="#characterTransferForm"
+            data-bs-toggle="collapse"
+          >
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer {{ ucfirst(__('awards.award')) }} to Character
-          </a></h3>
+          </a>
+          </h3>
         </h5>
         <div id="characterTransferForm" class="collapse">
           <p>This will transfer this stack or stacks to this character's {{ __('awards.awardcase') }}.</p>
@@ -110,18 +129,23 @@
                 'class' => 'btn btn-primary',
                 'name' => 'action',
                 'value' => 'characterTransfer',
-                'type' => 'submit',
+                'type' => 'submit'
             ]) !!}
           </div>
         </div>
       @endif
       @if ($award->allow_transfer || ($user && $user->hasPower('edit_inventories')))
         <h5 class="card-title">
-          <a class="h5 collapse-toggle collapsed" href="#transferForm" data-bs-toggle="collapse">
+          <a
+            class="h5 collapse-toggle collapsed"
+            href="#transferForm"
+            data-bs-toggle="collapse"
+          >
             @if ($stack->first()->user_id != $user->id)
               [ADMIN]
             @endif Transfer {{ ucfirst(__('awards.award')) }}
-          </a></h3>
+          </a>
+          </h3>
         </h5>
         <div id="transferForm" class="collapse">
           @if ($user && $user->hasPower('edit_inventories'))
@@ -137,18 +161,23 @@
                 'class' => 'btn btn-primary',
                 'name' => 'action',
                 'value' => 'transfer',
-                'type' => 'submit',
+                'type' => 'submit'
             ]) !!}
           </div>
         </div>
       @endif
 
       <h5 class="card-title">
-        <a class="h5 collapse-toggle collapsed" href="#deleteForm" data-bs-toggle="collapse">
+        <a
+          class="h5 collapse-toggle collapsed"
+          href="#deleteForm"
+          data-bs-toggle="collapse"
+        >
           @if ($stack->first()->user_id != $user->id)
             [ADMIN]
           @endif Delete {{ ucfirst(__('awards.award')) }}
-        </a></h3>
+        </a>
+        </h3>
       </h5>
       <div id="deleteForm" class="collapse">
         <p>This action is not reversible. Are you sure you want to delete this {{ __('awards.award') }}?</p>

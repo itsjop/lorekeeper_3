@@ -5,7 +5,11 @@
 @endsection
 
 @section('profile-content')
-  {!! breadcrumbs(['Users' => 'users', $user->name => $user->url, ucfirst(__('awards.awardcase')) => $user->url . '/awardcase']) !!}
+  {!! breadcrumbs([
+      'Users' => 'users',
+      $user->name => $user->url,
+      ucfirst(__('awards.awardcase')) => $user->url . '/awardcase'
+  ]) !!}
 
   <h1>
     {!! $user->displayName !!}'s {{ ucfirst(__('awards.awardcase')) }}
@@ -14,16 +18,29 @@
   @foreach ($awards as $categoryId => $categoryAwards)
     <div class="card mb-3 awardcase-category">
       <h5 class="card-header awardcase-header">
-        {!! isset($categories[$categoryId]) ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>' : 'Miscellaneous' !!}
-        <a class="small awardcase-collapse-toggle collapse-toggle " href="#{!! isset($categories[$categoryId]) ? str_replace(' ', '', $categories[$categoryId]->name) : 'miscellaneous' !!}" data-bs-toggle="collapse">Show</a></h3>
+        {!! isset($categories[$categoryId])
+            ? '<a href="' . $categories[$categoryId]->searchUrl . '">' . $categories[$categoryId]->name . '</a>'
+            : 'Miscellaneous' !!}
+        <a
+          class="small awardcase-collapse-toggle collapse-toggle "
+          href="#{!! isset($categories[$categoryId]) ? str_replace(' ', '', $categories[$categoryId]->name) : 'miscellaneous' !!}"
+          data-bs-toggle="collapse"
+        >Show</a>
+        </h3>
       </h5>
       <div class="card-body awardcase-body collapse show" id="{!! isset($categories[$categoryId]) ? str_replace(' ', '', $categories[$categoryId]->name) : 'miscellaneous' !!}">
         @foreach ($categoryAwards->chunk(4) as $chunk)
           <div class="grid grid-4-col">
             @foreach ($chunk as $awardId => $stack)
-              <div class="text-center case-award" data-id="{{ $stack->first()->pivot->id }}" data-name="{{ $user->name }}'s {{ $stack->first()->name }}">
+              <div
+                class="text-center case-award"
+                data-id="{{ $stack->first()->pivot->id }}"
+                data-name="{{ $user->name }}'s {{ $stack->first()->name }}"
+              >
                 <div class="mb-1">
-                  <a href="#" class="awardcase-stack {{ $stack->first()->is_featured ? 'alert alert-success' : '' }}"><img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" /></a>
+                  <a href="#" class="awardcase-stack {{ $stack->first()->is_featured ? 'alert alert-success' : '' }}">
+                    <img src="{{ $stack->first()->imageUrl }}" alt="{{ $stack->first()->name }}" />
+                  </a>
                 </div>
                 <div>
                   <a href="#" class="awardcase-stack awardcase-stack-name">{{ $stack->first()->name }}@if ($stack->first()->user_limit != 1)
@@ -38,7 +55,6 @@
       </div>
     </div>
   @endforeach
-
 
   <h3>Latest Activity</h3>
   <div class="row ml-md-2 mb-4">

@@ -1,15 +1,28 @@
 <div class="row world-entry">
   @if ($transformation->transformationImageUrl)
     <div class="col-md-3 world-entry-image">
-      <a href="{{ $transformation->transformationImageUrl }}" data-lightbox="entry" data-title="{{ $transformation->name }}">
-        <img src="{{ $transformation->transformationImageUrl }}" class="world-entry-image" alt="{{ $transformation->name }}" /></a>
+      <a
+        href="{{ $transformation->transformationImageUrl }}"
+        data-lightbox="entry"
+        data-title="{{ $transformation->name }}"
+      >
+        <img
+          src="{{ $transformation->transformationImageUrl }}"
+          class="world-entry-image"
+          alt="{{ $transformation->name }}"
+        />
+      </a>
     </div>
   @endif
   <div class="{{ $transformation->transformationImageUrl ? 'col-md-9' : 'col-12' }}">
     <h3>{!! $transformation->displayName !!} <a href="{{ $transformation->searchUrl }}" class="world-entry-search text-muted">
-        <i class="fas fa-search"></i></a></h3>
+        <i class="fas fa-search"></i>
+      </a>
+    </h3>
     @if ($transformation->species_id)
-      <div><strong>Species:</strong> {!! $transformation->species->displayName !!} </div>
+      <div>
+        <strong>Species:</strong> {!! $transformation->species->displayName !!}
+      </div>
     @endif
     <div class="world-entry-text">
       {!! $transformation->parsed_description !!}

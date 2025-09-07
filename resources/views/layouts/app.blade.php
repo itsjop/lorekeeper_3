@@ -63,7 +63,8 @@
 
   <!------------------------------ EXTERNAL RESOURCES ----------------------------->
   <!-- Scripts -->
-  {{-- <script src="{{ asset('js/vendor/jquery.tinymce.min.js') }}"></script> --}}
+  {{-- <script src="{{ asset('js/vendor/jquery.tinymce.min.js') }}">
+</script> --}}
   <script src="{{ asset('js/vendor/jquery.ui.touch-punch.min.js') }}"></script>
   <script src="{{ asset('js/vendor/tinymce/tinymce.min.js') }}"></script>
   <script defer src="{{ asset('js/vendor/bootstrap4-toggle.min.js') }}"></script>
@@ -167,7 +168,8 @@
   >
     {{-- <div id="site-wrapper" class="{{ View::hasSection('sidebar') ? 'has-sidebar' : '' }}"> --}}
     <div id="site-wrapper" class="has-sidebar">
-      <div class="site-background"></div>
+      <div class="site-background">
+      </div>
       {{-- Header Logo --}}
       <a id="site-logo-header" href="{{ url('/') }}">
         <picture>
@@ -217,7 +219,8 @@
       @endif
 
       <main id="main-content" class="main-content">
-        <div class="main-backdrop"></div>
+        <div class="main-backdrop">
+        </div>
         <div class="content-wrapper">
 
           @if (Settings::get('is_maintenance_mode'))
@@ -231,8 +234,10 @@
 
           @if (Auth::check() && Auth::user()->hasUnseenMail && !Auth::user()->is_banned)
             <div class="alert alert-danger">
-              <h5 class="mb-0"><i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages
-                from staff. <a href="{{ url('mail#modMail') }}">View here.</a></h5>
+              <h5 class="mb-0">
+                <i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages
+                from staff. <a href="{{ url('mail#modMail') }}">View here.</a>
+              </h5>
             </div>
           @endif
 
@@ -256,7 +261,8 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <span class="modal-title h5 mb-0"></span>
+              <span class="modal-title h5 mb-0">
+              </span>
               <button
                 type="button"
                 class="close"

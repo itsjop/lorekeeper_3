@@ -45,7 +45,9 @@
               <div class="card-body">
                 {!! $parent->message !!}
                 <div class="text-right">
-                  <a href="{{ $parent->viewUrl }}"><u>View Message</u></a>
+                  <a href="{{ $parent->viewUrl }}">
+                    <u>View Message</u>
+                  </a>
                 </div>
               </div>
             </div>
@@ -78,7 +80,9 @@
               {!! $child->message !!}
 
               <div class="text-right">
-                <a href="{{ $child->viewUrl }}"><u>...View Reply</u></a>
+                <a href="{{ $child->viewUrl }}">
+                  <u>...View Reply</u>
+                </a>
               </div>
             </div>
           </div>

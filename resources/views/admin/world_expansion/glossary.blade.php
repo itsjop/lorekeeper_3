@@ -7,7 +7,9 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Glossary Terms' => 'admin/world/glossary']) !!}
 
-  <div class="alert {{ Settings::get('WE_glossary') ? 'alert-success' : 'alert-warning' }} d-flex justify-content-between align-items-center">
+  <div
+    class="alert {{ Settings::get('WE_glossary') ? 'alert-success' : 'alert-warning' }} d-flex justify-content-between align-items-center"
+  >
     <span>
       The glossary is currently {{ Settings::get('WE_glossary') ? 'visible' : 'not visible' }}.
     </span>
@@ -18,7 +20,8 @@
 
   <h1>Glossary Terms</h1>
 
-  <p class="mb-0">These are relatively short definitions of terms that will be displayed together on a searchable page for your users.</p>
+  <p class="mb-0">These are relatively short definitions of terms that will be displayed together on a searchable page for your
+    users.</p>
 
   <div class="text-right mb-3 mt-2">
     <a class="btn btn-primary" href="{{ url('admin/world/glossary/create') }}">

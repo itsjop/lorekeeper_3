@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Sub Masterlists' => 'admin/data/sublists', ($sublist->id ? 'Edit' : 'Create') . ' Sub Masterlist' => $sublist->id ? 'admin/data/sublists/edit/' . $sublist->id : 'admin/data/sublists/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Sub Masterlists' => 'admin/data/sublists',
+      ($sublist->id ? 'Edit' : 'Create') . ' Sub Masterlist' => $sublist->id
+          ? 'admin/data/sublists/edit/' . $sublist->id
+          : 'admin/data/sublists/create'
+  ]) !!}
 
   <h1>{{ $sublist->id ? 'Edit' : 'Create' }} Sub Masterlist
     @if ($sublist->id)
@@ -13,7 +19,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $sublist->id ? 'admin/data/sublists/edit/' . $sublist->id : 'admin/data/sublists/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $sublist->id ? 'admin/data/sublists/edit/' . $sublist->id : 'admin/data/sublists/create',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -29,12 +38,17 @@
   </div>
 
   <h3>Contents</h3>
-  <p>Each category and species can only have ONE sublist. If you assign a sublist here, it will be removed from any other sublists. If you want a species shared across multiple lists, it is suggested you only use character categories. Likewise, if you
+  <p>Each category and species can only have ONE sublist. If you assign a sublist here, it will be removed from any other sublists.
+    If you want a species shared across multiple lists, it is suggested you only use character categories. Likewise, if you
     want a category shared across multiple lists, it is suggested you only use species.</p>
 
   <div class="form-group">
     {!! Form::label('categories[]', 'Categories') !!}
-    {!! Form::select('categories[]', $categories, $subCategories, ['id' => 'categoryList', 'class' => 'form-control', 'multiple']) !!}
+    {!! Form::select('categories[]', $categories, $subCategories, [
+        'id' => 'categoryList',
+        'class' => 'form-control',
+        'multiple'
+    ]) !!}
   </div>
 
   <div class="form-group">
@@ -43,8 +57,13 @@
   </div>
 
   <div class="form-group">
-    {!! Form::checkbox('show_main', 1, $sublist->id ? $sublist->show_main : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('show_main', 'Show on Main', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Turn on to include these characters in the main masterlist as well. Turn off to entirely seperate them into the sub masterlist.') !!}
+    {!! Form::checkbox('show_main', 1, $sublist->id ? $sublist->show_main : 1, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('show_main', 'Show on Main', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'Turn on to include these characters in the main masterlist as well. Turn off to entirely seperate them into the sub masterlist.'
+    ) !!}
   </div>
 
   <div class="text-right">

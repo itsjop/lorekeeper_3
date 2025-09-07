@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('dailies.daily')) => 'admin/data/dailies',
-      ($daily->id ? 'Edit ' : 'Create ') . ucfirst(__('dailies.daily')) => $daily->id ? 'admin/data/dailies/edit/' . $daily->id : 'admin/data/dailies/create',
+      ($daily->id ? 'Edit ' : 'Create ') . ucfirst(__('dailies.daily')) => $daily->id
+          ? 'admin/data/dailies/edit/' . $daily->id
+          : 'admin/data/dailies/create'
   ]) !!}
 
   <h1>{{ $daily->id ? 'Edit' : 'Create' }} {{ ucfirst(__('dailies.daily')) }}
@@ -20,7 +22,7 @@
 
   {!! Form::open([
       'url' => $daily->id ? 'admin/data/dailies/edit/' . $daily->id : 'admin/data/dailies/create',
-      'files' => true,
+      'files' => true
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -34,7 +36,7 @@
       <div class="form-group col">
         {!! Form::label('type', 'Daily Type') !!} {!! add_help('Buttons are just one click to collect a reward. Wheels allow users to spin a wheel each day.') !!}
         {!! Form::select('type', ['Button' => 'Button', 'Wheel' => 'Wheel'], $daily ? $daily->type : null, [
-            'class' => 'form-control',
+            'class' => 'form-control'
         ]) !!}
       </div>
     @endif
@@ -55,7 +57,7 @@
       {!! Form::label('currency_id', 'Currency (Optional)') !!} {!! add_help('Which currency the fee should be in. If left unselected, no fee will be applied.') !!}
       {!! Form::select('currency_id', $currencies, $daily->currency_id ?? null, [
           'class' => 'form-control',
-          'placeholder' => 'Select Currency',
+          'placeholder' => 'Select Currency'
       ]) !!}
     </div>
   </div>
@@ -78,7 +80,7 @@
       'tables' => $tables,
       'raffles' => $raffles,
       'showLootTables' => true,
-      'showRaffles' => true,
+      'showRaffles' => true
   ])
 
 @endsection

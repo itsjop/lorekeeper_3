@@ -10,7 +10,8 @@
   <h1>Encounters</h1>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/encounters/create') }}"><i class="fas fa-plus"></i> Create New
+    <a class="btn btn-primary" href="{{ url('admin/data/encounters/create') }}">
+      <i class="fas fa-plus"></i> Create New
       Encounter</a>
   </div>
 

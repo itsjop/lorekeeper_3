@@ -12,7 +12,8 @@
       href="{{ url('admin/world/locations/edit/') . '/' . $location->id }}"
       class="mb-2 float-right"
     >
-      <i class="fas fa-crown"></i></a>
+      <i class="fas fa-crown"></i>
+    </a>
   @endif
   {!! breadcrumbs([
       'World' => 'world',
@@ -25,12 +26,14 @@
   <h5 class="mb-0">{!! ucfirst($location->type->displayName) !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!}</h5>
 
   @if (($user_enabled && $location->is_user_home) || ($ch_enabled && $location->is_character_home))
-    <p class="mb-0"><strong>
+    <p class="mb-0">
+      <strong>
         Can be home to
         {!! $location->is_character_home && $location->is_user_home ? 'both' : '' !!}
         {!! $user_enabled && $location->is_user_home ? 'users' : '' !!}{!! $location->is_character_home && $location->is_user_home ? ' and' : '' !!}{!! !$location->is_character_home && $location->is_user_home ? '.' : '' !!}
         {!! $ch_enabled && $location->is_character_home ? 'characters.' : '' !!}
-      </strong></p>
+      </strong>
+    </p>
   @endif
 
   @if ($location->image_extension)

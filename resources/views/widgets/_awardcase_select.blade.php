@@ -1,5 +1,10 @@
 <h3>
-  Your {{ ucfirst(__('awards.awardcase')) }} <a class="small awardcase-collapse-toggle collapse-toggle" href="#userAwardcase" data-bs-toggle="collapse">Show</a></h3>
+  Your {{ ucfirst(__('awards.awardcase')) }} <a
+    class="small awardcase-collapse-toggle collapse-toggle"
+    href="#userAwardcase"
+    data-bs-toggle="collapse"
+  >Show</a>
+</h3>
 <div class="card mb-3 collapse show" id="userAwardCase">
   <div class="card-body">
     <div class="text-right mb-3">
@@ -25,7 +30,9 @@
       <table class="table table-sm">
         <thead class="thead-light">
           <tr class="d-flex">
-            <th class="col-1"><input id="toggle-checks" type="checkbox"></th>
+            <th class="col-1">
+              <input id="toggle-checks" type="checkbox">
+            </th>
             <th class="col-2">{{ ucfirst(__('awards.award')) }}</th>
             <th class="col-4">Source</th>
             <th class="col-3">Notes</th>
@@ -35,8 +42,14 @@
         <tbody>
           @foreach ($awardcase as $awardRow)
             <tr id ="awardRow{{ $awardRow->id }}"
-              class="d-flex {{ $awardRow->isTransferrable ? '' : 'accountbound' }} user-award select-award-row category-all category-{{ $awardRow->award->award_category_id ?: 0 }} {{ isset($selected) && in_array($awardRow->id, array_keys($selected)) ? 'category-selected' : '' }}">
-              <td class="col-1">{!! Form::checkbox(isset($fieldName) && $fieldName ? $fieldName : 'stack_id[]', $awardRow->id, isset($selected) && in_array($awardRow->id, array_keys($selected)) ? true : false, ['class' => 'awardcase-checkbox']) !!}</td>
+              class="d-flex {{ $awardRow->isTransferrable ? '' : 'accountbound' }} user-award select-award-row category-all category-{{ $awardRow->award->award_category_id ?: 0 }} {{ isset($selected) && in_array($awardRow->id, array_keys($selected)) ? 'category-selected' : '' }}"
+            >
+              <td class="col-1">{!! Form::checkbox(
+                  isset($fieldName) && $fieldName ? $fieldName : 'stack_id[]',
+                  $awardRow->id,
+                  isset($selected) && in_array($awardRow->id, array_keys($selected)) ? true : false,
+                  ['class' => 'awardcase-checkbox']
+              ) !!}</td>
               <td class="col-2">
                 @if (isset($awardRow->award->image_url))
                   <img class="small-icon" src="{{ $awardRow->award->image_url }}">
@@ -45,7 +58,14 @@
               <td class="col-3">{!! array_key_exists('notes', $awardRow->data) ? ($awardRow->data['notes'] ? $awardRow->data['notes'] : 'N/A') : 'N/A' !!}</td>
               @if ($awardRow->availableQuantity || in_array($awardRow->id, array_keys($selected)))
                 @if (in_array($awardRow->id, array_keys($selected)))
-                  <td class="col-2">{!! Form::selectRange('stack_quantity[]', $selected[$awardRow->id], $awardRow->getAvailableContextQuantity($selected[$awardRow->id]), 1, ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;']) !!} /{{ $awardRow->getAvailableContextQuantity($selected[$awardRow->id]) }} @if ($page == 'trade')
+                  <td class="col-2">{!! Form::selectRange(
+                      'stack_quantity[]',
+                      $selected[$awardRow->id],
+                      $awardRow->getAvailableContextQuantity($selected[$awardRow->id]),
+                      1,
+                      ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;']
+                  ) !!}
+                    /{{ $awardRow->getAvailableContextQuantity($selected[$awardRow->id]) }} @if ($page == 'trade')
                       @if ($awardRow->getOthers($selected[$awardRow->id], 0))
                         {{ $awardRow->getOthers($selected[$awardRow->id], 0) }}
                       @endif
@@ -56,13 +76,22 @@
                     @endif
                   </td>
                 @else
-                  <td class="col-2">{!! Form::selectRange('', 1, $awardRow->availableQuantity, 1, ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;']) !!} /{{ $awardRow->availableQuantity }} @if ($awardRow->getOthers())
+                  <td class="col-2">{!! Form::selectRange('', 1, $awardRow->availableQuantity, 1, [
+                      'class' => 'quantity-select',
+                      'type' => 'number',
+                      'style' => 'min-width:40px;'
+                  ]) !!} /{{ $awardRow->availableQuantity }} @if ($awardRow->getOthers())
                       {{ $awardRow->getOthers() }}
                     @endif
                   </td>
                 @endif
               @else
-                <td class="col-2">{!! Form::selectRange('', 0, 0, 0, ['class' => 'quantity-select', 'type' => 'number', 'style' => 'min-width:40px;', 'disabled']) !!} /{{ $awardRow->availableQuantity }} @if ($awardRow->getOthers())
+                <td class="col-2">{!! Form::selectRange('', 0, 0, 0, [
+                    'class' => 'quantity-select',
+                    'type' => 'number',
+                    'style' => 'min-width:40px;',
+                    'disabled'
+                ]) !!} /{{ $awardRow->availableQuantity }} @if ($awardRow->getOthers())
                     {{ $awardRow->getOthers() }}
                   @endif
                 </td>

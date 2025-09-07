@@ -36,17 +36,19 @@
           <td class="font-weight-bold" style="width:10%;">
             End
           </td>
-          <td></td>
+          <td>
+          </td>
         </tr>
       </thead>
       <tbody id="sortable" class="sortable">
         @foreach ($events as $event)
           <tr class="sort-item" data-id="{{ $event->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               <a href={!! $event->url !!}
-                @if ($event->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $event->thumbUrl }}' style='max-width:100px;' class='my-1'/>
-<br> {{ ucfirst($event->name) }} " @endif />{!! $event->name !!}</a>
+                @if ($event->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $event->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($event->name) }} " @endif
+              />{!! $event->name !!}</a>
             </td>
             <td>
               {!! $event->category ? $event->category->displayName : '' !!}

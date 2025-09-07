@@ -19,8 +19,9 @@
   {!! breadcrumbs(['Users' => 'users', $user->name => $user->url]) !!}
 
   @if (Auth::check() && Auth::user()->id != $user->id && config('lorekeeper.mod_mail.allow_user_mail'))
-    <a class="btn btn-primary btn-sm float-right" href="{{ url('mail/new?recipient_id=' . $user->id) }}"><i
-        class="fas fa-envelope"></i> Message User</a>
+    <a class="btn btn-primary btn-sm float-right" href="{{ url('mail/new?recipient_id=' . $user->id) }}">
+      <i class="fas fa-envelope">
+      </i> Message User</a>
   @endif
 
   @include('widgets._awardcase_feature', [
@@ -52,7 +53,8 @@
         data-bs-toggle="tooltip"
         title="Click here to report this user."
         style="opacity: 50%; font-size:0.5em;"
-      ></i></a>
+      ></i>
+    </a>
 
     @if ($user->settings->is_fto)
       <span
@@ -126,7 +128,8 @@
       @endif
     </div>
 
-    <br></br>
+    <br>
+    </br>
 
     @if (isset($user->profile->parsed_text))
       <div class="card mb-3" style="clear:both;">
@@ -147,7 +150,8 @@
                 allow="picture-in-picture"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
-              ></iframe>
+              >
+              </iframe>
             </div>
           @endif
 
@@ -172,7 +176,9 @@
                 <div>{!! $currency->display($currency->quantity) !!}</div>
               @endforeach
             </div>
-            <div class="text-right"><a href="{{ $user->url . '/bank' }}">View all...</a></div>
+            <div class="text-right">
+              <a href="{{ $user->url . '/bank' }}">View all...</a>
+            </div>
           </div>
         </div>
         <div class="card profile-inventory profile-assets-card">
@@ -198,7 +204,9 @@
                 <div>No items owned.</div>
               @endif
             </div>
-            <div class="text-right"><a href="{{ $user->url . '/inventory' }}">View all...</a></div>
+            <div class="text-right">
+              <a href="{{ $user->url . '/inventory' }}">View all...</a>
+            </div>
           </div>
         </div>
       </div>
@@ -260,7 +268,8 @@
       src="{{ $character?->image?->thumbnailUrl }}"
       class="img-thumbnail"
       alt="{{ $character->fullName }}"
-      /></a>
+      />
+</a>
     </div>
     <div class="mt-1">
       <a href="{{ $character->url }}" class="h5 mb-0">

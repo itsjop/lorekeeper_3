@@ -4,7 +4,8 @@
   {{-- Subtype Badge --}}
   <div class="ml-badge">
     <div class="flag">
-      <div class="bg"></div>
+      <div class="bg">
+      </div>
       <div class="label">
         {{ ucfirst(getSubtypeInfo($character->image->subtype_id)) }} Palate
       </div>
@@ -13,7 +14,8 @@
       alt="{{ 'Subtype badge for ' . $character->url . '.' }}"
     >
   </div>
-  <div class="border-background"></div>
+  <div class="border-background">
+  </div>
   {{-- Name --}}
   <div
     class="name {{ strlen($character->nameFallback) > 14 ? 'name-sm' : (strlen($character->nameFallback) < 8 ? 'name-lg' : '') }}"
@@ -33,42 +35,50 @@
   {{-- Thumbnail / Main Image --}}
   <a class="thumbnail" href="{{ $character->url }}">
     {{-- {{ $char_image = $character->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->thumbnailUrl : $character->image->thumbnailUrl }}" --}}
-    <div class="tn-background"></div>
+    <div class="tn-background">
+    </div>
     <div class="ml-thumbnail">
       <img
         loading="lazy"
         src="{{ $char_image }}"
         alt="Thumbnail for {{ $character->nameFallback }}"
       />
-      <div class="shine" style=" {{ '--card_shine_mask-image: url(' . $char_image . ');' }} "></div>
+      <div class="shine" style=" {{ '--card_shine_mask-image: url(' . $char_image . ');' }} ">
+      </div>
     </div>
   </a>
   {{-- Character Number ID --}}
   <div class="slug gap-_5 flex">
-    <div class="fas fa-star"></div>
+    <div class="fas fa-star">
+    </div>
     {{ Illuminate\Support\Str::limit($character->slug, 20, $end = '...') }}
   </div>
   {{-- Owner --}}
   @if (isset($character->user->url))
     <a class="display-user" href="{{ $character->user->url }}">
       {!! $character->user->name !!}
-      <div class="fas fa-user"></div>
+      <div class="fas fa-user">
+      </div>
     </a>
   @else
     <a class="display-user">
       {!! $character->user->name !!}
-      <div class="fas fa-user"></div>
+      <div class="fas fa-user">
+      </div>
     </a>
   @endif
   {{-- Paper Overlay --}}
-  <div class="paper-overlay"></div>
+  <div class="paper-overlay">
+  </div>
   {{-- vvv Disabled Content vvv --}}
   {{--   Somnivore Species Label --}}
   {{--     {!! $character->image->species_id ? $character->image->species->displayName : 'No ' . ucfirst(__('lorekeeper.species')) !!} --}}
   {{--   Content Warning --}}
   {{--     @if (count($character->image->content_warnings ?? []) && (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2)))
            <p class="mb-0">
-             <span class="text-danger mr-1"><strong>Character Warning:</strong></span>
+             <span class="text-danger mr-1">
+<strong>Character Warning:</strong>
+</span>
              {{ implode(', ', $character->image->content_warnings) }}
            </p>
            @endif --}}

@@ -3,8 +3,13 @@
     <ul class="nav nav-tabs flex gap-_5 card-header-tabs">
       @foreach ($stock as $categoryId => $categoryItems)
         <li class="nav-item">
-          <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="categoryTab-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}" data-bs-toggle="tab"
-            href="#category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}" role="tab">
+          <a
+            class="nav-link {{ $loop->first ? 'active' : '' }}"
+            id="categoryTab-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}"
+            data-bs-toggle="tab"
+            href="#category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}"
+            role="tab"
+          >
             {!! isset($categoryItems->first()->category) ? $categoryItems->first()->category->name : 'Miscellaneous' !!}
           </a>
         </li>
@@ -13,19 +18,27 @@
   </div>
   <div class="card-body tab-content">
     @foreach ($stock as $categoryId => $categoryItems)
-      <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}">
+      <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+        id="category-{{ isset($categoryItems->first()->category) ? $categoryItems->first()->category->id : 'misc' }}"
+      >
         @foreach ($categoryItems->chunk(4) as $chunk)
           <div class="grid grid-4-col">
             @foreach ($chunk as $item)
               <div class="text-center inventory-item" data-id="{{ $item->pivot->id }}">
                 @if ($item->has_image)
                   <div class="mb-1">
-                    <a href="#" class="inventory-stack"><img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" /></a>
+                    <a href="#" class="inventory-stack">
+                      <img src="{{ $item->imageUrl }}" alt="{{ $item->name }}" />
+                    </a>
                   </div>
                 @endif
                 <div>
-                  <a href="#" class="inventory-stack inventory-stack-name"><strong>{{ $item->name }}</strong></a>
-                  <div><strong>Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}</div>
+                  <a href="#" class="inventory-stack inventory-stack-name">
+                    <strong>{{ $item->name }}</strong>
+                  </a>
+                  <div>
+                    <strong>Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}
+                  </div>
                   @if ($item->pivot->is_limited_stock)
                     <div>Stock: {{ $item->pivot->quantity }}</div>
                   @endif

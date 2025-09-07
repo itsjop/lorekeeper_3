@@ -12,7 +12,8 @@
   <p>Prize keys can be used to grant a user specified items when inputted.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/prizecodes/create') }}"><i class="fas fa-plus"></i> Create New Key</a>
+    <a class="btn btn-primary" href="{{ url('admin/prizecodes/create') }}">
+      <i class="fas fa-plus"></i> Create New Key</a>
   </div>
 
   @if (!count($prizes))
@@ -29,7 +30,8 @@
           <th>Ends</th>
           <th>Use Limit</th>
           <th>Active?</th>
-          <th></th>
+          <th>
+          </th>
         </tr>
       </thead>
       <tbody>

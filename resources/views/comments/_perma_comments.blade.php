@@ -29,7 +29,9 @@
           @endif
         </h5>
         @if ($comment->is_featured)
-          <div class="ml-1 text-muted text-right col-6 mx-0 pr-1"><small class="text-success">Featured by Owner</small></div>
+          <div class="ml-1 text-muted text-right col-6 mx-0 pr-1">
+            <small class="text-success">Featured by Owner</small>
+          </div>
         @endif
       </div>
       <div
@@ -57,17 +59,25 @@
               @endif
             @endif
           </small>
-          <a href="{{ url('comment/') . '/' . $comment->id }}"><i class="fas fa-link ml-1" style="opacity: 50%;"></i></a>
-          <a href="{{ url('reports/new?url=') . $comment->url }}"><i
+          <a href="{{ url('comment/') . '/' . $comment->id }}">
+            <i class="fas fa-link ml-1" style="opacity: 50%;"></i>
+          </a>
+          <a href="{{ url('reports/new?url=') . $comment->url }}">
+            <i
               class="fas fa-exclamation-triangle"
               data-bs-toggle="tooltip"
               title="Click here to report this comment."
               style="opacity: 50%;"
-            ></i></a>
+            ></i>
+          </a>
         </p>
       </div>
 
-      @include('comments._actions', ['comment' => $comment, 'compact' => isset($compact) ? $compact : false, 'class' => 'text-right'] )
+      @include('comments._actions', [
+          'comment' => $comment,
+          'compact' => isset($compact) ? $compact : false,
+          'class' => 'text-right'
+      ])
 
     </div>
 
@@ -82,7 +92,9 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
         @php $limit++; @endphp
 
         @if ($limit >= 5 && $depth >= 1)
-          <a href="{{ url('comment/') . '/' . $comment->id }}"><span class="btn btn-secondary w-100">See More Replies</span></a>
+          <a href="{{ url('comment/') . '/' . $comment->id }}">
+            <span class="btn btn-secondary w-100">See More Replies</span>
+          </a>
           @break
         @endif
 
@@ -131,7 +143,9 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
               <span class="text-muted border-left mx-1 px-1">(Deleted {!! $comment->deleted_at !!})</span>
             @endif
           </small>
-          <a href="{{ url('comment/') . '/' . $comment->id }}"><i class="fas fa-link ml-1" style="opacity: 50%;"></i></a>
+          <a href="{{ url('comment/') . '/' . $comment->id }}">
+            <i class="fas fa-link ml-1" style="opacity: 50%;"></i>
+          </a>
         </p>
       </div>
     </div>
@@ -143,7 +157,9 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
         @php $limit++; @endphp
 
         @if ($limit >= 5 && $depth >= 1)
-          <a href="{{ url('comment/') . '/' . $comment->id }}"><span class="btn btn-secondary w-100">See More Replies</span></a>
+          <a href="{{ url('comment/') . '/' . $comment->id }}">
+            <span class="btn btn-secondary w-100">See More Replies</span>
+          </a>
           @break
         @endif
 

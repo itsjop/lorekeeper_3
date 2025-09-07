@@ -15,7 +15,8 @@
   </div>
   <h1>Faction types</h1>
 
-  <p class="mb-0" style="clear:both">Faction types are effectively categories for factions - but mostly for organization and display.</p>
+  <p class="mb-0" style="clear:both">Faction types are effectively categories for factions - but mostly for organization and
+    display.</p>
   <p>The sorting order reflects the order in which the types will be listed on the faction type index.</p>
 
   @if (!count($types))
@@ -26,9 +27,11 @@
         @foreach ($types as $type)
           <tr class="sort-item" data-id="{{ $type->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
-              <a href={!! $type->url !!} @if ($type->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/>
-<br> {{ ucfirst($type->name) }} " @endif />{!! $type->name !!}</a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
+              <a href={!! $type->url !!}
+                @if ($type->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($type->name) }} " @endif
+              />{!! $type->name !!}</a>
               ({!! $type->names !!})
             </td>
             <td class="text-right">

@@ -4,11 +4,22 @@ You can ignore this section if you use an image for the wheel, although text wil
   <div class="card">
     <div class="card-header ">
 
-      <a class="btn btn-link collapse-toggle collapsed mr-5" type="button" data-bs-toggle="collapse" data-bs-target="#segmentStyleCollapse" aria-expanded="true" aria-controls="segmentStyleCollapse">
+      <a
+        class="btn btn-link collapse-toggle collapsed mr-5"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#segmentStyleCollapse"
+        aria-expanded="true"
+        aria-controls="segmentStyleCollapse"
+      >
         <h5 class="mb-0">Colors & Text</h5>
       </a>
     </div>
-    <div id="segmentStyleCollapse" class="collapse" data-parent="#segmentStyleAcc">
+    <div
+      id="segmentStyleCollapse"
+      class="collapse"
+      data-parent="#segmentStyleAcc"
+    >
       <div class="card-body">
 
         <table class="table table-sm" id="segmentTable">
@@ -30,7 +41,8 @@ You can ignore this section if you use an image for the wheel, although text wil
                       {!! Form::text('segment_style[color][]', $segments[$i]['fillStyle'] ?? null, ['class' => 'form-control']) !!}
                       <span class="input-group-append">
                         <span class="input-group-text colorpicker-input-addon">
-                          <i></i></span>
+                          <i></i>
+                        </span>
                       </span>
                     </div>
                   </td>

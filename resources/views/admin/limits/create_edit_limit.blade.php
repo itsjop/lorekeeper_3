@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Limits' => 'admin/data/limits', ($limit->id ? 'Edit' : 'Create') . ' Limit' => $limit->id ? 'admin/data/limits/edit/' . $limit->id : 'admin/data/limits/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Limits' => 'admin/data/limits',
+      ($limit->id ? 'Edit' : 'Create') . ' Limit' => $limit->id
+          ? 'admin/data/limits/edit/' . $limit->id
+          : 'admin/data/limits/create'
+  ]) !!}
 
   <h1>{{ $limit->id ? 'Edit' : 'Create' }} Limit
     @if ($limit->id)
@@ -13,7 +19,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $limit->id ? 'admin/data/limits/edit/' . $limit->id : 'admin/data/limits/create', 'id' => 'form']) !!}
+  {!! Form::open([
+      'url' => $limit->id ? 'admin/data/limits/edit/' . $limit->id : 'admin/data/limits/create',
+      'id' => 'form'
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -30,9 +39,15 @@
   <hr />
 
   <h5>Evalutation</h5>
-  <p>Enter the PHP code that will be evaluated to determine if the limit is met. The code should return a boolean <code>(true / false)</code> value.</p>
+  <p>Enter the PHP code that will be evaluated to determine if the limit is met. The code should return a boolean <code>(true /
+      false)</code> value.</p>
   <p>Laravel facades are accessible. For example, you can use <code>Auth::user()</code> to get the currently authenticated user.</p>
-  <div class="mb-3" id="editor" style="height: 500px; width: 100%;"></div>
+  <div
+    class="mb-3"
+    id="editor"
+    style="height: 500px; width: 100%;"
+  >
+  </div>
 
   {!! Form::hidden('evaluation', $limit->evaluation, ['id' => 'evaluation']) !!}
 

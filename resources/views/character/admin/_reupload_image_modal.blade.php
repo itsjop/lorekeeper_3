@@ -1,6 +1,8 @@
 {!! Form::open(['url' => 'admin/character/image/' . $image->id . '/reupload', 'files' => true]) !!}
 <div class="form-group">
-  {!! Form::label(ucfirst(__('lorekeeper.character')) . ' Image') !!} {!! add_help('This is the full masterlist image. Note that the image is not protected in any way, so take precautions to avoid art/design theft.') !!}
+  {!! Form::label(ucfirst(__('lorekeeper.character')) . ' Image') !!} {!! add_help(
+      'This is the full masterlist image. Note that the image is not protected in any way, so take precautions to avoid art/design theft.'
+  ) !!}
   <div class="custom-file">
     {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
     {!! Form::file('image', ['class' => 'custom-file-input', 'id' => 'mainImage']) !!}
@@ -9,7 +11,9 @@
 @if (config('lorekeeper.settings.masterlist_image_automation') === 1)
   <div class="form-group">
     {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
-    {!! Form::label('use_cropper', 'Use Thumbnail Automation', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the Thumbnail Automation, or upload a custom thumbnail.') !!}
+    {!! Form::label('use_cropper', 'Use Thumbnail Automation', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'A thumbnail is required for the upload (used for the masterlist). You can use the Thumbnail Automation, or upload a custom thumbnail.'
+    ) !!}
   </div>
   <div class="card mb-3" id="thumbnailCrop">
     <div class="card-body">
@@ -23,12 +27,19 @@
 @else
   <div class="form-group">
     {!! Form::checkbox('use_cropper', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'useCropper']) !!}
-    {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!} {!! add_help('A thumbnail is required for the upload (used for the masterlist). You can use the image cropper (crop dimensions can be adjusted in the site code), or upload a custom thumbnail.') !!}
+    {!! Form::label('use_cropper', 'Use Image Cropper', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'A thumbnail is required for the upload (used for the masterlist). You can use the image cropper (crop dimensions can be adjusted in the site code), or upload a custom thumbnail.'
+    ) !!}
   </div>
   <div class="card mb-3" id="thumbnailCrop">
     <div class="card-body">
       <div id="cropSelect">Select an image to use the thumbnail cropper.</div>
-      <img src="#" id="cropper" class="hide" alt="" />
+      <img
+        src="#"
+        id="cropper"
+        class="hide"
+        alt=""
+      />
       {!! Form::hidden('x0', null, ['id' => 'cropX0']) !!}
       {!! Form::hidden('x1', null, ['id' => 'cropX1']) !!}
       {!! Form::hidden('y0', null, ['id' => 'cropY0']) !!}
@@ -43,7 +54,8 @@
       {!! Form::label('thumbnail', 'Choose thumbnail...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('thumbnail', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px</div>
+    <div class="text-muted">Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
+      {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px</div>
   </div>
 </div>
 

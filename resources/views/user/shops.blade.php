@@ -11,7 +11,6 @@
     {!! $user->displayName !!}'s User Shops
   </h1>
 
-
   @if ($shops->count())
     <div class="shops-row grid grid-4-col ai-center">
       @foreach ($shops as $shop)
@@ -19,7 +18,8 @@
           @if ($shop->has_image)
             <div class="shop-image">
               <a href="{{ $shop->url }}">
-                <img src="{{ $shop->shopImageUrl }}" alt="{{ $shop->name }}" /></a>
+                <img src="{{ $shop->shopImageUrl }}" alt="{{ $shop->name }}" />
+              </a>
             </div>
           @endif
           <div class="shop-name mt-1">

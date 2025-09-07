@@ -13,9 +13,10 @@
       <tr class="loot-row">
         <td>{!! Form::select('rewardable_type[]', ['Item' => 'Item', 'Currency' => 'Currency', 'LootTable' => 'Loot Table'], null, [
             'class' => 'form-control reward-type',
-            'placeholder' => 'Select Reward Type',
+            'placeholder' => 'Select Reward Type'
         ]) !!}</td>
-        <td class="loot-row-select"></td>
+        <td class="loot-row-select">
+        </td>
         <td>{!! Form::text('min_quantity[]', 1, ['class' => 'form-control min-quantity', 'min' => 1]) !!}</td>
         <td>{!! Form::text('max_quantity[]', 1, ['class' => 'form-control max-quantity']) !!}</td>
         <td class="text-right">
@@ -27,10 +28,10 @@
   {!! Form::select('rewardable_id[]', $items, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
   {!! Form::select('rewardable_id[]', $currencies, null, [
       'class' => 'form-control currency-select',
-      'placeholder' => 'Select Currency',
+      'placeholder' => 'Select Currency'
   ]) !!}
   {!! Form::select('rewardable_id[]', $tables, null, [
       'class' => 'form-control table-select',
-      'placeholder' => 'Select Loot Table',
+      'placeholder' => 'Select Loot Table'
   ]) !!}
 </div>

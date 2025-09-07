@@ -46,7 +46,8 @@
                 <tr>
                   <th>Message</th>
                   <th>Date</th>
-                  <th></th>
+                  <th>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -60,7 +61,8 @@
                         data-id="{{ $notification->id }}"
                         class="clear-notification"
                       >
-                        <i class="fas fa-times" aria-hidden="true"></i></a>
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                      </a>
                     </td>
                   </tr>
                 @endforeach

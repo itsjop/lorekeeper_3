@@ -17,12 +17,20 @@
     </div>
     <div class="col-6 col-md-1">
       <div class="logs-table-cell">
-        {!! Settings::get('gallery_submissions_reward_currency') ? ($gallery->currency_enabled ? '<i class="text-success fas fa-check"></i>' : '-') : '' !!}
+        {!! Settings::get('gallery_submissions_reward_currency')
+            ? ($gallery->currency_enabled
+                ? '<i class="text-success fas fa-check"></i>'
+                : '-')
+            : '' !!}
       </div>
     </div>
     <div class="col-6 col-md-2">
       <div class="logs-table-cell">
-        {!! Settings::get('gallery_submissions_require_approval') ? ($gallery->votes_required ? $gallery->votes_required : '-') : '' !!}
+        {!! Settings::get('gallery_submissions_require_approval')
+            ? ($gallery->votes_required
+                ? $gallery->votes_required
+                : '-')
+            : '' !!}
       </div>
     </div>
     <div class="col-4 col-md-2">

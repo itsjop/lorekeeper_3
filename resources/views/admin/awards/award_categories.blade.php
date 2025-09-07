@@ -8,7 +8,7 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('awards.awards')) => 'admin/data/awards',
-      ucfirst(__('awards.award')) . ' Categories' => 'admin/data/award-categories',
+      ucfirst(__('awards.award')) . ' Categories' => 'admin/data/award-categories'
   ]) !!}
 
   <h1>{{ ucfirst(__('awards.award')) }} Categories</h1>
@@ -21,7 +21,8 @@
     {{ __('awards.awardcase') }}, as well as on the world pages.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/award-categories/create') }}"><i class="fas fa-plus"></i> Create New
+    <a class="btn btn-primary" href="{{ url('admin/data/award-categories/create') }}">
+      <i class="fas fa-plus"></i> Create New
       {{ ucfirst(__('awards.award')) }} Category</a>
   </div>
   @if (!count($categories))
@@ -32,7 +33,8 @@
         @foreach ($categories as $category)
           <tr class="sort-award" data-id="{{ $category->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $category->displayName !!}
             </td>
             <td class="text-right">

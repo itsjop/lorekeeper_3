@@ -25,16 +25,24 @@
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link {{ Request::get('type') == 'draft' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=draft' }}">Drafts</a>
+      <a class="nav-link {{ Request::get('type') == 'draft' ? 'active' : '' }}"
+        href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=draft' }}"
+      >Drafts</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'pending' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') }}">Pending</a>
+      <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'pending' ? 'active' : '' }}"
+        href="{{ url($isClaims ? 'claims' : 'submissions') }}"
+      >Pending</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ Request::get('type') == 'approved' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=approved' }}">Approved</a>
+      <a class="nav-link {{ Request::get('type') == 'approved' ? 'active' : '' }}"
+        href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=approved' }}"
+      >Approved</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ Request::get('type') == 'rejected' ? 'active' : '' }}" href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=rejected' }}">Rejected</a>
+      <a class="nav-link {{ Request::get('type') == 'rejected' ? 'active' : '' }}"
+        href="{{ url($isClaims ? 'claims' : 'submissions') . '?type=rejected' }}"
+      >Rejected</a>
     </li>
   </ul>
 
@@ -71,7 +79,8 @@
               <div class="col-6 {{ !$isClaims ? 'col-md-3' : 'col-md-4' }}">
                 <div class="logs-table-cell">
                   <span class="ubt-texthide">
-                    <a href="{{ $submission->url }}">{{ $submission->url }}</a></span>
+                    <a href="{{ $submission->url }}">{{ $submission->url }}</a>
+                  </span>
                 </div>
               </div>
               <div class="col-6 {{ !$isClaims ? 'col-md-5' : 'col-md-6' }}">
@@ -79,7 +88,9 @@
               </div>
               <div class="col-6 col-md-1 text-right">
                 <div class="logs-table-cell">
-                  <span class="btn btn-{{ $submission->status == 'Pending' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1">{{ $submission->status }}</span>
+                  <span
+                    class="btn btn-{{ $submission->status == 'Pending' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1"
+                  >{{ $submission->status }}</span>
                 </div>
               </div>
               <div class="col-6 col-md-1">
@@ -93,7 +104,8 @@
       </div>
     </div>
     {!! $submissions->render() !!}
-    <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }}
+      found.</div>
   @else
     <p>No {{ $isClaims ? 'claims' : 'submissions' }} found.</p>
   @endif

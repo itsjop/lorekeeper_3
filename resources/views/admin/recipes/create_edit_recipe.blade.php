@@ -5,7 +5,13 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Recipes' => 'admin/data/recipes', ($recipe->id ? 'Edit' : 'Create') . ' Recipe' => $recipe->id ? 'admin/data/recipes/edit/' . $recipe->id : 'admin/data/recipes/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Recipes' => 'admin/data/recipes',
+      ($recipe->id ? 'Edit' : 'Create') . ' Recipe' => $recipe->id
+          ? 'admin/data/recipes/edit/' . $recipe->id
+          : 'admin/data/recipes/create'
+  ]) !!}
 
   <h1>{{ $recipe->id ? 'Edit' : 'Create' }} Recipe
     @if ($recipe->id)
@@ -13,7 +19,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $recipe->id ? 'admin/data/recipes/edit/' . $recipe->id : 'admin/data/recipes/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $recipe->id ? 'admin/data/recipes/edit/' . $recipe->id : 'admin/data/recipes/create',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -35,7 +44,12 @@
   </div>
 
   <div class="form-group mb-2">
-    {!! Form::checkbox('needs_unlocking', 1, $recipe->needs_unlocking, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Needs to be Unlocked', 'data-off' => 'Automatically Unlocked']) !!}
+    {!! Form::checkbox('needs_unlocking', 1, $recipe->needs_unlocking, [
+        'class' => 'form-check-input',
+        'data-toggle' => 'toggle',
+        'data-on' => 'Needs to be Unlocked',
+        'data-off' => 'Automatically Unlocked'
+    ]) !!}
   </div>
 
   <div class="form-group">
@@ -45,8 +59,13 @@
 
   <h3>Restrict Recipe</h3>
   <div class="form-group">
-    {!! Form::checkbox('is_limited', 1, $recipe->is_limited, ['class' => 'is-limited-class form-check-label', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_limited', 'Should this recipe have a requirement?', ['class' => 'is-limited-label form-check-label ml-3']) !!} {!! add_help('If turned on, the recipe cannot be used/crafted unless the user currently owns all required items.') !!}
+    {!! Form::checkbox('is_limited', 1, $recipe->is_limited, [
+        'class' => 'is-limited-class form-check-label',
+        'data-toggle' => 'toggle'
+    ]) !!}
+    {!! Form::label('is_limited', 'Should this recipe have a requirement?', [
+        'class' => 'is-limited-label form-check-label ml-3'
+    ]) !!} {!! add_help('If turned on, the recipe cannot be used/crafted unless the user currently owns all required items.') !!}
   </div>
 
   <div class="br-form-group mb-1" style="display: none">
@@ -67,15 +86,29 @@
 
   {!! Form::close() !!}
 
-  @include('widgets._recipe_ingredient_select_row', ['items' => $items, 'categories' => $categories, 'currencies' => $currencies])
-  @include('widgets._recipe_reward_select_row', ['items' => $items, 'currencies' => $currencies, 'tables' => $tables, 'raffles' => $raffles])
+  @include('widgets._recipe_ingredient_select_row', [
+      'items' => $items,
+      'categories' => $categories,
+      'currencies' => $currencies
+  ])
+  @include('widgets._recipe_reward_select_row', [
+      'items' => $items,
+      'currencies' => $currencies,
+      'tables' => $tables,
+      'raffles' => $raffles
+  ])
   @include('widgets._recipe_limit_row', ['items' => $items, 'currencies' => $currencies, 'recipes' => $recipes])
 
   @if ($recipe->id)
     <h3>Preview</h3>
     <div class="card mb-3">
       <div class="card-body">
-        @include('world._entry', ['imageUrl' => $recipe->imageUrl, 'name' => $recipe->displayName, 'description' => $recipe->parsed_description, 'searchUrl' => $recipe->searchUrl])
+        @include('world._entry', [
+            'imageUrl' => $recipe->imageUrl,
+            'name' => $recipe->displayName,
+            'description' => $recipe->parsed_description,
+            'searchUrl' => $recipe->searchUrl
+        ])
       </div>
     </div>
   @endif

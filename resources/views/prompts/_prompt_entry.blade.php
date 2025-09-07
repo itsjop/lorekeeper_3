@@ -1,8 +1,17 @@
 <div class="row world-entry">
   @if ($prompt->has_image)
     <div class="col-md-3 world-entry-image">
-      <a href="{{ $prompt->imageUrl }}" data-lightbox="entry" data-title="{{ $prompt->name }}">
-        <img src="{{ $prompt->imageUrl }}" class="world-entry-image" alt="{{ $prompt->name }}" /></a>
+      <a
+        href="{{ $prompt->imageUrl }}"
+        data-lightbox="entry"
+        data-title="{{ $prompt->name }}"
+      >
+        <img
+          src="{{ $prompt->imageUrl }}"
+          class="world-entry-image"
+          alt="{{ $prompt->name }}"
+        />
+      </a>
     </div>
   @endif
   <div class="{{ $prompt->has_image ? 'col-md-9' : 'col-12' }}">
@@ -10,26 +19,39 @@
     <div class="mb-3">
       @if (isset($isPage))
         <h1 class="mb-0">{!! $prompt->name !!} <a href="{{ $prompt->idUrl }}" class="world-entry-search text-muted">
-            <i class="fas fa-search"></i></a></h1>
+            <i class="fas fa-search"></i>
+          </a>
+        </h1>
       @else
         <h2 class="mb-0">
           <a href="{{ $prompt->idUrl }}">{!! $prompt->name !!}</a>
         </h2>
       @endif
       @if ($prompt->prompt_category_id)
-        <div><strong>Category: </strong>{!! $prompt->category->displayName !!}</div>
+        <div>
+          <strong>Category: </strong>{!! $prompt->category->displayName !!}
+        </div>
       @endif
       @if ($prompt->start_at && $prompt->start_at->isFuture())
-        <div><strong>Starts: </strong>{!! format_date($prompt->start_at) !!} ({{ $prompt->start_at->diffForHumans() }})</div>
+        <div>
+          <strong>Starts: </strong>{!! format_date($prompt->start_at) !!} ({{ $prompt->start_at->diffForHumans() }})
+        </div>
       @endif
       @if ($prompt->end_at)
-        <div><strong>Ends: </strong>{!! format_date($prompt->end_at) !!} ({{ $prompt->end_at->diffForHumans() }})</div>
+        <div>
+          <strong>Ends: </strong>{!! format_date($prompt->end_at) !!} ({{ $prompt->end_at->diffForHumans() }})
+        </div>
       @endif
     </div>
     <div class="world-entry-text">
       <p>{{ $prompt->summary }}</p>
       <h3 class="mb-3">
-        <a data-bs-toggle="collapse" href="#prompt-{{ $prompt->id }}" @if (isset($isPage)) aria-expanded="true" @endif>Details <i class="fas fa-angle-down"></i></a>
+        <a
+          data-bs-toggle="collapse"
+          href="#prompt-{{ $prompt->id }}"
+          @if (isset($isPage)) aria-expanded="true" @endif
+        >Details <i class="fas fa-angle-down"></i>
+        </a>
       </h3>
       <div class="collapse @if (isset($isPage)) show @endif mb-5" id="prompt-{{ $prompt->id }}">
         @if ($prompt->parsed_description)

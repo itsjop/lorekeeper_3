@@ -18,7 +18,12 @@
       <div class="col-md-3 col-6 text-center mb-2" data-id="{{ $character->id }}">
         <div>
           <a href="{{ $character->url }}">
-            <img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->fullName }}" /></a>
+            <img
+              src="{{ $character->image->thumbnailUrl }}"
+              class="img-thumbnail"
+              alt="Thumbnail for {{ $character->fullName }}"
+            />
+          </a>
         </div>
         <div class="mt-1 h5">
           {!! $character->displayName !!}
@@ -39,7 +44,7 @@
   {!! Form::open(['url' => 'characters/select-character']) !!}
   {!! Form::select('character_id', $characters->pluck('fullName', 'id'), Auth::user()->settings->selected_character_id, [
       'class' => 'form-control mb-2 default character-select',
-      'placeholder' => 'Select Character',
+      'placeholder' => 'Select Character'
   ]) !!}
   <div class="text-right">
     {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}

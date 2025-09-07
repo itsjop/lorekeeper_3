@@ -4,7 +4,12 @@
       @if ($activity->has_image)
         <div class="activity-image">
           <a href="{{ $activity->url }}">
-            <img class="img-fluid" src="{{ $activity->imageUrl }}" alt="{{ $activity->name }}" /></a>
+            <img
+              class="img-fluid"
+              src="{{ $activity->imageUrl }}"
+              alt="{{ $activity->name }}"
+            />
+          </a>
         </div>
       @endif
       <div class="activity-name mt-1">

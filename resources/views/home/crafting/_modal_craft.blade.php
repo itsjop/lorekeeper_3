@@ -3,10 +3,17 @@
 @else
   @if ($recipe->imageUrl)
     <div class="text-center">
-      <div class="mb-3"><img class="recipe-image" src="{{ $recipe->imageUrl }}" /></div>
+      <div class="mb-3">
+        <img class="recipe-image" src="{{ $recipe->imageUrl }}" />
+      </div>
     </div>
   @endif
-  <h3>Recipe Details <a class="small inventory-collapse-toggle collapse-toggle" href="#recipeDetails" data-bs-toggle="collapse">Show</a></h3>
+  <h3>Recipe Details <a
+      class="small inventory-collapse-toggle collapse-toggle"
+      href="#recipeDetails"
+      data-bs-toggle="collapse"
+    >Show</a>
+  </h3>
   <hr>
   <div class="collapse show" id="recipeDetails">
     <div class="row">
@@ -55,7 +62,7 @@
         'inventory' => $inventory,
         'categories' => $categories,
         'selected' => $selected,
-        'page' => $page,
+        'page' => $page
     ])
     <div class="text-right">
       {!! Form::submit('Craft', ['class' => 'btn btn-primary']) !!}

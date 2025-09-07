@@ -1,4 +1,9 @@
-<h3>Your Characters <a class="small characters-collapse-toggle collapse-toggle" href="#userCharacters" data-bs-toggle="collapse">Show</a></h3>
+<h3>Your Characters <a
+    class="small characters-collapse-toggle collapse-toggle"
+    href="#userCharacters"
+    data-bs-toggle="collapse"
+  >Show</a>
+</h3>
 <div class="card mb-3 collapse show" id="userCharacters">
   <div class="card-body">
     <div class="text-right mb-3">
@@ -24,16 +29,29 @@
         @foreach ($characters as $character)
           <div
             class="mb-3 user-character category-all category-{{ $character->character_category_id ?: 0 }} {{ isset($selected) && in_array($character->id, $selected) ? 'category-selected' : '' }} {{ (isset($selected) && in_array($character->id, $selected)) || $character->isAvailable ? '' : 'select-disabled' }}"
-            data-id="{{ $character->id }}">
-            <div class="text-center character-item {{ (isset($selected) && in_array($character->id, $selected)) || $character->isAvailable ? '' : 'disabled' }}"
-              @if (!(isset($selected) && in_array($character->id, $selected)) && !$character->isAvailable) data-bs-toggle="tooltip" title="{{ $character->trade_id ? 'This character is in a trade.' : 'This character has an active design update.' }}" @endif>
+            data-id="{{ $character->id }}"
+          >
+            <div
+              class="text-center character-item {{ (isset($selected) && in_array($character->id, $selected)) || $character->isAvailable ? '' : 'disabled' }}"
+              @if (!(isset($selected) && in_array($character->id, $selected)) && !$character->isAvailable) data-bs-toggle="tooltip" title="{{ $character->trade_id ? 'This character is in a trade.' : 'This character has an active design update.' }}" @endif
+            >
               <div class="mb-1">
                 <a class="character-stack">
-                  <img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character->fullName }}" /></a>
+                  <img
+                    src="{{ $character->image->thumbnailUrl }}"
+                    class="img-thumbnail"
+                    alt="Thumbnail for {{ $character->fullName }}"
+                  />
+                </a>
               </div>
               <div>
                 <a class="character-stack character-stack-name">{{ $character->slug }}</a>
-                {!! Form::checkbox(isset($fieldName) && $fieldName ? $fieldName : 'character_id[]', $character->id, isset($selected) && in_array($character->id, $selected) ? true : false, ['class' => 'character-checkbox hide']) !!}
+                {!! Form::checkbox(
+                    isset($fieldName) && $fieldName ? $fieldName : 'character_id[]',
+                    $character->id,
+                    isset($selected) && in_array($character->id, $selected) ? true : false,
+                    ['class' => 'character-checkbox hide']
+                ) !!}
               </div>
             </div>
           </div>

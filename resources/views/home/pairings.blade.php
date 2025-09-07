@@ -13,16 +13,24 @@
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'new' ? 'active' : '' }}" href="{{ url('characters/pairings') }}">Create New</a>
+      <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'new' ? 'active' : '' }}"
+        href="{{ url('characters/pairings') }}"
+      >Create New</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ Request::get('type') == 'approval' ? 'active' : '' }}" href="{{ url('characters/pairings') . '?type=approval' }}">Approval Required</a>
+      <a class="nav-link {{ Request::get('type') == 'approval' ? 'active' : '' }}"
+        href="{{ url('characters/pairings') . '?type=approval' }}"
+      >Approval Required</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ Request::get('type') == 'waiting' ? 'active' : '' }}" href="{{ url('characters/pairings') . '?type=waiting' }}">Waiting</a>
+      <a class="nav-link {{ Request::get('type') == 'waiting' ? 'active' : '' }}"
+        href="{{ url('characters/pairings') . '?type=waiting' }}"
+      >Waiting</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ Request::get('type') == 'closed' ? 'active' : '' }}" href="{{ url('characters/pairings') . '?type=closed' }}">Closed</a>
+      <a class="nav-link {{ Request::get('type') == 'closed' ? 'active' : '' }}"
+        href="{{ url('characters/pairings') . '?type=closed' }}"
+      >Closed</a>
     </li>
   </ul>
 
@@ -34,7 +42,7 @@
         'user_boost_items' => $user_boost_items,
         'boost_item_filter' => $boost_item_filter,
         'categories' => $categories,
-        'page' => $page,
+        'page' => $page
     ])
   @else
     {!! $pairings->render() !!}
@@ -113,12 +121,14 @@
                 colour_palettes.html('');
 
                 if ("{{ config('lorekeeper.character_pairing.inherit_colours') }}" == 1 && data.palettes) {
-                  let palette_html = '<h2>Possible Colour Palette(s)</h2><div class="row justify-content-center">'
+                  let palette_html =
+                    '<h2>Possible Colour Palette(s)</h2> <div class = "row justify-content-center" > '
                   for (let i = 0; i < data.palettes.length; i++) {
                     let palette = data.palettes[i];
-                    palette_html += '<div class="col text-center"><h5>Colour Palette ' + (i + 1) + '</h5>' + palette + '</div>';
+                    palette_html += '<div class="col text-center"> <h5 > Colour Palette ' + (i + 1) + ' < /h5>' +
+                      palette + '</div > ';
                   }
-                  palette_html += '</div><hr class="my-3">';
+                  palette_html += '</div> <hr class = "my-3" > ';
                   colour_palettes.html(palette_html);
                   colour_palettes.removeClass('hide');
                 }

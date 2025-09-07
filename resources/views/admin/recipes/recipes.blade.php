@@ -12,7 +12,8 @@
   <p>This is a list of recipes in the game that can be used to craft items.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/recipes/create') }}"><i class="fas fa-plus"></i> Create New Recipe</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/recipes/create') }}">
+      <i class="fas fa-plus"></i> Create New Recipe</a>
   </div>
 
   <div>
@@ -34,7 +35,8 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th></th>
+          <th>
+          </th>
         </tr>
       </thead>
       <tbody>

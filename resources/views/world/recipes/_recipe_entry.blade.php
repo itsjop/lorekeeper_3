@@ -1,23 +1,44 @@
 <div class="row world-entry">
   @if ($imageUrl)
     <div class="col-md-3 world-entry-image">
-      <a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}"><img src="{{ $imageUrl }}" class="world-entry-image" /></a>
+      <a
+        href="{{ $imageUrl }}"
+        data-lightbox="entry"
+        data-title="{{ $name }}"
+      >
+        <img src="{{ $imageUrl }}" class="world-entry-image" />
+      </a>
     </div>
   @endif
   <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
     <h3>
       @if ($recipe->needs_unlocking)
         @if (Auth::check() && Auth::user()->hasRecipe($recipe->id))
-          <i class="fas fa-lock-open" data-bs-toggle="tooltip" title="You have this recipe!"></i>
+          <i
+            class="fas fa-lock-open"
+            data-bs-toggle="tooltip"
+            title="You have this recipe!"
+          ></i>
         @else
-          <i class="fas fa-lock" style="opacity:0.5" data-bs-toggle="tooltip" title="You do not have this recipe."></i>
+          <i
+            class="fas fa-lock"
+            style="opacity:0.5"
+            data-bs-toggle="tooltip"
+            title="You do not have this recipe."
+          ></i>
         @endif
       @else
-        <i class="fas fa-lock-open" data-bs-toggle="tooltip" title="This recipe is automatically unlocked."></i>
+        <i
+          class="fas fa-lock-open"
+          data-bs-toggle="tooltip"
+          title="This recipe is automatically unlocked."
+        ></i>
       @endif
 
       {!! $name !!} @if (isset($idUrl) && $idUrl)
-        <a href="{{ $idUrl }}" class="world-entry-search text-muted"><i class="fas fa-search"></i></a>
+        <a href="{{ $idUrl }}" class="world-entry-search text-muted">
+          <i class="fas fa-search"></i>
+        </a>
       @endif
     </h3>
 

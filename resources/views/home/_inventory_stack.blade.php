@@ -10,7 +10,8 @@
             src="{{ $item->imageUrl }}"
             class="img-fluid"
             alt="{{ $item->name }}"
-          /></a>
+          />
+        </a>
       </div>
     @endif
     <div @if (count($item->tags)) class="mb-1" @endif>

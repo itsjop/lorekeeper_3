@@ -2,8 +2,10 @@
   @foreach ($saleses as $sales)
     @if ($sales->characters->count())
       <a class="img" href="{{ $sales->url }}">
-        <div class="starburst border"></div>
-        <div class="starburst"></div>
+        <div class="starburst border">
+        </div>
+        <div class="starburst">
+        </div>
         <img
           src="{{ $sales->characters->first()->character->image->thumbnailUrl }}"
           alt="{!! $sales->characters->first()->character->fullName !!}"
@@ -39,18 +41,19 @@
           </p>
           {{-- @if ($sales->characters->count() == 1)
                 <a href="{{ $sales->url }}" class="btn btn-secondary">View Character For
-                  {{ $sales->characters->first()->displayType }} <i class="fas fa-arrow-right"></i></a>
+                  {{ $sales->characters->first()->displayType }} <i class="fas fa-arrow-right"></i>
+</a>
               @else
                 <a href="{{ $sales->url }}" class="btn btn-secondary">View {!! $sales->characters->count() !!} Characters For
-                  {{ $sales->characters->first()->displayType }} <i class="fas fa-arrow-right"></i></a>
+                  {{ $sales->characters->first()->displayType }} <i class="fas fa-arrow-right"></i>
+</a>
               @endif --}}
         </div>
       @else
         <p class="link pl-3 mb-0">
           {!! substr(strip_tags(str_replace('<br />', '&nbsp;', $sales->parsed_text)), 0, 300) !!}...
           <a href="{!! $sales->url !!}">
-            View sale <i class="fas fa-arrow-right">
-            </i>
+            View sale <i class="fas fa-arrow-right"></i>
           </a>
         </p>
       @endif

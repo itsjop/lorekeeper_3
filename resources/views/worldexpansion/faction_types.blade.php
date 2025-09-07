@@ -26,15 +26,21 @@
         <div class="card mb-3 p-3 h-100">
           <div class="world-entry-image">
             @isset($type->thumb_extension)
-              <a href="{{ $type->thumbUrl }}" data-lightbox="entry" data-title="{{ $type->name }}">
-                <img src="{{ $type->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" /></a>
+              <a
+                href="{{ $type->thumbUrl }}"
+                data-lightbox="entry"
+                data-title="{{ $type->name }}"
+              >
+                <img src="{{ $type->thumbUrl }}" class="world-entry-image hover-preview mb-3 mw-100" />
+              </a>
             @endisset
           </div>
           <h3>
             {!! $type->displayName !!} ({!! ucfirst($type->names) !!})
             @if (isset($type->searchUrl) && $type->searchUrl)
               <a href="{{ $type->searchUrl }}" class="world-entry-search text-muted float-right">
-                <i class="fas fa-search"></i></a>
+                <i class="fas fa-search"></i>
+              </a>
             @endif
           </h3>
           <div class="world-entry-text">

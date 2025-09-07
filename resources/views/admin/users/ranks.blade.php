@@ -10,8 +10,10 @@
   <h1>
     User Ranks</h1>
 
-  <p>You can create and edit ranks to assign to users here. Ranks can have powers attached, which allows users with the rank to view and edit data on certain parts of the site. To assign a rank to a user, find their admin page from the <a
-      href="{{ url('admin/users') }}">User Index</a> and change their rank there.</p>
+  <p>You can create and edit ranks to assign to users here. Ranks can have powers attached, which allows users with the rank to view
+    and edit data on certain parts of the site. To assign a rank to a user, find their admin page from the <a
+      href="{{ url('admin/users') }}"
+    >User Index</a> and change their rank there.</p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary create-rank-button" href="#">
@@ -20,11 +22,13 @@
   <table class="table table-sm ranks-table">
     <thead>
       <tr>
-        <th></th>
+        <th>
+        </th>
         <th>Rank</th>
         <th>Description</th>
         <th>Powers</th>
-        <th></th>
+        <th>
+        </th>
       </tr>
     </thead>
     <tbody id="sortable" class="sortable">
@@ -32,7 +36,8 @@
         <tr {{ !$rank->isAdmin ? 'class=sort-item' : '' }} data-id="{{ $rank->id }}">
           <td>
             @if (!$rank->isAdmin)
-              <a class="fas fa-arrows-alt-v handle" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle" href="#">
+              </a>
             @endif
           </td>
           <td>
@@ -45,9 +50,17 @@
             @endforeach
           </td>
           <td>
-            <a href="#" class="btn btn-primary edit-rank-button" data-id="{{ $rank->id }}">Edit</a>
+            <a
+              href="#"
+              class="btn btn-primary edit-rank-button"
+              data-id="{{ $rank->id }}"
+            >Edit</a>
             @if (!$rank->isAdmin)
-              <a href="#" class="btn btn-danger delete-rank-button" data-id="{{ $rank->id }}">Delete</a>
+              <a
+                href="#"
+                class="btn btn-danger delete-rank-button"
+                data-id="{{ $rank->id }}"
+              >Delete</a>
             @endif
           </td>
         </tr>
@@ -59,7 +72,9 @@
     {!! Form::open(['url' => 'admin/users/ranks/sort']) !!}
     {!! Form::hidden('sort', '', ['id' => 'sortableOrder']) !!}
     {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
-    {!! add_help('This order is reflected in the sort order on the users list. Additionally, users with the Edit User Info power cannot edit users with a rank higher than their own.') !!}
+    {!! add_help(
+        'This order is reflected in the sort order on the users list. Additionally, users with the Edit User Info power cannot edit users with a rank higher than their own.'
+    ) !!}
     {!! Form::close() !!}
   </div>
 @endsection

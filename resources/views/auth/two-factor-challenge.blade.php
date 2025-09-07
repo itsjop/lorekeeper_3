@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/auth/2fa-challenge'])
 
-
 @section('title')
   Login: Two-Factor Auth
 @endsection
@@ -21,7 +20,13 @@
   <div class="form-group row">
     {!! Form::label('use_recovery', 'Use a Recovery Code', ['class' => 'form-label text-md-right col-md-6']) !!}
     <div class="col-md-6">
-      {!! Form::checkbox('use_recovery', 1, old('use_recovery'), ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'data-on' => 'Yes', 'data-off' => 'No', 'id' => 'useRecovery']) !!}
+      {!! Form::checkbox('use_recovery', 1, old('use_recovery'), [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle',
+          'data-on' => 'Yes',
+          'data-off' => 'No',
+          'id' => 'useRecovery'
+      ]) !!}
     </div>
   </div>
   <div class="mb-3" id="recoveryContainer">

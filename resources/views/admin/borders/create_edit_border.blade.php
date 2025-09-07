@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Borders' => 'admin/data/borders',
-      ($border->id ? 'Edit' : 'Create') . ' Border' => $border->id ? 'admin/data/borders/edit/' . $border->id : 'admin/data/borders/create',
+      ($border->id ? 'Edit' : 'Create') . ' Border' => $border->id
+          ? 'admin/data/borders/edit/' . $border->id
+          : 'admin/data/borders/create'
   ]) !!}
 
   <h1>
@@ -20,7 +22,7 @@
 
   {!! Form::open([
       'url' => $border->id ? 'admin/data/borders/edit/' . $border->id : 'admin/data/borders/create',
-      'files' => true,
+      'files' => true
   ]) !!}
 
   <h3>Basic Information</h3>
@@ -65,8 +67,11 @@
 
     <div class="col-md-6">
       <h3>Image</h3>
-      <p><b>An image is required. You can't have a border with no image!</b> A square canvas is recommended. The container that contains the avatar and borders has a max-width set of 150px, while the avatar itself is resized down to around 120px.
-        This can be adjusted in the CSS.</p>
+      <p>
+        <b>An image is required. You can't have a border with no image!</b> A square canvas is recommended. The container that
+        contains the avatar and borders has a max-width set of 150px, while the avatar itself is resized down to around 120px.
+        This can be adjusted in the CSS.
+      </p>
 
       <div class="form-group">
         {!! Form::label('image', 'Border Image', ['class' => 'font-weight-bold']) !!}
@@ -77,33 +82,34 @@
         {!! Form::label('Border Style (Required)') !!}{!! add_help('Choose how the border will display around an icon. It can display over or under the user\'s icon.') !!}
         {!! Form::select('border_style', ['0' => 'Under', '1' => 'Over'], $border->border_style, [
             'class' => 'form-control w-75',
-            'placeholder' => 'Select a Type',
+            'placeholder' => 'Select a Type'
         ]) !!}
       </div>
     </div>
 
     <div class="col-md-3">
       <h3>Border Options</h3>
-      <p>You can adjust whether your border is active (visible), allowed for free use by all users, or if it is exclusive to staff.</p>
+      <p>You can adjust whether your border is active (visible), allowed for free use by all users, or if it is exclusive to staff.
+      </p>
 
       <div class="form-group">
         {!! Form::checkbox('is_default', 1, $border->is_default, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-toggle' => 'toggle'
         ]) !!}
         {!! Form::label('is_default', 'Default Border', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If enabled, this border will be automatically available for any users.') !!}
       </div>
       <div class="form-group">
         {!! Form::checkbox('is_active', 1, $border->is_active, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-toggle' => 'toggle'
         ]) !!}
         {!! Form::label('is_active', 'Active?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Users can\'t see or select this border if it isn\'t visible.') !!}
       </div>
       <div class="form-group">
         {!! Form::checkbox('admin_only', 1, $border->admin_only, [
             'class' => 'form-check-input',
-            'data-toggle' => 'toggle',
+            'data-toggle' => 'toggle'
         ]) !!}
         {!! Form::label('admin_only', 'Staff Only?', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Only users who are staff can select this border if turned on.') !!}
       </div>
@@ -116,12 +122,18 @@
       <div class="row">
         <div class="col-md">
           <div class="form-group">
-            {!! Form::select('artist_id', $userOptions, $border && $border->artist_id ? $border->artist_id : null, ['class' => 'form-control mr-2 selectize', 'placeholder' => 'Select a User']) !!}
+            {!! Form::select('artist_id', $userOptions, $border && $border->artist_id ? $border->artist_id : null, [
+                'class' => 'form-control mr-2 selectize',
+                'placeholder' => 'Select a User'
+            ]) !!}
           </div>
         </div>
         <div class="col-md">
           <div class="form-group">
-            {!! Form::text('artist_url', $border && $border->artist_url ? $border->artist_url : '', ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
+            {!! Form::text('artist_url', $border && $border->artist_url ? $border->artist_url : '', [
+                'class' => 'form-control mr-2',
+                'placeholder' => 'Artist URL'
+            ]) !!}
           </div>
         </div>
       </div>
@@ -143,13 +155,19 @@
     <hr />
     <div class="card mb-3 p-4">
       <h2>Layers</h2>
-      <p>These are layered images that players can choose from. A user that owns this base border can switch between its layers for free. A border must have a top and bottom layer before a user can choose to layer anything.</p>
-      <p>Top layers will always layer over the bottom layer, but a top layer and bottom layer can both have their own styles as well.</p>
+      <p>These are layered images that players can choose from. A user that owns this base border can switch between its layers for
+        free. A border must have a top and bottom layer before a user can choose to layer anything.</p>
+      <p>Top layers will always layer over the bottom layer, but a top layer and bottom layer can both have their own styles as
+        well.</p>
       <div class="card border-0">
         <div class="card-body">
           <h2 class="text-center">Top Layers</h2>
           <div class="text-right mb-2">
-            <a href="#" class="btn btn-primary" id="add-top">Add Top Layer</a>
+            <a
+              href="#"
+              class="btn btn-primary"
+              id="add-top"
+            >Add Top Layer</a>
           </div>
           @if ($border->topLayers->count())
             <div class="row">
@@ -159,7 +177,11 @@
 
                   <div class="text-center">
                     <h5>{!! $layer->name !!}</h5>
-                    <a href="#" class="btn btn-sm btn-primary edit-top" data-id="{{ $layer->id }}">
+                    <a
+                      href="#"
+                      class="btn btn-sm btn-primary edit-top"
+                      data-id="{{ $layer->id }}"
+                    >
                       <i class="fas fa-cog mr-1"></i>Edit</a>
                   </div>
                 </div>
@@ -171,7 +193,11 @@
           <hr class="w-75">
           <h2 class="text-center">Bottom Layers</h2>
           <div class="text-right mb-2">
-            <a href="#" class="btn btn-primary" id="add-bottom">Add Bottom Layer</a>
+            <a
+              href="#"
+              class="btn btn-primary"
+              id="add-bottom"
+            >Add Bottom Layer</a>
           </div>
           @if ($border->bottomLayers->count())
             <div class="row">
@@ -181,7 +207,11 @@
 
                   <div class="text-center">
                     <h5>{!! $layer->name !!}</h5>
-                    <a href="#" class="btn btn-sm btn-primary edit-bottom" data-id="{{ $layer->id }}">
+                    <a
+                      href="#"
+                      class="btn btn-sm btn-primary edit-bottom"
+                      data-id="{{ $layer->id }}"
+                    >
                       <i class="fas fa-cog mr-1"></i>Edit</a>
                   </div>
                 </div>
@@ -199,7 +229,11 @@
       <div class="card border-0">
         <div class="card-body">
           <div class="text-right mb-2">
-            <a href="#" class="btn btn-primary" id="add-variant">Add Variant</a>
+            <a
+              href="#"
+              class="btn btn-primary"
+              id="add-variant"
+            >Add Variant</a>
           </div>
           @if ($border->variants->count())
             <div class="row">
@@ -209,7 +243,11 @@
 
                   <div class="text-center">
                     <h5>{!! $variant->name !!}</h5>
-                    <a href="#" class="btn btn-sm btn-primary edit-variant" data-id="{{ $variant->id }}">
+                    <a
+                      href="#"
+                      class="btn btn-sm btn-primary edit-variant"
+                      data-id="{{ $variant->id }}"
+                    >
                       <i class="fas fa-cog mr-1"></i>Edit</a>
                   </div>
                 </div>
@@ -227,7 +265,7 @@
       <p>This will only check if an item tag can unlock this specific border ONLY.</p>
       @if (!$border->hasItem())
         {!! Form::open([
-            'url' => 'admin/data/borders/item/' . $border->id,
+            'url' => 'admin/data/borders/item/' . $border->id
         ]) !!}
         {!! Form::submit('Create Item', ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
@@ -261,7 +299,8 @@
 
       $('.edit-variant').on('click', function(e) {
         e.preventDefault();
-        loadModal("{{ url('admin/data/borders/edit/' . $border->id . '/variants/edit') }}/" + $(this).data('id'), 'Edit Variant');
+        loadModal("{{ url('admin/data/borders/edit/' . $border->id . '/variants/edit') }}/" + $(this).data('id'),
+          'Edit Variant');
       });
 
       $('#add-top').on('click', function(e) {
@@ -271,7 +310,8 @@
 
       $('.edit-top').on('click', function(e) {
         e.preventDefault();
-        loadModal("{{ url('admin/data/borders/edit/' . $border->id . '/tops/edit') }}/" + $(this).data('id'), 'Edit Top Layer');
+        loadModal("{{ url('admin/data/borders/edit/' . $border->id . '/tops/edit') }}/" + $(this).data('id'),
+          'Edit Top Layer');
       });
 
       $('#add-bottom').on('click', function(e) {
@@ -281,7 +321,8 @@
 
       $('.edit-bottom').on('click', function(e) {
         e.preventDefault();
-        loadModal("{{ url('admin/data/borders/edit/' . $border->id . '/bottoms/edit') }}/" + $(this).data('id'), 'Edit Bottom Layer');
+        loadModal("{{ url('admin/data/borders/edit/' . $border->id . '/bottoms/edit') }}/" + $(this).data('id'),
+          'Edit Bottom Layer');
       });
     });
   </script>

@@ -20,7 +20,7 @@
       data-id=""
     >Create Raffle</a>
   </div>
-  
+
   @if (Request::get('is_active') == 1)
     <p>
       This is the list of raffles that are visible to users and have not been rolled.

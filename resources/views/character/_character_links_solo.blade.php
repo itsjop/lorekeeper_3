@@ -6,8 +6,7 @@
     View all Connections
     <i class="fas fa-caret-right"></i>
   </a>
-</header>
-<br>
+</header><br>
 @if (count($character->links))
   <div class="grid grid-4-col gap-1">
     @foreach ($character->links as $key => $link)

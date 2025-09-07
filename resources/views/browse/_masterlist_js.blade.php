@@ -92,7 +92,7 @@
 
     function featureSelectedRender(item, escape) {
       return '<div> <span > ' + escape(item["text"].trim()) + '(' + escape(item["optgroup"].trim()) + ')' +
-        ' < /span></div > ';
+        ' < /span> </div > ';
     }
 
     function addRemoveListener($node) {

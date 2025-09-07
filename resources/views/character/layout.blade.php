@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageName' => '/character'])
 
-
 @section('title')
   Character ::
   @yield('profile-title')
@@ -21,7 +20,9 @@
       $('.bookmark-button').on('click', function(e) {
         e.preventDefault();
         var $this = $(this);
-        loadModal($this.data('id') ? "{{ url('account/bookmarks/edit') }}" + '/' + $this.data('id') : "{{ url('account/bookmarks/create') }}?character_id=" + $this.data('character-id'), $this.data('id') ? 'Edit Bookmark' :
+        loadModal($this.data('id') ? "{{ url('account/bookmarks/edit') }}" + '/' + $this.data('id') :
+          "{{ url('account/bookmarks/create') }}?character_id=" + $this.data('character-id'), $this.data('id') ?
+          'Edit Bookmark' :
           'Bookmark Character');
       });
     });

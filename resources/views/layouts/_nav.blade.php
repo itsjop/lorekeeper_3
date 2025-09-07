@@ -29,9 +29,12 @@
       aria-label="{{ __('Toggle navigation') }}"
     >
       <span class="navbar-toggler-icon">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
+        <span class="line">
+        </span>
+        <span class="line">
+        </span>
+        <span class="line">
+        </span>
       </span>
     </button>
     <button id="mobile-sidebar-toggle" class="mobile-menu-button">menu</button>
@@ -254,12 +257,14 @@
         @if (Auth::user()->isStaff)
           <li class="nav-item admin">
             <a class="nav-link" href="{{ url('admin') }}">
-              <i class="fas fa-crown"></i></a>
+              <i class="fas fa-crown"></i>
+            </a>
           </li>
         @endif
         @if (Auth::user()->notifications_unread)
           <li class="nav-item nav-notifications">
-            <a class="nav-link" href="{{ url('notifications') }}"><i class="fas fa-envelope"></i>
+            <a class="nav-link" href="{{ url('notifications') }}">
+              <i class="fas fa-envelope"></i>
               {{ Auth::user()->notifications_unread }}</a>
           </li>
         @endif
@@ -301,7 +306,8 @@
             aria-expanded="false"
             v-pre
           >
-            {{ Auth::user()->name }} <span class="caret"></span>
+            {{ Auth::user()->name }} <span class="caret">
+            </span>
           </div>
           <div class="dropdown-menu dropdown-menu-right dt-nav-page grid-3-col" aria-labelledby="accountDropdown">
             <div class="dt-nav-group character">

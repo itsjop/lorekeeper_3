@@ -11,12 +11,12 @@
 
   <p>View your site logs without logging into the host console. Logs may not persist forever depending on your app's settings.</p>
 
-
   <table class="table table-sm">
     <thead>
       <tr>
         <th>Logs</th>
-        <th></th>
+        <th>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -26,25 +26,43 @@
             <a href="/admin/logs/{{ $log }}">{{ $log }}</a>
           </td>
           <td class="text-right">
-            <a href="/admin/logs/{{ $log }}" class="btn btn-outline-primary btn-sm move-log" data-name="{{ $log }} ">View</a>
-            <a href="#" class="btn btn-outline-danger btn-sm delete-log" data-name="{{ $log }}">Delete</a>
+            <a
+              href="/admin/logs/{{ $log }}"
+              class="btn btn-outline-primary btn-sm move-log"
+              data-name="{{ $log }} "
+            >View</a>
+            <a
+              href="#"
+              class="btn btn-outline-danger btn-sm delete-log"
+              data-name="{{ $log }}"
+            >Delete</a>
           </td>
         </tr>
       @endforeach
     </tbody>
   </table>
 
-  <dialog class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+  <dialog
+    class="modal fade"
+    id="deleteModal"
+    tabindex="-1"
+    role="dialog"
+  >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <span class="modal-title h5 mb-0">Delete Log</span>
-          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+          <button
+            type="button"
+            class="close"
+            data-bs-dismiss="modal"
+          >&times;</button>
         </div>
         <div class="modal-body">
           {{-- Delete a file --}}
           {!! Form::open(['url' => 'admin/logs/delete', 'id' => 'deleteForm', 'class' => 'file-form']) !!}
-          <p>This will permanently delete <strong id="deleteFilename"></strong>. Are you sure?</p>
+          <p>This will permanently delete <strong id="deleteFilename">
+            </strong>. Are you sure?</p>
           <div class="text-right">
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
           </div>

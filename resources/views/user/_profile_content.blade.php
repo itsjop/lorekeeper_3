@@ -16,12 +16,14 @@
       </div>
       <div style="position: relative; margin: auto;">
         {!! $user->displayName !!}
-        <a href="{{ url('reports/new?url=') . $user->url }}"><i
+        <a href="{{ url('reports/new?url=') . $user->url }}">
+          <i
             class="fas fa-exclamation-triangle fa-xs"
             data-bs-toggle="tooltip"
             title="Click here to report this user."
             style="opacity: 50%; font-size:0.5em;"
-          ></i></a>
+          ></i>
+        </a>
       </div>
     </h1>
     <div class="row no-gutters justify-content-center mb-5"
@@ -170,17 +172,21 @@
       {{-- <div class="col-md-3 col-6 text-center">
         <div>
           @if ((Auth::check() && Auth::user()->settings->content_warning_visibility == 0 && isset($character->character_warning)) || (isset($character->character_warning) && !Auth::check()))
-            <a href="{{ $character->url }}"><img
+            <a href="{{ $character->url }}">
+<img
                 src="{{ asset('images/somnivores/site/content-warning.png') }}"
                 class="img-thumbnail"
                 alt="Content Warning - {{ $character->fullName }}"
-              /></a>
+              />
+</a>
           @else
-            <a href="{{ $character->url }}"><img
+            <a href="{{ $character->url }}">
+<img
                 src="{{ $character->image->thumbnailUrl }}"
                 class="img-thumbnail"
                 alt="{{ $character->fullName }}"
-              /></a>
+              />
+</a>
           @endif
         </div>
         <div class="mt-1">
@@ -192,7 +198,10 @@
         </div>
         @if ((Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($character->character_warning)) || (isset($character->character_warning) && !Auth::check()))
           <div class="small">
-            <p><span class="text-danger"><strong>Character Warning:</strong></span> {!! nl2br(htmlentities($character->character_warning)) !!}</p>
+            <p>
+<span class="text-danger">
+<strong>Character Warning:</strong>
+</span> {!! nl2br(htmlentities($character->character_warning)) !!}</p>
           </div>
         @endif
       </div> --}}
@@ -236,7 +245,9 @@
           </div>
         @endif
         <hr>
-        <div class="my-2"><strong>For Names and Avatars:</strong></div>
+        <div class="my-2">
+          <strong>For Names and Avatars:</strong>
+        </div>
         In the rich text editor:
         <div class="alert alert-secondary">
           {{ '%' . $user->name }}

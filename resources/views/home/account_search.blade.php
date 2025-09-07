@@ -9,13 +9,18 @@
 
   <h1>Account Search</h1>
 
-  <p>Select an item to search for all occurrences of it in your and your characters' inventories, as well as your shops. If a stack is currently "held" in a trade, design update, or submission, this will be stated and all held locations will be linked.
+  <p>Select an item to search for all occurrences of it in your and your characters' inventories, as well as your shops. If a stack
+    is currently "held" in a trade, design update, or submission, this will be stated and all held locations will be linked.
   </p>
 
   {!! Form::open(['method' => 'GET', 'class' => '']) !!}
   <div class="form-inline justify-content-end">
     <div class="form-group ml-3 mb-3">
-      {!! Form::select('item_id', $items, Request::get('item_id'), ['class' => 'form-control selectize', 'placeholder' => 'Select an Item', 'style' => 'width: 25em; max-width: 100%;']) !!}
+      {!! Form::select('item_id', $items, Request::get('item_id'), [
+          'class' => 'form-control selectize',
+          'placeholder' => 'Select an Item',
+          'style' => 'width: 25em; max-width: 100%;'
+      ]) !!}
     </div>
     <div class="form-group ml-3 mb-3">
       {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
@@ -26,7 +31,9 @@
   @if ($item)
     <h3>{{ $item->name }}</h3>
 
-    <p>You currently have {{ $userItems->pluck('count')->sum() + $characterItems->pluck('count')->sum() + $shopItems->pluck('quantity')->sum() }} of this item between your and your characters' inventories.</p>
+    <p>You currently have
+      {{ $userItems->pluck('count')->sum() + $characterItems->pluck('count')->sum() + $shopItems->pluck('quantity')->sum() }} of
+      this item between your and your characters' inventories.</p>
 
     @if ($userItems->count())
       <h5>In Your Inventory:</h5>
@@ -40,7 +47,7 @@
                 <?php
                 $tradesSent = $trades->where('sender_id', Auth::user()->id);
                 $tradesReceived = $trades->where('recipient_id', Auth::user()->id);
-                
+
                 // Collect hold location IDs and quantities
                 $holdLocations = [];
                 if (isset($item->trade_count) && $item->trade_count > 0) {
@@ -69,7 +76,7 @@
                         }
                     }
                 }
-                
+
                 // Format a string with all the places a stack is held
                 $held = [];
                 if (isset($holdLocations['trade'])) {

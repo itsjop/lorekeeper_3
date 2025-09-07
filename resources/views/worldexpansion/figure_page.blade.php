@@ -7,8 +7,14 @@
 @section('content')
 
   @if (Auth::check() && Auth::user()->hasPower('manage_world'))
-    <a data-bs-toggle="tooltip" title="[ADMIN] Edit Figure" href="{{ url('admin/world/figures/edit/') . '/' . $figure->id }}" class="mb-2 float-right">
-      <i class="fas fa-crown"></i></a>
+    <a
+      data-bs-toggle="tooltip"
+      title="[ADMIN] Edit Figure"
+      href="{{ url('admin/world/figures/edit/') . '/' . $figure->id }}"
+      class="mb-2 float-right"
+    >
+      <i class="fas fa-crown"></i>
+    </a>
   @endif
   {!! breadcrumbs(['World' => 'world', 'Figure' => 'world/figures', $figure->name => 'world/figures/' . $figure->id]) !!}
   <h1 style="clear:both;">
@@ -61,8 +67,5 @@
     @endif
 
   </div>
-
-
-
 
 @endsection

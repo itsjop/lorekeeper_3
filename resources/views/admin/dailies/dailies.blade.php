@@ -10,7 +10,8 @@
   <h1>{{ ucfirst(__('dailies.daily')) }}</h1>
 
   <p>This is a list of {{ __('dailies.dailies') }} that users can roll each day.</p>
-  <p>The sorting order reflects the order in which the {{ __('dailies.daily') }} will be listed on the {{ __('dailies.daily') }} index.</p>
+  <p>The sorting order reflects the order in which the {{ __('dailies.daily') }} will be listed on the {{ __('dailies.daily') }}
+    index.</p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/dailies/create') }}">
@@ -24,7 +25,8 @@
         @foreach ($dailies as $daily)
           <tr class="sort-item" data-id="{{ $daily->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               {!! $daily->displayName !!}
               @if ($daily->is_timed_daily)
                 <i class="fas fa-clock"></i>

@@ -26,8 +26,16 @@
           <div class="row world-entry {{ $pet->evolutions->count() || $pet->variants->count() ? 'mb-3' : '' }}">
             @if ($pet->has_image)
               <div class="col-md-3 world-entry-image">
-                <a href="{{ $pet->imageUrl }}" data-lightbox="entry" data-title="{{ $pet->name }}">
-                  <img src="{{ $pet->imageUrl }}" class="world-entry-image" alt="{{ $pet->name }}" />
+                <a
+                  href="{{ $pet->imageUrl }}"
+                  data-lightbox="entry"
+                  data-title="{{ $pet->name }}"
+                >
+                  <img
+                    src="{{ $pet->imageUrl }}"
+                    class="world-entry-image"
+                    alt="{{ $pet->name }}"
+                  />
                 </a>
               </div>
             @endif
@@ -56,7 +64,12 @@
               @if ($pet->hasDrops)
                 <div class="card">
                   <h5 class="card-header inventory-header">
-                    <a class="inventory-collapse-toggle collapse-toggle collapsed" href="#drop-collapse" data-bs-toggle="collapse">Show Drops</a></h3>
+                    <a
+                      class="inventory-collapse-toggle collapse-toggle collapsed"
+                      href="#drop-collapse"
+                      data-bs-toggle="collapse"
+                    >Show Drops</a>
+                    </h3>
                   </h5>
                   <div class="collapse" id="drop-collapse">
                     <div class="card-body">
@@ -75,8 +88,20 @@
                   <div class="row">
                     @foreach ($chunk as $evolution)
                       <div class="col text-center">
-                        <a href="{{ $evolution->imageUrl }}" data-lightbox="entry" data-title="{{ $evolution->evolution_name }}">
-                          <img src="{{ $evolution->imageUrl }}" class="img-fluid" style="max-height: 10em;" alt="{{ $evolution->evolution_name }}" data-bs-toggle="tooltip" data-title="{{ $evolution->evolution_name }}" style="max-height:200px" />
+                        <a
+                          href="{{ $evolution->imageUrl }}"
+                          data-lightbox="entry"
+                          data-title="{{ $evolution->evolution_name }}"
+                        >
+                          <img
+                            src="{{ $evolution->imageUrl }}"
+                            class="img-fluid"
+                            style="max-height: 10em;"
+                            alt="{{ $evolution->evolution_name }}"
+                            data-bs-toggle="tooltip"
+                            data-title="{{ $evolution->evolution_name }}"
+                            style="max-height:200px"
+                          />
                         </a>
                         <div class="h5">
                           {{ $evolution->evolution_name }}
@@ -102,7 +127,15 @@
                       <div class="col-md text-center">
                         <a href="{{ $variant->idUrl }}">
                           @if ($variant->has_image)
-                            <img src="{{ $variant->imageUrl }}" class="img-fluid" style="max-height: 10em;" alt="{{ $variant->name }}" data-bs-toggle="tooltip" data-title="{{ $variant->name }}" style="max-height:200px" />
+                            <img
+                              src="{{ $variant->imageUrl }}"
+                              class="img-fluid"
+                              style="max-height: 10em;"
+                              alt="{{ $variant->name }}"
+                              data-bs-toggle="tooltip"
+                              data-title="{{ $variant->name }}"
+                              style="max-height:200px"
+                            />
                           @else
                             {{ $variant->name }}
                           @endif

@@ -48,7 +48,8 @@
                   style="min-width:40px;"
                   data-action="reject"
                 >
-                  <i class="fas fa-times"></i></button>
+                  <i class="fas fa-times"></i>
+                </button>
                 {!! Form::close() !!}
               </div>
               <div class="col-sm-6 text-center text-success">
@@ -59,7 +60,8 @@
                   style="min-width:40px;"
                   data-action="approve"
                 >
-                  <i class="fas fa-check"></i></button>
+                  <i class="fas fa-check"></i>
+                </button>
                 {!! Form::close() !!}
               </div>
             </div>

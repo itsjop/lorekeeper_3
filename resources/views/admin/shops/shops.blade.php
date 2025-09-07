@@ -13,7 +13,8 @@
   <p>The sorting order reflects the order in which the shops will be listed on the shop index.</p>
 
   <div class="text-right mb-3">
-    <a class="btn btn-primary" href="{{ url('admin/data/shops/create') }}"><i class="fas fa-plus"></i> Create New Shop</a>
+    <a class="btn btn-primary" href="{{ url('admin/data/shops/create') }}">
+      <i class="fas fa-plus"></i> Create New Shop</a>
   </div>
   @if (!count($shops))
     <p>No item shops found.</p>
@@ -23,7 +24,8 @@
         @foreach ($shops as $shop)
           <tr class="sort-item" data-id="{{ $shop->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               @if ($shop->is_staff)
                 <i class="fas fa-crown mr-1"></i>
               @endif

@@ -3,10 +3,19 @@
   <span class="float-right">
     @if (Auth::user()->id == $user->id && $trade->status == 'Open')
       @if ($trade->{'is_' . $type . '_confirmed'})
-        <a href="#" class="btn btn-sm btn-outline-danger" id="confirmOfferButton" data-bs-toggle="tooltip"
-          title="This will unconfirm your offer and allow you to edit it. You will need to reconfirm your offer after you have edited it to proceed.">Unconfirm</a>
+        <a
+          href="#"
+          class="btn btn-sm btn-outline-danger"
+          id="confirmOfferButton"
+          data-bs-toggle="tooltip"
+          title="This will unconfirm your offer and allow you to edit it. You will need to reconfirm your offer after you have edited it to proceed."
+        >Unconfirm</a>
       @else
-        <a href="{{ url('trades/' . $trade->id . '/edit') }}" class="btn btn-sm btn-primary">Edit</a> <a href="#" class="btn btn-sm btn-outline-primary" id="confirmOfferButton">Confirm</a>
+        <a href="{{ url('trades/' . $trade->id . '/edit') }}" class="btn btn-sm btn-primary">Edit</a> <a
+          href="#"
+          class="btn btn-sm btn-outline-primary"
+          id="confirmOfferButton"
+        >Confirm</a>
       @endif
     @else
       @if ($trade->{'is_' . $type . '_confirmed'})
@@ -21,13 +30,15 @@
     @endif
   </span>
 </h2>
-<div class="card mb-3 trade-offer
+<div
+  class="card mb-3 trade-offer
         @if ($trade->{'is_' . $type . '_confirmed'}) @if ($trade->{'is_' . $type . '_trade_confirmed'})
                 border-success
             @else
                 border-primary @endif
         @endif
-">
+        "
+>
   @if ($data)
     @if ($data['user_items'])
       <div class="card-header">
@@ -48,10 +59,22 @@
               <tr class="d-flex">
                 <td class="col-2">
                   @if (isset($items[$itemRow['asset']->item_id]->image_url))
-                    <img class="small-icon" src="{{ $items[$itemRow['asset']->item_id]->image_url }}" alt="{{ $items[$itemRow['asset']->item_id]->name }}">
+                    <img
+                      class="small-icon"
+                      src="{{ $items[$itemRow['asset']->item_id]->image_url }}"
+                      alt="{{ $items[$itemRow['asset']->item_id]->name }}"
+                    >
                   @endif {!! $items[$itemRow['asset']->item_id]->name !!}
-                <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data) ? ($itemRow['asset']->data['data'] ? $itemRow['asset']->data['data'] : 'N/A') : 'N/A' !!}</td>
-                <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data) ? ($itemRow['asset']->data['notes'] ? $itemRow['asset']->data['notes'] : 'N/A') : 'N/A' !!}</td>
+                <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data)
+                    ? ($itemRow['asset']->data['data']
+                        ? $itemRow['asset']->data['data']
+                        : 'N/A')
+                    : 'N/A' !!}</td>
+                <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data)
+                    ? ($itemRow['asset']->data['notes']
+                        ? $itemRow['asset']->data['notes']
+                        : 'N/A')
+                    : 'N/A' !!}</td>
                 <td class="col-2">{!! $itemRow['quantity'] !!}
               </tr>
             @endforeach
@@ -70,7 +93,12 @@
               <div class="text-center inventory-item">
                 <div class="mb-1">
                   <a class="inventory-stack">
-                    <img src="{{ $character['asset']->image->thumbnailUrl }}" class="img-thumbnail" alt="Thumbnail for {{ $character['asset']->fullName }}" /></a>
+                    <img
+                      src="{{ $character['asset']->image->thumbnailUrl }}"
+                      class="img-thumbnail"
+                      alt="Thumbnail for {{ $character['asset']->fullName }}"
+                    />
+                  </a>
                 </div>
                 <div>
                   <a class="inventory-stack inventory-stack-name">{!! $character['asset']->displayName !!}</a>

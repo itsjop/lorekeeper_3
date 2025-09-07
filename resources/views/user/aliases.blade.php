@@ -21,7 +21,8 @@
           <div class="logs-table-cell">Site</div>
         </div>
         <div class="col-5">
-          <div class="logs-table-cell"></div>
+          <div class="logs-table-cell">
+          </div>
         </div>
       </div>
     </div>
@@ -43,7 +44,11 @@
                   <span class="badge badge-success">Primary</span>
                 @endif
                 @if (!$alias->is_visible)
-                  <i class="fas fa-eye-slash" data-bs-toggle="tooltip" title="This alias is hidden from public view."></i>
+                  <i
+                    class="fas fa-eye-slash"
+                    data-bs-toggle="tooltip"
+                    title="This alias is hidden from public view."
+                  ></i>
                 @endif
               </div>
             </div>

@@ -24,20 +24,24 @@
       <div class="d-flex mb-2">
         {!! Form::select('pet_ids[]', $pets, null, [
             'class' => 'form-control mr-2 default pet-select',
-            'placeholder' => 'Select Pet',
+            'placeholder' => 'Select Pet'
         ]) !!}
         {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
         {!! Form::select('variant[]', ['none' => 'No Variant', 'randomize' => 'Randomize Variant'], null, [
-            'class' => 'form-control mr-2 variant-select',
+            'class' => 'form-control mr-2 variant-select'
         ]) !!}
         {!! Form::select('evolution[]', ['none' => 'No Evolution', 'randomize' => 'Randomize Evolution'], null, [
-            'class' => 'form-control mr-2 evolution-select',
+            'class' => 'form-control mr-2 evolution-select'
         ]) !!}
         <a href="#" class="remove-pet btn btn-danger mb-2 disabled">×</a>
       </div>
     </div>
     <div>
-      <a href="#" class="btn btn-primary" id="add-pet">Add Pet</a>
+      <a
+        href="#"
+        class="btn btn-primary"
+        id="add-pet"
+      >Add Pet</a>
     </div>
   </div>
 
@@ -55,7 +59,9 @@
 
   <div class="form-group">
     {!! Form::checkbox('disallow_transfer', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('disallow_transfer', 'Account-bound', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is on, the recipient(s) will not be able to transfer this pet to other users. Pets that disallow transfers by default will still not be transferrable.') !!}
+    {!! Form::label('disallow_transfer', 'Account-bound', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+        'If this is on, the recipient(s) will not be able to transfer this pet to other users. Pets that disallow transfers by default will still not be transferrable.'
+    ) !!}
   </div>
 
   <div class="text-right">
@@ -68,7 +74,7 @@
     {!! Form::select('pet_ids[]', $pets, null, ['class' => 'form-control mr-2 pet-select', 'placeholder' => 'Select Pet']) !!}
     {!! Form::text('quantities[]', 1, ['class' => 'form-control mr-2', 'placeholder' => 'Quantity']) !!}
     {!! Form::select('variant[]', ['none' => 'No Variant', 'randomize' => 'Randomize Variant'], null, [
-        'class' => 'form-control mr-2 variant-select',
+        'class' => 'form-control mr-2 variant-select'
     ]) !!}
     <a href="#" class="remove-pet btn btn-danger mb-2">×</a>
   </div>

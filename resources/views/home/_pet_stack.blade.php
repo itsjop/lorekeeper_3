@@ -155,7 +155,8 @@
             <p>
               This will use a splice item!
               @if ($stack->pet->isVariant)
-                <br><b>Current variant:</b> {{ $stack->pet->name }}
+                <br>
+                <b>Current variant:</b> {{ $stack->pet->name }}
               @endif
             </p>
             <div class="form-group">
@@ -190,7 +191,8 @@
             {!! Form::hidden('is_staff', 1) !!}
             <p>
               @if ($stack->variant_id)
-                <br><b>Current variant:</b> {{ $stack->variant->name }}
+                <br>
+                <b>Current variant:</b> {{ $stack->variant->name }}
               @endif
             </p>
             <div class="form-group">
@@ -219,7 +221,8 @@
             {!! Form::hidden('is_staff', 1) !!}
             <p>
               @if ($stack->evolution_id)
-                <br><b>Current evolution:</b> {{ $stack->evolution->evolution_name }} (Stage
+                <br>
+                <b>Current evolution:</b> {{ $stack->evolution->evolution_name }} (Stage
                 {{ $stack->evolution->evolution_stage }})
               @endif
             </p>
@@ -313,13 +316,17 @@
             </li>
           @else
             <li class="list-group-item bg-light">
-              <h5 class="card-title mb-0 text-muted"><i class="fas fa-lock mr-2"></i> Currently attached to
-                {!! $stack->character->displayName !!}</h5>
+              <h5 class="card-title mb-0 text-muted">
+                <i class="fas fa-lock mr-2"></i> Currently attached to
+                {!! $stack->character->displayName !!}
+              </h5>
             </li>
           @endif
         @else
           <li class="list-group-item bg-light">
-            <h5 class="card-title mb-0 text-muted"><i class="fas fa-lock mr-2"></i> Account-bound</h5>
+            <h5 class="card-title mb-0 text-muted">
+              <i class="fas fa-lock mr-2"></i> Account-bound
+            </h5>
           </li>
         @endif
 

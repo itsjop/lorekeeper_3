@@ -9,7 +9,9 @@
       'Admin Panel' => 'admin',
       'Criteria' => 'admin/data/criteria',
       'Edit Criterion' => 'admin/data/criteria/edit/' . $criterionId,
-      ($step->id ? 'Create' : 'Edit') . ' Criterion Step' => $step->id ? 'admin/data/criteria/' . $criterionId . '/step/' . $step->id : 'admin/data/criteria/' . $criterionId . '/step',
+      ($step->id ? 'Create' : 'Edit') . ' Criterion Step' => $step->id
+          ? 'admin/data/criteria/' . $criterionId . '/step/' . $step->id
+          : 'admin/data/criteria/' . $criterionId . '/step'
   ]) !!}
 
   <h1>
@@ -19,7 +21,12 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $step->id ? 'admin/data/criteria/' . $criterionId . '/step/' . $step->id : 'admin/data/criteria/' . $criterionId . '/step', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $step->id
+          ? 'admin/data/criteria/' . $criterionId . '/step/' . $step->id
+          : 'admin/data/criteria/' . $criterionId . '/step',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
   <div class="form-group">
@@ -57,12 +64,23 @@
 
   <div class="row align-items-end">
     <div class="form-group col-6">
-      {!! Form::label('Type') !!} {!! add_help('This is the type of form element presented to the user. Input is an number input, options is a select, and boolean is a checkbox') !!}
-      {!! Form::select('type', ['options' => 'Dropdown Input / Select from Options', 'input' => 'Number Input', 'boolean' => 'Boolean'], $step->type, ['class' => 'form-control selectize']) !!}
+      {!! Form::label('Type') !!} {!! add_help(
+          'This is the type of form element presented to the user. Input is an number input, options is a select, and boolean is a checkbox'
+      ) !!}
+      {!! Form::select(
+          'type',
+          ['options' => 'Dropdown Input / Select from Options', 'input' => 'Number Input', 'boolean' => 'Boolean'],
+          $step->type,
+          ['class' => 'form-control selectize']
+      ) !!}
     </div>
     <div class="form-group col-6">
-      {!! Form::label('Calculation Type') !!} {!! add_help('This is the type of calculation done with the amount calculated from the selected option. If multiplicative, negative amounts will be divided.') !!}
-      {!! Form::select('calc_type', ['additive' => 'Additive', 'multiplicative' => 'Multiplicative'], $step->calc_type, ['class' => 'form-control selectize']) !!}
+      {!! Form::label('Calculation Type') !!} {!! add_help(
+          'This is the type of calculation done with the amount calculated from the selected option. If multiplicative, negative amounts will be divided.'
+      ) !!}
+      {!! Form::select('calc_type', ['additive' => 'Additive', 'multiplicative' => 'Multiplicative'], $step->calc_type, [
+          'class' => 'form-control selectize'
+      ]) !!}
     </div>
   </div>
 
@@ -71,14 +89,18 @@
         <button type="button" class="btn btn-primary float-right option-create">+ Add Option</button>
       @endif
     </h2>
-    <p>If you change the Criterion Step's type, it will delete what's specified in this section, and populate it with new configuration.</p>
+    <p>If you change the Criterion Step's type, it will delete what's specified in this section, and populate it with new
+      configuration.</p>
     @if ($step->type === 'options')
-      <p>These can be re-ordered using Drag and Drop. If you set a minimum requirement on a prompt, only options after that one will be choose-able.</p>
+      <p>These can be re-ordered using Drag and Drop. If you set a minimum requirement on a prompt, only options after that one will
+        be choose-able.</p>
       <div id="sortable" class="sortable">
         @foreach ($step->options->sortBy('order') as $option)
           <div class="card p-3 mb-2 pl-0" data-id="{{ $option->id }}">
             <div class="d-flex justify-content-between align-items-center">
-              <i class="fas fa-grip-lines-vertical mr-3" style="font-size: 150%; color: rgba(0,0,0,.3); cursor: grab; margin-left: -3px;"></i>
+              <i class="fas fa-grip-lines-vertical mr-3"
+                style="font-size: 150%; color: rgba(0,0,0,.3); cursor: grab; margin-left: -3px;"
+              ></i>
               <div class="flex-grow-1">
                 <h4 class="pb-0 mb-0">
                   @if ($option->is_active === 0)
@@ -91,8 +113,20 @@
                 <span class="text-secondary">{!! $step->criterion->currency->display($option->amount) !!} · {{ $option->summary }}</span>
               </div>
               <div style="flex: 0 0 auto;">
-                <button class="option-edit btn btn-info text-white mr-2" data-id="{{ $option->id }}" type="button"><i class="fas fa-pencil-alt"></i></button>
-                <button class="btn btn-danger option-delete" data-id="{{ $option->id }}" type="button"><i class="fas fa-trash"></i></button>
+                <button
+                  class="option-edit btn btn-info text-white mr-2"
+                  data-id="{{ $option->id }}"
+                  type="button"
+                >
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button
+                  class="btn btn-danger option-delete"
+                  data-id="{{ $option->id }}"
+                  type="button"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -102,18 +136,30 @@
     @elseif($step->type === 'input')
       <div class="row align-items-end">
         <div class="form-group col-6">
-          {!! Form::label('Input Calculation Type') !!} {!! add_help('This is the type of calculation applied with the amount entered by the user and the value to the left. If multiplicative, negative amounts will be divided.') !!}
-          {!! Form::select('input_calc_type', ['additive' => 'Additive', 'multiplicative' => 'Multiplicative'], $step->input_calc_type ?? 'multiplicative', ['class' => 'form-control selectize']) !!}
+          {!! Form::label('Input Calculation Type') !!} {!! add_help(
+              'This is the type of calculation applied with the amount entered by the user and the value to the left. If multiplicative, negative amounts will be divided.'
+          ) !!}
+          {!! Form::select(
+              'input_calc_type',
+              ['additive' => 'Additive', 'multiplicative' => 'Multiplicative'],
+              $step->input_calc_type ?? 'multiplicative',
+              ['class' => 'form-control selectize']
+          ) !!}
         </div>
         <div class="form-group col-6">
-          {!! Form::label('Amount') !!} {!! add_help('This is the amount used with the Input Calculation Type and the number the user enters. If left as 1 and multiplicative, you\'ll just get the user the number entered.') !!}
+          {!! Form::label('Amount') !!} {!! add_help(
+              'This is the amount used with the Input Calculation Type and the number the user enters. If left as 1 and multiplicative, you\'ll just get the user the number entered.'
+          ) !!}
           {!! Form::text('options[amount]', $step->options->first()->amount ?? 1, ['class' => 'form-control selectize']) !!}
         </div>
       </div>
 
       <div class="form-group hide">
         {!! Form::checkbox('options[is_active]', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-        {!! Form::text('options[id]', $step->options->first()->id ?? -1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::text('options[id]', $step->options->first()->id ?? -1, [
+            'class' => 'form-check-input',
+            'data-toggle' => 'toggle'
+        ]) !!}
       </div>
     @else
       <div class="row align-items-end">
@@ -125,13 +171,15 @@
 
       <div class="form-group hide">
         {!! Form::checkbox('options[is_active]', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-        {!! Form::text('options[id]', $step->options->first()->id ?? -1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+        {!! Form::text('options[id]', $step->options->first()->id ?? -1, [
+            'class' => 'form-check-input',
+            'data-toggle' => 'toggle'
+        ]) !!}
       </div>
     @endif
   @else
     <p>More Options will be presented here once the Step is created.</p>
   @endif
-
 
   <div class="text-right mt-4">
     {!! Form::submit($step->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}

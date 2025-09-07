@@ -1,9 +1,11 @@
 <div class="lore site-page-content parsed-text">
-  <h1 class="header"><img
+  <h1 class="header">
+    <img
       class="w-100"
       src="/images/lore_pages/homepage/splashart.png"
       alt="Somnivores splash art"
-    /></h1>
+    />
+  </h1>
   <div class="card-basic">
     <h1 class="top">What is a Somnivore?</h1>
     <hr />
@@ -15,12 +17,14 @@
         tails
         that end in a tuft of fur.</p>
     </div>
-    <div class="card-img"><img
+    <div class="card-img">
+      <img
         src="/images/lore_pages/homepage/keytraits.png"
         alt="Somnivores Key Traits"
         width="606"
         height="444"
-      /></div>
+      />
+    </div>
     <div class="card-text">
       <p>Similar to their vampire ancestors, somnivores possess the ability to shapeshift from their bat form into a humanoid -
         this
@@ -28,11 +32,13 @@
         and
         spindly tail, along with many other optional features that may be translated from their bat&rsquo;s appearance!</p>
     </div>
-    <div class="card-img"><img
+    <div class="card-img">
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/demonforms.png"
         alt="Demonstration of the Demon Form"
-      /></div>
+      />
+    </div>
   </div>
   <div class="card-basic">
     <h1 class="top">Dream Diet</h1>
@@ -42,12 +48,14 @@
         forms around a dreamer&rsquo;s head as they sleep. Dream essence consists of stars, sparkles, and clouds- all swirling
         slowly around each other and producing a soft glow.</p>
     </div>
-    <div class="card-img"><img
+    <div class="card-img">
+      <img
         src="/images/lore_pages/homepage/dreaming.png"
         alt="Demonstration of the Dream Essence"
         width="455"
         height="488"
-      /></div>
+      />
+    </div>
     <div class="card-text">Every dream is unique and the resulting dream essence possesses an appearance and flavor influenced by
       the contents and feelings within.Somnivores are very picky eaters, each one having their personal palate limited to only one
       or two of the six core classifications of dream. <br />You can always tell which types of dreams a somnivore favors by
@@ -57,12 +65,15 @@
   <div class="card-basic">
     <h1 class="top">Reverie</h1>
     <hr />
-    <div class="card-img"><img
+    <div class="card-img">
+      <img
         class="w-100 br-15"
         src="/images/somnivores/site/newreveriemap-small.png"
         alt="World Map of Reverie"
-      /></div>
-    <div class="card-text"><br />
+      />
+    </div>
+    <div class="card-text">
+      <br />
       <p>Reverie is the magical realm in which the vast majority of the somnivore population resides. Founded by the first colony
         of
         somnivores, this mysterious world is a sanctuary for magical beings where the night is eternal and the air hums with mana.
@@ -80,35 +91,40 @@
   <h1 class="header" style="margin-bottom: 0;">⟡˙⋆ Welcome to the Somnivores ARPG! ⋆˙⟡</h1>
   <h2>What we offer:</h2>
   <div class="card-basic grid grid-3-col w-content-66">
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/characters.png"
         alt=""
       />
       <p>A unique subtype system and 30+ traits to mix and match, with more to come 🦇</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/starlitacres.png"
         alt=""
       />
       <p>Dailies that passively reward species currency 💰</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/prompts.png"
         alt=""
       />
       <p>Permanent and repeatable prompts that award species currency and titles! 🎁</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/shops.png"
         alt=""
       />
       <p>Monthly events with limited prompts and seasonal traits and items 🎉</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/petshopicon.png"
         alt=""
@@ -116,28 +132,32 @@
       <p>Curious critters to collect! There are currently 15 unique pets to collect; 40 if you include their variants and
         evolutions.</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/inventory.png"
         alt=""
       />
       <p>Trinkets to put in your character&rsquo;s inventories, which will be displayed directly on their ML profile 🎀</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/worldmap.png"
         alt=""
       />
       <p>A developed world with fleshed out locations and lore! 🌎</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/account.png"
         alt=""
       />
       <p>Whimsical and playful aesthetics inspired by dreams, magic, and a bit of nostalgia ✨</p>
     </div>
-    <div><img
+    <div>
+      <img
         class="w-100"
         src="/images/lore_pages/homepage/supporter.png"
         alt=""

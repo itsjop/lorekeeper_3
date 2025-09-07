@@ -11,8 +11,19 @@
   <div class="row justify-content-center {{ $wheel->marginAlignment() }}" style="width:{{ $wheel->size }}px;height:50px;">
     <img src="{{ $wheel->stopperUrl }}" style="max-height:50px;">
   </div>
-  <div id="#canvas-container" class="w-100 {{ $wheel->marginAlignment() }}" style="max-width:{{ $wheel->size }}px;max-height:{{ $wheel->size }}px;">
-    <canvas class="@if ($isDisabled) disabled @endif" id='canvas' width="{{ $wheel->size }}" height="{{ $wheel->size }}" onClick="calcPrize();" style="cursor: pointer;">
+  <div
+    id="#canvas-container"
+    class="w-100 {{ $wheel->marginAlignment() }}"
+    style="max-width:{{ $wheel->size }}px;max-height:{{ $wheel->size }}px;"
+  >
+    <canvas
+      class="@if ($isDisabled) disabled @endif"
+      id='canvas'
+      width="{{ $wheel->size }}"
+      height="{{ $wheel->size }}"
+      onClick="calcPrize();"
+      style="cursor: pointer;"
+    >
       Canvas not supported, use another browser.
     </canvas>
   </div>
@@ -65,7 +76,11 @@
               <div class="col-6">
                 @if ($reward->rewardImage)
                   <div class="row justify-content-center">
-                    <img src="{{ $reward->rewardImage }}" alt="{{ $reward->reward()->first()->name }}" style="max-width:75px;width:100%;" />
+                    <img
+                      src="{{ $reward->rewardImage }}"
+                      alt="{{ $reward->reward()->first()->name }}"
+                      style="max-width:75px;width:100%;"
+                    />
                   </div>
                 @endif
                 <div class="row justify-content-center">{{ $reward->quantity }} {{ $reward->reward()->first()->name }}</div>
@@ -169,7 +184,9 @@
             wheelSpinning = true;
           }
         }).fail(function(jqXHR, textStatus, errorThrown) {
-          alert("Woops- something went wrong! Please refresh the page and try again. If the error persists, please report it to the site owners!");
+          alert(
+            "Woops- something went wrong! Please refresh the page and try again. If the error persists, please report it to the site owners!"
+            );
         });
       }
     }

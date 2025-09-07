@@ -8,7 +8,9 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Prompt Categories' => 'admin/data/prompt-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/prompt-categories/edit/' . $category->id : 'admin/data/prompt-categories/create',
+      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id
+          ? 'admin/data/prompt-categories/edit/' . $category->id
+          : 'admin/data/prompt-categories/create'
   ]) !!}
 
   <h1>{{ $category->id ? 'Edit' : 'Create' }} Prompt Category
@@ -17,7 +19,10 @@
     @endif
   </h1>
 
-  {!! Form::open(['url' => $category->id ? 'admin/data/prompt-categories/edit/' . $category->id : 'admin/data/prompt-categories/create', 'files' => true]) !!}
+  {!! Form::open([
+      'url' => $category->id ? 'admin/data/prompt-categories/edit/' . $category->id : 'admin/data/prompt-categories/create',
+      'files' => true
+  ]) !!}
 
   <h3>Basic Information</h3>
 
@@ -56,7 +61,11 @@
     <h3>Preview</h3>
     <div class="card mb-3">
       <div class="card-body">
-        @include('prompts._entry', ['imageUrl' => $category->categoryImageUrl, 'name' => $category->displayName, 'description' => $category->parsed_description])
+        @include('prompts._entry', [
+            'imageUrl' => $category->categoryImageUrl,
+            'name' => $category->displayName,
+            'description' => $category->parsed_description
+        ])
       </div>
     </div>
   @endif

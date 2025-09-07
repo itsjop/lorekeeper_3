@@ -12,29 +12,48 @@
     <div class="card-body">
       <div class="text-right">
         <a href="#" class="remove-character text-muted">
-          <i class="fas fa-times"></i></a>
+          <i class="fas fa-times"></i>
+        </a>
       </div>
       <div class="row">
         <div class="col-md-2 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
             <div class="character-image-blank">Enter character code.</div>
-            <div class="character-image-loaded hide"></div>
+            <div class="character-image-loaded hide">
+            </div>
           </div>
         </div>
         <div class="col-md-10">
           <div class="form-group">
             {!! Form::label('slug', 'Character Code') !!}
-            {!! Form::select('slug[]', $characters, null, ['class' => 'form-control character-code', 'placeholder' => 'Select Character', 'placeholder' => 'Select Character']) !!}
+            {!! Form::select('slug[]', $characters, null, [
+                'class' => 'form-control character-code',
+                'placeholder' => 'Select Character',
+                'placeholder' => 'Select Character'
+            ]) !!}
           </div>
           <div class="character-details hide">
             <h4>Sale Details</h4>
 
             <div class="form-group mb-2">
               {!! Form::label('Type') !!}
-              {!! Form::select('sale_type[]', ['flatsale' => 'Flatsale', 'auction' => 'Auction', 'ota' => 'OTA', 'xta' => 'XTA', 'raffle' => 'Raffle', 'flaffle' => 'Flatsale Raffle', 'pwyw' => 'Pay What You Want'], null, [
-                  'class' => 'form-control character-sale-type',
-                  'placeholder' => 'Select Sale Type',
-              ]) !!}
+              {!! Form::select(
+                  'sale_type[]',
+                  [
+                      'flatsale' => 'Flatsale',
+                      'auction' => 'Auction',
+                      'ota' => 'OTA',
+                      'xta' => 'XTA',
+                      'raffle' => 'Raffle',
+                      'flaffle' => 'Flatsale Raffle',
+                      'pwyw' => 'Pay What You Want'
+                  ],
+                  null,
+                  [
+                      'class' => 'form-control character-sale-type',
+                      'placeholder' => 'Select Sale Type'
+                  ]
+              ) !!}
             </div>
 
             <div class="saleType">
@@ -63,7 +82,10 @@
                 </div>
                 <div class="form-group">
                   {!! Form::label('End Point (Optional)') !!}
-                  {!! Form::text('end_point[]', null, ['class' => 'form-control', 'placeholder' => 'Provide information about when bids/offers close']) !!}
+                  {!! Form::text('end_point[]', null, [
+                      'class' => 'form-control',
+                      'placeholder' => 'Provide information about when bids/offers close'
+                  ]) !!}
                 </div>
               </div>
 
@@ -77,7 +99,10 @@
 
             <div class="form-group my-2">
               {!! Form::label('Notes (Optional)') !!}
-              {!! Form::text('description[]', null, ['class' => 'form-control', 'placeholder' => 'Provide any additional notes necessary']) !!}
+              {!! Form::text('description[]', null, [
+                  'class' => 'form-control',
+                  'placeholder' => 'Provide any additional notes necessary'
+              ]) !!}
             </div>
 
             <div class="form-group mb-4">

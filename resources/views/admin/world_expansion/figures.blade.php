@@ -7,7 +7,6 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Figures' => 'admin/world/figures']) !!}
 
-
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/figure-categories') }}">
       <i class="fas fa-folder mr-2"></i> Figure Categories</a>
@@ -33,17 +32,19 @@
           <td class="font-weight-bold">
             Summary
           </td>
-          <td></td>
+          <td>
+          </td>
         </tr>
       </thead>
       <tbody id="sortable" class="sortable">
         @foreach ($figures as $figure)
           <tr class="sort-item" data-id="{{ $figure->id }}">
             <td>
-              <a class="fas fa-arrows-alt-v handle mr-3" href="#"></a>
+              <a class="fas fa-arrows-alt-v handle mr-3" href="#">
+              </a>
               <a href={!! $figure->url !!}
-                @if ($figure->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $figure->thumbUrl }}' style='max-width:100px;' class='my-1'/>
-<br> {{ ucfirst($figure->name) }} " @endif />{!! $figure->name !!}</a>
+                @if ($figure->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $figure->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($figure->name) }} " @endif
+              />{!! $figure->name !!}</a>
             </td>
             <td>
               {!! $figure->category ? $figure->category->displayName : '' !!}
@@ -74,7 +75,7 @@
   <script>
     $(document).ready(function() {
       $('.handle').on('click', function(e) {
-        e.prfigureDefault();
+        e.preventDefault();
       });
       $("#sortable").sortable({
         items: '.sort-item',

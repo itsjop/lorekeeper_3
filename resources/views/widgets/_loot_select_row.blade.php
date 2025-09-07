@@ -34,7 +34,8 @@
                 'placeholder' => isset($progression) && $progression ? 'Select Progression Type' : 'Select Reward Type'
             ]
         ) !!}</td>
-        <td class="loot-row-select"></td>
+        <td class="loot-row-select">
+        </td>
         <td>{!! Form::text('quantity[]', 1, ['class' => 'form-control']) !!}</td>
         <td class="text-right">
           <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
@@ -43,7 +44,10 @@
     </tbody>
   </table>
   {!! Form::select('rewardable_id[]', $items, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
-  {!! Form::select('rewardable_id[]', $awards, null, ['class' => 'form-control award-select', 'placeholder' => 'Select Badge']) !!}
+  {!! Form::select('rewardable_id[]', $awards, null, [
+      'class' => 'form-control award-select',
+      'placeholder' => 'Select Badge'
+  ]) !!}
   {!! Form::select('rewardable_id[]', $currencies, null, [
       'class' => 'form-control currency-select',
       'placeholder' => 'Select Currency'

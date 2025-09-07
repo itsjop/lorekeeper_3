@@ -9,13 +9,18 @@
 
   <h1>Item Search</h1>
 
-  <p>Select an item to search for all occurrences of it in user and character inventories. It will only display currently extant stacks (where the count is more than zero). If a stack is currently "held" in a trade, design update, or submission, this
+  <p>Select an item to search for all occurrences of it in user and character inventories. It will only display currently extant
+    stacks (where the count is more than zero). If a stack is currently "held" in a trade, design update, or submission, this
     will be stated and all held locations will be linked.</p>
 
   {!! Form::open(['method' => 'GET', 'class' => '']) !!}
   <div class="form-inline justify-content-end">
     <div class="form-group ml-3 mb-3">
-      {!! Form::select('item_id', $items, Request::get('item_id'), ['class' => 'form-control selectize', 'placeholder' => 'Select an Item', 'style' => 'width: 25em; max-width: 100%;']) !!}
+      {!! Form::select('item_id', $items, Request::get('item_id'), [
+          'class' => 'form-control selectize',
+          'placeholder' => 'Select an Item',
+          'style' => 'width: 25em; max-width: 100%;'
+      ]) !!}
     </div>
     <div class="form-group ml-3 mb-3">
       {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
@@ -26,13 +31,17 @@
   @if ($item)
     <h3>{{ $item->name }}</h3>
 
-    <p>There are currently {{ $userItems->pluck('count')->sum() + $characterItems->pluck('count')->sum() }} of this item owned by users and characters.</p>
+    <p>There are currently {{ $userItems->pluck('count')->sum() + $characterItems->pluck('count')->sum() }} of this item owned by
+      users and characters.</p>
 
     <ul>
       @foreach ($users as $user)
         <li>
           {!! $user->displayName !!} has {{ $userItems->where('user_id', $user->id)->pluck('count')->sum() }}
-          @if ($userItems->where('user_id', $user->id)->pluck('count')->sum() > $userItems->where('user_id', $user->id)->pluck('availableQuantity')->sum())
+          @if (
+              $userItems->where('user_id', $user->id)->pluck('count')->sum() >
+                  $userItems->where('user_id', $user->id)->pluck('availableQuantity')->sum()
+          )
             ({{ $userItems->where('user_id', $user->id)->pluck('availableQuantity')->sum() }} Available)
             <ul>
               @foreach ($userItems->where('user_id', $user->id) as $item)
@@ -42,7 +51,7 @@
                   $userTradesReceived = $trades->where('recipient_id', $user->id);
                   $userUpdates = $designUpdates->where('user_id', $user->id);
                   $userSubmissions = $submissions->where('user_id', $user->id);
-                  
+
                   // Collect hold location IDs and quantities
                   $holdLocations = [];
                   if (isset($item->trade_count) && $item->trade_count > 0) {
@@ -71,7 +80,7 @@
                           }
                       }
                   }
-                  
+
                   // Format a string with all the places a stack is held
                   $held = [];
                   if (isset($holdLocations['trade'])) {
@@ -102,7 +111,8 @@
       @endforeach
       @foreach ($characters as $character)
         <li>
-          <a href="{{ $character->url }}">{{ $character->fullName }}</a> has {{ $characterItems->where('character_id', $character->id)->pluck('count')->sum() }}
+          <a href="{{ $character->url }}">{{ $character->fullName }}</a> has
+          {{ $characterItems->where('character_id', $character->id)->pluck('count')->sum() }}
         </li>
       @endforeach
     </ul>

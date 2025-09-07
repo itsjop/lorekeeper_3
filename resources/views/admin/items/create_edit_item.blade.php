@@ -5,7 +5,11 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Items' => 'admin/data/items', ($item->id ? 'Edit' : 'Create') . ' Item' => $item->id ? 'admin/data/items/edit/' . $item->id : 'admin/data/items/create']) !!}
+  {!! breadcrumbs([
+      'Admin Panel' => 'admin',
+      'Items' => 'admin/data/items',
+      ($item->id ? 'Edit' : 'Create') . ' Item' => $item->id ? 'admin/data/items/edit/' . $item->id : 'admin/data/items/create'
+  ]) !!}
 
   <h1>{{ $item->id ? 'Edit' : 'Create' }} Item
     @if ($item->id)
@@ -45,7 +49,10 @@
     @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
       <div class="col-md form-group">
         {!! Form::label('Item Rarity (Optional)') !!}
-        {!! Form::select('rarity_id', $rarities, $item && $item->rarityId ? $item->rarityId : '', ['class' => 'form-control', 'placeholder' => 'Select a Rarity']) !!}
+        {!! Form::select('rarity_id', $rarities, $item && $item->rarityId ? $item->rarityId : '', [
+            'class' => 'form-control',
+            'placeholder' => 'Select a Rarity'
+        ]) !!}
       </div>
     @endif
   </div>
@@ -60,10 +67,16 @@
         {!! Form::label('Item Artist (Optional)') !!} {!! add_help('Provide the artist\'s username if they are on site or, failing that, a link.') !!}
         <div class="row">
           <div class="col-md form-group">
-            {!! Form::select('artist_id', $userOptions, $item && $item->artist_id ? $item->artist_id : null, ['class' => 'form-control mr-2 selectize', 'placeholder' => 'Select a User']) !!}
+            {!! Form::select('artist_id', $userOptions, $item && $item->artist_id ? $item->artist_id : null, [
+                'class' => 'form-control mr-2 selectize',
+                'placeholder' => 'Select a User'
+            ]) !!}
           </div>
           <div class="col-md form-group">
-            {!! Form::text('artist_url', $item && $item->artist_url ? $item->artist_url : '', ['class' => 'form-control mr-2', 'placeholder' => 'Artist URL']) !!}
+            {!! Form::text('artist_url', $item && $item->artist_url ? $item->artist_url : '', [
+                'class' => 'form-control mr-2',
+                'placeholder' => 'Artist URL'
+            ]) !!}
           </div>
         </div>
       </div>
@@ -84,17 +97,30 @@
 
   <div class="row">
     <div class="col-md form-group">
-      {!! Form::checkbox('allow_transfer', 1, $item->id ? $item->allow_transfer : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-      {!! Form::label('allow_transfer', 'Allow User → User Transfer', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is off, users will not be able to transfer this item to other users. Non-account-bound items can be account-bound when granted to users directly.') !!}
+      {!! Form::checkbox('allow_transfer', 1, $item->id ? $item->allow_transfer : 1, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
+      {!! Form::label('allow_transfer', 'Allow User → User Transfer', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+          'If this is off, users will not be able to transfer this item to other users. Non-account-bound items can be account-bound when granted to users directly.'
+      ) !!}
     </div>
     @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
       <div class="col-md form-group">
-        {!! Form::checkbox('is_released', 1, $item->id ? $item->is_released : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-        {!! Form::label('is_released', 'Is Released', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is off, users will not be able to view information for the item/it will be hidden from view. This is overridden by the item being owned at any point by anyone on the site.') !!}
+        {!! Form::checkbox('is_released', 1, $item->id ? $item->is_released : 1, [
+            'class' => 'form-check-input',
+            'data-toggle' => 'toggle'
+        ]) !!}
+        {!! Form::label('is_released', 'Is Released', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
+            'If this is off, users will not be able to view information for the item/it will be hidden from view. This is overridden by the item being owned at any point by anyone on the site.'
+        ) !!}
       </div>
     @endif
     <div class="col-md form-group">
-      {!! Form::checkbox('is_deletable', 1, $item->id ? $item->is_deletable : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+      {!! Form::checkbox('is_deletable', 1, $item->id ? $item->is_deletable : 1, [
+          'class' => 'form-check-input',
+          'data-toggle' => 'toggle'
+      ]) !!}
       {!! Form::label('is_deletable', 'Can Be Deleted', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is off, users will not be able to delete this item from user or character inventories.') !!}
     </div>
   </div>
@@ -108,22 +134,36 @@
       </div>
       <div class="col-md form-group">
         {!! Form::label('prompts[]', 'Drop Location(s) (Optional)') !!} {!! add_help('You can select up to 10 prompts at once.') !!}
-        {!! Form::select('prompts[]', $prompts, $item && isset($item->data['prompts']) ? $item->data['prompts'] : '', ['id' => 'promptsList', 'class' => 'form-control', 'multiple']) !!}
+        {!! Form::select('prompts[]', $prompts, $item && isset($item->data['prompts']) ? $item->data['prompts'] : '', [
+            'id' => 'promptsList',
+            'class' => 'form-control',
+            'multiple'
+        ]) !!}
       </div>
     </div>
   @endif
 
   @if (config('lorekeeper.extensions.item_entry_expansion.resale_function'))
     <h3>Resale Information</h3>
-    <p>The currency and amount users will be able to sell this item from their inventory for. If quantity is not set, the item will be unable to be sold.</p>
+    <p>The currency and amount users will be able to sell this item from their inventory for. If quantity is not set, the item will
+      be unable to be sold.</p>
     <div class="row">
       <div class="col-md form-group">
         {!! Form::label('currency_id', 'Currency') !!}
-        {!! Form::select('currency_id', $userCurrencies, isset($item->data['resell']) && App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() ? $item->resell->flip()->pop() : null, ['class' => 'form-control']) !!}
+        {!! Form::select(
+            'currency_id',
+            $userCurrencies,
+            isset($item->data['resell']) && App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first()
+                ? $item->resell->flip()->pop()
+                : null,
+            ['class' => 'form-control']
+        ) !!}
       </div>
       <div class="col-md form-group">
         {!! Form::label('currency_quantity', 'Quantity') !!}
-        {!! Form::text('currency_quantity', isset($item->data['resell']) ? $item->resell->pop() : null, ['class' => 'form-control']) !!}
+        {!! Form::text('currency_quantity', isset($item->data['resell']) ? $item->resell->pop() : null, [
+            'class' => 'form-control'
+        ]) !!}
       </div>
     </div>
   @endif
@@ -143,7 +183,8 @@
           <tr>
             <th>Tag</th>
             <th>Active?</th>
-            <th></th>
+            <th>
+            </th>
           </tr>
         </thead>
         @foreach ($item->tags as $tag)
@@ -166,7 +207,12 @@
     <h3>Preview</h3>
     <div class="card mb-3">
       <div class="card-body">
-        @include('world._item_entry', ['imageUrl' => $item->imageUrl, 'name' => $item->displayName, 'description' => $item->parsed_description, 'searchUrl' => $item->searchUrl])
+        @include('world._item_entry', [
+            'imageUrl' => $item->imageUrl,
+            'name' => $item->displayName,
+            'description' => $item->parsed_description,
+            'searchUrl' => $item->searchUrl
+        ])
       </div>
     </div>
   @endif

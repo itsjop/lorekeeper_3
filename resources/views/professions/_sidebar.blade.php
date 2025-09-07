@@ -1,6 +1,7 @@
 <div id="sidebar-ul">
   <div class="sidebar-header">
-    <a href="{{ url('professions') }}" class="card-link"></a>
+    <a href="{{ url('professions') }}" class="card-link">
+    </a>
   </div>
   <div class="details-sb" data-open>
     <summary class="sidebar-section-header">Professions</summary>

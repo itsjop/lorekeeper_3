@@ -2,7 +2,11 @@
   <div class="row">
     <div class="col-md-6">
       {!! Form::label('conversion_id', 'Convert to:') !!}
-      {!! Form::select('conversion_id', $convertOptions, null, ['class' => 'form-control', 'placeholder' => 'Select Currency', 'id' => 'conversion-currency']) !!}
+      {!! Form::select('conversion_id', $convertOptions, null, [
+          'class' => 'form-control',
+          'placeholder' => 'Select Currency',
+          'id' => 'conversion-currency'
+      ]) !!}
     </div>
     <div class="col-md-6 quantity hide">
       {!! Form::label('quantity', 'Quantity') !!}
@@ -12,7 +16,8 @@
 </div>
 
 <div class="alert alert-info hide conversion-info">
-  <strong>Conversion Rate:</strong> <span id="conversion-rate"></span>
+  <strong>Conversion Rate:</strong> <span id="conversion-rate">
+  </span>
 </div>
 
 <script>

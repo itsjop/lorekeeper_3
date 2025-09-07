@@ -1,4 +1,5 @@
-<p>Create a new pairing of characters. If you pair your character with one that belongs to another person, it is highly recommended you ask them first, as their approval will be needed.</p>
+<p>Create a new pairing of characters. If you pair your character with one that belongs to another person, it is highly
+  recommended you ask them first, as their approval will be needed.</p>
 
 {!! Form::open(['url' => 'characters/pairings/create', 'id' => 'pairingForm']) !!}
 <div id="characterComponents" class="row justify-content-center">
@@ -8,18 +9,24 @@
         <div class="col-md-4 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
             <div class="character-image-blank">Select character.</div>
-            <div class="character-image-loaded hide"></div>
+            <div class="character-image-loaded hide">
+            </div>
           </div>
         </div>
         <div class="col-md-8">
-          <a href="#" class="float-right fas fa-close"></a>
+          <a href="#" class="float-right fas fa-close">
+          </a>
           <div class="form-group">
             {!! Form::label('character_codes', 'First Character') !!}
-            {!! Form::select('character_codes[]', $characters, null, ['class' => 'form-control selectize character-code', 'placeholder' => 'Select Character']) !!}
+            {!! Form::select('character_codes[]', $characters, null, [
+                'class' => 'form-control selectize character-code',
+                'placeholder' => 'Select Character'
+            ]) !!}
           </div>
         </div>
       </div>
-      <div class="character-image-colours row ml-3"></div>
+      <div class="character-image-colours row ml-3">
+      </div>
     </div>
   </div>
   <div class="submission-character m-3 card col-md" id="character_2">
@@ -28,28 +35,37 @@
         <div class="col-md-4 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
             <div class="character-image-blank">Enter character code.</div>
-            <div class="character-image-loaded hide"></div>
+            <div class="character-image-loaded hide">
+            </div>
           </div>
         </div>
         <div class="col-md-8">
-          <a href="#" class="float-right fas fa-close"></a>
+          <a href="#" class="float-right fas fa-close">
+          </a>
           <div class="form-group">
             {!! Form::label('character_codes', 'Second Character') !!}
-            {!! Form::select('character_codes[]', $characters, null, ['class' => 'form-control selectize character-code', 'placeholder' => 'Select Character']) !!}
+            {!! Form::select('character_codes[]', $characters, null, [
+                'class' => 'form-control selectize character-code',
+                'placeholder' => 'Select Character'
+            ]) !!}
           </div>
         </div>
       </div>
-      <div class="character-image-colours row ml-3"></div>
+      <div class="character-image-colours row ml-3">
+      </div>
     </div>
   </div>
 </div>
 
-<div class="alert hide mb-3" id="compatibility-check"></div>
-<div class="hide mb-3" id="colour-palettes"></div>
+<div class="alert hide mb-3" id="compatibility-check">
+</div>
+<div class="hide mb-3" id="colour-palettes">
+</div>
 
 <h2>Addon Items</h2>
 <p>
-  Decide which pairing item and boosts to use. These items will be removed from your inventory but refunded if your pairing is rejected.
+  Decide which pairing item and boosts to use. These items will be removed from your inventory but refunded if your pairing is
+  rejected.
   You can optionally attach Boost Items.
 </p>
 <div class="row">
@@ -66,7 +82,7 @@
           'selected' => [],
           'page' => $page,
           'id' => 'pairing_item_id',
-          'item_filter' => $pairing_item_filter,
+          'item_filter' => $pairing_item_filter
       ])
     @else
       <div class="alert alert-danger">
@@ -87,7 +103,7 @@
           'selected' => [],
           'page' => $page,
           'id' => 'boost_item_id',
-          'item_filter' => $boost_item_filter,
+          'item_filter' => $boost_item_filter
       ])
     @else
       <div class="alert alert-info">

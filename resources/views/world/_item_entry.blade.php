@@ -1,8 +1,16 @@
 <div class="row world-entry">
   @if ($imageUrl)
     <div class="col-md-3 world-entry-image">
-      <a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}">
-        <img src="{{ $imageUrl }}" class="world-entry-image" alt="{{ $name }}" />
+      <a
+        href="{{ $imageUrl }}"
+        data-lightbox="entry"
+        data-title="{{ $name }}"
+      >
+        <img
+          src="{{ $imageUrl }}"
+          class="world-entry-image"
+          alt="{{ $name }}"
+        />
       </a>
       @include('widgets._object_block', ['object' => $item])
     </div>
@@ -37,18 +45,28 @@
       @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
         @if (isset($item->rarity) && $item->rarity)
           <div class="col-md">
-            <p><strong>Rarity:</strong> {!! $item->rarity !!}</p>
+            <p>
+              <strong>Rarity:</strong> {!! $item->rarity !!}
+            </p>
           </div>
         @endif
         @if (isset($item->itemArtist) && $item->itemArtist)
           <div class="col-md">
-            <p><strong>Artist:</strong> {!! $item->itemArtist !!}</p>
+            <p>
+              <strong>Artist:</strong> {!! $item->itemArtist !!}
+            </p>
           </div>
         @endif
       @endif
-      @if (isset($item->data['resell']) && $item->data['resell'] && App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() && config('lorekeeper.extensions.item_entry_expansion.resale_function'))
+      @if (isset($item->data['resell']) &&
+              $item->data['resell'] &&
+              App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() &&
+              config('lorekeeper.extensions.item_entry_expansion.resale_function')
+      )
         <div class="col-md">
-          <p><strong>Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}</p>
+          <p>
+            <strong>Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}
+          </p>
         </div>
       @endif
       <div class="col-md-6 col-md">
@@ -69,7 +87,8 @@
     <div class="row">
       @if ($item->seedRewards())
         <div class="col-md">
-          <p><strong>Cultivates:</strong>
+          <p>
+            <strong>Cultivates:</strong>
             @foreach ($item->seedRewards() as $reward)
               {{ $reward['quantity'] }}x {!! $reward['asset']->displayName !!}
             @endforeach
@@ -78,24 +97,35 @@
       @endif
       @if ($item->toolPlot())
         <div class="col-md">
-          <p><strong>Creates Plot:</strong> {{ $item->toolPlot()->name }}</p>
+          <p>
+            <strong>Creates Plot:</strong> {{ $item->toolPlot()->name }}
+          </p>
         </div>
       @endif
       @if ($item->explorationArea())
         <div class="col-md">
-          <p><strong>Unlocks Area:</strong> {{ $item->explorationArea()->name }}</p>
+          <p>
+            <strong>Unlocks Area:</strong> {{ $item->explorationArea()->name }}
+          </p>
         </div>
       @endif
     </div>
     <div class="world-entry-text">
       @if (isset($item->reference) && $item->reference && Config::get('lorekeeper.extensions.item_entry_expansion.extra_fields'))
-        <p><strong>Reference Link:</strong> <a href="{{ $item->reference }}">{{ $item->reference }}</a></p>
+        <p>
+          <strong>Reference Link:</strong> <a href="{{ $item->reference }}">{{ $item->reference }}</a>
+        </p>
       @endif
       {!! $description !!}
 
       @if ($item->hasTag('border'))
         <div class="mb-2">
-          <a data-bs-toggle="collapse" href="#border{{ $item->id }}" class="h5">Unlocks Borders <i class="fas fa-caret-down"></i></a>
+          <a
+            data-bs-toggle="collapse"
+            href="#border{{ $item->id }}"
+            class="h5"
+          >Unlocks Borders <i class="fas fa-caret-down"></i>
+          </a>
           <div class="card collapse mt-1" id="border{{ $item->id }}">
             <div class="card-body">
               @if (isset($item->tag('border')->data['all_borders']))
@@ -106,8 +136,11 @@
                 <div class="row">
                   @foreach (parseAssetData($item->tag('border')->data, true) as $type)
                     @foreach ($type as $border)
-                      <div class="col-md" style="{{ Auth::check() && Auth::user()->hasBorder($border['asset']->id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}">
-                        <img src="{{ $border['asset']->image_url }}" style="height: 3rem; padding-right: .5rem;"> {!! $border['asset'] ? $border['asset']->displayName : '(Deleted Border)' !!}
+                      <div class="col-md"
+                        style="{{ Auth::check() && Auth::user()->hasBorder($border['asset']->id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}"
+                      >
+                        <img src="{{ $border['asset']->image_url }}" style="height: 3rem; padding-right: .5rem;">
+                        {!! $border['asset'] ? $border['asset']->displayName : '(Deleted Border)' !!}
                       </div>
                     @endforeach
                   @endforeach
@@ -122,7 +155,11 @@
               <strong>Uses:</strong> {{ $item->uses }}
             </p>
           @endif
-          @if ((isset($item->source) && $item->source) || $item->shop_stock_count || (isset($item->data['prompts']) && $item->data['prompts']))
+          @if (
+              (isset($item->source) && $item->source) ||
+                  $item->shop_stock_count ||
+                  (isset($item->data['prompts']) && $item->data['prompts'])
+          )
             <h5>Availability</h5>
             <div class="row">
               @if (isset($item->source) && $item->source)
@@ -173,7 +210,8 @@
       @endif
       @if ($item->canUserSell)
         <div class="text-right mb-4">
-          <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}"><i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
+          <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}">
+            <i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
         </div>
       @endif
     </div>
