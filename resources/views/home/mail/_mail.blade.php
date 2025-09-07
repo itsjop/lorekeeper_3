@@ -4,40 +4,50 @@
       <div class="col-2 col-md-2">
         <div class="logs-table-cell"> Subject </div>
       </div>
-      <div class="col-3 col-md-3">
+      <div class="col-2 col-md-2">
+        <div class="logs-table-cell"> To </div>
+      </div>
+      <div class="col-2 col-md-2">
+        <div class="logs-table-cell"> At </div>
+      </div>
+      <div class="col-4 col-md-4">
         <div class="logs-table-cell"> Message </div>
       </div>
-      <div class="col-3 col-md-3">
-        <div class="logs-table-cell"> From </div>
-      </div>
-      <div class="col-2 col-md-2">
+      <div class="col-1 col-md-1">
         <div class="logs-table-cell"> Seen </div>
       </div>
-      <div class="col-2 col-md-2">
+      <div class="col-1 col-md-1">
         <div class="logs-table-cell"> Details </div>
       </div>
     </div>
   </div>
   <div class="logs-table-body">
     @foreach ($mails as $mail)
+      {{-- {{ dd($mail->recipient) }} --}}
       <div class="logs-table-row">
         <div class="row flex-wrap">
           <div class="col-2 col-md-2">
-            <div class="logs-table-cell"> {!! $mail->displayName !!} </div>
+            <div class="logs-table-cell subject"> {!! mb_strimwidth($mail->displayName, 0, 50, '...') !!} </div>
           </div>
-          <div class="col-3 col-md-3">
-            <div class="logs-table-cell">
-              <span class="ubt-texthide"> {{ Illuminate\Support\Str::limit(strip_tags($mail->message), 50, $end = '...') }} </span>
+          <div class="col-2 col-md-2">
+            <div class="logs-table-cell to"> {!! $mail->recipient?->displayName !!} </div>
+          </div>
+          <div class="col-2 col-md-2">
+            <div class="logs-table-cell at">
+              {!! pretty_date($mail->created_at) !!}
             </div>
           </div>
-          <div class="col-3 col-md-3">
-            <div class="logs-table-cell"> {!! $mail->sender?->displayName !!} {!! pretty_date($mail->created_at) !!} </div>
+          <div class="col-4 col-md-4">
+            <div class="logs-table-cell message">
+              <span class="ubt-texthide"> {{ Illuminate\Support\Str::limit(strip_tags($mail->message), 50, $end = '...') }}
+              </span>
+            </div>
           </div>
-          <div class="col-2 col-md-2">
-            <div class="logs-table-cell"> {!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!} </div>
+          <div class="col-1 col-md-1">
+            <div class="logs-table-cell seen"> {!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!} </div>
           </div>
-          <div class="col-2 col-md-2">
-            <div class="logs-table-cell">
+          <div class="col-1 col-md-1">
+            <div class="logs-table-cell details">
               <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1"> Details </a>
             </div>
           </div>
@@ -46,4 +56,4 @@
     @endforeach
   </div>
 </div>
-<div class="text-center mt-4 small text-muted"> {{ $mail->count() }} result{{ $mail->count() == 1 ? '' : 's' }} found. </div>
+{{-- <div class="text-center mt-4 small text-muted"> {{ $mail->count() }} result{{ $mail->count() == 1 ? '' : 's' }} found. </div> --}}
