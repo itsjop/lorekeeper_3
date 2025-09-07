@@ -17,7 +17,7 @@
         <div class="grid grid-4-col gap-2">
           @foreach ($categoryFeatures as $featureId => $feature)
             <div class="inventory-item pi-center pc-center">
-              <div class="title">{!! $feature->first()->title !!}</div>
+              <div class="title"> {!! $feature->first()->title !!} </div>
               <div class="{{ 'card-bg_animated ' . lcfirst(__($feature->first()->rarity->name)) }}">
                 <div class="stars">
                 </div>
@@ -39,7 +39,7 @@
               @if (!$feature->first()->is_visible)
                 <i class="fas fa-eye-slash mr-1"></i>
               @endif
-              <div class="rarity flex gap-_5 pi-center pc-center">{!! $feature->first()->rarityName !!}</div>
+              <div class="rarity flex gap-_5 pi-center pc-center"> {!! $feature->first()->rarityName !!} </div>
               @if ($showSubtype && $feature->first()->subtype)
                 <br />({!! $feature->first()->subtype->twolineDisplayName !!} Subtype)
               @endif

@@ -25,7 +25,7 @@
           class="small awardcase-collapse-toggle collapse-toggle "
           href="#{!! isset($categories[$categoryId]) ? str_replace(' ', '', $categories[$categoryId]->name) : 'miscellaneous' !!}"
           data-bs-toggle="collapse"
-        >Show</a>
+        > Show </a>
         </h3>
       </h5>
       <div class="card-body awardcase-body collapse show" id="{!! isset($categories[$categoryId]) ? str_replace(' ', '', $categories[$categoryId]->name) : 'miscellaneous' !!}">
@@ -43,7 +43,7 @@
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="awardcase-stack awardcase-stack-name">{{ $stack->first()->name }}@if ($stack->first()->user_limit != 1)
+                  <a href="#" class="awardcase-stack awardcase-stack-name"> {{ $stack->first()->name }}@if ($stack->first()->user_limit != 1)
                       x{{ $stack->sum('pivot.count') }}
                     @endif
                   </a>
@@ -56,21 +56,21 @@
     </div>
   @endforeach
 
-  <h3>Latest Activity</h3>
+  <h3> Latest Activity </h3>
   <div class="row ml-md-2 mb-4">
     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
-      <div class="col-6 col-md-2 font-weight-bold">Sender</div>
-      <div class="col-6 col-md-2 font-weight-bold">Recipient</div>
-      <div class="col-6 col-md-2 font-weight-bold">{{ ucfirst(__('awards.award')) }}</div>
-      <div class="col-6 col-md-4 font-weight-bold">Log</div>
-      <div class="col-6 col-md-2 font-weight-bold">Date</div>
+      <div class="col-6 col-md-2 font-weight-bold"> Sender </div>
+      <div class="col-6 col-md-2 font-weight-bold"> Recipient </div>
+      <div class="col-6 col-md-2 font-weight-bold"> {{ ucfirst(__('awards.award')) }} </div>
+      <div class="col-6 col-md-4 font-weight-bold"> Log </div>
+      <div class="col-6 col-md-2 font-weight-bold"> Date </div>
     </div>
     @foreach ($logs as $log)
       @include('user._award_log_row', ['log' => $log, 'owner' => $user])
     @endforeach
   </div>
   <div class="text-right">
-    <a href="{{ url($user->url . '/' . __('awards.award') . '-logs') }}">View all...</a>
+    <a href="{{ url($user->url . '/' . __('awards.award') . '-logs') }}"> View all... </a>
   </div>
 @endsection
 

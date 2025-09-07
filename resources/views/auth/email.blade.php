@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <h1>Add Email Address</h1>
+  <h1> Add Email Address </h1>
   <p>
     Your account does not have any email addresses linked to it. For the purposes of ensuring account security, you must link at your email address to your {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}
     account.
@@ -21,7 +21,7 @@
       {!! Form::email('email', old('email'), ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'required']) !!}
       @if ($errors->has('email'))
         <span class="invalid-feedback" role="alert">
-          <strong>{{ $errors->first('email') }}</strong>
+          <strong> {{ $errors->first('email') }} </strong>
         </span>
       @endif
     </div>

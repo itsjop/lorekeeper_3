@@ -13,12 +13,12 @@
 
   <div class="text-right mb-3">
     <a class="btn btn-secondary" href="{{ url('admin/data/criteria') }}">
-      <i class="fas fa-folder"></i> Back</a>
+      <i class="fas fa-folder"></i> Back </a>
     <a class="btn btn-primary" href="{{ url('admin/data/criteria-defaults/create') }}">
-      <i class="fas fa-plus"></i> Create New Default</a>
+      <i class="fas fa-plus"></i> Create New Default </a>
   </div>
 
-  <h2>Default Criteria</h2>
+  <h2> Default Criteria </h2>
   <p>
     These are default criteria groups that you can auto-populate into prompts and galleries. When a group is toggled on, it will be
     added to the prompt or gallery with the pre-determined values that you set. You can have as many default groups as you
@@ -34,14 +34,14 @@
 
               {{ $default->name }}
             </h4>
-            <span class="text-secondary">{{ $default->summary }}</span>
+            <span class="text-secondary"> {{ $default->summary }} </span>
           </div>
           <div class="flex-grow-1">
             <h4 class="pb-0 mb-0">
               Criteria Within:</h4>
             <ul>
               @foreach ($default->criteria as $criterion)
-                <li>{{ safe($criterion?->criterion?->name) }}</li>
+                <li> {{ safe($criterion?->criterion?->name) }} </li>
               @endforeach
             </ul>
           </div>

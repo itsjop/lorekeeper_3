@@ -7,11 +7,11 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Grant Pets' => 'admin/grants/pets']) !!}
 
-  <h1>Grant Pets</h1>
+  <h1> Grant Pets </h1>
 
   {!! Form::open(['url' => 'admin/grants/pets']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('names[]', 'Username(s)') !!} {!! add_help('You can select up to 10 users at once.') !!}
@@ -41,7 +41,7 @@
         href="#"
         class="btn btn-primary"
         id="add-pet"
-      >Add Pet</a>
+      > Add Pet </a>
     </div>
   </div>
 
@@ -50,7 +50,7 @@
     {!! Form::text('data', null, ['class' => 'form-control', 'maxlength' => 400]) !!}
   </div>
 
-  <h3>Additional Data</h3>
+  <h3> Additional Data </h3>
 
   <div class="form-group">
     {!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help('Additional notes for the pet. This will appear in the pet\'s description, but not in the logs.') !!}
@@ -121,15 +121,15 @@
           $variantSelect.html('');
           $evolutionSelect.html('');
           // loading symbol until ajax request is done
-          $variantSelect.append('<option value="loading">Loading...</option>');
-          $evolutionSelect.append('<option value="loading">Loading...</option>');
+          $variantSelect.append('<option value="loading"> Loading... </option>');
+          $evolutionSelect.append('<option value="loading"> Loading... </option>');
           $.ajax({
             url: "{{ url('admin/grants/pets/variants') }}/" + pet_id,
             type: 'GET',
             success: function(data) {
               $variantSelect.html('');
-              $variantSelect.append('<option value="none">No Variant</option>');
-              $variantSelect.append('<option value="randomize">Randomize Variant</option>');
+              $variantSelect.append('<option value="none"> No Variant </option>');
+              $variantSelect.append('<option value="randomize"> Randomize Variant </option>');
               $.each(data, function(key, value) {
                 $variantSelect.append('<option value="' + key + '">' + value + '</option>');
               });
@@ -140,8 +140,8 @@
             type: 'GET',
             success: function(data) {
               $evolutionSelect.html('');
-              $evolutionSelect.append('<option value="none">No Evolution</option>');
-              $evolutionSelect.append('<option value="randomize">Randomize Evolution</option>');
+              $evolutionSelect.append('<option value="none"> No Evolution </option>');
+              $evolutionSelect.append('<option value="randomize"> Randomize Evolution </option>');
               $.each(data, function(key, value) {
                 $evolutionSelect.append('<option value="' + key + '">' + value + '</option>');
               });

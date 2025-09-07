@@ -30,7 +30,7 @@
         data-bs-toggle="modal"
         data-bs-target="#grantModal"
       >
-        <i class="fas fa-cog"></i> Admin</a>
+        <i class="fas fa-cog"></i> Admin </a>
     @endif
     Currencies
   </h3>
@@ -77,10 +77,10 @@
     <div class="form-group">
       <div class="row">
         <div class="col-md-6">
-          <label>{{ Form::radio('action', 'take', true, ['class' => 'take-button']) }} Take from Character</label>
+          <label> {{ Form::radio('action', 'take', true, ['class' => 'take-button']) }} Take from Character </label>
         </div>
         <div class="col-md-6">
-          <label>{{ Form::radio('action', 'give', false, ['class' => 'give-button']) }} Give to Character</label>
+          <label> {{ Form::radio('action', 'give', false, ['class' => 'give-button']) }} Give to Character </label>
         </div>
       </div>
     </div>
@@ -112,24 +112,24 @@
     {!! Form::close() !!}
   @endif
 
-  <h3>Latest Activity</h3>
+  <h3> Latest Activity </h3>
   <div class="mb-4 logs-table">
     <div class="logs-table-header">
       <div class="row">
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Sender</div>
+          <div class="logs-table-cell"> Sender </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Recipient</div>
+          <div class="logs-table-cell"> Recipient </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Currency</div>
+          <div class="logs-table-cell"> Currency </div>
         </div>
         <div class="col-6 col-md-4">
-          <div class="logs-table-cell">Log</div>
+          <div class="logs-table-cell"> Log </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Date</div>
+          <div class="logs-table-cell"> Date </div>
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@
     </div>
   </div>
   <div class="text-right">
-    <a href="{{ url($character->url . '/currency-logs') }}">View all...</a>
+    <a href="{{ url($character->url . '/currency-logs') }}"> View all... </a>
   </div>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
@@ -155,7 +155,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">[ADMIN] Grant/remove currency</span>
+            <span class="modal-title h5 mb-0">[ADMIN] Grant/remove currency </span>
             <button
               type="button"
               class="close"

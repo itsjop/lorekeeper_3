@@ -28,7 +28,7 @@
             file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName))
     )
       <div class="text-right">
-        You are viewing the full-size image. <a href="{{ $image->imageUrl }}">View watermarked image</a>?
+        You are viewing the full-size image. <a href="{{ $image->imageUrl }}"> View watermarked image </a>?
       </div>
     @endif
   </div>

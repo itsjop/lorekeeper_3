@@ -13,10 +13,10 @@
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/gallery/currency/pending*') }} {{ set_active('admin/gallery/currency') }}" href="{{ url('admin/gallery/currency/pending') }}">Pending</a>
+      <a class="nav-link {{ set_active('admin/gallery/currency/pending*') }} {{ set_active('admin/gallery/currency') }}" href="{{ url('admin/gallery/currency/pending') }}"> Pending </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/gallery/currency/valued*') }}" href="{{ url('admin/gallery/currency/valued') }}">Processed</a>
+      <a class="nav-link {{ set_active('admin/gallery/currency/valued*') }}" href="{{ url('admin/gallery/currency/valued') }}"> Processed </a>
     </li>
   </ul>
 
@@ -51,5 +51,5 @@
   @endforeach
 
   {!! $submissions->render() !!}
-  <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found. </div>
 @endsection

@@ -12,7 +12,7 @@
   </h1>
 
   <div class="alert alert-info">
-    <strong>NOTE:</strong> ENSURE that rarities have been "sorted" in order for the rarities to correctly be chosen.
+    <strong> NOTE:</strong> ENSURE that rarities have been "sorted" in order for the rarities to correctly be chosen.
   </div>
 
   <p>
@@ -36,7 +36,7 @@
         <div class="row">
           <div class="col-md-4 align-items-stretch d-flex">
             <div class="d-flex text-center align-items-center">
-              <div class="character-image-blank">Select character.</div>
+              <div class="character-image-blank"> Select character. </div>
               <div class="character-image-loaded hide">
               </div>
             </div>
@@ -62,7 +62,7 @@
         <div class="row">
           <div class="col-md-4 align-items-stretch d-flex">
             <div class="d-flex text-center align-items-center">
-              <div class="character-image-blank">Enter character code.</div>
+              <div class="character-image-blank"> Enter character code. </div>
               <div class="character-image-loaded hide">
               </div>
             </div>
@@ -92,7 +92,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h2>Pairing Item</h2>
+      <h2> Pairing Item </h2>
       <p>
         Decide which pairing item to use.
       </p>
@@ -102,7 +102,7 @@
       ]) !!}
     </div>
     <div class="col-md-6">
-      <h2>Boost Items</h2>
+      <h2> Boost Items </h2>
       <p>
         Decide which boost items to use. Boost items are optional.
       <div class="text-right mb-3">
@@ -110,7 +110,7 @@
           href="#"
           class="btn btn-outline-info"
           id="addItem"
-        >Add Items</a>
+        > Add Items </a>
       </div>
       </p>
       <table class="table table-sm" id="traitTable">
@@ -123,7 +123,7 @@
               ]) !!}
             </td>
             <td class="text-right">
-              <a href="#" class="btn btn-danger remove-trait-button">Remove</a>
+              <a href="#" class="btn btn-danger remove-trait-button"> Remove </a>
             </td>
           </tr>
           @if (isset($boost_item_ids) && count($boost_item_ids) > 0)
@@ -136,7 +136,7 @@
                   ]) !!}
                 </td>
                 <td class="text-right">
-                  <a href="#" class="btn btn-danger remove-trait-button">Remove</a>
+                  <a href="#" class="btn btn-danger remove-trait-button"> Remove </a>
                 </td>
               </tr>
             @endforeach
@@ -151,7 +151,7 @@
       href="#"
       class="btn btn-success"
       id="pairingSubmit"
-    >Roll!</a>
+    > Roll!</a>
   </div>
 
   {!! Form::close() !!}
@@ -232,7 +232,7 @@
 
                 if ("{{ config('lorekeeper.character_pairing.inherit_colours') }}" == 1 && data.palettes) {
                   let palette_html =
-                    '<h2>Possible Colour Palette(s)</h2> <div class = "row justify-content-center" > '
+                    '<h2> Possible Colour Palette(s)</h2> <div class = "row justify-content-center" > '
                   for (let i = 0; i < data.palettes.length; i++) {
                     let palette = data.palettes[i];
                     palette_html += '<div class="col text-center"> <h5 > Colour Palette ' + (i + 1) + ' < /h5>' +

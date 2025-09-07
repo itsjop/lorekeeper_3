@@ -42,7 +42,7 @@
   @if ($character->images()->where('is_valid', 1)->whereNotNull('transformation_id')->exists())
     <div class="form-selectors card-header p-0">
       <ul class="nav nav-tabs flex gap-_5 card-header-tab ai-center">
-        <h5 class="m-0">Forms:</h5>
+        <h5 class="m-0"> Forms:</h5>
         @foreach ($character->images()->where('is_valid', 1)->get() as $image)
           <li class="nav-item">
             <a
@@ -239,7 +239,7 @@
             data-bs-toggle="tab"
             href="#stats"
             role="tab"
-          >Stats</a>
+          > Stats </a>
         </li>
         <li class="nav-item">
           <a
@@ -248,7 +248,7 @@
             data-bs-toggle="tab"
             href="#notes"
             role="tab"
-          >Description</a>
+          > Description </a>
         </li>
         @if ($character->getLineageBlacklistLevel() < 2)
           <li class="nav-item">
@@ -258,7 +258,7 @@
               data-bs-toggle="tab"
               href="#lineage"
               role="tab"
-            >Lineage</a>
+            > Lineage </a>
           </li>
         @endif
         @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
@@ -297,7 +297,7 @@
           ]) !!}
           {{-- is Visible --}}
           <div class="form-group">
-            <h3>Character-wide settings</h3>
+            <h3> Character-wide settings </h3>
             {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
             {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!}
             {!! add_help(
@@ -314,7 +314,7 @@
               href="#"
               class="btn btn-outline-danger btn-sm delete-character"
               data-id="{{ $character->id }}"
-            >Delete</a>
+            > Delete </a>
           </div>
         </div>
       @endif

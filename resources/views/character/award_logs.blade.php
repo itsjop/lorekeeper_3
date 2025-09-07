@@ -25,16 +25,16 @@
 
   @include('character._header', ['character' => $character])
 
-  <h3>{{ ucfirst(__('awards.award')) }} Logs</h3>
+  <h3> {{ ucfirst(__('awards.award')) }} Logs </h3>
 
   {!! $logs->render() !!}
   <div class="row ml-md-2 mb-4">
     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
-      <div class="col-6 col-md-2 font-weight-bold">Sender</div>
-      <div class="col-6 col-md-2 font-weight-bold">Recipient</div>
-      <div class="col-6 col-md-2 font-weight-bold">{{ ucfirst(__('awards.award')) }}</div>
-      <div class="col-6 col-md-4 font-weight-bold">Log</div>
-      <div class="col-6 col-md-2 font-weight-bold">Date</div>
+      <div class="col-6 col-md-2 font-weight-bold"> Sender </div>
+      <div class="col-6 col-md-2 font-weight-bold"> Recipient </div>
+      <div class="col-6 col-md-2 font-weight-bold"> {{ ucfirst(__('awards.award')) }} </div>
+      <div class="col-6 col-md-4 font-weight-bold"> Log </div>
+      <div class="col-6 col-md-2 font-weight-bold"> Date </div>
     </div>
     @foreach ($logs as $log)
       @include('user._award_log_row', ['log' => $log, 'owner' => $character])

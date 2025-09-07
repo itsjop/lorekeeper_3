@@ -13,10 +13,10 @@
           : 'admin/world/faction-types/create'
   ]) !!}
 
-  <h1>{{ $type->id ? 'Edit' : 'Create' }} Faction Type
+  <h1> {{ $type->id ? 'Edit' : 'Create' }} Faction Type
     @if ($type->id)
       ({!! $type->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-type-button">Delete Faction Type</a>
+      <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Faction Type </a>
     @endif
   </h1>
 
@@ -26,7 +26,7 @@
   ]) !!}
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Basic Information</h2>
+    <h2 class="card-header h3"> Basic Information </h2>
     <div class="card-body">
       <div class="row mx-0 px-0 ">
         <div class="form-group col-md-6 px-0 pr-md-1">
@@ -46,7 +46,7 @@
   </div>
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Images</h2>
+    <h2 class="card-header h3"> Images </h2>
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($type->thumb_extension)
@@ -63,8 +63,8 @@
           </a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the faction type index.') !!}
-        <div>{!! Form::file('image_th') !!}</div>
-        <div class="text-muted">Recommended size: 200x200</div>
+        <div> {!! Form::file('image_th') !!} </div>
+        <div class="text-muted"> Recommended size: 200x200</div>
         @if (isset($type->thumb_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image_th', 1, false, [
@@ -91,8 +91,8 @@
           </a>
         @endif
         {!! Form::label('Type Image (Optional)') !!} {!! add_help('This image is used on the faction type page as a header.') !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Recommended size: None (Choose a standard size for all type header images.)</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Recommended size: None (Choose a standard size for all type header images.)</div>
         @if (isset($type->image_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, [

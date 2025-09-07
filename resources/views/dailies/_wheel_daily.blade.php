@@ -30,7 +30,7 @@
 </div>
 
 <div class="text-center">
-  <p>{!! $daily->parsed_description !!}</p>
+  <p> {!! $daily->parsed_description !!} </p>
 </div>
 
 @if (Auth::user())
@@ -58,7 +58,7 @@
 @if ($daily->progress_display != 'none')
   <div class="card mt-5">
     <div class="card-header">
-      <h4 class="m-0 align-items-center">Prize Pool</h4>
+      <h4 class="m-0 align-items-center"> Prize Pool </h4>
     </div>
 
     <div class="card-body row p-0 m-auto w-100">
@@ -66,7 +66,7 @@
         <div class="col-lg-2 col-6 w-100 }} text-center justify-content-center border p-0">
           <div class="row w-100 p-1 m-auto btn-primary">
             <div class="col-lg col-6 h-100">
-              <h5 class="p-1 m-0">{{ $loop->index + 1 }}</h5>
+              <h5 class="p-1 m-0"> {{ $loop->index + 1 }} </h5>
             </div>
             <div class="col p-0">
             </div>
@@ -83,7 +83,7 @@
                     />
                   </div>
                 @endif
-                <div class="row justify-content-center">{{ $reward->quantity }} {{ $reward->reward()->first()->name }}</div>
+                <div class="row justify-content-center"> {{ $reward->quantity }} {{ $reward->reward()->first()->name }} </div>
 
               </div>
             @endif

@@ -2,19 +2,19 @@
   <div class="logs-table-header">
     <div class="row">
       <div class="col-2 col-md-2">
-        <div class="logs-table-cell">Subject</div>
+        <div class="logs-table-cell"> Subject </div>
       </div>
       <div class="col-3 col-md-3">
-        <div class="logs-table-cell">Message</div>
+        <div class="logs-table-cell"> Message </div>
       </div>
       <div class="col-3 col-md-3">
-        <div class="logs-table-cell">From</div>
+        <div class="logs-table-cell"> From </div>
       </div>
       <div class="col-2 col-md-2">
-        <div class="logs-table-cell">Seen</div>
+        <div class="logs-table-cell"> Seen </div>
       </div>
       <div class="col-2 col-md-2">
-        <div class="logs-table-cell">Details</div>
+        <div class="logs-table-cell"> Details </div>
       </div>
     </div>
   </div>
@@ -23,22 +23,22 @@
       <div class="logs-table-row">
         <div class="row flex-wrap">
           <div class="col-2 col-md-2">
-            <div class="logs-table-cell">{!! $mail->displayName !!}</div>
+            <div class="logs-table-cell"> {!! $mail->displayName !!} </div>
           </div>
           <div class="col-3 col-md-3">
             <div class="logs-table-cell">
-              <span class="ubt-texthide">{{ Illuminate\Support\Str::limit(strip_tags($mail->message), 50, $end = '...') }}</span>
+              <span class="ubt-texthide"> {{ Illuminate\Support\Str::limit(strip_tags($mail->message), 50, $end = '...') }} </span>
             </div>
           </div>
           <div class="col-3 col-md-3">
-            <div class="logs-table-cell">{!! $mail->sender?->displayName !!} {!! pretty_date($mail->created_at) !!}</div>
+            <div class="logs-table-cell"> {!! $mail->sender?->displayName !!} {!! pretty_date($mail->created_at) !!} </div>
           </div>
           <div class="col-2 col-md-2">
-            <div class="logs-table-cell">{!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
+            <div class="logs-table-cell"> {!! $mail->seen ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!} </div>
           </div>
           <div class="col-2 col-md-2">
             <div class="logs-table-cell">
-              <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
+              <a href="{{ $mail->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1"> Details </a>
             </div>
           </div>
         </div>
@@ -46,4 +46,4 @@
     @endforeach
   </div>
 </div>
-<div class="text-center mt-4 small text-muted">{{ $mail->count() }} result{{ $mail->count() == 1 ? '' : 's' }} found.</div>
+<div class="text-center mt-4 small text-muted"> {{ $mail->count() }} result{{ $mail->count() == 1 ? '' : 's' }} found. </div>

@@ -1,13 +1,13 @@
-<p>This will accept the approval request, creating an update for the character and consuming the items and/or currency attached to this request. You will not be able to edit the traits for the character, so if those require any corrections, please
-  cancel the request and ask the user to make changes.</p>
+<p> This will accept the approval request, creating an update for the character and consuming the items and/or currency attached to this request. You will not be able to edit the traits for the character, so if those require any corrections, please
+  cancel the request and ask the user to make changes. </p>
 {!! Form::open(['url' => 'admin/designs/edit/' . $request->id . '/approve']) !!}
-<h3>Basic Information</h3>
+<h3> Basic Information </h3>
 <div class="form-group">
   {!! Form::label('Character Category') !!}
   <select name="character_category_id" id="category" class="form-control" placeholder="Select Category">
-    <option value="" data-code="">Select Category</option>
+    <option value="" data-code=""> Select Category </option>
     @foreach ($categories as $category)
-      <option value="{{ $category->id }}" data-code="{{ $category->code }}" {{ $request->character->character_category_id == $category->id ? 'selected' : '' }}>{{ $category->name }} ({{ $category->code }})</option>
+      <option value="{{ $category->id }}" data-code="{{ $category->code }}" {{ $request->character->character_category_id == $category->id ? 'selected' : '' }}> {{ $category->name }} ({{ $category->code }})</option>
     @endforeach
   </select>
 </div>
@@ -16,7 +16,7 @@
   <div class="d-flex">
     {!! Form::text('number', $request->character->number, ['class' => 'form-control mr-2', 'id' => 'number']) !!}
     <a href="#" id="pull-number" class="btn btn-primary" data-bs-toggle="tooltip"
-      title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code.">Pull Next Number</a>
+      title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code."> Pull Next Number </a>
   </div>
 </div>
 
@@ -30,7 +30,7 @@
   {!! Form::textarea('description', $request->character->description, ['class' => 'form-control wysiwyg']) !!}
 </div>
 
-<h3>Image Settings</h3>
+<h3> Image Settings </h3>
 <div class="form-group">
   {!! Form::checkbox('set_active', 1, false, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
   {!! Form::label('set_active', 'Set Active Image', ['class' => 'form-check-label ml-3']) !!} {!! add_help('This will set the new approved image as the character\'s masterlist image.') !!}
@@ -46,13 +46,13 @@
   </div>
 @endif
 <br>
-<h3>Transfer Information</h3>
+<h3> Transfer Information </h3>
 
 <div class="alert alert-info">
   These are displayed on the character's profile, but don't have any effect on site functionality except for the following:
   <ul>
-    <li>If all switches are off, the character cannot be transferred by the user (directly or through trades).</li>
-    <li>If a transfer cooldown is set, the character also cannot be transferred by the user (directly or through trades) until the cooldown is up.</li>
+    <li> If all switches are off, the character cannot be transferred by the user (directly or through trades). </li>
+    <li> If a transfer cooldown is set, the character also cannot be transferred by the user (directly or through trades) until the cooldown is up. </li>
   </ul>
 </div>
 <div class="form-group">

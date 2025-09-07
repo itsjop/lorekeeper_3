@@ -16,7 +16,7 @@
   <div class="mx-auto img-thumbnail text-left"
     style=""
   >
-    <span class="badge-primary px-2 py-1 br-15" >Literature</span>
+    <span class="badge-primary px-2 py-1 br-15" > Literature </span>
     <img
       loading="lazy"
       class="img-thumbnail"

@@ -7,15 +7,15 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Forms & Polls' => 'admin/forms', ($form->id ? 'Edit' : 'Create') . ' Post' => $form->id ? 'admin/forms/edit/' . $form->id : 'admin/forms/create']) !!}
 
-  <h1>{{ $form->id ? 'Edit' : 'Create' }} Form
+  <h1> {{ $form->id ? 'Edit' : 'Create' }} Form
     @if ($form->id)
-      <a href="#" class="btn btn-danger float-right delete-form-button">Delete Form</a>
+      <a href="#" class="btn btn-danger float-right delete-form-button"> Delete Form </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $form->id ? 'admin/forms/edit/' . $form->id : 'admin/forms/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
   <div class="row">
     <div class="form-group col">
       {!! Form::label('Title') !!}
@@ -83,7 +83,7 @@
       {!! Form::label('is_timed', 'Set Timed Form', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Sets the form as timed between the chosen dates.') !!}
     </div>
     <div class="form-timed-quantity {{ $form->is_timed ? '' : 'hide' }}">
-      <p>Set the start time for when the form should become visible, and the end time at which it closes. Closed forms are still visible on site! Even if set active, a form will only show once the start time is reached. </p>
+      <p> Set the start time for when the form should become visible, and the end time at which it closes. Closed forms are still visible on site! Even if set active, a form will only show once the start time is reached. </p>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
@@ -102,15 +102,15 @@
   </div>
 
   <hr>
-  <h3>Questions</h3>
-  <p>Add your question/s here. At least one question is required for the creation of a form.</p>
+  <h3> Questions </h3>
+  <p> Add your question/s here. At least one question is required for the creation of a form. </p>
   <div id="questionContainer" class="mb-5">
     @foreach ($form->questions as $question)
       <div class="card mb-2">
         <div class="card-body">
 
           <div class="card-title row">
-            <h5 class="col-lg col-12">Question</h5>
+            <h5 class="col-lg col-12"> Question </h5>
             <div class="col-lg col-6">
               {!! Form::checkbox('is_mandatory[' . $question->id . ']', 1, $question->is_mandatory ?? 0, ['class' => 'mandatory form-check-input form-timed form-toggle form-field']) !!}
               Mandatory {!! add_help('If turned off, this question can be left empty.') !!}
@@ -119,12 +119,12 @@
               {!! Form::checkbox('is_multichoice[' . $question->id . ']', 0, $question->is_multichoice ?? 0, ['class' => 'multichoice form-check-input form-timed form-toggle form-field']) !!}
               Multichoice {!! add_help('If turned on, this question will allow choices between multiple options - does not apply to questions without options.') !!}
             </div>
-            <a href="#" class="btn btn-danger col-1 remove-question-button">X</a>
+            <a href="#" class="btn btn-danger col-1 remove-question-button"> X</a>
           </div>
-          <div class="question">{!! Form::text('questions[' . $question->id . ']', $question->question, ['class' => 'form-control mt-2 mb-2']) !!}</div>
+          <div class="question"> {!! Form::text('questions[' . $question->id . ']', $question->question, ['class' => 'form-control mt-2 mb-2']) !!} </div>
 
           <div class="d-flex align-items-center">
-            <h5 class="card-text">Options (Optional)</h5>{!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}
+            <h5 class="card-text"> Options (Optional)</h5> {!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}
           </div>
           <div class="options" id="option-{{ $question->id }}">
             @foreach ($question->options as $option)
@@ -134,7 +134,7 @@
                     {!! Form::text('options[' . $question->id . '][' . $option->id . ']', $option->option, ['class' => 'form-control']) !!}
                   </div>
                   <div class="col">
-                    <a href="#" class="btn btn-secondary float-right remove-option-button">X</a>
+                    <a href="#" class="btn btn-secondary float-right remove-option-button"> X</a>
                   </div>
                 </div>
               </div>
@@ -145,14 +145,14 @@
                   {!! Form::text('options[' . $question->id . '][]', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="col">
-                  <a href="#" class="btn btn-secondary float-right remove-option-button">X</a>
+                  <a href="#" class="btn btn-secondary float-right remove-option-button"> X</a>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="text-right mt-2">
-            <a href="#" class="btn btn-outline-info addOption" id="button-{{ $question->id }}">Add Option</a>
+            <a href="#" class="btn btn-outline-info addOption" id="button-{{ $question->id }}"> Add Option </a>
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@
     <div class="card hide mb-2">
       <div class="card-body">
         <div class="card-title row">
-          <h5 class="col-lg col-12">Question</h5>
+          <h5 class="col-lg col-12"> Question </h5>
           <div class="col-lg col-6">
             {!! Form::checkbox('is_mandatory[default]', 1, 0, ['class' => 'mandatory form-check-input form-timed form-toggle form-field']) !!}
             Mandatory {!! add_help('If turned off, this question can be left empty.') !!}
@@ -169,12 +169,12 @@
             {!! Form::checkbox('is_multichoice[default]', 0, 0, ['class' => 'multichoice form-check-input form-timed form-toggle form-field']) !!}
             Multichoice {!! add_help('If turned on, this question will allow choices between multiple options - does not apply to questions without options.') !!}
           </div>
-          <a href="#" class="btn btn-danger col-1 remove-question-button">X</a>
+          <a href="#" class="btn btn-danger col-1 remove-question-button"> X</a>
         </div>
-        <div class="question">{!! Form::text('questions[default]', null, ['class' => 'form-control mt-2 mb-2']) !!}</div>
+        <div class="question"> {!! Form::text('questions[default]', null, ['class' => 'form-control mt-2 mb-2']) !!} </div>
 
         <div class="d-flex align-items-center">
-          <h5 class="card-text">Options (Optional)</h5>{!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}
+          <h5 class="card-text"> Options (Optional)</h5> {!! add_help('If you do not provide options, it will be considered an open answer where users can write their own response.') !!}
         </div>
         <div class="options">
           <div class="hide mb-2">
@@ -183,25 +183,25 @@
                 {!! Form::text('options[default][]', null, ['class' => 'form-control']) !!}
               </div>
               <div class="col">
-                <a href="#" class="btn btn-secondary float-right remove-option-button">X</a>
+                <a href="#" class="btn btn-secondary float-right remove-option-button"> X</a>
               </div>
             </div>
           </div>
         </div>
 
         <div class="text-right mt-2">
-          <a href="#" class="btn btn-outline-info addOption">Add Option</a>
+          <a href="#" class="btn btn-outline-info addOption"> Add Option </a>
         </div>
       </div>
     </div>
   </div>
 
   <div class="text-right mb-3">
-    <a href="#" class="btn btn-outline-info" id="addQuestion">Add Question</a>
+    <a href="#" class="btn btn-outline-info" id="addQuestion"> Add Question </a>
   </div>
 
-  <h3>Rewards</h3>
-  <p>Rewards are credited on a per-user basis. They are given out each time the user submits the form, so make sure to set the form timeframe accordingly. Edits to existing answers will not reward the user again.</p>
+  <h3> Rewards </h3>
+  <p> Rewards are credited on a per-user basis. They are given out each time the user submits the form, so make sure to set the form timeframe accordingly. Edits to existing answers will not reward the user again. </p>
 
   @include('widgets._loot_select', ['loots' => $form->rewards, 'showLootTables' => true, 'showRaffles' => true])
 

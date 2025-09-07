@@ -33,7 +33,7 @@
     ?>)</div>
   @endif
   <div class="mt-3">
-    <a class="btn btn-outline-info btn-sm initiate-explore-{{ $area->id }}"> Explore</a>
+    <a class="btn btn-outline-info btn-sm initiate-explore-{{ $area->id }}"> Explore </a>
   </div>
 </div>
 

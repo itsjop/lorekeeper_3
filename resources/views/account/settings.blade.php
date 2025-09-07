@@ -7,16 +7,16 @@
 @section('account-content')
   {!! breadcrumbs(['My Account' => Auth::user()->url, 'Settings' => 'account/settings']) !!}
 
-  <h1>Settings</h1>
+  <h1> Settings </h1>
 
   {{-- AVATAR  --}}
   <div class="row">
     <div class="card-full p-3 mb-2">
-      <h3>Avatar</h3>
+      <h3> Avatar </h3>
       @if (Auth::user()->isStaff)
         <div class="text-left">
-          <div class="alert alert-warning">Please note a hard refresh may be required to see your updated avatar. Also please note
-            that uploading a .gif will display a 500 error after; the upload should still work, however.</div>
+          <div class="alert alert-warning"> Please note a hard refresh may be required to see your updated avatar. Also please note
+            that uploading a .gif will display a 500 error after; the upload should still work, however. </div>
         </div>
       @endif
       {!! Form::open(['url' => 'account/avatar', 'files' => true]) !!}
@@ -34,7 +34,7 @@
           {!! Form::hidden('y1', null, ['id' => 'cropY1']) !!}
         </div>
         <div class="alert alert-info mx-3">
-          <b>Note:</b> Cropping does not work on gifs.
+          <b> Note:</b> Cropping does not work on gifs.
         </div>
       </div>
       <div class="form-group row">
@@ -52,7 +52,7 @@
     {{-- PROFILE HEADER --}}
     {{-- <div class="col-12">
       <div class="card-full p-3 mb-2">
-        <h3>Profile Header Image</h3>
+        <h3> Profile Header Image </h3>
         {!! Form::open(['url' => 'account/profile_img', 'files' => true]) !!}
         <div class="form-group row">
           {!! Form::label('profile_img', 'Update', ['class' => 'col-md-2 col-form-label']) !!}
@@ -69,7 +69,7 @@
   </div>
   {{-- YOUR PROFILE --}}
   <div class="card-full p-3 mb-2">
-    <h3>Profile</h3>
+    <h3> Profile </h3>
     {!! Form::open(['url' => 'account/profile']) !!}
     <div class="form-group">
       {!! Form::label('pronouns', 'Preferred Pronouns (100 char max)') !!} {!! add_help(
@@ -89,19 +89,19 @@
 
   @if ($user_enabled == 1 || (Auth::user()->isStaff && $user_enabled == 2))
     <div class="card-full p-3 mb-2">
-      <h3>Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span>
+      <h3> Home Location <span class="text-muted">({{ ucfirst($location_interval) }})</span>
       </h3>
       @if (Auth::user()->isStaff && $user_enabled == 2)
-        <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their own
-          locations freely.</div>
+        <div class="alert alert-warning"> You can edit this because you are a staff member. Normal users cannot edit their own
+          locations freely. </div>
       @endif
       @if ($char_enabled == 1)
-        <div class="alert alert-warning">Your characters will have the same home as you.</div>
+        <div class="alert alert-warning"> Your characters will have the same home as you. </div>
       @endif
       @if (Auth::user()->canChangeLocation)
         {!! Form::open(['url' => 'account/location']) !!}
         <div class="form-group row">
-          <label class="col-md-2 col-form-label">Location</label>
+          <label class="col-md-2 col-form-label"> Location </label>
           <div class="col-md-9">
             {!! Form::select(
                 'location',
@@ -117,7 +117,7 @@
         {!! Form::close() !!}
       @else
         <div class="alert alert-warning">
-          <strong>You can't change your location right now.</strong>
+          <strong> You can't change your location right now. </strong>
           You last changed it on {!! format_date(Auth::user()->home_changed, false) !!}.
           Home locations can be changed {{ $location_interval }}.
         </div>
@@ -127,11 +127,11 @@
 
   {{-- BORDER CUSTOMIZATION --}}
   <div class="card-full p-3 mb-2">
-    <h3>Update Border</h3>
-    <p>Change your onsite border.</p>
-    <p>Standard borders behave as normal. Variants may be different colors or even border styles than the main border. If your
-      chosen main border has a "layer" associated with it, you can layer that image with one of its variant's borders.</p>
-    <p>Variants supersede standard borders, and layers supersede variants.</p>
+    <h3> Update Border </h3>
+    <p> Change your onsite border. </p>
+    <p> Standard borders behave as normal. Variants may be different colors or even border styles than the main border. If your
+      chosen main border has a "layer" associated with it, you can layer that image with one of its variant's borders. </p>
+    <p> Variants supersede standard borders, and layers supersede variants. </p>
     {!! Form::open(['url' => 'account/border']) !!}
     <div class="row">
       <div class="col-md-6 form-group">
@@ -151,10 +151,10 @@
     <div class="row">
       <div class="col-md-12">
         <br>
-        <h4>Border Style</h4>
+        <h4> Border Style </h4>
       </div>
       <div class="col-md-5">
-        <h4 class="text-center w-100">Border Flip</h4>
+        <h4 class="text-center w-100"> Border Flip </h4>
         <div class="row">
           <div class="col-md-12 form-group flex j-c-around a-i-center">
             {!! Form::label('border_flip', 'Flip Border (Horizontally)', ['class' => 'form-check-label ml-3']) !!}
@@ -166,10 +166,10 @@
         </div>
       </div>
       <div class="col-md-7">
-        <h4 class="text-center">Your Borders</h4>
+        <h4 class="text-center"> Your Borders </h4>
         <div class="card-full p-3 mb-2 image-info-box">
           @if ($default->count())
-            <h4 class="mb-0">Default</h4>
+            <h4 class="mb-0"> Default </h4>
             <hr class="mt-0">
             <div class="row">
               @foreach ($default as $border)
@@ -178,14 +178,14 @@
                     {!! $border->preview() !!}
                   </div>
                   <div class="shop-name mt-1 text-center">
-                    <h5>{!! $border->displayName !!}</h5>
+                    <h5> {!! $border->displayName !!} </h5>
                   </div>
                 </div>
               @endforeach
             </div>
           @endif
           @if (Auth::user()->borders->count())
-            <h4 class="mb-0">Unlocked</h4>
+            <h4 class="mb-0"> Unlocked </h4>
             <hr class="mt-0">
             <div class="row">
               @foreach (Auth::user()->borders as $border)
@@ -194,7 +194,7 @@
                     {!! $border->preview() !!}
                   </div>
                   <div class="shop-name mt-1 text-center">
-                    <h5>{!! $border->displayName !!}</h5>
+                    <h5> {!! $border->displayName !!} </h5>
                   </div>
                 </div>
               @endforeach
@@ -202,9 +202,9 @@
           @endif
           @if (Auth::user()->isStaff)
             @if ($admin->count())
-              <h4 class="mb-0">Staff-Only</h4>
+              <h4 class="mb-0"> Staff-Only </h4>
               <hr class="mt-0">
-              <small>You can see these as a member of staff</small>
+              <small> You can see these as a member of staff </small>
               <div class="row">
                 @foreach ($admin as $border)
                   <div class="col-md-3 col-6 text-center">
@@ -212,7 +212,7 @@
                       {!! $border->preview() !!}
                     </div>
                     <div class="shop-name mt-1 text-center">
-                      <h5>{!! $border->displayName !!}</h5>
+                      <h5> {!! $border->displayName !!} </h5>
                     </div>
                   </div>
                 @endforeach
@@ -224,7 +224,7 @@
         </div>
       </div>
       <div class="col-md-12 flex j-c-end a-i-center gap-2">
-        <a href="{{ url(Auth::user()->url . '/border-logs') }}">View logs...</a>
+        <a href="{{ url(Auth::user()->url . '/border-logs') }}"> View logs... </a>
         {!! Form::submit('Save', ['class' => 'btn btn-primary a-s-center']) !!}
       </div>
       {!! Form::close() !!}
@@ -233,7 +233,7 @@
   {{-- CHANGE USERNAME --}}
   @if (config('lorekeeper.settings.allow_username_changes'))
     <div class="card-full p-3 mb-2">
-      <h3>Change Username</h3>
+      <h3> Change Username </h3>
       @if (config('lorekeeper.settings.username_change_cooldown'))
         <div class="alert alert-info">
           You can change your username once every {{ config('lorekeeper.settings.username_change_cooldown') }} days.
@@ -252,7 +252,7 @@
       @endif
       {!! Form::open(['url' => 'account/username']) !!}
       <div class="form-group row">
-        <label class="col-md-2 col-form-label">Username</label>
+        <label class="col-md-2 col-form-label"> Username </label>
         <div class="col-md-10">
           {!! Form::text('username', Auth::user()->name, ['class' => 'form-control']) !!}
         </div>
@@ -266,20 +266,20 @@
   {{-- YOUR FACTION --}}
   @if ($user_faction_enabled == 1 || (Auth::user()->isStaff && $user_faction_enabled == 2))
     <div class="card-full p-3 mb-2">
-      <h3>Faction <span class="text-muted">({{ ucfirst($location_interval) }})</span>
+      <h3> Faction <span class="text-muted">({{ ucfirst($location_interval) }})</span>
       </h3>
       @if (Auth::user()->isStaff && $user_faction_enabled == 2)
-        <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their own
-          faction freely.</div>
+        <div class="alert alert-warning"> You can edit this because you are a staff member. Normal users cannot edit their own
+          faction freely. </div>
       @endif
       @if ($char_faction_enabled == 1)
-        <div class="alert alert-warning">Your characters will have the same faction as you.</div>
+        <div class="alert alert-warning"> Your characters will have the same faction as you. </div>
       @endif
       @if (Auth::user()->canChangeFaction)
-        <p>Please note that changing your faction will remove you from any special ranks and reset your faction standing!</p>
+        <p> Please note that changing your faction will remove you from any special ranks and reset your faction standing!</p>
         {!! Form::open(['url' => 'account/faction']) !!}
         <div class="form-group row">
-          <label class="col-md-2 col-form-label">Faction</label>
+          <label class="col-md-2 col-form-label"> Faction </label>
           <div class="col-md-9">
             {!! Form::select(
                 'faction',
@@ -295,7 +295,7 @@
         {!! Form::close() !!}
       @else
         <div class="alert alert-warning">
-          <strong>You can't change your faction right now.</strong>
+          <strong> You can't change your faction right now. </strong>
           You last changed it on {!! format_date(Auth::user()->faction_changed, false) !!}.
           Faction can be changed {{ $location_interval }}.
         </div>
@@ -304,10 +304,10 @@
   @endif
   {{-- YOUR BIRTHDAY --}}
   <div class="card-full p-3 mb-2">
-    <h3>Birthday Publicity</h3>
+    <h3> Birthday Publicity </h3>
     {!! Form::open(['url' => 'account/dob']) !!}
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Setting</label>
+      <label class="col-md-2 col-form-label"> Setting </label>
       <div class="col-md-10">
         {!! Form::select(
             'birthday_setting',
@@ -332,11 +332,11 @@
   </div>
   {{-- EMAIL ADDRESS --}}
   <div class="card-full p-3 mb-2">
-    <h3>Allow Profile Comments</h3>
+    <h3> Allow Profile Comments </h3>
     {!! Form::open(['url' => 'account/comments']) !!}
-    <p>If turned off, all comments on your profile will be hidden.</p>
+    <p> If turned off, all comments on your profile will be hidden. </p>
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Setting</label>
+      <label class="col-md-2 col-form-label"> Setting </label>
       <div class="col-md-10">
         {!! Form::select(
             'allow_profile_comments',
@@ -353,11 +353,11 @@
   </div>
 
   <div class="card-full p-3 mb-2">
-    <h3>Character Warning Visibility</h3>
-    <p>This setting will change how characters with content warnings are displayed to you.</p>
+    <h3> Character Warning Visibility </h3>
+    <p> This setting will change how characters with content warnings are displayed to you. </p>
     {!! Form::open(['url' => 'account/warning']) !!}
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Setting</label>
+      <label class="col-md-2 col-form-label"> Setting </label>
       <div class="col-md-10">
         {!! Form::select(
             'content_warning_visibility',
@@ -378,11 +378,11 @@
   </div>
 
   <div class="card-full p-3 mb-2">
-    <h3>Email Address</h3>
-    <p>Changing your email address will require you to re-verify your email address.</p>
+    <h3> Email Address </h3>
+    <p> Changing your email address will require you to re-verify your email address. </p>
     {!! Form::open(['url' => 'account/email']) !!}
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Email Address</label>
+      <label class="col-md-2 col-form-label"> Email Address </label>
       <div class="col-md-10">
         {!! Form::text('email', Auth::user()->email, ['class' => 'form-control']) !!}
       </div>
@@ -394,22 +394,22 @@
   </div>
   {{-- PASSWORD UPDATE --}}
   <div class="card-full p-3 mb-2">
-    <h3>Change Password</h3>
+    <h3> Change Password </h3>
     {!! Form::open(['url' => 'account/password']) !!}
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Old Password</label>
+      <label class="col-md-2 col-form-label"> Old Password </label>
       <div class="col-md-10">
         {!! Form::password('old_password', ['class' => 'form-control']) !!}
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">New Password</label>
+      <label class="col-md-2 col-form-label"> New Password </label>
       <div class="col-md-10">
         {!! Form::password('new_password', ['class' => 'form-control']) !!}
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Confirm New Password</label>
+      <label class="col-md-2 col-form-label"> Confirm New Password </label>
       <div class="col-md-10">
         {!! Form::password('new_password_confirmation', ['class' => 'form-control']) !!}
       </div>
@@ -421,9 +421,9 @@
   </div>
 
   <div class="card-full p-3 mb-2">
-    <h3>Image Block Settings</h3>
-    <p>This will disable or enable the image block widgets from showing.</p>
-    <p>Note that this won't delete or unblock your existing image blocks, they will remain blurred for you.</p>
+    <h3> Image Block Settings </h3>
+    <p> This will disable or enable the image block widgets from showing. </p>
+    <p> Note that this won't delete or unblock your existing image blocks, they will remain blurred for you. </p>
     {!! Form::open(['url' => 'account/blocked-image-setting']) !!}
     <div class="row">
       <div class="col form-group">
@@ -441,17 +441,17 @@
   </div>
   {{-- TWO FACTOR AUTH --}}
   <div class="card-full p-3 mb-2">
-    <h3>Two-Factor Authentication</h3>
+    <h3> Two-Factor Authentication </h3>
     <hr>
-    <h6>Coming soon!</h6>
+    <h6> Coming soon!</h6>
     <span>
-      Hi. This is <strong>pim</strong>, the Somnivores site developer. While 2FA comes with lorekeeper, lots of bugs have appeared
+      Hi. This is <strong>pim </strong>, the Somnivores site developer. While 2FA comes with lorekeeper, lots of bugs have appeared
       over the course of the site's development. As such, I haven't yet had the opportunity to re-confirm that the 2FA setup process
       is completely functional end to end yet. Since something going wrong in that proccess can result in account lockouts, we've
       disabled it until we have the devtime to make sure everything is working fully, at which point we'll re-enable it!
     </span>
-    {{-- <p>Two-factor authentication acts as a second layer of protection for your account. It uses an app on your phone-- such as
-      Google Authenticator-- and information provided by the site to generate a random code that changes frequently.</p>
+    {{-- <p> Two-factor authentication acts as a second layer of protection for your account. It uses an app on your phone-- such as
+      Google Authenticator-- and information provided by the site to generate a random code that changes frequently. </p>
 
     <div class="alert alert-info">
       Please note that two-factor authentication is only used when logging in directly to the site (with an email address and
@@ -460,9 +460,9 @@
     </div>
 
     @if (!isset(Auth::user()->two_factor_secret))
-      <p>In order to enable two-factor authentication, you will need to scan a QR code with an authenticator app on your phone.
+      <p> In order to enable two-factor authentication, you will need to scan a QR code with an authenticator app on your phone.
         Two-factor authentication will not be enabled until you do so and confirm by entering one of the codes provided by your
-        authentication app.</p>
+        authentication app. </p>
       <hr>
       {!! Form::open(['url' => 'account/two-factor/enable']) !!}
       <div class="text-right">
@@ -470,13 +470,13 @@
       </div>
       {!! Form::close() !!}
     @elseif(isset(Auth::user()->two_factor_secret))
-      <p>Two-factor authentication is currently enabled.</p>
+      <p> Two-factor authentication is currently enabled. </p>
 
-      <h4>Disable Two-Factor Authentication</h4>
-      <p>To disable two-factor authentication, you must enter a code from your authenticator app.</p>
+      <h4> Disable Two-Factor Authentication </h4>
+      <p> To disable two-factor authentication, you must enter a code from your authenticator app. </p>
       {!! Form::open(['url' => 'account/two-factor/disable']) !!}
       <div class="form-group row">
-        <label class="col-md-2 col-form-label">Code</label>
+        <label class="col-md-2 col-form-label"> Code </label>
         <div class="col-md-10">
           {!! Form::text('code', null, ['class' => 'form-control']) !!}
         </div>
@@ -494,10 +494,10 @@
 
   <div class="card-full p-3 mb-2">
 
-    <h3>Character {{ ucfirst(__('character_likes.likes')) }} Setting</h3>
+    <h3> Character {{ ucfirst(__('character_likes.likes')) }} Setting </h3>
     {!! Form::open(['url' => 'account/character-likes']) !!}
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Setting</label>
+      <label class="col-md-2 col-form-label"> Setting </label>
       <div class="col-md-10">
         {!! Form::select(
             'allow_character_likes',

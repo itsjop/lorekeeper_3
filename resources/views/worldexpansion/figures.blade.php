@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Figures' => 'world/figures']) !!}
-  <h1>Figures</h1>
+  <h1> Figures </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -57,22 +57,22 @@
                 </a>
               @endisset
             </div>
-            <h3 class="mb-0">{!! $figure->displayName !!}</h3>
-            <p class="mb-0">{!! $figure->category ? $figure->category->displayName : '' !!}{!! $figure->faction ? ' ・ ' . ucfirst($figure->faction->displayName) : '' !!}</p>
+            <h3 class="mb-0"> {!! $figure->displayName !!} </h3>
+            <p class="mb-0"> {!! $figure->category ? $figure->category->displayName : '' !!}{!! $figure->faction ? ' ・ ' . ucfirst($figure->faction->displayName) : '' !!} </p>
           </div>
 
           @if (count(allAttachments($figure)))
             <div class="card-body">
               @foreach (allAttachments($figure) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }}
-                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+                <p class="text-center mb-0"> Associated with {{ count($attachments) }}
+                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}. </p>
               @endforeach
             </div>
           @endif
 
           @isset($figure->summary)
             <div class="card-footer mt-auto">
-              <p class="mb-0"> {!! $figure->summary !!}</p>
+              <p class="mb-0"> {!! $figure->summary !!} </p>
             </div>
           @endisset
 
@@ -82,5 +82,5 @@
   </div>
   {!! $figures->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $figures->total() }} result{{ $figures->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $figures->total() }} result{{ $figures->total() == 1 ? '' : 's' }} found. </div>
 @endsection

@@ -9,16 +9,16 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/figure-categories') }}">
-      <i class="fas fa-folder mr-2"></i> Figure Categories</a>
+      <i class="fas fa-folder mr-2"></i> Figure Categories </a>
     <a class="btn btn-primary" href="{{ url('admin/world/figures/create') }}">
-      <i class="fas fa-plus mr-2"></i> Create New Figure</a>
+      <i class="fas fa-plus mr-2"></i> Create New Figure </a>
   </div>
-  <h1>Figures</h1>
+  <h1> Figures </h1>
 
-  <p class="mb-0" style="clear:both;">Figures are individuals who do not fit in the regular Character setup.</p>
+  <p class="mb-0" style="clear:both;"> Figures are individuals who do not fit in the regular Character setup. </p>
 
   @if (!count($figures))
-    <p>No figures found.</p>
+    <p> No figures found. </p>
   @else
     <table class="table table-sm type-table">
       <thead>
@@ -44,7 +44,7 @@
               </a>
               <a href={!! $figure->url !!}
                 @if ($figure->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $figure->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($figure->name) }} " @endif
-              />{!! $figure->name !!}</a>
+              /> {!! $figure->name !!} </a>
             </td>
             <td>
               {!! $figure->category ? $figure->category->displayName : '' !!}
@@ -53,7 +53,7 @@
               {{ $figure->summary ? $figure->summary : '' }}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/figures/edit/' . $figure->id) }}" class="btn btn-primary btn-sm">Edit</a>
+              <a href="{{ url('admin/world/figures/edit/' . $figure->id) }}" class="btn btn-primary btn-sm"> Edit </a>
             </td>
           </tr>
         @endforeach

@@ -1,4 +1,4 @@
-<h3>Stages</h3>
+<h3> Stages </h3>
 <div class="row mt-3 mb-3">
   <div class="col">
     {!! Form::label('Stage 2 days') !!} {!! add_help('How many days does stage 2 last?') !!}
@@ -15,9 +15,9 @@
 </div>
 
 
-<h3>Rewards</h3>
+<h3> Rewards </h3>
 
-<p>These are the rewards that will be distributed to the user when they harvest from a stage 5 plot that had this seed planted.</p>
+<p> These are the rewards that will be distributed to the user when they harvest from a stage 5 plot that had this seed planted. </p>
 
 @include('widgets._loot_select', ['loots' => $tag->getData()['rewards'] ?? null, 'showLootTables' => true, 'showRaffles' => true])
 

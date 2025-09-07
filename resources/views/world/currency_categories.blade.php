@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Currency Categories' => 'world/currency-categories']) !!}
-  <h1>Currency Categories</h1>
+  <h1> Currency Categories </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -36,5 +36,5 @@
   @endforeach
   {!! $categories->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $categories->total() }} result{{ $categories->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $categories->total() }} result{{ $categories->total() == 1 ? '' : 's' }} found. </div>
 @endsection

@@ -13,13 +13,13 @@
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link {{ set_active('characters/transfers/incoming*') }}" href="{{ url('characters/transfers/incoming') }}">Incoming</a>
+      <a class="nav-link {{ set_active('characters/transfers/incoming*') }}" href="{{ url('characters/transfers/incoming') }}"> Incoming </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('characters/transfers/outgoing*') }}" href="{{ url('characters/transfers/outgoing') }}">Outgoing</a>
+      <a class="nav-link {{ set_active('characters/transfers/outgoing*') }}" href="{{ url('characters/transfers/outgoing') }}"> Outgoing </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('characters/transfers/completed*') }}" href="{{ url('characters/transfers/completed') }}">Completed</a>
+      <a class="nav-link {{ set_active('characters/transfers/completed*') }}" href="{{ url('characters/transfers/completed') }}"> Completed </a>
     </li>
   </ul>
 

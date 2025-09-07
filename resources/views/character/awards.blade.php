@@ -34,7 +34,7 @@
         data-bs-toggle="modal"
         data-bs-target="#grantModal"
       >
-        <i class="fas fa-cog"></i> Admin</a>
+        <i class="fas fa-cog"></i> Admin </a>
     @endif
     {{ __('awards.awardcase') }}
   </h3>
@@ -65,7 +65,7 @@
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="awards-stack awards-stack-name">{{ $stack->first()->name }}@if ($stack->first()->user_limit != 1)
+                  <a href="#" class="awards-stack awards-stack-name"> {{ $stack->first()->name }}@if ($stack->first()->user_limit != 1)
                       x{{ $stack->sum('pivot.count') }}
                     @endif
                   </a>
@@ -78,21 +78,21 @@
     </div>
   @endforeach
 
-  <h3>Latest Activity</h3>
+  <h3> Latest Activity </h3>
   <div class="row ml-md-2 mb-4">
     <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
-      <div class="col-6 col-md-2 font-weight-bold">Sender</div>
-      <div class="col-6 col-md-2 font-weight-bold">Recipient</div>
-      <div class="col-6 col-md-2 font-weight-bold">{{ ucfirst(__('awards.award')) }}</div>
-      <div class="col-6 col-md-4 font-weight-bold">Log</div>
-      <div class="col-6 col-md-2 font-weight-bold">Date</div>
+      <div class="col-6 col-md-2 font-weight-bold"> Sender </div>
+      <div class="col-6 col-md-2 font-weight-bold"> Recipient </div>
+      <div class="col-6 col-md-2 font-weight-bold"> {{ ucfirst(__('awards.award')) }} </div>
+      <div class="col-6 col-md-4 font-weight-bold"> Log </div>
+      <div class="col-6 col-md-2 font-weight-bold"> Date </div>
     </div>
     @foreach ($logs as $log)
       @include('user._award_log_row', ['log' => $log, 'owner' => $character])
     @endforeach
   </div>
   <div class="text-right">
-    <a href="{{ url($character->url . '/' . __('awards.award') . '-logs') }}">View all...</a>
+    <a href="{{ url($character->url . '/' . __('awards.award') . '-logs') }}"> View all... </a>
   </div>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
@@ -113,8 +113,8 @@
             >&times;</button>
           </div>
           <div class="modal-body">
-            <p>Note that granting {{ __('awards.awards') }} does not check against any hold limits for
-              {{ __('lorekeeper.characters') }}.</p>
+            <p> Note that granting {{ __('awards.awards') }} does not check against any hold limits for
+              {{ __('lorekeeper.characters') }}. </p>
             <div class="form-group">
               {!! Form::open(['url' => 'admin/character/' . $character->slug . '/grant-awards']) !!}
 
@@ -134,7 +134,7 @@
                   href="#"
                   class="btn btn-primary"
                   id="add-award"
-                >Add {{ ucfirst(__('awards.award')) }}</a>
+                > Add {{ ucfirst(__('awards.award')) }} </a>
               </div>
               <div class="award-row hide mb-2">
                 {!! Form::select('award_ids[]', $awardOptions, null, [
@@ -145,7 +145,7 @@
                 <a href="#" class="remove-award btn btn-danger mb-2">✖</a>
               </div>
 
-              <h5 class="mt-2">Additional Data</h5>
+              <h5 class="mt-2"> Additional Data </h5>
 
               <div class="form-group">
                 {!! Form::label('data', 'Reason (Optional)') !!} {!! add_help(

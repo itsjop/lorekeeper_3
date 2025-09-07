@@ -7,9 +7,9 @@
 @section('account-content')
   {!! breadcrumbs(['My Account' => Auth::user()->url, 'Blocked Images' => 'blocked-images']) !!}
 
-  <h1>Blocked Images</h1>
+  <h1> Blocked Images </h1>
 
-  <p>This is a list of images that you have blocked yourself from viewing on this site. Other users or even admins cannot see this-- this is for your eyes only!</p>
+  <p> This is a list of images that you have blocked yourself from viewing on this site. Other users or even admins cannot see this-- this is for your eyes only!</p>
 
   {!! Form::open(['method' => 'GET']) !!}
   <div class="form-inline justify-content-end mb-3">
@@ -36,7 +36,7 @@
 
   {!! $images->render() !!}
   @if (!count($images))
-    <div class="text-center">You haven't blocked any images yet.</div>
+    <div class="text-center"> You haven't blocked any images yet. </div>
   @else
     <div class="row">
       @foreach ($images as $image)

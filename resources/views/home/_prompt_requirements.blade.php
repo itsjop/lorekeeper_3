@@ -1,6 +1,6 @@
 @if (count(getLimits($prompt)))
   <div class="alert alert-warning">
-    <strong>Warning:</strong> If you are submitting a prompt, you will not be able to edit the contents after
+    <strong> Warning:</strong> If you are submitting a prompt, you will not be able to edit the contents after
     the submission has been made.
     <br />
     Submitting to: {!! $prompt->displayName !!}

@@ -1,6 +1,6 @@
-<h4>Prompt to be used for this Activity</h4>
-<p>The prompt list here is auto-filtered for hidden prompts under the assumption that you wouldn't want it also listed under the prompt page</p>
-<p>The selected prompt will be what submissions show up in under the admin queue, and is the source of default rewards.</p>
+<h4> Prompt to be used for this Activity </h4>
+<p> The prompt list here is auto-filtered for hidden prompts under the assumption that you wouldn't want it also listed under the prompt page </p>
+<p> The selected prompt will be what submissions show up in under the admin queue, and is the source of default rewards. </p>
 
 <div class="form-group w-50">
   {!! Form::label('Associated Prompt') !!}

@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header" id="headingTwo">
         <div class="row p-2">
-          <h5>{{ $question->question }}</h5>
+          <h5> {{ $question->question }} </h5>
           @if (!$form->is_anonymous && $question->has_options && $user && $user->isStaff)
             <a
               href="#"
@@ -33,7 +33,7 @@
         </div>
         @php $totalAnswers = $question->is_multichoice ? $question->answers->groupBy('user_id')->count() : $question->totalAnswers(); @endphp
         <h6>
-          <b>Total answers: {{ $totalAnswers }}</b>
+          <b> Total answers: {{ $totalAnswers }} </b>
         </h6>
         @if ($question->options->count() > 0)
           @foreach ($question->options as $option)
@@ -47,7 +47,7 @@
                 aria-valuenow="{{ $optionAnswers }}"
                 aria-valuemin="0"
                 aria-valuemax="{{ $totalAnswers }}"
-              >{{ $optionAnswers }}</div>
+              > {{ $optionAnswers }} </div>
             </div>
           @endforeach
         @else
@@ -63,10 +63,10 @@
         <div class="card-body p-lg-3 p-0">
           @if ($question->has_options)
             @foreach ($question->options as $option)
-              <b>{{ $option->option }} :</b>
+              <b> {{ $option->option }} :</b>
               <div>
                 @foreach ($option->answers as $answer)
-                  <span class="mr-2">{!! $answer->user->displayName !!}</span>
+                  <span class="mr-2"> {!! $answer->user->displayName !!} </span>
                 @endforeach
               </div>
             @endforeach
@@ -76,7 +76,7 @@
                 <div>
                   <div class="p-3 mt-3 border">
                     @if (!$form->is_anonymous && $user && $user->isStaff)
-                      <b>{!! $answer->user->displayName !!}:</b>
+                      <b> {!! $answer->user->displayName !!}:</b>
                     @endif
                     {{ $answer->answer }}
                     @if ($form->allow_likes)
@@ -93,7 +93,7 @@
                           @endif
                         </div>
                       @else
-                        <div class="text-right">{{ $answer->likes()->count() }} <i class="far fa-heart h4"></i>
+                        <div class="text-right"> {{ $answer->likes()->count() }} <i class="far fa-heart h4"></i>
                         </div>
                       @endif
                     @endif

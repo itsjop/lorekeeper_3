@@ -44,13 +44,13 @@
     <div class="logs-table-header">
       <div class="row">
         <div class="col-12 col-md-2">
-          <div class="logs-table-cell">Prompt</div>
+          <div class="logs-table-cell"> Prompt </div>
         </div>
         <div class="col-6 col-md-4">
-          <div class="logs-table-cell">Link</div>
+          <div class="logs-table-cell"> Link </div>
         </div>
         <div class="col-6 col-md-5">
-          <div class="logs-table-cell">Date</div>
+          <div class="logs-table-cell"> Date </div>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
             <div class="col-6 col-md-4">
               <div class="logs-table-cell">
                 <span class="ubt-texthide">
-                  <a href="{{ $log->url }}">{{ $log->url }}</a>
+                  <a href="{{ $log->url }}"> {{ $log->url }} </a>
                 </span>
               </div>
             </div>
@@ -77,7 +77,7 @@
             </div>
             <div class="col-6 col-md-1">
               <div class="logs-table-cell">
-                <a href="{{ $log->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a>
+                <a href="{{ $log->viewUrl }}" class="btn btn-primary btn-sm py-0 px-1"> Details </a>
               </div>
             </div>
           </div>

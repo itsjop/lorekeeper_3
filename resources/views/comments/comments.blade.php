@@ -20,7 +20,7 @@
 @endphp
 
 @if (!isset($type) || $type == 'User-User')
-  <h2>Comments</h2>
+  <h2> Comments </h2>
 @endif
 
 <div class="d-flex mw-100 row mx-0" style="overflow:hidden;">
@@ -63,11 +63,11 @@
 </div>
 
 @if ($comments->count() < 1)
-  <div class="alert alert-warning">There are no comments yet.</div>
+  <div class="alert alert-warning"> There are no comments yet. </div>
 @endif
 
 @isset($perPage)
-  <div class="ml-auto mt-2">{{ $grouped_comments->links() }}</div>
+  <div class="ml-auto mt-2"> {{ $grouped_comments->links() }} </div>
 @endisset
 
 @auth
@@ -77,9 +77,9 @@
 @else
   <div class="card mt-3">
     <div class="card-body">
-      <h5 class="card-title">Authentication required</h5>
-      <p class="card-text">You must log in to post a comment.</p>
-      <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
+      <h5 class="card-title"> Authentication required </h5>
+      <p class="card-text"> You must log in to post a comment. </p>
+      <a href="{{ route('login') }}" class="btn btn-primary"> Log in </a>
     </div>
   </div>
 @endauth

@@ -16,13 +16,13 @@
   <h1>
     {!! $drop->id ? 'Edit ' . $drop->pet->displayName : 'Create' !!} Pet Drop
     @if ($drop->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-drop-button">Delete Drop</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-drop-button"> Delete Drop </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $drop->id ? 'admin/data/pets/drops/edit/' . $drop->pet_id : 'admin/data/pets/drops/create']) !!}
 
-  <h2>Basic Information</h2>
+  <h2> Basic Information </h2>
 
   @if (!$drop->id && !$drop->pet_id)
     <div class="form-group">
@@ -36,7 +36,7 @@
     {!! Form::text('drop_name', $drop->name ?? null, ['class' => 'form-control']) !!}
   </div>
 
-  <h2>Groups</h2>
+  <h2> Groups </h2>
   <p>
     Every pet of the above pet is sorted into a "group" - these groups are used for different item drops, which can be set in this
     form after the pet drop is initially created.
@@ -48,18 +48,18 @@
       href="#"
       class="btn btn-info"
       id="addLoot"
-    >Add Group</a>
+    > Add Group </a>
   </div>
   <table class="table table-sm" id="lootTable">
     <thead>
       <tr>
-        <th width="25%">Group Label {!! add_help('This label will be shown to users.') !!}</th>
-        <th width="10%">Weight {!! add_help(
+        <th width="25%"> Group Label {!! add_help('This label will be shown to users.') !!} </th>
+        <th width="10%"> Weight {!! add_help(
             'A higher weight means a pet is more likely to be randomly assigned to this group upon creation. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.'
-        ) !!}</th>
-        <th width="20%">Chance {!! add_help(
+        ) !!} </th>
+        <th width="20%"> Chance {!! add_help(
             'Calculated automatically based on the weights. A pet has this percentage of chance of being automatically sorted into this group.'
-        ) !!}</th>
+        ) !!} </th>
         <th width="10%">
         </th>
       </tr>
@@ -68,12 +68,12 @@
       @if ($drop->id)
         @foreach ($drop->parameters as $label => $weight)
           <tr class="drop-row">
-            <td class="drop-row-select">{!! Form::text('label[]', $label, ['class' => 'form-control']) !!}</td>
-            <td class="drop-row-weight">{!! Form::number('weight[]', $weight, ['class' => 'form-control drop-weight']) !!}</td>
+            <td class="drop-row-select"> {!! Form::text('label[]', $label, ['class' => 'form-control']) !!} </td>
+            <td class="drop-row-weight"> {!! Form::number('weight[]', $weight, ['class' => 'form-control drop-weight']) !!} </td>
             <td class="drop-row-chance">
             </td>
             <td class="text-right">
-              <a href="#" class="btn btn-danger remove-drop-button">Remove</a>
+              <a href="#" class="btn btn-danger remove-drop-button"> Remove </a>
             </td>
           </tr>
         @endforeach
@@ -81,7 +81,7 @@
     </tbody>
   </table>
 
-  <h2>Drop Frequency</h2>
+  <h2> Drop Frequency </h2>
   Select how often drops should occur.
   <div class="d-flex my-2">
     {!! Form::number('drop_frequency', $drop->id ? $drop->frequency : 1, [
@@ -110,8 +110,8 @@
   </div>
 
   @if ($drop->id)
-    <h2>Dropped Items</h2>
-    <p>Select an item for each group of this pet to drop. Leave the item field blank to disable drops for the group.</p>
+    <h2> Dropped Items </h2>
+    <p> Select an item for each group of this pet to drop. Leave the item field blank to disable drops for the group. </p>
     <div class="card card-body my-2 mb-4" id="dropped">
       @include('admin.pets._drop_widget', ['drop' => $drop])
     </div>
@@ -126,14 +126,14 @@
   @if ($drop->id)
     @if ($drop->pet->variants->count())
       <hr />
-      <h3 class="h4">Variant Drops</h3>
+      <h3 class="h4"> Variant Drops </h3>
       @if ($drop->pet->variants()->has('dropData')->get()->count())
         <div class="card card-body my-2 mb-4">
           <table class="table table-sm">
             <thead>
               <tr>
-                <th width="25%">Variant</th>
-                <th width="65%">Rewards</th>
+                <th width="25%"> Variant </th>
+                <th width="65%"> Rewards </th>
                 <th>
                 </th>
               </tr>
@@ -141,16 +141,16 @@
             <tbody>
               @foreach ($drop->pet->variants()->has('dropData')->get() as $variant)
                 <tr id="variant-{{ $variant->id }}">
-                  <td>{{ $variant->name }}</td>
+                  <td> {{ $variant->name }} </td>
                   <td>
                     @if ($variant->dropData->rewards())
                       {!! $variant->dropData->rewardString() !!}
                     @else
-                      <i>No rewards set.</i>
+                      <i> No rewards set. </i>
                     @endif
                   </td>
                   <td class="text-right">
-                    <a href="{{ $variant->dropData->url }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ $variant->dropData->url }}" class="btn btn-primary"> Edit </a>
                   </td>
                 </tr>
               @endforeach
@@ -169,12 +169,12 @@
     <table class="table table-sm">
       <tbody id="dropRow">
         <tr class="drop-row">
-          <td class="drop-row-select">{!! Form::text('label[]', null, ['class' => 'form-control']) !!}</td>
-          <td class="drop-row-weight">{!! Form::text('weight[]', 1, ['class' => 'form-control drop-weight']) !!}</td>
+          <td class="drop-row-select"> {!! Form::text('label[]', null, ['class' => 'form-control']) !!} </td>
+          <td class="drop-row-weight"> {!! Form::text('weight[]', 1, ['class' => 'form-control drop-weight']) !!} </td>
           <td class="drop-row-chance">
           </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-drop-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-drop-button"> Remove </a>
           </td>
         </tr>
       </tbody>

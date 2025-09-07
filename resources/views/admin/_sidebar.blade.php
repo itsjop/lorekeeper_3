@@ -1,13 +1,13 @@
 <div id="sidebar-ul" class="gridded">
   <div class="sidebar-header">
-    <a href="{{ url('admin') }}" class="card-link">Admin Home</a>
+    <a href="{{ url('admin') }}" class="card-link"> Admin Home </a>
   </div>
 
   @foreach (config('lorekeeper.admin_sidebar') as $key => $section)
     @if (Auth::user()->isAdmin || $section['power'] === 'mixed' || Auth::user()->hasPower($section['power']))
       <div class="{{ 'details-sb' . (array_key_exists('meta', $section) ? ' ' . $section['meta'] : '') }}"
       >
-        <summary class="sidebar-section-header">{{ str_replace(' ', '', $key) }} </summary>
+        <summary class="sidebar-section-header"> {{ str_replace(' ', '', $key) }} </summary>
         {{-- order by name --}}
         @php
           usort($section['links'], function ($a, $b) {

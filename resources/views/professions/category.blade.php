@@ -9,7 +9,7 @@
 
   <div class="row">
     <div class="col-lg-7 col-12 text-lg-left text-center">
-      <h1>{{ $category->name }}</h1>
+      <h1> {{ $category->name }} </h1>
     </div>
     <div class="col-lg-5 col-12 text-lg-right text-center">
       <a href="/professions/characters/{{ $category->id }}">
@@ -47,7 +47,7 @@
               role="tab"
               aria-controls="subcat-{{ $subcategory->id ?? 'general' }}"
               aria-selected="{{ $category->professions->where('subcategory_id', null)->count() <= 0 && $loop->index == 0 ? 'true' : 'false' }}"
-            >{{ $subcategory->name ?? 'General' }}</a>
+            > {{ $subcategory->name ?? 'General' }} </a>
           </li>
         @endif
       @endforeach
@@ -131,7 +131,7 @@
                       class="fr-fic fr-dii"
                       src="{{ $profession->iconUrl }}"
                       style="max-width:50px;"
-                    >{{ $profession->name }}
+                    > {{ $profession->name }}
                   </h1>
                   <div class="row text-justify p-4 mt-2 site-page-content parsed-text">
                     <div class="site-page-content parsed-text">

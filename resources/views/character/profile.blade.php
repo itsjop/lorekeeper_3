@@ -38,11 +38,11 @@
         <a class="btn btn-secondary btn-sm" href="/professions/{{ $character->profile->professionObj->category_id ?? '' }}">
           @if (isset($character->profile->professionObj))
             <h5 class="p-0 m-0">
-              <img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/somnivores/site/profession.png' }}" style="max-width:50px;">{{ $character->profile->professionObj->name }}
+              <img class="fr-fic fr-dii mr-2" src="{{ $character->profile->professionObj->iconUrl ?? '/images/somnivores/site/profession.png' }}" style="max-width:50px;"> {{ $character->profile->professionObj->name }}
             </h5>
           @else
             <h5 class="p-0 m-0">
-              <img class="fr-fic fr-dii mr-2" src="/images/somnivores/site/profession.png" style="max-width:50px;">{{ $character->profile->profession }}
+              <img class="fr-fic fr-dii mr-2" src="/images/somnivores/site/profession.png" style="max-width:50px;"> {{ $character->profile->profession }}
             </h5>
           @endif
         </a>
@@ -68,8 +68,8 @@
         $character->image->canViewFull(Auth::user() ?? null) &&
             file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
     )
-      <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked
-          image</a>?</div>
+      <div class="text-right"> You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}"> View watermarked
+          image </a>?</div>
     @endif
   </div>
 
@@ -85,7 +85,7 @@
   @if (Auth::check() && ($character->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
     <div class="text-right mb-2">
       <a href="{{ $character->url . '/profile/edit' }}" class="btn btn-outline-info btn-sm">
-        <i class="fas fa-cog"></i> Edit Profile</a>
+        <i class="fas fa-cog"></i> Edit Profile </a>
     </div>
   @endif
   @if ($character->profile->parsed_text)

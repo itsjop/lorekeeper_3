@@ -1,11 +1,11 @@
 <div id="sidebar-ul">
   <div class="sidebar-header">
-    <a href="{{ url('shops') }}" class="card-link">Shops</a>
+    <a href="{{ url('shops') }}" class="card-link"> Shops </a>
   </div>
 
   @if (Auth::check())
     <div class="details-sb" data-open>
-      <summary class="sidebar-section-header">History</summary>
+      <summary class="sidebar-section-header"> History </summary>
       <div class="sb-item">
         <a href="{{ url('shops/history') }}" class="{{ set_active('shops/history') }}">
           My Purchase History
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="details-sb" data-open>
-      <summary class="sidebar-section-header">My Currencies</summary>
+      <summary class="sidebar-section-header"> My Currencies </summary>
       @foreach (Auth::user()->getCurrencies(true) as $currency)
         <div class="sb-item pr-3">
           {!! $currency->display($currency->quantity) !!}
@@ -21,7 +21,7 @@
       @endforeach
   @endif
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">Shops</summary>
+    <summary class="sidebar-section-header"> Shops </summary>
     @foreach ($shops as $shop)
       @if ($shop->is_staff)
         @if (Auth::check() && Auth::user()->isstaff)
@@ -33,7 +33,7 @@
         @endif
       @else
         <div class="sb-item">
-          <a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}">{{ $shop->name }}</a>
+          <a href="{{ $shop->url }}" class="{{ set_active('shops/' . $shop->id) }}"> {{ $shop->name }} </a>
         </div>
       @endif
     @endforeach

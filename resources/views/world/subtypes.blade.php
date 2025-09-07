@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', __('lorekeeper.subtypes') => 'world/subtypes']) !!}
-  <h1>{{ __('lorekeeper.subtypes') }}</h1>
+  <h1> {{ __('lorekeeper.subtypes') }} </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -29,5 +29,5 @@
   @endforeach
   {!! $subtypes->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $subtypes->total() }} {{ trans_choice('lorekeeper.subtypes_', $subtypes->total()) }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $subtypes->total() }} {{ trans_choice('lorekeeper.subtypes_', $subtypes->total()) }} found. </div>
 @endsection

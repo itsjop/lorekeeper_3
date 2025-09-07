@@ -17,7 +17,7 @@
     <div class="row">
       <div class="col-md-2 align-items-stretch d-flex">
         <div class="d-flex text-center align-items-center">
-          <div class="character-image-blank hide">Enter character code.</div>
+          <div class="character-image-blank hide"> Enter character code. </div>
           <div class="character-image-loaded">
             @include('home._character', ['character' => $character->character])
             {!! Form::hidden('image_id[]', $character->image_id) !!}
@@ -33,7 +33,7 @@
           ]) !!}
         </div>
         <div class="character-details">
-          <h4>Sale Details</h4>
+          <h4> Sale Details </h4>
 
           <div class="form-group mb-2">
             {!! Form::label('Type') !!}

@@ -11,9 +11,9 @@
       ($feature->id ? 'Edit' : 'Create') . ' Trait' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create',
   ]) !!}
 
-  <h1>{{ $feature->id ? 'Edit' : 'Create' }} Trait
+  <h1> {{ $feature->id ? 'Edit' : 'Create' }} Trait
     @if ($feature->id)
-      <a href="#" class="btn btn-danger float-right delete-feature-button">Delete Trait</a>
+      <a href="#" class="btn btn-danger float-right delete-feature-button"> Delete Trait </a>
     @endif
   </h1>
 
@@ -22,7 +22,7 @@
       'files' => true,
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6 form-group">
@@ -41,7 +41,7 @@
       {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: 200px x 200px</div>
+    <div class="text-muted"> Recommended size: 200px x 200px </div>
     @if ($feature->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -85,7 +85,7 @@
   {!! Form::close() !!}
 
   @if ($feature->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._feature_entry', ['feature' => $feature])

@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Figure Categories' => 'world/fauna-categories']) !!}
-  <h1>Figure Categories</h1>
+  <h1> Figure Categories </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -52,6 +52,6 @@
   </div>
   {!! $categories->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $categories->total() }} result{{ $categories->total() == 1 ? '' : 's' }} found.
+  <div class="text-center mt-4 small text-muted"> {{ $categories->total() }} result{{ $categories->total() == 1 ? '' : 's' }} found.
   </div>
 @endsection

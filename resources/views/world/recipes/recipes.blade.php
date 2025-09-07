@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Recipes' => 'world/recipes']) !!}
-  <h1>Recipes</h1>
+  <h1> Recipes </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -48,5 +48,5 @@
   @endforeach
   {!! $recipes->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $recipes->total() }} result{{ $recipes->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $recipes->total() }} result{{ $recipes->total() == 1 ? '' : 's' }} found. </div>
 @endsection

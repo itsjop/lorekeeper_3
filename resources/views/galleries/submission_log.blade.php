@@ -12,10 +12,10 @@
       'Log Details' => 'gallery/queue/' . $submission->id
   ]) !!}
 
-  <h1>Log Details
+  <h1> Log Details
     <span
       class="float-right badge badge-{{ $submission->status == 'Pending' ? 'secondary' : ($submission->status == 'Accepted' ? 'success' : 'danger') }}"
-    >{{ $submission->collaboratorApproval ? $submission->status : 'Pending Collaborator Approval' }}</span>
+    > {{ $submission->collaboratorApproval ? $submission->status : 'Pending Collaborator Approval' }} </span>
   </h1>
 
   @include('galleries._queue_submission', ['key' => 0])
@@ -25,18 +25,18 @@
       @if (Settings::get('gallery_submissions_reward_currency') && $submission->gallery->currency_enabled)
         <div class="card mb-4">
           <div class="card-header">
-            <h5>{!! $currency->displayName !!} Award Info <a
+            <h5> {!! $currency->displayName !!} Award Info <a
                 class="small inventory-collapse-toggle collapse-toggle {{ $submission->status == 'Accepted' ? '' : 'collapsed' }}"
                 href="#currencyForm"
                 data-bs-toggle="collapse"
-              >Show</a>
+              > Show </a>
             </h5>
           </div>
           <div class="card-body collapse {{ $submission->status == 'Accepted' ? 'show' : '' }}" id="currencyForm">
             @if ($submission->status == 'Accepted')
               @if (!$submission->is_valued)
                 @if (Auth::user()->hasPower('manage_submissions'))
-                  <p>Enter in the amount of {{ $currency->name }} that
+                  <p> Enter in the amount of {{ $currency->name }} that
                     {{ $submission->collaborators->count() ? 'each collaborator' : 'the submitting user' }}{{ $submission->participants->count() ? ' and any participants' : '' }}
                     should receive. The suggested amount has been pre-filled for you based on the provided form responses, but this
                     is only a guideline based on user input and should be verified and any adjustments made as necessary.
@@ -77,14 +77,14 @@
                     @endforeach
                   @endif
                   @if (isset($submission->data['criterion']))
-                    <p>Adjust the criteria submitted and other options as needed for what the submitter, collaborators, and/or
-                      participants, should receive.</p>
+                    <p> Adjust the criteria submitted and other options as needed for what the submitter, collaborators, and/or
+                      participants, should receive. </p>
 
-                    <h2 class="mt-5">Criteria Rewards</h2>
+                    <h2 class="mt-5"> Criteria Rewards </h2>
                     @foreach ($submission->data['criterion'] as $key => $criterionData)
                       <div class="card p-3 mb-2">
                         @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
-                        <h3>{!! $criterion->displayName !!}</h3>
+                        <h3> {!! $criterion->displayName !!} </h3>
                         {!! Form::hidden('criterion[' . $key . '][id]', $criterionData['id']) !!}
                         @include('criteria._minimum_requirements', [
                             'criterion' => $criterion,
@@ -100,8 +100,8 @@
                       </div>
                     @endforeach
                   @else
-                    <p>This submission didn't have any criteria specified for rewards. Hitting submit will confirm this and clear it
-                      from the queue.</p>
+                    <p> This submission didn't have any criteria specified for rewards. Hitting submit will confirm this and clear it
+                      from the queue. </p>
                   @endif
                   <div class="form-group">
                     {!! Form::checkbox('ineligible', 1, false, [
@@ -116,18 +116,18 @@
                   </div>
                   {!! Form::close() !!}
                 @else
-                  <p>This submission hasn't been evaluated yet. You'll receive a notification once it has!</p>
+                  <p> This submission hasn't been evaluated yet. You'll receive a notification once it has!</p>
                 @endif
               @else
                 @if (isset($submission->data['staff']))
                   <p>
-                    <strong>Processed By:</strong> {!! App\Models\User\User::find($submission->data['staff'])->displayName !!}
+                    <strong> Processed By:</strong> {!! App\Models\User\User::find($submission->data['staff'])->displayName !!}
                   </p>
                 @endif
                 @if (isset($submission->data['ineligible']) && $submission->data['ineligible'] == 1)
-                  <p>This submission has been evaluated as ineligible for {{ $currency->name }} rewards.</p>
+                  <p> This submission has been evaluated as ineligible for {{ $currency->name }} rewards. </p>
                 @else
-                  <p>{{ $currency->name }} has been awarded for this submission.</p>
+                  <p> {{ $currency->name }} has been awarded for this submission. </p>
                   <div class="row">
                     @if (isset($submission->data['value']['submitted']))
                       <div class="col-md-4">
@@ -144,31 +144,31 @@
                     @endif
                   </div>
 
-                  <p>This submission didn't have any criteria specified for rewards</p>
+                  <p> This submission didn't have any criteria specified for rewards </p>
                 @endif
           </div>
       @endif
       @endif
     @else
-      <p>This submission is not eligible for currency
-        awards{{ $submission->status == 'Pending' ? ' yet-- it must be accepted first' : '' }}.</p>
+      <p> This submission is not eligible for currency
+        awards{{ $submission->status == 'Pending' ? ' yet-- it must be accepted first' : '' }}. </p>
       @endif
       @if (isset($totals) && count($totals) > 0)
         <hr />
         @if (isset($submission->data['total']))
-          <h6>Form Responses:</h6>
+          <h6> Form Responses:</h6>
           <div class="row mb-2">
             @foreach ($submission->data['currencyData'] as $key => $data)
               <div class="col-md-3 text-center">
                 @if (isset($data) && isset(config('lorekeeper.group_currency_form')[$key]))
-                  <strong>{{ config('lorekeeper.group_currency_form')[$key]['name'] }}:</strong>
+                  <strong> {{ config('lorekeeper.group_currency_form')[$key]['name'] }}:</strong>
                   <br />
                   @if (config('lorekeeper.group_currency_form')[$key]['type'] == 'choice')
                     @if (isset(config('lorekeeper.group_currency_form')[$key]['multiple']) &&
                             config('lorekeeper.group_currency_form')[$key]['multiple'] == 'true'
                     )
                       @foreach ($data as $answer)
-                        {{ config('lorekeeper.group_currency_form')[$key]['choices'][$answer] ?? '-' }}<br />
+                        {{ config('lorekeeper.group_currency_form')[$key]['choices'][$answer] ?? '-' }} <br />
                       @endforeach
                     @else
                       {{ config('lorekeeper.group_currency_form')[$key]['choices'][$data] }}
@@ -183,21 +183,21 @@
           @if (Auth::user()->hasPower('manage_submissions') && isset($submission->data['total']))
             <h6>[Admin]</h6>
             <p class="text-center">
-              <strong>Calculated Total:</strong> {{ $submission->data['total'] }}
+              <strong> Calculated Total:</strong> {{ $submission->data['total'] }}
               @if ($submission->characters->count())
                 ・ <strong> Times {{ $submission->characters->count() }} Characters:</strong>
                 {{ round($submission->data['total'] * $submission->characters->count()) }}
               @endif
               @if ($submission->collaborators->count())
                 <br />
-                <strong>Divided by {{ $submission->collaborators->count() }} Collaborators:</strong>
+                <strong> Divided by {{ $submission->collaborators->count() }} Collaborators:</strong>
                 {{ round($submission->data['total'] / $submission->collaborators->count()) }}
                 @if ($submission->characters->count())
                   ・ <strong> Times {{ $submission->characters->count() }} Characters:</strong>
                   {{ round(round($submission->data['total'] * $submission->characters->count()) / $submission->collaborators->count()) }}
                 @endif
               @endif
-              <br />For a suggested {!! $currency->display(
+              <br /> For a suggested {!! $currency->display(
                   round(
                       ($submission->characters->count()
                           ? round($submission->data['total'] * $submission->characters->count())
@@ -207,18 +207,18 @@
             </p>
           @endif
         @else
-          <p>This submission does not have form data associated with it.</p>
+          <p> This submission does not have form data associated with it. </p>
         @endif
     </div>
   </div>
   @endif
   <div class="card mb-4">
     <div class="card-header">
-      <h4>Staff Comments</h4> {!! Auth::user()->hasPower('staff_comments') ? '(Visible to ' . $submission->credits . ')' : '' !!}
+      <h4> Staff Comments </h4> {!! Auth::user()->hasPower('staff_comments') ? '(Visible to ' . $submission->credits . ')' : '' !!}
     </div>
     <div class="card-body">
       @if (isset($submission->parsed_staff_comments))
-        <h5>Staff Comments (Old):</h5>
+        <h5> Staff Comments (Old):</h5>
         {!! $submission->parsed_staff_comments !!}
         <hr />
       @endif
@@ -233,25 +233,25 @@
     <div class="col-md-5">
       <div class="card mb-4">
         <div class="card-header">
-          <h5>[Admin] Vote Info</h5>
+          <h5>[Admin] Vote Info </h5>
         </div>
         <div class="card-body">
           @if ($submission->getVoteData()['raw']->count())
             @foreach ($submission->getVoteData(1)['raw'] as $vote)
               <li>
                 {!! $vote['user']->displayName !!} {{ $vote['user']->id == Auth::user()->id ? '(you)' : '' }}: <span
-                  {!! $vote['vote'] == 2 ? 'class="text-success">Accept' : 'class="text-danger">Reject' !!}</span
+                  {!! $vote['vote'] == 2 ? 'class="text-success"> Accept' : 'class="text-danger"> Reject' !!} </span
                 >
               </li>
             @endforeach
           @else
-            <p>No votes have been cast yet!</p>
+            <p> No votes have been cast yet!</p>
           @endif
         </div>
       </div>
       {{-- <div class="card mb-4">
         <div class="card-header">
-          <h5>[Admin] Staff Comments</h5> (Only visible to staff)
+          <h5>[Admin] Staff Comments </h5> (Only visible to staff)
         </div>
         <div class="card-body">
           <!-- Staff-User Comments -->

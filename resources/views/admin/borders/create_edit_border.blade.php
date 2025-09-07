@@ -16,7 +16,7 @@
   <h1>
     {{ $border->id ? 'Edit' : 'Create' }} Border
     @if ($border->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-border-button">Delete Border</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-border-button"> Delete Border </a>
     @endif
   </h1>
 
@@ -25,7 +25,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6">
@@ -45,11 +45,11 @@
   <div class="row">
     @if ($border->id)
       <div class="col-md-3 text-center">
-        <h3>Preview</h3>
+        <h3> Preview </h3>
         <div class="row no-gutters">
           <div class="col-6 col-md-12">
             <div class="form-group">
-              <h5>Border Image</h5>
+              <h5> Border Image </h5>
               <div class="user-avatar">
                 <img src="{{ $border->imageUrl }}" class="img-fluid" />
               </div>
@@ -57,7 +57,7 @@
           </div>
           <div class="col-6 col-md-12">
             <div class="form-group">
-              <h5>In Action</h5>
+              <h5> In Action </h5>
               {!! $border->preview() !!}
             </div>
           </div>
@@ -66,17 +66,17 @@
     @endif
 
     <div class="col-md-6">
-      <h3>Image</h3>
+      <h3> Image </h3>
       <p>
-        <b>An image is required. You can't have a border with no image!</b> A square canvas is recommended. The container that
+        <b> An image is required. You can't have a border with no image!</b> A square canvas is recommended. The container that
         contains the avatar and borders has a max-width set of 150px, while the avatar itself is resized down to around 120px.
         This can be adjusted in the CSS.
       </p>
 
       <div class="form-group">
         {!! Form::label('image', 'Border Image', ['class' => 'font-weight-bold']) !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Supports .png and .gif</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Supports .png and .gif </div>
       </div>
       <div class="form-group">
         {!! Form::label('Border Style (Required)') !!}{!! add_help('Choose how the border will display around an icon. It can display over or under the user\'s icon.') !!}
@@ -88,8 +88,8 @@
     </div>
 
     <div class="col-md-3">
-      <h3>Border Options</h3>
-      <p>You can adjust whether your border is active (visible), allowed for free use by all users, or if it is exclusive to staff.
+      <h3> Border Options </h3>
+      <p> You can adjust whether your border is active (visible), allowed for free use by all users, or if it is exclusive to staff.
       </p>
 
       <div class="form-group">
@@ -154,20 +154,20 @@
   @if ($border->id)
     <hr />
     <div class="card mb-3 p-4">
-      <h2>Layers</h2>
-      <p>These are layered images that players can choose from. A user that owns this base border can switch between its layers for
-        free. A border must have a top and bottom layer before a user can choose to layer anything.</p>
-      <p>Top layers will always layer over the bottom layer, but a top layer and bottom layer can both have their own styles as
-        well.</p>
+      <h2> Layers </h2>
+      <p> These are layered images that players can choose from. A user that owns this base border can switch between its layers for
+        free. A border must have a top and bottom layer before a user can choose to layer anything. </p>
+      <p> Top layers will always layer over the bottom layer, but a top layer and bottom layer can both have their own styles as
+        well. </p>
       <div class="card border-0">
         <div class="card-body">
-          <h2 class="text-center">Top Layers</h2>
+          <h2 class="text-center"> Top Layers </h2>
           <div class="text-right mb-2">
             <a
               href="#"
               class="btn btn-primary"
               id="add-top"
-            >Add Top Layer</a>
+            > Add Top Layer </a>
           </div>
           @if ($border->topLayers->count())
             <div class="row">
@@ -176,28 +176,28 @@
                   {!! $layer->preview() !!}
 
                   <div class="text-center">
-                    <h5>{!! $layer->name !!}</h5>
+                    <h5> {!! $layer->name !!} </h5>
                     <a
                       href="#"
                       class="btn btn-sm btn-primary edit-top"
                       data-id="{{ $layer->id }}"
                     >
-                      <i class="fas fa-cog mr-1"></i>Edit</a>
+                      <i class="fas fa-cog mr-1"></i> Edit </a>
                   </div>
                 </div>
               @endforeach
             </div>
           @else
-            <div class="alert alert-info">No top layers found.</div>
+            <div class="alert alert-info"> No top layers found. </div>
           @endif
           <hr class="w-75">
-          <h2 class="text-center">Bottom Layers</h2>
+          <h2 class="text-center"> Bottom Layers </h2>
           <div class="text-right mb-2">
             <a
               href="#"
               class="btn btn-primary"
               id="add-bottom"
-            >Add Bottom Layer</a>
+            > Add Bottom Layer </a>
           </div>
           @if ($border->bottomLayers->count())
             <div class="row">
@@ -206,26 +206,26 @@
                   {!! $layer->preview() !!}
 
                   <div class="text-center">
-                    <h5>{!! $layer->name !!}</h5>
+                    <h5> {!! $layer->name !!} </h5>
                     <a
                       href="#"
                       class="btn btn-sm btn-primary edit-bottom"
                       data-id="{{ $layer->id }}"
                     >
-                      <i class="fas fa-cog mr-1"></i>Edit</a>
+                      <i class="fas fa-cog mr-1"></i> Edit </a>
                   </div>
                 </div>
               @endforeach
             </div>
           @else
-            <div class="alert alert-info">No bottom layers found.</div>
+            <div class="alert alert-info"> No bottom layers found. </div>
           @endif
         </div>
       </div>
     </div>
     <div class="card mb-3 p-4">
-      <h2>Variants</h2>
-      <p>These are the variations for this border. A user that owns this base border can switch between its variants for free.</p>
+      <h2> Variants </h2>
+      <p> These are the variations for this border. A user that owns this base border can switch between its variants for free. </p>
       <div class="card border-0">
         <div class="card-body">
           <div class="text-right mb-2">
@@ -233,7 +233,7 @@
               href="#"
               class="btn btn-primary"
               id="add-variant"
-            >Add Variant</a>
+            > Add Variant </a>
           </div>
           @if ($border->variants->count())
             <div class="row">
@@ -242,27 +242,27 @@
                   {!! $variant->preview() !!}
 
                   <div class="text-center">
-                    <h5>{!! $variant->name !!}</h5>
+                    <h5> {!! $variant->name !!} </h5>
                     <a
                       href="#"
                       class="btn btn-sm btn-primary edit-variant"
                       data-id="{{ $variant->id }}"
                     >
-                      <i class="fas fa-cog mr-1"></i>Edit</a>
+                      <i class="fas fa-cog mr-1"></i> Edit </a>
                   </div>
                 </div>
               @endforeach
             </div>
           @else
-            <div class="alert alert-info">No variants found.</div>
+            <div class="alert alert-info"> No variants found. </div>
           @endif
         </div>
       </div>
     </div>
     <div class="card mb-3 p-4">
-      <h2>Create Item</h2>
-      <p>This will create a corresponding item (with an attached item tag) that a user can activate and obtain this border.</p>
-      <p>This will only check if an item tag can unlock this specific border ONLY.</p>
+      <h2> Create Item </h2>
+      <p> This will create a corresponding item (with an attached item tag) that a user can activate and obtain this border. </p>
+      <p> This will only check if an item tag can unlock this specific border ONLY. </p>
       @if (!$border->hasItem())
         {!! Form::open([
             'url' => 'admin/data/borders/item/' . $border->id
@@ -270,11 +270,11 @@
         {!! Form::submit('Create Item', ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
       @else
-        <div class="alert alert-danger">This border already has an item.</div>
+        <div class="alert alert-danger"> This border already has an item. </div>
       @endif
     </div>
     <hr />
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._border_entry', ['border' => $border])

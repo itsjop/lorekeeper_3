@@ -1,5 +1,5 @@
 @if (!$stack)
-  <div class="text-center">Invalid stack selected.</div>
+  <div class="text-center"> Invalid stack selected. </div>
 @else
   <div class="text-center">
     @if ($award->has_image)
@@ -9,7 +9,7 @@
         </a>
       </div>
     @endif
-    <a href="{{ $award->idUrl }}">{{ $award->name }}</a>
+    <a href="{{ $award->idUrl }}"> {{ $award->name }} </a>
   </div>
 
   @if ($award->is_featured)
@@ -18,7 +18,7 @@
     </div>
   @endif
 
-  <h5>Owned Stacks</h5>
+  <h5> Owned Stacks </h5>
 
   {!! Form::open(['url' => 'character/' . $character->slug . '/' . __('awards.awardcase') . '/edit']) !!}
   <div class="card" style="border: 0px">
@@ -34,9 +34,9 @@
               >
             </th>
           @endif
-          <th class="col">Source</th>
-          <th class="col">Notes</th>
-          <th class="col-2">Quantity</th>
+          <th class="col"> Source </th>
+          <th class="col"> Notes </th>
+          <th class="col-2"> Quantity </th>
           <th class="col-1">
             <i class="fas fa-lock invisible"></i>
           </th>
@@ -46,10 +46,10 @@
         @foreach ($stack as $awardRow)
           <tr id ="awardRow{{ $awardRow->id }}" class="d-flex {{ $awardRow->isTransferrable ? '' : 'accountbound' }}">
             @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
-              <td class="col-1">{!! Form::checkbox('ids[]', $awardRow->id, false, ['class' => 'award-check', 'onclick' => 'updateQuantities(this)']) !!}</td>
+              <td class="col-1"> {!! Form::checkbox('ids[]', $awardRow->id, false, ['class' => 'award-check', 'onclick' => 'updateQuantities(this)']) !!} </td>
             @endif
-            <td class="col">{!! array_key_exists('data', $awardRow->data) ? ($awardRow->data['data'] ? $awardRow->data['data'] : 'N/A') : 'N/A' !!}</td>
-            <td class="col">{!! array_key_exists('notes', $awardRow->data) ? ($awardRow->data['notes'] ? $awardRow->data['notes'] : 'N/A') : 'N/A' !!}</td>
+            <td class="col"> {!! array_key_exists('data', $awardRow->data) ? ($awardRow->data['data'] ? $awardRow->data['data'] : 'N/A') : 'N/A' !!} </td>
+            <td class="col"> {!! array_key_exists('notes', $awardRow->data) ? ($awardRow->data['notes'] ? $awardRow->data['notes'] : 'N/A') : 'N/A' !!} </td>
             @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
               @if ($awardRow->availableQuantity)
                 <td class="col-2">
@@ -60,7 +60,7 @@
                         'style' => 'min-width:40px;'
                     ]) !!}
                     <div class="input-group-append">
-                      <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
+                      <div class="input-group-text">/ {{ $awardRow->availableQuantity }} </div>
                     </div>
                   </div>
                 </td>
@@ -74,13 +74,13 @@
                         'disabled'
                     ]) !!}
                     <div class="input-group-append">
-                      <div class="input-group-text">/ {{ $awardRow->availableQuantity }}</div>
+                      <div class="input-group-text">/ {{ $awardRow->availableQuantity }} </div>
                     </div>
                   </div>
                 </td>
               @endif
             @else
-              <td class="col-3">{!! $awardRow->count !!}</td>
+              <td class="col-3"> {!! $awardRow->count !!} </td>
             @endif
             <td class="col-1">
               @if (!$awardRow->isTransferrable)
@@ -114,14 +114,14 @@
           </div>
           <div id="transferForm" class="collapse">
             @if ($user && $user->hasPower('edit_inventories'))
-              <p class="alert alert-warning my-2">Note: Your rank allows you to transfer {{ __('lorekeeper.character') }}-bound
-                {{ __('awards.awards') }}.</p>
+              <p class="alert alert-warning my-2"> Note: Your rank allows you to transfer {{ __('lorekeeper.character') }}-bound
+                {{ __('awards.awards') }}. </p>
             @endif
-            <p>This will transfer this {{ __('awards.award') }} back to @if ($owner_id != $user->id)
+            <p> This will transfer this {{ __('awards.award') }} back to @if ($owner_id != $user->id)
                 this user's
               @else
                 your
-              @endif {{ __('awards.awardcase') }} .</p>
+              @endif {{ __('awards.awardcase') }} . </p>
             <div class="text-right">
               {!! Form::button('Transfer', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'take', 'type' => 'submit']) !!}
             </div>
@@ -139,7 +139,7 @@
           </a>
         </div>
         <div id="deleteForm" class="collapse">
-          <p>This action is not reversible. Are you sure you want to delete this {{ __('awards.award') }}?</p>
+          <p> This action is not reversible. Are you sure you want to delete this {{ __('awards.award') }}?</p>
           <div class="text-right">
             {!! Form::button('Delete', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete', 'type' => 'submit']) !!}
           </div>

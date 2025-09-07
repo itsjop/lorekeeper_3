@@ -32,7 +32,7 @@
 
     @if ($category->is_character_owned == 1)
       <div>
-        <strong>Characters can own {{ $category->character_limit != 0 ? $category->character_limit : '' }}
+        <strong> Characters can own {{ $category->character_limit != 0 ? $category->character_limit : '' }}
           {{ __('awards.awards') }} in this category!</strong>
       </div>
     @endif

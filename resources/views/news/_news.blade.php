@@ -20,12 +20,12 @@
   @if (!$page)
     <div class="text-right mb-2 mr-2">
       <a class="btn" href="{{ $news->url }}#comment-comments">
-        <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</a>
+        <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }} </a>
     </div>
   @else
     <div class="text-right mb-2 mr-2">
       <a class="btn" href="#comment-comments">
-        <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</a>
+        <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }} </a>
     </div>
   @endif
 </div>

@@ -25,94 +25,94 @@
       {{ $submission->prompt_id ? 'Submission' : 'Claim' }} (#{{ $submission->id }})
       <span
         class="float-right badge badge-{{ $submission->status == 'Pending' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}"
-      >{{ $submission->status }}</span>
+      > {{ $submission->status }} </span>
     </h1>
 
     <div class="mb-1">
       <div class="row">
         <div class="col-md-2 col-4">
-          <h5>User</h5>
+          <h5> User </h5>
         </div>
-        {{-- <div class="col-md-10 col-8">{!! $submission->user->displayNamePronouns !!}</div> --}}
-        <div class="col-md-10 col-8">{!! $submission->user->displayName !!}</div>
+        {{-- <div class="col-md-10 col-8"> {!! $submission->user->displayNamePronouns !!} </div> --}}
+        <div class="col-md-10 col-8"> {!! $submission->user->displayName !!} </div>
       </div>
     </div>
     @if ($submission->prompt_id)
       <div class="row">
         <div class="col-md-2 col-4">
-          <h5>Prompt</h5>
+          <h5> Prompt </h5>
         </div>
-        <div class="col-md-10 col-8">{!! $submission->prompt->displayName !!}</div>
+        <div class="col-md-10 col-8"> {!! $submission->prompt->displayName !!} </div>
       </div>
       <div class="row">
         <div class="col-md-2 col-4">
-          <h5>Previous Submissions{!! add_help('This is the number of times the user has submitted this prompt before, pending or approved.') !!}</h5>
+          <h5> Previous Submissions{!! add_help('This is the number of times the user has submitted this prompt before, pending or approved.') !!} </h5>
         </div>
         <div class="col-md-10 col-8">
           <div class="row text-center">
             <div class="col">
-              <strong>All Time</strong>
+              <strong> All Time </strong>
             </div>
             <div class="col">
-              <strong>Past Hour</strong>
+              <strong> Past Hour </strong>
             </div>
             <div class="col">
-              <strong>Past Day</strong>
+              <strong> Past Day </strong>
             </div>
             <div class="col">
-              <strong>Past Week</strong>
+              <strong> Past Week </strong>
             </div>
             <div class="col">
-              <strong>Past Month</strong>
+              <strong> Past Month </strong>
             </div>
             <div class="col">
-              <strong>Past Year</strong>
+              <strong> Past Year </strong>
             </div>
           </div>
           <div class="row text-center">
-            <div class="col">{{ $count['all'] }}</div>
-            <div class="col">{{ $count['Hour'] }}</div>
-            <div class="col">{{ $count['Day'] }}</div>
-            <div class="col">{{ $count['Week'] }}</div>
-            <div class="col">{{ $count['Month'] }}</div>
-            <div class="col">{{ $count['Year'] }}</div>
+            <div class="col"> {{ $count['all'] }} </div>
+            <div class="col"> {{ $count['Hour'] }} </div>
+            <div class="col"> {{ $count['Day'] }} </div>
+            <div class="col"> {{ $count['Week'] }} </div>
+            <div class="col"> {{ $count['Month'] }} </div>
+            <div class="col"> {{ $count['Year'] }} </div>
           </div>
         </div>
       </div>
     @endif
     <div class="row">
       <div class="col-md-2 col-4">
-        <h5>URL</h5>
+        <h5> URL</h5>
       </div>
       <div class="col-md-10 col-8">
-        <a href="{{ $submission->url }}">{{ $submission->url }}</a>
+        <a href="{{ $submission->url }}"> {{ $submission->url }} </a>
       </div>
     </div>
     @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && $submission->data['gallery_submission_id'])
       <div class="row mb-2 no-gutters">
         <div class="col-md-2">
-          <h5 class="mb-0">Gallery Submission</h5>
+          <h5 class="mb-0"> Gallery Submission </h5>
         </div>
         <div class="col-md-10">
-          <a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a>
+          <a href="{{ $submission->gallerySubmission->url }}"> {{ $submission->gallerySubmission->title }} </a>
         </div>
       </div>
     @endif
     <div class="row">
       <div class="col-md-2 col-4">
-        <h5>Submitted</h5>
+        <h5> Submitted </h5>
       </div>
-      <div class="col-md-10 col-8">{!! format_date($submission->created_at) !!} ({{ $submission->created_at->diffForHumans() }})</div>
+      <div class="col-md-10 col-8"> {!! format_date($submission->created_at) !!} ({{ $submission->created_at->diffForHumans() }})</div>
     </div>
-    <h2>Comments</h2>
+    <h2> Comments </h2>
     <div class="card mb-3">
-      <div class="card-body">{!! nl2br(htmlentities($submission->comments)) !!}</div>
+      <div class="card-body"> {!! nl2br(htmlentities($submission->comments)) !!} </div>
     </div>
     @if (Auth::check() &&
             $submission->staff_comments &&
             ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
     )
-      <h2>Staff Comments ({!! $submission->staff->displayName !!})</h2>
+      <h2> Staff Comments ({!! $submission->staff->displayName !!})</h2>
       <div class="card mb-3">
         <div class="card-body">
           @if (isset($submission->parsed_staff_comments))
@@ -130,11 +130,11 @@
         'onsubmit' => "$(this).find('input').prop('disabled', false)"
     ]) !!}
     @if (isset($submission->data['criterion']))
-      <h2 class="mt-5">Criteria Rewards</h2>
+      <h2 class="mt-5"> Criteria Rewards </h2>
       @foreach ($submission->data['criterion'] as $key => $criterionData)
         <div class="card p-3 mb-2">
           @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
-          <h3>{!! $criterion->displayName !!}</h3>
+          <h3> {!! $criterion->displayName !!} </h3>
           {!! Form::hidden('criterion[' . $key . '][id]', $criterionData['id']) !!}
           @include('criteria._minimum_requirements', [
               'criterion' => $criterion,
@@ -152,7 +152,7 @@
         </div>
       @endforeach
     @endif
-    <h2>Rewards</h2>
+    <h2> Rewards </h2>
     @include('widgets._loot_select', [
         'loots' => $submission->rewards,
         'showLootTables' => true,
@@ -165,7 +165,7 @@
       </div>
     @endif
 
-    <h2>Characters</h2>
+    <h2> Characters </h2>
     <div id="characters" class="mb-3">
       @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) !=
               count($submission->characters()->get())
@@ -190,21 +190,21 @@
         href="#"
         class="btn btn-outline-info"
         id="addCharacter"
-      >Add Character</a>
+      > Add Character </a>
     </div>
 
     @if (isset($inventory['user_items']))
-      <h2>Add-Ons</h2>
-      <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be
-        refunded if the request is rejected or consumed if it is approved.</p>
+      <h2> Add-Ons </h2>
+      <p> These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be
+        refunded if the request is rejected or consumed if it is approved. </p>
       <hr>
       <table class="table table-sm">
         <thead class="thead-light">
           <tr class="d-flex">
-            <th class="col-2">Item</th>
-            <th class="col-4">Source</th>
-            <th class="col-4">Notes</th>
-            <th class="col-2">Quantity</th>
+            <th class="col-2"> Item </th>
+            <th class="col-4"> Source </th>
+            <th class="col-4"> Notes </th>
+            <th class="col-2"> Quantity </th>
           </tr>
         </thead>
         <tbody>
@@ -218,17 +218,17 @@
                     alt="{{ $itemsrow[$itemRow['asset']->item_id]->name }}"
                   >
                 @endif {!! $itemsrow[$itemRow['asset']->item_id]->name !!}
-              <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data)
+              <td class="col-4"> {!! array_key_exists('data', $itemRow['asset']->data)
                   ? ($itemRow['asset']->data['data']
                       ? $itemRow['asset']->data['data']
                       : 'N/A')
-                  : 'N/A' !!}</td>
-              <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data)
+                  : 'N/A' !!} </td>
+              <td class="col-4"> {!! array_key_exists('notes', $itemRow['asset']->data)
                   ? ($itemRow['asset']->data['notes']
                       ? $itemRow['asset']->data['notes']
                       : 'N/A')
-                  : 'N/A' !!}</td>
-              <td class="col-2">{!! $itemRow['quantity'] !!}
+                  : 'N/A' !!} </td>
+              <td class="col-2"> {!! $itemRow['quantity'] !!}
             </tr>
           @endforeach
         </tbody>
@@ -236,19 +236,19 @@
     @endif
 
     @if (isset($inventory['currencies']))
-      <h3>{!! $submission->user->displayName !!}'s Bank</h3>
+      <h3> {!! $submission->user->displayName !!}'s Bank </h3>
       <table class="table table-sm mb-3">
         <thead>
           <tr>
-            <th width="70%">Currency</th>
-            <th width="30%">Quantity</th>
+            <th width="70%"> Currency </th>
+            <th width="30%"> Quantity </th>
           </tr>
         </thead>
         <tbody>
           @foreach ($inventory['currencies'] as $currency)
             <tr>
-              <td>{!! $currency['asset']->name !!}</td>
-              <td>{{ $currency['quantity'] }}</td>
+              <td> {!! $currency['asset']->name !!} </td>
+              <td> {{ $currency['quantity'] }} </td>
             </tr>
           @endforeach
         </tbody>
@@ -264,17 +264,17 @@
         href="#"
         class="btn btn-danger mr-2"
         id="rejectionButton"
-      >Reject</a>
+      > Reject </a>
       <a
         href="#"
         class="btn btn-secondary mr-2"
         id="cancelButton"
-      >Cancel</a>
+      > Cancel </a>
       <a
         href="#"
         class="btn btn-success"
         id="approvalButton"
-      >Approve</a>
+      > Approve </a>
     </div>
 
     {!! Form::close() !!}
@@ -290,7 +290,7 @@
           <div class="row">
             <div class="col-md-2 align-items-stretch d-flex">
               <div class="d-flex text-center align-items-center">
-                <div class="character-image-blank">Enter character code.</div>
+                <div class="character-image-blank"> Enter character code. </div>
                 <div class="character-image-loaded hide">
                 </div>
               </div>
@@ -306,7 +306,7 @@
                 ]) !!}
               </div>
               <div class="form-group gift-notifs hide">
-                <h4>Notify Owner?</h4>
+                <h4> Notify Owner?</h4>
                 <div class="row">
                   {!! Form::select('character-notify-owner[]', [0 => 'No', 1 => 'Yes'], 0, [
                       'class' => 'form-control ml-lg-3 col-5 col-md-9 character-notify-owner'
@@ -316,24 +316,24 @@
                 </div>
               </div>
               <div class="character-rewards hide">
-                <h4>Character Rewards</h4>
+                <h4> Character Rewards </h4>
                 <table class="table table-sm">
                   <thead>
                     <tr>
                       @if ($expanded_rewards)
-                        <th width="35%">Reward Type</th>
-                        <th width="35%">Reward</th>
+                        <th width="35%"> Reward Type </th>
+                        <th width="35%"> Reward </th>
                       @else
-                        <th width="70%">Reward</th>
+                        <th width="70%"> Reward </th>
                       @endif
-                      <th width="30%">Amount</th>
+                      <th width="30%"> Amount </th>
                     </tr>
                   </thead>
                   <tbody class="character-rewards">
                   </tbody>
                 </table>
                 <div class="text-right">
-                  <a href="#" class="btn btn-outline-primary btn-sm add-reward">Add Reward</a>
+                  <a href="#" class="btn btn-outline-primary btn-sm add-reward"> Add Reward </a>
                 </div>
               </div>
             </div>
@@ -353,22 +353,22 @@
               ) !!}
             </td>
             <td class="lootDivs">
-              <div class="character-currencies hide">{!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, [
+              <div class="character-currencies hide"> {!! Form::select('character_rewardable_id[]', $characterCurrencies, 0, [
                   'class' => 'form-control character-currency-id',
                   'placeholder' => 'Select Currency'
-              ]) !!}</div>
-              <div class="character-items hide">{!! Form::select('character_rewardable_id[]', $items, 0, [
+              ]) !!} </div>
+              <div class="character-items hide"> {!! Form::select('character_rewardable_id[]', $items, 0, [
                   'class' => 'form-control character-item-id',
                   'placeholder' => 'Select Item'
-              ]) !!}</div>
-              <div class="character-awards hide">{!! Form::select('character_rewardable_id[]', $characterAwards, 0, [
+              ]) !!} </div>
+              <div class="character-awards hide"> {!! Form::select('character_rewardable_id[]', $characterAwards, 0, [
                   'class' => 'form-control character-award-id',
                   'placeholder' => 'Select ' . ucfirst(__('awards.award'))
-              ]) !!}</div>
-              <div class="character-tables hide">{!! Form::select('character_rewardable_id[]', $tables, 0, [
+              ]) !!} </div>
+              <div class="character-tables hide"> {!! Form::select('character_rewardable_id[]', $tables, 0, [
                   'class' => 'form-control character-table-id',
                   'placeholder' => 'Select Loot Table'
-              ]) !!}</div>
+              ]) !!} </div>
             </td>
           @else
             <td class="lootDivs">
@@ -405,7 +405,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content hide" id="approvalContent">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">Confirm Approval</span>
+            <span class="modal-title h5 mb-0"> Confirm Approval </span>
             <button
               type="button"
               class="close"
@@ -413,20 +413,20 @@
             >&times;</button>
           </div>
           <div class="modal-body">
-            <p>This will approve the {{ $submission->prompt_id ? 'submission' : 'claim' }} and distribute the above rewards to the
-              user.</p>
+            <p> This will approve the {{ $submission->prompt_id ? 'submission' : 'claim' }} and distribute the above rewards to the
+              user. </p>
             <div class="text-right">
               <a
                 href="#"
                 id="approvalSubmit"
                 class="btn btn-success"
-              >Approve</a>
+              > Approve </a>
             </div>
           </div>
         </div>
         <div class="modal-content hide" id="cancelContent">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">Confirm Cancellation</span>
+            <span class="modal-title h5 mb-0"> Confirm Cancellation </span>
             <button
               type="button"
               class="close"
@@ -434,20 +434,20 @@
             >&times;</button>
           </div>
           <div class="modal-body">
-            <p>This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} and send it back to drafts. Make sure to
+            <p> This will cancel the {{ $submission->prompt_id ? 'submission' : 'claim' }} and send it back to drafts. Make sure to
               include a staff comment if you do this!</p>
             <div class="text-right">
               <a
                 href="#"
                 id="cancelSubmit"
                 class="btn btn-secondary"
-              >Cancel</a>
+              > Cancel </a>
             </div>
           </div>
         </div>
         <div class="modal-content hide" id="rejectionContent">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">Confirm Rejection</span>
+            <span class="modal-title h5 mb-0"> Confirm Rejection </span>
             <button
               type="button"
               class="close"
@@ -455,20 +455,20 @@
             >&times;</button>
           </div>
           <div class="modal-body">
-            <p>This will reject the {{ $submission->prompt_id ? 'submission' : 'claim' }}.</p>
+            <p> This will reject the {{ $submission->prompt_id ? 'submission' : 'claim' }}. </p>
             <div class="text-right">
               <a
                 href="#"
                 id="rejectionSubmit"
                 class="btn btn-danger"
-              >Reject</a>
+              > Reject </a>
             </div>
           </div>
         </div>
       </div>
     </div>
   @else
-    <div class="alert alert-info">This {{ $submission->prompt_id ? 'submission' : 'claim' }} has already been processed.</div>
+    <div class="alert alert-info"> This {{ $submission->prompt_id ? 'submission' : 'claim' }} has already been processed. </div>
     @include('home._submission_content', ['submission' => $submission])
   @endif
 

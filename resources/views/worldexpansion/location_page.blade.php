@@ -21,9 +21,9 @@
       $location->style => 'world/locations/' . $location->id
   ]) !!}
   <h1 style="clear:both;">
-    <img src="{{ $location->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $location->style !!}
+    <img src="{{ $location->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" /> {!! $location->style !!}
   </h1>
-  <h5 class="mb-0">{!! ucfirst($location->type->displayName) !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!}</h5>
+  <h5 class="mb-0"> {!! ucfirst($location->type->displayName) !!} {!! $location->parent ? 'inside ' . $location->parent->displayName : '' !!} </h5>
 
   @if (($user_enabled && $location->is_user_home) || ($ch_enabled && $location->is_character_home))
     <p class="mb-0">
@@ -43,7 +43,7 @@
   @endif
 
   @isset($location->summary)
-    <div class="world-entry-text px-3 text-center">{!! $location->summary !!}</div>
+    <div class="world-entry-text px-3 text-center"> {!! $location->summary !!} </div>
   @endisset
 
   @isset($location->parsed_description)
@@ -56,7 +56,7 @@
     @if (count($location->children))
       <div class="text-center col-md mb-3 fb-md-50">
         <div class="card h-100 py-3">
-          <h5 class="mb-0">Contains the following</h5>
+          <h5 class="mb-0"> Contains the following </h5>
           {{--
           <hr>
           <p class="mb-0">
@@ -121,7 +121,7 @@
   @if (count($location->gallerysubmissions))
     <div class="text-center col-md mb-3 fb-md-50">
       <div class="card h-100 py-3">
-        <h5 class="mb-0">Associated Gallery Submission{{ count($location->gallerysubmissions) == 1 ? '' : 's' }}</h5>
+        <h5 class="mb-0"> Associated Gallery Submission{{ count($location->gallerysubmissions) == 1 ? '' : 's' }} </h5>
         <hr>
 
         <div class="gallery grid grid-4-col">
@@ -131,7 +131,7 @@
         </div>
         @if (count($location->gallerysubmissions) > 2)
           <p class="text-right mr-4 mb-0">
-            <a href="{{ url('world/locations/') . '/' . $location->id . '/submissions' }}">See All
+            <a href="{{ url('world/locations/') . '/' . $location->id . '/submissions' }}"> See All
               {{ count($location->gallerysubmissions) }}
           </p>
         @endif

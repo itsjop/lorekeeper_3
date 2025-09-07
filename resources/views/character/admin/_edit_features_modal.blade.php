@@ -35,7 +35,7 @@
       <div id="titleData">
         @foreach ($image->titles as $title)
           <div class="d-flex mb-2">
-            <div class="mb-0 title-name col-3 col-md-3 col-sm-12">{{ $title->title?->title ?? 'Custom Title' }}</div>
+            <div class="mb-0 title-name col-3 col-md-3 col-sm-12"> {{ $title->title?->title ?? 'Custom Title' }} </div>
             {!! Form::text(
                 'title_data[' . ($title->title_id ?? 'custom') . '][full]',
                 isset($title->data['full']) ? $title->data['full'] : null,
@@ -56,7 +56,7 @@
 </div>
 
 <hr>
-<h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
+<h5> {{ ucfirst(__('transformations.transformations')) }} </h5>
 <div class="form-group" id="transformations">
   {!! Form::label(ucfirst(__('transformations.transformation')) . ' (Optional)') !!}
   {!! Form::select('transformation_id', $transformations, $image->transformation_id, [
@@ -102,7 +102,7 @@
       href="#"
       class="btn btn-primary mb-2"
       id="add-feature"
-    >Add Trait</a>
+    > Add Trait </a>
   </div>
   <div id="featureList">
     @foreach ($image->features as $feature)

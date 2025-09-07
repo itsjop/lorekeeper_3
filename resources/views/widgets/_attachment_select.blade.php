@@ -17,20 +17,20 @@
 <div class="row no-gutters" id="attachments">
   <div class="row col-12  logs-table-header align-items-center ">
     <div class="col-4 py-1 h-100 col-md-4 font-weight-bold">
-      <div class="logs-table-cell">Attachment Type</div>
+      <div class="logs-table-cell"> Attachment Type </div>
     </div>
     <div class="col-4 py-1 h-100 col-md-3 font-weight-bold">
-      <div class="logs-table-cell">Attachment</div>
+      <div class="logs-table-cell"> Attachment </div>
     </div>
     <div class="col py-1 h-100 col-md-3 font-weight-bold">
-      <div class="logs-table-cell">Notes</div>
+      <div class="logs-table-cell"> Notes </div>
     </div>
   </div>
   <div id="attachmentsBody" class="row col-12 px-0">
     @if ($attachments)
       @foreach ($attachments as $attachment)
         <div class="row col-12 py-1 logs-table-row attachment-row">
-          <div class="col-6 col-md-4">{!! Form::select(
+          <div class="col-6 col-md-4"> {!! Form::select(
               'attachment_type[]',
               [
                   'Item' => 'Item',
@@ -46,7 +46,7 @@
               ],
               $attachment->attachment_type,
               ['class' => 'form-control attachment-type', 'placeholder' => 'Select Attachment Type'],
-          ) !!}</div>
+          ) !!} </div>
           <div class="col-6 col-md-3 attachment-row-select">
             @if ($attachment->attachment_type == 'Item')
               {!! Form::select('attachment_id[]', $items, $attachment->attachment_id, ['class' => 'form-control item-select', 'placeholder' => 'Select Item']) !!}
@@ -70,9 +70,9 @@
               {!! Form::select('attachment_id[]', $events, $attachment->attachment_id, ['class' => 'form-control event-select', 'placeholder' => 'Select Event']) !!}
             @endif
           </div>
-          <div class="col-6 col-md-3">{!! Form::text('attachment_data[]', $attachment->data, ['class' => 'form-control']) !!}</div>
+          <div class="col-6 col-md-3"> {!! Form::text('attachment_data[]', $attachment->data, ['class' => 'form-control']) !!} </div>
           <div class="col-6 col-md text-right">
-            <a href="#" class="btn btn-danger remove-attachment-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-attachment-button"> Remove </a>
           </div>
         </div>
       @endforeach

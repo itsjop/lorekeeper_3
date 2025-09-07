@@ -10,7 +10,7 @@
   <h1>
     {{ $level->id ? 'Edit' : 'Create' }} Level
     @if ($level->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-level-button">Delete Level</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-level-button"> Delete Level </a>
     @endif
   </h1>
 
@@ -22,7 +22,7 @@
     <p>
   @endif
 
-  <h2>Basic Information</h2>
+  <h2> Basic Information </h2>
 
   <div class="row">
     <div class="col-md-6">
@@ -44,8 +44,8 @@
     {!! Form::number('bonding_required', $level->bonding_required ?? 0, ['class' => 'form-control']) !!}
   </div>
 
-  <h2>General Rewards</h2>
-  <p>These rewards are given to the owner of a pet when they reach this level, regardless of what pet it is.</p>
+  <h2> General Rewards </h2>
+  <p> These rewards are given to the owner of a pet when they reach this level, regardless of what pet it is. </p>
   @include('widgets._loot_select', ['loots' => $level->rewardData ?? [], 'showLootTables' => true, 'showRaffles' => true])
 
   <div class="text-right">
@@ -57,27 +57,27 @@
   @if ($level->id)
     <hr />
 
-    <h2>Pet Specific Rewards</h2>
-    <p>These rewards are given <i>in addition</i> to the general rewards when a pet reaches this level.</p>
+    <h2> Pet Specific Rewards </h2>
+    <p> These rewards are given <i>in addition </i> to the general rewards when a pet reaches this level. </p>
 
     <div class="text-right mb-2">
-      <a href="#" class="btn btn-primary add-pet">Add Pet</a>
+      <a href="#" class="btn btn-primary add-pet"> Add Pet </a>
     </div>
     <div class="row">
       @foreach ($level->pets as $pet)
         <div class="col-md-6">
           <div class="card mb-2">
             <div class="card-header">
-              <h3>{{ $pet->pet->name }}</h3>
+              <h3> {{ $pet->pet->name }} </h3>
             </div>
             <div class="card-body">
               @if (count($pet->rewardData))
-                <h4>Rewards</h4>
+                <h4> Rewards </h4>
                 <table class="table table-sm">
                   <thead>
                     <tr>
-                      <th width="70%">Reward</th>
-                      <th width="30%">Amount</th>
+                      <th width="70%"> Reward </th>
+                      <th width="30%"> Amount </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -87,17 +87,17 @@
                         $asset = $model::find($reward->rewardable_id);
                       @endphp
                       <tr>
-                        <td>{!! $asset->displayName !!}</td>
-                        <td>{{ $reward->quantity }}</td>
+                        <td> {!! $asset->displayName !!} </td>
+                        <td> {{ $reward->quantity }} </td>
                       </tr>
                     @endforeach
                   </tbody>
                 </table>
               @else
-                <p>This pet has no specific rewards for this level.</p>
+                <p> This pet has no specific rewards for this level. </p>
               @endif
               <div class="float-right">
-                <a href="{{ url('admin/data/pets/levels/edit/' . $level->id . '/pets/edit/' . $pet->id) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ url('admin/data/pets/levels/edit/' . $level->id . '/pets/edit/' . $pet->id) }}" class="btn btn-primary"> Edit </a>
               </div>
             </div>
           </div>

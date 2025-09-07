@@ -1,7 +1,7 @@
 @if (!$user->is_banned)
-  <p>Are you sure you want to ban {!! $user->displayName !!}?</p>
+  <p> Are you sure you want to ban {!! $user->displayName !!}?</p>
   <div class="text-right">
-    <a href="#" class="btn btn-danger ban-confirm-button">Ban</a>
+    <a href="#" class="btn btn-danger ban-confirm-button"> Ban </a>
   </div>
 
   <script>
@@ -11,5 +11,5 @@
     });
   </script>
 @else
-  <p>This user is already banned.</p>
+  <p> This user is already banned. </p>
 @endif

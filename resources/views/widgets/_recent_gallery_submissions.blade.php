@@ -7,7 +7,7 @@
         @include('galleries._thumb', ['submission' => $gallerySubmission, 'gallery' => false])
       @endforeach
     @else
-      <div class="col-12">No Gallery Submissions.</div>
+      <div class="col-12"> No Gallery Submissions. </div>
     @endif
   </div>
 @endif

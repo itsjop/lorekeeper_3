@@ -42,14 +42,14 @@
         alt="{{ $shop->name }}"
       />
     @endif
-    <p>{!! $shop->parsed_description !!}</p>
+    <p> {!! $shop->parsed_description !!} </p>
   </div>
   @if (count($items))
     <h3> Items <a
         class="small inventory-collapse-toggle collapse-toggle collapsed"
         href="#itemstockcollapsible"
         data-bs-toggle="collapse"
-      >Collapse View</a>
+      > Collapse View </a>
     </h3>
     <div class="card mb-3 inventory-category collapse show" id="itemstockcollapsible">
       <div class="card-body inventory-body">
@@ -86,12 +86,12 @@
                       </div>
                       <div>
                         <a href="#" class="inventory-stack inventory-stack-name">
-                          <strong>{{ $item->name }}</strong>
+                          <strong> {{ $item->name }} </strong>
                         </a>
                         <div>
-                          <strong>Cost: </strong> {!! $currencies[$item->pivot->currency_id]->display($item->pivot->cost) !!}
+                          <strong> Cost: </strong> {!! $currencies[$item->pivot->currency_id]->display($item->pivot->cost) !!}
                         </div>
-                        <div>Stock: {{ $item->pivot->quantity }}</div>
+                        <div> Stock: {{ $item->pivot->quantity }} </div>
                       </div>
                     </div>
                   @endforeach

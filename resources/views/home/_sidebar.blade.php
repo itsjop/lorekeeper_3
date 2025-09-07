@@ -1,9 +1,9 @@
 <div id="sidebar-ul">
   <div class="sidebar-header">
-    <a href="{{ url('/') }}" class="card-link">Home</a>
+    <a href="{{ url('/') }}" class="card-link"> Home </a>
   </div>
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">Inventory</summary>
+    <summary class="sidebar-section-header"> Inventory </summary>
     <div class="sb-item">
       <a href="{{ url('characters') }}" class="{{ set_active('characters') }}">
         My Characters
@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">Activity</summary>
+    <summary class="sidebar-section-header"> Activity </summary>
     <div class="sb-item">
       <a href="{{ url('submissions') }}" class="{{ set_active('submissions*') }}">
         Prompt Submissions
@@ -51,13 +51,13 @@
       <a href="{{ url('characters/transfers/incoming') }}" class="{{ set_active('characters/transfers*') }}">
 
         Character
-        Transfers</a>
+        Transfers </a>
     </div>
     <div class="sb-item">
       <a href="{{ url('characters/pairings') }}" class="{{ set_active('characters/pairings') }}">
 
         Character
-        Pairings</a>
+        Pairings </a>
     </div>
     <div class="sb-item">
       <a href="{{ url('trades/open') }}" class="{{ set_active('trades/open*') }}">
@@ -71,7 +71,7 @@
     </div>
   </div>
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">Crafting</summary>
+    <summary class="sidebar-section-header"> Crafting </summary>
     <div class="sb-item">
       <a href="{{ url('crafting') }}" class="{{ set_active('crafting') }}">
         My Recipes
@@ -89,7 +89,7 @@
     </div>
   </div>
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">Reports</summary>
+    <summary class="sidebar-section-header"> Reports </summary>
     <div class="sb-item">
       <a href="{{ url('reports') }}" class="{{ set_active('reports*') }}">
         Reports

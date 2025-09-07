@@ -2,5 +2,5 @@
   <div class="col-6 col-md-2">
     {!! $log->prize->name !!}
   </div>
-  <div class="col-6 col-md-2">{!! pretty_date($log->claimed_at) !!}</div>
+  <div class="col-6 col-md-2"> {!! pretty_date($log->claimed_at) !!} </div>
 </div>

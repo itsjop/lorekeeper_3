@@ -1,4 +1,4 @@
-<h3>Plot</h3>
+<h3> Plot </h3>
 <div class="row">
   <div class="col">
     {!! Form::label('Unlock Plot') !!} {!! add_help('Choose the plot that should be unlocked once the user utilizes this tool on an empty/unusable plot.') !!}

@@ -13,10 +13,10 @@
           : 'admin/world/figures/create'
   ]) !!}
 
-  <h1>{{ $figure->id ? 'Edit' : 'Create' }} Figure
+  <h1> {{ $figure->id ? 'Edit' : 'Create' }} Figure
     @if ($figure->id)
       ({!! $figure->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-figure-button">Delete Figure</a>
+      <a href="#" class="btn btn-danger float-right delete-figure-button"> Delete Figure </a>
     @endif
   </h1>
 
@@ -26,7 +26,7 @@
   ]) !!}
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Basic Information</h2>
+    <h2 class="card-header h3"> Basic Information </h2>
     <div class="card-body">
 
       <div class="row mx-0 px-0">
@@ -72,7 +72,7 @@
   </div>
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Images</h2>
+    <h2 class="card-header h3"> Images </h2>
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($figure->thumb_extension)
@@ -89,8 +89,8 @@
           </a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the figure index.') !!}
-        <div>{!! Form::file('image_th') !!}</div>
-        <div class="text-muted">Recommended size: 200x200</div>
+        <div> {!! Form::file('image_th') !!} </div>
+        <div class="text-muted"> Recommended size: 200x200</div>
         @if (isset($figure->thumb_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image_th', 1, false, [
@@ -118,8 +118,8 @@
           </a>
         @endif
         {!! Form::label('Figure Image (Optional)') !!} {!! add_help('This image is used on the figure page as a header.') !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Recommended size: None (Choose a standard size for all figure header images.)</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Recommended size: None (Choose a standard size for all figure header images.)</div>
         @if (isset($figure->image_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, [
@@ -153,7 +153,7 @@
             href="#"
             class="btn btn-sm btn-primary"
             id="addAttachment"
-          >Add Attachment</a>
+          > Add Attachment </a>
         </div>
         Attachments
       </h2>
@@ -162,14 +162,14 @@
       </div>
       @if ($figure->attachers->count())
         <div class="card-footer">
-          <div class="h5">Attached to the following</div>
+          <div class="h5"> Attached to the following </div>
           <div class="row">
             @foreach ($figure->attachers->groupBy('attacher_type') as $type => $attachers)
               <div class="col-6 col-md-3">
                 <div class="card">
                   <div class="card-body p-2 text-center">
                     <div>
-                      <strong>{!! $type !!}</strong> <small>({{ $attachers->count() }})</small>
+                      <strong> {!! $type !!} </strong> <small>({{ $attachers->count() }})</small>
                     </div>
                     <p class="mt-2 mb-1">
                       @foreach ($attachers as $attacher)

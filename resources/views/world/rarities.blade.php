@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Rarities' => 'world/rarities']) !!}
-  <h1>Rarities</h1>
+  <h1> Rarities </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -40,5 +40,5 @@
   @endforeach
   {!! $rarities->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $rarities->total() }} result{{ $rarities->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $rarities->total() }} result{{ $rarities->total() == 1 ? '' : 's' }} found. </div>
 @endsection

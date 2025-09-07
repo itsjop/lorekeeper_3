@@ -7,7 +7,7 @@
 @section('account-content')
   {!! breadcrumbs(['My Account' => Auth::user()->url, 'Notifications' => 'notifications']) !!}
 
-  <h1>Notifications</h1>
+  <h1> Notifications </h1>
 
   <div class="text-right mb-3">
     {!! Form::open(['url' => 'notifications/clear', 'id' => 'clearForm']) !!}
@@ -36,7 +36,7 @@
             class="card-title h5 collapse-title mb-2"
             href="#{{ str_replace(' ', '_', config('lorekeeper.notifications.' . $type . '.name')) }}"
             data-bs-toggle="collapse"
-          >{{ config('lorekeeper.notifications.' . $type . '.name') }}
+          > {{ config('lorekeeper.notifications.' . $type . '.name') }}
           </a>
           <div id="{{ str_replace(' ', '_', config('lorekeeper.notifications.' . $type . '.name')) }}"
             class="collapse {{ $notifications->where('notification_type_id', $type)->count() < 5 ? 'show' : '' }} mt-2"
@@ -44,8 +44,8 @@
             <table class="table notifications-table">
               <thead>
                 <tr>
-                  <th>Message</th>
-                  <th>Date</th>
+                  <th> Message </th>
+                  <th> Date </th>
                   <th>
                   </th>
                 </tr>
@@ -53,8 +53,8 @@
               <tbody>
                 @foreach ($notifications->where('notification_type_id', $type) as $notification)
                   <tr class="{{ $notification->is_unread ? 'unread' : '' }}">
-                    <td>{!! $notification->message !!}</td>
-                    <td>{!! format_date($notification->created_at) !!}</td>
+                    <td> {!! $notification->message !!} </td>
+                    <td> {!! format_date($notification->created_at) !!} </td>
                     <td class="text-right">
                       <a
                         href="#"
@@ -74,7 +74,7 @@
     </div>
   @endforeach
   @if (!count($notifications))
-    <div class="text-center">No notifications.</div>
+    <div class="text-center"> No notifications. </div>
   @endif
 
   {!! $notifications->render() !!}
@@ -88,7 +88,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <span class="modal-title h5 mb-0">Clear All Notifications</span>
+          <span class="modal-title h5 mb-0"> Clear All Notifications </span>
           <button
             type="button"
             class="close"
@@ -96,13 +96,13 @@
           >&times;</button>
         </div>
         <div class="modal-body">
-          <p>This will clear <strong>all</strong> of your notifications. Are you certain you wish to do so?</p>
+          <p> This will clear <strong>all </strong> of your notifications. Are you certain you wish to do so?</p>
           <div class="text-right">
             <a
               href="#"
               id="clearSubmit"
               class="btn btn-primary"
-            >Clear All</a>
+            > Clear All </a>
           </div>
         </div>
       </div>

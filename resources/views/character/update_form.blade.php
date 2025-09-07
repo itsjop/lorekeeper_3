@@ -38,8 +38,8 @@
       approval request at this time.
     </div>
   @elseif(!$request)
-    <p>No {{ $character->is_myo_slot ? 'MYO approval' : 'design update' }} request found. Would you like to create one?</p>
-    <p>This will prepare a request to approve
+    <p> No {{ $character->is_myo_slot ? 'MYO approval' : 'design update' }} request found. Would you like to create one?</p>
+    <p> This will prepare a request to approve
       {{ $character->is_myo_slot ? 'your MYO slot\'s design' : 'a design update for your character' }}, which will allow you to
       upload a new masterlist image, list their new traits and spend items/currency on
       the design. You will be able to edit the contents of your request as much as you like before submission. Staff will be able to
@@ -52,10 +52,10 @@
     </div>
     {!! Form::close() !!}
   @else
-    <p>You have a {{ $character->is_myo_slot ? 'MYO approval' : 'design update' }} request
-      {{ $request->status == 'Draft' ? 'that has not been submitted' : 'awaiting approval' }}. <a href="{{ $request->url }}">Click
+    <p> You have a {{ $character->is_myo_slot ? 'MYO approval' : 'design update' }} request
+      {{ $request->status == 'Draft' ? 'that has not been submitted' : 'awaiting approval' }}. <a href="{{ $request->url }}"> Click
         here to view
-        {{ $request->status == 'Draft' ? 'and edit ' : '' }}it.</a>
+        {{ $request->status == 'Draft' ? 'and edit ' : '' }}it. </a>
     </p>
   @endif
 @endsection

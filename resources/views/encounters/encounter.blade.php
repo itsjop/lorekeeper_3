@@ -10,7 +10,7 @@
     </a>
   @endif
   <div class="row col-12 mb-2">
-    <h1>{!! $encounter->name !!} in {{ $area->name }} </h1>
+    <h1> {!! $encounter->name !!} in {{ $area->name }} </h1>
   </div>
   <div class="d-flex"
     style="position: relative; overflow: hidden; background:url({{ $area->imageUrl }}); height:500px;background-size: cover;"
@@ -23,7 +23,7 @@
     @endif
   </div>
   <div class="card bg-dark text-light rounded-0 text-center">
-    <p>{!! $encounter->initial_prompt !!}</p>
+    <p> {!! $encounter->initial_prompt !!} </p>
     <h5> what do you do?</h5>
     <hr>
     @foreach ($action_options as $option)

@@ -15,13 +15,13 @@
     <div class="card my-2">
       <div class="card-body">
         <div class="card-title">
-          <h2>Mod Mail</h2>
+          <h2> Mod Mail </h2>
         </div>
         <div class="card-text">
-          <p>In this section you can view all sent mod mail and send new mod mail to users.</p>
+          <p> In this section you can view all sent mod mail and send new mod mail to users. </p>
           <p>
-            <a href="{{ url('admin/mail') }}" class="btn btn-primary">View Mod Mail</a>
-            <a href="{{ url('admin/mail/create') }}" class="btn btn-primary">Send Mod Mail</a>
+            <a href="{{ url('admin/mail') }}" class="btn btn-primary"> View Mod Mail </a>
+            <a href="{{ url('admin/mail/create') }}" class="btn btn-primary"> Send Mod Mail </a>
           </p>
         </div>
       </div>
@@ -33,8 +33,8 @@
       <div class="col-sm-6">
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">Prompt Submissions @if ($submissionCount)
-                <span class="badge badge-primary">{{ $submissionCount }}</span>
+            <h5 class="card-title"> Prompt Submissions @if ($submissionCount)
+                <span class="badge badge-primary"> {{ $submissionCount }} </span>
               @endif
             </h5>
             <p class="card-text">
@@ -45,7 +45,7 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/submissions/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1">
+              <a href="{{ url('admin/submissions/pending') }}" class="card-link"> View Queue <span class="fas fa-caret-right ml-1">
                 </span>
               </a>
             </div>
@@ -55,8 +55,8 @@
       <div class="col-sm-6">
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">Claims @if ($claimCount)
-                <span class="badge badge-primary">{{ $claimCount }}</span>
+            <h5 class="card-title"> Claims @if ($claimCount)
+                <span class="badge badge-primary"> {{ $claimCount }} </span>
               @endif
             </h5>
             <p class="card-text">
@@ -67,7 +67,7 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/claims/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1">
+              <a href="{{ url('admin/claims/pending') }}" class="card-link"> View Queue <span class="fas fa-caret-right ml-1">
                 </span>
               </a>
             </div>
@@ -79,8 +79,8 @@
       <div class="col-sm-6">
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">Design Updates @if ($designCount)
-                <span class="badge badge-primary">{{ $designCount }}</span>
+            <h5 class="card-title"> Design Updates @if ($designCount)
+                <span class="badge badge-primary"> {{ $designCount }} </span>
               @endif
             </h5>
             <p class="card-text">
@@ -91,7 +91,7 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/design-approvals/pending') }}" class="card-link">View Queue <span
+              <a href="{{ url('admin/design-approvals/pending') }}" class="card-link"> View Queue <span
                   class="fas fa-caret-right ml-1"
                 >
                 </span>
@@ -103,8 +103,8 @@
       <div class="col-sm-6">
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">MYO Approvals @if ($myoCount)
-                <span class="badge badge-primary">{{ $myoCount }}</span>
+            <h5 class="card-title"> MYO Approvals @if ($myoCount)
+                <span class="badge badge-primary"> {{ $myoCount }} </span>
               @endif
             </h5>
             <p class="card-text">
@@ -115,7 +115,7 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/myo-approvals/pending') }}" class="card-link">View Queue <span
+              <a href="{{ url('admin/myo-approvals/pending') }}" class="card-link"> View Queue <span
                   class="fas fa-caret-right ml-1">
                 </span>
               </a>
@@ -127,8 +127,8 @@
         <div class="col-sm-6">
           <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title">Character Transfers @if ($transferCount + $tradeCount)
-                  <span class="badge badge-primary">{{ $transferCount + $tradeCount }}</span>
+              <h5 class="card-title"> Character Transfers @if ($transferCount + $tradeCount)
+                  <span class="badge badge-primary"> {{ $transferCount + $tradeCount }} </span>
                 @endif
               </h5>
               <p class="card-text">
@@ -140,7 +140,7 @@
                 @endif
               </p>
               <div class="text-right">
-                <a href="{{ url('admin/masterlist/transfers/incoming') }}" class="card-link">View Queue <span
+                <a href="{{ url('admin/masterlist/transfers/incoming') }}" class="card-link"> View Queue <span
                     class="fas fa-caret-right ml-1"
                   >
                   </span>
@@ -155,8 +155,8 @@
       <div class="col-sm-6">
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">Reports @if ($reportCount || $assignedReportCount)
-                <span class="badge badge-primary">{{ $reportCount + $assignedReportCount }}</span>
+            <h5 class="card-title"> Reports @if ($reportCount || $assignedReportCount)
+                <span class="badge badge-primary"> {{ $reportCount + $assignedReportCount }} </span>
               @endif
             </h5>
             <p class="card-text">
@@ -173,7 +173,7 @@
               @endif
             </p>
             <div class="text-right">
-              <a href="{{ url('admin/reports/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1">
+              <a href="{{ url('admin/reports/pending') }}" class="card-link"> View Queue <span class="fas fa-caret-right ml-1">
                 </span>
               </a>
             </div>
@@ -187,7 +187,7 @@
             !Auth::user()->hasPower('manage_reports')
     )
       <div class="card p-4 col-12">
-        <h5 class="card-title">You do not have a rank that allows you to access any queues.</h5>
+        <h5 class="card-title"> You do not have a rank that allows you to access any queues. </h5>
         <p class="mb-1">
           Refer to the sidebar for what you can access as a staff member.
         </p>
@@ -201,8 +201,8 @@
         <div class="col-sm-6">
           <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title">Gallery Submissions @if ($gallerySubmissionCount)
-                  <span class="badge badge-primary">{{ $gallerySubmissionCount }}</span>
+              <h5 class="card-title"> Gallery Submissions @if ($gallerySubmissionCount)
+                  <span class="badge badge-primary"> {{ $gallerySubmissionCount }} </span>
                 @endif
               </h5>
               <p class="card-text">
@@ -214,7 +214,7 @@
                 @endif
               </p>
               <div class="text-right">
-                <a href="{{ url('admin/gallery/submissions/pending') }}" class="card-link">View Queue <span
+                <a href="{{ url('admin/gallery/submissions/pending') }}" class="card-link"> View Queue <span
                     class="fas fa-caret-right ml-1"
                   >
                   </span>
@@ -228,8 +228,8 @@
         <div class="col-sm-6">
           <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title">Gallery Currency Awards @if ($galleryAwardCount)
-                  <span class="badge badge-primary">{{ $galleryAwardCount }}</span>
+              <h5 class="card-title"> Gallery Currency Awards @if ($galleryAwardCount)
+                  <span class="badge badge-primary"> {{ $galleryAwardCount }} </span>
                 @endif
               </h5>
               <p class="card-text">
@@ -240,7 +240,7 @@
                 @endif
               </p>
               <div class="text-right">
-                <a href="{{ url('admin/gallery/currency/pending') }}" class="card-link">View Queue <span
+                <a href="{{ url('admin/gallery/currency/pending') }}" class="card-link"> View Queue <span
                     class="fas fa-caret-right ml-1"
                   >
                   </span>

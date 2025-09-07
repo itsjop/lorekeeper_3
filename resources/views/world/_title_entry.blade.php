@@ -18,7 +18,7 @@
         @if (isset($searchCharactersUrl) && $searchCharactersUrl)
           <a href="{{ $searchCharactersUrl }}" class="world-entry-search text-muted small ml-4">
             <i class="fas fa-search"></i>
-            Characters</a>
+            Characters </a>
         @endif
       </div>
 

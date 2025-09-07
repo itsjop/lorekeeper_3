@@ -1,4 +1,4 @@
-<h2 class="h3">You must collect...</h2>
+<h2 class="h3"> You must collect... </h2>
 <div class="mt-3 square-grid">
   @foreach ($collection->ingredients as $ingredient)
     <div class="square-column text-center">
@@ -18,7 +18,7 @@
             </div>
           @endif
         @endswitch
-        <div class="text-center">{!! $ingredient->ingredient->displayName !!}</div>
+        <div class="text-center"> {!! $ingredient->ingredient->displayName !!} </div>
       </div>
     @endforeach
   </div>

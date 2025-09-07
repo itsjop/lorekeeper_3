@@ -12,7 +12,7 @@ You can ignore this section if you use an image for the wheel, although text wil
         aria-expanded="true"
         aria-controls="segmentStyleCollapse"
       >
-        <h5 class="mb-0">Colors & Text</h5>
+        <h5 class="mb-0"> Colors & Text </h5>
       </a>
     </div>
     <div
@@ -26,16 +26,16 @@ You can ignore this section if you use an image for the wheel, although text wil
           <thead>
             <tr>
               <th width="5%"> Segment </th>
-              <th width="45%">Text</th>
-              <th width="45%">Color</th>
+              <th width="45%"> Text </th>
+              <th width="45%"> Color </th>
             </tr>
           </thead>
           <tbody id="segmentTableBody">
             @if ($totalSegments)
               @for ($i = 0; $i < $totalSegments; $i++)
                 <tr class="segment-row">
-                  <td>{!! Form::number('segment_style[number][]', $i + 1, ['class' => 'form-control bg-dark text-light', 'readonly' => 'true']) !!}</td>
-                  <td>{!! Form::text('segment_style[text][]', $segments[$i]['text'] ?? '', ['class' => 'form-control bg-dark text-light']) !!}</td>
+                  <td> {!! Form::number('segment_style[number][]', $i + 1, ['class' => 'form-control bg-dark text-light', 'readonly' => 'true']) !!} </td>
+                  <td> {!! Form::text('segment_style[text][]', $segments[$i]['text'] ?? '', ['class' => 'form-control bg-dark text-light']) !!} </td>
                   <td>
                     <div class="input-group cp">
                       {!! Form::text('segment_style[color][]', $segments[$i]['fillStyle'] ?? null, ['class' => 'form-control']) !!}

@@ -9,18 +9,18 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/faction-types/create') }}">
-      <i class="fas fa-plus mr-2"></i> Create New Faction Type</a>
+      <i class="fas fa-plus mr-2"></i> Create New Faction Type </a>
     <a class="btn btn-secondary" href="{{ url('admin/world/factions') }}">
-      <i class="fas fa-undo-alt mr-2"></i> Back to Factions</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Factions </a>
   </div>
-  <h1>Faction types</h1>
+  <h1> Faction types </h1>
 
-  <p class="mb-0" style="clear:both">Faction types are effectively categories for factions - but mostly for organization and
-    display.</p>
-  <p>The sorting order reflects the order in which the types will be listed on the faction type index.</p>
+  <p class="mb-0" style="clear:both"> Faction types are effectively categories for factions - but mostly for organization and
+    display. </p>
+  <p> The sorting order reflects the order in which the types will be listed on the faction type index. </p>
 
   @if (!count($types))
-    <p>No faction types found.</p>
+    <p> No faction types found. </p>
   @else
     <table class="table table-sm type-table">
       <tbody id="sortable" class="sortable">
@@ -31,11 +31,11 @@
               </a>
               <a href={!! $type->url !!}
                 @if ($type->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($type->name) }} " @endif
-              />{!! $type->name !!}</a>
+              /> {!! $type->name !!} </a>
               ({!! $type->names !!})
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/faction-types/edit/' . $type->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/world/faction-types/edit/' . $type->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

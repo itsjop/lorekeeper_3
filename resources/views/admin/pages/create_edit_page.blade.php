@@ -7,19 +7,19 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Pages' => 'admin/pages', ($page->id ? 'Edit' : 'Create') . ' Page' => $page->id ? 'admin/pages/edit/' . $page->id : 'admin/pages/create']) !!}
 
-  <h1>{{ $page->id ? 'Edit' : 'Create' }} Page
+  <h1> {{ $page->id ? 'Edit' : 'Create' }} Page
     @if ($page->id && !config('lorekeeper.text_pages.' . $page->key))
-      <a href="#" class="btn btn-danger float-right delete-page-button">Delete Page</a>
+      <a href="#" class="btn btn-danger float-right delete-page-button"> Delete Page </a>
     @endif
     @if ($page->id)
-      <a href="#" class="btn btn-secondary float-right regen-page-button mr-md-2">Regenerate Page</a>
-      <a href="{{ $page->url }}" class="btn btn-info float-right mr-md-2">View Page</a>
+      <a href="#" class="btn btn-secondary float-right regen-page-button mr-md-2"> Regenerate Page </a>
+      <a href="{{ $page->url }}" class="btn btn-info float-right mr-md-2"> View Page </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $page->id ? 'admin/pages/edit/' . $page->id : 'admin/pages/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6 form-group">

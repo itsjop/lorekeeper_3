@@ -13,9 +13,9 @@
           : 'admin/data/recipes/create'
   ]) !!}
 
-  <h1>{{ $recipe->id ? 'Edit' : 'Create' }} Recipe
+  <h1> {{ $recipe->id ? 'Edit' : 'Create' }} Recipe
     @if ($recipe->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-recipe-button">Delete Recipe</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-recipe-button"> Delete Recipe </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -33,8 +33,8 @@
 
   <div class="form-group">
     {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
-    <div>{!! Form::file('image') !!}</div>
-    <div class="text-muted">Recommended size: 100px x 100px</div>
+    <div> {!! Form::file('image') !!} </div>
+    <div class="text-muted"> Recommended size: 100px x 100px </div>
     @if ($recipe->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -57,7 +57,7 @@
     {!! Form::textarea('description', $recipe->description, ['class' => 'form-control wysiwyg']) !!}
   </div>
 
-  <h3>Restrict Recipe</h3>
+  <h3> Restrict Recipe </h3>
   <div class="form-group">
     {!! Form::checkbox('is_limited', 1, $recipe->is_limited, [
         'class' => 'is-limited-class form-check-label',
@@ -72,12 +72,12 @@
     @include('widgets._recipe_limit_select', ['limits' => $recipe->limits, 'showRecipes' => true])
   </div>
 
-  <h3>Recipe Ingredients</h3>
+  <h3> Recipe Ingredients </h3>
   @include('widgets._recipe_ingredient_select', ['ingredients' => $recipe->ingredients])
 
   <hr>
 
-  <h3>Recipe Rewards</h3>
+  <h3> Recipe Rewards </h3>
   @include('widgets._recipe_reward_select', ['rewards' => $recipe->rewards])
 
   <div class="text-right">
@@ -100,7 +100,7 @@
   @include('widgets._recipe_limit_row', ['items' => $items, 'currencies' => $currencies, 'recipes' => $recipes])
 
   @if ($recipe->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._entry', [

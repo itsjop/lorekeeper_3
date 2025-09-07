@@ -9,23 +9,23 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/faction-types') }}">
-      <i class="fas fa-folder mr-2"></i> Faction Types</a>
+      <i class="fas fa-folder mr-2"></i> Faction Types </a>
     @if (count($types))
       <a class="btn btn-primary" href="{{ url('admin/world/factions/create') }}">
-        <i class="fas fa-plus mr-2"></i> Create New Faction</a>
+        <i class="fas fa-plus mr-2"></i> Create New Faction </a>
     @endif
   </div>
-  <h1>Factions</h1>
+  <h1> Factions </h1>
 
-  <p class="mb-0" style="clear:both;">Factions are specific organizations within your world.</p>
-  <p>The sorting order reflects the order in which the factions will be listed on the faction index.</p>
+  <p class="mb-0" style="clear:both;"> Factions are specific organizations within your world. </p>
+  <p> The sorting order reflects the order in which the factions will be listed on the faction index. </p>
 
   @if (!count($types))
-    <div class="alert alert-warning">You will need to create a faction type before you can create any factions, as type is required.
+    <div class="alert alert-warning"> You will need to create a faction type before you can create any factions, as type is required.
     </div>
   @endif
   @if (!count($factions))
-    <p>No factions found.</p>
+    <p> No factions found. </p>
   @else
     <table class="table table-sm type-table">
       <tbody id="sortable" class="sortable">
@@ -36,10 +36,10 @@
               </a>
               <a href={!! $faction->url !!}
                 @if ($faction->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $faction->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($faction->style) }} " @endif
-              />{!! $faction->name !!}</a>
+              /> {!! $faction->name !!} </a>
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/factions/edit/' . $faction->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/world/factions/edit/' . $faction->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

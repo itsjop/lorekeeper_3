@@ -7,18 +7,18 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Flora' => 'admin/world/floras']) !!}
 
-  <h1>Flora</h1>
+  <h1> Flora </h1>
 
-  <p class="mb-0">Flora are the plants of your world. </p>
+  <p class="mb-0"> Flora are the plants of your world. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/flora-categories') }}">
-      <i class="fas fa-folder mr-2"></i> Flora Categories</a>
+      <i class="fas fa-folder mr-2"></i> Flora Categories </a>
     <a class="btn btn-primary" href="{{ url('admin/world/floras/create') }}">
-      <i class="fas fa-plus mr-2"></i> Create New Flora</a>
+      <i class="fas fa-plus mr-2"></i> Create New Flora </a>
   </div>
   @if (!count($floras))
-    <p>No flora found.</p>
+    <p> No flora found. </p>
   @else
     <table class="table table-sm type-table">
       <tbody id="sortable" class="sortable">
@@ -29,11 +29,11 @@
               </a>
               <a href={!! $flora->url !!}
                 @if ($flora->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $flora->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($flora->name) }} " @endif
-              />{!! $flora->name !!}</a>
+              /> {!! $flora->name !!} </a>
               {{ $flora->summary ? '(' . $flora->summary . ')' : '' }}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/floras/edit/' . $flora->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/world/floras/edit/' . $flora->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

@@ -21,23 +21,23 @@
 
   @include('character._header', ['character' => $character])
 
-  <h3>Ownership History</h3>
+  <h3> Ownership History </h3>
 
   {!! $logs->render() !!}
   <div class="mb-4 logs-table">
     <div class="logs-table-header">
       <div class="row">
         <div class="col-6 col-md">
-          <div class="logs-table-cell">Sender</div>
+          <div class="logs-table-cell"> Sender </div>
         </div>
         <div class="col-6 col-md">
-          <div class="logs-table-cell">Recipient</div>
+          <div class="logs-table-cell"> Recipient </div>
         </div>
         <div class="col-6 col-md-4">
-          <div class="logs-table-cell">Log</div>
+          <div class="logs-table-cell"> Log </div>
         </div>
         <div class="col-6 col-md">
-          <div class="logs-table-cell">Date</div>
+          <div class="logs-table-cell"> Date </div>
         </div>
       </div>
     </div>

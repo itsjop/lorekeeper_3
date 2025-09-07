@@ -7,25 +7,25 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Character Categories' => 'admin/data/character-categories']) !!}
 
-  <h1>Character Categories</h1>
+  <h1> Character Categories </h1>
 
-  <p>This is a list of character categories that will be used to classify characters. Creating character categories is entirely
-    optional, but recommended for organisational purposes.</p>
-  <p>The sorting order reflects the order in which the character categories will be displayed on the world pages.</p>
+  <p> This is a list of character categories that will be used to classify characters. Creating character categories is entirely
+    optional, but recommended for organisational purposes. </p>
+  <p> The sorting order reflects the order in which the character categories will be displayed on the world pages. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/character-categories/create') }}">
-      <i class="fas fa-plus"></i> Create New Character Category</a>
+      <i class="fas fa-plus"></i> Create New Character Category </a>
   </div>
   @if (!count($categories))
-    <p>No character categories found.</p>
+    <p> No character categories found. </p>
   @else
     <table class="table table-sm category-table">
       <thead>
         <tr>
-          <th>Category</th>
-          <th>Code</th>
-          <th>Sub Masterlist</th>
+          <th> Category </th>
+          <th> Code </th>
+          <th> Sub Masterlist </th>
           <th>
           </th>
         </tr>
@@ -52,7 +52,7 @@
               @endif
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/character-categories/edit/' . $category->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/character-categories/edit/' . $category->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

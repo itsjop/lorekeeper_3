@@ -1,9 +1,9 @@
 <div id="stockTable">
   <div class="row border-bottom">
-    <div class="col-6 col-md-3">Item</div>
-    <div class="col-6 col-md-3 order-3 order-md-2">Visible?</div>
-    <div class="col-6 col-md-3 order-2 order-md-3">Cost/Currency</div>
-    <div class="col-6 col-md-3">Removal Quantity</div>
+    <div class="col-6 col-md-3"> Item </div>
+    <div class="col-6 col-md-3 order-3 order-md-2"> Visible?</div>
+    <div class="col-6 col-md-3 order-2 order-md-3"> Cost/Currency </div>
+    <div class="col-6 col-md-3"> Removal Quantity </div>
   </div>
 
   {!! $stocks->render() !!}

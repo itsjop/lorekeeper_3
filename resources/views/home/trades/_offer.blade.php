@@ -9,23 +9,23 @@
           id="confirmOfferButton"
           data-bs-toggle="tooltip"
           title="This will unconfirm your offer and allow you to edit it. You will need to reconfirm your offer after you have edited it to proceed."
-        >Unconfirm</a>
+        > Unconfirm </a>
       @else
-        <a href="{{ url('trades/' . $trade->id . '/edit') }}" class="btn btn-sm btn-primary">Edit</a> <a
+        <a href="{{ url('trades/' . $trade->id . '/edit') }}" class="btn btn-sm btn-primary"> Edit </a> <a
           href="#"
           class="btn btn-sm btn-outline-primary"
           id="confirmOfferButton"
-        >Confirm</a>
+        > Confirm </a>
       @endif
     @else
       @if ($trade->{'is_' . $type . '_confirmed'})
         @if ($trade->{'is_' . $type . '_trade_confirmed'})
-          <small class="text-success">{!! add_help($user->name . ' has reviewed your offer and confirmed the trade.') !!} Trade Confirmed</small>
+          <small class="text-success"> {!! add_help($user->name . ' has reviewed your offer and confirmed the trade.') !!} Trade Confirmed </small>
         @else
-          <small class="text-primary">{!! add_help('This offer has been confirmed.') !!} Offer Confirmed</small>
+          <small class="text-primary"> {!! add_help('This offer has been confirmed.') !!} Offer Confirmed </small>
         @endif
       @else
-        <small class="text-muted">{!! add_help('This offer has yet to be confirmed.') !!} Pending</small>
+        <small class="text-muted"> {!! add_help('This offer has yet to be confirmed.') !!} Pending </small>
       @endif
     @endif
   </span>
@@ -48,10 +48,10 @@
         <table class="table table-sm">
           <thead class="thead-light">
             <tr class="d-flex">
-              <th class="col-2">Item</th>
-              <th class="col-4">Source</th>
-              <th class="col-4">Notes</th>
-              <th class="col-2">Quantity</th>
+              <th class="col-2"> Item </th>
+              <th class="col-4"> Source </th>
+              <th class="col-4"> Notes </th>
+              <th class="col-2"> Quantity </th>
             </tr>
           </thead>
           <tbody>
@@ -65,17 +65,17 @@
                       alt="{{ $items[$itemRow['asset']->item_id]->name }}"
                     >
                   @endif {!! $items[$itemRow['asset']->item_id]->name !!}
-                <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data)
+                <td class="col-4"> {!! array_key_exists('data', $itemRow['asset']->data)
                     ? ($itemRow['asset']->data['data']
                         ? $itemRow['asset']->data['data']
                         : 'N/A')
-                    : 'N/A' !!}</td>
-                <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data)
+                    : 'N/A' !!} </td>
+                <td class="col-4"> {!! array_key_exists('notes', $itemRow['asset']->data)
                     ? ($itemRow['asset']->data['notes']
                         ? $itemRow['asset']->data['notes']
                         : 'N/A')
-                    : 'N/A' !!}</td>
-                <td class="col-2">{!! $itemRow['quantity'] !!}
+                    : 'N/A' !!} </td>
+                <td class="col-2"> {!! $itemRow['quantity'] !!}
               </tr>
             @endforeach
           </tbody>
@@ -101,7 +101,7 @@
                   </a>
                 </div>
                 <div>
-                  <a class="inventory-stack inventory-stack-name">{!! $character['asset']->displayName !!}</a>
+                  <a class="inventory-stack inventory-stack-name"> {!! $character['asset']->displayName !!} </a>
                 </div>
               </div>
             </div>
@@ -122,9 +122,9 @@
       </ul>
     @endif
     @if (!$data['user_items'] && !$data['currencies'] && !$data['characters'])
-      <div class="card-body">{!! $user->displayName !!} has not added anything to their offer.</div>
+      <div class="card-body"> {!! $user->displayName !!} has not added anything to their offer. </div>
     @endif
   @else
-    <div class="card-body">{!! $user->displayName !!} has not added anything to their offer.</div>
+    <div class="card-body"> {!! $user->displayName !!} has not added anything to their offer. </div>
   @endif
 </div>

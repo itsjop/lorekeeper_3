@@ -11,12 +11,12 @@
     Bank
   </h1>
 
-  <h3>Currencies</h3>
+  <h3> Currencies </h3>
   @foreach (Auth::user()->getCurrencies(true, true) as $category => $currencies)
     <div class="card mb-2">
       @if ($currencies->first()->category)
         <div class="card-header">
-          <h5 class="mb-0">{!! $currencies->first()->category->displayName !!}</h5>
+          <h5 class="mb-0"> {!! $currencies->first()->category->displayName !!} </h5>
         </div>
       @endif
       <ul class="list-group list-group-flush">
@@ -45,13 +45,13 @@
     </div>
   @endforeach
   <div class="text-right mb-4">
-    <a href="{{ url(Auth::user()->url . '/currency-logs') }}">View logs...</a>
+    <a href="{{ url(Auth::user()->url . '/currency-logs') }}"> View logs... </a>
   </div>
 
   @if (count($convertOptions))
-    <h3>Convert Currency</h3>
-    <p>Converting currency is a way to exchange one currency for another. The conversion rates are set by the site administrators
-      and may change over time.</p>
+    <h3> Convert Currency </h3>
+    <p> Converting currency is a way to exchange one currency for another. The conversion rates are set by the site administrators
+      and may change over time. </p>
     {!! Form::open(['url' => 'bank/convert']) !!}
     <div class="form-group">
       <div class="row">

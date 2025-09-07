@@ -15,8 +15,8 @@
     {{ $page->title }}
   </h1>
   <div class="mb-4">
-    <div> Created {!! format_date($page->created_at) !!}</div>
-    <div> Last updated {!! format_date($page->updated_at) !!}</div>
+    <div> Created {!! format_date($page->created_at) !!} </div>
+    <div> Last updated {!! format_date($page->updated_at) !!} </div>
   </div> --}}
 
     <div id="custom-page-parsed" class="site-page-content parsed-text">

@@ -13,9 +13,9 @@
           : 'admin/data/encounters/create'
   ]) !!}
 
-  <h1>{{ $encounter->id ? 'Edit' : 'Create' }} Encounter
+  <h1> {{ $encounter->id ? 'Edit' : 'Create' }} Encounter
     @if ($encounter->id)
-      <a href="#" class="btn btn-danger float-right delete-encounter-button">Delete Encounter</a>
+      <a href="#" class="btn btn-danger float-right delete-encounter-button"> Delete Encounter </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -47,8 +47,8 @@
     <div class="col-md-6">
       <div class="form-group">
         {!! Form::label('Encounter Image (Optional)') !!} {!! add_help('This image will show up when the user gets this encounter.') !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Recommended size: 100px x 100px</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Recommended size: 100px x 100px </div>
         @if ($encounter->has_image)
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -58,8 +58,8 @@
       </div>
     </div>
   </div>
-  <h5>Image Positioning</h5>
-  <p>Where the image will rest on the encounter page (relative to the area background)</p>
+  <h5> Image Positioning </h5>
+  <p> Where the image will rest on the encounter page (relative to the area background)</p>
   <div class="row">
     <div class="form-group col-6">
       {!! Form::label('position_right', 'Right Position') !!} {!! add_help(
@@ -106,20 +106,20 @@
 
   @if ($encounter->id)
     <div class="card-body text-center">
-      <h4>Encounter Options</h4>
-      <p>You can create a series of options the user can choose from when they run into this encounter. You can
+      <h4> Encounter Options </h4>
+      <p> You can create a series of options the user can choose from when they run into this encounter. You can
         create a short
         option that can be clicked on, as well as a description of the result from the result of that option.
       </p>
-      <p>You can also choose if the user gets rewards or not, they will get the rewards that you choose for this
+      <p> You can also choose if the user gets rewards or not, they will get the rewards that you choose for this
         encounter
-        below.</p>
+        below. </p>
       <div class="mb-2 text-right">
         <a
           href="#"
           class="btn btn-primary"
           id="add-prompt"
-        >Add Option</a>
+        > Add Option </a>
       </div>
     </div>
     @foreach ($encounter->prompts as $prompt)
@@ -167,7 +167,7 @@
             class="btn btn-sm btn-primary edit-prompt"
             data-id="{{ $prompt->id }}"
           >
-            <i class="fas fa-cog mr-1"></i>Edit</a>
+            <i class="fas fa-cog mr-1"></i> Edit </a>
         </div>
       </div>
     @endforeach

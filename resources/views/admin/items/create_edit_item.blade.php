@@ -11,15 +11,15 @@
       ($item->id ? 'Edit' : 'Create') . ' Item' => $item->id ? 'admin/data/items/edit/' . $item->id : 'admin/data/items/create'
   ]) !!}
 
-  <h1>{{ $item->id ? 'Edit' : 'Create' }} Item
+  <h1> {{ $item->id ? 'Edit' : 'Create' }} Item
     @if ($item->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-item-button">Delete Item</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-item-button"> Delete Item </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $item->id ? 'admin/data/items/edit/' . $item->id : 'admin/data/items/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -32,7 +32,7 @@
       {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: 100px x 100px</div>
+    <div class="text-muted"> Recommended size: 100px x 100px </div>
     @if ($item->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -126,7 +126,7 @@
   </div>
 
   @if (config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
-    <h3>Availability Information</h3>
+    <h3> Availability Information </h3>
     <div class="row">
       <div class="col-md form-group">
         {!! Form::label('release', 'Source (Optional)') !!} {!! add_help('The original and/or general source of the item. Should be brief.') !!}
@@ -144,9 +144,9 @@
   @endif
 
   @if (config('lorekeeper.extensions.item_entry_expansion.resale_function'))
-    <h3>Resale Information</h3>
-    <p>The currency and amount users will be able to sell this item from their inventory for. If quantity is not set, the item will
-      be unable to be sold.</p>
+    <h3> Resale Information </h3>
+    <p> The currency and amount users will be able to sell this item from their inventory for. If quantity is not set, the item will
+      be unable to be sold. </p>
     <div class="row">
       <div class="col-md form-group">
         {!! Form::label('currency_id', 'Currency') !!}
@@ -175,36 +175,36 @@
   {!! Form::close() !!}
 
   @if ($item->id)
-    <h3>Item Tags</h3>
-    <p>Item tags indicate extra functionality for the item. Click on the edit button to edit the specific item tag's data.</p>
+    <h3> Item Tags </h3>
+    <p> Item tags indicate extra functionality for the item. Click on the edit button to edit the specific item tag's data. </p>
     @if (count($item->tags))
       <table class="table">
         <thead>
           <tr>
-            <th>Tag</th>
-            <th>Active?</th>
+            <th> Tag </th>
+            <th> Active?</th>
             <th>
             </th>
           </tr>
         </thead>
         @foreach ($item->tags as $tag)
           <tr>
-            <td>{!! $tag->displayTag !!}</td>
-            <td class="{{ $tag->is_active ? 'text-success' : 'text-danger' }}">{{ $tag->is_active ? 'Yes' : 'No' }}</td>
+            <td> {!! $tag->displayTag !!} </td>
+            <td class="{{ $tag->is_active ? 'text-success' : 'text-danger' }}"> {{ $tag->is_active ? 'Yes' : 'No' }} </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/items/tag/' . $item->id . '/' . $tag->tag) }}" class="btn btn-outline-primary">Edit</a>
+              <a href="{{ url('admin/data/items/tag/' . $item->id . '/' . $tag->tag) }}" class="btn btn-outline-primary"> Edit </a>
             </td>
           </tr>
         @endforeach
       </table>
     @else
-      <p>No item tags attached to this item.</p>
+      <p> No item tags attached to this item. </p>
     @endif
     <div class="text-right">
-      <a href="{{ url('admin/data/items/tag/' . $item->id) }}" class="btn btn-outline-primary">Add a Tag</a>
+      <a href="{{ url('admin/data/items/tag/' . $item->id) }}" class="btn btn-outline-primary"> Add a Tag </a>
     </div>
 
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._item_entry', [

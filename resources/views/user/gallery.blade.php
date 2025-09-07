@@ -22,7 +22,7 @@
 
     {!! $submissions->render() !!}
   @else
-    <p>No submissions found!</p>
+    <p> No submissions found!</p>
   @endif
 
 @endsection

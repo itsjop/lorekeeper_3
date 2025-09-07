@@ -34,13 +34,13 @@
                 @endif
                 <div>
                   <a href="#" class="inventory-stack inventory-stack-name">
-                    <strong>{{ $item->name }}</strong>
+                    <strong> {{ $item->name }} </strong>
                   </a>
                   <div>
-                    <strong>Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}
+                    <strong> Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}
                   </div>
                   @if ($item->pivot->is_limited_stock)
-                    <div>Stock: {{ $item->pivot->quantity }}</div>
+                    <div> Stock: {{ $item->pivot->quantity }} </div>
                   @endif
                   @if ($item->pivot->purchase_limit)
                     <div class="text-danger">
@@ -51,10 +51,10 @@
                     </div>
                   @endif
                   @if ($item->pivot->disallow_transfer)
-                    <div class="text-danger">Cannot be transferred after purchase</div>
+                    <div class="text-danger"> Cannot be transferred after purchase </div>
                   @endif
                   @if ($item->pivot->is_timed_stock)
-                    <div class="text-info">Available for a limited time!</div>
+                    <div class="text-info"> Available for a limited time!</div>
                   @endif
                 </div>
               </div>

@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-md-4">
         <div>
-          <div class="character-image-blank">Enter character code.</div>
+          <div class="character-image-blank"> Enter character code. </div>
           <div class="character-image-loaded hide">
           </div>
         </div>

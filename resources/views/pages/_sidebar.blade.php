@@ -39,7 +39,7 @@
         {!! $featured->image->rarity_id ? $featured->image->rarity->displayName : 'No Rarity' !!}
       </div> --}}
       @else
-        <p>There is no featured character.</p>
+        <p> There is no featured character. </p>
       @endif
     </div>
   </div>
@@ -64,7 +64,7 @@
             />
           </a>
         @else
-          <p>There is no featured featured.</p>
+          <p> There is no featured featured. </p>
         @endif
       </div>
       <div class="info">

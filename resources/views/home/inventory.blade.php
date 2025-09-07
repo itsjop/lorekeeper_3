@@ -9,18 +9,18 @@
 
   <h1> Inventory </h1>
 
-  <p>This is your inventory. Click on an item to view more details and actions you can perform on it.</p>
+  <p> This is your inventory. Click on an item to view more details and actions you can perform on it. </p>
   <div class="grid grid-4-col mb-3">
-    <a class="btn btn-secondary consolidate-inventory" href="#">Consolidate</a>
+    <a class="btn btn-secondary consolidate-inventory" href="#"> Consolidate </a>
     <a class="btn btn-primary" href="{{ url('inventory/account-search') }}">
       <i class="fas fa-search">
-      </i> Account Search</a>
+      </i> Account Search </a>
     <a class="btn btn-primary" href="{{ url('inventory/full-inventory') }}">
       <i class="fas fa-warehouse">
-      </i> Full Inventory</a>
+      </i> Full Inventory </a>
     <a class="btn btn-primary" href="{{ url('inventory/quickstock') }}">
       <i class="fas fa-truck">
-      </i> Quickstock</a>
+      </i> Quickstock </a>
 
   </div>
 
@@ -90,7 +90,7 @@
             class="small inventory-collapse-toggle collapse-toggle"
             href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}"
             data-bs-toggle="collapse"
-          >Show</a>
+          > Show </a>
         </h5>
         <div class="card-body inventory-body collapse show grid grid-4-col" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
           @foreach ($categoryItems as $itemId => $stack)
@@ -129,7 +129,7 @@
             class="small inventory-collapse-toggle collapse-toggle"
             href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}"
             data-bs-toggle="collapse"
-          >Show</a>
+          > Show </a>
         </h5>
         <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
           @foreach ($categoryItems as $itemtype)
@@ -141,7 +141,7 @@
                   alt="{{ $itemtype->first()->name }}"
                 />
               @endif
-              <a href="{{ $itemtype->first()->idUrl }}">{{ $itemtype->first()->name }}</a>
+              <a href="{{ $itemtype->first()->idUrl }}"> {{ $itemtype->first()->name }} </a>
               <ul
                 class="mb-0"
                 data-id="{{ $itemtype->first()->pivot->id }}"
@@ -149,7 +149,7 @@
               >
                 @foreach ($itemtype as $item)
                   <li>
-                    <a class="inventory-stack" href="#">Stack of x{{ $item->pivot->count }}</a>.
+                    <a class="inventory-stack" href="#"> Stack of x{{ $item->pivot->count }} </a>.
                   </li>
                 @endforeach
               </ul>
@@ -161,7 +161,7 @@
   </div>
 
   <div class="text-right mb-4">
-    <a href="{{ url(Auth::user()->url . '/item-logs') }}">View logs...</a>
+    <a href="{{ url(Auth::user()->url . '/item-logs') }}"> View logs... </a>
   </div>
 @endsection
 

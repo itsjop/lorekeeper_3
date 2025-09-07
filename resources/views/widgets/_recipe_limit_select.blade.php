@@ -3,14 +3,14 @@
     href="#"
     class="btn btn-outline-info"
     id="addLimit"
-  >Add Limit</a>
+  > Add Limit </a>
 </div>
 <table class="table table-sm" id="limitTable">
   <thead>
     <tr>
-      <th width="35%">Limit Type</th>
-      <th width="35%">Limit</th>
-      <th width="20%">Quantity</th>
+      <th width="35%"> Limit Type </th>
+      <th width="35%"> Limit </th>
+      <th width="20%"> Quantity </th>
       <th width="10%">
       </th>
     </tr>
@@ -19,10 +19,10 @@
     @if ($limits)
       @foreach ($limits as $limit)
         <tr class="limit-row">
-          <td>{!! Form::select('limit_type[]', ['Item' => 'Item', 'Currency' => 'Currency', 'Recipe' => 'Recipe'], $limit->limit_type, [
+          <td> {!! Form::select('limit_type[]', ['Item' => 'Item', 'Currency' => 'Currency', 'Recipe' => 'Recipe'], $limit->limit_type, [
               'class' => 'form-control reward-type',
               'placeholder' => 'Select limit Type'
-          ]) !!}</td>
+          ]) !!} </td>
           <td class="limit-row-select">
             @if ($limit->limit_type == 'Item')
               {!! Form::select('limit_id[]', $items, $limit->limit_id, [
@@ -41,9 +41,9 @@
               ]) !!}
             @endif
           </td>
-          <td>{!! Form::text('limit_quantity[]', $limit->quantity, ['class' => 'form-control']) !!}</td>
+          <td> {!! Form::text('limit_quantity[]', $limit->quantity, ['class' => 'form-control']) !!} </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-limit-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-limit-button"> Remove </a>
           </td>
         </tr>
       @endforeach

@@ -3,7 +3,7 @@
     class="card-title h5 collapse-title"
     data-bs-toggle="collapse"
     href="#redeemRecipe"
-  > Redeem Recipe</a>
+  > Redeem Recipe </a>
   <div id="redeemRecipe" class="collapse">
     {!! Form::hidden('tag', $tag->tag) !!}
 
@@ -14,20 +14,20 @@
     </p>
 
     <p class="mb-0">
-      <strong>Possible Results:</strong>
+      <strong> Possible Results:</strong>
     </p>
     <div class="row mb-2">
       @if (is_array($tag->getData()) && count($tag->getData()))
         @foreach ($tag->getData() as $loot)
           <div class="col-md-3"
             style="{{ Auth::user()->hasRecipe($loot->rewardable_id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}"
-          >{!! App\Models\Recipe\Recipe::find($loot->rewardable_id)->displayName !!}</div>
+          > {!! App\Models\Recipe\Recipe::find($loot->rewardable_id)->displayName !!} </div>
         @endforeach
       @else
         @foreach (App\Models\Recipe\Recipe::orderBy('name')->where('needs_unlocking', 1)->get() as $loot)
           <div class="col-md-3"
             style="{{ Auth::user()->hasRecipe($loot->id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}"
-          >{!! $loot->displayName !!}</div>
+          > {!! $loot->displayName !!} </div>
         @endforeach
       @endif
     </div>

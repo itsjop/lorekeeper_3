@@ -13,9 +13,9 @@
           : 'admin/data/professions/create'
   ]) !!}
 
-  <h1>{{ $profession->id ? 'Edit' : 'Create' }} Profession
+  <h1> {{ $profession->id ? 'Edit' : 'Create' }} Profession
     @if ($profession->id)
-      <a href="#" class="btn btn-danger float-right delete-profession-button">Delete Profession</a>
+      <a href="#" class="btn btn-danger float-right delete-profession-button"> Delete Profession </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -32,7 +32,7 @@
   </div>
 
   <div class="card mb-3">
-    <div class="card-header h3">Images</div>
+    <div class="card-header h3"> Images </div>
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($profession->icon_extension)
@@ -49,8 +49,8 @@
           </a>
         @endif
         {!! Form::label('Icon Image (Optional)') !!} {!! add_help('This icon is used on the profession page.') !!}
-        <div>{!! Form::file('image_icon') !!}</div>
-        <div class="text-muted">Recommended size: 100x100 or smaller</div>
+        <div> {!! Form::file('image_icon') !!} </div>
+        <div class="text-muted"> Recommended size: 100x100 or smaller </div>
         @if (isset($profession->icon_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image_icon', 1, false, [
@@ -78,8 +78,8 @@
           </a>
         @endif
         {!! Form::label('Main Image (Optional)') !!} {!! add_help('This image is used as the main profession image.') !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Recommended size: None (Choose a standard size for all profession images.)</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Recommended size: None (Choose a standard size for all profession images.)</div>
         @if (isset($profession->image_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, [
@@ -143,7 +143,7 @@
   {!! Form::close() !!}
 
   @if ($profession->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._entry', [

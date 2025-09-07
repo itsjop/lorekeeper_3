@@ -54,12 +54,12 @@
     {!! Form::textarea('comments', null, ['class' => 'form-control']) !!}
   </div>
 
-  <h2>Rewards</h2>
+  <h2> Rewards </h2>
   @if ($isClaim)
-    <p>Select the rewards you would like to claim.</p>
+    <p> Select the rewards you would like to claim. </p>
   @else
-    <p>Note that any rewards added here are <u>in addition</u> to the default prompt rewards. If you do not require any additional
-      rewards, you can leave this blank.</p>
+    <p> Note that any rewards added here are <u>in addition </u> to the default prompt rewards. If you do not require any additional
+      rewards, you can leave this blank. </p>
   @endif
   @include('widgets._loot_select', ['loots' => null, 'showLootTables' => false])
   @if (!$isClaim)
@@ -67,9 +67,9 @@
     </div>
   @endif
 
-  <h2>Characters</h2>
+  <h2> Characters </h2>
   @if ($isClaim)
-    <p>If there are character-specific rewards you would like to claim, attach them here. Otherwise, this section can be left blank.
+    <p> If there are character-specific rewards you would like to claim, attach them here. Otherwise, this section can be left blank.
     </p>
   @endif
   <div id="characters" class="mb-3">
@@ -79,7 +79,7 @@
       href="#"
       class="btn btn-outline-info"
       id="addCharacter"
-    >Add Character</a>
+    > Add Character </a>
   </div>
 
   <div class="text-right">
@@ -87,7 +87,7 @@
       href="#"
       class="btn btn-primary"
       id="submitButton"
-    >Submit</a>
+    > Submit </a>
   </div>
   {!! Form::close() !!}
 
@@ -105,7 +105,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <span class="modal-title h5 mb-0">Confirm {{ $isClaim ? 'Claim' : 'Submission' }}</span>
+          <span class="modal-title h5 mb-0"> Confirm {{ $isClaim ? 'Claim' : 'Submission' }} </span>
           <button
             type="button"
             class="close"
@@ -113,15 +113,15 @@
           >&times;</button>
         </div>
         <div class="modal-body">
-          <p>This will submit the form and put it into the {{ $isClaim ? 'claims' : 'prompt' }} approval queue. You will not be able
+          <p> This will submit the form and put it into the {{ $isClaim ? 'claims' : 'prompt' }} approval queue. You will not be able
             to edit the contents after the {{ $isClaim ? 'claim' : 'submission' }} has been made. Click the Confirm
-            button to complete the {{ $isClaim ? 'claim' : 'submission' }}.</p>
+            button to complete the {{ $isClaim ? 'claim' : 'submission' }}. </p>
           <div class="text-right">
             <a
               href="#"
               id="formSubmit"
               class="btn btn-primary"
-            >Confirm</a>
+            > Confirm </a>
           </div>
         </div>
       </div>

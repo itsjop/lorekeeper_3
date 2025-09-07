@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-md-2 align-items-stretch d-flex">
         <div class="d-flex text-center align-items-center">
-          <div class="character-image-blank hide">Enter character code.</div>
+          <div class="character-image-blank hide"> Enter character code. </div>
           <div class="character-image-loaded">
             @include('home._character', ['character' => $character->character ? $character->character : $character])
           </div>
@@ -34,7 +34,7 @@
         </div>
         @if (isset($submission))
           <div class="form-group gift-notifs">
-            <h4>Notify Owner?</h4>
+            <h4> Notify Owner?</h4>
             <div class="row">
               {{-- TODO: find root issue why character ID is unset occasionally --}}
               @if (isset($character->character->id) && isset($character->notify_owner))
@@ -71,17 +71,17 @@
           </div>
         @endif
         <div class="character-rewards">
-          <h4>Character Rewards</h4>
+          <h4> Character Rewards </h4>
           <table class="table table-sm">
             <thead>
               <tr>
                 @if ($expanded_rewards)
-                  <th width="35%">Reward Type</th>
-                  <th width="35%">Reward</th>
+                  <th width="35%"> Reward Type </th>
+                  <th width="35%"> Reward </th>
                 @else
-                  <th width="70%">Reward</th>
+                  <th width="70%"> Reward </th>
                 @endif
-                <th width="30%">Amount</th>
+                <th width="30%"> Amount </th>
               </tr>
             </thead>
             <tbody class="character-rewards">
@@ -109,14 +109,14 @@
                                 'class' => 'form-control character-currency-id',
                                 'placeholder' => 'Select Currency'
                             ]
-                        ) !!}</div>
+                        ) !!} </div>
                       <div class="character-items  {{ $reward->rewardable_type == 'Item' ? 'show' : 'hide' }}">
                         {!! Form::select(
                             'character_rewardable_id[' . $character->character_id . '][]',
                             $items,
                             $reward->rewardable_type == 'Item' ? $reward->rewardable_id : null,
                             ['class' => 'form-control character-item-id', 'placeholder' => 'Select Item']
-                        ) !!}</div>
+                        ) !!} </div>
                       <div class="character-awards  {{ $reward->rewardable_type == 'Award' ? 'show' : 'hide' }}">
                         {!! Form::select(
                             'character_rewardable_id[' . $character->character_id . '][]',
@@ -126,7 +126,7 @@
                                 'class' => 'form-control character-award-id',
                                 'placeholder' => 'Select ' . ucfirst(__('awards.award'))
                             ]
-                        ) !!}</div>
+                        ) !!} </div>
                       <div class="character-tables {{ $reward->rewardable_type == 'Loot Table' ? 'show' : 'hide' }}">
                         {!! Form::select(
                             'character_rewardable_id[' . $character->character_id . '][]',
@@ -136,7 +136,7 @@
                                 'class' => 'form-control character-table-id',
                                 'placeholder' => 'Select Loot Table'
                             ]
-                        ) !!}</div>
+                        ) !!} </div>
                     </td>
                   @else
                     <td class="lootDivs">
@@ -167,7 +167,7 @@
             </tbody>
           </table>
           <div class="text-right">
-            <a href="#" class="btn btn-outline-primary btn-sm add-reward">Add Reward</a>
+            <a href="#" class="btn btn-outline-primary btn-sm add-reward"> Add Reward </a>
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@
 
               @if ($recipe->is_limited)
                 <div class="col-md-12">
-                  <h5>Requirements</h5>
+                  <h5> Requirements </h5>
 
                   <div class="alert alert-secondary">
                     <?php
@@ -86,7 +86,7 @@
               @endif
 
               <div class="col-md-6">
-                <h5>Ingredients</h5>
+                <h5> Ingredients </h5>
                 @foreach ($recipe->ingredients as $ingredient)
                   <div class="alert alert-secondary">
                     @include('home.crafting._recipe_ingredient_entry', ['ingredient' => $ingredient])
@@ -94,7 +94,7 @@
                 @endforeach
               </div>
               <div class="col-md-6">
-                <h5>Rewards</h5>
+                <h5> Rewards </h5>
                 @foreach ($recipe->reward_items as $type)
                   @foreach ($type as $item)
                     <div class="alert alert-secondary">

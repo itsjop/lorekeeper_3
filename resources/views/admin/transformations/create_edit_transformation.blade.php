@@ -13,10 +13,10 @@
           : 'admin/data/transformations/create'
   ]) !!}
 
-  <h1>{{ $transformation->id ? 'Edit' : 'Create' }} {{ ucfirst(__('transformations.transformation')) }}
+  <h1> {{ $transformation->id ? 'Edit' : 'Create' }} {{ ucfirst(__('transformations.transformation')) }}
     @if ($transformation->id)
-      <a href="#" class="btn btn-danger float-right delete-transformation-button">Delete
-        {{ ucfirst(__('transformations.transformation')) }}</a>
+      <a href="#" class="btn btn-danger float-right delete-transformation-button"> Delete
+        {{ ucfirst(__('transformations.transformation')) }} </a>
     @endif
   </h1>
 
@@ -25,7 +25,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -43,8 +43,8 @@
 
   <div class="form-group">
     {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
-    <div>{!! Form::file('image') !!}</div>
-    <div class="text-muted">Recommended size: 200px x 200px</div>
+    <div> {!! Form::file('image') !!} </div>
+    <div class="text-muted"> Recommended size: 200px x 200px </div>
     @if ($transformation->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -65,7 +65,7 @@
   {!! Form::close() !!}
 
   @if ($transformation->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._transformation_entry', ['transformation' => $transformation])

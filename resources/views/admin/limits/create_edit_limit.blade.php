@@ -13,9 +13,9 @@
           : 'admin/data/limits/create'
   ]) !!}
 
-  <h1>{{ $limit->id ? 'Edit' : 'Create' }} Limit
+  <h1> {{ $limit->id ? 'Edit' : 'Create' }} Limit
     @if ($limit->id)
-      <a href="#" class="btn btn-danger float-right delete-limit-button">Delete Limit</a>
+      <a href="#" class="btn btn-danger float-right delete-limit-button"> Delete Limit </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'id' => 'form'
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -38,10 +38,10 @@
 
   <hr />
 
-  <h5>Evalutation</h5>
-  <p>Enter the PHP code that will be evaluated to determine if the limit is met. The code should return a boolean <code>(true /
-      false)</code> value.</p>
-  <p>Laravel facades are accessible. For example, you can use <code>Auth::user()</code> to get the currently authenticated user.</p>
+  <h5> Evalutation </h5>
+  <p> Enter the PHP code that will be evaluated to determine if the limit is met. The code should return a boolean <code>(true /
+      false)</code> value. </p>
+  <p> Laravel facades are accessible. For example, you can use <code> Auth::user()</code> to get the currently authenticated user. </p>
   <div
     class="mb-3"
     id="editor"

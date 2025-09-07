@@ -16,12 +16,12 @@
   <div class="card-basic p-3 m-0 ta-center">
     <div class="mt-2">
       <h5>
-        {{ $character->displayType }}: <a href="{{ $character->character->url }}">{!! $character->character->slug !!}</a> ・ <span
+        {{ $character->displayType }}: <a href="{{ $character->character->url }}"> {!! $character->character->slug !!} </a> ・ <span
           class="{{ $character->is_open && $character->sales->is_open ? 'text-success' : '' }}"
         >[{{ $character->is_open && $character->sales->is_open ? 'Open' : 'Closed' }}]</span>
         <br />
         <small>
-          {!! $character->image->species->displayName !!} ・ {!! $character->image->rarity->displayName !!}<br />
+          {!! $character->image->species->displayName !!} ・ {!! $character->image->rarity->displayName !!} <br />
         </small>
       </h5>
 
@@ -37,7 +37,7 @@
                   <div>
                     @if ($group->count() > 1)
                       <div>
-                        <strong>{!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
+                        <strong> {!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
                         @foreach ($group as $feature)
                           {!! $feature->feature->displayName !!}@if ($feature->data)
                             ({{ $feature->data }})
@@ -45,7 +45,7 @@
                         @endforeach
                       </div>
                     @else
-                      <strong>{!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
+                      <strong> {!! $key ? $group->first()->feature->category->displayName : 'Miscellaneous' !!}:</strong>
                       {!! $group->first()->feature->displayName !!}
                       @if ($group->first()->data)
                         ({{ $group->first()->data }})
@@ -54,7 +54,7 @@
                   </div>
                 @endforeach
               @else
-                <div>No traits listed.</div>
+                <div> No traits listed. </div>
               @endif
             </div>
           @else
@@ -64,14 +64,14 @@
                 @foreach ($features as $feature)
                   <div>
                     @if ($feature->feature->feature_category_id)
-                      <strong>{!! $feature->feature->category->displayName !!}:</strong>
+                      <strong> {!! $feature->feature->category->displayName !!}:</strong>
                       @endif {!! $feature->feature->displayName !!} @if ($feature->data)
                         ({{ $feature->data }})
                       @endif
                   </div>
                 @endforeach
               @else
-                <div>No traits listed.</div>
+                <div> No traits listed. </div>
               @endif
             </div>
           @endif
@@ -101,11 +101,11 @@
                     (Auth::check() && Auth::user()->hasPower('edit_pages')) ||
                     $character->sales->comments_open_at < Carbon\Carbon::now())
         )
-          <a href="{{ $character->link }}">{{ $character->typeLink }}</a>
+          <a href="{{ $character->link }}"> {{ $character->typeLink }} </a>
         @endif
       </h6>
 
-      <p>{!! $character->description !!}</p>
+      <p> {!! $character->description !!} </p>
     </div>
   </div>
 </div>

@@ -11,18 +11,18 @@
 @section('meta-desc')
   @if (isset($item->category) && $item->category)
     <p>
-      <strong>Category:</strong> {{ $item->category->name }}
+      <strong> Category:</strong> {{ $item->category->name }}
     </p>
   @endif
   @if (isset($item->rarity) && $item->rarity)
     :: <p>
-      <strong>Rarity:</strong> {{ $item->rarity?->name ?? 'None' }}
+      <strong> Rarity:</strong> {{ $item->rarity?->name ?? 'None' }}
     </p>
   @endif
   :: {!! substr(str_replace('"', '&#39;', $item->description), 0, 69) !!}
   @if (isset($item->uses) && $item->uses)
     :: <p>
-      <strong>Uses:</strong> {!! $item->uses !!}
+      <strong> Uses:</strong> {!! $item->uses !!}
     </p>
   @endif
 @endsection
@@ -64,7 +64,7 @@
                 @if (isset($item->category) && $item->category)
                   <div class="col-md">
                     <p>
-                      <strong>Category:</strong>
+                      <strong> Category:</strong>
                       @if (!$item->category->is_visible)
                         <i class="fas fa-eye-slash mx-1 text-danger"></i>
                       @endif
@@ -78,14 +78,14 @@
                   @if (isset($item->rarity) && $item->rarity)
                     <div class="col-md">
                       <p>
-                        <strong>Rarity:</strong> {!! $item->rarity->displayName !!}
+                        <strong> Rarity:</strong> {!! $item->rarity->displayName !!}
                       </p>
                     </div>
                   @endif
                   @if (isset($item->itemArtist) && $item->itemArtist)
                     <div class="col-md">
                       <p>
-                        <strong>Artist:</strong> {!! $item->itemArtist !!}
+                        <strong> Artist:</strong> {!! $item->itemArtist !!}
                       </p>
                     </div>
                   @endif
@@ -93,7 +93,7 @@
                 @if (isset($item->data['resell']) && $item->data['resell'] && config('lorekeeper.extensions.item_entry_expansion.resale_function'))
                   <div class="col-md">
                     <p>
-                      <strong>Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}
+                      <strong> Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}
                     </p>
                   </div>
                 @endif
@@ -115,7 +115,7 @@
               <div class="world-entry-text">
                 @if (isset($item->reference) && $item->reference && config('lorekeeper.extensions.item_entry_expansion.extra_fields'))
                   <p>
-                    <strong>Reference Link:</strong>
+                    <strong> Reference Link:</strong>
                     <a href="{{ $item->reference }}">
                       {{ $item->reference }}
                     </a>
@@ -132,7 +132,7 @@
 
                   @if (isset($item->uses) && $item->uses)
                     <p>
-                      <strong>Uses:</strong> {!! $item->uses !!}
+                      <strong> Uses:</strong> {!! $item->uses !!}
                     </p>
                   @endif
                   @if (
@@ -140,20 +140,20 @@
                           $item->shop_stock_count ||
                           (isset($item->data['prompts']) && $item->data['prompts'])
                   )
-                    <h5>Availability</h5>
+                    <h5> Availability </h5>
                     <div class="row">
                       @if (isset($item->data['release']) && $item->data['release'])
                         <div class="col">
                           <p>
-                            <strong>Source:</strong>
+                            <strong> Source:</strong>
                           </p>
-                          <p>{!! $item->data['release'] !!}</p>
+                          <p> {!! $item->data['release'] !!} </p>
                         </div>
                       @endif
                       @if ($item->shop_stock_count)
                         <div class="col">
                           <p>
-                            <strong>Purchaseable At:</strong>
+                            <strong> Purchaseable At:</strong>
                           </p>
                           <div class="row">
                             @foreach ($item->shops(Auth::user() ?? null) as $shop)
@@ -169,7 +169,7 @@
                       @if (isset($item->data['prompts']) && $item->data['prompts'])
                         <div class="col">
                           <p>
-                            <strong>Drops From:</strong>
+                            <strong> Drops From:</strong>
                           </p>
                           <div class="row">
                             @foreach ($item->prompts as $prompt)
@@ -188,7 +188,7 @@
                 @if ($item->canUserSell)
                   <div class="text-right mb-4">
                     <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}">
-                      <i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
+                      <i class="fas fa-shopping-cart mr-2"></i> User Shops </a>
                   </div>
                 @endif
               </div>

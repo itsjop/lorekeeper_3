@@ -7,11 +7,11 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Grant Borders' => 'admin/grants/borders']) !!}
 
-  <h1>Grant Borders</h1>
+  <h1> Grant Borders </h1>
 
   {!! Form::open(['url' => 'admin/grants/borders']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('names[]', 'Username(s)') !!} {!! add_help('You can select up to 10 users at once.') !!}
@@ -36,7 +36,7 @@
         href="#"
         class="btn btn-primary"
         id="add-border"
-      >Add Border</a>
+      > Add Border </a>
     </div>
     <div class="border-row hide mb-2">
       {!! Form::select('border_ids[]', $borders, null, [

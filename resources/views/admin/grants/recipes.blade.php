@@ -7,11 +7,11 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Grant Recipes' => 'admin/grants/recipes']) !!}
 
-  <h1>Grant Recipes</h1>
+  <h1> Grant Recipes </h1>
 
   {!! Form::open(['url' => 'admin/grants/recipes']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('names[]', 'Username(s)') !!} {!! add_help('You can select up to 10 users at once.') !!}
@@ -36,7 +36,7 @@
         href="#"
         class="btn btn-primary"
         id="add-recipe"
-      >Add Recipe</a>
+      > Add Recipe </a>
     </div>
     <div class="recipe-row hide mb-2">
       {!! Form::select('recipe_ids[]', $recipes, null, [

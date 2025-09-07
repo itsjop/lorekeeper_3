@@ -11,15 +11,15 @@
       ($title->id ? 'Edit' : 'Create') . ' Title' => $title->id ? 'admin/data/character-titles/edit/' . $title->id : 'admin/data/character-titles/create',
   ]) !!}
 
-  <h1>{{ $title->id ? 'Edit' : 'Create' }} Title
+  <h1> {{ $title->id ? 'Edit' : 'Create' }} Title
     @if ($title->id)
-      <a href="#" class="btn btn-danger float-right delete-title-button">Delete Title</a>
+      <a href="#" class="btn btn-danger float-right delete-title-button"> Delete Title </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $title->id ? 'admin/data/character-titles/edit/' . $title->id : 'admin/data/character-titles/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6 form-group">
@@ -41,7 +41,7 @@
         <div>
           {!! Form::label('colours', 'Colours (Optional)') !!}
         </div>
-        <div class="btn btn-secondary" id="addColour">Add Colour</div>
+        <div class="btn btn-secondary" id="addColour"> Add Colour </div>
       </div>
       @if (!$title->id)
         {!! Form::color('colours[]', $title->colour, ['class' => 'form-control']) !!}
@@ -50,7 +50,7 @@
           <div class="form-group d-flex mt-1">
             {!! Form::color('colours[]', $colour, ['class' => 'form-control']) !!}
             <div class="text-right">
-              <button type="button" class="btn btn-danger removeColour ml-2">X</button>
+              <button type="button" class="btn btn-danger removeColour ml-2"> X</button>
             </div>
           </div>
         @endforeach
@@ -60,8 +60,8 @@
 
   <div class="form-group">
     {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
-    <div>{!! Form::file('image') !!}</div>
-    <div class="text-muted">Recommended size: 200px x 200px</div>
+    <div> {!! Form::file('image') !!} </div>
+    <div class="text-muted"> Recommended size: 200px x 200px </div>
     @if ($title->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -84,12 +84,12 @@
   {{-- <div class="colourForm hide form-group d-flex mt-1">
     {!! Form::color('colours[]', null, ['class' => 'form-control']) !!}
     <div class="text-right">
-      <button type="button" class="btn btn-danger removeColour ml-2">X</button>
+      <button type="button" class="btn btn-danger removeColour ml-2"> X</button>
     </div>
   </div> --}}
 
   @if ($title->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._title_entry', ['imageUrl' => $title->titleImageUrl, 'name' => $title->displayNameFull, 'description' => $title->parsed_description, 'searchCharactersUrl' => $title->searchCharactersUrl])

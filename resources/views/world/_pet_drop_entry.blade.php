@@ -2,16 +2,16 @@
   <i class="fas fa-info-circle"></i> Drops every {{ $pet->dropData->interval }}.
 </div>
 @if (!$pet->dropData->override)
-  <h2 class="h4">Base Pet Drops</h2>
+  <h2 class="h4"> Base Pet Drops </h2>
   <div class="card p-3">
     @foreach ($pet->dropData->parameters as $label => $group)
       @if (isset($pet->dropData->rewards(true)[strtolower($label)]))
-        <h4 class="h5">{{ $label }}</h4>
+        <h4 class="h5"> {{ $label }} </h4>
         <table class="table table-sm category-table">
           <thead>
             <tr>
-              <th width="70%">Reward</th>
-              <th>Quantity</th>
+              <th width="70%"> Reward </th>
+              <th> Quantity </th>
             </tr>
           </thead>
           <tbody>
@@ -29,7 +29,7 @@
                   @endif
                   {!! $reward_object->displayName !!}
                 </td>
-                <td>Between {{ $reward->min_quantity . ' and ' . $reward->max_quantity }}</td>
+                <td> Between {{ $reward->min_quantity . ' and ' . $reward->max_quantity }} </td>
               </tr>
             @endforeach
           </tbody>

@@ -14,16 +14,16 @@
 @endphp
 
 <div class="card p-4 mb-3 mt-3" id="limit-card">
-  <h3>Limits</h3>
+  <h3> Limits </h3>
 
   <p>
     You can add requirements to this object by clicking "Add Limit" & selecting a requirement from the dropdown below.
     <br />
     Requirements are used to determine if a specific action can be performed on an object.
     <br />
-    <b>Note that the checks for requirements are automatic, but their usage needs to be defined in the code.</b>
+    <b> Note that the checks for requirements are automatic, but their usage needs to be defined in the code. </b>
     <br />
-    <b>Dynamic limits are created in the admin panel, but execute their logic in the code.</b>
+    <b> Dynamic limits are created in the admin panel, but execute their logic in the code. </b>
   </p>
   {!! isset($info) ? '<p class="alert alert-info">' . $info . '</p>' : '' !!}
 
@@ -33,7 +33,7 @@
   <div class="limit">
     <div id="limits">
       @if ($limits)
-        <h5>Limits for {!! $limits->first()->object->displayName !!}</h5>
+        <h5> Limits for {!! $limits->first()->object->displayName !!} </h5>
       @endif
       <div class="row">
         <div class="col-md form-group">
@@ -118,13 +118,13 @@
               </div>
             </div>
             <div class="col-md-1 d-flex align-items-center">
-              <div class="btn btn-danger remove-limit mx-auto">X</div>
+              <div class="btn btn-danger remove-limit mx-auto"> X</div>
             </div>
           </div>
         @endforeach
       @endif
     </div>
-    <div class="btn btn-secondary" id="add-limit">Add Limit</div>
+    <div class="btn btn-secondary" id="add-limit"> Add Limit </div>
     @if ($limits)
       <i
         class="fas fa-trash text-danger float-right mt-2 mx-2 fa-2x"
@@ -159,7 +159,7 @@
       </div>
     </div>
     <div class="col-md-1 d-flex align-items-center">
-      <div class="btn btn-danger remove-limit mx-auto">X</div>
+      <div class="btn btn-danger remove-limit mx-auto"> X</div>
     </div>
   </div>
 </div>

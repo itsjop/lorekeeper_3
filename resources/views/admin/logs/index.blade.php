@@ -7,14 +7,14 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Logs' => 'admin/logs']) !!}
 
-  <h1>Log Viewer</h1>
+  <h1> Log Viewer </h1>
 
-  <p>View your site logs without logging into the host console. Logs may not persist forever depending on your app's settings.</p>
+  <p> View your site logs without logging into the host console. Logs may not persist forever depending on your app's settings. </p>
 
   <table class="table table-sm">
     <thead>
       <tr>
-        <th>Logs</th>
+        <th> Logs </th>
         <th>
         </th>
       </tr>
@@ -23,19 +23,19 @@
       @foreach ($logs as $log)
         <tr>
           <td>
-            <a href="/admin/logs/{{ $log }}">{{ $log }}</a>
+            <a href="/admin/logs/{{ $log }}"> {{ $log }} </a>
           </td>
           <td class="text-right">
             <a
               href="/admin/logs/{{ $log }}"
               class="btn btn-outline-primary btn-sm move-log"
               data-name="{{ $log }} "
-            >View</a>
+            > View </a>
             <a
               href="#"
               class="btn btn-outline-danger btn-sm delete-log"
               data-name="{{ $log }}"
-            >Delete</a>
+            > Delete </a>
           </td>
         </tr>
       @endforeach
@@ -51,7 +51,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <span class="modal-title h5 mb-0">Delete Log</span>
+          <span class="modal-title h5 mb-0"> Delete Log </span>
           <button
             type="button"
             class="close"
@@ -61,7 +61,7 @@
         <div class="modal-body">
           {{-- Delete a file --}}
           {!! Form::open(['url' => 'admin/logs/delete', 'id' => 'deleteForm', 'class' => 'file-form']) !!}
-          <p>This will permanently delete <strong id="deleteFilename">
+          <p> This will permanently delete <strong id="deleteFilename">
             </strong>. Are you sure?</p>
           <div class="text-right">
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}

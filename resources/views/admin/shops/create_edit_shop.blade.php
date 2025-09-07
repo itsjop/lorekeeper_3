@@ -11,16 +11,16 @@
       ($shop->id ? 'Edit' : 'Create') . ' Shop' => $shop->id ? 'admin/data/shops/edit/' . $shop->id : 'admin/data/shops/create'
   ]) !!}
 
-  <h1>{{ $shop->id ? 'Edit' : 'Create' }} Shop
+  <h1> {{ $shop->id ? 'Edit' : 'Create' }} Shop
     @if ($shop->id)
       ({!! $shop->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-shop-button">Delete Shop</a>
+      <a href="#" class="btn btn-danger float-right delete-shop-button"> Delete Shop </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $shop->id ? 'admin/data/shops/edit/' . $shop->id : 'admin/data/shops/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -33,7 +33,7 @@
       {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: None (Choose a standard size for all shop images)</div>
+    <div class="text-muted"> Recommended size: None (Choose a standard size for all shop images)</div>
     @if ($shop->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -85,7 +85,7 @@
   </div>
   <div class="form-group coupon-row {{ $shop->use_coupons ? '' : 'hide' }}">
     {!! Form::label('allowed_coupons', 'Allowed Coupon(s)', ['class' => 'form-check-label']) !!}
-    <p>Leave blank to allow ALL coupons.</p>
+    <p> Leave blank to allow ALL coupons. </p>
     {!! Form::select('allowed_coupons[]', $coupons, safeJSON($shop->allowed_coupons, 1), [
         'multiple',
         'class' => 'form-check-label',
@@ -104,12 +104,12 @@
   </div>
   <div class="card mb-3 shop-timed-quantity {{ $shop->is_timed_shop ? '' : 'hide' }}">
     <div class="card-body">
-      <h3>Shop Time Period</h3>
-      <p>Both of the below options can work together. If both are set, the shop will only be available during the specific time
-        period, and on the specific days of the week and months.</p>
+      <h3> Shop Time Period </h3>
+      <p> Both of the below options can work together. If both are set, the shop will only be available during the specific time
+        period, and on the specific days of the week and months. </p>
 
-      <h5>Specific Time Period</h5>
-      <p>The time period below is between the specific dates and times, rather than an agnostic period like "every November".</p>
+      <h5> Specific Time Period </h5>
+      <p> The time period below is between the specific dates and times, rather than an agnostic period like "every November". </p>
       <div class="row">
         <div class="col-md-6 form-group">
           {!! Form::label('start_at', 'Start Time') !!} {!! add_help('The shop will cycle in at this date.') !!}
@@ -121,10 +121,10 @@
         </div>
       </div>
 
-      <h5>Repeating Time Period</h5>
-      <p>Select the months and days of the week that the shop will be available.</p>
+      <h5> Repeating Time Period </h5>
+      <p> Select the months and days of the week that the shop will be available. </p>
       <p>
-        <b>If months are set alongside days, the shop will only be available on those days in those months.</b>
+        <b> If months are set alongside days, the shop will only be available on those days in those months. </b>
       </p>
       <div class="form-group">
         {!! Form::label('shop_days', 'Days of the Week') !!}
@@ -184,9 +184,9 @@
 
     <hr />
 
-    <h3>Shop Stock</h3>
+    <h3> Shop Stock </h3>
     <div class="text-right mb-3">
-      <a href="#" class="add-stock-button btn btn-outline-primary">Add Stock</a>
+      <a href="#" class="add-stock-button btn btn-outline-primary"> Add Stock </a>
     </div>
     <div class="row">
       @foreach ($shop->stock as $stock)
@@ -206,14 +206,14 @@
                 <div class="col-{{ $stock->item?->has_image ? '8' : '10' }}">
                   <div>
                     <a href="{{ $stock->item?->idUrl }}">
-                      <strong>{{ $stock->item?->name ?? 'Deleted' }} - {{ $stock->stock_type }}</strong>
+                      <strong> {{ $stock->item?->name ?? 'Deleted' }} - {{ $stock->stock_type }} </strong>
                     </a>
                     @if ($stock->isRandom)
-                      <span class="ml-1 badge badge-primary">Random</span>
+                      <span class="ml-1 badge badge-primary"> Random </span>
                     @endif
                   </div>
                   <div>
-                    <strong>Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!}
+                    <strong> Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!}
                   </div>
                   @if (!$stock->is_visible)
                     <div>
@@ -224,20 +224,20 @@
                     <i class="fas fa-clock"></i>
                   @endif
                   @if ($stock->is_limited_stock)
-                    <div>Stock: {{ $stock->quantity }}</div>
+                    <div> Stock: {{ $stock->quantity }} </div>
                   @endif
                   @if ($stock->is_limited_stock)
-                    <div>Restock: {!! $stock->restock ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!}</div>
+                    <div> Restock: {!! $stock->restock ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' !!} </div>
                   @endif
                   @if ($stock->purchase_limit)
-                    <div class="text-danger">Max {{ $stock->purchase_limit }}
+                    <div class="text-danger"> Max {{ $stock->purchase_limit }}
                       @if ($stock->purchase_limit_timeframe !== 'lifetime')
                         {{ $stock->purchase_limit_timeframe }}
                       @endif per user
                     </div>
                   @endif
                   @if ($stock->disallow_transfer)
-                    <div class="text-danger">Cannot be transferred</div>
+                    <div class="text-danger"> Cannot be transferred </div>
                   @endif
                 </div>
               </div>
@@ -268,7 +268,7 @@
     <div class="col-4">
       {!! Form::select('item_id[]', $items, null, ['class' => 'form-control', 'placeholder' => 'Select Item']) !!}
     </div>
-    <a href="#" class="remove-feature btn btn-danger">Remove</a>
+    <a href="#" class="remove-feature btn btn-danger"> Remove </a>
   </div>
 @endsection
 

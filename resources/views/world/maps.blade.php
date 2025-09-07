@@ -6,9 +6,9 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Maps' => 'world/maps']) !!}
-  <h1>Maps</h1>
+  <h1> Maps </h1>
 
-  <p>Maps are here for record keeping only. Their interactive states must be used by admins on pages or other similar locations.</p>
+  <p> Maps are here for record keeping only. Their interactive states must be used by admins on pages or other similar locations. </p>
 
   @foreach ($maps as $map)
     <div class="card mb-3">
@@ -18,5 +18,5 @@
     </div>
   @endforeach
 
-  <div class="text-center mt-4 small text-muted">{{ count($maps) }} result{{ count($maps) == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ count($maps) }} result{{ count($maps) == 1 ? '' : 's' }} found. </div>
 @endsection

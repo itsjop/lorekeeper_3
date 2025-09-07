@@ -3,14 +3,14 @@
         href="#"
         class="btn btn-outline-info"
         id="addIngredient"
-      >Add Ingredient</a>
+      > Add Ingredient </a>
     </div>
     <table class="table table-sm" id="ingredientTable">
       <thead>
         <tr>
-          <th width="35%">Ingredient Type</th>
-          <th width="35%">Ingredient</th>
-          <th width="20%">Quantity</th>
+          <th width="35%"> Ingredient Type </th>
+          <th width="35%"> Ingredient </th>
+          <th width="20%"> Quantity </th>
           <th width="10%">
           </th>
         </tr>
@@ -20,7 +20,7 @@
           @php $row_counter = 0; @endphp
           @foreach ($ingredients as $ingredient)
             <tr class="ingredient-row" data-row="{{ $row_counter }}">
-              <td>{!! Form::select(
+              <td> {!! Form::select(
                   'ingredient_type[' . $row_counter . ']',
                   [
                       'Item' => 'Item',
@@ -34,7 +34,7 @@
                       'class' => 'form-control ingredient-type',
                       'placeholder' => 'Select Ingredient Type'
                   ]
-              ) !!}</td>
+              ) !!} </td>
               <td class="ingredient-row-select">
                 @switch($ingredient->ingredient_type)
                   @case('Item')
@@ -56,12 +56,12 @@
                             <div class="text-right text-uppercase" style="margin-top: -0.5em;">
                               <a href="#"
                                 class="remove-multi-entry-button text-danger {{ count($ingredient->data) > 1 ? '' : 'hide' }}"
-                              >Remove Item</a>
+                              > Remove Item </a>
                             </div>
                           </div>
                         @endforeach
                       </div>
-                      <a href="#" class="btn btn-primary add-multi-item-button mb-2">Add Item</a>
+                      <a href="#" class="btn btn-primary add-multi-item-button mb-2"> Add Item </a>
                     </div>
                   @break
 
@@ -84,12 +84,12 @@
                             <div class="text-right text-uppercase" style="margin-top: -0.5em;">
                               <a href="#"
                                 class="remove-multi-entry-button text-danger {{ count($ingredient->data) > 1 ? '' : 'hide' }}"
-                              >Remove Category</a>
+                              > Remove Category </a>
                             </div>
                           </div>
                         @endforeach
                       </div>
-                      <a href="#" class="btn btn-primary add-multi-category-button mb-2">Add Category</a>
+                      <a href="#" class="btn btn-primary add-multi-category-button mb-2"> Add Category </a>
                     </div>
                   @break
 
@@ -101,11 +101,11 @@
                   @break
                 @endswitch
               </td>
-              <td>{!! Form::text('ingredient_quantity[' . $row_counter . ']', $ingredient->quantity, [
+              <td> {!! Form::text('ingredient_quantity[' . $row_counter . ']', $ingredient->quantity, [
                   'class' => 'form-control ingredient_quantity'
-              ]) !!}</td>
+              ]) !!} </td>
               <td class="text-right">
-                <a href="#" class="btn btn-danger remove-ingredient-button">Remove</a>
+                <a href="#" class="btn btn-danger remove-ingredient-button"> Remove </a>
               </td>
             </tr>
             @php $row_counter++; @endphp

@@ -1,6 +1,6 @@
 @if (!$stock)
   <div class="text-center">
-    Invalid item selected.</div>
+    Invalid item selected. </div>
 @else
   <div class="text-center mb-3">
     <div class="mb-1">
@@ -12,11 +12,11 @@
       </a>
     </div>
     <div>
-      <a href="{{ $stock->item->idUrl }}"><strong>{{ $stock->item->name }}</strong></a>
+      <a href="{{ $stock->item->idUrl }}"><strong> {{ $stock->item->name }} </strong></a>
     </div>
-    <div><strong>Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!}</div>
+    <div><strong> Cost: </strong> {!! $stock->displayCosts() ?? 'Free' !!} </div>
     @if ($stock->is_limited_stock)
-      <div>Stock: {{ $stock->quantity }}</div>
+      <div> Stock: {{ $stock->quantity }} </div>
     @endif
     @if ($stock->purchase_limit)
       <div class="text-danger">
@@ -28,7 +28,7 @@
       </div>
     @endif
     @if ($stock->disallow_transfer)
-      <div class="text-danger">Cannot be transferred after purchase</div>
+      <div class="text-danger"> Cannot be transferred after purchase </div>
     @endif
   </div>
 
@@ -38,7 +38,7 @@
         data-bs-toggle="collapse"
         href="#itemDescription"
         class="h5"
-      >Description <i class="fas fa-caret-down"></i>
+      > Description <i class="fas fa-caret-down"></i>
       </a>
       <div class="card collapse show mt-1" id="itemDescription">
         <div class="card-body">
@@ -53,14 +53,14 @@
       This item is available for a limited time!
       <br />
       <i class="fas fa-clock">
-      </i> <small>{!! $stock->displayTime() !!}</small>
+      </i> <small> {!! $stock->displayTime() !!} </small>
     </div>
   @endif
 
   @if ($stock->shop->use_coupons)
-    <div class="alert alert-success">You can use coupons in this store!</div>
+    <div class="alert alert-success"> You can use coupons in this store!</div>
     @if ($shop->allowed_coupons && count(json_decode($shop->allowed_coupons, 1)))
-      <div class="alert alert-info">You can use the following coupons: @foreach ($shop->allAllowedCoupons as $coupon)
+      <div class="alert alert-info"> You can use the following coupons: @foreach ($shop->allAllowedCoupons as $coupon)
           {!! $coupon->displayName !!}{{ $loop->last ? '' : ',' }}
         @endforeach
       </div>
@@ -76,7 +76,7 @@
         </span>
       </h5>
       @if ($stock->is_limited_stock && $stock->quantity == 0)
-        <div class="alert alert-warning mb-0">This item is out of stock.</div>
+        <div class="alert alert-warning mb-0"> This item is out of stock. </div>
       @elseif ($purchaseLimitReached)
         <div class="alert alert-warning mb-0">
           You have already purchased the limit of {{ $stock->purchase_limit }} of this item
@@ -117,14 +117,14 @@
           </p>
           <div class="form-group">
             <div>
-              <label class="h5">{{ Form::radio('bank', 'user', true, ['class' => 'bank-select mr-1']) }} User Bank</label>
+              <label class="h5"> {{ Form::radio('bank', 'user', true, ['class' => 'bank-select mr-1']) }} User Bank </label>
             </div>
             <div>
-              <label class="h5">{{ Form::radio('bank', 'character', false, ['class' => 'bank-select mr-1']) }} Character
-                Bank</label>
+              <label class="h5"> {{ Form::radio('bank', 'character', false, ['class' => 'bank-select mr-1']) }} Character
+                Bank </label>
               <div class="card use-character-bank hide">
                 <div class="card-body">
-                  <p>Enter the code of the character you would like to use to purchase the item.</p>
+                  <p> Enter the code of the character you would like to use to purchase the item. </p>
                   <div class="form-group">
                     {!! Form::label('slug', 'Character Code') !!}
                     {!! Form::select('slug', Auth::user()->characters()->get()->pluck('fullName', 'id'), ['class' => 'form-control']) !!}
@@ -134,7 +134,7 @@
             </div>
           </div>
         @elseif($stock->use_user_bank)
-          <p>This item will be paid for using your user account bank.</p>
+          <p> This item will be paid for using your user account bank. </p>
           {!! Form::hidden('bank', 'user') !!}
         @elseif($stock->use_character_bank)
           <p>
@@ -153,7 +153,7 @@
         @endif
         @if ($stock->shop->use_coupons && $userCoupons !== null)
           @if (Settings::get('limited_stock_coupon_settings') == 0)
-            <p class="text-danger">Note that coupons cannot be used on limited stock items.</p>
+            <p class="text-danger"> Note that coupons cannot be used on limited stock items. </p>
           @endif
           <div class="form-group">
             {!! Form::checkbox('use_coupon', 1, 0, ['class' => 'is-coupon-class form-control', 'data-toggle' => 'toggle']) !!}
@@ -166,7 +166,7 @@
             ]) !!}
           </div>
         @elseif($stock->shop->use_coupons && $userCoupons == null)
-          <div class="alert alert-danger">You do not own any coupons.</div>
+          <div class="alert alert-danger"> You do not own any coupons. </div>
         @endif
         <div class="text-right">
           {!! Form::submit('Purchase', ['class' => 'btn btn-primary']) !!}
@@ -174,10 +174,10 @@
         {!! Form::close() !!}
       @endif
     @else
-      <div class="alert alert-danger">You must be a FTO to purchase this item.</div>
+      <div class="alert alert-danger"> You must be a FTO to purchase this item. </div>
     @endif
   @else
-    <div class="alert alert-danger">You must be logged in to purchase this item.</div>
+    <div class="alert alert-danger"> You must be logged in to purchase this item. </div>
   @endif
 @endif
 

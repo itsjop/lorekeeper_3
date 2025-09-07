@@ -11,9 +11,9 @@
     All Recent Submissions
   </h1>
 
-  <p>This page displays all recent submissions, regardless of gallery.</p>
+  <p> This page displays all recent submissions, regardless of gallery. </p>
   @if (!$submissions->count())
-    <p>There are no submissions.</p>
+    <p> There are no submissions. </p>
   @endif
 
   {!! Form::open(['method' => 'GET', 'class' => 'flex flex-wrap gap-1 form-inline justify-content-end']) !!}
@@ -54,7 +54,7 @@
 
     {!! $submissions->render() !!}
   @else
-    <p>No submissions found!</p>
+    <p> No submissions found!</p>
   @endif
 
 @endsection

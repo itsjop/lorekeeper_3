@@ -2,7 +2,7 @@
     'url' => 'admin/data/encounters/edit/' . $encounter->id . '/prompts/' . ($prompt->id ? 'edit/' . $prompt->id : 'create')
 ]) !!}
 
-<h3>Basic Information</h3>
+<h3> Basic Information </h3>
 
 <div class="row">
   <div class="col-md-6">
@@ -46,10 +46,10 @@
   ]) !!}
 </div>
 
-<h3>Energy Alterations (Optional)</h3>
-<p>You can allow this prompt to alter the user's encounter energy when it is selected.</p>
-<p>Select if it adds or subtracts, and mow much is taken or given.</p>
-<p>Both fields must be filled out for energy alteration to take place.</p>
+<h3> Energy Alterations (Optional)</h3>
+<p> You can allow this prompt to alter the user's encounter energy when it is selected. </p>
+<p> Select if it adds or subtracts, and mow much is taken or given. </p>
+<p> Both fields must be filled out for energy alteration to take place. </p>
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
@@ -73,31 +73,31 @@
 </div>
 <hr>
 
-<h3>Rewards</h3>
-<p>You can add loot tables containing any kind of currencies (both user- and character-attached), but be sure to keep
-  track of which are being distributed! Character-only currencies cannot be given to users.</p>
+<h3> Rewards </h3>
+<p> You can add loot tables containing any kind of currencies (both user- and character-attached), but be sure to keep
+  track of which are being distributed! Character-only currencies cannot be given to users. </p>
 @include('widgets._loot_select', [
     'loots' => $prompt->rewards,
     'showLootTables' => true,
     'showRaffles' => true
 ])
 <hr>
-<h3>Restrict action</h3>
-<p>Users/characters must obtain all these requirements to be able to attempt the action.</p>
-<p>Remember to keep track of who can hold what, or you may end up with an impossible set of actions.</p>
+<h3> Restrict action </h3>
+<p> Users/characters must obtain all these requirements to be able to attempt the action. </p>
+<p> Remember to keep track of who can hold what, or you may end up with an impossible set of actions. </p>
 
 <div class="text-right mb-3">
   <a
     href="#"
     class="btn btn-outline-info"
     id="addLimit"
-  >Add Limit</a>
+  > Add Limit </a>
 </div>
 <table class="table table-sm" id="limitTable">
   <thead>
     <tr>
-      <th width="35%">Limit Type</th>
-      <th width="35%">Limit</th>
+      <th width="35%"> Limit Type </th>
+      <th width="35%"> Limit </th>
       <th width="10%">
       </th>
     </tr>
@@ -106,10 +106,10 @@
     @if ($prompt->limits)
       @foreach ($prompt->limits as $limit)
         <tr class="limit-row">
-          <td>{!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], $limit->item_type, [
+          <td> {!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], $limit->item_type, [
               'class' => 'form-control reward-type',
               'placeholder' => 'Select limit Type'
-          ]) !!}</td>
+          ]) !!} </td>
           <td class="limit-row-select">
             @if ($limit->item_type == 'Item')
               {!! Form::select('item_id[]', $items, $limit->item_id, [
@@ -124,7 +124,7 @@
             @endif
           </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-limit-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-limit-button"> Remove </a>
           </td>
         </tr>
       @endforeach
@@ -160,7 +160,7 @@
         <td class="limit-row-select">
         </td>
         <td class="text-right">
-          <a href="#" class="btn btn-danger remove-limit-button">Remove</a>
+          <a href="#" class="btn btn-danger remove-limit-button"> Remove </a>
         </td>
       </tr>
     </tbody>

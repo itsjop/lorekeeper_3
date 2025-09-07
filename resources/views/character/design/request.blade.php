@@ -22,15 +22,15 @@
         @if ($request->user_id == Auth::user()->id)
           @if ($request->isComplete)
             <div class="text-right">
-              <button class="btn btn-outline-danger delete-button">Delete Request</button>
-              <a href="#" class="btn btn-outline-primary submit-button">Submit Request</a>
+              <button class="btn btn-outline-danger delete-button"> Delete Request </button>
+              <a href="#" class="btn btn-outline-primary submit-button"> Submit Request </a>
             </div>
           @else
-            <p class="text-danger">Not all sections have been completed yet. Please visit the necessary tab(s) and click Save to
-              update them, even if no modifications to the information are needed.</p>
+            <p class="text-danger"> Not all sections have been completed yet. Please visit the necessary tab(s) and click Save to
+              update them, even if no modifications to the information are needed. </p>
             <div class="text-right">
-              <button class="btn btn-outline-danger delete-button">Delete Request</button>
-              <button class="btn btn-outline-primary" disabled>Submit Request</button>
+              <button class="btn btn-outline-danger delete-button"> Delete Request </button>
+              <button class="btn btn-outline-primary" disabled> Submit Request </button>
             </div>
           @endif
         @endif
@@ -46,8 +46,8 @@
                     href="#"
                     class="btn btn-outline-secondary cancel-button btn-sm float-right"
                     data-action="cancel"
-                  >Cancel</a>
-                  <strong class="text-secondary">Cancelling</strong> the request returns it to its draft status, allowing you to
+                  > Cancel </a>
+                  <strong class="text-secondary"> Cancelling </strong> the request returns it to its draft status, allowing you to
                   make further edits.
                 </div>
               </div>
@@ -64,8 +64,8 @@
                 href="#"
                 class="btn btn-outline-secondary process-button btn-sm float-right"
                 data-action="cancel"
-              >Cancel</a>
-              <strong class="text-secondary">Cancelling</strong> the request returns it to its draft status, allowing the user to
+              > Cancel </a>
+              <strong class="text-secondary"> Cancelling </strong> the request returns it to its draft status, allowing the user to
               make further edits.
             </div>
           </div>
@@ -75,8 +75,8 @@
                 href="#"
                 class="btn btn-outline-success process-button btn-sm float-right"
                 data-action="approve"
-              >Approve</a>
-              <strong class="text-success">Approving</strong> the request creates the update.
+              > Approve </a>
+              <strong class="text-success"> Approving </strong> the request creates the update.
             </div>
           </div>
           <div class="card">
@@ -85,14 +85,14 @@
                 href="#"
                 class="btn btn-outline-danger process-button btn-sm float-right"
                 data-action="reject"
-              >Reject</a>
-              <strong class="text-danger">Rejecting</strong> the update returns any attached items and the user may not edit it any
+              > Reject </a>
+              <strong class="text-danger"> Rejecting </strong> the update returns any attached items and the user may not edit it any
               more.
             </div>
           </div>
         @endif
       @elseif($request->status == 'Approved')
-        <p>This request has been approved. The data is preserved as a record of this submission.</p>
+        <p> This request has been approved. The data is preserved as a record of this submission. </p>
       @endif
     </div>
   </div>

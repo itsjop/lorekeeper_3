@@ -2,7 +2,7 @@
   {!! Form::open(['url' => 'admin/world/faction-types/delete/' . $type->id]) !!}
 
   <p>
-    You are about to delete the faction type <strong>{{ $type->name }}</strong>. This is not reversible.
+    You are about to delete the faction type <strong> {{ $type->name }} </strong>. This is not reversible.
   </p>
 
   <p>
@@ -11,9 +11,9 @@
 
   @if (count($type->factions))
     <div class="alert alert-danger">
-      <h5>If you delete this, you will also delete: </h5>
+      <h5> If you delete this, you will also delete: </h5>
       @foreach ($type->factions as $key => $faction)
-        <strong>{!! $faction->displayName !!}</strong>
+        <strong> {!! $faction->displayName !!} </strong>
         @if ($key != count($type->factions) - 1 && count($type->factions) > 2)
           ,
           @endif @if ($key == count($type->factions) - 2)
@@ -23,7 +23,7 @@
     </div>
   @endif
 
-  <p>Are you sure you want to delete <strong>{{ $type->name }}</strong>?</p>
+  <p> Are you sure you want to delete <strong> {{ $type->name }} </strong>?</p>
 
   <div class="text-right">
     {!! Form::submit('Delete Faction Type', ['class' => 'btn btn-danger']) !!}

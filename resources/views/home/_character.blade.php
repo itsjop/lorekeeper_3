@@ -7,7 +7,7 @@
     />
   </div>
   <div class="text-center">
-    <a href="{{ $character->url }}">{{ $character->slug }}</a>
+    <a href="{{ $character->url }}"> {{ $character->slug }} </a>
   </div>
   @if (!$character->is_visible && Auth::check() && Auth::user()->isStaff)
     <div class="text-danger character-info" data-id="0">
@@ -16,5 +16,5 @@
     </div>
   @endif
 @else
-  <div class="text-danger character-info" data-id="0">Character not found.</div>
+  <div class="text-danger character-info" data-id="0"> Character not found. </div>
 @endif

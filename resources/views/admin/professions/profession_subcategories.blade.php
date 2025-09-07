@@ -7,20 +7,20 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Profession Subcategories' => 'admin/data/profession-subcategories']) !!}
 
-  <h1>Profession Subcategories</h1>
+  <h1> Profession Subcategories </h1>
 
-  <p>This is a list of profession subcategories that will be used to sort professions on the profession page. Creating profession
-    subcategories is entirely optional, but recommended if you want even more clustering of professions.</p>
-  <p>The sorting order reflects the order in which the profession subcategories will be displayed on the world pages.</p>
+  <p> This is a list of profession subcategories that will be used to sort professions on the profession page. Creating profession
+    subcategories is entirely optional, but recommended if you want even more clustering of professions. </p>
+  <p> The sorting order reflects the order in which the profession subcategories will be displayed on the world pages. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-secondary" href="{{ url('admin/data/professions') }}">
-      <i class="fas fa-undo-alt mr-2"></i> Back to Professions</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Professions </a>
     <a class="btn btn-primary" href="{{ url('admin/data/profession-subcategories/create') }}">
-      <i class="fas fa-plus"></i> Create New Profession Subcategory</a>
+      <i class="fas fa-plus"></i> Create New Profession Subcategory </a>
   </div>
   @if (!count($subcategories))
-    <p>No profession subcategories found.</p>
+    <p> No profession subcategories found. </p>
   @else
     <table class="table table-sm category-table">
       <tbody id="sortable" class="sortable">
@@ -32,7 +32,7 @@
               {!! $category->displayName !!}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/profession-subcategories/edit/' . $category->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/profession-subcategories/edit/' . $category->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

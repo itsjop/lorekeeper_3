@@ -1,4 +1,4 @@
-<h3>Area</h3>
+<h3> Area </h3>
 <div class="row">
   <div class="col">
     {!! Form::label('Unlock Area') !!} {!! add_help('Choose the area that should be unlocked when using this item from the inventory.') !!}

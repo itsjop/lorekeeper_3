@@ -18,9 +18,9 @@
 
   @if (count($category->faunas))
     <div class="text-center">
-      <h5 class="mt-3 mb-0">All {{ $category->name }} Fauna ({{ count($category->faunas) }})</h5>
+      <h5 class="mt-3 mb-0"> All {{ $category->name }} Fauna ({{ count($category->faunas) }})</h5>
       @foreach ($category->faunas as $key => $fauna)
-        <strong>{!! $fauna->displayName !!}</strong>
+        <strong> {!! $fauna->displayName !!} </strong>
         @if ($key != count($category->faunas) - 1 && count($category->faunas) > 2)
           ,
           @endif @if ($key == count($category->faunas) - 2)
@@ -29,12 +29,12 @@
         @endforeach
     </div>
   @else
-    <h5 class="mt-3 mb-0 text-center">There aren't any {{ $category->names }} yet</h5>
+    <h5 class="mt-3 mb-0 text-center"> There aren't any {{ $category->names }} yet </h5>
   @endif
 
   @isset($category->summary)
     <hr>
-    <div class="text-center">{!! $category->summary !!}</div>
+    <div class="text-center"> {!! $category->summary !!} </div>
   @endisset
 
   @isset($category->parsed_description)

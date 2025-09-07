@@ -7,11 +7,11 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Grant Currency' => 'admin/grants/user-currency']) !!}
 
-  <h1>Grant User Currency</h1>
+  <h1> Grant User Currency </h1>
 
   {!! Form::open(['url' => 'admin/grants/user-currency']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('names[]', 'Username(s)') !!} {!! add_help('You can select up to 10 users at once.') !!}

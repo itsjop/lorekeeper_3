@@ -13,10 +13,10 @@
           : 'admin/world/concept-categories/create'
   ]) !!}
 
-  <h1>{{ $category->id ? 'Edit' : 'Create' }} Concept Category
+  <h1> {{ $category->id ? 'Edit' : 'Create' }} Concept Category
     @if ($category->id)
       ({!! $category->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-category-button">Delete Concept Category</a>
+      <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Concept Category </a>
     @endif
   </h1>
 
@@ -26,7 +26,7 @@
   ]) !!}
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Basic Information</h2>
+    <h2 class="card-header h3"> Basic Information </h2>
     <div class="card-body">
       <div class="form-group">
         {!! Form::label('Name') !!}
@@ -40,7 +40,7 @@
   </div>
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Images</h2>
+    <h2 class="card-header h3"> Images </h2>
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($category->thumb_extension)
@@ -57,8 +57,8 @@
           </a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the category index.') !!}
-        <div>{!! Form::file('image_th') !!}</div>
-        <div class="text-muted">Recommended size: 200x200</div>
+        <div> {!! Form::file('image_th') !!} </div>
+        <div class="text-muted"> Recommended size: 200x200</div>
         @if (isset($category->thumb_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image_th', 1, false, [
@@ -85,8 +85,8 @@
           </a>
         @endif
         {!! Form::label('Category Image (Optional)') !!} {!! add_help('This image is used on the category page as a header.') !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Recommended size: None (Choose a standard size for all category header images.)</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Recommended size: None (Choose a standard size for all category header images.)</div>
         @if (isset($category->image_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, [

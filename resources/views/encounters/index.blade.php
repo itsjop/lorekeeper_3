@@ -9,16 +9,16 @@
   <p id="display_error">
   </p>
   <div class="text-center">
-    <h1>Encounter Areas</h1>
-    <p>Here is a list of areas that you can venture into. You will recieve a randomized encounter and options of
+    <h1> Encounter Areas </h1>
+    <p> Here is a list of areas that you can venture into. You will recieve a randomized encounter and options of
       what to do
-      in it.</p>
-    <p>You have limited energy to explore each day, so spend it wisely.</p>
+      in it. </p>
+    <p> You have limited energy to explore each day, so spend it wisely. </p>
   </div>
   <hr>
 
   @if (!count($areas))
-    <div class="alert alert-info">No areas found. Check back later!</div>
+    <div class="alert alert-info"> No areas found. Check back later!</div>
   @else
     <div class="shops-row grid grid-4-col ai-center">
 

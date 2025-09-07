@@ -28,7 +28,7 @@
                   It seems a message was attached!
                 </p>
                 <p>
-                  <i>{{ $target->description }}</i>
+                  <i> {{ $target->description }} </i>
                 </p>
               </div>
             @endif
@@ -41,11 +41,11 @@
                 {!! Form::close() !!}
               @else
                 <p>
-                  <strong>You've already claimed this!</strong>
+                  <strong> You've already claimed this!</strong>
                 </p>
               @endif
             @else
-              <p>This hunt isn't active. Check the <a href="{{ $hunt->url }}">hunt's page</a> for more information!</p>
+              <p> This hunt isn't active. Check the <a href="{{ $hunt->url }}">hunt's page </a> for more information!</p>
             @endif
           </div>
         </div>

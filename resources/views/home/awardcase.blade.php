@@ -11,7 +11,7 @@
     {{ ucfirst(__('awards.awardcase')) }}
   </h1>
 
-  <p>These are the {{ __('awards.awards') }} you've earned for participating on this site.</p>
+  <p> These are the {{ __('awards.awards') }} you've earned for participating on this site. </p>
   @foreach ($awards as $categoryId => $categoryAwards)
     <div class="card mb-3 awardcase-category">
       <h5 class="card-header awardcase-header">
@@ -38,7 +38,7 @@
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="awardcase-stack awardcase-stack-name">{{ $stack->first()->name }}
+                  <a href="#" class="awardcase-stack awardcase-stack-name"> {{ $stack->first()->name }}
                   </a>
                 </div>
               </div>
@@ -49,7 +49,7 @@
     </div>
   @endforeach
   <div class="text-right mb-4">
-    <a href="{{ url(Auth::user()->url . '/' . __('awards.award') . '-logs') }}">View logs...</a>
+    <a href="{{ url(Auth::user()->url . '/' . __('awards.award') . '-logs') }}"> View logs... </a>
   </div>
 
   <h3>
@@ -73,14 +73,14 @@
         });
       @endphp
       @if (!$inProgressAwards->count())
-        <p class="text-success">You have completed all available {{ __('awards.awards') }}. Yay!</p>
+        <p class="text-success"> You have completed all available {{ __('awards.awards') }}. Yay!</p>
       @else
         @foreach ($inProgressAwards as $award)
           <div class="card mb-2">
             <div class="card-header">
               <div class="row">
                 <div class="col-9">
-                  <h5>{!! $award->displayName !!}</h5>
+                  <h5> {!! $award->displayName !!} </h5>
                 </div>
                 <div class="col-3 text-right">
                   <h5>({{ $award->progressionProgress($user) }}/{{ count($award->progressions) }})</h5>

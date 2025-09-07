@@ -15,9 +15,9 @@
           : 'admin/data/criteria-defaults/create'
   ]) !!}
 
-  <h1>{{ $default->id ? 'Edit' : 'Create' }} Criteria Default
+  <h1> {{ $default->id ? 'Edit' : 'Create' }} Criteria Default
     @if ($default->id)
-      <a href="#" class="btn btn-danger float-right delete-button">Delete Default</a>
+      <a href="#" class="btn btn-danger float-right delete-button"> Delete Default </a>
     @endif
   </h1>
 
@@ -25,7 +25,7 @@
       'url' => $default->id ? 'admin/data/criteria-defaults/edit/' . $default->id : 'admin/data/criteria-defaults/create'
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
   <div class="form-group">
     {!! Form::label('Name') !!}
     {!! Form::text('name', $default->name, ['class' => 'form-control']) !!}
@@ -36,13 +36,13 @@
     {!! Form::text('summary', $default->summary, ['class' => 'form-control']) !!}
   </div>
 
-  <h3 class="mt-5">Criteria Rewards <button class="btn btn-primary float-right add-calc m-0" type="button">+ Criterion</a>
+  <h3 class="mt-5"> Criteria Rewards <button class="btn btn-primary float-right add-calc m-0" type="button">+ Criterion </a>
   </h3>
-  <p>Criteria can be used in addition to or in replacement of rewards. They can be created under the "criterion" section of the
+  <p> Criteria can be used in addition to or in replacement of rewards. They can be created under the "criterion" section of the
     admin panel,
     and allow for dynamic reward amounts to be generated based on user / admin selected criteria like the type of art, or the number
-    of words.</p>
-  <p>When adding criteria here, any defaults set will be populated in for a prompt/gallery if this default is selected.</p>
+    of words. </p>
+  <p> When adding criteria here, any defaults set will be populated in for a prompt/gallery if this default is selected. </p>
   <div id="criteria">
     @foreach ($default->criteria as $criterion)
       <div class="card p-3 mb-2 pl-0">
@@ -108,7 +108,7 @@
         </button>
       </div>
     </div>
-    <div id="collapsable-" class="form collapse">Select a criterion to populate this area.</div>
+    <div id="collapsable-" class="form collapse"> Select a criterion to populate this area. </div>
   </div>
 @endsection
 

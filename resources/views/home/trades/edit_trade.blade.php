@@ -12,8 +12,8 @@
   </h1>
 
   <p>
-    Edit the contents of this trade freely. Your trade partner will only be notified once you have confirmed your offer. Note that each person may only add up to <strong>{{ config('lorekeeper.settings.trade_asset_limit') }} things to one trade
-      - if necessary, please create a new trade to add more.</strong>
+    Edit the contents of this trade freely. Your trade partner will only be notified once you have confirmed your offer. Note that each person may only add up to <strong> {{ config('lorekeeper.settings.trade_asset_limit') }} things to one trade
+      - if necessary, please create a new trade to add more. </strong>
   </p>
 
   {!! Form::open(['url' => 'trades/' . $trade->id . '/edit']) !!}
@@ -27,7 +27,7 @@
   @include('widgets._inventory_select', ['user' => Auth::user(), 'inventory' => $inventory, 'categories' => $categories, 'selected' => $trade->getInventory(Auth::user()), 'page' => $page])
   @include('widgets._my_character_select', ['readOnly' => true, 'categories' => $characterCategories, 'selected' => $trade->getCharacters(Auth::user())])
   @include('widgets._bank_select', ['owner' => Auth::user(), 'selected' => $trade->getCurrencies(Auth::user()), 'isTransferrable' => true])
-  <div class="text-right">{!! Form::submit('Edit Trade', ['class' => 'btn btn-primary']) !!}</div>
+  <div class="text-right"> {!! Form::submit('Edit Trade', ['class' => 'btn btn-primary']) !!} </div>
   {!! Form::close() !!}
 @endsection
 @section('scripts')

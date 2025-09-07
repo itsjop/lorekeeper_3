@@ -26,7 +26,7 @@
       {!! $pet->description !!}
       @if ($pet->evolutions->count())
         <div class="card mb-3">
-          <div class="card-header h2">Evolutions</div>
+          <div class="card-header h2"> Evolutions </div>
           <div class="card-body">
             @foreach ($pet->evolutions->sortBy('evolution_stage')->chunk(4) as $chunk)
               <div class="row">
@@ -51,7 +51,7 @@
       @endif
       @if ($pet->variants->count())
         <div class="card mb-3">
-          <div class="card-header h2">Variants</div>
+          <div class="card-header h2"> Variants </div>
           <div class="card-body">
             @foreach ($pet->variants->chunk(4) as $chunk)
               <div class="row">
@@ -63,7 +63,7 @@
                       @else
                         {{ $variant->name }}
                       @endif
-                      <p class="mb-0">{{ $variant->description }}</p>
+                      <p class="mb-0"> {{ $variant->description }} </p>
                     </a>
                   </div>
                 @endforeach
@@ -74,7 +74,7 @@
       @endif
       @if ($pet->hasDrops)
         <div class="alert alert-info">
-          This pet has drops! <a href="{{ $pet->idUrl }}">Click here to view them</a>.
+          This pet has drops! <a href="{{ $pet->idUrl }}"> Click here to view them </a>.
         </div>
       @endif
     </div>

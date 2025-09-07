@@ -19,9 +19,9 @@
   </h1>
 
   @if ($shop->use_coupons)
-    <div class="alert alert-success">You can use coupons in this store!</div>
+    <div class="alert alert-success"> You can use coupons in this store!</div>
     @if ($shop->allowed_coupons && count(safeJSON($shop->allowed_coupons)))
-      <div class="alert alert-info">You can use the following coupons: @foreach ($shop->allAllowedCoupons as $coupon)
+      <div class="alert alert-info"> You can use the following coupons: @foreach ($shop->allAllowedCoupons as $coupon)
           {!! $coupon->displayName !!}{{ $loop->last ? '' : ', ' }}
         @endforeach
       </div>
@@ -36,7 +36,7 @@
         alt="{{ $shop->name }}"
       />
     @endif
-    <p>{!! $shop->parsed_description !!}</p>
+    <p> {!! $shop->parsed_description !!} </p>
   </div>
 
   @foreach ($stocks as $type => $stock)
@@ -79,13 +79,13 @@
                   </a>
                 @endif
                 <a href="#" class="inventory-stack inventory-stack-name jc-center">
-                  <strong>{{ $item->name }}</strong>
+                  <strong> {{ $item->name }} </strong>
                 </a>
                 <div class="cost">
-                  <strong>Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}
+                  <strong> Cost: </strong> {!! $shop->displayStockCosts($item->pivot->id) ?? 'Free' !!}
                 </div>
                 @if ($item->pivot->is_limited_stock)
-                  <div class="stock">Stock: {{ $item->pivot->quantity }}</div>
+                  <div class="stock"> Stock: {{ $item->pivot->quantity }} </div>
                 @endif
                 @if ($item->pivot->purchase_limit)
                   <div class="max-stock text-danger">
@@ -96,10 +96,10 @@
                   </div>
                 @endif
                 @if ($item->pivot->disallow_transfer)
-                  <div class="transfer-note text-danger">Cannot be transferred after purchase</div>
+                  <div class="transfer-note text-danger"> Cannot be transferred after purchase </div>
                 @endif
                 @if ($item->pivot->is_timed_stock)
-                  <div class="limited-time text-info">Available for a limited time!</div>
+                  <div class="limited-time text-info"> Available for a limited time!</div>
                 @endif
               </div>
             @endforeach

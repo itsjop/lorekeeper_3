@@ -15,10 +15,10 @@
     <div class="logs-table-header">
       <div class="row">
         <div class="col-4">
-          <div class="logs-table-cell">Alias</div>
+          <div class="logs-table-cell"> Alias </div>
         </div>
         <div class="col-3">
-          <div class="logs-table-cell">Site</div>
+          <div class="logs-table-cell"> Site </div>
         </div>
         <div class="col-5">
           <div class="logs-table-cell">
@@ -31,7 +31,7 @@
         <div class="logs-table-row">
           <div class="row flex-wrap">
             <div class="col-4">
-              <div class="logs-table-cell">{!! $alias->displayAlias !!}</div>
+              <div class="logs-table-cell"> {!! $alias->displayAlias !!} </div>
             </div>
             <div class="col-3">
               <div class="logs-table-cell">
@@ -41,7 +41,7 @@
             <div class="col-5">
               <div class="logs-table-cell">
                 @if ($alias->is_primary_alias)
-                  <span class="badge badge-success">Primary</span>
+                  <span class="badge badge-success"> Primary </span>
                 @endif
                 @if (!$alias->is_visible)
                   <i

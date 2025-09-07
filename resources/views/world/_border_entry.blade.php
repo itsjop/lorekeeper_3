@@ -26,7 +26,7 @@
     </div>
     @if ($border->topLayers->count() && $border->bottomLayers->count())
       <hr class="w-75">
-      <h5>Layer Preview</h5>
+      <h5> Layer Preview </h5>
       <div class="form-group">
         {!! Form::label('Top Layer') !!}
         {!! Form::select(
@@ -91,21 +91,21 @@
         @if (isset($border->category) && $border->category)
           <div class="col-md">
             <p>
-              <strong>Category:</strong> {!! $border->category->displayName !!}
+              <strong> Category:</strong> {!! $border->category->displayName !!}
             </p>
           </div>
         @endif
         @if (isset($border->borderArtist) && $border->borderArtist)
           <div class="col-md">
             <p>
-              <strong>Artist:</strong> {!! $border->borderArtist !!}
+              <strong> Artist:</strong> {!! $border->borderArtist !!}
             </p>
           </div>
         @endif
         @if ($border->hasItem())
           <div class="col-md">
             <p>
-              <strong>Obtained From:</strong> {!! $border->borderItem()->displayName !!}
+              <strong> Obtained From:</strong> {!! $border->borderItem()->displayName !!}
             </p>
           </div>
         @endif
@@ -114,7 +114,7 @@
       <div class="container mt-2">
         @if ($border->variants->count())
           <hr />
-          <h2 class="h4 pl-2">Variants</h2>
+          <h2 class="h4 pl-2"> Variants </h2>
           <div class="row">
             @foreach ($border->variants as $variant)
               <div class="col-md-3 col-6 text-center">
@@ -131,7 +131,7 @@
                   @if (isset($variant->borderArtist) && $variant->borderArtist)
                     <div class="col-md">
                       <p>
-                        <strong>Artist:</strong> {!! $variant->borderArtist !!}
+                        <strong> Artist:</strong> {!! $variant->borderArtist !!}
                       </p>
                     </div>
                   @endif

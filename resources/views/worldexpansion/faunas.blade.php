@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Fauna' => 'world/faunas']) !!}
-  <h1>Fauna</h1>
+  <h1> Fauna </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -57,22 +57,22 @@
                 </a>
               @endisset
             </div>
-            <h3 class="mb-0 text-center">{!! $fauna->displayName !!}</h3>
-            <p class="mb-0 text-center">{!! $fauna->category ? $fauna->category->displayName : '' !!}</p>
+            <h3 class="mb-0 text-center"> {!! $fauna->displayName !!} </h3>
+            <p class="mb-0 text-center"> {!! $fauna->category ? $fauna->category->displayName : '' !!} </p>
           </div>
 
           @if (count(allAttachments($fauna)))
             <div class="card-body">
               @foreach (allAttachments($fauna) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }}
-                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+                <p class="text-center mb-0"> Associated with {{ count($attachments) }}
+                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}. </p>
               @endforeach
             </div>
           @endif
 
           @isset($fauna->summary)
             <div class="card-footer mt-auto">
-              <p class="mb-0"> {!! $fauna->summary !!}</p>
+              <p class="mb-0"> {!! $fauna->summary !!} </p>
             </div>
           @endisset
 
@@ -82,5 +82,5 @@
   </div>
   {!! $faunas->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $faunas->total() }} result{{ $faunas->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $faunas->total() }} result{{ $faunas->total() == 1 ? '' : 's' }} found. </div>
 @endsection

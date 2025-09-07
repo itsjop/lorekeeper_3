@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Traits' => 'world/traits']) !!}
-  <h1>Traits</h1>
+  <h1> Traits </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -61,6 +61,6 @@
   @endforeach
   {!! $features->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $features->total() }} result{{ $features->total() == 1 ? '' : 's' }} found.
+  <div class="text-center mt-4 small text-muted"> {{ $features->total() }} result{{ $features->total() == 1 ? '' : 's' }} found.
   </div>
 @endsection

@@ -77,7 +77,7 @@
   {{--     @if (count($character->image->content_warnings ?? []) && (!Auth::check() || (Auth::check() && Auth::user()->settings->content_warning_visibility < 2)))
            <p class="mb-0">
              <span class="text-danger mr-1">
-<strong>Character Warning:</strong>
+<strong> Character Warning:</strong>
 </span>
              {{ implode(', ', $character->image->content_warnings) }}
            </p>

@@ -7,11 +7,11 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Grant Encounter Energy' => 'admin/grants/encounter-energy']) !!}
 
-  <h1>Grant Encounter Energy</h1>
+  <h1> Grant Encounter Energy </h1>
 
   {!! Form::open(['url' => 'admin/grants/encounter-energy']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   @if (Config::get('lorekeeper.encounters.use_characters'))
     <div class="form-group">

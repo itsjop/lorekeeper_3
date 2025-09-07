@@ -1,5 +1,5 @@
 @if (!$recipe)
-  <div class="text-center">Invalid recipe selected.</div>
+  <div class="text-center"> Invalid recipe selected. </div>
 @else
   @if ($recipe->imageUrl)
     <div class="text-center">
@@ -8,18 +8,18 @@
       </div>
     </div>
   @endif
-  <h3>Recipe Details <a
+  <h3> Recipe Details <a
       class="small inventory-collapse-toggle collapse-toggle"
       href="#recipeDetails"
       data-bs-toggle="collapse"
-    >Show</a>
+    > Show </a>
   </h3>
   <hr>
   <div class="collapse show" id="recipeDetails">
     <div class="row">
       @if ($recipe->is_limited)
         <div class="col-md-12">
-          <h5>Requirements</h5>
+          <h5> Requirements </h5>
 
           <div class="alert alert-warning">
             <?php
@@ -35,7 +35,7 @@
         </div>
       @endif
       <div class="col-md-6">
-        <h5>Ingredients</h5>
+        <h5> Ingredients </h5>
         @foreach ($recipe->ingredients as $ingredient)
           <div class="alert alert-secondary">
             @include('home.crafting._recipe_ingredient_entry', ['ingredient' => $ingredient])
@@ -43,7 +43,7 @@
         @endforeach
       </div>
       <div class="col-md-6">
-        <h5>Rewards</h5>
+        <h5> Rewards </h5>
         @foreach ($recipe->reward_items as $type)
           @foreach ($type as $item)
             <div class="alert alert-secondary">
@@ -69,7 +69,7 @@
     </div>
     {!! Form::close() !!}
   @else
-    <div class="alert alert-danger">You do not have all of the required recipe ingredients.</div>
+    <div class="alert alert-danger"> You do not have all of the required recipe ingredients. </div>
   @endif
 @endif
 

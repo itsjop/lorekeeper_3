@@ -1,5 +1,5 @@
 @if (!$stack)
-  <div class="text-center">Invalid stack selected.</div>
+  <div class="text-center"> Invalid stack selected. </div>
 @else
   <div class="text-center">
     <div class="mb-1 inventory-main-img">
@@ -8,13 +8,13 @@
       </a>
     </div>
     <div @if (count($item->tags)) class="mb-1 inventory-main-name" @endif>
-      <a href="{{ $item->url }}">{{ $item->name }}</a>
+      <a href="{{ $item->url }}"> {{ $item->name }} </a>
     </div>
   </div>
 
-  <h5>Item Variations</h5>
+  <h5> Item Variations </h5>
   @if ($user && $user->hasPower('edit_inventories'))
-    <p class="alert alert-warning my-2">Note: Your rank allows you to transfer {{ __('lorekeeper.character') }}-bound items.</p>
+    <p class="alert alert-warning my-2"> Note: Your rank allows you to transfer {{ __('lorekeeper.character') }}-bound items. </p>
   @endif
 
   {!! Form::open(['url' => 'character/' . $character->slug . '/inventory/edit']) !!}
@@ -33,11 +33,11 @@
               </th>
             @endif
             @if ($item->category->can_name)
-              <th class="col-2">Name</th>
+              <th class="col-2"> Name </th>
             @endif
-            <th class="col">Source</th>
-            <th class="col">Notes</th>
-            <th class="col-2">Quantity</th>
+            <th class="col"> Source </th>
+            <th class="col"> Notes </th>
+            <th class="col-2"> Quantity </th>
             <th class="col-1">
               <i class="fas fa-lock invisible"></i>
             </th>
@@ -47,30 +47,30 @@
           @foreach ($stack as $itemRow)
             <tr id="itemRow{{ $itemRow->id }}" class="d-flex {{ $itemRow->isTransferrable ? '' : 'accountbound' }}">
               @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
-                <td class="col-1">{!! Form::checkbox('ids[]', $itemRow->id, false, ['class' => 'item-check', 'onclick' => 'updateQuantities(this)']) !!}</td>
+                <td class="col-1"> {!! Form::checkbox('ids[]', $itemRow->id, false, ['class' => 'item-check', 'onclick' => 'updateQuantities(this)']) !!} </td>
               @endif
               @if ($item->category->can_name)
-                <td class="col-2">{!! htmlentities($itemRow->stack_name) ?: 'N/A' !!}</td>
+                <td class="col-2"> {!! htmlentities($itemRow->stack_name) ?: 'N/A' !!} </td>
               @endif
-              <td class="col">{!! array_key_exists('data', $itemRow->data) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!}</td>
-              <td class="col">{!! array_key_exists('notes', $itemRow->data) ? ($itemRow->data['notes'] ? $itemRow->data['notes'] : 'N/A') : 'N/A' !!}</td>
+              <td class="col"> {!! array_key_exists('data', $itemRow->data) ? ($itemRow->data['data'] ? $itemRow->data['data'] : 'N/A') : 'N/A' !!} </td>
+              <td class="col"> {!! array_key_exists('notes', $itemRow->data) ? ($itemRow->data['notes'] ? $itemRow->data['notes'] : 'N/A') : 'N/A' !!} </td>
               @if ($user && !$readOnly && ($owner_id == $user->id || $has_power == true))
                 @if ($itemRow->availableQuantity)
-                  <td class="col-2">{!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, [
+                  <td class="col-2"> {!! Form::selectRange('', 1, $itemRow->availableQuantity, 1, [
                       'class' => 'quantity-select',
                       'type' => 'number',
                       'style' => 'min-width:40px;'
-                  ]) !!} /{{ $itemRow->availableQuantity }}</td>
+                  ]) !!} /{{ $itemRow->availableQuantity }} </td>
                 @else
-                  <td class="col-2">{!! Form::selectRange('', 0, 0, 0, [
+                  <td class="col-2"> {!! Form::selectRange('', 0, 0, 0, [
                       'class' => 'quantity-select',
                       'type' => 'number',
                       'style' => 'min-width:40px;',
                       'disabled'
-                  ]) !!} /{{ $itemRow->availableQuantity }}</td>
+                  ]) !!} /{{ $itemRow->availableQuantity }} </td>
                 @endif
               @else
-                <td class="col-3">{!! $itemRow->count !!}</td>
+                <td class="col-3"> {!! $itemRow->count !!} </td>
               @endif
               <td class="col-1">
                 @if (!$itemRow->isTransferrable)
@@ -103,8 +103,8 @@
               @endif Name Item
             </a>
             <div id="nameForm" class="collapse">
-              <p>Enter a name to display for the selected stack(s)! Note that only one of the stacks' names will display on the
-                inventory page and title of this panel, while other stacks' names will appear in the list above.</p>
+              <p> Enter a name to display for the selected stack(s)! Note that only one of the stacks' names will display on the
+                inventory page and title of this panel, while other stacks' names will appear in the list above. </p>
               {!! Form::open() !!}
               <div class="form-group">
                 {!! Form::text('stack_name', null, ['class' => 'form-control stock-field', 'data-name' => 'stack_name']) !!}
@@ -128,11 +128,11 @@
               @endif Transfer Item
             </a>
             <div id="transferForm" class="collapse">
-              <p>This will transfer this item back to @if ($owner_id != $user->id)
+              <p> This will transfer this item back to @if ($owner_id != $user->id)
                   this user's
                 @else
                   your
-                @endif inventory.</p>
+                @endif inventory. </p>
               <div class="text-right">
                 {!! Form::button('Transfer', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'take', 'type' => 'submit']) !!}
               </div>
@@ -151,7 +151,7 @@
               @endif Delete Item
             </a>
             <div id="deleteForm" class="collapse">
-              <p>This action is not reversible. Are you sure you want to delete this item?</p>
+              <p> This action is not reversible. Are you sure you want to delete this item?</p>
               <div class="text-right">
                 {!! Form::button('Delete', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete', 'type' => 'submit']) !!}
               </div>

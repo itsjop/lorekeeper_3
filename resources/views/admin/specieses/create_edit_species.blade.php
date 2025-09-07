@@ -13,9 +13,9 @@
           : 'admin/data/species/create'
   ]) !!}
 
-  <h1>{{ $species->id ? 'Edit' : 'Create' }} Species
+  <h1> {{ $species->id ? 'Edit' : 'Create' }} Species
     @if ($species->id)
-      <a href="#" class="btn btn-danger float-right delete-species-button">Delete Species</a>
+      <a href="#" class="btn btn-danger float-right delete-species-button"> Delete Species </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -42,7 +42,7 @@
       {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: 200px x 200px</div>
+    <div class="text-muted"> Recommended size: 200px x 200px </div>
     @if ($species->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -78,7 +78,7 @@
   {!! Form::close() !!}
 
   @if ($species->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._species_entry', ['species' => $species])

@@ -13,7 +13,7 @@
     <div class="col-lg-8 col-md-12">
       <div class="mb-3">
 
-        <h2>{{ $hunt->displayName }}</h2>
+        <h2> {{ $hunt->displayName }} </h2>
 
         <div class="text-center">
           @if (isset($participantLog))
@@ -39,18 +39,18 @@
 
         <div class="card mb-4">
           <div class="card-header">
-            <h4>Information</h4>
+            <h4> Information </h4>
           </div>
           <div class="card-body">
             <div>
-              <strong>Start Time: </strong>{!! format_date($hunt->start_at) !!} ({{ $hunt->start_at->diffForHumans() }})
+              <strong> Start Time: </strong> {!! format_date($hunt->start_at) !!} ({{ $hunt->start_at->diffForHumans() }})
             </div>
             <div class="mb-2">
-              <strong>End Time: </strong>{!! format_date($hunt->end_at) !!} ({{ $hunt->end_at->diffForHumans() }})
+              <strong> End Time: </strong> {!! format_date($hunt->end_at) !!} ({{ $hunt->end_at->diffForHumans() }})
             </div>
 
             @if ($hunt->summary)
-              <i>{{ $hunt->summary }}</i>
+              <i> {{ $hunt->summary }} </i>
             @endif
           </div>
         </div>
@@ -58,10 +58,10 @@
         <div class="card">
           <div class="card-body">
             @if ($hunt->clue)
-              <p>Here's a clue to get you started...</p>
-              <i>{{ $hunt->clue }}</i>
+              <p> Here's a clue to get you started... </p>
+              <i> {{ $hunt->clue }} </i>
             @else
-              <p>There doesn't seem to be a clue for this hunt. You're on your own!</p>
+              <p> There doesn't seem to be a clue for this hunt. You're on your own!</p>
             @endif
 
             <hr />
@@ -70,9 +70,9 @@
               @foreach ($logArray as $key => $found)
                 @if (isset($found))
                   @if (isset($hunt->targets[$key - 1]->description))
-                    <p>The <strong>{!! $hunt->targets[$key - 1]->item ? $hunt->targets[$key - 1]->item->name : 'Deleted Asset' !!}</strong> had this message for you:</p>
+                    <p> The <strong> {!! $hunt->targets[$key - 1]->item ? $hunt->targets[$key - 1]->item->name : 'Deleted Asset' !!} </strong> had this message for you:</p>
                     <p>
-                      <i>{!! $hunt->targets[$key - 1]->description !!}</i>
+                      <i> {!! $hunt->targets[$key - 1]->description !!} </i>
                     </p>
                   @endif
                 @endif

@@ -1,5 +1,5 @@
-<p>Create a new pairing of characters. If you pair your character with one that belongs to another person, it is highly
-  recommended you ask them first, as their approval will be needed.</p>
+<p> Create a new pairing of characters. If you pair your character with one that belongs to another person, it is highly
+  recommended you ask them first, as their approval will be needed. </p>
 
 {!! Form::open(['url' => 'characters/pairings/create', 'id' => 'pairingForm']) !!}
 <div id="characterComponents" class="row justify-content-center">
@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-md-4 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
-            <div class="character-image-blank">Select character.</div>
+            <div class="character-image-blank"> Select character. </div>
             <div class="character-image-loaded hide">
             </div>
           </div>
@@ -34,7 +34,7 @@
       <div class="row">
         <div class="col-md-4 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
-            <div class="character-image-blank">Enter character code.</div>
+            <div class="character-image-blank"> Enter character code. </div>
             <div class="character-image-loaded hide">
             </div>
           </div>
@@ -62,7 +62,7 @@
 <div class="hide mb-3" id="colour-palettes">
 </div>
 
-<h2>Addon Items</h2>
+<h2> Addon Items </h2>
 <p>
   Decide which pairing item and boosts to use. These items will be removed from your inventory but refunded if your pairing is
   rejected.
@@ -70,7 +70,7 @@
 </p>
 <div class="row">
   <div class="col-md-6">
-    <h3>Pairing Item</h3>
+    <h3> Pairing Item </h3>
     <p>
       Decide which pairing item to use.
     </p>
@@ -91,7 +91,7 @@
     @endif
   </div>
   <div class="col-md-6">
-    <h3>Boost Items</h3>
+    <h3> Boost Items </h3>
     <p>
       Decide which boost items to use. Boost items are optional.
     </p>

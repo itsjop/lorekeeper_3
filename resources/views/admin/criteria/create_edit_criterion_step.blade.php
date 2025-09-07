@@ -17,7 +17,7 @@
   <h1>
     {{ $step->id ? 'Edit' : 'Create' }} Step
     @if ($step->id)
-      <a href="#" class="btn btn-danger float-right delete-button">Delete Step</a>
+      <a href="#" class="btn btn-danger float-right delete-button"> Delete Step </a>
     @endif
   </h1>
 
@@ -28,7 +28,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
   <div class="form-group">
     {!! Form::label('Name') !!}
     {!! Form::text('name', $step->name, ['class' => 'form-control']) !!}
@@ -40,7 +40,7 @@
 
   <div class="form-group">
     {!! Form::label('Guide Image (Optional)') !!} {!! add_help('This image is used as an example of the step if the guide page is enabled for your criterion.') !!}
-    <div>{!! Form::file('image') !!}</div>
+    <div> {!! Form::file('image') !!} </div>
     @if ($step->has_image)
       <img style="height: 100px; width: auto;" src="{{ $step->imageUrl }}" />
       <div class="form-check">
@@ -85,15 +85,15 @@
   </div>
 
   @if ($step->id)
-    <h2 class="mt-5">Step Options @if ($step->type === 'options')
-        <button type="button" class="btn btn-primary float-right option-create">+ Add Option</button>
+    <h2 class="mt-5"> Step Options @if ($step->type === 'options')
+        <button type="button" class="btn btn-primary float-right option-create">+ Add Option </button>
       @endif
     </h2>
-    <p>If you change the Criterion Step's type, it will delete what's specified in this section, and populate it with new
-      configuration.</p>
+    <p> If you change the Criterion Step's type, it will delete what's specified in this section, and populate it with new
+      configuration. </p>
     @if ($step->type === 'options')
-      <p>These can be re-ordered using Drag and Drop. If you set a minimum requirement on a prompt, only options after that one will
-        be choose-able.</p>
+      <p> These can be re-ordered using Drag and Drop. If you set a minimum requirement on a prompt, only options after that one will
+        be choose-able. </p>
       <div id="sortable" class="sortable">
         @foreach ($step->options->sortBy('order') as $option)
           <div class="card p-3 mb-2 pl-0" data-id="{{ $option->id }}">
@@ -110,7 +110,7 @@
                   @endif
                   {{ $option->name }}
                 </h4>
-                <span class="text-secondary">{!! $step->criterion->currency->display($option->amount) !!} · {{ $option->summary }}</span>
+                <span class="text-secondary"> {!! $step->criterion->currency->display($option->amount) !!} · {{ $option->summary }} </span>
               </div>
               <div style="flex: 0 0 auto;">
                 <button
@@ -178,7 +178,7 @@
       </div>
     @endif
   @else
-    <p>More Options will be presented here once the Step is created.</p>
+    <p> More Options will be presented here once the Step is created. </p>
   @endif
 
   <div class="text-right mt-4">

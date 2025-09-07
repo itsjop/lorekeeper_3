@@ -14,14 +14,14 @@
     >
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title text-center w-100">{{ Config::get('lorekeeper.settings.terms_popup')['title'] }}</h1>
+          <h1 class="modal-title text-center w-100"> {{ Config::get('lorekeeper.settings.terms_popup')['title'] }} </h1>
         </div>
         <hr class="m-0">
         <div class="modal-body">
-          <h1 style="text-align:center">Somnivores is an 18+ Community!</h1>
+          <h1 style="text-align:center"> Somnivores is an 18+ Community!</h1>
           <ul style="margin-left: 2em;">
-            <li>Any users under 18 will be banned.</li>
-            <li>You must review of our <strong>ARPG Content Warnings & Terms</strong> of Service before engaging with the site!
+            <li> Any users under 18 will be banned. </li>
+            <li> You must review of our <strong> ARPG Content Warnings & Terms </strong> of Service before engaging with the site!
             </li>
           </ul>
           <hr>
@@ -29,22 +29,22 @@
             While Reverie is generally colorful and cheerful, our world and lore does (or will) contain the following
             topics:
           </p>
-          <h2 style="text-align:center">Content Warnings</h2>
+          <h2 style="text-align:center"> Content Warnings </h2>
           <ul style="margin-left: 2em;">
-            <li>Insects (Foods, Trait items & an insect tail trait which includes centipedes)</li>
-            <li>Hunger & Starvation</li>
-            <li>Loss of Self / Derealization / Mental Decline</li>
-            <li>Humans as a Food Source (Dream Eating, Vampirism)</li>
-            <li>Violence & Large-Scale Conflicts</li>
-            <li>Bodily Experimentation</li>
-            <li>Nightmare-Related Horror</li>
-            <li>Fictional Religions / Cults</li>
+            <li> Insects (Foods, Trait items & an insect tail trait which includes centipedes)</li>
+            <li> Hunger & Starvation </li>
+            <li> Loss of Self / Derealization / Mental Decline </li>
+            <li> Humans as a Food Source (Dream Eating, Vampirism)</li>
+            <li> Violence & Large-Scale Conflicts </li>
+            <li> Bodily Experimentation </li>
+            <li> Nightmare-Related Horror </li>
+            <li> Fictional Religions / Cults </li>
           </ul>
 
           <p>
             Instances that could be triggering will have filters and/or content warnings to the best of our ability, but
             if you are particularly sensitive to any of these topics I encourage you to
-            <strong>proceed with caution</strong>, or consider if our community might not be a good fit.
+            <strong>proceed with caution </strong>, or consider if our community might not be a good fit.
           </p>
 
           <hr>

@@ -29,7 +29,7 @@
 
   @include('character._header', ['character' => $character])
 
-  <h1>Pets</h1>
+  <h1> Pets </h1>
 
   @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
     <p>
@@ -39,7 +39,7 @@
         A maximum of {{ config('lorekeeper.pets.max_pets') }} pet{{ config('lorekeeper.pets.max_pets') != 1 ? 's' : '' }} can be
         attached.
       @endif
-      <br />You can determine which pets are displayed by dragging and dropping them in the order you want.
+      <br /> You can determine which pets are displayed by dragging and dropping them in the order you want.
     </p>
 
     {!! Form::open(['url' => 'characters/' . $character->slug . '/pets/sort', 'class' => 'text-right']) !!}
@@ -62,10 +62,10 @@
             <div>
               @if ($pet->pet_name)
                 <a href="{{ $pet->pageUrl() }}">
-                  <div class="text-light btn btn-dark">{!! $pet->pet_name !!}</div>
+                  <div class="text-light btn btn-dark"> {!! $pet->pet_name !!} </div>
                 </a>
               @endif
-              <div>{!! $pet->pet->displayName !!}</div>
+              <div> {!! $pet->pet->displayName !!} </div>
             </div>
             @if (config('lorekeeper.pets.pet_bonding_enabled'))
               <div class="progress mb-2">
@@ -88,7 +88,7 @@
                   {!! Form::close() !!}
                 </div>
               @else
-                <div class="alert alert-warning mb-0">{{ $pet->canBond(true) }}</div>
+                <div class="alert alert-warning mb-0"> {{ $pet->canBond(true) }} </div>
               @endif
             @endif
           </div>

@@ -13,9 +13,9 @@
           : 'admin/data/sublists/create'
   ]) !!}
 
-  <h1>{{ $sublist->id ? 'Edit' : 'Create' }} Sub Masterlist
+  <h1> {{ $sublist->id ? 'Edit' : 'Create' }} Sub Masterlist
     @if ($sublist->id)
-      <a href="#" class="btn btn-danger float-right delete-sublist-button">Delete Sub Masterlist</a>
+      <a href="#" class="btn btn-danger float-right delete-sublist-button"> Delete Sub Masterlist </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6 form-group">
@@ -37,10 +37,10 @@
     </div>
   </div>
 
-  <h3>Contents</h3>
-  <p>Each category and species can only have ONE sublist. If you assign a sublist here, it will be removed from any other sublists.
+  <h3> Contents </h3>
+  <p> Each category and species can only have ONE sublist. If you assign a sublist here, it will be removed from any other sublists.
     If you want a species shared across multiple lists, it is suggested you only use character categories. Likewise, if you
-    want a category shared across multiple lists, it is suggested you only use species.</p>
+    want a category shared across multiple lists, it is suggested you only use species. </p>
 
   <div class="form-group">
     {!! Form::label('categories[]', 'Categories') !!}

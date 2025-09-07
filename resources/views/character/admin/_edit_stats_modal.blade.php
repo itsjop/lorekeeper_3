@@ -34,9 +34,9 @@
 <div class="alert alert-info">
   These are displayed on the character's profile, but don't have any effect on site functionality except for the following:
   <ul>
-    <li>If all switches are off, the character cannot be transferred by the user (directly or through trades).</li>
-    <li>If a transfer cooldown is set, the character also cannot be transferred by the user (directly or through trades) until the
-      cooldown is up.</li>
+    <li> If all switches are off, the character cannot be transferred by the user (directly or through trades). </li>
+    <li> If a transfer cooldown is set, the character also cannot be transferred by the user (directly or through trades) until the
+      cooldown is up. </li>
   </ul>
 </div>
 <div class="form-group">

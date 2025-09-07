@@ -18,7 +18,7 @@
     @if (isset($edit))
       <x-admin-edit title="{{ $edit['title'] }}" :object="$edit['object']" />
     @endif
-    <h3>{!! $name !!} @if (isset($searchUrl) && $searchUrl)
+    <h3> {!! $name !!} @if (isset($searchUrl) && $searchUrl)
         <a href="{{ $searchUrl }}" class="world-entry-search text-muted">
           <i class="fas fa-search"></i>
         </a>

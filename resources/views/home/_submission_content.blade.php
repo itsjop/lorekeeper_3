@@ -3,12 +3,12 @@
   @if (Auth::check() && $submission->user_id == Auth::user()->id && $submission->status == 'Draft')
     <a href="{{ url(($isClaim ? 'claims' : 'submissions') . '/draft/' . $submission->id) }}"
       class="btn btn-sm btn-outline-secondary ml-3"
-    >Edit Draft <i class="fas fa-pen ml-2"></i>
+    > Edit Draft <i class="fas fa-pen ml-2"></i>
     </a>
   @endif
   <span
     class="float-right badge badge-{{ $submission->status == 'Pending' || $submission->status == 'Draft' ? 'secondary' : ($submission->status == 'Approved' ? 'success' : 'danger') }}"
-  >{{ $submission->status }}</span>
+  > {{ $submission->status }} </span>
 
 </h1>
 
@@ -16,39 +16,39 @@
   <div class="card-body">
     <div class="row mb-2 no-gutters">
       <div class="col-md-2">
-        <h5 class="mb-0">User</h5>
+        <h5 class="mb-0"> User </h5>
       </div>
-      <div class="col-md-10">{!! $submission->user->displayName !!}</div>
+      <div class="col-md-10"> {!! $submission->user->displayName !!} </div>
     </div>
     @if ($submission->prompt_id)
       <div class="row mb-2 no-gutters">
         <div class="col-md-2">
-          <h5 class="mb-0">Prompt</h5>
+          <h5 class="mb-0"> Prompt </h5>
         </div>
-        <div class="col-md-10">{!! $submission->prompt->displayName !!}</div>
+        <div class="col-md-10"> {!! $submission->prompt->displayName !!} </div>
       </div>
     @endif
     <div class="row mb-2 no-gutters">
       <div class="col-md-2">
-        <h5 class="mb-0">URL</h5>
+        <h5 class="mb-0"> URL</h5>
       </div>
       <div class="col-md-10">
-        <a href="{{ $submission->url }}">{{ $submission->url }}</a>
+        <a href="{{ $submission->url }}"> {{ $submission->url }} </a>
       </div>
     </div>
     @if (config('lorekeeper.settings.allow_gallery_submissions_on_prompts') && $submission->data['gallery_submission_id'])
       <div class="row mb-2 no-gutters">
         <div class="col-md-2">
-          <h5 class="mb-0">Gallery Submission</h5>
+          <h5 class="mb-0"> Gallery Submission </h5>
         </div>
         <div class="col-md-10">
-          <a href="{{ $submission->gallerySubmission->url }}">{{ $submission->gallerySubmission->title }}</a>
+          <a href="{{ $submission->gallerySubmission->url }}"> {{ $submission->gallerySubmission->title }} </a>
         </div>
       </div>
     @endif
     <div class="row mb-2 no-gutters">
       <div class="col-md-2">
-        <h5 class="mb-0">Submitted</h5>
+        <h5 class="mb-0"> Submitted </h5>
       </div>
       <div class="col-md-10">
         {!! format_date($submission->created_at) !!} ({{ $submission->created_at->diffForHumans() }})
@@ -57,7 +57,7 @@
     @if ($submission->status != 'Pending' && $submission->status != 'Draft')
       <div class="row mb-2 no-gutters">
         <div class="col-md-2">
-          <h5 class="mb-0">Processed</h5>
+          <h5 class="mb-0"> Processed </h5>
         </div>
         <div class="col-md-10">
           {!! format_date($submission->updated_at) !!} ({{ $submission->updated_at->diffForHumans() }}) by {!! $submission->staff->displayName !!}
@@ -68,7 +68,7 @@
 </div>
 
 <div class="card mb-3">
-  <div class="card-header h2">Comments</div>
+  <div class="card-header h2"> Comments </div>
   <div class="card-body">
     {!! nl2br(htmlentities($submission->comments)) !!}
   </div>
@@ -77,7 +77,7 @@
           $submission->staff_comments &&
           ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
   )
-    <div class="card-header h2">Staff Comments</div>
+    <div class="card-header h2"> Staff Comments </div>
     <div class="card-body">
       @if (isset($submission->parsed_staff_comments))
         {!! $submission->parsed_staff_comments !!}
@@ -90,27 +90,27 @@
 
 @if (isset($submission->data['criterion']))
   <div class="card mb-3">
-    <div class="card-header h2">Criteria Rewards</div>
+    <div class="card-header h2"> Criteria Rewards </div>
     <div class="card-body">
       @foreach ($submission->data['criterion'] as $criterionData)
         <div class="card p-3 mb-2">
           @php $criterion = \App\Models\Criteria\Criterion::where('id', $criterionData['id'])->first() @endphp
-          <h3>{!! $criterion->displayName !!} <span class="text-secondary"> - {!! isset($criterionData['criterion_currency_id'])
+          <h3> {!! $criterion->displayName !!} <span class="text-secondary"> - {!! isset($criterionData['criterion_currency_id'])
               ? \App\Models\Currency\Currency::find($criterionData['criterion_currency_id'])->display(
                   $criterion->calculateReward($criterionData)
               )
-              : $criterion->currency->display($criterion->calculateReward($criterionData)) !!}</span>
+              : $criterion->currency->display($criterion->calculateReward($criterionData)) !!} </span>
           </h3>
           @foreach ($criterion->steps->where('is_active', 1) as $step)
             <div class="d-flex">
-              <span class="mr-1 text-secondary">{{ $step->name }}:</span>
+              <span class="mr-1 text-secondary"> {{ $step->name }}:</span>
               @if ($step->type === 'options')
                 @php $stepOption = $step->options->where('id', $criterionData[$step->id])->first() @endphp
-                <span>{{ isset($stepOption) ? $stepOption->name : 'Not Selected' }}</span>
+                <span> {{ isset($stepOption) ? $stepOption->name : 'Not Selected' }} </span>
               @elseif($step->type === 'boolean')
-                <span>{{ isset($criterionData[$step->id]) ? 'On' : 'Off' }}
+                <span> {{ isset($criterionData[$step->id]) ? 'On' : 'Off' }}
                 @elseif($step->type === 'input')
-                  <span> {{ $criterionData[$step->id] ?? 0 }}</span>
+                  <span> {{ $criterionData[$step->id] ?? 0 }} </span>
               @endif
             </div>
           @endforeach
@@ -122,21 +122,21 @@
 
 @if (array_filter(parseAssetData(isset($submission->data['rewards']) ? $submission->data['rewards'] : $submission->data)))
   <div class="card mb-3">
-    <div class="card-header h2">Rewards</div>
+    <div class="card-header h2"> Rewards </div>
     <div class="card-body">
       <table class="table table-sm">
         <thead class="thead-light">
           <tr>
-            <th width="70%">Reward</th>
-            <th width="30%">Amount</th>
+            <th width="70%"> Reward </th>
+            <th width="30%"> Amount </th>
           </tr>
         </thead>
         <tbody>
           @foreach (parseAssetData(isset($submission->data['rewards']) ? $submission->data['rewards'] : $submission->data) as $type)
             @foreach ($type as $asset)
               <tr>
-                <td>{!! $asset['asset'] ? $asset['asset']->displayName : 'Deleted Asset' !!}</td>
-                <td>{{ $asset['quantity'] }}</td>
+                <td> {!! $asset['asset'] ? $asset['asset']->displayName : 'Deleted Asset' !!} </td>
+                <td> {{ $asset['quantity'] }} </td>
               </tr>
             @endforeach
           @endforeach
@@ -147,7 +147,7 @@
 @endif
 
 <div class="card mb-3">
-  <div class="card-header h2">Characters</div>
+  <div class="card-header h2"> Characters </div>
   <div class="card-body">
     @if (count($submission->characters()->whereRelation('character', 'deleted_at', null)->get()) !=
             count($submission->characters()->get())
@@ -172,23 +172,23 @@
             <div class="card-body">
               <div class="submission-character-info-content">
                 <h3 class="mb-2 submission-character-info-header">
-                  <a href="{{ $character->character->url }}">{{ $character->character->fullName }}</a>
+                  <a href="{{ $character->character->url }}"> {{ $character->character->fullName }} </a>
                 </h3>
                 <div class="submission-character-info-body">
                   @if (array_filter(parseAssetData($character->data)))
                     <table class="table table-sm mb-0">
                       <thead class="thead-light">
                         <tr>
-                          <th width="70%">Reward</th>
-                          <th width="30%">Amount</th>
+                          <th width="70%"> Reward </th>
+                          <th width="30%"> Amount </th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach (parseAssetData($character->data) as $key => $type)
                           @foreach ($type as $asset)
                             <tr>
-                              <td>{!! $asset['asset']->displayName !!} ({!! ucfirst($key) !!})</td>
-                              <td>{{ $asset['quantity'] }}</td>
+                              <td> {!! $asset['asset']->displayName !!} ({!! ucfirst($key) !!})</td>
+                              <td> {{ $asset['quantity'] }} </td>
                             </tr>
                           @endforeach
                         @endforeach
@@ -200,13 +200,13 @@
                         @if (count($type))
                         <tr>
 <td colspan="2">
-<strong>{!! strtoupper($key) !!}</strong>
+<strong> {!! strtoupper($key) !!} </strong>
 </td>
 </tr>
                             @foreach ($type as $asset)
                                 <tr>
-                                    <td>{!! $asset['asset']->displayName !!}</td>
-                                    <td>{{ $asset['quantity'] }}</td>
+                                    <td> {!! $asset['asset']->displayName !!} </td>
+                                    <td> {{ $asset['quantity'] }} </td>
                                 </tr>
                             @endforeach
                         @endif
@@ -226,24 +226,24 @@
         </div>
       @endforeach
     @else
-      <div class="">No characters were included with this submission.</div>
+      <div class=""> No characters were included with this submission. </div>
     @endif
   </div>
 </div>
 
 @if (isset($inventory['user_items']) && array_filter($inventory['user_items']))
   <div class="card mb-3">
-    <div class="card-header h2">Add-Ons</div>
+    <div class="card-header h2"> Add-Ons </div>
     <div class="card-body">
-      <p>These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be
-        refunded if the request is rejected or consumed if it is approved.</p>
+      <p> These items have been removed from the {{ $submission->prompt_id ? 'submitter' : 'claimant' }}'s inventory and will be
+        refunded if the request is rejected or consumed if it is approved. </p>
       <table class="table table-sm">
         <thead class="thead-light">
           <tr class="d-flex">
-            <th class="col-2">Item</th>
-            <th class="col-4">Source</th>
-            <th class="col-4">Notes</th>
-            <th class="col-2">Quantity</th>
+            <th class="col-2"> Item </th>
+            <th class="col-4"> Source </th>
+            <th class="col-4"> Notes </th>
+            <th class="col-2"> Quantity </th>
           </tr>
         </thead>
         <tbody>
@@ -257,17 +257,17 @@
                     alt="{{ $itemsrow[$itemRow['asset']->item_id]->name }}"
                   >
                 @endif {!! $itemsrow[$itemRow['asset']->item_id]->name !!}
-              <td class="col-4">{!! array_key_exists('data', $itemRow['asset']->data)
+              <td class="col-4"> {!! array_key_exists('data', $itemRow['asset']->data)
                   ? ($itemRow['asset']->data['data']
                       ? $itemRow['asset']->data['data']
                       : 'N/A')
-                  : 'N/A' !!}</td>
-              <td class="col-4">{!! array_key_exists('notes', $itemRow['asset']->data)
+                  : 'N/A' !!} </td>
+              <td class="col-4"> {!! array_key_exists('notes', $itemRow['asset']->data)
                   ? ($itemRow['asset']->data['notes']
                       ? $itemRow['asset']->data['notes']
                       : 'N/A')
-                  : 'N/A' !!}</td>
-              <td class="col-2">{!! $itemRow['quantity'] !!}
+                  : 'N/A' !!} </td>
+              <td class="col-2"> {!! $itemRow['quantity'] !!}
             </tr>
           @endforeach
         </tbody>
@@ -278,20 +278,20 @@
 
 @if (isset($inventory['currencies']) && array_filter($inventory['currencies']))
   <div class="card mb-3">
-    <div class="card-header h2">{!! $submission->user->displayName !!}'s Bank</div>
+    <div class="card-header h2"> {!! $submission->user->displayName !!}'s Bank </div>
     <div class="card-body">
       <table class="table table-sm mb-3">
         <thead class="thead-light">
           <tr>
-            <th width="70%">Currency</th>
-            <th width="30%">Quantity</th>
+            <th width="70%"> Currency </th>
+            <th width="30%"> Quantity </th>
           </tr>
         </thead>
         <tbody>
           @foreach ($inventory['currencies'] as $currency)
             <tr>
-              <td>{!! $currency['asset']->name !!}</td>
-              <td>{{ $currency['quantity'] }}</td>
+              <td> {!! $currency['asset']->name !!} </td>
+              <td> {{ $currency['quantity'] }} </td>
             </tr>
           @endforeach
         </tbody>

@@ -13,11 +13,11 @@
   <h1>
     {{ $pet->id ? 'Edit' : 'Create' }} Pet
     @if ($pet->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-pet-button">Delete Pet</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-pet-button"> Delete Pet </a>
       @if ($pet->dropData)
-        <a href="{{ url('/admin/data/pets/drops/edit/') . '/' . $pet->id }}" class="btn btn-info float-right mr-2">Edit Drops</a>
+        <a href="{{ url('/admin/data/pets/drops/edit/') . '/' . $pet->id }}" class="btn btn-info float-right mr-2"> Edit Drops </a>
       @else
-        <a href="{{ url('/admin/data/pets/drops/create') }}" class="btn btn-info float-right mr-2">Create Drops</a>
+        <a href="{{ url('/admin/data/pets/drops/create') }}" class="btn btn-info float-right mr-2"> Create Drops </a>
       @endif
     @endif
   </h1>
@@ -25,11 +25,11 @@
   {!! Form::open(['url' => $pet->id ? 'admin/data/pets/edit/' . $pet->id : 'admin/data/pets/create', 'files' => true]) !!}
 
   @if (!$pet->id)
-    <p>You can create variants once the pet is made.
+    <p> You can create variants once the pet is made.
     <p>
   @endif
 
-  <h2>Basic Information</h2>
+  <h2> Basic Information </h2>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -38,8 +38,8 @@
 
   <div class="form-group">
     {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
-    <div>{!! Form::file('image') !!}</div>
-    <div class="text-muted">Recommended size: 100px x 100px</div>
+    <div> {!! Form::file('image') !!} </div>
+    <div class="text-muted"> Recommended size: 100px x 100px </div>
     @if ($pet->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -108,11 +108,11 @@
     <hr />
     @if (!$pet->isVariant)
       <div class="card mb-3">
-        <div class="card-header h3">Variants</div>
+        <div class="card-header h3"> Variants </div>
         <div class="card-body">
           <p>
             Variants are different colourations, patterns, or other visual differences that a pet can have.
-            <br />They are technically separate pets, but are treated as variants of the same pet.
+            <br /> They are technically separate pets, but are treated as variants of the same pet.
             {{ !config('lorekeeper.pets.include_variants') ? 'They do not have a unique encyclopedia entry.' : '' }}
           </p>
           @if ($pet->variants->count())
@@ -140,13 +140,13 @@
                         @else
                           {{ $variant->name }}
                         @endif
-                        <div class="h5 my-2">{{ $variant->name }}</div>
+                        <div class="h5 my-2"> {{ $variant->name }} </div>
                         <div>
                           <a href="{{ $variant->adminUrl }}" class="btn btn-sm btn-primary edit-variant">
-                            <i class="fas fa-cog mr-1"></i>Edit</a>
+                            <i class="fas fa-cog mr-1"></i> Edit </a>
                           @if ($variant->dropData)
                             <a href="{{ url('/admin/data/pets/drops/edit') . '/' . $variant->id }}" class="btn btn-sm btn-primary">
-                              <i class="fas fa-gift mr-1"></i>Drops</a>
+                              <i class="fas fa-gift mr-1"></i> Drops </a>
                           @endif
                         </div>
                       </div>
@@ -156,26 +156,26 @@
               </div>
             @endforeach
           @else
-            <div class="alert alert-info">No variants found.</div>
+            <div class="alert alert-info"> No variants found. </div>
           @endif
         </div>
       </div>
     @endif
 
     <div class="card mb-3">
-      <div class="card-header h2">Evolutions</div>
+      <div class="card-header h2"> Evolutions </div>
       <div class="card-body">
-        <p>If you would like your pet to "evolve" (similarly to Pokémon), you can set up evolutions here. Evolutions are not
+        <p> If you would like your pet to "evolve" (similarly to Pokémon), you can set up evolutions here. Evolutions are not
           required, and you can have as many or as few as you like. If you do not set up any evolutions, the pet will not evolve.
         </p>
-        <p>Please note that variants will not be carried over to the evolved pet. If you would like to have a variant evolve into
-          another variant, you will need to set up an evolution for each variant (after an evolution has been created).</p>
+        <p> Please note that variants will not be carried over to the evolved pet. If you would like to have a variant evolve into
+          another variant, you will need to set up an evolution for each variant (after an evolution has been created). </p>
         <div class="mb-2 text-right">
           <a
             href="#"
             class="btn btn-primary"
             id="add-evolution"
-          >Add Evolution</a>
+          > Add Evolution </a>
         </div>
         @if ($pet->evolutions->count())
           @foreach ($pet->evolutions->sortBy('evolution_stage')->chunk(4) as $chunk)
@@ -210,7 +210,7 @@
                           class="btn btn-sm btn-primary edit-evolution"
                           data-id="{{ $evolution->id }}"
                         >
-                          <i class="fas fa-cog mr-1"></i>Edit</a>
+                          <i class="fas fa-cog mr-1"></i> Edit </a>
                       </div>
                     </div>
                   </div>
@@ -219,12 +219,12 @@
             </div>
           @endforeach
         @else
-          <div class="alert alert-info">No evolutions found.</div>
+          <div class="alert alert-info"> No evolutions found. </div>
         @endif
       </div>
     </div>
 
-    <h2>Preview</h2>
+    <h2> Preview </h2>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._pet_entry', ['pet' => $pet])

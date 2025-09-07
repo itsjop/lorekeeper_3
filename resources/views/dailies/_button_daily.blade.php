@@ -6,7 +6,7 @@
       alt="{{ $daily->name }}"
     />
   @endif
-  <p>{!! $daily->parsed_description !!}</p>
+  <p> {!! $daily->parsed_description !!} </p>
 </div>
 
 @if (Auth::user())
@@ -38,7 +38,7 @@
           name="daily_id"
           value="{{ $daily->id }}"
           @if ($isDisabled) disabled @endif
-        >Collect Reward!</button>
+        > Collect Reward!</button>
       </form>
     </div>
   @endif
@@ -66,11 +66,11 @@
 @if ($daily->progress_display != 'none')
   <div class="card mt-5">
     <div class="card-header">
-      <h4 class="m-0 align-items-center">Progress ({{ $timer->step ?? 0 }}/{{ $daily->maxStep }}) {!! add_help(
+      <h4 class="m-0 align-items-center"> Progress ({{ $timer->step ?? 0 }}/{{ $daily->maxStep }}) {!! add_help(
           $daily->is_streak
               ? 'Progress will reset if you miss collecting your reward in the given timeframe.'
               : 'Progress is safe even if you miss collecting your reward in the given timeframe.'
-      ) !!}</h4>
+      ) !!} </h4>
     </div>
 
     <div class="all-dailies card-body w-100">
@@ -102,8 +102,8 @@
 
                       </div>
                     @endif
-                    <div class="prize-label row justify-content-center text-center mt-2">{{ $reward->quantity }}
-                      {{ $reward->reward()->first()->name }}</div>
+                    <div class="prize-label row justify-content-center text-center mt-2"> {{ $reward->quantity }}
+                      {{ $reward->reward()->first()->name }} </div>
                   </div>
                 @endforeach
               @endif

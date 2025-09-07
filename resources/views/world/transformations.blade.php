@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', ucfirst(__('transformations.transformations')) => 'world/' . __('transformations.transformations')]) !!}
-  <h1>{{ ucfirst(__('transformations.transformations')) }}</h1>
+  <h1> {{ ucfirst(__('transformations.transformations')) }} </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -29,5 +29,5 @@
   @endforeach
   {!! $transformations->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $transformations->total() }} result{{ $transformations->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $transformations->total() }} result{{ $transformations->total() == 1 ? '' : 's' }} found. </div>
 @endsection

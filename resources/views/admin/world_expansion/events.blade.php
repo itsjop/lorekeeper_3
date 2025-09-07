@@ -7,16 +7,16 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Events' => 'admin/world/events']) !!}
 
-  <h1>Events</h1>
+  <h1> Events </h1>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/event-categories') }}">
-      <i class="fas fa-folder mr-2"></i> Event Categories</a>
+      <i class="fas fa-folder mr-2"></i> Event Categories </a>
     <a class="btn btn-primary" href="{{ url('admin/world/events/create') }}">
-      <i class="fas fa-plus mr-2"></i> Create New Event</a>
+      <i class="fas fa-plus mr-2"></i> Create New Event </a>
   </div>
   @if (!count($events))
-    <p>No events found.</p>
+    <p> No events found. </p>
   @else
     <table class="table table-sm type-table">
       <thead>
@@ -48,7 +48,7 @@
               </a>
               <a href={!! $event->url !!}
                 @if ($event->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $event->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($event->name) }} " @endif
-              />{!! $event->name !!}</a>
+              /> {!! $event->name !!} </a>
             </td>
             <td>
               {!! $event->category ? $event->category->displayName : '' !!}
@@ -63,7 +63,7 @@
               {!! $event->occur_end ? format_date($event->occur_end, false) : '' !!}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/events/edit/' . $event->id) }}" class="btn btn-primary btn-sm">Edit</a>
+              <a href="{{ url('admin/world/events/edit/' . $event->id) }}" class="btn btn-primary btn-sm"> Edit </a>
             </td>
           </tr>
         @endforeach

@@ -15,22 +15,22 @@
     <li class="nav-item">
       <a class="nav-link {{ !Request::get('type') || Request::get('type') == 'new' ? 'active' : '' }}"
         href="{{ url('characters/pairings') }}"
-      >Create New</a>
+      > Create New </a>
     </li>
     <li class="nav-item">
       <a class="nav-link {{ Request::get('type') == 'approval' ? 'active' : '' }}"
         href="{{ url('characters/pairings') . '?type=approval' }}"
-      >Approval Required</a>
+      > Approval Required </a>
     </li>
     <li class="nav-item">
       <a class="nav-link {{ Request::get('type') == 'waiting' ? 'active' : '' }}"
         href="{{ url('characters/pairings') . '?type=waiting' }}"
-      >Waiting</a>
+      > Waiting </a>
     </li>
     <li class="nav-item">
       <a class="nav-link {{ Request::get('type') == 'closed' ? 'active' : '' }}"
         href="{{ url('characters/pairings') . '?type=closed' }}"
-      >Closed</a>
+      > Closed </a>
     </li>
   </ul>
 
@@ -50,14 +50,14 @@
       <table class="table">
         <thead>
           <tr>
-            <th width="15%">Character 1</th>
-            <th width="15%">Character 2</th>
-            <th width="25%">Items</th>
-            <th>Status</th>
+            <th width="15%"> Character 1</th>
+            <th width="15%"> Character 2</th>
+            <th width="25%"> Items </th>
+            <th> Status </th>
             @if (Request::get('type') != 'closed')
-              <th width="20%">Actions</th>
+              <th width="20%"> Actions </th>
             @endif
-            <th>Created</th>
+            <th> Created </th>
           </tr>
         </thead>
         <tbody>
@@ -122,7 +122,7 @@
 
                 if ("{{ config('lorekeeper.character_pairing.inherit_colours') }}" == 1 && data.palettes) {
                   let palette_html =
-                    '<h2>Possible Colour Palette(s)</h2> <div class = "row justify-content-center" > '
+                    '<h2> Possible Colour Palette(s)</h2> <div class = "row justify-content-center" > '
                   for (let i = 0; i < data.palettes.length; i++) {
                     let palette = data.palettes[i];
                     palette_html += '<div class="col text-center"> <h5 > Colour Palette ' + (i + 1) + ' < /h5>' +

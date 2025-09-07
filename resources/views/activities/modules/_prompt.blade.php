@@ -2,26 +2,26 @@
 
 {{-- Default rewards are only default if we're not choosing --}}
 @if (!$activity->data->choose_reward)
-  <h2 class="h3">Submission Approval will Reward:</h2>
+  <h2 class="h3"> Submission Approval will Reward:</h2>
   <table class="table table-sm mb-0">
     <thead>
       <tr>
-        <th width="70%">Reward</th>
-        <th width="30%">Amount</th>
+        <th width="70%"> Reward </th>
+        <th width="30%"> Amount </th>
       </tr>
     </thead>
     <tbody>
       @foreach ($activity->data->prompt->rewards as $reward)
         <tr>
-          <td>{!! $reward->reward->displayName !!}</td>
-          <td>{{ $reward->quantity }}</td>
+          <td> {!! $reward->reward->displayName !!} </td>
+          <td> {{ $reward->quantity }} </td>
         </tr>
       @endforeach
     </tbody>
   </table>
 @endif
 
-<h2 class="h3 mt-3">Submission Entry</h2>
+<h2 class="h3 mt-3"> Submission Entry </h2>
 <div class="form-group">
   {!! Form::label('comments', 'Submission') !!}
   {!! Form::textarea('comments', $activity->data->template ?? null, ['class' => 'form-control wysiwyg']) !!}
@@ -40,8 +40,8 @@
 @endif
 
 @if ($activity->data->show_rewards)
-  <h2 class="h3 mt-3">Rewards</h2>
-  <p>Add the rewards you would like to claim with this submission.</p>
+  <h2 class="h3 mt-3"> Rewards </h2>
+  <p> Add the rewards you would like to claim with this submission. </p>
   @include('widgets._loot_select', ['loots' => null, 'showLootTables' => false, 'showRaffles' => false])
 @endif
 

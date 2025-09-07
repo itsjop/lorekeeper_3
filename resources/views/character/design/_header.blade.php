@@ -2,17 +2,17 @@
   Request (#{{ $request->id }}): {!! $request->character ? $request->character->displayName : 'Deleted Character [#' . $request->character_id . ']' !!}
   <span
     class="float-right badge badge-{{ $request->status == 'Draft' || $request->status == 'Pending' ? 'secondary' : ($request->status == 'Approved' ? 'success' : 'danger') }}"
-  >{{ $request->status }}
+  > {{ $request->status }}
 </h1>
 
 @if (isset($request->staff_id))
   @if ($request->staff_comments && ($request->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
-    <h5 class="text-danger">Staff Comments ({!! $request->staff->displayName !!})</h5>
+    <h5 class="text-danger"> Staff Comments ({!! $request->staff->displayName !!})</h5>
     <div class="card border-danger">
-      <div class="card-body">{!! nl2br(htmlentities($request->staff_comments)) !!}</div>
+      <div class="card-body"> {!! nl2br(htmlentities($request->staff_comments)) !!} </div>
     </div>
   @else
-    <p>No staff comment was provided.</p>
+    <p> No staff comment was provided. </p>
   @endif
 @endif
 
@@ -35,7 +35,7 @@
   ?>
   <div class="card">
     <div class="card-body">
-      <h5 class="text-left">{{ $request->status == 'Pending' ? 'Vote' : 'Past Votes' }} on this
+      <h5 class="text-left"> {{ $request->status == 'Pending' ? 'Vote' : 'Past Votes' }} on this
         {{ $request->update_type == 'MYO' ? 'MYO Submission' : 'Design Update' }}
         @if ($request->status == 'Pending')
           <span class="text-right float-right">
@@ -76,10 +76,10 @@
       </p>
       <hr />
       @if (isset($request->vote_data) && $request->vote_data)
-        <h4>Votes:</h4>
+        <h4> Votes:</h4>
         <div class="row">
           <div class="col-md">
-            <h5>Reject:</h5>
+            <h5> Reject:</h5>
             <ul>
               @foreach ($request->voteData as $voter => $vote)
                 @if ($vote == 1)
@@ -91,7 +91,7 @@
             </ul>
           </div>
           <div class="col-md">
-            <h5>Approve:</h5>
+            <h5> Approve:</h5>
             <ul>
               @foreach ($request->voteData as $voter => $vote)
                 @if ($vote == 2)
@@ -104,7 +104,7 @@
           </div>
         </div>
       @else
-        <p>No votes have been cast yet!</p>
+        <p> No votes have been cast yet!</p>
       @endif
     </div>
   </div>
@@ -123,27 +123,27 @@
       href="{{ url('designs/' . $request->id . '/comments') }}"
     >
       <i class="text-{{ $request->has_comments ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
-      Comments</a>
+      Comments </a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{ set_active('designs/' . $request->id . '/image') }}"
       href="{{ url('designs/' . $request->id . '/image') }}"
     >
       <i class="text-{{ $request->has_image ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
-      Masterlist Image</a>
+      Masterlist Image </a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{ set_active('designs/' . $request->id . '/addons') }}"
       href="{{ url('designs/' . $request->id . '/addons') }}"
     >
       <i class="text-{{ $request->has_addons ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
-      Add-ons</a>
+      Add-ons </a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{ set_active('designs/' . $request->id . '/traits') }}"
       href="{{ url('designs/' . $request->id . '/traits') }}"
     >
       <i class="text-{{ $request->has_features ? 'success fa fa-thumbs-up' : 'danger fas fa-question' }} fa-fw mr-2"></i>
-      Traits</a>
+      Traits </a>
   </li>
 </ul>

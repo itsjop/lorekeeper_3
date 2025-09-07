@@ -11,7 +11,7 @@
     @include('forms._site_form_header')
     <div class="card-body">
       <div class="parsed-text">
-        {!! $form->parsed_description ?? '<i>This form has no description.</i>' !!}
+        {!! $form->parsed_description ?? '<i> This form has no description. </i>' !!}
       </div>
       <hr>
       @if ($form->is_editable || ($action == 'submit' && $form->canSubmit($user) === true))

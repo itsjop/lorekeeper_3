@@ -18,9 +18,9 @@
 
   @if (count($category->events))
     <div class="text-center">
-      <h5 class="mt-3 mb-0">{{ $category->name }} Event{{ count($category->events) == 0 ? '(' . count($category->events) . ')' : 's (' . count($category->events) . ')' }}</h5>
+      <h5 class="mt-3 mb-0"> {{ $category->name }} Event{{ count($category->events) == 0 ? '(' . count($category->events) . ')' : 's (' . count($category->events) . ')' }} </h5>
       @foreach ($category->events as $key => $event)
-        <strong>{!! $event->displayName !!}</strong>
+        <strong> {!! $event->displayName !!} </strong>
         @if ($key != count($category->events) - 1 && count($category->events) > 2)
           ,
           @endif @if ($key == count($category->events) - 2)
@@ -29,12 +29,12 @@
         @endforeach
     </div>
   @else
-    <h5 class="mt-3 mb-0 text-center">There aren't any {{ $category->name }} Events yet</h5>
+    <h5 class="mt-3 mb-0 text-center"> There aren't any {{ $category->name }} Events yet </h5>
   @endif
 
   @isset($category->summary)
     <hr>
-    <div class="text-center">{!! $category->summary !!}</div>
+    <div class="text-center"> {!! $category->summary !!} </div>
   @endisset
 
   @isset($category->parsed_description)

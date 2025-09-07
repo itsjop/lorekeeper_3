@@ -34,31 +34,31 @@
         data-bs-toggle="modal"
         data-bs-target="#grantModal"
       >
-        <i class="fas fa-cog"></i> Admin</a>
+        <i class="fas fa-cog"></i> Admin </a>
     @endif
     Items
   </h3>
 
   @include('character._character_inventory', ['items' => $items])
 
-  <h3>Latest Activity</h3>
+  <h3> Latest Activity </h3>
   <div class="mb-4 logs-table">
     <div class="logs-table-header">
       <div class="row">
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Sender</div>
+          <div class="logs-table-cell"> Sender </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Recipient</div>
+          <div class="logs-table-cell"> Recipient </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Character</div>
+          <div class="logs-table-cell"> Character </div>
         </div>
         <div class="col-6 col-md-4">
-          <div class="logs-table-cell">Log</div>
+          <div class="logs-table-cell"> Log </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Date</div>
+          <div class="logs-table-cell"> Date </div>
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@
     </div>
   </div>
   <div class="text-right">
-    <a href="{{ url($character->url . '/item-logs') }}">View all...</a>
+    <a href="{{ url($character->url . '/item-logs') }}"> View all... </a>
   </div>
 
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
@@ -86,7 +86,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">[ADMIN] Grant Items</span>
+            <span class="modal-title h5 mb-0">[ADMIN] Grant Items </span>
             <button
               type="button"
               class="close"
@@ -94,7 +94,7 @@
             >&times;</button>
           </div>
           <div class="modal-body">
-            <p>Note that granting items does not check against any category hold limits for characters.</p>
+            <p> Note that granting items does not check against any category hold limits for characters. </p>
             <div class="form-group">
               {!! Form::open(['url' => 'admin/character/' . $character->slug . '/grant-items']) !!}
 
@@ -114,7 +114,7 @@
                   href="#"
                   class="btn btn-primary"
                   id="add-item"
-                >Add Item</a>
+                > Add Item </a>
               </div>
               <div class="item-row hide mb-2">
                 {!! Form::select('item_ids[]', $itemOptions, null, [
@@ -125,7 +125,7 @@
                 <a href="#" class="remove-item btn btn-danger mb-2">×</a>
               </div>
 
-              <h5>Additional Data</h5>
+              <h5> Additional Data </h5>
 
               <div class="form-group">
                 {!! Form::label('data', 'Reason (Optional)') !!} {!! add_help('A reason for the grant. This will be noted in the logs and in the inventory description.') !!}

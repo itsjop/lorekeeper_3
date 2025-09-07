@@ -7,17 +7,17 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Character Titles' => 'admin/data/character-titles']) !!}
 
-  <h1>Character Titles</h1>
+  <h1> Character Titles </h1>
 
-  <p>This is a list of titles that can be applied to characters. Titles are optional, and pre-set titles may be created here for
-    ease of use, or custom titles can be given to individual characters when editing their traits, etc.</p>
+  <p> This is a list of titles that can be applied to characters. Titles are optional, and pre-set titles may be created here for
+    ease of use, or custom titles can be given to individual characters when editing their traits, etc. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/character-titles/create') }}">
-      <i class="fas fa-plus"></i> Create New Title</a>
+      <i class="fas fa-plus"></i> Create New Title </a>
   </div>
   @if (!count($titles))
-    <p>No titles found.</p>
+    <p> No titles found. </p>
   @else
     <table class="table table-sm title-table">
       <tbody id="sortable" class="sortable">
@@ -29,7 +29,7 @@
               {!! $title->displayName !!}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/character-titles/edit/' . $title->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/character-titles/edit/' . $title->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

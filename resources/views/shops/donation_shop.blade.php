@@ -13,7 +13,7 @@
 
   <div class="text-center">
     <img src="{{ asset('images/somnivores/site/donation_shop.png') }}" style="max-width:100%" />
-    <p>{!! $text->parsed_text !!}</p>
+    <p> {!! $text->parsed_text !!} </p>
 
     @if (Auth::check() && Auth::user()->donationShopCooldown)
       You can collect an item {!! pretty_date(Auth::user()->donationShopCooldown) !!}!
@@ -39,9 +39,9 @@
                 </div>
                 <div>
                   <a href="#" class="inventory-stack inventory-stack-name">
-                    <strong>{{ $item->item->name }}</strong>
+                    <strong> {{ $item->item->name }} </strong>
                   </a>
-                  <div>Stock: {{ $item->stock }}</div>
+                  <div> Stock: {{ $item->stock }} </div>
                 </div>
               </div>
             @endforeach

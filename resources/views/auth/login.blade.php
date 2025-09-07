@@ -14,7 +14,7 @@
 
     <div class="row">
       <div class="col-md-6 offset-md-4">
-        <h1>Log In</h1>
+        <h1> Log In </h1>
       </div>
     </div>
     <form method="POST" action="{{ route('login') }}">
@@ -22,7 +22,7 @@
       @honeypot
 
       <div class="form-group row">
-        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+        <label for="email" class="col-md-4 col-form-label text-md-right"> {{ __('E-Mail Address') }} </label>
 
         <div class="col-md-6">
           <input
@@ -36,14 +36,14 @@
           >
           @if ($errors->has('email'))
             <span class="invalid-feedback" role="alert">
-              <strong>{{ $errors->first('email') }}</strong>
+              <strong> {{ $errors->first('email') }} </strong>
             </span>
           @endif
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+        <label for="password" class="col-md-4 col-form-label text-md-right"> {{ __('Password') }} </label>
 
         <div class="col-md-6">
           <input
@@ -56,7 +56,7 @@
 
           @if ($errors->has('password'))
             <span class="invalid-feedback" role="alert">
-              <strong>{{ $errors->first('password') }}</strong>
+              <strong> {{ $errors->first('password') }} </strong>
             </span>
           @endif
         </div>
@@ -98,14 +98,14 @@
     {!! RecaptchaV3::field('login') !!}
 
     @if ($altLogins)
-      <h3 class="text-center mt-5 pt-2">Alternate Logins</h3>
+      <h3 class="text-center mt-5 pt-2"> Alternate Logins </h3>
       <hr>
       <blockquote class="ta-center">
         Sorry! We are currently experiencing issues with DeviantArt and Toyhouse direct logins, so we've had to disable them
         temporarily. They
-        will return <strong>soon</strong> once we have time to diagnose the issues.
+        will return <strong>soon </strong> once we have time to diagnose the issues.
         <br>
-        In the meantime, <strong>please register with an email and password</strong> and then additionally confirm your account with
+        In the meantime, <strong>please register with an email and password </strong> and then additionally confirm your account with
         Toyhouse or DeviantArt afterwards. Thank you!
       </blockquote>
       <hr>
@@ -113,7 +113,7 @@
         @if (isset($site['login']) && $site['login'])
           <div class="text-center pt-3 w-75 m-auto">
             <a href="{{ url('/login/redirect/' . $provider) }}" class="btn btn-primary text-white w-100">
-              <i class="{{ $site['icon'] }} mr-2"></i> Login With {{ ucfirst($provider) }}</a>
+              <i class="{{ $site['icon'] }} mr-2"></i> Login With {{ ucfirst($provider) }} </a>
           </div>
         @endif
       @endforeach --}}

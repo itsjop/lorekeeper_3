@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', ucfirst(__('lorekeeper.species')) => 'world/species']) !!}
-  <h1>Species</h1>
+  <h1> Species </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -29,5 +29,5 @@
   @endforeach
   {!! $specieses->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $specieses->total() }} result{{ $specieses->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $specieses->total() }} result{{ $specieses->total() == 1 ? '' : 's' }} found. </div>
 @endsection

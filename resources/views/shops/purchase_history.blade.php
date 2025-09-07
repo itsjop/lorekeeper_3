@@ -17,22 +17,22 @@
     <div class="logs-table-header">
       <div class="row">
         <div class="col-12 col-md-2">
-          <div class="logs-table-cell">Item</div>
+          <div class="logs-table-cell"> Item </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Quantity</div>
+          <div class="logs-table-cell"> Quantity </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Shop</div>
+          <div class="logs-table-cell"> Shop </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Character</div>
+          <div class="logs-table-cell"> Character </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Cost</div>
+          <div class="logs-table-cell"> Cost </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Date</div>
+          <div class="logs-table-cell"> Date </div>
         </div>
       </div>
     </div>

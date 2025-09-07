@@ -15,16 +15,16 @@
       <div class="transfer-info-content">
         @if ($transfer->character)
           <h3 class="mb-0 transfer-info-header">
-            <a href="{{ $transfer->character->url }}">{{ $transfer->character->fullName }}</a>
+            <a href="{{ $transfer->character->url }}"> {{ $transfer->character->fullName }} </a>
           </h3>
         @else
-          <h3 class="mb-0 transfer-info-header">Character Deleted</h3>
+          <h3 class="mb-0 transfer-info-header"> Character Deleted </h3>
         @endif
         <div class="transfer-info-body mb-3">
           @if (Auth::user()->id == $transfer->recipient_id)
-            <p>Transfer sent by {!! $transfer->sender->displayName !!}, {!! format_date($transfer->created_at) !!}</p>
+            <p> Transfer sent by {!! $transfer->sender->displayName !!}, {!! format_date($transfer->created_at) !!} </p>
           @else
-            <p>Transfer sent to {!! $transfer->recipient->displayName !!}, {!! format_date($transfer->created_at) !!}</p>
+            <p> Transfer sent to {!! $transfer->recipient->displayName !!}, {!! format_date($transfer->created_at) !!} </p>
           @endif
 
           @if ($transfer->isActive && $transfersQueue)
@@ -41,7 +41,7 @@
             @endif
           @elseif(!$transfer->isActive)
             @if ($transfer->reason)
-              <div class="alert alert-danger mb-0">{{ $transfer->reason }}</div>
+              <div class="alert alert-danger mb-0"> {{ $transfer->reason }} </div>
             @endif
           @endif
         </div>
@@ -59,11 +59,11 @@
             @else
               <h2 class="text-right mb-0">
                 @if ($transfer->status == 'Accepted')
-                  <span class="badge badge-success">Accepted</span>
+                  <span class="badge badge-success"> Accepted </span>
                 @elseif($transfer->status == 'Rejected')
-                  <span class="badge badge-danger">Rejected</span>
+                  <span class="badge badge-danger"> Rejected </span>
                 @elseif($transfer->status == 'Canceled')
-                  <span class="badge badge-secondary">Canceled</span>
+                  <span class="badge badge-secondary"> Canceled </span>
                 @endif
               </h2>
             @endif
@@ -77,11 +77,11 @@
             @else
               <h2 class="text-right mb-0">
                 @if ($transfer->status == 'Accepted')
-                  <span class="badge badge-success">Accepted</span>
+                  <span class="badge badge-success"> Accepted </span>
                 @elseif($transfer->status == 'Rejected')
-                  <span class="badge badge-danger">Rejected</span>
+                  <span class="badge badge-danger"> Rejected </span>
                 @elseif($transfer->status == 'Canceled')
-                  <span class="badge badge-secondary">Canceled</span>
+                  <span class="badge badge-secondary"> Canceled </span>
                 @endif
               </h2>
             @endif

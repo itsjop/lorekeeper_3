@@ -9,19 +9,19 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/location-types/create') }}">
-      <i class="fas fa-plus mr-2"></i> Create New Location Type</a>
+      <i class="fas fa-plus mr-2"></i> Create New Location Type </a>
     <a class="btn btn-secondary" href="{{ url('admin/world/locations') }}">
-      <i class="fas fa-undo-alt mr-2"></i> Back to Locations</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Locations </a>
   </div>
-  <h1>Location types</h1>
+  <h1> Location types </h1>
 
-  <p class="mb-0" style="clear:both">Location types are effectively categories for locations - but mostly for organization and
-    display. <strong>eg. Country, Continent, Island.</strong>
+  <p class="mb-0" style="clear:both"> Location types are effectively categories for locations - but mostly for organization and
+    display. <strong>eg. Country, Continent, Island. </strong>
   </p>
-  <p>The sorting order reflects the order in which the types will be listed on the location type index.</p>
+  <p> The sorting order reflects the order in which the types will be listed on the location type index. </p>
 
   @if (!count($types))
-    <p>No location types found.</p>
+    <p> No location types found. </p>
   @else
     <table class="table table-sm type-table">
       <tbody id="sortable" class="sortable">
@@ -32,11 +32,11 @@
               </a>
               <a href={!! $type->url !!}
                 @if ($type->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $type->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($type->name) }} " @endif
-              />{!! $type->name !!}</a>
+              /> {!! $type->name !!} </a>
               ({!! $type->names !!})
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/location-types/edit/' . $type->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/world/location-types/edit/' . $type->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

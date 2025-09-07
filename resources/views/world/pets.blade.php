@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Pets' => 'world/pets']) !!}
-  <h1>Pets</h1>
+  <h1> Pets </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -50,5 +50,5 @@
   @endforeach
   {!! $pets->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $pets->total() }} result{{ $pets->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $pets->total() }} result{{ $pets->total() == 1 ? '' : 's' }} found. </div>
 @endsection

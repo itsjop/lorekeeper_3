@@ -5,20 +5,20 @@
         <a href="{{ $submission->url }}">@include('widgets._gallery_thumb', ['submission' => $submission])</a>
       </div>
       <div class="col-md text-center align-self-center">
-        <h5>{!! $submission->displayName !!}</h5>
+        <h5> {!! $submission->displayName !!} </h5>
         @if (isset($submission->content_warning))
           <p>
             <span class="text-danger">
-              <strong>Content Warning:</strong>
+              <strong> Content Warning:</strong>
             </span> {!! nl2br(htmlentities($submission->content_warning)) !!}
           </p>
         @endif
         @if (isset($queue) && $queue)
           <span style="font-size:95%;"
             class="badge badge-{{ $submission->status == 'Accepted' ? 'success' : ($submission->status == 'Rejected' ? 'danger' : 'secondary') }}"
-          >{{ $submission->status }}</span> ・
+          > {{ $submission->status }} </span> ・
         @endif
-        In {!! $submission->gallery->displayName !!} ・ By {!! $submission->credits !!}<br />
+        In {!! $submission->gallery->displayName !!} ・ By {!! $submission->credits !!} <br />
         Submitted {!! pretty_date($submission->created_at) !!} ・ Last updated {!! pretty_date($submission->updated_at) !!}
 
         @if ($submission->status == 'Pending' && $submission->collaboratorApproval && Auth::user()->hasPower('manage_submissions'))
@@ -51,12 +51,12 @@
         @endif
 
         @if (isset($queue) && $queue)
-          <h6 class="mt-2">{{ $submission->comments->where('type', 'Staff-User')->count() }}
+          <h6 class="mt-2"> {{ $submission->comments->where('type', 'Staff-User')->count() }}
             {{ Auth::user()->hasPower('manage_submissions') ? 'Staff↔User Comment' . ($submission->comments->where('type', 'Staff-User')->count() != 1 ? 's' : '') . ' ・ ' : 'Staff Comment' }}
             {{ Auth::user()->hasPower('manage_submissions') ? $submission->comments->where('type', 'Staff-Staff')->count() . ' Staff↔Staff Comment' . ($submission->comments->where('type', 'Staff-Staff')->count() != 1 ? 's' : '') : '' }}
           </h6>
           <h6 class="mt-2">
-            <a href="{{ $submission->queueUrl }}">Detailed Log</a>
+            <a href="{{ $submission->queueUrl }}"> Detailed Log </a>
           </h6>
         @endif
       </div>

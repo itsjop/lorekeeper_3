@@ -7,7 +7,7 @@
 @section('account-content')
   {!! breadcrumbs(['My Account' => Auth::user()->url, 'Deactivate Account' => 'account/deactivate']) !!}
 
-  <h1>Deactivate Account</h1>
+  <h1> Deactivate Account </h1>
 
   <p>
     If you wish to deactivate your account for any reason, you may do so here. This does not delete your account in totality, but it hides your information
@@ -18,7 +18,7 @@
   </p>
 
   <div class="card p-3 mb-2">
-    <h3>Deactivate your account</h3>
+    <h3> Deactivate your account </h3>
     {!! Form::open(['url' => 'account/deactivate', 'id' => 'deactivateForm']) !!}
     <div class="form-group">
       {!! Form::label('Reason (Optional; no HTML)') !!}

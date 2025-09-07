@@ -3,7 +3,7 @@
     class="card-title h5 collapse-title"
     data-bs-toggle="collapse"
     href="#redeemBorder"
-  >Redeem Border</a>
+  > Redeem Border </a>
   <div id="redeemBorder" class="collapse">
     {!! Form::hidden('tag', $tag->tag) !!}
 
@@ -14,7 +14,7 @@
     </p>
 
     <p class="mb-0">
-      <strong>Possible Results:</strong>
+      <strong> Possible Results:</strong>
     </p>
     <div class="row mb-2">
       @if (is_array($tag->getData()) && count($tag->getData()))
@@ -22,14 +22,14 @@
           <div class="col-md-3"
             style="{{ Auth::user()->hasBorder($loot->rewardable_id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}"
           >
-            {!! App\Models\Border\Border::find($loot->rewardable_id)->displayName !!}</div>
+            {!! App\Models\Border\Border::find($loot->rewardable_id)->displayName !!} </div>
         @endforeach
       @else
         @foreach (App\Models\Border\Border::orderBy('name')->where('is_default', 0)->get() as $loot)
           <div class="col-md-3"
             style="{{ Auth::user()->hasBorder($loot->id) ? 'text-decoration: line-through; opacity:0.5;' : '' }}"
           >
-            {!! $loot->displayName !!}</div>
+            {!! $loot->displayName !!} </div>
         @endforeach
       @endif
     </div>

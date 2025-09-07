@@ -18,7 +18,7 @@
   @if (!$namespace)
     <div class="container justify-content-right text-right my-3">
       <a href="{{ $user->url . '/pets' }}">
-        <div class="btn btn-primary">Return to Pets</div>
+        <div class="btn btn-primary"> Return to Pets </div>
       </a>
     </div>
   @endif
@@ -37,7 +37,7 @@
       <div class="row col-12 world-entry-text">
         <div class="col-md-4 mb-2 text-center">
           @if ($pet->character)
-            <h2 class="h5">Attached to {{ $pet->character->fullName }}</h2>
+            <h2 class="h5"> Attached to {{ $pet->character->fullName }} </h2>
             <a href="{{ $pet->character->url }}">
               <img src="{{ $pet->character->image->thumbnailUrl }}" class="rounded img-thumbnail mb-2" alt="Thumbnail for {{ $pet->character->fullName }}" />
             </a>
@@ -49,12 +49,12 @@
                   {!! Form::close() !!}
                 </div>
               @else
-                <div class="alert alert-warning mb-0">{{ $pet->canBond(true) }}</div>
+                <div class="alert alert-warning mb-0"> {{ $pet->canBond(true) }} </div>
               @endif
             @endif
           @endif
           @if ($pet->evolution)
-            <h2 class="h5">Evolved</h2>
+            <h2 class="h5"> Evolved </h2>
             <p>
               {{ $pet->evolution->evolution_name }}
               {{-- (Stage {{ $pet->evolution->evolution_stage }}) --}}
@@ -75,7 +75,7 @@
         <p class="alert alert-info">
           This pet is displaying custom art!
           @if (isset($pet->petArtist) && $pet->petArtist)
-            <b>Artist:</b> {!! $pet->petArtist !!}
+            <b> Artist:</b> {!! $pet->petArtist !!}
           @else
             No credits given.
           @endif
@@ -86,7 +86,7 @@
     @if ($pet->description)
       <hr>
       <div>
-        <h2 class="h5">Profile</h2>
+        <h2 class="h5"> Profile </h2>
         {!! $pet->description !!}
       </div>
     @endif

@@ -53,9 +53,9 @@
     </div>
   @else
     <div class="card bg-light mb-3">
-      <div class="card-body">Powers for the admin rank cannot be edited. {!! add_help(
+      <div class="card-body"> Powers for the admin rank cannot be edited. {!! add_help(
           'The admin rank has the ability to edit any editable information on the site, and is always highest-ranked (cannot be edited by any other user).'
-      ) !!}</div>
+      ) !!} </div>
     </div>
   @endif
 

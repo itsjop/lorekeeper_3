@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-md-2 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
-            <div class="character-image-blank">Select character code.</div>
+            <div class="character-image-blank"> Select character code. </div>
             <div class="character-image-loaded hide">
             </div>
           </div>

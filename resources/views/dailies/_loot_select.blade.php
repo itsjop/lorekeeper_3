@@ -3,7 +3,7 @@
     href="#"
     class="btn btn-outline-info"
     id="addLoot"
-  >Add Reward</a>
+  > Add Reward </a>
 </div>
 <table class="table table-sm" id="lootTable">
   <thead>
@@ -15,9 +15,9 @@
           Step
         @endif
       </th>
-      <th width="30%">Reward Type</th>
-      <th width="35%">Reward</th>
-      <th width="20%">Quantity</th>
+      <th width="30%"> Reward Type </th>
+      <th width="35%"> Reward </th>
+      <th width="20%"> Quantity </th>
       <th width="10%">
       </th>
     </tr>
@@ -26,8 +26,8 @@
     @if ($loots)
       @foreach ($loots as $loot)
         <tr class="loot-row">
-          <td>{!! Form::text('step[]', $loot->step, ['class' => 'form-control bg-dark text-light']) !!}</td>
-          <td>{!! Form::select(
+          <td> {!! Form::text('step[]', $loot->step, ['class' => 'form-control bg-dark text-light']) !!} </td>
+          <td> {!! Form::select(
               'rewardable_type[]',
               ['Item' => 'Item', 'Currency' => 'Currency'] +
                   ($showLootTables ? ['LootTable' => 'Loot Table'] : []) +
@@ -37,7 +37,7 @@
                   'class' => 'form-control reward-type',
                   'placeholder' => 'Select Reward Type'
               ]
-          ) !!}</td>
+          ) !!} </td>
           <td class="loot-row-select">
             @if ($loot->rewardable_type == 'Item')
               {!! Form::select('rewardable_id[]', $items, $loot->rewardable_id, [
@@ -61,9 +61,9 @@
               ]) !!}
             @endif
           </td>
-          <td>{!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!}</td>
+          <td> {!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!} </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-loot-button"> Remove </a>
           </td>
         </tr>
       @endforeach

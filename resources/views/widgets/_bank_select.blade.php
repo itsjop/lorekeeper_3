@@ -5,7 +5,7 @@
     class="small inventory-collapse-toggle collapse-toggle collapsed"
     href="#{{ strtolower($owner->logType) }}Bank-{{ $owner->id }}"
     data-bs-toggle="collapse"
-  >Show</a>
+  > Show </a>
 </h3>
 <div class="{{ isset($selected) && count($selected) ? '' : 'collapse' }}"
   id="{{ strtolower($owner->logType) }}Bank-{{ $owner->id }}"
@@ -16,13 +16,13 @@
       class="btn btn-outline-info add-currency-button"
       data-type="{{ strtolower($owner->logType) }}"
       data-id="{{ $owner->id }}"
-    >Add Currency</a>
+    > Add Currency </a>
   </div>
   <table class="table table-sm show currency-table">
     <thead>
       <tr>
-        <th width="70%">Currency</th>
-        <th width="20%">Quantity</th>
+        <th width="70%"> Currency </th>
+        <th width="20%"> Quantity </th>
         <th width="10%">
         </th>
       </tr>
@@ -32,15 +32,15 @@
         <?php $currencySelect = $owner->getCurrencySelect(isset($isTransferrable) ? $isTransferrable : false); ?>
         @foreach ($selected as $currencyId => $quantity)
           <tr class="bank-row">
-            <td>{!! Form::select('currency_id[' . strtolower($owner->logType) . '-' . $owner->id . '][]', $currencySelect, $currencyId, [
+            <td> {!! Form::select('currency_id[' . strtolower($owner->logType) . '-' . $owner->id . '][]', $currencySelect, $currencyId, [
                 'class' => 'form-control selectize',
                 'placeholder' => 'Select Currency    '
-            ]) !!}</td>
-            <td>{!! Form::text('currency_quantity[' . strtolower($owner->logType) . '-' . $owner->id . '][]', $quantity, [
+            ]) !!} </td>
+            <td> {!! Form::text('currency_quantity[' . strtolower($owner->logType) . '-' . $owner->id . '][]', $quantity, [
                 'class' => 'form-control'
-            ]) !!}</td>
+            ]) !!} </td>
             <td class="text-right">
-              <a href="#" class="btn btn-danger remove-currency-button">Remove</a>
+              <a href="#" class="btn btn-danger remove-currency-button"> Remove </a>
             </td>
           </tr>
         @endforeach

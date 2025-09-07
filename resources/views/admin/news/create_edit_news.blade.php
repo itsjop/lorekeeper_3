@@ -7,17 +7,17 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'News' => 'admin/news', ($news->id ? 'Edit' : 'Create') . ' Post' => $news->id ? 'admin/news/edit/' . $news->id : 'admin/news/create']) !!}
 
-  <h1>{{ $news->id ? 'Edit' : 'Create' }} News Post
+  <h1> {{ $news->id ? 'Edit' : 'Create' }} News Post
     @if ($news->id)
-      <a href="#" class="btn btn-danger float-right delete-news-button">Delete Post</a>
-      <a href="#" class="btn btn-secondary float-right regen-news-button mr-md-2">Regenerate Post</a>
-      <a href="{{ $news->url }}" class="btn btn-info float-right mr-md-2">View Post</a>
+      <a href="#" class="btn btn-danger float-right delete-news-button"> Delete Post </a>
+      <a href="#" class="btn btn-secondary float-right regen-news-button mr-md-2"> Regenerate Post </a>
+      <a href="{{ $news->url }}" class="btn btn-info float-right mr-md-2"> View Post </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $news->id ? 'admin/news/edit/' . $news->id : 'admin/news/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6 form-group">

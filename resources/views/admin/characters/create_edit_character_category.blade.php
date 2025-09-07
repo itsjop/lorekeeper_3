@@ -11,15 +11,15 @@
       ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/character-categories/edit/' . $category->id : 'admin/data/character-categories/create',
   ]) !!}
 
-  <h1>{{ $category->id ? 'Edit' : 'Create' }} Character Category
+  <h1> {{ $category->id ? 'Edit' : 'Create' }} Character Category
     @if ($category->id)
-      <a href="#" class="btn btn-danger float-right delete-category-button">Delete Category</a>
+      <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $category->id ? 'admin/data/character-categories/edit/' . $category->id : 'admin/data/character-categories/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -42,7 +42,7 @@
       {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: 200px x 200px</div>
+    <div class="text-muted"> Recommended size: 200px x 200px </div>
     @if ($category->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -73,7 +73,7 @@
   {!! Form::close() !!}
 
   @if ($category->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._entry', [

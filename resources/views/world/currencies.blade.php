@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Currencies' => 'world/currencies']) !!}
-  <h1>Currencies</h1>
+  <h1> Currencies </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -50,5 +50,5 @@
   @endforeach
   {!! $currencies->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $currencies->total() }} result{{ $currencies->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $currencies->total() }} result{{ $currencies->total() == 1 ? '' : 's' }} found. </div>
 @endsection

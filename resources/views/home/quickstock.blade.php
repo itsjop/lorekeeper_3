@@ -11,7 +11,7 @@
     Quickstock
   </h1>
 
-  <p>This is your inventory's quickstock. You can quickly mass-transfer items to your shop here.</p>
+  <p> This is your inventory's quickstock. You can quickly mass-transfer items to your shop here. </p>
   @if (Auth::user()->shops->count())
     {!! Form::open(['url' => 'inventory/quickstock-items']) !!}
     <div class="form-group">
@@ -34,7 +34,7 @@
     {!! Form::close() !!}
   @else
     <div class="alert alert-warning text-center">
-      You can't stock a shop if you <a href="{{ url('user-shops/create') }}">don't have one...</a>
+      You can't stock a shop if you <a href="{{ url('user-shops/create') }}">don't have one... </a>
     </div>
   @endif
 @endsection

@@ -16,7 +16,7 @@
   @endif
   <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
 
-    <h3>{!! $name !!}
+    <h3> {!! $name !!}
 
       <div class="float-right small">
         @if (isset($searchItemsUrl) && $searchItemsUrl)

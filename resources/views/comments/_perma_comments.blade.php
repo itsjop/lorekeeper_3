@@ -25,12 +25,12 @@
       <div class="row mx-0 px-0 align-items-md-end">
         <h5 class="mt-0 mb-1 col mx-0 px-0">
           {!! $comment->commenter->commentDisplayName !!} @if ($comment->commenter->isStaff == true)
-            <small class="text-muted">Staff Member</small>
+            <small class="text-muted"> Staff Member </small>
           @endif
         </h5>
         @if ($comment->is_featured)
           <div class="ml-1 text-muted text-right col-6 mx-0 pr-1">
-            <small class="text-success">Featured by Owner</small>
+            <small class="text-success"> Featured by Owner </small>
           </div>
         @endif
       </div>
@@ -55,7 +55,7 @@
                   href="#"
                   data-bs-toggle="modal"
                   data-bs-target="#show-edits-{{ $comment->id }}"
-                >Edit History</a>
+                > Edit History </a>
               @endif
             @endif
           </small>
@@ -93,7 +93,7 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
 
         @if ($limit >= 5 && $depth >= 1)
           <a href="{{ url('comment/') . '/' . $comment->id }}">
-            <span class="btn btn-secondary w-100">See More Replies</span>
+            <span class="btn btn-secondary w-100"> See More Replies </span>
           </a>
           @break
         @endif
@@ -136,9 +136,9 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
     </div>
     <div class="d-block bg-light" style="flex:1">
       <div class="border p-3 rounded {{ $limit == 0 ? 'shadow-sm border-info' : '' }}">
-        <p>Comment deleted </p>
+        <p> Comment deleted </p>
         <p class="border-top pt-1 text-right mb-0">
-          <small class="text-muted">{!! $comment->created_at !!}
+          <small class="text-muted"> {!! $comment->created_at !!}
             @if ($comment->created_at != $comment->deleted_at)
               <span class="text-muted border-left mx-1 px-1">(Deleted {!! $comment->deleted_at !!})</span>
             @endif
@@ -158,7 +158,7 @@ url should be equal to the last replies permalink (e.g reply 5) --}}
 
         @if ($limit >= 5 && $depth >= 1)
           <a href="{{ url('comment/') . '/' . $comment->id }}">
-            <span class="btn btn-secondary w-100">See More Replies</span>
+            <span class="btn btn-secondary w-100"> See More Replies </span>
           </a>
           @break
         @endif

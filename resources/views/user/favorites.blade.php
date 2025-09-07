@@ -16,8 +16,8 @@
   </h1>
 
   @if ($characters)
-    <p>These are {{ Auth::check() && Auth::user()->id == $user->id ? 'your' : $user->name . '\'s' }} favorites which feature <a href="{{ url($user->url . '/characters') }}">characters
-        {{ Auth::check() && Auth::user()->id == $user->id ? 'you' : 'they' }} own</a>.</p>
+    <p> These are {{ Auth::check() && Auth::user()->id == $user->id ? 'your' : $user->name . '\'s' }} favorites which feature <a href="{{ url($user->url . '/characters') }}">characters
+        {{ Auth::check() && Auth::user()->id == $user->id ? 'you' : 'they' }} own </a>. </p>
   @endif
 
   @if (isset($favorites) && $favorites->count())
@@ -31,7 +31,7 @@
 
     {!! $favorites->render() !!}
   @else
-    <p>No favorites found!</p>
+    <p> No favorites found!</p>
   @endif
 
 @endsection

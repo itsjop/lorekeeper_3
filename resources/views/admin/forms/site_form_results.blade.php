@@ -19,7 +19,7 @@
         <div class="card">
           <div class="card-header" id="headingTwo">
             <div class="row p-2">
-              <h5>{{ $question->question }}</h5>
+              <h5> {{ $question->question }} </h5>
               @if (!$form->is_anonymous && $question->has_options)
                 <a
                   href="#"
@@ -49,7 +49,7 @@
             </div>
             @php $totalAnswers = $question->answers->count(); @endphp
             <h6>
-              <b>Total answers: {{ $totalAnswers }}</b>
+              <b> Total answers: {{ $totalAnswers }} </b>
             </h6>
             @if ($question->options->count() > 0)
               @foreach ($question->options as $option)
@@ -63,7 +63,7 @@
                     aria-valuenow="{{ $optionAnswers }}"
                     aria-valuemin="0"
                     aria-valuemax="{{ $totalAnswers }}"
-                  >{{ $optionAnswers }}</div>
+                  > {{ $optionAnswers }} </div>
                 </div>
               @endforeach
             @else
@@ -79,10 +79,10 @@
             <div class="card-body">
               @if ($question->has_options)
                 @foreach ($question->options as $option)
-                  <b>{{ $option->option }} :</b>
+                  <b> {{ $option->option }} :</b>
                   <div>
                     @foreach ($option->answers as $answer)
-                      <span class="mr-2">{!! $answer->user->displayName !!}</span>
+                      <span class="mr-2"> {!! $answer->user->displayName !!} </span>
                     @endforeach
                   </div>
                 @endforeach
@@ -96,7 +96,7 @@
                         Anonymous
                       @endif:
                     </b>
-                    <div class="p-3 border">{{ $answer->answer }}</div>
+                    <div class="p-3 border"> {{ $answer->answer }} </div>
                   </div>
                 @endforeach
               @endif

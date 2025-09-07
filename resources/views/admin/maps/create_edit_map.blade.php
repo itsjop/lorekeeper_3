@@ -11,15 +11,15 @@
       ($map->id ? 'Edit' : 'Create') . ' Map' => $map->id ? 'admin/maps/edit/' . $map->id : 'admin/maps/create'
   ]) !!}
 
-  <h1>{{ $map->id ? 'Edit' : 'Create' }} Map
+  <h1> {{ $map->id ? 'Edit' : 'Create' }} Map
     @if ($map->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-map-button">Delete Map</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-map-button"> Delete Map </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $map->id ? 'admin/maps/edit/' . $map->id : 'admin/maps/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -28,7 +28,7 @@
 
   <div class="form-group">
     {!! Form::label('Image') !!}
-    <div>{!! Form::file('image') !!}</div>
+    <div> {!! Form::file('image') !!} </div>
     @if ($map->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -57,22 +57,22 @@
   {!! Form::close() !!}
 
   @if ($map->id)
-    <h1>Map Locations</h1>
-    <p class="text-muted">These are the locations that are currently on this map.</p>
-    <p>To get image co-ordinates for locations, use a site like <a href="https://www.image-map.net/" target="_blank">Image Map</a>
+    <h1> Map Locations </h1>
+    <p class="text-muted"> These are the locations that are currently on this map. </p>
+    <p> To get image co-ordinates for locations, use a site like <a href="https://www.image-map.net/" target="_blank"> Image Map </a>
     </p>
     <hr />
     <div class="text-right my-3">
       <a class="btn btn-primary create-location">
-        <i class="fas fa-plus"></i> Create New Location</a>
+        <i class="fas fa-plus"></i> Create New Location </a>
     </div>
     @if (!count($map->locations))
-      <p>No locations found.</p>
+      <p> No locations found. </p>
     @else
       <table class="table table-sm table-responsive-md">
         <thead>
-          <th>Name</th>
-          <th>Image Co-ordinates</th>
+          <th> Name </th>
+          <th> Image Co-ordinates </th>
           <th>
           </th>
           <th>
@@ -82,8 +82,8 @@
           @foreach ($map->locations as $location)
             <tr>
 
-              <td>{{ $location->name }}</td>
-              <td>{{ $location->cords }}</td>
+              <td> {{ $location->name }} </td>
+              <td> {{ $location->cords }} </td>
               <td>
                 <a
                   href="#"
@@ -108,8 +108,8 @@
       </table>
     @endif
     <hr />
-    <h1>Preview</h1>
-    <p class="text-muted">This is a preview of the map.</p>
+    <h1> Preview </h1>
+    <p class="text-muted"> This is a preview of the map. </p>
     <div class="container">
       {!! $map->display !!}
     </div>

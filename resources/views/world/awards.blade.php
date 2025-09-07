@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', __('awards.awards') => 'world/' . __('awards.awards')]) !!}
-  <h1>{{ __('awards.awards') }}</h1>
+  <h1> {{ __('awards.awards') }} </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -64,7 +64,7 @@
             </div>
           @endif
           <div class="card-body text-center">
-            <h5 class="mt-3">{!! $award->displayName !!}</h5>
+            <h5 class="mt-3"> {!! $award->displayName !!} </h5>
             <div>
               @if ($award->is_character_owned)
                 <i class="fas fa-paw mx-2" data-bs-toggle="tooltip" title="This {{ __('awards.award') }} can be held by {{ __('lorekeeper.characters') }}."></i>
@@ -89,5 +89,5 @@
   </div>
   {!! $awards->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $awards->total() }} {{ trans_choice('awards.awards_', $awards->total()) }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $awards->total() }} {{ trans_choice('awards.awards_', $awards->total()) }} found. </div>
 @endsection

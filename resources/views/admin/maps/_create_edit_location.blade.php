@@ -4,7 +4,7 @@
         : 'admin/maps/locations/create/' . $map->id
 ]) !!}
 
-<h3>{{ $location->id ? 'Edit' : 'Create' }} Location</h3>
+<h3> {{ $location->id ? 'Edit' : 'Create' }} Location </h3>
 
 <div class="form-group">
   {!! Form::label('name', 'Name') !!}
@@ -19,9 +19,9 @@
 <div class="row">
   <div class="col-md">
     <div class="form-group">
-      <p>Coordinates should be comma seperated integers.
+      <p> Coordinates should be comma seperated integers.
         <br>
-        <b>Example:</b>
+        <b> Example:</b>
         <br>100, 200
         <br>or
         <br>254,334,278,390

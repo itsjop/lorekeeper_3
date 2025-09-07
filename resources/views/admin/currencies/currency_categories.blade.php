@@ -7,20 +7,20 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Currency Categories' => 'admin/data/currency-categories']) !!}
 
-  <h1>Currency Categories</h1>
+  <h1> Currency Categories </h1>
 
-  <p>This is a list of currency categories that will be used to sort currencies. Creating currency categories is entirely optional,
-    but recommended if you have a lot of currencies in the game.</p>
-  <p>The sorting order reflects the order in which currency categories will be displayed in the bank, as well as on the world pages.
+  <p> This is a list of currency categories that will be used to sort currencies. Creating currency categories is entirely optional,
+    but recommended if you have a lot of currencies in the game. </p>
+  <p> The sorting order reflects the order in which currency categories will be displayed in the bank, as well as on the world pages.
   </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/currency-categories/create') }}">
-      <i class="fas fa-plus"></i> Create New Currency Category</a>
+      <i class="fas fa-plus"></i> Create New Currency Category </a>
   </div>
 
   @if (!count($categories))
-    <p>No currency categories found.</p>
+    <p> No currency categories found. </p>
   @else
     <table class="table table-sm category-table">
       <tbody id="sortable" class="sortable">
@@ -35,7 +35,7 @@
               {!! $category->displayName !!}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/currency-categories/edit/' . $category->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/currency-categories/edit/' . $category->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

@@ -16,12 +16,12 @@
         <div class="row mx-0 px-0 align-items-md-end">
           <h5 class="mt-0 mb-1 col mx-0 px-0">
             {!! $comment->commenter->commentDisplayName !!} @if ($comment->commenter->isStaff == true)
-              <small class="text-success">Staff Member</small>
+              <small class="text-success"> Staff Member </small>
             @endif
           </h5>
           @if ($comment->is_featured)
             <div class="ml-1 text-muted text-right col-6 mx-0 pr-1">
-              <small class="text-success">Featured by Owner</small>
+              <small class="text-success"> Featured by Owner </small>
             </div>
           @endif
         </div>
@@ -51,7 +51,7 @@
                 ? $comment->comment
                 : '<p>' . nl2br($markdown->line(strip_tags($comment->comment))) . '</p>' !!}
             <p class="border-top pt-1 text-right mb-0">
-              <small class="text-muted">{!! $comment->created_at !!}
+              <small class="text-muted"> {!! $comment->created_at !!}
                 @if ($comment->created_at != $comment->updated_at)
                   <span class="text-muted border-left mx-1 px-1">(Edited {!! $comment->updated_at !!})
                     @if (Auth::check() && Auth::user()->isStaff)
@@ -59,7 +59,7 @@
                         href="#"
                         data-toggle="modal"
                         data-target="#show-edits-{{ $comment->id }}"
-                      >Edit History</a>
+                      > Edit History </a>
                     @endif
                   </span>
                 @endif
@@ -93,8 +93,8 @@
 
             @if ($limit >= 3)
               <a href="{{ url('comment/') . '/' . $comment->id }}">
-                <span class="btn btn-secondary w-100 my-2">See More
-                  Replies</span>
+                <span class="btn btn-secondary w-100 my-2"> See More
+                  Replies </span>
               </a>
               @break
             @endif
@@ -128,9 +128,9 @@
       @endif
       <div class="d-block bg-light" style="flex:1">
         <div class="border p-3 rounded">
-          <p>Comment deleted</p>
+          <p> Comment deleted </p>
           <p class="border-top pt-1 text-right mb-0">
-            <small class="text-muted">{!! $comment->created_at !!}
+            <small class="text-muted"> {!! $comment->created_at !!}
               @if ($comment->created_at != $comment->deleted_at)
                 <span class="text-muted border-left mx-1 px-1">(Deleted {!! $comment->deleted_at !!})</span>
               @endif
@@ -152,8 +152,8 @@
 
             @if ($limit >= 3)
               <a href="{{ url('comment/') . '/' . $comment->id }}">
-                <span class="btn btn-secondary w-100 my-2">See More
-                  Replies</span>
+                <span class="btn btn-secondary w-100 my-2"> See More
+                  Replies </span>
               </a>
               @break
             @endif

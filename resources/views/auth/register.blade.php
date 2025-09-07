@@ -8,16 +8,16 @@
   @if ($userCount)
     <div class="row">
       <div class="col-md-6 offset-md-4">
-        <h1>Register</h1>
+        <h1> Register </h1>
       </div>
     </div>
-    <h3 class="text-center">Regular Registration</h3>
+    <h3 class="text-center"> Regular Registration </h3>
     <form method="POST" action="{{ route('register') }}">
       @csrf
       @honeypot
 
       <div class="form-group row">
-        <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
+        <label for="name" class="col-md-4 col-form-label text-md-right"> Username </label>
 
         <div class="col-md-6">
           <input
@@ -32,14 +32,14 @@
 
           @if ($errors->has('name'))
             <span class="invalid-feedback" role="alert">
-              <strong>{{ $errors->first('name') }}</strong>
+              <strong> {{ $errors->first('name') }} </strong>
             </span>
           @endif
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="email" class="col-md-4 col-form-label text-md-right">E-mail Address</label>
+        <label for="email" class="col-md-4 col-form-label text-md-right"> E-mail Address </label>
 
         <div class="col-md-6">
           <input
@@ -53,14 +53,14 @@
 
           @if ($errors->has('email'))
             <span class="invalid-feedback" role="alert">
-              <strong>{{ $errors->first('email') }}</strong>
+              <strong> {{ $errors->first('email') }} </strong>
             </span>
           @endif
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+        <label for="password" class="col-md-4 col-form-label text-md-right"> {{ __('Password') }} </label>
 
         <div class="col-md-6">
           <input
@@ -73,14 +73,14 @@
 
           @if ($errors->has('password'))
             <span class="invalid-feedback" role="alert">
-              <strong>{{ $errors->first('password') }}</strong>
+              <strong> {{ $errors->first('password') }} </strong>
             </span>
           @endif
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+        <label for="password-confirm" class="col-md-4 col-form-label text-md-right"> {{ __('Confirm Password') }} </label>
 
         <div class="col-md-6">
           <input
@@ -95,7 +95,7 @@
 
       @if (!Settings::get('is_registration_open'))
         <div class="form-group row">
-          <label for="name" class="col-md-4 col-form-label text-md-right">Invitation Key {!! add_help('Registration is currently closed. An invitation key is required to create an account.') !!}</label>
+          <label for="name" class="col-md-4 col-form-label text-md-right"> Invitation Key {!! add_help('Registration is currently closed. An invitation key is required to create an account.') !!} </label>
 
           <div class="col-md-6">
             <input
@@ -110,7 +110,7 @@
 
             @if ($errors->has('code'))
               <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('code') }}</strong>
+                <strong> {{ $errors->first('code') }} </strong>
               </span>
             @endif
           </div>
@@ -124,7 +124,7 @@
         </div>
         @if ($errors->has('dob'))
           <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('dob') }}</strong>
+            <strong> {{ $errors->first('dob') }} </strong>
           </span>
         @endif
       </div>
@@ -134,9 +134,9 @@
           <div class="form-check">
             <label class="form-check-label">
               {!! Form::checkbox('agreement', 1, false, ['class' => 'form-check-input']) !!}
-              I have read and agree to the <a href="{{ url('info/terms') }}">Terms of Service</a> and <a
+              I have read and agree to the <a href="{{ url('info/terms') }}"> Terms of Service </a> and <a
                 href="{{ url('info/privacy') }}"
-              >Privacy Policy</a>.
+              > Privacy Policy </a>.
             </label>
           </div>
         </div>
@@ -158,12 +158,12 @@
 
       @if ($altRegistrations)
         <hr>
-        <h3 class="text-center">Alternate Registrations</h3>
+        <h3 class="text-center"> Alternate Registrations </h3>
         <blockquote class="ta-center">
           Sorry! We are currently experiencing issues with DeviantArt and Toyhouse direct logins, so we've had to disable them
-          temporarily. They will return <strong>soon</strong> once we have time to diagnose the issues.
+          temporarily. They will return <strong>soon </strong> once we have time to diagnose the issues.
           <br>
-          In the meantime, <strong>please register with an email and password</strong> and then additionally confirm your account
+          In the meantime, <strong>please register with an email and password </strong> and then additionally confirm your account
           with Toyhouse or DeviantArt afterwards. Thank you!
         </blockquote>
         <hr>
@@ -172,14 +172,14 @@
           @if (isset($site['login']) && $site['login'])
             <div class="text-center w-75 m-auto pt-2 pb-2">
               <a href="{{ url('/login/redirect/' . $provider) }}" class="btn btn-primary text-white w-100">
-                <i class="{{ $site['icon'] }} mr-2"></i> Register With {{ ucfirst($provider) }}</a>
+                <i class="{{ $site['icon'] }} mr-2"></i> Register With {{ ucfirst($provider) }} </a>
             </div>
           @endif
         @endforeach --}}
 
-        <small class="ta-center">This site is protected by reCAPTCHA and the Google
-          <a href="https://policies.google.com/privacy">Privacy Policy</a> and
-          <a href="https://policies.google.com/terms">Terms of Service</a> apply.</small>
+        <small class="ta-center"> This site is protected by reCAPTCHA and the Google
+          <a href="https://policies.google.com/privacy"> Privacy Policy </a> and
+          <a href="https://policies.google.com/terms"> Terms of Service </a> apply. </small>
       @endif
     </form>
   @else

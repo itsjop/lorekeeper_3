@@ -19,11 +19,11 @@
   {!! breadcrumbs(['World' => 'world', 'Flora' => 'world/floras', $flora->name => 'world/floras/' . $flora->id]) !!}
   <h1 style="clear:both;">
     <img src="{{ $flora->thumbUrl }}"
-      style="max-height:25px;vertical-align:inherit;" />{!! $flora->displayName !!}@isset($flora->scientific_name)
-    <span class="ml-2" style="opacity:0.5; font-size:0.7em;font-style:italic">{!! $flora->scientific_name !!}</span>
+      style="max-height:25px;vertical-align:inherit;" /> {!! $flora->displayName !!}@isset($flora->scientific_name)
+    <span class="ml-2" style="opacity:0.5; font-size:0.7em;font-style:italic"> {!! $flora->scientific_name !!} </span>
   @endisset
 </h1>
-<h5>{!! $flora->category ? ucfirst($flora->category->displayName) : 'Miscellaneous' !!}</h5>
+<h5> {!! $flora->category ? ucfirst($flora->category->displayName) : 'Miscellaneous' !!} </h5>
 
 @if ($flora->image_extension)
   <div class="text-center">
@@ -32,7 +32,7 @@
 @endif
 
 @isset($flora->summary)
-  <div class="world-entry-text px-3 text-center">{!! $flora->summary !!}</div>
+  <div class="world-entry-text px-3 text-center"> {!! $flora->summary !!} </div>
 @endisset
 
 @isset($flora->parsed_description)

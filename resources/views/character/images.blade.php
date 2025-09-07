@@ -45,8 +45,8 @@
                 $image->canViewFull(Auth::check() ? Auth::user() : null) &&
                     file_exists(public_path($image->imageDirectory . '/' . $image->fullsizeFileName))
             )
-              <div class="text-right">You are viewing the full-size image. <a href="{{ $image->imageUrl }}">View watermarked
-                  image</a>?</div>
+              <div class="text-right"> You are viewing the full-size image. <a href="{{ $image->imageUrl }}"> View watermarked
+                  image </a>?</div>
             @endif
             @if (Auth::check() && !$image->character->is_myo_slot && $character->user_id == Auth::user()->id)
               {!! Form::open([
@@ -70,7 +70,7 @@
     Images
     @if ($canManage)
       <a href="{{ url('admin/character/' . $character->slug . '/image') }}" class="float-right btn btn-outline-info btn-sm">
-        <i class="fas fa-plus"></i> Add Image</a>
+        <i class="fas fa-plus"></i> Add Image </a>
     @endif
   </h3>
 
@@ -101,7 +101,7 @@
 
     <div class="mobile-handle handle-clone badge badge-primary rounded-circle hide">
       <i class="fas fa-hand-point-up" aria-hidden="true"></i>
-      <span class="sr-only">Drag Handle</span>
+      <span class="sr-only"> Drag Handle </span>
     </div>
   @endif
 @endsection

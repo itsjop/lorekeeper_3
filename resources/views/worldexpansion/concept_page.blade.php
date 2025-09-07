@@ -18,11 +18,11 @@
   {!! breadcrumbs(['World' => 'world', 'Concept' => 'world/concepts', $concept->name => 'world/concepts/' . $concept->id]) !!}
   <h1 style="clear:both;">
     <img src="{{ $concept->thumbUrl }}"
-      style="max-height:25px;vertical-align:inherit;" />{!! $concept->displayName !!}@isset($concept->scientific_name)
-    <span class="ml-2" style="opacity:0.5; font-size:0.7em;font-style:italic">{!! $concept->scientific_name !!}</span>
+      style="max-height:25px;vertical-align:inherit;" /> {!! $concept->displayName !!}@isset($concept->scientific_name)
+    <span class="ml-2" style="opacity:0.5; font-size:0.7em;font-style:italic"> {!! $concept->scientific_name !!} </span>
   @endisset
 </h1>
-<h5>{!! $concept->category ? ucfirst($concept->category->displayName) : 'Miscellaneous' !!}</h5>
+<h5> {!! $concept->category ? ucfirst($concept->category->displayName) : 'Miscellaneous' !!} </h5>
 
 @if ($concept->image_extension)
   <div class="text-center">
@@ -31,7 +31,7 @@
 @endif
 
 @isset($concept->summary)
-  <div class="world-entry-text px-3 text-center">{!! $concept->summary !!}</div>
+  <div class="world-entry-text px-3 text-center"> {!! $concept->summary !!} </div>
 @endisset
 
 @isset($concept->parsed_description)

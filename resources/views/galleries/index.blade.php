@@ -37,11 +37,11 @@
             <p>
               @if (isset($gallery->start_at) || isset($gallery->end_at))
                 @if ($gallery->start_at)
-                  <strong>Open{{ $gallery->start_at->isFuture() ? 's' : 'ed' }}: </strong>{!! pretty_date($gallery->start_at) !!}
+                  <strong> Open{{ $gallery->start_at->isFuture() ? 's' : 'ed' }}: </strong> {!! pretty_date($gallery->start_at) !!}
                 @endif
                 {{ $gallery->start_at && $gallery->end_at ? ' ・ ' : '' }}
                 @if ($gallery->end_at)
-                  <strong>Close{{ $gallery->end_at->isFuture() ? 's' : 'ed' }}: </strong>{!! pretty_date($gallery->end_at) !!}
+                  <strong> Close{{ $gallery->end_at->isFuture() ? 's' : 'ed' }}: </strong> {!! pretty_date($gallery->end_at) !!}
                 @endif
               @endif
               {{ $gallery->children_count && (isset($gallery->start_at) || isset($gallery->end_at)) ? ' ・ ' : '' }}
@@ -63,7 +63,7 @@
             </div>
             @if ($gallery->submissions_count > 4)
               <div class="text-right">
-                <a href="{{ url('gallery/' . $gallery->id) }}">See More...</a>
+                <a href="{{ url('gallery/' . $gallery->id) }}"> See More... </a>
               </div>
             @endif
           @elseif(
@@ -77,7 +77,7 @@
               @endforeach
             </div>
           @else
-            <p>This gallery has no submissions!</p>
+            <p> This gallery has no submissions!</p>
           @endif
         </div>
       </div>
@@ -85,7 +85,7 @@
 
     {!! $galleries->render() !!}
   @else
-    <p>There aren't any galleries!</p>
+    <p> There aren't any galleries!</p>
   @endif
 
 @endsection

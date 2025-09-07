@@ -40,13 +40,13 @@
                 <div class="float-right small">
                   @if (isset($title->searchCharactersUrl) && $title->searchCharactersUrl)
                     <a href="{{ $title->searchCharactersUrl }}" class="world-entry-search text-muted small ml-4">
-                      <i class="fas fa-search"></i> Characters</a>
+                      <i class="fas fa-search"></i> Characters </a>
                   @endif
                 </div>
               </h1>
               @if ($title->short_title)
                 <h5>
-                  <em>{!! $title->short_title !!}</em>
+                  <em> {!! $title->short_title !!} </em>
                 </h5>
               @endif
               <div class="world-entry-text">

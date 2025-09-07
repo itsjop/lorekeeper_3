@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Items' => 'world/items']) !!}
-  <h1>Items</h1>
+  <h1> Items </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'flex flex-wrap ji-end']) !!}
@@ -54,5 +54,5 @@
   @endforeach
   {!! $items->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $items->total() }} result{{ $items->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $items->total() }} result{{ $items->total() == 1 ? '' : 's' }} found. </div>
 @endsection

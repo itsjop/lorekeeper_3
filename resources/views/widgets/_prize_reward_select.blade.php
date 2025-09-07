@@ -3,14 +3,14 @@
     href="#"
     class="btn btn-outline-info"
     id="addReward"
-  >Add Reward</a>
+  > Add Reward </a>
 </div>
 <table class="table table-sm" id="rewardTable">
   <thead>
     <tr>
-      <th width="35%">Reward Type</th>
-      <th width="35%">Reward</th>
-      <th width="20%">Quantity</th>
+      <th width="35%"> Reward Type </th>
+      <th width="35%"> Reward </th>
+      <th width="20%"> Quantity </th>
       <th width="10%">
       </th>
     </tr>
@@ -19,7 +19,7 @@
     @if ($rewards)
       @foreach ($rewards as $reward)
         <tr class="reward-row">
-          <td>{!! Form::select(
+          <td> {!! Form::select(
               'rewardable_type[]',
               ['Item' => 'Item', 'Currency' => 'Currency', 'LootTable' => 'Loot Table', 'Raffle' => 'Raffle'],
               $reward->rewardable_type,
@@ -27,7 +27,7 @@
                   'class' => 'form-control reward-type selectize',
                   'placeholder' => 'Select Reward Type'
               ]
-          ) !!}</td>
+          ) !!} </td>
           <td class="reward-row-select">
             @if ($reward->rewardable_type == 'Item')
               {!! Form::select('rewardable_id[]', $items, $reward->rewardable_id, [
@@ -51,9 +51,9 @@
               ]) !!}
             @endif
           </td>
-          <td>{!! Form::text('reward_quantity[]', $reward->quantity, ['class' => 'form-control']) !!}</td>
+          <td> {!! Form::text('reward_quantity[]', $reward->quantity, ['class' => 'form-control']) !!} </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-reward-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-reward-button"> Remove </a>
           </td>
         </tr>
       @endforeach

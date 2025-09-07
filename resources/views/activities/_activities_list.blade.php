@@ -13,7 +13,7 @@
         </div>
       @endif
       <div class="activity-name mt-1">
-        <a href="{{ $activity->url }}" class="h5 mb-0">{{ $activity->name }}</a>
+        <a href="{{ $activity->url }}" class="h5 mb-0"> {{ $activity->name }} </a>
       </div>
     </div>
   @endforeach

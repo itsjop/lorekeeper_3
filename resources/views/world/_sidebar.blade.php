@@ -1,31 +1,31 @@
 <div id="sidebar-ul">
   <div class="sidebar-header">
-    <a href="{{ url('world') }}" class="card-link">Encyclopedia</a>
+    <a href="{{ url('world') }}" class="card-link"> Encyclopedia </a>
   </div>
   <div class="details-sb" data-open>
     <summary class="sidebar-section-header"> World </summary>
     <div class="sb-item">
-      <a href="{{ url('world/info') }}">World Expanded</a>
+      <a href="{{ url('world/info') }}"> World Expanded </a>
     </div>
   </div>
   <div class="details-sb" data-open>
     <summary class="sidebar-section-header"> Characters </summary>
     <div class="sb-item">
       <a href="{{ url('world/' . __('lorekeeper.specieses')) }}"
-        class="{{ set_active('world/species*') }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a>
+        class="{{ set_active('world/species*') }}"> {{ ucfirst(__('lorekeeper.specieses')) }} </a>
     </div>
     <div class="sb-item">
       <a href="{{ url('world/' . __('lorekeeper.subtypes')) }}"
-        class="{{ set_active('world/subtypes*') }}">{{ ucfirst(__('lorekeeper.subtypes')) }}</a>
+        class="{{ set_active('world/subtypes*') }}"> {{ ucfirst(__('lorekeeper.subtypes')) }} </a>
     </div>
     <div class="sb-item">
-      <a href="{{ url('world/rarities') }}" class="{{ set_active('world/rarities*') }}">Rarities</a>
+      <a href="{{ url('world/rarities') }}" class="{{ set_active('world/rarities*') }}"> Rarities </a>
     </div>
     <div class="sb-item">
-      <a href="{{ url('world/trait-categories') }}" class="{{ set_active('world/trait-categories*') }}">Trait Categories</a>
+      <a href="{{ url('world/trait-categories') }}" class="{{ set_active('world/trait-categories*') }}"> Trait Categories </a>
     </div>
     <div class="sb-item">
-      <a href="{{ url('world/traits') }}" class="{{ set_active('world/traits*') }}">All Traits</a>
+      <a href="{{ url('world/traits') }}" class="{{ set_active('world/traits*') }}"> All Traits </a>
     </div>
     @if (config('lorekeeper.extensions.visual_trait_index.enable_universal_index'))
       <div class="sb-item">
@@ -42,7 +42,7 @@
     <div class="sb-item">
       <a href="{{ url('world/' . __('transformations.transformations')) }}"
         class="{{ set_active('world/' . __('transformations.transformations')) }}"
-      >{{ ucfirst(__('transformations.transformations')) }}</a>
+      > {{ ucfirst(__('transformations.transformations')) }} </a>
     </div>
     <div class="sb-item">
       <a href="{{ url('world/character-titles') }}" class="{{ set_active('world/character-titles*') }}">

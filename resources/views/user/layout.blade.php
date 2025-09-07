@@ -10,7 +10,7 @@
     @if (Auth::check() && Auth::user()->isStaff)
       <ul class="my-0 py-0">
         <li class="sidebar-header my-0 h4">
-          <a href="{{ $user->url }}" class="card-link">ADMIN VIEW</a>
+          <a href="{{ $user->url }}" class="card-link"> ADMIN VIEW</a>
         </li>
       </ul>
 

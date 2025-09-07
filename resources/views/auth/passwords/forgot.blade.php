@@ -12,9 +12,9 @@
     </div>
   @endif
 
-  <h1>Forgot Password</h1>
+  <h1> Forgot Password </h1>
 
-  <p>Please enter the email address associated with your account. An email will be sent to this address to reset your password.</p>
+  <p> Please enter the email address associated with your account. An email will be sent to this address to reset your password. </p>
 
   {!! Form::open(['url' => 'forgot-password']) !!}
   <div class="form-group row">

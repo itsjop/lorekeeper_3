@@ -13,10 +13,10 @@
           : 'admin/data/dailies/create'
   ]) !!}
 
-  <h1>{{ $daily->id ? 'Edit' : 'Create' }} {{ ucfirst(__('dailies.daily')) }}
+  <h1> {{ $daily->id ? 'Edit' : 'Create' }} {{ ucfirst(__('dailies.daily')) }}
     @if ($daily->id)
       ({!! $daily->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-daily-button">Delete {{ ucfirst(__('dailies.daily')) }}</a>
+      <a href="#" class="btn btn-danger float-right delete-daily-button"> Delete {{ ucfirst(__('dailies.daily')) }} </a>
     @endif
   </h1>
 
@@ -25,7 +25,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
   <div class="row">
     <div class="form-group col">
       {!! Form::label('Name') !!}

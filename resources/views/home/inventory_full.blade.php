@@ -11,8 +11,8 @@
     Full Inventory
   </h1>
 
-  <p>This is your FULL inventory. Click on an item name to view more details on the item, click on the word 'stack' to see the
-    actions you can perform on it.</p>
+  <p> This is your FULL inventory. Click on an item name to view more details on the item, click on the word 'stack' to see the
+    actions you can perform on it. </p>
 
   @foreach ($items as $categoryId => $categoryItems)
     <div class="card mb-2">
@@ -24,7 +24,7 @@
           class="small inventory-collapse-toggle collapse-toggle"
           href="#categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}"
           data-bs-toggle="collapse"
-        >Show</a>
+        > Show </a>
       </h5>
       <div class="card-body p-2 collapse show row" id="categoryId_{!! isset($categories[$categoryId]) ? $categories[$categoryId]->id : 'miscellaneous' !!}">
         @foreach ($categoryItems as $itemtype)
@@ -36,7 +36,7 @@
                 alt="{{ $itemtype->first()->name }}"
               />
             @endif
-            <a href="{{ $itemtype->first()->idUrl }}">{{ $itemtype->first()->name }}</a>
+            <a href="{{ $itemtype->first()->idUrl }}"> {{ $itemtype->first()->name }} </a>
             <ul class="mb-0">
               @foreach ($itemtype as $item)
                 <li>

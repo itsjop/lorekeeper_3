@@ -11,12 +11,12 @@
     Bug Reports
   </h1>
 
-  <p>Please check the current 'fix in progress' reports to ensure your bug is not already being worked on! If the title is not descriptive enough, or does not match your bug, feel free to create a new one.</p>
-  <div class="alert alert-warning">Please note that certain bug reports cannot be viewed until they are closed to prevent abuse.</div>
+  <p> Please check the current 'fix in progress' reports to ensure your bug is not already being worked on! If the title is not descriptive enough, or does not match your bug, feel free to create a new one. </p>
+  <div class="alert alert-warning"> Please note that certain bug reports cannot be viewed until they are closed to prevent abuse. </div>
 
   @if (Auth::check())
     <div class="text-right">
-      <a href="{{ url('reports/new') }}" class="btn btn-success">New Report</a>
+      <a href="{{ url('reports/new') }}" class="btn btn-success"> New Report </a>
     </div>
   @endif
   <br>
@@ -35,13 +35,13 @@
       <div class="logs-table-header">
         <div class="row">
           <div class="col-6 col-md-4">
-            <div class="logs-table-cell">Link/Title</div>
+            <div class="logs-table-cell"> Link/Title </div>
           </div>
           <div class="col-6 col-md-5">
-            <div class="logs-table-cell">Submitted</div>
+            <div class="logs-table-cell"> Submitted </div>
           </div>
           <div class="col-12 col-md-1">
-            <div class="logs-table-cell">Status</div>
+            <div class="logs-table-cell"> Status </div>
           </div>
         </div>
       </div>
@@ -54,9 +54,9 @@
       </div>
     </div>
     {!! $reports->render() !!}
-    <div class="text-center mt-4 small text-muted">{{ $reports->total() }} result{{ $reports->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted"> {{ $reports->total() }} result{{ $reports->total() == 1 ? '' : 's' }} found. </div>
   @else
-    <p>No reports found.</p>
+    <p> No reports found. </p>
   @endif
 
 @endsection

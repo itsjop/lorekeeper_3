@@ -10,17 +10,17 @@
       'Create ' . ($isMyo ? 'MYO Slot' : 'Character') => 'admin/masterlist/create-' . ($isMyo ? 'myo' : 'character')
   ]) !!}
 
-  <h1>Create {{ $isMyo ? 'MYO Slot' : 'Character' }}</h1>
+  <h1> Create {{ $isMyo ? 'MYO Slot' : 'Character' }} </h1>
 
   @if (!$isMyo && !count($categories))
 
-    <div class="alert alert-danger">Creating characters requires at least one <a
-        href="{{ url('admin/data/character-categories') }}">character category</a> to be created first, as character categories are
-      used to generate the character code.</div>
+    <div class="alert alert-danger"> Creating characters requires at least one <a
+        href="{{ url('admin/data/character-categories') }}">character category </a> to be created first, as character categories are
+      used to generate the character code. </div>
   @else
     {!! Form::open(['url' => 'admin/masterlist/create-' . ($isMyo ? 'myo' : 'character'), 'files' => true]) !!}
 
-    <h3>Basic Information</h3>
+    <h3> Basic Information </h3>
 
     @if ($isMyo)
       <div class="form-group">
@@ -68,13 +68,13 @@
               class="form-control"
               placeholder="Select Category"
             >
-              <option value="" data-code="">Select Category</option>
+              <option value="" data-code=""> Select Category </option>
               @foreach ($categories as $category)
                 <option
                   value="{{ $category->id }}"
                   data-code="{{ $category->code }}"
                   {{ old('character_category_id') == $category->id ? 'selected' : '' }}
-                >{{ $category->name }} ({{ $category->code }})</option>
+                > {{ $category->name }} ({{ $category->code }})</option>
               @endforeach
             </select>
           </div>
@@ -92,7 +92,7 @@
                 class="btn btn-primary"
                 data-bs-toggle="tooltip"
                 title="This will find the highest number assigned to a character currently and add 1 to it. It can be adjusted to pull the highest number in the category or the highest overall number - this setting is in the code."
-              >Pull Next Number</a>
+              > Pull Next Number </a>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@
       {!! Form::textarea('description', old('description'), ['class' => 'form-control wysiwyg']) !!}
     </div>
 
-    <h3>Image Upload</h3>
+    <h3> Image Upload </h3>
 
     <div class="form-group">
       {!! Form::label('Image') !!}
@@ -158,7 +158,7 @@
       </div>
       <div class="card mb-3" id="thumbnailCrop">
         <div class="card-body">
-          <div id="cropSelect">By using this function, the thumbnail will be automatically generated from the full image.</div>
+          <div id="cropSelect"> By using this function, the thumbnail will be automatically generated from the full image. </div>
           {!! Form::hidden('x0', 1) !!}
           {!! Form::hidden('x1', 1) !!}
           {!! Form::hidden('y0', 1) !!}
@@ -174,7 +174,7 @@
       </div>
       <div class="card mb-3" id="thumbnailCrop">
         <div class="card-body">
-          <div id="cropSelect">Select an image to use the thumbnail cropper.</div>
+          <div id="cropSelect"> Select an image to use the thumbnail cropper. </div>
           <img
             src="#"
             id="cropper"
@@ -195,8 +195,8 @@
           {!! Form::label('thumbnail', 'Choose thumbnail...', ['class' => 'custom-file-label']) !!}
           {!! Form::file('thumbnail', ['class' => 'custom-file-input']) !!}
         </div>
-        <div class="text-muted">Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
-          {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px</div>
+        <div class="text-muted"> Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
+          {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px </div>
       </div>
     </div>
     <p class="alert alert-info">
@@ -272,7 +272,7 @@
       </div>
     @endif
 
-    <h3>Traits</h3>
+    <h3> Traits </h3>
 
     <div class="form-group">
       {!! Form::label(ucfirst(__('lorekeeper.species'))) !!} @if ($isMyo)
@@ -329,7 +329,7 @@
     @endif
 
     <hr>
-    <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
+    <h5> {{ ucfirst(__('transformations.transformations')) }} </h5>
     <div class="form-group" id="transformations">
       {!! Form::label(ucfirst(__('transformations.transformation')) . ' (Optional)') !!}
       {!! add_help('This will make the image have the selected ' . __('transformations.transformation') . ' id.') !!}
@@ -382,7 +382,7 @@
           href="#"
           class="btn btn-primary mb-2"
           id="add-feature"
-        >Add Trait</a>
+        > Add Trait </a>
       </div>
       <div id="featureList">
       </div>
@@ -398,16 +398,16 @@
 
     <hr class="my-4">
 
-    <h3>Transfer Information</h3>
+    <h3> Transfer Information </h3>
 
     <div class="alert alert-info">
       These are displayed on the {{ $isMyo ? 'MYO slot' : 'character' }}'s profile, but don't have any effect on site functionality
       except for the following:
       <ul>
-        <li>If all switches are off, the {{ $isMyo ? 'MYO slot' : 'character' }} cannot be transferred by the user (directly or
-          through trades).</li>
-        <li>If a transfer cooldown is set, the {{ $isMyo ? 'MYO slot' : 'character' }} also cannot be transferred by the user
-          (directly or through trades) until the cooldown is up.</li>
+        <li> If all switches are off, the {{ $isMyo ? 'MYO slot' : 'character' }} cannot be transferred by the user (directly or
+          through trades). </li>
+        <li> If a transfer cooldown is set, the {{ $isMyo ? 'MYO slot' : 'character' }} also cannot be transferred by the user
+          (directly or through trades) until the cooldown is up. </li>
       </ul>
     </div>
     <div class="form-group">
@@ -448,11 +448,11 @@
       ) !!}
     </div>
 
-    <h3>Lineage (Optional)</h3>
+    <h3> Lineage (Optional)</h3>
     <div class="alert alert-info">
       If you want to assign parents to the character, you can do so here. If you don't want to assign parents, leave these fields
       blank.
-      <br />If you want to assign parents, but they aren't in the system, you can enter their names here.
+      <br /> If you want to assign parents, but they aren't in the system, you can enter their names here.
     </div>
     <div class="row">
       <div class="col-md-6">

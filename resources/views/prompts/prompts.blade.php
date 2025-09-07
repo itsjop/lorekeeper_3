@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['Prompts' => 'prompts', 'All Prompts' => 'prompts/prompts']) !!}
-  <h1>All Prompts</h1>
+  <h1> All Prompts </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -56,5 +56,5 @@
     @endforeach
     {!! $prompts->render() !!}
 
-    <div class="text-center mt-4 small text-muted">{{ $prompts->total() }} result{{ $prompts->total() == 1 ? '' : 's' }} found.</div>
+    <div class="text-center mt-4 small text-muted"> {{ $prompts->total() }} result{{ $prompts->total() == 1 ? '' : 's' }} found. </div>
   @endsection

@@ -12,21 +12,21 @@
   </h1>
 
   <div class="text-right">
-    <a href="{{ url('trades/create') }}" class="btn btn-primary">New Trade</a>
+    <a href="{{ url('trades/create') }}" class="btn btn-primary"> New Trade </a>
   </div>
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link {{ set_active('trades/open*') }}" href="{{ url('trades/open') }}">Open</a>
+      <a class="nav-link {{ set_active('trades/open*') }}" href="{{ url('trades/open') }}"> Open </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('trades/pending*') }}" href="{{ url('trades/pending') }}">Pending</a>
+      <a class="nav-link {{ set_active('trades/pending*') }}" href="{{ url('trades/pending') }}"> Pending </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('trades/completed*') }}" href="{{ url('trades/completed') }}">Completed</a>
+      <a class="nav-link {{ set_active('trades/completed*') }}" href="{{ url('trades/completed') }}"> Completed </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('trades/rejected*') }}" href="{{ url('trades/rejected') }}">Rejected</a>
+      <a class="nav-link {{ set_active('trades/rejected*') }}" href="{{ url('trades/rejected') }}"> Rejected </a>
     </li>
   </ul>
 

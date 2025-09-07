@@ -19,12 +19,12 @@
     </h3>
     @if (config('lorekeeper.extensions.visual_trait_index.enable_species_index') && $species->features_count)
       <a href="{{ $species->visualTraitsUrl }}">
-        <strong>Visual Trait Index</strong>
+        <strong> Visual Trait Index </strong>
       </a>
     @endif
     @if (count($species->subtypes))
       <div>
-        <strong>{{ ucfirst(__('lorekeeper.subtypes')) }}: </strong>
+        <strong> {{ ucfirst(__('lorekeeper.subtypes')) }}: </strong>
         @foreach ($species->subtypes as $count => $subtype)
           {!! $subtype->displayName !!}{{ $count < $species->subtypes->count() - 1 ? ', ' : '' }}
         @endforeach

@@ -13,17 +13,17 @@
           : 'admin/world/glossary/create'
   ]) !!}
 
-  <h1>{{ $term->id ? 'Edit' : 'Create' }} Glossary Term
+  <h1> {{ $term->id ? 'Edit' : 'Create' }} Glossary Term
     @if ($term->id)
       ({!! $term->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-term-button">Delete Term</a>
+      <a href="#" class="btn btn-danger float-right delete-term-button"> Delete Term </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $term->id ? 'admin/world/glossary/edit/' . $term->id : 'admin/world/glossary/create']) !!}
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Basic Information</h2>
+    <h2 class="card-header h3"> Basic Information </h2>
     <div class="card-body">
       <div class="form-group">
         {!! Form::label('Name') !!}
@@ -41,14 +41,14 @@
       Linked Attachment
     </div>
     <div class="card-body">
-      <p>The linked item here will be displayed as the link for the glossary item</p>
+      <p> The linked item here will be displayed as the link for the glossary item </p>
       <div class="row no-gutters mb-4" id="attachments">
         <div class="row col-12 logs-table-header align-items-center ">
           <div class="col-6 py-1 h-100 font-weight-bold">
-            <div class="logs-table-cell">Attachment Type</div>
+            <div class="logs-table-cell"> Attachment Type </div>
           </div>
           <div class="col-6 py-1 h-100 font-weight-bold">
-            <div class="logs-table-cell">Attachment</div>
+            <div class="logs-table-cell"> Attachment </div>
           </div>
         </div>
         <div id="attachmentsBody" class="row col-12 px-0">

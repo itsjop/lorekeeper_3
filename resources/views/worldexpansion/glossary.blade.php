@@ -6,9 +6,9 @@
 
 @section('content')
   {!! breadcrumbs(['Lore' => 'info', 'Glossary' => 'info/glossary']) !!}
-  <h1>Glossary</h1>
-  <p>This page contains quick definitions of commonly used terms. If a term has a longer lore page, it will be linked via the name
-    of the term</p>
+  <h1> Glossary </h1>
+  <p> This page contains quick definitions of commonly used terms. If a term has a longer lore page, it will be linked via the name
+    of the term </p>
 
   <div class="mb-4">
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -50,13 +50,13 @@
           </a>
         @endif
       </h2>
-      <div class="parsed-text mt-2 pl-3 py-2" style="border-left: 4px solid lightgrey">{!! $term->parsed_description !!}</div>
+      <div class="parsed-text mt-2 pl-3 py-2" style="border-left: 4px solid lightgrey"> {!! $term->parsed_description !!} </div>
     </div>
     <hr class="my-4 w-75" />
   @endforeach
   {!! $terms->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $terms->total() }} result{{ $terms->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $terms->total() }} result{{ $terms->total() == 1 ? '' : 's' }} found. </div>
 @endsection
 
 @section('scripts')

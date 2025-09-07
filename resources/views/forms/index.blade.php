@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['Site Forms & Polls' => 'forms']) !!}
-  <h1>Site Forms & Polls</h1>
+  <h1> Site Forms & Polls </h1>
   @if (count($forms))
     {!! $forms->render() !!}
     @foreach ($forms as $form)
@@ -14,6 +14,6 @@
     @endforeach
     {!! $forms->render() !!}
   @else
-    <div>No forms or polls were posted yet.</div>
+    <div> No forms or polls were posted yet. </div>
   @endif
 @endsection

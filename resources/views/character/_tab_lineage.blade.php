@@ -7,7 +7,7 @@
         'tab' => true
     ])
   @endif
-  <h5>{{ $character->fullName }}'s Lineage</h5>
+  <h5> {{ $character->fullName }}'s Lineage </h5>
   <div class="row">
     @include('character._tab_lineage_col', [
         'character' => $character?->lineage?->parent_1,
@@ -29,6 +29,6 @@
       class="btn btn-outline-info btn-sm edit-lineage"
       data-{{ $character->is_myo_slot ? 'id' : 'slug' }}="{{ $character->is_myo_slot ? $character->id : $character->slug }}"
     >
-      <i class="fas fa-cog"></i> Edit</a>
+      <i class="fas fa-cog"></i> Edit </a>
   </div>
 @endif

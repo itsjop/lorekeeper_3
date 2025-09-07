@@ -14,7 +14,7 @@
       {!! Form::open(['url' => url()->current(), 'id' => 'submissionForm']) !!}
       @if ($isClaim || !count(getLimits($submission->prompt)))
         <div class="text-right">
-          <a href="#" class="btn btn-danger mr-2" id="cancellationButton">Cancel {{ $submission->prompt_id ? 'submission' : 'claim' }}</a>
+          <a href="#" class="btn btn-danger mr-2" id="cancellationButton"> Cancel {{ $submission->prompt_id ? 'submission' : 'claim' }} </a>
         </div>
       @else
         <div class="alert alert-warning">
@@ -25,7 +25,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content hide" id="cancellationContent">
             <div class="modal-header">
-              <span class="modal-title h5 mb-0">Confirm Cancellation</span>
+              <span class="modal-title h5 mb-0"> Confirm Cancellation </span>
               <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -34,7 +34,7 @@
                 This will cancel this {{ $submission->prompt_id ? 'submission' : 'claim' }} and return it to your drafts.
               </p>
               <div class="text-right">
-                <a href="#" id="cancellationSubmit" class="btn btn-danger">Cancel</a>
+                <a href="#" id="cancellationSubmit" class="btn btn-danger"> Cancel </a>
               </div>
             </div>
           </div>

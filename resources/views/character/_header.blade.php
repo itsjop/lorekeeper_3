@@ -8,14 +8,14 @@
       @if ($extPrevAndNextBtns['prevCharName'])
         <div class="col text-left float-left">
           <a class="btn btn-outline-success text-success" href="{{ $extPrevAndNextBtns['prevCharUrl'] }}{!! $extPrevAndNextBtnsUrl !!}">
-            <i class="fas fa-angle-double-left"></i> Previous Character ・ <span class="text-primary">{!! $extPrevAndNextBtns['prevCharName'] !!}</span>
+            <i class="fas fa-angle-double-left"></i> Previous Character ・ <span class="text-primary"> {!! $extPrevAndNextBtns['prevCharName'] !!} </span>
           </a>
         </div>
       @endif
       @if ($extPrevAndNextBtns['nextCharName'])
         <div class="col text-right float-right">
           <a class="btn btn-outline-success text-success" href="{{ $extPrevAndNextBtns['nextCharUrl'] }}{!! $extPrevAndNextBtnsUrl !!}">
-            <span class="text-primary">{!! $extPrevAndNextBtns['nextCharName'] !!}</span> ・ Next Character <i class="fas fa-angle-double-right"></i>
+            <span class="text-primary"> {!! $extPrevAndNextBtns['nextCharName'] !!} </span> ・ Next Character <i class="fas fa-angle-double-right"></i>
             <br />
           </a>
         </div>
@@ -45,7 +45,7 @@
           title="{{ ucfirst(__('character_likes.liked')) }}
              {{ $character->likeTotal }} times"
         >
-          <i class="fas fa-star"></i> {{ $character->likeTotal }}</a>
+          <i class="fas fa-star"></i> {{ $character->likeTotal }} </a>
         </div>
       @endif
       @if (Auth::check() &&
@@ -113,7 +113,7 @@
         data-character-id="{{ $character->id }}"
         href="{{ $character->profile->link }}"
       >
-        <i class="fas fa-home"></i> Profile</a>
+        <i class="fas fa-home"></i> Profile </a>
     @endif
   </div>
   @if (!$character->is_visible)
@@ -123,7 +123,7 @@
     {!! $character->displayName !!}
   </h1>
   @if (Settings::get('character_title_display'))
-    <div class="h5">{!! $character->image->displayTitles !!}</div>
+    <div class="h5"> {!! $character->image->displayTitles !!} </div>
   @endif
   <div class="mb-3">
     Owned by {!! $character->displayOwner !!}

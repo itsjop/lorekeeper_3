@@ -7,11 +7,11 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Grant Items' => 'admin/grants/items']) !!}
 
-  <h1>Grant Items</h1>
+  <h1> Grant Items </h1>
 
   {!! Form::open(['url' => 'admin/grants/items']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('names[]', 'Username(s)') !!} {!! add_help('You can select up to 10 users at once.') !!}
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div>
-      <a href="#" class="btn btn-primary" id="add-item">Add Item</a>
+      <a href="#" class="btn btn-primary" id="add-item"> Add Item </a>
     </div>
     <div class="item-row hide mb-2">
       {!! Form::select('item_ids[]', $items, null, ['class' => 'form-control mr-2 item-select', 'placeholder' => 'Select Item']) !!}
@@ -42,7 +42,7 @@
     {!! Form::text('data', null, ['class' => 'form-control', 'maxlength' => 400]) !!}
   </div>
 
-  <h3>Additional Data</h3>
+  <h3> Additional Data </h3>
 
   <div class="form-group">
     {!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help('Additional notes for the item. This will appear in the item\'s description, but not in the logs.') !!}

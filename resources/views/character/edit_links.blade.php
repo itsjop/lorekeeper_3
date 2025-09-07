@@ -22,15 +22,15 @@
       You are editing this character as a staff member.
     </div>
   @endif
-  <div class="alert alert-info">This creates a one-to-one relation with all requested characters!</div>
+  <div class="alert alert-info"> This creates a one-to-one relation with all requested characters!</div>
 
   <strong>
-    <p>Characters you own will auto-link and not require approval.</p>
+    <p> Characters you own will auto-link and not require approval. </p>
   </strong>
 
   {!! Form::open(['url' => $character->url . '/links/edit']) !!}
   <div class="text-right mb-3">
-    <a href="#" class="btn btn-outline-info" id="addCharacter">Add Character</a>
+    <a href="#" class="btn btn-outline-info" id="addCharacter"> Add Character </a>
   </div>
   <div id="characters" class="mb-3">
   </div>

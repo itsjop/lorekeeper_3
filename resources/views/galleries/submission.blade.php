@@ -49,7 +49,7 @@
           </a>
           @if ($submission->status != 'Rejected')
             <a class="btn btn-outline-primary" href="/gallery/edit/{{ $submission->id }}">
-              <i class="fas fa-edit"></i> Edit</a>
+              <i class="fas fa-edit"></i> Edit </a>
           @endif
         @endif
         {!! Form::close() !!}
@@ -121,7 +121,7 @@
         <div class="col-md ml-md-2">
           <div class="card">
             <div class="card-header">
-              <h5>{{ $submission->displayTitle }}
+              <h5> {{ $submission->displayTitle }}
                 <a class="float-right" href="{{ url('reports/new?url=') . $submission->url }}">
                   <i
                     class="fas fa-exclamation-triangle"
@@ -168,27 +168,27 @@
               In {!! $submission->gallery->displayName !!} ・ By {!! $submission->credits !!}
               @if (Auth::check() && Auth::user()->settings->content_warning_visibility < 2 && isset($submission->content_warning))
                 ・ <span class="text-danger">
-                  <strong>Content Warning:</strong>
+                  <strong> Content Warning:</strong>
                 </span> {!! nl2br(htmlentities($submission->content_warning)) !!}
               @endif
             </div>
             <div class="card-body">
-              {!! $submission->parsed_description ? $submission->parsed_description : '<i>No description provided.</i>' !!}
+              {!! $submission->parsed_description ? $submission->parsed_description : '<i> No description provided. </i>' !!}
               <hr />
               <p>
-                <strong>Submitted By</strong> {!! $submission->user->displayName !!}
+                <strong> Submitted By </strong> {!! $submission->user->displayName !!}
                 @if ($submission->prompt)
-                  <strong>for</strong> {!! safe($submission->prompt?->displayName) !!}
+                  <strong>for </strong> {!! safe($submission->prompt?->displayName) !!}
                 @endif
                 @if ($submission->location_id && ($submission->location->is_active || (Auth::check() && Auth::user()->isStaff)))
-                  ・ <strong>Location:</strong> {!! $submission->location->fullDisplayNameUC !!}
+                  ・ <strong> Location:</strong> {!! $submission->location->fullDisplayNameUC !!}
                 @endif
                 @if ($submission->favorites->count())
-                  ・ <a class="view-favorites" href="#">View Favorites</a>
+                  ・ <a class="view-favorites" href="#"> View Favorites </a>
                 @endif
                 <br />
-                <strong>Submitted:</strong> {!! pretty_date($submission->created_at) !!} ・
-                <strong>Last Updated:</strong> {!! pretty_date($submission->updated_at) !!}
+                <strong> Submitted:</strong> {!! pretty_date($submission->created_at) !!} ・
+                <strong> Last Updated:</strong> {!! pretty_date($submission->updated_at) !!}
               </p>
             </div>
           </div>
@@ -199,7 +199,7 @@
       @if ($submission->collaborators->count())
         <div class="card mb-4">
           <div class="card-header">
-            <h5>Collaborators</h5>
+            <h5> Collaborators </h5>
           </div>
           <div class="card-body">
             @if (
@@ -207,15 +207,15 @@
                     Auth::check() &&
                     $submission->collaborators->where('user_id', Auth::user()->id)->first() != null
             )
-              <p>Check that your role in the collaboration is correct as listed, and if not, make any changes. You can also remove
+              <p> Check that your role in the collaboration is correct as listed, and if not, make any changes. You can also remove
                 yourself from the collaborator list if necessary. When you are done, or if the record is already accurate,
                 press "submit" to make any changes and mark yourself as having approved. You will be able to edit this until the
-                submission is approved.</p>
+                submission is approved. </p>
               {!! Form::open(['url' => '/gallery/collaborator/' . $submission->id]) !!}
               @foreach ($submission->collaborators as $collaborator)
                 @if ($collaborator->user_id == Auth::user()->id)
                   <div class="mb-2">
-                    <div class="d-flex">{!! $collaborator->has_approved
+                    <div class="d-flex"> {!! $collaborator->has_approved
                         ? '<div class="mb-2 mr-2 text-success" data-bs-toggle="tooltip" title="Has Approved">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <i class="fas fa-check"></i>
                                                             </div>'
@@ -265,7 +265,7 @@
       @if ($submission->participants->count())
         <div class="card mb-4">
           <div class="card-header">
-            <h5>Participants</h5>
+            <h5> Participants </h5>
           </div>
           <div class="card-body">
             @foreach ($submission->participants as $participant)
@@ -279,7 +279,7 @@
       @if ($submission->characters->count())
         <div class="card mb-4">
           <div class="card-header">
-            <h5>Characters</h5>
+            <h5> Characters </h5>
           </div>
           <div class="card-body">
             @foreach ($submission->characters->chunk(1) as $chunk)
@@ -297,21 +297,21 @@
       @if ($submission->promptSubmissions->count())
         <div class="card mb-4">
           <div class="card-header">
-            <h5>Prompt Submissions</h5>
+            <h5> Prompt Submissions </h5>
           </div>
           <div class="card-body">
             @foreach ($submission->promptSubmissions as $promptSubmission)
               <strong>
-                <a href="{{ $promptSubmission->viewUrl }}">#{{ $promptSubmission->id }} for {!! $promptSubmission->prompt->name !!}</a>
+                <a href="{{ $promptSubmission->viewUrl }}">#{{ $promptSubmission->id }} for {!! $promptSubmission->prompt->name !!} </a>
               </strong>
-              by {!! $promptSubmission->user->displayName !!}<br />
+              by {!! $promptSubmission->user->displayName !!} <br />
             @endforeach
           </div>
         </div>
       @endif
       <div class="card mb-4">
         <div class="card-header">
-          <h5>Mention This</h5>
+          <h5> Mention This </h5>
         </div>
         <div class="card-body">
           In the rich text editor:

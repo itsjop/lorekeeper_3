@@ -10,7 +10,7 @@
   <h1>
     Code Redemption
   </h1>
-  <p> Here you can redeem a code for prizes. Check in with the site's social media and updates to see if any codes have been posted.</p>
+  <p> Here you can redeem a code for prizes. Check in with the site's social media and updates to see if any codes have been posted. </p>
 
   <hr>
   <div class="text-center">
@@ -26,7 +26,7 @@
   </div>
 
   <div class="text-right mb-4">
-    <a href="{{ url(Auth::user()->url . '/redeem-logs') }}">View logs...</a>
+    <a href="{{ url(Auth::user()->url . '/redeem-logs') }}"> View logs... </a>
   </div>
 @endsection
 

@@ -108,7 +108,7 @@
               href="#"
               class="btn btn-outline-danger btn-sm delete-character"
               data-id="{{ $character->id }}"
-            >Delete</a>
+            > Delete </a>
           </div>
         </div>
       @endif

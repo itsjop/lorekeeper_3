@@ -11,16 +11,16 @@
       ($sales->id ? 'Edit' : 'Create') . ' Post' => $sales->id ? 'admin/sales/edit/' . $sales->id : 'admin/sales/create'
   ]) !!}
 
-  <h1>{{ $sales->id ? 'Edit' : 'Create' }} Sales Post
+  <h1> {{ $sales->id ? 'Edit' : 'Create' }} Sales Post
     @if ($sales->id)
-      <a href="#" class="btn btn-danger float-right delete-sales-button">Delete Post</a>
-      <a href="{{ $sales->url }}" class="btn btn-info float-right mr-md-2">View Post</a>
+      <a href="#" class="btn btn-danger float-right delete-sales-button"> Delete Post </a>
+      <a href="{{ $sales->url }}" class="btn btn-info float-right mr-md-2"> View Post </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $sales->id ? 'admin/sales/edit/' . $sales->id : 'admin/sales/create', 'files' => true]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6 form-group">
@@ -72,7 +72,7 @@
     </div>
   </div>
 
-  <h3>Characters</h3>
+  <h3> Characters </h3>
   <p>
     Add characters to be featured in this sales post.
   </p>
@@ -81,7 +81,7 @@
     @if ($sales->id)
       @if (count($sales->characters()->whereRelation('character', 'deleted_at', null)->get()) != count($sales->characters))
         <div class="alert alert-warning">
-          <strong>Warning!</strong> Some characters have been deleted since they were added to this post. Editing this post will
+          <strong> Warning!</strong> Some characters have been deleted since they were added to this post. Editing this post will
           remove those characters permanently from the post.
         </div>
       @endif
@@ -95,7 +95,7 @@
       href="#"
       class="btn btn-outline-info"
       id="addCharacter"
-    >Add Character</a>
+    > Add Character </a>
   </div>
 
   <div class="text-right">

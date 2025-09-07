@@ -9,7 +9,7 @@
         class="btn btn-sm p-2 btn-outline small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-comment"></i>
-        <span class="d-none d-lg-block">Reply</span>
+        <span class="d-none d-lg-block"> Reply </span>
       </button>
     @endcan
     @can('edit-comment', $comment)
@@ -19,7 +19,7 @@
         class="btn btn-sm p-2 btn-outline small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-edit"></i>
-        <span class="d-none d-lg-block">Edit</span>
+        <span class="d-none d-lg-block"> Edit </span>
       </button>
     @endcan
     @if (
@@ -33,7 +33,7 @@
         class="btn btn-sm p-2 btn-outline small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-star"></i>
-        <span class="d-none d-lg-block">{{ $comment->is_featured ? 'Unf' : 'F' }}eature</span>
+        <span class="d-none d-lg-block"> {{ $comment->is_featured ? 'Unf' : 'F' }}eature </span>
       </button>
     @endif
     @can('delete-comment', $comment)
@@ -43,7 +43,7 @@
         class="btn btn-sm p-2 btn-outline-danger small flex gap-_5 jc-center ai-center"
       >
         <i class="fas fa-minus-circle"></i>
-        <span class="d-none d-lg-block">Delete</span>
+        <span class="d-none d-lg-block"> Delete </span>
       </button>
     @endcan
 
@@ -60,9 +60,9 @@
           title="Click to View"
           class="btn btn-sm p-0 m-0 color-white btn-faded small"
         >
-          <span>{{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() }}</span>
+          <span> {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() }} </span>
           <span
-            class="d-none d-lg-inline pl-1">{{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() != 1 ? 'Likes' : 'Like' }}</span>
+            class="d-none d-lg-inline pl-1"> {{ $comment->likes()->where('is_like', 1)->count() - $comment->likes()->where('is_like', 0)->count() != 1 ? 'Likes' : 'Like' }} </span>
         </button>
       </a>
       {!! Form::open(['url' => 'comments/' . $comment->id . '/like/1', 'class' => 'd-inline-block']) !!}
@@ -105,7 +105,7 @@
       <div class="modal-content">
         {{ Form::model($comment, ['route' => ['comments.update', $comment->getKey()]]) }}
         <div class="modal-header">
-          <h5 class="modal-title">Edit Comment</h5>
+          <h5 class="modal-title"> Edit Comment </h5>
           <button
             type="button"
             class="close"
@@ -123,8 +123,8 @@
                 config('lorekeeper.settings.wysiwyg_comments') ? '' : 'required'
             ]) !!}
             <small class="form-text text-muted">
-              <a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax">Markdown</a>
-              cheatsheet.</small>
+              <a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax"> Markdown </a>
+              cheatsheet. </small>
           </div>
         </div>
         <div class="modal-footer">
@@ -132,7 +132,7 @@
             type="button"
             class="btn btn-sm p-0 m-0 btn-outline-secondary small ai-center"
             data-bs-dismiss="modal"
-          >Cancel</button>
+          > Cancel </button>
           {!! Form::submit('Update', ['class' => 'btn btn-sm p-0 m-0 btn-outline-success small ai-center']) !!}
         </div>
         </form>
@@ -152,7 +152,7 @@
       <div class="modal-content">
         {{ Form::open(['route' => ['comments.reply', $comment->getKey()]]) }}
         <div class="modal-header">
-          <h5 class="modal-title">Reply to Comment</h5>
+          <h5 class="modal-title"> Reply to Comment </h5>
           <button
             type="button"
             class="close"
@@ -170,8 +170,8 @@
                 config('lorekeeper.settings.wysiwyg_comments') ? '' : 'required'
             ]) !!}
             <small class="form-text text-muted">
-              <a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax">Markdown</a>
-              cheatsheet.</small>
+              <a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax"> Markdown </a>
+              cheatsheet. </small>
           </div>
         </div>
         <div class="modal-footer">
@@ -200,7 +200,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Delete Comment</h5>
+          <h5 class="modal-title"> Delete Comment </h5>
           <button
             type="button"
             class="close"
@@ -210,9 +210,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group">Are you sure you want to delete this comment?</div>
+          <div class="form-group"> Are you sure you want to delete this comment?</div>
           <div class="alert alert-warning">
-            <strong>Comments can be restored in the database.</strong>
+            <strong> Comments can be restored in the database. </strong>
             <br> Deleting a comment does not delete the comment record.
           </div>
           <div class="text-right">
@@ -220,7 +220,7 @@
               href="{{ route('comments.destroy', $comment->getKey()) }}"
               onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->getKey() }}').submit();"
               class="btn btn-danger small ai-center"
-            >Delete</a>
+            > Delete </a>
             <form
               id="comment-delete-form-{{ $comment->getKey() }}"
               action="{{ route('comments.destroy', $comment->getKey()) }}"
@@ -246,7 +246,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{ $comment->is_featured ? 'Unf' : 'F' }}eature Comment</h5>
+        <h5 class="modal-title"> {{ $comment->is_featured ? 'Unf' : 'F' }}eature Comment </h5>
         <button
           type="button"
           class="close"
@@ -256,9 +256,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-group">Are you sure you want to {{ $comment->is_featured ? 'un' : '' }}feature this comment?</div>
+        <div class="form-group"> Are you sure you want to {{ $comment->is_featured ? 'un' : '' }}feature this comment?</div>
       </div>
-      <div class="alert alert-warning">Comments can be unfeatured.</div>
+      <div class="alert alert-warning"> Comments can be unfeatured. </div>
       {!! Form::open(['url' => 'comments/' . $comment->id . '/feature']) !!}
       @if (!$comment->is_featured)
         {!! Form::submit('Feature', ['class' => 'btn btn-primary w-100 mb-0 mx-0']) !!}
@@ -279,7 +279,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Likes</h5>
+        <h5 class="modal-title"> Likes </h5>
         <button
           type="button"
           class="close"
@@ -294,7 +294,7 @@
             <div class="logs-table-header">
               <div class="row">
                 <div class="col-4 col-md-3">
-                  <div class="logs-table-cell">User</div>
+                  <div class="logs-table-cell"> User </div>
                 </div>
                 <div class="col-12 col-md-4">
                   <div class="logs-table-cell">
@@ -316,10 +316,10 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-4">
-                      <div class="logs-table-cell">{!! $like->user->displayName !!}</div>
+                      <div class="logs-table-cell"> {!! $like->user->displayName !!} </div>
                     </div>
                     <div class="col-4 col-md-4 text-right">
-                      <div class="logs-table-cell">{!! $like->is_like ? '<i class="fas fa-thumbs-up"></i>' : '<i class="fas fa-thumbs-down"></i>' !!}</div>
+                      <div class="logs-table-cell"> {!! $like->is_like ? '<i class="fas fa-thumbs-up"></i>' : '<i class="fas fa-thumbs-down"></i>' !!} </div>
                     </div>
                   </div>
                 </div>
@@ -327,7 +327,7 @@
             </div>
           </div>
         @else
-          <div class="alert alert-info">No likes yet.</div>
+          <div class="alert alert-info"> No likes yet. </div>
         @endif
       </div>
     </div>
@@ -346,7 +346,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit History</h5>
+          <h5 class="modal-title"> Edit History </h5>
           <button
             type="button"
             class="close"
@@ -361,13 +361,13 @@
               <div class="logs-table-header">
                 <div class="row">
                   <div class="col-4 col-md-3">
-                    <div class="logs-table-cell">Time</div>
+                    <div class="logs-table-cell"> Time </div>
                   </div>
                   <div class="col-12 col-md-4">
-                    <div class="logs-table-cell">Old Comment</div>
+                    <div class="logs-table-cell"> Old Comment </div>
                   </div>
                   <div class="col-4 col-md-3">
-                    <div class="logs-table-cell">New Comment</div>
+                    <div class="logs-table-cell"> New Comment </div>
                   </div>
                 </div>
               </div>
@@ -400,7 +400,7 @@
               </div>
             </div>
           @else
-            <div class="alert alert-info">No edits yet.</div>
+            <div class="alert alert-info"> No edits yet. </div>
           @endif
         </div>
       </div>

@@ -5,7 +5,7 @@
     </a>
   </div>
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">{{ ucfirst(__('lorekeeper.character')) }}</summary>
+    <summary class="sidebar-section-header"> {{ ucfirst(__('lorekeeper.character')) }} </summary>
     <div class="sb-item">
       <a href="{{ $character->url }}" class="{{ set_active('character/' . $character->slug) }}">
         Information
@@ -56,13 +56,13 @@
       <div class="sb-item">
         <a href="{{ $character->url . '/' . __('awards.awardcase') }}"
           class="{{ set_active('character/' . $character->slug . '/' . __('awards.awardcase')) }}"
-        >{{ ucfirst(__('awards.awards')) }}
+        > {{ ucfirst(__('awards.awards')) }}
         </a>
       </div> --}}
   </div>
   @if (Auth::check() && (Auth::user()->id == $character->user_id || Auth::user()->hasPower('manage_characters')))
     <div class="details-sb" data-open>
-      <summary class="sidebar-section-header">Settings</summary>
+      <summary class="sidebar-section-header"> Settings </summary>
       <div class="sb-item">
         <a href="{{ $character->url . '/profile/edit' }}"
           class="{{ set_active('character/' . $character->slug . '/profile/edit') }}"
@@ -93,27 +93,27 @@
     </div>
   @endif
   <div class="details-sb">
-    <summary class="sidebar-section-header">History</summary>
+    <summary class="sidebar-section-header"> History </summary>
     <div class="sb-item">
       <a href="{{ $character->url . '/change-log' }}"
-        class="{{ set_active('character/' . $character->slug . '/change-log') }}">Change Log
+        class="{{ set_active('character/' . $character->slug . '/change-log') }}"> Change Log
       </a>
     </div>
     <div class="sb-item">
       <a href="{{ $character->url . '/ownership' }}"
-        class="{{ set_active('character/' . $character->slug . '/ownership') }}">Ownership History
+        class="{{ set_active('character/' . $character->slug . '/ownership') }}"> Ownership History
       </a>
     </div>
     <div class="sb-item">
       <a href="{{ $character->url . '/item-logs' }}"
-        class="{{ set_active('character/' . $character->slug . '/item-logs') }}">Item
+        class="{{ set_active('character/' . $character->slug . '/item-logs') }}"> Item
         Logs
       </a>
     </div>
     {{-- <div class="sb-item">
         <a href="{{ $character->url . '/currency-logs' }}"
           class="{{ set_active('character/' . $character->slug . '/currency-logs') }}"
-        >Currency Logs
+        > Currency Logs
         </a>
       </div> --}}
     <div class="sb-item">

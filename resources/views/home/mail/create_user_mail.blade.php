@@ -7,7 +7,7 @@
 @section('home-content')
   {!! breadcrumbs(['Inbox' => 'mail', 'Create Message' => 'mail/new']) !!}
 
-  <h1>Create Direct Message</h1>
+  <h1> Create Direct Message </h1>
 
   {!! Form::open(['url' => 'mail/new']) !!}
 

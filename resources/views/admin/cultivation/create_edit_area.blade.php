@@ -13,10 +13,10 @@
           : 'admin/cultivation/areas/edit'
   ]) !!}
 
-  <h1>{{ $area->id ? 'Edit' : 'Create' }} Area
+  <h1> {{ $area->id ? 'Edit' : 'Create' }} Area
     @if ($area->id)
       ({!! $area->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-type-button">Delete Area</a>
+      <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Area </a>
     @endif
   </h1>
 
@@ -26,7 +26,7 @@
   ]) !!}
 
   <div class="card mb-3">
-    <div class="card-header h3">Basic Information</div>
+    <div class="card-header h3"> Basic Information </div>
     <div class="card-body">
 
       <div class="row mx-0 px-0">
@@ -43,7 +43,7 @@
   </div>
 
   <div class="card mb-3">
-    <div class="card-header h3">Images</div>
+    <div class="card-header h3"> Images </div>
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($area->background_extension)
@@ -60,8 +60,8 @@
           </a>
         @endif
         {!! Form::label('Background Image (Optional)') !!} {!! add_help('This image will serve as the background to the area which plots will be rendered on to.') !!}
-        <div>{!! Form::file('background_image') !!}</div>
-        <div class="text-muted">Recommended size: any, but might need some fiddling to look good.</div>
+        <div> {!! Form::file('background_image') !!} </div>
+        <div class="text-muted"> Recommended size: any, but might need some fiddling to look good. </div>
         @if (isset($area->background_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_background', 1, false, [
@@ -89,8 +89,8 @@
           </a>
         @endif
         {!! Form::label('Default Plot Image (Optional)') !!} {!! add_help('This image is for plots that are not yet ready for planting.') !!}
-        <div>{!! Form::file('plot_image') !!}</div>
-        <div class="text-muted">Recommended size: 250px wide, as that is what images will be sized to.</div>
+        <div> {!! Form::file('plot_image') !!} </div>
+        <div class="text-muted"> Recommended size: 250px wide, as that is what images will be sized to. </div>
         @if (isset($area->plot_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_plot', 1, false, [
@@ -127,7 +127,7 @@
           href="#"
           class="btn btn-outline-info"
           id="addPlot"
-        >Add Plot</a>
+        > Add Plot </a>
       </div>
 
       <table class="table table-sm" id="plotTable">
@@ -140,7 +140,7 @@
                   {!! Form::select('plot_id[]', $plots, $plot->id, ['class' => 'form-control item-select', 'placeholder' => 'Select Plot']) !!}
                 </td>
                 <td class="text-right">
-                  <a href="#" class="btn btn-danger remove-plot-button">Remove</a>
+                  <a href="#" class="btn btn-danger remove-plot-button"> Remove </a>
                 </td>
               </tr>
             @endforeach
@@ -173,7 +173,7 @@
             {!! Form::select('plot_id[]', $plots, null, ['class' => 'form-control item-select', 'placeholder' => 'Select Plot']) !!}
           </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-plot-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-plot-button"> Remove </a>
           </td>
         </tr>
       </tbody>

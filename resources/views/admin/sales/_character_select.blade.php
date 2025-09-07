@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-md-2 align-items-stretch d-flex">
           <div class="d-flex text-center align-items-center">
-            <div class="character-image-blank">Enter character code.</div>
+            <div class="character-image-blank"> Enter character code. </div>
             <div class="character-image-loaded hide">
             </div>
           </div>
@@ -33,7 +33,7 @@
             ]) !!}
           </div>
           <div class="character-details hide">
-            <h4>Sale Details</h4>
+            <h4> Sale Details </h4>
 
             <div class="form-group mb-2">
               {!! Form::label('Type') !!}

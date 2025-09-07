@@ -6,7 +6,7 @@
 
 @section('content')
   <div class="text-center">
-    <h1>Two-Factor Authentication</h1>
+    <h1> Two-Factor Authentication </h1>
   </div>
 
   {!! Form::open(['url' => 'two-factor-challenge']) !!}

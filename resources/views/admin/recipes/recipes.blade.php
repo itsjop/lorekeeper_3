@@ -7,13 +7,13 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Recipes' => 'admin/data/recipes']) !!}
 
-  <h1>Recipes</h1>
+  <h1> Recipes </h1>
 
-  <p>This is a list of recipes in the game that can be used to craft items.</p>
+  <p> This is a list of recipes in the game that can be used to craft items. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/recipes/create') }}">
-      <i class="fas fa-plus"></i> Create New Recipe</a>
+      <i class="fas fa-plus"></i> Create New Recipe </a>
   </div>
 
   <div>
@@ -28,13 +28,13 @@
   </div>
 
   @if (!count($recipes))
-    <p>No recipes found.</p>
+    <p> No recipes found. </p>
   @else
     {!! $recipes->render() !!}
     <table class="table table-sm category-table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th> Name </th>
           <th>
           </th>
         </tr>
@@ -46,7 +46,7 @@
               {{ $recipe->name }}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/recipes/edit/' . $recipe->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/recipes/edit/' . $recipe->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

@@ -47,12 +47,12 @@
     @if (!$page)
       <div class="text-right mb-2 mr-2">
         <a class="btn" href="{{ $sales->url }}#commentsSection">
-          <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</a>
+          <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }} </a>
       </div>
     @else
       <div class="text-right mb-2 mr-2">
         <a class="btn" href="#commentsSection">
-          <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }}</a>
+          <i class="fas fa-comment"></i> {{ $commentCount }} Comment{{ $commentCount != 1 ? 's' : '' }} </a>
       </div>
     @endif
   @endif

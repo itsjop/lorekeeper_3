@@ -13,9 +13,9 @@
           : 'admin/data/advent-calendars/create'
   ]) !!}
 
-  <h1>{{ $advent->id ? 'Edit' : 'Create' }} Advent Calendar
+  <h1> {{ $advent->id ? 'Edit' : 'Create' }} Advent Calendar
     @if ($advent->id)
-      <a href="#" class="btn btn-danger float-right delete-advent-button">Delete Advent Calendar</a>
+      <a href="#" class="btn btn-danger float-right delete-advent-button"> Delete Advent Calendar </a>
     @endif
   </h1>
 
@@ -23,7 +23,7 @@
       'url' => $advent->id ? 'admin/data/advent-calendars/edit/' . $advent->id : 'admin/data/advent-calendars/create'
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!} {!! add_help(
@@ -60,24 +60,24 @@
   </div>
 
   @if ($advent->id)
-    <p>With these start and end times, the advent calendar will run for {{ $advent->days }} days, with the first day on
+    <p> With these start and end times, the advent calendar will run for {{ $advent->days }} days, with the first day on
       {{ $advent->start_at->toFormattedDateString() }} and last day on {{ $advent->end_at->endOf('day')->toFormattedDateString() }}.
       While
       you do not need to set the start time to the beginning of the first day nor the end time to the end of the last day, you
       should give users enough time to claim these days' prizes, since they may not be available for the full 24 hours that the
-      other days' prizes are.</p>
+      other days' prizes are. </p>
   @endif
 
   @if ($advent->id)
-    <h3>Prizes <a
+    <h3> Prizes <a
         class="small inventory-collapse-toggle collapse-toggle"
         href="#prizes"
         data-bs-toggle="collapse"
-      >Show</a>
+      > Show </a>
     </h3>
     <div class="mb-3 collapse form-group" id="prizes">
-      <p>These are the prizes for each day. You can specify a item and quantity, which users will be able to claim on the respective
-        day. If you do not specify an item, no prize will be available for that day.</p>
+      <p> These are the prizes for each day. You can specify a item and quantity, which users will be able to claim on the respective
+        day. If you do not specify an item, no prize will be available for that day. </p>
 
       @for ($day = 1; $day <= $advent->days; $day++)
         <div class="form-group">
@@ -98,9 +98,9 @@
       @endfor
     </div>
 
-    <h5>Bonus Prize</h5>
-    <p>This prize, if an item is set, will be given to users who collect every prize from this advent. This is checked on the final
-      day.</p>
+    <h5> Bonus Prize </h5>
+    <p> This prize, if an item is set, will be given to users who collect every prize from this advent. This is checked on the final
+      day. </p>
     <div class="d-flex mb-2">
       {!! Form::select('item_ids[bonus]', $items, isset($advent->data['bonus']) ? $advent->data['bonus']['item'] : null, [
           'class' => 'form-control mr-2 default item-select',
@@ -120,9 +120,9 @@
   {!! Form::close() !!}
 
   @if ($advent->id)
-    <h3>Display Link</h3>
-    <p>For convenience, here is the advent calendar's url as well as the full HTML to display a link to the advent calendar's
-      user-facing page. Users claim the day's prize from this page.</p>
+    <h3> Display Link </h3>
+    <p> For convenience, here is the advent calendar's url as well as the full HTML to display a link to the advent calendar's
+      user-facing page. Users claim the day's prize from this page. </p>
     <div class="alert alert-secondary">
       {{ $advent->url }}
     </div>
@@ -132,7 +132,7 @@
   @endif
 
   @if ($advent->id)
-    <h3>Log</h3>
+    <h3> Log </h3>
     <p>
       This is the log of claimed prizes. Each claimed prize has its own row, since there can be any number of prizes per calendar.
     </p>
@@ -165,9 +165,9 @@
 
       <div class="row ml-md-2 mb-3">
         <div class="d-flex row flex-wrap col-12 pb-1 px-0 ubt-bottom">
-          <div class="col-md-2 font-weight-bold">User</div>
-          <div class="col-md font-weight-bold text-center">Day</div>
-          <div class="col-md font-weight-bold text-center">Claimed</div>
+          <div class="col-md-2 font-weight-bold"> User </div>
+          <div class="col-md font-weight-bold text-center"> Day </div>
+          <div class="col-md font-weight-bold text-center"> Claimed </div>
         </div>
         @foreach ($participants as $participant)
           <div class="d-flex row flex-wrap col-12 mt-1 pt-2 px-0 ubt-top">
@@ -186,7 +186,7 @@
 
       {!! $participants->render() !!}
     @else
-      <p>No participants found!</p>
+      <p> No participants found!</p>
     @endif
 
   @endif

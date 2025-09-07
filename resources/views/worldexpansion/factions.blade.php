@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Factions' => 'world/factions']) !!}
-  <h1>Factions</h1>
+  <h1> Factions </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -57,8 +57,8 @@
                 </a>
               @endisset
             </div>
-            <h3 class="mb-0 text-center">{!! $faction->fullDisplayName !!}</h3>
-            <p class="mb-0 text-center">{!! $faction->category ? $faction->category->displayName : '' !!}</p>
+            <h3 class="mb-0 text-center"> {!! $faction->fullDisplayName !!} </h3>
+            <p class="mb-0 text-center"> {!! $faction->category ? $faction->category->displayName : '' !!} </p>
 
             <p class="text-center mb-0">
               <strong>
@@ -82,7 +82,7 @@
 
             @if (count($faction->children))
               <div class="pt-3">
-                <strong class="mt-3 mb-0">Contains the following:</strong>
+                <strong class="mt-3 mb-0"> Contains the following:</strong>
                 @foreach ($faction->children->groupBy('type_id') as $group => $children)
                   <p class="mb-0">
                     <strong>
@@ -104,15 +104,15 @@
 
           @isset($faction->summary)
             <div class="card-body pt-3">
-              <p class="mb-0"> {!! $faction->summary !!}</p>
+              <p class="mb-0"> {!! $faction->summary !!} </p>
             </div>
           @endisset
 
           @if (count(allAttachments($faction)))
             <div class="card-footer mt-auto">
               @foreach (allAttachments($faction) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }}
-                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+                <p class="text-center mb-0"> Associated with {{ count($attachments) }}
+                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}. </p>
               @endforeach
             </div>
           @endif
@@ -123,6 +123,6 @@
   </div>
   {!! $factions->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $factions->total() }} result{{ $factions->total() == 1 ? '' : 's' }} found.
+  <div class="text-center mt-4 small text-muted"> {{ $factions->total() }} result{{ $factions->total() == 1 ? '' : 's' }} found.
   </div>
 @endsection

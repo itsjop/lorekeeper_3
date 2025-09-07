@@ -9,7 +9,7 @@
 
   <div class="row">
     <div class="col-lg-7 col-12 text-lg-left text-center">
-      <h1>{{ $category->name }} - Characters</h1>
+      <h1> {{ $category->name }} - Characters </h1>
     </div>
     <div class="col-lg-5 col-12 text-lg-right text-center">
       <a href="/professions/{{ $category->id }}">
@@ -23,7 +23,7 @@
   @foreach ($category->professionsBySubcategory as $subcategoryId => $professions)
     @php $subcategory = \App\Models\Profession\ProfessionSubcategory::where('id', $subcategoryId)->first(); @endphp
     @isset($subcategory)
-      <h3> {{ $subcategory->name }}</h3>
+      <h3> {{ $subcategory->name }} </h3>
     @endisset
     @if ($professions->count() > 0)
       <div class="row">

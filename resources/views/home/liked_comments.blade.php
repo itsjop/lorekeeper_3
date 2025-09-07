@@ -11,7 +11,7 @@
     My Liked Comments
   </h1>
 
-  <p>This is a list of comments you've liked or disliked. This list is not public, but users can see on the comment who has liked it.</p>
+  <p> This is a list of comments you've liked or disliked. This list is not public, but users can see on the comment who has liked it. </p>
   <div class="p-2">
     {{-- Order user CommentLikes by when the comment was created inside the foreach --}}
     @php

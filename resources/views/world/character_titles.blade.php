@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Character Titles' => 'world/character-titles']) !!}
-  <h1>Character Titles</h1>
+  <h1> Character Titles </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -32,5 +32,5 @@
   @endforeach
   {!! $titles->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $titles->total() }} result{{ $titles->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $titles->total() }} result{{ $titles->total() == 1 ? '' : 's' }} found. </div>
 @endsection

@@ -1,7 +1,7 @@
 <div id="masterlist">
   {!! Form::open(['method' => 'GET']) !!}
   <fieldset class="masterlist-search-grid ji-start ai-end my-2">
-    <legend>Character Search</legend>
+    <legend> Character Search </legend>
     <div class="character-name form-group grid ji-start m-0 w-100">
       {!! Form::label('name', ucfirst(__('lorekeeper.character')) . ' Name/Code: ', ['class' => 'mr-2']) !!}
       {!! Form::text('name', Request::get('name'), ['class' => 'w-100 form-control']) !!}
@@ -129,37 +129,37 @@ alt="List View"
   <table class="table table-sm">
     <thead>
       <tr>
-        <th>Owner</th>
-        <th>Name</th>
-        <th>Rarity</th>
-        <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
+        <th> Owner </th>
+        <th> Name </th>
+        <th> Rarity </th>
+        <th> {{ ucfirst(__('lorekeeper.species')) }} </th>
         @if (Settings::get('character_title_display'))
-          <th>Title</th>
+          <th> Title </th>
         @endif
-        <th>Created</th>
+        <th> Created </th>
       </tr>
     </thead>
     <tbody>
       @foreach ($characters as $character)
         <tr>
-          <td>{!! $character->displayOwner !!}</td>
+          <td> {!! $character->displayOwner !!} </td>
           <td>
             @if (!$character->is_visible)
               <i class="fas fa-eye-slash"></i>
             @endif {!! $character->displayName !!}
           </td>
-          <td>{!! $character->image->rarity_id ? $character->image->rarity->displayName : 'None' !!}</td>
-          <td>{!! $character->image->species_id ? $character->image->species->displayName : 'None' !!}</td>
+          <td> {!! $character->image->rarity_id ? $character->image->rarity->displayName : 'None' !!} </td>
+          <td> {!! $character->image->species_id ? $character->image->species->displayName : 'None' !!} </td>
           @if (Settings::get('character_title_display'))
-            <td>{!! $character->image->hasTitle
+            <td> {!! $character->image->hasTitle
                 ? ($character->image->title_id
                     ? $character->image->title->displayNameShort
                     : (isset($character->image->title_data['short'])
                         ? nl2br(htmlentities($character->image->title_data['short']))
                         : nl2br(htmlentities($character->image->title_data['full']))))
-                : 'None' !!}</td>
+                : 'None' !!} </td>
           @endif
-          <td>{!! format_date($character->created_at) !!}</td>
+          <td> {!! format_date($character->created_at) !!} </td>
         </tr>
       @endforeach
     </tbody>

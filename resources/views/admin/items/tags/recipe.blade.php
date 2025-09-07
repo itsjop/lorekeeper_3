@@ -1,4 +1,4 @@
-<h3>Recipes</h3>
+<h3> Recipes </h3>
 
 <a
   data-bs-toggle="collapse"
@@ -24,13 +24,13 @@
         href="#"
         class="btn btn-outline-info"
         id="addLoot"
-      >Add Reward</a>
+      > Add Reward </a>
     </div>
     <table class="table table-sm" id="lootTable">
       <thead>
         <tr>
-          <th width="35%">Reward</th>
-          <th width="20%">Quantity</th>
+          <th width="35%"> Reward </th>
+          <th width="20%"> Quantity </th>
           <th width="10%">
           </th>
         </tr>
@@ -45,9 +45,9 @@
                     'placeholder' => 'Select Recipe'
                 ]) !!}
               </td>
-              <td>{!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!}</td>
+              <td> {!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!} </td>
               <td class="text-right">
-                <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
+                <a href="#" class="btn btn-danger remove-loot-button"> Remove </a>
               </td>
             </tr>
           @endforeach

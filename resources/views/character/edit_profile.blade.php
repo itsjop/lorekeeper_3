@@ -65,11 +65,11 @@
 
   @if (!$character->is_myo_slot && ($char_enabled == 2 || (Auth::user()->isStaff && $char_enabled == 3)))
     @if (Auth::user()->isStaff && $char_enabled == 3)
-      <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their character
-        locations freely.</div>
+      <div class="alert alert-warning"> You can edit this because you are a staff member. Normal users cannot edit their character
+        locations freely. </div>
     @endif
     <div class="form-group row">
-      <label class="col-md-1 col-form-label">Location</label>
+      <label class="col-md-1 col-form-label"> Location </label>
       <div class="col-md">
         {!! Form::select(
             'location',
@@ -83,13 +83,13 @@
 
   @if (!$character->is_myo_slot && ($char_faction_enabled == 2 || (Auth::user()->isStaff && $char_faction_enabled == 3)))
     @if (Auth::user()->isStaff && $char_faction_enabled == 3)
-      <div class="alert alert-warning">You can edit this because you are a staff member. Normal users cannot edit their character
-        factions freely.</div>
+      <div class="alert alert-warning"> You can edit this because you are a staff member. Normal users cannot edit their character
+        factions freely. </div>
     @endif
-    <p>Please note that changing this character's faction will remove them from any special ranks and reset their faction standing!
+    <p> Please note that changing this character's faction will remove them from any special ranks and reset their faction standing!
     </p>
     <div class="form-group row">
-      <label class="col-md-1 col-form-label">Faction</label>
+      <label class="col-md-1 col-form-label"> Faction </label>
       <div class="col-md">
         {!! Form::select(
             'faction',
@@ -137,7 +137,7 @@
         ) !!}
       </div>
     @else
-      <div class="alert alert-secondary">Cannot be set to "Up for Trade" as character cannot be traded or sold.</div>
+      <div class="alert alert-secondary"> Cannot be set to "Up for Trade" as character cannot be traded or sold. </div>
     @endif
   @endif
   @if ($character->user_id != Auth::user()->id)
@@ -159,11 +159,11 @@
 
   <hr />
 
-  <h5>Sort Character Titles</h5>
-  <p>Here you can order your character's titles however you like! By default, the titles will be ordered by the same sorting as
-    appears on the world page.</p>
+  <h5> Sort Character Titles </h5>
+  <p> Here you can order your character's titles however you like! By default, the titles will be ordered by the same sorting as
+    appears on the world page. </p>
   @if (!count($character->image->titles))
-    <p>No titles found.</p>
+    <p> No titles found. </p>
   @else
     <table class="table table-sm title-table">
       <tbody id="sortable" class="sortable">

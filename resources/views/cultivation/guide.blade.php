@@ -9,7 +9,7 @@
 
   <div class="row">
     <div class="col">
-      <h1>{{ ucfirst(__('cultivation.cultivation')) }} Guide</h1>
+      <h1> {{ ucfirst(__('cultivation.cultivation')) }} Guide </h1>
     </div>
   </div>
 
@@ -24,7 +24,7 @@
                 <img class="" src="{{ $area->backgroundImageUrl }}" alt="{{ $area->name }}" style="max-height:100px;">
               </div>
               <div class="col-lg-9 col d-flex align-items-center">
-                <h4 class="p-0 m-0">{{ $area->name }}</h4>
+                <h4 class="p-0 m-0"> {{ $area->name }} </h4>
               </div>
             </div>
             <div class="card-body row">
@@ -32,7 +32,7 @@
                 <div class="col-lg-6 col-12 mb-3 text-center">
                   <div class="card h-100">
                     <div class="row m-0 card-header">
-                      <h4 class="p-0 m-0">{{ $plot->name }}</h4>
+                      <h4 class="p-0 m-0"> {{ $plot->name }} </h4>
                     </div>
                     <div class="card-body text-justify">
                       <div class="row m-0">

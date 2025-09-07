@@ -7,8 +7,8 @@
     />
   </div>
   <div>
-    <a href="{{ $character->url }}">{{ isset($character->name) ? $character->fullName : $character->slug }}</a>
+    <a href="{{ $character->url }}"> {{ isset($character->name) ? $character->fullName : $character->slug }} </a>
   </div>
 @else
-  <div class="text-danger character-info" data-id="0">Character not found.</div>
+  <div class="text-danger character-info" data-id="0"> Character not found. </div>
 @endif

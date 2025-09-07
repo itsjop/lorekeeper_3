@@ -13,13 +13,13 @@
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/gallery/submissions/pending*') }} {{ set_active('admin/gallery/submissions') }}" href="{{ url('admin/gallery/submissions/pending') }}">Pending</a>
+      <a class="nav-link {{ set_active('admin/gallery/submissions/pending*') }} {{ set_active('admin/gallery/submissions') }}" href="{{ url('admin/gallery/submissions/pending') }}"> Pending </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/gallery/submissions/accepted*') }}" href="{{ url('admin/gallery/submissions/accepted') }}">Accepted</a>
+      <a class="nav-link {{ set_active('admin/gallery/submissions/accepted*') }}" href="{{ url('admin/gallery/submissions/accepted') }}"> Accepted </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/gallery/submissions/rejected*') }}" href="{{ url('admin/gallery/submissions/rejected') }}">Rejected</a>
+      <a class="nav-link {{ set_active('admin/gallery/submissions/rejected*') }}" href="{{ url('admin/gallery/submissions/rejected') }}"> Rejected </a>
     </li>
   </ul>
 
@@ -54,5 +54,5 @@
   @endforeach
 
   {!! $submissions->render() !!}
-  <div class="text-center mt-4 small text-muted">{{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $submissions->total() }} result{{ $submissions->total() == 1 ? '' : 's' }} found. </div>
 @endsection

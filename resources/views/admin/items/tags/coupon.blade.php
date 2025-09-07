@@ -1,7 +1,7 @@
-<h3>Coupon</h3>
+<h3> Coupon </h3>
 
-<h4>Discount</h4>
-<p>Input discount percent. You can select what coupons can be used in each shop on the shop edit page.</p>
+<h4> Discount </h4>
+<p> Input discount percent. You can select what coupons can be used in each shop on the shop edit page. </p>
 
 <div class="row">
   <div class="col-md-6 form-group">

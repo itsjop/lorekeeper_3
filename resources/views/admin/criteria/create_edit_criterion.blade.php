@@ -13,9 +13,9 @@
           : 'admin/data/criteria/create'
   ]) !!}
 
-  <h1>{{ $criterion->id ? 'Edit' : 'Create' }} Criterion
+  <h1> {{ $criterion->id ? 'Edit' : 'Create' }} Criterion
     @if ($criterion->id)
-      <a href="#" class="btn btn-danger float-right delete-button">Delete Criterion</a>
+      <a href="#" class="btn btn-danger float-right delete-button"> Delete Criterion </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
   <div class="form-group">
     {!! Form::label('Name') !!}
     {!! Form::text('name', $criterion->name, ['class' => 'form-control']) !!}
@@ -93,12 +93,12 @@
   </div>
 
   @if ($criterion->id)
-    <h2 class="mt-5">Criterion Steps <a href="{{ url('admin/data/criteria/' . $criterion->id . '/step') }}"
+    <h2 class="mt-5"> Criterion Steps <a href="{{ url('admin/data/criteria/' . $criterion->id . '/step') }}"
         class="btn btn-primary float-right"
-      >+ Add Step</a>
+      >+ Add Step </a>
     </h2>
-    <p>Drag and Drop the cards to re-order your steps - the ordering determines the order of the final calculation. Steps that are
-      inactive will not be shown or included in the final calculation.</p>
+    <p> Drag and Drop the cards to re-order your steps - the ordering determines the order of the final calculation. Steps that are
+      inactive will not be shown or included in the final calculation. </p>
     <div id="sortable" class="sortable">
       @foreach ($criterion->steps->sortBy('order') as $step)
         <div class="card p-3 mb-2 pl-0" data-id="{{ $step->id }}">
@@ -115,8 +115,8 @@
                 @endif
                 {{ $step->name }}
               </h4>
-              <span class="text-secondary">{{ ucfirst($step->type) }} · {{ ucfirst($step->calc_type) }} ·
-                {{ $step->summary }}</span>
+              <span class="text-secondary"> {{ ucfirst($step->type) }} · {{ ucfirst($step->calc_type) }} ·
+                {{ $step->summary }} </span>
             </div>
             <div style="flex: 0 0 auto;">
               <a href="{{ url('admin/data/criteria/' . $criterion->id . '/step/' . $step->id) }}"
@@ -138,7 +138,7 @@
     </div>
     {!! Form::hidden('sort', null, ['id' => 'sortableOrder']) !!}
   @else
-    <p>Criterion Steps will be able to be added here once you've created the criterion.</p>
+    <p> Criterion Steps will be able to be added here once you've created the criterion. </p>
   @endif
 
   <div class="text-right mt-4">

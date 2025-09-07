@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'User Borders' => 'world/borders']) !!}
-  <h1>Borders</h1>
+  <h1> Borders </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -58,6 +58,6 @@
   @endforeach
   {!! $borders->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $borders->total() }} result{{ $borders->total() == 1 ? '' : 's' }}
-    found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $borders->total() }} result{{ $borders->total() == 1 ? '' : 's' }}
+    found. </div>
 @endsection

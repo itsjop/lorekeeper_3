@@ -7,7 +7,7 @@
 
 @if ($limits)
   @if (!isset($compact) || !$compact)
-    <h4 class="my-3">{!! $object->displayName !!}'s Requirements</h4>
+    <h4 class="my-3"> {!! $object->displayName !!}'s Requirements </h4>
 
     <p>
       You must obtain or complete all of the following in order to access this {{ $object->assetType ? (substr($object->assetType, -1) === 's' ? substr($object->assetType, 0, -1) : $object->assetType) : '' }}.
@@ -15,10 +15,10 @@
     <table class="table table-sm">
       <thead>
         <tr>
-          <th width="30%">Limit Type</th>
-          <th width="30%">Limit</th>
-          <th width="20%">Quantity</th>
-          <th width="20%">Is Debited?</th>
+          <th width="30%"> Limit Type </th>
+          <th width="30%"> Limit </th>
+          <th width="20%"> Quantity </th>
+          <th width="20%"> Is Debited?</th>
         </tr>
       </thead>
       <tbody>
@@ -28,8 +28,8 @@
               <i class="fas fa-question-circle"></i>
               {{ $limitTypes[$limit->limit_type] }}
             </td>
-            <td>{!! $limit->limit->displayName !!}</td>
-            <td>{{ $limit->quantity }}</td>
+            <td> {!! $limit->limit->displayName !!} </td>
+            <td> {{ $limit->quantity }} </td>
             <td class="text-{{ $limit->debit ? 'success' : 'danger' }}">
               {{ $limit->debit ? 'Yes' : 'No' }}
             </td>

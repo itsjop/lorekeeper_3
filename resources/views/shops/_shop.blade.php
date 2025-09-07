@@ -13,7 +13,7 @@
     </a>
     @include('widgets._limits', ['object' => $shop, 'compact' => true])
     @if ($shop->is_fto)
-      <span class="badge badge-pill badge-success">FTO Shop</span>
+      <span class="badge badge-pill badge-success"> FTO Shop </span>
     @endif
   </div>
 </div>

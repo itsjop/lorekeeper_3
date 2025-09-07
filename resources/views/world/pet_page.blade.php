@@ -50,7 +50,7 @@
                 @if (isset($pet->category) && $pet->category)
                   <div class="col-md">
                     <p>
-                      <strong>Category:</strong>
+                      <strong> Category:</strong>
                       <a href="{!! $pet->category->url !!}">
                         {!! $pet->category->name !!}
                       </a>
@@ -68,7 +68,7 @@
                       class="inventory-collapse-toggle collapse-toggle collapsed"
                       href="#drop-collapse"
                       data-bs-toggle="collapse"
-                    >Show Drops</a>
+                    > Show Drops </a>
                     </h3>
                   </h5>
                   <div class="collapse" id="drop-collapse">
@@ -82,7 +82,7 @@
           </div>
           @if ($pet->evolutions->count())
             <div class="card mb-3">
-              <div class="card-header h2">Evolutions</div>
+              <div class="card-header h2"> Evolutions </div>
               <div class="card-body">
                 @foreach ($pet->evolutions->sortBy('evolution_stage')->chunk(4) as $chunk)
                   <div class="row">
@@ -119,7 +119,7 @@
           @endif
           @if ($pet->variants->count())
             <div class="card mb-3">
-              <div class="card-header h2">Variants</div>
+              <div class="card-header h2"> Variants </div>
               <div class="card-body">
                 @foreach ($pet->variants->chunk(4) as $chunk)
                   <div class="row">
@@ -139,7 +139,7 @@
                           @else
                             {{ $variant->name }}
                           @endif
-                          <p class="mb-0">{{ $variant->description }}</p>
+                          <p class="mb-0"> {{ $variant->description }} </p>
                         </a>
                       </div>
                     @endforeach

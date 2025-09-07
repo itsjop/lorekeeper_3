@@ -9,12 +9,12 @@
 
   @include('character._header', ['character' => $character])
 
-  <p>This will add a new image to the character's gallery. The character's active image will be changed to the new one
-    automatically. If the character is marked as visible, the owner of the character will be notified of the upload.</p>
+  <p> This will add a new image to the character's gallery. The character's active image will be changed to the new one
+    automatically. If the character is marked as visible, the owner of the character will be notified of the upload. </p>
 
   {!! Form::open(['url' => 'admin/character/' . $character->slug . '/image', 'files' => true]) !!}
 
-  <h3>Validity</h3>
+  <h3> Validity </h3>
 
   <div class="form-group">
     {!! Form::checkbox('is_valid', 1, 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
@@ -23,7 +23,7 @@
     ) !!}
   </div>
 
-  <h3>Image Upload</h3>
+  <h3> Image Upload </h3>
 
   <div class="form-group">
     {!! Form::label('Character Image') !!} {!! add_help(
@@ -43,7 +43,7 @@
     </div>
     <div class="card mb-3" id="thumbnailCrop">
       <div class="card-body">
-        <div id="cropSelect">By using this function, the thumbnail will be automatically generated from the full image.</div>
+        <div id="cropSelect"> By using this function, the thumbnail will be automatically generated from the full image. </div>
         {!! Form::hidden('x0', 1) !!}
         {!! Form::hidden('x1', 1) !!}
         {!! Form::hidden('y0', 1) !!}
@@ -59,7 +59,7 @@
     </div>
     <div class="card mb-3" id="thumbnailCrop">
       <div class="card-body">
-        <div id="cropSelect">Select an image to use the thumbnail cropper.</div>
+        <div id="cropSelect"> Select an image to use the thumbnail cropper. </div>
         <img
           src="#"
           id="cropper"
@@ -80,8 +80,8 @@
         {!! Form::label('thumbnail', 'Choose thumbnail...', ['class' => 'custom-file-label']) !!}
         {!! Form::file('thumbnail', ['class' => 'custom-file-input']) !!}
       </div>
-      <div class="text-muted">Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
-        {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px</div>
+      <div class="text-muted"> Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
+        {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px </div>
     </div>
   </div>
   <p class="alert alert-info">
@@ -158,7 +158,7 @@
 
   <h3>
     {{-- <div class="float-right">
-<a href="#" class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="This will fill the below fields with the same data as the character's current image. Note that this will overwrite any changes made below.">Fill Data</a>
+<a href="#" class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="This will fill the below fields with the same data as the character's current image. Note that this will overwrite any changes made below."> Fill Data </a>
 </div> --}}
     Traits
   </h3>
@@ -182,7 +182,7 @@
   </div>
 
   <hr>
-  <h5>{{ ucfirst(__('transformations.transformations')) }}</h5>
+  <h5> {{ ucfirst(__('transformations.transformations')) }} </h5>
   <div class="form-group" id="transformations">
     {!! Form::label(ucfirst(__('transformations.transformation')) . ' (Optional)') !!}
     {!! Form::select('transformation_id', $transformations, null, ['class' => 'form-control', 'id' => 'transformation']) !!}
@@ -232,7 +232,7 @@
         href="#"
         class="btn btn-primary mb-2"
         id="add-feature"
-      >Add Trait</a>
+      > Add Trait </a>
     </div>
     <div id="featureList">
       @if (config('lorekeeper.extensions.autopopulate_image_features'))

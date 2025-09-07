@@ -14,7 +14,7 @@
   <!-- ReCaptcha v3 -->
   {!! RecaptchaV3::initJs() !!}
 
-  <title>{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')</title>
+  <title> {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')</title>
 
   <!-- Primary Meta Tags -->
   <meta name="title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
@@ -236,7 +236,7 @@
             <div class="alert alert-danger">
               <h5 class="mb-0">
                 <i class="fas fa-exclamation"></i> <i class="fas fa-envelope"></i> - You have unread messages
-                from staff. <a href="{{ url('mail#modMail') }}">View here.</a>
+                from staff. <a href="{{ url('mail#modMail') }}"> View here. </a>
               </h5>
             </div>
           @endif

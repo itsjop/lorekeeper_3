@@ -46,7 +46,7 @@
 
       @if ($recipe->is_limited)
         <div class="col-md-4">
-          <h5>Requirements</h5>
+          <h5> Requirements </h5>
 
           <div class="alert alert-secondary">
             <?php
@@ -62,7 +62,7 @@
         </div>
       @endif
       <div class="col-md">
-        <h5>Ingredients</h5>
+        <h5> Ingredients </h5>
         @for ($i = 0; $i < count($recipe->ingredients) && $i < 3; ++$i)
           <?php $ingredient = $recipe->ingredients[$i]; ?>
           <div class="alert alert-secondary">
@@ -74,7 +74,7 @@
         @endif
       </div>
       <div class="col-md">
-        <h5>Rewards</h5>
+        <h5> Rewards </h5>
         <?php $counter = 0; ?>
         @foreach ($recipe->reward_items as $type)
           @foreach ($type as $item)

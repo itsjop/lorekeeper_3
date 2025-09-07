@@ -16,7 +16,7 @@
       <a class="ml-2 mr-3">
         <img src="{{ $pet->pet->image($pet->id) }}" class="w-75" />
         <br>
-        <span class="text-light badge badge-dark" style="font-size:95%;">{!! $pet->pet_name !!}</span>
+        <span class="text-light badge badge-dark" style="font-size:95%;"> {!! $pet->pet_name !!} </span>
       </a>
     @endif
   @endforeach

@@ -11,7 +11,7 @@
 @section('meta-desc')
   @if (isset($border->category) && $border->category)
     <p>
-      <strong>Category:</strong> {{ $border->category->name }}
+      <strong> Category:</strong> {{ $border->category->name }}
     </p>
   @endif
   :: {!! substr(str_replace('"', '&#39;', $border->description), 0, 69) !!}

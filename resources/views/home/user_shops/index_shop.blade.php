@@ -10,11 +10,11 @@
   <h1>
     User Shops
   </h1>
-  <p>These are user-owned shops that sell items. Not to be confused with official, admin-made shops.</p>
+  <p> These are user-owned shops that sell items. Not to be confused with official, admin-made shops. </p>
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('user-shops/item-search') }}">
       <i class="fas fa-search mr-1">
-      </i>Search by Items
+      </i> Search by Items
     </a>
   </div>
 
@@ -69,21 +69,21 @@
           </div>
         @endif
         <div class="shop-name mt-1">
-          <h5 class="mb-0">{!! $shop->displayName !!}</h5>
-          Owned by <a href="{{ $shop->user->url }}">{!! $shop->user->displayName !!}</a>
+          <h5 class="mb-0"> {!! $shop->displayName !!} </h5>
+          Owned by <a href="{{ $shop->user->url }}"> {!! $shop->user->displayName !!} </a>
         </div>
         <div class="shop-name mt-1">
-          <strong>Stock</strong>: {{ $shop->visibleStock->count() }}
+          <strong> Stock </strong>: {{ $shop->visibleStock->count() }}
         </div>
       </div>
     @endforeach
   </div>
   {!! $shops->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $shops->total() }} result{{ $shops->total() == 1 ? '' : 's' }} found.
+  <div class="text-center mt-4 small text-muted"> {{ $shops->total() }} result{{ $shops->total() == 1 ? '' : 's' }} found.
   </div>
 
   <div class="text-right mb-4">
-    <a href="{{ url('user-shops/history') }}">View purchase logs...</a>
+    <a href="{{ url('user-shops/history') }}"> View purchase logs... </a>
   </div>
 @endsection

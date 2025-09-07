@@ -8,11 +8,11 @@
   <x-admin-edit title="Raffle" :object="$raffle" />
   {!! breadcrumbs(['Raffles' => 'raffles', 'Raffle: ' . $raffle->name => 'raffles/view/' . $raffle->id]) !!}
   <h1>
-    Raffle: {{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }}</h1>
+    Raffle: {{ $raffle->name }} {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }} </h1>
   @if ($raffle->is_active == 1)
     @if ($raffle->end_at)
       @if ($raffle->end_at < Carbon\Carbon::now())
-        <div class="alert alert-danger mb-2">This raffle has closed.</div>
+        <div class="alert alert-danger mb-2"> This raffle has closed. </div>
       @else
         <div class="alert alert-success text-center">
           This raffle is currently open.
@@ -33,11 +33,11 @@
           class="card-title collapse-title"
           data-toggle="collapse"
           href="#rewards"
-        >View Rewards</a>
+        > View Rewards </a>
         <div id="rewards" class="collapse">
           <ul>
             @foreach ($raffle->rewards as $reward)
-              <li>{!! $reward->reward->displayName !!} x {{ $reward->quantity }}</li>
+              <li> {!! $reward->reward->displayName !!} x {{ $reward->quantity }} </li>
             @endforeach
           </ul>
         </div>
@@ -68,19 +68,19 @@
       @endif
     @endif
   @elseif($raffle->is_active == 2)
-    <div class="alert alert-danger">This raffle is closed. Rolled: {!! format_date($raffle->rolled_at) !!}</div>
+    <div class="alert alert-danger"> This raffle is closed. Rolled: {!! format_date($raffle->rolled_at) !!} </div>
     <div class="card mb-3">
-      <div class="card-header h3">Winner(s)</div>
+      <div class="card-header h3"> Winner(s)</div>
       <div class="table-responsive">
         <table class="table table-sm mb-0">
           <thead>
             <th class="col-xs-1 text-center" style="width: 100px;">#</th>
-            <th>User</th>
+            <th> User </th>
           </thead>
           <tbody>
             @foreach ($raffle->tickets()->winners()->get() as $winner)
               <tr>
-                <td class="text-center">{{ $winner->position }}</td>
+                <td class="text-center"> {{ $winner->position }} </td>
                 <td class="text-left">
                   {!! $winner->displayHolderName !!}
                   @if ($winner->reroll)
@@ -95,17 +95,17 @@
     </div>
   @endif
 
-  <h3>Tickets</h3>
+  <h3> Tickets </h3>
 
   @if (Auth::check() && count($tickets))
     <?php $chance = number_format((float) (($userCount / $count) * 100), 1, '.', ''); //Change 1 to 0 if you want no decimal place. ?>
-    <p class="text-center mb-0">You {{ $raffle->is_active == 2 ? 'had' : 'have' }} <strong>{{ $userCount }}</strong> out of
-      <strong>{{ $count }} tickets</strong> in this raffle.
+    <p class="text-center mb-0"> You {{ $raffle->is_active == 2 ? 'had' : 'have' }} <strong> {{ $userCount }} </strong> out of
+      <strong> {{ $count }} tickets </strong> in this raffle.
     </p>
-    <p class="text-center"> That's a <strong>{{ $chance }}%</strong> chance! </p>
+    <p class="text-center"> That's a <strong> {{ $chance }}%</strong> chance! </p>
   @endif
 
-  <div class="text-right">{!! $tickets->render() !!}</div>
+  <div class="text-right"> {!! $tickets->render() !!} </div>
 
   <div class="mb-4 logs-table">
     <div class="logs-table-header">
@@ -114,7 +114,7 @@
           <div class="logs-table-cell">#</div>
         </div>
         <div class="col-10 col-md-11 font-weight-bold">
-          <div class="logs-table-cell">User</div>
+          <div class="logs-table-cell"> User </div>
         </div>
       </div>
     </div>
@@ -131,7 +131,7 @@
               </div>
             </div>
             <div class="col-10 col-md-11">
-              <div class="logs-table-cell">{!! $ticket->displayHolderName !!}</div>
+              <div class="logs-table-cell"> {!! $ticket->displayHolderName !!} </div>
             </div>
           </div>
         </div>

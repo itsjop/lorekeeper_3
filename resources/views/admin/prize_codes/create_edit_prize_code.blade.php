@@ -11,9 +11,9 @@
       ($prize->id ? 'Edit' : 'Create') . ' Prize' => $prize->id ? 'admin/prizecodes/edit/' . $prize->id : 'admin/prizecodes/create',
   ]) !!}
 
-  <h1>{{ $prize->id ? 'Edit' : 'Create' }} Prize
+  <h1> {{ $prize->id ? 'Edit' : 'Create' }} Prize
     @if ($prize->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-prize-button">Delete Prize</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-prize-button"> Delete Prize </a>
     @endif
   </h1>
 
@@ -22,7 +22,7 @@
       'files' => true,
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
 
   <div class="row">
@@ -83,7 +83,7 @@
   </div>
 
 
-  <h3>Prize Rewards</h3>
+  <h3> Prize Rewards </h3>
   @include('widgets._prize_reward_select', ['rewards' => $prize->rewards])
 
   <div class="text-right">
@@ -101,13 +101,13 @@
   ])
 
   @if ($prize->id)
-    <h3>Log</h3>
+    <h3> Log </h3>
 
     @if (count($prize->redeemers))
       <div class="row ml-md-2 mb-3">
         <div class="d-flex row flex-wrap col-12 pb-1 px-0 ubt-bottom">
-          <div class="col-md-2 font-weight-bold">User</div>
-          <div class="col-md font-weight-bold text-center">Claimed</div>
+          <div class="col-md-2 font-weight-bold"> User </div>
+          <div class="col-md font-weight-bold text-center"> Claimed </div>
         </div>
         @foreach ($redeemers as $redeemer)
           <div class="d-flex row flex-wrap col-12 mt-1 pt-2 px-0 ubt-top">
@@ -121,7 +121,7 @@
         @endforeach
       </div>
     @else
-      <p>No redeemers found!</p>
+      <p> No redeemers found!</p>
     @endif
 
   @endif

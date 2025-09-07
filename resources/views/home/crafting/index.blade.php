@@ -14,7 +14,7 @@
 
   <hr>
 
-  <h3>Free Recipes</h3>
+  <h3> Free Recipes </h3>
   @if ($default->count())
     <div class="row mx-0">
       @foreach ($default as $recipe)
@@ -27,7 +27,7 @@
 
   <hr>
 
-  <h3>Your Unlocked Recipes</h3>
+  <h3> Your Unlocked Recipes </h3>
   @if (Auth::user()->recipes->count())
     <div class="row mx-0">
       @foreach (Auth::user()->recipes as $recipe)
@@ -38,7 +38,7 @@
     You haven't unlocked any recipes!
   @endif
   <div class="text-right mb-4">
-    <a href="{{ url(Auth::user()->url . '/recipe-logs') }}">View logs...</a>
+    <a href="{{ url(Auth::user()->url . '/recipe-logs') }}"> View logs... </a>
   </div>
 
 

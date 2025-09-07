@@ -5,13 +5,13 @@
     {!! Form::open(['url' => 'admin/data/shops/stock/' . $shop->id]) !!}
   @endif
 
-  <h5>Stock</h5>
+  <h5> Stock </h5>
   <p>
     Random stock will select a random item from the list below on creation / edit.
     <br />
-    <b>If a restock period is set and the stock is set to "random", it will select a new random stock of the chosen type.</b>
+    <b> If a restock period is set and the stock is set to "random", it will select a new random stock of the chosen type. </b>
     <br />
-    <b>If a category exists for the chosen stock type, it can be used as a random filter.</b>
+    <b> If a category exists for the chosen stock type, it can be used as a random filter. </b>
   </p>
   <div class="row">
     <div class="col-md-6 form-group">
@@ -29,11 +29,11 @@
     </div>
   </div>
 
-  <h5>Costs</h5>
+  <h5> Costs </h5>
   <p>
     You can select multiple costs for the item. Setting no costs will make the item free.
     <br />
-    <b>By default, all costs are required to purchase the item unless they are assigned seperate groups.</b>
+    <b> By default, all costs are required to purchase the item unless they are assigned seperate groups. </b>
   </p>
   <div class="mb-3">
     <div class="text-right">
@@ -43,9 +43,9 @@
     </div>
     <div id="costs">
       <div class="text-center row no-gutters border-bottom mb-2">
-        <div class="col-3">Cost Type</div>
-        <div class="col-4">Cost Object</div>
-        <div class="col-2">Quantity</div>
+        <div class="col-3"> Cost Type </div>
+        <div class="col-4"> Cost Object </div>
+        <div class="col-2"> Quantity </div>
         <div class="col-2">
           Group
           {!! add_help('You can group costs together to allow users to choose which group they want to pay with.') !!}
@@ -87,9 +87,9 @@
 
   <hr />
 
-  <h5>Coupon Usage</h5>
+  <h5> Coupon Usage </h5>
   @if ($shop->use_coupons)
-    <p>You can set which groups can use coupons on this stock. Note that you must do this after creating the stock and groups!</p>
+    <p> You can set which groups can use coupons on this stock. Note that you must do this after creating the stock and groups!</p>
     @if ($stock->id)
       @foreach ($stock->groups ?? [] as $group)
         <div class="form-group">
@@ -103,10 +103,10 @@
         </div>
       @endforeach
     @else
-      <div class="alert alert-info">You must create the stock before setting coupon usage.</div>
+      <div class="alert alert-info"> You must create the stock before setting coupon usage. </div>
     @endif
   @else
-    <div class="alert alert-info">Coupons are disabled on this shop.</div>
+    <div class="alert alert-info"> Coupons are disabled on this shop. </div>
   @endif
 
   <hr />
@@ -225,12 +225,12 @@
   </div>
   <div class="card stock-timed-quantity {{ $stock->is_timed_stock ? '' : 'hide' }}">
     <div class="card-body">
-      <h3>Stock Time Period</h3>
-      <p>Both of the below options can work together. If both are set, the stock will only be available during the specific time
-        period, and on the specific days of the week and months.</p>
+      <h3> Stock Time Period </h3>
+      <p> Both of the below options can work together. If both are set, the stock will only be available during the specific time
+        period, and on the specific days of the week and months. </p>
 
-      <h5>Specific Time Period</h5>
-      <p>The time period below is between the specific dates and times, rather than an agnostic period like "every November".</p>
+      <h5> Specific Time Period </h5>
+      <p> The time period below is between the specific dates and times, rather than an agnostic period like "every November". </p>
       <div class="row">
         <div class="col-md-6 form-group">
           {!! Form::label('stock_start_at', 'Start Time') !!} {!! add_help('Stock will cycle in at this date.') !!}
@@ -242,10 +242,10 @@
         </div>
       </div>
 
-      <h5>Repeating Time Period</h5>
-      <p>Select the months and days of the week that the stock will be available.</p>
+      <h5> Repeating Time Period </h5>
+      <p> Select the months and days of the week that the stock will be available. </p>
       <p>
-        <b>If months are set alongside days, the stock will only be available on those days in those months.</b>
+        <b> If months are set alongside days, the stock will only be available on those days in those months. </b>
       </p>
       <div class="form-group">
         {!! Form::label('stock_days', 'Days of the Week') !!}

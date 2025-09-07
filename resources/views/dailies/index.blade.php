@@ -22,7 +22,7 @@
           </div>
         @endif
         <div class="daily-name mt-1">
-          <a href="{{ $daily->url }}" class="h5 mb-0">{{ $daily->name }}</a>
+          <a href="{{ $daily->url }}" class="h5 mb-0"> {{ $daily->name }} </a>
         </div>
       </div>
     @endforeach

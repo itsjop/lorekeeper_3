@@ -1,4 +1,4 @@
-<h3>Options</h3>
+<h3> Options </h3>
 
 <div class="row p-4">
   <div class="form-group col">
@@ -74,7 +74,7 @@
 
 <hr>
 
-<h3>Images</h3>
+<h3> Images </h3>
 
 <div class="form-group">
   {!! Form::label(__('dailies.daily') . ' Image (Optional)') !!} {!! add_help(
@@ -85,9 +85,9 @@
           '
                                           page as a header.',
   ) !!}
-  <div>{!! Form::file('image') !!}</div>
-  <div class="text-muted">Recommended size: None (Choose a standard size for all {{ __('dailies.daily') }} images). File type:
-    png.</div>
+  <div> {!! Form::file('image') !!} </div>
+  <div class="text-muted"> Recommended size: None (Choose a standard size for all {{ __('dailies.daily') }} images). File type:
+    png. </div>
   @if ($daily->has_image)
     <div class="form-check">
       {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -97,8 +97,8 @@
 </div>
 <div class="form-group">
   {!! Form::label('Button Image (Optional)') !!} {!! add_help('This image is used for the button instead of the generic Collect Reward button.') !!}
-  <div>{!! Form::file('button_image') !!}</div>
-  <div class="text-muted">Recommended size: 200x200px or something small. File type: png.</div>
+  <div> {!! Form::file('button_image') !!} </div>
+  <div class="text-muted"> Recommended size: 200x200px or something small. File type: png. </div>
   @if ($daily->has_button_image)
     <div class="form-check">
       {!! Form::checkbox('remove_button_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -107,14 +107,14 @@
   @endif
 </div>
 
-<h3>Rewards</h3>
-<p>Please add what reward the {{ __('dailies.daily') }} should award users each day. If you would like an element of chance in it,
-  linking a loot table here is recommended.</p>
+<h3> Rewards </h3>
+<p> Please add what reward the {{ __('dailies.daily') }} should award users each day. If you would like an element of chance in it,
+  linking a loot table here is recommended. </p>
 
-<p>The step field is needed for progressable {{ __('dailies.dailies') }}. It defines what rewards the user can get at each step
+<p> The step field is needed for progressable {{ __('dailies.dailies') }}. It defines what rewards the user can get at each step
   as. Once the end of the steps is reached, the rewards start over from step 1. </p>
-<b>If you have no need for progression, simply always leave it at step 1. If you want to set a default reward that is picked for
-  all steps with no reward set, you may specify it as step 0.</b> Beware that the default reward will not be shown on the
+<b> If you have no need for progression, simply always leave it at step 1. If you want to set a default reward that is picked for
+  all steps with no reward set, you may specify it as step 0. </b> Beware that the default reward will not be shown on the
 progress.
 
 @include('dailies._loot_select', ['loots' => $daily->rewards, 'showLootTables' => true, 'showRaffles' => true])

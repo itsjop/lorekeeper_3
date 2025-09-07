@@ -32,7 +32,7 @@
       @if (isset($item->category) && $item->category)
         <div class="col-md">
           <p>
-            <strong>Category:</strong>
+            <strong> Category:</strong>
             @if (!$item->category->is_visible)
               <i class="fas fa-eye-slash mx-1 text-danger"></i>
             @endif
@@ -46,14 +46,14 @@
         @if (isset($item->rarity) && $item->rarity)
           <div class="col-md">
             <p>
-              <strong>Rarity:</strong> {!! $item->rarity !!}
+              <strong> Rarity:</strong> {!! $item->rarity !!}
             </p>
           </div>
         @endif
         @if (isset($item->itemArtist) && $item->itemArtist)
           <div class="col-md">
             <p>
-              <strong>Artist:</strong> {!! $item->itemArtist !!}
+              <strong> Artist:</strong> {!! $item->itemArtist !!}
             </p>
           </div>
         @endif
@@ -65,7 +65,7 @@
       )
         <div class="col-md">
           <p>
-            <strong>Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}
+            <strong> Resale Value:</strong> {!! App\Models\Currency\Currency::find($item->resell->flip()->pop())->display($item->resell->pop()) !!}
           </p>
         </div>
       @endif
@@ -88,7 +88,7 @@
       @if ($item->seedRewards())
         <div class="col-md">
           <p>
-            <strong>Cultivates:</strong>
+            <strong> Cultivates:</strong>
             @foreach ($item->seedRewards() as $reward)
               {{ $reward['quantity'] }}x {!! $reward['asset']->displayName !!}
             @endforeach
@@ -98,14 +98,14 @@
       @if ($item->toolPlot())
         <div class="col-md">
           <p>
-            <strong>Creates Plot:</strong> {{ $item->toolPlot()->name }}
+            <strong> Creates Plot:</strong> {{ $item->toolPlot()->name }}
           </p>
         </div>
       @endif
       @if ($item->explorationArea())
         <div class="col-md">
           <p>
-            <strong>Unlocks Area:</strong> {{ $item->explorationArea()->name }}
+            <strong> Unlocks Area:</strong> {{ $item->explorationArea()->name }}
           </p>
         </div>
       @endif
@@ -113,7 +113,7 @@
     <div class="world-entry-text">
       @if (isset($item->reference) && $item->reference && Config::get('lorekeeper.extensions.item_entry_expansion.extra_fields'))
         <p>
-          <strong>Reference Link:</strong> <a href="{{ $item->reference }}">{{ $item->reference }}</a>
+          <strong> Reference Link:</strong> <a href="{{ $item->reference }}"> {{ $item->reference }} </a>
         </p>
       @endif
       {!! $description !!}
@@ -124,15 +124,15 @@
             data-bs-toggle="collapse"
             href="#border{{ $item->id }}"
             class="h5"
-          >Unlocks Borders <i class="fas fa-caret-down"></i>
+          > Unlocks Borders <i class="fas fa-caret-down"></i>
           </a>
           <div class="card collapse mt-1" id="border{{ $item->id }}">
             <div class="card-body">
               @if (isset($item->tag('border')->data['all_borders']))
-                <p class="text-center">Each use of this item unlocks <strong>one</strong> random border between all onsite.</p>
+                <p class="text-center"> Each use of this item unlocks <strong>one </strong> random border between all onsite. </p>
               @else
-                <p class="text-center">Each use of this item unlocks <strong>one</strong> of the following borders randomly.<br>
-                  If one is crossed out, you already have it.</p>
+                <p class="text-center"> Each use of this item unlocks <strong>one </strong> of the following borders randomly. <br>
+                  If one is crossed out, you already have it. </p>
                 <div class="row">
                   @foreach (parseAssetData($item->tag('border')->data, true) as $type)
                     @foreach ($type as $border)
@@ -152,7 +152,7 @@
         <div class="collapse" id="item-{{ $item->id }}">
           @if (isset($item->uses) && $item->uses)
             <p>
-              <strong>Uses:</strong> {{ $item->uses }}
+              <strong> Uses:</strong> {{ $item->uses }}
             </p>
           @endif
           @if (
@@ -160,12 +160,12 @@
                   $item->shop_stock_count ||
                   (isset($item->data['prompts']) && $item->data['prompts'])
           )
-            <h5>Availability</h5>
+            <h5> Availability </h5>
             <div class="row">
               @if (isset($item->source) && $item->source)
                 <div class="col">
                   <p>
-                    <strong>Source:</strong>
+                    <strong> Source:</strong>
                   </p>
                   <p>
                     {!! $item->source !!}
@@ -175,7 +175,7 @@
               @if ($item->shop_stock_count)
                 <div class="col">
                   <p>
-                    <strong>Purchaseable At:</strong>
+                    <strong> Purchaseable At:</strong>
                   </p>
                   <div class="row">
                     @foreach ($item->shops as $shop)
@@ -191,7 +191,7 @@
               @if (isset($item->data['prompts']) && $item->data['prompts'])
                 <div class="col">
                   <p>
-                    <strong>Drops From:</strong>
+                    <strong> Drops From:</strong>
                   </p>
                   <div class="row">
                     @foreach ($item->prompts as $prompt)
@@ -211,7 +211,7 @@
       @if ($item->canUserSell)
         <div class="text-right mb-4">
           <a class="btn btn-secondary " href="{{ url('user-shops/item-search?item_ids=' . $item->id) }}">
-            <i class="fas fa-shopping-cart mr-2"></i>User Shops</a>
+            <i class="fas fa-shopping-cart mr-2"></i> User Shops </a>
         </div>
       @endif
     </div>

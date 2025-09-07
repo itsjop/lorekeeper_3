@@ -7,9 +7,9 @@
 @section('home-content')
   {!! breadcrumbs(['Inventory' => 'inventory', 'Account Search' => 'account-search']) !!}
 
-  <h1>Account Search</h1>
+  <h1> Account Search </h1>
 
-  <p>Select an item to search for all occurrences of it in your and your characters' inventories, as well as your shops. If a stack
+  <p> Select an item to search for all occurrences of it in your and your characters' inventories, as well as your shops. If a stack
     is currently "held" in a trade, design update, or submission, this will be stated and all held locations will be linked.
   </p>
 
@@ -29,14 +29,14 @@
   {!! Form::close() !!}
 
   @if ($item)
-    <h3>{{ $item->name }}</h3>
+    <h3> {{ $item->name }} </h3>
 
-    <p>You currently have
+    <p> You currently have
       {{ $userItems->pluck('count')->sum() + $characterItems->pluck('count')->sum() + $shopItems->pluck('quantity')->sum() }} of
-      this item between your and your characters' inventories.</p>
+      this item between your and your characters' inventories. </p>
 
     @if ($userItems->count())
-      <h5>In Your Inventory:</h5>
+      <h5> In Your Inventory:</h5>
       <ul>
         @foreach ($userItems as $item)
           <li>
@@ -81,17 +81,17 @@
                 $held = [];
                 if (isset($holdLocations['trade'])) {
                     foreach ($holdLocations['trade'] as $trade => $quantity) {
-                        array_push($held, '<a href="' . App\Models\Trade::find($trade)->url . '">Trade #' . App\Models\Trade::find($trade)->id . '</a>' . ' (' . $quantity . ')');
+                        array_push($held, '<a href="' . App\Models\Trade::find($trade)->url . '"> Trade #' . App\Models\Trade::find($trade)->id . '</a>' . ' (' . $quantity . ')');
                     }
                 }
                 if (isset($holdLocations['update'])) {
                     foreach ($holdLocations['update'] as $update => $quantity) {
-                        array_push($held, '<a href="' . App\Models\Character\CharacterDesignUpdate::find($update)->url . '">Design Update #' . App\Models\Character\CharacterDesignUpdate::find($update)->id . '</a>' . ' (' . $quantity . ')');
+                        array_push($held, '<a href="' . App\Models\Character\CharacterDesignUpdate::find($update)->url . '"> Design Update #' . App\Models\Character\CharacterDesignUpdate::find($update)->id . '</a>' . ' (' . $quantity . ')');
                     }
                 }
                 if (isset($holdLocations['submission'])) {
                     foreach ($holdLocations['submission'] as $submission => $quantity) {
-                        array_push($held, '<a href="' . App\Models\Submission\Submission::find($submission)->viewUrl . '">Submission #' . App\Models\Submission\Submission::find($submission)->id . '</a>' . ' (' . $quantity . ')');
+                        array_push($held, '<a href="' . App\Models\Submission\Submission::find($submission)->viewUrl . '"> Submission #' . App\Models\Submission\Submission::find($submission)->id . '</a>' . ' (' . $quantity . ')');
                     }
                 }
                 ?>
@@ -107,17 +107,17 @@
       </ul>
     @endif
     @if ($characterItems->count())
-      <h5>In Character Inventories:</h5>
+      <h5> In Character Inventories:</h5>
       <ul>
         @foreach ($characterItems as $item)
           <li>
-            <a href="{{ $item->character->url }}">{{ $item->character->fullName }}</a> has a stack of {{ $item->count }}
+            <a href="{{ $item->character->url }}"> {{ $item->character->fullName }} </a> has a stack of {{ $item->count }}
           </li>
         @endforeach
       </ul>
     @endif
     @if ($shopItems->count())
-      <h5>In your shops:</h5>
+      <h5> In your shops:</h5>
       <ul>
         @foreach ($shopItems as $item)
           <li>

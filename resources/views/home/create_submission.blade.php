@@ -41,7 +41,7 @@
 
         <div class="modal-content hide" id="confirmContent">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">Confirm {{ $isClaim ? 'Claim' : 'Submission' }}</span>
+            <span class="modal-title h5 mb-0"> Confirm {{ $isClaim ? 'Claim' : 'Submission' }} </span>
             <button
               type="button"
               class="close"
@@ -64,14 +64,14 @@
                 href="#"
                 id="confirmSubmit"
                 class="btn btn-primary"
-              >Confirm</a>
+              > Confirm </a>
             </div>
           </div>
         </div>
 
         <div class="modal-content hide" id="draftContent">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">Create Draft</span>
+            <span class="modal-title h5 mb-0"> Create Draft </span>
             <button
               type="button"
               class="close"

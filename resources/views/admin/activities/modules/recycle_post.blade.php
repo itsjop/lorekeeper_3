@@ -2,14 +2,14 @@
   <table class="table table-sm">
     <tbody id="recyclableRow">
       <tr class="recyclable-row">
-        <td>{!! Form::select('recyclable_type[]', ['Item' => 'Item', 'ItemCategory' => 'Item Category'], null, [
+        <td> {!! Form::select('recyclable_type[]', ['Item' => 'Item', 'ItemCategory' => 'Item Category'], null, [
             'class' => 'form-control recyclable-type',
             'placeholder' => 'Select Recyclable Type'
-        ]) !!}</td>
+        ]) !!} </td>
         <td class="recyclable-row-select">
         </td>
         <td class="text-right">
-          <a href="#" class="btn btn-danger remove-recyclable-button">Remove</a>
+          <a href="#" class="btn btn-danger remove-recyclable-button"> Remove </a>
         </td>
       </tr>
     </tbody>

@@ -7,7 +7,7 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Grant ' . ucfirst(__('awards.awards')) => 'admin/grants/awards']) !!}
 
-  <h1>Grant {{ ucfirst(__('awards.awards')) }}</h1>
+  <h1> Grant {{ ucfirst(__('awards.awards')) }} </h1>
   <p>
     There should be at least one {{ __('awards.award') }} selected for either {{ __('lorekeeper.character') }} grants or user
     grants.
@@ -15,13 +15,13 @@
 
   {!! Form::open(['url' => 'admin/grants/awards']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h3 class="mb-0">User Grants</h3>
+          <h3 class="mb-0"> User Grants </h3>
         </div>
         <div class="card-body">
           <div class="form-group">
@@ -31,8 +31,8 @@
 
           <div>
             <div class="float-right">
-              <a href="#" class="btn btn-primary add-award btn-sm">Add
-                {{ ucfirst(__('awards.award')) }}</a>
+              <a href="#" class="btn btn-primary add-award btn-sm"> Add
+                {{ ucfirst(__('awards.award')) }} </a>
             </div>
             {!! Form::label(ucfirst(__('awards.award')) . '(s)') !!} {!! add_help('Must have at least 1 ' . __('awards.award') . ' and quantity must be at least 1.') !!}
 
@@ -53,7 +53,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h3 class="mb-0">{{ ucfirst(__('lorekeeper.character')) }} Grants</h3>
+          <h3 class="mb-0"> {{ ucfirst(__('lorekeeper.character')) }} Grants </h3>
         </div>
         <div class="card-body">
           <div class="form-group">
@@ -67,8 +67,8 @@
 
           <div>
             <div class="float-right">
-              <a href="#" class="btn btn-primary add-award btn-sm">Add
-                {{ ucfirst(__('awards.award')) }}</a>
+              <a href="#" class="btn btn-primary add-award btn-sm"> Add
+                {{ ucfirst(__('awards.award')) }} </a>
             </div>
             {!! Form::label(ucfirst(__('awards.award')) . '(s)') !!} {!! add_help('Must have at least 1 ' . __('awards.award') . ' and quantity must be at least 1.') !!}
 
@@ -90,23 +90,23 @@
     <div class="col-12 mt-3">
       <div class="card">
         <div class="card-header">
-          <h3 class="mb-0">Additional Data</h3>
+          <h3 class="mb-0"> Additional Data </h3>
         </div>
         <div class="card-body">
           <div class="form-group d-flex align-items-center no-gutters">
-            <div class="col-md-2">{!! Form::label('data', 'Reason (Optional)') !!} {!! add_help(
+            <div class="col-md-2"> {!! Form::label('data', 'Reason (Optional)') !!} {!! add_help(
                 'A reason for the grant. This will be noted in the logs and in the ' . __('awards.awardcase') . ' description.'
-            ) !!}</div>
+            ) !!} </div>
             {!! Form::text('data', null, ['class' => 'col-md-10 form-control px-2', 'maxlength' => 400]) !!}
           </div>
           <div class="form-group d-flex align-items-center no-gutters">
-            <div class="col-md-2">{!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help(
+            <div class="col-md-2"> {!! Form::label('notes', 'Notes (Optional)') !!} {!! add_help(
                 'Additional notes for the ' .
                     __('awards.award') .
                     '. This will appear in the ' .
                     __('awards.award') .
                     '\'s description, but not in the logs.'
-            ) !!}</div>
+            ) !!} </div>
             {!! Form::text('notes', null, ['class' => 'col-md-10 form-control px-2', 'maxlength' => 400]) !!}
           </div>
           <div class="form-group">

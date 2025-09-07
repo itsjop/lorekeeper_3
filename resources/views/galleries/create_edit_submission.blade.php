@@ -19,9 +19,9 @@
       <div class="float-right">
         @if ($submission->status == 'Accepted')
           <a href="#"
-            class="btn btn-warning archive-submission-button">{{ $submission->isVisible ? 'Archive' : 'Unarchive' }}</a>
+            class="btn btn-warning archive-submission-button"> {{ $submission->isVisible ? 'Archive' : 'Unarchive' }} </a>
         @endif
-        <a href="/gallery/view/{{ $submission->id }}" class="btn btn-outline-primary">View Submission</a>
+        <a href="/gallery/view/{{ $submission->id }}" class="btn btn-outline-primary"> View Submission </a>
       </div>
     @endif
   </h1>
@@ -41,9 +41,9 @@
         'files' => true
     ]) !!}
 
-    <h2>Main Content</h2>
-    <p>Upload an image and/or text as the content of your submission. You <strong>can</strong> upload both in the event that you
-      have an image with accompanying text or vice versa.</p>
+    <h2> Main Content </h2>
+    <p> Upload an image and/or text as the content of your submission. You <strong>can </strong> upload both in the event that you
+      have an image with accompanying text or vice versa. </p>
 
     <div class="form-group">
       {!! Form::label('Image') !!}
@@ -73,7 +73,7 @@
           {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
           {!! Form::file('image', ['class' => 'custom-file-input', 'id' => 'mainImage']) !!}
         </div>
-        <small>Images may be PNG, GIF, JPG, or WebP and up to 2MB in size.</small>
+        <small> Images may be PNG, GIF, JPG, or WebP and up to 2MB in size. </small>
       </div>
     </div>
 
@@ -88,7 +88,7 @@
           class="mx-2 mb-2 btn btn-sm btn-primary"
           data-bs-toggle="collapse"
           aria-expanded="false"
-        >Hide Textarea</a>
+        > Hide Textarea </a>
       @endif
       <div id="writingForm" class="collapse show">
         {!! Form::textarea('text', $submission->text ?? old('text'), ['class' => 'form-control wysiwyg']) !!}
@@ -96,10 +96,10 @@
 
       <div class="row">
         <div class="col-md">
-          <h3>Basic Information</h3>
+          <h3> Basic Information </h3>
           <div class="form-group">
             {!! Form::label('title', 'Title', ['class' => 'h5']) !!} {!! add_help(
-                'You <strong>do not</strong> need to indicate that a piece is a trade, gift, for a prompt etc. as this will be automatically added based on your input elsewhere in this form.'
+                'You <strong>do not </strong> need to indicate that a piece is a trade, gift, for a prompt etc. as this will be automatically added based on your input elsewhere in this form.'
             ) !!}
             {!! Form::text('title', $submission->title ?? old('title'), ['class' => 'form-control']) !!}
           </div>
@@ -122,7 +122,7 @@
                   'prompt_id',
                   ($submission->id && Auth::user()->hasPower('manage_submissions') ? '[Admin] ' : '') . 'Prompt (Optional)'
               ) !!} {!! add_help(
-                  'This <strong>does not</strong> automatically submit to the selected prompt, and you will need to submit to it separately. The prompt selected here will be displayed on the submission page for future reference. You will not be able to edit this after creating the submission.'
+                  'This <strong>does not </strong> automatically submit to the selected prompt, and you will need to submit to it separately. The prompt selected here will be displayed on the submission page for future reference. You will not be able to edit this after creating the submission.'
               ) !!}
               {!! Form::select('prompt_id', $prompts, $submission->prompt_id ?? old('prompt_id'), [
                   'class' => 'form-control selectize',
@@ -133,7 +133,7 @@
           @else
             {!! $submission->prompt_id
                 ? '<p>
-                                    <strong>Prompt:</strong> ' .
+                                    <strong> Prompt:</strong> ' .
                     $submission->prompt->displayName .
                     '</p>'
                 : '' !!}
@@ -145,7 +145,7 @@
                   'location_id',
                   ($submission->id && Auth::user()->hasPower('manage_submissions') ? '[Admin] ' : '') . 'Location (Optional)'
               ) !!} {!! add_help(
-                  'This <strong>does not</strong> automatically submit to the selected location, and you will need to submit to it separately. The location selected here will be displayed on the submission page for future reference. You will not be able to edit this after creating the submission.'
+                  'This <strong>does not </strong> automatically submit to the selected location, and you will need to submit to it separately. The location selected here will be displayed on the submission page for future reference. You will not be able to edit this after creating the submission.'
               ) !!}
               {!! Form::select('location_id', $locations, $submission->location_id, [
                   'class' => 'form-control selectize',
@@ -156,7 +156,7 @@
           @else
             {!! $submission->location_id
                 ? '<p>
-                                    <strong>Location:</strong> ' .
+                                    <strong> Location:</strong> ' .
                     $submission->location->displayName .
                     '</p>'
                 : '' !!}
@@ -179,7 +179,7 @@
             {!! Form::hidden('gallery_id', $gallery->id) !!}
           @endif
 
-          <h3>Characters</h3>
+          <h3> Characters </h3>
           <p>
             Add the characters included in this piece.
             @if ($gallery->criteria)
@@ -205,26 +205,26 @@
               href="#"
               class="btn btn-outline-info"
               id="addCharacter"
-            >Add Character</a>
+            > Add Character </a>
           </div>
         </div>
         @if (!$submission->id || $submission->status == 'Pending')
           <div class="col-md-4">
             <div class="card mb-4">
               <div class="card-header">
-                <h5>Collaborators</h5>
+                <h5> Collaborators </h5>
               </div>
               <div class="card-body">
-                <p>If this piece is a collaboration, add collaborators and their roles here, including yourself. <strong>Otherwise,
-                    leave this blank</strong>. You <strong>will not</strong> be able to edit this once the submission has been
-                  accepted, but will while it is still pending.</p>
+                <p> If this piece is a collaboration, add collaborators and their roles here, including yourself. <strong> Otherwise,
+                    leave this blank </strong>. You <strong>will not </strong> be able to edit this once the submission has been
+                  accepted, but will while it is still pending. </p>
                 @if (!$submission->id || $submission->status == 'Pending')
                   <div class="text-right mb-3">
                     <a
                       href="#"
                       class="btn btn-outline-info"
                       id="add-collaborator"
-                    >Add Collaborator</a>
+                    > Add Collaborator </a>
                   </div>
                   <div id="collaboratorList">
                     @if ($submission->id)
@@ -254,10 +254,10 @@
                     @if (old('collaborator_id'))
                       @foreach (old('collaborator_id') as $key => $collaborator)
                         <div class="mb-2">
-                          <div class="d-flex">{!! Form::select('collaborator_id[]', $users, $collaborator, [
+                          <div class="d-flex"> {!! Form::select('collaborator_id[]', $users, $collaborator, [
                               'class' => 'form-control mr-2 collaborator-select original',
                               'placeholder' => 'Select User'
-                          ]) !!}</div>
+                          ]) !!} </div>
                           <div class="d-flex">
                             {!! Form::text('collaborator_data[]', old('collaborator_data')[$key], [
                                 'class' => 'form-control mr-2',
@@ -273,7 +273,7 @@
                   <p>
                     @if ($submission->collaborators->count())
                       @foreach ($submission->collaborators as $collaborator)
-                        {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}<br />
+                        {!! $collaborator->user->displayName !!}: {{ $collaborator->data }} <br />
                       @endforeach
                     @endif
                   </p>
@@ -282,28 +282,28 @@
             </div>
             <div class="card mb-4">
               <div class="card-header">
-                <h5>Other Participants</h5>
+                <h5> Other Participants </h5>
               </div>
               <div class="card-body">
-                <p>If this piece is gift, part of a trade, or was commissioned By, specify the related user(s) here and select their
-                  role. <strong>Otherwise, leave this blank</strong>. You <strong>will not</strong> be able to edit this once the
-                  submission has been accepted, but will while it is still pending.</p>
+                <p> If this piece is gift, part of a trade, or was commissioned By, specify the related user(s) here and select their
+                  role. <strong> Otherwise, leave this blank </strong>. You <strong>will not </strong> be able to edit this once the
+                  submission has been accepted, but will while it is still pending. </p>
                 @if (!$submission->id || $submission->status == 'Pending')
                   <div class="text-right mb-3">
                     <a
                       href="#"
                       class="btn btn-outline-info"
                       id="add-participant"
-                    >Add Participant</a>
+                    > Add Participant </a>
                   </div>
                   <div id="participantList">
                     @if ($submission->id)
                       @foreach ($submission->participants as $participant)
                         <div class="mb-2">
-                          <div class="d-flex">{!! Form::select('participant_id[]', $users, $participant->user_id, [
+                          <div class="d-flex"> {!! Form::select('participant_id[]', $users, $participant->user_id, [
                               'class' => 'form-control mr-2 participant-select original',
                               'placeholder' => 'Select User'
-                          ]) !!}</div>
+                          ]) !!} </div>
                           <div class="d-flex">
                             {!! Form::select(
                                 'participant_type[]',
@@ -327,10 +327,10 @@
                     @if (old('participant_id'))
                       @foreach (old('participant_id') as $key => $participant)
                         <div class="mb-2">
-                          <div class="d-flex">{!! Form::select('participant_id[]', $users, $participant, [
+                          <div class="d-flex"> {!! Form::select('participant_id[]', $users, $participant, [
                               'class' => 'form-control mr-2 participant-select original',
                               'placeholder' => 'Select User'
-                          ]) !!}</div>
+                          ]) !!} </div>
                           <div class="d-flex">
                             {!! Form::select(
                                 'participant_type[]',
@@ -356,7 +356,7 @@
                   <p>
                     @if ($submission->participants->count())
                       @foreach ($submission->participants as $participant)
-                        {!! $participant->user->displayName !!}: {{ $participant->displayType }}<br />
+                        {!! $participant->user->displayName !!}: {{ $participant->displayType }} <br />
                       @endforeach
                     @endif
                   </p>
@@ -366,12 +366,12 @@
             {{-- @if (Settings::get('gallery_submissions_reward_currency') && $gallery->currency_enabled && !$submission->id)
               <div class="card mb-4">
                 <div class="card-header">
-                  <h5>{!! $currency->name !!} Awards</h5>
+                  <h5> {!! $currency->name !!} Awards </h5>
                 </div>
                 <div class="card-body">
-                  <p>Please select options as appropriate for this piece. This will help the staff processing your submission award
-                    {!! $currency->displayName !!} for it. You <strong>will not</strong> be able to edit this after creating the
-                    submission.</p>
+                  <p> Please select options as appropriate for this piece. This will help the staff processing your submission award
+                    {!! $currency->displayName !!} for it. You <strong>will not </strong> be able to edit this after creating the
+                    submission. </p>
 
                   @foreach (config('lorekeeper.group_currency_form') as $key => $field)
                     <div class="form-group">
@@ -401,7 +401,7 @@
                               type="{{ isset($field['multiple']) && $field['multiple'] ? 'checkbox' : 'radio' }}"
                               value="{{ $value }}"
                             >
-                            <label for="{{ $key }}[]" class="label-class ml-3">{{ $choice }}</label>
+                            <label for="{{ $key }}[]" class="label-class ml-3"> {{ $choice }} </label>
                           </div>
                         @endforeach
                       @elseif($field['type'] != 'checkbox')
@@ -422,14 +422,14 @@
       </div>
 
       @if ($gallery->criteria->count() > 0 && !$submission->id)
-        <h2 id="criterion-section" class="mt-5">Criteria Rewards <button class="btn  btn-outline-info float-right add-calc"
+        <h2 id="criterion-section" class="mt-5"> Criteria Rewards <button class="btn  btn-outline-info float-right add-calc"
             type="button"
-          >Add Reward Calculator</a>
+          > Add Reward Calculator </a>
         </h2>
-        <p>Criteria can be used in addition to or in replacement of rewards. They take input on what you are turning in for the
+        <p> Criteria can be used in addition to or in replacement of rewards. They take input on what you are turning in for the
           prompt
-          in order to calculate your final reward.</p>
-        <p>The calculator may populate in with pre-selected minimum requirements for this prompt. </p>
+          in order to calculate your final reward. </p>
+        <p> The calculator may populate in with pre-selected minimum requirements for this prompt. </p>
         <div id="criteria">
         </div>
         <div class="mb-4">
@@ -493,7 +493,7 @@
           href="#"
           class="btn btn-primary"
           id="submitButton"
-        >Submit</a>
+        > Submit </a>
       </div>
       {!! Form::close() !!}
 
@@ -506,7 +506,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <span class="modal-title h5 mb-0">Confirm Submission</span>
+              <span class="modal-title h5 mb-0"> Confirm Submission </span>
               <button
                 type="button"
                 class="close"
@@ -531,7 +531,7 @@
                   href="#"
                   id="formSubmit"
                   class="btn btn-primary"
-                >Confirm</a>
+                > Confirm </a>
               </div>
             </div>
           </div>

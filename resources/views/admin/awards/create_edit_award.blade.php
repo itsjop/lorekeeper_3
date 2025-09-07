@@ -13,9 +13,9 @@
           : 'admin/data/awards/create'
   ]) !!}
 
-  <h1>{!! $award->id ? 'Edit ' . $award->displayName : 'Create ' . ucfirst(__('awards.award')) !!}
+  <h1> {!! $award->id ? 'Edit ' . $award->displayName : 'Create ' . ucfirst(__('awards.award')) !!}
     @if ($award->id)
-      <a href="#" class="btn btn-outline-danger float-right delete-award-button">Delete {{ ucfirst(__('awards.award')) }}</a>
+      <a href="#" class="btn btn-outline-danger float-right delete-award-button"> Delete {{ ucfirst(__('awards.award')) }} </a>
     @endif
   </h1>
 
@@ -26,7 +26,7 @@
 
   <div class="card mb-3">
     <div class="card-header">
-      <h3 class="mb-0">Basic Information</h3>
+      <h3 class="mb-0"> Basic Information </h3>
     </div>
     <div class="card-body">
       <div class="row no-gutters">
@@ -49,8 +49,8 @@
             <img src="{{ $award->imageUrl }}" class="float-left mr-2" />
           @endif
           {!! Form::label('image', 'World Page Image (Optional)', ['class' => 'mr-2 mb-0 font-weight-bold']) !!} {!! add_help('This image is used only on the world information pages.') !!}
-          <div>{!! Form::file('image') !!}</div>
-          <div class="text-muted">Recommended size: 100px x 100px</div>
+          <div> {!! Form::file('image') !!} </div>
+          <div class="text-muted"> Recommended size: 100px x 100px </div>
           @if ($award->has_image)
             <div class="form-check">
               {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-input']) !!}
@@ -64,7 +64,7 @@
 
   <div class="card mb-3">
     <div class="card-header">
-      <h3 class="mb-0">Settings</h3>
+      <h3 class="mb-0"> Settings </h3>
     </div>
     <div class="card-body">
       <div class="row no-gutters">
@@ -91,7 +91,7 @@
           {!! add_help(
               'This ' .
                   __('awards.award') .
-                  ' is featured on the holder\'s profile. <br>Limited to the number set in extension configuration per character/user.'
+                  ' is featured on the holder\'s profile. <br> Limited to the number set in extension configuration per character/user.'
           ) !!}
         </div>
         <div class="col-md-4 form-group pl-md-3">
@@ -150,7 +150,7 @@
 
   <div class="card mb-3">
     <div class="card-header">
-      <h3 class="mb-0">Availability Information</h3>
+      <h3 class="mb-0"> Availability Information </h3>
     </div>
     <div class="card-body">
       <div class="row mb-0">
@@ -180,7 +180,7 @@
           href="#"
           class="btn btn-primary mr-2 float-right btn-sm"
           id="add-credit-button"
-        >Add Credit</a> Credits
+        > Add Credit </a> Credits
       </h3>
     </div>
     <div class="card-body">
@@ -214,7 +214,7 @@
   @if ($award->id)
     <div class="card mb-3">
       <div class="card-header">
-        <h3 class="mb-0">Automatic Unlock Progression</h3>
+        <h3 class="mb-0"> Automatic Unlock Progression </h3>
       </div>
       <div class="card-body">
         <p>
@@ -239,7 +239,7 @@
 
     <div class="card mb-3">
       <div class="card-header">
-        <h3 class="mb-0">Unlock Reward</h3>
+        <h3 class="mb-0"> Unlock Reward </h3>
       </div>
       <div class="card-body">
         <p>
@@ -249,9 +249,9 @@
           reward.
         </p>
         <p>
-          <b>The user will only receive this reward through the automatic unlock process. When they claim the
+          <b> The user will only receive this reward through the automatic unlock process. When they claim the
             {{ __('awards.award') }}, if the {{ __('awards.award') }} has any rewards all the items required for unlock will be
-            debitted from their inventory.</b>
+            debitted from their inventory. </b>
         </p>
 
         @include('widgets._reward_select', [
@@ -347,7 +347,7 @@
   </div>
 
   @if ($award->id)
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._award_entry', [

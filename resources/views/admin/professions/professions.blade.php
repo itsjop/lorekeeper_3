@@ -7,23 +7,23 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Professions' => 'admin/data/professions']) !!}
 
-  <h1>Professions</h1>
+  <h1> Professions </h1>
 
-  <p>This is a list of professions that can be attached to characters. These professions can be freely chosen by the user on their
+  <p> This is a list of professions that can be attached to characters. These professions can be freely chosen by the user on their
     profile.
     You can sort within a category or with all professions visible, <b>but sorting within subcategories will lead to weird
-      results.</b> </p>
+      results. </b> </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/profession-categories') }}">
       <i class="fas fa-folder">
-      </i> Profession Categories</a>
+      </i> Profession Categories </a>
     <a class="btn btn-primary" href="{{ url('admin/data/profession-subcategories') }}">
       <i class="fas fa-folder">
-      </i> Profession Subcategories</a>
+      </i> Profession Subcategories </a>
     <a class="btn btn-primary" href="{{ url('admin/data/professions/create') }}">
       <i class="fas fa-plus">
-      </i> Create New Profession</a>
+      </i> Create New Profession </a>
   </div>
 
   <div>
@@ -44,15 +44,15 @@
   </div>
 
   @if (!count($professions))
-    <p>No professions found.</p>
+    <p> No professions found. </p>
   @else
     <table class="table table-sm category-table">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Category</th>
-          <th scope="col">Subcategory</th>
-          <th scope="col">Species</th>
+          <th scope="col"> Name </th>
+          <th scope="col"> Category </th>
+          <th scope="col"> Subcategory </th>
+          <th scope="col"> Species </th>
         </tr>
       </thead>
       <tbody id="sortable" class="sortable">
@@ -73,7 +73,7 @@
               {{ $profession->category->species ? $profession->category->species->name : '---' }}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/professions/edit/' . $profession->id) }}" class="btn btn-primary py-0 px-1">Edit</a>
+              <a href="{{ url('admin/data/professions/edit/' . $profession->id) }}" class="btn btn-primary py-0 px-1"> Edit </a>
             </td>
           </tr>
         @endforeach
@@ -86,8 +86,8 @@
       {!! Form::submit('Save Order', ['class' => 'btn btn-primary']) !!}
       {!! Form::close() !!}
     </div>
-    <div class="text-center mt-4 small text-muted">{{ $professions->count() }} result{{ $professions->count() == 1 ? '' : 's' }}
-      found.</div>
+    <div class="text-center mt-4 small text-muted"> {{ $professions->count() }} result{{ $professions->count() == 1 ? '' : 's' }}
+      found. </div>
   @endif
 
 @endsection

@@ -13,7 +13,7 @@
     </a>
   </div>
   <div class="col-md-9">
-    <h3>{!! $name !!} @if (isset($url) && $url)
+    <h3> {!! $name !!} @if (isset($url) && $url)
         <a href="{{ $url }}" class="world-entry-search text-muted">
           <i class="fas fa-search"></i>
         </a>
@@ -21,7 +21,7 @@
     </h3>
     <div class="row">
       <div class="col-md-6 col-md">
-        <h4>Locations</h4>
+        <h4> Locations </h4>
         <div class="row">
           @foreach ($map->locations as $l)
             @if ($l->is_active)

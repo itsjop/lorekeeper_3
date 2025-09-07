@@ -13,9 +13,9 @@
           : 'admin/data/prompts/create'
   ]) !!}
 
-  <h1>{{ $prompt->id ? 'Edit' : 'Create' }} Prompt
+  <h1> {{ $prompt->id ? 'Edit' : 'Create' }} Prompt
     @if ($prompt->id)
-      <a href="#" class="btn btn-danger float-right delete-prompt-button">Delete Prompt</a>
+      <a href="#" class="btn btn-danger float-right delete-prompt-button"> Delete Prompt </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md-8 form-group">
@@ -43,7 +43,7 @@
       {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('image', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: 100px x 100px</div>
+    <div class="text-muted"> Recommended size: 100px x 100px </div>
     @if ($prompt->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -117,7 +117,7 @@
 
   <div class="form-group">
     {!! Form::label('Hide Submissions (Optional)') !!} {!! add_help(
-        'Hide submissions to this prompt until the prompt ends, or forever. <strong>Hiding until the prompt ends requires a set end time.</strong>'
+        'Hide submissions to this prompt until the prompt ends, or forever. <strong> Hiding until the prompt ends requires a set end time. </strong>'
     ) !!}
     {!! Form::select(
         'hide_submissions',
@@ -131,7 +131,7 @@
 
   <h3 class="my-5">
     Criteria Rewards
-    <button class="btn btn-primary float-right add-calc m-0" type="button">+ Criterion</a>
+    <button class="btn btn-primary float-right add-calc m-0" type="button">+ Criterion </a>
   </h3>
   <p>
     Criteria can be used in addition to or in replacment of rewards. They can be created under the "criterion" section of the admin
@@ -177,11 +177,11 @@
     @endforeach
   </div>
 
-  <h3>Submission Limits</h3>
-  <p>Limit the number of times a user can submit. Leave blank to allow endless submissions.</p>
-  <p>Set a number into number of submissions. This will be applied for all time if you leave period blank, or per time period (ex:
-    once a month, twice a week) if selected.</p>
-  <p>If you turn 'per character' on, then the number of submissions multiplies per character (ex: if you can submit twice a month
+  <h3> Submission Limits </h3>
+  <p> Limit the number of times a user can submit. Leave blank to allow endless submissions. </p>
+  <p> Set a number into number of submissions. This will be applied for all time if you leave period blank, or per time period (ex:
+    once a month, twice a week) if selected. </p>
+  <p> If you turn 'per character' on, then the number of submissions multiplies per character (ex: if you can submit twice a month
     per character and you own three characters, that's 6 submissions) HOWEVER it will not keep track of which characters are being
     submitted due to conflicts arising in character cameos. A user will be able to submit those full 6 times with just one
     character...!</p>
@@ -210,10 +210,10 @@
     {!! Form::label('limit_character', 'Per Character', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If turned on, they can submit once per character they own on the masterlist.') !!}
   </div>
 
-  <h3>Rewards</h3>
-  <p>Rewards are credited on a per-user basis. Mods are able to modify the specific rewards granted at approval time.</p>
-  <p>You can add loot tables containing any kind of currencies (both user- and character-attached), but be sure to keep track of
-    which are being distributed! Character-only currencies cannot be given to users.</p>
+  <h3> Rewards </h3>
+  <p> Rewards are credited on a per-user basis. Mods are able to modify the specific rewards granted at approval time. </p>
+  <p> You can add loot tables containing any kind of currencies (both user- and character-attached), but be sure to keep track of
+    which are being distributed! Character-only currencies cannot be given to users. </p>
 
   @include('widgets._loot_select', [
       'loots' => $prompt->rewards,
@@ -249,7 +249,7 @@
         </button>
       </div>
     </div>
-    <div id="collapsable-" class="form collapse">Select a criterion to populate this area.</div>
+    <div id="collapsable-" class="form collapse"> Select a criterion to populate this area. </div>
   </div>
 
   @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
@@ -257,7 +257,7 @@
   @if ($prompt->id)
     @include('widgets._add_limits', ['object' => $prompt])
 
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     <div class="card mb-3">
       <div class="card-body">
         @include('prompts._prompt_entry', ['prompt' => $prompt])

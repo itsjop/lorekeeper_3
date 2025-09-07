@@ -7,12 +7,12 @@
 @section('account-content')
   {!! breadcrumbs(['My Account' => Auth::user()->url, 'Character Bookmarks' => 'bookmarks']) !!}
 
-  <h1>Character Bookmarks</h1>
+  <h1> Character Bookmarks </h1>
 
-  <p>Bookmarks allow you to keep track of characters that other users own without notifying them in any way. You can add new
+  <p> Bookmarks allow you to keep track of characters that other users own without notifying them in any way. You can add new
     bookmarks by visiting the character's page and clicking the Bookmark button. You cannot bookmark your own characters, but
     characters you have bookmarked that are transferred to you will preserve the bookmarks until you delete them. Bookmarks on
-    characters you own will not give you notifications.</p>
+    characters you own will not give you notifications. </p>
 
   {!! Form::open(['method' => 'GET']) !!}
   <div class="form-inline justify-content-end mb-3">
@@ -74,9 +74,9 @@
         <tr>
           <th class="thumbnail-hide bookmark-thumbnail">
           </th>
-          <th class="bookmark-info">Info</th>
-          <th class="bookmark-comment">Comment</th>
-          <th class="bookmark-notifications">Notify When...</th>
+          <th class="bookmark-info"> Info </th>
+          <th class="bookmark-comment"> Comment </th>
+          <th class="bookmark-notifications"> Notify When... </th>
           <th class="bookmark-actions">
           </th>
         </tr>
@@ -96,7 +96,7 @@
               </div>
             </td>
             <td>
-              <h5 class="mb-0">{!! $bookmark->character->displayName !!}</h5>
+              <h5 class="mb-0"> {!! $bookmark->character->displayName !!} </h5>
               {!! $bookmark->character->image->species_id ? $bookmark->character->image->species->displayName : 'No Species' !!} ・ {!! $bookmark->character->image->rarity_id ? $bookmark->character->image->rarity->displayName : 'No Rarity' !!} ・ {!! $bookmark->character->displayOwner !!}
 
               @if ($bookmark->character->is_gift_art_allowed > 0 && !$bookmark->character->is_myo_slot)
@@ -155,12 +155,12 @@
                 href="#"
                 class="btn btn-outline-primary btn-sm edit-bookmark-button"
                 data-id="{{ Auth::user()->bookmarks()->where('character_id', $bookmark->character_id)->first()->id }}"
-              >Edit</a>
+              > Edit </a>
               <a
                 href="#"
                 class="btn btn-outline-danger btn-sm delete-bookmark-button"
                 data-id="{{ Auth::user()->bookmarks()->where('character_id', $bookmark->character_id)->first()->id }}"
-              >Delete</a>
+              > Delete </a>
             </td>
           </tr>
         @endforeach
@@ -169,7 +169,7 @@
   </div>
 
   @if (!count($bookmarks))
-    <div class="text-center">No bookmarks. You can bookmark characters from their respective pages.</div>
+    <div class="text-center"> No bookmarks. You can bookmark characters from their respective pages. </div>
   @endif
 
   {!! $bookmarks->render() !!}

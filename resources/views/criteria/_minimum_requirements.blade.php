@@ -1,13 +1,13 @@
 @if ($criterion)
-  <p>{{ $criterion->summary }}{!! $criterion->is_guide_active ? ' - <a href="' . url('/criteria/guide/' . $criterion->id) . '">Go To Guide</a>' : '' !!}</p>
+  <p> {{ $criterion->summary }}{!! $criterion->is_guide_active ? ' - <a href="' . url('/criteria/guide/' . $criterion->id) . '"> Go To Guide </a>' : '' !!} </p>
 
   @php $finalValues = $values ?? $minRequirements @endphp
   <div id="calc-{{ isset($id) ? $id : $criterion->id }}" class="ml-2 grid gap-2 grid-3-col steps">
     <h5 class="grid-span">
       {{ isset($title) ? $title : 'Minimum Requirements' }}
-      <span class="mr-2 text-secondary"> - will reward <span class="reward">{!! isset($criterion_currency)
+      <span class="mr-2 text-secondary"> - will reward <span class="reward"> {!! isset($criterion_currency)
           ? \App\Models\Currency\Currency::find($criterion_currency)->display($criterion->calculateReward($finalValues)) ?? 0
-          : $criterion->currency->display($criterion->calculateReward($finalValues)) ?? 0 !!}</span>
+          : $criterion->currency->display($criterion->calculateReward($finalValues)) ?? 0 !!} </span>
     </h5>
     @if (isset($isAdmin) && $isAdmin)
       @php
@@ -25,8 +25,8 @@
           ) !!}
         </div>
         <div class="col">
-          <strong>(Admin) Currency Options</strong>
-          <p class="mb-0">If you would like to reward a different currency to the base criterion, then change this.</p>
+          <strong>(Admin) Currency Options </strong>
+          <p class="mb-0"> If you would like to reward a different currency to the base criterion, then change this. </p>
         </div>
       </div>
     @else
@@ -96,5 +96,5 @@
     });
   </script>
 @else
-  <div>This Criterion no longer exists</div>
+  <div> This Criterion no longer exists </div>
 @endif

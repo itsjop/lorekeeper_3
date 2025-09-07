@@ -13,15 +13,15 @@
           : 'admin/data/galleries/create'
   ]) !!}
 
-  <h1>{{ $gallery->id ? 'Edit' : 'Create' }} Gallery
+  <h1> {{ $gallery->id ? 'Edit' : 'Create' }} Gallery
     @if ($gallery->id)
-      <a href="#" class="btn btn-danger float-right delete-gallery-button">Delete Gallery</a>
+      <a href="#" class="btn btn-danger float-right delete-gallery-button"> Delete Gallery </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $gallery->id ? 'admin/data/galleries/edit/' . $gallery->id : 'admin/data/galleries/create']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="row">
     <div class="col-md form-group">
@@ -108,7 +108,7 @@
       <div class="form-group">
         {!! Form::label('hide_before_start', 'Hide Before Start Time', ['class' => 'form-check-label ml-3']) !!} {!! add_help(
             'If hidden, the gallery will not be shown on the gallery list before the starting time is reached. A starting time needs to be set. Galleries are always visible after the end time.'
-        ) !!}<br />
+        ) !!} <br />
         {!! Form::checkbox('hide_before_start', 1, $gallery->id ? $gallery->hide_before_start : 0, [
             'class' => 'form-check-input',
             'data-toggle' => 'toggle'
@@ -133,7 +133,7 @@
 
   <h3 class="mt-5">
     Criteria Rewards
-    <button class="btn btn-primary float-right add-calc m-0" type="button">+ Criterion</a>
+    <button class="btn btn-primary float-right add-calc m-0" type="button">+ Criterion </a>
   </h3>
   <p>
     Criteria can be used to reward users with currency for the art they submit. They can be created under the "criterion" section of
@@ -206,7 +206,7 @@
         </button>
       </div>
     </div>
-    <div id="collapsable-" class="form collapse">Select a criterion to populate this area.</div>
+    <div id="collapsable-" class="form collapse"> Select a criterion to populate this area. </div>
   </div>
 @endsection
 

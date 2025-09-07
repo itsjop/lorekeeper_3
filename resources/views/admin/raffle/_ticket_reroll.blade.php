@@ -1,6 +1,6 @@
 {!! Form::open(['url' => 'admin/raffles/edit/reroll/' . $ticket->id]) !!}
 
-<p>Are you sure you want to reroll ticket #{{ $ticket->id }}, {!! $ticket->displayHolderName !!}?</p>
+<p> Are you sure you want to reroll ticket #{{ $ticket->id }}, {!! $ticket->displayHolderName !!}?</p>
 
 {!! Form::text('reason', null, ['placeholder' => 'Reason for reroll', 'class' => 'form-control']) !!}
 

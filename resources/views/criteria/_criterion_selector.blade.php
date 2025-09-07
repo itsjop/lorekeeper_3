@@ -11,4 +11,4 @@
     </button>
   </div>
 </div>
-<div class="form">Select a reward calculator to see its options.</div>
+<div class="form"> Select a reward calculator to see its options. </div>

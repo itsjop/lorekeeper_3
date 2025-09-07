@@ -13,9 +13,9 @@
           : 'admin/data/currencies/create'
   ]) !!}
 
-  <h1>{{ $currency->id ? 'Edit' : 'Create' }} Currency
+  <h1> {{ $currency->id ? 'Edit' : 'Create' }} Currency
     @if ($currency->id)
-      <a href="#" class="btn btn-danger float-right delete-currency-button">Delete Currency</a>
+      <a href="#" class="btn btn-danger float-right delete-currency-button"> Delete Currency </a>
     @endif
   </h1>
 
@@ -24,7 +24,7 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
@@ -57,7 +57,7 @@
           {!! Form::label('icon', 'Choose icon file...', ['class' => 'custom-file-label']) !!}
           {!! Form::file('icon', ['class' => 'custom-file-input']) !!}
         </div>
-        <div class="text-muted">Recommended height: 16px</div>
+        <div class="text-muted"> Recommended height: 16px </div>
         @if ($currency->has_icon)
           <div class="form-check">
             {!! Form::checkbox('remove_icon', 1, false, ['class' => 'form-check-input']) !!}
@@ -73,7 +73,7 @@
           {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
           {!! Form::file('image', ['class' => 'custom-file-input']) !!}
         </div>
-        <div class="text-muted">Recommended size: 200px x 200px</div>
+        <div class="text-muted"> Recommended size: 200px x 200px </div>
         @if ($currency->has_image)
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -89,9 +89,9 @@
     {!! Form::textarea('description', $currency->description, ['class' => 'form-control wysiwyg']) !!}
   </div>
 
-  <h3>Usage</h3>
-  <p>Choose whether this currency should be attached to users and/or characters. Both can be selected at the same time, but at least
-    one must be selected.</p>
+  <h3> Usage </h3>
+  <p> Choose whether this currency should be attached to users and/or characters. Both can be selected at the same time, but at least
+    one must be selected. </p>
   <div class="form-group">
     <div class="form-check">
       <label class="form-check-label">
@@ -154,17 +154,17 @@
   </div>
 
   @if ($currency->id && $currency->is_user_owned)
-    <h3>Conversion Rates</h3>
+    <h3> Conversion Rates </h3>
     <p>
       Choose whether this currency should be able to be converted to other currencies. If so, you can set the conversion rates here.
       <br />
-      <strong>Conversion rates are unidirectional.</strong> If you want to allow a currency to be converted both ways, you will need
+      <strong> Conversion rates are unidirectional. </strong> If you want to allow a currency to be converted both ways, you will need
       to create conversion on both currencies.
       <br />
       Rates should be in decimal form. For example, 1 USD = 0.75 EUR, so the rate would be 0.75.
       Conversions will only allow whole number conversions, e.g. requiring a user to convert 3 USD to 4 EUR.
       <br />
-      <strong>Conversions are only possible on user owned currencies.</strong>
+      <strong> Conversions are only possible on user owned currencies. </strong>
     </p>
     <div class="form-group">
       <div class="d-flex justify-content-end mb-2">
@@ -172,7 +172,7 @@
           href="#"
           class="btn btn-primary mb-2"
           id="add-conversion"
-        >Add Conversion</a>
+        > Add Conversion </a>
       </div>
       <div id="conversionList">
         @foreach ($currency->conversions as $conversion)
@@ -222,16 +222,16 @@
   @endif
 
   @if ($currency->id)
-    <h3>Previews</h3>
+    <h3> Previews </h3>
 
-    <h5>Display</h5>
+    <h5> Display </h5>
     <div class="card mb-3">
       <div class="card-body">
         {!! $currency->display(100) !!}
       </div>
     </div>
 
-    <h5>World Page Entry</h5>
+    <h5> World Page Entry </h5>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._currency_entry', ['currency' => $currency])

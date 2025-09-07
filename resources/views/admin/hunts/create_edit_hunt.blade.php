@@ -13,15 +13,15 @@
           : 'admin/data/hunts/create'
   ]) !!}
 
-  <h1>{{ $hunt->id ? 'Edit' : 'Create' }} Scavenger Hunt
+  <h1> {{ $hunt->id ? 'Edit' : 'Create' }} Scavenger Hunt
     @if ($hunt->id)
-      <a href="#" class="btn btn-danger float-right delete-hunt-button">Delete Hunt</a>
+      <a href="#" class="btn btn-danger float-right delete-hunt-button"> Delete Hunt </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $hunt->id ? 'admin/data/hunts/edit/' . $hunt->id : 'admin/data/hunts/create']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!} {!! add_help(
@@ -48,11 +48,11 @@
   </div>
 
   @if ($hunt->id)
-    <h4>Locations <a
+    <h4> Locations <a
         class="small inventory-collapse-toggle collapse-toggle"
         href="#spoilers"
         data-bs-toggle="collapse"
-      >Show</a>
+      > Show </a>
       </h3>
       <div class="mb-3 collapse form-group" id="spoilers">
         {!! Form::label('locations', 'Locations (Optional)') !!} {!! add_help('The locations of hunt targets. HTML cannot be used.') !!}
@@ -82,11 +82,11 @@
   {!! Form::close() !!}
 
   @if ($hunt->id)
-    <h3>Display Link</h3>
-    <p>For convenience, here is the hunt's url as well as the full HTML to display a link to the hunt's user-facing page. Hunt's
+    <h3> Display Link </h3>
+    <p> For convenience, here is the hunt's url as well as the full HTML to display a link to the hunt's user-facing page. Hunt's
       pages inform users of how many of the hunt's targets they've found, and provide a recap of any clues attached to the found
       targets. Targets not yet found are not displayed, aside from indicating the total number; the full lineup can thus be
-      indicated (or not) as desired.</p>
+      indicated (or not) as desired. </p>
     <div class="alert alert-secondary">
       {{ $hunt->url }}
     </div>
@@ -96,8 +96,8 @@
   @endif
 
   @if ($hunt->id)
-    <h3>Hunt Targets</h3>
-    <p>Hunt targets are items with a specified quantity. They are granted to the user on being claimed, and can only be claimed
+    <h3> Hunt Targets </h3>
+    <p> Hunt targets are items with a specified quantity. They are granted to the user on being claimed, and can only be claimed
       once. Each target is assigned a number, 1-10, per hunt, based on the order they are added to the hunt. Targets can be
       deleted so long as the hunt has not had any participants, as doing so after would break the logs. Users will also be shown the
       number of targets they have found out of the total, so make sure you have only the number of targets desired before the
@@ -105,15 +105,15 @@
 
     @if (count($hunt->targets) < 10)
       <div class="text-right">
-        <a href="{{ url('admin/data/hunts/targets/create/' . $hunt->id) }}" class="btn btn-outline-primary">Add a Target</a>
+        <a href="{{ url('admin/data/hunts/targets/create/' . $hunt->id) }}" class="btn btn-outline-primary"> Add a Target </a>
       </div>
     @endif
 
     @if (count($hunt->targets))
       <div class="row ml-md-2 mb-3">
         <div class="d-flex row flex-wrap col-12 pb-1 px-0 ubt-bottom">
-          <div class="col-md-2 font-weight-bold text-center">Target Number</div>
-          <div class="col-md font-weight-bold">Item</div>
+          <div class="col-md-2 font-weight-bold text-center"> Target Number </div>
+          <div class="col-md font-weight-bold"> Item </div>
         </div>
         @foreach ($hunt->targets as $target)
           <div class="d-flex row flex-wrap col-12 mt-1 pt-2 px-0 ubt-top">
@@ -124,18 +124,18 @@
               {!! $target->displayItem !!}
             </div>
             <div class="col-3 col-md-1 text-right">
-              <a href="{{ url('admin/data/hunts/targets/edit/' . $target->id) }}" class="btn btn-primary py-0 px-2">Edit</a>
+              <a href="{{ url('admin/data/hunts/targets/edit/' . $target->id) }}" class="btn btn-primary py-0 px-2"> Edit </a>
             </div>
           </div>
         @endforeach
       </div>
     @else
-      <p>This hunt has no targets yet.</p>
+      <p> This hunt has no targets yet. </p>
     @endif
   @endif
 
   @if ($hunt->id)
-    <h3>Log</h3>
+    <h3> Log </h3>
     <p>
       This is the log of claimed targets. It's organized per user, and claimed targets are represented by a checkmark with the
       timestamp in the adjacent tooltip.
@@ -146,9 +146,9 @@
 
       <div class="row ml-md-2 mb-3">
         <div class="d-flex row flex-wrap col-12 pb-1 px-0 ubt-bottom">
-          <div class="col-md-2 font-weight-bold">User</div>
+          <div class="col-md-2 font-weight-bold"> User </div>
           @foreach ($hunt->targets as $target)
-            <div class="col-md font-weight-bold text-center">Target {{ $target->targetNumber }}</div>
+            <div class="col-md font-weight-bold text-center"> Target {{ $target->targetNumber }} </div>
           @endforeach
         </div>
         @foreach ($participants as $participant)
@@ -169,7 +169,7 @@
 
       {!! $participants->render() !!}
     @else
-      <p>No participants found!</p>
+      <p> No participants found!</p>
     @endif
 
   @endif

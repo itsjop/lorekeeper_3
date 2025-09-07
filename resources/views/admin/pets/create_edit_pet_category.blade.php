@@ -11,15 +11,15 @@
       ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/pet-categories/edit/' . $category->id : 'admin/data/pet-categories/create',
   ]) !!}
 
-  <h1>{{ $category->id ? 'Edit' : 'Create' }} Pet Category
+  <h1> {{ $category->id ? 'Edit' : 'Create' }} Pet Category
     @if ($category->id)
-      <a href="#" class="btn btn-danger float-right delete-category-button">Delete Category</a>
+      <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif
   </h1>
 
   {!! Form::open(['url' => $category->id ? 'admin/data/pet-categories/edit/' . $category->id : 'admin/data/pet-categories/create', 'files' => true]) !!}
 
-  <h2 class="h3">Basic Information</h2>
+  <h2 class="h3"> Basic Information </h2>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
@@ -43,8 +43,8 @@
 
   <div class="form-group">
     {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
-    <div>{!! Form::file('image') !!}</div>
-    <div class="text-muted">Recommended size: 200px x 200px</div>
+    <div> {!! Form::file('image') !!} </div>
+    <div class="text-muted"> Recommended size: 200px x 200px </div>
     @if ($category->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -70,7 +70,7 @@
   {!! Form::close() !!}
 
   @if ($category->id)
-    <h2 class="h3">Preview</h2>
+    <h2 class="h3"> Preview </h2>
     <div class="card mb-3">
       <div class="card-body">
         @include('world._entry', ['imageUrl' => $category->categoryImageUrl, 'name' => $category->displayName, 'description' => $category->parsed_description, 'visible' => $category->is_visible])

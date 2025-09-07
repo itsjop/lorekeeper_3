@@ -16,7 +16,7 @@
   <h1>
     {{ $area->id ? 'Edit' : 'Create' }} Area
     @if ($area->id)
-      <a href="#" class="btn btn-danger float-right delete-area-button">Delete Area</a>
+      <a href="#" class="btn btn-danger float-right delete-area-button"> Delete Area </a>
     @endif
   </h1>
 
@@ -25,15 +25,15 @@
       'files' => true
   ]) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('Name') !!}
     {!! Form::text('name', $area->name, ['class' => 'form-control']) !!}
   </div>
 
-  <h5>Thumbnail Image</h5>
-  <p>This will be the thumbnail image for this area that will show on the area index.</p>
+  <h5> Thumbnail Image </h5>
+  <p> This will be the thumbnail image for this area that will show on the area index. </p>
   <div class="row">
     @if ($area->has_thumbnail)
       <div class="col-md-2">
@@ -50,8 +50,8 @@
     <div class="col-md-6">
       <div class="form-group">
         {!! Form::label('Thumbnail (Optional)') !!} {!! add_help('This thumbnail is used on the area index.') !!}
-        <div>{!! Form::file('thumb') !!}</div>
-        <div class="text-muted">Recommended size: 100px x 100px</div>
+        <div> {!! Form::file('thumb') !!} </div>
+        <div class="text-muted"> Recommended size: 100px x 100px </div>
         @if ($area->has_thumbnail)
           <div class="form-check">
             {!! Form::checkbox('remove_thumb', 1, false, ['class' => 'form-check-input']) !!}
@@ -61,8 +61,8 @@
       </div>
     </div>
   </div>
-  <h5>Background Image</h5>
-  <p>This will be the background image for this area's encounters.</p>
+  <h5> Background Image </h5>
+  <p> This will be the background image for this area's encounters. </p>
   <div class="row">
     @if ($area->has_image)
       <div class="col-md-2">
@@ -79,8 +79,8 @@
     <div class="col-md-6">
       <div class="form-group">
         {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used on the encounter page.') !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Recommended size: 100px x 100px</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Recommended size: 100px x 100px </div>
         @if ($area->has_image)
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -121,9 +121,9 @@
     </div>
   </div>
 
-  <h3>Table</h3>
+  <h3> Table </h3>
 
-  <p>These are the potential encounters from rolling on this area.@if (!$area->id)
+  <p> These are the potential encounters from rolling on this area.@if (!$area->id)
       You can test rolling after the area is created.
     @endif
   </p>
@@ -132,16 +132,16 @@
       href="#"
       class="btn btn-info"
       id="addEncounter"
-    >Add Encounter</a>
+    > Add Encounter </a>
   </div>
   <table class="table table-sm" id="encounterArea">
     <thead>
       <tr>
-        <th width="40%">Encounter</th>
-        <th width="30%">Weight {!! add_help(
+        <th width="40%"> Encounter </th>
+        <th width="30%"> Weight {!! add_help(
             'A higher weight means a reward is more likely to be rolled. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.'
-        ) !!}</th>
-        <th width="20%">Chance</th>
+        ) !!} </th>
+        <th width="20%"> Chance </th>
         <th width="10%">
         </th>
       </tr>
@@ -156,11 +156,11 @@
                   'placeholder' => 'Select Encounter'
               ]) !!}
             </td>
-            <td class="encounter-row-weight">{!! Form::text('weight[]', $encounter->weight, ['class' => 'form-control encounter-weight']) !!}</td>
+            <td class="encounter-row-weight"> {!! Form::text('weight[]', $encounter->weight, ['class' => 'form-control encounter-weight']) !!} </td>
             <td class="encounter-row-chance">
             </td>
             <td class="text-right">
-              <a href="#" class="btn btn-danger remove-encounter-button">Remove</a>
+              <a href="#" class="btn btn-danger remove-encounter-button"> Remove </a>
             </td>
           </tr>
         @endforeach
@@ -178,15 +178,15 @@
     <table class="table table-sm">
       <tbody id="encounterRow">
         <tr class="encounter-row">
-          <td class="encounter-row-select">{!! Form::select('encounter_id[]', $encounters, null, [
+          <td class="encounter-row-select"> {!! Form::select('encounter_id[]', $encounters, null, [
               'class' => 'form-control encounter-select',
               'placeholder' => 'Select Encounter'
-          ]) !!}</td>
-          <td class="encounter-row-weight">{!! Form::text('weight[]', 1, ['class' => 'form-control encounter-weight']) !!}</td>
+          ]) !!} </td>
+          <td class="encounter-row-weight"> {!! Form::text('weight[]', 1, ['class' => 'form-control encounter-weight']) !!} </td>
           <td class="encounter-row-chance">
           </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-encounter-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-encounter-button"> Remove </a>
           </td>
         </tr>
       </tbody>
@@ -194,13 +194,13 @@
   </div>
 
   @if ($area->id)
-    <h3>Test Roll</h3>
-    <p>If you have made any modifications to the area contents above, be sure to save it (click the Edit button) before
-      testing.</p>
-    <p>Please note that due to the nature of probability, as long as there is a chance, there will always be the
-      possibility of rolling improbably good or bad results. <i>This is not indicative of the code being buggy or poor
-        game balance.</i> Be cautious when adjusting values based on a small sample size, including but not limited
-      to test rolls and a small amount of user reports.</p>
+    <h3> Test Roll </h3>
+    <p> If you have made any modifications to the area contents above, be sure to save it (click the Edit button) before
+      testing. </p>
+    <p> Please note that due to the nature of probability, as long as there is a chance, there will always be the
+      possibility of rolling improbably good or bad results. <i> This is not indicative of the code being buggy or poor
+        game balance. </i> Be cautious when adjusting values based on a small sample size, including but not limited
+      to test rolls and a small amount of user reports. </p>
     <div class="form-group">
       {!! Form::label('quantity', 'Number of Rolls') !!}
       {!! Form::text('quantity', 1, ['class' => 'form-control', 'id' => 'rollQuantity']) !!}
@@ -210,27 +210,27 @@
         href="#"
         class="btn btn-primary"
         id="testRoll"
-      >Test Roll</a>
+      > Test Roll </a>
     </div>
   @endif
 
   @if ($area->id)
     {!! Form::open(['url' => 'admin/data/encounters/areas/restrictions/' . $area->id]) !!}
-    <h3>Restrict Area</h3>
-    <p>Users must obtain all these requirements to be able to enter the area.</p>
+    <h3> Restrict Area </h3>
+    <p> Users must obtain all these requirements to be able to enter the area. </p>
 
     <div class="text-right mb-3">
       <a
         href="#"
         class="btn btn-outline-info"
         id="addLimit"
-      >Add Limit</a>
+      > Add Limit </a>
     </div>
     <table class="table table-sm" id="limitTable">
       <thead>
         <tr>
-          <th width="35%">Limit Type</th>
-          <th width="35%">Limit</th>
+          <th width="35%"> Limit Type </th>
+          <th width="35%"> Limit </th>
           <th width="10%">
           </th>
         </tr>
@@ -239,10 +239,10 @@
         @if ($area->limits)
           @foreach ($area->limits as $limit)
             <tr class="limit-row">
-              <td>{!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], $limit->item_type, [
+              <td> {!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], $limit->item_type, [
                   'class' => 'form-control reward-type',
                   'placeholder' => 'Select limit Type'
-              ]) !!}</td>
+              ]) !!} </td>
               <td class="limit-row-select">
                 @if ($limit->item_type == 'Item')
                   {!! Form::select('item_id[]', $items, $limit->item_id, [
@@ -257,7 +257,7 @@
                 @endif
               </td>
               <td class="text-right">
-                <a href="#" class="btn btn-danger remove-limit-button">Remove</a>
+                <a href="#" class="btn btn-danger remove-limit-button"> Remove </a>
               </td>
             </tr>
           @endforeach
@@ -275,14 +275,14 @@
       <table class="table table-sm">
         <tbody id="limitRow">
           <tr class="limit-row">
-            <td>{!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], null, [
+            <td> {!! Form::select('item_type[]', ['Item' => 'Item', 'Currency' => 'Currency'], null, [
                 'class' => 'form-control reward-type',
                 'placeholder' => 'Select limit Type'
-            ]) !!}</td>
+            ]) !!} </td>
             <td class="limit-row-select">
             </td>
             <td class="text-right">
-              <a href="#" class="btn btn-danger remove-limit-button">Remove</a>
+              <a href="#" class="btn btn-danger remove-limit-button"> Remove </a>
             </td>
           </tr>
         </tbody>
@@ -298,7 +298,7 @@
 
     </div>
 
-    <h3>Preview</h3>
+    <h3> Preview </h3>
     @include('encounters._area_entry')
 
     <div id="encounter-area">

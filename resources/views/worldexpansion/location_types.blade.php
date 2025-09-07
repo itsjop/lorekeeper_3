@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Location Types' => 'world/location-types']) !!}
-  <h1>Location Types</h1>
+  <h1> Location Types </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -52,5 +52,5 @@
   </div>
   {!! $types->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $types->total() }} result{{ $types->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $types->total() }} result{{ $types->total() == 1 ? '' : 's' }} found. </div>
 @endsection

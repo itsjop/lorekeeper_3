@@ -1,8 +1,8 @@
 <div class="card mb-3">
   <div class="card-header">
     <h2 class="mb-0">
-      <span class="float-right badge badge-{{ $trade->status == 'Pending' || $trade->status == 'Open' || $trade->status == 'Canceled' ? 'secondary' : ($trade->status == 'Completed' ? 'success' : 'danger') }}">{{ $trade->status }}</span>
-      <a href="{{ $trade->url }} ">Trade (#{{ $trade->id }})</a>
+      <span class="float-right badge badge-{{ $trade->status == 'Pending' || $trade->status == 'Open' || $trade->status == 'Canceled' ? 'secondary' : ($trade->status == 'Completed' ? 'success' : 'danger') }}"> {{ $trade->status }} </span>
+      <a href="{{ $trade->url }} "> Trade (#{{ $trade->id }})</a>
     </h2>
     @if ($trade->staff)
       Processed by {!! $trade->staff->displayName !!}
@@ -10,7 +10,7 @@
   </div>
   <div class="card-body">
     @if ($trade->comments)
-      <div>{!! nl2br(htmlentities($trade->comments)) !!}</div>
+      <div> {!! nl2br(htmlentities($trade->comments)) !!} </div>
       <hr />
     @endif
     <div class="row">
@@ -20,12 +20,12 @@
           <span class="float-right">
             @if ($trade->{'is_sender_confirmed'})
               @if ($trade->{'is_sender_trade_confirmed'})
-                <small class="text-success">Trade Confirmed</small>
+                <small class="text-success"> Trade Confirmed </small>
               @else
-                <small class="text-primary">Offer Confirmed</small>
+                <small class="text-primary"> Offer Confirmed </small>
               @endif
             @else
-              <small class="text-muted">Pending</small>
+              <small class="text-muted"> Pending </small>
             @endif
           </span>
         </h3>
@@ -42,12 +42,12 @@
           <span class="float-right">
             @if ($trade->{'is_recipient_confirmed'})
               @if ($trade->{'is_recipient_trade_confirmed'})
-                <small class="text-success">Trade Confirmed</small>
+                <small class="text-success"> Trade Confirmed </small>
               @else
-                <small class="text-primary">Offer Confirmed</small>
+                <small class="text-primary"> Offer Confirmed </small>
               @endif
             @else
-              <small class="text-muted">Pending</small>
+              <small class="text-muted"> Pending </small>
             @endif
           </span>
         </h3>
@@ -61,11 +61,11 @@
     </div>
     <hr />
     <div class="text-right">
-      <a href="{{ $trade->url }}" class="btn btn-outline-primary">View Details</a>
+      <a href="{{ $trade->url }}" class="btn btn-outline-primary"> View Details </a>
       @if (isset($queueView) && $trade->status == 'Pending')
         @if (!$trade->is_approved)
-          <a href="#" class="btn btn-outline-success trade-action-button" data-id="{{ $trade->id }}" data-action="approve">Approve</a>
-          <a href="#" class="btn btn-outline-danger trade-action-button" data-id="{{ $trade->id }}" data-action="reject">Reject</a>
+          <a href="#" class="btn btn-outline-success trade-action-button" data-id="{{ $trade->id }}" data-action="approve"> Approve </a>
+          <a href="#" class="btn btn-outline-danger trade-action-button" data-id="{{ $trade->id }}" data-action="reject"> Reject </a>
         @else
           Currently awaiting mod approval
         @endif

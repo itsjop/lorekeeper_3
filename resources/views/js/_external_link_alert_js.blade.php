@@ -28,7 +28,7 @@
                 <a class="btn btn-block btn-success mb-3" href="${url}" target="_blank">
                     Continue
                 </a>
-                <p>Don't recognise this link? Click below to cancel and return to the previous page.</p>
+                <p> Don't recognise this link? Click below to cancel and return to the previous page. </p>
                 <button class="btn btn-block btn-secondary" data-bs-dismiss="modal">
                     Cancel
                 </button>

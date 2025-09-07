@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Events' => 'world/events']) !!}
-  <h1>Events</h1>
+  <h1> Events </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => '']) !!}
@@ -57,22 +57,22 @@
                 </a>
               @endisset
             </div>
-            <h3 class="mb-0 text-center">{!! $event->displayName !!}</h3>
-            <p class="mb-0 text-center">{!! $event->category ? $event->category->displayName : '' !!}</p>
+            <h3 class="mb-0 text-center"> {!! $event->displayName !!} </h3>
+            <p class="mb-0 text-center"> {!! $event->category ? $event->category->displayName : '' !!} </p>
           </div>
 
           @if (count(allAttachments($event)))
             <div class="card-body">
               @foreach (allAttachments($event) as $type => $attachments)
-                <p class="text-center mb-0">Associated with {{ count($attachments) }}
-                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+                <p class="text-center mb-0"> Associated with {{ count($attachments) }}
+                  {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}. </p>
               @endforeach
             </div>
           @endif
 
           @isset($event->summary)
             <div class="card-footer mt-auto">
-              <p class="mb-0"> {!! $event->summary !!}</p>
+              <p class="mb-0"> {!! $event->summary !!} </p>
             </div>
           @endisset
 
@@ -82,5 +82,5 @@
   </div>
   {!! $events->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $events->total() }} result{{ $events->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $events->total() }} result{{ $events->total() == 1 ? '' : 's' }} found. </div>
 @endsection

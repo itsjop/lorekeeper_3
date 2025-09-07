@@ -1,5 +1,5 @@
-<h4>Populate Default Criteria</h4>
-<p>You can populate this {{ $type }} with the selected defaults.</p>
+<h4> Populate Default Criteria </h4>
+<p> You can populate this {{ $type }} with the selected defaults. </p>
 @php
   $defaults = \App\Models\Criteria\CriterionDefault::orderBy('name')->get();
 @endphp

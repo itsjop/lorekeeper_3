@@ -1,5 +1,5 @@
 <div class="home-dashboard">
-  <h1 class="welcome-banner">Welcome back to Reverie, {!! Auth::user()->displayName !!}! ✨</h1>
+  <h1 class="welcome-banner"> Welcome back to Reverie, {!! Auth::user()->displayName !!}! ✨</h1>
   {{-- <div class="card mb-4 timestamp">
     <div class="card-body"> <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!} </div> </div> --}}
   <div class="bubblebox current-event">
@@ -29,11 +29,11 @@
     <div class="bubble jobs gap-_5">
       <a class="wishing-well" href="/dailies/1">
         <img src="{{ asset('images/pages/daily-wishingwell.png') }}" alt="Go to the Wishing Well" />
-        <p class="frontpage-button m-0"> Wishing Well</p>
+        <p class="frontpage-button m-0"> Wishing Well </p>
       </a>
       <a class="starlit-acres" href="/dailies/2">
         <img src="{{ asset('images/pages/daily-starlitacres.png') }}" alt="Go to Starlit Acres daily" />
-        <p class="frontpage-button m-0"> Starlit Acres</p>
+        <p class="frontpage-button m-0"> Starlit Acres </p>
       </a>
       <a class="foraging">
         {{-- <a class="foraging" href="/dailies/3"> --}}
@@ -52,7 +52,7 @@
     </a>
     <div class="bubble px-4">
       @if (Auth::user()->is_news_unread)
-        <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;">New!</div>
+        <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;"> New!</div>
       @endif
       @include('widgets._news', ['textPreview' => true])
     </div>
@@ -66,7 +66,7 @@
     </a>
     <div class="bubble sale-info">
       @if (Auth::user()->is_sales_unread)
-        <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;">New!</div>
+        <div class="newbadge frontpage-button" style="animation-delay: {{ rand(0, 1000) }}ms;"> New!</div>
       @endif
       @include('widgets._sales')
     </div>

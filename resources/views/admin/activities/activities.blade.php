@@ -7,17 +7,17 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Activities' => 'admin/data/activities']) !!}
 
-  <h1>Activities</h1>
+  <h1> Activities </h1>
 
-  <p>This is a list of activities that users can interact with.</p>
-  <p>The sorting order reflects the order in which the activities will be listed on the activity index.</p>
+  <p> This is a list of activities that users can interact with. </p>
+  <p> The sorting order reflects the order in which the activities will be listed on the activity index. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/activities/create') }}">
-      <i class="fas fa-plus"></i> Create New Activity</a>
+      <i class="fas fa-plus"></i> Create New Activity </a>
   </div>
   @if (!count($activities))
-    <p>No activies found.</p>
+    <p> No activies found. </p>
   @else
     <table class="table table-sm">
       <tbody id="sortable" class="sortable">
@@ -29,7 +29,7 @@
               {!! $activity->displayName !!}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/activities/edit/' . $activity->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/activities/edit/' . $activity->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

@@ -9,17 +9,17 @@
 
   <div class="float-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/figure-categories/create') }}">
-      <i class="fas fa-plus mr-2"></i> Create New Figure Category</a>
+      <i class="fas fa-plus mr-2"></i> Create New Figure Category </a>
     <a class="btn btn-secondary" href="{{ url('admin/world/figures') }}">
-      <i class="fas fa-undo-alt mr-2"></i> Back to Figures</a>
+      <i class="fas fa-undo-alt mr-2"></i> Back to Figures </a>
   </div>
-  <h1>Figure Categories</h1>
+  <h1> Figure Categories </h1>
 
-  <p style="clear:both">Figure categories are not required but may help in differentiating mythological figures versus political
-    figures, etc.</p>
+  <p style="clear:both"> Figure categories are not required but may help in differentiating mythological figures versus political
+    figures, etc. </p>
 
   @if (!count($categories))
-    <p>No figure categories found.</p>
+    <p> No figure categories found. </p>
   @else
     <table class="table table-sm category-table">
       <tbody id="sortable" class="sortable">
@@ -30,11 +30,11 @@
               </a>
               <a href={!! $category->url !!}
                 @if ($category->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $category->thumbUrl }}' style='max-width:100px;'/><br> {{ ucfirst($category->name) }} " @endif
-              />{!! $category->name !!}</a>
+              /> {!! $category->name !!} </a>
               {{ $category->summary ? '(' . $category->summary . ')' : '' }}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/figure-categories/edit/' . $category->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/world/figure-categories/edit/' . $category->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

@@ -1,8 +1,8 @@
-<h3>Your Characters <a
+<h3> Your Characters <a
     class="small characters-collapse-toggle collapse-toggle"
     href="#userCharacters"
     data-bs-toggle="collapse"
-  >Show</a>
+  > Show </a>
 </h3>
 <div class="card mb-3 collapse show" id="userCharacters">
   <div class="card-body">
@@ -10,18 +10,18 @@
       <div class="d-inline-block">
         {!! Form::label('character_category_id', 'Filter:', ['class' => 'mr-2']) !!}
         <select class="form-control d-inline-block w-auto" id="userCharacterCategory">
-          <option value="all">All Categories</option>
-          <option value="selected">Selected Characters</option>
+          <option value="all"> All Categories </option>
+          <option value="selected"> Selected Characters </option>
           <option disabled>&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</option>
           @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <option value="{{ $category->id }}"> {{ $category->name }} </option>
           @endforeach
         </select>
       </div>
       <div class="d-inline-block">
         {!! Form::label('character_category_id', 'Action:', ['class' => 'ml-2 mr-2']) !!}
-        <a href="#" class="btn btn-primary characters-select-all">Select All Visible</a>
-        <a href="#" class="btn btn-primary characters-clear-selection">Clear Visible Selection</a>
+        <a href="#" class="btn btn-primary characters-select-all"> Select All Visible </a>
+        <a href="#" class="btn btn-primary characters-clear-selection"> Clear Visible Selection </a>
       </div>
     </div>
     <div class="user-characters">
@@ -45,7 +45,7 @@
                 </a>
               </div>
               <div>
-                <a class="character-stack character-stack-name">{{ $character->slug }}</a>
+                <a class="character-stack character-stack-name"> {{ $character->slug }} </a>
                 {!! Form::checkbox(
                     isset($fieldName) && $fieldName ? $fieldName : 'character_id[]',
                     $character->id,

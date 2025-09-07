@@ -7,21 +7,21 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Pets' => 'admin/data/pets']) !!}
 
-  <h1>Pets</h1>
+  <h1> Pets </h1>
 
-  <p>This is a list of pets in the game. Specific details about pets can be added when they are granted to users (e.g. reason for
+  <p> This is a list of pets in the game. Specific details about pets can be added when they are granted to users (e.g. reason for
     grant). By default, pets are merely collectibles and any additional functionality must be manually processed, or custom
-    coded in for the specific pet.</p>
+    coded in for the specific pet. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/pet-categories') }}">
-      <i class="fas fa-folder mr-1"></i> Pet Categories</a>
+      <i class="fas fa-folder mr-1"></i> Pet Categories </a>
     <a class="btn btn-primary" href="{{ url('admin/data/pets/drops') }}">
-      <i class="fas fa-egg mr-1"></i> Pet Drops</a>
+      <i class="fas fa-egg mr-1"></i> Pet Drops </a>
     <a class="btn btn-primary" href="{{ url('admin/data/pets/levels') }}">
-      <i class="fas fa-level-up-alt mr-1"></i> Pet Levels</a>
+      <i class="fas fa-level-up-alt mr-1"></i> Pet Levels </a>
     <a class="btn btn-primary" href="{{ url('admin/data/pets/create') }}">
-      <i class="fas fa-plus mr-1"></i> Create New Pet</a>
+      <i class="fas fa-plus mr-1"></i> Create New Pet </a>
   </div>
 
   <div>
@@ -39,13 +39,13 @@
   </div>
 
   @if (!count($pets))
-    <p>No pets found.</p>
+    <p> No pets found. </p>
   @else
     {!! $pets->render() !!}
     <div class="row ml-md-2">
       <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
-        <div class="col-5 col-md-6 font-weight-bold">Name</div>
-        <div class="col col-md font-weight-bold">Category</div>
+        <div class="col-5 col-md-6 font-weight-bold"> Name </div>
+        <div class="col col-md font-weight-bold"> Category </div>
       </div>
       @foreach ($pets as $pet)
         <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
@@ -58,14 +58,14 @@
           <div class="col-5 col-md-5"> {{ $pet->category ? $pet->category->name : '' }} </div>
           <div class="col-2 col-md-1 text-right"> <a href="{{ url('admin/data/pets/edit/' . $pet->id) }}"
               class="btn btn-primary py-0"
-            >Edit</a> </div>
+            > Edit </a> </div>
         </div>
       @endforeach
     </div>
     {!! $pets->render() !!}
   @endif
 
-  <div class="text-center mt-4 small text-muted">{{ $pets->total() }} result{{ $pets->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $pets->total() }} result{{ $pets->total() == 1 ? '' : 's' }} found. </div>
 
 @endsection
 

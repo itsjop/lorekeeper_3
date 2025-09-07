@@ -1,6 +1,6 @@
 {!! Form::label('Select Specific Variants') !!}
-<p>If you want this splice item to only apply specific variants from each pet, select them here. Otherwise, leave this blank to be
-  able to apply any variant.</p>
+<p> If you want this splice item to only apply specific variants from each pet, select them here. Otherwise, leave this blank to be
+  able to apply any variant. </p>
 {!! Form::select(
     'variant_ids[]',
     ['default' => 'Default'] + $variants,

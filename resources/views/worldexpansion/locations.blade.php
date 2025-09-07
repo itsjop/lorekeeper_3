@@ -6,7 +6,7 @@
 
 @section('content')
   {!! breadcrumbs(['World' => 'world', 'Locations' => 'world/locations']) !!}
-  <h1>Locations</h1>
+  <h1> Locations </h1>
 
   <div class="flex jc-center">
     <img
@@ -18,7 +18,7 @@
       "
     />
   </div>
-  <figcaption class="ta-center h5">Reverie's World Map</figcaption>
+  <figcaption class="ta-center h5"> Reverie's World Map </figcaption>
   <hr>
   {{-- {!! Form::open(['method' => 'GET', 'class' => '']) !!}
   <div class="form-inline justify-content-end">
@@ -62,8 +62,8 @@
               </a>
             @endisset
           </div>
-          <h3 class="mb-0 text-center">{!! $location->fullDisplayName !!}</h3>
-          <p class="mb-0 text-center">{!! $location->category ? $location->category->displayName : '' !!}</p>
+          <h3 class="mb-0 text-center"> {!! $location->fullDisplayName !!} </h3>
+          <p class="mb-0 text-center"> {!! $location->category ? $location->category->displayName : '' !!} </p>
 
           <p class="text-center mb-0">
             <strong>
@@ -73,7 +73,7 @@
         </div>
         @if (count($location->children))
           <div class="card-basic p-3">
-            <strong class="mt-3 mb-0">Contains the following:</strong>
+            <strong class="mt-3 mb-0"> Contains the following:</strong>
             @foreach ($location->children->groupBy('type_id') as $group => $children)
               <p class="mb-0">
                 {{-- <strong>
@@ -98,15 +98,15 @@
 
         @isset($location->summary)
           <div class="card-body pt-3">
-            <p class="mb-0"> {!! $location->summary !!}</p>
+            <p class="mb-0"> {!! $location->summary !!} </p>
           </div>
         @endisset
 
         @if (count(allAttachments($location)))
           <div class="card-footer mt-auto">
             @foreach (allAttachments($location) as $type => $attachments)
-              <p class="text-center mb-0">Associated with {{ count($attachments) }}
-                {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}.</p>
+              <p class="text-center mb-0"> Associated with {{ count($attachments) }}
+                {{ strtolower($type) }}{{ count($attachments) == 1 ? '' : 's' }}. </p>
             @endforeach
           </div>
         @endif
@@ -116,6 +116,6 @@
   </div>
   {!! $locations->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $locations->total() }} result{{ $locations->total() == 1 ? '' : 's' }} found.
+  <div class="text-center mt-4 small text-muted"> {{ $locations->total() }} result{{ $locations->total() == 1 ? '' : 's' }} found.
   </div>
 @endsection

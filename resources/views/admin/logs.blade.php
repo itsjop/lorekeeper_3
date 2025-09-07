@@ -7,7 +7,7 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Logs' => 'admin/logs']) !!}
 
-  <h1>Admin Logs</h1>
+  <h1> Admin Logs </h1>
 
   <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
@@ -28,16 +28,16 @@
     <div class="logs-table-header">
       <div class="row">
         <div class="col-6 col-md-3">
-          <div class="logs-table-cell">Staff</div>
+          <div class="logs-table-cell"> Staff </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="logs-table-cell">Action</div>
+          <div class="logs-table-cell"> Action </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="logs-table-cell">Action Details</div>
+          <div class="logs-table-cell"> Action Details </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="logs-table-cell">Date</div>
+          <div class="logs-table-cell"> Date </div>
         </div>
       </div>
     </div>
@@ -46,16 +46,16 @@
         <div class="logs-table-row">
           <div class="row flex-wrap">
             <div class="col-6 col-md-3">
-              <div class="logs-table-cell">{!! $log->user->displayName !!}</div>
+              <div class="logs-table-cell"> {!! $log->user->displayName !!} </div>
             </div>
             <div class="col-6 col-md-3">
-              <div class="logs-table-cell">{!! $log->action !!}</div>
+              <div class="logs-table-cell"> {!! $log->action !!} </div>
             </div>
             <div class="col-6 col-md-3">
-              <div class="logs-table-cell">{!! $log->action_details !!}</div>
+              <div class="logs-table-cell"> {!! $log->action_details !!} </div>
             </div>
             <div class="col-6 col-md-3">
-              <div class="logs-table-cell">{!! format_date($log->created_at) !!} ({!! pretty_date($log->created_at) !!})</div>
+              <div class="logs-table-cell"> {!! format_date($log->created_at) !!} ({!! pretty_date($log->created_at) !!})</div>
             </div>
           </div>
         </div>

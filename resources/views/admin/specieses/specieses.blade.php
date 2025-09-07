@@ -7,21 +7,21 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', ucfirst(__('lorekeeper.species')) => 'admin/data/species']) !!}
 
-  <h1>{{ ucfirst(__('lorekeeper.species')) }}</h1>
+  <h1> {{ ucfirst(__('lorekeeper.species')) }} </h1>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/species/create') }}">
       <i class="fas fa-plus"></i>
-      Create New Species</a>
+      Create New Species </a>
   </div>
   @if (!count($specieses))
-    <p>No species found.</p>
+    <p> No species found. </p>
   @else
     <table class="table table-sm species-table">
       <thead>
         <tr>
-          <th>{{ ucfirst(__('lorekeeper.species')) }}</th>
-          <th>Sub Masterlist</th>
+          <th> {{ ucfirst(__('lorekeeper.species')) }} </th>
+          <th> Sub Masterlist </th>
           <th>
           </th>
         </tr>
@@ -45,7 +45,7 @@
               @endif
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/species/edit/' . $species->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/species/edit/' . $species->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

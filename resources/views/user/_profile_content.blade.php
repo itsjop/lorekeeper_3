@@ -48,7 +48,7 @@
           class="badge badge-success"
           data-bs-toggle="tooltip"
           title="This user has not owned any characters from this world before."
-        >FTO</span>
+        > FTO</span>
       @endif
     </div>
   </div>
@@ -67,20 +67,20 @@
 <div class="card-deck mb-4 profile-assets" style="clear:both;">
   <div class="card profile-currencies profile-assets-card">
     <div class="card-body text-center">
-      <h5 class="card-title">Bank</h5>
+      <h5 class="card-title"> Bank </h5>
       <div class="profile-assets-content">
         @foreach ($user->getCurrencies(false, false, Auth::user() ?? null) as $currency)
-          <div>{!! $currency->display($currency->quantity) !!}</div>
+          <div> {!! $currency->display($currency->quantity) !!} </div>
         @endforeach
       </div>
       <div class="text-right">
-        <a href="{{ $user->url . '/bank' }}">View all...</a>
+        <a href="{{ $user->url . '/bank' }}"> View all... </a>
       </div>
     </div>
   </div>
   <div class="card profile-inventory profile-assets-card">
     <div class="card-body text-center">
-      <h5 class="card-title">Inventory</h5>
+      <h5 class="card-title"> Inventory </h5>
       <div class="profile-assets-content">
         @if (count($items))
           <div class="row">
@@ -94,17 +94,17 @@
                     alt="{{ $item->name }}"
                   />
                 @else
-                  <p>{{ $item->name }}</p>
+                  <p> {{ $item->name }} </p>
                 @endif
               </div>
             @endforeach
           </div>
         @else
-          <div>No items owned.</div>
+          <div> No items owned. </div>
         @endif
       </div>
       <div class="text-right">
-        <a href="{{ $user->url . '/inventory' }}">View all...</a>
+        <a href="{{ $user->url . '/inventory' }}"> View all... </a>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@
 
 <div class="card mb-3">
   <div class="card-body text-center">
-    <h5 class="card-title">Pets</h5>
+    <h5 class="card-title"> Pets </h5>
     <div class="card-body">
       @if (count($pets))
         <div class="row justify-content-center">
@@ -140,20 +140,20 @@
           @endforeach
         </div>
       @else
-        <div>No pets owned.</div>
+        <div> No pets owned. </div>
       @endif
     </div>
     <div class="text-right">
-      <a href="{{ $user->url . '/pets' }}">View all...</a>
+      <a href="{{ $user->url . '/pets' }}"> View all... </a>
     </div>
   </div>
 </div>
 
 <h2>
-  <a href="{{ $user->url . '/characters' }}">Characters</a>
+  <a href="{{ $user->url . '/characters' }}"> Characters </a>
   @if (isset($sublists) && $sublists->count() > 0)
     @foreach ($sublists as $sublist)
-      / <a href="{{ $user->url . '/sublist/' . $sublist->key }}">{{ $sublist->name }}</a>
+      / <a href="{{ $user->url . '/sublist/' . $sublist->key }}"> {{ $sublist->name }} </a>
     @endforeach
   @endif
 </h2>
@@ -200,8 +200,8 @@
           <div class="small">
             <p>
 <span class="text-danger">
-<strong>Character Warning:</strong>
-</span> {!! nl2br(htmlentities($character->character_warning)) !!}</p>
+<strong> Character Warning:</strong>
+</span> {!! nl2br(htmlentities($character->character_warning)) !!} </p>
           </div>
         @endif
       </div> --}}
@@ -210,7 +210,7 @@
 @endforeach
 
 <div class="text-right">
-  <a href="{{ $user->url . '/characters' }}">View all...</a>
+  <a href="{{ $user->url . '/characters' }}"> View all... </a>
 </div>
 <hr class="mb-5" />
 
@@ -230,7 +230,7 @@
         aria-expanded="{{ $user->settings->allow_profile_comments ? 'true' : 'false' }}"
       >
 
-        <h5>Mention This User</h5>
+        <h5> Mention This User </h5>
       </div>
       <div class="card-body collapse {{ $user->settings->allow_profile_comments ? 'show' : '' }}" id="mentionHelp">
 
@@ -246,7 +246,7 @@
         @endif
         <hr>
         <div class="my-2">
-          <strong>For Names and Avatars:</strong>
+          <strong> For Names and Avatars:</strong>
         </div>
         In the rich text editor:
         <div class="alert alert-secondary">

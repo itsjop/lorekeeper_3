@@ -31,11 +31,11 @@
                     class="nav-link active"
                     data-bs-toggle="tab"
                     role="tab"
-                  >Info</a>
+                  > Info </a>
                 </li>
               </ul>
               <h6 class="text-center text-uppercase m-0">
-                <b>Relationship Status: {!! $link->type !!}</b>
+                <b> Relationship Status: {!! $link->type !!} </b>
               </h6>
             </div>
           </div>
@@ -68,7 +68,7 @@
                       </div>
                       {!! Form::close() !!}
                     @else
-                      <div class="m-4">{{ $link->getRelationshipInfo($character->id) }}</div>
+                      <div class="m-4"> {{ $link->getRelationshipInfo($character->id) }} </div>
                     @endif
                   </div>
                   @if (Auth::check() && ($character->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-md-6 mb-md-0 mb-2">
                   <div class="card m-2 h-50">
-                    <div class="m-4">{{ $link->getRelationshipInfo($link->getOtherCharacter($character->id)->id) }} </div>
+                    <div class="m-4"> {{ $link->getRelationshipInfo($link->getOtherCharacter($character->id)->id) }} </div>
                   </div>
                 </div>
               </div>

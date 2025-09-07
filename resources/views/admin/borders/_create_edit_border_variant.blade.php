@@ -4,7 +4,7 @@
   $word = $type == 'variant' ? 'Variant' : ($type == 'top' ? 'Top Layer' : 'Bottom Layer');
 @endphp
 
-<h3>Basic Information</h3>
+<h3> Basic Information </h3>
 
 <div class="row">
   <div class="col-md-6 form-group">
@@ -55,11 +55,11 @@
 <div class="row">
   @if ($variant->id)
     <div class="col-md-4 text-center">
-      <h3>Preview</h3>
+      <h3> Preview </h3>
       <div class="row no-gutters">
         <div class="col-6 col-md-12">
           <div class="form-group">
-            <h5>Image</h5>
+            <h5> Image </h5>
             <div class="user-avatar">
               <img src="{{ $variant->imageUrl }}" class="img-fluid" />
             </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="col-6 col-md-12">
           <div class="form-group">
-            <h5>In Action</h5>
+            <h5> In Action </h5>
             {!! $variant->preview() !!}
           </div>
         </div>
@@ -75,13 +75,13 @@
     </div>
   @endif
   <div class="col-md-7">
-    <h3>Image</h3>
-    <p>An image is required. You can't have a border with no image!</p>
+    <h3> Image </h3>
+    <p> An image is required. You can't have a border with no image!</p>
 
     <div class="form-group">
       {!! Form::label($word . ' Image') !!}
-      <div>{!! Form::file('image') !!}</div>
-      <div class="text-muted">Supports .png and .gif</div>
+      <div> {!! Form::file('image') !!} </div>
+      <div class="text-muted"> Supports .png and .gif </div>
     </div>
     <div class="form-group">
       {!! Form::label('Border Style (Required)') !!}{!! add_help('Choose how the border will display around an icon. It can display over or under the user\'s icon.') !!}

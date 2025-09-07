@@ -2,8 +2,8 @@
   <table class="table table-sm">
     <tbody id="lootRow">
       <tr class="loot-row">
-        <td>{!! Form::text('step[]', 1, ['class' => 'form-control bg-dark text-light']) !!}</td>
-        <td>{!! Form::select(
+        <td> {!! Form::text('step[]', 1, ['class' => 'form-control bg-dark text-light']) !!} </td>
+        <td> {!! Form::select(
             'rewardable_type[]',
             ['Item' => 'Item', 'Currency' => 'Currency'] +
                 ($showLootTables ? ['LootTable' => 'Loot Table'] : []) +
@@ -13,12 +13,12 @@
                 'class' => 'form-control reward-type',
                 'placeholder' => 'Select Reward Type'
             ]
-        ) !!}</td>
+        ) !!} </td>
         <td class="loot-row-select">
         </td>
-        <td>{!! Form::text('quantity[]', 1, ['class' => 'form-control']) !!}</td>
+        <td> {!! Form::text('quantity[]', 1, ['class' => 'form-control']) !!} </td>
         <td class="text-right">
-          <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
+          <a href="#" class="btn btn-danger remove-loot-button"> Remove </a>
         </td>
       </tr>
     </tbody>

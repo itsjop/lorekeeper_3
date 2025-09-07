@@ -1,4 +1,4 @@
-<p>Custom titles cannot be applied by users. They are only applied by administrators.</p>
+<p> Custom titles cannot be applied by users. They are only applied by administrators. </p>
 
 <div class="form-group">
   {!! Form::label('type', 'Type:', ['class' => 'form-control-label']) !!}

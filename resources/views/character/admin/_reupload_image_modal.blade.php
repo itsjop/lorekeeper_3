@@ -17,7 +17,7 @@
   </div>
   <div class="card mb-3" id="thumbnailCrop">
     <div class="card-body">
-      <div id="cropSelect">By using this function, the thumbnail will be automatically generated from the full image.</div>
+      <div id="cropSelect"> By using this function, the thumbnail will be automatically generated from the full image. </div>
       {!! Form::hidden('x0', 1) !!}
       {!! Form::hidden('x1', 1) !!}
       {!! Form::hidden('y0', 1) !!}
@@ -33,7 +33,7 @@
   </div>
   <div class="card mb-3" id="thumbnailCrop">
     <div class="card-body">
-      <div id="cropSelect">Select an image to use the thumbnail cropper.</div>
+      <div id="cropSelect"> Select an image to use the thumbnail cropper. </div>
       <img
         src="#"
         id="cropper"
@@ -54,8 +54,8 @@
       {!! Form::label('thumbnail', 'Choose thumbnail...', ['class' => 'custom-file-label']) !!}
       {!! Form::file('thumbnail', ['class' => 'custom-file-input']) !!}
     </div>
-    <div class="text-muted">Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
-      {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px</div>
+    <div class="text-muted"> Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
+      {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px </div>
   </div>
 </div>
 

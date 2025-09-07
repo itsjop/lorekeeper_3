@@ -19,7 +19,7 @@
 
   <div class="text-right mb-2">
     <a href="{{ url('admin/data/pets/levels/edit/' . $level->id) }}" class="btn btn-info">
-      <i class="fas fa-arrow-left"></i> Back to Level</a>
+      <i class="fas fa-arrow-left"></i> Back to Level </a>
   </div>
 
   {!! Form::open(['url' => 'admin/data/pets/levels/edit/' . $level->id . '/pets/edit/' . $petLevel->id]) !!}

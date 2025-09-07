@@ -1,4 +1,4 @@
-<h3>Options</h3>
+<h3> Options </h3>
 
 <div class="row p-4">
   <div class="form-group col">
@@ -59,9 +59,9 @@
 
 <hr>
 
-<h3>Images</h3>
+<h3> Images </h3>
 <p> The images for the wheel! Keep in mind that if you use an image as the wheel, the segments must align with how a non-image
-  wheel would look like, or your reward distribution will be off.</p>
+  wheel would look like, or your reward distribution will be off. </p>
 <div class="card-body row">
   <div class="form-group col-md-6">
     @if ($daily->has_image)
@@ -74,9 +74,9 @@
       </a>
     @endif
     {!! Form::label(__('dailies.daily') . ' Image (Optional)') !!} {!! add_help('This image is used on the ' . __('dailies.daily') . ' index.') !!}
-    <div>{!! Form::file('image') !!}</div>
-    <div class="text-muted">Recommended size: None (Choose a standard size for all {{ __('dailies.daily') }} images). File type:
-      png.</div>
+    <div> {!! Form::file('image') !!} </div>
+    <div class="text-muted"> Recommended size: None (Choose a standard size for all {{ __('dailies.daily') }} images). File type:
+      png. </div>
     @if ($daily->has_image)
       <div class="form-check">
         {!! Form::checkbox('remove_image', 1, false, [
@@ -99,9 +99,9 @@
       </a>
     @endif
     {!! Form::label('Wheel Image (Optional)') !!}
-    <div>{!! Form::file('wheel_image') !!}</div>
-    <div class="text-muted">Recommended size: The size of your chosen Wheel. Make sure that the segments align
-      correctly.</div>
+    <div> {!! Form::file('wheel_image') !!} </div>
+    <div class="text-muted"> Recommended size: The size of your chosen Wheel. Make sure that the segments align
+      correctly. </div>
     @if (isset($wheel?->wheel_extension))
       <div class="form-check">
         {!! Form::checkbox('remove_wheel', 1, false, [
@@ -125,8 +125,8 @@
       </a>
     @endif
     {!! Form::label('Stopper Image (Optional)') !!}
-    <div>{!! Form::file('stopper_image') !!}</div>
-    <div class="text-muted">Recommended size: 50 x 50px.</div>
+    <div> {!! Form::file('stopper_image') !!} </div>
+    <div class="text-muted"> Recommended size: 50 x 50px. </div>
     @if (isset($wheel?->stopper_extension))
       <div class="form-check">
         {!! Form::checkbox('remove_stopper', 1, false, [
@@ -150,8 +150,8 @@
       </a>
     @endif
     {!! Form::label('Background Image (Optional)') !!} {!! add_help('This image is used as a wheel background and will take the place of the daily image.') !!}
-    <div>{!! Form::file('background_image') !!}</div>
-    <div class="text-muted">Recommended size: Any, just play around until it looks good!</div>
+    <div> {!! Form::file('background_image') !!} </div>
+    <div class="text-muted"> Recommended size: Any, just play around until it looks good!</div>
     @if (isset($wheel?->background_extension))
       <div class="form-check">
         {!! Form::checkbox('remove_background', 1, false, [
@@ -166,7 +166,7 @@
 </div>
 
 <hr>
-<h3>Wheel Style </h3>
+<h3> Wheel Style </h3>
 <div class="row p-3">
   <div class="form-group col-lg col-6">
     {!! Form::number('size', $wheel->size ?? 400, ['class' => 'form-control']) !!}
@@ -204,11 +204,11 @@
 
 <hr>
 
-<h3>Rewards</h3>
-<p>Please add what reward the {{ __('dailies.daily') }} should award users each day. If you would like an element of
-  chance in it, linking a loot table here is recommended.</p>
+<h3> Rewards </h3>
+<p> Please add what reward the {{ __('dailies.daily') }} should award users each day. If you would like an element of
+  chance in it, linking a loot table here is recommended. </p>
 
-<p>The segment field defines which reward is set for what segment. The first segment is always on the right of the top
-  middle of the wheel.</p>
+<p> The segment field defines which reward is set for what segment. The first segment is always on the right of the top
+  middle of the wheel. </p>
 
 @include('dailies._loot_select', ['loots' => $daily->rewards, 'showLootTables' => true, 'showRaffles' => true])

@@ -14,19 +14,19 @@
       <div class="d-inline-block">
         {!! Form::label('item_category_id', 'Filter:', ['class' => 'mr-2']) !!}
         <select class="form-control d-inline-block w-auto" id="userItemCategory">
-          <option value="all">All Categories</option>
-          <option value="selected">Selected Items</option>
+          <option value="all"> All Categories </option>
+          <option value="selected"> Selected Items </option>
           <option disabled>&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</option>
-          <option value="0">Miscellaneous</option>
+          <option value="0"> Miscellaneous </option>
           @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <option value="{{ $category->id }}"> {{ $category->name }} </option>
           @endforeach
         </select>
       </div>
       <div class="d-inline-block">
         {!! Form::label('item_category_id', 'Action:', ['class' => 'ml-2 mr-2']) !!}
-        <a href="#" class="btn btn-primary pet-select-all">Select All Visible</a>
-        <a href="#" class="btn btn-primary pet-clear-selection">Clear Visible Selection</a>
+        <a href="#" class="btn btn-primary pet-select-all"> Select All Visible </a>
+        <a href="#" class="btn btn-primary pet-clear-selection"> Clear Visible Selection </a>
       </div>
     </div>
     <div id="userItems" class="user-items">
@@ -45,7 +45,7 @@
                 </a>
               </div>
               <div>
-                <a class="pet-stack pet-stack-name">{{ $item->item->name }}</a>
+                <a class="pet-stack pet-stack-name"> {{ $item->item->name }} </a>
                 {!! Form::checkbox(
                     isset($fieldName) && $fieldName ? $fieldName : 'stack_id[]',
                     $item->id,
@@ -54,7 +54,7 @@
                 ) !!}
               </div>
               <div>
-                <a href="#" class="btn btn-xs btn-outline-info pet-info">Info</a>
+                <a href="#" class="btn btn-xs btn-outline-info pet-info"> Info </a>
 
               </div>
             </div>

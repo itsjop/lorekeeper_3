@@ -8,7 +8,7 @@
         $submission->staff_comments &&
         ($submission->user_id == Auth::user()->id || Auth::user()->hasPower('manage_submissions'))
 )
-  <h2>Staff Comments ({!! $submission->staff->displayName !!})</h2>
+  <h2> Staff Comments ({!! $submission->staff->displayName !!})</h2>
   <div class="card mb-3">
     <div class="card-body">
       @if (isset($submission->parsed_staff_comments))
@@ -106,14 +106,14 @@
       Rewards
     </div>
     <div class="card-body">
-      <p>Select the rewards you would like to claim.</p>
+      <p> Select the rewards you would like to claim. </p>
       {{-- @else --}}
       {{-- <div class="card-header h2">
     PROMPT
   </div>
     <div class="card-body">
-      <p>Note that any rewards added here are <u>in addition</u> to the default prompt rewards. If you do not require any
-        additional rewards, you can leave this blank.</p> --}}
+      <p> Note that any rewards added here are <u>in addition </u> to the default prompt rewards. If you do not require any
+        additional rewards, you can leave this blank. </p> --}}
 @endif
 {{-- previous input --}}
 @if (old('rewardable_type'))
@@ -158,21 +158,21 @@
   <div class="card mb-3">
     <div id="criterion-section" class="{{ Request::get('prompt_id') || $submission->prompt_id ? '' : 'hide' }}">
       <div class="card-header flex jc-between ai-end">
-        <h2>Reward Calculator </h2>
-        <button class="btn btn-outline-info add-calc m-0" type="button">Add Calculator</button>
+        <h2> Reward Calculator </h2>
+        <button class="btn btn-outline-info add-calc m-0" type="button"> Add Calculator </button>
       </div>
       <div class="card-body">
-        <p>Select the calculator(s) for your submission's media type to calculate your rewards. Be sure to review the <strong>
-            <a href="/info/submission-rewards">Submission Rewards Guide</a>
+        <p> Select the calculator(s) for your submission's media type to calculate your rewards. Be sure to review the <strong>
+            <a href="/info/submission-rewards"> Submission Rewards Guide </a>
           </strong> for accurate grading!</p>
 
         <p>
-          <strong>If you are submitting artwork with a background, you will need to add both "Art - Focal Elements" AND "Art -
-            Background Elements" as seperate calculators.</strong>
+          <strong> If you are submitting artwork with a background, you will need to add both "Art - Focal Elements" AND "Art -
+            Background Elements" as seperate calculators. </strong>
         </p>
 
-        <p>The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they
-          aren't accurate to the piece you're submitting.</p>
+        <p> The calculator may come pre-filled with the minimum requirements for this prompt- feel free to change them if they
+          aren't accurate to the piece you're submitting. </p>
         <div id="criteria">
           @if ($submission->id && $submission->data['criterion'])
             @foreach ($submission->data['criterion'] as $i => $criterionData)
@@ -219,17 +219,17 @@
 
 <div class="card mb-3">
   <div class="card-header flex jc-between ai-end ">
-    <h2>Characters</h2>
+    <h2> Characters </h2>
     <a
       href="#"
       class="btn btn-outline-info m-0"
       id="addCharacter"
-    >Add Character</a>
+    > Add Character </a>
   </div>
   <div class="card-body" style="clear:both;">
     @if ($isClaim)
-      <p>If there are character-specific rewards you would like to claim, attach them here. Otherwise, this section can be left
-        blank.</p>
+      <p> If there are character-specific rewards you would like to claim, attach them here. Otherwise, this section can be left
+        blank. </p>
     @endif
     <div id="characters" class="mb-3">
       @foreach ($submission->characters as $character)
@@ -263,9 +263,9 @@
     Add-Ons
   </div>
   <div class="card-body">
-    <p>If your {{ $isClaim ? 'claim' : 'submission' }} consumes items, attach them here. Otherwise, this section can be left
+    <p> If your {{ $isClaim ? 'claim' : 'submission' }} consumes items, attach them here. Otherwise, this section can be left
       blank. These items will be removed from your inventory but refunded if your {{ $isClaim ? 'claim' : 'submission' }} is
-      rejected.</p>
+      rejected. </p>
     <div id="addons" class="mb-3">
       @include('widgets._inventory_select', [
           'user' => Auth::user(),
@@ -299,17 +299,17 @@
       href="#"
       class="btn btn-danger mr-2"
       id="cancelButton"
-    >Delete Draft</a>
+    > Delete Draft </a>
     <a
       href="#"
       class="btn btn-secondary mr-2"
       id="draftButton"
-    >Save Draft</a>
+    > Save Draft </a>
     <a
       href="#"
       class="btn btn-primary"
       id="confirmButton"
-    >Submit</a>
+    > Submit </a>
   </div>
 @else
   <div class="text-right">
@@ -317,12 +317,12 @@
       href="#"
       class="btn btn-secondary mr-2"
       id="draftButton"
-    >Save Draft</a>
+    > Save Draft </a>
     <a
       href="#"
       class="btn btn-primary"
       id="confirmButton"
-    >Submit</a>
+    > Submit </a>
   </div>
 @endif
 

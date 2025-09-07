@@ -7,18 +7,18 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', ucfirst(__('dailies.daily')) => 'admin/data/dailies']) !!}
 
-  <h1>{{ ucfirst(__('dailies.daily')) }}</h1>
+  <h1> {{ ucfirst(__('dailies.daily')) }} </h1>
 
-  <p>This is a list of {{ __('dailies.dailies') }} that users can roll each day.</p>
-  <p>The sorting order reflects the order in which the {{ __('dailies.daily') }} will be listed on the {{ __('dailies.daily') }}
-    index.</p>
+  <p> This is a list of {{ __('dailies.dailies') }} that users can roll each day. </p>
+  <p> The sorting order reflects the order in which the {{ __('dailies.daily') }} will be listed on the {{ __('dailies.daily') }}
+    index. </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/data/dailies/create') }}">
-      <i class="fas fa-plus"></i> Create New {{ __('dailies.daily') }}</a>
+      <i class="fas fa-plus"></i> Create New {{ __('dailies.daily') }} </a>
   </div>
   @if (!count($dailies))
-    <p>No {{ __('dailies.dailies') }} found.</p>
+    <p> No {{ __('dailies.dailies') }} found. </p>
   @else
     <table class="table table-sm daily-table">
       <tbody id="sortable" class="sortable">
@@ -33,7 +33,7 @@
               @endif
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/data/dailies/edit/' . $daily->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/data/dailies/edit/' . $daily->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

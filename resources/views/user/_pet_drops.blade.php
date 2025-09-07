@@ -1,12 +1,12 @@
 @if (!$pet->drops->dropData->isActive)
-  <div class="alert alert-warning">This pet's drops are currently inactive. Because you are staff, you can see this area anyways.
+  <div class="alert alert-warning"> This pet's drops are currently inactive. Because you are staff, you can see this area anyways.
   </div>
 @endif
 
 <h4>
   Collect {{ isset($pet->drops->dropData->name) ? $pet->drops->dropData->name . 's' : 'Drops' }} ({{ $pet->drops->parameters }})
   {!! add_help(
-      'Your pet\'s type is ' . $pet->drops->parameters . '.<br>You can view all pet drops on the ' . $pet->pet->name . ' pet page.'
+      'Your pet\'s type is ' . $pet->drops->parameters . '. <br> You can view all pet drops on the ' . $pet->pet->name . ' pet page.'
   ) !!}
   @if (Auth::check() && Auth::user()->hasPower('edit_inventories'))
     <a
@@ -17,7 +17,7 @@
       data-bs-target="#paramsModal"
     >
       <i class="fas fa-cog">
-      </i> Admin</a>
+      </i> Admin </a>
   @endif
 </h4>
 <div class="alert alert-info mt-3">
@@ -36,13 +36,13 @@
 
 <div class="card card-body mb-4 collapse" id="drops">
   @if ($pet->availableDrops)
-    <p>This pet produces these {{ isset($pet->drops->dropData->name) ? strtolower($pet->drops->dropData->name) . 's' : 'drops' }},
+    <p> This pet produces these {{ isset($pet->drops->dropData->name) ? strtolower($pet->drops->dropData->name) . 's' : 'drops' }},
       based on their type of pet and/or variant:</p>
     <table class="table table-sm category-table">
       <thead>
         <tr>
-          <th width="50%">Reward</th>
-          <th>Quantity</th>
+          <th width="50%"> Reward </th>
+          <th> Quantity </th>
         </tr>
       </thead>
       <tbody>
@@ -61,18 +61,18 @@
                 @endif
                 {!! $reward_object->displayName !!}
               </td>
-              <td>Between {{ $reward->min_quantity . ' and ' . $reward->max_quantity }}</td>
+              <td> Between {{ $reward->min_quantity . ' and ' . $reward->max_quantity }} </td>
             </tr>
           @endforeach
         @else
           <tr>
-            <td>No drops available for this pet.</td>
+            <td> No drops available for this pet. </td>
           </tr>
         @endif
       </tbody>
     </table>
   @else
-    <p>This pet
+    <p> This pet
       {{ isset($pet->drops->dropData->name) ? 'doesn\'t produce any ' . strtolower($pet->drops->dropData->name) . 's' : 'isn\'t eligible for any drops' }}.
     </p>
   @endif
@@ -81,7 +81,7 @@
     <div class="text-center">
       <p>
         This pet has {{ $drops->drops_available }} batch{{ $drops->drops_available == 1 ? '' : 'es' }} of
-        {{ isset($pet->drops->dropData->name) ? strtolower($pet->drops->dropData->name) : 'drop' }}s available.<br />
+        {{ isset($pet->drops->dropData->name) ? strtolower($pet->drops->dropData->name) : 'drop' }}s available. <br />
         @if (isset($drops->dropData->cap) && $drops->dropData->cap > 0)
           This pet can manage a maximum of {{ $drops->dropData->cap }} batch{{ $drops->dropData->cap == 1 ? '' : 'es' }} of
           {{ isset($pet->drops->dropData->name) ? strtolower($pet->drops->dropData->name) : 'drop' }}s at once!
@@ -121,7 +121,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <span class="modal-title h5 mb-0">[ADMIN] Adjust Drop</span>
+          <span class="modal-title h5 mb-0">[ADMIN] Adjust Drop </span>
           <button
             type="button"
             class="close"

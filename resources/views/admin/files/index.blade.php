@@ -9,12 +9,12 @@
       ['Admin Panel' => 'admin', 'Files' => 'admin/files'] + ($folder ? [$folder => 'admin/files/' . $folder] : [])
   ) !!}
 
-  <h1>File Manager / {!! $folder
-      ? $folder . ' <a href="' . url('admin/files/') . '" class="btn btn-success float-right">Back to Root</a>'
-      : 'Root' !!}</h1>
+  <h1> File Manager / {!! $folder
+      ? $folder . ' <a href="' . url('admin/files/') . '" class="btn btn-success float-right"> Back to Root </a>'
+      : 'Root' !!} </h1>
 
-  <p>This manager allows you to upload files onto your server and create folders up to one level deep. Note that a folder containing
-    files cannot be renamed or deleted.</p>
+  <p> This manager allows you to upload files onto your server and create folders up to one level deep. Note that a folder containing
+    files cannot be renamed or deleted. </p>
 
   @if (!$folder)
     <div class="text-right mb-3">
@@ -23,7 +23,7 @@
         id="createFolder"
         href="#"
       >
-        <i class="fas fa-plus"></i> Create New Folder</a>
+        <i class="fas fa-plus"></i> Create New Folder </a>
     </div>
     <div class="row mb-3">
       @foreach ($folders as $f)
@@ -31,7 +31,7 @@
           <div class="card">
             <div class="card-body">
               <a href="{{ url('admin/files/' . basename($f)) }}">
-                <i class="fas fa-folder"></i> {{ basename($f) }}</a>
+                <i class="fas fa-folder"></i> {{ basename($f) }} </a>
             </div>
           </div>
         </div>
@@ -43,12 +43,12 @@
         class="btn btn-outline-primary"
         id="renameFolder"
         href="#"
-      >Rename Folder</a>
+      > Rename Folder </a>
       <a
         class="btn btn-outline-danger"
         id="deleteFolder"
         href="#"
-      >Delete Folder</a>
+      > Delete Folder </a>
     </div>
   @endif
 
@@ -58,13 +58,13 @@
       class="btn btn-outline-primary"
       id="uploadButton"
     >
-      <i class="fas fa-plus"></i> Upload File</a>
+      <i class="fas fa-plus"></i> Upload File </a>
   </div>
   <div class="mb-4 logs-table">
     <div class="logs-table-header">
       <div class="row">
         <div class="col-6 col-md-7">
-          <div class="logs-table-cell">Files</div>
+          <div class="logs-table-cell"> Files </div>
         </div>
         <div class="col-6 col-md-5">
           <div class="logs-table-cell">
@@ -78,7 +78,7 @@
           <div class="row flex-wrap">
             <div class="col-6 col-md-7">
               <div class="logs-table-cell">
-                <a href="{{ asset('files/' . ($folder ? $folder . '/' : '') . $file) }}">{{ $file }}</a>
+                <a href="{{ asset('files/' . ($folder ? $folder . '/' : '') . $file) }}"> {{ $file }} </a>
               </div>
             </div>
             <div class="col-6 col-md-5">
@@ -88,19 +88,19 @@
                   class="btn btn-outline-primary btn-sm move-file"
                   data-name="{{ $file }}"
                   data-folder="{{ $folder }}"
-                >Move</a>
+                > Move </a>
                 <a
                   href="#"
                   class="btn btn-outline-primary btn-sm rename-file"
                   data-name="{{ $file }}"
                   data-folder="{{ $folder }}"
-                >Rename</a>
+                > Rename </a>
                 <a
                   href="#"
                   class="btn btn-outline-danger btn-sm delete-file"
                   data-name="{{ $file }}"
                   data-folder="{{ $folder }}"
-                >Delete</a>
+                > Delete </a>
               </div>
             </div>
           </div>
@@ -129,8 +129,8 @@
           </div>
           <div class="modal-body">
             {!! Form::open(['url' => 'admin/files/folder/rename', 'id' => 'renameFolderForm', 'class' => 'folder-form']) !!}
-            <p>This will rename the folder. Folders containing files cannot be renamed. Use alphanumeric characters and
-              dashes/underscores only.</p>
+            <p> This will rename the folder. Folders containing files cannot be renamed. Use alphanumeric characters and
+              dashes/underscores only. </p>
             <div class="form-group">
               {!! Form::label('name', 'New Name') !!}
               {!! Form::text('name', $folder, ['class' => 'form-control', 'id' => 'editFolderName']) !!}
@@ -141,7 +141,7 @@
             {!! Form::hidden('folder', $folder, ['class' => 'edit-folder']) !!}
             {!! Form::close() !!}
             {!! Form::open(['url' => 'admin/files/folder/delete', 'id' => 'deleteFolderForm', 'class' => 'folder-form']) !!}
-            <p>This will permanently delete <strong>{{ $folder }}</strong>. Are you sure?</p>
+            <p> This will permanently delete <strong> {{ $folder }} </strong>. Are you sure?</p>
             <div class="text-right">
               {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
             </div>
@@ -161,7 +161,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <span class="modal-title h5 mb-0">Create Folder</span>
+            <span class="modal-title h5 mb-0"> Create Folder </span>
             <button
               type="button"
               class="close"
@@ -170,7 +170,7 @@
           </div>
           <div class="modal-body">
             {!! Form::open(['url' => 'admin/files/folder/create']) !!}
-            <p>This will create a new folder in the root folder. Use alphanumeric characters and dashes/underscores only.</p>
+            <p> This will create a new folder in the root folder. Use alphanumeric characters and dashes/underscores only. </p>
             <div class="form-group">
               {!! Form::label('name', 'Folder Name') !!}
               {!! Form::text('name', '', ['class' => 'form-control']) !!}
@@ -205,7 +205,7 @@
         <div class="modal-body">
           {{-- Move a file --}}
           {!! Form::open(['url' => 'admin/files/move', 'id' => 'moveForm', 'class' => 'file-form']) !!}
-          <p>This will move the file. If a file exists in the destination folder with the same name, it will be overwritten.</p>
+          <p> This will move the file. If a file exists in the destination folder with the same name, it will be overwritten. </p>
           <div class="form-group">
             {!! Form::label('folder', 'Destination Folder') !!}
             <?php
@@ -225,9 +225,9 @@
 
           {{-- Rename a file --}}
           {!! Form::open(['url' => 'admin/files/rename', 'id' => 'renameForm', 'class' => 'file-form']) !!}
-          <p>This will rename the file. If a file exists in the same folder with the same name, it will be overwritten.</p>
-          <p>Use alphanumeric characters and dashes/underscores only. Include the file extension as well - you can change the file
-            extension, but this is not recommended.</p>
+          <p> This will rename the file. If a file exists in the same folder with the same name, it will be overwritten. </p>
+          <p> Use alphanumeric characters and dashes/underscores only. Include the file extension as well - you can change the file
+            extension, but this is not recommended. </p>
           <div class="form-group">
             {!! Form::label('name', 'New Name') !!}
             {!! Form::text('name', '', ['class' => 'form-control', 'id' => 'editFileName']) !!}
@@ -241,7 +241,7 @@
 
           {{-- Delete a file --}}
           {!! Form::open(['url' => 'admin/files/delete', 'id' => 'deleteForm', 'class' => 'file-form']) !!}
-          <p>This will permanently delete <strong id="deleteFilename">
+          <p> This will permanently delete <strong id="deleteFilename">
             </strong>. Are you sure?</p>
           <div class="text-right">
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
@@ -252,7 +252,7 @@
 
           {{-- Upload a file --}}
           {!! Form::open(['url' => 'admin/files/upload', 'id' => 'uploadForm', 'class' => 'file-form', 'files' => true]) !!}
-          <p>Select a file to upload. (Maximum size {{ min(ini_get('upload_max_filesize'), ini_get('post_max_size')) }}B.)</p>
+          <p> Select a file to upload. (Maximum size {{ min(ini_get('upload_max_filesize'), ini_get('post_max_size')) }}B.)</p>
           <div id="fileList">
             <div class="d-flex mb-2">
               <div class="custom-file">

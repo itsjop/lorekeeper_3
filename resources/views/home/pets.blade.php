@@ -11,7 +11,7 @@
     Pets
   </h1>
 
-  <p>These are your pets. Click on a pet to view more details and actions you can perform on it.</p>
+  <p> These are your pets. Click on a pet to view more details and actions you can perform on it. </p>
 
   <div class="text-right">
     {!! Form::open(['url' => 'pets/collect-all']) !!}
@@ -78,7 +78,7 @@
     </div>
   @endforeach
   <div class="text-right mb-4">
-    <a href="{{ url(Auth::user()->url . '/pet-logs') }}">View logs...</a>
+    <a href="{{ url(Auth::user()->url . '/pet-logs') }}"> View logs... </a>
   </div>
 @endsection
 @section('scripts')

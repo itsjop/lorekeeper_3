@@ -34,5 +34,5 @@
     @endforeach
   </div>
 @else
-  <p>No {{ $myo ? 'MYO slots' : 'characters' }} found.</p>
+  <p> No {{ $myo ? 'MYO slots' : 'characters' }} found. </p>
 @endif

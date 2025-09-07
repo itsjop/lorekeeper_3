@@ -1,10 +1,10 @@
 <div id="sidebar-ul">
   <div class="sidebar-header">
-    <a href="{{ url(__('cultivation.cultivation')) }}" class="card-link">{{ ucfirst(__('cultivation.cultivation')) }}</a>
+    <a href="{{ url(__('cultivation.cultivation')) }}" class="card-link"> {{ ucfirst(__('cultivation.cultivation')) }} </a>
   </div>
 
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">Cultivation</summary>
+    <summary class="sidebar-section-header"> Cultivation </summary>
     <div class="sb-item">
       <a href="{{ url(__('cultivation.cultivation') . '/guide') }}"
         class="{{ set_active(__('cultivation.cultivation') . '/guide') }} btn text-left"
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="details-sb" data-open>
-    <summary class="sidebar-section-header">{{ ucfirst(__('cultivation.cultivation')) }} Areas </summary>
+    <summary class="sidebar-section-header"> {{ ucfirst(__('cultivation.cultivation')) }} Areas </summary>
     @foreach ($areas as $area)
       <div class="sb-item">
         @if (isset($user) && in_array($area->id, $user->areas->pluck('id')->toArray()))

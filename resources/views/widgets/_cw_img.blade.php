@@ -6,7 +6,7 @@
     alt="Image depicting {{ $warnings }}"
   />
   <div class="warning">
-    <h2>Content Warning:</h2>
+    <h2> Content Warning:</h2>
     <p> {{ $warnings }} </p>
     <button
       id="btn-{{ $id }}"

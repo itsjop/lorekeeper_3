@@ -13,10 +13,10 @@
           : 'admin/world/factions/create'
   ]) !!}
 
-  <h1>{{ $faction->id ? 'Edit' : 'Create' }} Faction
+  <h1> {{ $faction->id ? 'Edit' : 'Create' }} Faction
     @if ($faction->id)
       ({!! $faction->displayName !!})
-      <a href="#" class="btn btn-danger float-right delete-type-button">Delete Faction</a>
+      <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Faction </a>
     @endif
   </h1>
 
@@ -26,7 +26,7 @@
   ]) !!}
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Basic Information</h2>
+    <h2 class="card-header h3"> Basic Information </h2>
     <div class="card-body">
       <div class="row mx-0 px-0">
         <div class="form-group col-md px-0 pr-md-1">
@@ -92,7 +92,7 @@
   </div>
 
   <div class="card mb-3">
-    <h2 class="card-header h3">Images</h2>
+    <h2 class="card-header h3"> Images </h2>
     <div class="card-body row">
       <div class="form-group col-md-6">
         @if ($faction->thumb_extension)
@@ -109,8 +109,8 @@
           </a>
         @endif
         {!! Form::label('Thumbnail Image (Optional)') !!} {!! add_help('This thumbnail is used on the faction index.') !!}
-        <div>{!! Form::file('image_th') !!}</div>
-        <div class="text-muted">Recommended size: 200x200</div>
+        <div> {!! Form::file('image_th') !!} </div>
+        <div class="text-muted"> Recommended size: 200x200</div>
         @if (isset($faction->thumb_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image_th', 1, false, [
@@ -138,8 +138,8 @@
           </a>
         @endif
         {!! Form::label('faction Image (Optional)') !!} {!! add_help('This image is used on the faction page as a header.') !!}
-        <div>{!! Form::file('image') !!}</div>
-        <div class="text-muted">Recommended size: None (Choose a standard size for all faction header images.)</div>
+        <div> {!! Form::file('image') !!} </div>
+        <div class="text-muted"> Recommended size: None (Choose a standard size for all faction header images.)</div>
         @if (isset($faction->image_extension))
           <div class="form-check">
             {!! Form::checkbox('remove_image', 1, false, [
@@ -166,13 +166,13 @@
   </div>
 
   <div class="card mb-3">
-    <div class="card-header h3">Ranks</div>
+    <div class="card-header h3"> Ranks </div>
     <div class="card-body">
-      <p>Factions may have multiple ranks, which may be either open (available for users and/or characters to have/climb through) or
+      <p> Factions may have multiple ranks, which may be either open (available for users and/or characters to have/climb through) or
         closed (occupyable by characters or figures and changeable only by staff). Open ranks require a "breakpoint"-- the
         amount of faction standing (as represented by the set currency) required to attain that rank. Ranks are adjusted
         automatically/on the fly based on the user/character's current amount of standing. Ranks should have unique breakpoints
-        within the faction. To create a basic/entry rank, set a breakpoint of 0.</p>
+        within the faction. To create a basic/entry rank, set a breakpoint of 0. </p>
       <div class="form-group">
         <div id="rankList" class="row mb-2">
           @foreach ($faction->ranks()->orderBy('sort')->get() as $rank)
@@ -231,7 +231,7 @@
                     </div>
                   </div>
                   @if (!$rank->is_open)
-                    <h5>Occupants</h5>
+                    <h5> Occupants </h5>
                     @if ($rank->members()->count())
                       @foreach ($rank->members as $member)
                         <div class="rank-member-entry row">
@@ -305,7 +305,7 @@
                           </div>
                           <div class="rankMemberSetting col-md-8 mt-auto">
                             <div class="show defaultOptions">
-                              <p>Please select a member type.</p>
+                              <p> Please select a member type. </p>
                             </div>
                             <div class="hide figureOptions">
                               <div class="form-group">
@@ -349,7 +349,7 @@
             href="#"
             class="btn btn-primary"
             id="add-rank"
-          >Add Rank</a>
+          > Add Rank </a>
         </div>
       </div>
     </div>
@@ -363,7 +363,7 @@
             href="#"
             class="btn btn-sm btn-primary"
             id="addAttachment"
-          >Add Attachment</a>
+          > Add Attachment </a>
         </div>
         Attachments
       </h2>
@@ -372,14 +372,14 @@
       </div>
       @if ($faction->attachers->count())
         <div class="card-footer">
-          <div class="h5">Attached to the following</div>
+          <div class="h5"> Attached to the following </div>
           <div class="row">
             @foreach ($faction->attachers->groupBy('attacher_type') as $type => $attachers)
               <div class="col-6 col-md-3">
                 <div class="card">
                   <div class="card-body p-2 text-center">
                     <div>
-                      <strong>{!! $type !!}</strong> <small>({{ $attachers->count() }})</small>
+                      <strong> {!! $type !!} </strong> <small>({{ $attachers->count() }})</small>
                     </div>
                     <p class="mt-2 mb-1">
                       @foreach ($attachers as $attacher)
@@ -447,7 +447,7 @@
           </div>
           <div class="rankOpenSetting col-md-8 mt-auto">
             <div class="show defaultOptions">
-              <p>Please set whether this rank should be open or not.</p>
+              <p> Please set whether this rank should be open or not. </p>
             </div>
             <div class="hide openOptions">
               <div class="form-group">

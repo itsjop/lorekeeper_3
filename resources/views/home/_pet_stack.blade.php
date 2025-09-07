@@ -1,5 +1,5 @@
 @if (!$stack)
-  <div class="text-center">Invalid pet selected.</div>
+  <div class="text-center"> Invalid pet selected. </div>
 @else
   <div class="text-center">
     <div class="mb-1">
@@ -8,7 +8,7 @@
       </a>
     </div>
     <div class="mb-1">
-      <a href="{{ $stack->pet->url }}">{{ $stack->pet->name }}</a>
+      <a href="{{ $stack->pet->url }}"> {{ $stack->pet->name }} </a>
     </div>
   </div>
 
@@ -17,22 +17,22 @@
       <ul class="list-group list-group-flush">
         @if (isset($stack->data['notes']))
           <li class="list-group-item">
-            <h5 class="card-title">Notes</h5>
-            <div>{!! $stack->data['notes'] !!}</div>
+            <h5 class="card-title"> Notes </h5>
+            <div> {!! $stack->data['notes'] !!} </div>
           </li>
         @endif
         @if (isset($stack->data['data']))
           <li class="list-group-item">
-            <h5 class="card-title">Source</h5>
-            <div>{!! $stack->data['data'] !!}</div>
+            <h5 class="card-title"> Source </h5>
+            <div> {!! $stack->data['data'] !!} </div>
           </li>
         @endif
       </ul>
     </div>
   @endif
 
-  <a class="btn btn-primary btn-lg btn-block h5 mt-3" href="{{ $stack->pageUrl(Auth::check() ? Auth::user()->id : null) }}">View
-    Page</a>
+  <a class="btn btn-primary btn-lg btn-block h5 mt-3" href="{{ $stack->pageUrl(Auth::check() ? Auth::user()->id : null) }}"> View
+    Page </a>
 
   @if ($user && !$readOnly && ($stack->user_id == $user->id || $user->hasPower('edit_inventories')))
     <div class="card mt-3">
@@ -48,7 +48,7 @@
             @endif Name Pet
           </a>
           {!! Form::open(['url' => 'pets/name/' . $stack->id, 'id' => 'nameForm', 'class' => 'collapse']) !!}
-          <p>Enter a name to display for the pet!</p>
+          <p> Enter a name to display for the pet!</p>
           <div class="form-group">
             {!! Form::label('name', 'Name') !!} {!! add_help('If your name is not appropriate you can be banned.') !!}
             {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -69,7 +69,7 @@
             @endif Edit Profile
           </a>
           {!! Form::open(['url' => 'pets/description/' . $stack->id, 'id' => 'descForm', 'class' => 'collapse']) !!}
-          <p>Tell everyone about your pet.</p>
+          <p> Tell everyone about your pet. </p>
           <div class="form-group">
             {!! Form::label('Profile Text (Optional)') !!}
             {!! Form::textarea('description', $stack->description, ['class' => 'form-control wysiwyg']) !!}
@@ -91,7 +91,7 @@
             Delete Pet
           </a>
           {!! Form::open(['url' => 'pets/delete/' . $stack->id, 'id' => 'deleteForm', 'class' => 'collapse']) !!}
-          <p>This action is not reversible. Are you sure you want to delete this pet?</p>
+          <p> This action is not reversible. Are you sure you want to delete this pet?</p>
           <div class="text-right">
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
           </div>
@@ -113,7 +113,7 @@
               @endif Detach Pet from Character
             </a>
             {!! Form::open(['url' => 'pets/detach/' . $stack->id, 'id' => 'attachForm', 'class' => 'collapse']) !!}
-            <p>This pet is currently attached to {!! $stack->character->displayName !!}, do you want to detach them?</p>
+            <p> This pet is currently attached to {!! $stack->character->displayName !!}, do you want to detach them?</p>
             <div class="text-right">
               {!! Form::submit('Detach', ['class' => 'btn btn-primary']) !!}
             </div>
@@ -129,9 +129,9 @@
               @endif Attach Pet to Character
             </a>
             {!! Form::open(['url' => 'pets/attach/' . $stack->id, 'id' => 'attachForm', 'class' => 'collapse']) !!}
-            <p>Attach this pet to a character you own! They'll appear on the character's page and any stat bonuses will
-              automatically be applied.</p>
-            <p>Pets can be detached.</p>
+            <p> Attach this pet to a character you own! They'll appear on the character's page and any stat bonuses will
+              automatically be applied. </p>
+            <p> Pets can be detached. </p>
             <div class="form-group">
               {!! Form::label('id', 'Slug') !!} {!! add_help('Insert your character\'s slug.') !!}
               {!! Form::select('id', $chara, null, ['class' => 'form-control']) !!}
@@ -141,7 +141,7 @@
             </div>
             {!! Form::close() !!}
           @else
-            <a class="card-title h5">You cannot currently attach / detach this pet! It is under cooldown.</a>
+            <a class="card-title h5"> You cannot currently attach / detach this pet! It is under cooldown. </a>
           @endif
         </li>
         @if ($user && count($splices) && $user->id == $stack->user_id)
@@ -150,13 +150,13 @@
               class="card-title h5 collapse-title"
               data-bs-toggle="collapse"
               href="#userVariantForm"
-            >Change Pet Variant</a>
+            > Change Pet Variant </a>
             {!! Form::open(['url' => 'pets/variant/' . $stack->id, 'id' => 'userVariantForm', 'class' => 'collapse']) !!}
             <p>
               This will use a splice item!
               @if ($stack->pet->isVariant)
                 <br>
-                <b>Current variant:</b> {{ $stack->pet->name }}
+                <b> Current variant:</b> {{ $stack->pet->name }}
               @endif
             </p>
             <div class="form-group">
@@ -186,13 +186,13 @@
               class="card-title h5 collapse-title"
               data-bs-toggle="collapse"
               href="#variantForm"
-            >[ADMIN] Change Pet Variant</a>
+            >[ADMIN] Change Pet Variant </a>
             {!! Form::open(['url' => 'pets/variant/' . $stack->id, 'id' => 'variantForm', 'class' => 'collapse']) !!}
             {!! Form::hidden('is_staff', 1) !!}
             <p>
               @if ($stack->variant_id)
                 <br>
-                <b>Current variant:</b> {{ $stack->variant->name }}
+                <b> Current variant:</b> {{ $stack->variant->name }}
               @endif
             </p>
             <div class="form-group">
@@ -216,13 +216,13 @@
               class="card-title h5 collapse-title"
               data-bs-toggle="collapse"
               href="#evolutionForm"
-            >[ADMIN] Change Pet Evolution</a>
+            >[ADMIN] Change Pet Evolution </a>
             {!! Form::open(['url' => 'pets/evolution/' . $stack->id, 'id' => 'evolutionForm', 'class' => 'collapse']) !!}
             {!! Form::hidden('is_staff', 1) !!}
             <p>
               @if ($stack->evolution_id)
                 <br>
-                <b>Current evolution:</b> {{ $stack->evolution->evolution_name }} (Stage
+                <b> Current evolution:</b> {{ $stack->evolution->evolution_name }} (Stage
                 {{ $stack->evolution->evolution_stage }})
               @endif
             </p>
@@ -243,12 +243,12 @@
               class="card-title h5 collapse-title"
               data-bs-toggle="collapse"
               href="#imageForm"
-            >[ADMIN] Change Image</a>
+            >[ADMIN] Change Image </a>
             {!! Form::open(['url' => 'pets/image/' . $stack->id, 'id' => 'imageForm', 'class' => 'collapse', 'files' => true]) !!}
             <div class="form-group">
               {!! Form::label('Image') !!}
-              <div>{!! Form::file('image') !!}</div>
-              <div class="text-muted">Recommended size: 100px x 100px</div>
+              <div> {!! Form::file('image') !!} </div>
+              <div class="text-muted"> Recommended size: 100px x 100px </div>
               @if ($stack->has_image)
                 <div class="form-check">
                   {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}
@@ -302,8 +302,8 @@
               </a>
               {!! Form::open(['url' => 'pets/transfer/' . $stack->id, 'id' => 'transferForm', 'class' => 'collapse']) !!}
               @if (!$stack->isTransferrable)
-                <p class="alert alert-warning my-2">This pet is account-bound, but your rank allows you to transfer it to another
-                  user.</p>
+                <p class="alert alert-warning my-2"> This pet is account-bound, but your rank allows you to transfer it to another
+                  user. </p>
               @endif
               <div class="form-group">
                 {!! Form::label('user_id', 'Recipient') !!} {!! add_help('You can only transfer pets to verified users.') !!}

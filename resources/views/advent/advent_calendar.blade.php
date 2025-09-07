@@ -13,13 +13,13 @@
     <div class="col-lg-8 col-md-12">
       <div class="mb-3">
 
-        <h2>{{ $advent->displayName }}</h2>
+        <h2> {{ $advent->displayName }} </h2>
 
         @if ($advent->isActive)
           <div class="mb-3 pt-3 text-center card">
             <div class="card-body">
               @if ($advent->item($advent->day))
-                <h5>It's day {{ $advent->day }}! Today's prize is:</h5>
+                <h5> It's day {{ $advent->day }}! Today's prize is:</h5>
                 <p>
                   {!! $advent->displayItemLong($advent->day) !!}
                 </p>
@@ -36,15 +36,15 @@
                       {!! Form::close() !!}
                     @else
                       <p>
-                        <strong>You've already claimed this!</strong>
+                        <strong> You've already claimed this!</strong>
                       </p>
                     @endif
                   @else
-                    <p>This advent calendar isn't active.</p>
+                    <p> This advent calendar isn't active. </p>
                   @endif
                 </div>
               @elseif($advent->isActive)
-                <p>There doesn't seem to be a prize for today!</p>
+                <p> There doesn't seem to be a prize for today!</p>
               @endif
             </div>
           </div>
@@ -52,17 +52,17 @@
 
         <div class="card mb-4">
           <div class="card-header">
-            <h4>Information</h4>
+            <h4> Information </h4>
           </div>
           <div class="card-body">
             <div>
-              <strong>Start{{ $advent->start_at->isPast() ? 'ed' : 's' }}: </strong>{!! pretty_date($advent->start_at) !!}
+              <strong> Start{{ $advent->start_at->isPast() ? 'ed' : 's' }}: </strong> {!! pretty_date($advent->start_at) !!}
             </div>
             <div {{ $advent->isActive ? '' : 'style="mb-2"' }}>
-              <strong>End{{ $advent->end_at->isPast() ? 'ed' : 's' }}: </strong>{!! pretty_date($advent->end_at) !!}
+              <strong> End{{ $advent->end_at->isPast() ? 'ed' : 's' }}: </strong> {!! pretty_date($advent->end_at) !!}
             </div>
             @if ($advent->isActive)
-              <div class="mb-2">It's <strong>day {{ $advent->day }}</strong> of {{ $advent->days }}! This day started
+              <div class="mb-2"> It's <strong>day {{ $advent->day }} </strong> of {{ $advent->days }}! This day started
                 {!! $advent->day == 1 ? pretty_date($advent->start_at) : pretty_date(Carbon\Carbon::now()->startOf('day')) !!}
                 and
                 {{ $advent->day == $advent->days ? 'ends' : 'day ' . ($advent->day + 1) . ' is' }}
@@ -71,12 +71,12 @@
             @endif
 
             @if ($advent->summary)
-              <i>{{ $advent->summary }}</i>
+              <i> {{ $advent->summary }} </i>
             @endif
 
             @if ($participantLog->count())
               <hr />
-              <p>You {{ $advent->isActive ? 'have ' : '' }}claimed these prizes{{ $advent->isActive ? ' thus far' : '' }}:</p>
+              <p> You {{ $advent->isActive ? 'have ' : '' }}claimed these prizes{{ $advent->isActive ? ' thus far' : '' }}:</p>
               <div class="d-flex align-content-around flex-wrap mb-2">
                 @foreach ($participantLog as $log)
                   <div class="align-self-center mx-1">

@@ -7,9 +7,9 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Site Images & CSS' => 'admin/images']) !!}
 
-  <h1>Site Images</h1>
+  <h1> Site Images </h1>
 
-  <p>Upload images to replace the current site images. The specifications for each image are noted in the descriptions for each
+  <p> Upload images to replace the current site images. The specifications for each image are noted in the descriptions for each
     image. (Maximum size of an image is {{ min(ini_get('upload_max_filesize'), ini_get('post_max_size')) }}B.)</p>
 
   @foreach ($images as $key => $image)
@@ -24,9 +24,9 @@
             />
           </div>
           <div style="width: 100%;">
-            <p class="card-heading">{{ $image['name'] }}
-              <a href="{{ asset('images/' . $image['filename']) }}" class="btn btn-info btn-sm float-right">View Current</a>
-            <p>{{ $image['description'] }}</p>
+            <p class="card-heading"> {{ $image['name'] }}
+              <a href="{{ asset('images/' . $image['filename']) }}" class="btn btn-info btn-sm float-right"> View Current </a>
+            <p> {{ $image['description'] }} </p>
             {!! Form::open(['url' => 'admin/images/upload', 'files' => true]) !!}
             <div class="d-flex">
               <div class="custom-file">
@@ -43,16 +43,16 @@
     </div>
   @endforeach
 
-  <h1>Site CSS</h1>
+  <h1> Site CSS</h1>
 
-  <p>A custom CSS file can be uploaded here. This will be added to the page after the inclusion of other CSS files, and reuploading
+  <p> A custom CSS file can be uploaded here. This will be added to the page after the inclusion of other CSS files, and reuploading
     the file will replace the original. Making changes to the site code is recommended for large changes to the layout, but
-    this upload can be used for simple updates.</p>
+    this upload can be used for simple updates. </p>
   <div class="card mb-3">
     <div class="card-body">
       <div>
-        <h3 class="card-heading">CSS <a href="{{ asset('css/custom.css') }}" class="btn btn-info btn-sm float-right">View
-            Current</a>
+        <h3 class="card-heading"> CSS <a href="{{ asset('css/custom.css') }}" class="btn btn-info btn-sm float-right"> View
+            Current </a>
         </h3>
         {!! Form::open(['url' => 'admin/images/upload/css', 'files' => true]) !!}
         <div class="d-flex">

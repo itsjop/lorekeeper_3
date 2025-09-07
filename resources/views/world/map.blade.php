@@ -10,7 +10,7 @@
 
 @section('meta-desc')
   @if (isset($map->description))
-    <p>{{ strip_tags($map->description) }}</p>
+    <p> {{ strip_tags($map->description) }} </p>
   @endif
 @endsection
 
@@ -38,10 +38,10 @@
               </a>
             </div>
             <div class="col-md-9">
-              <h1>{!! $map->name !!}</h1>
+              <h1> {!! $map->name !!} </h1>
               <div class="row">
                 <div class="col-md-5 col-md">
-                  <h4>Locations</h4>
+                  <h4> Locations </h4>
                   <div class="row">
                     @foreach ($map->locations as $l)
                       @if ($l->is_active)

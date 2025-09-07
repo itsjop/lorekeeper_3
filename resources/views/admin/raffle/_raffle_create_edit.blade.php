@@ -66,10 +66,10 @@
   </div>
 </div>
 <div class="container">
-  <h5>Raffle Entry Rewards</h5>
-  <p>If you want users to receive a reward for entering, add it here. This only applies to users with an account, who are entered
+  <h5> Raffle Entry Rewards </h5>
+  <p> If you want users to receive a reward for entering, add it here. This only applies to users with an account, who are entered
     by an admin or who self entered.
-    <br>Users entered as an alias are not eligible to receive rewards at this time.
+    <br> Users entered as an alias are not eligible to receive rewards at this time.
   </p>
   @include('widgets._loot_select', ['loots' => $raffle->rewards, 'showLootTables' => false, 'showRaffles' => false])
 </div>

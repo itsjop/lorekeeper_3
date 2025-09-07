@@ -11,7 +11,7 @@
     My Characters
   </h1>
 
-  <p>This is a list of characters you own. Drag and drop to rearrange them.</p>
+  <p> This is a list of characters you own. Drag and drop to rearrange them. </p>
 
   <div id="sortable" class="row sortable">
     @foreach ($characters as $character)
@@ -40,7 +40,7 @@
     Selected Character
   </h1>
 
-  <p>You can select one of your characters to be featured on your profile here.</p>
+  <p> You can select one of your characters to be featured on your profile here. </p>
   {!! Form::open(['url' => 'characters/select-character']) !!}
   {!! Form::select('character_id', $characters->pluck('fullName', 'id'), Auth::user()->settings->selected_character_id, [
       'class' => 'form-control mb-2 default character-select',
@@ -60,7 +60,7 @@
 
   <div class="mobile-handle handle-clone badge badge-primary rounded-circle hide">
     <i class="fas fa-hand-point-up" aria-hidden="true"></i>
-    <span class="sr-only">Drag Handle</span>
+    <span class="sr-only"> Drag Handle </span>
   </div>
 @endsection
 @section('scripts')

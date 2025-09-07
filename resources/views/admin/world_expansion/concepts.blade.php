@@ -7,19 +7,19 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Concept' => 'admin/world/concepts']) !!}
 
-  <h1>Concept</h1>
+  <h1> Concept </h1>
 
-  <p class="mb-0">From artistic concepts to planned storylines, concepts can be whatever you want! </p>
+  <p class="mb-0"> From artistic concepts to planned storylines, concepts can be whatever you want! </p>
 
   <div class="text-right mb-3">
     <a class="btn btn-primary" href="{{ url('admin/world/concept-categories') }}">
-      <i class="fas fa-folder mr-2"></i> Concept Categories</a>
+      <i class="fas fa-folder mr-2"></i> Concept Categories </a>
     <a class="btn btn-primary" href="{{ url('admin/world/concepts/create') }}">
-      <i class="fas fa-plus mr-2"></i> Create New Concept</a>
+      <i class="fas fa-plus mr-2"></i> Create New Concept </a>
   </div>
 
   @if (!count($concepts))
-    <p>No concept found.</p>
+    <p> No concept found. </p>
   @else
     <table class="table table-sm type-table">
       <tbody id="sortable" class="sortable">
@@ -30,11 +30,11 @@
               </a>
               <a href={!! $concept->url !!}
                 @if ($concept->thumb_extension) data-bs-toggle="tooltip" title="<img src='{{ $concept->thumbUrl }}' style='max-width:100px;' class='my-1'/><br> {{ ucfirst($concept->name) }} " @endif
-              />{!! $concept->name !!}</a>
+              /> {!! $concept->name !!} </a>
               {{ $concept->summary ? '(' . $concept->summary . ')' : '' }}
             </td>
             <td class="text-right">
-              <a href="{{ url('admin/world/concepts/edit/' . $concept->id) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('admin/world/concepts/edit/' . $concept->id) }}" class="btn btn-primary"> Edit </a>
             </td>
           </tr>
         @endforeach

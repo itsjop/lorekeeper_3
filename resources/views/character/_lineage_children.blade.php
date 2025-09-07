@@ -1,7 +1,7 @@
 <div class="container text-center {{ isset($tab) && $tab ? 'mb-3' : '' }}">
   {{-- recursive based on config --}}
   @if ($character->children && $character->children->count())
-    <h5 class="text-center">{{ $title }}</h5>
+    <h5 class="text-center"> {{ $title }} </h5>
     @foreach ($character->children->chunk(4) as $chunk)
       <div class="row justify-content-center">
         @foreach ($chunk as $child)
@@ -34,6 +34,6 @@
     @endforeach
     {!! isset($tab) && $tab ? '<hr />' : '' !!}
   @else
-    <div class="alert alert-info text-center">No Descendants</div>
+    <div class="alert alert-info text-center"> No Descendants </div>
   @endif
 </div>

@@ -12,63 +12,63 @@
   @endif
   <div class="{{ $prompt->has_image ? 'col-md-9' : 'col-12' }}">
     <div class="mb-3">
-      <h3 class="mb-0">{!! $prompt->name !!}</h3>
+      <h3 class="mb-0"> {!! $prompt->name !!} </h3>
       @if ($prompt->prompt_category_id)
         <div>
-          <strong>Category: </strong>{!! $prompt->category->displayName !!}
+          <strong> Category: </strong> {!! $prompt->category->displayName !!}
         </div>
       @endif
       @if ($prompt->start_at && $prompt->start_at->isFuture())
         <div>
-          <strong>Starts: </strong>{!! format_date($prompt->start_at) !!} ({{ $prompt->start_at->diffForHumans() }})
+          <strong> Starts: </strong> {!! format_date($prompt->start_at) !!} ({{ $prompt->start_at->diffForHumans() }})
         </div>
       @endif
       @if ($prompt->end_at)
         <div>
-          <strong>Ends: </strong>{!! format_date($prompt->end_at) !!} ({{ $prompt->end_at->diffForHumans() }})
+          <strong> Ends: </strong> {!! format_date($prompt->end_at) !!} ({{ $prompt->end_at->diffForHumans() }})
         </div>
       @endif
     </div>
     <div class="world-entry-text">
-      <p>{{ $prompt->summary }}</p>
+      <p> {{ $prompt->summary }} </p>
       <div class="text-right">
         <a
           data-toggle="collapse"
           href="#prompt-{{ $prompt->id }}"
           class="text-primary"
         >
-          <strong>Show details...</strong>
+          <strong> Show details... </strong>
         </a>
       </div>
       <div class="collapse" id="prompt-{{ $prompt->id }}">
-        <h4>Details</h4>
+        <h4> Details </h4>
         @if ($prompt->parsed_description)
           {!! $prompt->parsed_description !!}
         @else
-          <p>No further details.</p>
+          <p> No further details. </p>
         @endif
         @if ($prompt->hide_submissions == 1 && isset($prompt->end_at) && $prompt->end_at > Carbon\Carbon::now())
-          <p class="text-info">Submissions to this prompt are hidden until this prompt ends.</p>
+          <p class="text-info"> Submissions to this prompt are hidden until this prompt ends. </p>
         @elseif($prompt->hide_submissions == 2)
-          <p class="text-info">Submissions to this prompt are hidden.</p>
+          <p class="text-info"> Submissions to this prompt are hidden. </p>
         @endif
       </div>
-      <h4>Rewards</h4>
+      <h4> Rewards </h4>
       @if (!count($prompt->rewards))
         No rewards.
       @else
         <table class="table table-sm">
           <thead>
             <tr>
-              <th width="70%">Reward</th>
-              <th width="30%">Amount</th>
+              <th width="70%"> Reward </th>
+              <th width="30%"> Amount </th>
             </tr>
           </thead>
           <tbody>
             @foreach ($prompt->rewards as $reward)
               <tr>
-                <td>{!! $reward->reward->displayName !!}</td>
-                <td>{{ $reward->quantity }}</td>
+                <td> {!! $reward->reward->displayName !!} </td>
+                <td> {{ $reward->quantity }} </td>
               </tr>
             @endforeach
           </tbody>
@@ -80,15 +80,15 @@
       <p>
         {{ $prompt->limit ? 'You can submit this prompt ' . $prompt->limit . ' time(s)' : 'You can submit this prompt an unlimited number of times' }}
         {{ $prompt->limit_period ? ' per ' . strtolower($prompt->limit_period) : '' }}
-        {{ $prompt->limit_character ? ' per character' : '' }}.</p>
+        {{ $prompt->limit_character ? ' per character' : '' }}. </p>
     </div>
     <div class="text-right">
       @if ($prompt->end_at && $prompt->end_at->isPast())
-        <span class="text-secondary">This prompt has ended.</span>
+        <span class="text-secondary"> This prompt has ended. </span>
       @elseif($prompt->start_at && $prompt->start_at->isFuture())
-        <span class="text-secondary">This prompt is not open for submissions yet.</span>
+        <span class="text-secondary"> This prompt is not open for submissions yet. </span>
       @else
-        <a href="{{ url('submissions/new?prompt_id=' . $prompt->id) }}" class="btn btn-primary">Submit Prompt</a>
+        <a href="{{ url('submissions/new?prompt_id=' . $prompt->id) }}" class="btn btn-primary"> Submit Prompt </a>
       @endunless
   </div>
 </div>

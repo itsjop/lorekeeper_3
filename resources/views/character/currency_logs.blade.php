@@ -18,7 +18,7 @@
 
   @include('character._header', ['character' => $character])
 
-  <h3>Currency Logs</h3>
+  <h3> Currency Logs </h3>
 
   {!! $logs->render() !!}
 
@@ -26,19 +26,19 @@
     <div class="logs-table-header">
       <div class="row">
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Sender</div>
+          <div class="logs-table-cell"> Sender </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Recipient</div>
+          <div class="logs-table-cell"> Recipient </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Currency</div>
+          <div class="logs-table-cell"> Currency </div>
         </div>
         <div class="col-6 col-md-4">
-          <div class="logs-table-cell">Log</div>
+          <div class="logs-table-cell"> Log </div>
         </div>
         <div class="col-6 col-md-2">
-          <div class="logs-table-cell">Date</div>
+          <div class="logs-table-cell"> Date </div>
         </div>
       </div>
     </div>

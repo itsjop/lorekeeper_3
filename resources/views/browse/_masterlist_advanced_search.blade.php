@@ -173,7 +173,7 @@
     ]) !!}
   </div>
   <hr />
-  <a href="#" class="float-right btn btn-sm btn-outline-primary add-feature-button">Add Trait</a>
+  <a href="#" class="float-right btn btn-sm btn-outline-primary add-feature-button"> Add Trait </a>
 
   <div class="form-group">
     {!! Form::label('Has Traits: ') !!} {!! add_help('This will narrow the search to characters that have ALL of the selected traits at the same time.') !!}
@@ -189,9 +189,9 @@
         'class' => 'form-check-input mr-3',
         'data-toggle' => 'toggle'
     ]) !!}
-    <span class="ml-2">Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
+    <span class="ml-2"> Include all {{ __('lorekeeper.character') }} images in search {!! add_help(
         'Each character can have multiple images for each updated version of the character, which captures the traits on that character at that point in time. By default the search will only search on the most up-to-date image, but this option will retrieve characters that match the criteria on older images - you may get results that are outdated.'
-    ) !!}</span>
+    ) !!} </span>
   </div>
 
 </div>

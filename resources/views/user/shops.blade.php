@@ -23,13 +23,13 @@
             </div>
           @endif
           <div class="shop-name mt-1">
-            <a href="{{ $shop->url }}" class="h5 mb-0">{{ $shop->name }}</a>
+            <a href="{{ $shop->url }}" class="h5 mb-0"> {{ $shop->name }} </a>
           </div>
         </div>
       @endforeach
     </div>
   @else
-    <p>No shops found.</p>
+    <p> No shops found. </p>
   @endif
 
 @endsection

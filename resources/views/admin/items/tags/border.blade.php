@@ -1,4 +1,4 @@
-<h3>Borders</h3>
+<h3> Borders </h3>
 
 <a
   data-bs-toggle="collapse"
@@ -23,12 +23,12 @@
         href="#"
         class="btn btn-outline-info"
         id="addLoot"
-      >Add Border</a>
+      > Add Border </a>
     </div>
     <table class="table table-sm" id="lootTable">
       <thead>
         <tr>
-          <th width="50%">Border</th>
+          <th width="50%"> Border </th>
           <th width="10%">
           </th>
         </tr>
@@ -44,7 +44,7 @@
                 ]) !!}
               </td>
               <td class="text-right">
-                <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
+                <a href="#" class="btn btn-danger remove-loot-button"> Remove </a>
               </td>
             </tr>
           @endforeach

@@ -13,7 +13,7 @@
     {{ substr($submission->displayTitle, 0, 40) . '' . (strlen($submission->displayTitle) > 40 ? '...' : '') }}
     @if (isset($submission->content_warning))
       <p class="m-0">
-        <strong class="text-danger">CW:</strong>
+        <strong class="text-danger"> CW:</strong>
         {!! nl2br(htmlentities($submission->content_warning)) !!}
       </p>
     @endif

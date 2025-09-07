@@ -11,7 +11,7 @@
   <h1>
     {{ $userArea->area->name }}
     @if (Settings::get('cultivation_area_unlock') > 0)
-      <a href="#" class="btn btn-outline-danger float-right abandon-area-button">Abandon Area</a>
+      <a href="#" class="btn btn-outline-danger float-right abandon-area-button"> Abandon Area </a>
     @endif
   </h1>
 
@@ -25,18 +25,18 @@
             <img class="plot-button" src="{{ isset($userPlot) ? $userPlot->getStageImage($userPlot->stage) : $userArea->area->plotImageUrl }}" data-id="{{ $i }}" style="width:100%;max-width:250px;" alt="plot" />
           </div>
           <div class="row justify-content-center">
-            <button class="plot-button btn btn-primary btn-sm" data-id="{{ $i }}">Plot {{ $i }}</button>
+            <button class="plot-button btn btn-primary btn-sm" data-id="{{ $i }}"> Plot {{ $i }} </button>
           </div>
         </div>
       @endforeach
     </div>
     @if (Settings::get('cultivation_care_cooldown') > 0)
       <h4>
-        <span class="float-right badge badge-secondary m-2">Plots tended to: {{ $caredPlots ?? 0 }} / {{ Settings::get('cultivation_care_cooldown') }}</span>
+        <span class="float-right badge badge-secondary m-2"> Plots tended to: {{ $caredPlots ?? 0 }} / {{ Settings::get('cultivation_care_cooldown') }} </span>
       </h4>
     @endif
 
-    <div class="p-5 m-auto mt-5">{!! $userArea->area->parsed_description !!}</div>
+    <div class="p-5 m-auto mt-5"> {!! $userArea->area->parsed_description !!} </div>
 
   </div>
 @endsection

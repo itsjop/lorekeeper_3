@@ -16,7 +16,7 @@
 </div>
 
 <div class="alert alert-info hide conversion-info">
-  <strong>Conversion Rate:</strong> <span id="conversion-rate">
+  <strong> Conversion Rate:</strong> <span id="conversion-rate">
   </span>
 </div>
 

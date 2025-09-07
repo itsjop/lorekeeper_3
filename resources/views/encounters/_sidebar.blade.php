@@ -1,6 +1,6 @@
 <div id="sidebar-ul">
   <div class="sidebar-header">
-    <a href="{{ url('encounter-areas') }}" class="card-link">Encounter Stats</a>
+    <a href="{{ url('encounter-areas') }}" class="card-link"> Encounter Stats </a>
   </div>
 
   <div class="details-sb" data-open>
@@ -8,9 +8,9 @@
     <div class="sb-item">
       @if ($use_characters)
         <div style="margin: 10px;" class="justify-content-center text-center">
-          <h5>Current Character</h5>
+          <h5> Current Character </h5>
           @if (!$character)
-            <p>No character selected!</p>
+            <p> No character selected!</p>
           @else
             <div>
               <a href="{{ $character->url }}">
@@ -25,7 +25,7 @@
               <a href="{{ $character->url }}" class="h5 mb-0">
                 {{ $character->fullName }}
               </a>
-              <p>{{ $character->fullName }} has <strong class="energy-amount">{{ $energy }}</strong> energy.</p>
+              <p> {{ $character->fullName }} has <strong class="energy-amount"> {{ $energy }} </strong> energy. </p>
             </div>
           @endif
           {!! Form::open(['url' => 'encounter-areas/select-character']) !!}
@@ -37,8 +37,8 @@
           {!! Form::close() !!}
         </div>
       @else
-        <div class="justify-content-center text-center">You have <strong class="energy-amount">{{ $energy }}</strong>
-          energy.</div>
+        <div class="justify-content-center text-center"> You have <strong class="energy-amount"> {{ $energy }} </strong>
+          energy. </div>
       @endif
     </div>
   </div>

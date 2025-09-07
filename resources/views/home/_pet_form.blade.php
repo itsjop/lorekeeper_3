@@ -9,7 +9,7 @@
     @endif Name Pet
   </a>
   {!! Form::open(['url' => 'pets/name/' . $pet->id, 'id' => 'nameForm', 'class' => 'collapse']) !!}
-  <p>Enter a name to display for the pet!</p>
+  <p> Enter a name to display for the pet!</p>
   <div class="form-group">
     {!! Form::label('name', 'Name') !!} {!! add_help('If your name is not appropriate you can be banned.') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -31,7 +31,7 @@
     @endif Edit Profile
   </a>
   {!! Form::open(['url' => 'pets/description/' . $pet->id, 'id' => 'descForm', 'class' => 'collapse']) !!}
-  <p>Tell everyone about your pet.</p>
+  <p> Tell everyone about your pet. </p>
   <div class="form-group">
     {!! Form::label('Profile Text (Optional)') !!}
     {!! Form::textarea('description', $pet->description, ['class' => 'form-control wysiwyg']) !!}
@@ -62,7 +62,7 @@
         @endif Detach Pet from Character
       </a>
       {!! Form::open(['url' => 'pets/detach/' . $pet->id, 'id' => 'attachForm', 'class' => 'collapse']) !!}
-      <p>This pet is currently attached to {!! $pet->character->displayName !!}, do you want to detach them?</p>
+      <p> This pet is currently attached to {!! $pet->character->displayName !!}, do you want to detach them?</p>
       <div class="text-right">
         {!! Form::submit('Detach', ['class' => 'btn btn-primary']) !!}
       </div>
@@ -78,9 +78,9 @@
         @endif Attach Pet to Character
       </a>
       {!! Form::open(['url' => 'pets/attach/' . $pet->id, 'id' => 'attachForm', 'class' => 'collapse']) !!}
-      <p>Attach this pet to a character you own! They'll appear on the character's page and any stat bonuses will automatically be
-        applied.</p>
-      <p>Pets can be detached.</p>
+      <p> Attach this pet to a character you own! They'll appear on the character's page and any stat bonuses will automatically be
+        applied. </p>
+      <p> Pets can be detached. </p>
       <div class="form-group">
         {!! Form::label('id', 'Slug') !!} {!! add_help('Insert your character\'s slug.') !!}
         {!! Form::select(
@@ -95,7 +95,7 @@
       </div>
       {!! Form::close() !!}
     @else
-      <a class="card-title h5">You cannot currently attach / detach this pet! It is under cooldown.</a>
+      <a class="card-title h5"> You cannot currently attach / detach this pet! It is under cooldown. </a>
     @endif
   </li>
 @endif
@@ -106,12 +106,12 @@
       class="card-title h5 collapse-title"
       data-bs-toggle="collapse"
       href="#userVariantForm"
-    >Change Pet Variant</a>
+    > Change Pet Variant </a>
     {!! Form::open(['url' => 'pets/variant/' . $pet->id, 'id' => 'userVariantForm', 'class' => 'collapse']) !!}
     <p>
       This will use a splice item!
       @if ($pet->pet->isVariant)
-        <br>Current Variant: {{ $pet->pet->name }}
+        <br> Current Variant: {{ $pet->pet->name }}
       @endif
     </p>
     <div class="form-group">
@@ -141,7 +141,7 @@
       class="card-title h5 collapse-title"
       data-bs-toggle="collapse"
       href="#variantForm"
-    >[ADMIN] Change Pet Variant</a>
+    >[ADMIN] Change Pet Variant </a>
     {!! Form::open(['url' => 'pets/variant/' . $pet->id, 'id' => 'variantForm', 'class' => 'collapse']) !!}
     {!! Form::hidden('is_staff', 1) !!}
     <div class="form-group">
@@ -166,7 +166,7 @@
       class="card-title h5 collapse-title"
       data-bs-toggle="collapse"
       href="#evolutionForm"
-    >[ADMIN] Change Pet Evolution</a>
+    >[ADMIN] Change Pet Evolution </a>
     {!! Form::open(['url' => 'pets/evolution/' . $pet->id, 'id' => 'evolutionForm', 'class' => 'collapse']) !!}
     {!! Form::hidden('is_staff', 1) !!}
     <div class="form-group">
@@ -187,12 +187,12 @@
       class="card-title h5 collapse-title"
       data-bs-toggle="collapse"
       href="#imageForm"
-    >[ADMIN] Change Image</a>
+    >[ADMIN] Change Image </a>
     {!! Form::open(['url' => 'pets/image/' . $pet->id, 'id' => 'imageForm', 'class' => 'collapse', 'files' => true]) !!}
     <div class="form-group mt-2">
       {!! Form::label('Image') !!}
-      <div>{!! Form::file('image') !!}</div>
-      <div class="text-muted">Recommended size: 100px x 100px</div>
+      <div> {!! Form::file('image') !!} </div>
+      <div class="text-muted"> Recommended size: 100px x 100px </div>
       @if ($pet->has_image)
         <div class="form-check">
           {!! Form::checkbox('remove_image', 1, false, ['class' => 'form-check-input']) !!}

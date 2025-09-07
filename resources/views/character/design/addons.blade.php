@@ -14,15 +14,15 @@
 
   <div class="card mb-3">
     <div class="card-body br-ntl-15">
-      <h2>Add-ons</h2>
+      <h2> Add-ons </h2>
 
       @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id && $request->character)
-        <p>Select any items needed to add <b>traits</b> or <b>modifications</b> to your character.</p>
-        <p>These items will be removed from your
+        <p> Select any items needed to add <b>traits </b> or <b>modifications </b> to your character. </p>
+        <p> These items will be removed from your
           inventory{{ $request->character->is_myo_slot ? '' : ' and/or character' }} but refunded if removed from the request, the
           request is rejected, or the
-          request is deleted.</p>
-        <p>If you don't need to attach any items for your request, simply click the <b>Save</b> button once to mark this section
+          request is deleted. </p>
+        <p> If you don't need to attach any items for your request, simply click the <b> Save </b> button once to mark this section
           as complete! </p>
         <hr>
 
@@ -44,18 +44,18 @@
         </div>
         {!! Form::close() !!}
       @else
-        <p>Items and/or currency listed have been removed from their holders and will be refunded if the request is rejected.</p>
+        <p> Items and/or currency listed have been removed from their holders and will be refunded if the request is rejected. </p>
         @if ($inventory && count($inventory))
-          <h3>{!! $request->user->displayName !!}'s Inventory</h3>
+          <h3> {!! $request->user->displayName !!}'s Inventory </h3>
           <div class="card mb-3">
             <div class="card-body">
               <table class="table table-sm">
                 <thead class="thead-light">
                   <tr class="d-flex">
-                    <th class="col-2">Item</th>
-                    <th class="col-4">Source</th>
-                    <th class="col-4">Notes</th>
-                    <th class="col-2">Quantity</th>
+                    <th class="col-2"> Item </th>
+                    <th class="col-4"> Source </th>
+                    <th class="col-4"> Notes </th>
+                    <th class="col-2"> Quantity </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -68,18 +68,18 @@
                             src="{{ $items[$itemRow['asset']->item_id]->image_url }}"
                             alt=" {{ $items[$itemRow['asset']->item_id]->name }} "
                           >
-                        @endif {!! isset($itemRow['asset']) ? $items[$itemRow['asset']->item_id]->name : '<i>Deleted User Item</i>' !!}
-                      <td class="col-4">{!! isset($itemRow['asset']) && array_key_exists('data', $itemRow['asset']->data)
+                        @endif {!! isset($itemRow['asset']) ? $items[$itemRow['asset']->item_id]->name : '<i> Deleted User Item </i>' !!}
+                      <td class="col-4"> {!! isset($itemRow['asset']) && array_key_exists('data', $itemRow['asset']->data)
                           ? ($itemRow['asset']->data['data']
                               ? $itemRow['asset']->data['data']
                               : 'N/A')
-                          : 'N/A' !!}</td>
-                      <td class="col-4">{!! isset($itemRow['asset']) && array_key_exists('notes', $itemRow['asset']->data)
+                          : 'N/A' !!} </td>
+                      <td class="col-4"> {!! isset($itemRow['asset']) && array_key_exists('notes', $itemRow['asset']->data)
                           ? ($itemRow['asset']->data['notes']
                               ? $itemRow['asset']->data['notes']
                               : 'N/A')
-                          : 'N/A' !!}</td>
-                      <td class="col-2">{!! $itemRow['quantity'] !!}
+                          : 'N/A' !!} </td>
+                      <td class="col-2"> {!! $itemRow['quantity'] !!}
                     </tr>
                   @endforeach
                 </tbody>
@@ -88,38 +88,38 @@
           </div>
         @endif
         @if (count($request->userBank))
-          <h3>{!! $request->user->displayName !!}'s Bank</h3>
+          <h3> {!! $request->user->displayName !!}'s Bank </h3>
           <table class="table table-sm mb-3">
             <thead>
               <tr>
-                <th width="70%">Currency</th>
-                <th width="30%">Quantity</th>
+                <th width="70%"> Currency </th>
+                <th width="30%"> Quantity </th>
               </tr>
             </thead>
             <tbody>
               @foreach ($request->getBank('user') as $currency)
                 <tr>
-                  <td>{!! $currency->displayName !!}</td>
-                  <td>{{ $currency->quantity }}</td>
+                  <td> {!! $currency->displayName !!} </td>
+                  <td> {{ $currency->quantity }} </td>
                 </tr>
               @endforeach
             </tbody>
           </table>
         @endif
         @if ($request->character && count($request->characterBank))
-          <h3>{!! $request->character->displayName !!}'s Bank</h3>
+          <h3> {!! $request->character->displayName !!}'s Bank </h3>
           <table class="table table-sm mb-3">
             <thead>
               <tr>
-                <th width="70%">Currency</th>
-                <th width="30%">Quantity</th>
+                <th width="70%"> Currency </th>
+                <th width="30%"> Quantity </th>
               </tr>
             </thead>
             <tbody>
               @foreach ($request->getBank('character') as $currency)
                 <tr>
-                  <td>{!! $currency->displayName !!}</td>
-                  <td>{{ $currency->quantity }}</td>
+                  <td> {!! $currency->displayName !!} </td>
+                  <td> {{ $currency->quantity }} </td>
                 </tr>
               @endforeach
             </tbody>

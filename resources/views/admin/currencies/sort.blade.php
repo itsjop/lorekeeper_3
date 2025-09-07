@@ -11,15 +11,15 @@
       'Sort Currencies' => 'admin/data/currencies/sort'
   ]) !!}
 
-  <h1>Sort Currencies</h1>
+  <h1> Sort Currencies </h1>
 
-  <p>This is the order in which currencies will appear on a user or character's page. Both types are saved separately, so remember
-    to hit save before editing the other one.</p>
+  <p> This is the order in which currencies will appear on a user or character's page. Both types are saved separately, so remember
+    to hit save before editing the other one. </p>
 
-  <h3>User Currencies</h3>
+  <h3> User Currencies </h3>
 
   @if (!count($userCurrencies))
-    <p>No user-attached currencies found.</p>
+    <p> No user-attached currencies found. </p>
   @else
     <table class="table table-sm currency-table">
       <tbody id="userSortable" class="sortable">
@@ -45,10 +45,10 @@
     </div>
   @endif
 
-  <h3>Character Currencies</h3>
+  <h3> Character Currencies </h3>
 
   @if (!count($characterCurrencies))
-    <p>No character-attached currencies found.</p>
+    <p> No character-attached currencies found. </p>
   @else
     <table class="table table-sm currency-table">
       <tbody id="characterSortable" class="sortable">

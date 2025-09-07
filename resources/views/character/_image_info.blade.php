@@ -5,9 +5,9 @@
   id="info-{{ $image->id }}"
 >
   <div class="quick-info">
-    <h5 class="ruled-left text-600">{!! $image->species_id ? $image->species->displayName : 'None' !!}</h5>
+    <h5 class="ruled-left text-600"> {!! $image->species_id ? $image->species->displayName : 'None' !!} </h5>
     <div class="flex gap-_5 jc-center">
-      <div class="rarity flex h6 no-break">{!! $image->rarity_id ? $image->rarity->displayName : 'None' !!} </div>
+      <div class="rarity flex h6 no-break"> {!! $image->rarity_id ? $image->rarity->displayName : 'None' !!} </div>
       <img src="{{ asset('images/subtypes/badges/' . getSubtypeInfo($character->image->subtype_id) . '.png') }}"
         style="height: 1.5em; margin-right: 0.1em;"
       >
@@ -18,12 +18,12 @@
       </div>
     </div>
     @if ($image->character->location)
-      <div class="home text-center">Location: {!! $image->character->location ? $image->character->location : 'None' !!}</div>
+      <div class="home text-center"> Location: {!! $image->character->location ? $image->character->location : 'None' !!} </div>
     @endif
   </div>
 
   <div class="trait-list">
-    <h5 class="ruled-left text-700">Traits</h5>
+    <h5 class="ruled-left text-700"> Traits </h5>
     @if (config('lorekeeper.extensions.traits_by_category'))
       @php
         $traitgroup = $image->features()->get()->groupBy('feature_category_id');
@@ -32,12 +32,12 @@
         @foreach ($traitgroup as $key => $group)
           <div class="pl-3 mb-2">
             @if ($key)
-              <strong>{!! $group->first()->feature->category->displayName !!}:</strong>
+              <strong> {!! $group->first()->feature->category->displayName !!}:</strong>
             @else
-              <strong>Miscellaneous:</strong>
+              <strong> Miscellaneous:</strong>
             @endif
             @foreach ($group as $feature)
-              <div class="pl-2 ml-md-2">{!! $feature->feature->displayName !!} @if ($feature->data)
+              <div class="pl-2 ml-md-2"> {!! $feature->feature->displayName !!} @if ($feature->data)
                   ({{ $feature->data }})
                 @endif
               </div>
@@ -45,7 +45,7 @@
           </div>
         @endforeach
       @else
-        <div>No traits listed.</div>
+        <div> No traits listed. </div>
       @endif
     @else
       <div>
@@ -54,14 +54,14 @@
           @foreach ($features as $feature)
             <div>
               @if ($feature->feature->feature_category_id)
-                <strong>{!! $feature->feature->category->displayName !!}:</strong>
+                <strong> {!! $feature->feature->category->displayName !!}:</strong>
                 @endif {!! $feature->feature->displayName !!} @if ($feature->data)
                   ({{ $feature->data }})
                 @endif
             </div>
           @endforeach
         @else
-          <div>No traits listed.</div>
+          <div> No traits listed. </div>
         @endif
       </div>
     @endif
@@ -69,7 +69,7 @@
 
   @if ($character->image->titles->count() > 0)
     <div class="titles">
-      <h5 class="ruled-left text-700">Titles</h5>
+      <h5 class="ruled-left text-700"> Titles </h5>
       {!! $character->image->displayTitles !!}
     </div>
   @endif
@@ -78,16 +78,16 @@
     <h5 class="ruled-left text-700"> Credits </h5>
     <div class="grid ji-center">
       <div class="flex">
-        <h6 class="mr-2">Design</h6>
+        <h6 class="mr-2"> Design </h6>
         @foreach ($image->designers as $designer)
-          <div>{!! $designer->displayLink() !!}</div>
+          <div> {!! $designer->displayLink() !!} </div>
         @endforeach
       </div>
 
       <div class="flex">
-        <h6 class="mr-2">Art</h6>
+        <h6 class="mr-2"> Art </h6>
         @foreach ($image->artists as $artist)
-          <div>{!! $artist->displayLink() !!}</div>
+          <div> {!! $artist->displayLink() !!} </div>
         @endforeach
       </div>
     </div>
@@ -98,13 +98,13 @@
 
     <div class="flex small jc-center gap-_5">
       <p style="text-align: end;">
-        <strong>Uploaded: </strong>
+        <strong> Uploaded: </strong>
         <br>
         {!! format_onlyDate($image->created_at, false) !!}
       </p>
       •
       <p>
-        <strong>Last Edited: </strong>
+        <strong> Last Edited: </strong>
         <br>
         {!! pretty_date($image->updated_at) !!}
       </p>
@@ -112,7 +112,7 @@
   </div>
 
   <div class="meta-info">
-    <div class="badge badge-primary">Image #{{ $image->id }}</div>
+    <div class="badge badge-primary"> Image #{{ $image->id }} </div>
     @if (!$image->character->is_myo_slot && !$image->is_valid)
       <div class="alert alert-danger">
         This version of this character is outdated, and only noted here for recordkeeping purposes. Do not use as an
@@ -153,7 +153,7 @@
                 : 'admin/character/' . $character->slug . '/settings'
         ]) !!} --}}
         {!! Form::open(['url' => 'admin/character/image/' . $image->id . '/settings']) !!}
-        <h5>Image-specific settings</h5>
+        <h5> Image-specific settings </h5>
         <div class="form-group">
           {!! Form::checkbox('is_visible', 1, $image->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
           {!! Form::label('is_visible', 'Is Viewable', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is turned off, the image will not be visible by anyone without the Manage Masterlist power.') !!}
@@ -188,16 +188,16 @@
               href="#"
               class="btn btn-outline-info btn-sm active-image"
               data-id="{{ $image->id }}"
-            >Set Active</a>
+            > Set Active </a>
           @endif <a
             href="#"
             class="btn btn-outline-info btn-sm reupload-image"
             data-id="{{ $image->id }}"
-          >Reupload Image</a> <a
+          > Reupload Image </a> <a
             href="#"
             class="btn btn-outline-danger btn-sm delete-image"
             data-id="{{ $image->id }}"
-          >Delete</a>
+          > Delete </a>
         </div>
       </details>
     </div>

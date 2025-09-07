@@ -13,7 +13,7 @@
   </h1>
 
   <div class="text-center">
-    <p>{!! $activity->parsed_description !!}</p>
+    <p> {!! $activity->parsed_description !!} </p>
   </div>
 
   @if (View::exists('activities.modules._' . $activity->module))

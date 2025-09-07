@@ -15,5 +15,5 @@
     @endforeach
   </div>
 @else
-  <p>No MYOs rolled.</p>
+  <p> No MYOs rolled. </p>
 @endif

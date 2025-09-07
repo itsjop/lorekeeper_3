@@ -43,8 +43,8 @@
         $character->image->canViewFull(Auth::check() ? Auth::user() : null) &&
             file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName))
     )
-      <div class="text-right">You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}">View watermarked
-          image</a>?</div>
+      <div class="text-right"> You are viewing the full-size image. <a href="{{ $character->image->imageUrl }}"> View watermarked
+          image </a>?</div>
     @endif
   </div>
 
@@ -55,7 +55,7 @@
         class="btn btn-outline-info btn-sm edit-lineage"
         data-{{ $character->is_myo_slot ? 'id' : 'slug' }}="{{ $character->is_myo_slot ? $character->id : $character->slug }}"
       >
-        <i class="fas fa-cog"></i> Edit</a>
+        <i class="fas fa-cog"></i> Edit </a>
     </div>
   @endif
 

@@ -12,25 +12,25 @@
       'Deactivate User' => 'admin/users/' . $user->name . '/deactivate'
   ]) !!}
 
-  <h1>User: {!! $user->displayName !!}</h1>
+  <h1> User: {!! $user->displayName !!} </h1>
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link" href="{{ $user->adminUrl }}">Account</a>
+      <a class="nav-link" href="{{ $user->adminUrl }}"> Account </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('admin/users/' . $user->name . '/updates') }}">Account Updates</a>
+      <a class="nav-link" href="{{ url('admin/users/' . $user->name . '/updates') }}"> Account Updates </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('admin/users/' . $user->name . '/ban') }}">Ban</a>
+      <a class="nav-link" href="{{ url('admin/users/' . $user->name . '/ban') }}"> Ban </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="{{ url('admin/users/' . $user->name . '/deactivate') }}">Deactivate</a>
+      <a class="nav-link active" href="{{ url('admin/users/' . $user->name . '/deactivate') }}"> Deactivate </a>
     </li>
   </ul>
 
-  <h3>{{ $user->is_deactivated ? 'Edit Deactivation' : 'Deactivate' }}</h3>
-  <p>Deactivating the user will remove their rank, cancel all of their queued submissions and transfers, and prevent them from using
-    any other site features. The deactivate reason will be displayed on the blacklist.</p>
+  <h3> {{ $user->is_deactivated ? 'Edit Deactivation' : 'Deactivate' }} </h3>
+  <p> Deactivating the user will remove their rank, cancel all of their queued submissions and transfers, and prevent them from using
+    any other site features. The deactivate reason will be displayed on the blacklist. </p>
 
   {!! Form::open(['url' => 'admin/users/' . $user->name . '/deactivate', 'id' => 'deactivateForm']) !!}
   <div class="form-group">
@@ -45,11 +45,11 @@
   {!! Form::close() !!}
 
   @if ($user->is_deactivated)
-    <h3>Reactivate</h3>
-    <p>Reactivating the user will grant them access to site features again. However, if they had a rank before being deactivatened,
-      it will not be restored.</p>
+    <h3> Reactivate </h3>
+    <p> Reactivating the user will grant them access to site features again. However, if they had a rank before being deactivatened,
+      it will not be restored. </p>
     <div class="text-right">
-      <a href="#" class="btn btn-outline-danger reactivate-button">Reactivate</a>
+      <a href="#" class="btn btn-outline-danger reactivate-button"> Reactivate </a>
     </div>
   @endif
 @endsection

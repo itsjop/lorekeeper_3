@@ -30,8 +30,8 @@
 <table class="table table-sm" id="lootTable">
   <thead>
     <tr>
-      <th width="35%">{{ isset($progression) && $progression ? 'Progression' : 'Reward' }}</th>
-      <th width="20%">Quantity</th>
+      <th width="35%"> {{ isset($progression) && $progression ? 'Progression' : 'Reward' }} </th>
+      <th width="20%"> Quantity </th>
       <th width="10%">
       </th>
     </tr>
@@ -40,7 +40,7 @@
     @if ($loots)
       @foreach ($loots as $loot)
         <tr class="loot-row">
-          <td>{!! Form::select(
+          <td> {!! Form::select(
               'rewardable_type[]',
               ['Item' => 'Item', 'Currency' => 'Currency', 'Pet' => 'Pet', 'Award' => ucfirst(__('awards.award'))] +
                   (isset($showLootTables) && $showLootTables ? ['LootTable' => 'Loot Table'] : []) +
@@ -52,7 +52,7 @@
                   'class' => 'form-control reward-type',
                   'placeholder' => isset($progression) && $progression ? 'Select Progression Type' : 'Select Reward Type'
               ]
-          ) !!}</td>
+          ) !!} </td>
           <td class="loot-row-select">
             @if ($loot->rewardable_type == 'Item')
               {!! Form::select('rewardable_id[]', $items, $loot->rewardable_id, [
@@ -96,9 +96,9 @@
               ]) !!}
             @endif
           </td>
-          <td>{!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!}</td>
+          <td> {!! Form::text('quantity[]', $loot->quantity, ['class' => 'form-control']) !!} </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-loot-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-loot-button"> Remove </a>
           </td>
         </tr>
       @endforeach

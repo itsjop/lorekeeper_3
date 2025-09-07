@@ -1,6 +1,6 @@
-<h1>MYO Slot Settings</h1>
+<h1> MYO Slot Settings </h1>
 
-<h3>Basic Information</h3>
+<h3> Basic Information </h3>
 <div class="form-group">
   {!! Form::label('Name') !!} {!! add_help(
       'Enter a descriptive name for the type of ' .
@@ -40,14 +40,14 @@
   ) !!}
 </div>
 
-<h3>Transfer Information</h3>
+<h3> Transfer Information </h3>
 
 <div class="alert alert-info">
   These are displayed on the MYO slot's profile, but don't have any effect on site functionality except for the following:
   <ul>
-    <li>If all switches are off, the MYO slot cannot be transferred by the user (directly or through trades).</li>
-    <li>If a transfer cooldown is set, the MYO slot also cannot be transferred by the user (directly or through trades) until the
-      cooldown is up.</li>
+    <li> If all switches are off, the MYO slot cannot be transferred by the user (directly or through trades). </li>
+    <li> If a transfer cooldown is set, the MYO slot also cannot be transferred by the user (directly or through trades) until the
+      cooldown is up. </li>
   </ul>
 </div>
 <div class="form-group">
@@ -79,7 +79,7 @@
   </div>
 </div>
 
-<h3>Traits</h3>
+<h3> Traits </h3>
 <div class="form-group">
   {!! Form::label('Species') !!} {!! add_help(
       'This will lock the slot into a particular species. Leave it blank if you would like to give the user a choice.'

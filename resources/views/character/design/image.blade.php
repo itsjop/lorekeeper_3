@@ -15,10 +15,10 @@
   @if ($request->has_image)
     <div class="card mb-3">
       <div class="card-body bg-secondary text-white">
-        <h2>Masterlist Image</h2>
+        <h2> Masterlist Image </h2>
         <div class="grid grid-2-col">
           <div class="">
-            <h3 class="text-center">Main Image</h3>
+            <h3 class="text-center"> Main Image </h3>
             <div class="text-center">
               <a
                 href="{{ $request->imageUrl }}?v={{ $request->updated_at->timestamp }}"
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="">
-            <h3 class="text-center">Thumbnail Image</h3>
+            <h3 class="text-center"> Thumbnail Image </h3>
             <div class="text-center">
               <a
                 href="{{ $request->thumbnailUrl }}?v={{ $request->updated_at->timestamp }}"
@@ -54,24 +54,24 @@
 
       @if (!($request->status == 'Draft' && $request->user_id == Auth::user()->id))
         <div class="card-body">
-          <h4 class="mb-3">Credits</h4>
+          <h4 class="mb-3"> Credits </h4>
           <div class="row">
             <div class="col-lg-4 col-md-6 col-4">
-              <h5>Design</h5>
+              <h5> Design </h5>
             </div>
             <div class="col-lg-8 col-md-6 col-8">
               @foreach ($request->designers as $designer)
-                <div>{!! $designer->displayLink() !!}</div>
+                <div> {!! $designer->displayLink() !!} </div>
               @endforeach
             </div>
           </div>
           <div class="row">
             <div class="col-lg-4 col-md-6 col-4">
-              <h5>Art</h5>
+              <h5> Art </h5>
             </div>
             <div class="col-lg-8 col-md-6 col-8">
               @foreach ($request->artists as $artist)
-                <div>{!! $artist->displayLink() !!}</div>
+                <div> {!! $artist->displayLink() !!} </div>
               @endforeach
             </div>
           </div>
@@ -82,15 +82,15 @@
 
   <div class="card mb-3">
     <div class="card-body br-ntl-15">
-      <h2>Masterlist Image</h2>
+      <h2> Masterlist Image </h2>
 
       @if (
           ($request->status == 'Draft' && $request->user_id == Auth::user()->id) ||
               ($request->status == 'Pending' && Auth::user()->hasPower('manage_characters'))
       )
         @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id)
-          <p>Each Masterlist image requires its own design request.</p>
-          <p>There is an area in the <b>Traits Tab</b> where you will specify what type of ML image you are uploading. (Bat, Demon,
+          <p> Each Masterlist image requires its own design request. </p>
+          <p> There is an area in the <b> Traits Tab </b> where you will specify what type of ML image you are uploading. (Bat, Demon,
             Reference, etc.)</p>
           <hr>
           <p>
@@ -99,9 +99,9 @@
                 : 'This is a character update, so feel free to upload any type of Masterlist image to replace or add to your character’s profile!' }}
           </p>
         @else
-          <p>As a staff member, you may modify the thumbnail of the uploaded image and/or the credits, but not the image itself. If
+          <p> As a staff member, you may modify the thumbnail of the uploaded image and/or the credits, but not the image itself. If
             you
-            have recropped the thumbnail, you may need to hard refresh to see the new one.</p>
+            have recropped the thumbnail, you may need to hard refresh to see the new one. </p>
         @endif
 
         @if ($request->character->is_myo_slot && $request->character->image->colours && config('lorekeeper.character_pairing.colours'))
@@ -110,19 +110,19 @@
             deviate
             from these colours, but they should be recognizable as the same character. If you have any questions, please
             contact staff.
-            <div class="mt-2 mb-0">{!! $request->character->image->displayColours() !!}</div>
+            <div class="mt-2 mb-0"> {!! $request->character->image->displayColours() !!} </div>
           </div>
         @endif
 
         {!! Form::open(['url' => 'designs/' . $request->id . '/image', 'files' => true]) !!}
         @if ($request->status == 'Draft' && $request->user_id == Auth::user()->id)
           <div class="form-group">
-            <h3> {!! Form::label('Image Upload') !!}</h3>
+            <h3> {!! Form::label('Image Upload') !!} </h3>
             <div class="custom-file">
               {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
               {!! Form::file('image', ['class' => 'custom-file-input', 'id' => 'mainImage']) !!}
             </div>
-            <p class="text-secondary">Max file size: 2000px x 2000px</p>
+            <p class="text-secondary"> Max file size: 2000px x 2000px </p>
           </div>
         @else
           <div class="form-group">
@@ -145,7 +145,7 @@
           @endif
           <div class="card mb-3" id="thumbnailCrop">
             <div class="card-body">
-              <div id="cropSelect">By using this function, the thumbnail will be automatically generated from the full image.</div>
+              <div id="cropSelect"> By using this function, the thumbnail will be automatically generated from the full image. </div>
               {!! Form::hidden('x0', 1) !!}
               {!! Form::hidden('x1', 1) !!}
               {!! Form::hidden('y0', 1) !!}
@@ -161,7 +161,7 @@
           </div>
           <div class="card mb-3" id="thumbnailCrop">
             <div class="card-body">
-              <div id="cropSelect">Select an image to use the thumbnail cropper.</div>
+              <div id="cropSelect"> Select an image to use the thumbnail cropper. </div>
               <img
                 src="{{ $request->imageUrl }}"
                 id="cropper"
@@ -188,15 +188,15 @@
                 {!! Form::label('thumbnail', 'Choose thumbnail...', ['class' => 'custom-file-label']) !!}
                 {!! Form::file('thumbnail', ['class' => 'custom-file-input']) !!}
               </div>
-              <div class="text-muted">Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
-                {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px</div>
+              <div class="text-muted"> Recommended size: {{ config('lorekeeper.settings.masterlist_thumbnails.width') }}px x
+                {{ config('lorekeeper.settings.masterlist_thumbnails.height') }}px </div>
             </div>
           </div>
         @endif
 
         <hr>
 
-        <h3> {!! Form::label('Artist Credits') !!}</h3>
+        <h3> {!! Form::label('Artist Credits') !!} </h3>
 
         <p>
           This section is for crediting the character's artist and/or designer. The first box is for the designer or artist's

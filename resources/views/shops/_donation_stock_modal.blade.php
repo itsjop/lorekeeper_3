@@ -1,5 +1,5 @@
 @if (!$stock)
-  <div class="text-center">Invalid item selected.</div>
+  <div class="text-center"> Invalid item selected. </div>
 @else
   <div class="text-center mb-3">
     <div class="mb-1">
@@ -9,10 +9,10 @@
     </div>
     <div>
       <a href="{{ $stock->item->idUrl }}">
-        <strong>{{ $stock->item->name }}</strong>
+        <strong> {{ $stock->item->name }} </strong>
       </a>
     </div>
-    <div>Stock: {{ $stock->stock }}</div>
+    <div> Stock: {{ $stock->stock }} </div>
   </div>
 
   <div class="mb-2">
@@ -20,7 +20,7 @@
       data-bs-toggle="collapse"
       href="#itemDescription"
       class="h5"
-    >Description <i class="fas fa-caret-down"></i>
+    > Description <i class="fas fa-caret-down"></i>
     </a>
     <div class="card collapse show mt-1" id="itemDescription">
       <div class="card-body">
@@ -32,12 +32,12 @@
         <div class="row">
           @if (isset($stock->stack->data['data']))
             <div class="col-md">
-              <strong>Source:</strong> {!! $stock->stack->data['data'] !!}
+              <strong> Source:</strong> {!! $stock->stack->data['data'] !!}
             </div>
           @endif
           @if (isset($stock->stack->data['notes']))
             <div class="col-md">
-              <strong>Notes:</strong> {!! $stock->stack->data['notes'] !!}
+              <strong> Notes:</strong> {!! $stock->stack->data['notes'] !!}
             </div>
           @endif
         </div>
@@ -47,10 +47,10 @@
 
   @if (Auth::check())
     @if ($stock->stock == 0)
-      <div class="alert alert-warning mb-0">This item is out of stock.</div>
+      <div class="alert alert-warning mb-0"> This item is out of stock. </div>
     @else
-      <p>You may collect <strong>one (1)</strong> item from this shop every
-        {{ Config::get('lorekeeper.settings.donation_shop.cooldown') }} minutes.</p>
+      <p> You may collect <strong>one (1)</strong> item from this shop every
+        {{ Config::get('lorekeeper.settings.donation_shop.cooldown') }} minutes. </p>
       {!! Form::open(['url' => 'shops/collect']) !!}
       {!! Form::hidden('stock_id', $stock->id) !!}
       <div class="text-right">
@@ -59,6 +59,6 @@
       {!! Form::close() !!}
     @endif
   @else
-    <div class="alert alert-danger">You must be logged in to collect this item.</div>
+    <div class="alert alert-danger"> You must be logged in to collect this item. </div>
   @endif
 @endif

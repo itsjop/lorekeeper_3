@@ -13,13 +13,13 @@
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending') }}">Pending</a>
+      <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/pending') }}"> Pending </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved') }}">Approved</a>
+      <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/approved') }}"> Approved </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected') }}">Rejected</a>
+      <a class="nav-link {{ set_active('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected*') }}" href="{{ url('admin/' . ($isMyo ? 'myo-approvals' : 'design-approvals') . '/rejected') }}"> Rejected </a>
     </li>
   </ul>
 
@@ -49,21 +49,21 @@
     <div class="logs-table-header">
       <div class="row">
         <div class="col-md-3">
-          <div class="logs-table-cell">{{ $isMyo ? 'MYO Slot' : 'Character' }}</div>
+          <div class="logs-table-cell"> {{ $isMyo ? 'MYO Slot' : 'Character' }} </div>
         </div>
         <div class="col-3 col-md-3">
-          <div class="logs-table-cell">User</div>
+          <div class="logs-table-cell"> User </div>
         </div>
         <div class="col-2 col-md-2">
-          <div class="logs-table-cell">Submitted</div>
+          <div class="logs-table-cell"> Submitted </div>
         </div>
         @if (config('lorekeeper.extensions.design_update_voting'))
           <div class="col-2 col-md-2">
-            <div class="logs-table-cell">Votes</div>
+            <div class="logs-table-cell"> Votes </div>
           </div>
         @endif
         <div class="col-4 col-md-2">
-          <div class="logs-table-cell">Status</div>
+          <div class="logs-table-cell"> Status </div>
         </div>
       </div>
     </div>
@@ -86,32 +86,32 @@
           @endif
           <div class="row flex-wrap">
             <div class="col-md-3">
-              <div class="logs-table-cell">{!! $r->character ? $r->character->displayName : 'Deleted Character [#' . $r->character_id . ']' !!}</div>
+              <div class="logs-table-cell"> {!! $r->character ? $r->character->displayName : 'Deleted Character [#' . $r->character_id . ']' !!} </div>
             </div>
             <div class="col-3 col-md-3">
-              <div class="logs-table-cell">{!! $r->user->displayName !!}</div>
+              <div class="logs-table-cell"> {!! $r->user->displayName !!} </div>
             </div>
             <div class="col-2 col-md-2">
-              <div class="logs-table-cell">{!! $r->submitted_at ? pretty_date($r->submitted_at) : '---' !!}</div>
+              <div class="logs-table-cell"> {!! $r->submitted_at ? pretty_date($r->submitted_at) : '---' !!} </div>
             </div>
             @if (config('lorekeeper.extensions.design_update_voting'))
               <div class="col-2 col-md-2">
                 <div class="logs-table-cell">
                   <strong>
-                    <span class="text-danger">{{ $rejectSum }}/{{ Settings::get('design_votes_needed') }}</span> :
-                    <span class="text-success">{{ $approveSum }}/{{ Settings::get('design_votes_needed') }}</span>
+                    <span class="text-danger"> {{ $rejectSum }}/{{ Settings::get('design_votes_needed') }} </span> :
+                    <span class="text-success"> {{ $approveSum }}/{{ Settings::get('design_votes_needed') }} </span>
                   </strong>
                 </div>
               </div>
             @endif
             <div class="col-4 col-md-1">
               <div class="logs-table-cell">
-                <span class="btn btn-{{ $r->status == 'Pending' ? 'secondary' : ($r->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1">{{ $r->status }}</span>
+                <span class="btn btn-{{ $r->status == 'Pending' ? 'secondary' : ($r->status == 'Approved' ? 'success' : 'danger') }} btn-sm py-0 px-1"> {{ $r->status }} </span>
               </div>
             </div>
             <div class="col-4 col-md-1">
               <div class="logs-table-cell">
-                <a href="{{ $r->url }}" class="btn btn-primary btn-sm">Details</a>
+                <a href="{{ $r->url }}" class="btn btn-primary btn-sm"> Details </a>
               </div>
             </div>
           </div>
@@ -121,5 +121,5 @@
   </div>
   {!! $requests->render() !!}
 
-  <div class="text-center mt-4 small text-muted">{{ $requests->total() }} result{{ $requests->total() == 1 ? '' : 's' }} found.</div>
+  <div class="text-center mt-4 small text-muted"> {{ $requests->total() }} result{{ $requests->total() == 1 ? '' : 's' }} found. </div>
 @endsection

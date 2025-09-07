@@ -17,7 +17,7 @@
     {!! $pair->displayItems !!}
   </td>
   <td>
-    <span class="btn btn-{{ $pair->status == 'PENDING' ? 'secondary' : ($pair->status == 'APPROVED' ? 'success' : ($pair->status == 'COMPLETE' ? 'secondary' : 'danger')) }}">{{ $pair->status }}</span>
+    <span class="btn btn-{{ $pair->status == 'PENDING' ? 'secondary' : ($pair->status == 'APPROVED' ? 'success' : ($pair->status == 'COMPLETE' ? 'secondary' : 'danger')) }}"> {{ $pair->status }} </span>
   </td>
   @if (Request::get('type') != 'closed')
     <td>
@@ -34,17 +34,17 @@
           {!! Form::open(['url' => 'characters/pairings/cancel']) !!}
           {!! Form::submit('Cancel', ['class' => 'btn btn-danger']) !!}
           {!! Form::close() !!}
-          <a href="#" class="btn btn-secondary disabled">Create MYO(s)</a>
+          <a href="#" class="btn btn-secondary disabled"> Create MYO(s)</a>
         @endif
       @endif
       @if (Request::get('type') == 'approval')
         @if ($pair->user_id == Auth::user()->id)
-          <p>Waiting on other user to approve.</p>
+          <p> Waiting on other user to approve. </p>
           {!! Form::open(['url' => 'characters/pairings/cancel/' . $pair->id]) !!}
           {!! Form::submit('Cancel', ['class' => 'btn btn-danger']) !!}
           {!! Form::close() !!}
         @else
-          <p>This pairing requires your approval to complete.</p>
+          <p> This pairing requires your approval to complete. </p>
           <div class="row">
             {!! Form::open(['url' => 'characters/pairings/reject/' . $pair->id]) !!}
             {!! Form::submit('Reject', ['class' => 'btn btn-danger mx-2']) !!}

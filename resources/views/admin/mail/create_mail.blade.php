@@ -7,11 +7,11 @@
 @section('admin-content')
   {!! breadcrumbs(['Admin Panel' => 'admin', 'Mod Mail' => 'admin/mail', 'Create Mod Mail' => 'admin/mail/create']) !!}
 
-  <h1>Create Mod Mail</h1>
+  <h1> Create Mod Mail </h1>
 
   {!! Form::open(['url' => 'admin/mail/create']) !!}
 
-  <h3>Basic Information</h3>
+  <h3> Basic Information </h3>
 
   <div class="form-group">
     {!! Form::label('user_id', 'Username') !!}
@@ -28,7 +28,7 @@
     {!! Form::textarea('message', null, ['class' => 'form-control wysiwyg']) !!}
   </div>
 
-  <h3>Additional Data</h3>
+  <h3> Additional Data </h3>
 
   <div class="form-group">
     {!! Form::checkbox('issue_strike', 1, 0, ['class' => 'form-check-input', 'data-toggle' => 'toggle', 'id' => 'strike']) !!}

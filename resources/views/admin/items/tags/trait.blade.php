@@ -1,9 +1,9 @@
-<h3>Trait</h3>
+<h3> Trait </h3>
 
-<p>This item can grant these traits to a design when added to the myo/design update submission.</p>
+<p> This item can grant these traits to a design when added to the myo/design update submission. </p>
 
 <div class="text-right mb-3">
-  <a href="#" class="btn btn-outline-info" id="addTrait">Add traits</a>
+  <a href="#" class="btn btn-outline-info" id="addTrait"> Add traits </a>
 </div>
 
 <table class="table table-sm" id="traitTable">
@@ -17,7 +17,7 @@
         ]) !!}
       </td>
       <td class="text-right">
-        <a href="#" class="btn btn-danger remove-trait-button">Remove</a>
+        <a href="#" class="btn btn-danger remove-trait-button"> Remove </a>
       </td>
     </tr>
     @if ($tag->getData() != null && count($tag->getData()) > 0)
@@ -31,7 +31,7 @@
 
           </td>
           <td class="text-right">
-            <a href="#" class="btn btn-danger remove-trait-button">Remove</a>
+            <a href="#" class="btn btn-danger remove-trait-button"> Remove </a>
           </td>
         </tr>
       @endforeach

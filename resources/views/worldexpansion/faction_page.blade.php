@@ -17,9 +17,9 @@
   @endif
   {!! breadcrumbs(['World' => 'world', 'Factions' => 'world/factions', $faction->style => 'world/factions/' . $faction->id]) !!}
   <h1 style="clear:both;">
-    <img src="{{ $faction->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" />{!! $faction->style !!}
+    <img src="{{ $faction->thumbUrl }}" style="max-height:25px;vertical-align:inherit;" /> {!! $faction->style !!}
   </h1>
-  <h5 class="mb-0">{!! ucfirst($faction->type->displayName) !!} {!! $faction->parent ? 'inside ' . $faction->parent->displayName : '' !!}</h5>
+  <h5 class="mb-0"> {!! ucfirst($faction->type->displayName) !!} {!! $faction->parent ? 'inside ' . $faction->parent->displayName : '' !!} </h5>
 
   @if (($user_enabled && $faction->is_user_faction) || ($ch_enabled && $faction->is_character_faction))
     <p class="mb-0">
@@ -39,7 +39,7 @@
   @endif
 
   @isset($faction->summary)
-    <div class="world-entry-text px-3 text-center">{!! $faction->summary !!}</div>
+    <div class="world-entry-text px-3 text-center"> {!! $faction->summary !!} </div>
   @endisset
 
   @isset($faction->parsed_description)
@@ -52,7 +52,7 @@
     @if (count($faction->children))
       <div class="text-center col-md mb-3 fb-md-50">
         <div class="card h-100 py-3">
-          <h5 class="mb-0">Contains the following</h5>
+          <h5 class="mb-0"> Contains the following </h5>
 
           <!-- <hr>
                                               <p class="mb-0">
@@ -87,7 +87,7 @@
     @if (count($faction->members))
       <div class="text-center col-md mb-3 fb-md-50">
         <div class="card h-100 py-3">
-          <h5 class="mb-0">Member Figure{{ count($faction->members) == 1 ? '' : 's' }}</h5>
+          <h5 class="mb-0"> Member Figure{{ count($faction->members) == 1 ? '' : 's' }} </h5>
 
           <!-- <hr>
                                               <p class="mb-0">
@@ -108,7 +108,7 @@
                 {{ $figure_categories->find($key) ? $figure_categories->find($key)->name : 'Miscellanous' }}:
               </strong>
               @foreach ($members as $key => $member)
-                <strong>{!! $member->displayName !!}</strong>
+                <strong> {!! $member->displayName !!} </strong>
                 @if ($key != count($members) - 1 && count($members) > 2)
                   ,
                   @endif @if ($key == count($members) - 2)
@@ -126,17 +126,17 @@
       </div>
       <div class="text-center col-md-12">
         <div class="card h-100 py-3">
-          <h5 class="mb-0">Faction Ranks</h5>
+          <h5 class="mb-0"> Faction Ranks </h5>
 
           <hr />
           <div class="row">
             @if ($faction->ranks()->where('is_open', 0)->count())
               <div class="col-md">
                 <h4>
-                  <small>Leadership</small>
+                  <small> Leadership </small>
                 </h4>
                 @foreach ($faction->ranks()->where('is_open', 0)->orderBy('sort')->get() as $rank)
-                  <h6>{{ $rank->name }}{{ $rank->description ? ': ' . $rank->description : '' }}</h6>
+                  <h6> {{ $rank->name }}{{ $rank->description ? ': ' . $rank->description : '' }} </h6>
                   @if ($rank->members()->count())
                     <p>
                       @foreach ($rank->members as $member)
@@ -150,10 +150,10 @@
             @if ($faction->ranks()->where('is_open', 1)->count())
               <div class="col-md">
                 <h4>
-                  <small>Member Ranks</small>
+                  <small> Member Ranks </small>
                 </h4>
                 @foreach ($faction->ranks()->where('is_open', 1)->orderBy('sort')->get() as $rank)
-                  <h6>{{ $rank->name }}{{ $rank->description ? ': ' . $rank->description : '' }}{!! $currency ? ' (' . $currency->display($rank->breakpoint) . ')' : ' (' . $rank->breakpoint . ' Standing)' !!}</h6>
+                  <h6> {{ $rank->name }}{{ $rank->description ? ': ' . $rank->description : '' }}{!! $currency ? ' (' . $currency->display($rank->breakpoint) . ')' : ' (' . $rank->breakpoint . ' Standing)' !!} </h6>
                 @endforeach
               </div>
             @endif
@@ -161,7 +161,7 @@
           <hr />
           <a href="{{ url('world/factions/' . $faction->id . '/members') }}">
             <h4>
-              <small>Members: {{ $faction->factionMembers->count() }} ・ See All</small>
+              <small> Members: {{ $faction->factionMembers->count() }} ・ See All </small>
             </h4>
           </a>
         </div>

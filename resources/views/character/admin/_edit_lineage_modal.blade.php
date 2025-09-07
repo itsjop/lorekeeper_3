@@ -2,7 +2,7 @@
 <div class="alert alert-warning">
   Custom ancestor names are only used when there is no live character ID set for that ancestor.
   If there is no ancestor, leave it blank.
-  <br />Ancestor names and "unknown"s will be generated automatically.
+  <br /> Ancestor names and "unknown"s will be generated automatically.
 </div>
 
 <div class="row">
@@ -63,7 +63,7 @@
           Relational ancestry will always take precedent over custom ancestry, when available.
           <br>
           <br>
-          <strong>NOTE:</strong> You may only create custom ancestry up to the lineage_depth config option.
+          <strong> NOTE:</strong> You may only create custom ancestry up to the lineage_depth config option.
         </div>
         <div class="row">
           <div class="col-md-6">
