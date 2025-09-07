@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/species/create-edit-species'])
 
 @section('admin-title')
-  {{ $species->id ? 'Edit' : 'Create' }} Species
+  {{ $species->id ? 'Save' : 'Create' }} Species
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('lorekeeper.species')) => 'admin/data/species',
-      ($species->id ? 'Edit' : 'Create') . ' ' . ucfirst(__('lorekeeper.species')) => $species->id
+      ($species->id ? 'Save' : 'Create') . ' ' . ucfirst(__('lorekeeper.species')) => $species->id
           ? 'admin/data/species/edit/' . $species->id
           : 'admin/data/species/create'
   ]) !!}
 
-  <h1> {{ $species->id ? 'Edit' : 'Create' }} Species
+  <h1> {{ $species->id ? 'Save' : 'Create' }} Species
     @if ($species->id)
       <a href="#" class="btn btn-danger float-right delete-species-button"> Delete Species </a>
     @endif

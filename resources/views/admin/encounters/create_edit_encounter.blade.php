@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Encounters' => 'admin/data/encounters',
-      ($encounter->id ? 'Edit' : 'Create') . ' Encounter' => $encounter->id
+      ($encounter->id ? 'Save' : 'Create') . ' Encounter' => $encounter->id
           ? 'admin/data/encounters/edit/' . $encounter->id
           : 'admin/data/encounters/create'
   ]) !!}
 
-  <h1> {{ $encounter->id ? 'Edit' : 'Create' }} Encounter
+  <h1> {{ $encounter->id ? 'Save' : 'Create' }} Encounter
     @if ($encounter->id)
       <a href="#" class="btn btn-danger float-right delete-encounter-button"> Delete Encounter </a>
     @endif
@@ -99,7 +99,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($encounter->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($encounter->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

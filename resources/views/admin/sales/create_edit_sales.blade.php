@@ -1,17 +1,17 @@
 @extends('admin.layout', ['componentName' => 'admin/sales/create-edit-sales'])
 
 @section('admin-title')
-  {{ $sales->id ? 'Edit' : 'Create' }} Sales Post
+  {{ $sales->id ? 'Save' : 'Create' }} Sales Post
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Sales' => 'admin/sales',
-      ($sales->id ? 'Edit' : 'Create') . ' Post' => $sales->id ? 'admin/sales/edit/' . $sales->id : 'admin/sales/create'
+      ($sales->id ? 'Save' : 'Create') . ' Post' => $sales->id ? 'admin/sales/edit/' . $sales->id : 'admin/sales/create'
   ]) !!}
 
-  <h1> {{ $sales->id ? 'Edit' : 'Create' }} Sales Post
+  <h1> {{ $sales->id ? 'Save' : 'Create' }} Sales Post
     @if ($sales->id)
       <a href="#" class="btn btn-danger float-right delete-sales-button"> Delete Post </a>
       <a href="{{ $sales->url }}" class="btn btn-info float-right mr-md-2"> View Post </a>
@@ -99,7 +99,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($sales->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($sales->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

@@ -38,7 +38,7 @@
     {!! Form::textarea('ban_reason', $user->settings->ban_reason, ['class' => 'form-control']) !!}
   </div>
   <div class="text-right">
-    {!! Form::submit($user->is_banned ? 'Edit' : 'Ban', [
+    {!! Form::submit($user->is_banned ? 'Save' : 'Ban', [
         'class' => 'btn btn' . ($user->is_banned ? '' : '-outline') . '-danger ban-button'
     ]) !!}
   </div>

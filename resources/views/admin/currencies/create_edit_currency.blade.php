@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/currencies/create-edit-currency'])
 
 @section('admin-title')
-  {{ $currency->id ? 'Edit' : 'Create' }} Currency
+  {{ $currency->id ? 'Save' : 'Create' }} Currency
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Currencies' => 'admin/data/currencies',
-      ($currency->id ? 'Edit' : 'Create') . ' Currency' => $currency->id
+      ($currency->id ? 'Save' : 'Create') . ' Currency' => $currency->id
           ? 'admin/data/currencies/edit/' . $currency->id
           : 'admin/data/currencies/create'
   ]) !!}
 
-  <h1> {{ $currency->id ? 'Edit' : 'Create' }} Currency
+  <h1> {{ $currency->id ? 'Save' : 'Create' }} Currency
     @if ($currency->id)
       <a href="#" class="btn btn-danger float-right delete-currency-button"> Delete Currency </a>
     @endif

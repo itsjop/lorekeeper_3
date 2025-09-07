@@ -1,19 +1,19 @@
 @extends('admin.layout')
 
 @section('admin-title')
-  {{ $limit->id ? 'Edit' : 'Create' }} Limit
+  {{ $limit->id ? 'Save' : 'Create' }} Limit
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Limits' => 'admin/data/limits',
-      ($limit->id ? 'Edit' : 'Create') . ' Limit' => $limit->id
+      ($limit->id ? 'Save' : 'Create') . ' Limit' => $limit->id
           ? 'admin/data/limits/edit/' . $limit->id
           : 'admin/data/limits/create'
   ]) !!}
 
-  <h1> {{ $limit->id ? 'Edit' : 'Create' }} Limit
+  <h1> {{ $limit->id ? 'Save' : 'Create' }} Limit
     @if ($limit->id)
       <a href="#" class="btn btn-danger float-right delete-limit-button"> Delete Limit </a>
     @endif
@@ -52,7 +52,7 @@
   {!! Form::hidden('evaluation', $limit->evaluation, ['id' => 'evaluation']) !!}
 
   <div class="text-right">
-    {!! Form::submit($limit->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary', 'id' => 'submit']) !!}
+    {!! Form::submit($limit->id ? 'Save' : 'Create', ['class' => 'btn btn-primary', 'id' => 'submit']) !!}
   </div>
 
   {!! Form::close() !!}

@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('admin-title')
-  {{ $target->id ? 'Edit' : 'Create' }} Hunt Target
+  {{ $target->id ? 'Save' : 'Create' }} Hunt Target
 @endsection
 
 @section('admin-content')
@@ -9,10 +9,10 @@
       'Admin Panel' => 'admin',
       'Scavenger Hunts' => 'admin/data/hunts',
       'Edit Scavenger Hunt' => 'admin/data/hunts/edit/' . $hunt->id,
-      ($target->id ? 'Edit' : 'Create') . ' Target' => $target->id ? 'admin/data/hunts/targets/edit/' . $target->id : 'admin/data/hunts/targets/create/' . $hunt->id,
+      ($target->id ? 'Save' : 'Create') . ' Target' => $target->id ? 'admin/data/hunts/targets/edit/' . $target->id : 'admin/data/hunts/targets/create/' . $hunt->id,
   ]) !!}
 
-  <h1> {{ $target->id ? 'Edit' : 'Create' }} Target
+  <h1> {{ $target->id ? 'Save' : 'Create' }} Target
     @if ($target->id)
       <a href="#" class="btn btn-danger float-right delete-target-button"> Delete Target </a>
     @endif
@@ -51,7 +51,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($target->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($target->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

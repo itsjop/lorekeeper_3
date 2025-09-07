@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Discord Rewards' => 'admin/discord/rewards',
-      ($reward->id ? 'Edit' : 'Create') . ' Discord Reward' => $reward->id ? 'admin/discord/rewards/edit/' . $reward->id : 'admin/discord/rewards/create',
+      ($reward->id ? 'Save' : 'Create') . ' Discord Reward' => $reward->id ? 'admin/discord/rewards/edit/' . $reward->id : 'admin/discord/rewards/create',
   ]) !!}
 
-  <h1> {{ $reward->id ? 'Edit' : 'Create' }} Discord Reward
+  <h1> {{ $reward->id ? 'Save' : 'Create' }} Discord Reward
     @if ($reward->id)
       <a href="#" class="btn btn-danger float-right delete-reward-button"> Delete Discord Reward </a>
     @endif
@@ -35,7 +35,7 @@
   @include('widgets._loot_select', ['loots' => $reward->rewards, 'showLootTables' => true, 'showRaffles' => true])
 
   <div class="text-right">
-    {!! Form::submit($reward->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($reward->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

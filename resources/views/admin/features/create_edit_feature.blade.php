@@ -1,17 +1,17 @@
 @extends('admin.layout', ['componentName' => 'admin/features/create-edit-feature'])
 
 @section('admin-title')
-  {{ $feature->id ? 'Edit' : 'Create' }} Trait
+  {{ $feature->id ? 'Save' : 'Create' }} Trait
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Traits' => 'admin/data/traits',
-      ($feature->id ? 'Edit' : 'Create') . ' Trait' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create',
+      ($feature->id ? 'Save' : 'Create') . ' Trait' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create',
   ]) !!}
 
-  <h1> {{ $feature->id ? 'Edit' : 'Create' }} Trait
+  <h1> {{ $feature->id ? 'Save' : 'Create' }} Trait
     @if ($feature->id)
       <a href="#" class="btn btn-danger float-right delete-feature-button"> Delete Trait </a>
     @endif

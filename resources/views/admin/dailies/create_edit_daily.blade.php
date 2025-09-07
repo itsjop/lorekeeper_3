@@ -13,7 +13,7 @@
           : 'admin/data/dailies/create'
   ]) !!}
 
-  <h1> {{ $daily->id ? 'Edit' : 'Create' }} {{ ucfirst(__('dailies.daily')) }}
+  <h1> {{ $daily->id ? 'Save' : 'Create' }} {{ ucfirst(__('dailies.daily')) }}
     @if ($daily->id)
       ({!! $daily->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-daily-button"> Delete {{ ucfirst(__('dailies.daily')) }} </a>
@@ -71,7 +71,7 @@
   @endif
 
   <div class="text-right">
-    {!! Form::submit($daily->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($daily->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
   {!! Form::close() !!}
   @include('dailies._loot_select_row', [

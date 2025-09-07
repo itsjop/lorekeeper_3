@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Character Titles' => 'admin/data/character-titles',
-      ($title->id ? 'Edit' : 'Create') . ' Title' => $title->id ? 'admin/data/character-titles/edit/' . $title->id : 'admin/data/character-titles/create',
+      ($title->id ? 'Save' : 'Create') . ' Title' => $title->id ? 'admin/data/character-titles/edit/' . $title->id : 'admin/data/character-titles/create',
   ]) !!}
 
-  <h1> {{ $title->id ? 'Edit' : 'Create' }} Title
+  <h1> {{ $title->id ? 'Save' : 'Create' }} Title
     @if ($title->id)
       <a href="#" class="btn btn-danger float-right delete-title-button"> Delete Title </a>
     @endif
@@ -76,7 +76,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($title->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($title->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

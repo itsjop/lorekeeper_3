@@ -33,7 +33,7 @@
 </div>
 
 <div class="text-right mt-4">
-  {!! Form::submit($option->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit($option->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>
 
 {!! Form::close() !!}

@@ -8,13 +8,13 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Borders' => 'admin/data/borders',
-      ($border->id ? 'Edit' : 'Create') . ' Border' => $border->id
+      ($border->id ? 'Save' : 'Create') . ' Border' => $border->id
           ? 'admin/data/borders/edit/' . $border->id
           : 'admin/data/borders/create'
   ]) !!}
 
   <h1>
-    {{ $border->id ? 'Edit' : 'Create' }} Border
+    {{ $border->id ? 'Save' : 'Create' }} Border
     @if ($border->id)
       <a href="#" class="btn btn-outline-danger float-right delete-border-button"> Delete Border </a>
     @endif
@@ -146,7 +146,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($border->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($border->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

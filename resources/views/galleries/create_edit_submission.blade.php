@@ -1,14 +1,14 @@
 @extends('galleries.layout', ['componentName' => 'galleries/create-edit-submission'])
 
 @section('gallery-title')
-  {{ $submission->id ? 'Edit' : 'Create' }} Submission
+  {{ $submission->id ? 'Save' : 'Create' }} Submission
 @endsection
 
 @section('gallery-content')
   {!! breadcrumbs([
       'Gallery' => 'gallery',
       $gallery->name => 'gallery/' . $gallery->id,
-      ($submission->id ? 'Edit' : 'Create') . ' Submission' => $submission->id
+      ($submission->id ? 'Save' : 'Create') . ' Submission' => $submission->id
           ? 'gallery/submissions/edit/' . $submission->id
           : 'gallery/submit/' . $gallery->id
   ]) !!}

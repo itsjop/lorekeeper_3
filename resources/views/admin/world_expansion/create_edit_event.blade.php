@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Events' => 'admin/world/events',
-      ($event->id ? 'Edit' : 'Create') . ' Event' => $event->id
+      ($event->id ? 'Save' : 'Create') . ' Event' => $event->id
           ? 'admin/world/events/edit/' . $event->id
           : 'admin/world/events/create'
   ]) !!}
 
-  <h1> {{ $event->id ? 'Edit' : 'Create' }} Event
+  <h1> {{ $event->id ? 'Save' : 'Create' }} Event
     @if ($event->id)
       ({!! $event->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-event-button"> Delete Event </a>
@@ -185,7 +185,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($event->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($event->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

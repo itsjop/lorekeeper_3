@@ -49,11 +49,11 @@ class Item extends Model {
    */
   protected $table = 'items';
 
-  /**
-   * The attributes that should be cast to native types.
-   *
-   * @var array
-   */
+  // /**
+  //  * The attributes that should be cast to native types.
+  //  *
+  //  * @var array
+  //  */
   protected $casts = [
     'data' => 'array',
   ];
@@ -73,15 +73,15 @@ class Item extends Model {
    * @var array
    */
   public static $createRules = [
-    'item_category_id'   => 'nullable',
-    'name'               => 'required|unique:items|between:3,100',
-    'description'        => 'nullable',
-    'image'              => 'mimes:png',
-    'rarity_id'          => 'nullable',
-    'reference_url'      => 'nullable|between:3,200',
-    'uses'               => 'nullable|between:3,250',
-    'release'            => 'nullable|between:3,100',
-    'currency_quantity'  => 'nullable|integer|min:1',
+    'item_category_id'  => 'nullable',
+    'name'              => 'required|unique:items|between:3,100',
+    'description'       => 'nullable',
+    'image'             => 'mimes:png',
+    'rarity'            => 'nullable',
+    'reference_url'     => 'nullable|between:3,200',
+    'uses'              => 'nullable|between:3,250',
+    'release'           => 'nullable|between:3,100',
+    'currency_quantity' => 'nullable|integer|min:1',
   ];
 
   /**
@@ -371,9 +371,26 @@ class Item extends Model {
    * @return string
    */
   public function getResellAttribute() {
-    if (!$this->data) return null;
-    return isset($this->data['resell']) && $this->data['resell'] ? $this->data['resell'] : null;
+    if (!$this->data) {
+      return null;
+    }
+    return collect(json_decode($this->data, true)['resell']);
   }
+
+
+  /**
+   * Get the data attribute as an associative array.
+   *
+   * @return array
+   */
+  // public function getDataAttribute() {
+  //   if (!$this->id) {
+  //     return null;
+  //   }
+  //   return json_decode($this->attributes['data'], true);
+  // }
+
+
 
   /**
    * Get the prompts attribute as an associative array.
@@ -559,6 +576,35 @@ class Item extends Model {
 
       return $query->where('is_hidden', 0)->where('is_staff', 0);
     })->whereIn('id', $this->shopStock->pluck('shop_id')->toArray())->get();
+
+    return $shops;
+  }
+
+  /**
+   * Get the rarity attribute.
+   *
+   * @return string
+   */
+  public function getRarityAttribute() {
+    if (!isset($this->data) || !isset($this->data['rarity'])) {
+      return null;
+    }
+
+    return $this->data['rarity'];
+  }
+
+
+  /**
+   * Get the shops that stock this item.
+   *
+   * @return \Illuminate\Database\Eloquent\Collection
+   */
+  public function getShopsAttribute() {
+    if (!config('lorekeeper.extensions.item_entry_expansion.extra_fields') || !$this->shop_stock_count) {
+      return null;
+    }
+
+    $shops = Shop::whereIn('id', $this->shopStock->pluck('shop_id')->toArray())->orderBy('sort', 'DESC')->get();
 
     return $shops;
   }

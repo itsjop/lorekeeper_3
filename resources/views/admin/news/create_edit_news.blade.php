@@ -1,13 +1,13 @@
 @extends('admin.layout', ['componentName' => 'admin/news/create-edit-news'])
 
 @section('admin-title')
-  {{ $news->id ? 'Edit' : 'Create' }} News Post
+  {{ $news->id ? 'Save' : 'Create' }} News Post
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'News' => 'admin/news', ($news->id ? 'Edit' : 'Create') . ' Post' => $news->id ? 'admin/news/edit/' . $news->id : 'admin/news/create']) !!}
+  {!! breadcrumbs(['Admin Panel' => 'admin', 'News' => 'admin/news', ($news->id ? 'Save' : 'Create') . ' Post' => $news->id ? 'admin/news/edit/' . $news->id : 'admin/news/create']) !!}
 
-  <h1> {{ $news->id ? 'Edit' : 'Create' }} News Post
+  <h1> {{ $news->id ? 'Save' : 'Create' }} News Post
     @if ($news->id)
       <a href="#" class="btn btn-danger float-right delete-news-button"> Delete Post </a>
       <a href="#" class="btn btn-secondary float-right regen-news-button mr-md-2"> Regenerate Post </a>
@@ -50,7 +50,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($news->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($news->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

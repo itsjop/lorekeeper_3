@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/items/create-edit-item-category'])
 
 @section('admin-title')
-  {{ $category->id ? 'Edit' : 'Create' }} Item Category
+  {{ $category->id ? 'Save' : 'Create' }} Item Category
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Item Categories' => 'admin/data/item-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id
+      ($category->id ? 'Save' : 'Create') . ' Category' => $category->id
           ? 'admin/data/item-categories/edit/' . $category->id
           : 'admin/data/item-categories/create'
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Item Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Item Category
     @if ($category->id)
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif
@@ -119,7 +119,7 @@
   @endif
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

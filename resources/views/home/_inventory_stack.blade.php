@@ -155,7 +155,7 @@
             </div>
           </li>
         @endif
-        @if (isset($item->data['resell']) &&
+        @if (isset($item->resell) &&
                 App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() &&
                 config('lorekeeper.extensions.item_entry_expansion.resale_function')
         )

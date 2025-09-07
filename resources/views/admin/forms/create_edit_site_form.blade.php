@@ -5,9 +5,9 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Forms & Polls' => 'admin/forms', ($form->id ? 'Edit' : 'Create') . ' Post' => $form->id ? 'admin/forms/edit/' . $form->id : 'admin/forms/create']) !!}
+  {!! breadcrumbs(['Admin Panel' => 'admin', 'Forms & Polls' => 'admin/forms', ($form->id ? 'Save' : 'Create') . ' Post' => $form->id ? 'admin/forms/edit/' . $form->id : 'admin/forms/create']) !!}
 
-  <h1> {{ $form->id ? 'Edit' : 'Create' }} Form
+  <h1> {{ $form->id ? 'Save' : 'Create' }} Form
     @if ($form->id)
       <a href="#" class="btn btn-danger float-right delete-form-button"> Delete Form </a>
     @endif
@@ -206,7 +206,7 @@
   @include('widgets._loot_select', ['loots' => $form->rewards, 'showLootTables' => true, 'showRaffles' => true])
 
   <div class="text-right">
-    {!! Form::submit($form->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($form->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

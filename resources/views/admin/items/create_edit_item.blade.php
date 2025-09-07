@@ -1,17 +1,17 @@
 @extends('admin.layout', ['componentName' => 'admin/items/create-edit-item'])
 
 @section('admin-title')
-  {{ $item->id ? 'Edit' : 'Create' }} Item
+  {{ $item->id ? 'Save' : 'Create' }} Item
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Items' => 'admin/data/items',
-      ($item->id ? 'Edit' : 'Create') . ' Item' => $item->id ? 'admin/data/items/edit/' . $item->id : 'admin/data/items/create'
+      ($item->id ? 'Save' : 'Create') . ' Item' => $item->id ? 'admin/data/items/edit/' . $item->id : 'admin/data/items/create'
   ]) !!}
 
-  <h1> {{ $item->id ? 'Edit' : 'Create' }} Item
+  <h1> {{ $item->id ? 'Save' : 'Create' }} Item
     @if ($item->id)
       <a href="#" class="btn btn-outline-danger float-right delete-item-button"> Delete Item </a>
     @endif
@@ -144,32 +144,39 @@
   @endif
 
   @if (config('lorekeeper.extensions.item_entry_expansion.resale_function'))
-    <h3> Resale Information </h3>
-    <p> The currency and amount users will be able to sell this item from their inventory for. If quantity is not set, the item will
-      be unable to be sold. </p>
+    <h3>Resale Information</h3>
+    <p>The currency and amount users will be able to sell this item from their inventory for. If quantity is not set, the item will
+      be unable to be sold.</p>
     <div class="row">
-      <div class="col-md form-group">
-        {!! Form::label('currency_id', 'Currency') !!}
-        {!! Form::select(
-            'currency_id',
-            $userCurrencies,
-            isset($item->data['resell']) && App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first()
-                ? $item->resell->flip()->pop()
-                : null,
-            ['class' => 'form-control']
-        ) !!}
+      <div class="col-md">
+        <div class="form-group">
+          {!! Form::label('currency_id', 'Currency') !!}
+          {!! Form::select(
+              'currency_id',
+              $userCurrencies,
+              isset($item->resell) && App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first()
+                  ? $item->resell->flip()->pop()
+                  : null,
+              ['class' => 'form-control']
+          ) !!}
+        </div>
       </div>
-      <div class="col-md form-group">
-        {!! Form::label('currency_quantity', 'Quantity') !!}
-        {!! Form::text('currency_quantity', isset($item->data['resell']) ? $item->resell->pop() : null, [
-            'class' => 'form-control'
-        ]) !!}
+      {{-- {{ dd($item->resell, isset($item->resell), $item->resell->pop()) }} --}}
+      {{-- {{ dd($item->data) }} --}}
+      {{-- {{ dd($item->data['resell']) }} --}}
+      <div class="col-md">
+        <div class="form-group">
+          {!! Form::label('currency_quantity', 'Quantity') !!}
+          {!! Form::text('currency_quantity', isset($item->resell) ? $item->resell->pop() : null, [
+              'class' => 'form-control'
+          ]) !!}
+        </div>
       </div>
     </div>
   @endif
 
   <div class="text-right">
-    {!! Form::submit($item->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($item->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

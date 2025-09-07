@@ -132,7 +132,7 @@
         title="To delete limits, simply remove all existing limits and click 'Edit Limits'"
       ></i>
     @endif
-    {!! Form::submit(($limits ? 'Edit' : 'Create') . ' Limits', ['class' => 'btn btn-primary float-right']) !!}
+    {!! Form::submit(($limits ? 'Save' : 'Create') . ' Limits', ['class' => 'btn btn-primary float-right']) !!}
   </div>
   {!! Form::close() !!}
 </div>

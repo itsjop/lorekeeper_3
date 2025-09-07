@@ -50,7 +50,7 @@
                     {!! Form::text('value', $setting->value, ['class' => 'form-control']) !!}
                   </div>
                   <div class="form-group mb-3">
-                    {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                   </div>
                   {!! Form::close() !!}
                 </div>

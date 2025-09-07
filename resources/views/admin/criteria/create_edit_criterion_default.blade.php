@@ -10,12 +10,12 @@
       'Criteria' => 'admin/data/criteria',
       'Default Criteria' => 'admin/data/criteria-defaults',
       'Default Criteria' => 'admin/data/criteria-defaults',
-      ($default->id ? 'Edit' : 'Create') . ' Default Criteria' => $default->id
+      ($default->id ? 'Save' : 'Create') . ' Default Criteria' => $default->id
           ? 'admin/data/criteria-defaults/edit/' . $default->id
           : 'admin/data/criteria-defaults/create'
   ]) !!}
 
-  <h1> {{ $default->id ? 'Edit' : 'Create' }} Criteria Default
+  <h1> {{ $default->id ? 'Save' : 'Create' }} Criteria Default
     @if ($default->id)
       <a href="#" class="btn btn-danger float-right delete-button"> Delete Default </a>
     @endif
@@ -82,7 +82,7 @@
   </div>
 
   <div class="text-right mt-4">
-    {!! Form::submit($default->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($default->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

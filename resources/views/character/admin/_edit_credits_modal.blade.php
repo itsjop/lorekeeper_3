@@ -109,7 +109,7 @@
 </div>
 
 <div class="text-right">
-  {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
 </div>
 {!! Form::close() !!}
 

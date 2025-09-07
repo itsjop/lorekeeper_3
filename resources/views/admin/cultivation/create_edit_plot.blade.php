@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Plots' => 'admin/cultivation/plots',
-      ($plot->id ? 'Edit' : 'Create') . ' Plot' => $plot->id
+      ($plot->id ? 'Save' : 'Create') . ' Plot' => $plot->id
           ? 'admin/cultivation/plots/edit/' . $plot->id
           : 'admin/cultivation/plots/edit'
   ]) !!}
 
-  <h1> {{ $plot->id ? 'Edit' : 'Create' }} Plot
+  <h1> {{ $plot->id ? 'Save' : 'Create' }} Plot
     @if ($plot->id)
       ({!! $plot->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Plot </a>
@@ -243,7 +243,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($plot->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($plot->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

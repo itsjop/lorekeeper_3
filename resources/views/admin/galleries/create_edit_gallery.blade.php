@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/galleries/create-edit-gallery'])
 
 @section('admin-title')
-  {{ $gallery->id ? 'Edit' : 'Create' }} Gallery
+  {{ $gallery->id ? 'Save' : 'Create' }} Gallery
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Galleries' => 'admin/data/galleries',
-      ($gallery->id ? 'Edit' : 'Create') . ' Gallery' => $gallery->id
+      ($gallery->id ? 'Save' : 'Create') . ' Gallery' => $gallery->id
           ? 'admin/data/galleries/edit/' . $gallery->id
           : 'admin/data/galleries/create'
   ]) !!}
 
-  <h1> {{ $gallery->id ? 'Edit' : 'Create' }} Gallery
+  <h1> {{ $gallery->id ? 'Save' : 'Create' }} Gallery
     @if ($gallery->id)
       <a href="#" class="btn btn-danger float-right delete-gallery-button"> Delete Gallery </a>
     @endif
@@ -180,7 +180,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($gallery->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($gallery->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

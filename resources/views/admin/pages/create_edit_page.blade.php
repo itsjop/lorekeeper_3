@@ -1,13 +1,13 @@
 @extends('admin.layout', ['componentName' => 'admin/pages/create-edit-pages'])
 
 @section('admin-title')
-  {{ $page->id ? 'Edit' : 'Create' }} Page
+  {{ $page->id ? 'Save' : 'Create' }} Page
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Pages' => 'admin/pages', ($page->id ? 'Edit' : 'Create') . ' Page' => $page->id ? 'admin/pages/edit/' . $page->id : 'admin/pages/create']) !!}
+  {!! breadcrumbs(['Admin Panel' => 'admin', 'Pages' => 'admin/pages', ($page->id ? 'Save' : 'Create') . ' Page' => $page->id ? 'admin/pages/edit/' . $page->id : 'admin/pages/create']) !!}
 
-  <h1> {{ $page->id ? 'Edit' : 'Create' }} Page
+  <h1> {{ $page->id ? 'Save' : 'Create' }} Page
     @if ($page->id && !config('lorekeeper.text_pages.' . $page->key))
       <a href="#" class="btn btn-danger float-right delete-page-button"> Delete Page </a>
     @endif
@@ -57,7 +57,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($page->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($page->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

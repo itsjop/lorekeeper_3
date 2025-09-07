@@ -1,19 +1,19 @@
 @extends('admin.layout')
 
 @section('admin-title')
-  {{ $hunt->id ? 'Edit' : 'Create' }} Scavenger Hunt
+  {{ $hunt->id ? 'Save' : 'Create' }} Scavenger Hunt
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Scavenger Hunts' => 'admin/data/hunts',
-      ($hunt->id ? 'Edit' : 'Create') . ' Scavenger Hunt' => $hunt->id
+      ($hunt->id ? 'Save' : 'Create') . ' Scavenger Hunt' => $hunt->id
           ? 'admin/data/hunts/edit/' . $hunt->id
           : 'admin/data/hunts/create'
   ]) !!}
 
-  <h1> {{ $hunt->id ? 'Edit' : 'Create' }} Scavenger Hunt
+  <h1> {{ $hunt->id ? 'Save' : 'Create' }} Scavenger Hunt
     @if ($hunt->id)
       <a href="#" class="btn btn-danger float-right delete-hunt-button"> Delete Hunt </a>
     @endif
@@ -76,7 +76,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($hunt->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($hunt->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

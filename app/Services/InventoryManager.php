@@ -12,6 +12,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use App\Models\Shop\UserItemDonation;
 use App\Models\Shop\UserShopStock;
+use Config;
+
 
 class InventoryManager extends Service {
   /*
@@ -522,7 +524,7 @@ class InventoryManager extends Service {
         if ($stack->count < $quantity) {
           throw new \Exception('Quantity to sell exceeds item count.');
         }
-        if (!isset($stack->item->data['resell'])) {
+        if (!isset($stack->item->resell)) {
           throw new \Exception('This item cannot be sold.');
         }
         if (!Config::get('lorekeeper.extensions.item_entry_expansion.resale_function')) {
@@ -532,7 +534,7 @@ class InventoryManager extends Service {
         $oldUser = $stack->user;
 
         $currencyManager = new CurrencyManager();
-        if (isset($stack->item->data['resell']) && $stack->item->data['resell']) {
+        if (isset($stack->item->resell) && $stack->item->resell) {
           $currency = $stack->item->resell->flip()->pop();
           $currencyQuantity = $stack->item->resell->pop() * $quantity;
 

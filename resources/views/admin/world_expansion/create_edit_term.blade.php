@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Glossary' => 'admin/world/glossary',
-      ($term->id ? 'Edit' : 'Create') . ' Glossary Term' => $term->id
+      ($term->id ? 'Save' : 'Create') . ' Glossary Term' => $term->id
           ? 'admin/world/glossary/edit/' . $term->id
           : 'admin/world/glossary/create'
   ]) !!}
 
-  <h1> {{ $term->id ? 'Edit' : 'Create' }} Glossary Term
+  <h1> {{ $term->id ? 'Save' : 'Create' }} Glossary Term
     @if ($term->id)
       ({!! $term->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-term-button"> Delete Term </a>
@@ -138,7 +138,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($term->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($term->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

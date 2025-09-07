@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Factions' => 'admin/world/factions',
-      ($faction->id ? 'Edit' : 'Create') . ' Faction' => $faction->id
+      ($faction->id ? 'Save' : 'Create') . ' Faction' => $faction->id
           ? 'admin/world/factions/edit/' . $faction->id
           : 'admin/world/factions/create'
   ]) !!}
 
-  <h1> {{ $faction->id ? 'Edit' : 'Create' }} Faction
+  <h1> {{ $faction->id ? 'Save' : 'Create' }} Faction
     @if ($faction->id)
       ({!! $faction->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Faction </a>
@@ -406,7 +406,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($faction->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($faction->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

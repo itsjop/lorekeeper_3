@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Concept' => 'admin/world/concepts',
-      ($concept->id ? 'Edit' : 'Create') . ' Concept' => $concept->id
+      ($concept->id ? 'Save' : 'Create') . ' Concept' => $concept->id
           ? 'admin/world/concepts/edit/' . $concept->id
           : 'admin/world/concepts/create'
   ]) !!}
 
-  <h1> {{ $concept->id ? 'Edit' : 'Create' }} Concept
+  <h1> {{ $concept->id ? 'Save' : 'Create' }} Concept
     @if ($concept->id)
       ({!! $concept->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-concept-button"> Delete Concept </a>
@@ -175,7 +175,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($concept->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($concept->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

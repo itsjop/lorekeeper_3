@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Event Categories' => 'admin/world/event-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Event Category' => $category->id
+      ($category->id ? 'Save' : 'Create') . ' Event Category' => $category->id
           ? 'admin/world/event-categories/edit/' . $category->id
           : 'admin/world/event-categories/create'
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Event Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Event Category
     @if ($category->id)
       ({!! $category->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Event Category </a>
@@ -113,7 +113,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

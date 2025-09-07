@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Prizes' => 'admin/prizecodes/',
-      ($prize->id ? 'Edit' : 'Create') . ' Prize' => $prize->id ? 'admin/prizecodes/edit/' . $prize->id : 'admin/prizecodes/create',
+      ($prize->id ? 'Save' : 'Create') . ' Prize' => $prize->id ? 'admin/prizecodes/edit/' . $prize->id : 'admin/prizecodes/create',
   ]) !!}
 
-  <h1> {{ $prize->id ? 'Edit' : 'Create' }} Prize
+  <h1> {{ $prize->id ? 'Save' : 'Create' }} Prize
     @if ($prize->id)
       <a href="#" class="btn btn-outline-danger float-right delete-prize-button"> Delete Prize </a>
     @endif
@@ -87,7 +87,7 @@
   @include('widgets._prize_reward_select', ['rewards' => $prize->rewards])
 
   <div class="text-right">
-    {!! Form::submit($prize->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($prize->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

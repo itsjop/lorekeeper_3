@@ -13,7 +13,7 @@
           : 'admin/data/transformations/create'
   ]) !!}
 
-  <h1> {{ $transformation->id ? 'Edit' : 'Create' }} {{ ucfirst(__('transformations.transformation')) }}
+  <h1> {{ $transformation->id ? 'Save' : 'Create' }} {{ ucfirst(__('transformations.transformation')) }}
     @if ($transformation->id)
       <a href="#" class="btn btn-danger float-right delete-transformation-button"> Delete
         {{ ucfirst(__('transformations.transformation')) }} </a>
@@ -59,7 +59,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($transformation->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($transformation->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

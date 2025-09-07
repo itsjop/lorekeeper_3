@@ -1,14 +1,14 @@
 @extends('admin.layout')
 
 @section('admin-title')
-  {{ $level->id ? 'Edit' : 'Create' }} Pet Level
+  {{ $level->id ? 'Save' : 'Create' }} Pet Level
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Pets' => 'admin/data/pets', 'Pet Levels' => 'admin/data/pets/levels', ($level->id ? 'Edit' : 'Create') . ' Level' => 'admin/data/pets/levels/' . ($level->id ? 'edit/' . $level->id : 'create')]) !!}
+  {!! breadcrumbs(['Admin Panel' => 'admin', 'Pets' => 'admin/data/pets', 'Pet Levels' => 'admin/data/pets/levels', ($level->id ? 'Save' : 'Create') . ' Level' => 'admin/data/pets/levels/' . ($level->id ? 'edit/' . $level->id : 'create')]) !!}
 
   <h1>
-    {{ $level->id ? 'Edit' : 'Create' }} Level
+    {{ $level->id ? 'Save' : 'Create' }} Level
     @if ($level->id)
       <a href="#" class="btn btn-outline-danger float-right delete-level-button"> Delete Level </a>
     @endif
@@ -49,7 +49,7 @@
   @include('widgets._loot_select', ['loots' => $level->rewardData ?? [], 'showLootTables' => true, 'showRaffles' => true])
 
   <div class="text-right">
-    {!! Form::submit($level->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($level->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

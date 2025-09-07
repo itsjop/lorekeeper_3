@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Sub Masterlists' => 'admin/data/sublists',
-      ($sublist->id ? 'Edit' : 'Create') . ' Sub Masterlist' => $sublist->id
+      ($sublist->id ? 'Save' : 'Create') . ' Sub Masterlist' => $sublist->id
           ? 'admin/data/sublists/edit/' . $sublist->id
           : 'admin/data/sublists/create'
   ]) !!}
 
-  <h1> {{ $sublist->id ? 'Edit' : 'Create' }} Sub Masterlist
+  <h1> {{ $sublist->id ? 'Save' : 'Create' }} Sub Masterlist
     @if ($sublist->id)
       <a href="#" class="btn btn-danger float-right delete-sublist-button"> Delete Sub Masterlist </a>
     @endif
@@ -67,7 +67,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($sublist->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($sublist->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

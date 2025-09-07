@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Areas' => 'admin/cultivation/areas',
-      ($area->id ? 'Edit' : 'Create') . ' Area' => $area->id
+      ($area->id ? 'Save' : 'Create') . ' Area' => $area->id
           ? 'admin/cultivation/areas/edit/' . $area->id
           : 'admin/cultivation/areas/edit'
   ]) !!}
 
-  <h1> {{ $area->id ? 'Edit' : 'Create' }} Area
+  <h1> {{ $area->id ? 'Save' : 'Create' }} Area
     @if ($area->id)
       ({!! $area->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Area </a>
@@ -160,7 +160,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($area->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($area->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

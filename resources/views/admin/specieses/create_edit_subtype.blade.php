@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/species/create-edit-species'])
 
 @section('admin-title')
-  {{ $subtype->id ? 'Edit' : 'Create' }} Subtype
+  {{ $subtype->id ? 'Save' : 'Create' }} Subtype
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('lorekeeper.subtypes')) => 'admin/data/subtypes',
-      ($subtype->id ? 'Edit' : 'Create') . ' ' . ucfirst(__('lorekeeper.subtype')) => $subtype->id
+      ($subtype->id ? 'Save' : 'Create') . ' ' . ucfirst(__('lorekeeper.subtype')) => $subtype->id
           ? 'admin/data/subtypes/edit/' . $subtype->id
           : 'admin/data/subtypes/create'
   ]) !!}
 
-  <h1> {{ $subtype->id ? 'Edit' : 'Create' }} {{ ucfirst(__('lorekeeper.subtype')) }}
+  <h1> {{ $subtype->id ? 'Save' : 'Create' }} {{ ucfirst(__('lorekeeper.subtype')) }}
     @if ($subtype->id)
       <a href="#" class="btn btn-danger float-right delete-subtype-button"> Delete {{ ucfirst(__('lorekeeper.subtype')) }} </a>
     @endif

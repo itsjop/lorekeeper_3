@@ -58,8 +58,8 @@
           </div>
         @endif
       @endif
-      @if (isset($item->data['resell']) &&
-              $item->data['resell'] &&
+      @if (isset($item->resell) &&
+              $item->resell &&
               App\Models\Currency\Currency::where('id', $item->resell->flip()->pop())->first() &&
               config('lorekeeper.extensions.item_entry_expansion.resale_function')
       )
@@ -129,10 +129,13 @@
           <div class="card collapse mt-1" id="border{{ $item->id }}">
             <div class="card-body">
               @if (isset($item->tag('border')->data['all_borders']))
-                <p class="text-center"> Each use of this item unlocks <strong>one </strong> random border between all onsite. </p>
+                <p class="text-center"> Each use of this item unlocks <strong> one </strong> random border between all onsite.
+                </p>
               @else
-                <p class="text-center"> Each use of this item unlocks <strong>one </strong> of the following borders randomly. <br>
-                  If one is crossed out, you already have it. </p>
+                <p class="text-center"> Each use of this item unlocks <strong> one </strong> of the following borders randomly.
+                  <br>
+                  If one is crossed out, you already have it.
+                </p>
                 <div class="row">
                   @foreach (parseAssetData($item->tag('border')->data, true) as $type)
                     @foreach ($type as $border)

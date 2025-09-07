@@ -7,10 +7,10 @@
 @section('home.user_shops-content')
   {!! breadcrumbs([
       'My Shops' => 'user-shops',
-      ($shop->id ? 'Edit' : 'Create') . ' Shop' => $shop->id ? 'user-shops/edit/' . $shop->id : 'user-shops/create',
+      ($shop->id ? 'Save' : 'Create') . ' Shop' => $shop->id ? 'user-shops/edit/' . $shop->id : 'user-shops/create',
   ]) !!}
 
-  <h1> {{ $shop->id ? 'Edit' : 'Create' }} Shop
+  <h1> {{ $shop->id ? 'Save' : 'Create' }} Shop
     @if ($shop->id)
       ({!! $shop->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-shop-button"> Delete Shop </a>
@@ -52,7 +52,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($shop->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($shop->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

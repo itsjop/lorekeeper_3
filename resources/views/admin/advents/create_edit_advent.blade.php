@@ -1,19 +1,19 @@
 @extends('admin.layout')
 
 @section('admin-title')
-  {{ $advent->id ? 'Edit' : 'Create' }} Advent Calendar
+  {{ $advent->id ? 'Save' : 'Create' }} Advent Calendar
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Advent Calendars' => 'admin/data/advent-calendars',
-      ($advent->id ? 'Edit' : 'Create') . ' Advent Calendar' => $advent->id
+      ($advent->id ? 'Save' : 'Create') . ' Advent Calendar' => $advent->id
           ? 'admin/data/advent-calendars/edit/' . $advent->id
           : 'admin/data/advent-calendars/create'
   ]) !!}
 
-  <h1> {{ $advent->id ? 'Edit' : 'Create' }} Advent Calendar
+  <h1> {{ $advent->id ? 'Save' : 'Create' }} Advent Calendar
     @if ($advent->id)
       <a href="#" class="btn btn-danger float-right delete-advent-button"> Delete Advent Calendar </a>
     @endif
@@ -114,7 +114,7 @@
   @endif
 
   <div class="text-right">
-    {!! Form::submit($advent->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($advent->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Figures' => 'admin/world/figures',
-      ($figure->id ? 'Edit' : 'Create') . ' Figure' => $figure->id
+      ($figure->id ? 'Save' : 'Create') . ' Figure' => $figure->id
           ? 'admin/world/figures/edit/' . $figure->id
           : 'admin/world/figures/create'
   ]) !!}
 
-  <h1> {{ $figure->id ? 'Edit' : 'Create' }} Figure
+  <h1> {{ $figure->id ? 'Save' : 'Create' }} Figure
     @if ($figure->id)
       ({!! $figure->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-figure-button"> Delete Figure </a>
@@ -196,7 +196,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($figure->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($figure->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

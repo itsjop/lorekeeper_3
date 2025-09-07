@@ -9,13 +9,13 @@
       'Admin Panel' => 'admin',
       'Criteria' => 'admin/data/criteria',
       'Edit Criterion' => 'admin/data/criteria/edit/' . $criterionId,
-      ($step->id ? 'Create' : 'Edit') . ' Criterion Step' => $step->id
+      ($step->id ? 'Create' : 'Save') . ' Criterion Step' => $step->id
           ? 'admin/data/criteria/' . $criterionId . '/step/' . $step->id
           : 'admin/data/criteria/' . $criterionId . '/step'
   ]) !!}
 
   <h1>
-    {{ $step->id ? 'Edit' : 'Create' }} Step
+    {{ $step->id ? 'Save' : 'Create' }} Step
     @if ($step->id)
       <a href="#" class="btn btn-danger float-right delete-button"> Delete Step </a>
     @endif
@@ -182,7 +182,7 @@
   @endif
 
   <div class="text-right mt-4">
-    {!! Form::submit($step->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($step->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

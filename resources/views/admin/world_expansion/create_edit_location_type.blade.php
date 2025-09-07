@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Location Types' => 'admin/world/location-types',
-      ($type->id ? 'Edit' : 'Create') . ' Location Type' => $type->id
+      ($type->id ? 'Save' : 'Create') . ' Location Type' => $type->id
           ? 'admin/world/location-types/edit/' . $type->id
           : 'admin/world/location-types/create'
   ]) !!}
 
-  <h1> {{ $type->id ? 'Edit' : 'Create' }} Location Type
+  <h1> {{ $type->id ? 'Save' : 'Create' }} Location Type
     @if ($type->id)
       ({!! $type->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Location Type </a>
@@ -119,7 +119,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($type->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($type->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

@@ -133,7 +133,7 @@
 </table>
 
 <div class="text-right">
-  {!! Form::submit($prompt->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit($prompt->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>
 
 {!! Form::close() !!}

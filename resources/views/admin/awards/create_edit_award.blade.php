@@ -275,7 +275,7 @@
   @endif
 
   <div class="text-right mt-2">
-    {!! Form::submit($award->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary px-5']) !!}
+    {!! Form::submit($award->id ? 'Save' : 'Create', ['class' => 'btn btn-primary px-5']) !!}
   </div>
 
   {!! Form::close() !!}

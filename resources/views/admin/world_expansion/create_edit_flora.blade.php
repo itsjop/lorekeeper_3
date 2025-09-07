@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Flora' => 'admin/world/floras',
-      ($flora->id ? 'Edit' : 'Create') . ' Flora' => $flora->id
+      ($flora->id ? 'Save' : 'Create') . ' Flora' => $flora->id
           ? 'admin/world/floras/edit/' . $flora->id
           : 'admin/world/floras/create'
   ]) !!}
 
-  <h1> {{ $flora->id ? 'Edit' : 'Create' }} Flora
+  <h1> {{ $flora->id ? 'Save' : 'Create' }} Flora
     @if ($flora->id)
       ({!! $flora->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-flora-button"> Delete Flora </a>
@@ -178,7 +178,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($flora->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($flora->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

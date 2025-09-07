@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Pets' => 'admin/data/pets',
-      ($pet->id ? 'Edit' : 'Create') . ' Pet' => $pet->id ? 'admin/data/pets/edit/' . $pet->id : 'admin/data/pets/create'
+      ($pet->id ? 'Save' : 'Create') . ' Pet' => $pet->id ? 'admin/data/pets/edit/' . $pet->id : 'admin/data/pets/create'
   ]) !!}
   <h1>
-    {{ $pet->id ? 'Edit' : 'Create' }} Pet
+    {{ $pet->id ? 'Save' : 'Create' }} Pet
     @if ($pet->id)
       <a href="#" class="btn btn-outline-danger float-right delete-pet-button"> Delete Pet </a>
       @if ($pet->dropData)

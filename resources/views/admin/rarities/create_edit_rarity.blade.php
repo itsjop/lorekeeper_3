@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/rarities/create-edit-rarity'])
 
 @section('admin-title')
-  {{ $rarity->id ? 'Edit' : 'Create' }} Rarity
+  {{ $rarity->id ? 'Save' : 'Create' }} Rarity
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Rarities' => 'admin/data/rarities',
-      ($rarity->id ? 'Edit' : 'Create') . ' Rarity' => $rarity->id
+      ($rarity->id ? 'Save' : 'Create') . ' Rarity' => $rarity->id
           ? 'admin/data/rarities/edit/' . $rarity->id
           : 'admin/data/rarities/create'
   ]) !!}
 
-  <h1> {{ $rarity->id ? 'Edit' : 'Create' }} Rarity
+  <h1> {{ $rarity->id ? 'Save' : 'Create' }} Rarity
     @if ($rarity->id)
       <a href="#" class="btn btn-danger float-right delete-rarity-button"> Delete Rarity </a>
       <h3> Preview </h3>
@@ -102,7 +102,7 @@
     ])
 
     <div class="text-right">
-      {!! Form::submit($rarity->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+      {!! Form::submit($rarity->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

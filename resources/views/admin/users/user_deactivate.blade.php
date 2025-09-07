@@ -38,7 +38,7 @@
     {!! Form::textarea('deactivate_reason', $user->settings->deactivate_reason, ['class' => 'form-control']) !!}
   </div>
   <div class="text-right">
-    {!! Form::submit($user->is_deactivated ? 'Edit' : 'Deactivate', [
+    {!! Form::submit($user->is_deactivated ? 'Save' : 'Deactivate', [
         'class' => 'btn btn' . ($user->is_deactivated ? '' : '-outline') . '-danger deactivate-button'
     ]) !!}
   </div>

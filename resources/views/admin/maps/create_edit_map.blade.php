@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Maps' => 'admin/maps',
-      ($map->id ? 'Edit' : 'Create') . ' Map' => $map->id ? 'admin/maps/edit/' . $map->id : 'admin/maps/create'
+      ($map->id ? 'Save' : 'Create') . ' Map' => $map->id ? 'admin/maps/edit/' . $map->id : 'admin/maps/create'
   ]) !!}
 
-  <h1> {{ $map->id ? 'Edit' : 'Create' }} Map
+  <h1> {{ $map->id ? 'Save' : 'Create' }} Map
     @if ($map->id)
       <a href="#" class="btn btn-outline-danger float-right delete-map-button"> Delete Map </a>
     @endif
@@ -51,7 +51,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($map->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($map->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

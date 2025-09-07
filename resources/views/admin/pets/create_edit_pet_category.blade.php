@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Pet Categories' => 'admin/data/pet-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/pet-categories/edit/' . $category->id : 'admin/data/pet-categories/create',
+      ($category->id ? 'Save' : 'Create') . ' Category' => $category->id ? 'admin/data/pet-categories/edit/' . $category->id : 'admin/data/pet-categories/create',
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Pet Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Pet Category
     @if ($category->id)
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif

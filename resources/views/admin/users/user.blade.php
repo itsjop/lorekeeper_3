@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="text-right">
-      {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+      {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
   </div>
@@ -74,7 +74,7 @@
           ]) !!}
         </div>
         <div class="col-md text-right">
-          {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+          {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         </div>
       </div>
       {!! Form::close() !!}
@@ -98,7 +98,7 @@
           ]) !!}
         </div>
         <div class="col-md text-right">
-          {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+          {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         </div>
       </div>
       {!! Form::close() !!}
@@ -131,7 +131,7 @@
       </div>
     </div>
     <div class="text-right">
-      {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+      {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
   </div>
@@ -154,7 +154,7 @@
       </div>
     </div>
     <div class="text-right">
-      {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+      {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
   </div>

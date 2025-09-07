@@ -30,7 +30,7 @@
     </div>
     <div class="text-right mt-2">
       @if ($user)
-        {!! Form::submit('Edit', ['class' => 'btn btn-success']) !!}
+        {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
       @else
         You must be logged in to send the form.
       @endif

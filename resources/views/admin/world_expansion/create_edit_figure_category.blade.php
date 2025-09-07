@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Figure Categories' => 'admin/world/figure-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Figure Category' => $category->id
+      ($category->id ? 'Save' : 'Create') . ' Figure Category' => $category->id
           ? 'admin/world/figure-categories/edit/' . $category->id
           : 'admin/world/figure-categories/create'
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Figure Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Figure Category
     @if ($category->id)
       ({!! $category->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Figure Category </a>
@@ -113,7 +113,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

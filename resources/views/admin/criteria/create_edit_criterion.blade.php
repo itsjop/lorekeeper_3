@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Criteria' => 'admin/data/criteria',
-      ($criterion->id ? 'Edit' : 'Create') . ' Criterion' => $criterion->id
+      ($criterion->id ? 'Save' : 'Create') . ' Criterion' => $criterion->id
           ? 'admin/data/criteria/edit/' . $criterion->id
           : 'admin/data/criteria/create'
   ]) !!}
 
-  <h1> {{ $criterion->id ? 'Edit' : 'Create' }} Criterion
+  <h1> {{ $criterion->id ? 'Save' : 'Create' }} Criterion
     @if ($criterion->id)
       <a href="#" class="btn btn-danger float-right delete-button"> Delete Criterion </a>
     @endif
@@ -142,7 +142,7 @@
   @endif
 
   <div class="text-right mt-4">
-    {!! Form::submit($criterion->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($criterion->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

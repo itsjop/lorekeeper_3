@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       ucfirst(__('awards.award')) . ' Categories' => 'admin/data/award-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/award-categories/edit/' . $category->id : 'admin/data/award-categories/create',
+      ($category->id ? 'Save' : 'Create') . ' Category' => $category->id ? 'admin/data/award-categories/edit/' . $category->id : 'admin/data/award-categories/create',
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Category
     @if ($category->id)
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif
@@ -46,7 +46,7 @@
 
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

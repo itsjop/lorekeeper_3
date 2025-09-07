@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/prompts/create-edit-prompt'])
 
 @section('admin-title')
-  {{ $prompt->id ? 'Edit' : 'Create' }} Prompts
+  {{ $prompt->id ? 'Save' : 'Create' }} Prompts
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Prompts' => 'admin/data/prompts',
-      ($prompt->id ? 'Edit' : 'Create') . ' Prompt' => $prompt->id
+      ($prompt->id ? 'Save' : 'Create') . ' Prompt' => $prompt->id
           ? 'admin/data/prompts/edit/' . $prompt->id
           : 'admin/data/prompts/create'
   ]) !!}
 
-  <h1> {{ $prompt->id ? 'Edit' : 'Create' }} Prompt
+  <h1> {{ $prompt->id ? 'Save' : 'Create' }} Prompt
     @if ($prompt->id)
       <a href="#" class="btn btn-danger float-right delete-prompt-button"> Delete Prompt </a>
     @endif
@@ -223,7 +223,7 @@
   ])
 
   <div class="text-right">
-    {!! Form::submit($prompt->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($prompt->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

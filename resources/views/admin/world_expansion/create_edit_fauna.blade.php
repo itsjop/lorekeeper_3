@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Fauna' => 'admin/world/faunas',
-      ($fauna->id ? 'Edit' : 'Create') . ' Fauna' => $fauna->id
+      ($fauna->id ? 'Save' : 'Create') . ' Fauna' => $fauna->id
           ? 'admin/world/faunas/edit/' . $fauna->id
           : 'admin/world/faunas/create'
   ]) !!}
 
-  <h1> {{ $fauna->id ? 'Edit' : 'Create' }} Fauna
+  <h1> {{ $fauna->id ? 'Save' : 'Create' }} Fauna
     @if ($fauna->id)
       ({!! $fauna->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-fauna-button"> Delete Fauna </a>
@@ -179,7 +179,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($fauna->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($fauna->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

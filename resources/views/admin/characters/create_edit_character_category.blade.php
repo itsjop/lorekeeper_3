@@ -1,17 +1,17 @@
 @extends('admin.layout', ['componentName' => 'admin/currencies/create-edit-character-category'])
 
 @section('admin-title')
-  {{ $category->id ? 'Edit' : 'Create' }} Character Category
+  {{ $category->id ? 'Save' : 'Create' }} Character Category
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Character Categories' => 'admin/data/character-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id ? 'admin/data/character-categories/edit/' . $category->id : 'admin/data/character-categories/create',
+      ($category->id ? 'Save' : 'Create') . ' Category' => $category->id ? 'admin/data/character-categories/edit/' . $category->id : 'admin/data/character-categories/create',
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Character Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Character Category
     @if ($category->id)
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif

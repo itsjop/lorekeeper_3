@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Locations' => 'admin/world/locations',
-      ($location->id ? 'Edit' : 'Create') . ' Location' => $location->id
+      ($location->id ? 'Save' : 'Create') . ' Location' => $location->id
           ? 'admin/world/locations/edit/' . $location->id
           : 'admin/world/locations/create'
   ]) !!}
 
-  <h1> {{ $location->id ? 'Edit' : 'Create' }} Location
+  <h1> {{ $location->id ? 'Save' : 'Create' }} Location
     @if ($location->id)
       ({!! $location->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Location </a>
@@ -212,7 +212,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($location->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($location->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

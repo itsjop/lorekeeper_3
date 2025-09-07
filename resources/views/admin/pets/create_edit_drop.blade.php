@@ -1,14 +1,14 @@
 @extends('admin.layout')
 
 @section('admin-title')
-  {{ $drop->id ? 'Edit' : 'Create' }} Pet Drop
+  {{ $drop->id ? 'Save' : 'Create' }} Pet Drop
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Pet Drops' => 'admin/data/pets/drops',
-      ($drop->id ? 'Edit' : 'Create') . ' Drop Data' => $drop->id
+      ($drop->id ? 'Save' : 'Create') . ' Drop Data' => $drop->id
           ? 'admin/data/pets/drops/edit/' . $drop->pet_id
           : 'admin/data/pets/drops/create'
   ]) !!}
@@ -118,7 +118,7 @@
   @endif
 
   <div class="text-right">
-    {!! Form::submit($drop->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($drop->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

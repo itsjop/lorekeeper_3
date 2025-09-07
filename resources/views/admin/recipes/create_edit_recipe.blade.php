@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Recipes' => 'admin/data/recipes',
-      ($recipe->id ? 'Edit' : 'Create') . ' Recipe' => $recipe->id
+      ($recipe->id ? 'Save' : 'Create') . ' Recipe' => $recipe->id
           ? 'admin/data/recipes/edit/' . $recipe->id
           : 'admin/data/recipes/create'
   ]) !!}
 
-  <h1> {{ $recipe->id ? 'Edit' : 'Create' }} Recipe
+  <h1> {{ $recipe->id ? 'Save' : 'Create' }} Recipe
     @if ($recipe->id)
       <a href="#" class="btn btn-outline-danger float-right delete-recipe-button"> Delete Recipe </a>
     @endif
@@ -81,7 +81,7 @@
   @include('widgets._recipe_reward_select', ['rewards' => $recipe->rewards])
 
   <div class="text-right">
-    {!! Form::submit($recipe->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($recipe->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

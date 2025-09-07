@@ -1,19 +1,19 @@
 @extends('admin.layout')
 
 @section('admin-title')
-  {{ $category->id ? 'Edit' : 'Create' }} Currency Category
+  {{ $category->id ? 'Save' : 'Create' }} Currency Category
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Currency Categories' => 'admin/data/currency-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id
+      ($category->id ? 'Save' : 'Create') . ' Category' => $category->id
           ? 'admin/data/currency-categories/edit/' . $category->id
           : 'admin/data/currency-categories/create'
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Currency Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Currency Category
     @if ($category->id)
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif

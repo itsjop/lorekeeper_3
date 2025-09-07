@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Faction Types' => 'admin/world/faction-types',
-      ($type->id ? 'Edit' : 'Create') . ' Faction Type' => $type->id
+      ($type->id ? 'Save' : 'Create') . ' Faction Type' => $type->id
           ? 'admin/world/faction-types/edit/' . $type->id
           : 'admin/world/faction-types/create'
   ]) !!}
 
-  <h1> {{ $type->id ? 'Edit' : 'Create' }} Faction Type
+  <h1> {{ $type->id ? 'Save' : 'Create' }} Faction Type
     @if ($type->id)
       ({!! $type->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-type-button"> Delete Faction Type </a>
@@ -119,7 +119,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($type->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($type->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

@@ -94,7 +94,7 @@
 </div>
 
 <div class="text-right">
-  {!! Form::submit($variant->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit($variant->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>
 
 {!! Form::close() !!}

@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Concept Categories' => 'admin/world/concept-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Concept Category' => $category->id
+      ($category->id ? 'Save' : 'Create') . ' Concept Category' => $category->id
           ? 'admin/world/concept-categories/edit/' . $category->id
           : 'admin/world/concept-categories/create'
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Concept Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Concept Category
     @if ($category->id)
       ({!! $category->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Concept Category </a>
@@ -113,7 +113,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

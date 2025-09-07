@@ -1,20 +1,20 @@
 @extends('admin.layout', ['componentName' => 'admin/loot/create-edit-loot'])
 
 @section('admin-title')
-  {{ $table->id ? 'Edit' : 'Create' }} Loot Table
+  {{ $table->id ? 'Save' : 'Create' }} Loot Table
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Loot Tables' => 'admin/data/loot-tables',
-      ($table->id ? 'Edit' : 'Create') . ' Loot Table' => $table->id
+      ($table->id ? 'Save' : 'Create') . ' Loot Table' => $table->id
           ? 'admin/data/loot-tables/edit/' . $table->id
           : 'admin/data/loot-tables/create'
   ]) !!}
 
   <h1>
-    {{ $table->id ? 'Edit' : 'Create' }} Loot Table
+    {{ $table->id ? 'Save' : 'Create' }} Loot Table
     @if ($table->id)
       <a href="#" class="btn btn-danger float-right delete-table-button"> Delete Loot Table </a>
     @endif
@@ -171,7 +171,7 @@
   </table>
 
   <div class="text-right">
-    {!! Form::submit($table->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($table->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

@@ -293,7 +293,7 @@
   </div>
 
   <div class="text-right mt-1">
-    {!! Form::submit($stock->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($stock->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
   {!! Form::close() !!}
 

@@ -1,19 +1,19 @@
 @extends('admin.layout', ['componentName' => 'admin/prompts/create-edit-prompt-category'])
 
 @section('admin-title')
-  {{ $category->id ? 'Edit' : 'Create' }} Prompt Category
+  {{ $category->id ? 'Save' : 'Create' }} Prompt Category
 @endsection
 
 @section('admin-content')
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Prompt Categories' => 'admin/data/prompt-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Category' => $category->id
+      ($category->id ? 'Save' : 'Create') . ' Category' => $category->id
           ? 'admin/data/prompt-categories/edit/' . $category->id
           : 'admin/data/prompt-categories/create'
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Prompt Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Prompt Category
     @if ($category->id)
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Category </a>
     @endif
@@ -52,7 +52,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

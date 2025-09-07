@@ -25,7 +25,7 @@
 </div>
 
 <div class="text-right">
-  {!! Form::submit($evolution->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit($evolution->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>
 
 {!! Form::close() !!}

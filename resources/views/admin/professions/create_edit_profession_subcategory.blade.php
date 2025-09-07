@@ -8,10 +8,10 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Profession Subcategories' => 'admin/data/profession-subcategories',
-      ($subcategory->id ? 'Edit' : 'Create') . ' Subcategory' => $subcategory->id ? 'admin/data/profession-subcategories/edit/' . $subcategory->id : 'admin/data/profession-subcategories/create',
+      ($subcategory->id ? 'Save' : 'Create') . ' Subcategory' => $subcategory->id ? 'admin/data/profession-subcategories/edit/' . $subcategory->id : 'admin/data/profession-subcategories/create',
   ]) !!}
 
-  <h1> {{ $subcategory->id ? 'Edit' : 'Create' }} Subcategory
+  <h1> {{ $subcategory->id ? 'Save' : 'Create' }} Subcategory
     @if ($subcategory->id)
       <a href="#" class="btn btn-danger float-right delete-subcategory-button"> Delete Subcategory </a>
     @endif
@@ -48,7 +48,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($subcategory->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($subcategory->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

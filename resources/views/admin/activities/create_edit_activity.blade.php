@@ -5,9 +5,9 @@
 @endsection
 
 @section('admin-content')
-  {!! breadcrumbs(['Admin Panel' => 'admin', 'Activities' => 'admin/data/activities', ($activity->id ? 'Edit' : 'Create') . ' Activity' => $activity->id ? 'admin/data/activities/edit/' . $activity->id : 'admin/data/activities/create']) !!}
+  {!! breadcrumbs(['Admin Panel' => 'admin', 'Activities' => 'admin/data/activities', ($activity->id ? 'Save' : 'Create') . ' Activity' => $activity->id ? 'admin/data/activities/edit/' . $activity->id : 'admin/data/activities/create']) !!}
 
-  <h1> {{ $activity->id ? 'Edit' : 'Create' }} Activity
+  <h1> {{ $activity->id ? 'Save' : 'Create' }} Activity
     @if ($activity->id)
       ({!! $activity->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-activity-button"> Delete Activity </a>
@@ -56,7 +56,7 @@
 
 
   <div class="text-right">
-    {!! Form::submit($activity->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($activity->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}
@@ -68,7 +68,7 @@
     @endif
 
     <div class="text-right">
-      {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+      {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
     @if (View::exists('admin.activities.modules.' . $activity->module . '_post'))

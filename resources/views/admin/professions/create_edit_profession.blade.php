@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Professions' => 'admin/data/professions',
-      ($profession->id ? 'Edit' : 'Create') . ' Profession' => $profession->id
+      ($profession->id ? 'Save' : 'Create') . ' Profession' => $profession->id
           ? 'admin/data/professions/edit/' . $profession->id
           : 'admin/data/professions/create'
   ]) !!}
 
-  <h1> {{ $profession->id ? 'Edit' : 'Create' }} Profession
+  <h1> {{ $profession->id ? 'Save' : 'Create' }} Profession
     @if ($profession->id)
       <a href="#" class="btn btn-danger float-right delete-profession-button"> Delete Profession </a>
     @endif
@@ -137,7 +137,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($profession->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($profession->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

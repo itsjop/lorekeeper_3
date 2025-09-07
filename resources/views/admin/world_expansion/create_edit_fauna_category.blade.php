@@ -8,12 +8,12 @@
   {!! breadcrumbs([
       'Admin Panel' => 'admin',
       'Fauna Categories' => 'admin/world/fauna-categories',
-      ($category->id ? 'Edit' : 'Create') . ' Fauna Category' => $category->id
+      ($category->id ? 'Save' : 'Create') . ' Fauna Category' => $category->id
           ? 'admin/world/fauna-categories/edit/' . $category->id
           : 'admin/world/fauna-categories/create'
   ]) !!}
 
-  <h1> {{ $category->id ? 'Edit' : 'Create' }} Fauna Category
+  <h1> {{ $category->id ? 'Save' : 'Create' }} Fauna Category
     @if ($category->id)
       ({!! $category->displayName !!})
       <a href="#" class="btn btn-danger float-right delete-category-button"> Delete Fauna Category </a>
@@ -113,7 +113,7 @@
   </div>
 
   <div class="text-right">
-    {!! Form::submit($category->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($category->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
   </div>
 
   {!! Form::close() !!}

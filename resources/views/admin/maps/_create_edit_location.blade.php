@@ -4,7 +4,7 @@
         : 'admin/maps/locations/create/' . $map->id
 ]) !!}
 
-<h3> {{ $location->id ? 'Edit' : 'Create' }} Location </h3>
+<h3> {{ $location->id ? 'Save' : 'Create' }} Location </h3>
 
 <div class="form-group">
   {!! Form::label('name', 'Name') !!}
@@ -64,7 +64,7 @@
 </div>
 
 <div class="text-right">
-  {!! Form::submit($location->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit($location->id ? 'Save' : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>
 
 {!! Form::close() !!}
