@@ -37,27 +37,30 @@
 
   <ul class="nav nav-tabs flex gap-_5">
     <li class="nav-item">
-      <a href="{{ url()->current() }}" class="nav-link {{ Request::get('is_active') ? '' : 'active' }}"> Current
-        Raffles </a>
+      <a href="{{ url()->current() }}" class="nav-link {{ Request::get('is_active') ? '' : 'active' }}">
+        Current Raffles
+      </a>
     </li>
     <li class="nav-item">
-      <a href="{{ url()->current() }}?is_active=1" class="nav-link {{ Request::get('is_active') == 1 ? 'active' : '' }}"> Open
-        Raffles </a>
+      <a href="{{ url()->current() }}?is_active=1" class="nav-link {{ Request::get('is_active') == 1 ? 'active' : '' }}">
+        Open Raffles
+      </a>
     </li>
     <li class="nav-item">
-      <a href="{{ url()->current() }}?is_active=2" class="nav-link {{ Request::get('is_active') == 2 ? 'active' : '' }}"> Completed
-        Raffles </a>
+      <a href="{{ url()->current() }}?is_active=2" class="nav-link {{ Request::get('is_active') == 2 ? 'active' : '' }}">
+        Completed Raffles
+      </a>
     </li>
   </ul>
 
   <?php $prevGroup = null; ?>
   <ul class="list-group mb-3">
-    @foreach ($raffles as $raffle)
+    @foreach ($raffles->sortBy('id', SORT_NUMERIC)->reverse() as $raffle)
       @if ($prevGroup != $raffle->group_id)
-  </ul>
-  @if ($prevGroup)
-    </div>
-  @endif
+    </ul>
+    @if ($prevGroup)
+      </div>
+    @endif
   <div class="card mb-3">
     <div class="card-header">
       <h3 class="d-inline"> {{ $groups[$raffle->group_id]->name }} <span
@@ -84,7 +87,9 @@
       @endif
 
       <li class="list-group-item">
+        {{-- {{ dd($raffle) }} --}}
         <i class="fas {{ $raffle->is_active ? 'fa-eye' : 'fa-eye-slash' }} mr-2"></i>
+        #{{ $raffle->id }} -
         {{-- <a href="{{ url('admin/raffles/view/' . $raffle->id) }}"> {{ $raffle->name }} </a> --}}
         <a href="{{ url('admin/raffles/view/' . $raffle->id) }}"> {{ $raffle->name }}
           {{ $raffle->is_fto ? ' (FTO / Non-Owner Only)' : '' }} </a>
