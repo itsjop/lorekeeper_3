@@ -249,7 +249,8 @@
                       <strong> {!! $feature->feature->category->displayName !!}:</strong>
                       @endif {!! $feature->feature->displayName !!} @if ($feature->data)
                         ({{ $feature->data }})
-                      @endif <span class="text-danger">*Required </span>
+                      @endif
+                      <span class="text-danger">*Required </span>
                   </div>
                 @endforeach
               @endif

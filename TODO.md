@@ -4,7 +4,7 @@
 - [x] Investigate why resale doesn't work
   - [x] Resale information isn't saving when editing an item
 - [x] mod mail show outgoing user name
-- [ ] completed raffles sorted by time instead of whatever it is now
+- [x] completed raffles sorted by time instead of whatever it is now
 - [ ] new news post - saved as a draft, reposted, - does not give NEW notification (or scheduled)
 - [ ] duplicated characters on prompt submission
 - [ ] gallery preview pass real blurred image instead of of lorekeeper book
