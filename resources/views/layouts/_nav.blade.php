@@ -385,9 +385,9 @@
       @endif
     </div>
     <?php
-    // set default timezone
-    date_default_timezone_set('America/New_York'); // EDT
-    $current_date = date('h:i:s A');
+      // set default timezone
+      date_default_timezone_set('America/New_York'); // EDT
+      $current_date = date('h:i:s A');
     ?>
     <div class="clock">
       <i class="fa fa-clock"></i>
@@ -400,13 +400,11 @@
 </nav>
 <script>
   let timeZone = "EST"
-
   function getdate() {
     const date = new Date;
     const now = date.getTime()
     document.getElementById("clock").textContent = date.toLocaleTimeString("en-US", {
       timeZone: "America/New_York",
-      // timeZoneName: "short",
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit'
