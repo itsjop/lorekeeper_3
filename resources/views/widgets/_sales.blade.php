@@ -8,6 +8,7 @@
         </div>
         <img
           src="{{ $sales->characters->first()->character->image->thumbnailUrl }}"
+          alt="{{ $sales->characters->first()->character->fullName }}"
           class="img-thumbnail mb-1"
         />
       </a>
@@ -46,7 +47,8 @@
                 <a href="{{ $sales->url }}" class="btn btn-secondary"> View {!! $sales->characters->count() !!} Characters For
                   {{ $sales->characters->first()->displayType }} <i class="fas fa-arrow-right"></i>
                 </a>
-              @endif --}}
+              @endif
+          --}}
         </div>
       @else
         <p class="link pl-3 mb-0">

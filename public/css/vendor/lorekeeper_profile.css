@@ -364,9 +364,6 @@
     border-radius: 0.25rem;
     display: block;
   }
-  .image-nav .nav-item a.active {
-    border: 5px solid #ddd;
-  }
 
   /* TRANSFERS *************************************************************************************/
 

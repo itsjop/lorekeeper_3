@@ -280,7 +280,7 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
   }
 }
 
-.sortable-item {
+.sortable-item, .sort-item {
   position: relative;
   .sort-handle {
     position: absolute;
@@ -290,5 +290,17 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
     font-size: 2em;
     color: var(--purple-clr_700);
     cursor: grab;
+  }
+}
+.image-nav .nav-item a {
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  &.active {
+    border: 4px dashed var(--purple-clr_600);
+    border-radius: 15px;
+  }
+  .img-thumbnail {
+    width: calc(100% - 20px);
   }
 }

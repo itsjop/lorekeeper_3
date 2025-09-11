@@ -74,9 +74,10 @@
     @endif
   </h3>
 
-  <ul class="row nav image-nav mb-2" @if ($canManage) id="sortable" @endif>
+  <ul class="grid grid-4-col w-100 image-nav mb-2" @if ($canManage) id="sortable" @endif>
     @foreach ($character->images($user)->get() as $image)
-      <li class="col-md-3 col-6 text-center nav-item sort-item" data-id="{{ $image->id }}">
+      <div class="text-center nav-item sort-item" data-id="{{ $image->id }}">
+        <i class="sort-handle hover-preview fa-solid fa-grip-horizontal"></i>
         <a
           id="thumbnail-{{ $image->id }}"
           data-bs-toggle="tab"
@@ -90,7 +91,7 @@
             alt="Thumbnail for {{ $image->character->fullName }}"
           />
         </a>
-      </li>
+      </div>
     @endforeach
   </ul>
   @if ($canManage)
@@ -114,6 +115,12 @@
         $("#sortable").sortable({
           characters: '.sort-item',
           placeholder: "sortable-placeholder",
+          revert: 100,
+          handle: ".sort-handle",
+          cursor: "grabbing",
+          tolerance: "pointer",
+          cursorAt: { right: 5, top: 5 },
+          distance: 5,
           stop: function(event, ui) {
             $('#sortableOrder').val($(this).sortable("toArray", {
               attribute: "data-id"

@@ -5162,10 +5162,10 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
   max-width: 800px;
 }
 
-.sortable-item {
+.sortable-item, .sort-item {
   position: relative;
 }
-.sortable-item .sort-handle {
+.sortable-item .sort-handle, .sort-item .sort-handle {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -5173,4 +5173,17 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
   font-size: 2em;
   color: var(--purple-clr_700);
   cursor: grab;
+}
+
+.image-nav .nav-item a {
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+}
+.image-nav .nav-item a.active {
+  border: 4px dashed var(--purple-clr_600);
+  border-radius: 15px;
+}
+.image-nav .nav-item a .img-thumbnail {
+  width: calc(100% - 20px);
 }
