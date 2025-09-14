@@ -1,90 +1,126 @@
 .palate-colors {
   &.unset {
+    --card_text: #f7dcff;
+    --card_text_dark: #512a5e;
     --card_gradient: linear-gradient(to bottom left, #d3d3d3, #cfc4d2, #b09bd0, #bdafff);
     --card_card-border: linear-gradient(180deg, #fff, #ecc3ff);
     --card_profile-bg_color: linear-gradient(45deg, #d0bfda, #dfdee6);
   }
   &.sweet {
+    --card_text: #ffc2f0;
+    --card_text_dark: #8a2b89;
     --card_gradient: linear-gradient(to bottom left, #ffb3e5, #ff75dd, #8e60d3, #bdafff);
     --card_card-border: linear-gradient(180deg, #fff, #ffc3fd);
     --card_profile-bg_color: linear-gradient(45deg, #ffcbf3, #ded3ff);
   }
   &.energetic {
+    --card_text: #dcedff;
+    --card_text_dark: #1d446e;
     --card_gradient: linear-gradient(to bottom left, #67d6ff, #3650ff, #0092c8, #4da9ff);
     --card_card-border: linear-gradient(to bottom, #ffffff, #bbf0ff);
     --card_profile-bg_color: linear-gradient(45deg, #cbdfff, #c2f1ff);
   }
   &.dreadful {
+    --card_text: #c2b9f4;
+    --card_text_dark: #28187e;
     --card_gradient: linear-gradient(to bottom left, #6548d5, #311ca5, #782f8c, #951c37);
     --card_card-border: linear-gradient(180deg, #fff, #ffc3e7);
     --card_profile-bg_color: linear-gradient(45deg, #c5d5ff, #facceb);
   }
   &.mundane {
+    --card_text: #cacacf;
+    --card_text_dark: #595963;
     --card_gradient: linear-gradient(to bottom left, #c5c3cc, #8e8e95, #5a5c6f, #9899a0);
     --card_card-border: linear-gradient(180deg, #fff, #cdccd3);
     --card_profile-bg_color: linear-gradient(45deg, #e1e3ea, #cfced6);
   }
   &.strange {
+    --card_text: #c3f4bf;
+    --card_text_dark: #1e7a16;
     --card_gradient: linear-gradient(to bottom left, #b7ff8f, #61ba5a, #009157, #7dc58c);
     --card_card-border: linear-gradient(180deg, #fff, #f7ffc3);
     --card_profile-bg_color: linear-gradient(45deg, #d3ffc5, #ccfaee);
   }
   &.passionate {
+    --card_text: #f7d4c6;
+    --card_text_dark: #62311d;
     --card_gradient: linear-gradient(to bottom left, #fffab3, #ff8e5f, #ff5757, #ffad99);
     --card_card-border: linear-gradient(180deg, #fff, #ffe1c3);
     --card_profile-bg_color: linear-gradient(45deg, #ffeec5, #ffe0ca);
   }
   &.playful {
+    --card_text: #ccd9f8;
+    --card_text_dark: #132c60;
     --card_gradient: linear-gradient(to bottom left, #a9ebff, #5a8cff, #cc9bff, #ff9fe1);
     --card_card-border: linear-gradient(180deg, #fff, #c1d7ff);
     --card_profile-bg_color: linear-gradient(45deg, #d3fbff, #ffc6f6);
   }
   &.dazzling {
+    --card_text: #f5bcbc;
+    --card_text_dark: #5c1d1d;
     --card_gradient: linear-gradient(to bottom left, #ffd273, #ff5a5a, #aed457, #6eed88);
     --card_card-border: linear-gradient(180deg, #fff, #fff4ca);
     --card_profile-bg_color: linear-gradient(45deg, #f7f5bc, #b8ecd3);
   }
   &.whimsical {
+    --card_text: #d9bbf9;
+    --card_text_dark: #39195a;
     --card_gradient: linear-gradient(to bottom left, #ffbee1, #b671ff, #0e8871, #98cf6f);
     --card_card-border: linear-gradient(180deg, #fff, #ffd7ef);
     --card_profile-bg_color: linear-gradient(45deg, #fbd3ff, #c7ecd1);
   }
   &.thrilling {
+    --card_text: #c0cdf3;
+    --card_text_dark: #29324f;
     --card_gradient: linear-gradient(to bottom left, #b5fffe, #0d46e4, #711997, #c11f4b);
     --card_card-border: linear-gradient(180deg, #fff, #d7f3ff);
     --card_profile-bg_color: linear-gradient(45deg, #d3f3ff, #ffd5f0);
   }
   &.surreal {
+    --card_text: #d6f7e5;
+    --card_text_dark: #284e39;
     --card_gradient: linear-gradient(to bottom left, #efffc2, #26be6e, #4525c5, #dd1295);
     --card_card-border: linear-gradient(180deg, #fff, #dbffcf);
     --card_profile-bg_color: linear-gradient(45deg, #d1f4d4, #ffd0ff);
   }
   &.charming {
+    --card_text: #4f2949;
+    --card_text_dark: #f4c8ed;
     --card_gradient: linear-gradient(to bottom left, #ffd0fd, #ff8fed, #ff8339, #f4cd98);
     --card_card-border: linear-gradient(180deg, #fff, #f7c8ff);
     --card_profile-bg_color: linear-gradient(45deg, #ffd3f3, #fffed5);
   }
   &.melodramatic {
+    --card_text: #f5d6e7;
+    --card_text_dark: #5a3047;
     --card_gradient: linear-gradient(to bottom left, #ffc868, #a71c68, #2d2076, #ff5356);
     --card_card-border: linear-gradient(180deg, #fff, #ffea9b);
     --card_profile-bg_color: linear-gradient(45deg, #ffeac1, #fac6ff);
   }
   &.bittersweet {
+    --card_text: #f9c6de;
+    --card_text_dark: #502a3c;
     --card_gradient: linear-gradient(to bottom left, #ffc2e0, #cb2e76, #3819b5, #a693ff);
     --card_card-border: linear-gradient(180deg, #fff, #ffcfea);
     --card_profile-bg_color: linear-gradient(45deg, #ffc9f0, #ddd0ff);
   }
   &.sensational {
+    --card_text: #cff6d4;
+    --card_text_dark: #234427;
     --card_gradient: linear-gradient(to bottom left, #d3ff90, #46b756, #0092c8, #77bdff);
     --card_card-border: linear-gradient(180deg, #fff, #f3ffbb);
     --card_profile-bg_color: linear-gradient(45deg, #caf0c5, #c2f1ff);
   }
   &.fiery {
+    --card_text: #cedefd;
+    --card_text_dark: #252f43;
     --card_gradient: linear-gradient(to bottom left, #98f8ff, #2168ec, #ff452a, #ff9a15);
     --card_card-border: linear-gradient(180deg, #fff, #ffe8bb);
     --card_profile-bg_color: linear-gradient(45deg, #c9f5ff, #ffe8d0);
   }
   &.unknown {
+    --card_text: #ff6ab5;
+    --card_text_dark: #044d36;
     --card_gradient: linear-gradient(to bottom left, #feff95, #ff6ab5, #3cc1ff, #c7ec7b);
     --card_card-border: linear-gradient(180deg, #fff, #fff2ca);
     --card_profile-bg_color: linear-gradient(45deg, #ffd0e4, #c2f1ff);

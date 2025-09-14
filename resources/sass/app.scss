@@ -21,6 +21,7 @@ html { background-color: light-dark(#eee, #222)}
 @import './global/site-frame';
 
 // Component-specific
+@import './site-components/masterlist/char_links_connections.scss';
 @import './site-components/masterlist/ml_profile.scss';
 @import './site-components/masterlist/ml_cards.scss';
 @import './site-components/prompt_submissions.scss';

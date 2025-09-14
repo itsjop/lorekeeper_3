@@ -1,0 +1,205 @@
+.character-imgs {
+  display: grid;
+  grid-template-columns: max-content 50px max-content;
+  .none {
+    position: relative;
+    display: grid;
+  }
+  .primary,
+  .secondary {
+    display: grid;
+    grid-row: 1/2;
+    --name-height: max-content;
+    --card-height: 5fr;
+    .name {
+      font-weight: 600px;
+      font-size: 2em;
+      // transform: translateY(30%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      line-height: 0.7em;
+    }
+    .cardslot {
+      grid-area: card;
+      display: grid;
+      perspective: 200px;
+      .card,
+      .slug,
+      img {
+        grid-area: 1/1/2/2;
+        transform-origin: 100% center;
+      }
+      .card {
+        display: grid;
+        .card-bg,
+        .card-border {
+          content: '';
+          position: relative;
+          display: block;
+          grid-area: 1/1/2/2;
+          border-radius: 15px;
+          width: 100%;
+          height: 100%;
+        }
+        .card-bg {
+          background-image: url('images/overlays/starring.png'), var(--card_profile-bg_color);
+          scale: 95%;
+        }
+        .card-border {
+          background-image: var(--card_gradient);
+        }
+      }
+      .card,
+      .slug {
+        --rot: 3deg;
+        --scal: 90%;
+        transform: rotateY(var(--rot)) scale(var(--scal));
+        border-radius: 15px;
+      }
+      .slug {
+        position: relative;
+        z-index: 4;
+        display: grid;
+        border: 3px transparent solid;
+        .slug-text {
+          color: var(--card_text_dark);
+          font-weight: 700;
+          background-image: var(--card_card-border);
+          width: max-content;
+          border-radius: 15px;
+          filter: drop-shadow(0 0 5px color-mix(in srgb, var(--clr_raw_purple-700) 30%, transparent));
+          text-align: start;
+          align-self: end;
+          font-size: 1.7em;
+          padding: 0 10px;
+          bottom: 0;
+          position: absolute;
+        }
+        .ml-badge {
+          position: absolute;
+          z-index: 5;
+          --offset: -20px;
+          top: var(--offset);
+          left: var(--offset);
+          height: 3em;
+        }
+      }
+      img {
+        z-index: 3;
+      }
+    }
+    .name {
+      grid-area: name;
+      width: max-content;
+      justify-self: center;
+
+      // big text should be sour gummy / baloo heavy weight
+      // name sour gummy but slug should be baloo and heavyweight
+      // names darker even though its a link
+      // make the names a little smaller
+
+      .small {
+        font-family: 'Baloo 2';
+      }
+      .namelink {
+        color: var(--card_text_dark);
+        font-family: 'Sour Gummy';
+        font-weight: 700;
+        backdrop-filter: blur(5px);
+        border-radius: 15px;
+        padding: 10px;
+        border: 2px var(--card_text_dark) solid;
+        position: relative;
+        z-index: 2;
+        &::before {
+          content: '';
+          position: absolute;
+          background-image: var(--card_gradient);
+          border-radius: 13px;
+          z-index: 1;
+          opacity: 0.3;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+        span {
+          position: relative;
+          z-index: 3;
+        }
+      }
+    }
+  }
+  .primary {
+    grid-column: 1/3;
+    grid-template: 'name' var(--name-height) 'card' var(--card-height) / 1fr;
+    .cardslot {
+      justify-content: end;
+    }
+  }
+  .secondary {
+    grid-column: 2/4;
+    grid-template: 'card' var(--card-height) 'name' var(--name-height) / 1fr;
+    .name {
+      // transform: translateY(-30%);
+      flex-direction: column-reverse;
+    }
+    .cardslot {
+      justify-content: start;
+      z-index: 2;
+      .card,
+      .slug {
+        transform-origin: 0% center;
+        --rot: -3deg;
+        .slug-text {
+          text-align: end;
+        }
+        .ml-badge {
+          left: unset;
+          top: var(--offset);
+          right: var(--offset);
+        }
+      }
+    }
+  }
+}
+.relationship {
+  .relationship-content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+  }
+  fieldset {
+    width: 100%;
+    &.card-basic {
+      margin: 0;
+    }
+    &.noborder {
+      border: 0 solid transparent;
+      padding-top: 10px;
+    }
+    legend {
+      padding: 5px;
+      line-height: 1em;
+      font-family: 'Baloo 2';
+
+      strong {
+        font-size: 1.5em;
+      }
+      &.legend-center {
+        margin: 0 auto;
+      }
+      &.legend-left {
+        margin: 0 auto 0 0;
+      }
+      &.legend-right {
+        margin: 0 0 0 auto;
+      }
+    }
+  }
+}
+@container main-container (width < 600px) {
+  .relationship .relationship-content {
+    grid-template-columns: 1fr;
+  }
+}

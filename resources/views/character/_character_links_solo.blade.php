@@ -15,7 +15,10 @@
           <h4 class="m-0">
             {!! $link->type !!}
           </h4>
-          @include('character._link_character', ['character' => $link->getOtherCharacter($character->id)])
+          @include('character._link_character', [
+              'character' => $link->getOtherCharacter($character->id),
+              'charType' => 'none'
+          ])
         </div>
       @endif
     @endforeach
