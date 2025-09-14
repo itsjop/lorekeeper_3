@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel {
     // $schedule->command('change-feature')->weeklyOn(1, '00:00');
     $schedule->command('clean-donations')->everyMinute();
     $schedule->command('update-timed-daily')->everyMinute();
-    $schedule->command('generate-rank-card-back')->daily();
+    // $schedule->command('generate-rank-card-back')->daily();
     $schedule->command('restock-shops')->daily();
     $schedule->command('update-timed-stock')->everyMinute();
     $schedule->command('check-pet-drops')->everyMinute();
