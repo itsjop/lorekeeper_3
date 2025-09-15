@@ -7,7 +7,7 @@ $ask = $writing == 2 || $art == 2;
 $closed = !$trading || $writing == 0 || $art == 0;
 ?>
 
-<div class="permission-box no-details" style="--permcolor: var(--purple-clr_400)">
+<div class="permission-box no-details" style="--permcolor: var(--primary-clr_400)">
   <div class="status">
     <span
       id="copy"
@@ -20,7 +20,7 @@ $closed = !$trading || $writing == 0 || $art == 0;
   </div>
 </div>
 @if (config('lorekeeper.extensions.character_TH_profile_link') && $character->profile->link)
-  <div class="permission-box no-details" style="--permcolor: var(--purple-clr_400)">
+  <div class="permission-box no-details" style="--permcolor: var(--primary-clr_400)">
     <div class="status">
       <a data-character-id="{{ $character->id }}" href="{{ $character->profile->link }}">
         <span
@@ -60,7 +60,7 @@ $closed = !$trading || $writing == 0 || $art == 0;
 
 @if ($character->is_visible && Auth::check() && $character->user_id != Auth::user()->id)
   <?php $bookmark = Auth::user()->hasBookmarked($character); ?>
-  <div class="permission-box no-details" style="--permcolor: var(--teal-clr_300)">
+  <div class="permission-box no-details" style="--permcolor: var(--secondary-clr_300)">
     <div class="status">
       <a
         href="#"

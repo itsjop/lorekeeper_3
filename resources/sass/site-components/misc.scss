@@ -15,12 +15,12 @@
     justify-content: center;
     .pagination {
       width: max-content;
-      background: var(--purple-clr_300);
+      background: var(--primary-clr_300);
       border-radius: 10px;
       .page-item {
         .page-link {
-          background: var(--purple-clr_400);
-          color: var(--purple-clr_100);
+          background: var(--primary-clr_400);
+          color: var(--primary-clr_100);
           transition: var(--smoothIn_linear) 0.7s;
           border: 1px solid transparent;
           user-select: none;
@@ -31,27 +31,27 @@
             transition: var(--smoothIn_linear) 0.1s;
             // scale: 1.2;
             transform: translateY(-3px) scale(1.1);
-            background: var(--purple-clr_500);
-            color: var(--purple-clr_100);
+            background: var(--primary-clr_500);
+            color: var(--primary-clr_100);
             border-radius: 10px;
             border: 1px solid var(--white);
-            box-shadow: 0 5px 3px color-mix(in srgb, var(--purple-clr_800) 30%, transparent);
+            box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_800) 30%, transparent);
           }
           &:active {
             transform: translateY(-3px) scale(0.9);
           }
         }
         &.active .page-link {
-          background: var(--purple-clr_600);
-          color: var(--purple-clr_100);
+          background: var(--primary-clr_600);
+          color: var(--primary-clr_100);
           &:hover {
-            background: var(--purple-clr_700);
+            background: var(--primary-clr_700);
           }
         }
         &:first-of-type .page-link,
         &:last-of-type .page-link {
-          background: var(--purple-clr_300);
-          color: var(--purple-clr_100);
+          background: var(--primary-clr_300);
+          color: var(--primary-clr_100);
           border-radius: 10px;
         }
         &.disabled .page-link {
@@ -74,10 +74,10 @@
     }
     .progress {
       grid-area: progress;
-      border: 2px var(--purple-clr_600) solid;
+      border: 2px var(--primary-clr_600) solid;
     }
     .progress-bar {
-      background-color: var(--active-clr_500);
+      background-color: var(--primary-clr_500);
     }
     .level {
       grid-area: level;
@@ -96,7 +96,7 @@
       grid-area: level;
     }
     .petname {
-      background: var(--active-clr_200);
+      background: var(--primary-clr_200);
       color: var(--black);
     }
   }
@@ -148,7 +148,7 @@
     place-content: center;
     place-items: center;
     z-index: 10;
-    border: 2px var(--purple-clr_500) solid;
+    border: 2px var(--primary-clr_500) solid;
     border-radius: 0 15px 15px 15px;
     opacity: 1;
     button {
@@ -227,10 +227,10 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
 
 .logs-table-body {
   .logs-table-row {
-    background-color: var(--purple-clr_100);
+    background-color: var(--primary-clr_100);
     padding: 0 15px;
     &:nth-child(odd) {
-      background-color: var(--purple-clr_50);
+      background-color: var(--primary-clr_50);
     }
     &:nth-child(1) {
       padding: 5px 15px;
@@ -259,13 +259,13 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
     margin: 0;
   }
   .comment_replies {
-    border-left: 4px var(--purple-clr_500) dotted;
+    border-left: 4px var(--primary-clr_500) dotted;
     margin-left: 3cqw;
     padding-left: 2cqw;
     width: calc(100% - 3cqw);
   }
   .border-top {
-    border-top: 2px dashed color-mix(in srgb, var(--purple-clr_400) 80%, transparent);
+    border-top: 2px dashed color-mix(in srgb, var(--primary-clr_400) 80%, transparent);
   }
 }
 
@@ -288,7 +288,7 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
     right: 10px;
     z-index: 1;
     font-size: 2em;
-    color: var(--purple-clr_700);
+    color: var(--primary-clr_700);
     cursor: grab;
   }
 }
@@ -297,7 +297,7 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
   display: grid;
   place-content: center;
   &.active {
-    border: 4px dashed var(--purple-clr_600);
+    border: 4px dashed var(--primary-clr_600);
     border-radius: 15px;
   }
   .img-thumbnail {

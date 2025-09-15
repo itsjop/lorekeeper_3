@@ -1615,11 +1615,11 @@ pre code {
 .table th {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 2px solid var(--purple-clr_600);
+  border-top: 2px solid var(--primary-clr_600);
 }
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 2px solid var(--purple-clr_600);
+  border-bottom: 2px solid var(--primary-clr_600);
 }
 .table tbody + tbody {
   border-top: 2px solid #dee2e6;

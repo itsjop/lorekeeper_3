@@ -40,8 +40,8 @@
               width:70px;
               height:70px;
               border-radius:50%;
-              border: 2px solid var(--purple-clr_500);
-              background: var(--purple-clr_100);"
+              border: 2px solid var(--primary-clr_500);
+              background: var(--primary-clr_100);"
               alt="{{ $comment->commenter->name }} Avatar"
             >
           @endif

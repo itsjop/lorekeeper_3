@@ -14,7 +14,7 @@
     <h2>The following website settings are <u>saved to your browser only</u> and are <u>not</u> synced to your user account.</h2>
     <p>You should only need to set them once per device, but account synching will come later. Thanks!</p>
     <hr>
-    <div class="setting-group">
+    {{-- <div class="setting-group">
       <div class="flex gap-1">
 
         <label class="m-0" for="site-theme">
@@ -27,10 +27,11 @@
         >
           <option value="light"> Light Theme </option>
           <option value="dark"> Dark Theme </option>
+          <option value="system"> Match System Theme </option>
         </select>
       </div>
       <hr>
-    </div>
+    </div> --}}
     <div class="setting-group">
       <h2>Site Graphical Features:</h2>
       <div class="setting backdrop-blur">

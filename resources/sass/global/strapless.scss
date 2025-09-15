@@ -38,18 +38,18 @@
   .btn-block,
   .btn-dark,
   .btn-link {
-    background: var(--purple-clr_400);
+    background: var(--primary-clr_400);
     color: var(--white);
     font-weight: 500;
     transition: 0.2s ease;
     margin: 5px;
     &:hover, &:active {
-      background: var(--teal-clr_400);
+      background: var(--secondary-clr_400);
     }
   }
 
   .btn-light {
-    background: var(--teal-clr_300);
+    background: var(--secondary-clr_300);
     color: var(--white);
     font-style: normal;
     font-weight: 500;
@@ -60,20 +60,20 @@
   }
 
   .toggle-handle.btn.btn-light {
-    background: var(--teal-clr_100);
+    background: var(--secondary-clr_100);
   }
 
   .btn-outline-info,
   .btn-info {
     font-family: 'Baloo 2', sans-serif;
     background: #6ebff2;
-    background: var(--teal-clr_400);
+    background: var(--secondary-clr_400);
     color: var(--white);
     font-style: normal;
     font-weight: 500;
     transition: 0.2s ease;
     &:hover, &:active {
-      background: var(--purple-clr_500);
+      background: var(--primary-clr_500);
     }
   }
 
@@ -88,13 +88,13 @@
     }
   }
   .notifications-table .unread {
-    background-color: var(--purple-clr_100);
+    background-color: var(--primary-clr_100);
   }
 
   .badge-secondary {
-    background-color: var(--purple-clr_300);
+    background-color: var(--primary-clr_300);
     &:hover, &:active {
-      background-color: var(--purple-clr_400);
+      background-color: var(--primary-clr_400);
     }
   }
   .badge-danger {
@@ -110,7 +110,7 @@
     }
   }
   .badge-dark {
-    background-color: var(--active-clr_800);
+    background-color: var(--primary-clr_800);
   }
   // .btn-warning:not(:disabled):not(.disabled).active:focus,
 

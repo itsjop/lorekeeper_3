@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler {
     public function render($request, Throwable $exception) {
         if ($exception instanceof ThrottleRequestsException) {
             Log::channel('too_many_attempts')->warning('Too many attempts: ', ['user' => $request->user()->name, 'parameters' => $request->all()]);
-            flash('Oops! You\'ve clicked too quickly and activated anti-spam measures. Your action may have still worked as intended though, please check to see if it did before retrying.')->warning();
+            flash('Oops! You\'ve clicked too quickly and activated anti-spam measures. Try again in a couple seconds if you didn\'t get your reward!')->warning();
             return redirect()->back();
         }
         return parent::render($request, $exception);

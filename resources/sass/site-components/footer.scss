@@ -24,7 +24,7 @@
         align-items: center;
         &:first-of-type::before,
         &::after {
-          color: var(--purple-clr_300);
+          color: var(--primary-clr_300);
           margin: 0 10px;
         }
         &:first-of-type::before {
@@ -41,13 +41,13 @@
       .copyright {
         grid-area: credit;
         font-size: 0.8em;
-        color: var(--purple-clr_300);
+        color: var(--primary-clr_300);
       }
       #backToTop {
         grid-area: top;
         border-radius: 50px;
-        color: var(--purple-clr_100);
-        background-color: var(--purple-clr_400);
+        color: var(--primary-clr_100);
+        background-color: var(--primary-clr_400);
         width: 2rem;
         height: 2rem;
         cursor: pointer;

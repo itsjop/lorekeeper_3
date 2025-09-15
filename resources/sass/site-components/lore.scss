@@ -15,7 +15,7 @@
       font-family: 'Fredoka';
       font-size: 2.5em;
       font-weight: 700;
-      color: var(--purple-clr_800);
+      color: var(--primary-clr_800);
       text-transform: none;
     }
     h1 {
@@ -57,7 +57,7 @@
       font-family: 'Baloo 2';
       font-size: 1em;
       font-weight: 600;
-      color: var(--purple-clr_800);
+      color: var(--primary-clr_800);
       text-transform: none;
       &.caption {
         font-size: 0.8em;
@@ -101,7 +101,7 @@
           &::marker {
             content: '✦  ';
             font-size: 1rem;
-            color: var(--purple-clr_700);
+            color: var(--primary-clr_700);
           }
         }
       }
@@ -115,12 +115,12 @@
 
     .speech-avatar {
       margin-top: 10px;
-      filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent))
-        drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+      filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent))
+        drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
     }
 
     .speech-name {
-      box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+      box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
       border-radius: 10px;
       padding: 5px 8px;
       width: max-content;
@@ -164,7 +164,7 @@
     }
 
     .speech-text {
-      box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+      box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
       background: rgba(250, 246, 255, 0.514);
       margin: 0 auto;
       width: 100%;
@@ -182,7 +182,7 @@
 
     .card {
       margin: 15px 25px 10px 25px;
-      box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+      box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
       background: rgba(255, 255, 255, 0.266);
       border-radius: 15px;
       &:not(:has(.card-header)) {

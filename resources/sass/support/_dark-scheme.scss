@@ -4,7 +4,7 @@
       background-image: url('images/somnivores/reveriefullres_dark.webp');
     }
     #site-logo-header picture {
-      filter: drop-shadow(0 -10px 10px color-mix(in srgb, var(--purple-clr_700) 30%, transparent));
+      filter: drop-shadow(0 -10px 10px color-mix(in srgb, var(--primary-clr_700) 30%, transparent));
       &::after {
         background-image: url('images/somnivores/logo_raw_dark.webp');
         filter: brightness(150%) opacity(0.8);

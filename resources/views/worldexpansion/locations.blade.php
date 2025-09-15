@@ -14,7 +14,7 @@
       alt="Map of Reverie"
       class="w-100 br-15 mb-4"
       style="max-width: 1000px;
-        filter: drop-shadow(0 10px 10px color-mix(in srgb, var(--purple-clr_700) 30%, transparent));
+        filter: drop-shadow(0 10px 10px color-mix(in srgb, var(--primary-clr_700) 30%, transparent));
       "
     />
   </div>

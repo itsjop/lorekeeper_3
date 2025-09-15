@@ -4,7 +4,7 @@
   font-weight: 500;
   font-optical-sizing: auto;
   font-style: normal;
-  color: var(--purple-clr_950);
+  color: var(--primary-clr_950);
   display: grid;
   justify-items: center;
   justify-content: center;
@@ -79,6 +79,12 @@
       height: 100dvh;
       top: 0;
       left: 0;
+      @media (prefers-color-scheme: light) {
+        background-image: url('images/somnivores/reveriefullres.webp');
+      }
+      @media (prefers-color-scheme: dark) {
+        background-image: url('images/somnivores/reveriefullres_dark.webp');
+      }
       // background-image: url('/images/somnivores/reveriefullres.webp');
       // --site-bg-dark: url('images/somnivores/reveriefullres_dark.webp');
       // --site-bg-lite: url('images/somnivores/reveriefullres.webp');

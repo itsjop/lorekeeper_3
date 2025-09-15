@@ -36,7 +36,7 @@
       font-size: 1.3em;
       // margin-top: 10px;
       a {
-        color: var(--purple-clr_700);
+        color: var(--primary-clr_700);
       }
     }
     .badge {
@@ -77,7 +77,7 @@
   height: 100%;
   position: relative;
   contain: paint;
-  --card_background-color: var(--purple-clr_100);
+  --card_background-color: var(--primary-clr_100);
   --card_star_opacity: 1;
   --card_star_animation-duration: 10s;
   --card_star_blend-mode: normal;

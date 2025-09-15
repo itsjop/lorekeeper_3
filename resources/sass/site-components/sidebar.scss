@@ -14,14 +14,14 @@
   }
   #sidebar {
     .sidebar-header {
-      @include body-bg(0.7, var(--purple-clr_700));
+      @include body-bg(0.7, var(--primary-clr_700));
       @include header-top;
       border-radius: 15px 15px 0 0;
       padding: 5px;
       a {
         font-weight: 600;
         font-size: 1.1em;
-        color: var(--purple-clr_100);
+        color: var(--primary-clr_100);
         &:hover {
           background-color: transparent !important;
           color: inherit !important;
@@ -44,32 +44,32 @@
         font-size: 1em;
         overflow: clip;
         border-width: 0 2px;
-        border-bottom: 0px solid var(--purple-clr_600);
+        border-bottom: 0px solid var(--primary-clr_600);
         transition: 0.3s;
         border-radius: 0;
         &:first-of-type {
-          border-bottom: 0px solid var(--purple-clr_600);
+          border-bottom: 0px solid var(--primary-clr_600);
           border-radius: 0 0 15px 15px;
         }
         &:last-of-type {
-          border-bottom: 2px solid var(--purple-clr_600);
+          border-bottom: 2px solid var(--primary-clr_600);
           border-radius: 0 0 15px 15px;
         }
         .sb-item {
           display: flex;
           align-items: center;
-          background-color: var(--purple-clr_50);
+          background-color: var(--primary-clr_50);
           &:nth-of-type(even) {
-            background-color: color-mix(in srgb, var(--purple-clr_100) 100%, transparent);
+            background-color: color-mix(in srgb, var(--primary-clr_100) 100%, transparent);
             a {
-              color: var(--purple-clr_600);
+              color: var(--primary-clr_600);
             }
           }
           display: flex;
           justify-content: center;
           font-size: 1rem;
           a {
-            color: var(--purple-clr_500);
+            color: var(--primary-clr_500);
             padding: 3px 0;
             text-align: start;
             padding: 3px 10px 3px 20px;
@@ -89,19 +89,19 @@
             }
             &:hover,
             &:active {
-              background-color: var(--purple-clr_300);
+              background-color: var(--primary-clr_300);
               transform: translateX(15px);
-              color: var(--purple-clr_800);
+              color: var(--primary-clr_800);
               border-radius: 7px 0 0 7px;
             }
           }
           &:has(a.active) {
             min-height: 2rem;
-            background-color: var(--purple-clr_400);
+            background-color: var(--primary-clr_400);
             a {
               &:hover,
               &:active {
-                background-color: var(--purple-clr_400);
+                background-color: var(--primary-clr_400);
                 color: var(--white);
               }
             }
@@ -109,12 +109,12 @@
         }
         summary {
           font-weight: 500;
-          color: var(--purple-clr_900);
+          color: var(--primary-clr_900);
           font-weight: 500;
           position: relative;
           text-align: center;
           padding: 5px 0;
-          background-color: color-mix(in srgb, var(--purple-clr_500) 80%, transparent);
+          background-color: color-mix(in srgb, var(--primary-clr_500) 80%, transparent);
           color: var(--white);
           backdrop-filter: blur(var(--var_backdrop-blur));
           padding: 5px 20px;
@@ -135,7 +135,7 @@
             display: inline-block;
             width: 0.7em;
             height: 0.7em;
-            background-color: var(--purple-clr_100);
+            background-color: var(--primary-clr_100);
             transform: rotate(0deg);
             clip-path: polygon(0 0, 0% 100%, 100% 50%);
             transform-origin: 50%;
@@ -144,14 +144,14 @@
         }
         // Toggled on
         &[data-open] {
-          border-bottom: 0px solid var(--purple-clr_600);
+          border-bottom: 0px solid var(--primary-clr_600);
           max-height: unset;
           margin: 10px 0 10px;
           border-radius: 15px;
-          box-shadow: 0 5px 3px color-mix(in srgb, var(--purple-clr_700) 20%, transparent);
+          box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_700) 20%, transparent);
           summary {
             &::after {
-              background-color: var(--purple-clr_100);
+              background-color: var(--primary-clr_100);
               transform: rotate(90deg);
             }
           }
@@ -188,7 +188,7 @@
     color: color-mix(in srgb, var(--black) 70%, transparent);
     &:hover,
     &:active {
-      color: var(--purple-clr_900);
+      color: var(--primary-clr_900);
     }
     &:hover,
     &:active,
@@ -205,11 +205,11 @@
     color: var(--white);
     a {
       font-size: 0.8em;
-      color: var(--purple-clr_50);
+      color: var(--primary-clr_50);
       &:hover,
       &:active {
-        background-color: var(--purple-clr_300);
-        color: var(--purple-clr_50);
+        background-color: var(--primary-clr_300);
+        color: var(--primary-clr_50);
       }
     }
   }
@@ -249,7 +249,7 @@
             padding: 3px 6px;
             &:hover,
             &:active {
-              background-color: var(--purple-clr_300);
+              background-color: var(--primary-clr_300);
             }
           }
           padding: 0;
@@ -257,7 +257,7 @@
           border: solid 2px transparent;
           &:hover,
           &:active {
-            border: solid 2px var(--purple-clr_900);
+            border: solid 2px var(--primary-clr_900);
           }
         }
       }
@@ -267,9 +267,9 @@
         padding-top: 30px;
         padding-left: 0px;
         .sb-item {
-          background-color: var(--purple-clr_bgtext);
+          background-color: var(--primary-clr_bgtext);
           border-radius: 0;
-          border: 0px solid var(--purple-clr_100);
+          border: 0px solid var(--primary-clr_100);
           border-bottom-width: 1px;
           padding: 0em 0;
           box-shadow: none;
@@ -285,7 +285,7 @@
 // FEATURED CHARACTER
 .featured-character {
   .sidebar-header {
-    background-color: var(--purple-clr_600);
+    background-color: var(--primary-clr_600);
   }
   .details-sb {
     display: grid;
@@ -415,7 +415,7 @@
         position: absolute;
         width: calc(0.8 * var(--sidebar-width));
         height: calc(0.8 * var(--sidebar-width));
-        background-color: var(--purple-clr_300);
+        background-color: var(--primary-clr_300);
         mix-blend-mode: soft-light;
       }
     }
@@ -424,7 +424,7 @@
       grid-area: name;
       &:hover,
       &:active {
-        color: var(--teal-clr_500);
+        color: var(--secondary-clr_500);
       }
     }
     .display-user {
@@ -512,7 +512,7 @@
         background: unset;
         box-shadow: unset;
         background-color: transparent;
-        color: var(--purple-clr_800);
+        color: var(--primary-clr_800);
         backdrop-filter: unset;
         font-family: 'Itim';
         font-weight: 600;

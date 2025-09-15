@@ -22,18 +22,8 @@ html {
   --var_transition_timing: initial;
 }
 
-#app.light {
-  color-scheme: light;
-}
-#app.light #site-wrapper .site-background {
-  background-image: url("images/somnivores/reveriefullres.webp");
-}
-
-#app.dark {
-  color-scheme: dark;
-}
-#app.dark #site-wrapper .site-background {
-  background-image: url("images/somnivores/reveriefullres_dark.webp");
+:root {
+  color-scheme: light dark;
 }
 
 .app {
@@ -94,73 +84,35 @@ html {
   --clr_raw_teal-800: #114b7b;
   --clr_raw_teal-900: #143566;
   --clr_raw_teal-950: #0d3244;
-  --purple-clr_25: light-dark(var(--clr_raw_purple-25), var(--clr_raw_purple-950));
-  --purple-clr_50: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
-  --purple-clr_100: light-dark(var(--clr_raw_purple-100), var(--clr_raw_purple-900));
-  --purple-clr_200: light-dark(var(--clr_raw_purple-200), var(--clr_raw_purple-800));
-  --purple-clr_300: light-dark(var(--clr_raw_purple-300), var(--clr_raw_purple-700));
-  --purple-clr_400: light-dark(var(--clr_raw_purple-400), var(--clr_raw_purple-600));
-  --purple-clr_500: light-dark(var(--clr_raw_purple-500), var(--clr_raw_purple-500));
-  --purple-clr_600: light-dark(var(--clr_raw_purple-600), var(--clr_raw_purple-400));
-  --purple-clr_700: light-dark(var(--clr_raw_purple-700), var(--clr_raw_purple-300));
-  --purple-clr_800: light-dark(var(--clr_raw_purple-800), var(--clr_raw_purple-200));
-  --purple-clr_900: light-dark(var(--clr_raw_purple-900), var(--clr_raw_purple-100));
-  --purple-clr_950: light-dark(var(--clr_raw_purple-950), var(--clr_raw_purple-50));
-  --teal-clr_50: light-dark(var(--clr_raw_teal-50), var(--clr_raw_teal-950));
-  --teal-clr_100: light-dark(var(--clr_raw_teal-100), var(--clr_raw_teal-900));
-  --teal-clr_200: light-dark(var(--clr_raw_teal-200), var(--clr_raw_teal-800));
-  --teal-clr_300: light-dark(var(--clr_raw_teal-300), var(--clr_raw_teal-700));
-  --teal-clr_400: light-dark(var(--clr_raw_teal-400), var(--clr_raw_teal-600));
-  --teal-clr_500: light-dark(var(--clr_raw_teal-500), var(--clr_raw_teal-500));
-  --teal-clr_600: light-dark(var(--clr_raw_teal-600), var(--clr_raw_teal-400));
-  --teal-clr_700: light-dark(var(--clr_raw_teal-700), var(--clr_raw_teal-300));
-  --teal-clr_800: light-dark(var(--clr_raw_teal-800), var(--clr_raw_teal-200));
-  --teal-clr_900: light-dark(var(--clr_raw_teal-900), var(--clr_raw_teal-100));
-  --teal-clr_950: light-dark(var(--clr_raw_teal-950), var(--clr_raw_teal-50));
-  --purple-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
-  --teal-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
-  --active-clr_25: var(--purple-clr_25);
-  --active-clr_50: var(--purple-clr_50);
-  --active-clr_100: var(--purple-clr_100);
-  --active-clr_200: var(--purple-clr_200);
-  --active-clr_300: var(--purple-clr_300);
-  --active-clr_400: var(--purple-clr_400);
-  --active-clr_500: var(--purple-clr_500);
-  --active-clr_600: var(--purple-clr_600);
-  --active-clr_700: var(--purple-clr_700);
-  --active-clr_800: var(--purple-clr_800);
-  --active-clr_900: var(--purple-clr_900);
-  --active-clr_950: var(--purple-clr_950);
-  --black: var(--active-clr_900);
-  --white: var(--active-clr_50);
+  --primary-clr_25: light-dark(var(--clr_raw_purple-25), var(--clr_raw_purple-950));
+  --primary-clr_50: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
+  --primary-clr_100: light-dark(var(--clr_raw_purple-100), var(--clr_raw_purple-900));
+  --primary-clr_200: light-dark(var(--clr_raw_purple-200), var(--clr_raw_purple-800));
+  --primary-clr_300: light-dark(var(--clr_raw_purple-300), var(--clr_raw_purple-700));
+  --primary-clr_400: light-dark(var(--clr_raw_purple-400), var(--clr_raw_purple-600));
+  --primary-clr_500: light-dark(var(--clr_raw_purple-500), var(--clr_raw_purple-500));
+  --primary-clr_600: light-dark(var(--clr_raw_purple-600), var(--clr_raw_purple-400));
+  --primary-clr_700: light-dark(var(--clr_raw_purple-700), var(--clr_raw_purple-300));
+  --primary-clr_800: light-dark(var(--clr_raw_purple-800), var(--clr_raw_purple-200));
+  --primary-clr_900: light-dark(var(--clr_raw_purple-900), var(--clr_raw_purple-100));
+  --primary-clr_950: light-dark(var(--clr_raw_purple-950), var(--clr_raw_purple-50));
+  --secondary-clr_50: light-dark(var(--clr_raw_teal-50), var(--clr_raw_teal-950));
+  --secondary-clr_100: light-dark(var(--clr_raw_teal-100), var(--clr_raw_teal-900));
+  --secondary-clr_200: light-dark(var(--clr_raw_teal-200), var(--clr_raw_teal-800));
+  --secondary-clr_300: light-dark(var(--clr_raw_teal-300), var(--clr_raw_teal-700));
+  --secondary-clr_400: light-dark(var(--clr_raw_teal-400), var(--clr_raw_teal-600));
+  --secondary-clr_500: light-dark(var(--clr_raw_teal-500), var(--clr_raw_teal-500));
+  --secondary-clr_600: light-dark(var(--clr_raw_teal-600), var(--clr_raw_teal-400));
+  --secondary-clr_700: light-dark(var(--clr_raw_teal-700), var(--clr_raw_teal-300));
+  --secondary-clr_800: light-dark(var(--clr_raw_teal-800), var(--clr_raw_teal-200));
+  --secondary-clr_900: light-dark(var(--clr_raw_teal-900), var(--clr_raw_teal-100));
+  --secondary-clr_950: light-dark(var(--clr_raw_teal-950), var(--clr_raw_teal-50));
+  --primary-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
+  --secondary-clr_bgtext: light-dark(var(--clr_raw_purple-50), var(--clr_raw_purple-950));
+  --black: var(--primary-clr_900);
+  --white: var(--primary-clr_50);
   --purewhite: light-dark(#fff, #000);
-  --body-color: var(--active-clr_50);
-}
-.app.purple {
-  --active-clr_50: var(--purple-clr_50);
-  --active-clr_100: var(--purple-clr_100);
-  --active-clr_200: var(--purple-clr_200);
-  --active-clr_300: var(--purple-clr_300);
-  --active-clr_400: var(--purple-clr_400);
-  --active-clr_500: var(--purple-clr_500);
-  --active-clr_600: var(--purple-clr_600);
-  --active-clr_700: var(--purple-clr_700);
-  --active-clr_800: var(--purple-clr_800);
-  --active-clr_900: var(--purple-clr_900);
-  --active-clr_950: var(--purple-clr_950);
-}
-.app.teal {
-  --active-clr_50: var(--teal-clr_50);
-  --active-clr_100: var(--teal-clr_100);
-  --active-clr_200: var(--teal-clr_200);
-  --active-clr_300: var(--teal-clr_300);
-  --active-clr_400: var(--teal-clr_400);
-  --active-clr_500: var(--teal-clr_500);
-  --active-clr_600: var(--teal-clr_600);
-  --active-clr_700: var(--teal-clr_700);
-  --active-clr_800: var(--teal-clr_800);
-  --active-clr_900: var(--teal-clr_900);
-  --active-clr_950: var(--teal-clr_950);
+  --body-color: var(--primary-clr_50);
 }
 
 /* prettier-ignore */
@@ -712,31 +664,31 @@ html {
   animation-play-state: paused;
 }
 #app .text-100 {
-  color: var(--active-clr_100);
+  color: var(--primary-clr_100);
 }
 #app .text-200 {
-  color: var(--active-clr_200);
+  color: var(--primary-clr_200);
 }
 #app .text-300 {
-  color: var(--active-clr_300);
+  color: var(--primary-clr_300);
 }
 #app .text-400 {
-  color: var(--active-clr_400);
+  color: var(--primary-clr_400);
 }
 #app .text-500 {
-  color: var(--active-clr_500);
+  color: var(--primary-clr_500);
 }
 #app .text-600 {
-  color: var(--active-clr_600);
+  color: var(--primary-clr_600);
 }
 #app .text-700 {
-  color: var(--active-clr_700);
+  color: var(--primary-clr_700);
 }
 #app .text-800 {
-  color: var(--active-clr_800);
+  color: var(--primary-clr_800);
 }
 #app .text-900 {
-  color: var(--active-clr_900);
+  color: var(--primary-clr_900);
 }
 @container main-container (600px < width < 700px) {
   #app .grid-clip.grid-4-col > *:nth-last-child(1):nth-child(3n+1),
@@ -769,10 +721,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .hover-preview:hover, .hover-preview:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .hover-preview:hover, .hover-preview:active {
@@ -852,7 +804,7 @@ body {
 #app .btn-block,
 #app .btn-dark,
 #app .btn-link {
-  background: var(--purple-clr_400);
+  background: var(--primary-clr_400);
   color: var(--white);
   font-weight: 500;
   transition: 0.2s ease;
@@ -883,10 +835,10 @@ body {
 #app .btn-dark:active,
 #app .btn-link:hover,
 #app .btn-link:active {
-  background: var(--teal-clr_400);
+  background: var(--secondary-clr_400);
 }
 #app .btn-light {
-  background: var(--teal-clr_300);
+  background: var(--secondary-clr_300);
   color: var(--white);
   font-style: normal;
   font-weight: 500;
@@ -896,13 +848,13 @@ body {
   background: #429bd3;
 }
 #app .toggle-handle.btn.btn-light {
-  background: var(--teal-clr_100);
+  background: var(--secondary-clr_100);
 }
 #app .btn-outline-info,
 #app .btn-info {
   font-family: "Baloo 2", sans-serif;
   background: #6ebff2;
-  background: var(--teal-clr_400);
+  background: var(--secondary-clr_400);
   color: var(--white);
   font-style: normal;
   font-weight: 500;
@@ -911,7 +863,7 @@ body {
 #app .btn-outline-info:hover, #app .btn-outline-info:active,
 #app .btn-info:hover,
 #app .btn-info:active {
-  background: var(--purple-clr_500);
+  background: var(--primary-clr_500);
 }
 #app .btn-danger,
 #app .btn-outline-danger {
@@ -926,13 +878,13 @@ body {
   background: #a51752;
 }
 #app .notifications-table .unread {
-  background-color: var(--purple-clr_100);
+  background-color: var(--primary-clr_100);
 }
 #app .badge-secondary {
-  background-color: var(--purple-clr_300);
+  background-color: var(--primary-clr_300);
 }
 #app .badge-secondary:hover, #app .badge-secondary:active {
-  background-color: var(--purple-clr_400);
+  background-color: var(--primary-clr_400);
 }
 #app .badge-danger {
   background-color: var(--danger);
@@ -947,7 +899,7 @@ body {
   background-color: var(--success_hover);
 }
 #app .badge-dark {
-  background-color: var(--active-clr_800);
+  background-color: var(--primary-clr_800);
 }
 
 .app h1,
@@ -955,14 +907,14 @@ body {
   font-family: "Sour Gummy", sans-serif, system-ui;
   font-size: 2rem;
   font-weight: 600;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
 }
 .app h2,
 .app .h2 {
   font-family: "Itim", sans-serif, system-ui;
   font-weight: 800;
   text-transform: lowercase;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   font-size: 1.6rem;
   font-style: strong;
 }
@@ -970,44 +922,44 @@ body {
 .app .h3 {
   font-family: "Itim", sans-serif, system-ui;
   font-weight: 700;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   font-size: 1.5rem;
 }
 .app h4,
 .app .h4 {
   font-family: "Sour Gummy", sans-serif, system-ui;
   font-weight: 700;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   font-size: 1.4rem;
 }
 .app h5,
 .app .h5 {
   font-family: "Itim", sans-serif, system-ui;
   font-weight: 700;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   font-size: 1.3rem;
 }
 .app h6,
 .app .h6 {
   font-family: "Baloo 2", sans-serif, system-ui;
   font-weight: 700;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   font-size: 1.2rem;
 }
 .app a,
 .app .a {
-  color: var(--purple-clr_600);
+  color: var(--primary-clr_600);
   text-decoration: none;
 }
 .app a:hover, .app a:active,
 .app .a:hover,
 .app .a:active {
-  color: var(--teal-clr_500);
+  color: var(--secondary-clr_500);
   text-decoration: none;
 }
 .app p,
 .app li {
-  color: var(--purple-clr_900);
+  color: var(--primary-clr_900);
   font-weight: 500;
 }
 .app span {
@@ -1033,8 +985,8 @@ body {
 .app .selectize-control,
 .app .selectize-input {
   border: 1px solid var(--white);
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
-  background-color: var(--active-clr_25);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
+  background-color: var(--primary-clr_25);
 }
 .app i {
   display: inline-flex;
@@ -1055,32 +1007,32 @@ body {
   border-radius: 10px;
 }
 .app .alert {
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--purple-clr_600));
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600));
   color: var(--black);
 }
 .app .alert.alert-primary {
-  background: var(--purple-clr_100);
+  background: var(--primary-clr_100);
 }
 .app .alert.alert-secondary {
-  background: var(--purple-clr_50);
+  background: var(--primary-clr_50);
 }
 .app .alert.alert-success {
   background: var(--success);
 }
 .app .table .thead-light th {
-  background: var(--purple-clr_100);
+  background: var(--primary-clr_100);
   border: none;
 }
 .app .small,
 .app small {
   font-weight: 600;
-  color: var(--purple-clr_700);
+  color: var(--primary-clr_700);
 }
 .app .help-icon {
-  color: var(--purple-clr_400);
+  color: var(--primary-clr_400);
 }
 .app .help-icon:hover, .app .help-icon:active {
-  color: var(--teal-clr_400);
+  color: var(--secondary-clr_400);
 }
 .app .badge-success,
 .app .badge-danger {
@@ -1096,7 +1048,7 @@ body {
 }
 .app .card-basic,
 .app .card-full {
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
   background: rgba(250, 246, 255, 0.514);
   margin: 0 auto;
   margin-top: 10px;
@@ -1118,18 +1070,18 @@ body {
 .app .card-full ul li::marker {
   content: "✦  ";
   font-size: 1rem;
-  color: var(--purple-clr_700);
+  color: var(--primary-clr_700);
 }
 .app .card-basic .card-header,
 .app .card-full .card-header {
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   border-radius: 15px 15px 0 0;
   padding: 5px;
   font-size: 1.15em;
   text-align: center;
-  color: var(--purple-clr_50);
+  color: var(--primary-clr_50);
   margin: -30px -30px 0 -30px;
   font-family: "Sour Gummy", sans-serif, system-ui;
   font-size: 1.8rem;
@@ -1141,7 +1093,7 @@ body {
   gap: 1rem 15px;
 }
 .app .mini-card {
-  border: 3px solid var(--purple-clr_200);
+  border: 3px solid var(--primary-clr_200);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.1960784314);
   max-width: 450px;
@@ -1203,7 +1155,7 @@ body {
   font-weight: 500;
   font-optical-sizing: auto;
   font-style: normal;
-  color: var(--purple-clr_950);
+  color: var(--primary-clr_950);
   display: grid;
   justify-items: center;
   justify-content: center;
@@ -1253,7 +1205,7 @@ body {
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -1272,6 +1224,16 @@ body {
   top: 0;
   left: 0;
   background-size: cover;
+}
+@media (prefers-color-scheme: light) {
+  #app #site-wrapper .site-background {
+    background-image: url("images/somnivores/reveriefullres.webp");
+  }
+}
+@media (prefers-color-scheme: dark) {
+  #app #site-wrapper .site-background {
+    background-image: url("images/somnivores/reveriefullres_dark.webp");
+  }
 }
 
 /* Desktop Only */
@@ -1603,7 +1565,7 @@ body {
   width: calc(100% - 20px);
   grid-area: thumb;
   place-self: center;
-  background-color: var(--active-clr_50);
+  background-color: var(--primary-clr_50);
   border-radius: 15px;
   display: grid;
   z-index: 2;
@@ -1648,10 +1610,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .masterlist-character .thumbnail .ml-thumbnail img:hover, .masterlist-character .thumbnail .ml-thumbnail img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .masterlist-character .thumbnail .ml-thumbnail img:hover, .masterlist-character .thumbnail .ml-thumbnail img:active {
@@ -1983,8 +1945,8 @@ body {
   --bc_chevron-width: 20px;
   --bc_chevron-size: 10px;
   position: relative;
-  --bc-bg: var(--purple-clr_500);
-  --bc-col: var(--purple-clr_100);
+  --bc-bg: var(--primary-clr_500);
+  --bc-col: var(--primary-clr_100);
   display: flex;
   padding: 0 10px 0 20px;
   --bc-clip: polygon(
@@ -2002,16 +1964,16 @@ body {
   z-index: 1;
 }
 .app .breadcrumb .breadcrumb-item:nth-of-type(1) {
-  --bc-bg: var(--purple-clr_600);
-  --bc-col: var(--purple-clr_100);
+  --bc-bg: var(--primary-clr_600);
+  --bc-col: var(--primary-clr_100);
 }
 .app .breadcrumb .breadcrumb-item:nth-of-type(2) {
-  --bc-bg: var(--purple-clr_500);
-  --bc-col: var(--purple-clr_100);
+  --bc-bg: var(--primary-clr_500);
+  --bc-col: var(--primary-clr_100);
 }
 .app .breadcrumb .breadcrumb-item.active {
-  --bc-bg: var(--purple-clr_300);
-  --bc-col: var(--purple-clr_700);
+  --bc-bg: var(--primary-clr_300);
+  --bc-col: var(--primary-clr_700);
 }
 .app .breadcrumb .breadcrumb-item:first-of-type {
   --bc-clip: polygon(
@@ -2305,7 +2267,7 @@ body {
   border: 2px solid var(--white);
   color: var(--white);
   border-radius: 50vw;
-  background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
   padding: 5px 15px;
   max-width: 90%;
   justify-self: center;
@@ -2313,12 +2275,12 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  box-shadow: -2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent), 2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent);
+  box-shadow: -2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent), 2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent);
   display: flex;
   justify-content: center;
 }
 .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
-  box-shadow: -5px 10px 6px color-mix(in srgb, var(--active-clr_800) 10%, transparent), 5px 10px 6px color-mix(in srgb, var(--active-clr_800) 10%, transparent);
+  box-shadow: -5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 10%, transparent), 5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 10%, transparent);
 }
 @media (prefers-reduced-motion: reduce) {
   .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
@@ -2353,7 +2315,7 @@ body {
   display: grid;
   background: var(--white);
   background-color: color-mix(in srgb, var(--white) 80%, transparent);
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600) 40%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600) 40%, transparent);
   border-radius: 15px;
   width: 100%;
   justify-items: center;
@@ -2373,10 +2335,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 50%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 50%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 50%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 50%, transparent));
 }
 .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 37.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 37.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 37.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 37.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
@@ -2414,7 +2376,7 @@ body {
 }
 .home-dashboard .bubblebox .bubble.event .event-buttons .event-title {
   background-color: var(--white);
-  color: var(--purple-clr_600);
+  color: var(--primary-clr_600);
   border-radius: 100vw;
   font-weight: 600;
   padding: 5px 10px;
@@ -2459,10 +2421,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .home-dashboard .bubblebox .bubble.sale-info .img img:hover, .home-dashboard .bubblebox .bubble.sale-info .img img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .home-dashboard .bubblebox .bubble.sale-info .img img:hover, .home-dashboard .bubblebox .bubble.sale-info .img img:active {
@@ -2579,7 +2541,7 @@ body {
     max-width: 250px;
   }
   .sale-info .character-info {
-    background-color: color-mix(in srgb, var(--active-clr_500) 70%, transparent);
+    background-color: color-mix(in srgb, var(--primary-clr_500) 70%, transparent);
     display: grid;
     border-radius: 15px;
     min-width: 70%;
@@ -2694,12 +2656,12 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
   max-width: min(200px, 100%);
   aspect-ratio: 1/1;
 }
 .inventory-category .inventory-item .inventory-stack img:hover, .inventory-category .inventory-item .inventory-stack img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .inventory-category .inventory-item .inventory-stack img:hover, .inventory-category .inventory-item .inventory-stack img:active {
@@ -2734,7 +2696,7 @@ body {
   font-size: 1.3em;
 }
 .inventory-category .inventory-item .title a {
-  color: var(--purple-clr_700);
+  color: var(--primary-clr_700);
 }
 .inventory-category .inventory-item .badge {
   width: 100%;
@@ -2754,11 +2716,11 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
   cursor: pointer;
 }
 .inventory-category .inventory-item .badge img:hover, .inventory-category .inventory-item .badge img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .inventory-category .inventory-item .badge img:hover, .inventory-category .inventory-item .badge img:active {
@@ -2802,7 +2764,7 @@ body {
   height: 100%;
   position: relative;
   contain: paint;
-  --card_background-color: var(--purple-clr_100);
+  --card_background-color: var(--primary-clr_100);
   --card_star_opacity: 1;
   --card_star_animation-duration: 10s;
   --card_star_blend-mode: normal;
@@ -2909,7 +2871,7 @@ body {
   transition: filter 0.5s var(--bounce_linear), box-shadow 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), box-shadow 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  box-shadow: 0 min(10px, 0.5cqw) min(10px, 1.5cqw) 0px color-mix(in srgb, var(--active-clr_800) 30%, transparent);
+  box-shadow: 0 min(10px, 0.5cqw) min(10px, 1.5cqw) 0px color-mix(in srgb, var(--primary-clr_800) 30%, transparent);
   padding: 5px;
   height: -moz-min-content;
   height: min-content;
@@ -2923,7 +2885,7 @@ body {
 .app .gallery-recents .submission .img:hover,
 .app .gallery-all .submission .img:hover {
   transform: scale(1.1);
-  box-shadow: 0 5px 10px color-mix(in srgb, var(--active-clr_800) 40%, transparent);
+  box-shadow: 0 5px 10px color-mix(in srgb, var(--primary-clr_800) 40%, transparent);
   -webkit-backdrop-filter: saturate(2) blur(3px);
           backdrop-filter: saturate(2) blur(3px);
 }
@@ -2942,12 +2904,12 @@ body {
   box-shadow: unset;
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
-  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--active-clr_800) 30%, transparent));
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--primary-clr_800) 30%, transparent));
 }
 .app .gallery .submission .img.noborder:hover,
 .app .gallery-recents .submission .img.noborder:hover,
 .app .gallery-all .submission .img.noborder:hover {
-  filter: drop-shadow(0 10px 5px color-mix(in srgb, var(--active-clr_800) 20%, transparent));
+  filter: drop-shadow(0 10px 5px color-mix(in srgb, var(--primary-clr_800) 20%, transparent));
   transform: scale(1.1);
   box-shadow: unset;
   -webkit-backdrop-filter: none;
@@ -2993,7 +2955,7 @@ body {
   display: grid;
   place-items: center;
   grid-template-rows: 4em auto;
-  border: 3px solid var(--purple-clr_500);
+  border: 3px solid var(--primary-clr_500);
   border-radius: 15px;
 }
 .daily header {
@@ -3023,7 +2985,7 @@ body {
   place-items: center;
   place-content: center;
   border: 4px solid var(--clr_raw_purple-500);
-  background-color: var(--purple-clr_200);
+  background-color: var(--primary-clr_200);
   width: calc(100% - 20px);
   border-radius: 100vw;
   aspect-ratio: 1/1;
@@ -3037,10 +2999,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .daily .prizes .prize .prize-box img:hover, .daily .prizes .prize .prize-box img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .daily .prizes .prize .prize-box img:hover, .daily .prizes .prize .prize-box img:active {
@@ -3068,7 +3030,7 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 .daily.inactive {
-  border: 2px solid var(--purple-clr_700);
+  border: 2px solid var(--primary-clr_700);
   background-color: #988aa8;
 }
 .daily.inactive header h5 {
@@ -3093,10 +3055,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .hover-preview:hover, .hover-preview:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .hover-preview:hover, .hover-preview:active {
@@ -3150,28 +3112,28 @@ body {
 #app #site-wrapper #sidebar .sidebar-header {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
   -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
           backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   border-radius: 15px 15px 0 0;
   padding: 5px;
   font-size: 1.15em;
   text-align: center;
-  color: var(--purple-clr_50);
+  color: var(--primary-clr_50);
   border-radius: 15px 15px 0 0;
   padding: 5px;
 }
 #app #site-wrapper #sidebar .sidebar-header a {
   font-weight: 600;
   font-size: 1.1em;
-  color: var(--purple-clr_100);
+  color: var(--primary-clr_100);
 }
 #app #site-wrapper #sidebar .sidebar-header a:hover {
   background-color: transparent !important;
@@ -3194,34 +3156,34 @@ body {
   font-size: 1em;
   overflow: clip;
   border-width: 0 2px;
-  border-bottom: 0px solid var(--purple-clr_600);
+  border-bottom: 0px solid var(--primary-clr_600);
   transition: 0.3s;
   border-radius: 0;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb:first-of-type {
-  border-bottom: 0px solid var(--purple-clr_600);
+  border-bottom: 0px solid var(--primary-clr_600);
   border-radius: 0 0 15px 15px;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb:last-of-type {
-  border-bottom: 2px solid var(--purple-clr_600);
+  border-bottom: 2px solid var(--primary-clr_600);
   border-radius: 0 0 15px 15px;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item {
   display: flex;
   align-items: center;
-  background-color: var(--purple-clr_50);
+  background-color: var(--primary-clr_50);
   display: flex;
   justify-content: center;
   font-size: 1rem;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item:nth-of-type(even) {
-  background-color: color-mix(in srgb, var(--purple-clr_100) 100%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_100) 100%, transparent);
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item:nth-of-type(even) a {
-  color: var(--purple-clr_600);
+  color: var(--primary-clr_600);
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item a {
-  color: var(--purple-clr_500);
+  color: var(--primary-clr_500);
   padding: 3px 0;
   text-align: start;
   padding: 3px 10px 3px 20px;
@@ -3237,27 +3199,27 @@ body {
   padding: 3px 0;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item a:hover, #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item a:active {
-  background-color: var(--purple-clr_300);
+  background-color: var(--primary-clr_300);
   transform: translateX(15px);
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   border-radius: 7px 0 0 7px;
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item:has(a.active) {
   min-height: 2rem;
-  background-color: var(--purple-clr_400);
+  background-color: var(--primary-clr_400);
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item:has(a.active) a:hover, #app #site-wrapper #sidebar #sidebar-ul .details-sb .sb-item:has(a.active) a:active {
-  background-color: var(--purple-clr_400);
+  background-color: var(--primary-clr_400);
   color: var(--white);
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb summary {
   font-weight: 500;
-  color: var(--purple-clr_900);
+  color: var(--primary-clr_900);
   font-weight: 500;
   position: relative;
   text-align: center;
   padding: 5px 0;
-  background-color: color-mix(in srgb, var(--purple-clr_500) 80%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_500) 80%, transparent);
   color: var(--white);
   -webkit-backdrop-filter: blur(var(--var_backdrop-blur));
           backdrop-filter: blur(var(--var_backdrop-blur));
@@ -3279,21 +3241,21 @@ body {
   display: inline-block;
   width: 0.7em;
   height: 0.7em;
-  background-color: var(--purple-clr_100);
+  background-color: var(--primary-clr_100);
   transform: rotate(0deg);
   clip-path: polygon(0 0, 0% 100%, 100% 50%);
   transform-origin: 50%;
   transition: 0.2s var(--smoothIn_linear);
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb[data-open] {
-  border-bottom: 0px solid var(--purple-clr_600);
+  border-bottom: 0px solid var(--primary-clr_600);
   max-height: unset;
   margin: 10px 0 10px;
   border-radius: 15px;
-  box-shadow: 0 5px 3px color-mix(in srgb, var(--purple-clr_700) 20%, transparent);
+  box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_700) 20%, transparent);
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb[data-open] summary::after {
-  background-color: var(--purple-clr_100);
+  background-color: var(--primary-clr_100);
   transform: rotate(90deg);
 }
 #app #site-wrapper #sidebar #sidebar-ul .details-sb[data-open] + .details-sb:last-of-type {
@@ -3321,7 +3283,7 @@ body {
   color: color-mix(in srgb, var(--black) 70%, transparent);
 }
 .sidebar a:hover, .sidebar a:active {
-  color: var(--purple-clr_900);
+  color: var(--primary-clr_900);
 }
 .sidebar a:hover, .sidebar a:active, .sidebar a:focus, .sidebar a:link {
   text-decoration: none;
@@ -3335,11 +3297,11 @@ body {
 }
 .sidebar .sidebar-header a {
   font-size: 0.8em;
-  color: var(--purple-clr_50);
+  color: var(--primary-clr_50);
 }
 .sidebar .sidebar-header a:hover, .sidebar .sidebar-header a:active {
-  background-color: var(--purple-clr_300);
-  color: var(--purple-clr_50);
+  background-color: var(--primary-clr_300);
+  color: var(--primary-clr_50);
 }
 .sidebar .sidebar-section-header {
   display: block;
@@ -3381,10 +3343,10 @@ body {
     padding: 3px 6px;
   }
   #app #site-wrapper #sidebar #sidebar-ul .details-sb.nonlinear ul .sb-item a:hover, #app #site-wrapper #sidebar #sidebar-ul .details-sb.nonlinear ul .sb-item a:active {
-    background-color: var(--purple-clr_300);
+    background-color: var(--primary-clr_300);
   }
   #app #site-wrapper #sidebar #sidebar-ul .details-sb.nonlinear ul .sb-item:hover, #app #site-wrapper #sidebar #sidebar-ul .details-sb.nonlinear ul .sb-item:active {
-    border: solid 2px var(--purple-clr_900);
+    border: solid 2px var(--primary-clr_900);
   }
   #app #site-wrapper #sidebar #sidebar-ul ul {
     list-style-type: none;
@@ -3393,9 +3355,9 @@ body {
     padding-left: 0px;
   }
   #app #site-wrapper #sidebar #sidebar-ul ul .sb-item {
-    background-color: var(--purple-clr_bgtext);
+    background-color: var(--primary-clr_bgtext);
     border-radius: 0;
-    border: 0px solid var(--purple-clr_100);
+    border: 0px solid var(--primary-clr_100);
     border-bottom-width: 1px;
     padding: 0em 0;
     box-shadow: none;
@@ -3405,7 +3367,7 @@ body {
   }
 }
 .featured-character .sidebar-header {
-  background-color: var(--purple-clr_600);
+  background-color: var(--primary-clr_600);
 }
 .featured-character .details-sb {
   display: grid;
@@ -3420,7 +3382,7 @@ body {
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   border-radius: 0 0 15px 15px;
 }
 .featured-character .details-sb .slug {
@@ -3541,14 +3503,14 @@ body {
   position: absolute;
   width: calc(0.8 * var(--sidebar-width));
   height: calc(0.8 * var(--sidebar-width));
-  background-color: var(--purple-clr_300);
+  background-color: var(--primary-clr_300);
   mix-blend-mode: soft-light;
 }
 .featured-character .details-sb .name {
   grid-area: name;
 }
 .featured-character .details-sb .name:hover, .featured-character .details-sb .name:active {
-  color: var(--teal-clr_500);
+  color: var(--secondary-clr_500);
 }
 .featured-character .details-sb .display-user {
   grid-area: owner;
@@ -3642,7 +3604,7 @@ body {
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   height: -moz-min-content;
   height: min-content;
 }
@@ -3651,10 +3613,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 #selected-character img:hover, #selected-character img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   #selected-character img:hover, #selected-character img:active {
@@ -3685,7 +3647,7 @@ body {
   background: unset;
   box-shadow: unset;
   background-color: transparent;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   -webkit-backdrop-filter: unset;
           backdrop-filter: unset;
   font-family: "Itim";
@@ -3698,10 +3660,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 #selected-character.profile .profile-assets-content img:hover, #selected-character.profile .profile-assets-content img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   #selected-character.profile .profile-assets-content img:hover, #selected-character.profile .profile-assets-content img:active {
@@ -3727,13 +3689,13 @@ body {
 }
 #selected-character .selected-header {
   background-image: url("images/overlays/otis-redding_noise.png");
-  background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   border-radius: 15px 15px 0 0;
   padding: 5px;
   font-size: 1.15em;
   text-align: center;
-  color: var(--purple-clr_50);
+  color: var(--primary-clr_50);
 }
 #selected-character .profile-assets-content {
   display: grid;
@@ -3774,7 +3736,7 @@ body {
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   border-radius: 15px;
   text-align: center;
   position: relative;
@@ -3814,10 +3776,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:hover, #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:hover, #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:active {
@@ -3928,9 +3890,9 @@ body {
   }
 }
 .badje {
-  background: var(--purple-clr_300);
+  background: var(--primary-clr_300);
   border-radius: 400px;
-  border: 5px dashed var(--active-clr_600);
+  border: 5px dashed var(--primary-clr_600);
   background-image: url("images/overlays/clean-textile.png");
   aspect-ratio: 1/1;
   max-width: 200px;
@@ -3940,10 +3902,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .badje img:hover, .badje img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .badje img:hover, .badje img:active {
@@ -3973,10 +3935,10 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .profile-inventory img:hover, .profile-inventory img:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .profile-inventory img:hover, .profile-inventory img:active {
@@ -4010,9 +3972,9 @@ body {
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   container: main-nav/inline-size;
-  background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
   grid-area: nav;
   border-radius: 20px;
   z-index: 3;
@@ -4027,7 +3989,7 @@ body {
   border: 2px transparent solid;
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown > a {
-  color: var(--purple-clr_50);
+  color: var(--primary-clr_50);
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown .dropdown-toggle {
   display: flex;
@@ -4044,17 +4006,17 @@ body {
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown:has(.show) {
   border-radius: 10px 10px 0 0;
-  border: 2px var(--purple-clr_300) solid;
-  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--active-clr_800) 50%, transparent));
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
-  background-color: var(--purple-clr_50);
+  border: 2px var(--primary-clr_300) solid;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--primary-clr_800) 50%, transparent));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
+  background-color: var(--primary-clr_50);
   z-index: 1;
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown:has(.show):hover, #app #site-wrapper #header-nav .navbar-nav .dropdown:has(.show):active {
   border-radius: 10px 10px 0 0;
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown:has(.show) .dropdown-toggle {
-  color: var(--purple-clr_700);
+  color: var(--primary-clr_700);
 }
 #app #site-wrapper #header-nav .navbar-nav .dropdown:has(.show) .dropdown-toggle::after {
   transform: rotate(0);
@@ -4063,7 +4025,7 @@ body {
   padding: 0 5px;
 }
 #app #site-wrapper #header-nav .nav-item:hover, #app #site-wrapper #header-nav .nav-item:active {
-  background-color: var(--active-clr_700);
+  background-color: var(--primary-clr_700);
 }
 #app #site-wrapper #header-nav .nav-item.nav-notifications {
   width: 2.5em;
@@ -4076,7 +4038,7 @@ body {
   }
 }
 #app #site-wrapper #header-nav .nav-item > .dropdown-toggle {
-  color: var(--purple-clr_bgtext);
+  color: var(--primary-clr_bgtext);
   padding: 5px 0;
 }
 #app #site-wrapper #header-nav .nav-item .btn-secondary {
@@ -4091,10 +4053,10 @@ body {
   padding: 5px;
 }
 #app #site-wrapper #header-nav .nav-item.admin a {
-  color: var(--purple-clr_200);
+  color: var(--primary-clr_200);
 }
 #app #site-wrapper #header-nav .nav-item.nav-notifications {
-  background-color: var(--purple-clr_300);
+  background-color: var(--primary-clr_300);
   border-radius: 15px;
 }
 #app #site-wrapper #header-nav .nav-item.nav-notifications a {
@@ -4103,7 +4065,7 @@ body {
   align-content: center;
   align-items: center;
   gap: 5px;
-  color: var(--purple-clr_600);
+  color: var(--primary-clr_600);
 }
 #app #site-wrapper #header-nav .navbar-brand .navbar-brand-image {
   max-width: 40vw;
@@ -4155,14 +4117,14 @@ body {
   z-index: 2;
 }
 .dt-nav-page .dt-nav-group .dt-nav-header {
-  background-color: var(--purple-clr_200);
-  color: var(--purple-clr_700);
+  background-color: var(--primary-clr_200);
+  color: var(--primary-clr_700);
   text-transform: uppercase;
   text-align: center;
   font-weight: 600;
 }
 .dt-nav-page .dt-nav-group .dt-nav-item {
-  color: var(--purple-clr_700);
+  color: var(--primary-clr_700);
   background-color: var(--body-color);
   font-weight: 500;
   text-decoration: none;
@@ -4200,7 +4162,7 @@ body {
     top: 100%;
     opacity: 0;
     transform: scale(0.5);
-    border: 2px var(--purple-clr_300) solid;
+    border: 2px var(--primary-clr_300) solid;
     border-top: 0;
     margin: -2px 0 0 -7px;
     transition: all 0.3s var(--spring_linear) allow-discrete, display 0.3s var(--spring_linear) allow-discrete;
@@ -4268,8 +4230,8 @@ body {
     border-radius: 15px 15px 0 0;
   }
   .dt-nav-page .dt-nav-group .dt-nav-item:hover, .dt-nav-page .dt-nav-group .dt-nav-item:active {
-    background-color: var(--purple-clr_300);
-    border-color: var(--purple-clr_400);
+    background-color: var(--primary-clr_300);
+    border-color: var(--primary-clr_400);
     transform: scale(1.15);
     border-radius: 100vw;
     z-index: 2;
@@ -4299,13 +4261,13 @@ body {
     transform: scale(1.06);
     z-index: 1;
     border-radius: 10px;
-    border-color: transparent var(--purple-clr_300);
+    border-color: transparent var(--primary-clr_300);
   }
   .dt-nav-page .dt-nav-group .dt-nav-item:has(+ .dt-nav-item:hover),
   .dt-nav-page .dt-nav-group .dt-nav-item:has(+ .dt-nav-header:hover),
   .dt-nav-page .dt-nav-group .dt-nav-item:hover + .dt-nav-item,
   .dt-nav-page .dt-nav-group .dt-nav-item:hover + .dt-nav-header {
-    background-color: var(--purple-clr_100);
+    background-color: var(--primary-clr_100);
     border-radius: 15px;
   }
   .dt-nav-page .dt-nav-group hr {
@@ -4313,7 +4275,7 @@ body {
     justify-self: center;
     margin: 5px;
     height: 1px;
-    background-color: var(--purple-clr_600);
+    background-color: var(--primary-clr_600);
   }
   .clocktainer {
     display: grid;
@@ -4327,7 +4289,7 @@ body {
   .clocktainer .cash {
     color: var(--white);
     padding: 0 10px;
-    background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
+    background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
     border-radius: 100vw;
     display: flex;
     transition: 0.3s;
@@ -4398,7 +4360,7 @@ body {
   }
   #header-nav .navbar-nav .nav-item:hover, #header-nav .navbar-nav .nav-item:active {
     transition: 0.5s var(--smoothIn_linear);
-    background: var(--purple-clr_900);
+    background: var(--primary-clr_900);
   }
   #header-nav .navbar-nav .nav-item:has(.show) {
     grid-template-rows: auto 1fr;
@@ -4435,7 +4397,7 @@ body {
   }
   #header-nav .navbar-nav .nav-item .dropdown-menu.show .dropdown-item:hover, #header-nav .navbar-nav .nav-item .dropdown-menu.show .dropdown-item:active {
     transition: 0.1s linear;
-    background: var(--purple-clr_100);
+    background: var(--primary-clr_100);
   }
   #header-nav .navbar-nav .nav-item .dropdown-menu.grid-3-col {
     grid-template-rows: auto auto;
@@ -4475,7 +4437,7 @@ body {
     align-content: center;
   }
   #header-nav .navbar-nav .nav-item .dt-nav-group .dt-nav-item {
-    color: var(--purple-clr_700);
+    color: var(--primary-clr_700);
     padding: 10px;
     font-weight: 500;
     font-size: 0.9em;
@@ -4484,13 +4446,13 @@ body {
     justify-content: start;
     align-items: center;
     text-align: left;
-    border-bottom: 1px var(--purple-clr_300) solid;
+    border-bottom: 1px var(--primary-clr_300) solid;
   }
   #header-nav .navbar-nav .nav-item .dt-nav-group .dt-nav-item:has(+ h2) {
     border: 0;
   }
   #header-nav .navbar-nav .nav-item .dt-nav-group .dt-nav-item:hover, #header-nav .navbar-nav .nav-item .dt-nav-group .dt-nav-item:active {
-    background-color: var(--purple-clr_100);
+    background-color: var(--primary-clr_100);
   }
   #header-nav .navbar-nav .nav-item .dt-nav-group hr {
     display: none;
@@ -4575,15 +4537,15 @@ body {
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
-  background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
   padding: 3px 10px;
   border: 2px var(--white) solid;
   border-radius: 15px;
   color: var(--white);
   height: -moz-max-content;
   height: max-content;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 80%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 80%, transparent);
 }
 .navbar .news-sales-container .newbadge:nth-child(2) {
   margin-top: 5px;
@@ -4611,7 +4573,7 @@ body {
   transition: -webkit-backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s;
   transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   grid-area: footer;
   border-radius: 15px;
   width: 100%;
@@ -4632,7 +4594,7 @@ body {
   align-items: center;
 }
 #app #site-wrapper #footer .footer-nav-item:first-of-type::before, #app #site-wrapper #footer .footer-nav-item::after {
-  color: var(--purple-clr_300);
+  color: var(--primary-clr_300);
   margin: 0 10px;
 }
 #app #site-wrapper #footer .footer-nav-item:first-of-type::before {
@@ -4648,13 +4610,13 @@ body {
 #app #site-wrapper #footer .copyright {
   grid-area: credit;
   font-size: 0.8em;
-  color: var(--purple-clr_300);
+  color: var(--primary-clr_300);
 }
 #app #site-wrapper #footer #backToTop {
   grid-area: top;
   border-radius: 50px;
-  color: var(--purple-clr_100);
-  background-color: var(--purple-clr_400);
+  color: var(--primary-clr_100);
+  background-color: var(--primary-clr_400);
   width: 2rem;
   height: 2rem;
   cursor: pointer;
@@ -4760,10 +4722,10 @@ dialog .modal-dialog,
 .modal .modal-dialog {
   max-height: 100%;
   width: 100%;
-  border: 2px solid var(--purple-clr_500);
+  border: 2px solid var(--primary-clr_500);
   margin: 0;
   overflow-y: scroll;
-  box-shadow: 0px 0px 5px var(--purple-clr_300);
+  box-shadow: 0px 0px 5px var(--primary-clr_300);
   border-radius: 15px;
   max-height: 80vh;
   overflow-y: scroll;
@@ -4818,11 +4780,11 @@ because the nesting selector cannot represent pseudo-elements. */
 
 body .modal-backdrop {
   transition: 0.2s ease;
-  background-color: color-mix(in srgb, var(--purple-clr_950) 0%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_950) 0%, transparent);
   z-index: 11;
 }
 body .modal-backdrop.show {
-  background-color: color-mix(in srgb, var(--purple-clr_950) 40%, transparent);
+  background-color: color-mix(in srgb, var(--primary-clr_950) 40%, transparent);
 }
 
 .card-header {
@@ -4834,7 +4796,7 @@ body .modal-backdrop.show {
   border-radius: 15px;
   background-color: color-mix(in srgb, var(--white) 20%, transparent);
   border-radius: 15px;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   width: 100%;
   background: var(--white);
   border-radius: 15px;
@@ -4855,7 +4817,7 @@ body .modal-backdrop.show {
   font-family: "Fredoka";
   font-size: 2.5em;
   font-weight: 700;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   text-transform: none;
 }
 #app .lore h1,
@@ -4907,7 +4869,7 @@ body .modal-backdrop.show {
   font-family: "Baloo 2";
   font-size: 1em;
   font-weight: 600;
-  color: var(--purple-clr_800);
+  color: var(--primary-clr_800);
   text-transform: none;
 }
 #app .lore p.caption,
@@ -4960,7 +4922,7 @@ body .modal-backdrop.show {
 #app #custom-page-parsed .card-float ul li::marker {
   content: "✦  ";
   font-size: 1rem;
-  color: var(--purple-clr_700);
+  color: var(--primary-clr_700);
 }
 #app .lore .speech-bubble,
 #app #custom-page-parsed .speech-bubble {
@@ -4971,11 +4933,11 @@ body .modal-backdrop.show {
 #app .lore .speech-avatar,
 #app #custom-page-parsed .speech-avatar {
   margin-top: 10px;
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 #app .lore .speech-name,
 #app #custom-page-parsed .speech-name {
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
   border-radius: 10px;
   padding: 5px 8px;
   width: -moz-max-content;
@@ -5029,7 +4991,7 @@ body .modal-backdrop.show {
 }
 #app .lore .speech-text,
 #app #custom-page-parsed .speech-text {
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
   background: rgba(250, 246, 255, 0.514);
   margin: 0 auto;
   width: 100%;
@@ -5048,7 +5010,7 @@ body .modal-backdrop.show {
 #app .lore .card,
 #app #custom-page-parsed .card {
   margin: 15px 25px 10px 25px;
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--active-clr_800) 20%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
   background: rgba(255, 255, 255, 0.266);
   border-radius: 15px;
 }
@@ -5311,12 +5273,12 @@ body .modal-backdrop.show {
 .app nav:has(.pagination) .pagination {
   width: -moz-max-content;
   width: max-content;
-  background: var(--purple-clr_300);
+  background: var(--primary-clr_300);
   border-radius: 10px;
 }
 .app nav:has(.pagination) .pagination .page-item .page-link {
-  background: var(--purple-clr_400);
-  color: var(--purple-clr_100);
+  background: var(--primary-clr_400);
+  color: var(--primary-clr_100);
   transition: var(--smoothIn_linear) 0.7s;
   border: 1px solid transparent;
   -webkit-user-select: none;
@@ -5329,25 +5291,25 @@ body .modal-backdrop.show {
   z-index: 1;
   transition: var(--smoothIn_linear) 0.1s;
   transform: translateY(-3px) scale(1.1);
-  background: var(--purple-clr_500);
-  color: var(--purple-clr_100);
+  background: var(--primary-clr_500);
+  color: var(--primary-clr_100);
   border-radius: 10px;
   border: 1px solid var(--white);
-  box-shadow: 0 5px 3px color-mix(in srgb, var(--purple-clr_800) 30%, transparent);
+  box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_800) 30%, transparent);
 }
 .app nav:has(.pagination) .pagination .page-item .page-link:active {
   transform: translateY(-3px) scale(0.9);
 }
 .app nav:has(.pagination) .pagination .page-item.active .page-link {
-  background: var(--purple-clr_600);
-  color: var(--purple-clr_100);
+  background: var(--primary-clr_600);
+  color: var(--primary-clr_100);
 }
 .app nav:has(.pagination) .pagination .page-item.active .page-link:hover {
-  background: var(--purple-clr_700);
+  background: var(--primary-clr_700);
 }
 .app nav:has(.pagination) .pagination .page-item:first-of-type .page-link, .app nav:has(.pagination) .pagination .page-item:last-of-type .page-link {
-  background: var(--purple-clr_300);
-  color: var(--purple-clr_100);
+  background: var(--primary-clr_300);
+  color: var(--primary-clr_100);
   border-radius: 10px;
 }
 .app .pet-card {
@@ -5359,10 +5321,10 @@ body .modal-backdrop.show {
 }
 .app .pet-card .progress {
   grid-area: progress;
-  border: 2px var(--purple-clr_600) solid;
+  border: 2px var(--primary-clr_600) solid;
 }
 .app .pet-card .progress-bar {
-  background-color: var(--active-clr_500);
+  background-color: var(--primary-clr_500);
 }
 .app .pet-card .level {
   grid-area: level;
@@ -5381,7 +5343,7 @@ body .modal-backdrop.show {
   grid-area: level;
 }
 .app .pet-card .petname {
-  background: var(--active-clr_200);
+  background: var(--primary-clr_200);
   color: var(--black);
 }
 .app .daily-button {
@@ -5389,10 +5351,10 @@ body .modal-backdrop.show {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
 }
 .app .daily-button:hover, .app .daily-button:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--primary-clr_800) 7.5%, transparent));
 }
 @media (prefers-reduced-motion: reduce) {
   .app .daily-button:hover, .app .daily-button:active {
@@ -5462,7 +5424,7 @@ body .modal-backdrop.show {
   place-content: center;
   place-items: center;
   z-index: 10;
-  border: 2px var(--purple-clr_500) solid;
+  border: 2px var(--primary-clr_500) solid;
   border-radius: 0 15px 15px 15px;
   opacity: 1;
 }
@@ -5542,11 +5504,11 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
 }
 
 .logs-table-body .logs-table-row {
-  background-color: var(--purple-clr_100);
+  background-color: var(--primary-clr_100);
   padding: 0 15px;
 }
 .logs-table-body .logs-table-row:nth-child(odd) {
-  background-color: var(--purple-clr_50);
+  background-color: var(--primary-clr_50);
 }
 .logs-table-body .logs-table-row:nth-child(1) {
   padding: 5px 15px;
@@ -5574,13 +5536,13 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
   margin: 0;
 }
 #app .comment_replies {
-  border-left: 4px var(--purple-clr_500) dotted;
+  border-left: 4px var(--primary-clr_500) dotted;
   margin-left: 3cqw;
   padding-left: 2cqw;
   width: calc(100% - 3cqw);
 }
 #app .border-top {
-  border-top: 2px dashed color-mix(in srgb, var(--purple-clr_400) 80%, transparent);
+  border-top: 2px dashed color-mix(in srgb, var(--primary-clr_400) 80%, transparent);
 }
 
 .pims-content iframe {
@@ -5599,7 +5561,7 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
   right: 10px;
   z-index: 1;
   font-size: 2em;
-  color: var(--purple-clr_700);
+  color: var(--primary-clr_700);
   cursor: grab;
 }
 
@@ -5609,7 +5571,7 @@ h1.ruled-right::before, h2.ruled-right::before, h3.ruled-right::before, h4.ruled
   place-content: center;
 }
 .image-nav .nav-item a.active {
-  border: 4px dashed var(--purple-clr_600);
+  border: 4px dashed var(--primary-clr_600);
   border-radius: 15px;
 }
 .image-nav .nav-item a .img-thumbnail {

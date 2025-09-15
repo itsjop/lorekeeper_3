@@ -170,9 +170,9 @@
 
 .paused, .paused::before, .paused::after { animation-play-state: paused; }
 
-.text-100 { color: var(--active-clr_100); } .text-200 { color: var(--active-clr_200); } .text-300 { color: var(--active-clr_300); }
-.text-400 { color: var(--active-clr_400); } .text-500 { color: var(--active-clr_500); } .text-600 { color: var(--active-clr_600); }
-.text-700 { color: var(--active-clr_700); } .text-800 { color: var(--active-clr_800); } .text-900 { color: var(--active-clr_900); }
+.text-100 { color: var(--primary-clr_100); } .text-200 { color: var(--primary-clr_200); } .text-300 { color: var(--primary-clr_300); }
+.text-400 { color: var(--primary-clr_400); } .text-500 { color: var(--primary-clr_500); } .text-600 { color: var(--primary-clr_600); }
+.text-700 { color: var(--primary-clr_700); } .text-800 { color: var(--primary-clr_800); } .text-900 { color: var(--primary-clr_900); }
 
 .grid-clip.grid-4-col {
   @container main-container (600px < width < 700px) {
