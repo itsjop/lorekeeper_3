@@ -37,7 +37,7 @@
         height: min-content;
         place-self: center;
         max-width: min(100%, 250px);
-        backdrop-filter: blur(1px);
+        backdrop-filter: unset;
         contain: paint;
         &:hover {
           transform: scale(1.1);
@@ -61,6 +61,10 @@
             box-shadow: unset;
             backdrop-filter: none;
           }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          transition-duration: 0.1s !important;
+          transition-timing-function: linear !important;
         }
       }
       .title {

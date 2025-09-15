@@ -1,10 +1,20 @@
 # Styling Issues:
+- motion reduction
+- clean color interpolation
+- safe fallbacks
+- finish hooking up _app_inline_js variable assignments for transitions
+- all of dark mode
+
+- something in modmail is breaking :/
+
+# Styling Issues:
 - [~] masterlist redo
 - [x] Character visibility toggle doesnt work
 - [x] Investigate why resale doesn't work
   - [x] Resale information isn't saving when editing an item
 - [x] mod mail show outgoing user name
 - [x] completed raffles sorted by time instead of whatever it is now
+- [ ] hover label on Closed for Trade labels
 - [ ] design update default to pure palette
 - [ ] new news post - saved as a draft, reposted, - does not give NEW notification (or scheduled)
 - [ ] duplicated characters on prompt submission
@@ -18,6 +28,8 @@
 - [ ] sitewide image alt tags
 - [ ] move the ML card wiggle to a standalone component
 - [ ] the change TH link button is not working (account settings?)
+
+- post an ad in the lorekeeper discord
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)

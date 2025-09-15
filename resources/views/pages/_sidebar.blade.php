@@ -121,11 +121,13 @@
         </div>
         <img src="{{ asset('images/somnivores/site/kofi-gift.png') }}" class="img-char-thumbnail kofi-gift" />
       </a>
-      <a class="name flex gap-_5 h5 mb-4" href="https://ko-fi.com/somnivores/tiers">
-        Somnivores' Ko-fi
-        <span class="small flex ai-center">
-          <i class="fa-solid fa-arrow-up-right-from-square "></i>
-        </span>
+      <a
+        class="name gap-_5 h5 mb-4"
+        href="https://ko-fi.com/somnivores/tiers"
+        style="  width: calc(var(--sidebar-width) - 20px); text-align: center;"
+      >
+        <span>Somnivores' Ko-fi</span>
+        <i class="fa-solid fa-arrow-up-right-from-square pl-2"></i>
       </a>
       <p class="text-center" style="width: var(--sidebar-width);">
         We offer monthly goodies! <br>

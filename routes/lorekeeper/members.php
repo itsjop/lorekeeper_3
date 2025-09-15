@@ -24,6 +24,7 @@ Route::group(['prefix' => 'notifications', 'namespace' => 'Users'], function () 
 
 Route::group(['prefix' => 'account', 'namespace' => 'Users'], function () {
   Route::get('settings', 'AccountController@getSettings');
+  Route::get('local-settings', 'AccountController@getLocalSettings');
   Route::post('profile', 'AccountController@postProfile');
   Route::post('password', 'AccountController@postPassword');
   Route::post('email', 'AccountController@postEmail');

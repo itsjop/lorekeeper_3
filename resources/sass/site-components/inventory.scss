@@ -97,12 +97,15 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      animation: stars 40s linear forwards infinite;
-      animation-duration: var(--card_star_animation-duration);
+      animation: stars min(var(--setting_animation_time), 40s) linear forwards infinite;
+      animation-duration: min(var(--setting_animation_time), var(--card_star_animation-duration));
       background-image: url('images/overlays/starring.png');
       background-repeat: repeat;
       background-size: 20%;
       transform: translateX(0%);
+      @media (prefers-reduced-motion: reduce) {
+        animation-duration: 0s !important;
+      }
     }
     &::before {
       left: -100%;
@@ -135,5 +138,14 @@
     --card_star_opacity: 0.9;
     --card_star_animation-duration: 20s;
     --card_star_blend-mode: overlay;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-bg_animated .stars {
+    &::before,
+    &::after {
+      animation-duration: 0s !important;
+    }
   }
 }

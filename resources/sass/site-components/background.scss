@@ -11,6 +11,9 @@
       animation: cloud-scroll 5s linear forwards infinite;
       background-image: url('https://transparenttextures.com/patterns/nice-snow.png');
       background-repeat: repeat;
+      @media (prefers-reduced-motion: reduce) {
+        animation-duration: 0s !important;
+      }
     }
     .cloud-1,
     .cloud-2,

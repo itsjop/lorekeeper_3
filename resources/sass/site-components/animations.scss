@@ -14,7 +14,10 @@
   mask-mode: alpha;
   filter: brightness(300%) opacity(0.8);
   position: relative;
-  animation: glare 11s ease-in-out forwards infinite;
+  animation: glare min(var(--setting_animation_time), 11s) ease-in-out forwards infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 0s !important;
+  }
 }
 @keyframes glare {
   0% {

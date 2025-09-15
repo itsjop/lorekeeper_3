@@ -36,61 +36,10 @@
       whitespace_elements: 'p pre script noscript style textarea video audio iframe object code',
     });
 
-    // function closeMenuOnBodyClick(event) {
-    //   // get the event path
-    //   const path = event.composedPath();
-    //   // check if it has the menu element
-    //   if (path.some((elem) => ['site-navbar', 'site-navbar-auth'].includes(elem.id))) {
-    //     // terminate this function if it does
-    //     return;
-    //   }
-    //   closeMenu();
-    // }
-
-    // $('#header-nav .navbar-toggler').on("click", () => {
-    //   $('#navbarSupportedContent').toggleClass('show')
-    // })
-
-    // // Menu handling
-    // function openMenu(dd) {
-    //   unShowAllDropdownsExcept();
-    //   showDropdown(dd);
-    //   document.documentElement.addEventListener('click', closeMenuOnBodyClick);
-    //   // console.log('opened and added body')
-    // }
-
-    // function closeMenu(dd = null) {
-    //   unShowAllDropdownsExcept();
-    //   document.documentElement.removeEventListener('click', closeMenuOnBodyClick);
-    //   // console.log('closed and removed body')
-    // }
-
-    // function showDropdown(dd) {
-    //   dd.classList.toggle('show');
-    //   dd.querySelector(".dropdown-menu").classList.toggle('show');
-    //   // console.log('shown')
-    // }
-
-    // function unShowAllDropdownsExcept(dropdown) {
-    //   document.querySelectorAll("#navbarSupportedContent .dropdown").forEach(dd => {
-    //     if (dropdown === null || dropdown?.isSameNode(dd)) return;
-    //     dd.classList.remove('show');
-    //     dd.querySelector(".dropdown-menu").classList.remove('show');
-    //   })
-    //   // console.log('closed all')
-    // };
-
-    // document.querySelectorAll("#navbarSupportedContent .dropdown").forEach(dropdown => {
-    //   // console.log('dropdown listener', dropdown)
-    //   dropdown.addEventListener('click', () => openMenu(dropdown));
-    // });
-
-
     $('#mobile-sidebar-toggle').on('click', (e) => {
       e.preventDefault();
       $('#sidebar-container').toggleClass('show')
     })
-
 
     bsCustomFileInput.init();
     var $mobileMenuButton = $('#mobileMenuButton');
@@ -144,15 +93,15 @@
     //   }
     //   el.style.gridTemplateRows = styl;
     // }
-    document.querySelectorAll('.details-sb').forEach(detail => {
-      // setRows(detail);
-      let summary = detail.querySelector(":scope > summary");
-      summary.addEventListener('click', () => {
-        detail.toggleAttribute("data-open");
-        // setRows(detail);
-      });
-    });
-
+    // document.querySelectorAll('.details-sb').forEach(detail => {
+    //   // setRows(detail);
+    //   let summary = detail.querySelector(":scope > summary");
+    //   summary.addEventListener('click', () => {
+    //     detail.toggleAttribute("data-open");
+    //     // setRows(detail);
+    //   });
+    // });
+    applyLocalSettings();
   });
 
   $(document).mousemove(function(e) {
@@ -167,6 +116,29 @@
       'left': mouseX
     }).fadeIn('slow');
   });
+
+
+  function applyLocalSettings() {
+    let siteTheme = localStorage.getItem("som_siteTheme");
+    let backdropBlur = localStorage.getItem("som_backdropBlur") === 'true';
+    let animations = localStorage.getItem("som_animations") === 'true';
+    let hoverEffects = localStorage.getItem("som_effects");
+    let newSettings = `
+    ${siteTheme ? '' : ''}
+    ${backdropBlur ? '--var_backdrop-saturate: 200% ; --var_backdrop-blur: 5px;' : '--var_backdrop-saturate: 100% ; --var_backdrop-blur: 0px;'}
+    ${animations ? '--var_animation_time: 1000s' : '--var_animation_time: 0s'}
+    ${hoverEffects === 'default' ? ''
+      : hoverEffects === 'reduced' ? '--var_transition_time: .3s; --var_transition_timing: linear;'
+      : hoverEffects === 'instant' ? '--var_transition_time: 0s; --var_transition_timing: linear;'
+      : ''
+    }
+    `;
+    let ap = document.getElementById('app');
+    ap.classList.remove(siteTheme === 'dark' ? 'light' : 'dark');
+    ap.classList.add(siteTheme);
+    ap.style.cssText = newSettings;
+    console.log("newSettings", newSettings);
+  }
 </script>
 {{-- Image Blocking --}}
 @if (Auth::check() && Auth::user()->blockedImages()->count())

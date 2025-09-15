@@ -1,6 +1,14 @@
 * {  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
 *, *::before, *::after {  box-sizing: border-box; }
 html { background-color: light-dark(#eee, #222)}
+.app{
+  // Site settings
+  --var_backdrop-saturate: 200%;
+  --var_backdrop-blur: 5px;
+  --var_animation_time: 1000s;
+  --var_transition_time: 1000s;
+  --var_transition_timing: initial;
+}
 
 // Google Fonts
 // TODO: combine this
@@ -41,8 +49,3 @@ html { background-color: light-dark(#eee, #222)}
 @import './site-components/card';
 @import './site-components/lore';
 @import './site-components/misc';
-
-// Enable Dark mode
-// @import './support/_dark-scheme';
-// :root { color-scheme: light dark ;}
-

@@ -65,6 +65,10 @@
       perspective: 400px;
       position: relative;
       display: grid;
+      @media (prefers-reduced-motion: reduce) {
+        transition-duration: 0.1s !important;
+        transition-timing-function: linear !important;
+      }
       img {
         top: 0;
         left: 0;
@@ -96,6 +100,10 @@
             // rotate(calc(-45deg + (45deg * var(--len))));
             transform: translateX(calc(25% + (-50% * var(--mpx)))) translateY(calc(25% + (-50% * var(--mpy)))) rotate(-45deg);
           }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          transition-duration: 0.1s !important;
+          transition-timing-function: linear !important;
         }
       }
     }
@@ -167,6 +175,10 @@
     color: white;
     font-size: 1.1em;
     transition: 0.3s var(--bounce_linear);
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0.1s !important;
+      transition-timing-function: linear !important;
+    }
   }
   .name {
     grid-area: name;

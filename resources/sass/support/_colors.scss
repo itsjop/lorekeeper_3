@@ -1,9 +1,64 @@
-body {
+// :root {
+//   color-scheme: light dark;
+// }
+#app.light {
+  color-scheme: light;
+  #site-wrapper .site-background {
+    background-image: url('images/somnivores/reveriefullres.webp');
+  }
+}
+#app.dark {
+  color-scheme: dark;
+  #site-wrapper .site-background {
+    background-image: url('images/somnivores/reveriefullres_dark.webp');
+  }
+}
+.app {
   /* TODO: Update to more usable color-mix:
     (https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/)
   */
 
+  // &.light {
+  //   color-scheme: light;
+  // }
+  // &.dark {
+  //   color-scheme: dark;
+  // }
   /* Colors */
+  --clr_mode: oklab;
+  --clr_length: longer hue;
+  // Color stops
+  --clr_stop-light-25: 85%;
+  --clr_stop-light-50: 80%;
+  --clr_stop-light-100: 70%;
+  --clr_stop-light-200: 55%;
+  --clr_stop-light-300: 40%;
+  --clr_stop-light-400: 20%;
+  --clr_stop-light-500: 00%;
+  --clr_stop-dark-600: 20%;
+  --clr_stop-dark-700: 30%;
+  --clr_stop-dark-800: 50%;
+  --clr_stop-dark-900: 70%;
+  --clr_stop-dark-950: 80%;
+
+  // Purple-specific Color
+  --clr_raw_purple: #8e76ed;
+  --clr_purple_white-target: color-mix(in var(--clr_mode),var(--clr_raw_purple),white 90%);
+  --clr_purple_dark-target: color-mix(in var(--clr_mode),var(--clr_raw_purple),black 80%);
+
+  --clr_raw_purple-25-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-25));
+  --clr_raw_purple-50-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-50));
+  --clr_raw_purple-100-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-100));
+  --clr_raw_purple-200-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-200));
+  --clr_raw_purple-300-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-300));
+  --clr_raw_purple-400-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-400));
+  --clr_raw_purple-500-new: var(--clr_raw_purple);
+  --clr_raw_purple-600-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-600));
+  --clr_raw_purple-700-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-700));
+  --clr_raw_purple-800-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-800));
+  --clr_raw_purple-900-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-900));
+  --clr_raw_purple-950-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-950));
+
   --clr_raw_purple-25: #fbf8ff;
   --clr_raw_purple-50: #f4eefc;
   --clr_raw_purple-100: #e8ddf7;

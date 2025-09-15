@@ -60,7 +60,10 @@
         &.nav-notifications {
           width: 2.5em;
           transform-origin: 50% 300%;
-          animation: wobble-hor-bottom 10s var(--smoothIn_linear) forwards infinite;
+          animation: wobble-hor-bottom min(var(--setting_animation_time), 10s) var(--smoothIn_linear) forwards infinite;
+          @media (prefers-reduced-motion: reduce) {
+            animation-duration: 0s !important;
+          }
         }
         > .dropdown-toggle {
           color: var(--purple-clr_bgtext);
@@ -595,5 +598,11 @@
     i {
       font-size: inherit;
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #app #site-wrapper #header-nav .nav-item.nav-notifications {
+    animation-duration: 0s !important;
   }
 }

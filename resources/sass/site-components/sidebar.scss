@@ -116,7 +116,7 @@
           padding: 5px 0;
           background-color: color-mix(in srgb, var(--purple-clr_500) 80%, transparent);
           color: var(--white);
-          backdrop-filter: blur(5px);
+          backdrop-filter: blur(var(--var_backdrop-blur));
           padding: 5px 20px;
           display: flex;
           align-items: center;
@@ -326,11 +326,13 @@
         height: calc(0.8 * var(--sidebar-width));
         aspect-ratio: 1/1;
         padding: 0;
-        animation: char-fly 3.5s cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
-        // animation: char-fly 3s var(--spring_linear) forwards infinite;
+        animation: char-fly min(var(--setting_animation_time), 3.5s) cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
         transform-origin: 50% 200%;
         &.kofi-gift {
-          animation: wobble-kofi 6s var(--smoothIn_linear) forwards infinite;
+          animation: wobble-kofi min(var(--setting_animation_time), 6s) var(--smoothIn_linear) forwards infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          animation-duration: 0s !important;
         }
       }
       .character-border {
@@ -352,7 +354,7 @@
           aspect-ratio: 1/1;
         }
         .rainbow {
-          animation: hr 6s linear infinite forwards;
+          animation: hr min(var(--setting_animation_time), 6s) linear infinite forwards;
           --r-value: 0.8;
           --r-sat: 0.2;
           --r-gradient: conic-gradient(
@@ -376,6 +378,9 @@
               oklch(var(--r-value) var(--r-sat) calc(100deg + 120deg)) 100%
             );
           }
+          @media (prefers-reduced-motion: reduce) {
+            animation-duration: 0s !important;
+          }
         }
         .stars {
           mix-blend-mode: overlay;
@@ -389,11 +394,14 @@
             position: absolute;
             width: calc(0.8 * var(--sidebar-width));
             height: calc(0.8 * var(--sidebar-width));
-            animation: stars 10s linear forwards infinite;
+            animation: stars min(var(--setting_animation_time), 10s) linear forwards infinite;
             background-image: url('images/overlays/starring.png');
             background-repeat: repeat;
             background-size: 50%;
             transform: translateX(0%);
+            @media (prefers-reduced-motion: reduce) {
+              animation-duration: 0s !important;
+            }
           }
           &::before {
             left: -100%;
@@ -657,12 +665,34 @@
 }
 // prettier-ignore
 @keyframes wobble-kofi {
-  0%   { transform: rotate(0deg); }
-  90%  { transform: rotate(0deg); }
-  92%  { transform: rotate(2deg); }
-  94%  { transform: rotate(-2deg); }
-  96%  { transform: rotate(1deg); }
+  0%   { transform: rotate(0deg);   }
+  90%  { transform: rotate(0deg);   }
+  92%  { transform: rotate(2deg);   }
+  94%  { transform: rotate(-2deg);  }
+  96%  { transform: rotate(1deg);   }
   98%  { transform: rotate(-.5deg); }
-  99%  { transform: rotate(.5deg); }
-  100% { transform: rotate(0deg); }
+  99%  { transform: rotate(.5deg);  }
+  100% { transform: rotate(0deg);   }
 }
+
+// @media (prefers-reduced-motion: reduce) {
+//   .featured-character .details-sb .thumb {
+//     img {
+//       animation-duration: 0s !important;
+//       &.kofi-gift {
+//         animation-duration: 0s !important;
+//       }
+//     }
+//     .character-border {
+//       .rainbow {
+//         animation-duration: 0s !important;
+//       }
+//       .stars {
+//         &::before,
+//         &::after {
+//           animation-duration: 0s !important;
+//         }
+//       }
+//     }
+//   }
+// }

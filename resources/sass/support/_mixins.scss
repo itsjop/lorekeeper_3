@@ -2,7 +2,8 @@
   border-radius: 15px;
   background-image: url('images/overlays/otis-redding_noise.png');
   background-color: color-mix(in srgb, $color calc(100% * $opacity), transparent);
-  backdrop-filter: saturate(200%) blur(5px);
+  backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
 }
 
@@ -15,7 +16,7 @@
   width: 100%;
 }
 
-@mixin hover-preview($opacity: 10%) {
+@mixin hover-preview($opacity: 10%, $box_shadow: 0, $onlyOnHover: 0) {
   transition:
     filter 0.5s var(--bounce_linear),
     transform 0.5s var(--bounce_linear),
@@ -25,22 +26,42 @@
   $offset_y: 4px;
   $blur: 3px;
   @if ($opacity != 0) {
-    filter:
-      // drop-shadow(-$offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
-      // drop-shadow($offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
-      drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
-      drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
+    @if ($onlyOnHover == 0) {
+      @if ($box_shadow == 0) {
+        filter: drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent))
+          drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent));
+      }
+      @if ($box_shadow == 1) {
+        box-shadow:
+          (-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent),
+          ($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent);
+      }
+    }
     &:hover,
     &:active {
       $offset_x: 10px;
       $offset_y: 10px;
       $blur: 6px;
       $opacity_hover: $opacity * 0.75;
-      filter:
-        // drop-shadow(-$offset_x (-$offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
-        // drop-shadow($offset_x ($offset_x / 2) $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent));
-        drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent))
-        drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent));
+      @if ($box_shadow == 0) {
+        filter: drop-shadow(
+            (-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent)
+          )
+          drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity_hover, transparent));
+      }
+      @if ($box_shadow == 1) {
+        box-shadow:
+          (-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent),
+          ($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--active-clr_800) $opacity, transparent);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        transition-duration: 0.1s !important;
+        transition-timing-function: linear !important;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0.1s !important;
+      transition-timing-function: linear !important;
     }
   }
   &:hover,
@@ -49,6 +70,11 @@
       filter 0.7s var(--elastic_linear),
       transform 0.7s var(--elastic_linear);
     transform: scale(1.1);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0.1s !important;
+      transition-timing-function: linear !important;
+    }
   }
 }
 .hover-preview {

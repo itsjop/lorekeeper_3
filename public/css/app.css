@@ -14,11 +14,62 @@ html {
   background-color: light-dark(#eee, #222);
 }
 
-body {
+.app {
+  --var_backdrop-saturate: 200%;
+  --var_backdrop-blur: 5px;
+  --var_animation_time: 1000s;
+  --var_transition_time: 1000s;
+  --var_transition_timing: initial;
+}
+
+#app.light {
+  color-scheme: light;
+}
+#app.light #site-wrapper .site-background {
+  background-image: url("images/somnivores/reveriefullres.webp");
+}
+
+#app.dark {
+  color-scheme: dark;
+}
+#app.dark #site-wrapper .site-background {
+  background-image: url("images/somnivores/reveriefullres_dark.webp");
+}
+
+.app {
   /* TODO: Update to more usable color-mix:
     (https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/)
   */
   /* Colors */
+  --clr_mode: oklab;
+  --clr_length: longer hue;
+  --clr_stop-light-25: 85%;
+  --clr_stop-light-50: 80%;
+  --clr_stop-light-100: 70%;
+  --clr_stop-light-200: 55%;
+  --clr_stop-light-300: 40%;
+  --clr_stop-light-400: 20%;
+  --clr_stop-light-500: 00%;
+  --clr_stop-dark-600: 20%;
+  --clr_stop-dark-700: 30%;
+  --clr_stop-dark-800: 50%;
+  --clr_stop-dark-900: 70%;
+  --clr_stop-dark-950: 80%;
+  --clr_raw_purple: #8e76ed;
+  --clr_purple_white-target: color-mix(in var(--clr_mode),var(--clr_raw_purple),white 90%);
+  --clr_purple_dark-target: color-mix(in var(--clr_mode),var(--clr_raw_purple),black 80%);
+  --clr_raw_purple-25-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-25));
+  --clr_raw_purple-50-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-50));
+  --clr_raw_purple-100-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-100));
+  --clr_raw_purple-200-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-200));
+  --clr_raw_purple-300-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-300));
+  --clr_raw_purple-400-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_white-target) var(--clr_stop-light-400));
+  --clr_raw_purple-500-new: var(--clr_raw_purple);
+  --clr_raw_purple-600-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-600));
+  --clr_raw_purple-700-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-700));
+  --clr_raw_purple-800-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-800));
+  --clr_raw_purple-900-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-900));
+  --clr_raw_purple-950-new: color-mix(in var(--clr_mode),var(--clr_raw_purple),var(--clr_purple_dark-target) var(--clr_stop-dark-950));
   --clr_raw_purple-25: #fbf8ff;
   --clr_raw_purple-50: #f4eefc;
   --clr_raw_purple-100: #e8ddf7;
@@ -85,7 +136,7 @@ body {
   --purewhite: light-dark(#fff, #000);
   --body-color: var(--active-clr_50);
 }
-body.purple {
+.app.purple {
   --active-clr_50: var(--purple-clr_50);
   --active-clr_100: var(--purple-clr_100);
   --active-clr_200: var(--purple-clr_200);
@@ -98,7 +149,7 @@ body.purple {
   --active-clr_900: var(--purple-clr_900);
   --active-clr_950: var(--purple-clr_950);
 }
-body.teal {
+.app.teal {
   --active-clr_50: var(--teal-clr_50);
   --active-clr_100: var(--teal-clr_100);
   --active-clr_200: var(--teal-clr_200);
@@ -687,11 +738,12 @@ body.teal {
 #app .text-900 {
   color: var(--active-clr_900);
 }
-#app .grid-clip-2x > *:nth-child(n+4) {
-  background-color: red;
-}
-#app .grid-clip-2x > *:nth-child(-n+4) {
-  background-color: green;
+@container main-container (600px < width < 700px) {
+  #app .grid-clip.grid-4-col > *:nth-last-child(1):nth-child(3n+1),
+  #app .grid-clip.grid-4-col > *:nth-last-child(1):nth-child(3n+2),
+  #app .grid-clip.grid-4-col > *:nth-last-child(2):nth-child(3n+1) {
+    display: none;
+  }
 }
 
 body {
@@ -722,9 +774,27 @@ body {
 .hover-preview:hover, .hover-preview:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .hover-preview:hover, .hover-preview:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-preview {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .hover-preview:hover, .hover-preview:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-preview:hover, .hover-preview:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 
 #app {
@@ -1004,7 +1074,7 @@ body {
 .app .small,
 .app small {
   font-weight: 600;
-  color: #40258b;
+  color: var(--purple-clr_700);
 }
 .app .help-icon {
   color: var(--purple-clr_400);
@@ -1048,7 +1118,7 @@ body {
 .app .card-full ul li::marker {
   content: "✦  ";
   font-size: 1rem;
-  color: #40258b;
+  color: var(--purple-clr_700);
 }
 .app .card-basic .card-header,
 .app .card-full .card-header {
@@ -1178,8 +1248,11 @@ body {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   position: absolute;
   width: 100%;
@@ -1198,7 +1271,6 @@ body {
   height: 100dvh;
   top: 0;
   left: 0;
-  background-image: url("images/somnivores/reveriefullres.webp");
   background-size: cover;
 }
 
@@ -1560,6 +1632,12 @@ body {
   position: relative;
   display: grid;
 }
+@media (prefers-reduced-motion: reduce) {
+  .masterlist-character .thumbnail .ml-thumbnail {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .masterlist-character .thumbnail .ml-thumbnail img {
   top: 0;
   left: 0;
@@ -1575,9 +1653,27 @@ body {
 .masterlist-character .thumbnail .ml-thumbnail img:hover, .masterlist-character .thumbnail .ml-thumbnail img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .masterlist-character .thumbnail .ml-thumbnail img:hover, .masterlist-character .thumbnail .ml-thumbnail img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .masterlist-character .thumbnail .ml-thumbnail img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .masterlist-character .thumbnail .ml-thumbnail img:hover, .masterlist-character .thumbnail .ml-thumbnail img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .masterlist-character .thumbnail .ml-thumbnail img:hover, .masterlist-character .thumbnail .ml-thumbnail img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .masterlist-character .thumbnail .ml-thumbnail:hover, .masterlist-character .thumbnail .ml-thumbnail:active {
   transition: 1.5s var(--elastic_linear);
@@ -1601,6 +1697,12 @@ body {
   --len: sqrt(pow(0.5 - var(--mpx), 2) + pow(0.5 - var(--mpy), 2));
   --tan: sin(var(--len));
   transform: translateX(calc(25% + -50% * var(--mpx))) translateY(calc(25% + -50% * var(--mpy))) rotate(-45deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .masterlist-character .thumbnail .ml-thumbnail:hover, .masterlist-character .thumbnail .ml-thumbnail:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .masterlist-character .thumbnail .shine {
   width: calc(100% - 10px);
@@ -1659,6 +1761,14 @@ body {
   color: white;
   font-size: 1.1em;
   transition: 0.3s var(--bounce_linear);
+}
+@media (prefers-reduced-motion: reduce) {
+  .masterlist-character .name,
+  .masterlist-character .slug,
+  .masterlist-character .display-user {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .masterlist-character .name {
   grid-area: name;
@@ -2093,7 +2203,12 @@ body {
   mask-mode: alpha;
   filter: brightness(300%) opacity(0.8);
   position: relative;
-  animation: glare 11s ease-in-out forwards infinite;
+  animation: glare min(var(--setting_animation_time), 11s) ease-in-out forwards infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  #app #site-logo-header picture::after {
+    animation-duration: 0s !important;
+  }
 }
 
 @keyframes glare {
@@ -2130,6 +2245,11 @@ body {
   animation: cloud-scroll 5s linear forwards infinite;
   background-image: url("https://transparenttextures.com/patterns/nice-snow.png");
   background-repeat: repeat;
+}
+@media (prefers-reduced-motion: reduce) {
+  #app .scolling-bg .cloud {
+    animation-duration: 0s !important;
+  }
 }
 #app .scolling-bg .cloud-1,
 #app .scolling-bg .cloud-2,
@@ -2193,16 +2313,34 @@ body {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
-  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+  box-shadow: -2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent), 2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent);
   display: flex;
   justify-content: center;
 }
 .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
-  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+  box-shadow: -5px 10px 6px color-mix(in srgb, var(--active-clr_800) 10%, transparent), 5px 10px 6px color-mix(in srgb, var(--active-clr_800) 10%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .frontpage-button {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .home-dashboard .frontpage-button:hover, .home-dashboard .frontpage-button:active {
   color: var(--white);
@@ -2240,9 +2378,27 @@ body {
 .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 37.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 37.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.event img, .home-dashboard .bubblebox .bubble.jobs img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.event img:hover, .home-dashboard .bubblebox .bubble.event img:active, .home-dashboard .bubblebox .bubble.jobs img:hover, .home-dashboard .bubblebox .bubble.jobs img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .home-dashboard .bubblebox .bubble.event {
   background-image: url("../images/somnivores/frontpage/event_bg.png");
@@ -2308,9 +2464,27 @@ body {
 .home-dashboard .bubblebox .bubble.sale-info .img img:hover, .home-dashboard .bubblebox .bubble.sale-info .img img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.sale-info .img img:hover, .home-dashboard .bubblebox .bubble.sale-info .img img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.sale-info .img img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .home-dashboard .bubblebox .bubble.sale-info .img img:hover, .home-dashboard .bubblebox .bubble.sale-info .img img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.sale-info .img img:hover, .home-dashboard .bubblebox .bubble.sale-info .img img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .home-dashboard .bubblebox .bubble.sale-info .img .starburst {
   --time: 240s;
@@ -2318,19 +2492,29 @@ body {
   --deg: 1;
   aspect-ratio: 1;
   clip-path: polygon(100% 50%, 93.55% 56.26%, 97.97% 64.09%, 90.02% 68.28%, 92.06% 77.03%, 83.25% 78.81%, 82.74% 87.79%, 73.79% 87.02%, 70.77% 95.48%, 62.4% 92.22%, 57.12% 99.49%, 50% 94%, 42.88% 99.49%, 37.6% 92.22%, 29.23% 95.48%, 26.21% 87.02%, 17.26% 87.79%, 16.75% 78.81%, 7.94% 77.03%, 9.98% 68.28%, 2.03% 64.09%, 6.45% 56.26%, 0% 50%, 6.45% 43.74%, 2.03% 35.91%, 9.98% 31.72%, 7.94% 22.97%, 16.75% 21.19%, 17.26% 12.21%, 26.21% 12.98%, 29.23% 4.52%, 37.6% 7.78%, 42.88% 0.51%, 50% 6%, 57.12% 0.51%, 62.4% 7.78%, 70.77% 4.52%, 73.79% 12.98%, 82.74% 12.21%, 83.25% 21.19%, 92.06% 22.97%, 90.02% 31.72%, 97.97% 35.91%, 93.55% 43.74%);
-  animation: spin var(--time) linear forwards infinite;
+  animation: spin min(var(--setting_animation_time), var(--time)) linear forwards infinite;
   transform-origin: center center;
   place-self: center;
   width: calc(100% - 14px);
   display: grid;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.sale-info .img .starburst {
+    animation-duration: 0s !important;
+  }
 }
 .home-dashboard .bubblebox .bubble.sale-info .img .starburst::after {
   --deg: -1;
   --starting-deg: -35deg;
   content: "";
   grid-area: 1/1/2/2;
-  animation: spin var(--time) linear forwards infinite;
+  animation: spin min(var(--setting_animation_time), var(--time)) linear forwards infinite;
   background-image: linear-gradient(#ffe47e 0%, #ff9122 30%, #fff57f 40%, #ff9122 70%, #fff57f 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dashboard .bubblebox .bubble.sale-info .img .starburst::after {
+    animation-duration: 0s !important;
+  }
 }
 .home-dashboard .bubblebox .bubble.sale-info .img .starburst.border {
   width: 100%;
@@ -2400,8 +2584,8 @@ body {
     border-radius: 15px;
     min-width: 70%;
     color: var(--white);
-    -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(var(--var_backdrop-blur));
+            backdrop-filter: blur(var(--var_backdrop-blur));
     grid-area: 2/1/4/4;
     justify-self: end;
     align-self: end;
@@ -2517,9 +2701,27 @@ body {
 .inventory-category .inventory-item .inventory-stack img:hover, .inventory-category .inventory-item .inventory-stack img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .inventory-category .inventory-item .inventory-stack img:hover, .inventory-category .inventory-item .inventory-stack img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inventory-category .inventory-item .inventory-stack img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .inventory-category .inventory-item .inventory-stack img:hover, .inventory-category .inventory-item .inventory-stack img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .inventory-category .inventory-item .inventory-stack img:hover, .inventory-category .inventory-item .inventory-stack img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .inventory-category .inventory-item .title {
   grid-area: name;
@@ -2558,9 +2760,27 @@ body {
 .inventory-category .inventory-item .badge img:hover, .inventory-category .inventory-item .badge img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .inventory-category .inventory-item .badge img:hover, .inventory-category .inventory-item .badge img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inventory-category .inventory-item .badge img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .inventory-category .inventory-item .badge img:hover, .inventory-category .inventory-item .badge img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .inventory-category .inventory-item .badge img:hover, .inventory-category .inventory-item .badge img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .inventory-category .inventory-item .rarity {
   grid-area: meta;
@@ -2603,12 +2823,17 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  animation: stars 40s linear forwards infinite;
-  animation-duration: var(--card_star_animation-duration);
+  animation: stars min(var(--setting_animation_time), 40s) linear forwards infinite;
+  animation-duration: min(var(--setting_animation_time), var(--card_star_animation-duration));
   background-image: url("images/overlays/starring.png");
   background-repeat: repeat;
   background-size: 20%;
   transform: translateX(0%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-bg_animated .stars::before, .card-bg_animated .stars::after {
+    animation-duration: 0s !important;
+  }
 }
 .card-bg_animated .stars::before {
   left: -100%;
@@ -2641,6 +2866,11 @@ body {
   --card_star_blend-mode: overlay;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .card-bg_animated .stars::before, .card-bg_animated .stars::after {
+    animation-duration: 0s !important;
+  }
+}
 .app .gallery,
 .app .gallery-recents,
 .app .gallery-all {
@@ -2685,8 +2915,8 @@ body {
   height: min-content;
   place-self: center;
   max-width: min(100%, 250px);
-  -webkit-backdrop-filter: blur(1px);
-          backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: unset;
+          backdrop-filter: unset;
   contain: paint;
 }
 .app .gallery .submission .img:hover,
@@ -2722,6 +2952,14 @@ body {
   box-shadow: unset;
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .app .gallery .submission .img,
+  .app .gallery-recents .submission .img,
+  .app .gallery-all .submission .img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .app .gallery .submission .title,
 .app .gallery-recents .submission .title,
@@ -2804,9 +3042,27 @@ body {
 .daily .prizes .prize .prize-box img:hover, .daily .prizes .prize .prize-box img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .daily .prizes .prize .prize-box img:hover, .daily .prizes .prize .prize-box img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .daily .prizes .prize .prize-box img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .daily .prizes .prize .prize-box img:hover, .daily .prizes .prize .prize-box img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .daily .prizes .prize .prize-box img:hover, .daily .prizes .prize .prize-box img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .daily.many {
   grid-template-columns: 1fr 1fr;
@@ -2842,9 +3098,27 @@ body {
 .hover-preview:hover, .hover-preview:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .hover-preview:hover, .hover-preview:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-preview {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .hover-preview:hover, .hover-preview:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-preview:hover, .hover-preview:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 
 body {
@@ -2877,8 +3151,11 @@ body {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--purple-clr_700) 70%, transparent);
@@ -2982,8 +3259,8 @@ body {
   padding: 5px 0;
   background-color: color-mix(in srgb, var(--purple-clr_500) 80%, transparent);
   color: var(--white);
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(var(--var_backdrop-blur));
+          backdrop-filter: blur(var(--var_backdrop-blur));
   padding: 5px 20px;
   display: flex;
   align-items: center;
@@ -3138,8 +3415,11 @@ body {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 0 0 15px 15px;
 }
@@ -3168,11 +3448,16 @@ body {
   height: calc(0.8 * var(--sidebar-width));
   aspect-ratio: 1/1;
   padding: 0;
-  animation: char-fly 3.5s cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
+  animation: char-fly min(var(--setting_animation_time), 3.5s) cubic-bezier(0.38, 0.015, 0.58, 1) forwards infinite;
   transform-origin: 50% 200%;
 }
 .featured-character .details-sb .thumb img.kofi-gift {
-  animation: wobble-kofi 6s var(--smoothIn_linear) forwards infinite;
+  animation: wobble-kofi min(var(--setting_animation_time), 6s) var(--smoothIn_linear) forwards infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .featured-character .details-sb .thumb img {
+    animation-duration: 0s !important;
+  }
 }
 .featured-character .details-sb .thumb .character-border {
   mask-mode: luminance;
@@ -3193,7 +3478,7 @@ body {
   aspect-ratio: 1/1;
 }
 .featured-character .details-sb .thumb .character-border .rainbow {
-  animation: hr 6s linear infinite forwards;
+  animation: hr min(var(--setting_animation_time), 6s) linear infinite forwards;
   --r-value: 0.8;
   --r-sat: 0.2;
   --r-gradient: conic-gradient(
@@ -3218,6 +3503,11 @@ body {
     oklch(var(--r-value) var(--r-sat) calc(100deg + 120deg)) 100%
   );
 }
+@media (prefers-reduced-motion: reduce) {
+  .featured-character .details-sb .thumb .character-border .rainbow {
+    animation-duration: 0s !important;
+  }
+}
 .featured-character .details-sb .thumb .character-border .stars {
   mix-blend-mode: overlay;
   opacity: 0.8;
@@ -3230,11 +3520,16 @@ body {
   position: absolute;
   width: calc(0.8 * var(--sidebar-width));
   height: calc(0.8 * var(--sidebar-width));
-  animation: stars 10s linear forwards infinite;
+  animation: stars min(var(--setting_animation_time), 10s) linear forwards infinite;
   background-image: url("images/overlays/starring.png");
   background-repeat: repeat;
   background-size: 50%;
   transform: translateX(0%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .featured-character .details-sb .thumb .character-border .stars::before, .featured-character .details-sb .thumb .character-border .stars::after {
+    animation-duration: 0s !important;
+  }
 }
 .featured-character .details-sb .thumb .character-border .stars::before {
   left: -100%;
@@ -3342,8 +3637,11 @@ body {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   height: -moz-min-content;
   height: min-content;
@@ -3358,9 +3656,27 @@ body {
 #selected-character img:hover, #selected-character img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  #selected-character img:hover, #selected-character img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #selected-character img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 #selected-character img:hover, #selected-character img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  #selected-character img:hover, #selected-character img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 #selected-character.profile .profile-assets-content {
   height: 100%;
@@ -3387,9 +3703,27 @@ body {
 #selected-character.profile .profile-assets-content img:hover, #selected-character.profile .profile-assets-content img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  #selected-character.profile .profile-assets-content img:hover, #selected-character.profile .profile-assets-content img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #selected-character.profile .profile-assets-content img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 #selected-character.profile .profile-assets-content img:hover, #selected-character.profile .profile-assets-content img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  #selected-character.profile .profile-assets-content img:hover, #selected-character.profile .profile-assets-content img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 #selected-character .selected-header {
   background-image: url("images/overlays/otis-redding_noise.png");
@@ -3435,8 +3769,11 @@ body {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 50%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   border-radius: 15px;
   text-align: center;
@@ -3482,9 +3819,27 @@ body {
 #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:hover, #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:hover, #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:hover, #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:hover, #app #site-wrapper #sidebar #sb-featured-mobile .featured-character .info .baddge:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 
 @media (width >= 1000px) {
@@ -3590,9 +3945,27 @@ body {
 .badje img:hover, .badje img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .badje img:hover, .badje img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badje img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .badje img:hover, .badje img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .badje img:hover, .badje img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 
 .profile-inventory img {
@@ -3605,17 +3978,38 @@ body {
 .profile-inventory img:hover, .profile-inventory img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .profile-inventory img:hover, .profile-inventory img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .profile-inventory img {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .profile-inventory img:hover, .profile-inventory img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .profile-inventory img:hover, .profile-inventory img:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 
 #app #site-wrapper #header-nav {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   container: main-nav/inline-size;
   background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
@@ -3674,7 +4068,12 @@ body {
 #app #site-wrapper #header-nav .nav-item.nav-notifications {
   width: 2.5em;
   transform-origin: 50% 300%;
-  animation: wobble-hor-bottom 10s var(--smoothIn_linear) forwards infinite;
+  animation: wobble-hor-bottom min(var(--setting_animation_time), 10s) var(--smoothIn_linear) forwards infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  #app #site-wrapper #header-nav .nav-item.nav-notifications {
+    animation-duration: 0s !important;
+  }
 }
 #app #site-wrapper #header-nav .nav-item > .dropdown-toggle {
   color: var(--purple-clr_bgtext);
@@ -4171,8 +4570,11 @@ body {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   background-color: color-mix(in srgb, var(--active-clr_700) 70%, transparent);
   padding: 3px 10px;
@@ -4195,12 +4597,20 @@ body {
     font-size: inherit;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  #app #site-wrapper #header-nav .nav-item.nav-notifications {
+    animation-duration: 0s !important;
+  }
+}
 #app #site-wrapper #footer {
   border-radius: 15px;
   background-image: url("images/overlays/otis-redding_noise.png");
   background-color: color-mix(in srgb, var(--body-color) 70%, transparent);
-  -webkit-backdrop-filter: saturate(200%) blur(5px);
-          backdrop-filter: saturate(200%) blur(5px);
+  -webkit-backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+          backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
+  transition: -webkit-backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s;
+  transition: backdrop-filter 0.5s, -webkit-backdrop-filter 0.5s;
   box-shadow: 0 0 10px color-mix(in srgb, var(--active-clr_600) 20%, transparent);
   grid-area: footer;
   border-radius: 15px;
@@ -4550,7 +4960,7 @@ body .modal-backdrop.show {
 #app #custom-page-parsed .card-float ul li::marker {
   content: "✦  ";
   font-size: 1rem;
-  color: #40258b;
+  color: var(--purple-clr_700);
 }
 #app .lore .speech-bubble,
 #app #custom-page-parsed .speech-bubble {
@@ -4984,9 +5394,27 @@ body .modal-backdrop.show {
 .app .daily-button:hover, .app .daily-button:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
+@media (prefers-reduced-motion: reduce) {
+  .app .daily-button:hover, .app .daily-button:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app .daily-button {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
+}
 .app .daily-button:hover, .app .daily-button:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .app .daily-button:hover, .app .daily-button:active {
+    transition-duration: 0.1s !important;
+    transition-timing-function: linear !important;
+  }
 }
 .app .daily-button:active {
   transition-duration: 0.8s;

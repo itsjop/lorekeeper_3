@@ -50,7 +50,7 @@
     padding: 5px 15px;
     max-width: 90%;
     justify-self: center;
-    @include hover-preview;
+    @include hover-preview(10%, 1);
     display: flex;
     justify-content: center;
     &:hover,
@@ -143,18 +143,24 @@
             --deg: 1;
             aspect-ratio: 1;
             clip-path: polygon(100% 50%,93.55% 56.26%,97.97% 64.09%,90.02% 68.28%,92.06% 77.03%,83.25% 78.81%,82.74% 87.79%,73.79% 87.02%,70.77% 95.48%,62.4% 92.22%,57.12% 99.49%,50% 94%,42.88% 99.49%,37.6% 92.22%,29.23% 95.48%,26.21% 87.02%,17.26% 87.79%,16.75% 78.81%,7.94% 77.03%,9.98% 68.28%,2.03% 64.09%,6.45% 56.26%,0% 50%,6.45% 43.74%,2.03% 35.91%,9.98% 31.72%,7.94% 22.97%,16.75% 21.19%,17.26% 12.21%,26.21% 12.98%,29.23% 4.52%,37.6% 7.78%,42.88% 0.51%,50% 6%,57.12% 0.51%,62.4% 7.78%,70.77% 4.52%,73.79% 12.98%,82.74% 12.21%,83.25% 21.19%,92.06% 22.97%,90.02% 31.72%,97.97% 35.91%,93.55% 43.74%);
-            animation: spin var(--time) linear forwards infinite;
+            animation: spin min(var(--setting_animation_time), var(--time)) linear forwards infinite;
             transform-origin: center center;
             place-self: center;
             width: calc(100% - 14px);
             display: grid;
+            @media (prefers-reduced-motion: reduce) {
+              animation-duration: 0s !important;
+            }
             &::after {
               --deg: -1;
               --starting-deg: -35deg;
               content: '';
               grid-area: 1/1/2/2;
-              animation: spin var(--time) linear forwards infinite;
-               background-image: linear-gradient(#ffe47e 0%, #ff9122 30%, #fff57f 40%, #ff9122 70%, #fff57f 100%)
+              animation: spin min(var(--setting_animation_time), var(--time)) linear forwards infinite;
+              background-image: linear-gradient(#ffe47e 0%, #ff9122 30%, #fff57f 40%, #ff9122 70%, #fff57f 100%);
+              @media (prefers-reduced-motion: reduce) {
+                animation-duration: 0s !important;
+              }
             }
             &.border {
               width: 100%;
@@ -199,7 +205,7 @@
         }
         &::after {
           background-size: clamp(50px, 6vw, 150px);
-          opacity: .5;
+          opacity: 0.5;
           background-image: url('images/overlays/starring.png');
         }
       }
@@ -236,7 +242,7 @@
       border-radius: 15px;
       min-width: 70%;
       color: var(--white);
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(var(--var_backdrop-blur));
       grid-area: 2/1/4/4;
       justify-self: end;
       align-self: end;

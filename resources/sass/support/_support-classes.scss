@@ -174,17 +174,13 @@
 .text-400 { color: var(--active-clr_400); } .text-500 { color: var(--active-clr_500); } .text-600 { color: var(--active-clr_600); }
 .text-700 { color: var(--active-clr_700); } .text-800 { color: var(--active-clr_800); } .text-900 { color: var(--active-clr_900); }
 
-.grid-clip-2x {
-  >*:nth-child(n+4){
-    background-color: red;
-    // display: none;
-  }
-  >*:nth-child(-n+4){
-    background-color: green;
-    // display: inital;
+.grid-clip.grid-4-col {
+  @container main-container (600px < width < 700px) {
+    >*:nth-last-child(1):nth-child(3n+1),
+    >*:nth-last-child(1):nth-child(3n+2),
+    >*:nth-last-child(2):nth-child(3n+1) {
+      display: none;
+    }
   }
 }
-
-
-
 }

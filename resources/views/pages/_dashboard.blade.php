@@ -1,5 +1,24 @@
 <div class="home-dashboard">
-  <h1 class="welcome-banner"> Welcome back to Reverie, {!! Auth::user()->displayName !!}! ✨</h1>
+  <div class="welcome-banner">
+    <h1 class="welcome-banner">
+      Welcome back to Reverie, {!! Auth::user()->displayName !!}! ✨
+    </h1>
+    {{-- <div class="colors flex jc-center ai-center ac-center ji-center" style="--clr_mode: oklab; border: 2px black solid; padding: 0px; width: max-content; grid-auto-flow: column;">
+      <div class="label ta-center ac-center" style="width: 70px; height: 50px;">OKLAB</div>
+      <div class="c25 ta-center ac-center" style="background-color: var(--clr_raw_purple-25-new); width: 50px; height: 50px;">25</div>
+      <div class="c50 ta-center ac-center" style="background-color: var(--clr_raw_purple-50-new); width: 50px; height: 50px;">50</div>
+      <div class="c100 ta-center ac-center" style="background-color: var(--clr_raw_purple-100-new); width: 50px; height: 50px;">100</div>
+      <div class="c200 ta-center ac-center" style="background-color: var(--clr_raw_purple-200-new); width: 50px; height: 50px;">200</div>
+      <div class="c300 ta-center ac-center" style="background-color: var(--clr_raw_purple-300-new); width: 50px; height: 50px;">300</div>
+      <div class="c400 ta-center ac-center" style="background-color: var(--clr_raw_purple-400-new); width: 50px; height: 50px;">400</div>
+      <div class="c500 ta-center ac-center" style="background-color: var(--clr_raw_purple-500-new); width: 50px; height: 50px;">500</div>
+      <div class="c600 ta-center ac-center" style="background-color: var(--clr_raw_purple-600-new); width: 50px; height: 50px;">600</div>
+      <div class="c700 ta-center ac-center" style="background-color: var(--clr_raw_purple-700-new); width: 50px; height: 50px;">700</div>
+      <div class="c800 ta-center ac-center" style="background-color: var(--clr_raw_purple-800-new); width: 50px; height: 50px;">800</div>
+      <div class="c900 ta-center ac-center" style="background-color: var(--clr_raw_purple-900-new); width: 50px; height: 50px;">900</div>
+      <div class="c950 ta-center ac-center" style="background-color: var(--clr_raw_purple-950-new); width: 50px; height: 50px;">950</div>
+    </div> --}}
+  </div>
   {{-- <div class="card mb-4 timestamp">
     <div class="card-body"> <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!} </div> </div> --}}
   <div class="bubblebox current-event">

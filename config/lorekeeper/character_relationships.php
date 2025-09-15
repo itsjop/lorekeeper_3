@@ -2,7 +2,7 @@
 
 return [
   '???'                      => '???',
-  'Acquaintence'             => 'Acquaintence',
+  'Acquaintance'             => 'Acquaintance',
   'Best Friends'             => 'Best Friends',
   'Boss and Employee'        => 'Boss and Employee',
   'Co-workers'               => 'Co-workers',
@@ -20,4 +20,7 @@ return [
   'Rival'                    => 'Rival',
   'Roommate'                 => 'Roommate',
   'Significant Others'        => 'Significant Others',
+  'Student'                  => 'Student',
+  'Mentor'                   => 'Mentor',
+  'Teacher'                  => 'Teacher',
 ];

@@ -62,6 +62,10 @@ class AccountController extends Controller {
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
+  public function getLocalSettings() {
+    return view('account.local_settings', []);
+  }
+
   public function getSettings() {
     $interval = array(
       0 => 'whenever',
