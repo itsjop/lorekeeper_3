@@ -65,7 +65,7 @@
     color: currentcolor;
   }
   fieldset {
-    border: 2px solid var(--clr_raw_purple-500);
+    border: 2px solid var(--clr_raw_primary-500);
     border-radius: 15px;
     padding: 15px;
     legend {
@@ -144,7 +144,7 @@
     }
   }
   legend {
-    color: var(--clr_raw_purple-800);
+    color: var(--clr_raw_primary-800);
   }
   .card-basic,
   .card-full {
