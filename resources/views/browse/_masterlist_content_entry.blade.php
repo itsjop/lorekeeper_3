@@ -23,7 +23,7 @@
     <a
       href="{{ $character->url }}"
       class=""
-      style="color: var(--purewhite);"
+      style="color: white;"
     >
       @if (!$character->is_visible)
         <i class="fas fa-eye-slash"></i>

@@ -32,7 +32,7 @@
           transform 0.5s var(--bounce_linear),
           backdrop-filter 0.5s var(--bounce_linear);
         transform: scale(1);
-        box-shadow: 0 min(10px, 0.5cqw) min(10px, 1.5cqw) 0px color-mix(in srgb, var(--primary-clr_800) 30%, transparent);
+        box-shadow: 0 min(10px, 0.5cqw) min(10px, 1.5cqw) 0px color-mix(in srgb, var(--primary-clr_800_fixed) 30%, transparent);
         padding: 5px;
         height: min-content;
         place-self: center;
@@ -41,7 +41,7 @@
         contain: paint;
         &:hover {
           transform: scale(1.1);
-          box-shadow: 0 5px 10px color-mix(in srgb, var(--primary-clr_800) 40%, transparent);
+          box-shadow: 0 5px 10px color-mix(in srgb, var(--primary-clr_800_fixed) 40%, transparent);
           backdrop-filter: saturate(2) blur(3px);
         }
         img {
@@ -54,9 +54,9 @@
           border: white 0px solid;
           box-shadow: unset;
           backdrop-filter: none;
-          filter: drop-shadow(0 0 3px color-mix(in srgb, var(--primary-clr_800) 30%, transparent));
+          filter: drop-shadow(0 0 3px color-mix(in srgb, var(--primary-clr_800_fixed) 30%, transparent));
           &:hover {
-            filter: drop-shadow(0 10px 5px color-mix(in srgb, var(--primary-clr_800) 20%, transparent));
+            filter: drop-shadow(0 10px 5px color-mix(in srgb, var(--primary-clr_800_fixed) 20%, transparent));
             transform: scale(1.1);
             box-shadow: unset;
             backdrop-filter: none;

@@ -84,7 +84,7 @@
   .selectize-control,
   .selectize-input {
     border: 1px solid var(--white);
-    box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
+    box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800_fixed) 20%, transparent);
     background-color: var(--primary-clr_25);
   }
   i {
@@ -107,7 +107,7 @@
   }
   // -- MISC -- //
   .alert {
-    box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600));
+    box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600_fixed));
     color: var(--black);
     &.alert-primary {
       background: var(--primary-clr_100);
@@ -148,7 +148,7 @@
   }
   .card-basic,
   .card-full {
-    box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
+    box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800_fixed) 20%, transparent);
     background: rgba(250, 246, 255, 0.514);
     margin: 0 auto;
     margin-top: 10px;

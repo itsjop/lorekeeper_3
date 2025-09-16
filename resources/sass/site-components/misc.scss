@@ -35,7 +35,7 @@
             color: var(--primary-clr_100);
             border-radius: 10px;
             border: 1px solid var(--white);
-            box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_800) 30%, transparent);
+            box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_800_fixed) 30%, transparent);
           }
           &:active {
             transform: translateY(-3px) scale(0.9);

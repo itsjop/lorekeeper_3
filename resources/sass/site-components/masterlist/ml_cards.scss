@@ -27,7 +27,7 @@
   // --card_badge-img: 'public/img/masterlist/badge_sweet.png';
   // --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
   background-image: var(--card_card-border);
-  box-shadow: 5px 5px 5px #04043078;
+  box-shadow: 5px 5px 5px var(--primary-clr_800_fixed);
   .border-background {
     grid-area: 1 / 1 / 4 / 3;
     border-radius: 14px;
@@ -283,7 +283,7 @@
         height: calc(10px + 100%);
         background-image: var(--card_card-border);
         border-radius: 15px;
-        box-shadow: 5px 5px 5px #04043078;
+        box-shadow: 5px 5px 5px var(--primary-clr_800_fixed);
       }
     }
     .label {

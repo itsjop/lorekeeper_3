@@ -65,7 +65,7 @@
       display: grid;
       background: var(--white);
       background-color: color-mix(in srgb, var(--white) 80%, transparent);
-      box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600) 40%, transparent);
+      box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600_fixed) 40%, transparent);
       border-radius: 15px;
       width: 100%;
       justify-items: center;
@@ -201,12 +201,21 @@
           top: 50%;
           transform: translate(-50%, -50%);
           z-index: -1;
-          background-image: linear-gradient(to bottom right, #f2e8fd 25%, #e4faf9 55%, #f9fbeb 100%);
+          background-image: linear-gradient(
+            to bottom right,
+            light-dark(#f2e8fd, #261e37) 25%,
+            light-dark(#e4faf9, #204949) 55%,
+            light-dark(#f9fbeb, #353817) 100%
+          );
         }
         &::after {
           background-size: clamp(50px, 6vw, 150px);
           opacity: 0.5;
           background-image: url('images/overlays/starring.png');
+          @media (prefers-color-scheme: dark) {
+            opacity: 0.1;
+            // background-image: url('images/overlays/starring_dark.png');
+          }
         }
       }
       .newbadge {

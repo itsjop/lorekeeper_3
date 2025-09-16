@@ -148,7 +148,7 @@
           max-height: unset;
           margin: 10px 0 10px;
           border-radius: 15px;
-          box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_700) 20%, transparent);
+          box-shadow: 0 5px 3px color-mix(in srgb, var(--primary-clr_700_fixed) 20%, transparent);
           summary {
             &::after {
               background-color: var(--primary-clr_100);
@@ -171,7 +171,7 @@
                 width: 100%;
                 height: 1em;
                 bottom: 0;
-                filter: drop-shadow(0px 5px 20px #333333cc);
+                filter: drop-shadow(0px 5px 20px var(--primary-clr_800_fixed));
               }
             }
           }
@@ -321,7 +321,7 @@
         position: relative;
         z-index: 100;
         overflow: hidden;
-        filter: drop-shadow(2px 2px 3px #111111aa);
+        filter: drop-shadow(2px 2px 3px var(--primary-clr_700_fixed));
         width: calc(0.8 * var(--sidebar-width));
         height: calc(0.8 * var(--sidebar-width));
         aspect-ratio: 1/1;
@@ -357,6 +357,9 @@
           animation: hr min(var(--setting_animation_time), 6s) linear infinite forwards;
           --r-value: 0.8;
           --r-sat: 0.2;
+          @media (prefers-color-scheme: dark) {
+            --r-value: 0.4;
+          }
           --r-gradient: conic-gradient(
             oklch(var(--r-value) var(--r-sat) 000deg) 00%,
             oklch(var(--r-value) var(--r-sat) 060deg) 18%,

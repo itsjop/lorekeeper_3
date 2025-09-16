@@ -115,12 +115,12 @@
 
     .speech-avatar {
       margin-top: 10px;
-      filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent))
-        drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800) 10%, transparent));
+      filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--primary-clr_800_fixed) 10%, transparent))
+        drop-shadow(2px 4px 3px color-mix(in srgb, var(--primary-clr_800_fixed) 10%, transparent));
     }
 
     .speech-name {
-      box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800) 20%, transparent);
+      box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_800_fixed) 20%, transparent);
       border-radius: 10px;
       padding: 5px 8px;
       width: max-content;
