@@ -27,10 +27,11 @@
       <div class="logs-table-row">
         <div class="row flex-wrap">
           <div class="col-2 col-md-2">
-            <div class="logs-table-cell subject"> {!! mb_strimwidth($mail->displayName, 0, 50, '...') !!} </div>
+            <div class="logs-table-cell subject"> {!! $mail->displayName !!} </div>
+            {{-- <div class="logs-table-cell subject"> {!! mb_strimwidth($mail->displayName, 0, 50, '...') !!} </div> --}}
           </div>
           <div class="col-2 col-md-2">
-            <div class="logs-table-cell to"> {!! $mail->recipient?->displayName !!} </div>
+            <div class="logs-table-cell to"> {!! $mail->recipient?->displayName ?: $mail->recipient?->name !!} </div>
           </div>
           <div class="col-2 col-md-2">
             <div class="logs-table-cell at">

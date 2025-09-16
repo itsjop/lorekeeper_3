@@ -1,53 +1,53 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-	"files": { "ignoreUnknown": false, "ignore": [] },
-	"formatter": {
-		"enabled": true,
-		"useEditorconfig": true,
-		"formatWithErrors": false,
-		"indentStyle": "space",
-		"indentWidth": 2,
-		"lineEnding": "lf",
-		"lineWidth": 300,
-		"attributePosition": "auto",
-		"bracketSpacing": true,
-		"ignore": [
-			"./node_modules",
-			"./public/hot",
-			"./public/storage",
-			"./storage/*.key",
-			"./vendor",
-			"**/.env",
-			"**/.phpunit.result.cache",
-			"**/Homestead.json",
-			"**/Homestead.yaml",
-			"**/npm-debug.log",
-			"**/yarn-error.log",
-			"./composer.lock",
-			"**/*.env",
-			"./composer.phar",
-			"./.github",
-			"./public/js"
-		]
-	},
-	"organizeImports": { "enabled": true },
-	"linter": { "enabled": true, "rules": { "recommended": true } },
-	"javascript": {
-		"formatter": {
-			"jsxQuoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"trailingCommas": "es5",
-			"semicolons": "always",
-			"arrowParentheses": "always",
-			"bracketSameLine": false,
-			"quoteStyle": "single",
-			"attributePosition": "auto",
-			"bracketSpacing": true
-		}
-	},
-	"overrides": [
-		{ "include": ["*.php"], "formatter": { "indentWidth": 2 } },
-		{ "include": ["*.blade.php"], "formatter": { "indentWidth": 2 } }
-	]
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+  "files": { "ignoreUnknown": false, "ignore": [], "maxSize": 1048576 },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 300,
+    "attributePosition": "auto",
+    "bracketSpacing": true,
+    "ignore": [
+      "./node_modules",
+      "./public/hot",
+      "./public/storage",
+      "./storage/*.key",
+      "./vendor",
+      "**/.env",
+      "**/.phpunit.result.cache",
+      "**/Homestead.json",
+      "**/Homestead.yaml",
+      "**/npm-debug.log",
+      "**/yarn-error.log",
+      "./composer.lock",
+      "**/*.env",
+      "./composer.phar",
+      "./.github",
+      "./public/js"
+    ]
+  },
+  "organizeImports": { "enabled": true },
+  "linter": { "enabled": true, "rules": { "recommended": true } },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "es5",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto",
+      "bracketSpacing": true
+    }
+  },
+  "overrides": [
+    { "include": ["*.php"], "formatter": { "indentWidth": 2 } },
+    { "include": ["*.blade.php"], "formatter": { "indentWidth": 2 } }
+  ]
 }
