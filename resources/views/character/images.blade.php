@@ -74,7 +74,7 @@
     @endif
   </h3>
 
-  <ul class="grid grid-4-col w-100 image-nav mb-2" @if ($canManage) id="sortable" @endif>
+  <ul class="grid nav grid-4-col w-100 image-nav mb-2" @if ($canManage) id="sortable" @endif>
     @foreach ($character->images($user)->get() as $image)
       <div class="text-center nav-item sort-item" data-id="{{ $image->id }}">
         <i class="sort-handle hover-preview fa-solid fa-grip-horizontal"></i>
