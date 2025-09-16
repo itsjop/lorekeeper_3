@@ -2,7 +2,7 @@
   <a href="{{ $character->character->url }}">
     <img
       src="{{ $loop->count == 1 ? $character->image->imageUrl : $character->image->thumbnailUrl }}"
-      class="mw-100 img-thumbnail hover-preview"
+      class="mw-100 img-thumbnail hover-preview_105"
       alt="{{ $character->fullName }}"
     />
     {{-- @include('browse._masterlist_content_entry', [
