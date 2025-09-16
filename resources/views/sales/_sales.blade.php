@@ -14,15 +14,15 @@
 
   @if ($sales->characters()->count())
 </div>
-
-<div class="grid grid-3-col gap-1 p-4">
+<div class="grid grid-{{ count($sales->characters) < 2 ? count($sales->characters) : 3 }}-col gap-1 p-4">
   @foreach ($sales->characters as $character)
+
     @if ($character->character->deleted_at)
       <div class="alert alert-warning my-auto mx-2">
         <i class="fas fa-exclamation-triangle"></i> This character has been deleted.
       </div>
     @else
-      @include('sales._character', ['character' => $character, 'loop' => $loop])
+      @include('sales._character', ['character' => $character, 'loop' => $loop, 'total' => count($sales->characters)])
     @endif
     {{-- {!! $loop->even ? '<div class="w-100">
 </div>' : '' !!} --}}
