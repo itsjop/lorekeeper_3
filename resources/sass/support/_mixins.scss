@@ -4,7 +4,9 @@
   background-color: color-mix(in srgb, $color calc(100% * $opacity), transparent);
   backdrop-filter: saturate(var(--var_backdrop-saturate)) blur(var(--var_backdrop-blur));
   transition: backdrop-filter 0.5s;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600_fixed) 20%, transparent);
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--primary-clr_600_fixed) 20%, transparent),
+    0 0 5px inset var(--white);
 }
 
 @mixin card-bg($color: var(--body-color), $opacity: 0.7) {
@@ -28,7 +30,9 @@
   @if ($opacity != 0) {
     @if ($onlyOnHover == 0) {
       @if ($box_shadow == 0) {
-        filter: drop-shadow((-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--primary-clr_800_fixed) $opacity, transparent))
+        filter: drop-shadow(
+            (-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--primary-clr_800_fixed) $opacity, transparent)
+          )
           drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--primary-clr_800_fixed) $opacity, transparent));
       }
       @if ($box_shadow == 1) {
@@ -47,7 +51,9 @@
         filter: drop-shadow(
             (-$offset_x / 2) $offset_y $blur color-mix(in srgb, var(--primary-clr_800_fixed) $opacity_hover, transparent)
           )
-          drop-shadow(($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--primary-clr_800_fixed) $opacity_hover, transparent));
+          drop-shadow(
+            ($offset_x / 2) $offset_y $blur color-mix(in srgb, var(--primary-clr_800_fixed) $opacity_hover, transparent)
+          );
       }
       @if ($box_shadow == 1) {
         box-shadow:
@@ -83,7 +89,7 @@
 
 @mixin header-top {
   background-image: url('images/overlays/otis-redding_noise.png');
-  background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
+  background-color: color-mix(in srgb, light-dark(var(--primary-clr_800), var(--primary-clr_700)) 70%, transparent);
   box-shadow: 0 0 10px color-mix(in srgb, var(--primary-clr_600) 20%, transparent);
   border-radius: 15px 15px 0 0;
   padding: 5px;

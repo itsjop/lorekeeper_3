@@ -6,6 +6,8 @@
 - all of dark mode
 
 - something in modmail is breaking :/
+- modmail defeault sucks
+- transfer ui makes you scroll all names
 
 # Styling Issues:
 - [~] masterlist redo

@@ -1,158 +1,80 @@
 :root {
   color-scheme: light dark;
 }
+// prettier-ignore
 .app {
   /* TODO: Update to more usable color-mix:
     (https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/)
   */
 
-  // &.light {
-  //   color-scheme: light;
-  // }
-  // &.dark {
-  //   color-scheme: dark;
-  // }
+  // &.light { color-scheme: light; }
+  // &.dark { color-scheme: dark; }
+
+  --primary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
+  --secondary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
+
+  --black: var(--primary-clr_900);
+
+  --white: var(--primary-clr_50);
+  --purewhite: light-dark(#fff, #000);
+
+  --body-color: light-dark(var(--primary-clr_50), var(--primary-clr_100));
+
+
   /* Colors */
-  --clr_mode: oklab;
+  --clr_mode: hsl;
   --clr_length: longer hue;
   // Color stops
-  --clr_stop-light-25: 85%;
-  --clr_stop-light-50: 80%;
-  --clr_stop-light-100: 70%;
-  --clr_stop-light-200: 55%;
-  --clr_stop-light-300: 40%;
-  --clr_stop-light-400: 20%;
-  --clr_stop-light-500: 00%;
+  --clr_stop-lite-25:  85%;
+  --clr_stop-lite-50:  80%;
+  --clr_stop-lite-100: 70%;
+  --clr_stop-lite-200: 55%;
+  --clr_stop-lite-300: 4%;
+  --clr_stop-lite-400: 20%;
+  --clr_stop-lite-500: 00%;
   --clr_stop-dark-600: 20%;
-  --clr_stop-dark-700: 30%;
-  --clr_stop-dark-800: 50%;
+  --clr_stop-dark-700: 40%;
+  --clr_stop-dark-800: 60%;
   --clr_stop-dark-900: 70%;
   --clr_stop-dark-950: 80%;
 
   // Purple-specific Color
-  --clr_raw_primary: #8e76ed;
-  --clr_primary_white-target: color-mix(in var(--clr_mode), var(--clr_raw_primary), white 90%);
-  --clr_primary_dark-target: color-mix(in var(--clr_mode), var(--clr_raw_primary), black 80%);
+  --clr_primary_root: #8e76ed;
+  --clr_primary_white-target: color-mix(in var(--clr_mode), var(--clr_primary_root), white 90%);
+  --clr_primary_dark-target: color-mix(in var(--clr_mode), var(--clr_primary_root), #171717 90%);
 
-  --clr_raw_primary-25: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_white-target) var(--clr_stop-light-25)
-  );
-  --clr_raw_primary-50: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_white-target) var(--clr_stop-light-50)
-  );
-  --clr_raw_primary-100: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_white-target) var(--clr_stop-light-100)
-  );
-  --clr_raw_primary-200: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_white-target) var(--clr_stop-light-200)
-  );
-  --clr_raw_primary-300: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_white-target) var(--clr_stop-light-300)
-  );
-  --clr_raw_primary-400: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_white-target) var(--clr_stop-light-400)
-  );
-  --clr_raw_primary-500: var(--clr_raw_primary);
-  --clr_raw_primary-600: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_dark-target) var(--clr_stop-dark-600)
-  );
-  --clr_raw_primary-700: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_dark-target) var(--clr_stop-dark-700)
-  );
-  --clr_raw_primary-800: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_dark-target) var(--clr_stop-dark-800)
-  );
-  --clr_raw_primary-900: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_dark-target) var(--clr_stop-dark-900)
-  );
-  --clr_raw_primary-950: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_primary),
-    var(--clr_primary_dark-target) var(--clr_stop-dark-950)
-  );
+  --clr_raw_primary-25: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-25));
+  --clr_raw_primary-50: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-50));
+  --clr_raw_primary-100: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-100));
+  --clr_raw_primary-200: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-200));
+  --clr_raw_primary-300: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-300));
+  --clr_raw_primary-400: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-400));
+  --clr_raw_primary-500: var(--clr_primary_root);
+  --clr_raw_primary-600: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-600));
+  --clr_raw_primary-700: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-700));
+  --clr_raw_primary-800: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-800));
+  --clr_raw_primary-900: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-900));
+  --clr_raw_primary-950: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-950));
 
   --clr_raw_secondary: #35a4dc;
   --clr_secondary_white-target: color-mix(in var(--clr_mode), var(--clr_raw_secondary), white 90%);
   --clr_secondary_dark-target: color-mix(in var(--clr_mode), var(--clr_raw_secondary), black 80%);
 
-  --clr_raw_secondary-25: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_white-target) var(--clr_stop-light-25)
-  );
-  --clr_raw_secondary-50: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_white-target) var(--clr_stop-light-50)
-  );
-  --clr_raw_secondary-100: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_white-target) var(--clr_stop-light-100)
-  );
-  --clr_raw_secondary-200: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_white-target) var(--clr_stop-light-200)
-  );
-  --clr_raw_secondary-300: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_white-target) var(--clr_stop-light-300)
-  );
-  --clr_raw_secondary-400: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_white-target) var(--clr_stop-light-400)
-  );
+  --clr_raw_secondary-25: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-25));
+  --clr_raw_secondary-50: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-50));
+  --clr_raw_secondary-100: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-100));
+  --clr_raw_secondary-200: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-200));
+  --clr_raw_secondary-300: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-300));
+  --clr_raw_secondary-400: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-400));
   --clr_raw_secondary-500: var(--clr_raw_secondary);
-  --clr_raw_secondary-600: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_dark-target) var(--clr_stop-dark-600)
-  );
-  --clr_raw_secondary-700: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_dark-target) var(--clr_stop-dark-700)
-  );
-  --clr_raw_secondary-800: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_dark-target) var(--clr_stop-dark-800)
-  );
-  --clr_raw_secondary-900: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_dark-target) var(--clr_stop-dark-900)
-  );
-  --clr_raw_secondary-950: color-mix(
-    in var(--clr_mode),
-    var(--clr_raw_secondary),
-    var(--clr_secondary_dark-target) var(--clr_stop-dark-950)
-  );
+  --clr_raw_secondary-600: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-600));
+  --clr_raw_secondary-700: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-700));
+  --clr_raw_secondary-800: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-800));
+  --clr_raw_secondary-900: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-900));
+  --clr_raw_secondary-950: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-950));
 
-  // Calculated Values
+  // Calculated Values //
+  // Primary
   --primary-clr_25: light-dark(var(--clr_raw_primary-25), var(--clr_raw_primary-950));
   --primary-clr_50: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
   --primary-clr_100: light-dark(var(--clr_raw_primary-100), var(--clr_raw_primary-900));
@@ -165,7 +87,7 @@
   --primary-clr_800: light-dark(var(--clr_raw_primary-800), var(--clr_raw_primary-200));
   --primary-clr_900: light-dark(var(--clr_raw_primary-900), var(--clr_raw_primary-100));
   --primary-clr_950: light-dark(var(--clr_raw_primary-950), var(--clr_raw_primary-50));
-
+  // Secondary
   --secondary-clr_50: light-dark(var(--clr_raw_secondary-50), var(--clr_raw_secondary-950));
   --secondary-clr_100: light-dark(var(--clr_raw_secondary-100), var(--clr_raw_secondary-900));
   --secondary-clr_200: light-dark(var(--clr_raw_secondary-200), var(--clr_raw_secondary-800));
@@ -203,13 +125,4 @@
   --secondary-clr_900_fixed: var(--clr_raw_secondary-900);
   --secondary-clr_950_fixed: var(--clr_raw_secondary-950);
 
-  --primary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
-  --secondary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
-
-  --black: var(--primary-clr_900);
-
-  --white: var(--primary-clr_50);
-  --purewhite: light-dark(#fff, #000);
-
-  --body-color: light-dark(var(--primary-clr_50), var(--primary-clr_100));
 }

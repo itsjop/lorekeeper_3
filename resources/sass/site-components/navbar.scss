@@ -4,7 +4,8 @@
     #header-nav {
       @include body-bg;
       container: main-nav / inline-size;
-      background-color: color-mix(in srgb, light-dark(var(--primary-clr_700), var(--primary-clr_400)) 70%, transparent);
+      background-color: color-mix(in srgb, light-dark(var(--primary-clr_700), var(--primary-clr_300)) 70%, transparent);
+      box-shadow: 0 0 5px inset var(--white);
       grid-area: nav;
       border-radius: 20px;
       z-index: 3;

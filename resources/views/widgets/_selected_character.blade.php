@@ -1,5 +1,5 @@
 <div class="profile-assets-content grid pi-center w-100 pb-2">
-  <div class="selected-header card-title w-100 text-center br-top-10 p-1"> Selected Character </div>
+  <div class="selected-header card-title w-100 text-center br-top-10 p-1"> Your Selected Character </div>
   @if ($character)
     <a class="grid pi-center" href="{{ $character->url }}">
       <img
@@ -20,6 +20,6 @@
       character. </p>
   @endif
   <div class="text-center">
-    <a href="{{ $user->url . '/characters' }}" class="btn btn-primary"> View All Characters </a>
+    <a href="{{ $user->url . '/characters' }}" class="btn btn-primary m-3 p-2"> View All Characters </a>
   </div>
 </div>

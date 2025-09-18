@@ -23,7 +23,11 @@
             class="img-char-thumbnail"
           />
         </a>
-        <a class="name h5 mb-0 ta-center" href="{{ $featured->url }}">
+        <a
+          class="name h5 mb-0 ta-center"
+          href="{{ $featured->url }}"
+          style="width: calc(var(--sidebar-width) - 20px); text-align: center;"
+        >
           @if (!$featured->is_visible)
             <i class="fas fa-eye-slash"></i>
           @endif {{ $featured->name }}
@@ -73,8 +77,10 @@
           Star of the Week!
         </a>
         <div class="meta">
-          <a class="name h5 mb-0 ta-center {{ strlen($featured->name) > 10 ? 'name-sm' : (strlen($featured->name) < 6 ? 'name-lg' : '') }}"
+          <a
+            class="name h5 mb-0 ta-center {{ strlen($featured->name) > 10 ? 'name-sm' : (strlen($featured->name) < 6 ? 'name-lg' : '') }}"
             href="{{ $featured->url }}"
+            style="width: calc(var(--sidebar-width) - 20px); text-align: center;"
           >
             @if (!$featured->is_visible)
               <i class="fas fa-eye-slash"></i>
