@@ -59,10 +59,10 @@ class ReportManager extends Service {
             //     true
             // );
 
-            if (is_array($response)) {
-                flash($response['error'])->error();
-                throw new \Exception('Failed to create webhook.');
-            }
+            // if (is_array($response)) {
+            //     flash($response['error'])->error();
+            //     throw new \Exception('Failed to create webhook.');
+            // }
 
             return $this->commitReturn($report);
         } catch (\Exception $e) {
