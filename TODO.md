@@ -5,6 +5,11 @@
   - [x] Resale information isn't saving when editing an item
 - [x] mod mail show outgoing user name
 - [x] completed raffles sorted by time instead of whatever it is now
+- [ ] hover label on Closed for Trade labels
+- [ ] replace main body blur with fake pre-rendered blur (maybe?)
+- [ ] look into @property for animated gradients
+- [ ] redo theming colorspace (with fallbacks) with new h s l model
+- [ ] details with same-names create an exclusive accordian
 - [ ] design update default to pure palette
 - [ ] new news post - saved as a draft, reposted, - does not give NEW notification (or scheduled)
 - [ ] duplicated characters on prompt submission

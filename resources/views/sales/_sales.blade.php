@@ -14,7 +14,7 @@
 
   @if ($sales->characters()->count())
 </div>
-<div class="grid grid-{{ count($sales->characters) < 2 ? count($sales->characters) : 3 }}-col gap-1 p-4">
+<div class="grid grid-{{ count($sales->characters) <= 2 ? count($sales->characters) : 3 }}-col gap-1 p-4">
   @foreach ($sales->characters as $character)
 
     @if ($character->character->deleted_at)
