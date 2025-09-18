@@ -8,8 +8,12 @@
   $(function() {
 
     $('.cp').colorpicker();
+
     $('[data-bs-toggle="tooltip"]').tooltip({
-      html: true
+      html: true,
+      placement: "bottom",
+      container: '#app',
+      customClass: 'tooltip-fix',
     });
 
     tinymce.init({
@@ -157,9 +161,7 @@
 
   $(document).mousemove(function(e) {
     // check if $('#Image-Maps-Com-process-map') exists
-    if ($('#Image-Maps-Com-process-map').length == 0) {
-      return;
-    }
+    if ($('#Image-Maps-Com-process-map').length == 0) return;
     var mouseX = e.pageX - $('#Image-Maps-Com-process-map').offset().left;
     var mouseY = e.pageY - $('#Image-Maps-Com-process-map').offset().top - 5;
     $('.tooltip').css({

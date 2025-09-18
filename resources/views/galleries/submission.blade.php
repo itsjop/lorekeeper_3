@@ -138,27 +138,26 @@
                         $submission->isVisible
                 )
                   {!! Form::open(['url' => '/gallery/favorite/' . $submission->id]) !!}
-                  {{ $submission->favorites->count() }} {!! Form::button(
-                      '<i class="fas fa-star">
-                                                      </i> ',
-                      [
-                          'style' => 'border:0; border-radius:.5em;',
-                          'class' => $submission->favorites->where('user_id', Auth::user()->id)->first() != null ? 'btn-success' : '',
-                          'data-toggle' => 'tooltip',
-                          'title' =>
-                              ($submission->favorites->where('user_id', Auth::user()->id)->first() == null ? 'Add to' : 'Remove from') .
-                              ' your Favorites',
-                          'type' => 'submit'
-                      ]
-                  ) !!} ・
+                  {{ $submission->favorites->count() }} {!! Form::button('<i class="fas fa-star"></i> ', [
+                      'style' => 'border:0; border-radius:.5em;',
+                      'class' => $submission->favorites->where('user_id', Auth::user()->id)->first() != null ? 'btn-success' : '',
+                      'data-toggle' => 'tooltip',
+                      'title' =>
+                          ($submission->favorites->where('user_id', Auth::user()->id)->first() == null ? 'Add to' : 'Remove from') .
+                          ' your Favorites',
+                      'type' => 'submit'
+                  ]) !!} ・
                   {{ $submission->comments->where('type', 'User-User')->count() }} <i class="fas fa-comment"></i>
                   {!! Form::close() !!}
                 @else
-                  {{ $submission->favorites->count() }} <i
+                  {{ $submission->favorites->count() }}
+                  <i
                     class="fas fa-star"
                     data-bs-toggle="tooltip"
                     title="Favorites"
-                  ></i> ・ {{ $submission->comments->where('type', 'User-User')->count() }} <i
+                  ></i>
+                  ・ {{ $submission->comments->where('type', 'User-User')->count() }}
+                  <i
                     class="fas fa-comment"
                     data-bs-toggle="tooltip"
                     title="Comments"
@@ -217,8 +216,8 @@
                   <div class="mb-2">
                     <div class="d-flex"> {!! $collaborator->has_approved
                         ? '<div class="mb-2 mr-2 text-success" data-bs-toggle="tooltip" title="Has Approved">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fas fa-check"></i>
-                                                            </div>'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="fas fa-check"></i>
+                                                                                                                                                                </div>'
                         : '' !!}{!! $collaborator->user->displayName !!}:
                     </div>
                     <div class="d-flex">
@@ -238,8 +237,8 @@
                   <div class="d-flex">
                     {!! $collaborator->has_approved
                         ? '<div class="mb-2 mr-2 text-success" data-bs-toggle="tooltip" title="Has Approved">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fas fa-check"></i>
-                                                            </div>'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="fas fa-check"></i>
+                                                                                                                                                                </div>'
                         : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                   </div>
                 @endif
@@ -253,8 +252,8 @@
                 <div class="d-flex">
                   {!! $submission->status == 'Pending' && $collaborator->has_approved
                       ? '<div class="mb-2 mr-2 text-success" data-bs-toggle="tooltip" title="Has Approved">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <i class="fas fa-check"></i>
-                                                      </div>'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="fas fa-check"></i>
+                                                                                                                                                </div>'
                       : '' !!} {!! $collaborator->user->displayName !!}: {{ $collaborator->data }}
                 </div>
               @endforeach

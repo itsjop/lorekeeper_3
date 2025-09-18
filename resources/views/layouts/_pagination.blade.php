@@ -32,8 +32,7 @@
             data-placement="top"
             data-title="Jump to Page"
             data-html="true"
-            data-content="<div class='paginationPopoverContent'>
-</div>"
+            data-content="<div class='paginationPopoverContent'></div>"
           >
             <span class="page-link"> {{ $element }} </span>
           </li>
