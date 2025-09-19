@@ -104,10 +104,10 @@
   .grid-6-col { grid-template-columns: repeat(4, 1fr); } .grid-5-col { grid-template-columns: repeat(3, 1fr); }
   .grid-3-col { grid-template-columns: repeat(3, 1fr); }
 }
+@container main-container (width < 800px) {  .grid-2-col { grid-template-columns: repeat(1, 1fr); }}
 @container main-container (width < 700px) {
   .grid-6-col { grid-template-columns: repeat(3, 1fr); } .grid-5-col { grid-template-columns: repeat(3, 1fr); }
   .grid-4-col { grid-template-columns: repeat(3, 1fr); } .grid-3-col { grid-template-columns: repeat(2, 1fr); }
-  .grid-2-col { grid-template-columns: repeat(1, 1fr); }
   .grid-5-2-col { grid-template-columns: repeat(4, 1fr); } .grid-4-2-col { grid-template-columns: repeat(3, 1fr); }
   .grid-table {
     grid-template-rows: unset;
@@ -117,12 +117,13 @@
 
 @container main-container (width < 600px) {
   .grid-6-col { grid-template-columns: repeat(3, 1fr); } .grid-5-col { grid-template-columns: repeat(2, 1fr); }
-  .grid-4-col { grid-template-columns: repeat(2, 1fr); } .grid-3-col { grid-template-columns: repeat(1, 1fr); }
+  .grid-4-col { grid-template-columns: repeat(2, 1fr); } .grid-2-col { grid-template-columns: repeat(1, 1fr); }
   .grid-5-2-col { grid-template-columns: repeat(2, 1fr); } .grid-4-2-col { grid-template-columns: repeat(2, 1fr); }
 }
 
 @container main-container (width < 400px) {
-  .grid-6-col { grid-template-columns: repeat(2, 1fr); } .grid-5-col { grid-template-columns: repeat(1, 1fr); } .grid-4-col { grid-template-columns: repeat(1, 1fr);}
+  .grid-6-col { grid-template-columns: repeat(2, 1fr); } .grid-5-col { grid-template-columns: repeat(1, 1fr); }
+  .grid-4-col { grid-template-columns: repeat(1, 1fr);} .grid-3-col { grid-template-columns: repeat(1, 1fr);}
   .grid-5-2-col { grid-template-columns: repeat(1, 1fr); } .grid-4-2-col { grid-template-columns: repeat(1, 1fr); }
 }
 

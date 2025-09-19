@@ -1,4 +1,4 @@
-<div class="card grid pi-center pc-center {{ $total < 2 ? 'grid-2-col' : '' }}">
+<div class="card grid pi-center pc-center {{ $total < 2 ? 'grid-2-col' : ($salesColumns % 2 == 0 ? 'grid-2-col-fixed' : '') }}">
   <a href="{{ $character->character->url }}">
     <img
       src="{{ $loop->count == 1 ? $character->image->imageUrl : $character->image->thumbnailUrl }}"

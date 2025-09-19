@@ -484,6 +484,11 @@ body.teal {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+@container main-container (width < 800px) {
+  #app .grid-2-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 @container main-container (width < 700px) {
   #app .grid-6-col {
     grid-template-columns: repeat(3, 1fr);
@@ -496,9 +501,6 @@ body.teal {
   }
   #app .grid-3-col {
     grid-template-columns: repeat(2, 1fr);
-  }
-  #app .grid-2-col {
-    grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-5-2-col {
     grid-template-columns: repeat(4, 1fr);
@@ -525,7 +527,7 @@ body.teal {
   #app .grid-4-col {
     grid-template-columns: repeat(2, 1fr);
   }
-  #app .grid-3-col {
+  #app .grid-2-col {
     grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-5-2-col {
@@ -543,6 +545,9 @@ body.teal {
     grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-4-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #app .grid-3-col {
     grid-template-columns: repeat(1, 1fr);
   }
   #app .grid-5-2-col {
@@ -1190,8 +1195,8 @@ body {
   z-index: 1;
   background-color: color-mix(in srgb, var(--active-clr_25) 70%, transparent);
   background-image: url("images/reveriefullres_blur.png");
-  background-size: cover;
   background-attachment: fixed;
+  background-size: cover;
 }
 #app #site-wrapper #main-content .content-wrapper {
   position: relative;
@@ -1242,6 +1247,11 @@ body {
   }
   #app #selected-character.profile {
     display: initial;
+  }
+}
+@media (width <= 800px) {
+  #app #site-wrapper #main-content {
+    background-image: unset;
   }
 }
 @media (width <= 600px) {
@@ -3251,8 +3261,8 @@ body {
 .featured-character .details-sb .thumb .character-border .stars::before, .featured-character .details-sb .thumb .character-border .stars::after {
   content: "";
   position: absolute;
-  width: calc(0.8 * var(--sidebar-width));
-  height: calc(0.8 * var(--sidebar-width));
+  width: var(--sidebar-width);
+  height: var(--sidebar-width);
   animation: stars 10s linear forwards infinite;
   background-image: url("images/overlays/starring.png");
   background-repeat: repeat;

@@ -387,8 +387,8 @@
           &::after {
             content: '';
             position: absolute;
-            width: calc(0.8 * var(--sidebar-width));
-            height: calc(0.8 * var(--sidebar-width));
+            width: var(--sidebar-width);
+            height: var(--sidebar-width);
             animation: stars 10s linear forwards infinite;
             background-image: url('images/overlays/starring.png');
             background-repeat: repeat;

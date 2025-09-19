@@ -50,8 +50,8 @@
       z-index: 1;
       background-color: color-mix(in srgb, var(--active-clr_25) 70%, transparent);
       background-image: url('images/reveriefullres_blur.png');
-      background-size: cover;
       background-attachment: fixed;
+      background-size: cover;
       // .main-backdrop {
       //   z-index: 0;
       //   @include body-bg;
@@ -76,10 +76,6 @@
       top: 0;
       left: 0;
       background-image: url('images/somnivores/reveriefullres.webp');
-      // background-image: url('/images/somnivores/reveriefullres.webp');
-      // --site-bg-dark: url('images/somnivores/reveriefullres_dark.webp');
-      // --site-bg-lite: url('images/somnivores/reveriefullres.webp');
-      // background-image: light-dark(var(--site-bg-lite), var(--site-bg-dark));
       background-size: cover;
     }
   }
@@ -125,6 +121,11 @@
         display: initial;
       }
     }
+  }
+}
+@media (width <= 800px) {
+  #app #site-wrapper #main-content {
+    background-image: unset;
   }
 }
 @media (width <= 600px) {
