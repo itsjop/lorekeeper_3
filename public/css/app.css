@@ -1188,9 +1188,9 @@ body {
   border-radius: 15px;
   container: main-container/inline-size;
   z-index: 1;
+  background-color: color-mix(in srgb, var(--active-clr_25) 70%, transparent);
   background-image: url("images/reveriefullres_blur.png");
   background-size: cover;
-  background-position: cover;
   background-attachment: fixed;
 }
 #app #site-wrapper #main-content .content-wrapper {

@@ -77,6 +77,18 @@
       // resize image map
       $map.imageMapResize();
     });
+
+    // Sidebar Toggling
+    document.querySelectorAll('.details-sb').forEach(detail => {
+      // setRows(detail);
+      let summary = detail.querySelector(":scope > summary");
+      summary.addEventListener('click', () => {
+        detail.toggleAttribute("data-open");
+        // setRows(detail);
+      });
+    });
+
+
     // check if $('#Image-Maps-Com-process-map') exists
     $(document).mousemove(function(e) {
       if ($('#Image-Maps-Com-process-map').length == 0) return;
