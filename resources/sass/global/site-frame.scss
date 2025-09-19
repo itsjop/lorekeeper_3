@@ -24,30 +24,22 @@
   --ideal-content-width: calc(100dvw - 40px - var(--gutters-width) - var(--sidebars-width));
   --content-width: clamp(var(--content-min-width), var(--ideal-content-width), var(--content-max-width));
   --app-width: calc(var(--content-width) + var(--app-gap-x) + var(--sidebars-width));
+
   #site-wrapper {
     display: grid;
-    // grid-template:
-    //   'logo  ' 20vh
-    //   'nav   ' max-content
-    //   'char  ' max-content
-    //   'main  ' auto
-    //   'footer' max-content
-    //   / auto;
     gap: var(--app-gap-x) var(--app-gap-y);
     position: relative;
-    max-width: calc(100dvw - var(--gutters-width));
+    --wrapper-max-width: calc(100dvw - var(--gutters-width));
+    max-width: var(--wrapper-max-width);
     height: min-content;
-    // &.has-sidebar {
+    --header-logo-height: clamp(150px, 15vh, 300px);
+    --header-nav-height: 50px;
     grid-template:
-      '   .     logo    . ' clamp(150px, 15vh, 300px)
-      '   .     nav     . ' min-content
+      '   .     logo    . ' var(--header-logo-height)
+      '   .     nav     . ' var(--header-nav-height)
       'sidebar  main  char' auto
       'sidebar footer char' auto
       / var(--sidebar-width) var(--content-width) var(--sidebar-width);
-    // }
-    // left: calc(-0.2 * var(--sidebar-width)); /* sidebar offset */
-  }
-  #site-wrapper {
     padding-bottom: 55px;
     #main-content {
       grid-area: main;
@@ -56,13 +48,18 @@
       border-radius: 15px;
       container: main-container / inline-size;
       z-index: 1;
-      .main-backdrop {
-        z-index: 0;
-        @include body-bg;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
+
+      background-image: url('images/reveriefullres_blur.png');
+      background-size: cover;
+      background-position: cover;
+      background-attachment: fixed;
+      // .main-backdrop {
+      //   z-index: 0;
+      //   @include body-bg;
+      //   position: absolute;
+      //   width: 100%;
+      //   height: 100%;
+      // }
       .content-wrapper {
         position: relative;
         z-index: 1;
