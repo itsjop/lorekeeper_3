@@ -374,7 +374,7 @@
       @endguest
     </ul>
     <div class="clocktainer">
-      <div class="cash">
+      <a class="cash" href="/bank">
         @if (Auth::user())
           @foreach (Auth::user()->getCurrencies(true)->where('id', 1) as $currency)
             {!! $currency->display($currency->quantity) !!}
@@ -383,7 +383,7 @@
       @else
         - - - -
       @endif
-    </div>
+    </a>
     <?php
       // set default timezone
       date_default_timezone_set('America/New_York'); // EDT

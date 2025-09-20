@@ -1,13 +1,5 @@
 # Open Issues:
-- [~] masterlist redo
-- [x] Character visibility toggle doesnt work
-- [x] Investigate why resale doesn't work
-  - [x] Resale information isn't saving when editing an item
-- [x] mod mail show outgoing user name
-- [x] completed raffles sorted by time instead of whatever it is now
-- [x] hover label on Closed for Trade labels
-- [x] replace main body blur with fake pre-rendered blur
-- [ ] clicking on lunes takes you the bank 
+- [ ] clicking on lunes takes you the bank
 - [ ] the change TH link button is not working (account settings?)
 - [ ] All headings with copyable link
   - [ ] Include javascript 📁 button to copy the full link
@@ -75,7 +67,14 @@
 - [x] live server time for clock
 - [x] redo mobile sidebar
 - [?] app.css `filemtime()` https://github.com/lk-arpg/lorekeeper/blob/release/v3.0.0/resources/views/layouts/app.blade.php#L63
-
+- [~] masterlist redo
+- [x] Character visibility toggle doesnt work
+- [x] Investigate why resale doesn't work
+  - [x] Resale information isn't saving when editing an item
+- [x] mod mail show outgoing user name
+- [x] completed raffles sorted by time instead of whatever it is now
+- [x] hover label on Closed for Trade labels
+- [x] replace main body blur with fake pre-rendered blur
 - [x] remove sex
 - [x] system clock
 - [x] currency counter? [root-level](app/Models/Currency/Currency.php#310)

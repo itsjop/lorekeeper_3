@@ -13,35 +13,29 @@
 
   <h3> Currencies </h3>
   @foreach (Auth::user()->getCurrencies(true, true) as $category => $currencies)
-    <div class="card mb-2">
-      @if ($currencies->first()->category)
-        <div class="card-header">
-          <h5 class="mb-0"> {!! $currencies->first()->category->displayName !!} </h5>
+    @if ($currencies->first()->category)
+      <hr>
+      <h5 class="mb-2"> {!! $currencies->first()->category->displayName !!} </h5>
+    @endif
+    <div class="flex jc-start ji-start gap-1">
+      @foreach ($currencies as $currency)
+        <div class="card-basic flex ai-center ji-start jc-start gap-1 m-0 p-3">
+          <strong>
+            <a href="{{ $currency->url }}">
+              {{ $currency->name }}
+              @if ($currency->abbreviation)
+                ({{ $currency->abbreviation }})
+              @endif
+            </a>
+          </strong>
+          <div>
+            {{ $currency->quantity }}
+            @if ($currency->has_icon)
+              {!! $currency->displayIcon !!}
+            @endif
+          </div>
         </div>
-      @endif
-      <ul class="list-group list-group-flush">
-        @foreach ($currencies as $currency)
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-lg-2 col-md-3 col-6 text-right">
-                <strong>
-                  <a href="{{ $currency->url }}">
-                    {{ $currency->name }}
-                    @if ($currency->abbreviation)
-                      ({{ $currency->abbreviation }})
-                    @endif
-                  </a>
-                </strong>
-              </div>
-              <div class="col-lg-10 col-md-9 col-6">
-                {{ $currency->quantity }} @if ($currency->has_icon)
-                  {!! $currency->displayIcon !!}
-                @endif
-              </div>
-            </div>
-          </li>
-        @endforeach
-      </ul>
+      @endforeach
     </div>
   @endforeach
   <div class="text-right mb-4">
@@ -60,7 +54,7 @@
           {!! Form::select('currency_id', $convertOptions, null, [
               'class' => 'form-control',
               'placeholder' => 'Select Currency',
-              'id' => 'convert-currency',
+              'id' => 'convert-currency'
           ]) !!}
         </div>
       </div>
