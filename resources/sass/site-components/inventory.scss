@@ -127,13 +127,13 @@
   &.rare {
     --card_background: #ffebc4;
     --card_star_opacity: 0.5;
-    --card_star_animation-duration: 25s;
+    --card_star_animation-duration: 32s;
     --card_star_blend-mode: normal;
   }
   &.mystic {
     --card_background: linear-gradient(to top right, #bcebff, #f1dfff);
     --card_star_opacity: 0.9;
-    --card_star_animation-duration: 20s;
+    --card_star_animation-duration: 35s;
     --card_star_blend-mode: overlay;
   }
 }

@@ -1,28 +1,31 @@
-# Styling Issues:
+# Open Issues:
 - [~] masterlist redo
 - [x] Character visibility toggle doesnt work
 - [x] Investigate why resale doesn't work
   - [x] Resale information isn't saving when editing an item
 - [x] mod mail show outgoing user name
 - [x] completed raffles sorted by time instead of whatever it is now
-- [ ] hover label on Closed for Trade labels
-- [ ] replace main body blur with fake pre-rendered blur (maybe?)
+- [x] hover label on Closed for Trade labels
+- [x] replace main body blur with fake pre-rendered blur
+- [ ] clicking on lunes takes you the bank 
+- [ ] the change TH link button is not working (account settings?)
+- [ ] All headings with copyable link
+  - [ ] Include javascript 📁 button to copy the full link
 - [ ] look into @property for animated gradients
 - [ ] redo theming colorspace (with fallbacks) with new h s l model
-- [ ] details with same-names create an exclusive accordian
+- [ ] native `<details name="">` exclusive toggle for tabs
+  - [ ] details with same-names create an exclusive accordian
 - [ ] design update default to pure palette
 - [ ] new news post - saved as a draft, reposted, - does not give NEW notification (or scheduled)
-- [ ] duplicated characters on prompt submission
+- [x] duplicated characters on prompt submission
 - [ ] gallery preview pass real blurred image instead of of lorekeeper book
 - [ ] Bat transformation should always be listed first
-- [ ] native `<details name="">` exclusive toggle for tabs
 - [ ] Add to User Shop needs to be diagnosed / re-enabled at some point
 - [ ] test SubmissionController with safeJSON() replacement
 - [ ] @supports for navbar container query? not even sure how to test this one
 - [ ] character links strip newlines
 - [ ] sitewide image alt tags
 - [ ] move the ML card wiggle to a standalone component
-- [ ] the change TH link button is not working (account settings?)
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)
