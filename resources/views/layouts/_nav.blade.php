@@ -374,7 +374,7 @@
       @endguest
     </ul>
     <div class="clocktainer">
-      <a class="cash" href="/bank">
+      <a class="cash color-white" href="/bank">
         @if (Auth::user())
           @foreach (Auth::user()->getCurrencies(true)->where('id', 1) as $currency)
             {!! $currency->display($currency->quantity) !!}
@@ -385,9 +385,9 @@
       @endif
     </a>
     <?php
-      // set default timezone
-      date_default_timezone_set('America/New_York'); // EDT
-      $current_date = date('h:i:s A');
+    // set default timezone
+    date_default_timezone_set('America/New_York'); // EDT
+    $current_date = date('h:i:s A');
     ?>
     <div class="clock">
       <i class="fa fa-clock"></i>
@@ -400,6 +400,7 @@
 </nav>
 <script>
   let timeZone = "EST"
+
   function getdate() {
     const date = new Date;
     const now = date.getTime()
