@@ -4505,7 +4505,8 @@ body .modal-backdrop.show {
 #app #custom-page-parsed .card-basic h1[id],
 #app #custom-page-parsed .card-basic h2[id] {
   position: relative;
-  scroll-margin-top: 1em;
+  scroll-margin-top: 1.5em;
+  cursor: copy;
 }
 #app .lore .card-basic h1[id] .lore-copy,
 #app .lore .card-basic h2[id] .lore-copy,

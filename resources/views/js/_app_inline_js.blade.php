@@ -100,44 +100,39 @@
       }).fadeIn('slow');
     });
 
-    // find all heading elements (h1-h6) on the page,
+
+    //////// LORE PAGE ANCHOR COPYING ////////
+    // find all h1/h2 heading elements on the page,
     // append a font-awesome copy itcon to each,
     // add a click event, and copies their URL (with #id) to the clipboard.
     (function() {
-      // Helper to get the current page URL without the hash
-      function getBaseUrl() {
-        return window.location.origin + window.location.pathname + window.location.search;
-      }
-
-      // Get all headings (h1-h6)
-      const headings = document.querySelectorAll('.card-basic h1, .card-basic h2');
-
+      // Get all headings
+      const headings = document.querySelectorAll('#custom-page-parsed .card-basic h1, #custom-page-parsed .card-basic h2');
       headings.forEach((heading) => {
         // If the heading has no id, skip it (cannot link to it)
         if (!heading.id) return;
-        // Create a copy icon element
+
+        // Creates a font-awesome icon element and appends it to the header
         const icon = document.createElement('i');
         icon.className = "lore-copy fa-solid fa-copy";
-        // Append the icon
         heading.appendChild(icon);
 
-
-        heading.style.cursor = 'pointer'; // Indicate it's clickable
-
+        // adds the click event listener and copied label feedback
         heading.addEventListener('click', function(event) {
-          heading.classList.add('clicked');
-          setTimeout(() => {
-            heading.classList.remove('clicked');
-          }, 1100);
           event.preventDefault();
-          const url = `${getBaseUrl()}#${heading.id}`;
+          const url = `${window.location.origin + window.location.pathname + window.location.search}#${heading.id}`;
           // Copy to clipboard
           if (navigator.clipboard) {
             navigator.clipboard.writeText(url)
               .then(() => {
-                // Optional: show feedback
+                // Shows 'copied' feedback
+                heading.classList.add('clicked');
                 heading.title = "Link copied!";
-                setTimeout(() => (heading.title = ""), 1000);
+                // Removes feedback
+                setTimeout(() => {
+                  heading.title = "";
+                  heading.classList.remove('clicked');
+                }, 1100);
               });
           }
         });
