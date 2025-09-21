@@ -464,3 +464,11 @@
   70% { transform: translateY(-1.5em); opacity: 1; }
   100% { transform: translateY(-1em); opacity: 0; }
 }
+html {
+  scroll-behavior: smooth;
+}
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
