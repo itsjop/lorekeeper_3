@@ -43,7 +43,7 @@
         position: relative;
         contain: layout;
         width: 0px;
-        font-size: 0.8em;
+        font-size: min(20px, 0.8em);
         transform: translateX(0px);
         opacity: 0;
         transition:
