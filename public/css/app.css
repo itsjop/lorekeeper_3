@@ -4502,16 +4502,20 @@ body .modal-backdrop.show {
 }
 #app .lore .card-basic h1[id],
 #app .lore .card-basic h2[id],
+#app .lore h1.header[id],
 #app #custom-page-parsed .card-basic h1[id],
-#app #custom-page-parsed .card-basic h2[id] {
+#app #custom-page-parsed .card-basic h2[id],
+#app #custom-page-parsed h1.header[id] {
   position: relative;
   scroll-margin-top: 1.5em;
   cursor: copy;
 }
 #app .lore .card-basic h1[id] .lore-copy,
 #app .lore .card-basic h2[id] .lore-copy,
+#app .lore h1.header[id] .lore-copy,
 #app #custom-page-parsed .card-basic h1[id] .lore-copy,
-#app #custom-page-parsed .card-basic h2[id] .lore-copy {
+#app #custom-page-parsed .card-basic h2[id] .lore-copy,
+#app #custom-page-parsed h1.header[id] .lore-copy {
   position: relative;
   contain: layout;
   width: 0px;
@@ -4522,15 +4526,19 @@ body .modal-backdrop.show {
 }
 #app .lore .card-basic h1[id]:hover .lore-copy,
 #app .lore .card-basic h2[id]:hover .lore-copy,
+#app .lore h1.header[id]:hover .lore-copy,
 #app #custom-page-parsed .card-basic h1[id]:hover .lore-copy,
-#app #custom-page-parsed .card-basic h2[id]:hover .lore-copy {
+#app #custom-page-parsed .card-basic h2[id]:hover .lore-copy,
+#app #custom-page-parsed h1.header[id]:hover .lore-copy {
   transform: translateX(0.6em);
   opacity: 1;
 }
 #app .lore .card-basic h1[id]::after,
 #app .lore .card-basic h2[id]::after,
+#app .lore h1.header[id]::after,
 #app #custom-page-parsed .card-basic h1[id]::after,
-#app #custom-page-parsed .card-basic h2[id]::after {
+#app #custom-page-parsed .card-basic h2[id]::after,
+#app #custom-page-parsed h1.header[id]::after {
   position: relative;
   display: inline-block;
   content: "Copied!";
@@ -4544,8 +4552,10 @@ body .modal-backdrop.show {
 }
 #app .lore .card-basic h1[id].clicked::after,
 #app .lore .card-basic h2[id].clicked::after,
+#app .lore h1.header[id].clicked::after,
 #app #custom-page-parsed .card-basic h1[id].clicked::after,
-#app #custom-page-parsed .card-basic h2[id].clicked::after {
+#app #custom-page-parsed .card-basic h2[id].clicked::after,
+#app #custom-page-parsed h1.header[id].clicked::after {
   animation: copied-popup 1s ease;
   animation: copied-popup 1s var(--spring_linear);
 }
