@@ -107,7 +107,8 @@
     // add a click event, and copies their URL (with #id) to the clipboard.
     (function() {
       // Get all headings
-      const headings = document.querySelectorAll('#custom-page-parsed .card-basic h1, #custom-page-parsed .card-basic h2');
+      const headings = document.querySelectorAll(
+        '#custom-page-parsed h1.header, #custom-page-parsed .card-basic h1, #custom-page-parsed .card-basic h2');
       headings.forEach((heading) => {
         // If the heading has no id, skip it (cannot link to it)
         if (!heading.id) return;
