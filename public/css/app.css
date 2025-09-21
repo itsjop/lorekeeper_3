@@ -4495,6 +4495,59 @@ body .modal-backdrop.show {
   color: transparent;
   text-shadow: none;
 }
+#app .lore h1::before, #app .lore h1::after,
+#app #custom-page-parsed h1::before,
+#app #custom-page-parsed h1::after {
+  color: initial;
+}
+#app .lore .card-basic h1[id],
+#app .lore .card-basic h2[id],
+#app #custom-page-parsed .card-basic h1[id],
+#app #custom-page-parsed .card-basic h2[id] {
+  position: relative;
+  scroll-margin-top: 1em;
+}
+#app .lore .card-basic h1[id] .lore-copy,
+#app .lore .card-basic h2[id] .lore-copy,
+#app #custom-page-parsed .card-basic h1[id] .lore-copy,
+#app #custom-page-parsed .card-basic h2[id] .lore-copy {
+  position: relative;
+  contain: layout;
+  width: 0px;
+  font-size: 0.8em;
+  transform: translateX(0px);
+  opacity: 0;
+  transition: transform 0.3s var(--spring_linear), opacity 0.15s;
+}
+#app .lore .card-basic h1[id]:hover .lore-copy,
+#app .lore .card-basic h2[id]:hover .lore-copy,
+#app #custom-page-parsed .card-basic h1[id]:hover .lore-copy,
+#app #custom-page-parsed .card-basic h2[id]:hover .lore-copy {
+  transform: translateX(0.6em);
+  opacity: 1;
+}
+#app .lore .card-basic h1[id]::after,
+#app .lore .card-basic h2[id]::after,
+#app #custom-page-parsed .card-basic h1[id]::after,
+#app #custom-page-parsed .card-basic h2[id]::after {
+  position: relative;
+  display: inline-block;
+  content: "Copied!";
+  contain: layout;
+  width: 0px;
+  font-size: 0.6em;
+  color: var(--active-clr_600);
+  transform: translateY(0);
+  right: 0;
+  opacity: 0;
+}
+#app .lore .card-basic h1[id].clicked::after,
+#app .lore .card-basic h2[id].clicked::after,
+#app #custom-page-parsed .card-basic h1[id].clicked::after,
+#app #custom-page-parsed .card-basic h2[id].clicked::after {
+  animation: copied-popup 1s ease;
+  animation: copied-popup 1s var(--spring_linear);
+}
 #app .lore h1.header,
 #app #custom-page-parsed h1.header {
   background: linear-gradient(to top, #5d61ff, #360d6a);
@@ -4920,6 +4973,24 @@ body .modal-backdrop.show {
   }
 }
 
+@keyframes copied-popup {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-1.5em);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-1.5em);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1em);
+    opacity: 0;
+  }
+}
 .app .rarity-icon,
 .app .currency-icon {
   align-content: center;

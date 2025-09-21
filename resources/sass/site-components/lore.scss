@@ -26,6 +26,50 @@
       background-clip: text;
       color: transparent;
       text-shadow: none;
+      * >,
+      &::before,
+      &::after {
+        color: initial;
+      }
+    }
+
+    .card-basic {
+      h1[id],
+      h2[id] {
+        position: relative;
+        scroll-margin-top: 1em;
+        .lore-copy {
+          position: relative;
+          contain: layout;
+          width: 0px;
+          font-size: 0.8em;
+          transform: translateX(0px);
+          opacity: 0;
+          transition:
+            transform 0.3s var(--spring_linear),
+            opacity 0.15s;
+        }
+        &:hover .lore-copy {
+          transform: translateX(0.6em);
+          opacity: 1;
+        }
+        &::after {
+          position: relative;
+          display: inline-block;
+          content: 'Copied!';
+          contain: layout;
+          width: 0px;
+          font-size: 0.6em;
+          color: var(--active-clr_600);
+          transform: translateY(0);
+          right: 0;
+          opacity: 0;
+        }
+        &.clicked::after {
+          animation: copied-popup 1s ease;
+          animation: copied-popup 1s var(--spring_linear);
+        }
+      }
     }
     h1.header {
       background: linear-gradient(to top, #5d61ff, #360d6a);
@@ -411,4 +455,12 @@
       width: calc(var(--content-width) - 80px);
     }
   }
+}
+
+// prettier-ignore
+@keyframes copied-popup {
+  0% { transform: translateY(0); opacity: 0; }
+  30% { transform: translateY(-1.5em); opacity: 1; }
+  70% { transform: translateY(-1.5em); opacity: 1; }
+  100% { transform: translateY(-1em); opacity: 0; }
 }

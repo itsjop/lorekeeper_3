@@ -1,5 +1,6 @@
 # Open Issues:
-- [ ] clicking on lunes takes you the bank
+- [x] clicking on lunes takes you the bank
+  - [x] bank redo while youre there
 - [ ] the change TH link button is not working (account settings?)
 - [ ] All headings with copyable link
   - [ ] Include javascript 📁 button to copy the full link
@@ -138,5 +139,5 @@
 - [~] mobile css
 - [x] Critical CSS Render Path to avoid flickering
     - [x] look into caching to avoid redraws?
-- [ ] - [x] Cannot add shop stock
+- [x] Cannot add shop stock
 - [x] 'Set Active' and 'FTO Only' toggles does not save successfully
