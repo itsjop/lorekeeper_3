@@ -1,0 +1,57 @@
+/////////////////////////////// Calculated Colors Values //////////////////////////////
+.app {
+  // Primary
+  --primary-clr_25: light-dark(var(--clr_raw_primary-25), var(--clr_raw_primary-975));
+  --primary-clr_50: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
+  --primary-clr_100: light-dark(var(--clr_raw_primary-100), var(--clr_raw_primary-900));
+  --primary-clr_200: light-dark(var(--clr_raw_primary-200), var(--clr_raw_primary-800));
+  --primary-clr_300: light-dark(var(--clr_raw_primary-300), var(--clr_raw_primary-700));
+  --primary-clr_400: light-dark(var(--clr_raw_primary-400), var(--clr_raw_primary-600));
+  --primary-clr_500: light-dark(var(--clr_raw_primary-500), var(--clr_raw_primary-500));
+  --primary-clr_600: light-dark(var(--clr_raw_primary-600), var(--clr_raw_primary-400));
+  --primary-clr_700: light-dark(var(--clr_raw_primary-700), var(--clr_raw_primary-300));
+  --primary-clr_800: light-dark(var(--clr_raw_primary-800), var(--clr_raw_primary-200));
+  --primary-clr_900: light-dark(var(--clr_raw_primary-900), var(--clr_raw_primary-100));
+  --primary-clr_950: light-dark(var(--clr_raw_primary-950), var(--clr_raw_primary-50));
+  --primary-clr_975: light-dark(var(--clr_raw_primary-975), var(--clr_raw_primary-25));
+  // Secondary
+  --secondary-clr_50: light-dark(var(--root_clr_secondary-50), var(--root_clr_secondary-950));
+  --secondary-clr_100: light-dark(var(--root_clr_secondary-100), var(--root_clr_secondary-900));
+  --secondary-clr_200: light-dark(var(--root_clr_secondary-200), var(--root_clr_secondary-800));
+  --secondary-clr_300: light-dark(var(--root_clr_secondary-300), var(--root_clr_secondary-700));
+  --secondary-clr_400: light-dark(var(--root_clr_secondary-400), var(--root_clr_secondary-600));
+  --secondary-clr_500: light-dark(var(--root_clr_secondary-500), var(--root_clr_secondary-500));
+  --secondary-clr_600: light-dark(var(--root_clr_secondary-600), var(--root_clr_secondary-400));
+  --secondary-clr_700: light-dark(var(--root_clr_secondary-700), var(--root_clr_secondary-300));
+  --secondary-clr_800: light-dark(var(--root_clr_secondary-800), var(--root_clr_secondary-200));
+  --secondary-clr_900: light-dark(var(--root_clr_secondary-900), var(--root_clr_secondary-100));
+  --secondary-clr_950: light-dark(var(--root_clr_secondary-950), var(--root_clr_secondary-50));
+  --secondary-clr_975: light-dark(var(--root_clr_secondary-975), var(--root_clr_secondary-25));
+  // Fixed Values
+  --primary-clr_25_fixed: var(--clr_raw_primary-25);
+  --primary-clr_50_fixed: var(--clr_raw_primary-50);
+  --primary-clr_100_fixed: var(--clr_raw_primary-100);
+  --primary-clr_200_fixed: var(--clr_raw_primary-200);
+  --primary-clr_300_fixed: var(--clr_raw_primary-300);
+  --primary-clr_400_fixed: var(--clr_raw_primary-400);
+  --primary-clr_500_fixed: var(--clr_raw_primary-500);
+  --primary-clr_600_fixed: var(--clr_raw_primary-600);
+  --primary-clr_700_fixed: var(--clr_raw_primary-700);
+  --primary-clr_800_fixed: var(--clr_raw_primary-800);
+  --primary-clr_900_fixed: var(--clr_raw_primary-900);
+  --primary-clr_950_fixed: var(--clr_raw_primary-950);
+  --primary-clr_975_fixed: var(--clr_raw_primary-975);
+  --secondary-clr_25_fixed: var(--root_clr_secondary-25);
+  --secondary-clr_50_fixed: var(--root_clr_secondary-50);
+  --secondary-clr_100_fixed: var(--root_clr_secondary-100);
+  --secondary-clr_200_fixed: var(--root_clr_secondary-200);
+  --secondary-clr_300_fixed: var(--root_clr_secondary-300);
+  --secondary-clr_400_fixed: var(--root_clr_secondary-400);
+  --secondary-clr_500_fixed: var(--root_clr_secondary-500);
+  --secondary-clr_600_fixed: var(--root_clr_secondary-600);
+  --secondary-clr_700_fixed: var(--root_clr_secondary-700);
+  --secondary-clr_800_fixed: var(--root_clr_secondary-800);
+  --secondary-clr_900_fixed: var(--root_clr_secondary-900);
+  --secondary-clr_950_fixed: var(--root_clr_secondary-950);
+  --secondary-clr_975_fixed: var(--root_clr_secondary-975);
+}

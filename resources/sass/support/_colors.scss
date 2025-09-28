@@ -3,126 +3,123 @@
 }
 // prettier-ignore
 .app {
-  /* TODO: Update to more usable color-mix:
-    (https://developer.mozilla.org/en-US/blog/color-palettes-css-color-mix/)
-  */
-
   // &.light { color-scheme: light; }
   // &.dark { color-scheme: dark; }
 
-  --primary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
-  --secondary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
+  // Legacy fallback colors, intended to be overriden
+  --clr_raw_primary-25: #fbf8ff;
+  --clr_raw_primary-50: #f4eefc;
+  --clr_raw_primary-100: #e8ddf7;
+  --clr_raw_primary-200: #e3d5fc;
+  --clr_raw_primary-300: #c7b4fb;
+  --clr_raw_primary-400: #b29bff;
+  --clr_raw_primary-500: #8e76ed;
+  --clr_raw_primary-600: #6e4dd0;
+  --clr_raw_primary-700: #5036ae;
+  --clr_raw_primary-800: #3c1979;
+  --clr_raw_primary-900: #250955;
+  --clr_raw_primary-950: #0f0539;
+  --clr_raw_primary-975: #08031e;
+  --body-color: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-100));
 
+  --root_clr: #8e76ed;
+  --root_clr: oklch(64.347% 0.17242 289.965);
+  --root_clr2: #35a4dc;
+  --root_clr2: oklch(68.168% 0.12733 235.534);
+
+  /////////////////////// Color-mix, slightly more supported ///////////////////////
+  @supports (color: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-25))) {
+    /* Colors */
+    --clr_mode: hsl;
+    --clr_length: longer hue;
+    // Color stops
+    --clr_stop-lite-25:  85%;
+    --clr_stop-lite-50:  80%;
+    --clr_stop-lite-100: 70%;
+    --clr_stop-lite-200: 55%;
+    --clr_stop-lite-300: 40%;
+    --clr_stop-lite-400: 20%;
+    --clr_stop-lite-500: 00%;
+    --clr_stop-dark-600: 20%;
+    --clr_stop-dark-700: 40%;
+    --clr_stop-dark-800: 60%;
+    --clr_stop-dark-900: 70%;
+    --clr_stop-dark-950: 80%;
+
+    --clr_primary_white-target: color-mix(in var(--clr_mode), var(--root_clr), white 90%);
+    --clr_primary_dark-target: color-mix(in var(--clr_mode), var(--root_clr), #171717 90%);
+
+    --clr_raw_primary-25: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-25));
+    --clr_raw_primary-50: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-50));
+    --clr_raw_primary-100: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-100));
+    --clr_raw_primary-200: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-200));
+    --clr_raw_primary-300: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-300));
+    --clr_raw_primary-400: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-400));
+    --clr_raw_primary-500: var(--root_clr);
+    --clr_raw_primary-600: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_dark-target) var(--clr_stop-dark-600));
+    --clr_raw_primary-700: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_dark-target) var(--clr_stop-dark-700));
+    --clr_raw_primary-800: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_dark-target) var(--clr_stop-dark-800));
+    --clr_raw_primary-900: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_dark-target) var(--clr_stop-dark-900));
+    --clr_raw_primary-950: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_dark-target) var(--clr_stop-dark-950));
+
+    --clr_secondary_white-target: color-mix(in var(--clr_mode), var(--root_clr2), white 90%);
+    --clr_secondary_dark-target: color-mix(in var(--clr_mode), var(--root_clr2), black 80%);
+
+    --root_clr2-25: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_white-target) var(--clr_stop-lite-25));
+    --root_clr2-50: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_white-target) var(--clr_stop-lite-50));
+    --root_clr2-100: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_white-target) var(--clr_stop-lite-100));
+    --root_clr2-200: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_white-target) var(--clr_stop-lite-200));
+    --root_clr2-300: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_white-target) var(--clr_stop-lite-300));
+    --root_clr2-400: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_white-target) var(--clr_stop-lite-400));
+    --root_clr2-500: var(--root_clr2);
+    --root_clr2-600: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_dark-target) var(--clr_stop-dark-600));
+    --root_clr2-700: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_dark-target) var(--clr_stop-dark-700));
+    --root_clr2-800: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_dark-target) var(--clr_stop-dark-800));
+    --root_clr2-900: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_dark-target) var(--clr_stop-dark-900));
+    --root_clr2-950: color-mix(in var(--clr_mode), var(--root_clr2), var(--clr_secondary_dark-target) var(--clr_stop-dark-950));
+  }
+
+  /////////////////////////////// Raw color() mixing //////////////////////////////
+  @supports (color: oklch(from var(--root_clr) l c h)) {
+    //    Saved Output     | color mix  |   base mixing   |   Lightness    | C (intensity)  | Hue |
+    //       Color         | function   |      color      |     0 - 1      |    0 - .37     | 360 |
+    --clr_raw_primary-25:    oklch(from   var(--root_clr)   calc(l + 0.39)   calc(c - 0.06)   h );
+    --clr_raw_primary-50:    oklch(from   var(--root_clr)   calc(l + 0.33)   calc(c - 0.06)   h );
+    --clr_raw_primary-100:   oklch(from   var(--root_clr)   calc(l + 0.32)   calc(c - 0.04)   h );
+    --clr_raw_primary-200:   oklch(from   var(--root_clr)   calc(l + 0.25)   calc(c - 0.03)   h );
+    --clr_raw_primary-300:   oklch(from   var(--root_clr)   calc(l + 0.20)   calc(c - 0.00)   h );
+    --clr_raw_primary-400:   oklch(from   var(--root_clr)   calc(l + 0.10)   calc(c - 0.00)   h );
+    --clr_raw_primary-500:   oklch(from   var(--root_clr)        l                c           h );
+    --clr_raw_primary-600:   oklch(from   var(--root_clr)   calc(l - 0.10)   calc(c - 0.00)   h );
+    --clr_raw_primary-700:   oklch(from   var(--root_clr)   calc(l - 0.17)   calc(c - 0.00)   h );
+    --clr_raw_primary-800:   oklch(from   var(--root_clr)   calc(l - 0.25)   calc(c - 0.00)   h );
+    --clr_raw_primary-900:   oklch(from   var(--root_clr)   calc(l - 0.34)   calc(c - 0.05)   h );
+    --clr_raw_primary-950:   oklch(from   var(--root_clr)   calc(l - 0.42)   calc(c - 0.07)   h );
+    --clr_raw_primary-975:   oklch(from   var(--root_clr)   calc(l - 0.48)   calc(c - 0.10)   h );
+
+    --clr_raw_secondary-25:  oklch(from   var(--root_clr2)  calc(l + 0.39)   calc(c - 0.06)   h );
+    --clr_raw_secondary-50:  oklch(from   var(--root_clr2)  calc(l + 0.33)   calc(c - 0.06)   h );
+    --clr_raw_secondary-100: oklch(from   var(--root_clr2)  calc(l + 0.32)   calc(c - 0.04)   h );
+    --clr_raw_secondary-200: oklch(from   var(--root_clr2)  calc(l + 0.25)   calc(c - 0.03)   h );
+    --clr_raw_secondary-300: oklch(from   var(--root_clr2)  calc(l + 0.20)   calc(c - 0.00)   h );
+    --clr_raw_secondary-400: oklch(from   var(--root_clr2)  calc(l + 0.10)   calc(c - 0.00)   h );
+    --clr_raw_secondary-500: oklch(from   var(--root_clr2)       l                c           h );
+    --clr_raw_secondary-600: oklch(from   var(--root_clr2)  calc(l - 0.10)   calc(c - 0.00)   h );
+    --clr_raw_secondary-700: oklch(from   var(--root_clr2)  calc(l - 0.17)   calc(c - 0.00)   h );
+    --clr_raw_secondary-800: oklch(from   var(--root_clr2)  calc(l - 0.25)   calc(c - 0.00)   h );
+    --clr_raw_secondary-900: oklch(from   var(--root_clr2)  calc(l - 0.34)   calc(c - 0.05)   h );
+    --clr_raw_secondary-950: oklch(from   var(--root_clr2)  calc(l - 0.42)   calc(c - 0.07)   h );
+    --clr_raw_secondary-975: oklch(from   var(--root_clr2)  calc(l - 0.48)   calc(c - 0.10)   h );
+
+    --body-color: light-dark(oklch(from   var(--root_clr)   calc(l + 0.40)   calc(c - 0.11)   h ),
+                             oklch(from   var(--root_clr)   calc(l - 0.40)   calc(c - 0.11)   h ));
+  }
+
+  /////////////////////////////// Support Colors //////////////////////////////
   --black: var(--primary-clr_900);
-
   --white: var(--primary-clr_50);
   --purewhite: light-dark(#fff, #000);
 
-  --body-color: light-dark(var(--primary-clr_50), var(--primary-clr_100));
-
-
-  /* Colors */
-  --clr_mode: hsl;
-  --clr_length: longer hue;
-  // Color stops
-  --clr_stop-lite-25:  85%;
-  --clr_stop-lite-50:  80%;
-  --clr_stop-lite-100: 70%;
-  --clr_stop-lite-200: 55%;
-  --clr_stop-lite-300: 4%;
-  --clr_stop-lite-400: 20%;
-  --clr_stop-lite-500: 00%;
-  --clr_stop-dark-600: 20%;
-  --clr_stop-dark-700: 40%;
-  --clr_stop-dark-800: 60%;
-  --clr_stop-dark-900: 70%;
-  --clr_stop-dark-950: 80%;
-
-  // Purple-specific Color
-  --clr_primary_root: #8e76ed;
-  --clr_primary_white-target: color-mix(in var(--clr_mode), var(--clr_primary_root), white 90%);
-  --clr_primary_dark-target: color-mix(in var(--clr_mode), var(--clr_primary_root), #171717 90%);
-
-  --clr_raw_primary-25: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-25));
-  --clr_raw_primary-50: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-50));
-  --clr_raw_primary-100: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-100));
-  --clr_raw_primary-200: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-200));
-  --clr_raw_primary-300: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-300));
-  --clr_raw_primary-400: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_white-target) var(--clr_stop-lite-400));
-  --clr_raw_primary-500: var(--clr_primary_root);
-  --clr_raw_primary-600: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-600));
-  --clr_raw_primary-700: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-700));
-  --clr_raw_primary-800: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-800));
-  --clr_raw_primary-900: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-900));
-  --clr_raw_primary-950: color-mix(in var(--clr_mode), var(--clr_primary_root), var(--clr_primary_dark-target) var(--clr_stop-dark-950));
-
-  --clr_raw_secondary: #35a4dc;
-  --clr_secondary_white-target: color-mix(in var(--clr_mode), var(--clr_raw_secondary), white 90%);
-  --clr_secondary_dark-target: color-mix(in var(--clr_mode), var(--clr_raw_secondary), black 80%);
-
-  --clr_raw_secondary-25: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-25));
-  --clr_raw_secondary-50: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-50));
-  --clr_raw_secondary-100: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-100));
-  --clr_raw_secondary-200: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-200));
-  --clr_raw_secondary-300: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-300));
-  --clr_raw_secondary-400: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_white-target) var(--clr_stop-lite-400));
-  --clr_raw_secondary-500: var(--clr_raw_secondary);
-  --clr_raw_secondary-600: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-600));
-  --clr_raw_secondary-700: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-700));
-  --clr_raw_secondary-800: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-800));
-  --clr_raw_secondary-900: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-900));
-  --clr_raw_secondary-950: color-mix(in var(--clr_mode), var(--clr_raw_secondary), var(--clr_secondary_dark-target) var(--clr_stop-dark-950));
-
-  // Calculated Values //
-  // Primary
-  --primary-clr_25: light-dark(var(--clr_raw_primary-25), var(--clr_raw_primary-950));
-  --primary-clr_50: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
-  --primary-clr_100: light-dark(var(--clr_raw_primary-100), var(--clr_raw_primary-900));
-  --primary-clr_200: light-dark(var(--clr_raw_primary-200), var(--clr_raw_primary-800));
-  --primary-clr_300: light-dark(var(--clr_raw_primary-300), var(--clr_raw_primary-700));
-  --primary-clr_400: light-dark(var(--clr_raw_primary-400), var(--clr_raw_primary-600));
-  --primary-clr_500: light-dark(var(--clr_raw_primary-500), var(--clr_raw_primary-500));
-  --primary-clr_600: light-dark(var(--clr_raw_primary-600), var(--clr_raw_primary-400));
-  --primary-clr_700: light-dark(var(--clr_raw_primary-700), var(--clr_raw_primary-300));
-  --primary-clr_800: light-dark(var(--clr_raw_primary-800), var(--clr_raw_primary-200));
-  --primary-clr_900: light-dark(var(--clr_raw_primary-900), var(--clr_raw_primary-100));
-  --primary-clr_950: light-dark(var(--clr_raw_primary-950), var(--clr_raw_primary-50));
-  // Secondary
-  --secondary-clr_50: light-dark(var(--clr_raw_secondary-50), var(--clr_raw_secondary-950));
-  --secondary-clr_100: light-dark(var(--clr_raw_secondary-100), var(--clr_raw_secondary-900));
-  --secondary-clr_200: light-dark(var(--clr_raw_secondary-200), var(--clr_raw_secondary-800));
-  --secondary-clr_300: light-dark(var(--clr_raw_secondary-300), var(--clr_raw_secondary-700));
-  --secondary-clr_400: light-dark(var(--clr_raw_secondary-400), var(--clr_raw_secondary-600));
-  --secondary-clr_500: light-dark(var(--clr_raw_secondary-500), var(--clr_raw_secondary-500));
-  --secondary-clr_600: light-dark(var(--clr_raw_secondary-600), var(--clr_raw_secondary-400));
-  --secondary-clr_700: light-dark(var(--clr_raw_secondary-700), var(--clr_raw_secondary-300));
-  --secondary-clr_800: light-dark(var(--clr_raw_secondary-800), var(--clr_raw_secondary-200));
-  --secondary-clr_900: light-dark(var(--clr_raw_secondary-900), var(--clr_raw_secondary-100));
-  --secondary-clr_950: light-dark(var(--clr_raw_secondary-950), var(--clr_raw_secondary-50));
-
-  // fixed Values
-  --primary-clr_25_fixed: var(--clr_raw_primary-25);
-  --primary-clr_50_fixed: var(--clr_raw_primary-50);
-  --primary-clr_100_fixed: var(--clr_raw_primary-100);
-  --primary-clr_200_fixed: var(--clr_raw_primary-200);
-  --primary-clr_300_fixed: var(--clr_raw_primary-300);
-  --primary-clr_400_fixed: var(--clr_raw_primary-400);
-  --primary-clr_500_fixed: var(--clr_raw_primary-500);
-  --primary-clr_600_fixed: var(--clr_raw_primary-600);
-  --primary-clr_700_fixed: var(--clr_raw_primary-700);
-  --primary-clr_800_fixed: var(--clr_raw_primary-800);
-  --primary-clr_900_fixed: var(--clr_raw_primary-900);
-  --primary-clr_950_fixed: var(--clr_raw_primary-950);
-  --secondary-clr_50_fixed: var(--clr_raw_secondary-50);
-  --secondary-clr_100_fixed: var(--clr_raw_secondary-100);
-  --secondary-clr_200_fixed: var(--clr_raw_secondary-200);
-  --secondary-clr_300_fixed: var(--clr_raw_secondary-300);
-  --secondary-clr_400_fixed: var(--clr_raw_secondary-400);
-  --secondary-clr_500_fixed: var(--clr_raw_secondary-500);
-  --secondary-clr_600_fixed: var(--clr_raw_secondary-600);
-  --secondary-clr_700_fixed: var(--clr_raw_secondary-700);
-  --secondary-clr_800_fixed: var(--clr_raw_secondary-800);
-  --secondary-clr_900_fixed: var(--clr_raw_secondary-900);
-  --secondary-clr_950_fixed: var(--clr_raw_secondary-950);
-
+  --primary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
+  --secondary-clr_bgtext: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-950));
 }

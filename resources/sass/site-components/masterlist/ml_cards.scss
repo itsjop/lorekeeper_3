@@ -27,7 +27,7 @@
   // --card_badge-img: 'public/img/masterlist/badge_sweet.png';
   // --card_profile-bg: 'public/img/masterlist/profile_sweet.png';
   background-image: var(--card_card-border);
-  box-shadow: 5px 5px 5px var(--primary-clr_800_fixed);
+  box-shadow: 5px 5px 5px light-dark(var(--primary-clr_800_fixed), var(--primary-clr_950_fixed));
   .border-background {
     grid-area: 1 / 1 / 4 / 3;
     border-radius: 14px;
@@ -161,7 +161,13 @@
       }
     }
     .tn-background {
-      background-image: url('images/overlays/starring.png'), var(--card_profile-bg_color);
+
+      @media (prefers-color-scheme: light) {
+        background-image: url('images/overlays/starring.png'), var(--card_profile-bg_color);
+      }
+      @media (prefers-color-scheme: dark) {
+        background-image: url('images/overlays/starring-dark.png'), var(--card_profile-bg_color);
+      }
       z-index: 1;
       filter: brightness(1);
     }
@@ -258,7 +264,7 @@
     position: absolute;
     transform: translateX(-33%) translateY(0);
     transition: 0.3s var(--smoothIn_linear);
-    color: var(--white);
+    color: white;
     padding: 5px 10px;
     z-index: 6;
     pointer-events: none;

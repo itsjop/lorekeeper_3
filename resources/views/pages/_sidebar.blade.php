@@ -130,12 +130,12 @@
       <a
         class="name gap-_5 h5 mb-4"
         href="https://ko-fi.com/somnivores/tiers"
-        style="  width: calc(var(--sidebar-width) - 20px); text-align: center;"
+        style="width: calc(var(--sidebar-width) - 40px); text-align: center;"
       >
         <span>Somnivores' Ko-fi</span>
         <i class="fa-solid fa-arrow-up-right-from-square pl-2"></i>
       </a>
-      <p class="text-center" style="width: var(--sidebar-width);">
+      <p class="text-center" style="width: calc(var(--sidebar-width) - 20px);">
         We offer monthly goodies! <br>
         Click to see what's included ❤
       </p>

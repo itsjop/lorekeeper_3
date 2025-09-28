@@ -44,9 +44,9 @@
   }
   .frontpage-button {
     border: 2px solid var(--white);
-    color: var(--white);
+    color: white;
     border-radius: 50vw;
-    background-color: color-mix(in srgb, var(--primary-clr_700) 70%, transparent);
+    background-color: color-mix(in srgb, light-dark(var(--primary-clr_700), var(--primary-clr_600)) 70%, transparent);
     padding: 5px 15px;
     max-width: 90%;
     justify-self: center;
@@ -55,7 +55,7 @@
     justify-content: center;
     &:hover,
     &:active {
-      color: var(--white);
+      color: var(--primary-clr_50-_fixed);
     }
   }
   .bubblebox {
@@ -64,7 +64,7 @@
     .bubble {
       display: grid;
       background: var(--white);
-      background-color: color-mix(in srgb, var(--white) 80%, transparent);
+      background-color: color-mix(in srgb, light-dark(var(--primary-clr_600), var(--primary-clr_25)) 80%, transparent);
       box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600_fixed) 40%, transparent);
       border-radius: 15px;
       width: 100%;
@@ -85,7 +85,13 @@
         }
       }
       &.event {
-        background-image: url('../images/somnivores/frontpage/event_bg.png');
+
+        @media (prefers-color-scheme: light) {
+          background-image: url('../images/somnivores/frontpage/event_bg.png');
+        }
+        @media (prefers-color-scheme: dark) {
+          background-image: url('../images/somnivores/frontpage/event_bg-dark.png');
+        }
         a {
           font-weight: 500;
         }
@@ -108,7 +114,12 @@
         }
       }
       &.jobs {
-        background-image: url('../images/somnivores/frontpage/jobs_bg.png');
+        @media (prefers-color-scheme: light) {
+          background-image: url('../images/somnivores/frontpage/jobs_bg.png');
+        }
+        @media (prefers-color-scheme: dark) {
+          background-image: url('../images/somnivores/frontpage/jobs_bg-dark.png');
+        }
         grid-template-columns: 1fr 1fr 1fr;
         > a {
           display: grid;
