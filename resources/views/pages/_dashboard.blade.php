@@ -19,8 +19,8 @@
         <p class="event-title m-0">
           Grimhallow Haunt
         </p>
-        <a class="frontpage-button" href="/dailies/4"> daily </a>
-        <a class="frontpage-button" href="/shops/8"> shop </a>
+        <a class="frontpage-button" href="/dailies/5"> daily </a>
+        <a class="frontpage-button" href="/shops/9"> shop </a>
       </div>
     </div>
   </div>
