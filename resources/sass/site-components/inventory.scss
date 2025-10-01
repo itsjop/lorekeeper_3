@@ -79,7 +79,7 @@
   contain: paint;
   --card_background-color: var(--purple-clr_100);
   --card_star_opacity: 1;
-  --card_star_animation-duration: 10s;
+  --card_star_animation-duration: 50s;
   --card_star_blend-mode: normal;
   background: var(--card_background);
   .stars {
@@ -98,7 +98,6 @@
       width: 100%;
       height: 100%;
       animation: stars 50s linear forwards infinite;
-      --card_star_animation: 50s;
       animation-duration: var(--card_star_animation-duration);
       background-image: url('images/overlays/starring.png');
       background-repeat: repeat;
@@ -134,7 +133,7 @@
     --card_star_blend-mode: overlay;
   }
   &.fall {
-    --card_background: linear-gradient(to top right, #fff3bc, #ffe9df);
+    --card_background: linear-gradient(to top right, #f7dcc3, #ffe7df);
     --card_star_opacity: 0.9;
     --card_star_blend-mode: overlay;
   }
