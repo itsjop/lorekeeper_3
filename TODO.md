@@ -21,6 +21,8 @@
 - [ ] sitewide image alt tags
 - [ ] move the ML card wiggle to a standalone component
 - [ ] Custom pages for 400, 500, and 503 (maintenance)
+- [ ] pet bonding doesn't bonding
+- [ ] admin prompt list needs to be chronological
 - [ ] buttons with gradeint outline using
   - background-image: linear-gradient(borderColor) padding-box, conic-gradient(color, color, color) border-box
   - animatable if you use an @property --angle with syntax of "<angle>"; intial-value: 0deg; inherits: true;
