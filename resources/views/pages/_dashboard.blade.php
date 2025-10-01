@@ -9,7 +9,7 @@
     </h2>
     <div class="bubble event">
       <img
-        src="images/event/grimhallow-haunt/haunt-tent.png"
+        src="/images/event/grimhallow-haunt/haunt-tent.png"
         alt=""
         class="w-66"
       >
