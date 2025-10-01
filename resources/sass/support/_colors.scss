@@ -6,6 +6,12 @@
   // &.light { color-scheme: light; }
   // &.dark { color-scheme: dark; }
 
+
+  --root_clr: #8e76ed;
+  --root_clr: oklch(64.347% 0.17242 289.965);
+  --root_clr2: #35a4dc;
+  --root_clr2: oklch(68.168% 0.12733 235.534);
+
   // Legacy fallback colors, intended to be overriden
   --clr_raw_primary-25: #fbf8ff;
   --clr_raw_primary-50: #f4eefc;
@@ -21,11 +27,6 @@
   --clr_raw_primary-950: #0f0539;
   --clr_raw_primary-975: #08031e;
   --body-color: light-dark(var(--clr_raw_primary-50), var(--clr_raw_primary-100));
-
-  --root_clr: #8e76ed;
-  --root_clr: oklch(64.347% 0.17242 289.965);
-  --root_clr2: #35a4dc;
-  --root_clr2: oklch(68.168% 0.12733 235.534);
 
   /////////////////////// Color-mix, slightly more supported ///////////////////////
   @supports (color: color-mix(in var(--clr_mode), var(--root_clr), var(--clr_primary_white-target) var(--clr_stop-lite-25))) {

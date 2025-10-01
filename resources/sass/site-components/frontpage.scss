@@ -64,7 +64,7 @@
     .bubble {
       display: grid;
       background: var(--white);
-      background-color: color-mix(in srgb, light-dark(var(--primary-clr_600), var(--primary-clr_25)) 80%, transparent);
+      background-color: color-mix(in srgb, light-dark(var(--primary-clr_50), var(--primary-clr_25)) 80%, transparent);
       box-shadow: 0 2px 10px color-mix(in srgb, var(--primary-clr_600_fixed) 40%, transparent);
       border-radius: 15px;
       width: 100%;

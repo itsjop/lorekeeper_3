@@ -1,4 +1,7 @@
 # Styling Issues:
+
+- disable croppie
+
 - motion reduction
 - clean color interpolation
 - safe fallbacks

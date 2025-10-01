@@ -137,7 +137,6 @@
     ap.classList.remove(siteTheme === 'dark' ? 'light' : 'dark');
     ap.classList.add(siteTheme);
     ap.style.cssText = newSettings;
-    console.log("newSettings", newSettings);
   }
 </script>
 {{-- Image Blocking --}}
