@@ -9,12 +9,12 @@
     </h2>
     <div class="bubble event">
       <img
-        src="images/event/launch/launchicon.png"
+        src="images/event/grimhallow-haunt/haunt-tent.png"
         alt=""
         class="w-66"
       >
       <div class="grid ai-center event-buttons">
-        <p class="event-title m-0"> Somnivores Launch Party! </p>
+        <p class="event-title m-0"> <a href="/info/grimhallow-haunt">Grimhallow Haunt</a> </p>
         <a class="frontpage-button" href="/dailies/4"> daily </a>
         <a class="frontpage-button" href="/shops/8"> shop </a>
       </div>
