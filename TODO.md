@@ -4,6 +4,7 @@
 - [ ] the change TH link button is not working (account settings?)
 - [ ] All headings with copyable link
   - [ ] Include javascript 📁 button to copy the full link
+- [ ] move all images into /public/images/site so they can be optimized
 - [ ] look into @property for animated gradients
 - [ ] redo theming colorspace (with fallbacks) with new h s l model
 - [ ] native `<details name="">` exclusive toggle for tabs
@@ -19,6 +20,11 @@
 - [ ] character links strip newlines
 - [ ] sitewide image alt tags
 - [ ] move the ML card wiggle to a standalone component
+- [ ] Custom pages for 400, 500, and 503 (maintenance)
+- [ ] buttons with gradeint outline using
+  - background-image: linear-gradient(borderColor) padding-box, conic-gradient(color, color, color) border-box
+  - animatable if you use an @property --angle with syntax of "<angle>"; intial-value: 0deg; inherits: true;
+  - naimation-play-state: paused; &:hover { animation-play-state: running; }
 
 # Future Issues
 - [~] finish bootstrap 5 upgrade (data-bs-toggle, data-bs-parent, and data-bs-target)

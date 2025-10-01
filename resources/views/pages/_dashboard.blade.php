@@ -9,7 +9,7 @@
     </h2>
     <div class="bubble event">
       <img
-        src="images/somnivores/event/launchicon.png"
+        src="images/event/launch/launchicon.png"
         alt=""
         class="w-66"
       >

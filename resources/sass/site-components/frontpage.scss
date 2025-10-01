@@ -85,7 +85,7 @@
         }
       }
       &.event {
-        background-image: url('../images/somnivores/frontpage/event_bg.png');
+        background-image: url('../images/frontpage/event_bg.png');
         a {
           font-weight: 500;
         }
@@ -108,7 +108,7 @@
         }
       }
       &.jobs {
-        background-image: url('../images/somnivores/frontpage/jobs_bg.png');
+        background-image: url('../images/frontpage/jobs_bg.png');
         grid-template-columns: 1fr 1fr 1fr;
         > a {
           display: grid;

@@ -2266,7 +2266,7 @@ body {
   transform: scale(1.1);
 }
 .home-dashboard .bubblebox .bubble.event {
-  background-image: url("../images/somnivores/frontpage/event_bg.png");
+  background-image: url("../images/frontpage/event_bg.png");
 }
 .home-dashboard .bubblebox .bubble.event a {
   font-weight: 500;
@@ -2289,7 +2289,7 @@ body {
   min-width: 100%;
 }
 .home-dashboard .bubblebox .bubble.jobs {
-  background-image: url("../images/somnivores/frontpage/jobs_bg.png");
+  background-image: url("../images/frontpage/jobs_bg.png");
   grid-template-columns: 1fr 1fr 1fr;
 }
 .home-dashboard .bubblebox .bubble.jobs > a {
