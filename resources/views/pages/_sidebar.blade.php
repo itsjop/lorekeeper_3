@@ -112,7 +112,7 @@
       </a>
     </div>
     <div class="details-sb p-2">
-      <a class="thumb" href="/world/items/78">
+      <a class="thumb" href="/world/items/99">
         <div class="character-border">
           <div class="rainbow kofi">
           </div>
