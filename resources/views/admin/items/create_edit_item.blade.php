@@ -161,9 +161,6 @@
           ) !!}
         </div>
       </div>
-      {{-- {{ dd($item->resell, isset($item->resell), $item->resell->pop()) }} --}}
-      {{-- {{ dd($item->data) }} --}}
-      {{-- {{ dd($item->data['resell']) }} --}}
       <div class="col-md">
         <div class="form-group">
           {!! Form::label('currency_quantity', 'Quantity') !!}

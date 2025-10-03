@@ -87,7 +87,6 @@
       @endif
 
       <li class="list-group-item">
-        {{-- {{ dd($raffle) }} --}}
         <i class="fas {{ $raffle->is_active ? 'fa-eye' : 'fa-eye-slash' }} mr-2"></i>
         #{{ $raffle->id }} -
         {{-- <a href="{{ url('admin/raffles/view/' . $raffle->id) }}"> {{ $raffle->name }} </a> --}}

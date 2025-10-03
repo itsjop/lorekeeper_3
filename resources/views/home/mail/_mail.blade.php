@@ -23,7 +23,6 @@
   </div>
   <div class="logs-table-body">
     @foreach ($mails as $mail)
-      {{-- {{ dd($mail->recipient) }} --}}
       <div class="logs-table-row">
         <div class="row flex-wrap">
           <div class="col-2 col-md-2">
