@@ -88,14 +88,14 @@
                 @endif
                 {!! $itemRow->item->name !!}
               <td class="col-4">
-                {!! array_key_exists('data', $itemRow->data)
+                {!! array_key_exists('data', safeJSON($itemRow->data, []))
                     ? (safeJSON($itemRow->data)['data']
                         ? safeJSON($itemRow->data)['data']
                         : 'N/A')
                     : 'N/A' !!}
               </td>
               <td class="col-3">
-                {!! array_key_exists('notes', $itemRow->data)
+                {!! array_key_exists('notes', safeJSON($itemRow->data))
                     ? (safeJSON($itemRow->data)['notes']
                         ? safeJSON($itemRow->data)['notes']
                         : 'N/A')

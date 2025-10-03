@@ -308,7 +308,7 @@ class Currency extends Model {
      * @return string
      */
     public function display($value) {
-        $ret = '<span class="display-currency">'.$value.' ';
+        $ret = ''.$value.' ';
         if ($this->has_icon) {
             $ret .= $this->displayIcon;
         } elseif ($this->abbreviation) {
@@ -317,6 +317,6 @@ class Currency extends Model {
             $ret .= $this->name;
         }
 
-        return $ret.'</span>';
+        return $ret.'';
     }
 }
