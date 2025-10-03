@@ -304,3 +304,10 @@ h1,h2,h3,h4,h5,h6,p,header,div,summary,
     width: calc(100% - 20px);
   }
 }
+
+.simple-badge {
+  background-color: var(--active-clr_100);
+  border: 2px solid var(--active-clr_300);
+  border-radius: 100vw;
+  padding: 5px 10px;
+}

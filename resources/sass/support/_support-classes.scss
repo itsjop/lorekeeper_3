@@ -76,6 +76,10 @@
 /* Grid-Gap */
 .gap-_25 { gap: .25rem; } .gap-_5 { gap: .5rem; } .gap-1 { gap: 1rem; } .gap-2 { gap: 2rem; } .gap-3 { gap: 3rem;   }
 .gap-4  { gap: 4rem;  }   .gap-5 { gap: 5rem; }   .gap-6 { gap: 6rem; } .gap-8 { gap: 8rem; } .gap-10 { gap: 10rem; }
+.gap-x-_25 { column-gap: .25rem; } .gap-x-_5 { column-gap: .5rem; } .gap-x-1 { column-gap: 1rem; } .gap-x-2 { column-gap: 2rem; } .gap-x-3 { column-gap: 3rem;   }
+.gap-x-4  { column-gap: 4rem;  }   .gap-x-5 { column-gap: 5rem; }   .gap-x-6 { column-gap: 6rem; } .gap-x-8 { column-gap: 8rem; } .gap-x-10 { column-gap: 10rem; }
+.gap-y-_25 { row-gap: .25rem; } .gap-y-_5 { row-gap: .5rem; } .gap-y-1 { row-gap: 1rem; } .gap-y-2 { row-gap: 2rem; } .gap-y-3 { row-gap: 3rem;   }
+.gap-y-4  { row-gap: 4rem;  }   .gap-y-5 { row-gap: 5rem; }   .gap-y-6 { row-gap: 6rem; } .gap-y-8 { row-gap: 8rem; } .gap-y-10 { row-gap: 10rem; }
 
 /* Grid Columns */
 .grid-2-col, .grid-2-col-fixed { grid-template-columns: repeat(2, 1fr); }

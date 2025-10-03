@@ -167,13 +167,13 @@
             'fullImage' => true
         ])
       </div>
-      <div class="profile-assets grid gap-1" style="clear:both;">
+      <div class="profile-assets grid gap-1" style="grid-template-rows: 2fr 3fr;">
         <div class="card profile-currencies profile-assets-card">
           <div class="card-body text-center">
             <h5 class="card-title"> Bank </h5>
-            <div class="profile-assets-content grid grid-3-col ai-center gap-1 ji-end">
+            <div class="profile-assets-content grid grid-3-col ai-center gap-x-1 ji-center jc-center">
               @foreach ($user->getCurrencies(false) as $currency)
-                <div> {!! $currency->display($currency->quantity) !!} </div>
+                <div class="simple-badge"> {!! $currency->display($currency->quantity) !!} </div>
               @endforeach
             </div>
             <div class="text-right">
