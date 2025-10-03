@@ -9,7 +9,9 @@
   @if ($request->staff_comments && ($request->user_id == Auth::user()->id || Auth::user()->hasPower('manage_characters')))
     <h5 class="text-danger"> Staff Comments ({!! $request->staff->displayName !!})</h5>
     <div class="card border-danger">
-      <div class="card-body"> {!! nl2br(htmlentities($request->staff_comments)) !!} </div>
+      <div class="card-body">
+        {!! nl2br($request->staff_comments) !!}
+      </div>
     </div>
   @else
     <p> No staff comment was provided. </p>
