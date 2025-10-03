@@ -215,7 +215,7 @@
     <div class="card mb-3">
       <div class="card-body text-center">
         <h5 class="card-title"> {{ ucfirst(__('awards.awards')) }} </h5>
-        <div class="grid grid-4-col pi-center">
+        <div class="grid grid-4-col gap-1 pi-center">
           @if (count($awards ?: 0))
             @foreach ($awards as $award)
               <div class="profile-inventory-item badje">
