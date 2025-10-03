@@ -26,7 +26,7 @@ function trimArrayNulls($val, $key) {
 
 function safeJSON($val) {
   isset($val) ? (gettype($val) == 'string' ? $val = json_decode($val, true) : '') : '';
-  return is_null($val) ? ($return ? $return : []) : $val;
+  return $val;
 }
 // Used for the redundant isset() calls for optional information
 function safe($val, $fallback = '') {
