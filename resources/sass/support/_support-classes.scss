@@ -1,3 +1,5 @@
+@import './mixins';
+
 /* prettier-ignore */
 #app {
 /* Sizing */
@@ -179,16 +181,38 @@
 .text-400 { color: var(--active-clr_400); } .text-500 { color: var(--active-clr_500); } .text-600 { color: var(--active-clr_600); }
 .text-700 { color: var(--active-clr_700); } .text-800 { color: var(--active-clr_800); } .text-900 { color: var(--active-clr_900); }
 
-.grid-clip-2x {
-  >*:nth-child(n+4){
-    background-color: red;
-    // display: none;
+
+
+
+.grid-clip {
+  &.grid-4-col, &.grid-4-col-fixed { @include clip-to-4(); }
+  &.grid-3-col, &.grid-3-col-fixed { @include clip-to-3(); }
+  @container main-container (width < 1000px) {
+    &.grid-6-col { @include clip-to-4(); }
+    &.grid-5-col { @include clip-to-3(); }
+    &.grid-3-col { @include clip-to-3(); }
   }
-  >*:nth-child(-n+4){
-    background-color: green;
-    // display: inital;
+  @container main-container (width < 700px) {
+    &.grid-6-col { @include clip-to-3(); }
+    &.grid-5-col { @include clip-to-3(); }
+    &.grid-4-col { @include clip-to-3(); }
+    &.grid-3-col { @include clip-to-2(); }
+    &.grid-5-2-col { @include clip-to-4(); }
+    &.grid-4-2-col { @include clip-to-3(); }
+  }
+  @container main-container (width < 600px) {
+    &.grid-6-col { @include clip-to-3(); }
+    &.grid-5-col { @include clip-to-2(); }
+    &.grid-4-col { @include clip-to-2(); }
+    &.grid-5-2-col { @include clip-to-2(); }
+    &.grid-4-2-col { @include clip-to-2(); }
+  }
+  @container main-container (width < 400px) {
+    &.grid-6-col { @include clip-to-2(); }
   }
 }
+
+
 
 
 [data-bs-toggle="tooltip"]{

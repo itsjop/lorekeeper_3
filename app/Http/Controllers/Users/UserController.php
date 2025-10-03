@@ -89,7 +89,7 @@ class UserController extends Controller {
     return view('user.profile', [
       'name'                  => $name,
       'user'                  => $this->user,
-      'items'                 => $this->user->items()->where('count', '>', 0)->orderBy('user_items.updated_at', 'DESC')->take(4)->get(),
+      'items'                 => $this->user->items()->where('count', '>', 0)->orderBy('user_items.updated_at', 'DESC')->take(9)->get(),
       'sublists'              => Sublist::orderBy('sort', 'DESC')->get(),
       'characters'            => $characters,
       'user_enabled'          => Settings::get('WE_user_locations'),

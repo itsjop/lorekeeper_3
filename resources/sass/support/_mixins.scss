@@ -68,3 +68,39 @@
   text-align: center;
   color: var(--purple-clr_50);
 }
+
+@mixin clip-to-4() {
+  // >:nth-last-child(1):nth-child(4n + 1) {
+  //   display: none;
+  // }
+  // >:nth-last-child(2):nth-child(4n + 1),
+  // >:nth-last-child(2):nth-child(4n + 2) {
+  //   display: none;
+  // }
+  // >:nth-last-child(3):nth-child(4n + 1),
+  // >:nth-last-child(3):nth-child(4n + 2),
+  // >:nth-last-child(3):nth-child(4n + 3) {
+  //   display: none;
+  // }
+}
+@mixin clip-to-3() {
+  // > * {
+  //   background: blue;
+  //   &:nth-last-child(1):nth-child(3n + 1) {
+  //     display: none;
+  //   }
+  //   /* Hide the last two elements if the total number is 2 more than a multiple of 3 */
+  //   &:nth-last-child(2):nth-child(3n + 2),
+  //   &:nth-last-child(1):nth-child(3n + 2) {
+  //     display: none;
+  //   }
+  // }
+}
+@mixin clip-to-2() {
+  // > * {
+  //   background: green;
+  //   &:nth-last-child(1):nth-child(2n + 1) {
+  //     display: none;
+  //   }
+  // }
+}

@@ -112,6 +112,36 @@ body.teal {
   --active-clr_950: var(--teal-clr_950);
 }
 
+.hover-preview {
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
+  transform: scale(1.1);
+}
+
+.hover-preview_105 {
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+}
+.hover-preview_105:hover, .hover-preview_105:active {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+}
+.hover-preview_105:hover, .hover-preview_105:active {
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
+  transform: scale(1.05);
+}
+
 /* prettier-ignore */
 #app {
   /* Sizing */
@@ -762,12 +792,10 @@ body.teal {
 #app .text-900 {
   color: var(--active-clr_900);
 }
-#app .grid-clip-2x > *:nth-child(n+4) {
-  background-color: red;
-}
-#app .grid-clip-2x > *:nth-child(-n+4) {
-  background-color: green;
-}
+@container main-container (width < 1000px) {}
+@container main-container (width < 700px) {}
+@container main-container (width < 600px) {}
+@container main-container (width < 400px) {}
 #app [data-bs-toggle=tooltip] {
   cursor: help;
 }
@@ -3679,7 +3707,37 @@ body {
     transform: rotate(0deg);
   }
 }
-.badje {
+.hover-preview {
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+}
+.hover-preview:hover, .hover-preview:active {
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
+  transform: scale(1.1);
+}
+
+.hover-preview_105 {
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
+  transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
+  transform: scale(1);
+  filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
+}
+.hover-preview_105:hover, .hover-preview_105:active {
+  filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
+}
+.hover-preview_105:hover, .hover-preview_105:active {
+  transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
+  transform: scale(1.05);
+}
+
+#app .badje {
   background: var(--purple-clr_300);
   border-radius: 400px;
   border: 5px dashed var(--active-clr_600);
@@ -3687,34 +3745,41 @@ body {
   aspect-ratio: 1/1;
   max-width: 200px;
 }
-.badje img {
+#app .badje img {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
-.badje img:hover, .badje img:active {
+#app .badje img:hover, #app .badje img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
-.badje img:hover, .badje img:active {
+#app .badje img:hover, #app .badje img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
 }
-
-.profile-inventory img {
+#app .profile-inventory img {
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear);
   transition: filter 0.5s var(--bounce_linear), transform 0.5s var(--bounce_linear), backdrop-filter 0.5s var(--bounce_linear), -webkit-backdrop-filter 0.5s var(--bounce_linear);
   transform: scale(1);
   filter: drop-shadow(-2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent)) drop-shadow(2px 4px 3px color-mix(in srgb, var(--active-clr_800) 10%, transparent));
 }
-.profile-inventory img:hover, .profile-inventory img:active {
+#app .profile-inventory img:hover, #app .profile-inventory img:active {
   filter: drop-shadow(-5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent)) drop-shadow(5px 10px 6px color-mix(in srgb, var(--active-clr_800) 7.5%, transparent));
 }
-.profile-inventory img:hover, .profile-inventory img:active {
+#app .profile-inventory img:hover, #app .profile-inventory img:active {
   transition: filter 0.7s var(--elastic_linear), transform 0.7s var(--elastic_linear);
   transform: scale(1.1);
+}
+#app .profile-assets {
+  grid-template-rows: max-content max-content;
+}
+@container main-container (width < 600px) {
+  #app .profile-assets .profile-items {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 #app #site-wrapper #header-nav {

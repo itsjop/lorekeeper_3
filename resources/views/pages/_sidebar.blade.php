@@ -4,7 +4,7 @@
         $char_image = $featured->image->canViewFull(Auth::user() ?? null) && file_exists(public_path($featured->image->imageDirectory . ' /' . $featured->image->fullsizeFileName)) ? $featured->image->thumbnailUrl : $featured->image->thumbnailUrl;
     } ?>
     <div class="sidebar-header">
-      <a href="#" class="card-link">
+      <a href="/prompts/1" class="card-link">
         <i class="fas fa-star mr-2"></i>
         Star of the Week!
       </a>
